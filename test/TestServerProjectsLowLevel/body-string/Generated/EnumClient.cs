@@ -220,12 +220,10 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATService/enum/getReferencedConstant
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. <Description>Referenced Color Constant Description.</Description>
-        ///   field1: string, # Optional. <Description>Sample string.</Description>
+        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 
@@ -250,12 +248,10 @@ namespace body_string_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATService/enum/getReferencedConstant
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. <Description>Referenced Color Constant Description.</Description>
-        ///   field1: string, # Optional. <Description>Sample string.</Description>
+        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 
@@ -282,12 +278,10 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATService/enum/putReferencedConstant
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. <Description>Referenced Color Constant Description.</Description>
-        ///   field1: string, # Optional. <Description>Sample string.</Description>
+        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 
@@ -316,12 +310,10 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATService/enum/putReferencedConstant
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. <Description>Referenced Color Constant Description.</Description>
-        ///   field1: string, # Optional. <Description>Sample string.</Description>
+        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 

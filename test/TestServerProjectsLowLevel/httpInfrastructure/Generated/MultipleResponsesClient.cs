@@ -60,8 +60,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -90,8 +88,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -120,8 +116,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError204Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -150,8 +144,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError204Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -180,8 +172,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError201Invalid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -210,8 +200,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError201Invalid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -240,8 +228,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError202None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -270,8 +256,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError202None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -300,8 +284,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -330,8 +312,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -360,8 +340,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -390,8 +368,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -420,8 +396,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError201Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -450,8 +424,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError201Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -480,8 +452,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -510,8 +480,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -540,8 +508,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -570,8 +536,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -600,8 +564,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError201Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -630,8 +592,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError201Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -660,8 +620,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError404Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -690,8 +648,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError404Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -720,8 +676,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -750,8 +704,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1032,8 +984,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1062,8 +1012,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1092,8 +1040,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1122,8 +1068,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1368,8 +1312,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1398,8 +1340,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1428,8 +1368,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1458,8 +1396,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1488,8 +1424,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Invalid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1518,8 +1452,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Invalid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1548,8 +1480,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1578,8 +1508,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400None
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1608,8 +1536,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1638,8 +1564,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1668,8 +1592,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Invalid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1698,8 +1620,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Invalid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1728,8 +1648,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA202Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.
@@ -1758,8 +1676,6 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA202Valid
         /// Schema for <c>B Response Body</c>:
         /// <code>{
         ///   statusCode: string, # Optional.

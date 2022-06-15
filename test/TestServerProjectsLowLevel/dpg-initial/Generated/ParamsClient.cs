@@ -200,8 +200,6 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/params/postParameters
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   url: string, # Required.
@@ -233,8 +231,6 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/params/postParameters
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   url: string, # Required.

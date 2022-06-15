@@ -60,8 +60,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphicrecursive/getValid
         /// Schema for <c>Salmon Response Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -148,7 +146,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Response Body</c>:
@@ -190,8 +188,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphicrecursive/getValid
         /// Schema for <c>Salmon Response Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -278,7 +274,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Response Body</c>:
@@ -322,8 +318,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphicrecursive/putValid
         /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -410,7 +404,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Request Body</c>:
@@ -456,8 +450,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphicrecursive/putValid
         /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -544,7 +536,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Request Body</c>:

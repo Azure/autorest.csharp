@@ -60,11 +60,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -89,11 +87,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -120,11 +116,9 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -153,11 +147,9 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -184,11 +176,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -213,11 +203,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -244,11 +232,9 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putEmpty
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -277,11 +263,9 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putEmpty
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -308,11 +292,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -337,11 +319,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -366,11 +346,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 
@@ -395,11 +373,9 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         /// }
         /// </code>
         /// 

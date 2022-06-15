@@ -2016,8 +2016,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2046,8 +2044,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2076,8 +2072,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2106,8 +2100,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2136,8 +2128,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexItemNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2166,8 +2156,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexItemNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2196,8 +2184,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexItemEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2226,8 +2212,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexItemEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2256,8 +2240,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2286,8 +2268,6 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/getComplexValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2318,8 +2298,6 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/putComplexValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   integer: number, # Optional.
@@ -2352,8 +2330,6 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestSwaggerBATArrayService/array/putComplexValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   integer: number, # Optional.

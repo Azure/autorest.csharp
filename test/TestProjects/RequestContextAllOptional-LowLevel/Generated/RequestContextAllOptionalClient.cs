@@ -105,8 +105,6 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/RequestContextAllOptional/RequestBodyResponseBody
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   Code: string, # Optional.
@@ -142,8 +140,6 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/RequestContextAllOptional/RequestBodyResponseBody
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   Code: string, # Optional.

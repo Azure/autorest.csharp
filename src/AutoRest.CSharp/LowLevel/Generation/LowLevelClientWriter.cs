@@ -546,12 +546,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (schemas.Count > 0)
             {
-                writer.WriteXmlDocumentation("remarks", $"{docinfo}{schemas}");
+                writer.WriteXmlDocumentation("remarks", $"Below is the JSON schema for the request and response payloads.{Environment.NewLine}{docinfo}{schemas}");
             }
 
             static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
             {
-                return $"Below is the JSON schema for the request and response payloads.{Environment.NewLine}Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.DocUrl}{Environment.NewLine}";
+                if (restMethod.Operation.ExternalDocs != null)
+                {
+                    return $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.Operation.ExternalDocs}{Environment.NewLine}";
+                }
+                return $"";
             }
             static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
             {
@@ -584,7 +588,7 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var row in doc.DocumentationRows)
             {
                 var required = showRequired ? (row.Required ? " # Required." : " # Optional.") : string.Empty;
-                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # <Description>{row.Description}</Description>" : $" <Description>{row.Description}</Description>");
+                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # {row.Description}" : $" {row.Description}");
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
                 builder.AppendIndentation(indentation).Append($"{row.Name}: ");

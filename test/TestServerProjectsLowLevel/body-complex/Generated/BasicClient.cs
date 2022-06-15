@@ -62,12 +62,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -93,12 +91,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -126,12 +122,10 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -161,12 +155,10 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -194,12 +186,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getInvalid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -225,12 +215,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getInvalid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -256,12 +244,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -287,12 +273,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -318,12 +302,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -349,12 +331,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -380,12 +360,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
@@ -411,12 +389,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number, # Optional. <Description>Basic Id</Description>
-        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
         ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>

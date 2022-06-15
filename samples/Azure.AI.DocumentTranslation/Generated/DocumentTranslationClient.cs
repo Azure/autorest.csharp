@@ -66,34 +66,32 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetDocumentStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   path: string, # Optional. <Description>Location of the document or folder</Description>
-        ///   sourcePath: string, # Required. <Description>Location of the source document</Description>
-        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
-        ///   to: string, # Required. <Description>To language</Description>
+        ///   path: string, # Optional. Location of the document or folder
+        ///   sourcePath: string, # Required. Location of the source document
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///   to: string, # Required. To language
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///     message: string, # Required. <Description>Gets high level error message.</Description>
-        ///     target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string, # Required. <Description>Gets code error string.</Description>
-        ///       message: string, # Required. <Description>Gets high level error message.</Description>
-        ///       target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///       innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///     }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///   }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
-        ///   progress: number, # Required. <Description>Progress of the translation if available</Description>
-        ///   id: DocumentStatusId, # Required. <Description>Document Id</Description>
-        ///   characterCharged: number, # Optional. <Description>Character charged by the API</Description>
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   progress: number, # Required. Progress of the translation if available
+        ///   id: DocumentStatusId, # Required. Document Id
+        ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
         /// 
@@ -120,34 +118,32 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetDocumentStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   path: string, # Optional. <Description>Location of the document or folder</Description>
-        ///   sourcePath: string, # Required. <Description>Location of the source document</Description>
-        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
-        ///   to: string, # Required. <Description>To language</Description>
+        ///   path: string, # Optional. Location of the document or folder
+        ///   sourcePath: string, # Required. Location of the source document
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///   to: string, # Required. To language
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///     message: string, # Required. <Description>Gets high level error message.</Description>
-        ///     target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string, # Required. <Description>Gets code error string.</Description>
-        ///       message: string, # Required. <Description>Gets high level error message.</Description>
-        ///       target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///       innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///     }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///   }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
-        ///   progress: number, # Required. <Description>Progress of the translation if available</Description>
-        ///   id: DocumentStatusId, # Required. <Description>Document Id</Description>
-        ///   characterCharged: number, # Optional. <Description>Character charged by the API</Description>
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   progress: number, # Required. Progress of the translation if available
+        ///   id: DocumentStatusId, # Required. Document Id
+        ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
         /// 
@@ -176,37 +172,35 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetTranslationStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. <Description>Id of the operation.</Description>
-        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
+        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///     message: string, # Required. <Description>Gets high level error message.</Description>
-        ///     target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string, # Required. <Description>Gets code error string.</Description>
-        ///       message: string, # Required. <Description>Gets high level error message.</Description>
-        ///       target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///       innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///     }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///   }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number, # Required. <Description>Total count</Description>
-        ///     failed: number, # Required. <Description>Failed count</Description>
-        ///     success: number, # Required. <Description>Number of Success</Description>
-        ///     inProgress: number, # Required. <Description>Number of in progress</Description>
-        ///     notYetStarted: number, # Required. <Description>Count of not yet started</Description>
-        ///     cancelled: number, # Required. <Description>Number of cancelled</Description>
-        ///     totalCharacterCharged: number, # Required. <Description>Total characters charged by the API</Description>
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
         ///   }, # Required.
         /// }
         /// </code>
@@ -236,37 +230,35 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetTranslationStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. <Description>Id of the operation.</Description>
-        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
+        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///     message: string, # Required. <Description>Gets high level error message.</Description>
-        ///     target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string, # Required. <Description>Gets code error string.</Description>
-        ///       message: string, # Required. <Description>Gets high level error message.</Description>
-        ///       target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///       innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///     }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///   }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number, # Required. <Description>Total count</Description>
-        ///     failed: number, # Required. <Description>Failed count</Description>
-        ///     success: number, # Required. <Description>Number of Success</Description>
-        ///     inProgress: number, # Required. <Description>Number of in progress</Description>
-        ///     notYetStarted: number, # Required. <Description>Count of not yet started</Description>
-        ///     cancelled: number, # Required. <Description>Number of cancelled</Description>
-        ///     totalCharacterCharged: number, # Required. <Description>Total characters charged by the API</Description>
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
         ///   }, # Required.
         /// }
         /// </code>
@@ -299,37 +291,35 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/CancelTranslation
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. <Description>Id of the operation.</Description>
-        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
+        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///     message: string, # Required. <Description>Gets high level error message.</Description>
-        ///     target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string, # Required. <Description>Gets code error string.</Description>
-        ///       message: string, # Required. <Description>Gets high level error message.</Description>
-        ///       target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///       innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///     }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///   }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number, # Required. <Description>Total count</Description>
-        ///     failed: number, # Required. <Description>Failed count</Description>
-        ///     success: number, # Required. <Description>Number of Success</Description>
-        ///     inProgress: number, # Required. <Description>Number of in progress</Description>
-        ///     notYetStarted: number, # Required. <Description>Count of not yet started</Description>
-        ///     cancelled: number, # Required. <Description>Number of cancelled</Description>
-        ///     totalCharacterCharged: number, # Required. <Description>Total characters charged by the API</Description>
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
         ///   }, # Required.
         /// }
         /// </code>
@@ -362,37 +352,35 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/CancelTranslation
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. <Description>Id of the operation.</Description>
-        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
+        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///     message: string, # Required. <Description>Gets high level error message.</Description>
-        ///     target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string, # Required. <Description>Gets code error string.</Description>
-        ///       message: string, # Required. <Description>Gets high level error message.</Description>
-        ///       target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///       innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///     }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///   }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number, # Required. <Description>Total count</Description>
-        ///     failed: number, # Required. <Description>Failed count</Description>
-        ///     success: number, # Required. <Description>Number of Success</Description>
-        ///     inProgress: number, # Required. <Description>Number of in progress</Description>
-        ///     notYetStarted: number, # Required. <Description>Count of not yet started</Description>
-        ///     cancelled: number, # Required. <Description>Number of cancelled</Description>
-        ///     totalCharacterCharged: number, # Required. <Description>Total characters charged by the API</Description>
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
         ///   }, # Required.
         /// }
         /// </code>
@@ -421,19 +409,17 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetSupportedDocumentFormats
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string, # Required. <Description>Name of the format</Description>
-        ///       fileExtensions: [string], # Required. <Description>Supported file extension for this format</Description>
-        ///       contentTypes: [string], # Required. <Description>Supported Content-Types for this format</Description>
-        ///       defaultVersion: string, # Optional. <Description>Default version if none is specified</Description>
-        ///       versions: [string], # Optional. <Description>Supported Version</Description>
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ], # Required. <Description>list of objects</Description>
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -461,19 +447,17 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetSupportedDocumentFormats
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string, # Required. <Description>Name of the format</Description>
-        ///       fileExtensions: [string], # Required. <Description>Supported file extension for this format</Description>
-        ///       contentTypes: [string], # Required. <Description>Supported Content-Types for this format</Description>
-        ///       defaultVersion: string, # Optional. <Description>Default version if none is specified</Description>
-        ///       versions: [string], # Optional. <Description>Supported Version</Description>
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ], # Required. <Description>list of objects</Description>
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -501,19 +485,17 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetSupportedGlossaryFormats
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string, # Required. <Description>Name of the format</Description>
-        ///       fileExtensions: [string], # Required. <Description>Supported file extension for this format</Description>
-        ///       contentTypes: [string], # Required. <Description>Supported Content-Types for this format</Description>
-        ///       defaultVersion: string, # Optional. <Description>Default version if none is specified</Description>
-        ///       versions: [string], # Optional. <Description>Supported Version</Description>
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ], # Required. <Description>list of objects</Description>
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -541,19 +523,17 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetSupportedGlossaryFormats
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string, # Required. <Description>Name of the format</Description>
-        ///       fileExtensions: [string], # Required. <Description>Supported file extension for this format</Description>
-        ///       contentTypes: [string], # Required. <Description>Supported Content-Types for this format</Description>
-        ///       defaultVersion: string, # Optional. <Description>Default version if none is specified</Description>
-        ///       versions: [string], # Optional. <Description>Supported Version</Description>
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ], # Required. <Description>list of objects</Description>
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -578,11 +558,9 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetSupportedStorageSources
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   value: [&quot;AzureBlob&quot;], # Required. <Description>list of objects</Description>
+        ///   value: [&quot;AzureBlob&quot;], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -607,11 +585,9 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetSupportedStorageSources
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   value: [&quot;AzureBlob&quot;], # Required. <Description>list of objects</Description>
+        ///   value: [&quot;AzureBlob&quot;], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -686,43 +662,41 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetTranslationsStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       id: TranslationStatusId, # Required. <Description>Id of the operation.</Description>
-        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
+        ///       id: TranslationStatusId, # Required. Id of the operation.
+        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///         message: string, # Required. <Description>Gets high level error message.</Description>
-        ///         target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///         message: string, # Required. Gets high level error message.
+        ///         target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///         innerError: {
-        ///           code: string, # Required. <Description>Gets code error string.</Description>
-        ///           message: string, # Required. <Description>Gets high level error message.</Description>
-        ///           target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///           innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///         }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///       }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
+        ///           code: string, # Required. Gets code error string.
+        ///           message: string, # Required. Gets high level error message.
+        ///           target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///           innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///         }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///       }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///       summary: {
-        ///         total: number, # Required. <Description>Total count</Description>
-        ///         failed: number, # Required. <Description>Failed count</Description>
-        ///         success: number, # Required. <Description>Number of Success</Description>
-        ///         inProgress: number, # Required. <Description>Number of in progress</Description>
-        ///         notYetStarted: number, # Required. <Description>Count of not yet started</Description>
-        ///         cancelled: number, # Required. <Description>Number of cancelled</Description>
-        ///         totalCharacterCharged: number, # Required. <Description>Total characters charged by the API</Description>
+        ///         total: number, # Required. Total count
+        ///         failed: number, # Required. Failed count
+        ///         success: number, # Required. Number of Success
+        ///         inProgress: number, # Required. Number of in progress
+        ///         notYetStarted: number, # Required. Count of not yet started
+        ///         cancelled: number, # Required. Number of cancelled
+        ///         totalCharacterCharged: number, # Required. Total characters charged by the API
         ///       }, # Required.
         ///     }
-        ///   ], # Required. <Description>The summary status of individual operation</Description>
-        ///   @nextLink: string, # Optional. <Description>Url for the next page.  Null if no more pages available</Description>
+        ///   ], # Required. The summary status of individual operation
+        ///   @nextLink: string, # Optional. Url for the next page.  Null if no more pages available
         /// }
         /// </code>
         /// 
@@ -803,43 +777,41 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetTranslationsStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       id: TranslationStatusId, # Required. <Description>Id of the operation.</Description>
-        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
+        ///       id: TranslationStatusId, # Required. Id of the operation.
+        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///         message: string, # Required. <Description>Gets high level error message.</Description>
-        ///         target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///         message: string, # Required. Gets high level error message.
+        ///         target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///         innerError: {
-        ///           code: string, # Required. <Description>Gets code error string.</Description>
-        ///           message: string, # Required. <Description>Gets high level error message.</Description>
-        ///           target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///           innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///         }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///       }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
+        ///           code: string, # Required. Gets code error string.
+        ///           message: string, # Required. Gets high level error message.
+        ///           target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///           innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///         }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///       }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///       summary: {
-        ///         total: number, # Required. <Description>Total count</Description>
-        ///         failed: number, # Required. <Description>Failed count</Description>
-        ///         success: number, # Required. <Description>Number of Success</Description>
-        ///         inProgress: number, # Required. <Description>Number of in progress</Description>
-        ///         notYetStarted: number, # Required. <Description>Count of not yet started</Description>
-        ///         cancelled: number, # Required. <Description>Number of cancelled</Description>
-        ///         totalCharacterCharged: number, # Required. <Description>Total characters charged by the API</Description>
+        ///         total: number, # Required. Total count
+        ///         failed: number, # Required. Failed count
+        ///         success: number, # Required. Number of Success
+        ///         inProgress: number, # Required. Number of in progress
+        ///         notYetStarted: number, # Required. Count of not yet started
+        ///         cancelled: number, # Required. Number of cancelled
+        ///         totalCharacterCharged: number, # Required. Total characters charged by the API
         ///       }, # Required.
         ///     }
-        ///   ], # Required. <Description>The summary status of individual operation</Description>
-        ///   @nextLink: string, # Optional. <Description>Url for the next page.  Null if no more pages available</Description>
+        ///   ], # Required. The summary status of individual operation
+        ///   @nextLink: string, # Optional. Url for the next page.  Null if no more pages available
         /// }
         /// </code>
         /// 
@@ -918,39 +890,37 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetDocumentsStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       path: string, # Optional. <Description>Location of the document or folder</Description>
-        ///       sourcePath: string, # Required. <Description>Location of the source document</Description>
-        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
-        ///       to: string, # Required. <Description>To language</Description>
+        ///       path: string, # Optional. Location of the document or folder
+        ///       sourcePath: string, # Required. Location of the source document
+        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///       to: string, # Required. To language
         ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///         message: string, # Required. <Description>Gets high level error message.</Description>
-        ///         target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///         message: string, # Required. Gets high level error message.
+        ///         target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///         innerError: {
-        ///           code: string, # Required. <Description>Gets code error string.</Description>
-        ///           message: string, # Required. <Description>Gets high level error message.</Description>
-        ///           target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///           innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///         }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///       }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
-        ///       progress: number, # Required. <Description>Progress of the translation if available</Description>
-        ///       id: DocumentStatusId, # Required. <Description>Document Id</Description>
-        ///       characterCharged: number, # Optional. <Description>Character charged by the API</Description>
+        ///           code: string, # Required. Gets code error string.
+        ///           message: string, # Required. Gets high level error message.
+        ///           target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///           innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///         }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///       }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///       progress: number, # Required. Progress of the translation if available
+        ///       id: DocumentStatusId, # Required. Document Id
+        ///       characterCharged: number, # Optional. Character charged by the API
         ///     }
-        ///   ], # Required. <Description>The detail status of individual documents</Description>
-        ///   @nextLink: string, # Optional. <Description>Url for the next page.  Null if no more pages available</Description>
+        ///   ], # Required. The detail status of individual documents
+        ///   @nextLink: string, # Optional. Url for the next page.  Null if no more pages available
         /// }
         /// </code>
         /// 
@@ -1029,39 +999,37 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/GetDocumentsStatus
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       path: string, # Optional. <Description>Location of the document or folder</Description>
-        ///       sourcePath: string, # Required. <Description>Location of the source document</Description>
-        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Operation created date time</Description>
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. <Description>Date time in which the operation&apos;s status has been updated</Description>
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. <Description>List of possible statuses for job or document</Description>
-        ///       to: string, # Required. <Description>To language</Description>
+        ///       path: string, # Optional. Location of the document or folder
+        ///       sourcePath: string, # Required. Location of the source document
+        ///       createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///       to: string, # Required. To language
         ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. <Description>Enums containing high level error codes.</Description>
-        ///         message: string, # Required. <Description>Gets high level error message.</Description>
-        ///         target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///         message: string, # Required. Gets high level error message.
+        ///         target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///         innerError: {
-        ///           code: string, # Required. <Description>Gets code error string.</Description>
-        ///           message: string, # Required. <Description>Gets high level error message.</Description>
-        ///           target: string, # Optional. <Description>Gets the source of the error. 
-        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.</Description>
-        ///           innerError: InnerTranslationError, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///         }, # Optional. <Description>New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).</Description>
-        ///       }, # Optional. <Description>This contains an outer error with error code, message, details, target and an inner error with more descriptive details.</Description>
-        ///       progress: number, # Required. <Description>Progress of the translation if available</Description>
-        ///       id: DocumentStatusId, # Required. <Description>Document Id</Description>
-        ///       characterCharged: number, # Optional. <Description>Character charged by the API</Description>
+        ///           code: string, # Required. Gets code error string.
+        ///           message: string, # Required. Gets high level error message.
+        ///           target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///           innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///         }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///       }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///       progress: number, # Required. Progress of the translation if available
+        ///       id: DocumentStatusId, # Required. Document Id
+        ///       characterCharged: number, # Optional. Character charged by the API
         ///     }
-        ///   ], # Required. <Description>The detail status of individual documents</Description>
-        ///   @nextLink: string, # Optional. <Description>Url for the next page.  Null if no more pages available</Description>
+        ///   ], # Required. The detail status of individual documents
+        ///   @nextLink: string, # Optional. Url for the next page.  Null if no more pages available
         /// }
         /// </code>
         /// 
@@ -1106,46 +1074,44 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/StartTranslation
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   inputs: [
         ///     {
         ///       source: {
-        ///         sourceUrl: string, # Required. <Description>Location of the folder / container or single file with your documents</Description>
+        ///         sourceUrl: string, # Required. Location of the folder / container or single file with your documents
         ///         filter: {
-        ///           prefix: string, # Optional. <Description>A case-sensitive prefix string to filter documents in the source path for translation. 
-        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.</Description>
-        ///           suffix: string, # Optional. <Description>A case-sensitive suffix string to filter documents in the source path for translation. 
-        /// This is most often use for file extensions</Description>
+        ///           prefix: string, # Optional. A case-sensitive prefix string to filter documents in the source path for translation. 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        ///           suffix: string, # Optional. A case-sensitive suffix string to filter documents in the source path for translation. 
+        /// This is most often use for file extensions
         ///         }, # Optional.
-        ///         language: string, # Optional. <Description>Language code
-        /// If none is specified, we will perform auto detect on the document</Description>
-        ///         storageSource: &quot;AzureBlob&quot;, # Optional. <Description>Storage Source</Description>
-        ///       }, # Required. <Description>Source of the input documents</Description>
+        ///         language: string, # Optional. Language code
+        /// If none is specified, we will perform auto detect on the document
+        ///         storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
+        ///       }, # Required. Source of the input documents
         ///       targets: [
         ///         {
-        ///           targetUrl: string, # Required. <Description>Location of the folder / container with your documents</Description>
-        ///           category: string, # Optional. <Description>Category / custom system for translation request</Description>
-        ///           language: string, # Required. <Description>Target Language</Description>
+        ///           targetUrl: string, # Required. Location of the folder / container with your documents
+        ///           category: string, # Optional. Category / custom system for translation request
+        ///           language: string, # Required. Target Language
         ///           glossaries: [
         ///             {
-        ///               glossaryUrl: string, # Required. <Description>Location of the glossary. 
+        ///               glossaryUrl: string, # Required. Location of the glossary. 
         /// We will use the file extension to extract the formatting if the format parameter is not supplied.
         /// 
-        /// If the translation language pair is not present in the glossary, it will not be applied</Description>
-        ///               format: string, # Required. <Description>Format</Description>
-        ///               version: string, # Optional. <Description>Optional Version.  If not specified, default is used.</Description>
-        ///               storageSource: &quot;AzureBlob&quot;, # Optional. <Description>Storage Source</Description>
+        /// If the translation language pair is not present in the glossary, it will not be applied
+        ///               format: string, # Required. Format
+        ///               version: string, # Optional. Optional Version.  If not specified, default is used.
+        ///               storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///             }
-        ///           ], # Optional. <Description>List of Glossary</Description>
-        ///           storageSource: &quot;AzureBlob&quot;, # Optional. <Description>Storage Source</Description>
+        ///           ], # Optional. List of Glossary
+        ///           storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///         }
-        ///       ], # Required. <Description>Location of the destination for the output</Description>
-        ///       storageType: &quot;Folder&quot; | &quot;File&quot;, # Optional. <Description>Storage type of the input documents source string</Description>
+        ///       ], # Required. Location of the destination for the output
+        ///       storageType: &quot;Folder&quot; | &quot;File&quot;, # Optional. Storage type of the input documents source string
         ///     }
-        ///   ], # Required. <Description>The input list of documents or folders containing documents</Description>
+        ///   ], # Required. The input list of documents or folders containing documents
         /// }
         /// </code>
         /// 
@@ -1186,46 +1152,44 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AzureAIDocumentTranslation/DocumentTranslation/StartTranslation
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   inputs: [
         ///     {
         ///       source: {
-        ///         sourceUrl: string, # Required. <Description>Location of the folder / container or single file with your documents</Description>
+        ///         sourceUrl: string, # Required. Location of the folder / container or single file with your documents
         ///         filter: {
-        ///           prefix: string, # Optional. <Description>A case-sensitive prefix string to filter documents in the source path for translation. 
-        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.</Description>
-        ///           suffix: string, # Optional. <Description>A case-sensitive suffix string to filter documents in the source path for translation. 
-        /// This is most often use for file extensions</Description>
+        ///           prefix: string, # Optional. A case-sensitive prefix string to filter documents in the source path for translation. 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        ///           suffix: string, # Optional. A case-sensitive suffix string to filter documents in the source path for translation. 
+        /// This is most often use for file extensions
         ///         }, # Optional.
-        ///         language: string, # Optional. <Description>Language code
-        /// If none is specified, we will perform auto detect on the document</Description>
-        ///         storageSource: &quot;AzureBlob&quot;, # Optional. <Description>Storage Source</Description>
-        ///       }, # Required. <Description>Source of the input documents</Description>
+        ///         language: string, # Optional. Language code
+        /// If none is specified, we will perform auto detect on the document
+        ///         storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
+        ///       }, # Required. Source of the input documents
         ///       targets: [
         ///         {
-        ///           targetUrl: string, # Required. <Description>Location of the folder / container with your documents</Description>
-        ///           category: string, # Optional. <Description>Category / custom system for translation request</Description>
-        ///           language: string, # Required. <Description>Target Language</Description>
+        ///           targetUrl: string, # Required. Location of the folder / container with your documents
+        ///           category: string, # Optional. Category / custom system for translation request
+        ///           language: string, # Required. Target Language
         ///           glossaries: [
         ///             {
-        ///               glossaryUrl: string, # Required. <Description>Location of the glossary. 
+        ///               glossaryUrl: string, # Required. Location of the glossary. 
         /// We will use the file extension to extract the formatting if the format parameter is not supplied.
         /// 
-        /// If the translation language pair is not present in the glossary, it will not be applied</Description>
-        ///               format: string, # Required. <Description>Format</Description>
-        ///               version: string, # Optional. <Description>Optional Version.  If not specified, default is used.</Description>
-        ///               storageSource: &quot;AzureBlob&quot;, # Optional. <Description>Storage Source</Description>
+        /// If the translation language pair is not present in the glossary, it will not be applied
+        ///               format: string, # Required. Format
+        ///               version: string, # Optional. Optional Version.  If not specified, default is used.
+        ///               storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///             }
-        ///           ], # Optional. <Description>List of Glossary</Description>
-        ///           storageSource: &quot;AzureBlob&quot;, # Optional. <Description>Storage Source</Description>
+        ///           ], # Optional. List of Glossary
+        ///           storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///         }
-        ///       ], # Required. <Description>Location of the destination for the output</Description>
-        ///       storageType: &quot;Folder&quot; | &quot;File&quot;, # Optional. <Description>Storage type of the input documents source string</Description>
+        ///       ], # Required. Location of the destination for the output
+        ///       storageType: &quot;Folder&quot; | &quot;File&quot;, # Optional. Storage type of the input documents source string
         ///     }
-        ///   ], # Required. <Description>The input list of documents or folders containing documents</Description>
+        ///   ], # Required. The input list of documents or folders containing documents
         /// }
         /// </code>
         /// 

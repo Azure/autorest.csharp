@@ -62,15 +62,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200Succeeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -79,11 +77,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -114,15 +112,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200Succeeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -131,11 +127,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -166,15 +162,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/patch200SucceededIgnoreHeaders
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -183,11 +177,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -218,15 +212,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/patch200SucceededIgnoreHeaders
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -235,11 +227,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -270,15 +262,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/patch201RetryWithAsyncHeader
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -287,11 +277,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -322,15 +312,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/patch201RetryWithAsyncHeader
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -339,11 +327,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -374,15 +362,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/patch202RetryWithAsyncAndLocationHeader
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -391,11 +377,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -426,15 +412,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/patch202RetryWithAsyncAndLocationHeader
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -443,11 +427,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -478,15 +462,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put201Succeeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -495,11 +477,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -530,15 +512,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put201Succeeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -547,11 +527,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -581,15 +561,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post202List
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -619,15 +597,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post202List
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -658,15 +634,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200SucceededNoState
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -675,11 +649,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -710,15 +684,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200SucceededNoState
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -727,11 +699,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -762,15 +734,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put202Retry200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -779,11 +749,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -814,15 +784,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put202Retry200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -831,11 +799,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -866,15 +834,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put201CreatingSucceeded200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -883,11 +849,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -918,15 +884,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put201CreatingSucceeded200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -935,11 +899,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -970,15 +934,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200UpdatingSucceeded204
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -987,11 +949,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1022,15 +984,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200UpdatingSucceeded204
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1039,11 +999,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1074,15 +1034,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put201CreatingFailed200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1091,11 +1049,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1126,15 +1084,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put201CreatingFailed200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1143,11 +1099,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1178,15 +1134,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200Acceptedcanceled200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1195,11 +1149,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1230,15 +1184,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/put200Acceptedcanceled200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1247,11 +1199,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1282,15 +1234,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putNoHeaderInRetry
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1299,11 +1249,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1334,15 +1284,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putNoHeaderInRetry
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1351,11 +1299,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1386,15 +1334,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1403,11 +1349,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1438,15 +1384,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1455,11 +1399,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1490,15 +1434,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNoRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1507,11 +1449,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1542,15 +1484,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNoRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1559,11 +1499,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1594,15 +1534,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncRetryFailed
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1611,11 +1549,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1646,15 +1584,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncRetryFailed
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1663,11 +1599,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1698,15 +1634,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNoRetrycanceled
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1715,11 +1649,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1750,15 +1684,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNoRetrycanceled
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1767,11 +1699,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1802,15 +1734,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNoHeaderInRetry
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1819,11 +1749,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1854,15 +1784,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNoHeaderInRetry
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1871,11 +1799,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -1906,8 +1834,6 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putNonResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -1944,8 +1870,6 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putNonResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -1982,8 +1906,6 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNonResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -2020,8 +1942,6 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncNonResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -2058,11 +1978,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putSubResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2071,7 +1989,7 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2102,11 +2020,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putSubResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2115,7 +2031,7 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2146,11 +2062,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncSubResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2159,7 +2073,7 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2190,11 +2104,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/putAsyncSubResource
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2203,7 +2115,7 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Sub Resource Id</Description>
+        ///   id: string, # Optional. Sub Resource Id
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2233,15 +2145,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/deleteProvisioning202Accepted200Succeeded
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2271,15 +2181,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/deleteProvisioning202Accepted200Succeeded
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2309,15 +2217,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/deleteProvisioning202DeletingFailed200
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2347,15 +2253,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/deleteProvisioning202DeletingFailed200
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2385,15 +2289,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/deleteProvisioning202Deletingcanceled200
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2423,15 +2325,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/deleteProvisioning202Deletingcanceled200
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2499,15 +2399,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/delete202Retry200
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2537,15 +2435,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/delete202Retry200
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2575,15 +2471,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/delete202NoRetry204
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2613,15 +2507,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/delete202NoRetry204
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2879,8 +2771,6 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post200WithPayload
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -2910,8 +2800,6 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post200WithPayload
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -2942,15 +2830,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post202Retry200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -2981,15 +2867,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post202Retry200
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3020,15 +2904,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post202NoRetry204
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3037,11 +2919,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3072,15 +2954,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/post202NoRetry204
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3089,11 +2969,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3123,15 +3003,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postDoubleHeadersFinalLocationGet
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3161,15 +3039,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postDoubleHeadersFinalLocationGet
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3199,15 +3075,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postDoubleHeadersFinalAzureHeaderGet
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3237,15 +3111,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postDoubleHeadersFinalAzureHeaderGet
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3275,15 +3147,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postDoubleHeadersFinalAzureHeaderGetDefault
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3313,15 +3183,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postDoubleHeadersFinalAzureHeaderGetDefault
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3352,15 +3220,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3369,11 +3235,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3404,15 +3270,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3421,11 +3285,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3456,15 +3320,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncNoRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3473,11 +3335,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3508,15 +3370,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncNoRetrySucceeded
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3525,11 +3385,11 @@ namespace lro_LowLevel
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3560,15 +3420,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncRetryFailed
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3599,15 +3457,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncRetryFailed
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3638,15 +3494,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncRetrycanceled
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
@@ -3677,15 +3531,13 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestLongRunningOperationTestService/LROs/postAsyncRetrycanceled
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string, # Optional. <Description>Resource Id</Description>
-        ///   type: string, # Optional. <Description>Resource Type</Description>
-        ///   tags: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
-        ///   location: string, # Optional. <Description>Resource Location</Description>
-        ///   name: string, # Optional. <Description>Resource Name</Description>
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         ///   properties: {
         ///     provisioningState: string, # Optional.
         ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.

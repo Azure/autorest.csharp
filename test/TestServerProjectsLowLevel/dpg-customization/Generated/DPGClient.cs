@@ -65,8 +65,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/getModel
         /// Schema for <c>LROProduct Response Body</c>:
         /// <code>{
         ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
@@ -99,8 +97,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/getModel
         /// Schema for <c>LROProduct Response Body</c>:
         /// <code>{
         ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
@@ -134,8 +130,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/postModel
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   hello: string, # Required.
@@ -175,8 +169,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/postModel
         /// Schema for <c>Request Body</c>:
         /// <code>{
         ///   hello: string, # Required.
@@ -215,8 +207,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/getPages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -259,8 +249,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/getPages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -304,8 +292,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/lro
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
@@ -339,8 +325,6 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/DPGClient/lro
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.

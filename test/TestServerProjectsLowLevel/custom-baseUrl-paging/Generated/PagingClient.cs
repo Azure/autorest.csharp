@@ -64,8 +64,6 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestParameterizedHostTestPagingClient/Paging/getPagesPartialUrl
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -111,8 +109,6 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestParameterizedHostTestPagingClient/Paging/getPagesPartialUrl
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -158,8 +154,6 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestParameterizedHostTestPagingClient/Paging/getPagesPartialUrlOperation
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -205,8 +199,6 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestParameterizedHostTestPagingClient/Paging/getPagesPartialUrlOperation
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -253,8 +245,6 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestParameterizedHostTestPagingClient/Paging/getPagesPartialUrlOperationNext
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -300,8 +290,6 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestParameterizedHostTestPagingClient/Paging/getPagesPartialUrlOperationNext
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [

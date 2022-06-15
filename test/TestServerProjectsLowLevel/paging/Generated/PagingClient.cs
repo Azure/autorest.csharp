@@ -63,8 +63,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getNoItemNamePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [Product], # Optional.
@@ -99,8 +97,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getNoItemNamePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [Product], # Optional.
@@ -135,8 +131,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getNullNextLinkNamePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -172,8 +166,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getNullNextLinkNamePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -209,8 +201,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getSinglePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -252,8 +242,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getSinglePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -295,8 +283,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/firstResponseEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [Product], # Optional.
@@ -331,8 +317,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/firstResponseEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   value: [Product], # Optional.
@@ -370,8 +354,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -416,8 +398,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -460,8 +440,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getWithQueryParams
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -504,8 +482,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getWithQueryParams
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -548,8 +524,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/duplicateParams
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -592,8 +566,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/duplicateParams
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -635,8 +607,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/nextOperationWithQueryParams
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -672,8 +642,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/nextOperationWithQueryParams
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -712,8 +680,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getOdataMultiplePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -758,8 +724,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getOdataMultiplePages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -805,8 +769,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesWithOffset
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -852,8 +814,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesWithOffset
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -895,8 +855,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesRetryFirst
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -938,8 +896,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesRetryFirst
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -981,8 +937,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesRetrySecond
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1024,8 +978,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesRetrySecond
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1067,8 +1019,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getSinglePagesFailure
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1110,8 +1060,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getSinglePagesFailure
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1153,8 +1101,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFailure
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1196,8 +1142,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFailure
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1239,8 +1183,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFailureUri
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1282,8 +1224,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFailureUri
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1329,8 +1269,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFragmentNextLink
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1379,8 +1317,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFragmentNextLink
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1429,8 +1365,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFragmentWithGroupingNextLink
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1479,8 +1413,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getMultiplePagesFragmentWithGroupingNextLink
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1530,8 +1462,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/nextFragment
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1580,8 +1510,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/nextFragment
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1630,8 +1558,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/nextFragmentWithGrouping
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1680,8 +1606,6 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/nextFragmentWithGrouping
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1725,8 +1649,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getPagingModelWithItemNameWithXMSClientName
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1768,8 +1690,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/getPagingModelWithItemNameWithXMSClientName
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1815,8 +1735,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/GetMultiplePagesLRO
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
@@ -1874,8 +1792,6 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestPagingTestService/Paging/GetMultiplePagesLRO
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [

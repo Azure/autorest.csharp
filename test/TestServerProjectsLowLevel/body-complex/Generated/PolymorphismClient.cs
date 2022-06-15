@@ -60,8 +60,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getValid
         /// Schema for <c>Salmon Response Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -148,7 +146,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Response Body</c>:
@@ -190,8 +188,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getValid
         /// Schema for <c>Salmon Response Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -278,7 +274,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Response Body</c>:
@@ -322,8 +318,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValid
         /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -410,7 +404,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Request Body</c>:
@@ -456,8 +450,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValid
         /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -544,7 +536,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Request Body</c>:
@@ -588,8 +580,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getDotSyntax
         /// Schema for <c>DotSalmon Response Body</c>:
         /// <code>{
         ///   fish.type: string, # Required.
@@ -620,8 +610,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getDotSyntax
         /// Schema for <c>DotSalmon Response Body</c>:
         /// <code>{
         ///   fish.type: string, # Required.
@@ -652,8 +640,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
@@ -692,8 +678,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
@@ -732,8 +716,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithoutDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
@@ -772,8 +754,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithoutDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
@@ -812,8 +792,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComplicated
         /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
         ///   location: string, # Optional.
@@ -854,8 +832,6 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComplicated
         /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
         ///   location: string, # Optional.
@@ -898,8 +874,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putComplicated
         /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
         ///   location: string, # Optional.
@@ -944,8 +918,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putComplicated
         /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
         ///   location: string, # Optional.
@@ -990,8 +962,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putMissingDiscriminator
         /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
         ///   location: string, # Optional.
@@ -1054,8 +1024,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putMissingDiscriminator
         /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
         ///   location: string, # Optional.
@@ -1118,8 +1086,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValidMissingRequired
         /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -1206,7 +1172,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Request Body</c>:
@@ -1252,8 +1218,6 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Additional information can be found in the service REST API documentation:
-        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValidMissingRequired
         /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -1340,7 +1304,7 @@ namespace body_complex_LowLevel
         ///     }
         ///   ], # Optional.
         ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// Schema for <c>Cookiecuttershark Request Body</c>:
