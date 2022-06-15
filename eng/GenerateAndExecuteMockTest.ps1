@@ -46,7 +46,7 @@ function Update-Branch([string]$CommitId, [string]$Path) {
     $fileContent = Get-Content $file
     $store = @()
     foreach ($item in $fileContent) {
-        $store += $item.ToString().Replace("master", $CommitId)
+        $store += $item.ToString().Replace("main", $CommitId)
     }
     $store | Out-File -FilePath $file
 }
@@ -187,7 +187,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 function  MockTestInit {
     param(
         [Parameter()]
-        [string] $CommitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b",
+        [string] $CommitId = "aa42d66d5b919ea80c8dde04ae19d30a9c974d7d",
         [Parameter()]
         [bool]$GenerateNewSDKs = $false,
         [Parameter()]
@@ -429,7 +429,7 @@ function  MockTestInit {
 }
 
 # Generate & Run All SDK
-$commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
+$commitId = "aa42d66d5b919ea80c8dde04ae19d30a9c974d7d"
 $GenerateNewSDKs = $true
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
