@@ -4,13 +4,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Builders;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
-    internal class CodeModelExtensionTests
+    internal class CodeModelTransformationTests
     {
         private static readonly List<string> EnumValuesShouldBePrompted = new()
         {
@@ -70,7 +70,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("JitSchedulingPolicy", "ManagedServiceIdentityType", AllSchemaTypes.String, "ManagedServiceIdentityType")]
         public void ValidateGetTypePropertyName(string parentName, string propertyTypeName, AllSchemaTypes type, string expected)
         {
-            var typePropertyName = CodeModelExtension.GetEnclosingTypeName(parentName, propertyTypeName, type);
+            var typePropertyName = FrameworkTypeUpdater.GetEnclosingTypeName(parentName, propertyTypeName, type);
             Assert.AreEqual(expected, typePropertyName);
         }
 
@@ -85,7 +85,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         private static void ValidateRearrangeChoices(IEnumerable<string> expected, IEnumerable<string> input)
         {
             var choiceValues = input.Select(v => GetChoiceValue(v)).ToList();
-            var results = CodeModelExtension.RearrangeChoices(choiceValues, EnumValuesShouldBePrompted);
+            var results = SealedChoicesUpdater.RearrangeChoices(choiceValues, EnumValuesShouldBePrompted);
             CollectionAssert.AreEquivalent(expected, results.Select(c => c.CSharpName()));
         }
 
