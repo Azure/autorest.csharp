@@ -37,12 +37,12 @@ namespace ExactMatchInheritance
             if (Optional.IsDefined(Type1))
             {
                 writer.WritePropertyName("type1");
-                writer.WriteStringValue(Type1.Value.ToSerialString());
+                writer.WriteStringValue(Type1.Value.ToString());
             }
             if (Optional.IsDefined(Type2))
             {
                 writer.WritePropertyName("type2");
-                writer.WriteStringValue(Type2.Value.ToSerialString());
+                writer.WriteStringValue(Type2.Value.ToString());
             }
             writer.WriteEndObject();
         }
@@ -86,7 +86,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type1 = property.Value.GetString().ToType1();
+                    type1 = new Type1(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("type2"))
@@ -96,7 +96,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type2 = property.Value.GetString().ToType2();
+                    type2 = new Type2(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))

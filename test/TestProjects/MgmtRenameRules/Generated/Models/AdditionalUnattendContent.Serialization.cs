@@ -18,12 +18,12 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PassName))
             {
                 writer.WritePropertyName("passName");
-                writer.WriteStringValue(PassName.Value.ToSerialString());
+                writer.WriteStringValue(PassName.Value.ToString());
             }
             if (Optional.IsDefined(ComponentName))
             {
                 writer.WritePropertyName("componentName");
-                writer.WriteStringValue(ComponentName.Value.ToSerialString());
+                writer.WriteStringValue(ComponentName.Value.ToString());
             }
             if (Optional.IsDefined(SettingName))
             {
@@ -53,7 +53,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    passName = property.Value.GetString().ToPassNames();
+                    passName = new PassNames(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("componentName"))
@@ -63,7 +63,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    componentName = property.Value.GetString().ToComponentNames();
+                    componentName = new ComponentNames(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("settingName"))
