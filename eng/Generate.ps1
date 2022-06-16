@@ -138,7 +138,7 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
 
     if ($forTest) {
-        Add-Swagger-Test "$testName.Tests" $directory $testArguments
+        Add-Swagger-Test $testName $directory $testArguments
     }
     else {
         Add-Swagger $testName $directory $testArguments
@@ -235,7 +235,7 @@ $swaggerDefinitions.Keys | ForEach-Object {
     $testProjectEntries[$_] = $swaggerDefinitions[$_];
 };
 $swaggerTestDefinitions.Keys | ForEach-Object {
-    $testProjectEntries[$_] = $swaggerTestDefinitions[$_];
+    $testProjectEntries["$_.Tests"] = $swaggerTestDefinitions[$_];
 }
 
 foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
