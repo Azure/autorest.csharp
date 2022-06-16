@@ -14,7 +14,7 @@ using Azure.ResourceManager.TestFramework;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for DeletedManagedHsm. </summary>
+    /// <summary> Test for DeletedManagedHsmCollection. </summary>
     public partial class DeletedManagedHsmCollectionMockTests : MockTestBase
     {
         public DeletedManagedHsmCollectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
@@ -27,11 +27,22 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted managed HSM
-            string location = "westus";
-            string name = "hsm1";
 
-            var collection = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000")).GetDeletedManagedHsms();
-            await collection.GetAsync(location, name);
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier();
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetDeletedManagedHsms();
+            await collection.GetAsync(default, default);
+        }
+
+        [RecordedTest]
+        public async Task Exists()
+        {
+            // Example: Retrieve a deleted managed HSM
+
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier();
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetDeletedManagedHsms();
+            await collection.ExistsAsync(default, default);
         }
     }
 }

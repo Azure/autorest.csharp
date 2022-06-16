@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 else
                 {
-                    var ep = exampleModel.AllParameter.FirstOrDefault(ev => ev.Parameter.CSharpName() == extraParam.Name);
+                    var ep = exampleModel.AllParameters.FirstOrDefault(ev => ev.Parameter.CSharpName() == extraParam.Name);
                     if (ep is null)
                     {
                         extraParamNames.Add($"default");

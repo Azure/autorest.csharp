@@ -14,5 +14,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}",
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}"
   ],
-  "TestModeler": {}
+  "TestModeler": {
+    "SourceCodePath": "file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtKeyvault/tests/../src"
+  }
 }

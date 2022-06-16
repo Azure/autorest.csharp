@@ -14,7 +14,7 @@ using Azure.ResourceManager.TestFramework;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for DeletedVault. </summary>
+    /// <summary> Test for DeletedVaultCollection. </summary>
     public partial class DeletedVaultCollectionMockTests : MockTestBase
     {
         public DeletedVaultCollectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
@@ -27,11 +27,22 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted vault
-            string location = "westus";
-            string vaultName = "sample-vault";
 
-            var collection = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000")).GetDeletedVaults();
-            await collection.GetAsync(location, vaultName);
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier();
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetDeletedVaults();
+            await collection.GetAsync(default, default);
+        }
+
+        [RecordedTest]
+        public async Task Exists()
+        {
+            // Example: Retrieve a deleted vault
+
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier();
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetDeletedVaults();
+            await collection.ExistsAsync(default, default);
         }
     }
 }

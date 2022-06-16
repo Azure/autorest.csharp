@@ -79,5 +79,17 @@ namespace AutoRest.CSharp.Utilities
         [return: MaybeNull]
         public static T GetValue<T>(this IDictionary<object, object>? dictionary, string key) =>
             ((dictionary?.ContainsKey(key) ?? false) && dictionary![key] is T item) ? item : default;
+
+        public static void AddInList<TKey, TValue>(this Dictionary<TKey, List<TValue>> dictionary, TKey key, TValue value) where TKey : notnull
+        {
+            if (dictionary.TryGetValue(key, out var list))
+            {
+                list.Add(value);
+            }
+            else
+            {
+                dictionary.Add(key, new List<TValue>() { value });
+            }
+        }
     }
 }

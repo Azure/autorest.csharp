@@ -45,8 +45,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Line($"[RecordedTest]");
 
-            var testModelerConfig = Configuration.MgmtConfiguration.TestModeler;
-            string? ignoreReason = testModelerConfig?.IgnoreReason;
+            string? ignoreReason = Configuration.MgmtConfiguration.TestModeler?.IgnoreReason;
             if (ignoreReason is not null)
             {
                 _writer.UseNamespace("NUnit.Framework");
@@ -674,7 +673,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     passThruParameter.Name == KnownParameters.CancellationTokenParameter.Name)
                     continue;
                 FormattableString? paramName = null;
-                foreach (ExampleParameter exampleParameter in exampleModel.AllParameter)
+                foreach (ExampleParameter exampleParameter in exampleModel.AllParameters)
                 {
                     if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
                     {
@@ -704,7 +703,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var identifierParams = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment =>
             {
                 var value = "\"default\"";
-                foreach (var parameterValue in exampleModel.AllParameter)
+                foreach (var parameterValue in exampleModel.AllParameters)
                 {
                     if (parameterValue.Parameter.CSharpName() == segment.ReferenceName)
                     {
@@ -728,7 +727,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)
         {
-            foreach (var parameterValue in exampleModel.AllParameter)
+            foreach (var parameterValue in exampleModel.AllParameters)
             {
                 if ((parameterValue.Parameter.Language.Default.SerializedName ?? parameterValue.Parameter.Language.Default.Name) == parameterName)
                 {

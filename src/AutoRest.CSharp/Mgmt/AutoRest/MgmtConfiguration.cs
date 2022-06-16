@@ -60,10 +60,14 @@ namespace AutoRest.CSharp.Input
             private const string TestModelerOptionsFormat = "testmodeler.{0}";
 
             public string? IgnoreReason { get; }
+            public string? SourceCodePath { get; }
 
-            public TestModelerConfiguration(JsonElement? ignoreReason = default)
+            public TestModelerConfiguration(
+                JsonElement? ignoreReason = default,
+                JsonElement? sourceCodePath = default)
             {
-                IgnoreReason = (ignoreReason is null || ignoreReason.Value.ValueKind == JsonValueKind.Null) ? null : ignoreReason.ToString();
+                IgnoreReason = !IsValidJsonElement(ignoreReason) ? null : ignoreReason.ToString();
+                SourceCodePath = !IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
             }
 
             internal static TestModelerConfiguration? LoadConfiguration(JsonElement root)
@@ -71,20 +75,24 @@ namespace AutoRest.CSharp.Input
                 if (root.ValueKind != JsonValueKind.Object)
                     return null;
 
-                var hasIgnoreReason = root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                root.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
 
-                return new TestModelerConfiguration(ignoreReason: hasIgnoreReason ? ignoreReason : null);
+                return new TestModelerConfiguration(
+                    ignoreReason: ignoreReason,
+                    sourceCodePath: sourceCodePath);
             }
 
             internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
             {
                 var testModeler = autoRest.GetValue<JsonElement?>("testmodeler").GetAwaiter().GetResult();
-                if (testModeler is null || testModeler.Value.ValueKind == JsonValueKind.Null)
+                if (!IsValidJsonElement(testModeler))
                 {
                     return null;
                 }
                 return new TestModelerConfiguration(
-                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult());
+                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
+                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "source-path")).GetAwaiter().GetResult());
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -93,6 +101,9 @@ namespace AutoRest.CSharp.Input
 
                 if (IgnoreReason is not null)
                     writer.WriteString(nameof(IgnoreReason), IgnoreReason);
+
+                if (SourceCodePath is not null)
+                    writer.WriteString(nameof(SourceCodePath), SourceCodePath);
 
                 writer.WriteEndObject();
             }
