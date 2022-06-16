@@ -231,6 +231,11 @@ function  MockTestInit {
         & dotnet new -i $projRoot\MgmtTemplate\Azure.ResourceManager.Template
         & dotnet new -i $projRoot\MgmtTemplate\mocktests
 
+        # Clone Azure/azure-rest-api-specs and get latest commitId
+        & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
+        & cd $projRoot\azure-rest-api-specs
+        $CommitId = (git rev-parse HEAD).Substring(0,40)
+
         # Clone Azure/azure-sdk-for-net
         & git clone $netSdkRepoUri $projRoot\azure-sdk-for-net
         $netRepoRoot = Join-Path $projRoot "azure-sdk-for-net"
@@ -429,8 +434,7 @@ function  MockTestInit {
 }
 
 # Generate & Run All SDK
-$commitId = "aa42d66d5b919ea80c8dde04ae19d30a9c974d7d"
 $GenerateNewSDKs = $true
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
-MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
+MockTestInit -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
