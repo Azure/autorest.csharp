@@ -27,5 +27,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public EmptyResourceData(string name) : base(GetEmptyObjectSchemaWithName(name))
         {
         }
+
+        // we never need anything in the empty resource data
+        internal override bool ShouldSetResourceIdentifier => false;
     }
 }

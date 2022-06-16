@@ -4,15 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -40,20 +36,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResourceIdentifierMethods()
         {
-            var method = This.CreateResourceIdentifierMethodSignature();
+            var method = This.CreateResourceIdentifierMethodSignature;
             _writer.WriteXmlDocumentationSummary($"{method.Description}");
             var parameterList = string.Join(", ", method.Parameters.Select(param => $"{param.Type.Name} {param.Name}"));
 
             var requestPath = This.RequestPath;
-            using (_writer.Scope($"public static {method.ReturnType?.Name} {method.Name}({parameterList})"))
+            using (_writer.WriteMethodDeclaration(method))
             {
                 // Storage has inconsistent definitions:
                 // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
                 // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
                 // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
                 // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
-                _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath, !requestPath.Any() || requestPath.First().IsConstant)}\";");
-                _writer.Line($"return new {method.ReturnType?.Name}(resourceId);");
+                var resourceId = new CodeWriterDeclaration("resourceId");
+                _writer.Line($"var {resourceId:D} = $\"{Segment.BuildSerializedSegments(requestPath, !requestPath.Any() || requestPath.First().IsConstant)}\";");
+                _writer.Line($"return new {method.ReturnType!.Name}({resourceId});");
             }
         }
 

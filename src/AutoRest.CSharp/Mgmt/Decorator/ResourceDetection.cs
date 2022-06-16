@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
 
-            // try to find it in the virtual resource list
+            // try to find it in the partial resource list
             if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceName))
             {
                 _resourceDataSchemaNameCache.TryAdd(set.RequestPath, resourceName);

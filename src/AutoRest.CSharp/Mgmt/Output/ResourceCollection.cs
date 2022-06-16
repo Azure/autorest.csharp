@@ -259,6 +259,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
+        public override MethodSignature CreateResourceIdentifierMethodSignature => throw new InvalidOperationException("Resource collections will never have CreateResourceIdentifier method");
+
         private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
         public IDictionary<RequestPath, ISet<ResourceTypeSegment>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
 

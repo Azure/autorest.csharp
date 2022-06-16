@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -684,7 +683,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
         {
-            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature();
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
 
             var parameterInvocations = new List<FormattableString>();

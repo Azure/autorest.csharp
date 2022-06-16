@@ -66,6 +66,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return nameProperty?.Declaration.Type;
         }
 
-        internal bool ShouldSetResourceIdentifier => TypeOfId == null;
+        internal virtual bool ShouldSetResourceIdentifier => TypeOfId == null;
     }
 }

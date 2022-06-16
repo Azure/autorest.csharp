@@ -403,16 +403,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Returns the different method signature for different base path of this resource
         /// </summary>
         /// <returns></returns>
-        public MethodSignature CreateResourceIdentifierMethodSignature()
-        {
-            return new MethodSignature(
-                    Name: "CreateResourceIdentifier",
-                    Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                    Modifiers: Public | Static,
-                    ReturnType: typeof(ResourceIdentifier),
-                    ReturnDescription: null,
-                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
-        }
+        public virtual MethodSignature CreateResourceIdentifierMethodSignature
+            => createResourceIdentifierMethodSignature ??= new MethodSignature(
+                Name: "CreateResourceIdentifier",
+                Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                Modifiers: Public | Static,
+                ReturnType: typeof(ResourceIdentifier),
+                ReturnDescription: null,
+                Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
+        private MethodSignature? createResourceIdentifierMethodSignature;
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
         {

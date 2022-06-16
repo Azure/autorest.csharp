@@ -31,6 +31,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
+        private MethodSignature? _createResourceIdentifierSignature;
+        public override MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierSignature ??= base.CreateResourceIdentifierMethodSignature! with
+        {
+            Modifiers = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static
+        };
+
         protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
         {
             yield break;
