@@ -15,8 +15,8 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 
-mgmt-debug:
-  show-request-path: true
+keep-orphaned-models:
+- VmDiskTypes
 
 rename-rules:
   Os: OS

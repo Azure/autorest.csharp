@@ -5,17 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.AutoRest.Plugins;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -176,9 +172,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
 
-        public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
+        /// <summary>
+        /// This method delegates the caller to do something on the generated code project
+        /// </summary>
+        /// <param name="processor"></param>
+        /// <returns></returns>
+        public async Task PostProcess(Func<Project, Task<Project>> processor)
         {
-            _project = await Internalizer.InternalizeAsync(_project, modelsToKeep);
+            _project = await processor(_project);
         }
     }
 }

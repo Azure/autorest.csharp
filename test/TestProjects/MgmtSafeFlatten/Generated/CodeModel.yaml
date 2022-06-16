@@ -804,6 +804,7 @@ operationGroups:
     $key: Common
     operations:
       - !Operation 
+        operationId: Common_ListTypeOnesBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -859,6 +860,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_ListTypeTwosBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -914,6 +916,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_ListTypeOnes
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -982,6 +985,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_ListTypeTwos
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -1050,6 +1054,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_GetTypeOne
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -1131,12 +1136,13 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_CreateOrUpdateTypeOne
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_45
+          - !Parameter &ref_46
             schema: *ref_1
             implementation: Method
             required: true
@@ -1148,7 +1154,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_46
+          - !Parameter &ref_47
             schema: *ref_1
             implementation: Method
             required: true
@@ -1162,8 +1168,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_45
             parameters:
               - !Parameter 
                 schema: *ref_43
@@ -1217,9 +1223,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_45
+        signatureParameters:
           - *ref_46
+          - *ref_47
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1241,12 +1249,13 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_GetTypeTwo
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_47
+          - !Parameter &ref_48
             schema: *ref_1
             implementation: Method
             required: true
@@ -1258,7 +1267,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_48
+          - !Parameter &ref_49
             schema: *ref_1
             implementation: Method
             required: true
@@ -1299,8 +1308,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_47
           - *ref_48
+          - *ref_49
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -1322,12 +1331,13 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_CreateOrUpdateTypeTwo
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_50
+          - !Parameter &ref_52
             schema: *ref_1
             implementation: Method
             required: true
@@ -1339,7 +1349,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
+          - !Parameter &ref_53
             schema: *ref_1
             implementation: Method
             required: true
@@ -1353,8 +1363,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_51
             parameters:
               - !Parameter 
                 schema: *ref_43
@@ -1369,7 +1379,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_49
+              - !Parameter &ref_50
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -1395,7 +1405,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_49
+              - *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -1408,9 +1418,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_50
+        requests:
           - *ref_51
+        signatureParameters:
+          - *ref_52
+          - *ref_53
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -1439,8 +1451,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

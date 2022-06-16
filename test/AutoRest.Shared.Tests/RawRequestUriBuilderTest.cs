@@ -122,5 +122,20 @@ namespace Azure.Core.Tests
 
             Assert.AreEqual(expected, builder.ToUri().ToString());
         }
+
+        [Theory]
+        [TestCase(long.MinValue)]
+        [TestCase(0L)]
+        [TestCase(long.MaxValue)]
+        public void AppendPathTypeLong(long longPathPart)
+        {
+            const string Endpoint = "http://localhost:12345/getByLong/";
+
+            var builder = new RawRequestUriBuilder();
+            builder.AppendRaw(Endpoint, false);
+            builder.AppendPath(longPathPart, true);
+
+            Assert.AreEqual($"{Endpoint}{longPathPart:G}", builder.ToUri().ToString());
+        }
     }
 }

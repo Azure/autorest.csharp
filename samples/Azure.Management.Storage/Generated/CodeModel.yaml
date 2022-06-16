@@ -387,7 +387,7 @@ schemas: !Schemas
           name: LastAccessTimeTrackingPolicyTrackingGranularityInDays
           description: The field specifies blob object tracking granularity in days, typically how often the blob object should be tracked.This field is currently read only with value as 1
       protocol: !Protocols {}
-    - !NumberSchema &ref_512
+    - !NumberSchema &ref_513
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -850,7 +850,7 @@ schemas: !Schemas
           name: ListContainerItemsNextLink
           description: Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size.
       protocol: !Protocols {}
-    - !StringSchema &ref_520
+    - !StringSchema &ref_521
       type: string
       apiVersions:
         - !ApiVersion 
@@ -874,7 +874,7 @@ schemas: !Schemas
           name: LegalHoldTagsItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_549
+    - !StringSchema &ref_555
       type: string
       apiVersions:
         - !ApiVersion 
@@ -885,7 +885,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_554
+    - !StringSchema &ref_560
       type: string
       apiVersions:
         - !ApiVersion 
@@ -896,7 +896,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_559
+    - !StringSchema &ref_565
       type: string
       apiVersions:
         - !ApiVersion 
@@ -907,7 +907,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_564
+    - !StringSchema &ref_570
       type: string
       apiVersions:
         - !ApiVersion 
@@ -2449,7 +2449,7 @@ schemas: !Schemas
           name: ObjectReplicationPolicyFilterMinCreationTime
           description: 'Blobs created after the time will be replicated to the destination. It must be in datetime format ''yyyy-MM-ddTHH:mm:ssZ''. Example: 2020-02-19T16:05:00Z'
       protocol: !Protocols {}
-    - !StringSchema &ref_727
+    - !StringSchema &ref_750
       type: string
       apiVersions:
         - !ApiVersion 
@@ -2623,7 +2623,7 @@ schemas: !Schemas
           name: SkuName
           description: The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_513
+    - !ChoiceSchema &ref_514
       choices:
         - !ChoiceValue 
           value: deleted
@@ -3755,7 +3755,7 @@ schemas: !Schemas
           name: SignedResource
           description: 'The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).'
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_683
+    - !ChoiceSchema &ref_703
       choices:
         - !ChoiceValue 
           value: default
@@ -3788,7 +3788,7 @@ schemas: !Schemas
           name: RuleType
           description: The valid value is Lifecycle
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_694
+    - !ChoiceSchema &ref_715
       choices:
         - !ChoiceValue 
           value: default
@@ -4159,7 +4159,7 @@ schemas: !Schemas
           name: AccountStatus
           description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_637
+    - !SealedChoiceSchema &ref_652
       choices:
         - !ChoiceValue 
           value: geoReplicationStats
@@ -4346,7 +4346,7 @@ schemas: !Schemas
           name: Action
           description: The action of virtual network rule.
       protocol: !Protocols {}
-    - !ConstantSchema &ref_647
+    - !ConstantSchema &ref_663
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -6877,7 +6877,7 @@ schemas: !Schemas
                               serializedName: privateLinkServiceConnectionState
                               language: !Languages 
                                 default:
-                                  name: privateLinkServiceConnectionState
+                                  name: connectionState
                                   description: A collection of information about the state of the connection between service consumer and provider.
                               protocol: !Protocols {}
                             - !Property 
@@ -10450,7 +10450,7 @@ schemas: !Schemas
     - *ref_282
     - *ref_96
     - *ref_9
-    - !ObjectSchema &ref_519
+    - !ObjectSchema &ref_520
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10502,7 +10502,7 @@ schemas: !Schemas
     - *ref_286
     - *ref_67
     - *ref_8
-    - !ObjectSchema &ref_535
+    - !ObjectSchema &ref_538
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10560,7 +10560,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_71
-    - !ObjectSchema &ref_570
+    - !ObjectSchema &ref_577
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10621,7 +10621,7 @@ schemas: !Schemas
           description: Lease Container request schema.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_575
+    - !ObjectSchema &ref_583
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10653,7 +10653,7 @@ schemas: !Schemas
           description: Lease Container response schema.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_579
+    - !ObjectSchema &ref_587
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10739,7 +10739,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_298
-    - !ObjectSchema &ref_582
+    - !ObjectSchema &ref_590
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10778,7 +10778,7 @@ schemas: !Schemas
     - *ref_299
     - *ref_300
     - *ref_301
-    - !ObjectSchema &ref_583
+    - !ObjectSchema &ref_591
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10864,7 +10864,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_302
-    - !ObjectSchema &ref_594
+    - !ObjectSchema &ref_603
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10911,7 +10911,7 @@ schemas: !Schemas
     - *ref_72
     - *ref_304
     - *ref_305
-    - !ObjectSchema &ref_614
+    - !ObjectSchema &ref_625
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10945,7 +10945,7 @@ schemas: !Schemas
           description: The deleted share to be restored.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_619
+    - !ObjectSchema &ref_631
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11006,7 +11006,7 @@ schemas: !Schemas
           description: Lease Share request schema.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_625
+    - !ObjectSchema &ref_638
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11038,7 +11038,7 @@ schemas: !Schemas
           description: Lease Share response schema.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_626
+    - !ObjectSchema &ref_639
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11107,9 +11107,6 @@ schemas: !Schemas
                       - json
                     usage:
                       - output
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: OperationDisplay
@@ -11338,7 +11335,7 @@ schemas: !Schemas
     - *ref_333
     - *ref_334
     - *ref_335
-    - !ObjectSchema &ref_627
+    - !ObjectSchema &ref_640
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11575,7 +11572,7 @@ schemas: !Schemas
     - *ref_343
     - *ref_344
     - *ref_345
-    - !ObjectSchema &ref_628
+    - !ObjectSchema &ref_641
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11609,7 +11606,7 @@ schemas: !Schemas
           description: The parameters used to check the availability of the storage account name.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_630
+    - !ObjectSchema &ref_644
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11652,7 +11649,7 @@ schemas: !Schemas
           description: The CheckNameAvailability operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_631
+    - !ObjectSchema &ref_645
       type: object
       apiVersions:
         - !ApiVersion 
@@ -11991,7 +11988,7 @@ schemas: !Schemas
     - *ref_380
     - *ref_381
     - *ref_95
-    - !ObjectSchema &ref_641
+    - !ObjectSchema &ref_656
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12232,7 +12229,7 @@ schemas: !Schemas
           description: The parameters that can be provided when updating the storage account properties.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_678
+    - !ObjectSchema &ref_698
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12278,7 +12275,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_200
     - *ref_194
-    - !ObjectSchema &ref_670
+    - !ObjectSchema &ref_689
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12334,7 +12331,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_386
-    - !ObjectSchema &ref_645
+    - !ObjectSchema &ref_661
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12378,7 +12375,7 @@ schemas: !Schemas
           description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_650
+    - !ObjectSchema &ref_666
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12465,7 +12462,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_392
-    - !ObjectSchema &ref_651
+    - !ObjectSchema &ref_667
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12490,7 +12487,7 @@ schemas: !Schemas
           description: The parameters used to regenerate the storage account key.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_682
+    - !ObjectSchema &ref_702
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12610,7 +12607,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_399
     - *ref_400
-    - !ObjectSchema &ref_655
+    - !ObjectSchema &ref_672
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12700,7 +12697,7 @@ schemas: !Schemas
           description: The parameters to list SAS credentials of a storage account.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_659
+    - !ObjectSchema &ref_677
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12725,7 +12722,7 @@ schemas: !Schemas
           description: The List SAS credentials operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_660
+    - !ObjectSchema &ref_678
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12903,7 +12900,7 @@ schemas: !Schemas
           description: The parameters to list service SAS credentials of a specific resource.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_664
+    - !ObjectSchema &ref_683
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12946,7 +12943,7 @@ schemas: !Schemas
     - *ref_438
     - *ref_439
     - *ref_440
-    - !ObjectSchema &ref_707
+    - !ObjectSchema &ref_729
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12981,7 +12978,7 @@ schemas: !Schemas
           description: List of blob inventory policies returned.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_710
+    - !ObjectSchema &ref_732
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13015,7 +13012,7 @@ schemas: !Schemas
           description: List of private endpoint connection associated with the specified storage account
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_723
+    - !ObjectSchema &ref_746
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13050,7 +13047,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_258
-    - !ObjectSchema &ref_726
+    - !ObjectSchema &ref_749
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13089,7 +13086,7 @@ schemas: !Schemas
     - *ref_442
     - *ref_260
     - *ref_443
-    - !ObjectSchema &ref_751
+    - !ObjectSchema &ref_777
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13235,6 +13232,7 @@ operationGroups:
     $key: BlobServices
     operations:
       - !Operation 
+        operationId: BlobServices_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -13388,12 +13386,13 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobServices_SetServiceProperties
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_508
+          - !Parameter &ref_509
             schema: *ref_497
             implementation: Method
             required: true
@@ -13405,7 +13404,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_509
+          - !Parameter &ref_510
             schema: *ref_498
             implementation: Method
             required: true
@@ -13431,8 +13430,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_508
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -13486,9 +13485,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_508
+        signatureParameters:
           - *ref_509
+          - *ref_510
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -13658,12 +13659,13 @@ operationGroups:
             description: 'Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobServices_GetServiceProperties
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_510
+          - !Parameter &ref_511
             schema: *ref_497
             implementation: Method
             required: true
@@ -13675,7 +13677,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_511
+          - !Parameter &ref_512
             schema: *ref_498
             implementation: Method
             required: true
@@ -13728,8 +13730,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_510
           - *ref_511
+          - *ref_512
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -13827,12 +13829,13 @@ operationGroups:
     $key: BlobContainers
     operations:
       - !Operation 
+        operationId: BlobContainers_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_514
+          - !Parameter &ref_515
             schema: *ref_497
             implementation: Method
             required: true
@@ -13844,7 +13847,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_515
+          - !Parameter &ref_516
             schema: *ref_498
             implementation: Method
             required: true
@@ -13858,8 +13861,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_516
-            schema: *ref_512
+          - !Parameter &ref_517
+            schema: *ref_513
             implementation: Method
             language: !Languages 
               default:
@@ -13869,7 +13872,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_517
+          - !Parameter &ref_518
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -13880,8 +13883,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_518
-            schema: *ref_513
+          - !Parameter &ref_519
+            schema: *ref_514
             implementation: Method
             language: !Languages 
               default:
@@ -13918,14 +13921,14 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_514
           - *ref_515
           - *ref_516
           - *ref_517
           - *ref_518
+          - *ref_519
         responses:
           - !SchemaResponse 
-            schema: *ref_519
+            schema: *ref_520
             language: !Languages 
               default:
                 name: ''
@@ -14022,12 +14025,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_Create
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_522
+          - !Parameter &ref_524
             schema: *ref_497
             implementation: Method
             required: true
@@ -14039,7 +14043,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_523
+          - !Parameter &ref_525
             schema: *ref_498
             implementation: Method
             required: true
@@ -14051,8 +14055,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_524
-            schema: *ref_520
+          - !Parameter &ref_526
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -14067,8 +14071,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_523
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -14083,7 +14087,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_521
+              - !Parameter &ref_522
                 schema: *ref_70
                 implementation: Method
                 required: true
@@ -14109,7 +14113,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_521
+              - *ref_522
             language: !Languages 
               default:
                 name: ''
@@ -14122,10 +14126,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_522
+        requests:
           - *ref_523
+        signatureParameters:
           - *ref_524
+          - *ref_525
+          - *ref_526
         responses:
           - !SchemaResponse 
             schema: *ref_70
@@ -14239,12 +14245,13 @@ operationGroups:
             description: 'Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_Update
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_526
+          - !Parameter &ref_529
             schema: *ref_497
             implementation: Method
             required: true
@@ -14256,7 +14263,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_527
+          - !Parameter &ref_530
             schema: *ref_498
             implementation: Method
             required: true
@@ -14268,8 +14275,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_528
-            schema: *ref_520
+          - !Parameter &ref_531
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -14284,8 +14291,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_528
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -14300,7 +14307,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_525
+              - !Parameter &ref_527
                 schema: *ref_70
                 implementation: Method
                 required: true
@@ -14326,7 +14333,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_525
+              - *ref_527
             language: !Languages 
               default:
                 name: ''
@@ -14339,10 +14346,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_526
-          - *ref_527
+        requests:
           - *ref_528
+        signatureParameters:
+          - *ref_529
+          - *ref_530
+          - *ref_531
         responses:
           - !SchemaResponse 
             schema: *ref_70
@@ -14390,12 +14399,13 @@ operationGroups:
             description: 'Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn''t already exist. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_529
+          - !Parameter &ref_532
             schema: *ref_497
             implementation: Method
             required: true
@@ -14407,7 +14417,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_530
+          - !Parameter &ref_533
             schema: *ref_498
             implementation: Method
             required: true
@@ -14419,8 +14429,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_531
-            schema: *ref_520
+          - !Parameter &ref_534
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -14462,9 +14472,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_529
-          - *ref_530
-          - *ref_531
+          - *ref_532
+          - *ref_533
+          - *ref_534
         responses:
           - !SchemaResponse 
             schema: *ref_70
@@ -14610,12 +14620,13 @@ operationGroups:
             description: 'Gets properties of a specified container. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_532
+          - !Parameter &ref_535
             schema: *ref_497
             implementation: Method
             required: true
@@ -14627,7 +14638,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_533
+          - !Parameter &ref_536
             schema: *ref_498
             implementation: Method
             required: true
@@ -14639,8 +14650,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_534
-            schema: *ref_520
+          - !Parameter &ref_537
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -14667,9 +14678,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_532
-          - *ref_533
-          - *ref_534
+          - *ref_535
+          - *ref_536
+          - *ref_537
         responses:
           - !Response 
             language: !Languages 
@@ -14708,12 +14719,13 @@ operationGroups:
             description: Deletes specified container under its account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_SetLegalHold
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_537
+          - !Parameter &ref_541
             schema: *ref_497
             implementation: Method
             required: true
@@ -14725,7 +14737,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_538
+          - !Parameter &ref_542
             schema: *ref_498
             implementation: Method
             required: true
@@ -14737,8 +14749,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_539
-            schema: *ref_520
+          - !Parameter &ref_543
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -14753,8 +14765,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_540
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -14769,8 +14781,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_536
-                schema: *ref_535
+              - !Parameter &ref_539
+                schema: *ref_538
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -14795,7 +14807,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_536
+              - *ref_539
             language: !Languages 
               default:
                 name: ''
@@ -14808,13 +14820,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_540
         signatureParameters:
-          - *ref_537
-          - *ref_538
-          - *ref_539
+          - *ref_541
+          - *ref_542
+          - *ref_543
         responses:
           - !SchemaResponse 
-            schema: *ref_535
+            schema: *ref_538
             language: !Languages 
               default:
                 name: ''
@@ -14878,12 +14892,13 @@ operationGroups:
             description: Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_ClearLegalHold
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_541
+          - !Parameter &ref_546
             schema: *ref_497
             implementation: Method
             required: true
@@ -14895,7 +14910,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_542
+          - !Parameter &ref_547
             schema: *ref_498
             implementation: Method
             required: true
@@ -14907,8 +14922,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_543
-            schema: *ref_520
+          - !Parameter &ref_548
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -14923,8 +14938,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_545
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -14939,8 +14954,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_540
-                schema: *ref_535
+              - !Parameter &ref_544
+                schema: *ref_538
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -14965,7 +14980,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_540
+              - *ref_544
             language: !Languages 
               default:
                 name: ''
@@ -14978,13 +14993,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_545
         signatureParameters:
-          - *ref_541
-          - *ref_542
-          - *ref_543
+          - *ref_546
+          - *ref_547
+          - *ref_548
         responses:
           - !SchemaResponse 
-            schema: *ref_535
+            schema: *ref_538
             language: !Languages 
               default:
                 name: ''
@@ -15022,12 +15039,13 @@ operationGroups:
             description: Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_CreateOrUpdateImmutabilityPolicy
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_545
+          - !Parameter &ref_551
             schema: *ref_497
             implementation: Method
             required: true
@@ -15039,7 +15057,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_546
+          - !Parameter &ref_552
             schema: *ref_498
             implementation: Method
             required: true
@@ -15051,8 +15069,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_547
-            schema: *ref_520
+          - !Parameter &ref_553
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -15079,7 +15097,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_548
+          - !Parameter &ref_554
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -15090,8 +15108,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_550
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -15106,7 +15124,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_544
+              - !Parameter &ref_549
                 schema: *ref_71
                 implementation: Method
                 required: false
@@ -15132,7 +15150,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_544
+              - *ref_549
             language: !Languages 
               default:
                 name: ''
@@ -15145,11 +15163,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_550
         signatureParameters:
-          - *ref_545
-          - *ref_546
-          - *ref_547
-          - *ref_548
+          - *ref_551
+          - *ref_552
+          - *ref_553
+          - *ref_554
         responses:
           - !SchemaResponse 
             schema: *ref_71
@@ -15230,12 +15250,13 @@ operationGroups:
             description: Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_GetImmutabilityPolicy
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_550
+          - !Parameter &ref_556
             schema: *ref_497
             implementation: Method
             required: true
@@ -15247,7 +15268,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_551
+          - !Parameter &ref_557
             schema: *ref_498
             implementation: Method
             required: true
@@ -15259,8 +15280,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_552
-            schema: *ref_520
+          - !Parameter &ref_558
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -15287,8 +15308,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_553
-            schema: *ref_549
+          - !Parameter &ref_559
+            schema: *ref_555
             implementation: Method
             language: !Languages 
               default:
@@ -15325,10 +15346,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_550
-          - *ref_551
-          - *ref_552
-          - *ref_553
+          - *ref_556
+          - *ref_557
+          - *ref_558
+          - *ref_559
         responses:
           - !SchemaResponse 
             schema: *ref_71
@@ -15340,7 +15361,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_549
+                    schema: *ref_555
                     header: ETag
                     language:
                       default:
@@ -15381,12 +15402,13 @@ operationGroups:
             description: Gets the existing immutability policy along with the corresponding ETag in response headers and body.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_DeleteImmutabilityPolicy
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_555
+          - !Parameter &ref_561
             schema: *ref_497
             implementation: Method
             required: true
@@ -15398,7 +15420,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_556
+          - !Parameter &ref_562
             schema: *ref_498
             implementation: Method
             required: true
@@ -15410,8 +15432,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_557
-            schema: *ref_520
+          - !Parameter &ref_563
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -15438,8 +15460,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_558
-            schema: *ref_554
+          - !Parameter &ref_564
+            schema: *ref_560
             implementation: Method
             required: true
             language: !Languages 
@@ -15477,10 +15499,10 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_555
-          - *ref_556
-          - *ref_557
-          - *ref_558
+          - *ref_561
+          - *ref_562
+          - *ref_563
+          - *ref_564
         responses:
           - !SchemaResponse 
             schema: *ref_71
@@ -15492,7 +15514,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_554
+                    schema: *ref_560
                     header: ETag
                     language:
                       default:
@@ -15535,12 +15557,13 @@ operationGroups:
               way is to delete the container after deleting all expired blobs inside the policy locked container.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_LockImmutabilityPolicy
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_560
+          - !Parameter &ref_566
             schema: *ref_497
             implementation: Method
             required: true
@@ -15552,7 +15575,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_561
+          - !Parameter &ref_567
             schema: *ref_498
             implementation: Method
             required: true
@@ -15564,8 +15587,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_562
-            schema: *ref_520
+          - !Parameter &ref_568
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -15580,8 +15603,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_563
-            schema: *ref_559
+          - !Parameter &ref_569
+            schema: *ref_565
             implementation: Method
             required: true
             language: !Languages 
@@ -15619,10 +15642,10 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_560
-          - *ref_561
-          - *ref_562
-          - *ref_563
+          - *ref_566
+          - *ref_567
+          - *ref_568
+          - *ref_569
         responses:
           - !SchemaResponse 
             schema: *ref_71
@@ -15634,7 +15657,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_559
+                    schema: *ref_565
                     header: ETag
                     language:
                       default:
@@ -15674,12 +15697,13 @@ operationGroups:
             description: Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_ExtendImmutabilityPolicy
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_566
+          - !Parameter &ref_573
             schema: *ref_497
             implementation: Method
             required: true
@@ -15691,7 +15715,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_567
+          - !Parameter &ref_574
             schema: *ref_498
             implementation: Method
             required: true
@@ -15703,8 +15727,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_568
-            schema: *ref_520
+          - !Parameter &ref_575
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -15719,8 +15743,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_569
-            schema: *ref_564
+          - !Parameter &ref_576
+            schema: *ref_570
             implementation: Method
             required: true
             language: !Languages 
@@ -15731,8 +15755,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_572
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -15747,7 +15771,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_565
+              - !Parameter &ref_571
                 schema: *ref_71
                 implementation: Method
                 required: false
@@ -15773,7 +15797,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_565
+              - *ref_571
             language: !Languages 
               default:
                 name: ''
@@ -15786,11 +15810,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_572
         signatureParameters:
-          - *ref_566
-          - *ref_567
-          - *ref_568
-          - *ref_569
+          - *ref_573
+          - *ref_574
+          - *ref_575
+          - *ref_576
         responses:
           - !SchemaResponse 
             schema: *ref_71
@@ -15802,7 +15828,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_564
+                    schema: *ref_570
                     header: ETag
                     language:
                       default:
@@ -15845,12 +15871,13 @@ operationGroups:
             description: Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_Lease
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_572
+          - !Parameter &ref_580
             schema: *ref_497
             implementation: Method
             required: true
@@ -15862,7 +15889,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_573
+          - !Parameter &ref_581
             schema: *ref_498
             implementation: Method
             required: true
@@ -15874,8 +15901,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_574
-            schema: *ref_520
+          - !Parameter &ref_582
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -15890,8 +15917,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_579
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -15906,8 +15933,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_571
-                schema: *ref_570
+              - !Parameter &ref_578
+                schema: *ref_577
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -15932,7 +15959,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_571
+              - *ref_578
             language: !Languages 
               default:
                 name: ''
@@ -15945,13 +15972,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_579
         signatureParameters:
-          - *ref_572
-          - *ref_573
-          - *ref_574
+          - *ref_580
+          - *ref_581
+          - *ref_582
         responses:
           - !SchemaResponse 
-            schema: *ref_575
+            schema: *ref_583
             language: !Languages 
               default:
                 name: ''
@@ -16007,12 +16036,13 @@ operationGroups:
             description: The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobContainers_ObjectLevelWorm
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_576
+          - !Parameter &ref_584
             schema: *ref_497
             implementation: Method
             required: true
@@ -16024,7 +16054,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_577
+          - !Parameter &ref_585
             schema: *ref_498
             implementation: Method
             required: true
@@ -16036,8 +16066,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_578
-            schema: *ref_520
+          - !Parameter &ref_586
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -16079,9 +16109,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_576
-          - *ref_577
-          - *ref_578
+          - *ref_584
+          - *ref_585
+          - *ref_586
         responses:
           - !Response 
             language: !Languages 
@@ -16103,7 +16133,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_579
+            schema: *ref_587
             language: !Languages 
               default:
                 name: ''
@@ -16148,12 +16178,13 @@ operationGroups:
     $key: FileServices
     operations:
       - !Operation 
+        operationId: FileServices_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_580
+          - !Parameter &ref_588
             schema: *ref_497
             implementation: Method
             required: true
@@ -16165,7 +16196,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_581
+          - !Parameter &ref_589
             schema: *ref_498
             implementation: Method
             required: true
@@ -16206,11 +16237,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_580
-          - *ref_581
+          - *ref_588
+          - *ref_589
         responses:
           - !SchemaResponse 
-            schema: *ref_582
+            schema: *ref_590
             language: !Languages 
               default:
                 name: ''
@@ -16224,7 +16255,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -16303,12 +16334,13 @@ operationGroups:
             description: List all file services in storage accounts
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileServices_SetServiceProperties
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_585
+          - !Parameter &ref_594
             schema: *ref_497
             implementation: Method
             required: true
@@ -16320,7 +16352,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_586
+          - !Parameter &ref_595
             schema: *ref_498
             implementation: Method
             required: true
@@ -16346,8 +16378,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_593
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -16362,7 +16394,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_584
+              - !Parameter &ref_592
                 schema: *ref_255
                 implementation: Method
                 required: true
@@ -16388,7 +16420,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_584
+              - *ref_592
             language: !Languages 
               default:
                 name: ''
@@ -16401,9 +16433,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_593
         signatureParameters:
-          - *ref_585
-          - *ref_586
+          - *ref_594
+          - *ref_595
         responses:
           - !SchemaResponse 
             schema: *ref_255
@@ -16420,7 +16454,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -16602,12 +16636,13 @@ operationGroups:
             description: 'Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileServices_GetServiceProperties
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_587
+          - !Parameter &ref_596
             schema: *ref_497
             implementation: Method
             required: true
@@ -16619,7 +16654,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_588
+          - !Parameter &ref_597
             schema: *ref_498
             implementation: Method
             required: true
@@ -16672,8 +16707,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_587
-          - *ref_588
+          - *ref_596
+          - *ref_597
         responses:
           - !SchemaResponse 
             schema: *ref_255
@@ -16690,7 +16725,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -16777,12 +16812,13 @@ operationGroups:
     $key: FileShares
     operations:
       - !Operation 
+        operationId: FileShares_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_589
+          - !Parameter &ref_598
             schema: *ref_497
             implementation: Method
             required: true
@@ -16794,7 +16830,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_590
+          - !Parameter &ref_599
             schema: *ref_498
             implementation: Method
             required: true
@@ -16808,8 +16844,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_591
-            schema: *ref_512
+          - !Parameter &ref_600
+            schema: *ref_513
             implementation: Method
             language: !Languages 
               default:
@@ -16819,7 +16855,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_592
+          - !Parameter &ref_601
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -16830,7 +16866,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_593
+          - !Parameter &ref_602
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -16868,14 +16904,14 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_589
-          - *ref_590
-          - *ref_591
-          - *ref_592
-          - *ref_593
+          - *ref_598
+          - *ref_599
+          - *ref_600
+          - *ref_601
+          - *ref_602
         responses:
           - !SchemaResponse 
-            schema: *ref_594
+            schema: *ref_603
             language: !Languages 
               default:
                 name: ''
@@ -16889,7 +16925,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -16997,12 +17033,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileShares_Create
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_596
+          - !Parameter &ref_606
             schema: *ref_497
             implementation: Method
             required: true
@@ -17014,7 +17051,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_597
+          - !Parameter &ref_607
             schema: *ref_498
             implementation: Method
             required: true
@@ -17026,8 +17063,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_598
-            schema: *ref_520
+          - !Parameter &ref_608
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -17040,7 +17077,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_599
+          - !Parameter &ref_609
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -17053,8 +17090,8 @@ operationGroups:
                 in: query
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_605
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -17069,7 +17106,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_595
+              - !Parameter &ref_604
                 schema: *ref_72
                 implementation: Method
                 required: true
@@ -17095,7 +17132,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_595
+              - *ref_604
             language: !Languages 
               default:
                 name: ''
@@ -17108,11 +17145,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_605
         signatureParameters:
-          - *ref_596
-          - *ref_597
-          - *ref_598
-          - *ref_599
+          - *ref_606
+          - *ref_607
+          - *ref_608
+          - *ref_609
         responses:
           - !SchemaResponse 
             schema: *ref_72
@@ -17142,7 +17181,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -17234,12 +17273,13 @@ operationGroups:
             description: 'Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileShares_Update
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_601
+          - !Parameter &ref_612
             schema: *ref_497
             implementation: Method
             required: true
@@ -17251,7 +17291,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_602
+          - !Parameter &ref_613
             schema: *ref_498
             implementation: Method
             required: true
@@ -17263,8 +17303,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_603
-            schema: *ref_520
+          - !Parameter &ref_614
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -17279,8 +17319,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_611
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -17295,7 +17335,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_600
+              - !Parameter &ref_610
                 schema: *ref_72
                 implementation: Method
                 required: true
@@ -17321,7 +17361,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_600
+              - *ref_610
             language: !Languages 
               default:
                 name: ''
@@ -17334,10 +17374,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_611
         signatureParameters:
-          - *ref_601
-          - *ref_602
-          - *ref_603
+          - *ref_612
+          - *ref_613
+          - *ref_614
         responses:
           - !SchemaResponse 
             schema: *ref_72
@@ -17354,7 +17396,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -17424,12 +17466,13 @@ operationGroups:
             description: 'Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. '
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileShares_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_604
+          - !Parameter &ref_615
             schema: *ref_497
             implementation: Method
             required: true
@@ -17441,7 +17484,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_605
+          - !Parameter &ref_616
             schema: *ref_498
             implementation: Method
             required: true
@@ -17453,8 +17496,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_606
-            schema: *ref_520
+          - !Parameter &ref_617
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -17469,7 +17512,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_607
+          - !Parameter &ref_618
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -17480,7 +17523,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_608
+          - !Parameter &ref_619
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -17518,11 +17561,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_604
-          - *ref_605
-          - *ref_606
-          - *ref_607
-          - *ref_608
+          - *ref_615
+          - *ref_616
+          - *ref_617
+          - *ref_618
+          - *ref_619
         responses:
           - !SchemaResponse 
             schema: *ref_72
@@ -17539,7 +17582,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -17597,12 +17640,13 @@ operationGroups:
             description: Gets properties of a specified share.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileShares_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_609
+          - !Parameter &ref_620
             schema: *ref_497
             implementation: Method
             required: true
@@ -17614,7 +17658,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_610
+          - !Parameter &ref_621
             schema: *ref_498
             implementation: Method
             required: true
@@ -17626,8 +17670,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_611
-            schema: *ref_520
+          - !Parameter &ref_622
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -17642,7 +17686,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_612
+          - !Parameter &ref_623
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -17653,7 +17697,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_613
+          - !Parameter &ref_624
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -17694,11 +17738,11 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_609
-          - *ref_610
-          - *ref_611
-          - *ref_612
-          - *ref_613
+          - *ref_620
+          - *ref_621
+          - *ref_622
+          - *ref_623
+          - *ref_624
         responses:
           - !Response 
             language: !Languages 
@@ -17720,7 +17764,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -17751,12 +17795,13 @@ operationGroups:
             description: Deletes specified share under its account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileShares_Restore
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_616
+          - !Parameter &ref_628
             schema: *ref_497
             implementation: Method
             required: true
@@ -17768,7 +17813,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_617
+          - !Parameter &ref_629
             schema: *ref_498
             implementation: Method
             required: true
@@ -17780,8 +17825,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_618
-            schema: *ref_520
+          - !Parameter &ref_630
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -17796,8 +17841,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_627
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -17812,8 +17857,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_615
-                schema: *ref_614
+              - !Parameter &ref_626
+                schema: *ref_625
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -17838,7 +17883,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_615
+              - *ref_626
             language: !Languages 
               default:
                 name: ''
@@ -17851,10 +17896,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_627
         signatureParameters:
-          - *ref_616
-          - *ref_617
-          - *ref_618
+          - *ref_628
+          - *ref_629
+          - *ref_630
         responses:
           - !Response 
             language: !Languages 
@@ -17867,7 +17914,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -17900,12 +17947,13 @@ operationGroups:
             description: Restore a file share within a valid retention days if share soft delete is enabled
         protocol: !Protocols {}
       - !Operation 
+        operationId: FileShares_Lease
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_621
+          - !Parameter &ref_634
             schema: *ref_497
             implementation: Method
             required: true
@@ -17917,7 +17965,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_622
+          - !Parameter &ref_635
             schema: *ref_498
             implementation: Method
             required: true
@@ -17929,8 +17977,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_623
-            schema: *ref_520
+          - !Parameter &ref_636
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -17945,7 +17993,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_624
+          - !Parameter &ref_637
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -17956,8 +18004,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_633
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -17972,8 +18020,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_620
-                schema: *ref_619
+              - !Parameter &ref_632
+                schema: *ref_631
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -17998,7 +18046,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_620
+              - *ref_632
             language: !Languages 
               default:
                 name: ''
@@ -18011,14 +18059,16 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_633
         signatureParameters:
-          - *ref_621
-          - *ref_622
-          - *ref_623
-          - *ref_624
+          - *ref_634
+          - *ref_635
+          - *ref_636
+          - *ref_637
         responses:
           - !SchemaResponse 
-            schema: *ref_625
+            schema: *ref_638
             language: !Languages 
               default:
                 name: ''
@@ -18042,7 +18092,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_583
+            schema: *ref_591
             language: !Languages 
               default:
                 name: ''
@@ -18106,6 +18156,7 @@ operationGroups:
     $key: Operations
     operations:
       - !Operation 
+        operationId: Operations_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -18141,7 +18192,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_626
+            schema: *ref_639
             language: !Languages 
               default:
                 name: ''
@@ -18499,6 +18550,7 @@ operationGroups:
     $key: Skus
     operations:
       - !Operation 
+        operationId: Skus_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -18535,7 +18587,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_627
+            schema: *ref_640
             language: !Languages 
               default:
                 name: ''
@@ -22291,6 +22343,7 @@ operationGroups:
     $key: StorageAccounts
     operations:
       - !Operation 
+        operationId: StorageAccounts_CheckNameAvailability
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -22298,8 +22351,8 @@ operationGroups:
           - *ref_496
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_643
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -22314,8 +22367,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_629
-                schema: *ref_628
+              - !Parameter &ref_642
+                schema: *ref_641
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -22340,7 +22393,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_629
+              - *ref_642
             language: !Languages 
               default:
                 name: ''
@@ -22353,10 +22406,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_643
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_630
+            schema: *ref_644
             language: !Languages 
               default:
                 name: ''
@@ -22387,12 +22442,13 @@ operationGroups:
             description: Checks that the storage account name is valid and is not already in use.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_Create
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_633
+          - !Parameter &ref_648
             schema: *ref_497
             implementation: Method
             required: true
@@ -22404,7 +22460,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_634
+          - !Parameter &ref_649
             schema: *ref_498
             implementation: Method
             required: true
@@ -22418,8 +22474,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_647
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -22434,8 +22490,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_632
-                schema: *ref_631
+              - !Parameter &ref_646
+                schema: *ref_645
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -22460,7 +22516,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_632
+              - *ref_646
             language: !Languages 
               default:
                 name: ''
@@ -22473,9 +22529,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_647
         signatureParameters:
-          - *ref_633
-          - *ref_634
+          - *ref_648
+          - *ref_649
         responses:
           - !SchemaResponse 
             schema: *ref_191
@@ -23042,12 +23100,13 @@ operationGroups:
               account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_635
+          - !Parameter &ref_650
             schema: *ref_497
             implementation: Method
             required: true
@@ -23059,7 +23118,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_636
+          - !Parameter &ref_651
             schema: *ref_498
             implementation: Method
             required: true
@@ -23085,8 +23144,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_635
-          - *ref_636
+          - *ref_650
+          - *ref_651
         responses:
           - !Response 
             language: !Languages 
@@ -23124,12 +23183,13 @@ operationGroups:
             description: Deletes a storage account in Microsoft Azure.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_GetProperties
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_638
+          - !Parameter &ref_653
             schema: *ref_497
             implementation: Method
             required: true
@@ -23141,7 +23201,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_639
+          - !Parameter &ref_654
             schema: *ref_498
             implementation: Method
             required: true
@@ -23155,8 +23215,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_640
-            schema: *ref_637
+          - !Parameter &ref_655
+            schema: *ref_652
             implementation: Method
             language: !Languages 
               default:
@@ -23193,9 +23253,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_638
-          - *ref_639
-          - *ref_640
+          - *ref_653
+          - *ref_654
+          - *ref_655
         responses:
           - !SchemaResponse 
             schema: *ref_191
@@ -23381,12 +23441,13 @@ operationGroups:
             description: Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_Update
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_643
+          - !Parameter &ref_659
             schema: *ref_497
             implementation: Method
             required: true
@@ -23398,7 +23459,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_644
+          - !Parameter &ref_660
             schema: *ref_498
             implementation: Method
             required: true
@@ -23412,8 +23473,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_658
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -23428,8 +23489,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_642
-                schema: *ref_641
+              - !Parameter &ref_657
+                schema: *ref_656
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -23454,7 +23515,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_642
+              - *ref_657
             language: !Languages 
               default:
                 name: ''
@@ -23467,9 +23528,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_658
         signatureParameters:
-          - *ref_643
-          - *ref_644
+          - *ref_659
+          - *ref_660
         responses:
           - !SchemaResponse 
             schema: *ref_191
@@ -23971,6 +24034,7 @@ operationGroups:
               call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -24007,7 +24071,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_645
+            schema: *ref_661
             language: !Languages 
               default:
                 name: ''
@@ -24278,12 +24342,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_646
+          - !Parameter &ref_662
             schema: *ref_497
             implementation: Method
             required: true
@@ -24324,10 +24389,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_646
+          - *ref_662
         responses:
           - !SchemaResponse 
-            schema: *ref_645
+            schema: *ref_661
             language: !Languages 
               default:
                 name: ''
@@ -24411,12 +24476,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_ListKeys
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_648
+          - !Parameter &ref_664
             schema: *ref_497
             implementation: Method
             required: true
@@ -24428,7 +24494,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_649
+          - !Parameter &ref_665
             schema: *ref_498
             implementation: Method
             required: true
@@ -24443,7 +24509,7 @@ operationGroups:
           - *ref_499
           - *ref_500
           - !Parameter 
-            schema: *ref_647
+            schema: *ref_663
             implementation: Method
             language: !Languages 
               default:
@@ -24480,11 +24546,11 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_648
-          - *ref_649
+          - *ref_664
+          - *ref_665
         responses:
           - !SchemaResponse 
-            schema: *ref_650
+            schema: *ref_666
             language: !Languages 
               default:
                 name: ''
@@ -24521,12 +24587,13 @@ operationGroups:
             description: Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_RegenerateKey
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_653
+          - !Parameter &ref_670
             schema: *ref_497
             implementation: Method
             required: true
@@ -24538,7 +24605,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_654
+          - !Parameter &ref_671
             schema: *ref_498
             implementation: Method
             required: true
@@ -24552,8 +24619,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_669
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -24568,8 +24635,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_652
-                schema: *ref_651
+              - !Parameter &ref_668
+                schema: *ref_667
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -24594,7 +24661,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_652
+              - *ref_668
             language: !Languages 
               default:
                 name: ''
@@ -24607,12 +24674,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_669
         signatureParameters:
-          - *ref_653
-          - *ref_654
+          - *ref_670
+          - *ref_671
         responses:
           - !SchemaResponse 
-            schema: *ref_650
+            schema: *ref_666
             language: !Languages 
               default:
                 name: ''
@@ -24673,12 +24742,13 @@ operationGroups:
             description: Regenerates one of the access keys or Kerberos keys for the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_ListAccountSAS
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_657
+          - !Parameter &ref_675
             schema: *ref_497
             implementation: Method
             required: true
@@ -24690,7 +24760,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_658
+          - !Parameter &ref_676
             schema: *ref_498
             implementation: Method
             required: true
@@ -24704,8 +24774,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_674
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -24720,8 +24790,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_656
-                schema: *ref_655
+              - !Parameter &ref_673
+                schema: *ref_672
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -24746,7 +24816,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_656
+              - *ref_673
             language: !Languages 
               default:
                 name: ''
@@ -24759,12 +24829,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_674
         signatureParameters:
-          - *ref_657
-          - *ref_658
+          - *ref_675
+          - *ref_676
         responses:
           - !SchemaResponse 
-            schema: *ref_659
+            schema: *ref_677
             language: !Languages 
               default:
                 name: ''
@@ -24803,12 +24875,13 @@ operationGroups:
             description: List SAS credentials of a storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_ListServiceSAS
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_662
+          - !Parameter &ref_681
             schema: *ref_497
             implementation: Method
             required: true
@@ -24820,7 +24893,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_663
+          - !Parameter &ref_682
             schema: *ref_498
             implementation: Method
             required: true
@@ -24834,8 +24907,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_680
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -24850,8 +24923,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_661
-                schema: *ref_660
+              - !Parameter &ref_679
+                schema: *ref_678
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -24876,7 +24949,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_661
+              - *ref_679
             language: !Languages 
               default:
                 name: ''
@@ -24889,12 +24962,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_680
         signatureParameters:
-          - *ref_662
-          - *ref_663
+          - *ref_681
+          - *ref_682
         responses:
           - !SchemaResponse 
-            schema: *ref_664
+            schema: *ref_683
             language: !Languages 
               default:
                 name: ''
@@ -24930,12 +25005,13 @@ operationGroups:
             description: List service SAS credentials of a specific resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_Failover
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_665
+          - !Parameter &ref_684
             schema: *ref_497
             implementation: Method
             required: true
@@ -24947,7 +25023,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_666
+          - !Parameter &ref_685
             schema: *ref_498
             implementation: Method
             required: true
@@ -24973,8 +25049,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_665
-          - *ref_666
+          - *ref_684
+          - *ref_685
         responses:
           - !Response 
             language: !Languages 
@@ -25017,12 +25093,13 @@ operationGroups:
               primary after failover.
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_HierarchicalNamespaceMigration
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_667
+          - !Parameter &ref_686
             schema: *ref_497
             implementation: Method
             required: true
@@ -25034,7 +25111,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_668
+          - !Parameter &ref_687
             schema: *ref_498
             implementation: Method
             required: true
@@ -25048,7 +25125,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_669
+          - !Parameter &ref_688
             schema: *ref_3
             implementation: Method
             required: true
@@ -25089,9 +25166,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_667
-          - *ref_668
-          - *ref_669
+          - *ref_686
+          - *ref_687
+          - *ref_688
         responses:
           - !Response 
             language: !Languages 
@@ -25113,7 +25190,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -25146,12 +25223,13 @@ operationGroups:
             description: Live Migration of storage account to enable Hns
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_AbortHierarchicalNamespaceMigration
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_671
+          - !Parameter &ref_690
             schema: *ref_497
             implementation: Method
             required: true
@@ -25163,7 +25241,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_672
+          - !Parameter &ref_691
             schema: *ref_498
             implementation: Method
             required: true
@@ -25204,8 +25282,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_671
-          - *ref_672
+          - *ref_690
+          - *ref_691
         responses:
           - !Response 
             language: !Languages 
@@ -25227,7 +25305,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -25259,12 +25337,13 @@ operationGroups:
             description: Abort live Migration of storage account to enable Hns
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_RestoreBlobRanges
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_674
+          - !Parameter &ref_694
             schema: *ref_497
             implementation: Method
             required: true
@@ -25276,7 +25355,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_675
+          - !Parameter &ref_695
             schema: *ref_498
             implementation: Method
             required: true
@@ -25290,8 +25369,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_693
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -25306,7 +25385,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_673
+              - !Parameter &ref_692
                 schema: *ref_380
                 implementation: Method
                 required: true
@@ -25332,7 +25411,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_673
+              - *ref_692
             language: !Languages 
               default:
                 name: ''
@@ -25345,9 +25424,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_693
         signatureParameters:
-          - *ref_674
-          - *ref_675
+          - *ref_694
+          - *ref_695
         responses:
           - !SchemaResponse 
             schema: *ref_379
@@ -25422,12 +25503,13 @@ operationGroups:
             description: Restore blobs in the specified blob ranges
         protocol: !Protocols {}
       - !Operation 
+        operationId: StorageAccounts_RevokeUserDelegationKeys
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_676
+          - !Parameter &ref_696
             schema: *ref_497
             implementation: Method
             required: true
@@ -25439,7 +25521,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_677
+          - !Parameter &ref_697
             schema: *ref_498
             implementation: Method
             required: true
@@ -25465,8 +25547,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_676
-          - *ref_677
+          - *ref_696
+          - *ref_697
         responses:
           - !Response 
             language: !Languages 
@@ -25501,6 +25583,7 @@ operationGroups:
     $key: DeletedAccounts
     operations:
       - !Operation 
+        operationId: DeletedAccounts_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -25537,7 +25620,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_678
+            schema: *ref_698
             language: !Languages 
               default:
                 name: ''
@@ -25551,7 +25634,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -25602,12 +25685,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: DeletedAccounts_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_679
+          - !Parameter &ref_699
             schema: *ref_498
             implementation: Method
             required: true
@@ -25619,7 +25703,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_680
+          - !Parameter &ref_700
             schema: *ref_3
             implementation: Method
             required: true
@@ -25660,8 +25744,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_679
-          - *ref_680
+          - *ref_699
+          - *ref_700
         responses:
           - !SchemaResponse 
             schema: *ref_200
@@ -25678,7 +25762,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -25725,6 +25809,7 @@ operationGroups:
     $key: Usages
     operations:
       - !Operation 
+        operationId: Usages_ListByLocation
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
@@ -25732,7 +25817,7 @@ operationGroups:
           - *ref_496
           - *ref_499
           - *ref_500
-          - !Parameter &ref_681
+          - !Parameter &ref_701
             schema: *ref_3
             implementation: Method
             required: true
@@ -25771,10 +25856,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_681
+          - *ref_701
         responses:
           - !SchemaResponse 
-            schema: *ref_682
+            schema: *ref_702
             language: !Languages 
               default:
                 name: ''
@@ -25821,12 +25906,13 @@ operationGroups:
     $key: ManagementPolicies
     operations:
       - !Operation 
+        operationId: ManagementPolicies_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_684
+          - !Parameter &ref_704
             schema: *ref_497
             implementation: Method
             required: true
@@ -25838,7 +25924,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_685
+          - !Parameter &ref_705
             schema: *ref_498
             implementation: Method
             required: true
@@ -25852,8 +25938,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_686
-            schema: *ref_683
+          - !Parameter &ref_706
+            schema: *ref_703
             implementation: Method
             required: true
             language: !Languages 
@@ -25891,9 +25977,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_684
-          - *ref_685
-          - *ref_686
+          - *ref_704
+          - *ref_705
+          - *ref_706
         responses:
           - !SchemaResponse 
             schema: *ref_256
@@ -25954,12 +26040,13 @@ operationGroups:
             description: Gets the managementpolicy associated with the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagementPolicies_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_688
+          - !Parameter &ref_709
             schema: *ref_497
             implementation: Method
             required: true
@@ -25971,7 +26058,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_689
+          - !Parameter &ref_710
             schema: *ref_498
             implementation: Method
             required: true
@@ -25985,8 +26072,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_690
-            schema: *ref_683
+          - !Parameter &ref_711
+            schema: *ref_703
             implementation: Method
             required: true
             language: !Languages 
@@ -25997,8 +26084,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_708
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -26013,7 +26100,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_687
+              - !Parameter &ref_707
                 schema: *ref_256
                 implementation: Method
                 required: true
@@ -26039,7 +26126,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_687
+              - *ref_707
             language: !Languages 
               default:
                 name: ''
@@ -26052,10 +26139,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_708
         signatureParameters:
-          - *ref_688
-          - *ref_689
-          - *ref_690
+          - *ref_709
+          - *ref_710
+          - *ref_711
         responses:
           - !SchemaResponse 
             schema: *ref_256
@@ -26398,12 +26487,13 @@ operationGroups:
             description: Sets the managementpolicy to the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagementPolicies_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_691
+          - !Parameter &ref_712
             schema: *ref_497
             implementation: Method
             required: true
@@ -26415,7 +26505,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_692
+          - !Parameter &ref_713
             schema: *ref_498
             implementation: Method
             required: true
@@ -26429,8 +26519,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_693
-            schema: *ref_683
+          - !Parameter &ref_714
+            schema: *ref_703
             implementation: Method
             required: true
             language: !Languages 
@@ -26453,9 +26543,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_691
-          - *ref_692
-          - *ref_693
+          - *ref_712
+          - *ref_713
+          - *ref_714
         responses:
           - !Response 
             language: !Languages 
@@ -26502,12 +26592,13 @@ operationGroups:
     $key: BlobInventoryPolicies
     operations:
       - !Operation 
+        operationId: BlobInventoryPolicies_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_695
+          - !Parameter &ref_716
             schema: *ref_497
             implementation: Method
             required: true
@@ -26519,7 +26610,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_696
+          - !Parameter &ref_717
             schema: *ref_498
             implementation: Method
             required: true
@@ -26533,8 +26624,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_697
-            schema: *ref_694
+          - !Parameter &ref_718
+            schema: *ref_715
             implementation: Method
             required: true
             language: !Languages 
@@ -26572,9 +26663,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_695
-          - *ref_696
-          - *ref_697
+          - *ref_716
+          - *ref_717
+          - *ref_718
         responses:
           - !SchemaResponse 
             schema: *ref_257
@@ -26591,7 +26682,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -26661,12 +26752,13 @@ operationGroups:
             description: Gets the blob inventory policy associated with the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobInventoryPolicies_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_699
+          - !Parameter &ref_721
             schema: *ref_497
             implementation: Method
             required: true
@@ -26678,7 +26770,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_700
+          - !Parameter &ref_722
             schema: *ref_498
             implementation: Method
             required: true
@@ -26692,8 +26784,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_701
-            schema: *ref_694
+          - !Parameter &ref_723
+            schema: *ref_715
             implementation: Method
             required: true
             language: !Languages 
@@ -26704,8 +26796,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_720
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -26720,7 +26812,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_698
+              - !Parameter &ref_719
                 schema: *ref_257
                 implementation: Method
                 required: true
@@ -26746,7 +26838,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_698
+              - *ref_719
             language: !Languages 
               default:
                 name: ''
@@ -26759,10 +26851,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_720
         signatureParameters:
-          - *ref_699
-          - *ref_700
-          - *ref_701
+          - *ref_721
+          - *ref_722
+          - *ref_723
         responses:
           - !SchemaResponse 
             schema: *ref_257
@@ -26779,7 +26873,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -26919,12 +27013,13 @@ operationGroups:
             description: Sets the blob inventory policy to the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobInventoryPolicies_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_702
+          - !Parameter &ref_724
             schema: *ref_497
             implementation: Method
             required: true
@@ -26936,7 +27031,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_703
+          - !Parameter &ref_725
             schema: *ref_498
             implementation: Method
             required: true
@@ -26950,8 +27045,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_704
-            schema: *ref_694
+          - !Parameter &ref_726
+            schema: *ref_715
             implementation: Method
             required: true
             language: !Languages 
@@ -26989,9 +27084,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_702
-          - *ref_703
-          - *ref_704
+          - *ref_724
+          - *ref_725
+          - *ref_726
         responses:
           - !Response 
             language: !Languages 
@@ -27013,7 +27108,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -27044,12 +27139,13 @@ operationGroups:
             description: Deletes the blob inventory policy associated with the specified storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: BlobInventoryPolicies_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_705
+          - !Parameter &ref_727
             schema: *ref_497
             implementation: Method
             required: true
@@ -27061,7 +27157,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_706
+          - !Parameter &ref_728
             schema: *ref_498
             implementation: Method
             required: true
@@ -27102,11 +27198,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_705
-          - *ref_706
+          - *ref_727
+          - *ref_728
         responses:
           - !SchemaResponse 
-            schema: *ref_707
+            schema: *ref_729
             language: !Languages 
               default:
                 name: ''
@@ -27120,7 +27216,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -27202,12 +27298,13 @@ operationGroups:
     $key: PrivateEndpointConnections
     operations:
       - !Operation 
+        operationId: PrivateEndpointConnections_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_708
+          - !Parameter &ref_730
             schema: *ref_497
             implementation: Method
             required: true
@@ -27219,7 +27316,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_709
+          - !Parameter &ref_731
             schema: *ref_498
             implementation: Method
             required: true
@@ -27260,11 +27357,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_708
-          - *ref_709
+          - *ref_730
+          - *ref_731
         responses:
           - !SchemaResponse 
-            schema: *ref_710
+            schema: *ref_732
             language: !Languages 
               default:
                 name: ''
@@ -27321,12 +27418,13 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_711
+          - !Parameter &ref_733
             schema: *ref_497
             implementation: Method
             required: true
@@ -27338,7 +27436,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_712
+          - !Parameter &ref_734
             schema: *ref_498
             implementation: Method
             required: true
@@ -27352,7 +27450,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_713
+          - !Parameter &ref_735
             schema: *ref_6
             implementation: Method
             required: true
@@ -27391,9 +27489,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_711
-          - *ref_712
-          - *ref_713
+          - *ref_733
+          - *ref_734
+          - *ref_735
         responses:
           - !SchemaResponse 
             schema: *ref_170
@@ -27410,7 +27508,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -27452,12 +27550,13 @@ operationGroups:
             description: Gets the specified private endpoint connection associated with the storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_715
+          - !Parameter &ref_738
             schema: *ref_497
             implementation: Method
             required: true
@@ -27469,7 +27568,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_716
+          - !Parameter &ref_739
             schema: *ref_498
             implementation: Method
             required: true
@@ -27483,7 +27582,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_717
+          - !Parameter &ref_740
             schema: *ref_6
             implementation: Method
             required: true
@@ -27495,8 +27594,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_737
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -27511,7 +27610,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_714
+              - !Parameter &ref_736
                 schema: *ref_170
                 implementation: Method
                 required: true
@@ -27537,7 +27636,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_714
+              - *ref_736
             language: !Languages 
               default:
                 name: ''
@@ -27550,10 +27649,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_737
         signatureParameters:
-          - *ref_715
-          - *ref_716
-          - *ref_717
+          - *ref_738
+          - *ref_739
+          - *ref_740
         responses:
           - !SchemaResponse 
             schema: *ref_170
@@ -27570,7 +27671,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -27617,12 +27718,13 @@ operationGroups:
             description: Update the state of specified private endpoint connection associated with the storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_718
+          - !Parameter &ref_741
             schema: *ref_497
             implementation: Method
             required: true
@@ -27634,7 +27736,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_719
+          - !Parameter &ref_742
             schema: *ref_498
             implementation: Method
             required: true
@@ -27648,7 +27750,7 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_720
+          - !Parameter &ref_743
             schema: *ref_6
             implementation: Method
             required: true
@@ -27687,9 +27789,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_718
-          - *ref_719
-          - *ref_720
+          - *ref_741
+          - *ref_742
+          - *ref_743
         responses:
           - !Response 
             language: !Languages 
@@ -27711,7 +27813,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -27750,12 +27852,13 @@ operationGroups:
     $key: PrivateLinkResources
     operations:
       - !Operation 
+        operationId: PrivateLinkResources_ListByStorageAccount
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_721
+          - !Parameter &ref_744
             schema: *ref_497
             implementation: Method
             required: true
@@ -27767,7 +27870,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_722
+          - !Parameter &ref_745
             schema: *ref_498
             implementation: Method
             required: true
@@ -27808,11 +27911,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_721
-          - *ref_722
+          - *ref_744
+          - *ref_745
         responses:
           - !SchemaResponse 
-            schema: *ref_723
+            schema: *ref_746
             language: !Languages 
               default:
                 name: ''
@@ -27905,12 +28008,13 @@ operationGroups:
     $key: ObjectReplicationPolicies
     operations:
       - !Operation 
+        operationId: ObjectReplicationPolicies_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_724
+          - !Parameter &ref_747
             schema: *ref_497
             implementation: Method
             required: true
@@ -27922,7 +28026,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_725
+          - !Parameter &ref_748
             schema: *ref_498
             implementation: Method
             required: true
@@ -27963,11 +28067,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_724
-          - *ref_725
+          - *ref_747
+          - *ref_748
         responses:
           - !SchemaResponse 
-            schema: *ref_726
+            schema: *ref_749
             language: !Languages 
               default:
                 name: ''
@@ -27981,7 +28085,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -28028,12 +28132,13 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: ObjectReplicationPolicies_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_728
+          - !Parameter &ref_751
             schema: *ref_497
             implementation: Method
             required: true
@@ -28045,7 +28150,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_729
+          - !Parameter &ref_752
             schema: *ref_498
             implementation: Method
             required: true
@@ -28059,8 +28164,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_730
-            schema: *ref_727
+          - !Parameter &ref_753
+            schema: *ref_750
             implementation: Method
             required: true
             language: !Languages 
@@ -28100,9 +28205,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_728
-          - *ref_729
-          - *ref_730
+          - *ref_751
+          - *ref_752
+          - *ref_753
         responses:
           - !SchemaResponse 
             schema: *ref_259
@@ -28119,7 +28224,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -28171,12 +28276,13 @@ operationGroups:
             description: Get the object replication policy of the storage account by policy ID.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ObjectReplicationPolicies_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_732
+          - !Parameter &ref_756
             schema: *ref_497
             implementation: Method
             required: true
@@ -28188,7 +28294,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_733
+          - !Parameter &ref_757
             schema: *ref_498
             implementation: Method
             required: true
@@ -28202,8 +28308,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_734
-            schema: *ref_727
+          - !Parameter &ref_758
+            schema: *ref_750
             implementation: Method
             required: true
             language: !Languages 
@@ -28216,8 +28322,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_755
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -28232,7 +28338,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_731
+              - !Parameter &ref_754
                 schema: *ref_259
                 implementation: Method
                 required: true
@@ -28258,7 +28364,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_731
+              - *ref_754
             language: !Languages 
               default:
                 name: ''
@@ -28271,10 +28377,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_755
         signatureParameters:
-          - *ref_732
-          - *ref_733
-          - *ref_734
+          - *ref_756
+          - *ref_757
+          - *ref_758
         responses:
           - !SchemaResponse 
             schema: *ref_259
@@ -28291,7 +28399,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -28477,12 +28585,13 @@ operationGroups:
             description: Create or update the object replication policy of the storage account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ObjectReplicationPolicies_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_735
+          - !Parameter &ref_759
             schema: *ref_497
             implementation: Method
             required: true
@@ -28494,7 +28603,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_736
+          - !Parameter &ref_760
             schema: *ref_498
             implementation: Method
             required: true
@@ -28508,8 +28617,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_737
-            schema: *ref_727
+          - !Parameter &ref_761
+            schema: *ref_750
             implementation: Method
             required: true
             language: !Languages 
@@ -28549,9 +28658,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_735
-          - *ref_736
-          - *ref_737
+          - *ref_759
+          - *ref_760
+          - *ref_761
         responses:
           - !Response 
             language: !Languages 
@@ -28573,7 +28682,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -28612,12 +28721,13 @@ operationGroups:
     $key: EncryptionScopes
     operations:
       - !Operation 
+        operationId: EncryptionScopes_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_739
+          - !Parameter &ref_764
             schema: *ref_497
             implementation: Method
             required: true
@@ -28629,7 +28739,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_740
+          - !Parameter &ref_765
             schema: *ref_498
             implementation: Method
             required: true
@@ -28643,8 +28753,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_741
-            schema: *ref_520
+          - !Parameter &ref_766
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -28657,8 +28767,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_763
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -28673,7 +28783,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_738
+              - !Parameter &ref_762
                 schema: *ref_260
                 implementation: Method
                 required: true
@@ -28699,7 +28809,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_738
+              - *ref_762
             language: !Languages 
               default:
                 name: ''
@@ -28712,10 +28822,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_763
         signatureParameters:
-          - *ref_739
-          - *ref_740
-          - *ref_741
+          - *ref_764
+          - *ref_765
+          - *ref_766
         responses:
           - !SchemaResponse 
             schema: *ref_260
@@ -28745,7 +28857,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -28831,12 +28943,13 @@ operationGroups:
               will be updated per the specified request.
         protocol: !Protocols {}
       - !Operation 
+        operationId: EncryptionScopes_Patch
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_743
+          - !Parameter &ref_769
             schema: *ref_497
             implementation: Method
             required: true
@@ -28848,7 +28961,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_744
+          - !Parameter &ref_770
             schema: *ref_498
             implementation: Method
             required: true
@@ -28862,8 +28975,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_745
-            schema: *ref_520
+          - !Parameter &ref_771
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -28876,8 +28989,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_768
             parameters:
               - !Parameter 
                 schema: *ref_506
@@ -28892,7 +29005,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_742
+              - !Parameter &ref_767
                 schema: *ref_260
                 implementation: Method
                 required: true
@@ -28918,7 +29031,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_742
+              - *ref_767
             language: !Languages 
               default:
                 name: ''
@@ -28931,10 +29044,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_768
         signatureParameters:
-          - *ref_743
-          - *ref_744
-          - *ref_745
+          - *ref_769
+          - *ref_770
+          - *ref_771
         responses:
           - !SchemaResponse 
             schema: *ref_260
@@ -28951,7 +29066,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -28999,12 +29114,13 @@ operationGroups:
             description: Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
         protocol: !Protocols {}
       - !Operation 
+        operationId: EncryptionScopes_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_746
+          - !Parameter &ref_772
             schema: *ref_497
             implementation: Method
             required: true
@@ -29016,7 +29132,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_747
+          - !Parameter &ref_773
             schema: *ref_498
             implementation: Method
             required: true
@@ -29030,8 +29146,8 @@ operationGroups:
                 in: path
           - *ref_499
           - *ref_500
-          - !Parameter &ref_748
-            schema: *ref_520
+          - !Parameter &ref_774
+            schema: *ref_521
             implementation: Method
             required: true
             language: !Languages 
@@ -29071,9 +29187,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_746
-          - *ref_747
-          - *ref_748
+          - *ref_772
+          - *ref_773
+          - *ref_774
         responses:
           - !SchemaResponse 
             schema: *ref_260
@@ -29090,7 +29206,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_670
+            schema: *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -29129,12 +29245,13 @@ operationGroups:
             description: Returns the properties for the specified encryption scope.
         protocol: !Protocols {}
       - !Operation 
+        operationId: EncryptionScopes_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-01'
         parameters:
           - *ref_496
-          - !Parameter &ref_749
+          - !Parameter &ref_775
             schema: *ref_497
             implementation: Method
             required: true
@@ -29146,7 +29263,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_750
+          - !Parameter &ref_776
             schema: *ref_498
             implementation: Method
             required: true
@@ -29187,11 +29304,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_749
-          - *ref_750
+          - *ref_775
+          - *ref_776
         responses:
           - !SchemaResponse 
-            schema: *ref_751
+            schema: *ref_777
             language: !Languages 
               default:
                 name: ''
@@ -29252,8 +29369,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

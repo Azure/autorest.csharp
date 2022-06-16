@@ -2,11 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -179,6 +183,21 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             return name;
+        }
+
+        public static string CreateExtraDescriptionWithDiscriminator(MgmtObjectType objectType)
+        {
+            if (objectType.Discriminator?.HasDescendants == true)
+            {
+                List<FormattableString> childrenList = new List<FormattableString>();
+                foreach (var implementation in objectType.Discriminator.Implementations)
+                {
+                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
+                }
+                return $"{System.Environment.NewLine}Please note <see cref=\"{objectType.Type.Name}\"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes." +
+                    $"{System.Environment.NewLine}The available derived classes include {FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+            }
+            return string.Empty;
         }
     }
 }

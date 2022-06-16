@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtRenameRules.Models
 {
     /// <summary> VM disk types which are disallowed. </summary>
-    internal readonly partial struct VmDiskTypes : IEquatable<VmDiskTypes>
+    public readonly partial struct VmDiskTypes : IEquatable<VmDiskTypes>
     {
         private readonly string _value;
 

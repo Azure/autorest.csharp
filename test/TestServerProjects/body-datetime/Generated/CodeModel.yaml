@@ -160,6 +160,7 @@ operationGroups:
     $key: datetime
     operations:
       - !Operation 
+        operationId: datetime_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -234,6 +235,7 @@ operationGroups:
             description: Get null datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -300,6 +302,7 @@ operationGroups:
             description: Get invalid datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getOverflow
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -366,6 +369,7 @@ operationGroups:
             description: Get overflow datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getUnderflow
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -432,13 +436,14 @@ operationGroups:
             description: Get underflow datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putUtcMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -492,6 +497,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -530,13 +537,14 @@ operationGroups:
             description: Put max datetime value 9999-12-31T23:59:59.999Z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putUtcMaxDateTime7Digits
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_11
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -551,7 +559,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_9
+              - !Parameter &ref_10
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -577,7 +585,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_9
+              - *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -590,6 +598,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -622,6 +632,7 @@ operationGroups:
             summary: Put max datetime value 9999-12-31T23:59:59.9999999Z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getUtcLowercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -695,6 +706,7 @@ operationGroups:
             description: Get max datetime value 9999-12-31t23:59:59.999z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getUtcUppercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -768,6 +780,7 @@ operationGroups:
             description: Get max datetime value 9999-12-31T23:59:59.999Z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getUtcUppercaseMaxDateTime7Digits
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -835,13 +848,14 @@ operationGroups:
             summary: Get max datetime value 9999-12-31T23:59:59.9999999Z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putLocalPositiveOffsetMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_13
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -856,7 +870,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_10
+              - !Parameter &ref_12
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -882,7 +896,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_10
+              - *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -895,6 +909,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_13
         signatureParameters: []
         responses:
           - !Response 
@@ -933,6 +949,7 @@ operationGroups:
             description: Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalPositiveOffsetLowercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1006,6 +1023,7 @@ operationGroups:
             description: Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalPositiveOffsetUppercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1079,13 +1097,14 @@ operationGroups:
             description: Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putLocalNegativeOffsetMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_15
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -1100,7 +1119,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
+              - !Parameter &ref_14
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -1126,7 +1145,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_11
+              - *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -1139,6 +1158,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_15
         signatureParameters: []
         responses:
           - !Response 
@@ -1170,6 +1191,7 @@ operationGroups:
             description: Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalNegativeOffsetUppercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1236,6 +1258,7 @@ operationGroups:
             description: Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalNegativeOffsetLowercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1302,13 +1325,14 @@ operationGroups:
             description: Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putUtcMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_17
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -1323,7 +1347,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_12
+              - !Parameter &ref_16
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -1349,7 +1373,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_12
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -1362,6 +1386,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_17
         signatureParameters: []
         responses:
           - !Response 
@@ -1400,6 +1426,7 @@ operationGroups:
             description: Put min datetime value 0001-01-01T00:00:00Z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getUtcMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1473,13 +1500,14 @@ operationGroups:
             description: Get min datetime value 0001-01-01T00:00:00Z
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putLocalPositiveOffsetMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_19
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -1494,7 +1522,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_13
+              - !Parameter &ref_18
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -1520,7 +1548,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_13
+              - *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -1533,6 +1561,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_19
         signatureParameters: []
         responses:
           - !Response 
@@ -1564,6 +1594,7 @@ operationGroups:
             description: Put min datetime value 0001-01-01T00:00:00+14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalPositiveOffsetMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1630,13 +1661,14 @@ operationGroups:
             description: Get min datetime value 0001-01-01T00:00:00+14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_putLocalNegativeOffsetMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_21
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -1651,7 +1683,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
+              - !Parameter &ref_20
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -1677,7 +1709,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_14
+              - *ref_20
             language: !Languages 
               default:
                 name: ''
@@ -1690,6 +1722,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_21
         signatureParameters: []
         responses:
           - !Response 
@@ -1728,6 +1762,7 @@ operationGroups:
             description: Put min datetime value 0001-01-01T00:00:00-14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalNegativeOffsetMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1801,6 +1836,7 @@ operationGroups:
             description: Get min datetime value 0001-01-01T00:00:00-14:00
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetime_getLocalNoOffsetMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

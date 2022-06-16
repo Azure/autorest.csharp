@@ -45,22 +45,22 @@ schemas: !Schemas
     - !ConstantSchema &ref_12
       type: constant
       value: !ConstantValue 
-        value: image/jpeg
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ImageJpeg
-          description: Content Type 'image/jpeg'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_15
-      type: constant
-      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
       language: !Languages 
         default:
           name: ApplicationJson
           description: Content Type 'application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_15
+      type: constant
+      value: !ConstantValue 
+        value: image/jpeg
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ImageJpeg
+          description: Content Type 'image/jpeg'
       protocol: !Protocols {}
   anyObjects:
     - !AnyObjectSchema &ref_6
@@ -71,18 +71,15 @@ schemas: !Schemas
           description: Any object
       protocol: !Protocols {}
   binaries:
-    - !BinarySchema &ref_13
+    - !BinarySchema &ref_16
       type: binary
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
       language: !Languages 
         default:
           name: binary
           description: ''
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_16
+    - !ObjectSchema &ref_13
       type: object
       apiVersions:
         - !ApiVersion 
@@ -129,6 +126,7 @@ operationGroups:
     $key: params
     operations:
       - !Operation 
+        operationId: params_headNoParams
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -193,6 +191,7 @@ operationGroups:
             description: Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_getRequired
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -272,6 +271,7 @@ operationGroups:
                Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_putRequiredOptional
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -361,71 +361,17 @@ operationGroups:
             description: Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_postParameters
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_2
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_18
             parameters:
               - !Parameter 
                 schema: *ref_12
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_14
-                schema: *ref_13
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameter
-                    description: 'I am a body parameter with a new content type. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }'
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_4
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_14
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
-                path: /serviceDriven/parameters
-                method: post
-                binary: true
-                knownMediaType: binary
-                mediaTypes:
-                  - image/jpeg
-                uri: '{$host}'
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_15
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -437,8 +383,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_17
-                schema: *ref_16
+              - !Parameter &ref_14
+                schema: *ref_13
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -463,7 +409,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_17
+              - *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -476,6 +422,64 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+          image/jpeg: !Request &ref_19
+            parameters:
+              - !Parameter 
+                schema: *ref_15
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_17
+                schema: *ref_16
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameter
+                    description: 'I am a body parameter with a new content type. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }'
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_17
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /serviceDriven/parameters
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - image/jpeg
+                uri: '{$host}'
+        requests:
+          - *ref_18
+          - *ref_19
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -497,6 +501,7 @@ operationGroups:
             description: POST a JSON or a JPEG
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_deleteParameters
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -532,12 +537,13 @@ operationGroups:
                Initially the path exists but there is no delete method. After evolution this is a new method in a known path
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_getOptional
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_2
-          - !Parameter &ref_18
+          - !Parameter &ref_20
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -548,7 +554,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_19
+          - !Parameter &ref_21
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -586,8 +592,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
-          - *ref_19
+          - *ref_20
+          - *ref_21
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -610,6 +616,7 @@ operationGroups:
                Initially has one optional query parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_getNewOperation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -671,9 +678,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: DPGClient

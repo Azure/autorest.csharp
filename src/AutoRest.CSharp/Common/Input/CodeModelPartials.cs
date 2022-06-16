@@ -135,6 +135,10 @@ namespace AutoRest.CSharp.Input
         public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
     }
 
+    internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>
+    {
+    }
+
     internal static class XMsFormat
     {
         public const string ArmId = "arm-id";
@@ -272,11 +276,20 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "testModel")]
         public TestModel? TestModel { get; set; }
 
-        private IEnumerable<Schema>? _allSchemas;
-        public IEnumerable<Schema> AllSchemas => _allSchemas ??= Schemas.Choices.Cast<Schema>()
-                .Concat(Schemas.SealedChoices)
-                .Concat(Schemas.Objects)
-                .Concat(Schemas.Groups);
+        public IEnumerable<Schema> AllSchemas
+        {
+            get
+            {
+                foreach (var schema in Schemas.Choices)
+                    yield return schema;
+                foreach (var schema in Schemas.SealedChoices)
+                    yield return schema;
+                foreach (var schema in Schemas.Objects)
+                    yield return schema;
+                foreach (var schema in Schemas.Groups)
+                    yield return schema;
+            }
+        }
     }
 
     internal partial class OavVariableScope
