@@ -371,7 +371,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
-        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Where(data => data is not VirtualResourceData).Distinct();
+        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Where(data => data is not EmptyResourceData).Distinct();
 
         private IEnumerable<MgmtRestClient>? _restClients;
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= RawRequestPathToRestClient.Values.SelectMany(v => v).Distinct();
@@ -500,7 +500,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (operationSet.Count > 0)
                         BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                     else
-                        BuildVirtualResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
+                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                 }
             }
 
@@ -523,10 +523,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void BuildVirtualResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData resourceData)
+        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData resourceData)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new VirtualResource(operationSet, operations, resourceDataSchemaName, resourceType, resourceData);
+            var resource = new PartialResource(operationSet, operations, resourceDataSchemaName, resourceType, resourceData);
             result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), resourceData, resource, null));
         }
 
@@ -705,10 +705,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            // add virtual resource data here
-            foreach ((var requestPath, var resourceDataSchemaName) in Configuration.MgmtConfiguration.VirtualResources)
+            // add partial resource data here (which is empty)
+            foreach ((var requestPath, var resourceDataSchemaName) in Configuration.MgmtConfiguration.PartialResources)
             {
-                rawRequestPathToResourceData.Add(requestPath, new VirtualResourceData(resourceDataSchemaName));
+                rawRequestPathToResourceData.Add(requestPath, new EmptyResourceData(resourceDataSchemaName));
             }
 
             return rawRequestPathToResourceData;
@@ -808,8 +808,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            // add virtual operation set here
-            foreach (var path in Configuration.MgmtConfiguration.VirtualResources.Keys)
+            // add operation set for the partial resources here
+            foreach (var path in Configuration.MgmtConfiguration.PartialResources.Keys)
             {
                 rawRequestPathToOperationSets.Add(path, new OperationSet(path));
             }

@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? singletonRequiresKeyword = default,
             TestModelerConfiguration? testmodeler = default,
             JsonElement? operationIdMappings = default,
-            JsonElement? virtualResources = default)
+            JsonElement? partialResources = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Input
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
             OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
             RenameRules = !IsValidJsonElement(renameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(renameRules.ToString());
-            VirtualResources = !IsValidJsonElement(virtualResources) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(virtualResources.ToString());
+            PartialResources = !IsValidJsonElement(partialResources) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(partialResources.ToString());
             try
             {
                 OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public IReadOnlyDictionary<string, string> VirtualResources { get; }
+        public IReadOnlyDictionary<string, string> PartialResources { get; }
         public IReadOnlyList<string> OperationGroupsToOmit { get; }
         public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
@@ -235,7 +235,7 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
-                virtualResources: autoRest.GetValue<JsonElement?>("virtual-resources").GetAwaiter().GetResult());
+                partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
             WriteNonEmptySettings(writer, nameof(RenameRules), RenameRules);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
-            WriteNonEmptySettings(writer, nameof(VirtualResources), VirtualResources);
+            WriteNonEmptySettings(writer, nameof(PartialResources), PartialResources);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
@@ -293,7 +293,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValues);
-            root.TryGetProperty(nameof(VirtualResources), out var virtualResources);
+            root.TryGetProperty(nameof(PartialResources), out var virtualResources);
 
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
@@ -354,7 +354,7 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
                 operationIdMappings: operationIdMappings,
-                virtualResources: virtualResources);
+                partialResources: virtualResources);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

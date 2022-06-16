@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
             _writer.Line();
-            if (This is not VirtualResource)
+            if (This is not PartialResource)
             {
                 _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
                 _writer.Line($"public virtual bool HasData {{ get; }}");
