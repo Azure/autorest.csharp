@@ -16,10 +16,10 @@ modelerfour:
   lenient-model-deduplication: true
 keep-orphaned-models: AvailabilitySetSkuTypes
 format-by-name-rules:
-  'TenantId': 'uuid'
-  'ResourceType': 'resource-type'
-  'Etag': 'etag'
-  'Location': 'azure-location'
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
 directive:

@@ -32,7 +32,7 @@ namespace MgmtKeyvault
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="connectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState connectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
+        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState connectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
