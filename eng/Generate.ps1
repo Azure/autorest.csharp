@@ -229,9 +229,18 @@ $settings = @{
     'profiles' = [ordered]@{}
 };
 
-foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
+# here we put the source code generation project (map $swaggerDefinitions) and the test code generation project (map $swaggerTestDefinitions) together
+$testProjectEntries = @{};
+$swaggerDefinitions.Keys | ForEach-Object {
+    $testProjectEntries[$_] = $swaggerDefinitions[$_];
+};
+$swaggerTestDefinitions.Keys | ForEach-Object {
+    $testProjectEntries["$_.Tests"] = $swaggerTestDefinitions[$_];
+}
+
+foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
 {
-    $definition = $swaggerDefinitions[$key];
+    $definition = $testProjectEntries[$key];
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping")
     {
