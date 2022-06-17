@@ -19,6 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;
+                if (schema.Extensions?.TryGetValue("x-ms-enum-plural", out _) ?? false)
+                    continue;
                 schema.Language.Default.Name = schema.Language.Default.Name.LastWordToSingular(inputIsKnownToBePlural: false);
             }
         }
