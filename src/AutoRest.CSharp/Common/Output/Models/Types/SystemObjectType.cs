@@ -163,12 +163,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private bool GetRequired(PropertyInfo property)
         {
-            var publicCtor = property.DeclaringType?.GetConstructors().Where(c => c.IsPublic).FirstOrDefault();
+            var publicCtor = property.DeclaringType?.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
             if (publicCtor == null)
             {
-                //ReferenceType for inheritance do not have public constructor, and currently there are ResourceData, TrackedResourceData, WritableResourceData.
-                //We treat Id, Name, ResourceType, Location in ResourceData/TrackedResourceData as required.
-                if (!property.DeclaringType!.Name.Equals("WritableResourceData", StringComparison.Ordinal))
+                //ReferenceTypes for inheritance do not have public constructors, and currently there are ResourceData and TrackedResourceData.
+                //We treat Id, Name, ResourceType, Location in them as required.
+                if (property.DeclaringType!.Name.Equals("ResourceData", StringComparison.Ordinal) || property.DeclaringType!.Name.Equals("TrackedResourceData", StringComparison.Ordinal))
                 {
                     if (property.Name == "Id" ||
                         property.Name == "Name" ||

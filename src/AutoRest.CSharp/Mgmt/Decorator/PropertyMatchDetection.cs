@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type", StringComparison.Ordinal)).Value;
                 }
                 else if (childProperty.Declaration.Name.EndsWith("Type", StringComparison.Ordinal))
-                {
+                { //TODO: enhance the code so that we don't match two different types in a child with the same type in parent.
                     parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type", StringComparison.Ordinal) && !p.Key.Equals("ResourceType", StringComparison.Ordinal)).Value;
                 }
                 if (parentProperty == null)

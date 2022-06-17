@@ -5,14 +5,12 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
-using Azure.ResourceManager.Models;
+using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the CustomModel3 data model. </summary>
-    public partial class CustomModel3Data : WritableResourceData
+    public partial class CustomModel3Data : AzureResourceFlattenModel7
     {
         /// <summary> Initializes a new instance of CustomModel3Data. </summary>
         public CustomModel3Data()
@@ -20,12 +18,11 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of CustomModel3Data. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="resourceType"> The resourceType. </param>
-        /// <param name="systemData"> The systemData. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="resourceType"></param>
         /// <param name="foo"></param>
-        internal CustomModel3Data(ResourceIdentifier id, string name, ResourceType? resourceType, SystemData systemData, string foo) : base(id, name, resourceType, systemData)
+        internal CustomModel3Data(string id, string name, string resourceType, string foo) : base(id, name, resourceType)
         {
             Foo = foo;
         }

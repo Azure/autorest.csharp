@@ -8,18 +8,13 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
-    public partial class CustomModel3Data : IUtf8JsonSerializable
+    public partial class AzureResourceFlattenModel7 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
-            {
-                writer.WritePropertyName("foo");
-                writer.WriteStringValue(Foo);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -38,19 +33,13 @@ namespace ExactMatchFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element)
+        internal static AzureResourceFlattenModel7 DeserializeAzureResourceFlattenModel7(JsonElement element)
         {
-            Optional<string> foo = default;
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("foo"))
-                {
-                    foo = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
@@ -67,7 +56,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel3Data(id.Value, name.Value, type.Value, foo.Value);
+            return new AzureResourceFlattenModel7(id.Value, name.Value, type.Value);
         }
     }
 }
