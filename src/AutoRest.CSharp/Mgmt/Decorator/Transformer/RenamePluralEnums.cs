@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -15,13 +17,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         public static void Update()
         {
+            ImmutableHashSet<string> enumsToKeepPlural = Configuration.MgmtConfiguration.KeepPluralEnums.ToImmutableHashSet();
+
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;
-                if (schema.Extensions?.TryGetValue("x-ms-enum-plural", out _) ?? false)
+                string name = schema.Language.Default.Name;
+                if (enumsToKeepPlural.Contains(name))
                     continue;
-                schema.Language.Default.Name = schema.Language.Default.Name.LastWordToSingular(inputIsKnownToBePlural: false);
+                if (Configuration.MgmtConfiguration.RenameRules.ContainsKey(name.SplitByCamelCase().Last()))
+                    continue;
+                schema.Language.Default.Name = name.LastWordToSingular(inputIsKnownToBePlural: false);
             }
         }
     }

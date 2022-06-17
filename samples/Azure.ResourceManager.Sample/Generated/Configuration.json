@@ -11,5 +11,8 @@
   "skip-csproj-packagereference": true,
   "KeepOrphanedModels": [
     "AvailabilitySetSkuTypes"
+  ],
+  "KeepPluralEnums": [
+    "HyperVGenerationTypes"
   ]
 }
