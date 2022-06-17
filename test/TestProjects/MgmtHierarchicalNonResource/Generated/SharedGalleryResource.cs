@@ -27,7 +27,7 @@ namespace MgmtHierarchicalNonResource
     public partial class SharedGalleryResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SharedGalleryResource"/> instance. </summary>
-        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string location, string galleryUniqueName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, AzureLocation location, string galleryUniqueName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}";
             return new ResourceIdentifier(resourceId);
