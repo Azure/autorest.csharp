@@ -36,6 +36,7 @@ ___
     - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
     - [Extending a model with additional constructors](#extending-a-model-with-additional-constructors)
+- [Management plane concepts and configurations](#management-plane-concepts-and-configurations)
 
 <!-- /TOC -->
 
@@ -1097,3 +1098,7 @@ skip-csproj-packagereference: true
 ```
 
 </details>
+
+## Management plane concepts and configurations
+
+See the documentation [here](./docs/mgmt/readme.md)
