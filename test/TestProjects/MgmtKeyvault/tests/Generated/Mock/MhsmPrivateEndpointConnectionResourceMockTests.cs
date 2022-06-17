@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
+using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -51,7 +52,14 @@ namespace MgmtKeyvault.Tests.Mock
 
             var mhsmPrivateEndpointConnectionResourceId = MgmtKeyvault.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
             var mhsmPrivateEndpointConnectionResource = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
-            await mhsmPrivateEndpointConnectionResource.UpdateAsync(WaitUntil.Completed, default);
+            await mhsmPrivateEndpointConnectionResource.UpdateAsync(WaitUntil.Completed, new MhsmPrivateEndpointConnectionData()
+            {
+                PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()
+                {
+                    Status = MgmtKeyvaultPrivateEndpointServiceConnectionStatus.Approved,
+                    Description = "My name is Joe and I'm approving this.",
+                },
+            });
         }
     }
 }

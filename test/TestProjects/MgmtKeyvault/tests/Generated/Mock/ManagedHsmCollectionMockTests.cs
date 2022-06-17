@@ -12,6 +12,8 @@ using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
+using MgmtKeyvault;
+using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -32,7 +34,19 @@ namespace MgmtKeyvault.Tests.Mock
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetManagedHsms();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "hsm1", default);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "hsm1", new ManagedHsmData()
+            {
+                Properties = new ManagedHsmProperties()
+                {
+                    TenantId = new Guid("00000000-0000-0000-0000-000000000000"),
+                    InitialAdminObjectIds =
+{
+"00000000-0000-0000-0000-000000000000"},
+                    EnableSoftDelete = true,
+                    SoftDeleteRetentionInDays = 90,
+                    EnablePurgeProtection = true,
+                },
+            });
         }
 
         [RecordedTest]

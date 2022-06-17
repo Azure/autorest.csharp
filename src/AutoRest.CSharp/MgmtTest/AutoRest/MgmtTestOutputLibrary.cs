@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 {
                     // we need to find which resource or resource collection this test case belongs
                     var operationId = exampleGroup.Operation.OperationId!;
-                    var providersAndOperations = FindResourcesFromOperationId(operationId);
+                    var providersAndOperations = FindTypeProvidersFromOperationId(operationId);
                     foreach ((var provider, var clientOperation) in providersAndOperations)
                     {
                         result.AddInList(provider, new MockTestCase(operationId, provider, clientOperation, example));
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return result;
         }
 
-        private IEnumerable<(MgmtTypeProvider Provider, MgmtClientOperation ClientOperation)> FindResourcesFromOperationId(string operationId)
+        private IEnumerable<(MgmtTypeProvider Provider, MgmtClientOperation ClientOperation)> FindTypeProvidersFromOperationId(string operationId)
         {
             // it is possible that an operationId does not exist in the MgmtOutputLibrary, because some of the operations are removed by design. For instance, `Operations_List`.
             if (EnsureOperationIdToProviders().TryGetValue(operationId, out var result))

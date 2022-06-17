@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
+using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -32,7 +33,15 @@ namespace MgmtKeyvault.Tests.Mock
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vaultResource.GetMgmtKeyvaultPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", default);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MgmtKeyvaultPrivateEndpointConnectionData()
+            {
+                Etag = "",
+                ConnectionState = new MgmtKeyvaultPrivateLinkServiceConnectionState()
+                {
+                    Status = MgmtKeyvaultPrivateEndpointServiceConnectionStatus.Approved,
+                    Description = "My name is Joe and I'm approving this.",
+                },
+            });
         }
 
         [RecordedTest]

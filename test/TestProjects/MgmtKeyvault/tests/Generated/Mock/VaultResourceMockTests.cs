@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
+using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -63,7 +64,35 @@ namespace MgmtKeyvault.Tests.Mock
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
-            await vaultResource.UpdateAsync(default);
+            await vaultResource.UpdateAsync(new VaultPatch()
+            {
+                Properties = new VaultPatchProperties()
+                {
+                    TenantId = new Guid("00000000-0000-0000-0000-000000000000"),
+                    Sku = new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard)
+                    {
+                    },
+                    AccessPolicies =
+{
+new AccessPolicyEntry(new Guid("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+{
+Keys =
+{
+KeyPermissions.Encrypt,KeyPermissions.Decrypt,KeyPermissions.WrapKey,KeyPermissions.UnwrapKey,KeyPermissions.Sign,KeyPermissions.Verify,KeyPermissions.Get,KeyPermissions.List,KeyPermissions.Create,KeyPermissions.Update,KeyPermissions.Import,KeyPermissions.Delete,KeyPermissions.Backup,KeyPermissions.Restore,KeyPermissions.Recover,KeyPermissions.Purge},
+Secrets =
+{
+SecretPermissions.Get,SecretPermissions.List,SecretPermissions.Set,SecretPermissions.Delete,SecretPermissions.Backup,SecretPermissions.Restore,SecretPermissions.Recover,SecretPermissions.Purge},
+Certificates =
+{
+CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge},
+})
+{
+}},
+                    EnabledForDeployment = true,
+                    EnabledForDiskEncryption = true,
+                    EnabledForTemplateDeployment = true,
+                },
+            });
         }
 
         [RecordedTest]
@@ -73,7 +102,26 @@ namespace MgmtKeyvault.Tests.Mock
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
-            await vaultResource.UpdateAccessPolicyAsync(default, default);
+            await vaultResource.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtKeyvault.Models.AccessPolicyEntry[]
+            {
+new AccessPolicyEntry(new Guid("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+{
+Keys =
+{
+KeyPermissions.Encrypt},
+Secrets =
+{
+SecretPermissions.Get},
+Certificates =
+{
+CertificatePermissions.Get},
+})
+{
+}})
+            {
+            })
+            {
+            });
         }
     }
 }

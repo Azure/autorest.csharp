@@ -12,18 +12,20 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.MgmtTest.Extensions
 {
     internal static class CodeWriterExtensions
     {
-        public static CodeWriter AppendExampleValue(this CodeWriter writer, ExampleValue exampleValue)
+        public static CodeWriter AppendExampleValue(this CodeWriter writer, ExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
             // get the type of this schema in the type factory
             var type = MgmtContext.Context.TypeFactory.CreateType(exampleValue.Schema, false);
 
             return type.IsFrameworkType ?
-                writer.AppendFrameworkTypeValue(type, exampleValue) :
+                writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
                 writer.AppendTypeProviderValue(type, exampleValue);
         }
 
@@ -41,39 +43,46 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
             if (TypeFactory.IsList(type))
-                return writer.AppendListValue(type, exampleValue);
+                return writer.AppendListValue(type, exampleValue, includeCollectionInitialization);
 
             if (TypeFactory.IsDictionary(type))
-                return writer.AppendDictionaryValue(type, exampleValue);
+                return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
 
             return writer.AppendSimpleFrameworkType(type.FrameworkType, exampleValue);
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
             // since this is a list, we take the first generic argument (and it should always has this first argument)
             var elementType = type.Arguments.First();
-            using (writer.Scope($"new[] "))
+            var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
+            using (writer.Scope(initialization, newLine: false))
             {
                 foreach (var itemValue in exampleValue.Elements)
                 {
                     writer.AppendExampleValue(itemValue);
-                    writer.AppendRaw(",");
+                    if (type.IsFrameworkType)
+                        writer.AppendRaw(",");
+                    else
+                        writer.LineRaw(",");
                 }
                 writer.RemoveTrailingComma();
+                if (!type.IsFrameworkType)
+                    writer.Line();
             }
             return writer;
         }
 
-        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
             // since this is a dictionary, we take the first generic argument as the key type which is always string
             // the second as the value type
             var valueType = type.Arguments[1];
-            using (writer.Scope($"new {type}()"))
+            var initialization = includeInitialization ? (FormattableString)$"new {type}()" : (FormattableString)$"";
+            using (writer.Scope(initialization, newLine: false))
             {
                 foreach ((var key, var value) in (Dictionary<string, ExampleValue>)exampleValue.Properties)
                 {
@@ -88,224 +97,103 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         }
 
         private static CodeWriter AppendSimpleFrameworkType(this CodeWriter writer, Type type, ExampleValue exampleValue)
-        {
-            switch (exampleValue.RawValue)
+            => exampleValue.RawValue switch
             {
-                case string str:
-                    return writer.Append($"\"{str}\"");
-                case null:
-                    throw new InvalidOperationException($"Example value is null for framework type {type}");
-                default:
-                    return writer.Append($"{exampleValue.RawValue}");
-            }
+                string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
+                bool b => writer.Append($"{b}"),
+                int i => writer.Append($"{i}"),
+                long l => writer.Append($"{l}"),
+                double d => writer.Append($"{d}"),
+                decimal dec => writer.Append($"{dec}"),
+                null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
+                _ => writer.AppendRaw(exampleValue.RawValue.ToString()!)
+            };
+
+        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value)
+        {
+            static FormattableString WrapStringLiteral(string value) => $"\"{value}\"";
+            if (type == typeof(string))
+                return writer.Append(WrapStringLiteral(value));
+            if (IsStringLikeType(type))
+                return writer.Append($"new {type}({WrapStringLiteral(value)})");
+            return writer.AppendRaw(value);
         }
+
+        private static bool IsStringLikeType(Type type)
+            => type == typeof(Guid) || type == typeof(Guid?) || type == typeof(AzureLocation) || type == typeof(AzureLocation?)
+            || type == typeof(ResourceType) || type == typeof(ResourceType?) || type == typeof(ResourceIdentifier);
 
         private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
         {
+            switch (type.Implementation)
+            {
+                case SchemaObjectType schemaObjectType:
+                    return writer.AppendSchemaObjectTypeValue(schemaObjectType, (Dictionary<string, ExampleValue>)exampleValue.Properties);
+                case EnumType enumType:
+                    return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
+            }
             return writer.AppendRaw("default");
         }
 
-        //public static void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
-        //{
-        //    switch ($"{cst.Namespace}.{cst.Name}")
-        //    {
-        //        case "System.Collections.Generic.IList":
-        //            using (writer.Scope($"new {new CSharpType(typeof(List<>), cst.Arguments)}()", newLine: false))
-        //            {
-        //                var idx = 0;
-        //                foreach (var element in exampleValue.Elements)
-        //                {
-        //                    WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
-        //                    writer.Append($",");
-        //                    idx++;
-        //                }
-        //            }
-        //            break;
-        //        case "System.Collections.Generic.IDictionary":
-        //            using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
-        //            {
-        //                foreach (var entry in exampleValue.Properties)
-        //                {
-        //                    var keyDelegate = WriteStringValue(cst.Arguments[0], entry.Key);
-        //                    writer.Append($"[{keyDelegate}] = ");
-        //                    WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{keyDelegate}]");
-        //                    writer.Append($",");
-        //                }
-        //            }
-        //            break;
-        //        case "System.Object":
-        //            WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
-        //            break;
-        //        case "Azure.ResourceManager.Models.UserAssignedIdentity":
-        //            WriteExampleValue(writer, new CSharpType(new SystemObjectType(typeof(Azure.ResourceManager.Models.UserAssignedIdentity), MgmtContext.Context)), exampleValue, variableName);
-        //            break;
-        //        case "Azure.ResourceManager.Models.SystemAssignedServiceIdentity":
-        //            WriteExampleValue(writer, new CSharpType(new SystemObjectType(typeof(Azure.ResourceManager.Models.SystemAssignedServiceIdentity), MgmtContext.Context)), exampleValue, variableName);
-        //            break;
-        //        case "System.BinaryData":
-        //            using (writer.Scope($"{typeof(BinaryData)}.FromObjectAsJson", start: "(", end: ")", newLine: false))
-        //            {
-        //                WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
-        //            }
-        //            break;
-        //        default:
-        //            var rawValue = new JsonRawValue(exampleValue.RawValue);
-        //            if (rawValue.IsString() && WriteStringValue(writer, cst, rawValue.AsString()))
-        //            {
-        //                return;
-        //            }
-        //            if (exampleValue.RawValue is null)
-        //            {
-        //                writer.Append($"null");
-        //                return;
-        //            }
-        //            try
-        //            {
-        //                writer.Append($"{exampleValue.RawValue}");
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                Console.WriteLine(e);
-        //            }
-        //            break;
-        //    }
-        //}
+        private static CodeWriter AppendSchemaObjectTypeValue(this CodeWriter writer, SchemaObjectType schemaObjectType, Dictionary<string, ExampleValue> valueDict)
+        {
+            // get all the properties on this type, including the properties from its base type
+            var properties = new HashSet<ObjectTypeProperty>(schemaObjectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
+            var constructor = schemaObjectType.InitializationConstructor;
+            writer.UseNamespace(schemaObjectType.Type.Namespace);
+            writer.Append($"new {schemaObjectType.Type.Name}(");
+            // build a map from parameter name to property
+            var propertyDict = properties.ToDictionary(
+                property => property.Declaration.Name.ToVariableName(), property => property);
+            // find the corresponding properties in the parameters
+            foreach (var parameter in constructor.Signature.Parameters)
+            {
+                // try every property, convert them to variable name and see if there are some of them matching
+                var property = propertyDict[parameter.Name];
+                ExampleValue? exampleValue;
+                if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
+                {
+                    // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
+                    if (TypeFactory.IsCollectionType(property.ValueType))
+                    {
+                        exampleValue = new ExampleValue()
+                        {
+                            Schema = property.SchemaProperty.Schema,
+                        };
+                    }
+                    else
+                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {schemaObjectType.Type.Name} is not found");
+                }
+                properties.Remove(property);
+                writer.AppendExampleValue(exampleValue).AppendRaw(",");
+            }
+            writer.RemoveTrailingComma();
+            // TODO -- skip this scope if there is no properties written
+            using (writer.Scope($")", newLine: false))
+            {
+                // find property
+                foreach (var property in properties)
+                {
+                    var schemaProperty = property.SchemaProperty;
+                    if (schemaProperty == null)
+                        continue; // now we explicitly ignore all the AdditionalProperties
+                    if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                    {
+                        writer.Append($"{property.Declaration.Name} = ");
+                        writer.AppendExampleValue(exampleValue, false);
+                        writer.LineRaw(",");
+                    }
+                }
+            }
+            return writer;
+        }
 
-        //public static void WriteExampleValue(this CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
-        //{
-        //    TypeProvider? tp = cst.IsFrameworkType ? null : cst.Implementation;
-        //    switch (tp)
-        //    {
-        //        case SchemaObjectType sot:
-        //            WriteSchemaObjectExampleValue(writer, sot, exampleValue, variableName);
-        //            break;
-        //        case SystemObjectType sot:
-        //            WriteSchemaObjectExampleValue(writer, sot, exampleValue, variableName);
-        //            break;
-        //        case EnumType enumType:
-        //            WriteEnumTypeExampleValue(writer, enumType, exampleValue);
-        //            break;
-        //        case null:
-        //            WriteFrameworkTypeExampleValue(writer, cst, exampleValue, variableName);
-        //            break;
-        //        default:
-        //            throw new Exception($"TODO: handle example value for {cst}!");
-        //    }
-        //}
-
-        //public static void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName)
-        //{
-        //    // Find Polimophismed schema
-        //    if (sot is SchemaObjectType && MgmtContext.Library.SchemaMap.ContainsKey(ev.Schema))
-        //    {
-        //        var mappedTypeProvider = MgmtContext.Library.SchemaMap[ev.Schema];
-        //        if (mappedTypeProvider is SchemaObjectType mappedSot)
-        //        {
-        //            if (mappedSot != sot)
-        //            {
-        //                sot = mappedSot;
-        //                variableName = $"(({mappedSot.Type}){variableName})";
-        //            }
-        //        }
-        //    }
-
-        //    var constructor = FindSuitableConstructor(sot, ev);
-        //    HashSet<ObjectTypeProperty> consumedProperties = new HashSet<ObjectTypeProperty>();
-        //    var signature = constructor.Signature;
-
-        //    writer.Append($"new {sot.Type}(");
-        //    foreach (var p in signature.Parameters)
-        //    {
-        //        var targetProperty = constructor.FindPropertyInitializedByParameter(p);
-        //        if (targetProperty is null)
-        //        {
-        //            writer.Append($"default, /* Can't find property for this parameter!*/");
-        //            continue;
-        //        }
-        //        var paramValue = FindPropertyValue(sot, ev, targetProperty);
-        //        writer.Append($"{p.Name:D}: ");
-        //        if (paramValue is not null)
-        //        {
-        //            WriteExampleValue(writer, p.Type, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}");
-        //        }
-        //        else
-        //        {
-        //            // initiate for special parameter, others provide default
-        //            if (p.Name == "location")
-        //            {
-        //                writer.Append($"{typeof(AzureLocation)}.WestUS");
-        //            }
-        //            else
-        //            {
-        //                writer.Append($"default /* don't find example value for this parameter!*/");
-        //            }
-        //        }
-        //        writer.AppendRaw(",");
-        //        consumedProperties.Add(targetProperty!);
-        //    }
-        //    writer.RemoveTrailingComma();
-        //    writer.Append($")");
-
-        //    var hasUnconsumedProperties = false;
-        //    foreach (var objectType in sot.EnumerateHierarchy())
-        //    {
-        //        foreach (var targetProperty in objectType.Properties)
-        //        {
-        //            if (consumedProperties.Contains(targetProperty) || targetProperty.IsReadOnly)
-        //                continue;
-        //            var paramValue = FindPropertyValue(sot, ev, targetProperty!);
-        //            if (paramValue is not null)
-        //            {
-        //                hasUnconsumedProperties = true;
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //    if (hasUnconsumedProperties)
-        //        WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
-
-        //    // assign readonly list and dictionary properties.
-        //    foreach (var objectType in sot.EnumerateHierarchy())
-        //    {
-        //        foreach (var targetProperty in objectType.Properties)
-        //        {
-        //            if (consumedProperties.Contains(targetProperty))
-        //                continue;
-        //            var paramValue = FindPropertyValue(sot, ev, targetProperty!);
-        //            if (paramValue is not null)
-        //            {
-        //                assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}"));
-        //            }
-        //        }
-        //    }
-        //}
-
-        //public static void WriteEnumTypeExampleValue(CodeWriter writer, EnumType enumType, ExampleValue exampleValue)
-        //{
-        //    if (enumType.IsExtendable)
-        //    {
-        //        if (enumType.BaseType.FrameworkType == typeof(String) && exampleValue.RawValue is string strValue)
-        //        {
-        //            writer.AppendEnumFromString(enumType, w => w.Append($"{strValue:L}"));
-        //        }
-        //        else
-        //        {
-        //            writer.AppendEnumFromString(enumType, w => w.Append($"{exampleValue.RawValue}"));
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (EnumTypeValue value in enumType.Values)
-        //        {
-        //            if ((bool)enumType.BaseType.FrameworkType.GetMethod("Equals", new[] { enumType.BaseType.FrameworkType, enumType.BaseType.FrameworkType })!.Invoke(null, new object?[] { exampleValue.RawValue, value.Value.Value })!)
-        //            {
-        //                writer.Append($"{enumType.Declaration.Namespace}.{enumType.Declaration.Name}.{value.Declaration.Name}");
-        //                return;
-        //            }
-        //        }
-        //        throw new Exception($"Can't resolve {exampleValue.RawValue:L} as {enumType.Declaration.Name} value!");
-        //    }
-        //}
+        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, string value)
+        {
+            // find value in one of the choices
+            var choice = enumType.Values.First(c => value.Equals(c.Value.Value));
+            writer.UseNamespace(enumType.Type.Namespace);
+            return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
+        }
     }
 }
