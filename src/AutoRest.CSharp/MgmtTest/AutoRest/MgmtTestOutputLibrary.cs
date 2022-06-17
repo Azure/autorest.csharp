@@ -70,6 +70,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             {
                 foreach (var clientOperation in provider.AllOperations)
                 {
+                    // we skip the convenient methods, AddTag, SetTags, DeleteTags, etc
+                    if (clientOperation.IsConvenientOperation)
+                        continue;
                     foreach (var restOperation in clientOperation)
                     {
                         // TODO -- simplify the Operation.OperationId to OperationId directly once this issue resolves https://github.com/Azure/azure-sdk-tools/issues/3454

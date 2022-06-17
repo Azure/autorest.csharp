@@ -7,7 +7,10 @@ using System.Net;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output;
 using AutoRest.CSharp.Utilities;
@@ -111,6 +114,89 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         protected string CreateMethodName(string methodName, bool async = true)
         {
             return async ? $"{methodName}Async" : methodName;
+        }
+
+        protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider parent, MockTestCase testCase)
+            => parent switch
+            {
+                Resource parentResource => WriteGetResource(parentResource, testCase),
+                MgmtExtensions parentExtension => WriteGetExtension(parentExtension, testCase),
+                _ => throw new InvalidOperationException($"Unknown parent {parent.GetType()}"),
+            };
+
+        protected CodeWriterDeclaration WriteGetResource(Resource parentResource, MockTestCase testCase)
+        {
+            var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name}Id".ToVariableName());
+            _writer.Append($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier(");
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentResource.RequestPath))
+            {
+                _writer.Append(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($");");
+            var resourceVar = new CodeWriterDeclaration(parentResource.Type.Name.ToVariableName());
+            _writer.Line($"var {resourceVar:D} = GetArmClient().Get{parentResource.Type.Name}({idVar});");
+
+            return resourceVar;
+        }
+
+        protected CodeWriterDeclaration WriteGetExtension(MgmtExtensions parentExtension, MockTestCase testCase)
+        {
+            var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
+            if (parentExtension == MgmtContext.Library.TenantExtensions)
+            {
+                _writer.UseNamespace("System.Linq");
+                _writer.Line($"var {resourceVar:D} = GetArmClient().GetTenants().First();");
+            }
+            else
+            {
+                var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
+                _writer.Append($"var {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
+                foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
+                {
+                    _writer.Append(value).AppendRaw(",");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.LineRaw(");");
+                _writer.Line($"var {resourceVar:D} = GetArmClient().Get{parentExtension.ArmCoreType.Name}({idVar});");
+            }
+
+            return resourceVar;
+        }
+
+        protected void WriteTestOperation(CodeWriterDeclaration declaration, MockTestCase testCase)
+        {
+            // we will always use the Async version of methods
+            if (testCase.ClientOperation.IsPagingOperation)
+            {
+                _writer.Append($"await foreach (var _ in ");
+                WriteTestMethodInvocation(declaration, testCase);
+                using (_writer.Scope($")"))
+                { }
+            }
+            else
+            {
+                _writer.Append($"await ");
+                WriteTestMethodInvocation(declaration, testCase);
+                _writer.LineRaw(";");
+            }
+        }
+
+        protected void WriteTestMethodInvocation(CodeWriterDeclaration declaration, MockTestCase testCase)
+        {
+            var clientOperation = testCase.ClientOperation;
+            var methodName = CreateMethodName(clientOperation.Name);
+            _writer.Append($"{declaration}.{methodName}(");
+            foreach (var parameter in clientOperation.MethodParameters)
+            {
+                if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                {
+                    _writer.AppendExampleParameterValue(parameter, parameterValue);
+                    _writer.AppendRaw(",");
+                }
+            }
+            _writer.RemoveTrailingComma();
+            _writer.AppendRaw(")");
         }
 
         public override string ToString()

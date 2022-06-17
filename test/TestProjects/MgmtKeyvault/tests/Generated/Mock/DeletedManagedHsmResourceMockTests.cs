@@ -15,7 +15,7 @@ using MgmtKeyvault;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for DeletedManagedHsm. </summary>
+    /// <summary> Test for DeletedManagedHsmResource. </summary>
     public partial class DeletedManagedHsmResourceMockTests : MockTestBase
     {
         public DeletedManagedHsmResourceMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
@@ -28,9 +28,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted managed HSM
+
             var deletedManagedHsmResourceId = MgmtKeyvault.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
             var deletedManagedHsmResource = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
-
             await deletedManagedHsmResource.GetAsync();
         }
 
@@ -38,9 +38,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task PurgeDeleted()
         {
             // Example: Purge a managed HSM Pool
+
             var deletedManagedHsmResourceId = MgmtKeyvault.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
             var deletedManagedHsmResource = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
-
             await deletedManagedHsmResource.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }

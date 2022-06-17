@@ -15,7 +15,7 @@ using MgmtKeyvault;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for DeletedVault. </summary>
+    /// <summary> Test for DeletedVaultResource. </summary>
     public partial class DeletedVaultResourceMockTests : MockTestBase
     {
         public DeletedVaultResourceMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
@@ -28,9 +28,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted vault
+
             var deletedVaultResourceId = MgmtKeyvault.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
             var deletedVaultResource = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
-
             await deletedVaultResource.GetAsync();
         }
 
@@ -38,9 +38,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task PurgeDeleted()
         {
             // Example: Purge a deleted vault
+
             var deletedVaultResourceId = MgmtKeyvault.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
             var deletedVaultResource = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
-
             await deletedVaultResource.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }

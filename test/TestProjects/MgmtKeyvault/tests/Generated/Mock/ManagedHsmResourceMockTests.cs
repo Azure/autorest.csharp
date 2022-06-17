@@ -6,18 +6,16 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for ManagedHsm. </summary>
+    /// <summary> Test for ManagedHsmResource. </summary>
     public partial class ManagedHsmResourceMockTests : MockTestBase
     {
         public ManagedHsmResourceMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
@@ -27,51 +25,42 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async Task Update()
         {
-            // Example: Retrieve a managed HSM Pool
+            // Example: Update an existing managed HSM Pool
+
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-
-            await managedHsmResource.GetAsync();
+            await managedHsmResource.UpdateAsync(WaitUntil.Completed, default);
         }
 
         [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a managed HSM Pool
+
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-
             await managedHsmResource.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
-        public async Task Update()
+        public async Task Get()
         {
-            // Example: Update an existing managed HSM Pool
+            // Example: Retrieve a managed HSM Pool
+
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            MgmtKeyvault.ManagedHsmData data = new MgmtKeyvault.ManagedHsmData(location: AzureLocation.WestUS)
-            {
-            };
-            data.Tags.ReplaceWith(new Dictionary<string, string>()
-            {
-                ["Dept"] = "hsm",
-                ["Environment"] = "dogfood",
-                ["Slice"] = "A",
-            });
-
-            await managedHsmResource.UpdateAsync(WaitUntil.Completed, data);
+            await managedHsmResource.GetAsync();
         }
 
         [RecordedTest]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResource()
         {
             // Example: KeyVaultListPrivateLinkResources
+
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-
             await foreach (var _ in managedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
             }

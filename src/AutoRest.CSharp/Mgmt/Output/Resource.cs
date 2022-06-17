@@ -239,7 +239,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
                         TagKeyParameter,
-                        TagValueParameter)));
+                        TagValueParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        TagSetParameter)));
+                        TagSetParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -255,7 +255,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        TagKeyParameter)));
+                        TagKeyParameter), isConvenientOperation: true));
             }
             return result;
         }

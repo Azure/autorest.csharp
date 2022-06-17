@@ -15,7 +15,7 @@ using MgmtKeyvault;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for MgmtKeyvaultPrivateEndpointConnection. </summary>
+    /// <summary> Test for MgmtKeyvaultPrivateEndpointConnectionResource. </summary>
     public partial class MgmtKeyvaultPrivateEndpointConnectionResourceMockTests : MockTestBase
     {
         public MgmtKeyvaultPrivateEndpointConnectionResourceMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
@@ -28,19 +28,29 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
+
             var mgmtKeyvaultPrivateEndpointConnectionResourceId = MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
             var mgmtKeyvaultPrivateEndpointConnectionResource = GetArmClient().GetMgmtKeyvaultPrivateEndpointConnectionResource(mgmtKeyvaultPrivateEndpointConnectionResourceId);
-
             await mgmtKeyvaultPrivateEndpointConnectionResource.GetAsync();
+        }
+
+        [RecordedTest]
+        public async Task Update()
+        {
+            // Example: KeyVaultPutPrivateEndpointConnection
+
+            var mgmtKeyvaultPrivateEndpointConnectionResourceId = MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
+            var mgmtKeyvaultPrivateEndpointConnectionResource = GetArmClient().GetMgmtKeyvaultPrivateEndpointConnectionResource(mgmtKeyvaultPrivateEndpointConnectionResourceId);
+            await mgmtKeyvaultPrivateEndpointConnectionResource.UpdateAsync(WaitUntil.Completed, default);
         }
 
         [RecordedTest]
         public async Task Delete()
         {
             // Example: KeyVaultDeletePrivateEndpointConnection
+
             var mgmtKeyvaultPrivateEndpointConnectionResourceId = MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
             var mgmtKeyvaultPrivateEndpointConnectionResource = GetArmClient().GetMgmtKeyvaultPrivateEndpointConnectionResource(mgmtKeyvaultPrivateEndpointConnectionResourceId);
-
             await mgmtKeyvaultPrivateEndpointConnectionResource.DeleteAsync(WaitUntil.Completed);
         }
     }
