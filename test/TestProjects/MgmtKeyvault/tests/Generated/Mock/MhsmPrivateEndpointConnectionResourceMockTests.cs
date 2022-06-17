@@ -25,6 +25,16 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task Delete()
+        {
+            // Example: ManagedHsmDeletePrivateEndpointConnection
+
+            var mhsmPrivateEndpointConnectionResourceId = MgmtKeyvault.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            var mhsmPrivateEndpointConnectionResource = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            await mhsmPrivateEndpointConnectionResource.DeleteAsync(WaitUntil.Completed);
+        }
+
+        [RecordedTest]
         public async Task Get()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
@@ -42,16 +52,6 @@ namespace MgmtKeyvault.Tests.Mock
             var mhsmPrivateEndpointConnectionResourceId = MgmtKeyvault.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
             var mhsmPrivateEndpointConnectionResource = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
             await mhsmPrivateEndpointConnectionResource.UpdateAsync(WaitUntil.Completed, default);
-        }
-
-        [RecordedTest]
-        public async Task Delete()
-        {
-            // Example: ManagedHsmDeletePrivateEndpointConnection
-
-            var mhsmPrivateEndpointConnectionResourceId = MgmtKeyvault.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
-            var mhsmPrivateEndpointConnectionResource = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
-            await mhsmPrivateEndpointConnectionResource.DeleteAsync(WaitUntil.Completed);
         }
     }
 }

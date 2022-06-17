@@ -25,6 +25,16 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task Delete()
+        {
+            // Example: KeyVaultDeletePrivateEndpointConnection
+
+            var mgmtKeyvaultPrivateEndpointConnectionResourceId = MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
+            var mgmtKeyvaultPrivateEndpointConnectionResource = GetArmClient().GetMgmtKeyvaultPrivateEndpointConnectionResource(mgmtKeyvaultPrivateEndpointConnectionResourceId);
+            await mgmtKeyvaultPrivateEndpointConnectionResource.DeleteAsync(WaitUntil.Completed);
+        }
+
+        [RecordedTest]
         public async Task Get()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
@@ -42,16 +52,6 @@ namespace MgmtKeyvault.Tests.Mock
             var mgmtKeyvaultPrivateEndpointConnectionResourceId = MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
             var mgmtKeyvaultPrivateEndpointConnectionResource = GetArmClient().GetMgmtKeyvaultPrivateEndpointConnectionResource(mgmtKeyvaultPrivateEndpointConnectionResourceId);
             await mgmtKeyvaultPrivateEndpointConnectionResource.UpdateAsync(WaitUntil.Completed, default);
-        }
-
-        [RecordedTest]
-        public async Task Delete()
-        {
-            // Example: KeyVaultDeletePrivateEndpointConnection
-
-            var mgmtKeyvaultPrivateEndpointConnectionResourceId = MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
-            var mgmtKeyvaultPrivateEndpointConnectionResource = GetArmClient().GetMgmtKeyvaultPrivateEndpointConnectionResource(mgmtKeyvaultPrivateEndpointConnectionResourceId);
-            await mgmtKeyvaultPrivateEndpointConnectionResource.DeleteAsync(WaitUntil.Completed);
         }
     }
 }

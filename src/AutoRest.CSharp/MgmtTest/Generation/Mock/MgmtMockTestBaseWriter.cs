@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
@@ -80,7 +81,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 testCaseDict.AddInList(testCase.ClientOperation, testCase);
             }
 
-            foreach (var testCase in This.MockTestCases)
+            foreach (var testCase in This.MockTestCases.OrderBy(testCase => testCase.ClientOperation.Name))
             {
                 WriteTestMethod(testCase, testCaseDict[testCase.ClientOperation].Count > 1);
                 _writer.Line();

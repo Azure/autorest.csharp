@@ -25,16 +25,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Update()
-        {
-            // Example: Update an existing managed HSM Pool
-
-            var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await managedHsmResource.UpdateAsync(WaitUntil.Completed, default);
-        }
-
-        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a managed HSM Pool
@@ -64,6 +54,16 @@ namespace MgmtKeyvault.Tests.Mock
             await foreach (var _ in managedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
             }
+        }
+
+        [RecordedTest]
+        public async Task Update()
+        {
+            // Example: Update an existing managed HSM Pool
+
+            var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            await managedHsmResource.UpdateAsync(WaitUntil.Completed, default);
         }
     }
 }

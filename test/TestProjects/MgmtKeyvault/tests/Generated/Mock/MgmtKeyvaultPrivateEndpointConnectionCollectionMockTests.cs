@@ -25,14 +25,14 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async Task CreateOrUpdate()
         {
-            // Example: KeyVaultGetPrivateEndpointConnection
+            // Example: KeyVaultPutPrivateEndpointConnection
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vaultResource.GetMgmtKeyvaultPrivateEndpointConnections();
-            await collection.GetAsync("sample-pec");
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", default);
         }
 
         [RecordedTest]
@@ -47,14 +47,14 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdate()
+        public async Task Get()
         {
-            // Example: KeyVaultPutPrivateEndpointConnection
+            // Example: KeyVaultGetPrivateEndpointConnection
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vaultResource.GetMgmtKeyvaultPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", default);
+            await collection.GetAsync("sample-pec");
         }
 
         [RecordedTest]

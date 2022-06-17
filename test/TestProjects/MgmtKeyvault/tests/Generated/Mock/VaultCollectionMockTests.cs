@@ -47,17 +47,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
-        {
-            // Example: Retrieve a vault
-
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
-            var collection = resourceGroupResource.GetVaults();
-            await collection.GetAsync("sample-vault");
-        }
-
-        [RecordedTest]
         public async Task Exists()
         {
             // Example: Retrieve a vault
@@ -66,6 +55,17 @@ namespace MgmtKeyvault.Tests.Mock
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
             await collection.ExistsAsync("sample-vault");
+        }
+
+        [RecordedTest]
+        public async Task Get()
+        {
+            // Example: Retrieve a vault
+
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetVaults();
+            await collection.GetAsync("sample-vault");
         }
 
         [RecordedTest]

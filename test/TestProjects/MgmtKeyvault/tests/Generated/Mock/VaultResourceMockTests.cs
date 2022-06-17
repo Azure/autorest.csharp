@@ -25,16 +25,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Update()
-        {
-            // Example: Update an existing vault
-
-            var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
-            await vaultResource.UpdateAsync(default);
-        }
-
-        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a vault
@@ -55,16 +45,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task UpdateAccessPolicy()
-        {
-            // Example: Add an access policy, or update an access policy with new permissions
-
-            var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
-            await vaultResource.UpdateAccessPolicyAsync(default, default);
-        }
-
-        [RecordedTest]
         public async Task GetPrivateLinkResources()
         {
             // Example: KeyVaultListPrivateLinkResources
@@ -74,6 +54,26 @@ namespace MgmtKeyvault.Tests.Mock
             await foreach (var _ in vaultResource.GetPrivateLinkResourcesAsync())
             {
             }
+        }
+
+        [RecordedTest]
+        public async Task Update()
+        {
+            // Example: Update an existing vault
+
+            var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
+            await vaultResource.UpdateAsync(default);
+        }
+
+        [RecordedTest]
+        public async Task UpdateAccessPolicy()
+        {
+            // Example: Add an access policy, or update an access policy with new permissions
+
+            var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
+            await vaultResource.UpdateAccessPolicyAsync(default, default);
         }
     }
 }
