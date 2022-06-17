@@ -33,7 +33,7 @@ namespace MgmtKeyvault.Tests.Mock
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             var collection = managedHsmResource.GetMhsmPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MhsmPrivateEndpointConnectionData()
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MhsmPrivateEndpointConnectionData("placeholder")
             {
                 PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()
                 {

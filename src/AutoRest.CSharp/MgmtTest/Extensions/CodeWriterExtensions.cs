@@ -63,6 +63,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             {
                 foreach (var itemValue in exampleValue.Elements)
                 {
+                    // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
                     writer.AppendExampleValue(itemValue);
                     if (type.IsFrameworkType)
                         writer.AppendRaw(",");
@@ -70,11 +71,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         writer.LineRaw(",");
                 }
                 writer.RemoveTrailingComma();
-                if (!type.IsFrameworkType)
-                    writer.Line();
+                writer.Line();
             }
             return writer;
         }
+
+        private static FormattableString WrapStringLiteral(string value) => $"\"{value}\"";
 
         private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
@@ -87,11 +89,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 foreach ((var key, var value) in (Dictionary<string, ExampleValue>)exampleValue.Properties)
                 {
                     // write key
-                    writer.Append($"[{key}] = ");
+                    writer.Append($"[{WrapStringLiteral(key)}] = ");
                     writer.AppendExampleValue(value);
-                    writer.AppendRaw(",");
+                    writer.LineRaw(", ");
                 }
-                writer.RemoveTrailingComma();
             }
             return writer;
         }
@@ -111,13 +112,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value)
         {
-            static FormattableString WrapStringLiteral(string value) => $"\"{value}\"";
             if (type == typeof(string))
                 return writer.Append(WrapStringLiteral(value));
             if (IsStringLikeType(type))
                 return writer.Append($"new {type}({WrapStringLiteral(value)})");
             return writer.AppendRaw(value);
         }
+
+        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && IsStringLikeType(type.FrameworkType);
 
         private static bool IsStringLikeType(Type type)
             => type == typeof(Guid) || type == typeof(Guid?) || type == typeof(AzureLocation) || type == typeof(AzureLocation?)
@@ -159,6 +161,18 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         exampleValue = new ExampleValue()
                         {
                             Schema = property.SchemaProperty.Schema,
+                        };
+                    }
+                    else if (IsStringLikeType(property.ValueType))
+                    {
+                        // this is a patch that some parameter is not marked as required, but in our generated code, it inherits from ResourceData, in which location is in the constructor and our code will recognize it as required
+                        exampleValue = new ExampleValue()
+                        {
+                            Schema = new StringSchema()
+                            {
+                                Type = AllSchemaTypes.String
+                            },
+                            RawValue = "placeholder",
                         };
                     }
                     else

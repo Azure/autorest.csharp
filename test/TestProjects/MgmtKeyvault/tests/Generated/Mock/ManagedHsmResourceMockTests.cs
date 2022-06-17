@@ -63,8 +63,14 @@ namespace MgmtKeyvault.Tests.Mock
 
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await managedHsmResource.UpdateAsync(WaitUntil.Completed, new ManagedHsmData()
+            await managedHsmResource.UpdateAsync(WaitUntil.Completed, new ManagedHsmData("placeholder")
             {
+                Tags =
+{
+["Dept"] = "hsm",
+["Environment"] = "dogfood",
+["Slice"] = "A",
+},
             });
         }
     }

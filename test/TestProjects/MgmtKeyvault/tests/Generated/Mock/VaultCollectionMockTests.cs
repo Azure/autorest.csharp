@@ -43,16 +43,20 @@ new AccessPolicyEntry(new Guid("00000000-0000-0000-0000-000000000000"),"00000000
 {
 Keys =
 {
-KeyPermissions.Encrypt,KeyPermissions.Decrypt,KeyPermissions.WrapKey,KeyPermissions.UnwrapKey,KeyPermissions.Sign,KeyPermissions.Verify,KeyPermissions.Get,KeyPermissions.List,KeyPermissions.Create,KeyPermissions.Update,KeyPermissions.Import,KeyPermissions.Delete,KeyPermissions.Backup,KeyPermissions.Restore,KeyPermissions.Recover,KeyPermissions.Purge},
+KeyPermissions.Encrypt,KeyPermissions.Decrypt,KeyPermissions.WrapKey,KeyPermissions.UnwrapKey,KeyPermissions.Sign,KeyPermissions.Verify,KeyPermissions.Get,KeyPermissions.List,KeyPermissions.Create,KeyPermissions.Update,KeyPermissions.Import,KeyPermissions.Delete,KeyPermissions.Backup,KeyPermissions.Restore,KeyPermissions.Recover,KeyPermissions.Purge
+},
 Secrets =
 {
-SecretPermissions.Get,SecretPermissions.List,SecretPermissions.Set,SecretPermissions.Delete,SecretPermissions.Backup,SecretPermissions.Restore,SecretPermissions.Recover,SecretPermissions.Purge},
+SecretPermissions.Get,SecretPermissions.List,SecretPermissions.Set,SecretPermissions.Delete,SecretPermissions.Backup,SecretPermissions.Restore,SecretPermissions.Recover,SecretPermissions.Purge
+},
 Certificates =
 {
-CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge},
+CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge
+},
 })
 {
-}},
+}
+},
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,
@@ -86,12 +90,14 @@ new IPRule("124.56.78.91")
 {
 },new IPRule("'10.91.4.0/24'")
 {
-}},
+}
+},
                     VirtualNetworkRules =
 {
 new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1")
 {
-}},
+}
+},
                 },
             })
             {
