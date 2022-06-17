@@ -28,10 +28,10 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Retrieve a deleted managed HSM
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier();
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetDeletedManagedHsms();
-            await collection.GetAsync(default, default);
+            await collection.GetAsync("westus", "hsm1");
         }
 
         [RecordedTest]
@@ -39,10 +39,10 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Retrieve a deleted managed HSM
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier();
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetDeletedManagedHsms();
-            await collection.ExistsAsync(default, default);
+            await collection.ExistsAsync("westus", "hsm1");
         }
     }
 }

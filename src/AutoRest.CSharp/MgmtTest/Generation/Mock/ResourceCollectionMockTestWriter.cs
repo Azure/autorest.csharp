@@ -37,7 +37,21 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
             _writer.Line();
             var collectionName = WriteGetCollection(parent, testCase);
-            WriteTestMethodInvocation(collectionName, testCase);
+
+            // we will always use the Async version of methods
+            if (testCase.ClientOperation.IsPagingOperation)
+            {
+                _writer.Append($"await foreach (var _ in ");
+                WriteTestMethodInvocation(collectionName, testCase);
+                using (_writer.Scope($")"))
+                { }
+            }
+            else
+            {
+                _writer.Append($"await ");
+                WriteTestMethodInvocation(collectionName, testCase);
+                _writer.LineRaw(";");
+            }
         }
 
         protected CodeWriterDeclaration WriteGetParent(MgmtTypeProvider parent, MockTestCase testCase)
@@ -52,7 +66,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name}Id".ToVariableName());
             _writer.Append($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier(");
-            _writer.AppendCommaSeparatedItems(testCase.ComposeResourceIdentifierParameterValues(parentResource.RequestPath));
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentResource.RequestPath))
+            {
+                _writer.Append(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
             _writer.Line($");");
             var parentVar = new CodeWriterDeclaration(parentResource.Type.Name.ToVariableName());
             _writer.Line($"var {parentVar:D} = GetArmClient().Get{parentResource.Type.Name}({idVar});");
@@ -72,7 +90,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             {
                 var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
                 _writer.Append($"var {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
-                // TODO -- write the Id construction here
+                foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
+                {
+                    _writer.Append(value).AppendRaw(",");
+                }
+                _writer.RemoveTrailingComma();
                 _writer.LineRaw(");");
                 _writer.Line($"var {parentVar:D} = GetArmClient().Get{parentExtension.ArmCoreType.Name}({idVar});");
             }
@@ -109,9 +131,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             var clientOperation = testCase.ClientOperation;
             var methodName = CreateMethodName(clientOperation.Name);
-
-            // we will always use the Async version of methods
-            _writer.Append($"await {collectionName}.{methodName}(");
+            _writer.Append($"{collectionName}.{methodName}(");
             foreach (var parameter in clientOperation.MethodParameters)
             {
                 if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
@@ -121,9 +141,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 }
             }
             _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
-
-            // TODO -- manage the case of paging method
+            _writer.AppendRaw(")");
         }
     }
 }

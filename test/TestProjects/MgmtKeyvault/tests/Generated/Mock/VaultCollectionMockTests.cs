@@ -29,10 +29,10 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create a new vault or update an existing vault
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier();
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, default, default);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", default);
         }
 
         [RecordedTest]
@@ -40,10 +40,10 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create or update a vault with network acls
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier();
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, default, default);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", default);
         }
 
         [RecordedTest]
@@ -51,10 +51,10 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Retrieve a vault
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier();
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.GetAsync(default);
+            await collection.GetAsync("sample-vault");
         }
 
         [RecordedTest]
@@ -62,10 +62,10 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Retrieve a vault
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier();
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.ExistsAsync(default);
+            await collection.ExistsAsync("sample-vault");
         }
 
         [RecordedTest]
@@ -73,10 +73,12 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: List vaults in the specified resource group
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier();
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.GetAllAsync();
+            await foreach (var _ in collection.GetAllAsync())
+            {
+            }
         }
     }
 }

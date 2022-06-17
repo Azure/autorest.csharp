@@ -68,10 +68,20 @@ namespace AutoRest.CSharp.MgmtTest.Models
             throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_example.Name}");
         }
 
+        /// <summary>
+        /// Returns the values to construct a resource identifier for the input request path
+        /// This method does not validate the parenting relationship between the request path passing in and the request path inside this test case
+        /// The passing in request path should always be a parent of the request path in this test case
+        /// </summary>
+        /// <param name="requestPath"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public IEnumerable<FormattableString> ComposeResourceIdentifierParameterValues(RequestPath requestPath)
         {
+            // we first take the same amount of segments from my own request path, in case there is a case that the parameter names between different paths are different
+            var piecesFromMyOwn = RequestPath.Take(requestPath.Count);
             // there should be a contract that we will never have two parameters with the same name in one path
-            foreach (var referenceSegment in requestPath.Where(segment => segment.IsReference))
+            foreach (var referenceSegment in piecesFromMyOwn.Where(segment => segment.IsReference))
             {
                 // find a path parameter in our path parameters for one with same name
                 var parameter = FindPathExampleParameterByName(referenceSegment.ReferenceName);
