@@ -69,9 +69,7 @@ namespace MgmtKeyvault.Tests.Mock
                 Properties = new VaultPatchProperties()
                 {
                     TenantId = new Guid("00000000-0000-0000-0000-000000000000"),
-                    Sku = new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard)
-                    {
-                    },
+                    Sku = new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard),
                     AccessPolicies =
 {
 new AccessPolicyEntry(new Guid("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
@@ -89,8 +87,6 @@ Certificates =
 CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge
 },
 })
-{
-}
 },
                     EnabledForDeployment = true,
                     EnabledForDiskEncryption = true,
@@ -123,13 +119,7 @@ Certificates =
 CertificatePermissions.Get
 },
 })
-{
-}
-            })
-            {
-            })
-            {
-            });
+            })));
         }
     }
 }

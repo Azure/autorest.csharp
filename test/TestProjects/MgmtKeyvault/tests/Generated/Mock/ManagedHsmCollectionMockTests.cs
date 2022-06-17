@@ -47,9 +47,7 @@ namespace MgmtKeyvault.Tests.Mock
                     SoftDeleteRetentionInDays = 90,
                     EnablePurgeProtection = true,
                 },
-                Sku = new ManagedHsmSku(ManagedHsmSkuFamily.B, ManagedHsmSkuName.StandardB1)
-                {
-                },
+                Sku = new ManagedHsmSku(ManagedHsmSkuFamily.B, ManagedHsmSkuName.StandardB1),
                 Tags =
 {
 ["Dept"] = "hsm",

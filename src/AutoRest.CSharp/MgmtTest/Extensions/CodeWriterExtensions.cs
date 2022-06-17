@@ -182,18 +182,25 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 writer.AppendExampleValue(exampleValue).AppendRaw(",");
             }
             writer.RemoveTrailingComma();
-            // TODO -- skip this scope if there is no properties written
-            using (writer.Scope($")", newLine: false))
+            writer.AppendRaw(")");
+            var propertiesToWrite = new Dictionary<string, ExampleValue>();
+            foreach (var property in properties)
             {
-                // find property
-                foreach (var property in properties)
+                var schemaProperty = property.SchemaProperty;
+                if (schemaProperty == null)
+                    continue; // now we explicitly ignore all the AdditionalProperties
+                if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                 {
-                    var schemaProperty = property.SchemaProperty;
-                    if (schemaProperty == null)
-                        continue; // now we explicitly ignore all the AdditionalProperties
-                    if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                    propertiesToWrite.Add(property.Declaration.Name, exampleValue);
+                }
+            }
+            if (propertiesToWrite.Count > 0) // only write the property initializers when there are properties to write
+            {
+                using (writer.Scope($"", newLine: false))
+                {
+                    foreach ((var propertyName, var exampleValue) in propertiesToWrite)
                     {
-                        writer.Append($"{property.Declaration.Name} = ");
+                        writer.Append($"{propertyName} = ");
                         writer.AppendExampleValue(exampleValue, false);
                         writer.LineRaw(",");
                     }

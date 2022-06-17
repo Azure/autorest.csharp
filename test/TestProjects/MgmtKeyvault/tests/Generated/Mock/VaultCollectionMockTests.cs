@@ -33,9 +33,7 @@ namespace MgmtKeyvault.Tests.Mock
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(new Guid("00000000-0000-0000-0000-000000000000"), new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard)
-            {
-            })
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(new Guid("00000000-0000-0000-0000-000000000000"), new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard))
             {
                 AccessPolicies =
 {
@@ -54,15 +52,11 @@ Certificates =
 CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge
 },
 })
-{
-}
 },
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,
-            })
-            {
-            });
+            }));
         }
 
         [RecordedTest]
@@ -73,9 +67,7 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(new Guid("00000000-0000-0000-0000-000000000000"), new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard)
-            {
-            })
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(new Guid("00000000-0000-0000-0000-000000000000"), new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -86,22 +78,14 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
                     DefaultAction = NetworkRuleAction.Deny,
                     IpRules =
 {
-new IPRule("124.56.78.91")
-{
-},new IPRule("'10.91.4.0/24'")
-{
-}
+new IPRule("124.56.78.91"),new IPRule("'10.91.4.0/24'")
 },
                     VirtualNetworkRules =
 {
 new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1")
-{
-}
 },
                 },
-            })
-            {
-            });
+            }));
         }
 
         [RecordedTest]
