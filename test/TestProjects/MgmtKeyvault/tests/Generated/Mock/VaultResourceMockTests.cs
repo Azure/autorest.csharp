@@ -81,11 +81,11 @@ namespace MgmtKeyvault.Tests.Mock
             {
                 Properties = new VaultPatchProperties()
                 {
-                    TenantId = new Guid("00000000-0000-0000-0000-000000000000"),
+                    TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
                     Sku = new MgmtKeyvaultSku(MgmtKeyvaultSkuFamily.A, MgmtKeyvaultSkuName.Standard),
                     AccessPolicies =
 {
-new AccessPolicyEntry(new Guid("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
 Keys =
 {
@@ -117,7 +117,7 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             await vaultResource.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtKeyvault.Models.AccessPolicyEntry[]
             {
-new AccessPolicyEntry(new Guid("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
 Keys =
 {

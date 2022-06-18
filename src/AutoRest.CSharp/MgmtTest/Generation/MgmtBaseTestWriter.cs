@@ -499,10 +499,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
                     break;
                 case "Azure.ResourceManager.Models.UserAssignedIdentity":
-                    WriteExampleValue(writer, new CSharpType(new SystemObjectType(typeof(Azure.ResourceManager.Models.UserAssignedIdentity), MgmtContext.Context)), exampleValue, variableName);
+                    WriteExampleValue(writer, new CSharpType(SystemObjectType.Create(typeof(Azure.ResourceManager.Models.UserAssignedIdentity), MgmtContext.Context)), exampleValue, variableName);
                     break;
                 case "Azure.ResourceManager.Models.SystemAssignedServiceIdentity":
-                    WriteExampleValue(writer, new CSharpType(new SystemObjectType(typeof(Azure.ResourceManager.Models.SystemAssignedServiceIdentity), MgmtContext.Context)), exampleValue, variableName);
+                    WriteExampleValue(writer, new CSharpType(SystemObjectType.Create(typeof(Azure.ResourceManager.Models.SystemAssignedServiceIdentity), MgmtContext.Context)), exampleValue, variableName);
                     break;
                 case "System.BinaryData":
                     using (writer.Scope($"{typeof(BinaryData)}.FromObjectAsJson", start: "(", end: ")", newLine: false))

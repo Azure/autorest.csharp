@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Input", Content);
             var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
+            // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 

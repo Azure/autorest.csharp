@@ -14,15 +14,17 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.MgmtTest.Extensions
 {
     internal static class CodeWriterExtensions
     {
-        public static CodeWriter AppendExampleValue(this CodeWriter writer, ExampleValue exampleValue, bool includeCollectionInitialization = true)
+        public static CodeWriter AppendExampleValue(this CodeWriter writer, ExampleValue exampleValue, CSharpType? type = null, bool includeCollectionInitialization = true)
         {
-            // get the type of this schema in the type factory
-            var type = MgmtContext.Context.TypeFactory.CreateType(exampleValue.Schema, false);
+            // get the type of this schema in the type factory if the type is not specified
+            // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
+            type ??= MgmtContext.Context.TypeFactory.CreateType(exampleValue.Schema, false);
 
             return type.IsFrameworkType ?
                 writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
@@ -51,6 +53,9 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (TypeFactory.IsDictionary(type))
                 return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
 
+            if (type.FrameworkType == typeof(BinaryData))
+                return writer.AppendBinaryData(exampleValue);
+
             return writer.AppendSimpleFrameworkType(type.FrameworkType, exampleValue);
         }
 
@@ -76,8 +81,6 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static FormattableString WrapStringLiteral(string value) => $"\"{value}\"";
-
         private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
             // since this is a dictionary, we take the first generic argument as the key type which is always string
@@ -89,7 +92,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 foreach ((var key, var value) in (Dictionary<string, ExampleValue>)exampleValue.Properties)
                 {
                     // write key
-                    writer.Append($"[{WrapStringLiteral(key)}] = ");
+                    writer.Append($"[{key:L}] = ");
                     writer.AppendExampleValue(value);
                     writer.LineRaw(", ");
                 }
@@ -97,53 +100,64 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendSimpleFrameworkType(this CodeWriter writer, Type type, ExampleValue exampleValue)
-            => exampleValue.RawValue switch
-            {
-                string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
-                bool b => writer.Append($"{b}"),
-                int i => writer.Append($"{i}"),
-                long l => writer.Append($"{l}"),
-                double d => writer.Append($"{d}"),
-                decimal dec => writer.Append($"{dec}"),
-                null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
-                _ => writer.AppendRaw(exampleValue.RawValue.ToString()!)
-            };
-
-        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value)
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, ExampleValue exampleValue)
         {
-            if (type == typeof(string))
-                return writer.Append(WrapStringLiteral(value));
-            if (IsStringLikeType(type))
-                return writer.Append($"new {type}({WrapStringLiteral(value)})");
-            return writer.AppendRaw(value);
+            // TODO
+            return writer.AppendRaw("default");
         }
+
+        private static CodeWriter AppendSimpleFrameworkType(this CodeWriter writer, Type type, ExampleValue exampleValue) => exampleValue.RawValue switch
+        {
+            string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
+            bool b => writer.Append($"{b}"),
+            int i => writer.Append($"{i}"),
+            long l => writer.Append($"{l}"),
+            double d => writer.Append($"{d}"),
+            decimal dec => writer.Append($"{dec}"),
+            null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
+            _ => writer.AppendRaw(exampleValue.RawValue.ToString()!)
+        };
+
+        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value) => type switch
+        {
+            _ when type == typeof(string) => writer.Append($"{value:L}"),
+            _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
+            _ when IsParsableInitializedStringLikeType(type) => writer.Append($"{type}.Parse({value:L})"),
+            _ => writer.AppendRaw(value),
+        };
 
         private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && IsStringLikeType(type.FrameworkType);
 
         private static bool IsStringLikeType(Type type)
-            => type == typeof(Guid) || type == typeof(Guid?) || type == typeof(AzureLocation) || type == typeof(AzureLocation?)
-            || type == typeof(ResourceType) || type == typeof(ResourceType?) || type == typeof(ResourceIdentifier);
+            => IsNewInstanceInitializedStringLikeType(type) || IsParsableInitializedStringLikeType(type);
+
+        private static bool IsNewInstanceInitializedStringLikeType(Type type)
+            => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type);
+
+        private static bool IsParsableInitializedStringLikeType(Type type)
+            => IsType<DateTimeOffset>(type) || IsType<Guid>(type) || IsType<TimeSpan>(type);
+
+        private static bool IsType<T>(Type type) => type == typeof(T) || (typeof(T).IsValueType && type == typeof(T?));
 
         private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
         {
             switch (type.Implementation)
             {
-                case SchemaObjectType schemaObjectType:
-                    return writer.AppendSchemaObjectTypeValue(schemaObjectType, (Dictionary<string, ExampleValue>)exampleValue.Properties);
+                case ObjectType objectType:
+                    return writer.AppendObjectTypeValue(objectType, (Dictionary<string, ExampleValue>)exampleValue.Properties);
                 case EnumType enumType:
                     return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
             }
             return writer.AppendRaw("default");
         }
 
-        private static CodeWriter AppendSchemaObjectTypeValue(this CodeWriter writer, SchemaObjectType schemaObjectType, Dictionary<string, ExampleValue> valueDict)
+        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
         {
             // get all the properties on this type, including the properties from its base type
-            var properties = new HashSet<ObjectTypeProperty>(schemaObjectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
-            var constructor = schemaObjectType.InitializationConstructor;
-            writer.UseNamespace(schemaObjectType.Type.Namespace);
-            writer.Append($"new {schemaObjectType.Type.Name}(");
+            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
+            var constructor = objectType.InitializationConstructor;
+            writer.UseNamespace(objectType.Type.Namespace);
+            writer.Append($"new {objectType.Type.Name}(");
             // build a map from parameter name to property
             var propertyDict = properties.ToDictionary(
                 property => property.Declaration.Name.ToVariableName(), property => property);
@@ -156,14 +170,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
-                    if (TypeFactory.IsCollectionType(property.ValueType))
+                    if (TypeFactory.IsCollectionType(property.Declaration.Type))
                     {
                         exampleValue = new ExampleValue()
                         {
                             Schema = property.SchemaProperty.Schema,
                         };
                     }
-                    else if (IsStringLikeType(property.ValueType))
+                    else if (IsStringLikeType(property.Declaration.Type))
                     {
                         // this is a patch that some parameter is not marked as required, but in our generated code, it inherits from ResourceData, in which location is in the constructor and our code will recognize it as required
                         exampleValue = new ExampleValue()
@@ -176,32 +190,33 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         };
                     }
                     else
-                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {schemaObjectType.Type.Name} is not found");
+                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
                 writer.AppendExampleValue(exampleValue).AppendRaw(",");
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
-            var propertiesToWrite = new Dictionary<string, ExampleValue>();
+            var propertiesToWrite = new Dictionary<ObjectTypeProperty, ExampleValue>();
             foreach (var property in properties)
             {
                 var schemaProperty = property.SchemaProperty;
-                if (schemaProperty == null)
+                if (!IsPropertyAssignable(property) || schemaProperty == null)
                     continue; // now we explicitly ignore all the AdditionalProperties
                 if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                 {
-                    propertiesToWrite.Add(property.Declaration.Name, exampleValue);
+                    propertiesToWrite.Add(property, exampleValue);
                 }
             }
             if (propertiesToWrite.Count > 0) // only write the property initializers when there are properties to write
             {
                 using (writer.Scope($"", newLine: false))
                 {
-                    foreach ((var propertyName, var exampleValue) in propertiesToWrite)
+                    foreach ((var property, var exampleValue) in propertiesToWrite)
                     {
-                        writer.Append($"{propertyName} = ");
-                        writer.AppendExampleValue(exampleValue, false);
+                        writer.Append($"{property.Declaration.Name} = ");
+                        // we need to pass in the current type of this property to make sure its initialization is correct
+                        writer.AppendExampleValue(exampleValue, type: property.Declaration.Type, includeCollectionInitialization: false);
                         writer.LineRaw(",");
                     }
                 }
@@ -209,12 +224,20 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
+        private static bool IsPropertyAssignable(ObjectTypeProperty property)
+            => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
+
         private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, string value)
         {
             // find value in one of the choices
-            var choice = enumType.Values.First(c => value.Equals(c.Value.Value));
+            var choice = enumType.Values.FirstOrDefault(c => value.Equals(c.Value.Value));
             writer.UseNamespace(enumType.Type.Namespace);
-            return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
+            if (choice != null)
+                return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
+            // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
+            if (!enumType.IsExtendable)
+                throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
+            return writer.Append($"new {enumType.Type.Name}({value:L})");
         }
     }
 }

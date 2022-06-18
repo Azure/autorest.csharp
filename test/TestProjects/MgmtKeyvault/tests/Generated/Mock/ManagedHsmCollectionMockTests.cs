@@ -38,7 +38,7 @@ namespace MgmtKeyvault.Tests.Mock
             {
                 Properties = new ManagedHsmProperties()
                 {
-                    TenantId = new Guid("00000000-0000-0000-0000-000000000000"),
+                    TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
                     InitialAdminObjectIds =
 {
 "00000000-0000-0000-0000-000000000000"
