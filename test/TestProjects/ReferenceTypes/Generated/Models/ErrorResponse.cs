@@ -29,6 +29,7 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The error object. </summary>
+        [PropertySerializedName("error")]
         public ResponseError Error { get; set; }
     }
 }

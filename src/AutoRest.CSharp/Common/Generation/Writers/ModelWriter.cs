@@ -342,6 +342,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             var accessibility = overrideAccessibility ?? property.Declaration.Accessibility;
+            AddPropertyAttribute(writer, property);
             CSharpType propertyType = property.Declaration.Type;
             writer.Append($"{accessibility} {propertyType} {property.Declaration.Name:D}");
             writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
@@ -386,6 +387,10 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         protected virtual void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)
+        {
+        }
+
+        protected virtual void AddPropertyAttribute(CodeWriter writer, ObjectTypeProperty property)
         {
         }
 

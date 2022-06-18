@@ -28,6 +28,7 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The ARM identifier for Private Endpoint. </summary>
+        [PropertySerializedName("id")]
         public ResourceIdentifier Id { get; }
     }
 }

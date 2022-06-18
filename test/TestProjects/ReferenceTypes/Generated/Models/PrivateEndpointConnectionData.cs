@@ -37,6 +37,7 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The resource of private end point. </summary>
+        [PropertySerializedName("privateEndpoint")]
         internal PrivateEndpoint PrivateEndpoint { get; set; }
         /// <summary> The ARM identifier for Private Endpoint. </summary>
         public ResourceIdentifier PrivateEndpointId
@@ -45,8 +46,10 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
+        [PropertySerializedName("privateLinkServiceConnectionState")]
         public ReferenceTypesPrivateLinkServiceConnectionState ConnectionState { get; set; }
         /// <summary> The provisioning state of the private endpoint connection resource. </summary>
+        [PropertySerializedName("provisioningState")]
         public ReferenceTypesPrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
     }
 }

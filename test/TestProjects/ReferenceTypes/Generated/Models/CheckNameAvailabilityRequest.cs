@@ -30,8 +30,10 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The name of the resource for which availability needs to be checked. </summary>
+        [PropertySerializedName("name")]
         public string Name { get; set; }
         /// <summary> The resource type. </summary>
+        [PropertySerializedName("type")]
         public ResourceType ResourceType { get; set; }
     }
 }

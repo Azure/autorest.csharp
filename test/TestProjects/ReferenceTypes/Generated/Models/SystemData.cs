@@ -39,16 +39,22 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The identity that created the resource. </summary>
+        [PropertySerializedName("createdBy")]
         public string CreatedBy { get; set; }
         /// <summary> The type of identity that created the resource. </summary>
+        [PropertySerializedName("createdByType")]
         public CreatedByType? CreatedByType { get; set; }
         /// <summary> The timestamp of resource creation (UTC). </summary>
+        [PropertySerializedName("createdAt")]
         public DateTimeOffset? CreatedOn { get; set; }
         /// <summary> The identity that last modified the resource. </summary>
+        [PropertySerializedName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
         /// <summary> The type of identity that last modified the resource. </summary>
+        [PropertySerializedName("lastModifiedByType")]
         public CreatedByType? LastModifiedByType { get; set; }
         /// <summary> The timestamp of resource last modification (UTC). </summary>
+        [PropertySerializedName("lastModifiedAt")]
         public DateTimeOffset? LastModifiedOn { get; set; }
     }
 }

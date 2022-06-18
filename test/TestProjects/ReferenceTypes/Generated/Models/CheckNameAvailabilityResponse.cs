@@ -32,10 +32,13 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> Indicates if the resource name is available. </summary>
+        [PropertySerializedName("nameAvailable")]
         public bool? NameAvailable { get; set; }
         /// <summary> The reason why the given name is not available. </summary>
+        [PropertySerializedName("reason")]
         public CheckNameAvailabilityReason? Reason { get; set; }
         /// <summary> Detailed reason why the given name is available. </summary>
+        [PropertySerializedName("message")]
         public string Message { get; set; }
     }
 }

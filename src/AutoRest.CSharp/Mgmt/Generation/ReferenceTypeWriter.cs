@@ -49,5 +49,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"[{ReferenceClassFinder.SerializationCtorAttribute}]");
             }
         }
+
+        protected override void AddPropertyAttribute(CodeWriter writer, ObjectTypeProperty property)
+        {
+            if (property.SchemaProperty != null)
+                writer.Line($"[PropertySerializedName({property.SchemaProperty.SerializedName:L})]");
+        }
     }
 }

@@ -40,10 +40,13 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The private link resource group id. </summary>
+        [PropertySerializedName("groupId")]
         public string GroupId { get; }
         /// <summary> The private link resource required member names. </summary>
+        [PropertySerializedName("requiredMembers")]
         public IReadOnlyList<string> RequiredMembers { get; }
         /// <summary> The private link resource Private link DNS zone name. </summary>
+        [PropertySerializedName("requiredZoneNames")]
         public IReadOnlyList<string> RequiredZoneNames { get; }
     }
 }

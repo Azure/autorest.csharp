@@ -30,6 +30,7 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> Array of private link resources. </summary>
+        [PropertySerializedName("value")]
         public IReadOnlyList<PrivateLinkResourceData> Value { get; }
     }
 }

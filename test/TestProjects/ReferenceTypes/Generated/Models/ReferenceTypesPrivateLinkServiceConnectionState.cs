@@ -32,10 +32,13 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>
+        [PropertySerializedName("status")]
         public ReferenceTypesPrivateEndpointServiceConnectionStatus? Status { get; set; }
         /// <summary> The reason for approval/rejection of the connection. </summary>
+        [PropertySerializedName("description")]
         public string Description { get; set; }
         /// <summary> A message indicating if changes on the service provider require any updates on the consumer. </summary>
+        [PropertySerializedName("actionsRequired")]
         public string ActionsRequired { get; set; }
     }
 }

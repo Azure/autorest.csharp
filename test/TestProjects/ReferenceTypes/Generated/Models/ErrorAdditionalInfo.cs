@@ -31,8 +31,10 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The additional info type. </summary>
+        [PropertySerializedName("type")]
         public string ErrorAdditionalInfoType { get; }
         /// <summary> The additional info. </summary>
+        [PropertySerializedName("info")]
         public BinaryData Info { get; }
     }
 }

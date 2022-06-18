@@ -30,6 +30,7 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> Array of private endpoint connections. </summary>
+        [PropertySerializedName("value")]
         public IReadOnlyList<PrivateEndpointConnectionData> Value { get; }
     }
 }
