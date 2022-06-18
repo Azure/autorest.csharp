@@ -8,7 +8,7 @@ namespace Azure.ResourceManager
     [AttributeUsage(AttributeTargets.Property)]
     internal class PropertySerializedNameAttribute : Attribute
     {
-        internal PropertySerializedNameAttribute(string name)
+        public PropertySerializedNameAttribute(string name)
         {
             Name = name;
         }
