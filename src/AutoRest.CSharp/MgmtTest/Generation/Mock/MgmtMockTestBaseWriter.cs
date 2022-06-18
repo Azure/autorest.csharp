@@ -117,26 +117,27 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             return async ? $"{methodName}Async" : methodName;
         }
 
-        protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider parent, MockTestCase testCase)
-            => parent switch
+        protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider carrierResource, MockTestCase testCase)
+            => carrierResource switch
             {
+                ResourceCollection => throw new InvalidOperationException($"ResourceCollection is not supported here"),
                 Resource parentResource => WriteGetResource(parentResource, testCase),
                 MgmtExtensions parentExtension => WriteGetExtension(parentExtension, testCase),
-                _ => throw new InvalidOperationException($"Unknown parent {parent.GetType()}"),
+                _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
-        protected CodeWriterDeclaration WriteGetResource(Resource parentResource, MockTestCase testCase)
+        protected CodeWriterDeclaration WriteGetResource(Resource carrierResource, MockTestCase testCase)
         {
-            var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name}Id".ToVariableName());
-            _writer.Append($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier(");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentResource.RequestPath))
+            var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
+            _writer.Append($"var {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath))
             {
                 _writer.Append(value).AppendRaw(",");
             }
             _writer.RemoveTrailingComma();
             _writer.Line($");");
-            var resourceVar = new CodeWriterDeclaration(parentResource.Type.Name.ToVariableName());
-            _writer.Line($"var {resourceVar:D} = GetArmClient().Get{parentResource.Type.Name}({idVar});");
+            var resourceVar = new CodeWriterDeclaration(carrierResource.Type.Name.ToVariableName());
+            _writer.Line($"var {resourceVar:D} = GetArmClient().Get{carrierResource.Type.Name}({idVar});");
 
             return resourceVar;
         }

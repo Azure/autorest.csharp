@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
@@ -53,6 +54,18 @@ namespace MgmtKeyvault.Tests.Mock
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             await foreach (var _ in vaultResource.GetPrivateLinkResourcesAsync())
+            {
+            }
+        }
+
+        [RecordedTest]
+        public async Task GetVaults()
+        {
+            // Example: List vaults in the specified subscription
+
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            await foreach (var _ in subscriptionResource.GetVaultsAsync())
             {
             }
         }

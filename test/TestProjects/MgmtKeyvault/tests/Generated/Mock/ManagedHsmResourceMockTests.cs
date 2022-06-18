@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 
@@ -42,6 +43,18 @@ namespace MgmtKeyvault.Tests.Mock
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             await managedHsmResource.GetAsync();
+        }
+
+        [RecordedTest]
+        public async Task GetManagedHsms()
+        {
+            // Example: List managed HSM Pools in a subscription
+
+            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            await foreach (var _ in subscriptionResource.GetManagedHsmsAsync())
+            {
+            }
         }
 
         [RecordedTest]

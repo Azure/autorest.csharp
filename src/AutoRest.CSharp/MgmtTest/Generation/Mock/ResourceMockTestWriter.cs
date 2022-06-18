@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             _writer.Line($"// Example: {testCase.Name}");
 
             _writer.Line();
-            var resourceName = WriteGetResource(This.Resource, testCase);
+            var resourceName = WriteGetResource(testCase.Carrier, testCase);
 
             WriteTestOperation(resourceName, testCase);
         }

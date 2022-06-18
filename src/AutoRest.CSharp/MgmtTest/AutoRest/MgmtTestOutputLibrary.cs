@@ -39,7 +39,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                     var providersAndOperations = FindTypeProvidersFromOperationId(operationId);
                     foreach ((var provider, var clientOperation) in providersAndOperations)
                     {
-                        result.AddInList(provider, new MockTestCase(operationId, provider, clientOperation, example));
+                        MgmtTypeProvider owner;
+                        if (provider is Resource)
+                            owner = provider;
+                        else
+                            owner = clientOperation.Resource ?? provider;
+                        result.AddInList(owner, new MockTestCase(operationId, provider, clientOperation, example));
                     }
                 }
             }
@@ -65,7 +70,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             // iterate all the resources and resource collection
             var mgmtProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
-                .Append(MgmtContext.Library.ExtensionWrapper);
+                .Concat(MgmtContext.Library.ExtensionWrapper.Extensions);
             foreach (var provider in mgmtProviders)
             {
                 foreach (var clientOperation in provider.AllOperations)

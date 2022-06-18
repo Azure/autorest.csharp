@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.MgmtTest.Models
     internal class MockTestCase
     {
         private ExampleModel _example;
-        private MgmtTypeProvider _carrier;
         public string OperationId { get; }
         public string Name => _example.Name;
         public MgmtClientOperation ClientOperation { get; }
@@ -35,10 +34,12 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private IEnumerable<ExampleParameter>? _pathParameters;
         public IEnumerable<ExampleParameter> PathParameters => _pathParameters ??= AllParameters.Where(p => p.Parameter.In == HttpParameterIn.Path);
 
+        public MgmtTypeProvider Carrier { get ; }
+
         public MockTestCase(string operationId, MgmtTypeProvider provider, MgmtClientOperation clientOperation, ExampleModel example)
         {
             OperationId = operationId;
-            _carrier = provider;
+            Carrier = provider;
             _example = example;
             ClientOperation = clientOperation;
         }
@@ -143,7 +144,10 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
         {
             var result = new Dictionary<string, ExampleParameterValue>();
-            foreach (var parameter in ClientOperation.MethodParameters)
+            // skip the first parameter if this method is an extension method
+            var parameters = ClientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
+                ClientOperation.MethodParameters.Skip(1) : ClientOperation.MethodParameters;
+            foreach (var parameter in parameters)
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
