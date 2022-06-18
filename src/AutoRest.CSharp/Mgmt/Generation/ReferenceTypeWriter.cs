@@ -52,8 +52,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void AddPropertyAttribute(CodeWriter writer, ObjectTypeProperty property)
         {
-            if (property.SchemaProperty != null)
-                writer.Line($"[PropertySerializedName({property.SchemaProperty.SerializedName:L})]");
+            var schemaProperty = property.SchemaProperty;
+            if (schemaProperty == null)
+                return;
+
+            writer.Line($"[PropertySerializedName({schemaProperty.SerializedName:L})]");
         }
     }
 }
