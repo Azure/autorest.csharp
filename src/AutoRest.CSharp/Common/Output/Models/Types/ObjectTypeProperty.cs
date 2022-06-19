@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -38,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsReadOnly { get; }
 
         private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true;
+
         public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
         {
             innerProperty = null;
@@ -55,6 +59,76 @@ namespace AutoRest.CSharp.Output.Models.Types
                 innerProperty = properties.First();
 
             return isSingleProperty;
+        }
+
+        internal string GetCombinedPropertyName(ObjectTypeProperty immediateParentProperty)
+        {
+            var immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
+
+            if (Declaration.Type.Equals(typeof(bool)) || Declaration.Type.Equals(typeof(bool?)))
+            {
+                return Declaration.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{immediateParentPropertyName}{Declaration.Name}" : Declaration.Name;
+            }
+
+            if (Declaration.Name.Equals("Id", StringComparison.Ordinal))
+                return $"{immediateParentPropertyName}{Declaration.Name}";
+
+            if (immediateParentPropertyName.EndsWith(Declaration.Name, StringComparison.Ordinal))
+                return immediateParentPropertyName;
+
+            var parentWords = immediateParentPropertyName.SplitByCamelCase();
+            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
+            {
+                parentWords = parentWords.Take(parentWords.Count() - 1);
+            }
+
+            var parentWordArray = parentWords.ToArray();
+            var parentWordsHash = new HashSet<string>(parentWordArray);
+            var nameWords = Declaration.Name.SplitByCamelCase().ToArray();
+            var lastWord = string.Empty;
+            for (int i = 0; i < nameWords.Length; i++)
+            {
+                var word = nameWords[i];
+                lastWord = word;
+                if (parentWordsHash.Contains(word))
+                {
+                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
+                    {
+                        parentWords = parentWords.Take(parentWords.Count() - 2);
+                        break;
+                    }
+                    {
+                        return Declaration.Name;
+                    }
+                }
+
+                //need to depluralize the last word and check
+                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
+                    return Declaration.Name;
+            }
+
+            immediateParentPropertyName = string.Join("", parentWords);
+
+            return $"{immediateParentPropertyName}{Declaration.Name}";
+        }
+
+        internal static string GetPropertyName(MemberDeclarationOptions property)
+        {
+            const string properties = "Properties";
+            if (property.Name.Equals(properties, StringComparison.Ordinal))
+            {
+                string typeName = property.Type.Name;
+                int index = typeName.IndexOf(properties);
+                if (index > -1 && index + properties.Length == typeName.Length)
+                    return typeName.Substring(0, index);
+
+                return typeName;
+            }
+            return property.Name;
         }
     }
 }

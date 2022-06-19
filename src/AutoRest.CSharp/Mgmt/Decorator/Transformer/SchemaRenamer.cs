@@ -106,14 +106,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private static void TransformLanguage(Languages languages, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
             var originalName = languages.Default.Name;
-            if (wordCache.TryGetValue(originalName, out var result))
+            if (!wordCache.TryGetValue(originalName, out var result))
             {
-                languages.Default.Name = result;
-                return;
+                result = transformer.EnsureNameCase(originalName);
+                wordCache.TryAdd(originalName, result);
             }
-            result = transformer.EnsureNameCase(originalName);
             languages.Default.Name = result;
-            wordCache.TryAdd(originalName, result);
+            languages.Default.SerializedName ??= originalName;
         }
 
         private static void TransformObjectSchema(ObjectSchema objSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)

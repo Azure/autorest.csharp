@@ -56,6 +56,7 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,
+                PublicNetworkAccess = "Enabled",
             }));
         }
 
@@ -118,7 +119,7 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await foreach (var _ in collection.GetAllAsync())
+            await foreach (var _ in collection.GetAllAsync(top: 1))
             {
             }
         }

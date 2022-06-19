@@ -197,31 +197,62 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
-            var propertiesToWrite = new Dictionary<ObjectTypeProperty, ExampleValue>();
-            foreach (var property in properties)
-            {
-                var schemaProperty = property.SchemaProperty;
-                if (!IsPropertyAssignable(property) || schemaProperty == null)
-                    continue; // now we explicitly ignore all the AdditionalProperties
-                if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
-                {
-                    propertiesToWrite.Add(property, exampleValue);
-                }
-            }
+            var propertiesToWrite = GetPropertiesToWrite(properties, valueDict);
             if (propertiesToWrite.Count > 0) // only write the property initializers when there are properties to write
             {
                 using (writer.Scope($"", newLine: false))
                 {
-                    foreach ((var property, var exampleValue) in propertiesToWrite)
+                    foreach ((var propertyName, (var propertyType, var exampleValue)) in propertiesToWrite)
                     {
-                        writer.Append($"{property.Declaration.Name} = ");
+                        writer.Append($"{propertyName} = ");
                         // we need to pass in the current type of this property to make sure its initialization is correct
-                        writer.AppendExampleValue(exampleValue, type: property.Declaration.Type, includeCollectionInitialization: false);
+                        writer.AppendExampleValue(exampleValue, type: propertyType, includeCollectionInitialization: false);
                         writer.LineRaw(",");
                     }
                 }
             }
             return writer;
+        }
+
+        private static Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, Dictionary<string, ExampleValue> valueDict)
+        {
+            var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
+            foreach (var property in properties)
+            {
+                var hierarchyStack = new Stack<ObjectTypeProperty>();
+                hierarchyStack.Push(property);
+                BuildHeirarchy(property, hierarchyStack);
+                // check if this property is safe-flattened
+                if (hierarchyStack.Count > 1)
+                {
+                    // TODO -- get the final result of the flattened result
+                    // We could build a stack hierarchy here as well, and when we pop that, we only take the last result
+                    // in the meantime we pop the example value once at a time, so that in this way we could just assign the innerest property with the innerest example values of the objects
+                    var innerProperty = hierarchyStack.Pop();
+                    var immediateParentProperty = hierarchyStack.Pop();
+                    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
+                    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+                    // TODO -- need more thinking here. The ModelWriter is not writing this recursively. Therefore this might be tricky
+                }
+                var schemaProperty = property.SchemaProperty;
+                if (!IsPropertyAssignable(property) || schemaProperty == null)
+                    continue; // now we explicitly ignore all the AdditionalProperties
+                if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                {
+                    propertiesToWrite.Add(property.Declaration.Name, (property.Declaration.Type, exampleValue));
+                }
+            }
+
+            return propertiesToWrite;
+        }
+
+        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        {
+            if (property.IsSinglePropertyObject(out var childProp))
+            {
+                heirarchyStack.Push(childProp);
+                BuildHeirarchy(childProp, heirarchyStack);
+            }
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)

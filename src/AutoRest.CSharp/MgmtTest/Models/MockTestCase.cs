@@ -3,11 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -85,13 +87,14 @@ namespace AutoRest.CSharp.MgmtTest.Models
             foreach (var referenceSegment in piecesFromMyOwn.Where(segment => segment.IsReference))
             {
                 // find a path parameter in our path parameters for one with same name
-                var parameter = FindPathExampleParameterByName(referenceSegment.ReferenceName);
+                var serializedName = GetParameterSerializedName(referenceSegment.ReferenceName);
+                var parameter = FindPathExampleParameterBySerializedName(serializedName);
                 // considering here is the path parameter, therefore it should always be a simple type, string, int or enum
                 var rawValue = parameter.ExampleValue.RawValue;
                 if (rawValue == null)
-                    throw new InvalidOperationException($"The value of required parameter {referenceSegment.ReferenceName} in example {_example.Name} is not specified");
+                    throw new InvalidOperationException($"The value of required path parameter {serializedName} in example {_example.Name} is not specified");
                 // replace the value of subscription id to avoid the sdk complain about the values not being a guid
-                if (referenceSegment.ReferenceName == "subscriptionId")
+                if (serializedName == "subscriptionId")
                     rawValue = ReplaceValueForSubscriptionId((string)rawValue);
 
                 yield return $"\"{rawValue}\"";
@@ -109,25 +112,16 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return _fallbackSubscriptionId;
         }
 
-        private ExampleParameter? FindExampleParameterByName(IEnumerable<ExampleParameter> parameters, string name)
-        {
-            foreach (var parameter in parameters)
-            {
-                var parameterName = GetRequestParameterName(parameter.Parameter);
-                if (parameterName == name)
-                    return parameter;
-            }
+        private ExampleParameter? FindExampleParameterBySerializedName(IEnumerable<ExampleParameter> parameters, string name)
+            => parameters.FirstOrDefault(p => GetRequestParameterName(p.Parameter) == name);
 
-            return null;
-        }
-
-        private ExampleParameter FindPathExampleParameterByName(string name)
+        private ExampleParameter FindPathExampleParameterBySerializedName(string serializedName)
         {
-            var parameter = FindExampleParameterByName(PathParameters, name);
+            var parameter = FindExampleParameterBySerializedName(PathParameters, serializedName);
 
             // we throw exceptions here because path parameter cannot be optional, therefore if we do not find a parameter in the example, there must be an issue in the example
             if (parameter == null)
-                throw new InvalidOperationException($"Cannot find a parameter in test case {_example.Name} with the name of {name}");
+                throw new InvalidOperationException($"Cannot find a parameter in test case {_example.Name} with the name of {serializedName}");
 
             return parameter;
         }
@@ -141,18 +135,46 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
 
+        private Dictionary<string, string> EnsureParameterSerializedNames()
+        {
+            if (_parameterNameToSerializedNameMapping != null)
+                return _parameterNameToSerializedNameMapping;
+
+            _parameterNameToSerializedNameMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var operation = _example.Operation;
+            var serviceRequest = operation.GetServiceRequest()!;
+
+            var allRequestParameters = operation.Parameters.Concat(serviceRequest.Parameters);
+
+            foreach (var requestParameter in allRequestParameters)
+            {
+                var serializedName = GetRequestParameterName(requestParameter);
+                _parameterNameToSerializedNameMapping.Add(requestParameter.Language.Default.Name, serializedName);
+            }
+
+            return _parameterNameToSerializedNameMapping;
+        }
+
+        private Dictionary<string, string>? _parameterNameToSerializedNameMapping;
+
+        private string GetParameterSerializedName(string name)
+        {
+            return EnsureParameterSerializedNames()[name];
+        }
+
         private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
         {
             var result = new Dictionary<string, ExampleParameterValue>();
             // skip the first parameter if this method is an extension method
             var parameters = ClientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
                 ClientOperation.MethodParameters.Skip(1) : ClientOperation.MethodParameters;
+            // get the "serialized name" of the parameters based on the raw request path
             foreach (var parameter in parameters)
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
 
-                var exampleParameter = FindExampleParameterByName(AllParameters, parameter.Name);
+                var exampleParameter = FindExampleParameterBySerializedName(AllParameters, GetParameterSerializedName(parameter.Name));
                 if (exampleParameter == null)
                 {
                     // we did not find the corresponding parameter in the examples, see if this is a required parameter
