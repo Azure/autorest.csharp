@@ -80,6 +80,11 @@ namespace MgmtKeyvault.Models
                 writer.WritePropertyName("networkAcls");
                 writer.WriteObjectValue(NetworkAcls);
             }
+            if (Optional.IsDefined(PublicNetworkAccess))
+            {
+                writer.WritePropertyName("publicNetworkAccess");
+                writer.WriteStringValue(PublicNetworkAccess);
+            }
             writer.WriteEndObject();
         }
     }

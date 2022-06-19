@@ -65,7 +65,7 @@ namespace MgmtKeyvault.Tests.Mock
 
             var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
-            await foreach (var _ in subscriptionResource.GetVaultsAsync())
+            await foreach (var _ in subscriptionResource.GetVaultsAsync(top: 1))
             {
             }
         }
@@ -104,6 +104,7 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
                     EnabledForDeployment = true,
                     EnabledForDiskEncryption = true,
                     EnabledForTemplateDeployment = true,
+                    PublicNetworkAccess = "Enabled",
                 },
             });
         }

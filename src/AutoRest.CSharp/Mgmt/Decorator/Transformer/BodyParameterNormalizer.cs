@@ -49,11 +49,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
+            bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
         }
 
         private static void UpdateRequestParameter(RequestParameter parameter, string parameterName, string schemaName)
         {
+            parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
             parameter.Language.Default.Name = parameterName;
             parameter.Schema.Language.Default.Name = schemaName;
             if (parameter.Schema is ChoiceSchema ||

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -149,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Nullable = false,
                     ReadOnly = GetReadOnly(property), //TODO read this from attribute from reference object
-                    SerializedName = GetSerializedName(property.Name),
+                    SerializedName = GetSerializedName(property),
                     Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
                     Required = true,
                     Language = new Languages()
@@ -171,12 +172,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private string GetSerializedName(string name)
+        private const string PropertySerializedNameAttributeName = "PropertySerializedNameAttribute";
+        private const string AttributePropertyName = "Name";
+
+        private string GetSerializedName(PropertyInfo property)
         {
-            // TODO -- this function has so many issues, must fix otherwise the test gen will never work
-            if (name.Equals("ResourceType", StringComparison.Ordinal))
-                return "type";
-            return ToCamelCase(name);
+            // get the serialized name from the attribute
+            var attribute = property.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertySerializedNameAttributeName).FirstOrDefault();
+
+            var serializedName = attribute?.GetType().GetProperty(AttributePropertyName)?.GetValue(attribute) as string;
+
+            return serializedName ?? ToCamelCase(property.Name);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

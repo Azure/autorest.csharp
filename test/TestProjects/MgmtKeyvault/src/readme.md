@@ -4,10 +4,12 @@ Run `dotnet build /t:GenerateCode` to generate code.
 
 ``` yaml
 azure-arm: true
-library-name: KeyVault
-require:
-- https://raw.githubusercontent.com/Azure/azure-rest-api-specs/954bf4ebc679ba55a6cacb39dbdacdbb956359f2/specification/keyvault/resource-manager/readme.md
-- $(this-folder)/../../../../readme.md
+library-name: MgmtKeyVault
+require: $(this-folder)/../../../../readme.md
+input-file:
+- $(this-folder)/keyvault.json
+- $(this-folder)/managedHsm.json
+- $(this-folder)/providers.json
 clear-output-folder: true
 namespace: MgmtKeyVault
 modelerfour:

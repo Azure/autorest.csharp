@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
+                            param.Language.Default.SerializedName ??= param.Language.Default.Name;
                             param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema.Name, dataSchemaDict);
                         }
                     }
