@@ -529,7 +529,7 @@ namespace AutoRest.CSharp.Generation.Writers
             AddDocumentationForSchema(schemas, documentationSchemas.RequestBodySchema, "Request Body", true);
             if (AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false))
             {
-                writer.WriteDocumentationLines($"<response>", $"</response>", $"The response returned from the service. Details of the response body schema are in the Remarks section below.");
+                writer.WriteDocumentationLines($"<returns cref=\"{nameof(Response)}\">", $"</returns>", $"The response returned from the service. Details of the response body schema are in the Remarks section below.");
             }
             AddDocumentationForSchema(schemas, documentationSchemas.ResponseErrorSchema, "Response Error", false);
 
