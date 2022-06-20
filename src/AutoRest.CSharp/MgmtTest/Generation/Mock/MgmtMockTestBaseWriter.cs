@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -13,17 +12,17 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
-using AutoRest.CSharp.MgmtTest.Output;
+using AutoRest.CSharp.MgmtTest.Output.Mock;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
-    internal abstract class MgmtMockTestBaseWriter
+    internal abstract class MgmtMockTestBaseWriter<TProvider> where TProvider : MgmtTypeProvider
     {
         protected CodeWriter _writer;
-        private MgmtTestTypeProvider This { get; }
+        protected MgmtMockTestProvider<TProvider> This { get; }
 
-        public MgmtMockTestBaseWriter(CodeWriter writer, MgmtTestTypeProvider typeProvider)
+        public MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider)
         {
             _writer = writer;
             This = typeProvider;

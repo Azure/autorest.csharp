@@ -89,31 +89,21 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return _operationIdToProviders;
         }
 
-        private IEnumerable<ResourceCollectionMockTest>? _resourceCollectionMockTests;
-        public IEnumerable<ResourceCollectionMockTest> ResourceCollectionMockTests => _resourceCollectionMockTests ??= EnsureResourceCollectionMockTests();
+        //private IEnumerable<ExtensionMockTest> _extensionMockTests;
+        //public IEnumerable<ExtensionMockTest> ExtensionMockTests => _extensionMockTests ??= EnsureExtensionMockTests();
 
-        private IEnumerable<ResourceMockTest>? _resourceMockTests;
-        public IEnumerable<ResourceMockTest> ResourceMockTests => _resourceMockTests ??= EnsureResourceMockTests();
+        private IEnumerable<MgmtMockTestProvider<ResourceCollection>>? _resourceCollectionMockTests;
+        public IEnumerable<MgmtMockTestProvider<ResourceCollection>> ResourceCollectionMockTests => _resourceCollectionMockTests ??= EnsureMockTestProviders<ResourceCollection>();
 
-        private IEnumerable<ResourceCollectionMockTest> EnsureResourceCollectionMockTests()
+        private IEnumerable<MgmtMockTestProvider<Resource>>? _resourceMockTests;
+        public IEnumerable<MgmtMockTestProvider<Resource>> ResourceMockTests => _resourceMockTests ??= EnsureMockTestProviders<Resource>();
+
+        private IEnumerable<MgmtMockTestProvider<TProvider>> EnsureMockTestProviders<TProvider>() where TProvider : MgmtTypeProvider
         {
             foreach ((var provider, var testCases) in MockTestCases)
             {
-                if (provider.GetType() != typeof(ResourceCollection))
-                    continue;
-
-                yield return new ResourceCollectionMockTest((ResourceCollection)provider, testCases);
-            }
-        }
-
-        private IEnumerable<ResourceMockTest> EnsureResourceMockTests()
-        {
-            foreach ((var resource, var testCases) in MockTestCases)
-            {
-                if (resource.GetType() != typeof(Resource))
-                    continue;
-
-                yield return new ResourceMockTest((Resource)resource, testCases);
+                if (provider.GetType() == typeof(TProvider))
+                    yield return new MgmtMockTestProvider<TProvider>((TProvider)provider, testCases);
             }
         }
     }

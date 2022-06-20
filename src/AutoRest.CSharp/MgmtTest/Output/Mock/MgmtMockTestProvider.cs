@@ -14,26 +14,26 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 
-namespace AutoRest.CSharp.MgmtTest.Output
+namespace AutoRest.CSharp.MgmtTest.Output.Mock
 {
-    internal abstract class MgmtTestTypeProvider : TypeProvider
+    internal class MgmtMockTestProvider<T> : TypeProvider where T : MgmtTypeProvider
     {
-        public Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, ValidationType.None, null);
+        protected Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, ValidationType.None, null);
 
-        private MgmtTypeProvider _provider;
-        protected MgmtTestTypeProvider(MgmtTypeProvider provider, IEnumerable<MockTestCase> testCases) : base(MgmtContext.Context)
+        public T Target { get; }
+        public MgmtMockTestProvider(T provider, IEnumerable<MockTestCase> testCases) : base(MgmtContext.Context)
         {
-            _provider = provider;
+            Target = provider;
             MockTestCases = testCases;
         }
 
         public IEnumerable<MockTestCase> MockTestCases { get; }
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
-        public virtual FormattableString Description => $"Test for {_provider.Type.Name}";
+        public virtual FormattableString Description => $"Test for {Target.Type.Name}";
         public string Namespace => DefaultNamespace;
-        protected override string DefaultName => $"{_provider.Type.Name}MockTests";
-        protected override string DefaultNamespace => $"{_provider.Type.Namespace}.Tests.Mock";
+        protected override string DefaultName => $"{Target.Type.Name}MockTests";
+        protected override string DefaultNamespace => $"{Target.Type.Namespace}.Tests.Mock";
         public virtual CSharpType? BaseType => typeof(MockTestBase);
 
         private ConstructorSignature? _ctor;
@@ -49,6 +49,5 @@ namespace AutoRest.CSharp.MgmtTest.Output
                     true,
                     new FormattableString[] { $"{IsAsyncParameter.Name:I}", $"{typeof(RecordedTestMode)}.Record" }));
         }
-
     }
 }

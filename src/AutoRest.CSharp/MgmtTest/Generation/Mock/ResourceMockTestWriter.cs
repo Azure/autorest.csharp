@@ -2,19 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
-using AutoRest.CSharp.MgmtTest.Output;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
-    internal class ResourceMockTestWriter : MgmtMockTestBaseWriter
+    internal class ResourceMockTestWriter : MgmtMockTestBaseWriter<Resource>
     {
-        private ResourceMockTest This { get; }
-
-        public ResourceMockTestWriter(CodeWriter writer, ResourceMockTest resourceMockTest) : base(writer, resourceMockTest)
+        public ResourceMockTestWriter(CodeWriter writer, MgmtMockTestProvider<Resource> resourceMockTest) : base(writer, resourceMockTest)
         {
-            This = resourceMockTest;
         }
 
         protected override void WriteTestMethodBody(MockTestCase testCase)
