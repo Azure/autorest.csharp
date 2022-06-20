@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.Models;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -114,7 +115,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             long l => writer.Append($"{l}"),
             double d => writer.Append($"{d}"),
             decimal dec => writer.Append($"{dec}"),
-            null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
+            //null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
+            null => writer.AppendRaw("default"),
             _ => writer.AppendRaw(exampleValue.RawValue.ToString()!)
         };
 
@@ -219,31 +221,65 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
             foreach (var property in properties)
             {
+                var schemaProperty = property.SchemaProperty;
+                if (!IsPropertyAssignable(property) || schemaProperty == null)
+                    continue; // now we explicitly ignore all the AdditionalProperties
+
+                if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                    continue; // skip the property that does not have a value
+
                 var hierarchyStack = new Stack<ObjectTypeProperty>();
                 hierarchyStack.Push(property);
                 BuildHeirarchy(property, hierarchyStack);
                 // check if this property is safe-flattened
                 if (hierarchyStack.Count > 1)
                 {
-                    // TODO -- get the final result of the flattened result
+                    // get example value out of the dict
+                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, hierarchyStack);
+                    if (exampleValue == null)
+                        continue;
                     // We could build a stack hierarchy here as well, and when we pop that, we only take the last result
                     // in the meantime we pop the example value once at a time, so that in this way we could just assign the innerest property with the innerest example values of the objects
                     var innerProperty = hierarchyStack.Pop();
                     var immediateParentProperty = hierarchyStack.Pop();
-                    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
-                    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
-                    // TODO -- need more thinking here. The ModelWriter is not writing this recursively. Therefore this might be tricky
+                    var myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
+                    // we need to know if this property has a setter, code copied from ModelWriter.WriteProperties
+                    if (!property.IsReadOnly && innerProperty.IsReadOnly)
+                    {
+                        if (ModelWriter.HasCtorWithSingleParam(property, innerProperty))
+                        {
+                            // this branch has a setter
+                            propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));
+                        }
+                    }
+                    else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
+                    {
+                        // this branch always has a setter
+                        propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));
+                    }
                 }
-                var schemaProperty = property.SchemaProperty;
-                if (!IsPropertyAssignable(property) || schemaProperty == null)
-                    continue; // now we explicitly ignore all the AdditionalProperties
-                if (valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                else
                 {
                     propertiesToWrite.Add(property.Declaration.Name, (property.Declaration.Type, exampleValue));
                 }
             }
 
             return propertiesToWrite;
+        }
+
+        private static ExampleValue? UnwrapExampleValueFromSinglePropertySchema(ExampleValue exampleValue, Stack<ObjectTypeProperty> hierarchyStack)
+        {
+            // reverse the stack because it is a stack, iterating it will start from the innerest property
+            // skip the first because this stack include the property we are handling here right now
+            foreach (var property in hierarchyStack.Reverse().Skip(1))
+            {
+                var schemaProperty = property.SchemaProperty;
+                if (schemaProperty == null || !exampleValue.Properties.TryGetValue(schemaProperty.SerializedName, out var inner))
+                    return null;
+                // get the value of this layer
+                exampleValue = inner;
+            }
+            return exampleValue;
         }
 
         private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)

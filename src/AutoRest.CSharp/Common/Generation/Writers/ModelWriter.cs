@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
+        private static bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
         {
             foreach (var ctor in enclosingType.Constructors)
             {
@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
+        internal static bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
         {
             var type = property.Declaration.Type;
             if (type.IsFrameworkType)
@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
+        private static bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
         {
             var type = objectTypeProperty.Declaration.Type;
             if (type.IsFrameworkType)
