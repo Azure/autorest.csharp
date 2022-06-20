@@ -49,7 +49,9 @@ namespace MgmtKeyvault.Models
         /// <param name="provisioningState"> Provisioning state of the vault. </param>
         /// <param name="privateEndpointConnections"> List of private endpoint connections associated with the key vault. </param>
         /// <param name="publicNetworkAccess"> Property to specify whether the vault will accept traffic from public internet. If set to &apos;disabled&apos; all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules. </param>
-        internal VaultProperties(Guid tenantId, MgmtKeyvaultSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess)
+        /// <param name="readWriteSingleStringProperty"> This is a single property of string. </param>
+        /// <param name="readOnlySingleStringProperty"> This is a single property of read-only string. </param>
+        internal VaultProperties(Guid tenantId, MgmtKeyvaultSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty)
         {
             TenantId = tenantId;
             Sku = sku;
@@ -68,6 +70,8 @@ namespace MgmtKeyvault.Models
             ProvisioningState = provisioningState;
             PrivateEndpointConnections = privateEndpointConnections;
             PublicNetworkAccess = publicNetworkAccess;
+            ReadWriteSingleStringProperty = readWriteSingleStringProperty;
+            ReadOnlySingleStringProperty = readOnlySingleStringProperty;
         }
 
         /// <summary> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </summary>
@@ -104,5 +108,26 @@ namespace MgmtKeyvault.Models
         public IReadOnlyList<PrivateEndpointConnectionItem> PrivateEndpointConnections { get; }
         /// <summary> Property to specify whether the vault will accept traffic from public internet. If set to &apos;disabled&apos; all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules. </summary>
         public string PublicNetworkAccess { get; set; }
+        /// <summary> This is a single property of string. </summary>
+        internal SinglePropertyModel ReadWriteSingleStringProperty { get; set; }
+        /// <summary> This is a string property. </summary>
+        public string ReadWriteSingleStringPropertySomething
+        {
+            get => ReadWriteSingleStringProperty is null ? default : ReadWriteSingleStringProperty.Something;
+            set
+            {
+                if (ReadWriteSingleStringProperty is null)
+                    ReadWriteSingleStringProperty = new SinglePropertyModel();
+                ReadWriteSingleStringProperty.Something = value;
+            }
+        }
+
+        /// <summary> This is a single property of read-only string. </summary>
+        internal ReadOnlySinglePropertyModel ReadOnlySingleStringProperty { get; set; }
+        /// <summary> This is a read only string property. </summary>
+        public string ReadOnlySomething
+        {
+            get => ReadOnlySingleStringProperty is null ? default : ReadOnlySingleStringProperty.ReadOnlySomething;
+        }
     }
 }

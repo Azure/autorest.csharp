@@ -62,14 +62,14 @@ schemas: !Schemas
           name: Boolean
           description: Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_65
+    - !BooleanSchema &ref_69
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: Property to specify whether the 'soft delete' functionality is enabled for this key vault. Once set to true, it cannot be reverted to false.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_66
+    - !BooleanSchema &ref_70
       type: boolean
       language: !Languages 
         default:
@@ -79,21 +79,21 @@ schemas: !Schemas
             ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the value of this property will not
             change.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_85
+    - !BooleanSchema &ref_89
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: Purge protection status of the original vault.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_91
+    - !BooleanSchema &ref_95
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_127
+    - !BooleanSchema &ref_131
       type: boolean
       defaultValue: true
       language: !Languages 
@@ -103,7 +103,7 @@ schemas: !Schemas
             Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. If it's not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to
             true, it cannot be reverted to false.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_129
+    - !BooleanSchema &ref_133
       type: boolean
       defaultValue: true
       language: !Languages 
@@ -113,28 +113,28 @@ schemas: !Schemas
             Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service
             may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_156
+    - !BooleanSchema &ref_160
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: Purge protection status of the original managed HSM.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_181
+    - !BooleanSchema &ref_185
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: Property to specify whether the dimension should be exported for Shoebox.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_182
+    - !BooleanSchema &ref_186
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: Property to specify whether to fill gap with zero.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_167
+    - !BooleanSchema &ref_171
       type: boolean
       language: !Languages 
         default:
@@ -154,7 +154,7 @@ schemas: !Schemas
           name: VaultPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_67
+    - !NumberSchema &ref_71
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -165,7 +165,7 @@ schemas: !Schemas
           name: VaultPatchPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_254
+    - !NumberSchema &ref_258
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -177,7 +177,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_279
+    - !NumberSchema &ref_283
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -189,7 +189,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_128
+    - !NumberSchema &ref_132
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -201,7 +201,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_300
+    - !NumberSchema &ref_304
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -213,7 +213,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_325
+    - !NumberSchema &ref_329
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -244,7 +244,7 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_227
+    - !StringSchema &ref_231
       type: string
       apiVersions:
         - !ApiVersion 
@@ -368,7 +368,27 @@ schemas: !Schemas
             Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override
             the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
       protocol: !Protocols {}
-    - !StringSchema &ref_49
+    - !StringSchema &ref_39
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-01'
+      language: !Languages 
+        default:
+          name: SinglePropertyModelSomething
+          description: This is a string property
+      protocol: !Protocols {}
+    - !StringSchema &ref_40
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-01'
+      language: !Languages 
+        default:
+          name: ReadOnlySinglePropertyModelReadOnlySomething
+          description: This is a read only string property
+      protocol: !Protocols {}
+    - !StringSchema &ref_53
       type: string
       apiVersions:
         - !ApiVersion 
@@ -378,7 +398,7 @@ schemas: !Schemas
           name: VaultId
           description: Fully qualified identifier of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_50
+    - !StringSchema &ref_54
       type: string
       apiVersions:
         - !ApiVersion 
@@ -388,7 +408,7 @@ schemas: !Schemas
           name: VaultName
           description: Name of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_51
+    - !StringSchema &ref_55
       type: string
       apiVersions:
         - !ApiVersion 
@@ -398,7 +418,7 @@ schemas: !Schemas
           name: VaultType
           description: Resource type of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_52
+    - !StringSchema &ref_56
       type: string
       apiVersions:
         - !ApiVersion 
@@ -408,7 +428,7 @@ schemas: !Schemas
           name: VaultLocation
           description: Azure location of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_54
+    - !StringSchema &ref_58
       type: string
       apiVersions:
         - !ApiVersion 
@@ -418,7 +438,7 @@ schemas: !Schemas
           name: SystemDataCreatedBy
           description: The identity that created the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_57
+    - !StringSchema &ref_61
       type: string
       apiVersions:
         - !ApiVersion 
@@ -428,7 +448,7 @@ schemas: !Schemas
           name: SystemDataLastModifiedBy
           description: The identity that last modified the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_60
+    - !StringSchema &ref_64
       type: string
       apiVersions:
         - !ApiVersion 
@@ -438,7 +458,7 @@ schemas: !Schemas
           name: CloudErrorBodyCode
           description: Error code. This is a mnemonic that can be consumed programmatically.
       protocol: !Protocols {}
-    - !StringSchema &ref_61
+    - !StringSchema &ref_65
       type: string
       apiVersions:
         - !ApiVersion 
@@ -448,7 +468,7 @@ schemas: !Schemas
           name: CloudErrorBodyMessage
           description: User friendly error message. The message is typically localized and may vary with service version.
       protocol: !Protocols {}
-    - !StringSchema &ref_68
+    - !StringSchema &ref_72
       type: string
       apiVersions:
         - !ApiVersion 
@@ -460,7 +480,7 @@ schemas: !Schemas
             Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override
             the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
       protocol: !Protocols {}
-    - !StringSchema &ref_70
+    - !StringSchema &ref_74
       type: string
       apiVersions:
         - !ApiVersion 
@@ -470,7 +490,7 @@ schemas: !Schemas
           name: VaultAccessPolicyParametersId
           description: The resource id of the access policy.
       protocol: !Protocols {}
-    - !StringSchema &ref_71
+    - !StringSchema &ref_75
       type: string
       apiVersions:
         - !ApiVersion 
@@ -480,7 +500,7 @@ schemas: !Schemas
           name: VaultAccessPolicyParametersName
           description: The resource name of the access policy.
       protocol: !Protocols {}
-    - !StringSchema &ref_72
+    - !StringSchema &ref_76
       type: string
       apiVersions:
         - !ApiVersion 
@@ -490,7 +510,7 @@ schemas: !Schemas
           name: VaultAccessPolicyParametersType
           description: The resource name of the access policy.
       protocol: !Protocols {}
-    - !StringSchema &ref_73
+    - !StringSchema &ref_77
       type: string
       apiVersions:
         - !ApiVersion 
@@ -500,7 +520,7 @@ schemas: !Schemas
           name: VaultAccessPolicyParametersLocation
           description: The resource type of the access policy.
       protocol: !Protocols {}
-    - !StringSchema &ref_76
+    - !StringSchema &ref_80
       type: string
       apiVersions:
         - !ApiVersion 
@@ -510,7 +530,7 @@ schemas: !Schemas
           name: VaultListResultNextLink
           description: The URL to get the next set of vaults.
       protocol: !Protocols {}
-    - !StringSchema &ref_77
+    - !StringSchema &ref_81
       type: string
       apiVersions:
         - !ApiVersion 
@@ -520,7 +540,7 @@ schemas: !Schemas
           name: DeletedVaultId
           description: The resource ID for the deleted key vault.
       protocol: !Protocols {}
-    - !StringSchema &ref_78
+    - !StringSchema &ref_82
       type: string
       apiVersions:
         - !ApiVersion 
@@ -530,7 +550,7 @@ schemas: !Schemas
           name: DeletedVaultName
           description: The name of the key vault.
       protocol: !Protocols {}
-    - !StringSchema &ref_79
+    - !StringSchema &ref_83
       type: string
       apiVersions:
         - !ApiVersion 
@@ -540,7 +560,7 @@ schemas: !Schemas
           name: DeletedVaultType
           description: The resource type of the key vault.
       protocol: !Protocols {}
-    - !StringSchema &ref_80
+    - !StringSchema &ref_84
       type: string
       apiVersions:
         - !ApiVersion 
@@ -550,7 +570,7 @@ schemas: !Schemas
           name: DeletedVaultPropertiesVaultId
           description: The resource id of the original vault.
       protocol: !Protocols {}
-    - !StringSchema &ref_81
+    - !StringSchema &ref_85
       type: string
       apiVersions:
         - !ApiVersion 
@@ -560,7 +580,7 @@ schemas: !Schemas
           name: DeletedVaultPropertiesLocation
           description: The location of the original vault.
       protocol: !Protocols {}
-    - !StringSchema &ref_86
+    - !StringSchema &ref_90
       type: string
       apiVersions:
         - !ApiVersion 
@@ -570,7 +590,7 @@ schemas: !Schemas
           name: DeletedVaultListResultNextLink
           description: The URL to get the next set of deleted vaults.
       protocol: !Protocols {}
-    - !StringSchema &ref_89
+    - !StringSchema &ref_93
       type: string
       apiVersions:
         - !ApiVersion 
@@ -580,7 +600,7 @@ schemas: !Schemas
           name: VaultCheckNameAvailabilityParametersName
           description: The vault name.
       protocol: !Protocols {}
-    - !StringSchema &ref_93
+    - !StringSchema &ref_97
       type: string
       apiVersions:
         - !ApiVersion 
@@ -590,7 +610,7 @@ schemas: !Schemas
           name: CheckNameAvailabilityResultMessage
           description: An error message explaining the Reason value in more detail.
       protocol: !Protocols {}
-    - !StringSchema &ref_105
+    - !StringSchema &ref_109
       type: string
       apiVersions:
         - !ApiVersion 
@@ -600,7 +620,7 @@ schemas: !Schemas
           name: PrivateEndpointConnectionEtag
           description: Modified whenever there is a change in the state of private endpoint connection.
       protocol: !Protocols {}
-    - !StringSchema &ref_100
+    - !StringSchema &ref_104
       type: string
       apiVersions:
         - !ApiVersion 
@@ -610,7 +630,7 @@ schemas: !Schemas
           name: ResourceId
           description: Fully qualified identifier of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_101
+    - !StringSchema &ref_105
       type: string
       apiVersions:
         - !ApiVersion 
@@ -620,7 +640,7 @@ schemas: !Schemas
           name: ResourceName
           description: Name of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_102
+    - !StringSchema &ref_106
       type: string
       apiVersions:
         - !ApiVersion 
@@ -630,7 +650,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_103
+    - !StringSchema &ref_107
       type: string
       apiVersions:
         - !ApiVersion 
@@ -640,7 +660,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Azure location of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_280
+    - !StringSchema &ref_284
       type: string
       apiVersions:
         - !ApiVersion 
@@ -651,7 +671,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_106
+    - !StringSchema &ref_110
       type: string
       apiVersions:
         - !ApiVersion 
@@ -661,7 +681,7 @@ schemas: !Schemas
           name: PrivateEndpointConnectionListResultNextLink
           description: The URL to get the next set of private endpoint connections.
       protocol: !Protocols {}
-    - !StringSchema &ref_96
+    - !StringSchema &ref_100
       type: string
       apiVersions:
         - !ApiVersion 
@@ -671,7 +691,7 @@ schemas: !Schemas
           name: PrivateLinkResourcePropertiesGroupId
           description: Group identifier of private link resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_97
+    - !StringSchema &ref_101
       type: string
       apiVersions:
         - !ApiVersion 
@@ -681,7 +701,7 @@ schemas: !Schemas
           name: PrivateLinkResourcePropertiesRequiredMembersItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_98
+    - !StringSchema &ref_102
       type: string
       apiVersions:
         - !ApiVersion 
@@ -702,7 +722,7 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_125
+    - !StringSchema &ref_129
       type: string
       apiVersions:
         - !ApiVersion 
@@ -712,7 +732,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesInitialAdminObjectIdsItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_126
+    - !StringSchema &ref_130
       type: string
       apiVersions:
         - !ApiVersion 
@@ -722,7 +742,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesHsmUri
           description: The URI of the managed hsm pool for performing operations on keys.
       protocol: !Protocols {}
-    - !StringSchema &ref_130
+    - !StringSchema &ref_134
       type: string
       apiVersions:
         - !ApiVersion 
@@ -732,7 +752,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesStatusMessage
           description: Resource Status Message.
       protocol: !Protocols {}
-    - !StringSchema &ref_132
+    - !StringSchema &ref_136
       type: string
       apiVersions:
         - !ApiVersion 
@@ -742,7 +762,7 @@ schemas: !Schemas
           name: MhsmipRuleValue
           description: An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).
       protocol: !Protocols {}
-    - !StringSchema &ref_133
+    - !StringSchema &ref_137
       type: string
       apiVersions:
         - !ApiVersion 
@@ -752,7 +772,7 @@ schemas: !Schemas
           name: MhsmVirtualNetworkRuleId
           description: Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'.
       protocol: !Protocols {}
-    - !StringSchema &ref_110
+    - !StringSchema &ref_114
       type: string
       apiVersions:
         - !ApiVersion 
@@ -762,7 +782,7 @@ schemas: !Schemas
           name: MhsmPrivateEndpointId
           description: Full identifier of the private endpoint resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_111
+    - !StringSchema &ref_115
       type: string
       apiVersions:
         - !ApiVersion 
@@ -772,7 +792,7 @@ schemas: !Schemas
           name: MhsmPrivateLinkServiceConnectionStateDescription
           description: The reason for approval or rejection.
       protocol: !Protocols {}
-    - !StringSchema &ref_117
+    - !StringSchema &ref_121
       type: string
       apiVersions:
         - !ApiVersion 
@@ -782,7 +802,7 @@ schemas: !Schemas
           name: ManagedHsmResourceId
           description: The Azure Resource Manager resource ID for the managed HSM Pool.
       protocol: !Protocols {}
-    - !StringSchema &ref_118
+    - !StringSchema &ref_122
       type: string
       apiVersions:
         - !ApiVersion 
@@ -792,7 +812,7 @@ schemas: !Schemas
           name: ManagedHsmResourceName
           description: The name of the managed HSM Pool.
       protocol: !Protocols {}
-    - !StringSchema &ref_119
+    - !StringSchema &ref_123
       type: string
       apiVersions:
         - !ApiVersion 
@@ -802,7 +822,7 @@ schemas: !Schemas
           name: ManagedHsmResourceType
           description: The resource type of the managed HSM Pool.
       protocol: !Protocols {}
-    - !StringSchema &ref_120
+    - !StringSchema &ref_124
       type: string
       apiVersions:
         - !ApiVersion 
@@ -816,7 +836,7 @@ schemas: !Schemas
           name: ManagedHsmResourceLocation
           description: The supported Azure location where the managed HSM Pool should be created.
       protocol: !Protocols {}
-    - !StringSchema &ref_144
+    - !StringSchema &ref_148
       type: string
       apiVersions:
         - !ApiVersion 
@@ -826,7 +846,7 @@ schemas: !Schemas
           name: ErrorCode
           description: The error code.
       protocol: !Protocols {}
-    - !StringSchema &ref_145
+    - !StringSchema &ref_149
       type: string
       apiVersions:
         - !ApiVersion 
@@ -836,7 +856,7 @@ schemas: !Schemas
           name: ErrorMessage
           description: The error message.
       protocol: !Protocols {}
-    - !StringSchema &ref_147
+    - !StringSchema &ref_151
       type: string
       apiVersions:
         - !ApiVersion 
@@ -846,7 +866,7 @@ schemas: !Schemas
           name: ManagedHsmListResultNextLink
           description: The URL to get the next set of managed HSM Pools.
       protocol: !Protocols {}
-    - !StringSchema &ref_109
+    - !StringSchema &ref_113
       type: string
       apiVersions:
         - !ApiVersion 
@@ -856,7 +876,7 @@ schemas: !Schemas
           name: MhsmPrivateEndpointConnectionEtag
           description: Modified whenever there is a change in the state of private endpoint connection.
       protocol: !Protocols {}
-    - !StringSchema &ref_148
+    - !StringSchema &ref_152
       type: string
       apiVersions:
         - !ApiVersion 
@@ -866,7 +886,7 @@ schemas: !Schemas
           name: MhsmPrivateEndpointConnectionsListResultNextLink
           description: The URL to get the next set of managed HSM Pools.
       protocol: !Protocols {}
-    - !StringSchema &ref_149
+    - !StringSchema &ref_153
       type: string
       apiVersions:
         - !ApiVersion 
@@ -876,7 +896,7 @@ schemas: !Schemas
           name: DeletedManagedHsmId
           description: The Azure Resource Manager resource ID for the deleted managed HSM Pool.
       protocol: !Protocols {}
-    - !StringSchema &ref_150
+    - !StringSchema &ref_154
       type: string
       apiVersions:
         - !ApiVersion 
@@ -886,7 +906,7 @@ schemas: !Schemas
           name: DeletedManagedHsmName
           description: The name of the managed HSM Pool.
       protocol: !Protocols {}
-    - !StringSchema &ref_151
+    - !StringSchema &ref_155
       type: string
       apiVersions:
         - !ApiVersion 
@@ -896,7 +916,7 @@ schemas: !Schemas
           name: DeletedManagedHsmType
           description: The resource type of the managed HSM Pool.
       protocol: !Protocols {}
-    - !StringSchema &ref_152
+    - !StringSchema &ref_156
       type: string
       apiVersions:
         - !ApiVersion 
@@ -906,7 +926,7 @@ schemas: !Schemas
           name: DeletedManagedHsmPropertiesMhsmId
           description: The resource id of the original managed HSM.
       protocol: !Protocols {}
-    - !StringSchema &ref_153
+    - !StringSchema &ref_157
       type: string
       apiVersions:
         - !ApiVersion 
@@ -916,7 +936,7 @@ schemas: !Schemas
           name: DeletedManagedHsmPropertiesLocation
           description: The location of the original managed HSM.
       protocol: !Protocols {}
-    - !StringSchema &ref_158
+    - !StringSchema &ref_162
       type: string
       apiVersions:
         - !ApiVersion 
@@ -926,7 +946,7 @@ schemas: !Schemas
           name: DeletedManagedHsmListResultNextLink
           description: The URL to get the next set of deleted managed HSM Pools.
       protocol: !Protocols {}
-    - !StringSchema &ref_321
+    - !StringSchema &ref_325
       type: string
       apiVersions:
         - !ApiVersion 
@@ -937,7 +957,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_326
+    - !StringSchema &ref_330
       type: string
       apiVersions:
         - !ApiVersion 
@@ -947,7 +967,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_112
+    - !StringSchema &ref_116
       type: string
       apiVersions:
         - !ApiVersion 
@@ -957,7 +977,7 @@ schemas: !Schemas
           name: MhsmPrivateLinkResourcePropertiesGroupId
           description: Group identifier of private link resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_113
+    - !StringSchema &ref_117
       type: string
       apiVersions:
         - !ApiVersion 
@@ -967,7 +987,7 @@ schemas: !Schemas
           name: MhsmPrivateLinkResourcePropertiesRequiredMembersItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_114
+    - !StringSchema &ref_118
       type: string
       apiVersions:
         - !ApiVersion 
@@ -977,7 +997,7 @@ schemas: !Schemas
           name: MhsmPrivateLinkResourcePropertiesRequiredZoneNamesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_161
+    - !StringSchema &ref_165
       type: string
       apiVersions:
         - !ApiVersion 
@@ -987,7 +1007,7 @@ schemas: !Schemas
           name: OperationName
           description: 'Operation name: {provider}/{resource}/{operation}'
       protocol: !Protocols {}
-    - !StringSchema &ref_162
+    - !StringSchema &ref_166
       type: string
       apiVersions:
         - !ApiVersion 
@@ -997,7 +1017,7 @@ schemas: !Schemas
           name: OperationDisplayProvider
           description: 'Service provider: Microsoft Key Vault.'
       protocol: !Protocols {}
-    - !StringSchema &ref_163
+    - !StringSchema &ref_167
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1007,7 +1027,7 @@ schemas: !Schemas
           name: OperationDisplayResource
           description: Resource on which the operation is performed etc.
       protocol: !Protocols {}
-    - !StringSchema &ref_164
+    - !StringSchema &ref_168
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1017,7 +1037,7 @@ schemas: !Schemas
           name: OperationDisplayOperation
           description: 'Type of operation: get, read, delete, etc.'
       protocol: !Protocols {}
-    - !StringSchema &ref_165
+    - !StringSchema &ref_169
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1027,7 +1047,7 @@ schemas: !Schemas
           name: OperationDisplayDescription
           description: Description of operation.
       protocol: !Protocols {}
-    - !StringSchema &ref_166
+    - !StringSchema &ref_170
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1037,7 +1057,7 @@ schemas: !Schemas
           name: OperationOrigin
           description: The origin of operations.
       protocol: !Protocols {}
-    - !StringSchema &ref_168
+    - !StringSchema &ref_172
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1047,7 +1067,7 @@ schemas: !Schemas
           name: LogSpecificationName
           description: Name of log specification.
       protocol: !Protocols {}
-    - !StringSchema &ref_169
+    - !StringSchema &ref_173
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1057,7 +1077,7 @@ schemas: !Schemas
           name: LogSpecificationDisplayName
           description: Display name of log specification.
       protocol: !Protocols {}
-    - !StringSchema &ref_170
+    - !StringSchema &ref_174
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1067,7 +1087,7 @@ schemas: !Schemas
           name: LogSpecificationBlobDuration
           description: Blob duration of specification.
       protocol: !Protocols {}
-    - !StringSchema &ref_171
+    - !StringSchema &ref_175
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1077,7 +1097,7 @@ schemas: !Schemas
           name: MetricSpecificationName
           description: Name of metric specification.
       protocol: !Protocols {}
-    - !StringSchema &ref_172
+    - !StringSchema &ref_176
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1087,7 +1107,7 @@ schemas: !Schemas
           name: MetricSpecificationDisplayName
           description: Display name of metric specification.
       protocol: !Protocols {}
-    - !StringSchema &ref_173
+    - !StringSchema &ref_177
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1097,7 +1117,7 @@ schemas: !Schemas
           name: MetricSpecificationDisplayDescription
           description: Display description of metric specification.
       protocol: !Protocols {}
-    - !StringSchema &ref_174
+    - !StringSchema &ref_178
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1107,7 +1127,7 @@ schemas: !Schemas
           name: MetricSpecificationUnit
           description: 'The metric unit. Possible values include: ''Bytes'', ''Count'', ''Milliseconds''.'
       protocol: !Protocols {}
-    - !StringSchema &ref_175
+    - !StringSchema &ref_179
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1117,7 +1137,7 @@ schemas: !Schemas
           name: MetricSpecificationAggregationType
           description: 'The metric aggregation type. Possible values include: ''Average'', ''Count'', ''Total''.'
       protocol: !Protocols {}
-    - !StringSchema &ref_176
+    - !StringSchema &ref_180
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1127,7 +1147,7 @@ schemas: !Schemas
           name: MetricSpecificationSupportedAggregationTypesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_177
+    - !StringSchema &ref_181
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1137,7 +1157,7 @@ schemas: !Schemas
           name: MetricSpecificationSupportedTimeGrainTypesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_178
+    - !StringSchema &ref_182
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1147,7 +1167,7 @@ schemas: !Schemas
           name: MetricSpecificationLockAggregationType
           description: The metric lock aggregation type.
       protocol: !Protocols {}
-    - !StringSchema &ref_179
+    - !StringSchema &ref_183
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1157,7 +1177,7 @@ schemas: !Schemas
           name: DimensionPropertiesName
           description: Name of dimension.
       protocol: !Protocols {}
-    - !StringSchema &ref_180
+    - !StringSchema &ref_184
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1167,7 +1187,7 @@ schemas: !Schemas
           name: DimensionPropertiesDisplayName
           description: Display name of dimension.
       protocol: !Protocols {}
-    - !StringSchema &ref_183
+    - !StringSchema &ref_187
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1177,7 +1197,7 @@ schemas: !Schemas
           name: MetricSpecificationInternalMetricName
           description: The internal metric name.
       protocol: !Protocols {}
-    - !StringSchema &ref_184
+    - !StringSchema &ref_188
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1187,7 +1207,7 @@ schemas: !Schemas
           name: OperationListResultNextLink
           description: The URL to get the next set of operations.
       protocol: !Protocols {}
-    - !StringSchema &ref_191
+    - !StringSchema &ref_195
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1786,7 +1806,7 @@ schemas: !Schemas
           name: PrivateEndpointConnectionProvisioningState
           description: The current provisioning state.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_55
+    - !ChoiceSchema &ref_59
       choices:
         - !ChoiceValue 
           value: User
@@ -1822,7 +1842,7 @@ schemas: !Schemas
           name: IdentityType
           description: The type of identity.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_131
+    - !ChoiceSchema &ref_135
       choices:
         - !ChoiceValue 
           value: Succeeded
@@ -1882,7 +1902,7 @@ schemas: !Schemas
           name: ProvisioningState
           description: Provisioning state.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_136
+    - !ChoiceSchema &ref_140
       choices:
         - !ChoiceValue 
           value: Enabled
@@ -1906,7 +1926,7 @@ schemas: !Schemas
           name: PublicNetworkAccess
           description: Control permission for data plane traffic coming from public networks while private endpoint is enabled.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_121
+    - !ChoiceSchema &ref_125
       choices:
         - !ChoiceValue 
           value: B
@@ -1977,7 +1997,7 @@ schemas: !Schemas
           name: CreateMode
           description: The vault's create mode to indicate whether the vault need to be recovered or not.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_247
+    - !SealedChoiceSchema &ref_251
       choices:
         - !ChoiceValue 
           value: add
@@ -2007,7 +2027,7 @@ schemas: !Schemas
           name: AccessPolicyUpdateKind
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_92
+    - !SealedChoiceSchema &ref_96
       choices:
         - !ChoiceValue 
           value: AccountNameInvalid
@@ -2031,7 +2051,7 @@ schemas: !Schemas
           name: Reason
           description: The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_122
+    - !SealedChoiceSchema &ref_126
       choices:
         - !ChoiceValue 
           value: Standard_B1
@@ -2056,7 +2076,7 @@ schemas: !Schemas
           description: SKU of the managed HSM Pool
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_225
+    - !ConstantSchema &ref_229
       type: constant
       value: !ConstantValue 
         value: '2021-10-01'
@@ -2066,7 +2086,7 @@ schemas: !Schemas
           name: ApiVersion20211001
           description: Api Version (2021-10-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_230
+    - !ConstantSchema &ref_234
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -2076,7 +2096,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_232
+    - !ConstantSchema &ref_236
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -2086,7 +2106,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_90
+    - !ConstantSchema &ref_94
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -2108,7 +2128,7 @@ schemas: !Schemas
           name: VaultCreateOrUpdateParametersTags
           description: The tags that will be assigned to the key vault.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_53
+    - !DictionarySchema &ref_57
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -2116,7 +2136,7 @@ schemas: !Schemas
           name: VaultTags
           description: Tags assigned to the key vault resource.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_63
+    - !DictionarySchema &ref_67
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -2124,7 +2144,7 @@ schemas: !Schemas
           name: VaultPatchParametersTags
           description: 'The tags that will be assigned to the key vault. '
       protocol: !Protocols {}
-    - !DictionarySchema &ref_84
+    - !DictionarySchema &ref_88
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -2132,7 +2152,7 @@ schemas: !Schemas
           name: DeletedVaultPropertiesTags
           description: Tags of the original vault.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_104
+    - !DictionarySchema &ref_108
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -2140,7 +2160,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Tags assigned to the key vault resource.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_123
+    - !DictionarySchema &ref_127
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -2148,7 +2168,7 @@ schemas: !Schemas
           name: ManagedHsmResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_157
+    - !DictionarySchema &ref_161
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -2157,7 +2177,7 @@ schemas: !Schemas
           description: Tags of the original managed HSM.
       protocol: !Protocols {}
   dateTimes:
-    - !DateTimeSchema &ref_56
+    - !DateTimeSchema &ref_60
       type: date-time
       format: date-time
       apiVersions:
@@ -2168,7 +2188,7 @@ schemas: !Schemas
           name: SystemDataCreatedAt
           description: The timestamp of the key vault resource creation (UTC).
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_58
+    - !DateTimeSchema &ref_62
       type: date-time
       format: date-time
       apiVersions:
@@ -2179,7 +2199,7 @@ schemas: !Schemas
           name: SystemDataLastModifiedAt
           description: The timestamp of the key vault resource last modification (UTC).
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_82
+    - !DateTimeSchema &ref_86
       type: date-time
       format: date-time
       apiVersions:
@@ -2190,7 +2210,7 @@ schemas: !Schemas
           name: DeletedVaultPropertiesDeletionDate
           description: The deleted date.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_83
+    - !DateTimeSchema &ref_87
       type: date-time
       format: date-time
       apiVersions:
@@ -2201,7 +2221,7 @@ schemas: !Schemas
           name: DeletedVaultPropertiesScheduledPurgeDate
           description: The scheduled purged date.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_137
+    - !DateTimeSchema &ref_141
       type: date-time
       format: date-time
       apiVersions:
@@ -2212,7 +2232,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesScheduledPurgeDate
           description: The scheduled purge date in UTC.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_154
+    - !DateTimeSchema &ref_158
       type: date-time
       format: date-time
       apiVersions:
@@ -2223,7 +2243,7 @@ schemas: !Schemas
           name: DeletedManagedHsmPropertiesDeletionDate
           description: The deleted date.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_155
+    - !DateTimeSchema &ref_159
       type: date-time
       format: date-time
       apiVersions:
@@ -2265,7 +2285,7 @@ schemas: !Schemas
           name: AccessPolicyEntryApplicationId
           description: ' Application ID of the client making request on behalf of a principal'
       protocol: !Protocols {}
-    - !UuidSchema &ref_64
+    - !UuidSchema &ref_68
       type: uuid
       apiVersions:
         - !ApiVersion 
@@ -2275,7 +2295,7 @@ schemas: !Schemas
           name: VaultPatchPropertiesTenantId
           description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
       protocol: !Protocols {}
-    - !UuidSchema &ref_124
+    - !UuidSchema &ref_128
       type: uuid
       apiVersions:
         - !ApiVersion 
@@ -2286,7 +2306,7 @@ schemas: !Schemas
           description: The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool.
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_231
+    - !ObjectSchema &ref_235
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2311,7 +2331,7 @@ schemas: !Schemas
               description: The tags that will be assigned to the key vault.
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_39
+          schema: !ObjectSchema &ref_41
             type: object
             apiVersions:
               - !ApiVersion 
@@ -2327,7 +2347,7 @@ schemas: !Schemas
                     description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_40
+                schema: !ObjectSchema &ref_42
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -2370,12 +2390,12 @@ schemas: !Schemas
                     description: SKU details
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_196
+                schema: !ArraySchema &ref_200
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
-                  elementType: !ObjectSchema &ref_41
+                  elementType: !ObjectSchema &ref_43
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -2409,14 +2429,14 @@ schemas: !Schemas
                             description: ' Application ID of the client making request on behalf of a principal'
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ObjectSchema &ref_42
+                        schema: !ObjectSchema &ref_44
                           type: object
                           apiVersions:
                             - !ApiVersion 
                               version: '2021-10-01'
                           properties:
                             - !Property 
-                              schema: !ArraySchema &ref_192
+                              schema: !ArraySchema &ref_196
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2434,7 +2454,7 @@ schemas: !Schemas
                                   description: Permissions to keys
                               protocol: !Protocols {}
                             - !Property 
-                              schema: !ArraySchema &ref_193
+                              schema: !ArraySchema &ref_197
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2452,7 +2472,7 @@ schemas: !Schemas
                                   description: Permissions to secrets
                               protocol: !Protocols {}
                             - !Property 
-                              schema: !ArraySchema &ref_194
+                              schema: !ArraySchema &ref_198
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2470,7 +2490,7 @@ schemas: !Schemas
                                   description: Permissions to certificates
                               protocol: !Protocols {}
                             - !Property 
-                              schema: !ArraySchema &ref_195
+                              schema: !ArraySchema &ref_199
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2635,7 +2655,7 @@ schemas: !Schemas
                       a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_43
+                schema: !ObjectSchema &ref_45
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -2658,12 +2678,12 @@ schemas: !Schemas
                           description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_197
+                      schema: !ArraySchema &ref_201
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: !ObjectSchema &ref_44
+                        elementType: !ObjectSchema &ref_46
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -2701,12 +2721,12 @@ schemas: !Schemas
                           description: The list of IP address rules.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_198
+                      schema: !ArraySchema &ref_202
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: !ObjectSchema &ref_45
+                        elementType: !ObjectSchema &ref_47
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -2780,12 +2800,12 @@ schemas: !Schemas
                     description: Provisioning state of the vault.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_199
+                schema: !ArraySchema &ref_203
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
-                  elementType: !ObjectSchema &ref_46
+                  elementType: !ObjectSchema &ref_48
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -2808,7 +2828,7 @@ schemas: !Schemas
                             description: Modified whenever there is a change in the state of private endpoint connection.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ObjectSchema &ref_47
+                        schema: !ObjectSchema &ref_49
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -2844,7 +2864,7 @@ schemas: !Schemas
                             description: Properties of the private endpoint object.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ObjectSchema &ref_48
+                        schema: !ObjectSchema &ref_50
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -2940,6 +2960,73 @@ schemas: !Schemas
                       Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will
                       override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
                 protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_51
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-10-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_39
+                      serializedName: something
+                      language: !Languages 
+                        default:
+                          name: something
+                          description: This is a string property
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SinglePropertyModel
+                      description: This is a single property of string
+                      namespace: ''
+                  protocol: !Protocols {}
+                required: false
+                serializedName: readWriteSingleStringProperty
+                language: !Languages 
+                  default:
+                    name: readWriteSingleStringProperty
+                    description: This is a single property of string
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_52
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-10-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_40
+                      readOnly: true
+                      serializedName: readOnlySomething
+                      language: !Languages 
+                        default:
+                          name: readOnlySomething
+                          description: This is a read only string property
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ReadOnlySinglePropertyModel
+                      description: This is a single property of read-only string
+                      namespace: ''
+                  protocol: !Protocols {}
+                required: false
+                serializedName: readOnlySingleStringProperty
+                language: !Languages 
+                  default:
+                    name: readOnlySingleStringProperty
+                    description: This is a single property of read-only string
+                protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
@@ -2970,8 +3057,6 @@ schemas: !Schemas
           description: Parameters for creating or updating a vault
           namespace: ''
       protocol: !Protocols {}
-    - *ref_39
-    - *ref_40
     - *ref_41
     - *ref_42
     - *ref_43
@@ -2980,14 +3065,18 @@ schemas: !Schemas
     - *ref_46
     - *ref_47
     - *ref_48
-    - !ObjectSchema &ref_75
+    - *ref_49
+    - *ref_50
+    - *ref_51
+    - *ref_52
+    - !ObjectSchema &ref_79
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: *ref_49
+          schema: *ref_53
           readOnly: true
           required: false
           serializedName: id
@@ -2997,7 +3086,7 @@ schemas: !Schemas
               description: Fully qualified identifier of the key vault resource.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_50
+          schema: *ref_54
           readOnly: true
           required: false
           serializedName: name
@@ -3007,7 +3096,7 @@ schemas: !Schemas
               description: Name of the key vault resource.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_51
+          schema: *ref_55
           readOnly: true
           required: false
           serializedName: type
@@ -3017,7 +3106,7 @@ schemas: !Schemas
               description: Resource type of the key vault resource.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_52
+          schema: *ref_56
           required: false
           serializedName: location
           language: !Languages 
@@ -3026,7 +3115,7 @@ schemas: !Schemas
               description: Azure location of the key vault resource.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_53
+          schema: *ref_57
           required: false
           serializedName: tags
           language: !Languages 
@@ -3035,14 +3124,14 @@ schemas: !Schemas
               description: Tags assigned to the key vault resource.
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_59
+          schema: !ObjectSchema &ref_63
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: *ref_54
+                schema: *ref_58
                 serializedName: createdBy
                 language: !Languages 
                   default:
@@ -3050,7 +3139,7 @@ schemas: !Schemas
                     description: The identity that created the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_55
+                schema: *ref_59
                 serializedName: createdByType
                 language: !Languages 
                   default:
@@ -3058,7 +3147,7 @@ schemas: !Schemas
                     description: The type of identity that created the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_56
+                schema: *ref_60
                 serializedName: createdAt
                 language: !Languages 
                   default:
@@ -3066,7 +3155,7 @@ schemas: !Schemas
                     description: The timestamp of the key vault resource creation (UTC).
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_57
+                schema: *ref_61
                 serializedName: lastModifiedBy
                 language: !Languages 
                   default:
@@ -3074,7 +3163,7 @@ schemas: !Schemas
                     description: The identity that last modified the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_55
+                schema: *ref_59
                 serializedName: lastModifiedByType
                 language: !Languages 
                   default:
@@ -3082,7 +3171,7 @@ schemas: !Schemas
                     description: The type of identity that last modified the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_58
+                schema: *ref_62
                 serializedName: lastModifiedAt
                 language: !Languages 
                   default:
@@ -3109,7 +3198,7 @@ schemas: !Schemas
               description: System metadata for the key vault.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_39
+          schema: *ref_41
           required: true
           serializedName: properties
           language: !Languages 
@@ -3129,22 +3218,22 @@ schemas: !Schemas
           description: Resource information with extended details.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_59
-    - !ObjectSchema &ref_237
+    - *ref_63
+    - !ObjectSchema &ref_241
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_62
+          schema: !ObjectSchema &ref_66
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: *ref_60
+                schema: *ref_64
                 serializedName: code
                 language: !Languages 
                   default:
@@ -3152,7 +3241,7 @@ schemas: !Schemas
                     description: Error code. This is a mnemonic that can be consumed programmatically.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_61
+                schema: *ref_65
                 serializedName: message
                 language: !Languages 
                   default:
@@ -3189,15 +3278,15 @@ schemas: !Schemas
           description: An error response from Key Vault resource provider
           namespace: ''
       protocol: !Protocols {}
-    - *ref_62
-    - !ObjectSchema &ref_238
+    - *ref_66
+    - !ObjectSchema &ref_242
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: *ref_63
+          schema: *ref_67
           serializedName: tags
           language: !Languages 
             default:
@@ -3205,14 +3294,14 @@ schemas: !Schemas
               description: 'The tags that will be assigned to the key vault. '
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_69
+          schema: !ObjectSchema &ref_73
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: *ref_64
+                schema: *ref_68
                 serializedName: tenantId
                 language: !Languages 
                   default:
@@ -3220,7 +3309,7 @@ schemas: !Schemas
                     description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_40
+                schema: *ref_42
                 serializedName: sku
                 language: !Languages 
                   default:
@@ -3228,12 +3317,12 @@ schemas: !Schemas
                     description: SKU details
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_200
+                schema: !ArraySchema &ref_204
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
-                  elementType: *ref_41
+                  elementType: *ref_43
                   language: !Languages 
                     default:
                       name: VaultPatchPropertiesAccessPolicies
@@ -3270,7 +3359,7 @@ schemas: !Schemas
                     description: Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_65
+                schema: *ref_69
                 serializedName: enableSoftDelete
                 language: !Languages 
                   default:
@@ -3278,7 +3367,7 @@ schemas: !Schemas
                     description: Property to specify whether the 'soft delete' functionality is enabled for this key vault. Once set to true, it cannot be reverted to false.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_66
+                schema: *ref_70
                 serializedName: enableRbacAuthorization
                 language: !Languages 
                   default:
@@ -3289,7 +3378,7 @@ schemas: !Schemas
                       will not change.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_67
+                schema: *ref_71
                 serializedName: softDeleteRetentionInDays
                 language: !Languages 
                   default:
@@ -3315,7 +3404,7 @@ schemas: !Schemas
                       a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_43
+                schema: *ref_45
                 serializedName: networkAcls
                 language: !Languages 
                   default:
@@ -3323,7 +3412,7 @@ schemas: !Schemas
                     description: A collection of rules governing the accessibility of the vault from specific network locations.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_68
+                schema: *ref_72
                 serializedName: publicNetworkAccess
                 language: !Languages 
                   default:
@@ -3360,15 +3449,15 @@ schemas: !Schemas
           description: Parameters for creating or updating a vault
           namespace: ''
       protocol: !Protocols {}
-    - *ref_69
-    - !ObjectSchema &ref_248
+    - *ref_73
+    - !ObjectSchema &ref_252
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: *ref_70
+          schema: *ref_74
           readOnly: true
           required: false
           serializedName: id
@@ -3378,7 +3467,7 @@ schemas: !Schemas
               description: The resource id of the access policy.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_71
+          schema: *ref_75
           readOnly: true
           required: false
           serializedName: name
@@ -3388,7 +3477,7 @@ schemas: !Schemas
               description: The resource name of the access policy.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_72
+          schema: *ref_76
           readOnly: true
           required: false
           serializedName: type
@@ -3398,7 +3487,7 @@ schemas: !Schemas
               description: The resource name of the access policy.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_73
+          schema: *ref_77
           readOnly: true
           required: false
           serializedName: location
@@ -3408,19 +3497,19 @@ schemas: !Schemas
               description: The resource type of the access policy.
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_74
+          schema: !ObjectSchema &ref_78
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: !ArraySchema &ref_201
+                schema: !ArraySchema &ref_205
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
-                  elementType: *ref_41
+                  elementType: *ref_43
                   language: !Languages 
                     default:
                       name: VaultAccessPolicyPropertiesAccessPolicies
@@ -3464,20 +3553,20 @@ schemas: !Schemas
           description: Parameters for updating the access policy in a vault
           namespace: ''
       protocol: !Protocols {}
-    - *ref_74
-    - !ObjectSchema &ref_257
+    - *ref_78
+    - !ObjectSchema &ref_261
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_202
+          schema: !ArraySchema &ref_206
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_75
+            elementType: *ref_79
             language: !Languages 
               default:
                 name: VaultListResultValue
@@ -3490,7 +3579,7 @@ schemas: !Schemas
               description: The list of vaults.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_76
+          schema: *ref_80
           serializedName: nextLink
           language: !Languages 
             default:
@@ -3507,26 +3596,26 @@ schemas: !Schemas
           description: List of vaults
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_259
+    - !ObjectSchema &ref_263
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_203
+          schema: !ArraySchema &ref_207
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: !ObjectSchema &ref_87
+            elementType: !ObjectSchema &ref_91
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2021-10-01'
               properties:
                 - !Property 
-                  schema: *ref_77
+                  schema: *ref_81
                   readOnly: true
                   serializedName: id
                   language: !Languages 
@@ -3535,7 +3624,7 @@ schemas: !Schemas
                       description: The resource ID for the deleted key vault.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_78
+                  schema: *ref_82
                   readOnly: true
                   serializedName: name
                   language: !Languages 
@@ -3544,7 +3633,7 @@ schemas: !Schemas
                       description: The name of the key vault.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_79
+                  schema: *ref_83
                   readOnly: true
                   serializedName: type
                   language: !Languages 
@@ -3553,14 +3642,14 @@ schemas: !Schemas
                       description: The resource type of the key vault.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_88
+                  schema: !ObjectSchema &ref_92
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2021-10-01'
                     properties:
                       - !Property 
-                        schema: *ref_80
+                        schema: *ref_84
                         readOnly: true
                         serializedName: vaultId
                         language: !Languages 
@@ -3569,7 +3658,7 @@ schemas: !Schemas
                             description: The resource id of the original vault.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_81
+                        schema: *ref_85
                         readOnly: true
                         serializedName: location
                         language: !Languages 
@@ -3578,7 +3667,7 @@ schemas: !Schemas
                             description: The location of the original vault.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_82
+                        schema: *ref_86
                         readOnly: true
                         serializedName: deletionDate
                         language: !Languages 
@@ -3587,7 +3676,7 @@ schemas: !Schemas
                             description: The deleted date.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_83
+                        schema: *ref_87
                         readOnly: true
                         serializedName: scheduledPurgeDate
                         language: !Languages 
@@ -3596,7 +3685,7 @@ schemas: !Schemas
                             description: The scheduled purged date.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_84
+                        schema: *ref_88
                         readOnly: true
                         serializedName: tags
                         language: !Languages 
@@ -3605,7 +3694,7 @@ schemas: !Schemas
                             description: Tags of the original vault.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_85
+                        schema: *ref_89
                         readOnly: true
                         serializedName: purgeProtectionEnabled
                         language: !Languages 
@@ -3651,7 +3740,7 @@ schemas: !Schemas
               description: The list of deleted vaults.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_86
+          schema: *ref_90
           serializedName: nextLink
           language: !Languages 
             default:
@@ -3668,16 +3757,16 @@ schemas: !Schemas
           description: List of vaults
           namespace: ''
       protocol: !Protocols {}
-    - *ref_87
-    - *ref_88
-    - !ObjectSchema &ref_264
+    - *ref_91
+    - *ref_92
+    - !ObjectSchema &ref_268
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: *ref_89
+          schema: *ref_93
           required: true
           serializedName: name
           language: !Languages 
@@ -3686,7 +3775,7 @@ schemas: !Schemas
               description: The vault name.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_90
+          schema: *ref_94
           required: true
           serializedName: type
           language: !Languages 
@@ -3704,14 +3793,14 @@ schemas: !Schemas
           description: The parameters used to check the availability of the vault name.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_267
+    - !ObjectSchema &ref_271
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: *ref_91
+          schema: *ref_95
           readOnly: true
           serializedName: nameAvailable
           language: !Languages 
@@ -3720,7 +3809,7 @@ schemas: !Schemas
               description: A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_92
+          schema: *ref_96
           readOnly: true
           serializedName: reason
           language: !Languages 
@@ -3729,7 +3818,7 @@ schemas: !Schemas
               description: The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_93
+          schema: *ref_97
           readOnly: true
           serializedName: message
           language: !Languages 
@@ -3747,34 +3836,34 @@ schemas: !Schemas
           description: The CheckNameAvailability operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_94
+    - !ObjectSchema &ref_98
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_95
+          - !ObjectSchema &ref_99
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             children: !Relations 
               all:
-                - *ref_94
-                - !ObjectSchema &ref_99
+                - *ref_98
+                - !ObjectSchema &ref_103
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
                   parents: !Relations 
                     all:
-                      - *ref_95
+                      - *ref_99
                     immediate:
-                      - *ref_95
+                      - *ref_99
                   properties:
                     - !Property 
-                      schema: *ref_96
+                      schema: *ref_100
                       flattenedNames:
                         - properties
                         - groupId
@@ -3786,12 +3875,12 @@ schemas: !Schemas
                           description: Group identifier of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_205
+                      schema: !ArraySchema &ref_209
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: *ref_97
+                        elementType: *ref_101
                         language: !Languages 
                           default:
                             name: PrivateLinkResourcePropertiesRequiredMembers
@@ -3808,12 +3897,12 @@ schemas: !Schemas
                           description: Required member names of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_206
+                      schema: !ArraySchema &ref_210
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: *ref_98
+                        elementType: *ref_102
                         language: !Languages 
                           default:
                             name: PrivateLinkResourcePropertiesRequiredZoneNames
@@ -3840,11 +3929,11 @@ schemas: !Schemas
                       namespace: ''
                   protocol: !Protocols {}
               immediate:
-                - *ref_94
-                - *ref_99
+                - *ref_98
+                - *ref_103
             properties:
               - !Property 
-                schema: *ref_100
+                schema: *ref_104
                 readOnly: true
                 serializedName: id
                 language: !Languages 
@@ -3853,7 +3942,7 @@ schemas: !Schemas
                     description: Fully qualified identifier of the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_101
+                schema: *ref_105
                 readOnly: true
                 serializedName: name
                 language: !Languages 
@@ -3862,7 +3951,7 @@ schemas: !Schemas
                     description: Name of the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_102
+                schema: *ref_106
                 readOnly: true
                 serializedName: type
                 language: !Languages 
@@ -3871,7 +3960,7 @@ schemas: !Schemas
                     description: Resource type of the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_103
+                schema: *ref_107
                 readOnly: true
                 serializedName: location
                 language: !Languages 
@@ -3880,7 +3969,7 @@ schemas: !Schemas
                     description: Azure location of the key vault resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_104
+                schema: *ref_108
                 readOnly: true
                 serializedName: tags
                 language: !Languages 
@@ -3902,10 +3991,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_95
+          - *ref_99
       properties:
         - !Property 
-          schema: *ref_105
+          schema: *ref_109
           serializedName: etag
           language: !Languages 
             default:
@@ -3913,7 +4002,7 @@ schemas: !Schemas
               description: Modified whenever there is a change in the state of private endpoint connection.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_47
+          schema: *ref_49
           flattenedNames:
             - properties
             - privateEndpoint
@@ -3924,7 +4013,7 @@ schemas: !Schemas
               description: Properties of the private endpoint object.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_48
+          schema: *ref_50
           flattenedNames:
             - properties
             - privateLinkServiceConnectionState
@@ -3958,20 +4047,20 @@ schemas: !Schemas
           description: Private endpoint connection resource.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_95
-    - !ObjectSchema &ref_283
+    - *ref_99
+    - !ObjectSchema &ref_287
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_204
+          schema: !ArraySchema &ref_208
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_94
+            elementType: *ref_98
             language: !Languages 
               default:
                 name: PrivateEndpointConnectionListResultValue
@@ -3984,7 +4073,7 @@ schemas: !Schemas
               description: The list of private endpoint connections.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_106
+          schema: *ref_110
           serializedName: nextLink
           language: !Languages 
             default:
@@ -4001,19 +4090,19 @@ schemas: !Schemas
           description: List of private endpoint connections.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_286
+    - !ObjectSchema &ref_290
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_207
+          schema: !ArraySchema &ref_211
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_99
+            elementType: *ref_103
             language: !Languages 
               default:
                 name: PrivateLinkResourceListResultValue
@@ -4035,35 +4124,35 @@ schemas: !Schemas
           description: A list of private link resources
           namespace: ''
       protocol: !Protocols {}
-    - *ref_99
-    - !ObjectSchema &ref_107
+    - *ref_103
+    - !ObjectSchema &ref_111
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_108
+          - !ObjectSchema &ref_112
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             children: !Relations 
               all:
-                - *ref_107
-                - !ObjectSchema &ref_115
+                - *ref_111
+                - !ObjectSchema &ref_119
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
                   parents: !Relations 
                     all:
-                      - *ref_108
+                      - *ref_112
                     immediate:
-                      - *ref_108
+                      - *ref_112
                   properties:
                     - !Property 
-                      schema: *ref_109
+                      schema: *ref_113
                       serializedName: etag
                       language: !Languages 
                         default:
@@ -4071,14 +4160,14 @@ schemas: !Schemas
                           description: Modified whenever there is a change in the state of private endpoint connection.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ObjectSchema &ref_134
+                      schema: !ObjectSchema &ref_138
                         type: object
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
                         properties:
                           - !Property 
-                            schema: *ref_110
+                            schema: *ref_114
                             readOnly: true
                             serializedName: id
                             language: !Languages 
@@ -4107,7 +4196,7 @@ schemas: !Schemas
                           description: Properties of the private endpoint object.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ObjectSchema &ref_135
+                      schema: !ObjectSchema &ref_139
                         type: object
                         apiVersions:
                           - !ApiVersion 
@@ -4122,7 +4211,7 @@ schemas: !Schemas
                                 description: Indicates whether the connection has been approved, rejected or removed by the key vault owner.
                             protocol: !Protocols {}
                           - !Property 
-                            schema: *ref_111
+                            schema: *ref_115
                             serializedName: description
                             language: !Languages 
                               default:
@@ -4181,19 +4270,19 @@ schemas: !Schemas
                       description: Private endpoint connection resource.
                       namespace: ''
                   protocol: !Protocols {}
-                - !ObjectSchema &ref_116
+                - !ObjectSchema &ref_120
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
                   parents: !Relations 
                     all:
-                      - *ref_108
+                      - *ref_112
                     immediate:
-                      - *ref_108
+                      - *ref_112
                   properties:
                     - !Property 
-                      schema: *ref_112
+                      schema: *ref_116
                       flattenedNames:
                         - properties
                         - groupId
@@ -4205,12 +4294,12 @@ schemas: !Schemas
                           description: Group identifier of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_215
+                      schema: !ArraySchema &ref_219
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: *ref_113
+                        elementType: *ref_117
                         language: !Languages 
                           default:
                             name: MhsmPrivateLinkResourcePropertiesRequiredMembers
@@ -4227,12 +4316,12 @@ schemas: !Schemas
                           description: Required member names of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_216
+                      schema: !ArraySchema &ref_220
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: *ref_114
+                        elementType: *ref_118
                         language: !Languages 
                           default:
                             name: MhsmPrivateLinkResourcePropertiesRequiredZoneNames
@@ -4259,12 +4348,12 @@ schemas: !Schemas
                       namespace: ''
                   protocol: !Protocols {}
               immediate:
-                - *ref_107
-                - *ref_115
-                - *ref_116
+                - *ref_111
+                - *ref_119
+                - *ref_120
             properties:
               - !Property 
-                schema: *ref_117
+                schema: *ref_121
                 readOnly: true
                 serializedName: id
                 language: !Languages 
@@ -4273,7 +4362,7 @@ schemas: !Schemas
                     description: The Azure Resource Manager resource ID for the managed HSM Pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_118
+                schema: *ref_122
                 readOnly: true
                 serializedName: name
                 language: !Languages 
@@ -4282,7 +4371,7 @@ schemas: !Schemas
                     description: The name of the managed HSM Pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_119
+                schema: *ref_123
                 readOnly: true
                 serializedName: type
                 language: !Languages 
@@ -4291,7 +4380,7 @@ schemas: !Schemas
                     description: The resource type of the managed HSM Pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_120
+                schema: *ref_124
                 serializedName: location
                 extensions:
                   x-ms-mutability:
@@ -4303,14 +4392,14 @@ schemas: !Schemas
                     description: The supported Azure location where the managed HSM Pool should be created.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_143
+                schema: !ObjectSchema &ref_147
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
                   properties:
                     - !Property 
-                      schema: *ref_121
+                      schema: *ref_125
                       required: true
                       serializedName: family
                       language: !Languages 
@@ -4319,7 +4408,7 @@ schemas: !Schemas
                           description: SKU Family of the managed HSM Pool
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_122
+                      schema: *ref_126
                       required: true
                       serializedName: name
                       language: !Languages 
@@ -4345,7 +4434,7 @@ schemas: !Schemas
                     description: SKU details
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_123
+                schema: *ref_127
                 serializedName: tags
                 language: !Languages 
                   default:
@@ -4353,7 +4442,7 @@ schemas: !Schemas
                     description: Resource tags
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_59
+                schema: *ref_63
                 readOnly: true
                 serializedName: systemData
                 language: !Languages 
@@ -4375,17 +4464,17 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_108
+          - *ref_112
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_138
+          schema: !ObjectSchema &ref_142
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: *ref_124
+                schema: *ref_128
                 serializedName: tenantId
                 language: !Languages 
                   default:
@@ -4393,12 +4482,12 @@ schemas: !Schemas
                     description: The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_208
+                schema: !ArraySchema &ref_212
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
-                  elementType: *ref_125
+                  elementType: *ref_129
                   language: !Languages 
                     default:
                       name: ManagedHsmPropertiesInitialAdminObjectIds
@@ -4411,7 +4500,7 @@ schemas: !Schemas
                     description: Array of initial administrators object ids for this managed hsm pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_126
+                schema: *ref_130
                 readOnly: true
                 serializedName: hsmUri
                 language: !Languages 
@@ -4420,7 +4509,7 @@ schemas: !Schemas
                     description: The URI of the managed hsm pool for performing operations on keys.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_127
+                schema: *ref_131
                 serializedName: enableSoftDelete
                 language: !Languages 
                   default:
@@ -4430,7 +4519,7 @@ schemas: !Schemas
                       set to true, it cannot be reverted to false.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_128
+                schema: *ref_132
                 serializedName: softDeleteRetentionInDays
                 language: !Languages 
                   default:
@@ -4438,7 +4527,7 @@ schemas: !Schemas
                     description: softDelete data retention days. It accepts >=7 and <=90.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_129
+                schema: *ref_133
                 serializedName: enablePurgeProtection
                 language: !Languages 
                   default:
@@ -4456,7 +4545,7 @@ schemas: !Schemas
                     description: The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_130
+                schema: *ref_134
                 readOnly: true
                 serializedName: statusMessage
                 language: !Languages 
@@ -4465,7 +4554,7 @@ schemas: !Schemas
                     description: Resource Status Message.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_131
+                schema: *ref_135
                 readOnly: true
                 serializedName: provisioningState
                 language: !Languages 
@@ -4474,7 +4563,7 @@ schemas: !Schemas
                     description: Provisioning state.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_139
+                schema: !ObjectSchema &ref_143
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -4497,19 +4586,19 @@ schemas: !Schemas
                           description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_209
+                      schema: !ArraySchema &ref_213
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: !ObjectSchema &ref_140
+                        elementType: !ObjectSchema &ref_144
                           type: object
                           apiVersions:
                             - !ApiVersion 
                               version: '2021-10-01'
                           properties:
                             - !Property 
-                              schema: *ref_132
+                              schema: *ref_136
                               required: true
                               serializedName: value
                               language: !Languages 
@@ -4540,19 +4629,19 @@ schemas: !Schemas
                           description: The list of IP address rules.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_210
+                      schema: !ArraySchema &ref_214
                         type: array
                         apiVersions:
                           - !ApiVersion 
                             version: '2021-10-01'
-                        elementType: !ObjectSchema &ref_141
+                        elementType: !ObjectSchema &ref_145
                           type: object
                           apiVersions:
                             - !ApiVersion 
                               version: '2021-10-01'
                           properties:
                             - !Property 
-                              schema: *ref_133
+                              schema: *ref_137
                               required: true
                               serializedName: id
                               language: !Languages 
@@ -4600,19 +4689,19 @@ schemas: !Schemas
                     description: Rules governing the accessibility of the key vault from specific network locations.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_211
+                schema: !ArraySchema &ref_215
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2021-10-01'
-                  elementType: !ObjectSchema &ref_142
+                  elementType: !ObjectSchema &ref_146
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2021-10-01'
                     properties:
                       - !Property 
-                        schema: *ref_134
+                        schema: *ref_138
                         flattenedNames:
                           - properties
                           - privateEndpoint
@@ -4623,7 +4712,7 @@ schemas: !Schemas
                             description: Properties of the private endpoint object.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_135
+                        schema: *ref_139
                         flattenedNames:
                           - properties
                           - privateLinkServiceConnectionState
@@ -4668,7 +4757,7 @@ schemas: !Schemas
                     description: List of private endpoint connections associated with the managed hsm pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_136
+                schema: *ref_140
                 serializedName: publicNetworkAccess
                 language: !Languages 
                   default:
@@ -4676,7 +4765,7 @@ schemas: !Schemas
                     description: Control permission for data plane traffic coming from public networks while private endpoint is enabled.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_137
+                schema: *ref_141
                 readOnly: true
                 serializedName: scheduledPurgeDate
                 language: !Languages 
@@ -4712,30 +4801,30 @@ schemas: !Schemas
           description: Resource information with extended details.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_142
+    - *ref_143
+    - *ref_144
+    - *ref_145
+    - *ref_146
     - *ref_138
     - *ref_139
-    - *ref_140
-    - *ref_141
-    - *ref_142
-    - *ref_134
-    - *ref_135
-    - *ref_108
-    - *ref_143
-    - !ObjectSchema &ref_291
+    - *ref_112
+    - *ref_147
+    - !ObjectSchema &ref_295
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_146
+          schema: !ObjectSchema &ref_150
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: *ref_144
+                schema: *ref_148
                 readOnly: true
                 serializedName: code
                 language: !Languages 
@@ -4744,7 +4833,7 @@ schemas: !Schemas
                     description: The error code.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_145
+                schema: *ref_149
                 readOnly: true
                 serializedName: message
                 language: !Languages 
@@ -4753,7 +4842,7 @@ schemas: !Schemas
                     description: The error message.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_146
+                schema: *ref_150
                 readOnly: true
                 serializedName: innererror
                 language: !Languages 
@@ -4788,20 +4877,20 @@ schemas: !Schemas
           description: The error exception.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_146
-    - !ObjectSchema &ref_303
+    - *ref_150
+    - !ObjectSchema &ref_307
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_212
+          schema: !ArraySchema &ref_216
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_107
+            elementType: *ref_111
             language: !Languages 
               default:
                 name: ManagedHsmListResultValue
@@ -4814,7 +4903,7 @@ schemas: !Schemas
               description: The list of managed HSM Pools.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_147
+          schema: *ref_151
           serializedName: nextLink
           language: !Languages 
             default:
@@ -4831,19 +4920,19 @@ schemas: !Schemas
           description: List of managed HSM Pools
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_312
+    - !ObjectSchema &ref_316
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_213
+          schema: !ArraySchema &ref_217
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_115
+            elementType: *ref_119
             language: !Languages 
               default:
                 name: MhsmPrivateEndpointConnectionsListResultValue
@@ -4856,7 +4945,7 @@ schemas: !Schemas
               description: The private endpoint connection associated with a managed HSM Pools.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_148
+          schema: *ref_152
           serializedName: nextLink
           language: !Languages 
             default:
@@ -4873,27 +4962,27 @@ schemas: !Schemas
           description: List of private endpoint connections associated with a managed HSM Pools
           namespace: ''
       protocol: !Protocols {}
-    - *ref_115
-    - !ObjectSchema &ref_305
+    - *ref_119
+    - !ObjectSchema &ref_309
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_214
+          schema: !ArraySchema &ref_218
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: !ObjectSchema &ref_159
+            elementType: !ObjectSchema &ref_163
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2021-10-01'
               properties:
                 - !Property 
-                  schema: *ref_149
+                  schema: *ref_153
                   readOnly: true
                   serializedName: id
                   language: !Languages 
@@ -4902,7 +4991,7 @@ schemas: !Schemas
                       description: The Azure Resource Manager resource ID for the deleted managed HSM Pool.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_150
+                  schema: *ref_154
                   readOnly: true
                   serializedName: name
                   language: !Languages 
@@ -4911,7 +5000,7 @@ schemas: !Schemas
                       description: The name of the managed HSM Pool.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_151
+                  schema: *ref_155
                   readOnly: true
                   serializedName: type
                   language: !Languages 
@@ -4920,14 +5009,14 @@ schemas: !Schemas
                       description: The resource type of the managed HSM Pool.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_160
+                  schema: !ObjectSchema &ref_164
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2021-10-01'
                     properties:
                       - !Property 
-                        schema: *ref_152
+                        schema: *ref_156
                         readOnly: true
                         serializedName: mhsmId
                         language: !Languages 
@@ -4936,7 +5025,7 @@ schemas: !Schemas
                             description: The resource id of the original managed HSM.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_153
+                        schema: *ref_157
                         readOnly: true
                         serializedName: location
                         language: !Languages 
@@ -4945,7 +5034,7 @@ schemas: !Schemas
                             description: The location of the original managed HSM.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_154
+                        schema: *ref_158
                         readOnly: true
                         serializedName: deletionDate
                         language: !Languages 
@@ -4954,7 +5043,7 @@ schemas: !Schemas
                             description: The deleted date.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_155
+                        schema: *ref_159
                         readOnly: true
                         serializedName: scheduledPurgeDate
                         language: !Languages 
@@ -4963,7 +5052,7 @@ schemas: !Schemas
                             description: The scheduled purged date.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_156
+                        schema: *ref_160
                         readOnly: true
                         serializedName: purgeProtectionEnabled
                         language: !Languages 
@@ -4972,7 +5061,7 @@ schemas: !Schemas
                             description: Purge protection status of the original managed HSM.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_157
+                        schema: *ref_161
                         readOnly: true
                         serializedName: tags
                         language: !Languages 
@@ -5018,7 +5107,7 @@ schemas: !Schemas
               description: The list of deleted managed HSM Pools.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_158
+          schema: *ref_162
           serializedName: nextLink
           language: !Languages 
             default:
@@ -5035,21 +5124,21 @@ schemas: !Schemas
           description: List of deleted managed HSM Pools
           namespace: ''
       protocol: !Protocols {}
-    - *ref_159
-    - *ref_160
-    - !ObjectSchema &ref_329
+    - *ref_163
+    - *ref_164
+    - !ObjectSchema &ref_333
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_217
+          schema: !ArraySchema &ref_221
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_116
+            elementType: *ref_120
             language: !Languages 
               default:
                 name: MhsmPrivateLinkResourceListResultValue
@@ -5071,27 +5160,27 @@ schemas: !Schemas
           description: A list of private link resources
           namespace: ''
       protocol: !Protocols {}
-    - *ref_116
-    - !ObjectSchema &ref_330
+    - *ref_120
+    - !ObjectSchema &ref_334
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_223
+          schema: !ArraySchema &ref_227
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: !ObjectSchema &ref_185
+            elementType: !ObjectSchema &ref_189
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2021-10-01'
               properties:
                 - !Property 
-                  schema: *ref_161
+                  schema: *ref_165
                   serializedName: name
                   language: !Languages 
                     default:
@@ -5099,14 +5188,14 @@ schemas: !Schemas
                       description: 'Operation name: {provider}/{resource}/{operation}'
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_186
+                  schema: !ObjectSchema &ref_190
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2021-10-01'
                     properties:
                       - !Property 
-                        schema: *ref_162
+                        schema: *ref_166
                         serializedName: provider
                         language: !Languages 
                           default:
@@ -5114,7 +5203,7 @@ schemas: !Schemas
                             description: 'Service provider: Microsoft Key Vault.'
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_163
+                        schema: *ref_167
                         serializedName: resource
                         language: !Languages 
                           default:
@@ -5122,7 +5211,7 @@ schemas: !Schemas
                             description: Resource on which the operation is performed etc.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_164
+                        schema: *ref_168
                         serializedName: operation
                         language: !Languages 
                           default:
@@ -5130,7 +5219,7 @@ schemas: !Schemas
                             description: 'Type of operation: get, read, delete, etc.'
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_165
+                        schema: *ref_169
                         serializedName: description
                         language: !Languages 
                           default:
@@ -5154,7 +5243,7 @@ schemas: !Schemas
                       description: Display metadata associated with the operation.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_166
+                  schema: *ref_170
                   serializedName: origin
                   language: !Languages 
                     default:
@@ -5162,7 +5251,7 @@ schemas: !Schemas
                       description: The origin of operations.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_167
+                  schema: *ref_171
                   serializedName: isDataAction
                   language: !Languages 
                     default:
@@ -5170,26 +5259,26 @@ schemas: !Schemas
                       description: Property to specify whether the action is a data action.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_187
+                  schema: !ObjectSchema &ref_191
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2021-10-01'
                     properties:
                       - !Property 
-                        schema: !ArraySchema &ref_218
+                        schema: !ArraySchema &ref_222
                           type: array
                           apiVersions:
                             - !ApiVersion 
                               version: '2021-10-01'
-                          elementType: !ObjectSchema &ref_188
+                          elementType: !ObjectSchema &ref_192
                             type: object
                             apiVersions:
                               - !ApiVersion 
                                 version: '2021-10-01'
                             properties:
                               - !Property 
-                                schema: *ref_168
+                                schema: *ref_172
                                 serializedName: name
                                 language: !Languages 
                                   default:
@@ -5197,7 +5286,7 @@ schemas: !Schemas
                                     description: Name of log specification.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_169
+                                schema: *ref_173
                                 serializedName: displayName
                                 language: !Languages 
                                   default:
@@ -5205,7 +5294,7 @@ schemas: !Schemas
                                     description: Display name of log specification.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_170
+                                schema: *ref_174
                                 serializedName: blobDuration
                                 language: !Languages 
                                   default:
@@ -5234,19 +5323,19 @@ schemas: !Schemas
                             description: Log specifications of operation.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_222
+                        schema: !ArraySchema &ref_226
                           type: array
                           apiVersions:
                             - !ApiVersion 
                               version: '2021-10-01'
-                          elementType: !ObjectSchema &ref_189
+                          elementType: !ObjectSchema &ref_193
                             type: object
                             apiVersions:
                               - !ApiVersion 
                                 version: '2021-10-01'
                             properties:
                               - !Property 
-                                schema: *ref_171
+                                schema: *ref_175
                                 serializedName: name
                                 language: !Languages 
                                   default:
@@ -5254,7 +5343,7 @@ schemas: !Schemas
                                     description: Name of metric specification.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_172
+                                schema: *ref_176
                                 serializedName: displayName
                                 language: !Languages 
                                   default:
@@ -5262,7 +5351,7 @@ schemas: !Schemas
                                     description: Display name of metric specification.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_173
+                                schema: *ref_177
                                 serializedName: displayDescription
                                 language: !Languages 
                                   default:
@@ -5270,7 +5359,7 @@ schemas: !Schemas
                                     description: Display description of metric specification.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_174
+                                schema: *ref_178
                                 serializedName: unit
                                 language: !Languages 
                                   default:
@@ -5278,7 +5367,7 @@ schemas: !Schemas
                                     description: 'The metric unit. Possible values include: ''Bytes'', ''Count'', ''Milliseconds''.'
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_175
+                                schema: *ref_179
                                 serializedName: aggregationType
                                 language: !Languages 
                                   default:
@@ -5286,12 +5375,12 @@ schemas: !Schemas
                                     description: 'The metric aggregation type. Possible values include: ''Average'', ''Count'', ''Total''.'
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: !ArraySchema &ref_219
+                                schema: !ArraySchema &ref_223
                                   type: array
                                   apiVersions:
                                     - !ApiVersion 
                                       version: '2021-10-01'
-                                  elementType: *ref_176
+                                  elementType: *ref_180
                                   language: !Languages 
                                     default:
                                       name: MetricSpecificationSupportedAggregationTypes
@@ -5304,12 +5393,12 @@ schemas: !Schemas
                                     description: The supported aggregation types for the metrics.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: !ArraySchema &ref_220
+                                schema: !ArraySchema &ref_224
                                   type: array
                                   apiVersions:
                                     - !ApiVersion 
                                       version: '2021-10-01'
-                                  elementType: *ref_177
+                                  elementType: *ref_181
                                   language: !Languages 
                                     default:
                                       name: MetricSpecificationSupportedTimeGrainTypes
@@ -5322,7 +5411,7 @@ schemas: !Schemas
                                     description: The supported time grain types for the metrics.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_178
+                                schema: *ref_182
                                 serializedName: lockAggregationType
                                 language: !Languages 
                                   default:
@@ -5330,19 +5419,19 @@ schemas: !Schemas
                                     description: The metric lock aggregation type.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: !ArraySchema &ref_221
+                                schema: !ArraySchema &ref_225
                                   type: array
                                   apiVersions:
                                     - !ApiVersion 
                                       version: '2021-10-01'
-                                  elementType: !ObjectSchema &ref_190
+                                  elementType: !ObjectSchema &ref_194
                                     type: object
                                     apiVersions:
                                       - !ApiVersion 
                                         version: '2021-10-01'
                                     properties:
                                       - !Property 
-                                        schema: *ref_179
+                                        schema: *ref_183
                                         serializedName: name
                                         language: !Languages 
                                           default:
@@ -5350,7 +5439,7 @@ schemas: !Schemas
                                             description: Name of dimension.
                                         protocol: !Protocols {}
                                       - !Property 
-                                        schema: *ref_180
+                                        schema: *ref_184
                                         serializedName: displayName
                                         language: !Languages 
                                           default:
@@ -5358,7 +5447,7 @@ schemas: !Schemas
                                             description: Display name of dimension.
                                         protocol: !Protocols {}
                                       - !Property 
-                                        schema: *ref_181
+                                        schema: *ref_185
                                         serializedName: toBeExportedForShoebox
                                         language: !Languages 
                                           default:
@@ -5387,7 +5476,7 @@ schemas: !Schemas
                                     description: The dimensions of metric
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_182
+                                schema: *ref_186
                                 serializedName: fillGapWithZero
                                 language: !Languages 
                                   default:
@@ -5395,7 +5484,7 @@ schemas: !Schemas
                                     description: Property to specify whether to fill gap with zero.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: *ref_183
+                                schema: *ref_187
                                 serializedName: internalMetricName
                                 language: !Languages 
                                   default:
@@ -5464,7 +5553,7 @@ schemas: !Schemas
               description: List of Storage operations supported by the Storage resource provider.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_184
+          schema: *ref_188
           serializedName: nextLink
           language: !Languages 
             default:
@@ -5481,12 +5570,12 @@ schemas: !Schemas
           description: Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_185
-    - *ref_186
-    - *ref_187
-    - *ref_188
     - *ref_189
     - *ref_190
+    - *ref_191
+    - *ref_192
+    - *ref_193
+    - *ref_194
     - !ObjectSchema 
       type: object
       apiVersions:
@@ -5494,12 +5583,12 @@ schemas: !Schemas
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_224
+          schema: !ArraySchema &ref_228
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2021-10-01'
-            elementType: *ref_95
+            elementType: *ref_99
             language: !Languages 
               default:
                 name: ResourceListResultValue
@@ -5512,7 +5601,7 @@ schemas: !Schemas
               description: The list of vault resources.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_191
+          schema: *ref_195
           serializedName: nextLink
           language: !Languages 
             default:
@@ -5526,10 +5615,6 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - *ref_192
-    - *ref_193
-    - *ref_194
-    - *ref_195
     - *ref_196
     - *ref_197
     - *ref_198
@@ -5559,8 +5644,12 @@ schemas: !Schemas
     - *ref_222
     - *ref_223
     - *ref_224
+    - *ref_225
+    - *ref_226
+    - *ref_227
+    - *ref_228
 globalParameters:
-  - !Parameter &ref_229
+  - !Parameter &ref_233
     schema: *ref_1
     implementation: Client
     required: true
@@ -5574,7 +5663,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_226
+  - !Parameter &ref_230
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -5590,8 +5679,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_228
-    schema: *ref_225
+  - !Parameter &ref_232
+    schema: *ref_229
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -5613,8 +5702,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_235
+          - *ref_230
+          - !Parameter &ref_239
             schema: *ref_1
             implementation: Method
             required: true
@@ -5626,8 +5715,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_236
-            schema: *ref_227
+          - !Parameter &ref_240
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -5638,13 +5727,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requestMediaTypes:
-          application/json: !Request &ref_234
+          application/json: !Request &ref_238
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -5656,8 +5745,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_233
-                schema: *ref_231
+              - !Parameter &ref_237
+                schema: *ref_235
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5669,7 +5758,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -5682,7 +5771,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_233
+              - *ref_237
             language: !Languages 
               default:
                 name: ''
@@ -5696,13 +5785,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_234
+          - *ref_238
         signatureParameters:
-          - *ref_235
-          - *ref_236
+          - *ref_239
+          - *ref_240
         responses:
           - !SchemaResponse 
-            schema: *ref_75
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -5715,7 +5804,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_75
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -5729,7 +5818,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -6067,8 +6156,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_241
+          - *ref_230
+          - !Parameter &ref_245
             schema: *ref_1
             implementation: Method
             required: true
@@ -6080,8 +6169,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_242
-            schema: *ref_227
+          - !Parameter &ref_246
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -6092,13 +6181,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requestMediaTypes:
-          application/json: !Request &ref_240
+          application/json: !Request &ref_244
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -6110,8 +6199,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_239
-                schema: *ref_238
+              - !Parameter &ref_243
+                schema: *ref_242
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6123,7 +6212,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -6136,7 +6225,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_239
+              - *ref_243
             language: !Languages 
               default:
                 name: ''
@@ -6150,13 +6239,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_240
+          - *ref_244
         signatureParameters:
-          - *ref_241
-          - *ref_242
+          - *ref_245
+          - *ref_246
         responses:
           - !SchemaResponse 
-            schema: *ref_75
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -6169,7 +6258,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_75
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -6183,7 +6272,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -6429,8 +6518,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_243
+          - *ref_230
+          - !Parameter &ref_247
             schema: *ref_1
             implementation: Method
             required: true
@@ -6442,7 +6531,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_244
+          - !Parameter &ref_248
             schema: *ref_1
             implementation: Method
             required: true
@@ -6454,13 +6543,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -6483,8 +6572,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_243
-          - *ref_244
+          - *ref_247
+          - *ref_248
         responses:
           - !Response 
             language: !Languages 
@@ -6506,7 +6595,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -6542,8 +6631,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_245
+          - *ref_230
+          - !Parameter &ref_249
             schema: *ref_1
             implementation: Method
             required: true
@@ -6555,7 +6644,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_246
+          - !Parameter &ref_250
             schema: *ref_1
             implementation: Method
             required: true
@@ -6567,13 +6656,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -6596,11 +6685,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_245
-          - *ref_246
+          - *ref_249
+          - *ref_250
         responses:
           - !SchemaResponse 
-            schema: *ref_75
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -6614,7 +6703,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -6717,8 +6806,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_251
+          - *ref_230
+          - !Parameter &ref_255
             schema: *ref_1
             implementation: Method
             required: true
@@ -6730,8 +6819,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_252
-            schema: *ref_227
+          - !Parameter &ref_256
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -6742,8 +6831,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_253
-            schema: *ref_247
+          - !Parameter &ref_257
+            schema: *ref_251
             implementation: Method
             required: true
             language: !Languages 
@@ -6754,13 +6843,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requestMediaTypes:
-          application/json: !Request &ref_250
+          application/json: !Request &ref_254
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -6772,8 +6861,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_249
-                schema: *ref_248
+              - !Parameter &ref_253
+                schema: *ref_252
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6785,7 +6874,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -6798,7 +6887,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_249
+              - *ref_253
             language: !Languages 
               default:
                 name: ''
@@ -6812,14 +6901,14 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_250
+          - *ref_254
         signatureParameters:
-          - *ref_251
-          - *ref_252
-          - *ref_253
+          - *ref_255
+          - *ref_256
+          - *ref_257
         responses:
           - !SchemaResponse 
-            schema: *ref_248
+            schema: *ref_252
             language: !Languages 
               default:
                 name: ''
@@ -6832,7 +6921,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_248
+            schema: *ref_252
             language: !Languages 
               default:
                 name: ''
@@ -6846,7 +6935,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -6921,8 +7010,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_255
+          - *ref_230
+          - !Parameter &ref_259
             schema: *ref_1
             implementation: Method
             required: true
@@ -6934,8 +7023,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_256
-            schema: *ref_254
+          - !Parameter &ref_260
+            schema: *ref_258
             implementation: Method
             language: !Languages 
               default:
@@ -6945,13 +7034,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -6974,11 +7063,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_255
-          - *ref_256
+          - *ref_259
+          - *ref_260
         responses:
           - !SchemaResponse 
-            schema: *ref_257
+            schema: *ref_261
             language: !Languages 
               default:
                 name: ''
@@ -6992,7 +7081,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7101,9 +7190,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_258
-            schema: *ref_254
+          - *ref_230
+          - !Parameter &ref_262
+            schema: *ref_258
             implementation: Method
             language: !Languages 
               default:
@@ -7113,13 +7202,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7142,10 +7231,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_258
+          - *ref_262
         responses:
           - !SchemaResponse 
-            schema: *ref_257
+            schema: *ref_261
             language: !Languages 
               default:
                 name: ''
@@ -7159,7 +7248,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7267,14 +7356,14 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_228
-          - *ref_229
+          - *ref_230
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7299,7 +7388,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_259
+            schema: *ref_263
             language: !Languages 
               default:
                 name: ''
@@ -7313,7 +7402,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7363,8 +7452,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_260
+          - *ref_230
+          - !Parameter &ref_264
             schema: *ref_1
             implementation: Method
             required: true
@@ -7376,7 +7465,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_261
+          - !Parameter &ref_265
             schema: *ref_1
             implementation: Method
             required: true
@@ -7388,13 +7477,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7417,11 +7506,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_260
-          - *ref_261
+          - *ref_264
+          - *ref_265
         responses:
           - !SchemaResponse 
-            schema: *ref_87
+            schema: *ref_91
             language: !Languages 
               default:
                 name: ''
@@ -7435,7 +7524,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7480,8 +7569,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_262
+          - *ref_230
+          - !Parameter &ref_266
             schema: *ref_1
             implementation: Method
             required: true
@@ -7493,7 +7582,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_263
+          - !Parameter &ref_267
             schema: *ref_1
             implementation: Method
             required: true
@@ -7505,13 +7594,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7534,8 +7623,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_262
-          - *ref_263
+          - *ref_266
+          - *ref_267
         responses:
           - !Response 
             language: !Languages 
@@ -7557,7 +7646,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7594,14 +7683,14 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_228
-          - *ref_229
+          - *ref_230
+          - *ref_232
+          - *ref_233
         requestMediaTypes:
-          application/json: !Request &ref_266
+          application/json: !Request &ref_270
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -7613,8 +7702,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_265
-                schema: *ref_264
+              - !Parameter &ref_269
+                schema: *ref_268
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7626,7 +7715,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7639,7 +7728,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_265
+              - *ref_269
             language: !Languages 
               default:
                 name: ''
@@ -7653,11 +7742,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_266
+          - *ref_270
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_267
+            schema: *ref_271
             language: !Languages 
               default:
                 name: ''
@@ -7671,7 +7760,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7715,9 +7804,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_268
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_272
             schema: *ref_1
             implementation: Method
             required: true
@@ -7729,8 +7818,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_269
-            schema: *ref_227
+          - !Parameter &ref_273
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -7741,7 +7830,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_270
+          - !Parameter &ref_274
             schema: *ref_1
             implementation: Method
             required: true
@@ -7753,12 +7842,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7781,12 +7870,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_268
-          - *ref_269
-          - *ref_270
+          - *ref_272
+          - *ref_273
+          - *ref_274
         responses:
           - !SchemaResponse 
-            schema: *ref_94
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -7809,7 +7898,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7858,9 +7947,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_273
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_277
             schema: *ref_1
             implementation: Method
             required: true
@@ -7872,8 +7961,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_274
-            schema: *ref_227
+          - !Parameter &ref_278
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -7884,7 +7973,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_275
+          - !Parameter &ref_279
             schema: *ref_1
             implementation: Method
             required: true
@@ -7896,12 +7985,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requestMediaTypes:
-          application/json: !Request &ref_272
+          application/json: !Request &ref_276
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -7913,8 +8002,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_271
-                schema: *ref_94
+              - !Parameter &ref_275
+                schema: *ref_98
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7926,7 +8015,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7939,7 +8028,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_271
+              - *ref_275
             language: !Languages 
               default:
                 name: ''
@@ -7953,14 +8042,14 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_272
+          - *ref_276
         signatureParameters:
-          - *ref_273
-          - *ref_274
-          - *ref_275
+          - *ref_277
+          - *ref_278
+          - *ref_279
         responses:
           - !SchemaResponse 
-            schema: *ref_94
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -7969,7 +8058,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_254
+                    schema: *ref_258
                     header: Retry-After
                     language:
                       default:
@@ -7989,7 +8078,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -8042,9 +8131,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_276
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_280
             schema: *ref_1
             implementation: Method
             required: true
@@ -8056,8 +8145,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_277
-            schema: *ref_227
+          - !Parameter &ref_281
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -8068,7 +8157,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_278
+          - !Parameter &ref_282
             schema: *ref_1
             implementation: Method
             required: true
@@ -8080,12 +8169,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8108,12 +8197,12 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_276
-          - *ref_277
-          - *ref_278
+          - *ref_280
+          - *ref_281
+          - *ref_282
         responses:
           - !SchemaResponse 
-            schema: *ref_94
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -8134,14 +8223,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_279
+                    schema: *ref_283
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_280
+                    schema: *ref_284
                     header: Location
                     language:
                       default:
@@ -8160,7 +8249,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -8206,9 +8295,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_281
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_285
             schema: *ref_1
             implementation: Method
             required: true
@@ -8220,8 +8309,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_282
-            schema: *ref_227
+          - !Parameter &ref_286
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -8232,12 +8321,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8260,11 +8349,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_281
-          - *ref_282
+          - *ref_285
+          - *ref_286
         responses:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_287
             language: !Languages 
               default:
                 name: ''
@@ -8278,7 +8367,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -8350,9 +8439,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_284
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_288
             schema: *ref_1
             implementation: Method
             required: true
@@ -8364,8 +8453,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_285
-            schema: *ref_227
+          - !Parameter &ref_289
+            schema: *ref_231
             implementation: Method
             required: true
             language: !Languages 
@@ -8376,12 +8465,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8404,11 +8493,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_284
-          - *ref_285
+          - *ref_288
+          - *ref_289
         responses:
           - !SchemaResponse 
-            schema: *ref_286
+            schema: *ref_290
             language: !Languages 
               default:
                 name: ''
@@ -8422,7 +8511,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -8474,8 +8563,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_289
+          - *ref_230
+          - !Parameter &ref_293
             schema: *ref_2
             implementation: Method
             required: true
@@ -8487,7 +8576,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_290
+          - !Parameter &ref_294
             schema: *ref_2
             implementation: Method
             required: true
@@ -8499,13 +8588,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requestMediaTypes:
-          application/json: !Request &ref_288
+          application/json: !Request &ref_292
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -8517,8 +8606,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_287
-                schema: *ref_107
+              - !Parameter &ref_291
+                schema: *ref_111
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8530,7 +8619,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8543,7 +8632,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_287
+              - *ref_291
             language: !Languages 
               default:
                 name: ''
@@ -8557,13 +8646,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_288
+          - *ref_292
         signatureParameters:
-          - *ref_289
-          - *ref_290
+          - *ref_293
+          - *ref_294
         responses:
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -8576,7 +8665,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -8590,7 +8679,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -8682,8 +8771,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_294
+          - *ref_230
+          - !Parameter &ref_298
             schema: *ref_2
             implementation: Method
             required: true
@@ -8695,7 +8784,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_295
+          - !Parameter &ref_299
             schema: *ref_2
             implementation: Method
             required: true
@@ -8707,13 +8796,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requestMediaTypes:
-          application/json: !Request &ref_293
+          application/json: !Request &ref_297
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -8725,8 +8814,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_292
-                schema: *ref_107
+              - !Parameter &ref_296
+                schema: *ref_111
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8738,7 +8827,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8751,7 +8840,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_292
+              - *ref_296
             language: !Languages 
               default:
                 name: ''
@@ -8765,13 +8854,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_293
+          - *ref_297
         signatureParameters:
-          - *ref_294
-          - *ref_295
+          - *ref_298
+          - *ref_299
         responses:
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -8784,7 +8873,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -8798,7 +8887,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -8882,8 +8971,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_296
+          - *ref_230
+          - !Parameter &ref_300
             schema: *ref_2
             implementation: Method
             required: true
@@ -8895,7 +8984,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_297
+          - !Parameter &ref_301
             schema: *ref_2
             implementation: Method
             required: true
@@ -8907,13 +8996,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8936,8 +9025,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_296
-          - *ref_297
+          - *ref_300
+          - *ref_301
         responses:
           - !Response 
             language: !Languages 
@@ -8968,7 +9057,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9004,8 +9093,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_298
+          - *ref_230
+          - !Parameter &ref_302
             schema: *ref_2
             implementation: Method
             required: true
@@ -9017,7 +9106,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_299
+          - !Parameter &ref_303
             schema: *ref_2
             implementation: Method
             required: true
@@ -9029,13 +9118,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9058,11 +9147,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_298
-          - *ref_299
+          - *ref_302
+          - *ref_303
         responses:
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -9094,7 +9183,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9154,8 +9243,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_301
+          - *ref_230
+          - !Parameter &ref_305
             schema: *ref_2
             implementation: Method
             required: true
@@ -9167,8 +9256,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_302
-            schema: *ref_300
+          - !Parameter &ref_306
+            schema: *ref_304
             implementation: Method
             language: !Languages 
               default:
@@ -9178,13 +9267,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9207,11 +9296,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_301
-          - *ref_302
+          - *ref_305
+          - *ref_306
         responses:
           - !SchemaResponse 
-            schema: *ref_303
+            schema: *ref_307
             language: !Languages 
               default:
                 name: ''
@@ -9225,7 +9314,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9304,9 +9393,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_304
-            schema: *ref_300
+          - *ref_230
+          - !Parameter &ref_308
+            schema: *ref_304
             implementation: Method
             language: !Languages 
               default:
@@ -9316,13 +9405,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9345,10 +9434,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_304
+          - *ref_308
         responses:
           - !SchemaResponse 
-            schema: *ref_303
+            schema: *ref_307
             language: !Languages 
               default:
                 name: ''
@@ -9362,7 +9451,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9440,14 +9529,14 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_228
-          - *ref_229
+          - *ref_230
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9472,7 +9561,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_305
+            schema: *ref_309
             language: !Languages 
               default:
                 name: ''
@@ -9486,7 +9575,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9548,8 +9637,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_306
+          - *ref_230
+          - !Parameter &ref_310
             schema: *ref_2
             implementation: Method
             required: true
@@ -9561,7 +9650,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_307
+          - !Parameter &ref_311
             schema: *ref_2
             implementation: Method
             required: true
@@ -9573,13 +9662,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9602,11 +9691,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_306
-          - *ref_307
+          - *ref_310
+          - *ref_311
         responses:
           - !SchemaResponse 
-            schema: *ref_159
+            schema: *ref_163
             language: !Languages 
               default:
                 name: ''
@@ -9620,7 +9709,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9666,8 +9755,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - !Parameter &ref_308
+          - *ref_230
+          - !Parameter &ref_312
             schema: *ref_2
             implementation: Method
             required: true
@@ -9679,7 +9768,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_309
+          - !Parameter &ref_313
             schema: *ref_2
             implementation: Method
             required: true
@@ -9691,13 +9780,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
-          - *ref_229
+          - *ref_232
+          - *ref_233
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9720,8 +9809,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_308
-          - *ref_309
+          - *ref_312
+          - *ref_313
         responses:
           - !Response 
             language: !Languages 
@@ -9734,7 +9823,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9776,10 +9865,10 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_228
-          - *ref_229
-          - !Parameter &ref_310
+          - *ref_230
+          - *ref_232
+          - *ref_233
+          - !Parameter &ref_314
             schema: *ref_2
             implementation: Method
             required: true
@@ -9791,7 +9880,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_311
+          - !Parameter &ref_315
             schema: *ref_2
             implementation: Method
             required: true
@@ -9807,7 +9896,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9830,11 +9919,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_310
-          - *ref_311
+          - *ref_314
+          - *ref_315
         responses:
           - !SchemaResponse 
-            schema: *ref_312
+            schema: *ref_316
             language: !Languages 
               default:
                 name: ''
@@ -9848,7 +9937,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -9912,9 +10001,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_313
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_317
             schema: *ref_2
             implementation: Method
             required: true
@@ -9926,7 +10015,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_314
+          - !Parameter &ref_318
             schema: *ref_2
             implementation: Method
             required: true
@@ -9938,7 +10027,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_315
+          - !Parameter &ref_319
             schema: *ref_2
             implementation: Method
             required: true
@@ -9950,12 +10039,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9978,12 +10067,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_313
-          - *ref_314
-          - *ref_315
+          - *ref_317
+          - *ref_318
+          - *ref_319
         responses:
           - !SchemaResponse 
-            schema: *ref_115
+            schema: *ref_119
             language: !Languages 
               default:
                 name: ''
@@ -9997,7 +10086,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_291
+            schema: *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -10044,9 +10133,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_318
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_322
             schema: *ref_2
             implementation: Method
             required: true
@@ -10058,7 +10147,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_319
+          - !Parameter &ref_323
             schema: *ref_2
             implementation: Method
             required: true
@@ -10070,7 +10159,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_320
+          - !Parameter &ref_324
             schema: *ref_2
             implementation: Method
             required: true
@@ -10082,12 +10171,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requestMediaTypes:
-          application/json: !Request &ref_317
+          application/json: !Request &ref_321
             parameters:
               - !Parameter 
-                schema: *ref_230
+                schema: *ref_234
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -10099,8 +10188,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_316
-                schema: *ref_115
+              - !Parameter &ref_320
+                schema: *ref_119
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10112,7 +10201,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10125,7 +10214,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_316
+              - *ref_320
             language: !Languages 
               default:
                 name: ''
@@ -10139,14 +10228,14 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_317
+          - *ref_321
         signatureParameters:
-          - *ref_318
-          - *ref_319
-          - *ref_320
+          - *ref_322
+          - *ref_323
+          - *ref_324
         responses:
           - !SchemaResponse 
-            schema: *ref_115
+            schema: *ref_119
             language: !Languages 
               default:
                 name: ''
@@ -10155,7 +10244,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_300
+                    schema: *ref_304
                     header: Retry-After
                     language:
                       default:
@@ -10175,7 +10264,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -10226,9 +10315,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_322
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_326
             schema: *ref_2
             implementation: Method
             required: true
@@ -10240,8 +10329,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_323
-            schema: *ref_321
+          - !Parameter &ref_327
+            schema: *ref_325
             implementation: Method
             required: true
             language: !Languages 
@@ -10252,7 +10341,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_324
+          - !Parameter &ref_328
             schema: *ref_2
             implementation: Method
             required: true
@@ -10264,12 +10353,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10292,12 +10381,12 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_322
-          - *ref_323
-          - *ref_324
+          - *ref_326
+          - *ref_327
+          - *ref_328
         responses:
           - !SchemaResponse 
-            schema: *ref_115
+            schema: *ref_119
             language: !Languages 
               default:
                 name: ''
@@ -10318,14 +10407,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_325
+                    schema: *ref_329
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_321
+                    schema: *ref_325
                     header: Location
                     language:
                       default:
@@ -10344,7 +10433,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -10398,9 +10487,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_229
-          - !Parameter &ref_327
+          - *ref_230
+          - *ref_233
+          - !Parameter &ref_331
             schema: *ref_2
             implementation: Method
             required: true
@@ -10412,8 +10501,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_328
-            schema: *ref_326
+          - !Parameter &ref_332
+            schema: *ref_330
             implementation: Method
             required: true
             language: !Languages 
@@ -10424,12 +10513,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_228
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10452,11 +10541,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_327
-          - *ref_328
+          - *ref_331
+          - *ref_332
         responses:
           - !SchemaResponse 
-            schema: *ref_329
+            schema: *ref_333
             language: !Languages 
               default:
                 name: ''
@@ -10470,7 +10559,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -10522,13 +10611,13 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_226
-          - *ref_228
+          - *ref_230
+          - *ref_232
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_232
+                schema: *ref_236
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10553,7 +10642,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_330
+            schema: *ref_334
             language: !Languages 
               default:
                 name: ''
@@ -10567,7 +10656,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_241
             language: !Languages 
               default:
                 name: ''

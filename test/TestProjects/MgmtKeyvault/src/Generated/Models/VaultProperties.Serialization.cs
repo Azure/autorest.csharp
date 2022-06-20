@@ -91,6 +91,16 @@ namespace MgmtKeyvault.Models
                 writer.WritePropertyName("publicNetworkAccess");
                 writer.WriteStringValue(PublicNetworkAccess);
             }
+            if (Optional.IsDefined(ReadWriteSingleStringProperty))
+            {
+                writer.WritePropertyName("readWriteSingleStringProperty");
+                writer.WriteObjectValue(ReadWriteSingleStringProperty);
+            }
+            if (Optional.IsDefined(ReadOnlySingleStringProperty))
+            {
+                writer.WritePropertyName("readOnlySingleStringProperty");
+                writer.WriteObjectValue(ReadOnlySingleStringProperty);
+            }
             writer.WriteEndObject();
         }
 
@@ -113,6 +123,8 @@ namespace MgmtKeyvault.Models
             Optional<VaultProvisioningState> provisioningState = default;
             Optional<IReadOnlyList<PrivateEndpointConnectionItem>> privateEndpointConnections = default;
             Optional<string> publicNetworkAccess = default;
+            Optional<SinglePropertyModel> readWriteSingleStringProperty = default;
+            Optional<ReadOnlySinglePropertyModel> readOnlySingleStringProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tenantId"))
@@ -275,8 +287,28 @@ namespace MgmtKeyvault.Models
                     publicNetworkAccess = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("readWriteSingleStringProperty"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    readWriteSingleStringProperty = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("readOnlySingleStringProperty"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    readOnlySingleStringProperty = ReadOnlySinglePropertyModel.DeserializeReadOnlySinglePropertyModel(property.Value);
+                    continue;
+                }
             }
-            return new VaultProperties(tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToNullable(enabledForDeployment), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value);
+            return new VaultProperties(tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToNullable(enabledForDeployment), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value);
         }
     }
 }
