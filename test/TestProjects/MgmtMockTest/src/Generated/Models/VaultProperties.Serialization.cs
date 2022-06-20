@@ -36,10 +36,15 @@ namespace MgmtMockTest.Models
                 writer.WritePropertyName("vaultUri");
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
-            if (Optional.IsDefined(EnabledForDeployment))
+            if (Optional.IsCollectionDefined(Deployments))
             {
-                writer.WritePropertyName("enabledForDeployment");
-                writer.WriteBooleanValue(EnabledForDeployment.Value);
+                writer.WritePropertyName("deployments");
+                writer.WriteStartArray();
+                foreach (var item in Deployments)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(EnabledForDiskEncryption))
             {
@@ -116,7 +121,7 @@ namespace MgmtMockTest.Models
             Optional<IList<AccessPolicyEntry>> accessPolicies = default;
             Optional<Uri> vaultUri = default;
             Optional<string> hsmPoolResourceId = default;
-            Optional<bool> enabledForDeployment = default;
+            Optional<IList<string>> deployments = default;
             Optional<bool> enabledForDiskEncryption = default;
             Optional<bool> enabledForTemplateDeployment = default;
             Optional<bool> enableSoftDelete = default;
@@ -173,14 +178,19 @@ namespace MgmtMockTest.Models
                     hsmPoolResourceId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("enabledForDeployment"))
+                if (property.NameEquals("deployments"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    enabledForDeployment = property.Value.GetBoolean();
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    deployments = array;
                     continue;
                 }
                 if (property.NameEquals("enabledForDiskEncryption"))
@@ -324,7 +334,7 @@ namespace MgmtMockTest.Models
                     continue;
                 }
             }
-            return new VaultProperties(tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToNullable(enabledForDeployment), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
+            return new VaultProperties(tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
         }
     }
 }

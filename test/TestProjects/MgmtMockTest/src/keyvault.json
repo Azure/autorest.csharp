@@ -1232,9 +1232,12 @@
           "description": "The resource id of HSM Pool.",
           "readOnly": true
         },
-        "enabledForDeployment": {
-          "type": "boolean",
-          "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
+        "deployments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specify a list of resource identifiers of deployment"
         },
         "enabledForDiskEncryption": {
           "type": "boolean",
@@ -1328,6 +1331,10 @@
       ],
       "description": "Properties of the vault",
       "type": "object"
+    },
+    "SubResource": {
+      "type": "string",
+      "description": "The resource identifier"
     },
     "SinglePropertyModel": {
       "type": "object",
@@ -1534,6 +1541,9 @@
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
+        },
+        "identity": {
+          "$ref": "common.json#/definitions/VaultIdentity"
         }
       },
       "description": "Parameters for creating or updating a vault",
@@ -1631,6 +1641,10 @@
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
+        },
+        "identity": {
+          "$ref": "common.json#/definitions/VaultIdentity",
+          "description": "Identity of the vault"
         }
       },
       "required": [

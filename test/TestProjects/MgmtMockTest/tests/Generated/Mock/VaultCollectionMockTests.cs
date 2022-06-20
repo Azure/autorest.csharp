@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockTest.Models;
@@ -26,7 +27,44 @@ namespace MgmtMockTest.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdate()
+        public async Task CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault()
+        {
+            // Example: Create a new vault or update an existing vault
+
+            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetVaults();
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
+            {
+                AccessPolicies =
+{
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+{
+Keys =
+{
+KeyPermissions.Encrypt,KeyPermissions.Decrypt,KeyPermissions.WrapKey,KeyPermissions.UnwrapKey,KeyPermissions.Sign,KeyPermissions.Verify,KeyPermissions.Get,KeyPermissions.List,KeyPermissions.Create,KeyPermissions.Update,KeyPermissions.Import,KeyPermissions.Delete,KeyPermissions.Backup,KeyPermissions.Restore,KeyPermissions.Recover,KeyPermissions.Purge
+},
+Secrets =
+{
+SecretPermissions.Get,SecretPermissions.List,SecretPermissions.Set,SecretPermissions.Delete,SecretPermissions.Backup,SecretPermissions.Restore,SecretPermissions.Recover,SecretPermissions.Purge
+},
+Certificates =
+{
+CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge
+},
+})
+},
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+                PublicNetworkAccess = "Enabled",
+            })
+            {
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
+            });
+        }
+
+        [RecordedTest]
+        public async Task CreateOrUpdate_CreateOrUpdateAVaultWithNetworkAcls()
         {
             // Example: Create or update a vault with network acls
 
@@ -35,7 +73,6 @@ namespace MgmtMockTest.Tests.Mock
             var collection = resourceGroupResource.GetVaults();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
             {
-                EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,
                 NetworkAcls = new NetworkRuleSet()

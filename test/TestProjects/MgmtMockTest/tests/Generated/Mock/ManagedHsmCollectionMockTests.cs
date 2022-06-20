@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
@@ -34,7 +35,7 @@ namespace MgmtMockTest.Tests.Mock
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetManagedHsms();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "hsm1", new ManagedHsmData("westus")
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "hsm1", new ManagedHsmData(new AzureLocation("westus"))
             {
                 Properties = new ManagedHsmProperties()
                 {

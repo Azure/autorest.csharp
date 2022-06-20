@@ -28,6 +28,7 @@ namespace MgmtMockTest.Models
             TenantId = tenantId;
             Sku = sku;
             AccessPolicies = new ChangeTrackingList<AccessPolicyEntry>();
+            Deployments = new ChangeTrackingList<string>();
             PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionItem>();
         }
 
@@ -37,7 +38,7 @@ namespace MgmtMockTest.Models
         /// <param name="accessPolicies"> An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault&apos;s tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required. </param>
         /// <param name="vaultUri"> The URI of the vault for performing operations on keys and secrets. </param>
         /// <param name="hsmPoolResourceId"> The resource id of HSM Pool. </param>
-        /// <param name="enabledForDeployment"> Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. </param>
+        /// <param name="deployments"> Specify a list of resource identifiers of deployment. </param>
         /// <param name="enabledForDiskEncryption"> Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. </param>
         /// <param name="enabledForTemplateDeployment"> Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. </param>
         /// <param name="enableSoftDelete"> Property to specify whether the &apos;soft delete&apos; functionality is enabled for this key vault. If it&apos;s not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false. </param>
@@ -52,14 +53,14 @@ namespace MgmtMockTest.Models
         /// <param name="readWriteSingleStringProperty"> This is a single property of string. </param>
         /// <param name="readOnlySingleStringProperty"> This is a single property of read-only string. </param>
         /// <param name="extremelyDeepStringProperty"> This is a single property of string. </param>
-        internal VaultProperties(Guid tenantId, MgmtMockTestSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty)
+        internal VaultProperties(Guid tenantId, MgmtMockTestSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty)
         {
             TenantId = tenantId;
             Sku = sku;
             AccessPolicies = accessPolicies;
             VaultUri = vaultUri;
             HsmPoolResourceId = hsmPoolResourceId;
-            EnabledForDeployment = enabledForDeployment;
+            Deployments = deployments;
             EnabledForDiskEncryption = enabledForDiskEncryption;
             EnabledForTemplateDeployment = enabledForTemplateDeployment;
             EnableSoftDelete = enableSoftDelete;
@@ -86,8 +87,8 @@ namespace MgmtMockTest.Models
         public Uri VaultUri { get; set; }
         /// <summary> The resource id of HSM Pool. </summary>
         public string HsmPoolResourceId { get; }
-        /// <summary> Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. </summary>
-        public bool? EnabledForDeployment { get; set; }
+        /// <summary> Specify a list of resource identifiers of deployment. </summary>
+        public IList<string> Deployments { get; }
         /// <summary> Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. </summary>
         public bool? EnabledForDiskEncryption { get; set; }
         /// <summary> Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. </summary>

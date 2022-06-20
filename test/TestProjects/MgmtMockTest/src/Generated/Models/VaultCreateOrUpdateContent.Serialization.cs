@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtMockTest.Models
 {
@@ -30,6 +31,12 @@ namespace MgmtMockTest.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteObjectValue(Properties);
+            if (Optional.IsDefined(Identity))
+            {
+                writer.WritePropertyName("identity");
+                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                JsonSerializer.Serialize(writer, Identity, serializeOptions);
+            }
             writer.WriteEndObject();
         }
     }

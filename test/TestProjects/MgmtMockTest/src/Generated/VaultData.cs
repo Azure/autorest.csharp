@@ -38,11 +38,13 @@ namespace MgmtMockTest
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, VaultProperties properties) : base(id, name, resourceType, systemData)
+        /// <param name="identity"> Identity of the vault. </param>
+        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;
             Properties = properties;
+            Identity = identity;
         }
 
         /// <summary> Azure location of the key vault resource. </summary>
@@ -51,5 +53,7 @@ namespace MgmtMockTest
         public IReadOnlyDictionary<string, string> Tags { get; }
         /// <summary> Properties of the vault. </summary>
         public VaultProperties Properties { get; }
+        /// <summary> Identity of the vault. </summary>
+        public ManagedServiceIdentity Identity { get; }
     }
 }

@@ -6,6 +6,9 @@
     "api-version": "2021-10-01",
     "parameters": {
       "location": "westus",
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "tenantId": "00000000-0000-0000-0000-000000000000",
         "sku": {
@@ -75,7 +78,6 @@
             "very": {}
             }
           }
-        }
       }
     }
   },
@@ -94,6 +96,11 @@
           "lastModifiedBy": "keyVaultUser2",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
         },
         "properties": {
           "sku": {

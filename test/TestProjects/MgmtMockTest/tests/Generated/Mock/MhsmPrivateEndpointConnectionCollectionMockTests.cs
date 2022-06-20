@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockTest;
@@ -33,7 +34,7 @@ namespace MgmtMockTest.Tests.Mock
             var managedHsmResourceId = MgmtMockTest.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             var collection = managedHsmResource.GetMhsmPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MhsmPrivateEndpointConnectionData("placeholder")
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
             {
                 PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()
                 {

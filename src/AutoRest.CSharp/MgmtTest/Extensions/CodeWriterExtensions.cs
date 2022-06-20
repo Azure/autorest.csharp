@@ -3,19 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.Models;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.MgmtTest.Extensions
 {
@@ -110,28 +107,25 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         private static CodeWriter AppendSimpleFrameworkType(this CodeWriter writer, Type type, ExampleValue exampleValue) => exampleValue.RawValue switch
         {
             string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
-            bool b => writer.Append($"{b}"),
-            int i => writer.Append($"{i}"),
-            long l => writer.Append($"{l}"),
-            double d => writer.Append($"{d}"),
-            decimal dec => writer.Append($"{dec}"),
-            //null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
-            null => writer.AppendRaw("default"),
+            null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
             _ => writer.AppendRaw(exampleValue.RawValue.ToString()!)
         };
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value) => type switch
         {
-            _ when type == typeof(string) => writer.Append($"{value:L}"),
+            _ when IsPrimitiveType(type) => writer.AppendRaw(value),
             _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
             _ when IsParsableInitializedStringLikeType(type) => writer.Append($"{type}.Parse({value:L})"),
-            _ => writer.AppendRaw(value),
+            _ => writer.Append($"{value:L}"),
         };
 
         private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && IsStringLikeType(type.FrameworkType);
 
         private static bool IsStringLikeType(Type type)
             => IsNewInstanceInitializedStringLikeType(type) || IsParsableInitializedStringLikeType(type);
+
+        private static bool IsPrimitiveType(Type type)
+            => IsType<bool>(type) || IsType<int>(type) || IsType<long>(type) || IsType<double>(type) || IsType<decimal>(type);
 
         private static bool IsNewInstanceInitializedStringLikeType(Type type)
             => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type);
@@ -145,12 +139,22 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         {
             switch (type.Implementation)
             {
+                // TODO -- this is only a temporary solution since now we do not have a solution of getting the serialized name of property in resourcemanager
+                // TODO -- when we have a more elegant solution and apply that into SystemObjectType, we could remove this branch and reuse AppendObjectTypeValue
                 case ObjectType objectType:
                     return writer.AppendObjectTypeValue(objectType, (Dictionary<string, ExampleValue>)exampleValue.Properties);
                 case EnumType enumType:
                     return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
             }
             return writer.AppendRaw("default");
+        }
+
+        private static string? GetPropertySerializedName(ObjectType objectType, ObjectTypeProperty property)
+        {
+            if (objectType is not SystemObjectType systemObjectType)
+                return property.SchemaProperty?.SerializedName;
+
+            return SystemObjectTypeHandler.GetPropertySerializedName(systemObjectType, property.Declaration.Name);
         }
 
         private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
@@ -169,14 +173,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 // try every property, convert them to variable name and see if there are some of them matching
                 var property = propertyDict[parameter.Name];
                 ExampleValue? exampleValue;
-                if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
+                if (!valueDict.TryGetValue(GetPropertySerializedName(objectType, property)!, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
                     if (TypeFactory.IsCollectionType(property.Declaration.Type))
                     {
                         exampleValue = new ExampleValue()
                         {
-                            Schema = property.SchemaProperty.Schema,
+                            Schema = property.SchemaProperty!.Schema,
                         };
                     }
                     else if (IsStringLikeType(property.Declaration.Type))
@@ -192,14 +196,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         };
                     }
                     else
-                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {objectType.Type.Name} is not found");
+                        throw new InvalidOperationException($"Example value for required property {GetPropertySerializedName(objectType, property)} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
-                writer.AppendExampleValue(exampleValue).AppendRaw(",");
+                writer.AppendExampleValue(exampleValue, type: property.Declaration.Type).AppendRaw(",");
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
-            var propertiesToWrite = GetPropertiesToWrite(properties, valueDict);
+            var propertiesToWrite = GetPropertiesToWrite(objectType, properties, valueDict);
             if (propertiesToWrite.Count > 0) // only write the property initializers when there are properties to write
             {
                 using (writer.Scope($"", newLine: false))
@@ -216,7 +220,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, Dictionary<string, ExampleValue> valueDict)
+        private static Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)> GetPropertiesToWrite(ObjectType objectType, IEnumerable<ObjectTypeProperty> properties, Dictionary<string, ExampleValue> valueDict)
         {
             var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
             foreach (var property in properties)
@@ -225,7 +229,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!IsPropertyAssignable(property) || schemaProperty == null)
                     continue; // now we explicitly ignore all the AdditionalProperties
 
-                if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
+                if (!valueDict.TryGetValue(GetPropertySerializedName(objectType, property)!, out var exampleValue))
                     continue; // skip the property that does not have a value
 
                 var hierarchyStack = new Stack<ObjectTypeProperty>();

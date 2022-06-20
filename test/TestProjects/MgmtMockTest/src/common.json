@@ -78,6 +78,59 @@
         "name": "identityType",
         "modelAsString": true
       }
+    },
+    "VaultIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the vault identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the vault. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the vault. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "$ref": "common.json#/definitions/UserAssignedIdentities",
+          "description": "The list of user identities associated with the vault. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the virtual machine."
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "x-ms-client-name": "userAssignedIdentitiesValue",
+        "properties": {
+          "principalId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The principal id of user assigned identity."
+          },
+          "clientId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The client id of user assigned identity."
+          }
+        }
+      },
+      "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
     }
   },
   "securityDefinitions": {

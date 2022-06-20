@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
@@ -76,7 +77,7 @@ namespace MgmtMockTest.Tests.Mock
 
             var managedHsmResourceId = MgmtMockTest.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await managedHsmResource.UpdateAsync(WaitUntil.Completed, new ManagedHsmData("placeholder")
+            await managedHsmResource.UpdateAsync(WaitUntil.Completed, new ManagedHsmData(new AzureLocation("placeholder"))
             {
                 Tags =
 {

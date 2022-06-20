@@ -20,6 +20,7 @@ namespace MgmtMockTest
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             VaultProperties properties = default;
+            Optional<ManagedServiceIdentity> identity = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -51,6 +52,17 @@ namespace MgmtMockTest
                     properties = VaultProperties.DeserializeVaultProperties(property.Value);
                     continue;
                 }
+                if (property.NameEquals("identity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString(), serializeOptions);
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -72,7 +84,7 @@ namespace MgmtMockTest
                     continue;
                 }
             }
-            return new VaultData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), properties);
+            return new VaultData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), properties, identity);
         }
     }
 }

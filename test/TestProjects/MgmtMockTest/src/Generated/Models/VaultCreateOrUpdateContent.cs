@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtMockTest.Models
 {
@@ -40,5 +41,7 @@ namespace MgmtMockTest.Models
         public IDictionary<string, string> Tags { get; }
         /// <summary> Properties of the vault. </summary>
         public VaultProperties Properties { get; }
+        /// <summary> Identity for the virtual machine. </summary>
+        public ManagedServiceIdentity Identity { get; set; }
     }
 }
