@@ -144,7 +144,7 @@ stages:
                 git checkout -b $BranchName
               }
             displayName: Create PR test branch if it doesn't exist
-            workingDirectory: $(AzureSdkRepoRoot)
+            workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
