@@ -118,7 +118,7 @@ stages:
           name: SmokeTest_S_Z
           filter: "^[s-z]"
       - job: Test_in_azure_sdk_for_net
-        condition: ne(variables['System.PullRequest.PullRequestNumber'], ''))
+        condition: ne(variables['System.PullRequest.PullRequestNumber'], '')
         timeoutInMinutes: 120
         pool:
           vmImage: ubuntu-20.04
