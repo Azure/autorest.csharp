@@ -64,6 +64,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential).GetClient4("<clientParameter>");
         /// 
         /// Response response = await client.PatchAsync("<filter>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -100,6 +101,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential).GetClient4("<clientParameter>");
         /// 
         /// Response response = client.Patch("<filter>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

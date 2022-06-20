@@ -68,6 +68,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -100,6 +101,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -132,6 +134,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetInvalidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -164,6 +167,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetInvalid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -196,6 +200,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -228,6 +233,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -338,6 +344,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetBooleanTfftAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -370,6 +377,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetBooleanTfft();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -480,6 +488,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetBooleanInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -512,6 +521,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetBooleanInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -544,6 +554,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetBooleanInvalidStringAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -576,6 +587,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetBooleanInvalidString();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -608,6 +620,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetIntegerValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -640,6 +653,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetIntegerValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -750,6 +764,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetIntInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -782,6 +797,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetIntInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -814,6 +830,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetIntInvalidStringAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -846,6 +863,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetIntInvalidString();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -878,6 +896,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetLongValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -910,6 +929,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetLongValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1020,6 +1040,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetLongInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1052,6 +1073,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetLongInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1084,6 +1106,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetLongInvalidStringAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1116,6 +1139,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetLongInvalidString();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1148,6 +1172,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetFloatValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1180,6 +1205,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetFloatValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1290,6 +1316,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetFloatInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1322,6 +1349,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetFloatInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1354,6 +1382,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetFloatInvalidStringAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1386,6 +1415,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetFloatInvalidString();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1418,6 +1448,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDoubleValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1450,6 +1481,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDoubleValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1560,6 +1592,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDoubleInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1592,6 +1625,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDoubleInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1624,6 +1658,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDoubleInvalidStringAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1656,6 +1691,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDoubleInvalidString();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1688,6 +1724,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetStringValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1720,6 +1757,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetStringValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1830,6 +1868,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetEnumValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1862,6 +1901,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetEnumValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -1972,6 +2012,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetStringEnumValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2004,6 +2045,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetStringEnumValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2114,6 +2156,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetStringWithNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2146,6 +2189,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetStringWithNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2178,6 +2222,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetStringWithInvalidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2210,6 +2255,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetStringWithInvalid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2242,6 +2288,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetUuidValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2274,6 +2321,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetUuidValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2384,6 +2432,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetUuidInvalidCharsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2416,6 +2465,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetUuidInvalidChars();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2448,6 +2498,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2480,6 +2531,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2590,6 +2642,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2622,6 +2675,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2654,6 +2708,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateInvalidCharsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2686,6 +2741,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateInvalidChars();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2718,6 +2774,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateTimeValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2750,6 +2807,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateTimeValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2860,6 +2918,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateTimeInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2892,6 +2951,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateTimeInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2924,6 +2984,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateTimeInvalidCharsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2956,6 +3017,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateTimeInvalidChars();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -2988,6 +3050,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateTimeRfc1123ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3020,6 +3083,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateTimeRfc1123Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3130,6 +3194,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDurationValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3162,6 +3227,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDurationValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3272,6 +3338,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetByteValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3304,6 +3371,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetByteValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3414,6 +3482,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetByteInvalidNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3446,6 +3515,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetByteInvalidNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3478,6 +3548,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetBase64UrlAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3510,6 +3581,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetBase64Url();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -3542,6 +3614,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetComplexNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3588,6 +3661,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetComplexNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3634,6 +3708,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetComplexEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3680,6 +3755,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetComplexEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3726,6 +3802,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetComplexItemNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3772,6 +3849,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetComplexItemNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3818,6 +3896,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetComplexItemEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3864,6 +3943,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetComplexItemEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3910,6 +3990,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetComplexValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -3956,6 +4037,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetComplexValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
@@ -4112,6 +4194,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetArrayNullAsync();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4143,6 +4226,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetArrayNull();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4174,6 +4258,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetArrayEmptyAsync();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4205,6 +4290,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetArrayEmpty();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4236,6 +4322,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetArrayItemNullAsync();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4267,6 +4354,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetArrayItemNull();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4298,6 +4386,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetArrayItemEmptyAsync();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4329,6 +4418,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetArrayItemEmpty();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4360,6 +4450,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetArrayValidAsync();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4391,6 +4482,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetArrayValid();
+        /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
@@ -4504,6 +4596,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDictionaryNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4536,6 +4629,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDictionaryNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4568,6 +4662,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDictionaryEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4600,6 +4695,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDictionaryEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4632,6 +4728,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDictionaryItemNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4664,6 +4761,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDictionaryItemNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4696,6 +4794,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDictionaryItemEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4728,6 +4827,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDictionaryItemEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4760,6 +4860,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDictionaryValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>
@@ -4792,6 +4893,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(endpoint, credential);
         /// 
         /// Response response = client.GetDictionaryValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
         /// ]]></code>

@@ -72,6 +72,7 @@ namespace media_types_LowLevel
         /// var data = File.OpenRead("<binary.data>");
         /// 
         /// Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -108,6 +109,7 @@ namespace media_types_LowLevel
         /// var data = File.OpenRead("<binary.data>");
         /// 
         /// Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -213,6 +215,7 @@ namespace media_types_LowLevel
         /// var data = "<String>";
         /// 
         /// Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -248,6 +251,7 @@ namespace media_types_LowLevel
         /// var data = "<String>";
         /// 
         /// Response response = client.ContentTypeWithEncoding(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -285,6 +289,7 @@ namespace media_types_LowLevel
         /// var data = File.OpenRead("<binary.data>");
         /// 
         /// Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -324,6 +329,7 @@ namespace media_types_LowLevel
         /// var data = File.OpenRead("<binary.data>");
         /// 
         /// Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -363,6 +369,7 @@ namespace media_types_LowLevel
         /// var data = File.OpenRead("<binary.data>");
         /// 
         /// Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -402,6 +409,7 @@ namespace media_types_LowLevel
         /// var data = File.OpenRead("<binary.data>");
         /// 
         /// Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -441,6 +449,7 @@ namespace media_types_LowLevel
         /// var data = "<String>";
         /// 
         /// Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -480,6 +489,7 @@ namespace media_types_LowLevel
         /// var data = "<String>";
         /// 
         /// Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

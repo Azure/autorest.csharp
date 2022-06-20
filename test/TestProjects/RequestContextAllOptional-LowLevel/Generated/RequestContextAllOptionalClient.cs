@@ -72,6 +72,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(endpoint, credential);
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -82,6 +83,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(endpoint, credential);
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -118,6 +120,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(endpoint, credential);
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -128,6 +131,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(endpoint, credential);
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -163,6 +167,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -178,6 +183,7 @@ namespace RequestContextAllOptional_LowLevel
         /// };
         /// 
         /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("Code").ToString());
         /// Console.WriteLine(result.GetProperty("Status").ToString());
@@ -236,6 +242,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -251,6 +258,7 @@ namespace RequestContextAllOptional_LowLevel
         /// };
         /// 
         /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("Code").ToString());
         /// Console.WriteLine(result.GetProperty("Status").ToString());
@@ -308,6 +316,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(endpoint, credential);
         /// 
         /// Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -344,6 +353,7 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(endpoint, credential);
         /// 
         /// Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

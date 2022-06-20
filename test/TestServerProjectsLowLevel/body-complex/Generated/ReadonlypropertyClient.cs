@@ -68,6 +68,7 @@ namespace body_complex_LowLevel
         /// var client = new ReadonlypropertyClient(endpoint, credential);
         /// 
         /// Response response = await client.GetValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("size").ToString());
@@ -114,6 +115,7 @@ namespace body_complex_LowLevel
         /// var client = new ReadonlypropertyClient(endpoint, credential);
         /// 
         /// Response response = client.GetValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("size").ToString());

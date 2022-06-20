@@ -68,6 +68,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = await client.GetCollectionAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
@@ -138,6 +139,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = client.GetCollection();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
@@ -212,6 +214,7 @@ namespace Azure.Analytics.Purview.Account
         /// var data = new {};
         /// 
         /// Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -230,6 +233,7 @@ namespace Azure.Analytics.Purview.Account
         /// };
         /// 
         /// Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
@@ -329,6 +333,7 @@ namespace Azure.Analytics.Purview.Account
         /// var data = new {};
         /// 
         /// Response response = client.CreateOrUpdateCollection(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -347,6 +352,7 @@ namespace Azure.Analytics.Purview.Account
         /// };
         /// 
         /// Response response = client.CreateOrUpdateCollection(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
@@ -504,6 +510,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = await client.GetCollectionPathAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("parentFriendlyNameChain").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("parentNameChain").Item[0].ToString());
@@ -550,6 +557,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = client.GetCollectionPath();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("parentFriendlyNameChain").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("parentNameChain").Item[0].ToString());
@@ -597,6 +605,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = await client.GetChildCollectionNamesAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
         /// ]]></code>
@@ -607,6 +616,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = await client.GetChildCollectionNamesAsync("<skipToken>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("count").ToString());
         /// Console.WriteLine(result.GetProperty("nextLink").ToString());
@@ -662,6 +672,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = client.GetChildCollectionNames();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
         /// ]]></code>
@@ -672,6 +683,7 @@ namespace Azure.Analytics.Purview.Account
         /// var client = new PurviewAccountsClient(endpoint, credential).GetCollections("<collectionName>");
         /// 
         /// Response response = client.GetChildCollectionNames("<skipToken>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("count").ToString());
         /// Console.WriteLine(result.GetProperty("nextLink").ToString());

@@ -75,6 +75,7 @@ namespace SubClients_LowLevel
         /// var client = new RootClient(endpoint, credential);
         /// 
         /// Response response = await client.GetCachedParameterAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -106,6 +107,7 @@ namespace SubClients_LowLevel
         /// var client = new RootClient(endpoint, credential);
         /// 
         /// Response response = client.GetCachedParameter();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

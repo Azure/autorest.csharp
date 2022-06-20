@@ -68,6 +68,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpFailureClient(endpoint, credential);
         /// 
         /// Response response = await client.GetEmptyErrorAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -100,6 +101,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpFailureClient(endpoint, credential);
         /// 
         /// Response response = client.GetEmptyError();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -132,6 +134,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpFailureClient(endpoint, credential);
         /// 
         /// Response response = await client.GetNoModelErrorAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -164,6 +167,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpFailureClient(endpoint, credential);
         /// 
         /// Response response = client.GetNoModelError();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -196,6 +200,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpFailureClient(endpoint, credential);
         /// 
         /// Response response = await client.GetNoModelEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -228,6 +233,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpFailureClient(endpoint, credential);
         /// 
         /// Response response = client.GetNoModelEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

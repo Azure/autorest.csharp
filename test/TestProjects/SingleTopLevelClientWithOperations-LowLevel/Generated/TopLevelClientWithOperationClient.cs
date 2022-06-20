@@ -70,6 +70,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
         /// 
         /// Response response = await client.OperationAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -101,6 +102,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
         /// 
         /// Response response = client.Operation();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -135,6 +137,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetAllAsync("<filter>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -177,6 +180,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
         /// 
         /// Response response = client.GetAll("<filter>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

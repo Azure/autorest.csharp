@@ -71,6 +71,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
         /// Response response = await client.GetParametersAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -103,6 +104,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
         /// Response response = client.GetParameters();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -135,6 +137,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
         /// Response response = await client.GetGroupsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -167,6 +170,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
         /// Response response = client.GetGroups();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -199,6 +203,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
         /// Response response = await client.GetAllItemsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -237,6 +242,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
         /// Response response = client.GetAllItems();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

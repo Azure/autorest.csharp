@@ -65,6 +65,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
         /// 
         /// Response response = await client.GetGroupAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -97,6 +98,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
         /// 
         /// Response response = client.GetGroup();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -129,6 +131,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
         /// 
         /// Response response = await client.GetItemsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -167,6 +170,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
         /// 
         /// Response response = client.GetItems();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

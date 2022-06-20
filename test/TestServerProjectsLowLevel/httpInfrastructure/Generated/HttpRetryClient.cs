@@ -328,6 +328,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
         /// Response response = await client.Options502Async();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -360,6 +361,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
         /// Response response = client.Options502();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

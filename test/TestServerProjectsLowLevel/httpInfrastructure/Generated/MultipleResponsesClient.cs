@@ -68,6 +68,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError200ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -114,6 +115,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError200Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -160,6 +162,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError204ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -206,6 +209,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError204Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -252,6 +256,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -298,6 +303,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError201Invalid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -344,6 +350,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError202NoneAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -390,6 +397,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError202None();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -436,6 +444,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError400ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -482,6 +491,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError400Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -528,6 +538,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model201ModelDefaultError200ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -574,6 +585,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model201ModelDefaultError200Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -620,6 +632,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model201ModelDefaultError201ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -666,6 +679,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model201ModelDefaultError201Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -712,6 +726,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Model201ModelDefaultError400ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -758,6 +773,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200Model201ModelDefaultError400Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -804,6 +820,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -850,6 +867,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -896,6 +914,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -942,6 +961,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -988,6 +1008,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1034,6 +1055,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1080,6 +1102,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1126,6 +1149,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1606,6 +1630,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDefaultModelA200ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1652,6 +1677,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.GetDefaultModelA200Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1698,6 +1724,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDefaultModelA200NoneAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -1744,6 +1771,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.GetDefaultModelA200None();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2162,6 +2190,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA200NoneAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2208,6 +2237,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA200None();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2254,6 +2284,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA200ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2300,6 +2331,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA200Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2346,6 +2378,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA200InvalidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2392,6 +2425,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA200Invalid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2438,6 +2472,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA400NoneAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2484,6 +2519,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA400None();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2530,6 +2566,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA400ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2576,6 +2613,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA400Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2622,6 +2660,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA400InvalidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2668,6 +2707,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA400Invalid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2714,6 +2754,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200ModelA202ValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>
@@ -2760,6 +2801,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new MultipleResponsesClient(endpoint, credential);
         /// 
         /// Response response = client.Get200ModelA202Valid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("statusCode").ToString());
         /// ]]></code>

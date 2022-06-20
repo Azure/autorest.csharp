@@ -67,6 +67,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
         /// 
         /// Response response = await client.GetItemAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -99,6 +100,7 @@ namespace ResourceClients_LowLevel
         /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
         /// 
         /// Response response = client.GetItem();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

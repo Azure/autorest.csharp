@@ -272,17 +272,17 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.Append("]]></code>");
         }
 
-        private void ComposeParsingResponseCodes(bool allProperties, Schema responseSchema, StringBuilder buider)
+        private void ComposeParsingResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
         {
             if (responseSchema is BinarySchema binarySchema)
             {
-                buider.AppendLine("if (response.ContentStream != null)");
-                buider.AppendLine("{");
-                buider.AppendLine($"    using(Stream outFileStream = File.OpenWrite(\"<{responseSchema.Name}.data>\")");
-                buider.AppendLine("    {");
-                buider.AppendLine("        response.ContentStream.CopyTo(outFileStream);");
-                buider.AppendLine("    }");
-                buider.AppendLine("}");
+                builder.AppendLine("if (response.ContentStream != null)");
+                builder.AppendLine("{");
+                builder.AppendLine($"    using(Stream outFileStream = File.OpenWrite(\"<{responseSchema.Name}.data>\")");
+                builder.AppendLine("    {");
+                builder.AppendLine("        response.ContentStream.CopyTo(outFileStream);");
+                builder.AppendLine("    }");
+                builder.AppendLine("}");
                 return;
             }
 
@@ -290,18 +290,20 @@ namespace AutoRest.CSharp.Generation.Writers
             ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(), new HashSet<string>() { responseSchema.Name });
             var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
 
+            builder.AppendLine();
+
             if (apiInvocationChainList.Count == 0)
             {
-                buider.AppendLine($"Console.WriteLine(response.ToString());");
+                builder.AppendLine($"Console.WriteLine(response.ToString());");
             }
             else
             {
-                buider.AppendLine($"JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;");
+                builder.AppendLine($"JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
-                    buider.Append("Console.WriteLine(result.");
-                    buider.Append(string.Join(".", apiInvocationChain));
-                    buider.AppendLine($"{(apiInvocationChain.Count > 0 ? "." : "")}ToString());");
+                    builder.Append("Console.WriteLine(result.");
+                    builder.Append(string.Join(".", apiInvocationChain));
+                    builder.AppendLine($"{(apiInvocationChain.Count > 0 ? "." : "")}ToString());");
                 }
             }
         }

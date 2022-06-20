@@ -68,6 +68,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetIntAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field2").ToString());
@@ -114,6 +115,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetInt();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field2").ToString());
@@ -288,6 +290,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetLongAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field2").ToString());
@@ -334,6 +337,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetLong();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field2").ToString());
@@ -508,6 +512,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetFloatAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field2").ToString());
@@ -554,6 +559,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetFloat();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field2").ToString());
@@ -728,6 +734,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDoubleAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
@@ -774,6 +781,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetDouble();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field1").ToString());
         /// Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
@@ -948,6 +956,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetBoolAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field_true").ToString());
         /// Console.WriteLine(result.GetProperty("field_false").ToString());
@@ -994,6 +1003,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetBool();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field_true").ToString());
         /// Console.WriteLine(result.GetProperty("field_false").ToString());
@@ -1168,6 +1178,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetStringAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("empty").ToString());
@@ -1216,6 +1227,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetString();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("empty").ToString());
@@ -1396,6 +1408,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("leap").ToString());
@@ -1442,6 +1455,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetDate();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("leap").ToString());
@@ -1616,6 +1630,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateTimeAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("now").ToString());
@@ -1662,6 +1677,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateTime();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("now").ToString());
@@ -1836,6 +1852,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDateTimeRfc1123Async();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("now").ToString());
@@ -1882,6 +1899,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetDateTimeRfc1123();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// Console.WriteLine(result.GetProperty("now").ToString());
@@ -2056,6 +2074,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDurationAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// ]]></code>
@@ -2100,6 +2119,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetDuration();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// ]]></code>
@@ -2268,6 +2288,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetByteAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// ]]></code>
@@ -2312,6 +2333,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetByte();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("field").ToString());
         /// ]]></code>

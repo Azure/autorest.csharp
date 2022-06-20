@@ -345,6 +345,7 @@ namespace BodyAndPath_LowLevel
         /// var client = new BodyAndPathClient(endpoint, credential);
         /// 
         /// Response response = await client.GetBodyAndPathsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -378,6 +379,7 @@ namespace BodyAndPath_LowLevel
         /// var client = new BodyAndPathClient(endpoint, credential);
         /// 
         /// Response response = client.GetBodyAndPaths();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -411,6 +413,7 @@ namespace BodyAndPath_LowLevel
         /// var client = new BodyAndPathClient(endpoint, credential);
         /// 
         /// Response response = await client.GetItemsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
@@ -444,6 +447,7 @@ namespace BodyAndPath_LowLevel
         /// var client = new BodyAndPathClient(endpoint, credential);
         /// 
         /// Response response = client.GetItems();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>

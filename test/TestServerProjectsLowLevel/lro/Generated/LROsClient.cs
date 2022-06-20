@@ -72,6 +72,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -92,6 +93,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -170,6 +172,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -190,6 +193,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -268,6 +272,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -288,6 +293,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -366,6 +372,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -386,6 +393,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -464,6 +472,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -484,6 +493,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -562,6 +572,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -582,6 +593,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -660,6 +672,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -680,6 +693,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -758,6 +772,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -778,6 +793,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -856,6 +872,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -876,6 +893,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -954,6 +972,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -974,6 +993,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1049,6 +1069,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.Post202ListAsync(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("type").ToString());
@@ -1108,6 +1129,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.Post202List(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("type").ToString());
@@ -1170,6 +1192,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1190,6 +1213,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1268,6 +1292,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1288,6 +1313,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1366,6 +1392,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1386,6 +1413,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1464,6 +1492,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1484,6 +1513,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1562,6 +1592,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1582,6 +1613,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1660,6 +1692,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1680,6 +1713,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1758,6 +1792,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1778,6 +1813,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1856,6 +1892,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1876,6 +1913,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1954,6 +1992,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1974,6 +2013,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2052,6 +2092,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2072,6 +2113,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2150,6 +2192,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2170,6 +2213,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2248,6 +2292,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2268,6 +2313,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2346,6 +2392,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2366,6 +2413,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2444,6 +2492,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2464,6 +2513,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2542,6 +2592,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2562,6 +2613,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2640,6 +2692,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2660,6 +2713,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2738,6 +2792,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2758,6 +2813,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2836,6 +2892,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2856,6 +2913,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2934,6 +2992,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2954,6 +3013,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3032,6 +3092,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3052,6 +3113,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3130,6 +3192,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3150,6 +3213,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3228,6 +3292,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3248,6 +3313,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3326,6 +3392,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3346,6 +3413,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3424,6 +3492,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3444,6 +3513,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3522,6 +3592,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3537,6 +3608,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3596,6 +3668,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3611,6 +3684,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3670,6 +3744,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3685,6 +3760,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3744,6 +3820,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3759,6 +3836,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3818,6 +3896,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3834,6 +3913,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -3900,6 +3980,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3916,6 +3997,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -3982,6 +4064,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3998,6 +4081,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -4064,6 +4148,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -4080,6 +4165,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -4143,6 +4229,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4202,6 +4289,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4261,6 +4349,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4320,6 +4409,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4379,6 +4469,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4438,6 +4529,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4561,6 +4653,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.Delete202Retry200Async(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4620,6 +4713,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.Delete202Retry200(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4679,6 +4773,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.Delete202NoRetry204Async(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4738,6 +4833,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.Delete202NoRetry204(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5181,6 +5277,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.Post200WithPayloadAsync(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -5228,6 +5325,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.Post200WithPayload(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -5426,6 +5524,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -5446,6 +5545,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5524,6 +5624,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -5544,6 +5645,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5619,6 +5721,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5678,6 +5781,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5737,6 +5841,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5796,6 +5901,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5855,6 +5961,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5914,6 +6021,7 @@ namespace lro_LowLevel
         /// var client = new LROsClient(endpoint, credential);
         /// 
         /// Response response = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed);
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5976,6 +6084,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -5996,6 +6105,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6074,6 +6184,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6094,6 +6205,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6172,6 +6284,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6192,6 +6305,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6270,6 +6384,7 @@ namespace lro_LowLevel
         /// var data = new {};
         /// 
         /// Response response = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6290,6 +6405,7 @@ namespace lro_LowLevel
         /// };
         /// 
         /// Response response = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());

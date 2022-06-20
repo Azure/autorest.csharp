@@ -71,6 +71,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = await client.HeadNoParamsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -106,6 +107,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = client.HeadNoParams();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -143,6 +145,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = await client.GetRequiredAsync("<parameter>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -182,6 +185,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = client.GetRequired("<parameter>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -219,6 +223,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -229,6 +234,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -266,6 +272,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = client.PutRequiredOptional("<requiredParam>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -276,6 +283,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -316,6 +324,7 @@ namespace dpg_initial_LowLevel
         /// };
         /// 
         /// Response response = await client.PostParametersAsync(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -368,6 +377,7 @@ namespace dpg_initial_LowLevel
         /// };
         /// 
         /// Response response = client.PostParameters(RequestContent.Create(data));
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -418,6 +428,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = await client.GetOptionalAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -428,6 +439,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = await client.GetOptionalAsync("<optionalParam>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -464,6 +476,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = client.GetOptional();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -474,6 +487,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(endpoint, credential);
         /// 
         /// Response response = client.GetOptional("<optionalParam>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

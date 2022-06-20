@@ -130,6 +130,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpSuccessClient(endpoint, credential);
         /// 
         /// Response response = await client.Get200Async();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -162,6 +163,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpSuccessClient(endpoint, credential);
         /// 
         /// Response response = client.Get200();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -194,6 +196,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpSuccessClient(endpoint, credential);
         /// 
         /// Response response = await client.Options200Async();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -226,6 +229,7 @@ namespace httpInfrastructure_LowLevel
         /// var client = new HttpSuccessClient(endpoint, credential);
         /// 
         /// Response response = client.Options200();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

@@ -68,6 +68,7 @@ namespace body_complex_LowLevel
         /// var client = new InheritanceClient(endpoint, credential);
         /// 
         /// Response response = await client.GetValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("color").ToString());
         /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("id").ToString());
@@ -128,6 +129,7 @@ namespace body_complex_LowLevel
         /// var client = new InheritanceClient(endpoint, credential);
         /// 
         /// Response response = client.GetValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("color").ToString());
         /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("id").ToString());

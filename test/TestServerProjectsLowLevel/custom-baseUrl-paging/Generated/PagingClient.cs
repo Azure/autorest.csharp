@@ -72,6 +72,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// var client = new PagingClient(endpoint, credential);
         /// 
         /// Response response = await client.GetPagesPartialUrlAsync("<accountName>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
@@ -131,6 +132,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// var client = new PagingClient(endpoint, credential);
         /// 
         /// Response response = client.GetPagesPartialUrl("<accountName>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
@@ -190,6 +192,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// var client = new PagingClient(endpoint, credential);
         /// 
         /// Response response = await client.GetPagesPartialUrlOperationAsync("<accountName>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
@@ -249,6 +252,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// var client = new PagingClient(endpoint, credential);
         /// 
         /// Response response = client.GetPagesPartialUrlOperation("<accountName>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
@@ -309,6 +313,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// var client = new PagingClient(endpoint, credential);
         /// 
         /// Response response = await client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
@@ -368,6 +373,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// var client = new PagingClient(endpoint, credential);
         /// 
         /// Response response = client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>");
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());

@@ -68,6 +68,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = await client.GetValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -112,6 +113,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = client.GetValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -284,6 +286,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = await client.GetEmptyAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -328,6 +331,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = client.GetEmpty();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -500,6 +504,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = await client.GetNullAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -544,6 +549,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = client.GetNull();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -588,6 +594,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = await client.GetNotProvidedAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -632,6 +639,7 @@ namespace body_complex_LowLevel
         /// var client = new DictionaryClient(endpoint, credential);
         /// 
         /// Response response = client.GetNotProvided();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
         /// ]]></code>

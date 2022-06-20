@@ -68,6 +68,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(endpoint, credential);
         /// 
         /// Response response = await client.GetNotExpandableAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -100,6 +101,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(endpoint, credential);
         /// 
         /// Response response = client.GetNotExpandable();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -206,6 +208,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(endpoint, credential);
         /// 
         /// Response response = await client.GetReferencedAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -238,6 +241,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(endpoint, credential);
         /// 
         /// Response response = client.GetReferenced();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -344,6 +348,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(endpoint, credential);
         /// 
         /// Response response = await client.GetReferencedConstantAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         /// Console.WriteLine(result.GetProperty("field1").ToString());
@@ -390,6 +395,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(endpoint, credential);
         /// 
         /// Response response = client.GetReferencedConstant();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         /// Console.WriteLine(result.GetProperty("field1").ToString());

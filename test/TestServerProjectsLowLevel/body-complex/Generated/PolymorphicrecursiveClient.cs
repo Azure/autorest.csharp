@@ -68,6 +68,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphicrecursiveClient(endpoint, credential);
         /// 
         /// Response response = await client.GetValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
@@ -223,6 +224,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphicrecursiveClient(endpoint, credential);
         /// 
         /// Response response = client.GetValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());

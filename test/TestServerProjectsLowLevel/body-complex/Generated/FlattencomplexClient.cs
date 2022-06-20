@@ -67,6 +67,7 @@ namespace body_complex_LowLevel
         /// var client = new FlattencomplexClient(endpoint, credential);
         /// 
         /// Response response = await client.GetValidAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("kind").ToString());
         /// Console.WriteLine(result.GetProperty("propB1").ToString());
@@ -118,6 +119,7 @@ namespace body_complex_LowLevel
         /// var client = new FlattencomplexClient(endpoint, credential);
         /// 
         /// Response response = client.GetValid();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("kind").ToString());
         /// Console.WriteLine(result.GetProperty("propB1").ToString());

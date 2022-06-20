@@ -56,6 +56,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// var client = new TopLevelClientWithoutOperationClient(endpoint, credential).GetClient6Client();
         /// 
         /// Response response = await client.OperationAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -87,6 +88,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// var client = new TopLevelClientWithoutOperationClient(endpoint, credential).GetClient6Client();
         /// 
         /// Response response = client.Operation();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>

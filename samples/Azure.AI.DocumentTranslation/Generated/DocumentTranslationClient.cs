@@ -74,6 +74,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("path").ToString());
         /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
@@ -159,6 +160,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("path").ToString());
         /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
@@ -243,6 +245,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -334,6 +337,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetTranslationStatus(Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -425,6 +429,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.CancelTranslationAsync(Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -519,6 +524,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.CancelTranslation(Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -612,6 +618,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetSupportedDocumentFormatsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
@@ -671,6 +678,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetSupportedDocumentFormats();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
@@ -730,6 +738,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetSupportedGlossaryFormatsAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
@@ -789,6 +798,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetSupportedGlossaryFormats();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
@@ -848,6 +858,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetSupportedStorageSourcesAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
         /// ]]></code>
@@ -894,6 +905,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetSupportedStorageSources();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
         /// ]]></code>
@@ -966,6 +978,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetTranslationsStatusAsync();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
@@ -986,6 +999,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
@@ -1130,6 +1144,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetTranslationsStatus();
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
@@ -1150,6 +1165,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
@@ -1295,6 +1311,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDocumentsStatusAsync(Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
@@ -1311,6 +1328,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = await client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("path").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
@@ -1447,6 +1465,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetDocumentsStatus(Guid.NewGuid());
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
@@ -1463,6 +1482,7 @@ namespace Azure.AI.DocumentTranslation
         /// var client = new DocumentTranslationClient(endpoint, credential);
         /// 
         /// Response response = client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// 
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("path").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
