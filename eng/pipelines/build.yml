@@ -11,9 +11,6 @@ pr:
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
   OfficialBuildId: $(Build.BuildNumber)
-  PullRequestNumber: $(System.PullRequest.PullRequestNumber)
-  ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-    BuildNumberPrefix: 'pr'
   NugetSecurityAnalysisWarningLevel: 'none'
 
 resources:
@@ -27,11 +24,6 @@ resources:
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
-    - repository: azure-sdk-for-net_pr
-      type: github
-      name: Azure/azure-sdk-for-net
-      endpoint: azure
-      ref: autorest/$(Build.BuildNumber)
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
@@ -133,8 +125,25 @@ stages:
           vmImage: ubuntu-20.04
         variables:
           AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+          AzureSdkRepoRoot: $(Build.SourcesDirectory)/azure-sdk-for-net
         steps:
-          - checkout: azure-sdk-for-net_pr
+          - pwsh: >
+              $ErrorActionPreference = "Continue"
+              $RemoteName = "origin"
+              $BranchName = "autorest/pr$(System.PullRequest.PullRequestNumber)"
+              # Fetch and checkout remote branch if it already exists otherwise create a new branch.
+              git ls-remote --exit-code --heads $RemoteName $BranchName
+              if ($LASTEXITCODE -eq 0) {
+                Write-Host "git fetch $RemoteName $BranchName"
+                git fetch $RemoteName $BranchName
+                Write-Host "git checkout $BranchName."
+                git checkout $BranchName
+              } else {
+                Write-Host "git checkout -b $BranchName."
+                git checkout -b $BranchName
+              }
+            displayName: Create PR test branch if it doesn't exist
+            workingDirectory: $(AzureSdkRepoRoot)
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
