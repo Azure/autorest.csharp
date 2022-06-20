@@ -15,7 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             OmitOperationGroups.RemoveOperationGroups();
             SubscriptionIdUpdater.Update();
-            RenamePluralEnums.Update();
             SchemaRenamer.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
             BodyParameterNormalizer.UpdatePatchOperations();
@@ -25,6 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             RenameTimeToOn.Update();
             RearrangeParameterOrder.Update();
             NormalizeParamNames.Update(dataSchemaDict);
+            RenamePluralEnums.Update();
 
             CodeModelValidator.Validate();
         }

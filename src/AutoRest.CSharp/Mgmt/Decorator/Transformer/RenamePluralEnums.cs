@@ -26,8 +26,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 string name = schema.Language.Default.Name;
                 if (enumsToKeepPlural.Contains(name))
                     continue;
-                if (Configuration.MgmtConfiguration.RenameRules.ContainsKey(name.SplitByCamelCase().Last()))
-                    continue;
                 schema.Language.Default.Name = name.LastWordToSingular(inputIsKnownToBePlural: false);
             }
         }
