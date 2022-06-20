@@ -64,7 +64,7 @@ namespace ResourceClients_LowLevel
         /// <code><![CDATA[
         /// var credential = new DefaultAzureCredential();
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential).GetResource("<itemId>");
+        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
         /// 
         /// Response response = await client.GetItemAsync();
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
@@ -96,7 +96,7 @@ namespace ResourceClients_LowLevel
         /// <code><![CDATA[
         /// var credential = new DefaultAzureCredential();
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential).GetResource("<itemId>");
+        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
         /// 
         /// Response response = client.GetItem();
         /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;

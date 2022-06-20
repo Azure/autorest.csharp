@@ -724,6 +724,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var childInvocation = GetSubClientInvocationChain(subClient.SubClients, subClient.SubClientFactoryMethods);
                 if (childInvocation.Count > 0)
                 {
+                    var factoryMethod = subClientFactoryMethods.First(m => m.ClientTypeName == subClient.Type.Name);
+                    chain.Add(factoryMethod.Signature);
                     chain.AddRange(childInvocation);
                     return chain;
                 }
