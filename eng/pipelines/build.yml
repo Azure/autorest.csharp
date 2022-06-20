@@ -118,14 +118,12 @@ stages:
           name: SmokeTest_S_Z
           filter: "^[s-z]"
       - job: Test_in_azure_sdk_for_net
-        dependsOn: Build
-        condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+        condition: ne(variables['System.PullRequest.PullRequestNumber'], ''))
         timeoutInMinutes: 120
         pool:
           vmImage: ubuntu-20.04
         variables:
           AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-          AzureSdkRepoRoot: $(Build.SourcesDirectory)/azure-sdk-for-net
         steps:
           - pwsh: >
               $ErrorActionPreference = "Continue"
