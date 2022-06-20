@@ -89,8 +89,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return _operationIdToProviders;
         }
 
-        //private IEnumerable<ExtensionMockTest> _extensionMockTests;
-        //public IEnumerable<ExtensionMockTest> ExtensionMockTests => _extensionMockTests ??= EnsureExtensionMockTests();
+        private MgmtMockTestProvider<MgmtExtensionsWrapper>? _extensionWrapperMockTest;
+        public MgmtMockTestProvider<MgmtExtensionsWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionsWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
+
+        private IEnumerable<MgmtMockTestProvider<MgmtExtensions>>? _extensionMockTests;
+        public IEnumerable<MgmtMockTestProvider<MgmtExtensions>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<MgmtExtensions>();
 
         private IEnumerable<MgmtMockTestProvider<ResourceCollection>>? _resourceCollectionMockTests;
         public IEnumerable<MgmtMockTestProvider<ResourceCollection>> ResourceCollectionMockTests => _resourceCollectionMockTests ??= EnsureMockTestProviders<ResourceCollection>();

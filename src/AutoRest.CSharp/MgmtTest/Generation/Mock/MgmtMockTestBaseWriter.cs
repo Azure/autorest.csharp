@@ -97,7 +97,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             }
         }
 
-        protected abstract void WriteTestMethodBody(MockTestCase testCase);
+        protected virtual void WriteTestMethodBody(MockTestCase testCase)
+        {
+        }
 
         protected void WriteTestAttribute()
         {

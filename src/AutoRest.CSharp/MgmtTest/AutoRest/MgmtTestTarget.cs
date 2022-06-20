@@ -57,14 +57,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
             }
 
-            //var extensionsWriter = new CodeWriter();
-            //var mockExtensionWriter = new TestHelperWriter(extensionsWriter);
-            //mockExtensionWriter.WriteMockExtension();
-            //project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
+            var extensionWrapperTest = library.ExtensionWrapperMockTest;
+            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+            extensionWrapperTestWriter.Write();
 
-            //var subscriptionExtensionsCodeWriter = new CodeWriter();
-            //new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter).Write();
-            //project.AddGeneratedFile($"Mock/{MgmtContext.Library.ExtensionWrapper.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
+            project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
         }
     }
 }
