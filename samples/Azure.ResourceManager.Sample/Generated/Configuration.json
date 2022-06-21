@@ -12,7 +12,12 @@
   "KeepOrphanedModels": [
     "AvailabilitySetSkuTypes"
   ],
-  "KeepPluralEnums": [
-    "HyperVGenerationTypes"
-  ]
+  "FormatByNameRules": {
+    "tenantId": "uuid",
+    "resourceType": "resource-type",
+    "etag": "etag",
+    "location": "azure-location",
+    "*Uri": "Uri",
+    "*Uris": "Uri"
+  }
 }

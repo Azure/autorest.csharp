@@ -26,7 +26,7 @@ namespace OmitOperationGroups.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("f"))
@@ -56,11 +56,16 @@ namespace OmitOperationGroups.Models
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new Model3(id, name, type, systemData, f.Value, g.Value);
+            return new Model3(id, name, type, systemData.Value, f.Value, g.Value);
         }
     }
 }
