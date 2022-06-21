@@ -122,14 +122,35 @@ stages:
         timeoutInMinutes: 120
         pool:
           vmImage: ubuntu-20.04
-        variables:
-          AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
         steps:
           - checkout: self
           - checkout: azure-sdk-for-net
           - checkout: azure-sdk-tools
-          - pwsh: ./eng/GetOrCreateAzureSdkForNetBranch.ps1 -Version $(AutorestCSharpVersion) -PullRequestNumber $(System.PullRequest.PullRequestNumber) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-            displayName: Create PR test branch if it doesn't exist
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core SDK'
+            retryCountOnTaskFailure: 3
+            inputs:
+              useGlobalJson: true
+              performMultiLevelLookup: true
+          - task: NodeTool@0
+            displayName: "Install Node 16.x"
+            inputs:
+              # https://github.com/nodejs/node/issues/40468
+              versionSpec: '16.6.2'
+          - script: |
+              npm ci
+            displayName: "Install packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
+            name: Package
+            displayName: 'Package'
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            env:
+              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+              DOTNET_CLI_TELEMETRY_OPTOUT: 1
+              DOTNET_MULTILEVEL_LOOKUP: 0
+          - pwsh: ./eng/GetOrCreateAzureSdkForNetBranch.ps1 -Version $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']] -PullRequestNumber $(System.PullRequest.PullRequestNumber) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+            displayName: Get or create azure-sdk-for-net test branch
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
