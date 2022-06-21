@@ -604,7 +604,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             WriteMethodDocumentation(writer, methodSignature, clientMethod);
             var exampleComposer = new LowLevelExampleComposer(writer, clientTypeName, context);
-            exampleComposer.Write(methodSignature, clientMethod.OperationSchemas, async);
+            exampleComposer.Write(clientMethod, async);
             WriteSchemaDocumentationRemarks(writer, methodSignature, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);

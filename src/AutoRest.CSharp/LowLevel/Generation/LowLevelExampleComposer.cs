@@ -32,38 +32,36 @@ namespace AutoRest.CSharp.Generation.Writers
             Context = context;
         }
 
-        /// <summary>
-        /// Compose <example> contents for a given low level client method.
-        /// </summary>
-        /// <param name="writer"><c>CodeWriter</c> to write the contents.</param>
-        /// <param name="methodSignature">Signature of the method.</param>
-        public void Write(MethodSignature methodSignature, LowLevelOperationSchemaInfo operationSchema, bool async)
+        public void Write(LowLevelClientMethod clientMethod, bool async)
         {
+            var methodSignature = clientMethod.Signature.WithAsync(async);
+            var operationSchema = clientMethod.OperationSchemas;
+
             var examples = new List<string>();
 
             if (HasNoCustomInput(methodSignature.Parameters))
             {
-                examples.Add(GenerateExampleWithoutParameter(methodSignature, operationSchema, async, true));
+                examples.Add(GenerateExampleWithoutParameter(clientMethod, methodSignature.Name, async, true));
             }
             else if (HasOptionalInputValue(methodSignature.Parameters, operationSchema.RequestBodySchema))
             {
                 if (AreAllParametersOptional(methodSignature.Parameters))
                 {
-                    examples.Add(GenerateExampleWithoutParameter(methodSignature, operationSchema, async, false));
+                    examples.Add(GenerateExampleWithoutParameter(clientMethod, methodSignature.Name, async, false));
                 }
                 else if (operationSchema.RequestBodySchema != null && HasRequiredAndWritablePropertyFromTop(operationSchema.RequestBodySchema))
                 {
-                    examples.Add(GenerateExampleWithParametersAndRequestContent(methodSignature, operationSchema, async, false));
+                    examples.Add(GenerateExampleWithParametersAndRequestContent(clientMethod, methodSignature.Name, async, false));
                 }
                 else
                 {
-                    examples.Add(GenerateExampleWithoutRequestContent(methodSignature, operationSchema, async));
+                    examples.Add(GenerateExampleWithoutRequestContent(clientMethod, methodSignature.Name, async));
                 }
-                examples.Add(GenerateExampleWithParametersAndRequestContent(methodSignature, operationSchema, async, true));
+                examples.Add(GenerateExampleWithParametersAndRequestContent(clientMethod, methodSignature.Name, async, true));
             }
             else
             {
-                examples.Add(GenerateExampleWithRequiredParameters(methodSignature, operationSchema, async));
+                examples.Add(GenerateExampleWithRequiredParameters(clientMethod, methodSignature.Name, async));
             }
 
             Writer.WriteXmlDocumentation("example", $"{string.Join(Environment.NewLine, examples)}");
@@ -74,22 +72,22 @@ namespace AutoRest.CSharp.Generation.Writers
             return parameters.Count() <= 1; // `RequestContext = null` is excluded
         }
 
-        private string GenerateExampleWithoutRequestContent(MethodSignature methodSignature, LowLevelOperationSchemaInfo schemaInfo, bool async)
+        private string GenerateExampleWithoutRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async)
         {
             var builder = new StringBuilder();
-            var hasParameter = methodSignature.Parameters.SkipLast(1).Any(p => p.RequestLocation != RequestLocation.Body);
-            builder.AppendLine($"This sample shows how to call {methodSignature.Name}{(hasParameter ? " with required parameters" : "")}{(schemaInfo.ResponseBodySchema != null ? " and parse the result" : "")}.");
+            var hasParameter = clientMethod.Signature.Parameters.SkipLast(1).Any(p => p.RequestLocation != RequestLocation.Body);
+            builder.AppendLine($"This sample shows how to call {methodName}{(hasParameter ? " with required parameters" : "")}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? " and parse the result" : "")}.");
             // in this case, we print the codes of parsing all properties from response
-            ComposeCodeSnippet(methodSignature, schemaInfo, async, false, builder);
+            ComposeCodeSnippet(clientMethod, methodName, async, false, builder);
             return builder.ToString();
         }
 
-        private string GenerateExampleWithRequiredParameters(MethodSignature methodSignature, LowLevelOperationSchemaInfo schemaInfo, bool async)
+        private string GenerateExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool async)
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"This sample shows how to call {methodSignature.Name} with required {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(schemaInfo.ResponseBodySchema != null ? " and parse the result" : "")}.");
+            builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.Signature.Parameters)}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? " and parse the result" : "")}.");
             // in this case, we print the codes of parsing all properties from response
-            ComposeCodeSnippet(methodSignature, schemaInfo, async, true, builder);
+            ComposeCodeSnippet(clientMethod, methodName, async, true, builder);
             return builder.ToString();
         }
 
@@ -216,11 +214,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private string GenerateExampleWithParametersAndRequestContent(MethodSignature methodSignature, LowLevelOperationSchemaInfo schemaInfo, bool async, bool allParameters)
+        private string GenerateExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters)
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"This sample shows how to call {methodSignature.Name} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(schemaInfo.ResponseBodySchema != null ? ", and how to parse the result" : "")}.");
-            ComposeCodeSnippet(methodSignature, schemaInfo, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.Signature.Parameters)}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? ", and how to parse the result" : "")}.");
+            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
             return builder.ToString();
         }
 
@@ -240,39 +238,48 @@ namespace AutoRest.CSharp.Generation.Writers
             return "request content";
         }
 
-        private string GenerateExampleWithoutParameter(MethodSignature methodSignature, LowLevelOperationSchemaInfo schemaInfo, bool async, bool allParameters)
+        private string GenerateExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters)
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"This sample shows how to call {methodSignature.Name}{(schemaInfo.ResponseBodySchema != null ? " and parse the result" : "")}.");
-            ComposeCodeSnippet(methodSignature, schemaInfo, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? " and parse the result" : "")}.");
+            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
             return builder.ToString();
         }
 
-        private void ComposeCodeSnippet(MethodSignature methodSignature, LowLevelOperationSchemaInfo schemaInfo, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine("<code><![CDATA[");
             builder.AppendLine("var credential = new DefaultAzureCredential();");
             builder.AppendLine($"var endpoint = new Uri(\"<{GetEndpoint()}>\");");
             builder.AppendLine(ComposeGetClientCodes());
             builder.AppendLine();
-            if (schemaInfo.RequestBodySchema != null)
+            if (clientMethod.OperationSchemas.RequestBodySchema != null)
             {
-                ComposeRequestContent(allParameters, schemaInfo.RequestBodySchema!, builder);
+                ComposeRequestContent(allParameters, clientMethod.OperationSchemas.RequestBodySchema!, builder);
                 builder.AppendLine();
             }
-            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodSignature.Name}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
-            if (schemaInfo.ResponseBodySchema != null)
+
+            // compose pageable
+            // compose long running
+            // normal response
+            ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
+            builder.Append("]]></code>");
+        }
+
+        private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            if (clientMethod.OperationSchemas.ResponseBodySchema != null)
             {
-                ComposeParsingResponseCodes(allParameters, schemaInfo.ResponseBodySchema, builder);
+                ComposeParsingNormalResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema, builder);
             }
             else
             {
                 builder.AppendLine("Console.WriteLine(response.Status);");
             }
-            builder.Append("]]></code>");
         }
 
-        private void ComposeParsingResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
+        private void ComposeParsingNormalResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
         {
             if (responseSchema is BinarySchema binarySchema)
             {
