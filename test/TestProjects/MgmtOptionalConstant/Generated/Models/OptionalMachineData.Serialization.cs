@@ -18,14 +18,17 @@ namespace MgmtOptionalConstant
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -46,18 +49,23 @@ namespace MgmtOptionalConstant
 
         internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element)
         {
-            IDictionary<string, string> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<ModelWithRequiredConstant> listener = default;
             Optional<ModelWithOptionalConstant> content = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -88,6 +96,11 @@ namespace MgmtOptionalConstant
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -124,7 +137,7 @@ namespace MgmtOptionalConstant
                     continue;
                 }
             }
-            return new OptionalMachineData(id, name, type, systemData, tags, location, listener.Value, content.Value);
+            return new OptionalMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, listener.Value, content.Value);
         }
     }
 }
