@@ -5,10 +5,10 @@ $BranchName = "autorest/pr$PullRequestNumber"
 $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
-Write-Host "version: $BranchName"
+Write-Host "`nversion: $BranchName"
 Write-Host "pull request number: $PullRequestNumber"
 Write-Host "autorest repo root: $RepoRoot"
-Write-Host "azure-sdk-for-net: $SdkRepoRoot"
+Write-Host "azure-sdk-for-net repo root: $SdkRepoRoot`n"
 
 # Fetch and checkout remote branch if it already exists otherwise create a new branch.
 git --git-dir=$SdkRepoRoot\.git ls-remote --exit-code --heads $RemoteName $BranchName
@@ -22,8 +22,8 @@ if ($LASTEXITCODE -eq 0) {
     git --git-dir=$SdkRepoRoot\.git checkout -b $BranchName
 }
 
-$PackageJson = Resolve-Path "$SdkRepoRoot\package.json"
+$NuGetConfig = Resolve-Path "$SdkRepoRoot\NuGet.Config"
 $PackagesProps = Resolve-Path "$SdkRepoRoot\eng\Packages.Data.props"
 
-Write-Host "$PackageJson"
+Write-Host "$NuGetConfig"
 Write-Host "$PackagesProps"
