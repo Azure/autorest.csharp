@@ -127,9 +127,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 else if (step.Type == TestStepType.ArmTemplateDeployment && step.ArmTemplatePayloadString is not null)
                 {
                     var templatePayload = new CodeWriterDeclaration("templatePayload");
+                    _writer.UseNamespace("Azure.ResourceManager.Resources.Models");
                     _writer.Line($"var {templatePayload:D} = $@\"{step.ArmTemplatePayloadString.RefScenarioDefinedVariablesToString(scenarioDefinedVariables).Replace("\"", "\"\"").MultiplyStartingSpace(2)}\";");
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
-                    using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetArmDeployments().CreateOrUpdateAsync({typeof(WaitUntil)}.Completed, {step.Step:L}, new {typeof(ArmDeploymentContent)}(new {typeof(ArmDeploymentProperties)}({typeof(ArmDeploymentMode)}.Complete)", "{", "}));"))
+                    using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetArmDeployments().CreateOrUpdateAsync({typeof(WaitUntil)}.Completed, {step.Step:L}, new ArmDeploymentContent(new ArmDeploymentProperties(ArmDeploymentMode.Complete)", "{", "}));"))
                     {
                         _writer.Append($"Template = {typeof(BinaryData)}.FromString({templatePayload})");
                         _writer.Line($",");

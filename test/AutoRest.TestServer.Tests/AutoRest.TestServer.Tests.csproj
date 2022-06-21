@@ -38,6 +38,8 @@
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs</Link>
     </Compile>
+
+    <Compile Remove="**/tests/Generated/Scenario/*.cs" LinkBase="TestProjects" ></Compile>
   </ItemGroup>
 
 </Project>

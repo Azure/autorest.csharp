@@ -41,6 +41,8 @@
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TypeAsserts.cs" />
+
+    <Compile Remove="**/tests/Generated/Scenario/*.cs" LinkBase="TestProjects" ></Compile>
   </ItemGroup>
 
 </Project>

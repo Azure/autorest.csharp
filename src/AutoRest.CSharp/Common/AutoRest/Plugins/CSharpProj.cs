@@ -112,6 +112,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
   <ItemGroup>
     <Compile Include = ""..\..\..\..\src\assets\TestFramework\*.cs"" />
+    <PackageReference Include=""Azure.ResourceManager.Resources"" Version=""1.1.0""/>
   </ItemGroup>", context.DefaultNamespace);
             }
 
