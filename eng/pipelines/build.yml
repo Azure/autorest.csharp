@@ -118,6 +118,7 @@ stages:
           name: SmokeTest_S_Z
           filter: "^[s-z]"
       - job: Test_in_azure_sdk_for_net
+        displayName: 'Test in azure-sdk-for-net repo'
         condition: ne(variables['System.PullRequest.PullRequestNumber'], '')
         timeoutInMinutes: 120
         pool:
@@ -126,6 +127,7 @@ stages:
         steps:
           - checkout: self
           - checkout: azure-sdk-for-net
+            lfs: false
           - checkout: azure-sdk-tools
           - task: UseDotNet@2
             displayName: 'Use .NET Core SDK'
@@ -140,11 +142,11 @@ stages:
               versionSpec: '16.6.2'
           - script: |
               npm ci
-            displayName: "Install packages"
+            displayName: 'Install packages'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
-            displayName: 'Package'
+            displayName: 'Build package'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -158,7 +160,27 @@ stages:
               -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
             displayName: Get or create azure-sdk-for-net test branch
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - script: dotnet msbuild /restore /t:GenerateCode "$(Build.SourcesDirectory)/azure-sdk-for-net/eng/service.proj"
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet restore'
+            inputs:
+              command: 'Restore packages in azure-sdk-for-net'
+              projects: "$(Build.SourcesDirectory)/azure-sdk-for-net/eng/service.proj"
+          - task: DotNetCoreCLI@2
+            displayName: 'Generate code in azure-sdk-for-net'
+            inputs:
+              command: 'build'
+              projects: "$(Build.SourcesDirectory)/azure-sdk-for-net/eng/service.proj"
+              arguments: "/t:GenerateCode"
+          - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+            parameters:
+              BaseBranchName: main
+              RepoName: azure-sdk-for-net
+              PRBranchName: auto-update-autorest
+              CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
+              PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
+              PRTitle:  Update AutoRest C# version
+              WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+              ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:

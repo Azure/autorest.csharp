@@ -28,7 +28,7 @@ if ($LASTEXITCODE -eq 0) {
     $LocalSourceNode = $NuGetConfigDocument.CreateElement("add")
     $LocalSourceNode.SetAttribute("key", "local")
     $LocalSourceNode.SetAttribute("value", $PackageSource)
-    $NuGetConfigDocument.configuration.packageSources.AppendChild($LocalSourceNode)
+    $NuGetConfigDocument.configuration.packageSources.AppendChild($LocalSourceNode) | out-null
     $NuGetConfigDocument.Save("$NuGetConfig")
 }
 
