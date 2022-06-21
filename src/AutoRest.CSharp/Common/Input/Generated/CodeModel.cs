@@ -4,6 +4,8 @@
 // </auto-generated>
 //----------------------
 
+using System;
+
 namespace AutoRest.CSharp.Input
 {
     #pragma warning disable // Disable all warnings
@@ -91,6 +93,9 @@ namespace AutoRest.CSharp.Input
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
         public RecordOfStringAndAny? Extensions { get; set; }
+
+        // Unique id for the schema
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 
     /// <summary>Represent information about a deprecation</summary>

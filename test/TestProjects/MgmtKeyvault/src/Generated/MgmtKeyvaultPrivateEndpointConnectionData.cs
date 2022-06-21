@@ -33,7 +33,7 @@ namespace MgmtKeyvault
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
-        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState connectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState connectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState, AzureLocation? location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
@@ -58,7 +58,7 @@ namespace MgmtKeyvault
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public MgmtKeyvaultPrivateEndpointConnectionProvisioningState? ProvisioningState { get; set; }
         /// <summary> Azure location of the key vault resource. </summary>
-        public string Location { get; }
+        public AzureLocation? Location { get; }
         /// <summary> Tags assigned to the key vault resource. </summary>
         public IReadOnlyDictionary<string, string> Tags { get; }
     }

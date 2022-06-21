@@ -31,6 +31,14 @@ operation-positions:
 override-operation-name:
   DeletedAccounts_List: GetAll
 
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
+
 directive:
   - rename-model:
       from: BlobServiceProperties

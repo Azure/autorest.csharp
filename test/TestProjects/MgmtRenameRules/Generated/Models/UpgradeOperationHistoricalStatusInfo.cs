@@ -21,7 +21,7 @@ namespace MgmtRenameRules.Models
         /// <param name="properties"> Information about the properties of the upgrade operation. </param>
         /// <param name="resourceType"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
-        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? resourceType, string location)
+        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? resourceType, AzureLocation? location)
         {
             Properties = properties;
             ResourceType = resourceType;
@@ -33,6 +33,6 @@ namespace MgmtRenameRules.Models
         /// <summary> Resource type. </summary>
         public ResourceType? ResourceType { get; }
         /// <summary> Resource location. </summary>
-        public string Location { get; }
+        public AzureLocation? Location { get; }
     }
 }
