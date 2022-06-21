@@ -1,12 +1,11 @@
-param($Version, $PullRequestNumber, $SdkRepoRoot, $PackageSource)
+param($Version, $BranchName, $SdkRepoRoot, $PackageSource)
 
 $RemoteName = "origin"
-$BranchName = "autorest/pr$PullRequestNumber"
 $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
 Write-Host "`nversion: $Version"
-Write-Host "pull request number: $PullRequestNumber"
+Write-Host "branch: $BranchName"
 Write-Host "autorest repo root: $RepoRoot"
 Write-Host "azure-sdk-for-net repo root: $SdkRepoRoot"
 Write-Host "package source: $PackageSource`n"

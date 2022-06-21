@@ -154,7 +154,7 @@ stages:
           - pwsh: >
               ./eng/GetOrCreateAzureSdkForNetBranch.ps1 
               -Version $(Package.AutorestCSharpVersion) 
-              -PullRequestNumber $(System.PullRequest.PullRequestNumber) 
+              -BranchName autorest/pr$(System.PullRequest.PullRequestNumber)
               -PackageSource $(Build.ArtifactStagingDirectory)
               -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
             displayName: Get or create azure-sdk-for-net test branch
@@ -176,14 +176,11 @@ stages:
               arguments: "/t:GenerateCode"
           - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
             parameters:
-              BaseBranchName: main
-              RepoName: azure-sdk-for-net
-              PRBranchName: auto-update-autorest
-              CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-              PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-              PRTitle:  Update AutoRest C# version
+              BaseRepoBranch: autorest/pr$(System.PullRequest.PullRequestNumber)
+              CommitMsg: Update AutoRest C# version to $(Package.AutorestCSharpVersion)
+              TargetRepoName: azure-sdk-for-net
               WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-              ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+              ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts              
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
