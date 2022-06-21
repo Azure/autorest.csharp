@@ -29,7 +29,7 @@ if ($LASTEXITCODE -eq 0) {
     $LocalSourceNode.SetAttribute("key", "local")
     $LocalSourceNode.SetAttribute("value", $PackageSource)
     $NuGetConfigDocument.configuration.packageSources.AppendChild($LocalSourceNode)
-    $NuGetConfigDocument.Save($pathToConfig)
+    $NuGetConfigDocument.Save("$pathToConfig")
 
     Write-Host (get-content $pathToConfig)
 }
