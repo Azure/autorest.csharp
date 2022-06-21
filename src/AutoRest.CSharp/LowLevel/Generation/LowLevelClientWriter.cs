@@ -546,7 +546,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (restMethod.Operation.ExternalDocs != null)
                 {
-                    return $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.Operation.ExternalDocs}{Environment.NewLine}";
+                    return $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.Operation.ExternalDocs.Url}{Environment.NewLine}";
                 }
                 return $"";
             }
@@ -580,7 +580,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return;
                 }
-                formattedSchemas.Add($"{Environment.NewLine}{schemaName}:");
+                formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}");
                 // check if it is base schema. if so, add children schemas.
                 if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
                 {
