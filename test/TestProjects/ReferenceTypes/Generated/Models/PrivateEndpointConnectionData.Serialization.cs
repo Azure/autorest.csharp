@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Fake.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            ResourceManager.Models.SystemData systemData = default;
+            Optional<ResourceManager.Models.SystemData> systemData = default;
             Optional<PrivateEndpoint> privateEndpoint = default;
             Optional<ReferenceTypesPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<ReferenceTypesPrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -63,6 +63,11 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<ResourceManager.Models.SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -109,7 +114,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new PrivateEndpointConnectionData(id, name, type, systemData, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new PrivateEndpointConnectionData(id, name, type, systemData.Value, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
 
         internal partial class PrivateEndpointConnectionDataConverter : JsonConverter<PrivateEndpointConnectionData>

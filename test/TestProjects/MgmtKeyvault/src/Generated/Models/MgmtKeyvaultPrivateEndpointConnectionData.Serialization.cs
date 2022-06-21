@@ -53,7 +53,7 @@ namespace MgmtKeyvault
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<SubResource> privateEndpoint = default;
             Optional<MgmtKeyvaultPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtKeyvaultPrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -106,6 +106,11 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -152,7 +157,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData, Optional.ToNullable(location), Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData.Value, Optional.ToNullable(location), Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

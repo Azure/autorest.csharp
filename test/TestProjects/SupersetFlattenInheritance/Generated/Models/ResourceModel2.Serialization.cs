@@ -32,7 +32,7 @@ namespace SupersetFlattenInheritance.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -53,6 +53,11 @@ namespace SupersetFlattenInheritance.Models
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -74,7 +79,7 @@ namespace SupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new ResourceModel2(id, name, type, systemData, foo.Value);
+            return new ResourceModel2(id, name, type, systemData.Value, foo.Value);
         }
     }
 }
