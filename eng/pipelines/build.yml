@@ -149,7 +149,7 @@ stages:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
-          - pwsh: ./eng/GetOrCreateAzureSdkForNetBranch.ps1 -Version $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']] -PullRequestNumber $(System.PullRequest.PullRequestNumber) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+          - pwsh: ./eng/GetOrCreateAzureSdkForNetBranch.ps1 -Version $(Package.AutorestCSharpVersion) -PullRequestNumber $(System.PullRequest.PullRequestNumber) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
             displayName: Get or create azure-sdk-for-net test branch
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
