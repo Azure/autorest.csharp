@@ -33,14 +33,17 @@ namespace MgmtSignalR
                 writer.WritePropertyName("identity");
                 writer.WriteObjectValue(Identity);
             }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -84,12 +87,12 @@ namespace MgmtSignalR
             Optional<ResourceSku> sku = default;
             Optional<ServiceKind> kind = default;
             Optional<ManagedIdentity> identity = default;
-            IDictionary<string, string> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<IList<SignalRFeature>> features = default;
             Optional<SignalRCorsSettings> cors = default;
             Optional<ServerlessUpstreamSettings> upstream = default;
@@ -136,6 +139,11 @@ namespace MgmtSignalR
                 }
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -166,6 +174,11 @@ namespace MgmtSignalR
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -297,7 +310,7 @@ namespace MgmtSignalR
                     continue;
                 }
             }
-            return new SignalRResourceData(id, name, type, systemData, tags, location, sku.Value, Optional.ToNullable(kind), identity.Value, Optional.ToList(features), cors.Value, upstream.Value, networkACLs.Value, Optional.ToNullable(provisioningState), externalIP.Value, hostName.Value, Optional.ToNullable(publicPort), Optional.ToNullable(serverPort), version.Value, Optional.ToList(privateEndpointConnections), tls.Value);
+            return new SignalRResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(kind), identity.Value, Optional.ToList(features), cors.Value, upstream.Value, networkACLs.Value, Optional.ToNullable(provisioningState), externalIP.Value, hostName.Value, Optional.ToNullable(publicPort), Optional.ToNullable(serverPort), version.Value, Optional.ToList(privateEndpointConnections), tls.Value);
         }
     }
 }
