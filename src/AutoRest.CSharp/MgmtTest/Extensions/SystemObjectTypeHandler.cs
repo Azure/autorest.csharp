@@ -11,6 +11,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 {
     internal static class SystemObjectTypeHandler
     {
+        /// <summary>
+        /// This is a temporary class. We could remove this class if the issue https://github.com/Azure/autorest.csharp/issues/2326 is resolved
+        /// </summary>
+        /// <param name="systemObjectType"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         public static string? GetPropertySerializedName(SystemObjectType systemObjectType, string propertyName)
         {
             var type = systemObjectType.SystemType;

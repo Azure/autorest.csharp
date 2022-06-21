@@ -18,6 +18,16 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 {
     internal static class CodeWriterExtensions
     {
+        /// <summary>
+        /// Write an ExampleValue, using the given type as a hint.
+        /// If the type is not provided, a type will be created from TypeFactory instead
+        /// In a case that a property's type is replaced, we will have to provide the actual type otherwise the type from TypeFactory will always be the one that is replaced.
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="exampleValue"></param>
+        /// <param name="type"></param>
+        /// <param name="includeCollectionInitialization"></param>
+        /// <returns></returns>
         public static CodeWriter AppendExampleValue(this CodeWriter writer, ExampleValue exampleValue, CSharpType? type = null, bool includeCollectionInitialization = true)
         {
             // get the type of this schema in the type factory if the type is not specified

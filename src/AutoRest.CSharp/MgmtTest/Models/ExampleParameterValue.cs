@@ -7,5 +7,11 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal record ExampleParameterValue(Parameter Parameter, ExampleValue? Value, FormattableString? RawValue, FormattableString? Note = null);
+    /// <summary>
+    /// A <see cref="ExampleParameterValue"/> represents a value for a parameter, which could either be a <see cref="ExampleValue"/>, or a <see cref="FormattableString"/> as a literal
+    /// </summary>
+    /// <param name="Parameter"></param>
+    /// <param name="Value"></param>
+    /// <param name="RawValue"></param>
+    internal record ExampleParameterValue(Parameter Parameter, ExampleValue? Value, FormattableString? RawValue);
 }
