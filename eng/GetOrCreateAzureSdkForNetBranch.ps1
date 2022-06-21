@@ -5,7 +5,7 @@ $BranchName = "autorest/pr$PullRequestNumber"
 $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
-Write-Host "`nversion: $BranchName"
+Write-Host "`nversion: $Version"
 Write-Host "pull request number: $PullRequestNumber"
 Write-Host "autorest repo root: $RepoRoot"
 Write-Host "azure-sdk-for-net repo root: $SdkRepoRoot"
@@ -30,9 +30,11 @@ if ($LASTEXITCODE -eq 0) {
     $LocalSourceNode.SetAttribute("value", $PackageSource)
     $NuGetConfigDocument.configuration.packageSources.AppendChild($LocalSourceNode)
     $NuGetConfigDocument.Save("$NuGetConfig")
-
-    Write-Host (get-content $NuGetConfig)
 }
 
 $PackagesProps = Resolve-Path "$SdkRepoRoot\eng\Packages.Data.props"
-Write-Host "$PackagesProps"
+Write-Host "Update autorest package version in $PackagesProps"
+$PackagesPropsDocument = [xml](get-content $PackagesProps)
+$PackageReference = $PackagesPropsDocument.Project.ItemGroup.PackageReference | Where-Object Update -eq 'Microsoft.Azure.AutoRest.CSharp' | Select-Object -First 1
+$PackageReference.Version = $Version
+$PackagesPropsDocument.Save("$PackagesProps")

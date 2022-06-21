@@ -158,6 +158,7 @@ stages:
               -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
             displayName: Get or create azure-sdk-for-net test branch
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: dotnet msbuild /restore /t:GenerateCode "$(Build.SourcesDirectory)/azure-sdk-for-net/eng/service.proj"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
