@@ -57,6 +57,11 @@ namespace Azure.Core
             builder.AppendPath(value.ToString(), escape);
         }
 
+        public static void AppendPath(this RequestUriBuilder builder, long value, bool escape = true)
+        {
+            builder.AppendPath(value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture), escape);
+        }
+
         public static void AppendQuery(this RequestUriBuilder builder, string name, bool value, bool escape = false)
         {
             builder.AppendQuery(name, TypeFormatters.ToString(value), escape);

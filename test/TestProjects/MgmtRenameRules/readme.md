@@ -27,6 +27,14 @@ rename-rules:
   VM: Vm
   VMs: Vms
   VMScaleSet: VmScaleSet
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
   
 directive:
   - rename-model:
@@ -44,6 +52,5 @@ directive:
   - from: MgmtRenameRules.json
     where: $.definitions.UpgradeOperationHistoricalStatusInfo.properties.type
     transform: > 
-      $["x-ms-format"] = "resource-type";
       $["x-ms-client-name"] = "ResourceType";
 ```
