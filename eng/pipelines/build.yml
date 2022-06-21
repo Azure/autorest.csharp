@@ -165,7 +165,7 @@ stages:
               command: 'restore'
               feedsToUse: 'config'
               verbosityRestore: 'minimal'
-              nugetConfig: "$(Build.SourcesDirectory)/azure-sdk-for-net/NuGet.Config"
+              nugetConfigPath: "$(Build.SourcesDirectory)/azure-sdk-for-net/NuGet.Config"
               projects: "$(Build.SourcesDirectory)/azure-sdk-for-net/eng/service.proj"
           - task: DotNetCoreCLI@2
             displayName: 'Generate code in azure-sdk-for-net'
