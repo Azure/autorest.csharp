@@ -59,8 +59,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Salmon Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -77,7 +79,8 @@ namespace body_complex_LowLevel
         ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>SmartSalmon Response Body</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
@@ -95,7 +98,8 @@ namespace body_complex_LowLevel
         ///   college_degree: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Shark Response Body</c>:
+        /// </details>
+        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -112,7 +116,8 @@ namespace body_complex_LowLevel
         ///   birthday: string (ISO 8601 Format), # Required.
         /// }
         /// </code>
-        /// Schema for <c>Sawshark Response Body</c>:
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -130,7 +135,8 @@ namespace body_complex_LowLevel
         ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Goblinshark Response Body</c>:
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -149,7 +155,8 @@ namespace body_complex_LowLevel
         ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
-        /// Schema for <c>Cookiecuttershark Response Body</c>:
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -166,6 +173,8 @@ namespace body_complex_LowLevel
         ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
@@ -187,8 +196,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Salmon Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -205,7 +216,8 @@ namespace body_complex_LowLevel
         ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>SmartSalmon Response Body</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
@@ -223,7 +235,8 @@ namespace body_complex_LowLevel
         ///   college_degree: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Shark Response Body</c>:
+        /// </details>
+        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -240,7 +253,8 @@ namespace body_complex_LowLevel
         ///   birthday: string (ISO 8601 Format), # Required.
         /// }
         /// </code>
-        /// Schema for <c>Sawshark Response Body</c>:
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -258,7 +272,8 @@ namespace body_complex_LowLevel
         ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Goblinshark Response Body</c>:
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -277,7 +292,8 @@ namespace body_complex_LowLevel
         ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
-        /// Schema for <c>Cookiecuttershark Response Body</c>:
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -294,6 +310,8 @@ namespace body_complex_LowLevel
         ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetValid(RequestContext context = null)
@@ -317,8 +335,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Salmon Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -335,7 +355,8 @@ namespace body_complex_LowLevel
         ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>SmartSalmon Request Body</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
@@ -353,7 +374,8 @@ namespace body_complex_LowLevel
         ///   college_degree: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Shark Request Body</c>:
+        /// </details>
+        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -370,7 +392,8 @@ namespace body_complex_LowLevel
         ///   birthday: string (ISO 8601 Format), # Required.
         /// }
         /// </code>
-        /// Schema for <c>Sawshark Request Body</c>:
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -388,7 +411,8 @@ namespace body_complex_LowLevel
         ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Goblinshark Request Body</c>:
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -407,7 +431,8 @@ namespace body_complex_LowLevel
         ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
-        /// Schema for <c>Cookiecuttershark Request Body</c>:
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -424,6 +449,8 @@ namespace body_complex_LowLevel
         ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
@@ -449,8 +476,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Salmon Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -467,7 +496,8 @@ namespace body_complex_LowLevel
         ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>SmartSalmon Request Body</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
@@ -485,7 +515,8 @@ namespace body_complex_LowLevel
         ///   college_degree: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Shark Request Body</c>:
+        /// </details>
+        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
         ///   fishtype: string, # Required.
         ///   species: string, # Optional.
@@ -502,7 +533,8 @@ namespace body_complex_LowLevel
         ///   birthday: string (ISO 8601 Format), # Required.
         /// }
         /// </code>
-        /// Schema for <c>Sawshark Request Body</c>:
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -520,7 +552,8 @@ namespace body_complex_LowLevel
         ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Goblinshark Request Body</c>:
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -539,7 +572,8 @@ namespace body_complex_LowLevel
         ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
-        /// Schema for <c>Cookiecuttershark Request Body</c>:
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
         /// <code>{
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
@@ -556,6 +590,8 @@ namespace body_complex_LowLevel
         ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response PutValid(RequestContent content, RequestContext context = null)

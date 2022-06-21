@@ -62,7 +62,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -75,7 +77,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -112,7 +116,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -125,7 +131,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -162,7 +170,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -175,7 +185,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -212,7 +224,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -225,7 +239,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -260,8 +276,10 @@ namespace lro_LowLevel
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -296,8 +314,10 @@ namespace lro_LowLevel
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -409,8 +429,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -446,8 +468,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -483,8 +507,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -520,8 +546,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type

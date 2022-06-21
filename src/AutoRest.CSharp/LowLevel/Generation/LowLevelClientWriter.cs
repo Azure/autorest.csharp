@@ -521,16 +521,30 @@ namespace AutoRest.CSharp.Generation.Writers
             var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            var requestSchemas = new List<FormattableString>();
+            AddResquestOrResponseSchema(requestSchemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            if (requestSchemas.Count > 0)
+            {
+                schemas.Add($"{Environment.NewLine}Request Body:{Environment.NewLine}");
+                schemas = schemas.Concat(requestSchemas).ToList();
+            }
+
+            var responseSchemas = new List<FormattableString>();
             if (clientMethod.PagingInfo != null && clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responseObj)
             {
                 Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
-                AddResquestOrResponseSchema(schemas, itemSchema, "Response Body", true);
+                AddResquestOrResponseSchema(responseSchemas, itemSchema, "Response Body", true);
             }
             else
             {
-                AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+                AddResquestOrResponseSchema(responseSchemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
 
+            }
+
+            if (responseSchemas.Count > 0)
+            {
+                schemas.Add($"{Environment.NewLine}Response Body:{Environment.NewLine}");
+                schemas = schemas.Concat(responseSchemas).ToList();
             }
 
             if (schemas.Count > 0)
@@ -538,14 +552,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 var schemaDesription = "";
                 if (clientMethod.OperationSchemas.RequestBodySchema != null && clientMethod.OperationSchemas.ResponseBodySchema != null)
                 {
-                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                    if (clientMethod.PagingInfo == null)
+                    {
+                        schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                    } else
+                    {
+                        schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
+                    }
                 } else if (clientMethod.OperationSchemas.RequestBodySchema != null)
                 {
                     schemaDesription = "Below is the JSON schema for the request payload.";
-                }
-                else if (clientMethod.OperationSchemas.ResponseBodySchema != null)
+                } else if (clientMethod.OperationSchemas.ResponseBodySchema != null)
                 {
-                    schemaDesription = "Below is the JSON schema for the response payload.";
+                    if (clientMethod.PagingInfo == null)
+                    {
+                        schemaDesription = "Below is the JSON schema for the response payload.";
+                    }
+                    else
+                    {
+                        schemaDesription = "Below is the JSON schema for one item in the pageable response.";
+                    }
                 }
                 writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
             }
@@ -588,7 +614,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return;
                 }
-                formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}");
+
                 // check if it is base schema. if so, add children schemas.
                 if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
                 {

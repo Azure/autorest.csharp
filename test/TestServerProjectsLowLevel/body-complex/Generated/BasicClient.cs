@@ -61,8 +61,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -90,8 +92,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -121,8 +125,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -154,8 +160,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -185,8 +193,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -214,8 +224,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -243,8 +255,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -272,8 +286,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -301,8 +317,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -330,8 +348,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -359,8 +379,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
@@ -388,8 +410,10 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Basic</c>:
         /// <code>{
         ///   id: number, # Optional. Basic Id
         ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.

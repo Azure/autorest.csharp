@@ -489,6 +489,8 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
+        externalDocs: !ExternalDocumentation 
+          url: https://docs.microsoft.com/en-us/rest/api/billing/
         parameters:
           - *ref_22
           - *ref_23
@@ -569,6 +571,8 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
+        externalDocs: !ExternalDocumentation 
+          url: https://docs.microsoft.com/en-us/rest/api/billing/
         parameters:
           - *ref_22
           - *ref_23
@@ -795,6 +799,8 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
+        externalDocs: !ExternalDocumentation 
+          url: https://docs.microsoft.com/en-us/rest/api/billing/
         parameters:
           - *ref_22
           - *ref_23
@@ -888,6 +894,8 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
+        externalDocs: !ExternalDocumentation 
+          url: https://docs.microsoft.com/en-us/rest/api/billing/
         parameters:
           - *ref_22
           - *ref_23

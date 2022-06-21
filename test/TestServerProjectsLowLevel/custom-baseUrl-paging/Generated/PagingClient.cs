@@ -63,18 +63,15 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number, # Optional.
-        ///         name: string, # Optional.
-        ///       }, # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   nextLink: string, # Optional.
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -108,18 +105,15 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number, # Optional.
-        ///         name: string, # Optional.
-        ///       }, # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   nextLink: string, # Optional.
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -153,18 +147,15 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number, # Optional.
-        ///         name: string, # Optional.
-        ///       }, # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   nextLink: string, # Optional.
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -198,18 +189,15 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number, # Optional.
-        ///         name: string, # Optional.
-        ///       }, # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   nextLink: string, # Optional.
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -244,18 +232,15 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number, # Optional.
-        ///         name: string, # Optional.
-        ///       }, # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   nextLink: string, # Optional.
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -289,18 +274,15 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number, # Optional.
-        ///         name: string, # Optional.
-        ///       }, # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   nextLink: string, # Optional.
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 

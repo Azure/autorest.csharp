@@ -118,13 +118,17 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
         ///   id: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
         ///   id: string, # Optional.
@@ -153,13 +157,17 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
         ///   id: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
         ///   id: string, # Optional.

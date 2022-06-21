@@ -59,8 +59,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -87,8 +89,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -117,8 +121,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -149,8 +155,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -179,8 +187,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -207,8 +217,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -237,8 +249,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -269,8 +283,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -299,8 +315,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -327,8 +345,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -357,8 +377,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -389,8 +411,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field2: number, # Optional.
@@ -419,8 +443,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
@@ -447,8 +473,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
@@ -477,8 +505,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
@@ -509,8 +539,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
         ///   field1: number, # Optional.
         ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
@@ -539,8 +571,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
         ///   field_true: boolean, # Optional.
         ///   field_false: boolean, # Optional.
@@ -567,8 +601,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
         ///   field_true: boolean, # Optional.
         ///   field_false: boolean, # Optional.
@@ -597,8 +633,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
         ///   field_true: boolean, # Optional.
         ///   field_false: boolean, # Optional.
@@ -629,8 +667,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
         ///   field_true: boolean, # Optional.
         ///   field_false: boolean, # Optional.
@@ -659,8 +699,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
         ///   field: string, # Optional.
         ///   empty: string, # Optional.
@@ -688,8 +730,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
         ///   field: string, # Optional.
         ///   empty: string, # Optional.
@@ -719,8 +763,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
         ///   field: string, # Optional.
         ///   empty: string, # Optional.
@@ -752,8 +798,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
         ///   field: string, # Optional.
         ///   empty: string, # Optional.
@@ -783,8 +831,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
         ///   field: DateWrapperField, # Optional.
         ///   leap: DateWrapperLeap, # Optional.
@@ -811,8 +861,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
         ///   field: DateWrapperField, # Optional.
         ///   leap: DateWrapperLeap, # Optional.
@@ -841,8 +893,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
         ///   field: DateWrapperField, # Optional.
         ///   leap: DateWrapperLeap, # Optional.
@@ -873,8 +927,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
         ///   field: DateWrapperField, # Optional.
         ///   leap: DateWrapperLeap, # Optional.
@@ -903,8 +959,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -931,8 +989,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -961,8 +1021,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -993,8 +1055,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -1023,8 +1087,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -1051,8 +1117,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -1081,8 +1149,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -1113,8 +1183,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
         ///   field: string (ISO 8601 Format), # Optional.
         ///   now: string (ISO 8601 Format), # Optional.
@@ -1143,8 +1215,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
         ///   field: DurationWrapperField, # Optional.
         /// }
@@ -1170,8 +1244,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
         ///   field: DurationWrapperField, # Optional.
         /// }
@@ -1199,8 +1275,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
         ///   field: DurationWrapperField, # Optional.
         /// }
@@ -1230,8 +1308,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
         ///   field: DurationWrapperField, # Optional.
         /// }
@@ -1259,8 +1339,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
         ///   field: ByteWrapperField, # Optional.
         /// }
@@ -1286,8 +1368,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
         ///   field: ByteWrapperField, # Optional.
         /// }
@@ -1315,8 +1399,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
         ///   field: ByteWrapperField, # Optional.
         /// }
@@ -1346,8 +1432,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
         ///   field: ByteWrapperField, # Optional.
         /// }

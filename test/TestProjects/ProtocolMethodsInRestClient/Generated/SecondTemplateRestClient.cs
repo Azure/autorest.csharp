@@ -243,8 +243,10 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
         ///   id: string, # Optional.
@@ -276,8 +278,10 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
         ///   id: string, # Optional.

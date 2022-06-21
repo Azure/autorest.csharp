@@ -91,8 +91,10 @@ namespace SecurityDefinition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>TestModel</c>:
         /// <code>{
         ///   Code: string, # Optional.
         ///   Status: string, # Optional.
@@ -122,8 +124,10 @@ namespace SecurityDefinition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>TestModel</c>:
         /// <code>{
         ///   Code: string, # Optional.
         ///   Status: string, # Optional.

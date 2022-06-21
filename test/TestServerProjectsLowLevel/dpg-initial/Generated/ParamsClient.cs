@@ -200,7 +200,9 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>PostInput</c>:
         /// <code>{
         ///   url: string, # Required.
         /// }
@@ -231,7 +233,9 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>PostInput</c>:
         /// <code>{
         ///   url: string, # Required.
         /// }

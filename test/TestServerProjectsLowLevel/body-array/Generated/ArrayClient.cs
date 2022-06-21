@@ -2015,8 +2015,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type null value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2043,8 +2045,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type null value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2071,8 +2075,10 @@ namespace body_array_LowLevel
         /// <summary> Get empty array of complex type []. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2099,8 +2105,10 @@ namespace body_array_LowLevel
         /// <summary> Get empty array of complex type []. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2127,8 +2135,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2155,8 +2165,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2183,8 +2195,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2211,8 +2225,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2239,8 +2255,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2267,8 +2285,10 @@ namespace body_array_LowLevel
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2297,8 +2317,10 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2329,8 +2351,10 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>ArrayOfProduct</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.

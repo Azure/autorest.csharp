@@ -59,8 +59,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Siamese</c>:
         /// <code>{
         ///   color: string, # Optional.
         ///   hates: [
@@ -96,8 +98,10 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// Schema for <c>Siamese</c>:
         /// <code>{
         ///   color: string, # Optional.
         ///   hates: [
@@ -135,8 +139,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Siamese</c>:
         /// <code>{
         ///   color: string, # Optional.
         ///   hates: [
@@ -176,8 +182,10 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Siamese</c>:
         /// <code>{
         ///   color: string, # Optional.
         ///   hates: [

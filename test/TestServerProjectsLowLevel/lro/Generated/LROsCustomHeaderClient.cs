@@ -62,7 +62,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -75,7 +77,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -112,7 +116,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -125,7 +131,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -162,7 +170,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -175,7 +185,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -212,7 +224,9 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -225,7 +239,9 @@ namespace lro_LowLevel
         ///   }, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -261,8 +277,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -298,8 +316,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -335,8 +355,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -372,8 +394,10 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
