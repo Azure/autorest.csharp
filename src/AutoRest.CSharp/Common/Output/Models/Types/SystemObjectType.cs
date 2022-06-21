@@ -120,13 +120,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     new CSharpType(property.PropertyType, isNullable));
-                Property prop = new Property();
-                prop.Nullable = isNullable;
-                prop.ReadOnly = IsReadOnly(property); //TODO read this from attribute from reference object
-                prop.SerializedName = GetSerializedName(property.Name);
-                prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
-                prop.Required = IsRequired(property);
-                prop.Language.Default.Name = property.Name;
+                Property prop = new Property()
+                {
+                    Nullable = isNullable,
+                    ReadOnly = IsReadOnly(property), //TODO read this from attribute from reference object
+                    SerializedName = GetSerializedName(property.Name),
+                    Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
+                    Required = IsRequired(property),
+                    Language = new Languages()
+                    {
+                        Default = new Language()
+                        {
+                            Name = property.Name,
+                        }
+                    }
+                };
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
@@ -143,8 +151,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private string GetSerializedName(string name)
         {
-            if (name.Equals("ResourceType", StringComparison.Ordinal))
-                return "type";
+            var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+            if (dict != null && dict.TryGetValue(name, out var serializedName))
+                return serializedName;
+
             return ToCamelCase(name);
         }
 

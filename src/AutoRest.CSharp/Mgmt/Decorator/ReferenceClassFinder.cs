@@ -10,6 +10,8 @@ using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -22,6 +24,50 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string InitializationCtorAttributeName = "InitializationConstructorAttribute";
         internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
         internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
+
+        private static readonly Dictionary<Type, Dictionary<string, string>> _referenceTypesPropertyMetadata = new()
+        {
+            [typeof(ResourceData)] = new()
+            {
+                ["Id"] = "id",
+                ["Name"] = "name",
+                ["ResourceType"] = "type",
+                ["SystemData"] = "systemData"
+            },
+            [typeof(TrackedResourceData)] = new()
+            {
+                ["Id"] = "id",
+                ["Name"] = "name",
+                ["ResourceType"] = "type",
+                ["Location"] = "location",
+                ["Tags"] = "tags",
+                ["SystemData"] = "systemData"
+            },
+            [typeof(ManagedServiceIdentity)] = new()
+            {
+                ["PrincipalId"] = "principalId",
+                ["TenantId"] = "tenantId",
+                ["ManagedServiceIdentityType"] = "type",
+                ["UserAssignedIdentities"] = "userAssignedIdentities",
+            },
+            [typeof(SystemAssignedServiceIdentity)] = new()
+            {
+                ["PrincipalId"] = "principalId",
+                ["TenantId"] = "tenantId",
+                ["SystemAssignedServiceIdentityType"] = "type",
+            },
+            [typeof(SubResource)] = new()
+            {
+                ["Id"] = "id",
+            },
+            [typeof(WritableSubResource)] = new()
+            {
+                ["Id"] = "id",
+            },
+        };
+
+        public static Dictionary<string, string>? GetPropertyMetadata(Type systemObjectType)
+            => _referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict) ? dict : null;
 
         private static IList<Type>? _externalTypes;
         private static IList<Type>? _referenceTypes;
@@ -65,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 !t.Name.Equals("Resource") && //temp while we have both Resource and ResourceData
                 !t.Name.Equals("TrackedResource") && //temp while we have both TrackedResource and TrackedResourceData
                 t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
-    }
+        }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {
