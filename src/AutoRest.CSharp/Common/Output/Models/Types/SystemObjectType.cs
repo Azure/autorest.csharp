@@ -11,6 +11,8 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
+using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -55,8 +57,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static Type? GetSerializeAs(Type type) => type.Name switch
         {
-            "ResourceIdentifier" => type,
-            "SystemData" => type,
+            _ when type == typeof(ResourceIdentifier) => type,
+            _ when type == typeof(SystemData) => type,
             _ => null,
         };
 
@@ -139,10 +141,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
-                if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+                if (TypeFactory.IsDictionary(property.PropertyType))
                 {
-                    prop.Schema = new DictionarySchema();
-                    prop.Schema.Type = AllSchemaTypes.Dictionary;
+                    prop.Schema = new DictionarySchema()
+                    {
+                        Type = AllSchemaTypes.Dictionary
+                    };
                 }
 
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
