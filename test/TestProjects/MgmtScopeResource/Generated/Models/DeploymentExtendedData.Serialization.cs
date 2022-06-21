@@ -23,7 +23,7 @@ namespace MgmtScopeResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -73,11 +73,16 @@ namespace MgmtScopeResource
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new DeploymentExtendedData(id, name, type, systemData, location.Value, properties.Value, Optional.ToDictionary(tags));
+            return new DeploymentExtendedData(id, name, type, systemData.Value, location.Value, properties.Value, Optional.ToDictionary(tags));
         }
     }
 }
