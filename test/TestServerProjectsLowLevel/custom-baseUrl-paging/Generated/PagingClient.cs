@@ -71,12 +71,13 @@ namespace custom_baseUrl_paging_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new PagingClient(endpoint, credential);
         /// 
-        /// Response response = await client.GetPagesPartialUrlAsync("<accountName>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -131,12 +132,13 @@ namespace custom_baseUrl_paging_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new PagingClient(endpoint, credential);
         /// 
-        /// Response response = client.GetPagesPartialUrl("<accountName>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// foreach (var data in client.GetPagesPartialUrl("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -191,12 +193,13 @@ namespace custom_baseUrl_paging_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new PagingClient(endpoint, credential);
         /// 
-        /// Response response = await client.GetPagesPartialUrlOperationAsync("<accountName>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -251,12 +254,13 @@ namespace custom_baseUrl_paging_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new PagingClient(endpoint, credential);
         /// 
-        /// Response response = client.GetPagesPartialUrlOperation("<accountName>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// foreach (var data in client.GetPagesPartialUrlOperation("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -312,12 +316,13 @@ namespace custom_baseUrl_paging_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new PagingClient(endpoint, credential);
         /// 
-        /// Response response = await client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -372,12 +377,13 @@ namespace custom_baseUrl_paging_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new PagingClient(endpoint, credential);
         /// 
-        /// Response response = client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>

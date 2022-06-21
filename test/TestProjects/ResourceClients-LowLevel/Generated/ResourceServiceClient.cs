@@ -202,10 +202,11 @@ namespace ResourceClients_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
-        /// Response response = await client.GetAllItemsAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// await foreach (var data in client.GetAllItemsAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
         /// ]]></code>
         /// </example>
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
@@ -241,10 +242,11 @@ namespace ResourceClients_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new ResourceServiceClient(endpoint, credential);
         /// 
-        /// Response response = client.GetAllItems();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// foreach (var data in client.GetAllItems())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
         /// ]]></code>
         /// </example>
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)

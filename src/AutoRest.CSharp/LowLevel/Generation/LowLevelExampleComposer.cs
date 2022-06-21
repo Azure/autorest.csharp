@@ -259,15 +259,151 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.AppendLine();
             }
 
-            // compose pageable
-            // compose long running
-            // normal response
-            ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
+            if (clientMethod.IsLongRunning)
+            {
+                if (clientMethod.PagingInfo != null && clientMethod.PagingInfo?.NextPageMethod != null)
+                {
+                    ComposeHandleLongRunningPageableResponseCode(clientMethod, methodName, async, allParameters, builder);
+                }
+                else
+                {
+                    ComposeHandleLongRunningResponseCode(clientMethod, methodName, async, allParameters, builder);
+                }
+            }
+            else if (clientMethod.PagingInfo != null)
+            {
+                ComposeHandlePageableResponseCode(clientMethod, methodName, async, allParameters, builder);
+            }
+            else
+            {
+                ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
+            }
+
             builder.Append("]]></code>");
+        }
+
+        private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            // var operation = await client.{methodName}(...);
+            //
+            // var response = await operation.WaitForCompleteAsync();
+            // await foreach (var data in response.Value)
+            // {
+            //     Console.WriteLine(data.ToString());
+            // or
+            //     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            //     Console.WriteLine(result[.GetProperty(...)...].ToString());
+            //     ...
+            // }
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine();
+            builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompleteResponse{(async ? "Async" : "")}();");
+            builder.AppendLine($"{(async ? "await " : "")}foreach (var data in response.Value)");
+            builder.AppendLine("{");
+            ComposeParsingPageableResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema!, builder);
+            builder.AppendLine("}");
+        }
+
+        private void ComposeHandleLongRunningResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            // var operation = await client.{methodName}(...);
+            //
+            // await operation.WaitForCompleteResponseAsync();
+            // or
+            // BinaryData data = await operation.WaitForCompleteAsync();
+            // JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            // Console.WriteLine(result[.GetProperty(...)...].ToString());
+            // ...
+            // }
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine();
+
+            if (clientMethod.OperationSchemas.ResponseBodySchema == null)
+            {
+                builder.AppendLine($"{(async ? "await " : "")}operation.WaitForCompleteResponse{(async ? "Async" : "")}();");
+            }
+            else
+            {
+                builder.AppendLine($"BinaryData data = {(async ? "await " : "")}operation.WaitForComplete{(async ? "Async" : "")}();");
+                ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema, builder);
+            }
+        }
+
+        private void ComposeParsingLongRunningResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
+        {
+            if (responseSchema is BinarySchema binarySchema)
+            {
+                builder.AppendLine($"using(Stream outFileStream = File.OpenWrite(\"<{responseSchema.Name}.data>\")");
+                builder.AppendLine("{");
+                builder.AppendLine("    data.ToStream().CopyTo(outFileStream);");
+                builder.AppendLine("}");
+                return;
+            }
+
+            var apiInvocationChainList = new List<IReadOnlyList<string>>();
+            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(), new HashSet<string>() { responseSchema.Name });
+            var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
+
+            if (apiInvocationChainList.Count == 0)
+            {
+                builder.AppendLine($"Console.WriteLine(data.ToString());");
+            }
+            else
+            {
+                builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                foreach (var apiInvocationChain in apiInvocationChainList)
+                {
+                    builder.Append("Console.WriteLine(result.");
+                    builder.Append(string.Join(".", apiInvocationChain));
+                    builder.AppendLine($"{(apiInvocationChain.Count > 0 ? "." : "")}ToString());");
+                }
+            }
+        }
+
+        private void ComposeHandlePageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            // await foreach (var data in client.{methodName}(...))
+            // {
+            //     Console.WriteLine(data.ToString());
+            // or
+            //     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            //     Console.WriteLine(result[.GetProperty(...)...].ToString());
+            //     ...
+            // }
+            builder.AppendLine($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)}))");
+            builder.AppendLine("{");
+            ComposeParsingPageableResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema!, builder);
+            builder.AppendLine("}");
+        }
+
+        private void ComposeParsingPageableResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
+        {
+            var apiInvocationChainList = new List<IReadOnlyList<string>>();
+            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(), new HashSet<string>() { responseSchema.Name });
+            var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
+
+            if (apiInvocationChainList.Count == 0)
+            {
+                builder.Append(' ', 4);
+                builder.AppendLine($"Console.WriteLine(data.ToString());");
+            }
+            else
+            {
+                builder.Append(' ', 4);
+                builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                foreach (var apiInvocationChain in apiInvocationChainList)
+                {
+                    builder.Append(' ', 4);
+                    builder.Append("Console.WriteLine(result.");
+                    builder.Append(string.Join(".", apiInvocationChain));
+                    builder.AppendLine($"{(apiInvocationChain.Count > 0 ? "." : "")}ToString());");
+                }
+            }
         }
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
+            // Respones response = await client.{methodName}(...);
             builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
             if (clientMethod.OperationSchemas.ResponseBodySchema != null)
             {

@@ -304,11 +304,12 @@ namespace dpg_customization_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new DPGClient(endpoint, credential);
         /// 
-        /// Response response = await client.GetPagesAsync("<mode>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("received").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// await foreach (var data in client.GetPagesAsync("<mode>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("received").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -360,11 +361,12 @@ namespace dpg_customization_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new DPGClient(endpoint, credential);
         /// 
-        /// Response response = client.GetPages("<mode>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("received").ToString());
-        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// foreach (var data in client.GetPages("<mode>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("received").ToString());
+        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        /// }
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -417,9 +419,10 @@ namespace dpg_customization_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new DPGClient(endpoint, credential);
         /// 
-        /// Response response = await client.LroAsync(WaitUntil.Completed, "<mode>");
+        /// var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
         /// ]]></code>
@@ -469,9 +472,10 @@ namespace dpg_customization_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new DPGClient(endpoint, credential);
         /// 
-        /// Response response = client.Lro(WaitUntil.Completed, "<mode>");
+        /// var operation = client.Lro(WaitUntil.Completed, "<mode>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
         /// ]]></code>

@@ -71,9 +71,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutNonRetry400Async with all parameters and request content, and how to parse the result.
@@ -92,9 +93,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -171,9 +173,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutNonRetry400 with all parameters and request content, and how to parse the result.
@@ -192,9 +195,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -271,9 +275,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400Async with all parameters and request content, and how to parse the result.
@@ -292,9 +297,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -371,9 +377,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutNonRetry201Creating400(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutNonRetry201Creating400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400 with all parameters and request content, and how to parse the result.
@@ -392,9 +399,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutNonRetry201Creating400(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutNonRetry201Creating400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -471,9 +479,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all parameters and request content, and how to parse the result.
@@ -492,9 +501,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -571,9 +581,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400InvalidJson with all parameters and request content, and how to parse the result.
@@ -592,9 +603,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -671,9 +683,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetry400Async with all parameters and request content, and how to parse the result.
@@ -692,9 +705,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -771,9 +785,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetry400 with all parameters and request content, and how to parse the result.
@@ -792,9 +807,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -868,8 +884,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.DeleteNonRetry400Async(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteNonRetry400Async(WaitUntil waitUntil, RequestContext context = null)
@@ -900,8 +917,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.DeleteNonRetry400(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.DeleteNonRetry400(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteNonRetry400(WaitUntil waitUntil, RequestContext context = null)
@@ -932,8 +950,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.Delete202NonRetry400Async(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Delete202NonRetry400Async(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> Delete202NonRetry400Async(WaitUntil waitUntil, RequestContext context = null)
@@ -964,8 +983,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.Delete202NonRetry400(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Delete202NonRetry400(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation Delete202NonRetry400(WaitUntil waitUntil, RequestContext context = null)
@@ -996,8 +1016,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContext context = null)
@@ -1028,8 +1049,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRelativeRetry400(WaitUntil waitUntil, RequestContext context = null)
@@ -1063,8 +1085,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PostNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call PostNonRetry400Async with all parameters and request content.
         /// <code><![CDATA[
@@ -1082,8 +1105,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PostNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1137,8 +1161,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PostNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call PostNonRetry400 with all parameters and request content.
         /// <code><![CDATA[
@@ -1156,8 +1181,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PostNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1211,8 +1237,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.Post202NonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202NonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call Post202NonRetry400Async with all parameters and request content.
         /// <code><![CDATA[
@@ -1230,8 +1257,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.Post202NonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202NonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1285,8 +1313,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.Post202NonRetry400(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202NonRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call Post202NonRetry400 with all parameters and request content.
         /// <code><![CDATA[
@@ -1304,8 +1333,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.Post202NonRetry400(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202NonRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1359,8 +1389,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetry400Async with all parameters and request content.
         /// <code><![CDATA[
@@ -1378,8 +1409,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1433,8 +1465,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PostAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetry400 with all parameters and request content.
         /// <code><![CDATA[
@@ -1452,8 +1485,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PostAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1507,9 +1541,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutError201NoProvisioningStatePayloadAsync with all parameters and request content, and how to parse the result.
@@ -1528,9 +1563,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -1607,9 +1643,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutError201NoProvisioningStatePayload with all parameters and request content, and how to parse the result.
@@ -1628,9 +1665,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -1707,9 +1745,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parameters and request content, and how to parse the result.
@@ -1728,9 +1767,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -1807,9 +1847,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters and request content, and how to parse the result.
@@ -1828,9 +1869,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -1907,9 +1949,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all parameters and request content, and how to parse the result.
@@ -1928,9 +1971,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -2007,9 +2051,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all parameters and request content, and how to parse the result.
@@ -2028,9 +2073,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -2104,8 +2150,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.Delete204SucceededAsync(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> Delete204SucceededAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -2136,8 +2183,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.Delete204Succeeded(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Delete204Succeeded(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation Delete204Succeeded(WaitUntil waitUntil, RequestContext context = null)
@@ -2168,8 +2216,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -2200,8 +2249,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContext context = null)
@@ -2235,8 +2285,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.Post202NoLocationAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202NoLocationAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call Post202NoLocationAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -2254,8 +2305,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.Post202NoLocationAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202NoLocationAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2309,8 +2361,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.Post202NoLocation(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202NoLocation(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call Post202NoLocation with all parameters and request content.
         /// <code><![CDATA[
@@ -2328,8 +2381,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.Post202NoLocation(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202NoLocation(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2383,8 +2437,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -2402,8 +2457,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2457,8 +2513,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryNoPayload with all parameters and request content.
         /// <code><![CDATA[
@@ -2476,8 +2533,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2531,9 +2589,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.Put200InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call Put200InvalidJsonAsync with all parameters and request content, and how to parse the result.
@@ -2552,9 +2611,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.Put200InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -2631,9 +2691,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.Put200InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.Put200InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call Put200InvalidJson with all parameters and request content, and how to parse the result.
@@ -2652,9 +2713,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.Put200InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.Put200InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -2731,9 +2793,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content, and how to parse the result.
@@ -2752,9 +2815,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -2831,9 +2895,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parameters and request content, and how to parse the result.
@@ -2852,9 +2917,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -2931,9 +2997,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content, and how to parse the result.
@@ -2952,9 +3019,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -3031,9 +3099,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all parameters and request content, and how to parse the result.
@@ -3052,9 +3121,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -3128,8 +3198,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> Delete202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -3160,8 +3231,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation Delete202RetryInvalidHeader(WaitUntil waitUntil, RequestContext context = null)
@@ -3192,8 +3264,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -3224,8 +3297,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContext context = null)
@@ -3256,8 +3330,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -3288,8 +3363,9 @@ namespace lro_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new LrosaDsClient(endpoint, credential);
         /// 
-        /// Response response = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContext context = null)
@@ -3323,8 +3399,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call Post202RetryInvalidHeaderAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -3342,8 +3419,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3397,8 +3475,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.Post202RetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call Post202RetryInvalidHeader with all parameters and request content.
         /// <code><![CDATA[
@@ -3416,8 +3495,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.Post202RetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3471,8 +3551,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -3490,8 +3571,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3545,8 +3627,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeader with all parameters and request content.
         /// <code><![CDATA[
@@ -3564,8 +3647,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3619,8 +3703,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -3638,8 +3723,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3693,8 +3779,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with all parameters and request content.
         /// <code><![CDATA[
@@ -3712,8 +3799,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>

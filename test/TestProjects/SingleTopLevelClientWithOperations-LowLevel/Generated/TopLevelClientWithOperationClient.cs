@@ -136,10 +136,11 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
         /// 
-        /// Response response = await client.GetAllAsync("<filter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// await foreach (var data in client.GetAllAsync("<filter>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
         /// ]]></code>
         /// </example>
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
@@ -179,10 +180,11 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
         /// 
-        /// Response response = client.GetAll("<filter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// foreach (var data in client.GetAll("<filter>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
         /// ]]></code>
         /// </example>
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)

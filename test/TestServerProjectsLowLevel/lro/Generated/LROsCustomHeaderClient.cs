@@ -71,9 +71,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content, and how to parse the result.
@@ -92,9 +93,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -171,9 +173,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content, and how to parse the result.
@@ -192,9 +195,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -271,9 +275,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content, and how to parse the result.
@@ -292,9 +297,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -371,9 +377,10 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content, and how to parse the result.
@@ -392,9 +399,10 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+        /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// BinaryData data = operation.WaitForComplete();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
@@ -471,8 +479,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
         /// <code><![CDATA[
@@ -490,8 +499,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -545,8 +555,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
         /// <code><![CDATA[
@@ -564,8 +575,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -619,8 +631,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -638,8 +651,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// await operation.WaitForCompleteResponseAsync();
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -693,8 +707,9 @@ namespace lro_LowLevel
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content.
         /// <code><![CDATA[
@@ -712,8 +727,9 @@ namespace lro_LowLevel
         ///     },
         /// };
         /// 
-        /// Response response = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// operation.WaitForCompleteResponse();
         /// ]]></code>
         /// </example>
         /// <remarks>
