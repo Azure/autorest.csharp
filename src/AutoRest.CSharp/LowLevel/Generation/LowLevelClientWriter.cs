@@ -522,8 +522,16 @@ namespace AutoRest.CSharp.Generation.Writers
             var schemas = new List<FormattableString>();
 
             AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
-            AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+            if (clientMethod.PagingInfo != null && clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responseObj)
+            {
+                Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
+                AddResquestOrResponseSchema(schemas, itemSchema, "Response Body", true);
+            }
+            else
+            {
+                AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
 
+            }
 
             if (schemas.Count > 0)
             {
