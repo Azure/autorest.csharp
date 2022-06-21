@@ -421,7 +421,7 @@ namespace dpg_customization_LowLevel
         /// 
         /// var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
@@ -474,7 +474,7 @@ namespace dpg_customization_LowLevel
         /// 
         /// var operation = client.Lro(WaitUntil.Completed, "<mode>");
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());

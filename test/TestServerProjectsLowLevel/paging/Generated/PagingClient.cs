@@ -2470,7 +2470,7 @@ namespace paging_LowLevel
         /// 
         /// var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed);
         /// 
-        /// var response = await operation.WaitForCompleteResponseAsync();
+        /// var response = await operation.WaitForCompletionAsync();
         /// await foreach (var data in response.Value)
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -2485,7 +2485,7 @@ namespace paging_LowLevel
         /// 
         /// var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
         /// 
-        /// var response = await operation.WaitForCompleteResponseAsync();
+        /// var response = await operation.WaitForCompletionAsync();
         /// await foreach (var data in response.Value)
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -2561,7 +2561,7 @@ namespace paging_LowLevel
         /// 
         /// var operation = client.GetMultiplePagesLRO(WaitUntil.Completed);
         /// 
-        /// var response = operation.WaitForCompleteResponse();
+        /// var response = operation.WaitForCompletion();
         /// foreach (var data in response.Value)
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -2576,7 +2576,7 @@ namespace paging_LowLevel
         /// 
         /// var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
         /// 
-        /// var response = operation.WaitForCompleteResponse();
+        /// var response = operation.WaitForCompletion();
         /// foreach (var data in response.Value)
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;

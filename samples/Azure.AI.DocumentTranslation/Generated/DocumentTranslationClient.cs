@@ -1638,7 +1638,8 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// var operation = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1766,7 +1767,8 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// var operation = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>

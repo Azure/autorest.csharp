@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // var operation = await client.{methodName}(...);
             //
-            // var response = await operation.WaitForCompleteAsync();
+            // var response = await operation.WaitForCompletionAsync();
             // await foreach (var data in response.Value)
             // {
             //     Console.WriteLine(data.ToString());
@@ -297,7 +297,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // }
             builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
             builder.AppendLine();
-            builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompleteResponse{(async ? "Async" : "")}();");
+            builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
             builder.AppendLine($"{(async ? "await " : "")}foreach (var data in response.Value)");
             builder.AppendLine("{");
             ComposeParsingPageableResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema!, builder);
@@ -308,9 +308,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // var operation = await client.{methodName}(...);
             //
-            // await operation.WaitForCompleteResponseAsync();
+            // var response = await operation.WaitForCompletionResponseAsync();
+            // Console.WriteLine(response.Status);
             // or
-            // BinaryData data = await operation.WaitForCompleteAsync();
+            // BinaryData data = await operation.WaitForCompletionAsync();
             // JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
             // Console.WriteLine(result[.GetProperty(...)...].ToString());
             // ...
@@ -320,11 +321,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (clientMethod.OperationSchemas.ResponseBodySchema == null)
             {
-                builder.AppendLine($"{(async ? "await " : "")}operation.WaitForCompleteResponse{(async ? "Async" : "")}();");
+                builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletionResponse{(async ? "Async" : "")}();");
+                builder.AppendLine("Console.WriteLine(response.Status)");
             }
             else
             {
-                builder.AppendLine($"BinaryData data = {(async ? "await " : "")}operation.WaitForComplete{(async ? "Async" : "")}();");
+                builder.AppendLine($"BinaryData data = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
                 ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema, builder);
             }
         }

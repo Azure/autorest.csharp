@@ -73,7 +73,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -95,7 +95,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -175,7 +175,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -197,7 +197,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -277,7 +277,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -299,7 +299,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -379,7 +379,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -401,7 +401,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -478,7 +478,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -539,7 +539,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -600,7 +600,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> Delete202Retry200Async(WaitUntil waitUntil, RequestContext context = null)
@@ -633,7 +634,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Delete202Retry200(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation Delete202Retry200(WaitUntil waitUntil, RequestContext context = null)
@@ -666,7 +668,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRelativeRetrySucceededAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -699,7 +702,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteAsyncRelativeRetrySucceeded(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRelativeRetrySucceeded(WaitUntil waitUntil, RequestContext context = null)
@@ -735,7 +739,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
         /// <code><![CDATA[
@@ -755,7 +760,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -811,7 +817,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
         /// <code><![CDATA[
@@ -831,7 +838,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -887,7 +895,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetrySucceededAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -907,7 +916,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -963,7 +973,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetrySucceeded with all parameters and request content.
         /// <code><![CDATA[
@@ -983,7 +994,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>

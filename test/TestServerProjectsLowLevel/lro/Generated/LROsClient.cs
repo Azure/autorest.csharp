@@ -73,7 +73,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -95,7 +95,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -175,7 +175,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -197,7 +197,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -277,7 +277,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -299,7 +299,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -379,7 +379,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -401,7 +401,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -481,7 +481,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -503,7 +503,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -583,7 +583,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -605,7 +605,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -685,7 +685,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -707,7 +707,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -787,7 +787,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -809,7 +809,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -889,7 +889,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -911,7 +911,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -991,7 +991,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1013,7 +1013,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1090,7 +1090,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202ListAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("type").ToString());
@@ -1151,7 +1151,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202List(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.Item[0].GetProperty("type").ToString());
@@ -1215,7 +1215,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1237,7 +1237,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1317,7 +1317,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1339,7 +1339,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1419,7 +1419,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1441,7 +1441,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1521,7 +1521,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1543,7 +1543,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1623,7 +1623,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1645,7 +1645,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1725,7 +1725,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1747,7 +1747,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1827,7 +1827,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1849,7 +1849,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -1929,7 +1929,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -1951,7 +1951,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2031,7 +2031,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2053,7 +2053,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2133,7 +2133,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2155,7 +2155,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2235,7 +2235,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2257,7 +2257,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2337,7 +2337,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2359,7 +2359,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2439,7 +2439,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2461,7 +2461,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2541,7 +2541,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2563,7 +2563,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2643,7 +2643,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2665,7 +2665,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2745,7 +2745,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2767,7 +2767,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2847,7 +2847,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2869,7 +2869,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -2949,7 +2949,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -2971,7 +2971,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3051,7 +3051,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3073,7 +3073,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3153,7 +3153,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3175,7 +3175,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3255,7 +3255,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3277,7 +3277,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3357,7 +3357,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3379,7 +3379,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3459,7 +3459,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3481,7 +3481,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3561,7 +3561,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3583,7 +3583,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -3663,7 +3663,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3680,7 +3680,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3741,7 +3741,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3758,7 +3758,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3819,7 +3819,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3836,7 +3836,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3897,7 +3897,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3914,7 +3914,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -3975,7 +3975,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -3993,7 +3993,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -4061,7 +4061,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -4079,7 +4079,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -4147,7 +4147,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -4165,7 +4165,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -4233,7 +4233,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -4251,7 +4251,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
@@ -4316,7 +4316,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4377,7 +4377,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4438,7 +4438,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4499,7 +4499,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4560,7 +4560,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4621,7 +4621,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4682,7 +4682,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> Delete204SucceededAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -4715,7 +4716,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Delete204Succeeded(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation Delete204Succeeded(WaitUntil waitUntil, RequestContext context = null)
@@ -4748,7 +4750,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4809,7 +4811,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Delete202Retry200(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4870,7 +4872,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4931,7 +4933,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Delete202NoRetry204(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -4992,7 +4994,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteNoHeaderInRetryAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -5025,7 +5028,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteNoHeaderInRetry(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteNoHeaderInRetry(WaitUntil waitUntil, RequestContext context = null)
@@ -5058,7 +5062,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncNoHeaderInRetryAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -5091,7 +5096,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncNoHeaderInRetry(WaitUntil waitUntil, RequestContext context = null)
@@ -5124,7 +5130,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -5157,7 +5164,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRetrySucceeded(WaitUntil waitUntil, RequestContext context = null)
@@ -5190,7 +5198,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncNoRetrySucceededAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -5223,7 +5232,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncNoRetrySucceeded(WaitUntil waitUntil, RequestContext context = null)
@@ -5256,7 +5266,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRetryFailedAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -5289,7 +5300,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteAsyncRetryFailed(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRetryFailed(WaitUntil waitUntil, RequestContext context = null)
@@ -5322,7 +5334,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual async Task<Operation> DeleteAsyncRetrycanceledAsync(WaitUntil waitUntil, RequestContext context = null)
@@ -5355,7 +5368,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.DeleteAsyncRetrycanceled(WaitUntil.Completed);
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         public virtual Operation DeleteAsyncRetrycanceled(WaitUntil waitUntil, RequestContext context = null)
@@ -5388,7 +5402,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -5437,7 +5451,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post200WithPayload(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
@@ -5489,7 +5503,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
         /// <code><![CDATA[
@@ -5509,7 +5524,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -5565,7 +5581,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
         /// <code><![CDATA[
@@ -5585,7 +5602,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -5641,7 +5659,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -5663,7 +5681,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5743,7 +5761,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -5765,7 +5783,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5842,7 +5860,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5903,7 +5921,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -5964,7 +5982,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6025,7 +6043,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6086,7 +6104,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed);
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6147,7 +6165,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed);
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6211,7 +6229,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6233,7 +6251,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6313,7 +6331,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6335,7 +6353,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6415,7 +6433,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6437,7 +6455,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = await operation.WaitForCompleteAsync();
+        /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6517,7 +6535,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
@@ -6539,7 +6557,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// BinaryData data = operation.WaitForComplete();
+        /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
@@ -6619,7 +6637,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetryFailedAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -6639,7 +6658,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -6695,7 +6715,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetryFailed with all parameters and request content.
         /// <code><![CDATA[
@@ -6715,7 +6736,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -6771,7 +6793,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrycanceledAsync with all parameters and request content.
         /// <code><![CDATA[
@@ -6791,7 +6814,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// await operation.WaitForCompleteResponseAsync();
+        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -6847,7 +6871,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrycanceled with all parameters and request content.
         /// <code><![CDATA[
@@ -6867,7 +6892,8 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// operation.WaitForCompleteResponse();
+        /// var respones = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
