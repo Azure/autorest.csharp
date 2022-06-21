@@ -68,7 +68,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("kind").ToString());
         /// Console.WriteLine(result.GetProperty("propB1").ToString());
         /// Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
@@ -120,7 +120,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetValid();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("kind").ToString());
         /// Console.WriteLine(result.GetProperty("propB1").ToString());
         /// Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());

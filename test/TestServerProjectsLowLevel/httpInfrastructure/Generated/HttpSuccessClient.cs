@@ -131,7 +131,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = await client.Get200Async();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -164,7 +164,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = client.Get200();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -197,7 +197,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = await client.Options200Async();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -230,7 +230,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = client.Options200();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

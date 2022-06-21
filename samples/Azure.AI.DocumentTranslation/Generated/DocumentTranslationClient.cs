@@ -75,7 +75,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("path").ToString());
         /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -161,7 +161,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid());
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("path").ToString());
         /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
@@ -246,7 +246,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
         /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -338,7 +338,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = client.GetTranslationStatus(Guid.NewGuid());
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
         /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -430,7 +430,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = await client.CancelTranslationAsync(Guid.NewGuid());
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
         /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -525,7 +525,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = client.CancelTranslation(Guid.NewGuid());
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
         /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
@@ -619,7 +619,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = await client.GetSupportedDocumentFormatsAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
@@ -679,7 +679,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = client.GetSupportedDocumentFormats();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
@@ -739,7 +739,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = await client.GetSupportedGlossaryFormatsAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
@@ -799,7 +799,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = client.GetSupportedGlossaryFormats();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
@@ -859,7 +859,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = await client.GetSupportedStorageSourcesAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
         /// ]]></code>
         /// </example>
@@ -906,7 +906,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Response response = client.GetSupportedStorageSources();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
         /// ]]></code>
         /// </example>
@@ -1638,7 +1638,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// var operation = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// var response = await operation.WaitForCompletionResponseAsync();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
@@ -1767,7 +1767,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// var operation = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// var respones = operation.WaitForCompletionResponse();
+        /// var response = operation.WaitForCompletionResponse();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>

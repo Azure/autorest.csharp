@@ -73,7 +73,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -110,7 +110,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -216,7 +216,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -252,7 +252,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = client.ContentTypeWithEncoding(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -290,7 +290,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -330,7 +330,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -370,7 +370,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -410,7 +410,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -450,7 +450,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -490,7 +490,7 @@ namespace media_types_LowLevel
         /// 
         /// Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

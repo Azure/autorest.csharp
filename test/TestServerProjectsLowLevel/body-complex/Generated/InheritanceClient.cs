@@ -69,7 +69,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("color").ToString());
         /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("name").ToString());
@@ -130,7 +130,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetValid();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("color").ToString());
         /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("name").ToString());

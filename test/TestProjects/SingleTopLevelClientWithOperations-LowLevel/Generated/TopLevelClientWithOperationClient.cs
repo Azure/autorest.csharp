@@ -71,7 +71,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// 
         /// Response response = await client.OperationAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -103,7 +103,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// 
         /// Response response = client.Operation();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

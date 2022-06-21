@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;");
+                builder.AppendLine($"JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     builder.Append("Console.WriteLine(result.");

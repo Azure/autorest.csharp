@@ -65,7 +65,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// 
         /// Response response = await client.PatchAsync("<filter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -102,7 +102,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// 
         /// Response response = client.Patch("<filter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

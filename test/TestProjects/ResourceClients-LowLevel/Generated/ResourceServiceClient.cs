@@ -72,7 +72,7 @@ namespace ResourceClients_LowLevel
         /// 
         /// Response response = await client.GetParametersAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -105,7 +105,7 @@ namespace ResourceClients_LowLevel
         /// 
         /// Response response = client.GetParameters();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -138,7 +138,7 @@ namespace ResourceClients_LowLevel
         /// 
         /// Response response = await client.GetGroupsAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -171,7 +171,7 @@ namespace ResourceClients_LowLevel
         /// 
         /// Response response = client.GetGroups();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

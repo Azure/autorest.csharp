@@ -69,7 +69,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = await client.GetEmptyErrorAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -102,7 +102,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = client.GetEmptyError();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -135,7 +135,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = await client.GetNoModelErrorAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -168,7 +168,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = client.GetNoModelError();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -201,7 +201,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = await client.GetNoModelEmptyAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -234,7 +234,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// Response response = client.GetNoModelEmpty();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

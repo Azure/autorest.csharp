@@ -72,7 +72,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.HeadNoParamsAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -108,7 +108,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.HeadNoParams();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -146,7 +146,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.GetRequiredAsync("<parameter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -186,7 +186,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.GetRequired("<parameter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -224,7 +224,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutRequiredOptionalAsync with all parameters, and how to parse the result.
@@ -235,7 +235,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -273,7 +273,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.PutRequiredOptional("<requiredParam>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutRequiredOptional with all parameters, and how to parse the result.
@@ -284,7 +284,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -325,7 +325,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.PostParametersAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -378,7 +378,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.PostParameters(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -429,7 +429,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.GetOptionalAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call GetOptionalAsync with all parameters, and how to parse the result.
@@ -440,7 +440,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = await client.GetOptionalAsync("<optionalParam>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -477,7 +477,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.GetOptional();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call GetOptional with all parameters, and how to parse the result.
@@ -488,7 +488,7 @@ namespace dpg_initial_LowLevel
         /// 
         /// Response response = client.GetOptional("<optionalParam>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

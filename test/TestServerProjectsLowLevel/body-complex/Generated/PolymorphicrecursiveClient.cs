@@ -69,7 +69,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
@@ -225,7 +225,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetValid();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());

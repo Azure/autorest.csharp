@@ -74,7 +74,7 @@ namespace dpg_customization_LowLevel
         /// 
         /// Response response = await client.GetModelAsync("<mode>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
@@ -125,7 +125,7 @@ namespace dpg_customization_LowLevel
         /// 
         /// Response response = client.GetModel("<mode>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
@@ -181,7 +181,7 @@ namespace dpg_customization_LowLevel
         /// 
         /// Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
@@ -246,7 +246,7 @@ namespace dpg_customization_LowLevel
         /// 
         /// Response response = client.PostModel("<mode>", RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>

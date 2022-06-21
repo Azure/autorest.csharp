@@ -69,7 +69,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
@@ -225,7 +225,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetValid();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
@@ -739,7 +739,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetDotSyntaxAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// ]]></code>
@@ -789,7 +789,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetDotSyntax();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// ]]></code>
@@ -839,7 +839,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetComposedWithDiscriminatorAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -906,7 +906,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetComposedWithDiscriminator();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -973,7 +973,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetComposedWithoutDiscriminatorAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -1040,7 +1040,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetComposedWithoutDiscriminator();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -1107,7 +1107,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetComplicatedAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
@@ -1173,7 +1173,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetComplicated();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
@@ -1432,7 +1432,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.ToString());
@@ -1463,7 +1463,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
@@ -1560,7 +1560,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.ToString());
@@ -1591,7 +1591,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());

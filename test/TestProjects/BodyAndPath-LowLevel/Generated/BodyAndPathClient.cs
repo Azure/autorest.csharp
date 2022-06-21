@@ -346,7 +346,7 @@ namespace BodyAndPath_LowLevel
         /// 
         /// Response response = await client.GetBodyAndPathsAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
         /// </example>
@@ -380,7 +380,7 @@ namespace BodyAndPath_LowLevel
         /// 
         /// Response response = client.GetBodyAndPaths();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
         /// </example>
@@ -414,7 +414,7 @@ namespace BodyAndPath_LowLevel
         /// 
         /// Response response = await client.GetItemsAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
         /// </example>
@@ -448,7 +448,7 @@ namespace BodyAndPath_LowLevel
         /// 
         /// Response response = client.GetItems();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.Item[0].ToString());
         /// ]]></code>
         /// </example>

@@ -69,7 +69,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = await client.GetCollectionAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
         /// Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -140,7 +140,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = client.GetCollection();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
         /// Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -215,7 +215,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call CreateOrUpdateCollectionAsync with all request content, and how to parse the result.
@@ -234,7 +234,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
         /// Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -334,7 +334,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = client.CreateOrUpdateCollection(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call CreateOrUpdateCollection with all request content, and how to parse the result.
@@ -353,7 +353,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = client.CreateOrUpdateCollection(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
         /// Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -511,7 +511,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = await client.GetCollectionPathAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("parentFriendlyNameChain").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("parentNameChain").Item[0].ToString());
         /// ]]></code>
@@ -558,7 +558,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// Response response = client.GetCollectionPath();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("parentFriendlyNameChain").Item[0].ToString());
         /// Console.WriteLine(result.GetProperty("parentNameChain").Item[0].ToString());
         /// ]]></code>

@@ -71,7 +71,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -120,7 +120,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetValid();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -301,7 +301,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetInvalidAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -350,7 +350,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetInvalid();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -399,7 +399,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetEmptyAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -448,7 +448,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetEmpty();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -497,7 +497,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetNullAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -546,7 +546,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetNull();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -595,7 +595,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = await client.GetNotProvidedAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
@@ -644,7 +644,7 @@ namespace body_complex_LowLevel
         /// 
         /// Response response = client.GetNotProvided();
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());

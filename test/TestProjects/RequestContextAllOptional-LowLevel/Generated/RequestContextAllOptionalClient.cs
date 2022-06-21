@@ -73,7 +73,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters, and how to parse the result.
@@ -84,7 +84,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -121,7 +121,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call NoRequestBodyResponseBody with all parameters, and how to parse the result.
@@ -132,7 +132,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>);
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -168,7 +168,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call RequestBodyResponseBodyAsync with all request content, and how to parse the result.
@@ -184,7 +184,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("Code").ToString());
         /// Console.WriteLine(result.GetProperty("Status").ToString());
         /// ]]></code>
@@ -243,7 +243,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call RequestBodyResponseBody with all request content, and how to parse the result.
@@ -259,7 +259,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("Code").ToString());
         /// Console.WriteLine(result.GetProperty("Status").ToString());
         /// ]]></code>
@@ -317,7 +317,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -354,7 +354,7 @@ namespace RequestContextAllOptional_LowLevel
         /// 
         /// Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

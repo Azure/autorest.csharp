@@ -60,7 +60,7 @@ namespace SubClients_LowLevel
         /// 
         /// Response response = await client.GetSubParameterAsync("<subParameter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
@@ -97,7 +97,7 @@ namespace SubClients_LowLevel
         /// 
         /// Response response = client.GetSubParameter("<subParameter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>

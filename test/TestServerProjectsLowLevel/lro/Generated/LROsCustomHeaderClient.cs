@@ -481,7 +481,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// var response = await operation.WaitForCompletionResponseAsync();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
@@ -502,7 +502,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// var response = await operation.WaitForCompletionResponseAsync();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
@@ -559,7 +559,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = operation.WaitForCompletionResponse();
+        /// var response = operation.WaitForCompletionResponse();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
@@ -580,7 +580,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = operation.WaitForCompletionResponse();
+        /// var response = operation.WaitForCompletionResponse();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
@@ -637,7 +637,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// var response = await operation.WaitForCompletionResponseAsync();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content.
@@ -658,7 +658,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = await operation.WaitForCompletionResponseAsync();
+        /// var response = await operation.WaitForCompletionResponseAsync();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
@@ -715,7 +715,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = operation.WaitForCompletionResponse();
+        /// var response = operation.WaitForCompletionResponse();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content.
@@ -736,7 +736,7 @@ namespace lro_LowLevel
         /// 
         /// var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// var respones = operation.WaitForCompletionResponse();
+        /// var response = operation.WaitForCompletionResponse();
         /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
