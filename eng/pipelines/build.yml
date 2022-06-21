@@ -128,9 +128,9 @@ stages:
           - checkout: self
           - checkout: azure-sdk-for-net
           - checkout: azure-sdk-tools
-          - pwsh: ./eng/GetOrCreateAzureSdkForNetBranch.ps1 -Version $(AutorestCSharpVersion) -PullRequestNumber  -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+          - pwsh: ./eng/GetOrCreateAzureSdkForNetBranch.ps1 -Version $(AutorestCSharpVersion) -PullRequestNumber $(System.PullRequest.PullRequestNumber) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
             displayName: Create PR test branch if it doesn't exist
-            workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
