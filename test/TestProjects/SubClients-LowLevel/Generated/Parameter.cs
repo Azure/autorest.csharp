@@ -50,6 +50,7 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
@@ -73,6 +74,7 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Response"> The response returned from the service. </returns>
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));

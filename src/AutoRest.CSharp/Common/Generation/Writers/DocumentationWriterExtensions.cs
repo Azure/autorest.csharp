@@ -68,6 +68,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteDocumentationLines($"<returns>", $"</returns>", text);
         }
 
+        public static CodeWriter WriteXmlDocumentationReturns(this CodeWriter writer, CSharpType type, FormattableString text)
+        {
+            return writer.WriteDocumentationLines($"<returns cref=\"{type.ToCommentShortNameString()}\">", $"</returns>", text);
+        }
+
         public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
             return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentNullException), parameters.Where(p => p.Validation is AssertNotNull or AssertNotNullOrEmpty).ToArray(), " is null.");

@@ -59,6 +59,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -87,6 +88,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Response"> The response returned from the service. </returns>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -115,6 +117,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -134,6 +137,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Response"> The response returned from the service. </returns>
         public virtual Response GetNoModelError(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -153,6 +157,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty response from server. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
@@ -172,6 +177,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty response from server. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Response"> The response returned from the service. </returns>
         public virtual Response GetNoModelEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");

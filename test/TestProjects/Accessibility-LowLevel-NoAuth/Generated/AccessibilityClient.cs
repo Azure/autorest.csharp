@@ -47,6 +47,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
@@ -66,6 +67,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Response"> The response returned from the service. </returns>
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
@@ -85,6 +87,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
@@ -104,6 +107,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns cref="Response"> The response returned from the service. </returns>
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");

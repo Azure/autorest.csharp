@@ -132,6 +132,18 @@ namespace AutoRest.CSharp.Generation.Types
             return new CodeWriter().Append($"{this}").ToString(false);
         }
 
+        public string ToCommentShortNameString()
+        {
+            if (IsGenericType)
+            {
+                return $"{Name}{{{string.Join(",", Arguments.Select(argument => argument.Name))}}}";
+            }
+            else
+            {
+                return Name;
+            }
+        }
+
         internal static CSharpType FromSystemType(BuildContext context, Type type)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));

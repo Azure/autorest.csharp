@@ -500,17 +500,23 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
-            WriteMethodDocumentation(writer, methodSignature);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod);
             WriteSchemaDocumentationRemarks(writer, clientMethod.OperationSchemas);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
         }
 
-        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature)
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod)
         {
             codeWriter.WriteMethodDocumentation(methodSignature);
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+
+            string appendText = ContainsObjectSchema(clientMethod.OperationSchemas.ResponseBodySchema) ? $"Details of the response body schema are in the Remarks section below." : string.Empty;
+            if (methodSignature.ReturnType != null)
+            {
+                codeWriter.WriteXmlDocumentationReturns(methodSignature.ReturnType, $"The response returned from the service. {appendText}");
+            }
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
@@ -527,10 +533,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var schemas = new List<FormattableString>();
 
             AddDocumentationForSchema(schemas, documentationSchemas.RequestBodySchema, "Request Body", true);
-            if (AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false))
-            {
-                writer.WriteDocumentationLines($"<returns cref=\"{nameof(Response)}\">", $"</returns>", $"The response returned from the service. Details of the response body schema are in the Remarks section below.");
-            }
+            AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false);
             AddDocumentationForSchema(schemas, documentationSchemas.ResponseErrorSchema, "Response Error", false);
 
             if (schemas.Count > 0)
@@ -538,11 +541,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
 
-            static bool AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
+            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
             {
                 if (schema == null)
                 {
-                    return false;
+                    return;
                 }
 
                 var docs = GetSchemaDocumentationsForSchema(schema, schemaName);
@@ -550,10 +553,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (docs != null)
                 {
                     formattedSchemas.Add($"Schema for <c>{schemaName}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
-                    return true;
                 }
-
-                return false;
             }
         }
 
@@ -627,18 +627,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 switch (toExplore)
                 {
-                    case OrSchema o:
-                        foreach (Schema s in o.AnyOf)
-                        {
-                            schemasToExplore.Enqueue(s);
-                        }
-                        break;
-                    case DictionarySchema d:
-                        schemasToExplore.Enqueue(d.ElementType);
-                        break;
-                    case ArraySchema a:
-                        schemasToExplore.Enqueue(a.ElementType);
-                        break;
                     case ObjectSchema o:
                         List<SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
 
@@ -659,6 +647,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         documentationObjects.Add(new(schema == o ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(o)), propertyDocumentation));
                         break;
+
+                    default:
+                        HandleNonObjectSchema(toExplore, schemasToExplore);
+                        break;
                 }
 
                 visitedSchema.Add(toExplore.Name);
@@ -670,6 +662,58 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return documentationObjects.Select(o => new SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
+        }
+
+        private static bool ContainsObjectSchema(Schema? schema)
+        {
+            if (schema == null)
+            {
+                return false;
+            }
+
+            var visitedSchema = new HashSet<string>();
+            var schemasToExplore = new Queue<Schema>(new[] { schema });
+
+            while (schemasToExplore.Any())
+            {
+                Schema toExplore = schemasToExplore.Dequeue();
+                if (visitedSchema.Contains(toExplore.Name))
+                {
+                    continue;
+                }
+
+                switch (toExplore)
+                {
+                    case ObjectSchema o:
+                        return true;
+                    default:
+                        HandleNonObjectSchema(toExplore, schemasToExplore);
+                        break;
+                }
+
+                visitedSchema.Add(toExplore.Name);
+            }
+
+            return false;
+        }
+
+        private static void HandleNonObjectSchema(Schema schema, Queue<Schema> schemasToExplore)
+        {
+            switch (schema)
+            {
+                case OrSchema o:
+                    foreach (Schema s in o.AnyOf)
+                    {
+                        schemasToExplore.Enqueue(s);
+                    }
+                    break;
+                case DictionarySchema d:
+                    schemasToExplore.Enqueue(d.ElementType);
+                    break;
+                case ArraySchema a:
+                    schemasToExplore.Enqueue(a.ElementType);
+                    break;
+            }
         }
 
         private static string StringifyTypeForTable(Schema schema)
