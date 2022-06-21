@@ -17,7 +17,7 @@ namespace MgmtKeyvault
     {
         internal static VaultData DeserializeVaultData(JsonElement element)
         {
-            Optional<string> location = default;
+            Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             VaultProperties properties = default;
             ResourceIdentifier id = default;
@@ -28,7 +28,12 @@ namespace MgmtKeyvault
             {
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -72,7 +77,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new VaultData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), properties);
+            return new VaultData(id, name, type, systemData, Optional.ToNullable(location), Optional.ToDictionary(tags), properties);
         }
     }
 }

@@ -132,7 +132,20 @@ namespace AutoRest.CSharp.Input
         /// </summary>
         public bool MgmtTypeReferenceType => TryGetValue("x-ms-mgmt-typeReferenceType", out var value) && Convert.ToBoolean(value);
 
-        public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
+        public string? Format
+        {
+            get
+            {
+                if (format == null)
+                    format = TryGetValue("x-ms-format", out object? value) ? value?.ToString() : string.Empty;
+                return format;
+            }
+            set
+            {
+                format = value;
+            }
+        }
+        private string? format;
     }
 
     internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>

@@ -34,7 +34,7 @@ namespace MgmtRenameRules.Models
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="provisionAfterExtensions"> Collection of extension names after which this extension needs to be provisioned. </param>
-        internal VirtualMachineScaleSetExtensionPatch(string id, string name, string resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
+        internal VirtualMachineScaleSetExtensionPatch(string id, string name, ResourceType? resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
         {
             Name = name;
             ResourceType = resourceType;
@@ -53,7 +53,7 @@ namespace MgmtRenameRules.Models
         /// <summary> The name of the extension. </summary>
         public string Name { get; }
         /// <summary> Resource type. </summary>
-        public string ResourceType { get; }
+        public ResourceType? ResourceType { get; }
         /// <summary> If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed. </summary>
         public string ForceUpdateTag { get; set; }
         /// <summary> The name of the extension handler publisher. </summary>

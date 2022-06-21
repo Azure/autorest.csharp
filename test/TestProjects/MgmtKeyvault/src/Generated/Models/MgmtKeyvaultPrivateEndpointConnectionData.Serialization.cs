@@ -48,7 +48,7 @@ namespace MgmtKeyvault
         internal static MgmtKeyvaultPrivateEndpointConnectionData DeserializeMgmtKeyvaultPrivateEndpointConnectionData(JsonElement element)
         {
             Optional<string> etag = default;
-            Optional<string> location = default;
+            Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -66,7 +66,12 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -147,7 +152,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData, Optional.ToNullable(location), Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

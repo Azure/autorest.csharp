@@ -35,7 +35,7 @@ namespace MgmtKeyvault.Models
 
         internal static MgmtKeyvaultPrivateLinkResource DeserializeMgmtKeyvaultPrivateLinkResource(JsonElement element)
         {
-            Optional<string> location = default;
+            Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -48,7 +48,12 @@ namespace MgmtKeyvault.Models
             {
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -134,7 +139,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new MgmtKeyvaultPrivateLinkResource(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+            return new MgmtKeyvaultPrivateLinkResource(id, name, type, systemData, Optional.ToNullable(location), Optional.ToDictionary(tags), groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
     }
 }
