@@ -152,8 +152,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private string GetSerializedName(string name)
         {
             var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
-            if (dict != null && dict.TryGetValue(name, out var serializedName))
-                return serializedName;
+            if (dict.TryGetValue(name, out var metadata))
+                return metadata.SerializedName;
 
             return ToCamelCase(name);
         }
@@ -166,29 +166,21 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private bool IsReadOnly(PropertyInfo property)
         {
-            if (property.Name == "Tags")
-                return false;
+            if (TypeFactory.IsCollectionType(property.PropertyType))
+            {
+                return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
+            }
+
             return property.GetSetMethod() == null;
         }
 
         private bool IsRequired(PropertyInfo property)
         {
-            var publicCtor = property.DeclaringType?.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
-            if (publicCtor == null)
-            {
-                // ReferenceTypes for inheritance do not have public constructors, and currently there are ResourceData and TrackedResourceData.
-                // The properties that are optional for matching should be treated as optional.
-                var attributeObj = property.DeclaringType!.GetCustomAttributes()?.Where(a => a.GetType().Name == InheritanceChooser.ReferenceAttributeName).First();
-                var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty(InheritanceChooser.OptionalPropertiesName)?.GetValue(attributeObj) as string[])!);
-                if (optionalPropertiesForMatch.Contains(property.Name))
-                    return false;
-                // We treat Id, Name, ResourceType as required although the swagger definition does not set them as required.
-                // This leaves Tags as the only remaining optional property.
-                if (property.Name == "Tags")
-                    return false;
-                return true;
-            }
-            return publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
+            var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+            if (dict.TryGetValue(property.Name, out var metadata))
+                return metadata.Required;
+
+            return true;
         }
 
         private bool IsNullable(Type type)

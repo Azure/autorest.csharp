@@ -25,49 +25,56 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
         internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
 
-        private static readonly Dictionary<Type, Dictionary<string, string>> _referenceTypesPropertyMetadata = new()
+        public record PropertyMetadata(string SerializedName, bool Required)
+        {
+            public PropertyMetadata(string serializedName) : this(serializedName, true)
+            {
+            }
+        }
+
+        private static readonly Dictionary<Type, Dictionary<string, PropertyMetadata>> _referenceTypesPropertyMetadata = new()
         {
             [typeof(ResourceData)] = new()
             {
-                ["Id"] = "id",
-                ["Name"] = "name",
-                ["ResourceType"] = "type",
-                ["SystemData"] = "systemData"
+                ["Id"] = new PropertyMetadata("id"),
+                ["Name"] = new PropertyMetadata("name"),
+                ["ResourceType"] = new PropertyMetadata("type"),
+                ["SystemData"] = new PropertyMetadata("systemData", false),
             },
             [typeof(TrackedResourceData)] = new()
             {
-                ["Id"] = "id",
-                ["Name"] = "name",
-                ["ResourceType"] = "type",
-                ["Location"] = "location",
-                ["Tags"] = "tags",
-                ["SystemData"] = "systemData"
+                ["Id"] = new PropertyMetadata("id"),
+                ["Name"] = new PropertyMetadata("name"),
+                ["ResourceType"] = new PropertyMetadata("type"),
+                ["Location"] = new PropertyMetadata("location"),
+                ["Tags"] = new PropertyMetadata("tags", false),
+                ["SystemData"] = new PropertyMetadata("systemData", false)
             },
             [typeof(ManagedServiceIdentity)] = new()
             {
-                ["PrincipalId"] = "principalId",
-                ["TenantId"] = "tenantId",
-                ["ManagedServiceIdentityType"] = "type",
-                ["UserAssignedIdentities"] = "userAssignedIdentities",
+                ["PrincipalId"] = new PropertyMetadata("principalId"),
+                ["TenantId"] = new PropertyMetadata("tenantId"),
+                ["ManagedServiceIdentityType"] = new PropertyMetadata("type"),
+                ["UserAssignedIdentities"] = new PropertyMetadata("userAssignedIdentities"),
             },
             [typeof(SystemAssignedServiceIdentity)] = new()
             {
-                ["PrincipalId"] = "principalId",
-                ["TenantId"] = "tenantId",
-                ["SystemAssignedServiceIdentityType"] = "type",
+                ["PrincipalId"] = new PropertyMetadata("principalId"),
+                ["TenantId"] = new PropertyMetadata("tenantId"),
+                ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type"),
             },
             [typeof(SubResource)] = new()
             {
-                ["Id"] = "id",
+                ["Id"] = new PropertyMetadata("id"),
             },
             [typeof(WritableSubResource)] = new()
             {
-                ["Id"] = "id",
+                ["Id"] = new PropertyMetadata("id"),
             },
         };
 
-        public static Dictionary<string, string>? GetPropertyMetadata(Type systemObjectType)
-            => _referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict) ? dict : null;
+        public static Dictionary<string, PropertyMetadata> GetPropertyMetadata(Type systemObjectType)
+            => _referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict) ? dict : throw new InvalidOperationException($"Property metadata for system type {systemObjectType} is not found");
 
         private static IList<Type>? _externalTypes;
         private static IList<Type>? _referenceTypes;
