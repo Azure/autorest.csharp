@@ -132,7 +132,20 @@ namespace AutoRest.CSharp.Input
         /// </summary>
         public bool MgmtTypeReferenceType => TryGetValue("x-ms-mgmt-typeReferenceType", out var value) && Convert.ToBoolean(value);
 
-        public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
+        public string? Format
+        {
+            get
+            {
+                if (format == null)
+                    format = TryGetValue("x-ms-format", out object? value) ? value?.ToString() : string.Empty;
+                return format;
+            }
+            set
+            {
+                format = value;
+            }
+        }
+        private string? format;
     }
 
     internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>
@@ -276,11 +289,20 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "testModel")]
         public TestModel? TestModel { get; set; }
 
-        private IEnumerable<Schema>? _allSchemas;
-        public IEnumerable<Schema> AllSchemas => _allSchemas ??= Schemas.Choices.Cast<Schema>()
-                .Concat(Schemas.SealedChoices)
-                .Concat(Schemas.Objects)
-                .Concat(Schemas.Groups);
+        public IEnumerable<Schema> AllSchemas
+        {
+            get
+            {
+                foreach (var schema in Schemas.Choices)
+                    yield return schema;
+                foreach (var schema in Schemas.SealedChoices)
+                    yield return schema;
+                foreach (var schema in Schemas.Objects)
+                    yield return schema;
+                foreach (var schema in Schemas.Groups)
+                    yield return schema;
+            }
+        }
     }
 
     internal partial class OavVariableScope

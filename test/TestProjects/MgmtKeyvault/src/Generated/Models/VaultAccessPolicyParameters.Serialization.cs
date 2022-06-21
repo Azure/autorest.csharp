@@ -23,7 +23,7 @@ namespace MgmtKeyvault.Models
 
         internal static VaultAccessPolicyParameters DeserializeVaultAccessPolicyParameters(JsonElement element)
         {
-            Optional<string> location = default;
+            Optional<AzureLocation> location = default;
             VaultAccessPolicyProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -33,7 +33,12 @@ namespace MgmtKeyvault.Models
             {
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -67,7 +72,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new VaultAccessPolicyParameters(id, name, type, systemData.Value, location.Value, properties);
+            return new VaultAccessPolicyParameters(id, name, type, systemData.Value, Optional.ToNullable(location), properties);
         }
     }
 }

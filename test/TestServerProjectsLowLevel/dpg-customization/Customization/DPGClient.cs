@@ -101,7 +101,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 var lro = await LroAsync(waitUntil, mode, requestContext).ConfigureAwait(false);
-                return LowLevelOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
+                return ProtocolOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 var lro = Lro(waitUntil, mode, requestContext);
-                return LowLevelOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
+                return ProtocolOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
