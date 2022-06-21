@@ -127,7 +127,6 @@ stages:
         steps:
           - checkout: self
           - checkout: azure-sdk-for-net
-            lfs: false
           - checkout: azure-sdk-tools
           - task: UseDotNet@2
             displayName: 'Use .NET Core SDK'
@@ -161,9 +160,9 @@ stages:
             displayName: Get or create azure-sdk-for-net test branch
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: DotNetCoreCLI@2
-            displayName: 'dotnet restore'
+            displayName: 'Restore packages in azure-sdk-for-net'
             inputs:
-              command: 'Restore packages in azure-sdk-for-net'
+              command: 'restore'
               projects: "$(Build.SourcesDirectory)/azure-sdk-for-net/eng/service.proj"
           - task: DotNetCoreCLI@2
             displayName: 'Generate code in azure-sdk-for-net'
