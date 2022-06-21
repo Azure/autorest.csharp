@@ -128,7 +128,7 @@ stages:
           - checkout: self
           - checkout: azure-sdk-for-net
           - checkout: azure-sdk-tools
-          - pwsh: >
+          - pwsh: |
               $ErrorActionPreference = "Continue"
               $RemoteName = "origin"
               $BranchName = "autorest/pr$(System.PullRequest.PullRequestNumber)"
