@@ -152,10 +152,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private string GetSerializedName(string name)
         {
             var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
-            if (dict.TryGetValue(name, out var metadata))
-                return metadata.SerializedName;
 
-            return ToCamelCase(name);
+            return dict[name].SerializedName;
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -177,10 +175,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool IsRequired(PropertyInfo property)
         {
             var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
-            if (dict.TryGetValue(property.Name, out var metadata))
-                return metadata.Required;
 
-            return true;
+            return dict[property.Name].Required;
         }
 
         private bool IsNullable(Type type)

@@ -8,6 +8,7 @@ using System.Reflection;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public record PropertyMetadata(string SerializedName, bool Required)
         {
-            public PropertyMetadata(string serializedName) : this(serializedName, true)
+            public PropertyMetadata(string serializedName) : this(serializedName, false)
             {
             }
         }
@@ -36,45 +37,56 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             [typeof(ResourceData)] = new()
             {
-                ["Id"] = new PropertyMetadata("id"),
-                ["Name"] = new PropertyMetadata("name"),
-                ["ResourceType"] = new PropertyMetadata("type"),
+                ["Id"] = new PropertyMetadata("id", true),
+                ["Name"] = new PropertyMetadata("name", true),
+                ["ResourceType"] = new PropertyMetadata("type", true),
                 ["SystemData"] = new PropertyMetadata("systemData", false),
             },
             [typeof(TrackedResourceData)] = new()
             {
-                ["Id"] = new PropertyMetadata("id"),
-                ["Name"] = new PropertyMetadata("name"),
-                ["ResourceType"] = new PropertyMetadata("type"),
-                ["Location"] = new PropertyMetadata("location"),
-                ["Tags"] = new PropertyMetadata("tags", false),
-                ["SystemData"] = new PropertyMetadata("systemData", false)
+                ["Location"] = new PropertyMetadata("location", true),
+                ["Tags"] = new PropertyMetadata("tags"),
             },
             [typeof(ManagedServiceIdentity)] = new()
             {
                 ["PrincipalId"] = new PropertyMetadata("principalId"),
                 ["TenantId"] = new PropertyMetadata("tenantId"),
-                ["ManagedServiceIdentityType"] = new PropertyMetadata("type"),
+                ["ManagedServiceIdentityType"] = new PropertyMetadata("type", true),
                 ["UserAssignedIdentities"] = new PropertyMetadata("userAssignedIdentities"),
             },
             [typeof(SystemAssignedServiceIdentity)] = new()
             {
                 ["PrincipalId"] = new PropertyMetadata("principalId"),
                 ["TenantId"] = new PropertyMetadata("tenantId"),
-                ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type"),
-            },
-            [typeof(SubResource)] = new()
-            {
-                ["Id"] = new PropertyMetadata("id"),
-            },
-            [typeof(WritableSubResource)] = new()
-            {
-                ["Id"] = new PropertyMetadata("id"),
+                ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type", true),
             },
         };
 
         public static Dictionary<string, PropertyMetadata> GetPropertyMetadata(Type systemObjectType)
-            => _referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict) ? dict : throw new InvalidOperationException($"Property metadata for system type {systemObjectType} is not found");
+        {
+            if (_referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict))
+                return dict;
+            dict = ConstructPropertyMetadata(systemObjectType);
+            _referenceTypesPropertyMetadata.Add(systemObjectType, dict);
+            return dict;
+        }
+
+        private static Dictionary<string, PropertyMetadata> ConstructPropertyMetadata(Type type)
+        {
+            var dict = new Dictionary<string, PropertyMetadata>();
+            var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
+            if (publicCtor == null)
+                throw new InvalidOperationException($"Property metadata information for type {type} cannot be constructed automatically because it does not have a public constructor");
+            foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type))
+            {
+                var metadata = new PropertyMetadata(property.Name.ToVariableName(), GetRequired(publicCtor, property));
+                dict.Add(property.Name, metadata);
+            }
+            return dict;
+        }
+
+        private static bool GetRequired(ConstructorInfo publicCtor, PropertyInfo property)
+            => publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
 
         private static IList<Type>? _externalTypes;
         private static IList<Type>? _referenceTypes;
