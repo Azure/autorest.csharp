@@ -12,6 +12,9 @@
   "KeepOrphanedModels": [
     "AvailabilitySetSkuTypes"
   ],
+  "KeepPluralEnums": [
+    "HyperVGenerationTypes"
+  ],
   "FormatByNameRules": {
     "tenantId": "uuid",
     "resourceType": "resource-type",
