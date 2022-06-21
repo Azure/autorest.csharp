@@ -521,32 +521,25 @@ namespace AutoRest.CSharp.Generation.Writers
             var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            // check if it is base schema. if so, add children schemas.
-            if ((clientMethod.OperationSchemas.RequestBodySchema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
-            {
-                foreach (Schema s in objSchema.Children.All)
-                {
-                    AddDocumentationForSchema(schemas, s, $"{s.CSharpName()} Request Body", true);
-                }
-            } else
-            {
-                AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
-            }
-            if ((clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responsObjSchema) && responsObjSchema.Children != null && responsObjSchema.Children.All.Count > 0)
-            {
-                foreach (Schema s in responsObjSchema.Children.All)
-                {
-                    AddDocumentationForSchema(schemas, s, $"{s.CSharpName()} Response Body", true);
-                }
-            }
-            else
-            {
-                AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
-            }
+            AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+
 
             if (schemas.Count > 0)
             {
-                writer.WriteXmlDocumentation("remarks", $"Below is the JSON schema for the request and response payloads.{Environment.NewLine}{docinfo}{schemas}");
+                var schemaDesription = "";
+                if (clientMethod.OperationSchemas.RequestBodySchema != null && clientMethod.OperationSchemas.ResponseBodySchema != null)
+                {
+                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                } else if (clientMethod.OperationSchemas.RequestBodySchema != null)
+                {
+                    schemaDesription = "Below is the JSON schema for the request payload.";
+                }
+                else if (clientMethod.OperationSchemas.ResponseBodySchema != null)
+                {
+                    schemaDesription = "Below is the JSON schema for the response payload.";
+                }
+                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
             }
 
             static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
@@ -557,7 +550,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 return $"";
             }
-            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
+
+            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried, bool collapse = false)
             {
                 if (schema == null)
                 {
@@ -568,7 +562,44 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (docs != null)
                 {
-                    formattedSchemas.Add($"Schema for <c>{schemaName}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    if (collapse)
+                    {
+                        formattedSchemas.Add($"<details><summary>{schema.CSharpName()}</summary>");
+                    }
+                    formattedSchemas.Add($"Schema for <c>{schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    if (collapse)
+                    {
+                        formattedSchemas.Add($"</details>{Environment.NewLine}");
+                    }
+                }
+            }
+
+            static void AddResquestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
+            {
+                if (schema == null)
+                {
+                    return;
+                }
+                formattedSchemas.Add($"{Environment.NewLine}{schemaName}:");
+                // check if it is base schema. if so, add children schemas.
+                if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
+                {
+                    foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
+                    {
+                        if (child.index == 1)
+                        {
+                            formattedSchemas.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
+                        }
+                        AddDocumentationForSchema(formattedSchemas, child.schema, $"{child.schema.CSharpName()} {schemaName}", showRequired, true);
+                    }
+                    if (objSchema.Children.All.Count > 1)
+                    {
+                        formattedSchemas.Add($"</details>{Environment.NewLine}");
+                    }
+                }
+                else
+                {
+                    AddDocumentationForSchema(formattedSchemas, schema, schemaName, showRequired);
                 }
             }
         }
