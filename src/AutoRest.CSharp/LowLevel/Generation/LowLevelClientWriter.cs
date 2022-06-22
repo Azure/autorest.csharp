@@ -521,36 +521,24 @@ namespace AutoRest.CSharp.Generation.Writers
             var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            var requestSchemas = new List<FormattableString>();
-            AddResquestOrResponseSchema(requestSchemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
-            if (requestSchemas.Count > 0)
-            {
-                schemas.Add($"{Environment.NewLine}Request Body:{Environment.NewLine}{Environment.NewLine}");
-                schemas = schemas.Concat(requestSchemas).ToList();
-            }
+            bool hasRequestSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
 
-            var responseSchemas = new List<FormattableString>();
+            bool hasResponseSchema = false;
             if (clientMethod.PagingInfo != null && clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responseObj)
             {
                 Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
-                AddResquestOrResponseSchema(responseSchemas, itemSchema, "Response Body", true);
+                hasResponseSchema = AddResquestOrResponseSchema(schemas, itemSchema, "Response Body", true);
             }
             else
             {
-                AddResquestOrResponseSchema(responseSchemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+                hasResponseSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
 
-            }
-
-            if (responseSchemas.Count > 0)
-            {
-                schemas.Add($"{Environment.NewLine}Response Body:{Environment.NewLine}{Environment.NewLine}");
-                schemas = schemas.Concat(responseSchemas).ToList();
             }
 
             if (schemas.Count > 0)
             {
                 var schemaDesription = "";
-                if (clientMethod.OperationSchemas.RequestBodySchema != null && clientMethod.OperationSchemas.ResponseBodySchema != null)
+                if (hasRequestSchema && hasResponseSchema)
                 {
                     if (clientMethod.PagingInfo == null)
                     {
@@ -559,10 +547,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
                     }
-                } else if (clientMethod.OperationSchemas.RequestBodySchema != null)
+                } else if (hasRequestSchema)
                 {
                     schemaDesription = "Below is the JSON schema for the request payload.";
-                } else if (clientMethod.OperationSchemas.ResponseBodySchema != null)
+                } else if (hasResponseSchema)
                 {
                     if (clientMethod.PagingInfo == null)
                     {
@@ -608,34 +596,44 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            static void AddResquestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
+            static bool AddResquestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
             {
                 if (schema == null)
                 {
-                    return;
+                    return false;
                 }
 
+                var schemasToAdd = new List<FormattableString>();
                 // check if it is base schema. if so, add children schemas.
                 if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
                 {
-                    if (objSchema.Children.All.Count > 1) formattedSchemas.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
+                    if (objSchema.Children.All.Count > 1) schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
                     foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
                     {
                         if (child.index == 1)
                         {
-                            formattedSchemas.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
+                            schemasToAdd.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
                         }
-                        AddDocumentationForSchema(formattedSchemas, child.schema, $"{child.schema.CSharpName()} {schemaName}", showRequired, true);
+                        AddDocumentationForSchema(schemasToAdd, child.schema, $"{child.schema.CSharpName()} {schemaName}", showRequired, true);
                     }
                     if (objSchema.Children.All.Count > 1)
                     {
-                        formattedSchemas.Add($"</details>{Environment.NewLine}");
+                        schemasToAdd.Add($"</details>{Environment.NewLine}");
                     }
                 }
                 else
                 {
-                    AddDocumentationForSchema(formattedSchemas, schema, schemaName, showRequired);
+                    AddDocumentationForSchema(schemasToAdd, schema, schemaName, showRequired);
                 }
+
+                if (schemasToAdd.Count > 0)
+                {
+                    formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}{Environment.NewLine}");
+                    formattedSchemas.AddRange(schemasToAdd);
+                    return true;
+                }
+
+                return false;
             }
         }
 
