@@ -119,16 +119,23 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -155,16 +162,23 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -332,10 +346,14 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -366,10 +384,14 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 

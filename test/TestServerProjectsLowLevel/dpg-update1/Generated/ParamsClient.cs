@@ -214,9 +214,13 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>PostInput</c>:
         /// <code>{
-        ///   url: string (required)
+        ///   url: string, # Required.
         /// }
         /// </code>
         /// 
@@ -247,9 +251,13 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>PostInput</c>:
         /// <code>{
-        ///   url: string (required)
+        ///   url: string, # Required.
         /// }
         /// </code>
         /// 

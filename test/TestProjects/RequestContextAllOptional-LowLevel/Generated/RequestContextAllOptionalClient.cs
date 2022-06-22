@@ -110,16 +110,23 @@ namespace RequestContextAllOptional_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -146,16 +153,23 @@ namespace RequestContextAllOptional_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
         /// 

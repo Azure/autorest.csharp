@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Generation.Types
             _ => null
         };
 
-        private static Type? ToXMsFormatType(string? format) => format switch
+        internal static Type? ToXMsFormatType(string? format) => format switch
         {
             XMsFormat.ArmId => typeof(ResourceIdentifier),
             XMsFormat.AzureLocation => typeof(AzureLocation),

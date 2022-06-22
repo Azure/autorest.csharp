@@ -17,7 +17,7 @@ namespace Azure.Management.Storage.Models
         {
             StorageSkuName name = default;
             Optional<StorageSkuTier> tier = default;
-            Optional<string> resourceType = default;
+            Optional<ResourceType> resourceType = default;
             Optional<StorageKind> kind = default;
             Optional<IReadOnlyList<string>> locations = default;
             Optional<IReadOnlyList<SKUCapability>> capabilities = default;
@@ -41,7 +41,12 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("resourceType"))
                 {
-                    resourceType = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    resourceType = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("kind"))
@@ -100,7 +105,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StorageSkuInformation(name, Optional.ToNullable(tier), resourceType.Value, Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions));
+            return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions));
         }
     }
 }

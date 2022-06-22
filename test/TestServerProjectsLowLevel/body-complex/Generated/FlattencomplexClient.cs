@@ -60,15 +60,21 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
@@ -91,15 +97,21 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetValid(RequestContext context = null)
