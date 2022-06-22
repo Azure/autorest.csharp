@@ -4,12 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -65,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
-                    var propertyType = CreatePropertyType(property);
+                    var propertyType = UpdatePropertyDescription(CreatePropertyType(property));
                     yield return propertyType;
                 }
             }
@@ -123,12 +125,63 @@ namespace AutoRest.CSharp.Mgmt.Output
             return Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
         }
 
+        private bool IsDescendantOf(SchemaObjectType schemaObjectType)
+        {
+            if (schemaObjectType.Discriminator == null)
+                return false;
+            var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
+
+            return descendantTypes.Contains(Type);
+        }
+
+        private static bool ShouldIncludeArmCoreType(Type type)
+        {
+            return SystemObjectType.TryGetCtor(type, ReferenceClassFinder.InitializationCtorAttributeName, out _);
+        }
+
         protected override CSharpType? CreateInheritedType()
         {
+            // find from the customized code to see if we already have this type defined with a base class
+            if (ExistingType != null && ExistingType.BaseType != null)
+            {
+                // if this type is defined with a base class, we have to use the same base class here
+                // otherwise the compiler will throw an error
+                if (Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
+                {
+                    // if we could find a type and it is not a framework type meaning that it is a TypeProvider, return that
+                    if (!existingBaseType.IsFrameworkType)
+                        return existingBaseType;
+                    // if it is a framework type, first we check if it is System.Object. Since it is base type for everything, we would not want it to override anything in our code
+                    if (!existingBaseType.Equals(typeof(object)))
+                    {
+                        // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
+                        // in order to let the constructor builder have the ability to get base constructor
+                        return CSharpType.FromSystemType(Context, existingBaseType.FrameworkType);
+                    }
+                }
+                // if we did not find that type, this means the customization code is referencing something unrecognized
+                // or the customization code is not specifying a base type
+            }
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType != null && inheritedType.IsFrameworkType)
-                return inheritedType;
+            if (inheritedType != null)
+            {
+                if (inheritedType.IsFrameworkType)
+                    return inheritedType;
+                else
+                {
+                    // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
+                    // by checking if this type is one of its descendants
+                    var baseTypeProvider = inheritedType.Implementation;
+                    if (baseTypeProvider is SchemaObjectType schemaObjectType && IsDescendantOf(schemaObjectType))
+                    {
+                        // if the base type has a discriminator and this type is one of them
+                        return inheritedType;
+                    }
+                }
+            }
 
+            // try to replace the base type if this is not a type from discriminator
+            // try exact match first
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
@@ -138,7 +191,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(this, MyProperties) : inheritedType;
+
+            // try superset match because our superset match is checking the proper superset
+            var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
+            if (supersetBaseType != null)
+                inheritedType = supersetBaseType;
+
+            return inheritedType;
         }
 
         protected CSharpType? CreateInheritedTypeWithNoExtraMatch()
@@ -158,6 +217,47 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return objectProperty;
+        }
+
+        protected override string CreateDescription()
+        {
+            return BuilderHelpers.CreateDescription(ObjectSchema) + BuilderHelpers.CreateExtraDescriptionWithDiscriminator(this);
+        }
+
+        private ObjectTypeProperty UpdatePropertyDescription(ObjectTypeProperty property)
+        {
+            CSharpType type = property.ValueType;
+            string updatedDescription = string.Empty;
+            if (type.IsFrameworkType)
+            {
+                if (TypeFactory.IsList(type))
+                {
+                    if (!type.Arguments.First().IsFrameworkType && type.Arguments.First().Implementation is MgmtObjectType objectType)
+                    {
+                        updatedDescription = BuilderHelpers.CreateExtraDescriptionWithDiscriminator(objectType);
+                    }
+                }
+                else if (TypeFactory.IsDictionary(type))
+                {
+                    var objectTypes = type.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is MgmtObjectType);
+                    if (objectTypes.Count() > 0)
+                    {
+                        var subDescription = objectTypes.Select(o => BuilderHelpers.CreateExtraDescriptionWithDiscriminator((MgmtObjectType)o.Implementation));
+                        updatedDescription = string.Join("", subDescription);
+                    }
+                }
+            }
+            else if (type.Implementation is MgmtObjectType objectType)
+            {
+                updatedDescription = BuilderHelpers.CreateExtraDescriptionWithDiscriminator(objectType);
+            }
+            return updatedDescription.IsNullOrEmpty() ? property :
+                new ObjectTypeProperty(property.Declaration,
+                property.Description + updatedDescription,
+                property.IsReadOnly,
+                property.SchemaProperty,
+                property.ValueType,
+                property.OptionalViaNullability);
         }
     }
 }

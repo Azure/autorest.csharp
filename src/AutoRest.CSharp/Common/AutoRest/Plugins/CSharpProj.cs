@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
             if (isTestProject)
             {
-                projectFile += "Test";
+                projectFile += ".Tests";
             }
             await autoRest.WriteFile($"{projectFile}.csproj", csProjContent, "source-file-csharp");
 

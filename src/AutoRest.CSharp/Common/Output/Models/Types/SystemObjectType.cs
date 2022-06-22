@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -42,15 +43,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal Type SystemType => _type;
 
-        private ConstructorInfo GetCtor(string attributeType)
+        internal static bool TryGetCtor(Type type, string attributeType, [MaybeNullWhen(false)] out ConstructorInfo result)
         {
-            foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
+            result = null;
+            foreach (var ctor in type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
                 if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
-                    return ctor;
+                {
+                    result = ctor;
+                    return true;
+                }
             }
+            return false;
+        }
 
-            throw new InvalidOperationException($"{attributeType} ctor was not found for {_type.Name}");
+        private static ConstructorInfo GetCtor(Type type, string attributeType)
+        {
+            if (TryGetCtor(type, attributeType, out var ctor))
+                return ctor;
+
+            throw new InvalidOperationException($"{attributeType} ctor was not found for {type.Name}");
         }
 
         private static Type? GetSerializeAs(Type type) => type.Name switch
@@ -107,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.InitializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName));
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -115,16 +127,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var getter = property.GetGetMethod();
                 var setter = property.GetSetMethod();
+                var isNullable = IsNullable(property.PropertyType);
                 MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions(
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
-                    new CSharpType(property.PropertyType));
+                    new CSharpType(property.PropertyType, isNullable));
                 Property prop = new Property();
-                prop.Nullable = false;
-                prop.ReadOnly = GetReadOnly(property); //TODO read this from attribute from reference object
+                prop.Nullable = isNullable;
+                prop.ReadOnly = IsReadOnly(property); //TODO read this from attribute from reference object
                 prop.SerializedName = GetSerializedName(property.Name);
                 prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
-                prop.Required = true;
+                prop.Required = IsRequired(property);
                 prop.Language.Default.Name = property.Name;
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
@@ -153,11 +166,42 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildSerializationConstructor();
         }
 
-        private bool GetReadOnly(PropertyInfo property)
+        private bool IsReadOnly(PropertyInfo property)
         {
             if (property.Name == "Tags")
                 return false;
             return property.GetSetMethod() == null;
+        }
+
+        private bool IsRequired(PropertyInfo property)
+        {
+            var publicCtor = property.DeclaringType?.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
+            if (publicCtor == null)
+            {
+                // ReferenceTypes for inheritance do not have public constructors, and currently there are ResourceData and TrackedResourceData.
+                // The properties that are optional for matching should be treated as optional.
+                var attributeObj = property.DeclaringType!.GetCustomAttributes()?.Where(a => a.GetType().Name == InheritanceChooser.ReferenceAttributeName).First();
+                var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty(InheritanceChooser.OptionalPropertiesName)?.GetValue(attributeObj) as string[])!);
+                if (optionalPropertiesForMatch.Contains(property.Name))
+                    return false;
+                // We treat Id, Name, ResourceType as required although the swagger definition does not set them as required.
+                // This leaves Tags as the only remaining optional property.
+                if (property.Name == "Tags")
+                    return false;
+                return true;
+            }
+            return publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
+        }
+
+        private bool IsNullable(Type type)
+        {
+            if (type == null)
+                return true; // obvious
+            if (!type.IsValueType)
+                return true; // ref-type
+            if (Nullable.GetUnderlyingType(type) != null)
+                return true; // Nullable<T>
+            return false; // value-type
         }
 
         private string GetPropertySummary(MethodInfo? setter)
@@ -165,11 +209,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.SerializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName));
 
         protected override CSharpType? CreateInheritedType()
         {
             return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(Context, _type.BaseType);
+        }
+
+        protected override string CreateDescription()
+        {
+            throw new NotImplementedException("Currently we don't support getting description in SystemObjectType");
         }
     }
 }

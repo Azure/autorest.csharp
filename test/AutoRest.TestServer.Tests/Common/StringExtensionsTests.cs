@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace AutoRest.CSharp.Utilities
+namespace AutoRest.CSharp.Utilities.Tests
 {
     public class StringExtensionsTests
     {

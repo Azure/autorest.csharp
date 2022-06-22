@@ -58,15 +58,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -85,15 +76,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetEmptyError(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");

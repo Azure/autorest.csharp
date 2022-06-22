@@ -59,15 +59,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -91,15 +89,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -125,15 +121,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -161,15 +155,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -195,15 +187,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -227,15 +217,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -261,15 +249,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -297,15 +283,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -331,15 +315,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -363,15 +345,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ArrayWrapper</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 

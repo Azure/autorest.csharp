@@ -117,16 +117,23 @@ namespace ProtocolMethodsInRestClient
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -151,16 +158,23 @@ namespace ProtocolMethodsInRestClient
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -326,10 +340,14 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -358,10 +376,14 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Resource</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 

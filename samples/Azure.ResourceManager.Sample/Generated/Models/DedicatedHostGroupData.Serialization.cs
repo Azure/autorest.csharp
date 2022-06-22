@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -29,14 +30,27 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(HostUris))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("hostUris");
+                writer.WriteStartArray();
+                foreach (var item in HostUris)
+                {
+                    writer.WriteStringValue(item.AbsoluteUri);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndObject();
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -58,12 +72,14 @@ namespace Azure.ResourceManager.Sample
         internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element)
         {
             Optional<IList<string>> zones = default;
-            IDictionary<string, string> tags = default;
+            Optional<IList<Uri>> hostUris = default;
+            Optional<Guid> tenantId = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<int> platformFaultDomainCount = default;
             Optional<IReadOnlyList<Resources.Models.SubResource>> hosts = default;
             Optional<DedicatedHostGroupInstanceView> instanceView = default;
@@ -85,8 +101,38 @@ namespace Azure.ResourceManager.Sample
                     zones = array;
                     continue;
                 }
+                if (property.NameEquals("hostUris"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<Uri> array = new List<Uri>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(new Uri(item.GetString()));
+                    }
+                    hostUris = array;
+                    continue;
+                }
+                if (property.NameEquals("tenantId"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    tenantId = property.Value.GetGuid();
+                    continue;
+                }
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -117,6 +163,11 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -178,7 +229,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, systemData, tags, location, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
+            return new DedicatedHostGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToList(zones), Optional.ToList(hostUris), Optional.ToNullable(tenantId), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
         }
     }
 }
