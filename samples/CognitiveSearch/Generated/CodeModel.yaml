@@ -1478,8 +1478,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
       language: !Languages 
         default:
           name: SearchRequestFilter
@@ -1647,8 +1645,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
       language: !Languages 
         default:
           name: SuggestRequestFilter
@@ -1782,8 +1778,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search
       language: !Languages 
         default:
           name: AutocompleteRequestFilter
@@ -1834,8 +1828,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Naming-rules
       language: !Languages 
         default:
           name: DataSourceName
@@ -1856,8 +1848,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source
       language: !Languages 
         default:
           name: DataSourceCredentialsConnectionString
@@ -1918,8 +1908,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Naming-rules
       language: !Languages 
         default:
           name: IndexerName
@@ -2280,8 +2268,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Naming-rules
       language: !Languages 
         default:
           name: SynonymMapName
@@ -2292,8 +2278,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Create-Synonym-Map#SynonymMapFormat
       language: !Languages 
         default:
           name: SynonymMapSynonyms
@@ -2366,8 +2350,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Naming-rules
       language: !Languages 
         default:
           name: IndexName
@@ -2378,8 +2360,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Naming-rules
       language: !Languages 
         default:
           name: FieldName
@@ -2400,8 +2380,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Naming-rules
       language: !Languages 
         default:
           name: ScoringProfileName
@@ -2482,8 +2460,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search#index-attribute-reference
       language: !Languages 
         default:
           name: AnalyzerName
@@ -2504,8 +2480,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search#index-attribute-reference
       language: !Languages 
         default:
           name: TokenizerName
@@ -2526,8 +2500,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search#index-attribute-reference
       language: !Languages 
         default:
           name: TokenFilterName
@@ -2548,8 +2520,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search#index-attribute-reference
       language: !Languages 
         default:
           name: CharFilterName
@@ -3606,8 +3576,6 @@ schemas: !Schemas
         - !ApiVersion 
           version: 2019-05-06-Preview
       choiceType: *ref_0
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Language-support
       language: !Languages 
         default:
           name: AnalyzerName
@@ -3698,8 +3666,6 @@ schemas: !Schemas
         - !ApiVersion 
           version: 2019-05-06-Preview
       choiceType: *ref_0
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
       language: !Languages 
         default:
           name: TokenizerName
@@ -3924,8 +3890,6 @@ schemas: !Schemas
         - !ApiVersion 
           version: 2019-05-06-Preview
       choiceType: *ref_0
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
       language: !Languages 
         default:
           name: TokenFilterName
@@ -3944,8 +3908,6 @@ schemas: !Schemas
         - !ApiVersion 
           version: 2019-05-06-Preview
       choiceType: *ref_0
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
       language: !Languages 
         default:
           name: CharFilterName
@@ -4006,8 +3968,6 @@ schemas: !Schemas
         - !ApiVersion 
           version: 2019-05-06-Preview
       choiceType: *ref_0
-      externalDocs: !ExternalDocumentation 
-        url: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary
       language: !Languages 
         default:
           name: RegexFlags
@@ -9441,8 +9401,6 @@ schemas: !Schemas
                     - !ApiVersion 
                       version: 2019-05-06-Preview
                   elementType: *ref_57
-                  externalDocs: !ExternalDocumentation 
-                    url: https://docs.microsoft.com/rest/api/searchservice/Search-Documents
                   language: !Languages 
                     default:
                       name: SearchRequestFacets
@@ -10680,8 +10638,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/rest/api/searchservice/Indexer-operations
       properties:
         - !Property 
           schema: *ref_137
@@ -10839,8 +10795,6 @@ schemas: !Schemas
               apiVersions:
                 - !ApiVersion 
                   version: 2019-05-06-Preview
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/azure/search/search-indexer-field-mappings
               properties:
                 - !Property 
                   schema: *ref_148
@@ -10866,8 +10820,6 @@ schemas: !Schemas
                     apiVersions:
                       - !ApiVersion 
                         version: 2019-05-06-Preview
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/search-indexer-field-mappings
                     properties:
                       - !Property 
                         schema: *ref_150
@@ -10916,8 +10868,6 @@ schemas: !Schemas
                   description: Defines a mapping between a field in a data source and a target field in an index.
                   namespace: ''
               protocol: !Protocols {}
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/azure/search/search-indexer-field-mappings
             language: !Languages 
               default:
                 name: IndexerFieldMappings
@@ -10937,8 +10887,6 @@ schemas: !Schemas
               - !ApiVersion 
                 version: 2019-05-06-Preview
             elementType: *ref_152
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/azure/search/search-indexer-field-mappings
             language: !Languages 
               default:
                 name: IndexerOutputFieldMappings
@@ -11419,8 +11367,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2019-05-06-Preview
-      externalDocs: !ExternalDocumentation 
-        url: https://docs.microsoft.com/azure/search/cognitive-search-tutorial-blob
       properties:
         - !Property 
           schema: *ref_186
@@ -11459,8 +11405,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Util.ConditionalSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-conditional
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11485,8 +11429,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.KeyPhraseExtractionSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-keyphrases
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11529,8 +11471,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Vision.OcrSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-ocr
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11580,8 +11520,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Vision.ImageAnalysisSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-image-analysis
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11651,8 +11589,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.LanguageDetectionSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11677,8 +11613,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Util.ShaperSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-shaper
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11703,8 +11637,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.MergeSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-textmerger
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11746,8 +11678,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.EntityRecognitionSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11819,8 +11749,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.SentimentSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-sentiment
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11854,8 +11782,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.SplitSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-textsplit
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11908,8 +11834,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Text.TranslationSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-skill-text-translation
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -11962,8 +11886,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Skills.Custom.WebApiSkill'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-web-api
                     parents: !Relations 
                       all:
                         - *ref_188
@@ -12089,8 +12011,6 @@ schemas: !Schemas
                       name: odataType
                       description: Identifies the concrete type of the skill.
                   protocol: !Protocols {}
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/azure/search/cognitive-search-predefined-skills
               properties:
                 - *ref_227
                 - !Property 
@@ -12212,8 +12132,6 @@ schemas: !Schemas
                       apiVersions:
                         - !ApiVersion 
                           version: 2019-05-06-Preview
-                      externalDocs: !ExternalDocumentation 
-                        url: https://docs.microsoft.com/rest/api/searchservice/naming-rules
                       properties:
                         - !Property 
                           schema: *ref_235
@@ -12672,8 +12590,6 @@ schemas: !Schemas
               apiVersions:
                 - !ApiVersion 
                   version: 2019-05-06-Preview
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/rest/api/searchservice/Create-Index
               properties:
                 - !Property 
                   schema: *ref_260
@@ -12807,8 +12723,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     elementType: *ref_269
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/rest/api/searchservice/Synonym-Map-operations
                     language: !Languages 
                       default:
                         name: FieldSynonymMaps
@@ -12878,8 +12792,6 @@ schemas: !Schemas
               apiVersions:
                 - !ApiVersion 
                   version: 2019-05-06-Preview
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index
               properties:
                 - !Property 
                   schema: *ref_271
@@ -12943,8 +12855,6 @@ schemas: !Schemas
                               - !ApiVersion 
                                 version: 2019-05-06-Preview
                             discriminatorValue: distance
-                            externalDocs: !ExternalDocumentation 
-                              url: https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index
                             parents: !Relations 
                               all:
                                 - *ref_273
@@ -13013,8 +12923,6 @@ schemas: !Schemas
                               - !ApiVersion 
                                 version: 2019-05-06-Preview
                             discriminatorValue: freshness
-                            externalDocs: !ExternalDocumentation 
-                              url: https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index
                             parents: !Relations 
                               all:
                                 - *ref_273
@@ -13074,8 +12982,6 @@ schemas: !Schemas
                               - !ApiVersion 
                                 version: 2019-05-06-Preview
                             discriminatorValue: magnitude
-                            externalDocs: !ExternalDocumentation 
-                              url: https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index
                             parents: !Relations 
                               all:
                                 - *ref_273
@@ -13153,8 +13059,6 @@ schemas: !Schemas
                               - !ApiVersion 
                                 version: 2019-05-06-Preview
                             discriminatorValue: tag
-                            externalDocs: !ExternalDocumentation 
-                              url: https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index
                             parents: !Relations 
                               all:
                                 - *ref_273
@@ -13234,8 +13138,6 @@ schemas: !Schemas
                               name: type
                               description: Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case.
                           protocol: !Protocols {}
-                      externalDocs: !ExternalDocumentation 
-                        url: https://docs.microsoft.com/rest/api/searchservice/Add-scoring-profiles-to-a-search-index
                       properties:
                         - *ref_286
                         - !Property 
@@ -13335,8 +13237,6 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: 2019-05-06-Preview
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/rest/api/searchservice/Create-Index
             properties:
               - !Property 
                 schema: !ArraySchema &ref_517
@@ -13561,8 +13461,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PatternAnalyzer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/PatternAnalyzer.html
                     parents: !Relations 
                       all:
                         - *ref_296
@@ -13630,8 +13528,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StandardAnalyzer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html
                     parents: !Relations 
                       all:
                         - *ref_296
@@ -13683,8 +13579,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StopAnalyzer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html
                     parents: !Relations 
                       all:
                         - *ref_296
@@ -13770,8 +13664,6 @@ schemas: !Schemas
                   description: Base type for analyzers.
                   namespace: ''
               protocol: !Protocols {}
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
             language: !Languages 
               default:
                 name: IndexAnalyzers
@@ -13803,8 +13695,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.ClassicTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -13838,8 +13728,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.EdgeNGramTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -13899,8 +13787,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.KeywordTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -13935,8 +13821,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.KeywordTokenizerV2'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14072,8 +13956,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.NGramTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14133,8 +14015,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PathHierarchyTokenizerV2'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14200,8 +14080,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PatternTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14253,8 +14131,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StandardTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14289,8 +14165,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StandardTokenizerV2'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14324,8 +14198,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.UaxUrlEmailTokenizer'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html
                     parents: !Relations 
                       all:
                         - *ref_314
@@ -14403,8 +14275,6 @@ schemas: !Schemas
                       name: odataType
                       description: Identifies the concrete type of the tokenizer.
                   protocol: !Protocols {}
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
               properties:
                 - *ref_351
                 - !Property 
@@ -14427,8 +14297,6 @@ schemas: !Schemas
                   description: Base type for tokenizers.
                   namespace: ''
               protocol: !Protocols {}
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
             language: !Languages 
               default:
                 name: IndexTokenizers
@@ -14460,8 +14328,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.AsciiFoldingTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14497,8 +14363,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.CjkBigramTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14550,8 +14414,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.CommonGramTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/commongrams/CommonGramsFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14616,8 +14478,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/compound/DictionaryCompoundWordTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14698,8 +14558,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.EdgeNGramTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14750,8 +14608,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.EdgeNGramTokenFilterV2'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14801,8 +14657,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.ElisionTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14846,8 +14700,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.KeepTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeepWordFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14901,8 +14753,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.KeywordMarkerTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14956,8 +14806,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.LengthTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LengthFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -14999,8 +14847,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.LimitTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15042,8 +14888,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.NGramTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15086,8 +14930,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.NGramTokenFilterV2'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15129,8 +14971,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PatternCaptureTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternCaptureGroupTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15184,8 +15024,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PatternReplaceTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternReplaceFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15231,8 +15069,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PhoneticTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15274,8 +15110,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.ShingleTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/shingle/ShingleFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15349,8 +15183,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.SnowballTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/snowball/SnowballFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15385,8 +15217,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StemmerTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15421,8 +15251,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StemmerOverrideTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15469,8 +15297,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.StopwordsTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15538,8 +15364,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.SynonymTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/synonym/SynonymFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15609,8 +15433,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.TruncateTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TruncateTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15644,8 +15466,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.UniqueTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/RemoveDuplicatesTokenFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15679,8 +15499,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.WordDelimiterTokenFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/WordDelimiterFilter.html
                     parents: !Relations 
                       all:
                         - *ref_353
@@ -15879,8 +15697,6 @@ schemas: !Schemas
                       name: odataType
                       description: Identifies the concrete type of the token filter.
                   protocol: !Protocols {}
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
               properties:
                 - *ref_442
                 - !Property 
@@ -15903,8 +15719,6 @@ schemas: !Schemas
                   description: Base type for token filters.
                   namespace: ''
               protocol: !Protocols {}
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
             language: !Languages 
               default:
                 name: IndexTokenFilters
@@ -15936,8 +15750,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.MappingCharFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/MappingCharFilter.html
                     parents: !Relations 
                       all:
                         - *ref_444
@@ -15984,8 +15796,6 @@ schemas: !Schemas
                       - !ApiVersion 
                         version: 2019-05-06-Preview
                     discriminatorValue: '#Microsoft.Azure.Search.PatternReplaceCharFilter'
-                    externalDocs: !ExternalDocumentation 
-                      url: https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternReplaceCharFilter.html
                     parents: !Relations 
                       all:
                         - *ref_444
@@ -16045,8 +15855,6 @@ schemas: !Schemas
                       name: odataType
                       description: Identifies the concrete type of the char filter.
                   protocol: !Protocols {}
-              externalDocs: !ExternalDocumentation 
-                url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
               properties:
                 - *ref_451
                 - !Property 
@@ -16069,8 +15877,6 @@ schemas: !Schemas
                   description: Base type for character filters.
                   namespace: ''
               protocol: !Protocols {}
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search
             language: !Languages 
               default:
                 name: IndexCharFilters
@@ -16197,8 +16003,6 @@ schemas: !Schemas
                     name: odataType
                     description: ''
                 protocol: !Protocols {}
-            externalDocs: !ExternalDocumentation 
-              url: https://docs.microsoft.com/azure/search/index-ranking-similarity
             properties:
               - *ref_459
             serializationFormats:
@@ -16921,8 +16725,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Count-Documents
         parameters:
           - *ref_551
           - *ref_552
@@ -17006,8 +16808,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Search-Documents
         parameters:
           - *ref_551
           - *ref_552
@@ -17171,8 +16971,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Search-Documents
         parameters:
           - *ref_551
           - *ref_552
@@ -17350,8 +17148,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/lookup-document
         parameters:
           - *ref_551
           - *ref_552
@@ -17468,8 +17264,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/suggestions
         parameters:
           - *ref_551
           - *ref_552
@@ -17616,8 +17410,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/suggestions
         parameters:
           - *ref_551
           - *ref_552
@@ -17752,8 +17544,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents
         parameters:
           - *ref_551
           - *ref_552
@@ -17931,8 +17721,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/autocomplete
         parameters:
           - *ref_551
           - *ref_552
@@ -18070,8 +17858,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/autocomplete
         parameters:
           - *ref_551
           - *ref_552
@@ -18210,8 +17996,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Update-Data-Source
         parameters:
           - *ref_551
           - !Parameter &ref_638
@@ -18417,8 +18201,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Delete-Data-Source
         parameters:
           - *ref_551
           - !Parameter &ref_644
@@ -18523,8 +18305,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Get-Data-Source
         parameters:
           - *ref_551
           - !Parameter &ref_647
@@ -18635,8 +18415,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/List-Data-Sources
         parameters:
           - *ref_551
           - !Parameter &ref_650
@@ -18747,8 +18525,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source
         parameters:
           - *ref_551
           - *ref_652
@@ -18900,8 +18676,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Reset-Indexer
         parameters:
           - *ref_551
           - !Parameter &ref_658
@@ -18992,8 +18766,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Run-Indexer
         parameters:
           - *ref_551
           - !Parameter &ref_661
@@ -19084,8 +18856,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Create-Indexer
         parameters:
           - *ref_551
           - !Parameter &ref_668
@@ -19280,8 +19050,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Delete-Indexer
         parameters:
           - *ref_551
           - !Parameter &ref_674
@@ -19386,8 +19154,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Get-Indexer
         parameters:
           - *ref_551
           - !Parameter &ref_677
@@ -19495,8 +19261,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/List-Indexers
         parameters:
           - *ref_551
           - !Parameter &ref_680
@@ -19628,8 +19392,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Create-Indexer
         parameters:
           - *ref_551
           - *ref_682
@@ -19765,8 +19527,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Get-Indexer-Status
         parameters:
           - *ref_551
           - !Parameter &ref_688
@@ -19929,8 +19689,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/update-skillset
         parameters:
           - *ref_551
           - !Parameter &ref_696
@@ -20296,8 +20054,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/delete-skillset
         parameters:
           - *ref_551
           - !Parameter &ref_702
@@ -20402,8 +20158,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/get-skillset
         parameters:
           - *ref_551
           - !Parameter &ref_705
@@ -20573,8 +20327,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/list-skillset
         parameters:
           - *ref_551
           - !Parameter &ref_708
@@ -20744,8 +20496,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/create-skillset
         parameters:
           - *ref_551
           - *ref_710
@@ -21000,8 +20750,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Update-Synonym-Map
         parameters:
           - *ref_551
           - !Parameter &ref_720
@@ -21192,8 +20940,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Delete-Synonym-Map
         parameters:
           - *ref_551
           - !Parameter &ref_726
@@ -21298,8 +21044,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Get-Synonym-Map
         parameters:
           - *ref_551
           - !Parameter &ref_729
@@ -21407,8 +21151,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/List-Synonym-Maps
         parameters:
           - *ref_551
           - !Parameter &ref_732
@@ -21520,8 +21262,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Create-Synonym-Map
         parameters:
           - *ref_551
           - *ref_734
@@ -21667,8 +21407,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Create-Index
         parameters:
           - *ref_551
           - *ref_738
@@ -22047,8 +21785,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/List-Indexes
         parameters:
           - *ref_551
           - !Parameter &ref_744
@@ -22362,8 +22098,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Update-Index
         parameters:
           - *ref_551
           - !Parameter &ref_752
@@ -22979,8 +22713,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Delete-Index
         parameters:
           - *ref_551
           - !Parameter &ref_759
@@ -23085,8 +22817,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Get-Index
         parameters:
           - *ref_551
           - !Parameter &ref_762
@@ -23367,8 +23097,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/Get-Index-Statistics
         parameters:
           - *ref_551
           - !Parameter &ref_765
@@ -23466,8 +23194,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
-        externalDocs: !ExternalDocumentation 
-          url: https://docs.microsoft.com/rest/api/searchservice/test-analyzer
         parameters:
           - *ref_551
           - !Parameter &ref_772

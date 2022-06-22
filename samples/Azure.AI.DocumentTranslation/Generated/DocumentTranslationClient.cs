@@ -68,6 +68,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>DocumentStatus</c>:
         /// <code>{
         ///   path: string, # Optional. Location of the document or folder
@@ -122,6 +123,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>DocumentStatus</c>:
         /// <code>{
         ///   path: string, # Optional. Location of the document or folder
@@ -178,6 +180,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
         ///   id: TranslationStatusId, # Required. Id of the operation.
@@ -238,6 +241,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
         ///   id: TranslationStatusId, # Required. Id of the operation.
@@ -301,6 +305,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
         ///   id: TranslationStatusId, # Required. Id of the operation.
@@ -364,6 +369,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
         ///   id: TranslationStatusId, # Required. Id of the operation.
@@ -423,6 +429,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
@@ -463,6 +470,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
@@ -503,6 +511,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
@@ -543,6 +552,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
@@ -580,6 +590,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>SupportedStorageSources</c>:
         /// <code>{
         ///   value: [&quot;AzureBlob&quot;], # Required. list of objects
@@ -609,6 +620,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>SupportedStorageSources</c>:
         /// <code>{
         ///   value: [&quot;AzureBlob&quot;], # Required. list of objects
@@ -688,6 +700,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>TranslationsStatusValue</c>:
         /// <code>{
         ///   id: TranslationStatusId, # Required. Id of the operation.
@@ -800,6 +813,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>TranslationsStatusValue</c>:
         /// <code>{
         ///   id: TranslationStatusId, # Required. Id of the operation.
@@ -910,6 +924,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>DocumentsStatusValue</c>:
         /// <code>{
         ///   path: string, # Optional. Location of the document or folder
@@ -1016,6 +1031,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>DocumentsStatusValue</c>:
         /// <code>{
         ///   path: string, # Optional. Location of the document or folder
@@ -1088,6 +1104,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>StartTranslationDetails</c>:
         /// <code>{
         ///   inputs: [
@@ -1168,6 +1185,7 @@ namespace Azure.AI.DocumentTranslation
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>StartTranslationDetails</c>:
         /// <code>{
         ///   inputs: [

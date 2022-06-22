@@ -61,6 +61,7 @@ namespace body_complex_LowLevel
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
         ///   kind: Kind1, # Required.
@@ -95,6 +96,7 @@ namespace body_complex_LowLevel
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
         ///   kind: Kind1, # Required.

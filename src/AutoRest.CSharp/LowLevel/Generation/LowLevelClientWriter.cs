@@ -525,7 +525,7 @@ namespace AutoRest.CSharp.Generation.Writers
             AddResquestOrResponseSchema(requestSchemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
             if (requestSchemas.Count > 0)
             {
-                schemas.Add($"{Environment.NewLine}Request Body:{Environment.NewLine}");
+                schemas.Add($"{Environment.NewLine}Request Body:{Environment.NewLine}{Environment.NewLine}");
                 schemas = schemas.Concat(requestSchemas).ToList();
             }
 
@@ -543,7 +543,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (responseSchemas.Count > 0)
             {
-                schemas.Add($"{Environment.NewLine}Response Body:{Environment.NewLine}");
+                schemas.Add($"{Environment.NewLine}Response Body:{Environment.NewLine}{Environment.NewLine}");
                 schemas = schemas.Concat(responseSchemas).ToList();
             }
 
@@ -618,6 +618,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 // check if it is base schema. if so, add children schemas.
                 if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
                 {
+                    if (objSchema.Children.All.Count > 1) formattedSchemas.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
                     foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
                     {
                         if (child.index == 1)

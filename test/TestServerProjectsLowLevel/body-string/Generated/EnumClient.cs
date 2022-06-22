@@ -222,6 +222,7 @@ namespace body_string_LowLevel
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
         ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
@@ -252,6 +253,7 @@ namespace body_string_LowLevel
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
         ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
@@ -284,6 +286,7 @@ namespace body_string_LowLevel
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
         ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
@@ -318,6 +321,7 @@ namespace body_string_LowLevel
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
         ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.

@@ -54,6 +54,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfig</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -172,6 +173,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfig</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -292,6 +294,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfig</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -388,6 +391,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfig</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -510,6 +514,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfig</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -606,6 +611,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfig</c>:
         /// <code>{
         ///   advancedResourceSet: {

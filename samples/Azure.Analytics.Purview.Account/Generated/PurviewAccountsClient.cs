@@ -68,6 +68,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Account</c>:
         /// <code>{
         ///   id: string, # Optional. Gets or sets the identifier.
@@ -160,6 +161,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Account</c>:
         /// <code>{
         ///   id: string, # Optional. Gets or sets the identifier.
@@ -254,6 +256,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>DataPlaneAccountUpdateParameters</c>:
         /// <code>{
         ///   friendlyName: string, # Optional. The friendly name for the azure resource.
@@ -261,6 +264,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Account</c>:
         /// <code>{
         ///   id: string, # Optional. Gets or sets the identifier.
@@ -357,6 +361,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>DataPlaneAccountUpdateParameters</c>:
         /// <code>{
         ///   friendlyName: string, # Optional. The friendly name for the azure resource.
@@ -364,6 +369,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Account</c>:
         /// <code>{
         ///   id: string, # Optional. Gets or sets the identifier.
@@ -458,6 +464,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>AccessKeys</c>:
         /// <code>{
         ///   atlasKafkaPrimaryEndpoint: string, # Optional. Gets or sets the primary connection string.
@@ -488,6 +495,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>AccessKeys</c>:
         /// <code>{
         ///   atlasKafkaPrimaryEndpoint: string, # Optional. Gets or sets the primary connection string.
@@ -520,6 +528,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>AccessKeyOptions</c>:
         /// <code>{
         ///   keyType: &quot;PrimaryAtlasKafkaKey&quot; | &quot;SecondaryAtlasKafkaKey&quot;, # Optional. The access key type.
@@ -527,6 +536,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>AccessKeys</c>:
         /// <code>{
         ///   atlasKafkaPrimaryEndpoint: string, # Optional. Gets or sets the primary connection string.
@@ -561,6 +571,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>AccessKeyOptions</c>:
         /// <code>{
         ///   keyType: &quot;PrimaryAtlasKafkaKey&quot; | &quot;SecondaryAtlasKafkaKey&quot;, # Optional. The access key type.
@@ -568,6 +579,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>AccessKeys</c>:
         /// <code>{
         ///   atlasKafkaPrimaryEndpoint: string, # Optional. Gets or sets the primary connection string.
@@ -601,6 +613,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfigListValue</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -726,6 +739,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>ResourceSetRuleConfigListValue</c>:
         /// <code>{
         ///   advancedResourceSet: {
@@ -851,6 +865,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>CollectionListValue</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -902,6 +917,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>CollectionListValue</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.

@@ -1143,8 +1143,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2021-06-01-preview
-        externalDocs: !ExternalDocumentation 
-          url: https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx
         parameters:
           - *ref_49
           - !Parameter &ref_56
@@ -1258,8 +1256,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2021-06-01-preview
-        externalDocs: !ExternalDocumentation 
-          url: https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx
         parameters:
           - *ref_49
           - !Parameter &ref_64
@@ -1386,8 +1382,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2021-06-01-preview
-        externalDocs: !ExternalDocumentation 
-          url: https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx
         parameters:
           - *ref_49
           - !Parameter &ref_66
@@ -1488,8 +1482,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 2021-06-01-preview
-        externalDocs: !ExternalDocumentation 
-          url: https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx
         parameters:
           - *ref_49
           - !Parameter &ref_68

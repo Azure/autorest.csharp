@@ -307,8 +307,6 @@ schemas: !Schemas
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parents: !Relations 
           all:
             - !ObjectSchema &ref_8
@@ -1051,8 +1049,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requestMediaTypes:
@@ -1147,8 +1143,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requests:
@@ -1216,8 +1210,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requestMediaTypes:
@@ -1312,8 +1304,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requests:
@@ -1381,8 +1371,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requestMediaTypes:
@@ -1477,8 +1465,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requests:
@@ -1546,8 +1532,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requestMediaTypes:
@@ -1642,8 +1626,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requests:
@@ -1711,8 +1693,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requestMediaTypes:
@@ -1811,8 +1791,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
         requestMediaTypes:
@@ -1987,8 +1965,6 @@ operationGroups:
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
-        externalDocs: !ExternalDocumentation 
-          url: http://tempuri.org
         parameters:
           - *ref_40
           - *ref_68

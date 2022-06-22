@@ -62,6 +62,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Collection</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -106,6 +107,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Collection</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -152,6 +154,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>Collection</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -174,6 +177,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Collection</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -222,6 +226,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the request and response payloads.
         /// 
         /// Request Body:
+        /// 
         /// Schema for <c>Collection</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -244,6 +249,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Collection</c>:
         /// <code>{
         ///   collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;, # Optional. Gets the state of the provisioning.
@@ -326,6 +332,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>CollectionPathResponse</c>:
         /// <code>{
         ///   parentFriendlyNameChain: [string], # Optional. The friendly names of ancestors starting from the default (root) collection and ending with the immediate parent.
@@ -356,6 +363,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>CollectionPathResponse</c>:
         /// <code>{
         ///   parentFriendlyNameChain: [string], # Optional. The friendly names of ancestors starting from the default (root) collection and ending with the immediate parent.
@@ -387,6 +395,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>CollectionNameResponseListValue</c>:
         /// <code>{
         ///   friendlyName: string, # Optional. Gets or sets the friendly name of the collection.
@@ -424,6 +433,7 @@ namespace Azure.Analytics.Purview.Account
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>CollectionNameResponseListValue</c>:
         /// <code>{
         ///   friendlyName: string, # Optional. Gets or sets the friendly name of the collection.

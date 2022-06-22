@@ -246,6 +246,7 @@ namespace ProtocolMethodsInRestClient
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.
@@ -281,6 +282,7 @@ namespace ProtocolMethodsInRestClient
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
         /// Schema for <c>Resource</c>:
         /// <code>{
         ///   name: string, # Optional.

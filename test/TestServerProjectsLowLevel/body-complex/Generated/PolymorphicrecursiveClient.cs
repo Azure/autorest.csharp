@@ -62,6 +62,8 @@ namespace body_complex_LowLevel
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -199,6 +201,8 @@ namespace body_complex_LowLevel
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -338,6 +342,8 @@ namespace body_complex_LowLevel
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
@@ -479,6 +485,8 @@ namespace body_complex_LowLevel
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
         ///   fishtype: string, # Required.
