@@ -149,8 +149,6 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         {
             switch (type.Implementation)
             {
-                // TODO -- this is only a temporary solution since now we do not have a solution of getting the serialized name of property in resourcemanager
-                // TODO -- when we have a more elegant solution and apply that into SystemObjectType, we could remove this branch and reuse AppendObjectTypeValue
                 case ObjectType objectType:
                     return writer.AppendObjectTypeValue(objectType, (Dictionary<string, ExampleValue>)exampleValue.Properties);
                 case EnumType enumType:
@@ -159,13 +157,13 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer.AppendRaw("default");
         }
 
-        private static string? GetPropertySerializedName(ObjectType objectType, ObjectTypeProperty property)
-        {
-            if (objectType is not SystemObjectType systemObjectType)
-                return property.SchemaProperty?.SerializedName;
+        //private static string? GetPropertySerializedName(ObjectType objectType, ObjectTypeProperty property)
+        //{
+        //    if (objectType is not SystemObjectType systemObjectType)
+        //        return property.SchemaProperty?.SerializedName;
 
-            return SystemObjectTypeHandler.GetPropertySerializedName(systemObjectType, property.Declaration.Name);
-        }
+        //    return SystemObjectTypeHandler.GetPropertySerializedName(systemObjectType, property.Declaration.Name);
+        //}
 
         private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
         {
@@ -183,7 +181,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 // try every property, convert them to variable name and see if there are some of them matching
                 var property = propertyDict[parameter.Name];
                 ExampleValue? exampleValue;
-                if (!valueDict.TryGetValue(GetPropertySerializedName(objectType, property)!, out exampleValue))
+                if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
                     if (TypeFactory.IsCollectionType(property.Declaration.Type))
@@ -206,7 +204,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         };
                     }
                     else
-                        throw new InvalidOperationException($"Example value for required property {GetPropertySerializedName(objectType, property)} in class {objectType.Type.Name} is not found");
+                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
                 writer.AppendExampleValue(exampleValue, type: property.Declaration.Type).AppendRaw(",");
@@ -239,7 +237,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!IsPropertyAssignable(property) || schemaProperty == null)
                     continue; // now we explicitly ignore all the AdditionalProperties
 
-                if (!valueDict.TryGetValue(GetPropertySerializedName(objectType, property)!, out var exampleValue))
+                if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
                 var hierarchyStack = new Stack<ObjectTypeProperty>();
