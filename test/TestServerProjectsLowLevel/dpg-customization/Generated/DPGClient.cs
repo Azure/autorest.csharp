@@ -64,11 +64,17 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetModelAsync(string mode, RequestContext context = null)
@@ -94,11 +100,17 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetModel(string mode, RequestContext context = null)
@@ -125,16 +137,25 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Input</c>:
         /// <code>{
-        ///   hello: string (required)
+        ///   hello: string, # Required.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> PostModelAsync(string mode, RequestContent content, RequestContext context = null)
@@ -162,16 +183,25 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Input</c>:
         /// <code>{
-        ///   hello: string (required)
+        ///   hello: string, # Required.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response PostModel(string mode, RequestContent content, RequestContext context = null)
@@ -198,14 +228,13 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       received: &quot;raw&quot; | &quot;model&quot;
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 
@@ -239,14 +268,13 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       received: &quot;raw&quot; | &quot;model&quot;
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 
@@ -281,10 +309,14 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;,
-        ///   provisioningState: string
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 
@@ -313,10 +345,14 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;,
-        ///   provisioningState: string
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 

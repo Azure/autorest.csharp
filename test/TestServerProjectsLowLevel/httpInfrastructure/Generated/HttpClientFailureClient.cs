@@ -58,15 +58,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Head400Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
@@ -85,15 +76,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Head400(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
@@ -112,15 +94,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get400Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
@@ -139,15 +112,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get400(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
@@ -166,15 +130,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Options400Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
@@ -193,15 +148,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Options400(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
@@ -221,15 +167,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Put400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
@@ -249,15 +186,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Put400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
@@ -277,15 +205,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Patch400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
@@ -305,15 +224,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Patch400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
@@ -333,15 +243,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Post400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
@@ -361,15 +262,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Post400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
@@ -389,15 +281,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Delete400Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
@@ -417,15 +300,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Delete400(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
@@ -444,15 +318,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Head401Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
@@ -471,15 +336,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Head401(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
@@ -498,15 +354,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get402Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
@@ -525,15 +372,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get402(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
@@ -552,15 +390,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Options403Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
@@ -579,15 +408,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Options403(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
@@ -606,15 +426,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get403Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
@@ -633,15 +444,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get403(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
@@ -661,15 +463,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Put404Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
@@ -689,15 +482,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Put404(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
@@ -717,15 +501,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Patch405Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
@@ -745,15 +520,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Patch405(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
@@ -773,15 +539,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Post406Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
@@ -801,15 +558,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Post406(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
@@ -829,15 +577,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Delete407Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
@@ -857,15 +596,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Delete407(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
@@ -885,15 +615,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Put409Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
@@ -913,15 +634,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Put409(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
@@ -940,15 +652,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Head410Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
@@ -967,15 +670,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Head410(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
@@ -994,15 +688,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get411Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
@@ -1021,15 +706,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get411(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
@@ -1048,15 +724,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Options412Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
@@ -1075,15 +742,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Options412(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
@@ -1102,15 +760,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get412Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
@@ -1129,15 +778,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get412(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
@@ -1157,15 +797,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Put413Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
@@ -1185,15 +816,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Put413(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
@@ -1213,15 +835,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Patch414Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
@@ -1241,15 +854,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Patch414(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
@@ -1269,15 +873,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Post415Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
@@ -1297,15 +892,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Post415(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
@@ -1324,15 +910,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get416Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
@@ -1351,15 +928,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get416(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
@@ -1379,15 +947,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Delete417Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
@@ -1407,15 +966,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Delete417(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
@@ -1434,15 +984,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Head429Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
@@ -1461,15 +1002,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Head429(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
