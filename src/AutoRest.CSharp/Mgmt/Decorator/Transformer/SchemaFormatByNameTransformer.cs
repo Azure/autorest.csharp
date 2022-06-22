@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (schemaCache.ContainsKey(schema.Id))
             {
                 if (!name.Equals(schemaCache[schema.Id]))
-                    throw new Exception($"The schema '{schema.CSharpName()}' is shared by '{name}' and '{schemaCache[schema.Id]}' which is unexpected.");
+                    Console.Error.WriteLine($"WARNING: The schema '{schema.CSharpName()}' is shared by '{name}' and '{schemaCache[schema.Id]}' which is unexpected.");
                 return ruleIdx;
             }
             ruleIdx = CheckRules(name, rules);

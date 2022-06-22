@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -44,15 +45,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal Type SystemType => _type;
 
-        private ConstructorInfo GetCtor(string attributeType)
+        internal static bool TryGetCtor(Type type, string attributeType, [MaybeNullWhen(false)] out ConstructorInfo result)
         {
-            foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
+            result = null;
+            foreach (var ctor in type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
                 if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
-                    return ctor;
+                {
+                    result = ctor;
+                    return true;
+                }
             }
+            return false;
+        }
 
-            throw new InvalidOperationException($"{attributeType} ctor was not found for {_type.Name}");
+        private static ConstructorInfo GetCtor(Type type, string attributeType)
+        {
+            if (TryGetCtor(type, attributeType, out var ctor))
+                return ctor;
+
+            throw new InvalidOperationException($"{attributeType} ctor was not found for {type.Name}");
         }
 
         private static Type? GetSerializeAs(Type type) => type.Name switch
@@ -109,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.InitializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName));
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -199,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.SerializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName));
 
         protected override CSharpType? CreateInheritedType()
         {
