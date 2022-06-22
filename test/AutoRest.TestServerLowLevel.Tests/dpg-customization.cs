@@ -103,7 +103,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             await result.WaitForCompletionAsync();
-            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletionResponse");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletion");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             JsonData responseBody = JsonData.FromBytes(result.Value.ToMemory());
@@ -121,7 +121,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             await lro.WaitForCompletionAsync();
-            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletionResponse");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletion");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             Assert.AreEqual("model", $"{lro.Value.Received}");
         });
