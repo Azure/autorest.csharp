@@ -93,7 +93,7 @@ namespace OmitOperationGroups
                     continue;
                 }
             }
-            return new Model2Data(id, name, type, systemData.Value, f.Value, g.Value, b.Value, modelx.Value);
+            return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value);
         }
     }
 }

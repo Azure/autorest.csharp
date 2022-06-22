@@ -58,15 +58,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Head408Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
@@ -85,15 +76,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Head408(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
@@ -113,15 +95,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
@@ -141,15 +114,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Put500(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
@@ -169,15 +133,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
@@ -197,15 +152,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Patch500(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
@@ -224,15 +170,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get502Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
@@ -251,15 +188,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get502(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
@@ -278,15 +206,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Options502Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
@@ -305,15 +224,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Options502(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
@@ -333,15 +243,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
@@ -361,15 +262,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Post503(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
@@ -389,15 +281,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
@@ -417,15 +300,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Delete503(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
@@ -445,15 +319,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
@@ -473,15 +338,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Put504(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
@@ -501,15 +357,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
@@ -529,15 +376,6 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Patch504(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");

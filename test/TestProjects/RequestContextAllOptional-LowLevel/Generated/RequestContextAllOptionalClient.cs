@@ -104,16 +104,23 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -138,16 +145,23 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
         /// <code>{
-        ///   Code: string,
-        ///   Status: string
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
         /// }
         /// </code>
         /// 

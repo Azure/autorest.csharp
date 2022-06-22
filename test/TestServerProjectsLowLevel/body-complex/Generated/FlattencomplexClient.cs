@@ -58,15 +58,21 @@ namespace body_complex_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
@@ -87,15 +93,21 @@ namespace body_complex_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetValid(RequestContext context = null)
