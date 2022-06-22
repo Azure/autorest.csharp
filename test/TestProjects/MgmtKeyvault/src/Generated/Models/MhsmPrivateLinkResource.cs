@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtKeyvault.Models
 {
     /// <summary> A private link resource. </summary>
-    public partial class MhsmPrivateLinkResource : ManagedHsmResource
+    public partial class MhsmPrivateLinkResource : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MhsmPrivateLinkResource. </summary>
         /// <param name="location"> The location. </param>
@@ -29,15 +29,16 @@ namespace MgmtKeyvault.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="sku"> SKU details. </param>
         /// <param name="groupId"> Group identifier of private link resource. </param>
         /// <param name="requiredMembers"> Required member names of private link resource. </param>
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
-        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, resourceType, systemData, tags, location, sku)
+        /// <param name="sku"> SKU details. </param>
+        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, ManagedHsmSku sku) : base(id, name, resourceType, systemData, tags, location)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
+            Sku = sku;
         }
 
         /// <summary> Group identifier of private link resource. </summary>
@@ -46,5 +47,7 @@ namespace MgmtKeyvault.Models
         public IReadOnlyList<string> RequiredMembers { get; }
         /// <summary> Required DNS zone names of the the private link resource. </summary>
         public IList<string> RequiredZoneNames { get; }
+        /// <summary> SKU details. </summary>
+        public ManagedHsmSku Sku { get; set; }
     }
 }
