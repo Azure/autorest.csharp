@@ -512,10 +512,28 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteMethodDocumentation(methodSignature);
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
 
-            string appendText = ContainsObjectSchema(clientMethod.OperationSchemas.ResponseBodySchema) ? $"Details of the response body schema are in the Remarks section below." : string.Empty;
             if (methodSignature.ReturnType != null)
             {
-                codeWriter.WriteXmlDocumentationReturns(methodSignature.ReturnType, $"The response returned from the service. {appendText}");
+                bool containsResponseBody = ContainsObjectSchema(clientMethod.OperationSchemas.ResponseBodySchema);
+                bool isAsync = methodSignature.Modifiers.HasFlag(Async);
+                string returnBodyText = methodSignature.ReturnType.ToCommentShortNameWithoutTaskString();
+                string returnContainingText = methodSignature.ReturnType.ToCommentContainingShortNameString();
+
+                string text;
+                if (clientMethod.PagingInfo != null)
+                {
+                    text = $"The <![CDATA[{returnBodyText}]]> from the service containing a list of <![CDATA[{returnContainingText}]]> objects.{(containsResponseBody ? " Details of the body schema for each item in the collection are in the Remarks section below." : string.Empty)}";
+                }
+                else if (clientMethod.IsLongRunning)
+                {
+                    text = containsResponseBody ? $"The <![CDATA[{returnBodyText}]]> from the service that will contain a <![CDATA[{returnContainingText}]]> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below." : $"The <![CDATA[{returnBodyText}]]> representing an asynchronous operation on the service.";
+                }
+                else
+                {
+                    text = $"The response returned from the service.{(containsResponseBody ? " Details of the response body schema are in the Remarks section below." : string.Empty)}";
+                }
+
+                codeWriter.WriteXmlDocumentationReturns($"{text}");
             }
         }
 

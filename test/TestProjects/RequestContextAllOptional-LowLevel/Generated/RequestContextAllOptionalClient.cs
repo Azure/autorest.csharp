@@ -63,7 +63,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="status"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
@@ -87,7 +87,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="status"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
@@ -108,7 +108,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -144,7 +144,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -181,7 +181,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -205,7 +205,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -227,7 +227,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <summary> No RequestBody and No ResponseBody. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
@@ -247,7 +247,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <summary> No RequestBody and No ResponseBody. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
@@ -268,7 +268,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
@@ -289,7 +289,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");

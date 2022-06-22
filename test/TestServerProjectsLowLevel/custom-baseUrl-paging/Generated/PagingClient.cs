@@ -63,7 +63,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="AsyncPageable{BinaryData}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <![CDATA[AsyncPageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -109,7 +109,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Pageable{BinaryData}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <![CDATA[Pageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -155,7 +155,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="AsyncPageable{BinaryData}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <![CDATA[AsyncPageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -201,7 +201,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Pageable{BinaryData}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <![CDATA[Pageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -248,7 +248,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="AsyncPageable{BinaryData}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <![CDATA[AsyncPageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -294,7 +294,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Pageable{BinaryData}"> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <![CDATA[Pageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{

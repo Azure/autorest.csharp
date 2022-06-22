@@ -62,7 +62,7 @@ namespace dpg_initial_LowLevel
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> HeadNoParamsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -85,7 +85,7 @@ namespace dpg_initial_LowLevel
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response HeadNoParams(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -110,7 +110,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetRequiredAsync(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -137,7 +137,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response GetRequired(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -162,7 +162,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -187,7 +187,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -211,7 +211,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -243,7 +243,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -277,7 +277,7 @@ namespace dpg_initial_LowLevel
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
@@ -301,7 +301,7 @@ namespace dpg_initial_LowLevel
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response GetOptional(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");

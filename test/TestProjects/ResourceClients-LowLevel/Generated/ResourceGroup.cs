@@ -56,7 +56,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -76,7 +76,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response GetGroup(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -96,7 +96,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="AsyncPageable{BinaryData}"> The response returned from the service. </returns>
+        /// <returns> The <![CDATA[AsyncPageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. </returns>
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
         {
             return GetItemsImplementationAsync("ResourceGroup.GetItems", context);
@@ -122,7 +122,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Pageable{BinaryData}"> The response returned from the service. </returns>
+        /// <returns> The <![CDATA[Pageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. </returns>
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
         {
             return GetItemsImplementation("ResourceGroup.GetItems", context);

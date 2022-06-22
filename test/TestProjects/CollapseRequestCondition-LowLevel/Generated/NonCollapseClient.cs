@@ -60,7 +60,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> IfMatchPutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
@@ -81,7 +81,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response IfMatchPut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
@@ -102,7 +102,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
@@ -123,7 +123,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");

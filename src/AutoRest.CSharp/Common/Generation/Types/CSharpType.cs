@@ -134,14 +134,19 @@ namespace AutoRest.CSharp.Generation.Types
 
         public string ToCommentShortNameString()
         {
-            if (IsGenericType)
+            return IsGenericType ? $"{Name}<{string.Join(",", Arguments.Select(argument => argument.ToCommentShortNameString()))}>" : Name;
+        }
+
+        public string ToCommentShortNameWithoutTaskString()
             {
-                return $"{Name}{{{string.Join(",", Arguments.Select(argument => argument.Name))}}}";
+            return Name == "Task" && IsGenericType ? Arguments[0].ToCommentShortNameString() : ToCommentShortNameString();
             }
-            else
+
+        public string ToCommentContainingShortNameString()
             {
-                return Name;
-            }
+            return (new[] { "Task", "Operation", "Pageable", "AsyncPageable" }).Contains(Name) ?
+                (IsGenericType ? Arguments[0].ToCommentContainingShortNameString() : string.Empty) :
+                ToCommentShortNameString();
         }
 
         internal static CSharpType FromSystemType(BuildContext context, Type type)

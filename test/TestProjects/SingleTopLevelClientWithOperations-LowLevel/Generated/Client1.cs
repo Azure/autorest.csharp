@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Task{Response}"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client1.Operation");
@@ -66,7 +66,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns cref="Response"> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response Operation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client1.Operation");
