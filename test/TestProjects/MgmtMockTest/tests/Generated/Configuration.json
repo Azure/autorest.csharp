@@ -14,6 +14,13 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}",
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}"
   ],
+  "FormatByNameRules": {
+    "tenantId": "uuid",
+    "resourceType": "resource-type",
+    "location": "azure-location",
+    "*Uri": "Uri",
+    "*Uris": "Uri"
+  },
   "TestModeler": {
     "SourceCodePath": "file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockTest/tests/../src"
   }

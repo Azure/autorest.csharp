@@ -17,7 +17,7 @@ namespace MgmtMockTest.Models
         internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element)
         {
             Optional<string> mhsmId = default;
-            Optional<string> location = default;
+            Optional<AzureLocation> location = default;
             Optional<DateTimeOffset> deletionDate = default;
             Optional<DateTimeOffset> scheduledPurgeDate = default;
             Optional<bool> purgeProtectionEnabled = default;
@@ -31,7 +31,12 @@ namespace MgmtMockTest.Models
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("deletionDate"))
@@ -80,7 +85,7 @@ namespace MgmtMockTest.Models
                     continue;
                 }
             }
-            return new DeletedManagedHsmProperties(mhsmId.Value, location.Value, Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags));
+            return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags));
         }
     }
 }

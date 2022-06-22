@@ -14,11 +14,12 @@ using MgmtMockTest.Models;
 namespace MgmtMockTest
 {
     /// <summary> A class representing the MgmtMockTestPrivateEndpointConnection data model. </summary>
-    public partial class MgmtMockTestPrivateEndpointConnectionData : MgmtMockTestResourceData
+    public partial class MgmtMockTestPrivateEndpointConnectionData : ResourceData
     {
         /// <summary> Initializes a new instance of MgmtMockTestPrivateEndpointConnectionData. </summary>
         public MgmtMockTestPrivateEndpointConnectionData()
         {
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of MgmtMockTestPrivateEndpointConnectionData. </summary>
@@ -26,18 +27,20 @@ namespace MgmtMockTest
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="location"> Azure location of the key vault resource. </param>
-        /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="connectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal MgmtMockTestPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, MgmtMockTestPrivateLinkServiceConnectionState connectionState, MgmtMockTestPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
+        /// <param name="location"> Azure location of the key vault resource. </param>
+        /// <param name="tags"> Tags assigned to the key vault resource. </param>
+        internal MgmtMockTestPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, SubResource privateEndpoint, MgmtMockTestPrivateLinkServiceConnectionState connectionState, MgmtMockTestPrivateEndpointConnectionProvisioningState? provisioningState, AzureLocation? location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
             ConnectionState = connectionState;
             ProvisioningState = provisioningState;
+            Location = location;
+            Tags = tags;
         }
 
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>
@@ -54,5 +57,9 @@ namespace MgmtMockTest
         public MgmtMockTestPrivateLinkServiceConnectionState ConnectionState { get; set; }
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public MgmtMockTestPrivateEndpointConnectionProvisioningState? ProvisioningState { get; set; }
+        /// <summary> Azure location of the key vault resource. </summary>
+        public AzureLocation? Location { get; }
+        /// <summary> Tags assigned to the key vault resource. </summary>
+        public IReadOnlyDictionary<string, string> Tags { get; }
     }
 }

@@ -48,12 +48,12 @@ namespace MgmtMockTest
         internal static MgmtMockTestPrivateEndpointConnectionData DeserializeMgmtMockTestPrivateEndpointConnectionData(JsonElement element)
         {
             Optional<string> etag = default;
-            Optional<string> location = default;
+            Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<SubResource> privateEndpoint = default;
             Optional<MgmtMockTestPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtMockTestPrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -66,7 +66,12 @@ namespace MgmtMockTest
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -101,6 +106,11 @@ namespace MgmtMockTest
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -147,7 +157,7 @@ namespace MgmtMockTest
                     continue;
                 }
             }
-            return new MgmtMockTestPrivateEndpointConnectionData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MgmtMockTestPrivateEndpointConnectionData(id, name, type, systemData.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(location), Optional.ToDictionary(tags));
         }
     }
 }

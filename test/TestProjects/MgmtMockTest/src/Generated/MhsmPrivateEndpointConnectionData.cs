@@ -14,7 +14,7 @@ using MgmtMockTest.Models;
 namespace MgmtMockTest
 {
     /// <summary> A class representing the MhsmPrivateEndpointConnection data model. </summary>
-    public partial class MhsmPrivateEndpointConnectionData : Models.ManagedHsmResource
+    public partial class MhsmPrivateEndpointConnectionData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
         /// <param name="location"> The location. </param>
@@ -29,17 +29,18 @@ namespace MgmtMockTest
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="sku"> SKU details. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, string etag, SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockTestPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, tags, location, sku)
+        /// <param name="sku"> SKU details. </param>
+        internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockTestPrivateEndpointConnectionProvisioningState? provisioningState, ManagedHsmSku sku) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
             ProvisioningState = provisioningState;
+            Sku = sku;
         }
 
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>
@@ -56,5 +57,7 @@ namespace MgmtMockTest
         public MhsmPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public MgmtMockTestPrivateEndpointConnectionProvisioningState? ProvisioningState { get; set; }
+        /// <summary> SKU details. </summary>
+        public ManagedHsmSku Sku { get; set; }
     }
 }

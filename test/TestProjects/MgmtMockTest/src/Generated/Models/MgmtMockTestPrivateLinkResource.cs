@@ -12,13 +12,14 @@ using Azure.ResourceManager.Models;
 namespace MgmtMockTest.Models
 {
     /// <summary> A private link resource. </summary>
-    public partial class MgmtMockTestPrivateLinkResource : MgmtMockTestResourceData
+    public partial class MgmtMockTestPrivateLinkResource : ResourceData
     {
         /// <summary> Initializes a new instance of MgmtMockTestPrivateLinkResource. </summary>
         public MgmtMockTestPrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
             RequiredZoneNames = new ChangeTrackingList<string>();
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of MgmtMockTestPrivateLinkResource. </summary>
@@ -26,16 +27,18 @@ namespace MgmtMockTest.Models
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="location"> Azure location of the key vault resource. </param>
-        /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="groupId"> Group identifier of private link resource. </param>
         /// <param name="requiredMembers"> Required member names of private link resource. </param>
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
-        internal MgmtMockTestPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, resourceType, systemData, location, tags)
+        /// <param name="location"> Azure location of the key vault resource. </param>
+        /// <param name="tags"> Tags assigned to the key vault resource. </param>
+        internal MgmtMockTestPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, AzureLocation? location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
+            Location = location;
+            Tags = tags;
         }
 
         /// <summary> Group identifier of private link resource. </summary>
@@ -44,5 +47,9 @@ namespace MgmtMockTest.Models
         public IReadOnlyList<string> RequiredMembers { get; }
         /// <summary> Required DNS zone names of the the private link resource. </summary>
         public IList<string> RequiredZoneNames { get; }
+        /// <summary> Azure location of the key vault resource. </summary>
+        public AzureLocation? Location { get; }
+        /// <summary> Tags assigned to the key vault resource. </summary>
+        public IReadOnlyDictionary<string, string> Tags { get; }
     }
 }

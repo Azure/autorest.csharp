@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
@@ -34,7 +35,7 @@ namespace MgmtMockTest.Tests.Mock
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
             {
                 AccessPolicies =
 {
@@ -71,7 +72,7 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
             var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent("westus", new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
             {
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,

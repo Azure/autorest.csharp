@@ -22,6 +22,13 @@ namespace AutoRest.CSharp.Generation.Types
         {
         }
 
+        public CSharpType(Type type, bool isNullable) : this(
+            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            isNullable,
+            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
+        {
+        }
+
         public CSharpType(Type type, Type? serializeAs) : this(
             type.IsGenericType ? type.GetGenericTypeDefinition() : type,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
