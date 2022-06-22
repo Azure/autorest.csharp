@@ -29,14 +29,17 @@ namespace MgmtKeyvault
                 writer.WritePropertyName("sku");
                 writer.WriteObjectValue(Sku);
             }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -64,12 +67,12 @@ namespace MgmtKeyvault
         {
             Optional<string> etag = default;
             Optional<ManagedHsmSku> sku = default;
-            IDictionary<string, string> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<SubResource> privateEndpoint = default;
             Optional<MhsmPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtKeyvaultPrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -92,6 +95,11 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -122,6 +130,11 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -168,7 +181,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionData(id, name, type, systemData, tags, location, sku.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MhsmPrivateEndpointConnectionData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), sku.Value);
         }
     }
 }

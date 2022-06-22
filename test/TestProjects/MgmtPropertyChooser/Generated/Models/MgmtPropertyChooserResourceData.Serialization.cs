@@ -40,7 +40,7 @@ namespace MgmtPropertyChooser.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -80,11 +80,16 @@ namespace MgmtPropertyChooser.Models
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new MgmtPropertyChooserResourceData(id, name, type, systemData, location, Optional.ToDictionary(tags));
+            return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, Optional.ToDictionary(tags));
         }
     }
 }

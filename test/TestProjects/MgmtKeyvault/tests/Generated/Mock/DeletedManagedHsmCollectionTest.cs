@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
@@ -27,7 +28,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted managed HSM
-            string location = "westus";
+            AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
 
             var collection = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000")).GetDeletedManagedHsms();

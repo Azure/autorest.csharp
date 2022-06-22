@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             UrlToUri.UpdateSuffix();
             BodyParameterNormalizer.UpdatePatchOperations();
             FrameworkTypeUpdater.ValidateAndUpdate();
+            SchemaFormatByNameTransformer.Update();
             SealedChoicesUpdater.UpdateSealChoiceTypes();
             CommonSingleWordModels.Update();
             RenameTimeToOn.Update();

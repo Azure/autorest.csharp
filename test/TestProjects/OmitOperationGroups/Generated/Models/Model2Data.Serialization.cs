@@ -39,7 +39,7 @@ namespace OmitOperationGroups
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("b"))
@@ -84,11 +84,16 @@ namespace OmitOperationGroups
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new Model2Data(id, name, type, systemData, f.Value, g.Value, b.Value, modelx.Value);
+            return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value);
         }
     }
 }

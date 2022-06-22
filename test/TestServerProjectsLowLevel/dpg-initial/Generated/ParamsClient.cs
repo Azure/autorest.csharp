@@ -199,9 +199,13 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>PostInput</c>:
         /// <code>{
-        ///   url: string (required)
+        ///   url: string, # Required.
         /// }
         /// </code>
         /// 
@@ -229,9 +233,13 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>PostInput</c>:
         /// <code>{
-        ///   url: string (required)
+        ///   url: string, # Required.
         /// }
         /// </code>
         /// 
