@@ -59,17 +59,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context = null)
@@ -91,17 +91,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context = null)
@@ -123,17 +123,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context = null)
@@ -155,17 +155,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context = null)
@@ -187,17 +187,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context = null)
@@ -219,17 +219,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context = null)
@@ -251,17 +251,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context = null)
@@ -283,17 +283,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context = null)
@@ -315,17 +315,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context = null)
@@ -347,17 +347,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context = null)
@@ -379,17 +379,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context = null)
@@ -411,17 +411,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context = null)
@@ -443,17 +443,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context = null)
@@ -475,17 +475,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context = null)
@@ -507,17 +507,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context = null)
@@ -539,17 +539,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context = null)
@@ -571,17 +571,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context = null)
@@ -603,17 +603,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context = null)
@@ -635,17 +635,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context = null)
@@ -667,17 +667,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context = null)
@@ -699,17 +699,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context = null)
@@ -731,17 +731,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context = null)
@@ -763,17 +763,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context = null)
@@ -795,17 +795,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context = null)
@@ -826,15 +826,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -853,15 +844,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError202None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -880,15 +862,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -907,15 +880,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError204None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -934,15 +898,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -961,15 +916,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -1133,11 +1079,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context = null)
@@ -1159,11 +1111,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetDefaultModelA200Valid(RequestContext context = null)
@@ -1185,11 +1143,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context = null)
@@ -1211,11 +1175,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetDefaultModelA200None(RequestContext context = null)
@@ -1236,14 +1206,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1262,14 +1224,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetDefaultModelA400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1288,14 +1242,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1314,14 +1260,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetDefaultModelA400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1485,11 +1423,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context = null)
@@ -1511,11 +1455,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA200None(RequestContext context = null)
@@ -1537,11 +1487,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context = null)
@@ -1563,11 +1519,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA200Valid(RequestContext context = null)
@@ -1589,11 +1551,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context = null)
@@ -1615,11 +1583,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA200Invalid(RequestContext context = null)
@@ -1641,11 +1615,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context = null)
@@ -1667,11 +1647,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA400None(RequestContext context = null)
@@ -1693,11 +1679,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context = null)
@@ -1719,11 +1711,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA400Valid(RequestContext context = null)
@@ -1745,11 +1743,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context = null)
@@ -1771,11 +1775,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA400Invalid(RequestContext context = null)
@@ -1797,11 +1807,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context = null)
@@ -1823,11 +1839,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA202Valid(RequestContext context = null)

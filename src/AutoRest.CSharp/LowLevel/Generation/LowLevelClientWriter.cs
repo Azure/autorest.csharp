@@ -501,7 +501,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
             writer.WriteMethodDocumentation(methodSignature);
-            WriteSchemaDocumentationRemarks(writer, clientMethod.OperationSchemas);
+            WriteSchemaDocumentationRemarks(writer, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
@@ -516,20 +516,64 @@ namespace AutoRest.CSharp.Generation.Writers
             return new ResponseClassifierType(statusCodes);
         }
 
-        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelOperationSchemaInfo documentationSchemas)
+        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
+            var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            AddDocumentationForSchema(schemas, documentationSchemas.RequestBodySchema, "Request Body", true);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseErrorSchema, "Response Error", false);
+            bool hasRequestSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+
+            bool hasResponseSchema = false;
+            if (clientMethod.PagingInfo != null && clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responseObj)
+            {
+                Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
+                hasResponseSchema = AddResquestOrResponseSchema(schemas, itemSchema, "Response Body", true);
+            }
+            else
+            {
+                hasResponseSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+
+            }
 
             if (schemas.Count > 0)
             {
-                writer.WriteXmlDocumentation("remarks", $"{schemas}");
+                var schemaDesription = "";
+                if (hasRequestSchema && hasResponseSchema)
+                {
+                    if (clientMethod.PagingInfo == null)
+                    {
+                        schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                    } else
+                    {
+                        schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
+                    }
+                } else if (hasRequestSchema)
+                {
+                    schemaDesription = "Below is the JSON schema for the request payload.";
+                } else if (hasResponseSchema)
+                {
+                    if (clientMethod.PagingInfo == null)
+                    {
+                        schemaDesription = "Below is the JSON schema for the response payload.";
+                    }
+                    else
+                    {
+                        schemaDesription = "Below is the JSON schema for one item in the pageable response.";
+                    }
+                }
+                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
             }
 
-            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
+            static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
+            {
+                if (restMethod.Operation.ExternalDocs != null)
+                {
+                    return $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.Operation.ExternalDocs.Url}{Environment.NewLine}";
+                }
+                return $"";
+            }
+
+            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried, bool collapse = false)
             {
                 if (schema == null)
                 {
@@ -540,8 +584,56 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (docs != null)
                 {
-                    formattedSchemas.Add($"Schema for <c>{schemaName}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    if (collapse)
+                    {
+                        formattedSchemas.Add($"<details><summary>{schema.CSharpName()}</summary>");
+                    }
+                    formattedSchemas.Add($"Schema for <c>{schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    if (collapse)
+                    {
+                        formattedSchemas.Add($"</details>{Environment.NewLine}");
+                    }
                 }
+            }
+
+            static bool AddResquestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
+            {
+                if (schema == null)
+                {
+                    return false;
+                }
+
+                var schemasToAdd = new List<FormattableString>();
+                // check if it is base schema. if so, add children schemas.
+                if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
+                {
+                    if (objSchema.Children.All.Count > 1) schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
+                    foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
+                    {
+                        if (child.index == 1)
+                        {
+                            schemasToAdd.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
+                        }
+                        AddDocumentationForSchema(schemasToAdd, child.schema, $"{child.schema.CSharpName()} {schemaName}", showRequired, true);
+                    }
+                    if (objSchema.Children.All.Count > 1)
+                    {
+                        schemasToAdd.Add($"</details>{Environment.NewLine}");
+                    }
+                }
+                else
+                {
+                    AddDocumentationForSchema(schemasToAdd, schema, schemaName, showRequired);
+                }
+
+                if (schemasToAdd.Count > 0)
+                {
+                    formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}{Environment.NewLine}");
+                    formattedSchemas.AddRange(schemasToAdd);
+                    return true;
+                }
+
+                return false;
             }
         }
 
@@ -559,7 +651,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var row in doc.DocumentationRows)
             {
-                var required = showRequired && row.Required ? " (required)" : string.Empty;
+                var required = showRequired ? (row.Required ? " # Required." : " # Optional.") : string.Empty;
+                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # {row.Description}" : $" {row.Description}");
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
                 builder.AppendIndentation(indentation).Append($"{row.Name}: ");
@@ -573,10 +666,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         builder.AppendIndentation(indentation + 2).AppendLine("{");
                         BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 4);
                         builder.AppendIndentation(indentation + 2).AppendLine("}");
-                        builder.AppendIndentation(indentation).AppendLine($"]{required},");
+                        builder.AppendIndentation(indentation).AppendLine($"],{required}{description}");
                     }
                     else
-                        builder.AppendLine($"[{rowType}]{required},");
+                        builder.AppendLine($"[{rowType}],{required}{description}");
                 }
                 else
                 {
@@ -586,15 +679,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         var docToProcess = docDict[rowType];
                         docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
                         BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 2);
-                        builder.AppendIndentation(indentation).Append("}").AppendLine($"{required},");
+                        builder.AppendIndentation(indentation).Append("}").AppendLine($",{required}{description}");
                     }
                     else
-                        builder.AppendLine($"{rowType}{required},");
+                        builder.AppendLine($"{rowType},{required}{description}");
                 }
             }
-            // Remove the last "," by first removing ",\n", then add back "\n".
-            builder.Length -= 1 + Environment.NewLine.Length;
-            builder.AppendLine();
         }
 
         private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
@@ -635,6 +725,20 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (Property prop in s.Properties)
                             {
+                                if (prop.Schema is ChoiceSchema cs && o.DiscriminatorValue != null)
+                                {
+                                    if (s.Discriminator != null && s.Discriminator.Property.Language.Default.Name == prop.Language.Default.Name)
+                                    {
+                                        propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
+                                            prop.SerializedName,
+                                            o.DiscriminatorValue,
+                                            prop.Required ?? false,
+                                            BuilderHelpers.EscapeXmlDescription(prop.Language.Default.Description)));
+
+                                        schemasToExplore.Enqueue(prop.Schema);
+                                        continue;
+                                    }
+                                }
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     prop.SerializedName,
                                     BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(prop.Schema)),
