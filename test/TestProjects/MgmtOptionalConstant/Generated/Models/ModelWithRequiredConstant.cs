@@ -13,21 +13,21 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         public ModelWithRequiredConstant()
         {
-            PassName = PassNames.OobeSystem;
+            PassName = PassName.OobeSystem;
         }
 
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
         /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
-        internal ModelWithRequiredConstant(PassNames passName, ProtocolTypes? protocol)
+        internal ModelWithRequiredConstant(PassName passName, ProtocolType? protocol)
         {
             PassName = passName;
             Protocol = protocol;
         }
 
         /// <summary> The pass name. Currently, the only allowable value is OobeSystem. </summary>
-        public PassNames PassName { get; set; }
+        public PassName PassName { get; set; }
         /// <summary> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </summary>
-        public ProtocolTypes? Protocol { get; set; }
+        public ProtocolType? Protocol { get; set; }
     }
 }

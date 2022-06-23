@@ -30,8 +30,8 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element)
         {
-            Optional<PassNames> passName = default;
-            Optional<SettingNames> settingName = default;
+            Optional<PassName> passName = default;
+            Optional<SettingName> settingName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
@@ -41,7 +41,7 @@ namespace MgmtOptionalConstant.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    passName = new PassNames(property.Value.GetString());
+                    passName = new PassName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("settingName"))
@@ -51,7 +51,7 @@ namespace MgmtOptionalConstant.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    settingName = property.Value.GetString().ToSettingNames();
+                    settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
             }

@@ -18,15 +18,15 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of ModelWithOptionalConstant. </summary>
         /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
         /// <param name="settingName"> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </param>
-        internal ModelWithOptionalConstant(PassNames? passName, SettingNames? settingName)
+        internal ModelWithOptionalConstant(PassName? passName, SettingName? settingName)
         {
             PassName = passName;
             SettingName = settingName;
         }
 
         /// <summary> The pass name. Currently, the only allowable value is OobeSystem. </summary>
-        public PassNames? PassName { get; set; }
+        public PassName? PassName { get; set; }
         /// <summary> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </summary>
-        public SettingNames? SettingName { get; set; }
+        public SettingName? SettingName { get; set; }
     }
 }

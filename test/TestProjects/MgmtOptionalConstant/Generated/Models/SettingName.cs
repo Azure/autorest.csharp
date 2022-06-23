@@ -8,7 +8,7 @@
 namespace MgmtOptionalConstant.Models
 {
     /// <summary> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </summary>
-    public enum SettingNames
+    public enum SettingName
     {
         /// <summary> AutoLogon. </summary>
         AutoLogon,

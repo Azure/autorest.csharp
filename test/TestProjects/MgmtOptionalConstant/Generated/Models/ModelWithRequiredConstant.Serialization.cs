@@ -27,13 +27,13 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element)
         {
-            PassNames passName = default;
-            Optional<ProtocolTypes> protocol = default;
+            PassName passName = default;
+            Optional<ProtocolType> protocol = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
                 {
-                    passName = new PassNames(property.Value.GetString());
+                    passName = new PassName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("protocol"))
@@ -43,7 +43,7 @@ namespace MgmtOptionalConstant.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    protocol = property.Value.GetString().ToProtocolTypes();
+                    protocol = property.Value.GetString().ToProtocolType();
                     continue;
                 }
             }
