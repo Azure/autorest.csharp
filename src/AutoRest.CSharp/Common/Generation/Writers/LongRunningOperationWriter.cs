@@ -51,9 +51,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteConstructor(writer, operation, pagingResponse, cs, helperType);
                     writer.Line();
 
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override string Id => _operation.Id;");
-                    writer.Line();
+                    writer
+                        .WriteXmlDocumentationInheritDoc()
+                        .Line($"#pragma warning disable CA1822")
+                        .Line($"public override string Id => throw new NotImplementedException();")
+                        .Line($"#pragma warning restore CA1822")
+                        .Line();
 
                     WriteValueProperty(writer, operation);
 
@@ -69,7 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
+                    writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.RawResponse;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -103,7 +106,8 @@ namespace AutoRest.CSharp.Generation.Writers
                                 operation.ResultSerialization,
                                 async: true,
                                 (w, v) => w.Line($"nextPageResult = {v};"),
-                                responseVariable);
+                                responseVariable,
+                                pagingResponse.ResponseType);
 
                             writer.Line($"return {typeof(Page)}.FromValues(nextPageResult.{itemPropertyName}, nextPageResult.{nextLinkPropertyName}, {responseVariable});");
                         }
@@ -115,6 +119,11 @@ namespace AutoRest.CSharp.Generation.Writers
         protected virtual CSharpType? GetInterfaceType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(IOperationSource<>), operation.ResultType) : null;
+        }
+
+        protected virtual CSharpType GetNextLinkOperationType(LongRunningOperation operation)
+        {
+            return operation.ResultType != null ? new CSharpType(typeof(IOperation<>), operation.ResultType) : typeof(IOperation);
         }
 
         protected virtual CSharpType GetBaseType(LongRunningOperation operation)
@@ -129,7 +138,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         protected virtual CSharpType GetHelperType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(typeof(OperationInternals<>), operation.ResultType) : new CSharpType(typeof(OperationInternals));
+            return operation.ResultType != null ? new CSharpType(typeof(OperationInternal<>), operation.ResultType) : new CSharpType(typeof(OperationInternal));
         }
 
         protected virtual void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
@@ -154,12 +163,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"_operation = new {helperType}(");
-                if (operation.ResultType != null)
-                {
-                    writer.Append($"this, ");
-                }
-                writer.Line($"clientDiagnostics, pipeline, request, response, { typeof(OperationFinalStateVia)}.{ operation.FinalStateVia}, { operation.Diagnostics.ScopeName:L});");
+                var nextLinkOperationVariable = new CodeWriterDeclaration("nextLinkOperation");
+                writer
+                    .Append($"{GetNextLinkOperationType(operation)} {nextLinkOperationVariable:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(")
+                    .AppendIf($"this, ", operation.ResultType != null)
+                    .Line($"pipeline, request.Method, request.Uri.ToUri(), response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia});")
+                    .Line($"_operation = new {helperType}(clientDiagnostics, nextLinkOperation, response, { operation.Diagnostics.ScopeName:L});");
 
                 if (pagingResponse != null)
                 {
@@ -181,15 +190,22 @@ namespace AutoRest.CSharp.Generation.Writers
         protected virtual void WriteWaitForCompletionVariants(CodeWriter writer, LongRunningOperation operation)
         {
             var valueTaskType = GetValueTaskType(operation);
-            var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
-            var waitForCompleteMethodName = operation.ResultType != null ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
+            var waitForCompletionMethodName = operation.ResultType != null ? "WaitForCompletion" : "WaitForCompletionResponse";
+
+            WriteWaitForCompletionMethods(writer, valueTaskType, waitForCompletionMethodName, false);
+            WriteWaitForCompletionMethods(writer, valueTaskType, waitForCompletionMethodName, true);
+        }
+
+        private void WriteWaitForCompletionMethods(CodeWriter writer, CSharpType valueTaskType, string waitForCompletionMethodName, bool async)
+        {
+            var waitForCompletionType = async ? new CSharpType(typeof(ValueTask<>), valueTaskType) : valueTaskType;
 
             writer.WriteXmlDocumentationInheritDoc();
-            writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(cancellationToken);");
+            writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(cancellationToken);");
             writer.Line();
 
             writer.WriteXmlDocumentationInheritDoc();
-            writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(pollingInterval, cancellationToken);");
+            writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(pollingInterval, cancellationToken);");
             writer.Line();
         }
     }

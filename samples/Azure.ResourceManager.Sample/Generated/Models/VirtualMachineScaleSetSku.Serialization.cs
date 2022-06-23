@@ -14,14 +14,19 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetSku DeserializeVirtualMachineScaleSetSku(JsonElement element)
         {
-            Optional<string> resourceType = default;
-            Optional<Sku> sku = default;
+            Optional<ResourceType> resourceType = default;
+            Optional<SampleSku> sku = default;
             Optional<VirtualMachineScaleSetSkuCapacity> capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("resourceType"))
                 {
-                    resourceType = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    resourceType = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("sku"))
@@ -31,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("capacity"))
@@ -45,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetSku(resourceType.Value, sku.Value, capacity.Value);
+            return new VirtualMachineScaleSetSku(Optional.ToNullable(resourceType), sku.Value, capacity.Value);
         }
     }
 }

@@ -13,12 +13,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
 
-        [TestCase("PolicyAssignment", "ArmResourceExtensions")]
-        [TestCase("DeploymentExtended", "SubscriptionExtensions")]
-        [TestCase("DeploymentExtended", "ResourceGroupExtensions")]
-        [TestCase("DeploymentExtended", "ManagementGroupExtensions")]
-        [TestCase("DeploymentExtended", "TenantExtensions")]
-        [TestCase("ResourceLink", "TenantExtensions")]
+        [TestCase("FakePolicyAssignmentResource", "ArmResourceExtensions")]
+        [TestCase("DeploymentExtendedResource", "SubscriptionResourceExtensions")]
+        [TestCase("DeploymentExtendedResource", "ResourceGroupResourceExtensions")]
+        [TestCase("DeploymentExtendedResource", "ManagementGroupResourceExtensions")]
+        [TestCase("DeploymentExtendedResource", "TenantResourceExtensions")]
+        [TestCase("ResourceLinkResource", "TenantResourceExtensions")]
         public void TestScopeResource(string resourceName, string parentName)
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);

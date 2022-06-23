@@ -6,7 +6,6 @@
 #nullable disable
 
 using Azure.Core;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -22,17 +21,17 @@ namespace Azure.ResourceManager.Fake.Models
 
         /// <summary> Initializes a new instance of CheckNameAvailabilityRequest. </summary>
         /// <param name="name"> The name of the resource for which availability needs to be checked. </param>
-        /// <param name="type"> The resource type. </param>
+        /// <param name="resourceType"> The resource type. </param>
         [SerializationConstructor]
-        internal CheckNameAvailabilityRequest(string name, ResourceType type)
+        internal CheckNameAvailabilityRequest(string name, ResourceType resourceType)
         {
             Name = name;
-            Type = type;
+            ResourceType = resourceType;
         }
 
         /// <summary> The name of the resource for which availability needs to be checked. </summary>
         public string Name { get; set; }
         /// <summary> The resource type. </summary>
-        public ResourceType Type { get; set; }
+        public ResourceType ResourceType { get; set; }
     }
 }

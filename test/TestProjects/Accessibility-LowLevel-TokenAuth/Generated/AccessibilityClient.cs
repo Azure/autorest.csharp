@@ -19,9 +19,7 @@ namespace Accessibility_LowLevel_TokenAuth
         private static readonly string[] AuthorizationScopes = new string[] { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,19 +34,26 @@ namespace Accessibility_LowLevel_TokenAuth
 
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public AccessibilityClient(TokenCredential credential) : this(credential, new Uri("http://localhost:3000"), new AccessibilityClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of AccessibilityClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public AccessibilityClient(TokenCredential credential, Uri endpoint = null, AccessibilityClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public AccessibilityClient(TokenCredential credential, Uri endpoint, AccessibilityClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessibilityClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -125,46 +130,33 @@ namespace Accessibility_LowLevel_TokenAuth
 
         internal HttpMessage CreateOperationRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateOperationInternalRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/OperationInternal/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

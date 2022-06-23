@@ -22,9 +22,7 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -39,19 +37,26 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public ResourceServiceClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ResourceServiceClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ResourceServiceClient(AzureKeyCredential credential, Uri endpoint = null, ResourceServiceClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public ResourceServiceClient(AzureKeyCredential credential, Uri endpoint, ResourceServiceClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ResourceServiceClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Method that belongs to the top level service. </summary>
@@ -130,7 +135,12 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
+            return GetAllItemsImplementationAsync("ResourceServiceClient.GetAllItems", context);
+        }
+
+        private AsyncPageable<BinaryData> GetAllItemsImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -149,7 +159,12 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
+            return GetAllItemsImplementation("ResourceServiceClient.GetAllItems", context);
+        }
+
+        private Pageable<BinaryData> GetAllItemsImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -172,77 +187,62 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
-            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, Endpoint);
+            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetGroupsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/groups", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetAllItemsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/items", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetAllItemsNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

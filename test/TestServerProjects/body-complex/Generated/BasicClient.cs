@@ -20,6 +20,7 @@ namespace body_complex
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal BasicRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of BasicClient for mocking. </summary>
         protected BasicClient()
@@ -31,6 +32,7 @@ namespace body_complex
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         internal BasicClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2016-02-29")
         {
             RestClient = new BasicRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);

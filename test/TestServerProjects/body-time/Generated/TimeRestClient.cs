@@ -18,9 +18,7 @@ namespace body_time
     internal partial class TimeRestClient
     {
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,11 +27,12 @@ namespace body_time
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public TimeRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateGetRequest()
@@ -42,7 +41,7 @@ namespace body_time
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/time/get", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -95,7 +94,7 @@ namespace body_time
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/time/put", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

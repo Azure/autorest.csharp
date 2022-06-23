@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
     public partial class LROsPostDoubleHeadersFinalAzureHeaderGetOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationInternals<Product> _operation;
+        private readonly OperationInternal<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPostDoubleHeadersFinalAzureHeaderGetOperation for mocking. </summary>
         protected LROsPostDoubleHeadersFinalAzureHeaderGetOperation()
@@ -28,11 +28,14 @@ namespace lro
 
         internal LROsPostDoubleHeadersFinalAzureHeaderGetOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LROsPostDoubleHeadersFinalAzureHeaderGetOperation");
+            IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.AzureAsyncOperation);
+            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPostDoubleHeadersFinalAzureHeaderGetOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override Product Value => _operation.Value;
@@ -44,13 +47,19 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
 
         /// <inheritdoc />
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
+
+        /// <inheritdoc />
+        public override Response<Product> WaitForCompletion(CancellationToken cancellationToken = default) => _operation.WaitForCompletion(cancellationToken);
+
+        /// <inheritdoc />
+        public override Response<Product> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletion(pollingInterval, cancellationToken);
 
         /// <inheritdoc />
         public override ValueTask<Response<Product>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);

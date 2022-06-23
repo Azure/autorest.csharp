@@ -20,9 +20,7 @@ namespace url_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,32 +35,30 @@ namespace url_LowLevel
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PathsClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestUrlTestServiceClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of PathsClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public PathsClient(AzureKeyCredential credential, Uri endpoint, AutoRestUrlTestServiceClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AutoRestUrlTestServiceClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
@@ -81,15 +77,6 @@ namespace url_LowLevel
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetBooleanTrue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
@@ -108,15 +95,6 @@ namespace url_LowLevel
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
@@ -135,15 +113,6 @@ namespace url_LowLevel
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetBooleanFalse(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
@@ -162,15 +131,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
@@ -189,15 +149,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetIntOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
@@ -216,15 +167,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
@@ -243,15 +185,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
@@ -270,15 +203,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
@@ -297,15 +221,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
@@ -324,15 +239,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
@@ -351,15 +257,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
@@ -378,15 +275,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
@@ -405,15 +293,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response FloatScientificPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
@@ -432,15 +311,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
@@ -459,15 +329,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response FloatScientificNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
@@ -486,15 +347,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
@@ -513,15 +365,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
@@ -540,15 +383,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
@@ -567,15 +401,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
@@ -594,15 +419,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
@@ -621,15 +437,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response StringUnicode(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
@@ -648,15 +455,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
@@ -675,15 +473,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response StringUrlEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
@@ -702,15 +491,6 @@ namespace url_LowLevel
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
@@ -729,15 +509,6 @@ namespace url_LowLevel
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
@@ -756,15 +527,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
@@ -783,15 +545,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response StringEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
@@ -813,15 +566,6 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
@@ -845,15 +589,6 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response StringNull(string stringPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
@@ -877,15 +612,6 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -909,15 +635,6 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -941,15 +658,6 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -973,15 +681,6 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -1004,15 +703,6 @@ namespace url_LowLevel
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1035,15 +725,6 @@ namespace url_LowLevel
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1064,15 +745,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
@@ -1091,15 +763,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response ByteEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
@@ -1120,15 +783,6 @@ namespace url_LowLevel
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1151,15 +805,6 @@ namespace url_LowLevel
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1180,15 +825,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
@@ -1207,15 +843,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response DateValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
@@ -1235,15 +862,6 @@ namespace url_LowLevel
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
@@ -1263,15 +881,6 @@ namespace url_LowLevel
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response DateNull(DateTimeOffset datePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
@@ -1290,15 +899,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
@@ -1317,15 +917,6 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response DateTimeValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
@@ -1345,15 +936,6 @@ namespace url_LowLevel
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
@@ -1373,15 +955,6 @@ namespace url_LowLevel
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
@@ -1402,15 +975,6 @@ namespace url_LowLevel
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
@@ -1433,15 +997,6 @@ namespace url_LowLevel
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
@@ -1464,15 +1019,6 @@ namespace url_LowLevel
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
@@ -1495,15 +1041,6 @@ namespace url_LowLevel
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
@@ -1525,15 +1062,6 @@ namespace url_LowLevel
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
@@ -1553,15 +1081,6 @@ namespace url_LowLevel
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
@@ -1580,434 +1099,385 @@ namespace url_LowLevel
 
         internal HttpMessage CreateGetBooleanTrueRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/bool/true/", false);
             uri.AppendPath(true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetBooleanFalseRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/bool/false/", false);
             uri.AppendPath(false, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetIntOneMillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/int/1000000/", false);
             uri.AppendPath(1000000, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetIntNegativeOneMillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/int/-1000000/", false);
             uri.AppendPath(-1000000, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetTenBillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/long/10000000000/", false);
             uri.AppendPath(10000000000L, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetNegativeTenBillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/long/-10000000000/", false);
             uri.AppendPath(-10000000000L, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateFloatScientificPositiveRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/float/1.034E+20/", false);
             uri.AppendPath(1.034E+20F, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateFloatScientificNegativeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/float/-1.034E-20/", false);
             uri.AppendPath(-1.034E-20F, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateDoubleDecimalPositiveRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/double/9999999.999/", false);
             uri.AppendPath(9999999.999, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateDoubleDecimalNegativeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/double/-9999999.999/", false);
             uri.AppendPath(-9999999.999, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateStringUnicodeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/unicode/", false);
             uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateStringUrlEncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
             uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateStringUrlNonEncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
             uri.AppendPath("begin!*'();:@&=+$,end", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateStringEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/empty/", false);
             uri.AppendPath("", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateStringNullRequest(string stringPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier400);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/null/", false);
             uri.AppendPath(stringPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier400.Instance;
             return message;
         }
 
         internal HttpMessage CreateEnumValidRequest(string enumPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/enum/green%20color/", false);
             uri.AppendPath(enumPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateEnumNullRequest(string enumPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier400);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/null/", false);
             uri.AppendPath(enumPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier400.Instance;
             return message;
         }
 
         internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/multibyte/", false);
             uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateByteEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/empty/", false);
             uri.AppendPath(new byte[] { }, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateByteNullRequest(byte[] bytePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier400);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/null/", false);
             uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier400.Instance;
             return message;
         }
 
         internal HttpMessage CreateDateValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/date/2012-01-01/", false);
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier400);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/date/null/", false);
             uri.AppendPath(datePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier400.Instance;
             return message;
         }
 
         internal HttpMessage CreateDateTimeValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier400);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/datetime/null/", false);
             uri.AppendPath(dateTimePath, "O", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier400.Instance;
             return message;
         }
 
         internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/string/bG9yZW0/", false);
             uri.AppendPath(base64UrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
             uri.AppendPath(arrayPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/int/1460505600/", false);
             uri.AppendPath(unixTimeUrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier400 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier400();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    400 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier400;
+        private static ResponseClassifier ResponseClassifier400 => _responseClassifier400 ??= new StatusCodeClassifier(stackalloc ushort[] { 400 });
     }
 }

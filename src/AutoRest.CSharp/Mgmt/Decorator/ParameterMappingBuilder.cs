@@ -205,6 +205,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
                 throw new System.InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
             }
+            // TODO: The deserialize type value logic is existing in multiple writers, similar but slightly different,
+            //       should be abstracted into one place in future refactoring.
+            if (type.FrameworkType == typeof(Azure.ETag) ||
+                type.FrameworkType == typeof(Uri) ||
+                type.FrameworkType == typeof(Azure.Core.ResourceIdentifier) ||
+                type.FrameworkType == typeof(Azure.Core.ResourceType) ||
+                type.FrameworkType == typeof(Azure.Core.AzureLocation))
+            {
+                return $"new {type.FrameworkType}({rawExpression})";
+            }
+
             return $"{type.FrameworkType}.Parse({rawExpression})";
         }
 
@@ -334,7 +345,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if we match one parameter, we need to remove the matching ContextualParameterMapping from the list to avoid multiple matching
             if (result != null)
                 contextualParameterMappings.Remove(result);
-            if (result is null && pathParameter.IsEnumType)
+            if (result is null && pathParameter.Type.IsEnum)
             {
                 var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type));
                 if (requestSegment.Any())

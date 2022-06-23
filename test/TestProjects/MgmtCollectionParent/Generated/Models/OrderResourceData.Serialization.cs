@@ -20,7 +20,7 @@ namespace MgmtCollectionParent
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<IReadOnlyList<string>> orderItemIds = default;
             Optional<StageDetails> currentStage = default;
             Optional<IReadOnlyList<StageDetails>> orderStageHistory = default;
@@ -38,11 +38,16 @@ namespace MgmtCollectionParent
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -99,7 +104,7 @@ namespace MgmtCollectionParent
                     continue;
                 }
             }
-            return new OrderResourceData(id, name, type, systemData, Optional.ToList(orderItemIds), currentStage.Value, Optional.ToList(orderStageHistory));
+            return new OrderResourceData(id, name, type, systemData.Value, Optional.ToList(orderItemIds), currentStage.Value, Optional.ToList(orderStageHistory));
         }
     }
 }

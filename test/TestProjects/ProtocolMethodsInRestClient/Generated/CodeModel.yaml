@@ -31,7 +31,7 @@ schemas: !Schemas
           name: ResourceId
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -118,13 +118,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Create
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_8
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -178,6 +179,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_8
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -199,13 +202,14 @@ operationGroups:
             description: Create or update resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Delete
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_9
-            schema: *ref_8
+          - !Parameter &ref_10
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -228,7 +232,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_9
+          - *ref_10
         responses:
           - !Response 
             language: !Languages 
@@ -245,13 +249,14 @@ operationGroups:
             description: Delete resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_10
-            schema: *ref_8
+          - !Parameter &ref_11
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -289,7 +294,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_10
+          - *ref_11
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -314,12 +319,628 @@ operationGroups:
         name: ''
         description: ''
     protocol: !Protocols {}
+  - !OperationGroup 
+    $key: firstTemplate
+    operations:
+      - !Operation 
+        operationId: firstTemplate_Create
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+        requestMediaTypes:
+          application/json: !Request &ref_13
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_12
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: resource
+                    description: Information about the resource
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_12
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /firstTemplate/resources
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_13
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Create
+            description: Create or update resource.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: firstTemplate_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_14
+            schema: *ref_9
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceId
+                description: The id of the resource.
+                serializedName: resourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /firstTemplate/resources/{resourceId}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_14
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete resource.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: firstTemplate_Get
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_15
+            schema: *ref_9
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceId
+                description: The id of the resource.
+                serializedName: resourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /firstTemplate/resources/{resourceId}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_15
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about the resource.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: FirstTemplate
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: secondTemplate
+    operations:
+      - !Operation 
+        operationId: secondTemplate_Create
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+        requestMediaTypes:
+          application/json: !Request &ref_17
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_16
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: resource
+                    description: Information about the resource
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_16
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /secondTemplate/resources
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_17
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Create
+            description: Create or update resource.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: secondTemplate_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_18
+            schema: *ref_9
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceId
+                description: The id of the resource.
+                serializedName: resourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /secondTemplate/resources/{resourceId}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_18
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete resource.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: secondTemplate_Get
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_19
+            schema: *ref_9
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceId
+                description: The id of the resource.
+                serializedName: resourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /secondTemplate/resources/{resourceId}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_19
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about the resource.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SecondTemplate
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: thirdTemplate
+    operations:
+      - !Operation 
+        operationId: thirdTemplate_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_20
+            schema: *ref_9
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceId
+                description: The id of the resource.
+                serializedName: resourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /thirdTemplate/resources/{resourceId}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_20
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete resource.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: thirdTemplate_Get
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_21
+            schema: *ref_9
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceId
+                description: The id of the resource.
+                serializedName: resourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /thirdTemplate/resources/{resourceId}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_21
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about the resource.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: thirdTemplate_Create
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+        requestMediaTypes:
+          application/json: !Request &ref_23
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_22
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: resource
+                    description: Information about the resource
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_22
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /thirdTemplate/resources
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_23
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Create
+            description: Create or update resource.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ThirdTemplate
+        description: ''
+    protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: TestService

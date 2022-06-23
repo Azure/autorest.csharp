@@ -15,7 +15,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -27,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class TypeReferenceTypeChooser
     {
         internal const string TyepReferenceTypeAttribute = "TypeReferenceType";
-        private const string TypeReferenceTypeAttributeType = "TypeReferenceTypeAttribute";
+        internal const string TypeReferenceTypeAttributeType = "TypeReferenceTypeAttribute";
 
         private static IReadOnlyList<System.Type>? _typeReferenceTypes;
         private static IReadOnlyList<System.Type> TypeReferenceTypes => _typeReferenceTypes ??= GetTypeReferenceTypes();

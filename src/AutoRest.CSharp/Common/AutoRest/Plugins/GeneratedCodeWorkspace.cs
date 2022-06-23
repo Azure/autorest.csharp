@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -149,7 +148,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             references.Add(MetadataReference.CreateFromFile(corlibLocation));
 
-            var trustedAssemblies = ((string?) AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
+            var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
             foreach (var tpl in trustedAssemblies)
             {
                 references.Add(MetadataReference.CreateFromFile(tpl));
@@ -169,6 +168,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return compilation;
         }
 
+        public static bool IsCustomDocument(Document document) => !IsGeneratedDocument(document) && !IsSharedDocument(document);
+        public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
+
+        /// <summary>
+        /// This method delegates the caller to do something on the generated code project
+        /// </summary>
+        /// <param name="processor"></param>
+        /// <returns></returns>
+        public async Task PostProcess(Func<Project, Task<Project>> processor)
+        {
+            _project = await processor(_project);
+        }
     }
 }

@@ -2,20 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Output.Models.Requests;
-using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -25,7 +20,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
         public MgmtExtensionWriter(MgmtExtensions extensions)
-            : base(new CodeWriter(), extensions)
+            : this(new CodeWriter(), extensions)
+        {
+            This = extensions;
+        }
+
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions) : base(writer, extensions)
         {
             This = extensions;
         }
@@ -94,25 +94,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected override void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        {
+            if (IsArmCore)
+            {
+                base.WriteResourceEntry(resourceCollection, isAsync);
+            }
+            else
+            {
+                var operation = resourceCollection.GetOperation;
+                string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
+                string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
+                _writer.Append($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}(");
+
+                foreach (var parameter in operation.MethodSignature.Parameters)
+                {
+                    _writer.Append($"{parameter.Name},");
+                }
+
+                _writer.RemoveTrailingComma();
+                _writer.Line($"){configureAwait};");
+            }
+        }
+
+        protected override MethodSignatureModifiers GetMethodModifiers() => IsArmCore ? base.GetMethodModifiers() : Public | Static | Extension;
+
+        protected override Parameter[] GetParametersForSingletonEntry() => IsArmCore ? base.GetParametersForSingletonEntry() : new[] { This.ExtensionParameter };
+
         protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
-        {
-            if (IsArmCore)
-                return base.GetParametersForCollectionEntry(resourceCollection);
-
-            List<Parameter> parameters = new List<Parameter>();
-            parameters.Add(This.ExtensionParameter);
-            parameters.AddRange(resourceCollection.ExtraConstructorParameters);
-            return parameters.ToArray();
-        }
-
-        protected override Parameter[] GetParametersForSingletonEntry()
-        {
-            if (IsArmCore)
-                return base.GetParametersForSingletonEntry();
-
-            List<Parameter> parameters = new List<Parameter>();
-            parameters.Add(This.ExtensionParameter);
-            return parameters.ToArray();
-        }
+            => IsArmCore ? base.GetParametersForCollectionEntry(resourceCollection) : resourceCollection.ExtraConstructorParameters.Prepend(This.ExtensionParameter).ToArray();
     }
 }

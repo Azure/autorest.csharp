@@ -21,6 +21,7 @@ namespace model_flattening
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AutoRestResourceFlatteningTestServiceRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AutoRestResourceFlatteningTestServiceClient for mocking. </summary>
         protected AutoRestResourceFlatteningTestServiceClient()
@@ -31,6 +32,7 @@ namespace model_flattening
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new AutoRestResourceFlatteningTestServiceRestClient(clientDiagnostics, pipeline, endpoint);

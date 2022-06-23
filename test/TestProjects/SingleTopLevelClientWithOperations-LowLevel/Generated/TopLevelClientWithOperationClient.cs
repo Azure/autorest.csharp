@@ -22,9 +22,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -39,19 +37,26 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public TopLevelClientWithOperationClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new TopLevelClientWithOperationClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint = null, TopLevelClientWithOperationClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint, TopLevelClientWithOperationClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new TopLevelClientWithOperationClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -96,7 +101,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            return GetAllImplementationAsync("TopLevelClientWithOperationClient.GetAll", filter, context);
+        }
+
+        private AsyncPageable<BinaryData> GetAllImplementationAsync(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -119,7 +129,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            return GetAllImplementation("TopLevelClientWithOperationClient.GetAll", filter, context);
+        }
+
+        private Pageable<BinaryData> GetAllImplementation(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -140,13 +155,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Initializes a new instance of Client1. </summary>
         public virtual Client1 GetClient1Client()
         {
-            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _keyCredential, Endpoint), null) ?? _cachedClient1;
+            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient1;
         }
 
         /// <summary> Initializes a new instance of Client2. </summary>
         public virtual Client2 GetClient2Client()
         {
-            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _keyCredential, Endpoint), null) ?? _cachedClient2;
+            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
@@ -156,64 +171,50 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
-            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, clientParameter, Endpoint);
+            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, clientParameter, _endpoint);
         }
 
         internal HttpMessage CreateOperationRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/client3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetAllRequest(string filter, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/client4", false);
             uri.AppendQuery("filter", filter, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string filter, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

@@ -18,9 +18,7 @@ namespace body_file
     internal partial class FilesRestClient
     {
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,11 +27,12 @@ namespace body_file
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public FilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateGetFileRequest()
@@ -43,7 +42,7 @@ namespace body_file
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/stream/nonempty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
@@ -93,7 +92,7 @@ namespace body_file
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/stream/verylarge", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
@@ -143,7 +142,7 @@ namespace body_file
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/stream/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");

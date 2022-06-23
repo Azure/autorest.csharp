@@ -12,7 +12,7 @@ using SubscriptionExtensions;
 
 namespace SubscriptionExtensions.Models
 {
-    public partial class ToasterListResult
+    internal partial class ToasterListResult
     {
         internal static ToasterListResult DeserializeToasterListResult(JsonElement element)
         {

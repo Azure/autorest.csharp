@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         protected const string UriProperty = "Endpoint";
         protected const string UriVariable = "endpoint";
         protected const string PipelineField = "_" + PipelineVariable;
-        protected const string DiagnosticOptionsProperty = "DiagnosticOptions";
+        protected const string DiagnosticsProperty = "Diagnostics";
 
         protected virtual string RestClientAccessibility => "internal";
         protected virtual string UriPropertyAccessibility => "public";

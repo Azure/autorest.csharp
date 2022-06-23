@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Linq;
 using System.Reflection;
+using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -11,19 +13,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public SingletonResourceTests() : base("SingletonResource") { }
 
-        [TestCase("Car", true)]
-        [TestCase("Ignition", true)]
+        [TestCase("CarResource", true)]
+        [TestCase("IgnitionResource", true)]
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
-        [TestCase("SingletonResource2", false)]
+        [TestCase("SingletonResource2Resource", false)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
             Assert.AreEqual(isExists, resourceTypeExists);
         }
 
-        [TestCase("Ignition", "Get", true)]
-        [TestCase("Ignition", "GetAsync", true)]
+        [TestCase("IgnitionResource", "Get", true)]
+        [TestCase("IgnitionResource", "GetAsync", true)]
         [TestCase("SingletonResource", "Get", true)]
         [TestCase("SingletonResource", "GetAsync", true)]
         [TestCase("SingletonResource", "Delete", false)]
@@ -37,6 +39,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ParentResourceCollection", true)]
+        [TestCase("ParentCollection", false)]
         [TestCase("SingletonResourceCollection", false)]
         [TestCase("SingletonResource2Collection", false)]
         public void ValidateCollections(string collection, bool isExists)
@@ -46,21 +49,27 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ParentResource", "GetSingletonResource", true)]
+        [TestCase("ParentResource", "GetSingleton", false)]
         [TestCase("ParentResource", "GetSingletonResources", false)]
-        [TestCase("Car", "GetIgnition", true)]
-        [TestCase("Car", "GetIgnitions", false)]
-        [TestCase("ResourceGroupExtensions", "GetCars", true)]
-        [TestCase("ResourceGroupExtensions", "GetCar", false)]
-        [TestCase("ResourceGroupExtensions", "GetParentResources", true)]
-        [TestCase("ResourceGroupExtensions", "GetParentResource", false)]
-        public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
+        [TestCase("CarResource", "GetIgnition", true)]
+        [TestCase("CarResource", "GetIgnitions", false)]
+        [TestCase("SingletonResourceExtensions", "GetCars", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetCars", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetCar", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetCar", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResources", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResources", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResource", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResource", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResourc", false)]
+        public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool exist, params Type[] parameterTypes)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())
-                .Append(FindResourceGroupExtensions()).Append(FindSubscriptionExtensions());
+                .Append(FindExtensionClass());
             var type = possibleTypesToFind.FirstOrDefault(r => r.Name == parent);
             Assert.IsNotNull(type, $"Cannot find parent {parent}");
-            var method = type.GetMethod(methodName);
-            Assert.AreEqual(isExist, method != null);
+            var method = type.GetMethods().Where(m => m.Name == methodName).Where(m => ParameterMatch(m.GetParameters(), parameterTypes));
+            Assert.AreEqual(exist, method.Any());
         }
     }
 }

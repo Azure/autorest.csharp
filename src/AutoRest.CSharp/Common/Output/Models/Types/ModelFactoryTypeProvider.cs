@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -42,64 +43,27 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static MethodSignature CreateMethod(SchemaObjectType modelType)
         {
             var ctor = modelType.SerializationConstructor.Signature;
-            var methodParameters = new Parameter[ctor.Parameters.Length];
+            var methodParameters = new Parameter[ctor.Parameters.Count];
 
-            for (var i = 0; i < ctor.Parameters.Length; i++)
+            for (var i = 0; i < ctor.Parameters.Count; i++)
             {
                 var ctorParameter = ctor.Parameters[i];
                 var inputType = TypeFactory.GetInputType(ctorParameter.Type);
-                var implementationType = ctorParameter.DefaultValue?.Type ?? TypeFactory.GetImplementationType(inputType);
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);
                 }
 
-                var defaultValue = GetDefaultValue(inputType, implementationType, ctorParameter.DefaultValue);
-
-                var methodParameter = new Parameter(
-                    ctorParameter.Name,
-                    ctorParameter.Description,
-                    inputType,
-                    defaultValue,
-                    ctorParameter.Validate,
-                    IsApiVersionParameter: ctorParameter.IsApiVersionParameter
-                );
-
-                methodParameters[i] = methodParameter;
+                methodParameters[i] = ctorParameter with
+                {
+                    Type = inputType,
+                    DefaultValue = Constant.Default(inputType),
+                    Initializer = Parameter.GetParameterInitializer(inputType, ctorParameter.DefaultValue)
+                };
             }
 
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
-            return new MethodSignature(ctor.Name, ctor.Description, "public static", modelType.Type, returnDescription, methodParameters);
-
-            static Constant GetDefaultValue(CSharpType inputType, CSharpType implementationType, Constant? defaultValue)
-            {
-                // Special case for strings
-                if (inputType.Equals(typeof(string)))
-                {
-                    return Constant.Default(inputType.WithNullable(true));
-                }
-
-                // Use default value if it is provided
-                if (defaultValue != null)
-                {
-                    return defaultValue.Value;
-                }
-
-                // Non-null value types must be instantiated
-                if (inputType.IsValueType && !inputType.IsNullable)
-                {
-                    return Constant.NewInstanceOf(implementationType);
-                }
-
-                // Collections must be instantiated
-                if (TypeFactory.IsCollectionType(inputType))
-                {
-                    return Constant.NewInstanceOf(implementationType.WithNullable(false));
-                }
-
-                // Return typed null for everything else
-                return Constant.Default(implementationType.WithNullable(true));
-            }
+            return new MethodSignature(ctor.Name, ctor.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
         }
 
         private static bool RequiresModelFactory(SchemaObjectType model)
@@ -129,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return model.Constructors
-                .Where(c => c.Signature.Modifiers == "public")
+                .Where(c => c.Signature.Modifiers.HasFlag(Public))
                 .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }

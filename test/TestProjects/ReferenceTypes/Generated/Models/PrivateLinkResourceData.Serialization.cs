@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Fake.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            ResourceManager.Models.SystemData systemData = default;
+            Optional<ResourceManager.Models.SystemData> systemData = default;
             Optional<string> groupId = default;
             Optional<IReadOnlyList<string>> requiredMembers = default;
             Optional<IReadOnlyList<string>> requiredZoneNames = default;
@@ -49,11 +49,16 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<ResourceManager.Models.SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -105,7 +110,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new PrivateLinkResourceData(id, name, type, systemData, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+            return new PrivateLinkResourceData(id, name, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
 
         internal partial class PrivateLinkResourceDataConverter : JsonConverter<PrivateLinkResourceData>

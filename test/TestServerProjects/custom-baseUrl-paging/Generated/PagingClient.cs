@@ -21,6 +21,7 @@ namespace custom_baseUrl_paging
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PagingRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
@@ -31,6 +32,7 @@ namespace custom_baseUrl_paging
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             RestClient = new PagingRestClient(clientDiagnostics, pipeline, host);

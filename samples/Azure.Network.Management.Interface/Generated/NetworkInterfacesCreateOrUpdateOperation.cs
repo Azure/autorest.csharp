@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Creates or updates a network interface. </summary>
     public partial class NetworkInterfacesCreateOrUpdateOperation : Operation<NetworkInterface>, IOperationSource<NetworkInterface>
     {
-        private readonly OperationInternals<NetworkInterface> _operation;
+        private readonly OperationInternal<NetworkInterface> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfacesCreateOrUpdateOperation for mocking. </summary>
         protected NetworkInterfacesCreateOrUpdateOperation()
@@ -28,11 +28,14 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfacesCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<NetworkInterface>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfacesCreateOrUpdateOperation");
+            IOperation<NetworkInterface> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.AzureAsyncOperation);
+            _operation = new OperationInternal<NetworkInterface>(clientDiagnostics, nextLinkOperation, response, "NetworkInterfacesCreateOrUpdateOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override NetworkInterface Value => _operation.Value;
@@ -44,13 +47,19 @@ namespace Azure.Network.Management.Interface
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
 
         /// <inheritdoc />
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
+
+        /// <inheritdoc />
+        public override Response<NetworkInterface> WaitForCompletion(CancellationToken cancellationToken = default) => _operation.WaitForCompletion(cancellationToken);
+
+        /// <inheritdoc />
+        public override Response<NetworkInterface> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletion(pollingInterval, cancellationToken);
 
         /// <inheritdoc />
         public override ValueTask<Response<NetworkInterface>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);

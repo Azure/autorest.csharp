@@ -25,11 +25,19 @@ request-path-to-parent:
   /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
 
 operation-positions:
-  /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts: collection
-  /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability: collection
+  DeletedAccounts_List: collection
+  StorageAccounts_CheckNameAvailability: collection
 
 override-operation-name:
   DeletedAccounts_List: GetAll
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
 
 directive:
   - rename-model:

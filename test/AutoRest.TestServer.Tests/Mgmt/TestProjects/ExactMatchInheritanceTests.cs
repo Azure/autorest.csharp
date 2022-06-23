@@ -2,6 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance;
@@ -44,5 +47,51 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
+
+        [TestCase("Id", "ExactMatchModel3", typeof(ResourceIdentifier))]
+        [TestCase("Id", "ExactMatchModel8", typeof(ResourceIdentifier))]
+        [TestCase("ResourceType", "ExactMatchModel11", typeof(ResourceType?))]
+        [TestCase("ID", "ExactMatchModel7", typeof(string))]
+        [TestCase("ExactMatchModel7Type", "ExactMatchModel7", typeof(string))]
+        [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
+        [TestCase("ResourceType", "ExactMatchModel1Data", typeof(ResourceType))]
+        [TestCase("SupportingUris", "ExactMatchModel1Data", typeof(IList<Uri>))]
+        [TestCase("Type1", "ExactMatchModel1Data", typeof(ResourceType?))]
+        [TestCase("Type2", "ExactMatchModel1Data", typeof(string))]
+        public void ValidatePropertyType(string propertyName, string className, Type expectedType)
+        {
+            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
+            Assert.NotNull(type, $"Type {className} should exist");
+            var property = type.GetProperty(propertyName);
+            Assert.AreEqual(property.PropertyType, expectedType);
+        }
+
+        [TestCase(true, "ResourceType", "ExactMatchModel1Data")]
+        [TestCase(false, "Type", "ExactMatchModel1Data")]
+        [TestCase(true, "ResourceType", "ExactMatchModel5Data")]
+        [TestCase(false, "Type", "ExactMatchModel5Data")]
+        [TestCase(false, "ExactMatchModel11Type", "ExactMatchModel5Data")]
+        [TestCase(true, "ExactMatchModel7Type", "ExactMatchModel2")]
+        [TestCase(false, "ResourceType", "ExactMatchModel2")]
+        [TestCase(false, "Type", "ExactMatchModel2")]
+        [TestCase(true, "ExactMatchModel9Type", "ExactMatchModel4")]
+        [TestCase(false, "ResourceType", "ExactMatchModel4")]
+        [TestCase(false, "Type", "ExactMatchModel4")]
+        [TestCase(true, "ExactMatchModel9Type", "ExactMatchModel9")]
+        [TestCase(false, "ResourceType", "ExactMatchModel9")]
+        [TestCase(false, "Type", "ExactMatchModel9")]
+        public void ValidatePropertyName(bool exist, string propertyName, string className)
+        {
+            var type = FindTypeByName(className);
+            Assert.NotNull(type, $"Type {className} should exist");
+            var property = type.GetProperty(propertyName);
+            Assert.AreEqual(exist, property != null, $"Property {propertyName} should {(exist ? string.Empty : "not")} exist");
+        }
+
+        private Type? FindTypeByName(string name)
+        {
+            var allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            return allTypes.FirstOrDefault(t => t.Name == name);
+        }
     }
 }

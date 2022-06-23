@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -18,14 +19,17 @@ namespace MgmtParamOrdering
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -67,10 +71,10 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("storageAccount");
                 writer.WriteStringValue(StorageAccount);
             }
-            if (Optional.IsDefined(DiscoveryUrl))
+            if (Optional.IsDefined(DiscoveryUri))
             {
                 writer.WritePropertyName("discoveryUrl");
-                writer.WriteStringValue(DiscoveryUrl);
+                writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
             if (Optional.IsDefined(HbiWorkspace))
             {
@@ -98,12 +102,12 @@ namespace MgmtParamOrdering
 
         internal static WorkspaceData DeserializeWorkspaceData(JsonElement element)
         {
-            IDictionary<string, string> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<string> workspaceId = default;
             Optional<string> description = default;
             Optional<string> friendlyName = default;
@@ -111,7 +115,7 @@ namespace MgmtParamOrdering
             Optional<string> applicationInsights = default;
             Optional<string> containerRegistry = default;
             Optional<string> storageAccount = default;
-            Optional<string> discoveryUrl = default;
+            Optional<Uri> discoveryUrl = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<bool> hbiWorkspace = default;
             Optional<string> serviceProvisionedResourceGroup = default;
@@ -119,11 +123,16 @@ namespace MgmtParamOrdering
             Optional<string> imageBuildCompute = default;
             Optional<bool> allowPublicAccessWhenBehindVnet = default;
             Optional<string> primaryUserAssignedIdentity = default;
-            Optional<string> tenantId = default;
+            Optional<Guid> tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -134,7 +143,7 @@ namespace MgmtParamOrdering
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -149,11 +158,16 @@ namespace MgmtParamOrdering
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -208,7 +222,12 @@ namespace MgmtParamOrdering
                         }
                         if (property0.NameEquals("discoveryUrl"))
                         {
-                            discoveryUrl = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                discoveryUrl = null;
+                                continue;
+                            }
+                            discoveryUrl = new Uri(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -268,14 +287,19 @@ namespace MgmtParamOrdering
                         }
                         if (property0.NameEquals("tenantId"))
                         {
-                            tenantId = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            tenantId = property0.Value.GetGuid();
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new WorkspaceData(id, name, type, systemData, tags, location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, tenantId.Value);
+            return new WorkspaceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, Optional.ToNullable(tenantId));
         }
     }
 }

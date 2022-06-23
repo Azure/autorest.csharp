@@ -1,10 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -14,7 +18,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
+            Debug.Assert(codeModel.TestModel is not null);
+
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+
+            // force trigger the model initialization
+            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            {
+            }
+
             var extensionsWriter = new CodeWriter();
 
             bool hasCollectionTest = false;
@@ -43,6 +55,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());
             }
+
+            var subscriptionExtensionsCodeWriter = new CodeWriter();
+            new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter).Write();
+            project.AddGeneratedFile($"Mock/{MgmtContext.Library.ExtensionWrapper.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
         }
     }
 }

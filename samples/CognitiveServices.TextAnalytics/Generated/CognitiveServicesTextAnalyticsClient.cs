@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using CognitiveServices.TextAnalytics.Models;
 
@@ -20,6 +21,7 @@ namespace CognitiveServices.TextAnalytics
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal CognitiveServicesTextAnalyticsRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsClient for mocking. </summary>
         protected CognitiveServicesTextAnalyticsClient()
@@ -27,9 +29,31 @@ namespace CognitiveServices.TextAnalytics
         }
 
         /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsClient. </summary>
+        /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        public CognitiveServicesTextAnalyticsClient(string endpoint, AzureKeyCredential credential, CognitiveServicesTextAnalyticsClientOptions options = null)
+        {
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+
+            options ??= new CognitiveServicesTextAnalyticsClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Ocp-Apim-Subscription-Key"));
+            RestClient = new CognitiveServicesTextAnalyticsRestClient(_clientDiagnostics, _pipeline, endpoint);
+        }
+
+        /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
         internal CognitiveServicesTextAnalyticsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
             RestClient = new CognitiveServicesTextAnalyticsRestClient(clientDiagnostics, pipeline, endpoint);

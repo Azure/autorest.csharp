@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -43,12 +44,20 @@ namespace MgmtExtensionResource
             if (Optional.IsDefined(PolicyRule))
             {
                 writer.WritePropertyName("policyRule");
-                writer.WriteObjectValue(PolicyRule);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(PolicyRule);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(PolicyRule.ToString()).RootElement);
+#endif
             }
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata");
-                writer.WriteObjectValue(Metadata);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Metadata);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Metadata.ToString()).RootElement);
+#endif
             }
             if (Optional.IsCollectionDefined(Parameters))
             {
@@ -70,13 +79,13 @@ namespace MgmtExtensionResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<PolicyType> policyType = default;
             Optional<string> mode = default;
             Optional<string> displayName = default;
             Optional<string> description = default;
-            Optional<object> policyRule = default;
-            Optional<object> metadata = default;
+            Optional<BinaryData> policyRule = default;
+            Optional<BinaryData> metadata = default;
             Optional<IDictionary<string, ParameterDefinitionsValue>> parameters = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -92,11 +101,16 @@ namespace MgmtExtensionResource
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -141,7 +155,7 @@ namespace MgmtExtensionResource
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            policyRule = property0.Value.GetObject();
+                            policyRule = BinaryData.FromString(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("metadata"))
@@ -151,7 +165,7 @@ namespace MgmtExtensionResource
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            metadata = property0.Value.GetObject();
+                            metadata = BinaryData.FromString(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("parameters"))
@@ -173,7 +187,7 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new PolicyDefinitionData(id, name, type, systemData, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
+            return new PolicyDefinitionData(id, name, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
         }
     }
 }

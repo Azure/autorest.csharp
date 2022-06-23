@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -31,28 +32,31 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<FieldDeclaration> CredentialFields { get; }
 
-        public ClientFields(IEnumerable<Parameter> parameters, BuildContext? context = null)
+        public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, BuildContext context) => new(parameters, context);
+
+        public static ClientFields CreateForRestClient(IEnumerable<Parameter> parameters) => new(parameters, null);
+
+        private ClientFields(IEnumerable<Parameter> parameters, BuildContext? context)
         {
             ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
-            var parameterNamesToFields = new Dictionary<string, FieldDeclaration>
-            {
-                [KnownParameters.Pipeline.Name] = PipelineField,
-                [KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty
-            };
-
+            var parameterNamesToFields = new Dictionary<string, FieldDeclaration>();
             var fields = new List<FieldDeclaration>();
             var credentialFields = new List<FieldDeclaration>();
             var properties = new List<FieldDeclaration>();
+
             if (context != null)
             {
+                parameterNamesToFields[KnownParameters.Pipeline.Name] = PipelineField;
+                parameterNamesToFields[KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty;
+
                 foreach (var scheme in context.CodeModel.Security.Schemes)
                 {
                     switch (scheme)
                     {
-                        case AzureKeySecurityScheme azureKeySecurityScheme:
-                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
+                        case KeySecurityScheme keySecurityScheme:
+                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{keySecurityScheme.Name:L}");
                             _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                             fields.Add(AuthorizationHeaderConstant);
@@ -60,8 +64,8 @@ namespace AutoRest.CSharp.Output.Models
                             credentialFields.Add(_keyAuthField);
                             parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
                             break;
-                        case AADTokenSecurityScheme aadTokenSecurityScheme:
-                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
+                        case OAuth2SecurityScheme oAuth2SecurityScheme:
+                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {oAuth2SecurityScheme.Scopes.GetLiteralsFormattable()} }}");
                             _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                             fields.Add(ScopesConstant);
@@ -71,15 +75,15 @@ namespace AutoRest.CSharp.Output.Models
                             break;
                     }
                 }
-            }
 
-            fields.Add(PipelineField);
+                fields.Add(PipelineField);
+            }
 
             foreach (Parameter parameter in parameters)
             {
-                var field = parameter.IsResourceIdentifier || (context != null && context.BaseLibrary is LowLevelOutputLibrary && parameter.Name == "endpoint")
-                    ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
-                    : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
+                var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
+                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
+                        : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
 
                 if (field.WriteAsProperty)
                 {
@@ -93,7 +97,11 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             fields.AddRange(properties);
-            fields.Add(ClientDiagnosticsProperty);
+            if (context != null)
+            {
+                fields.Add(ClientDiagnosticsProperty);
+            }
+
             _fields = fields;
             _parameterNamesToFields = parameterNamesToFields;
             CredentialFields = credentialFields;

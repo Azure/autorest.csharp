@@ -23,10 +23,10 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(ResourceType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
+                writer.WriteStringValue(ResourceType);
             }
             writer.WriteEndObject();
         }
@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Fake.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type = (ResourceType)property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
             }

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -26,32 +27,13 @@ namespace MgmtScopeResource
 
         internal static ResourceLinkData DeserializeResourceLinkData(JsonElement element)
         {
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<object> type = default;
             Optional<ResourceLinkProperties> properties = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    type = property.Value.GetObject();
-                    continue;
-                }
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -62,8 +44,33 @@ namespace MgmtScopeResource
                     properties = ResourceLinkProperties.DeserializeResourceLinkProperties(property.Value);
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = new ResourceIdentifier(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = new ResourceType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new ResourceLinkData(id.Value, name.Value, type.Value, properties.Value);
+            return new ResourceLinkData(id, name, type, systemData.Value, properties.Value);
         }
     }
 }

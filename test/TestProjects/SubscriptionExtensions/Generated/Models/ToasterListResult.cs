@@ -12,7 +12,7 @@ using SubscriptionExtensions;
 namespace SubscriptionExtensions.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class ToasterListResult
+    internal partial class ToasterListResult
     {
         /// <summary> Initializes a new instance of ToasterListResult. </summary>
         internal ToasterListResult()

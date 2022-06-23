@@ -4,6 +4,8 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using MgmtScopeResource;
 using System;
+using MgmtScopeResource.Models;
+using Azure.ResourceManager;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -13,47 +15,53 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(ResourceLinkCollection) };
 
-        [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
-        [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
-        [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", false)]
-        [TestCase("ArmResourceExtensions", "GetPolicyAssignments", true)]
-        [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
-        [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
-        [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]
-        [TestCase("ArmResourceExtensions", "GetDeploymentExtendeds", false)]
-        [TestCase("PolicyAssignmentCollection", "CreateOrUpdate", true)]
-        [TestCase("PolicyAssignmentCollection", "Get", true)]
-        [TestCase("PolicyAssignmentCollection", "GetAll", true)]
-        [TestCase("PolicyAssignmentCollection", "GetForResourceGroup", false)]
-        [TestCase("PolicyAssignmentCollection", "GetForResource", false)]
-        [TestCase("PolicyAssignmentCollection", "GetForManagementGroup", false)]
-        [TestCase("PolicyAssignmentCollection", "GetAllAsGenericResources", false)]
-        [TestCase("PolicyAssignment", "Get", true)]
-        [TestCase("PolicyAssignment", "Delete", true)]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.TenantResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.SubscriptionResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.ResourceGroupResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.ManagementGroups.ManagementGroupResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", true, typeof(ArmResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.TenantResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.SubscriptionResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.ResourceGroupResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.ManagementGroups.ManagementGroupResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", false, typeof(ArmResource))]
+        [TestCase("FakePolicyAssignmentCollection", "CreateOrUpdate", true)]
+        [TestCase("FakePolicyAssignmentCollection", "Get", true)]
+        [TestCase("FakePolicyAssignmentCollection", "GetAll", true)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForResourceGroup", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForResource", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForManagementGroup", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetAllAsGenericResources", false)]
+        [TestCase("FakePolicyAssignmentResource", "Get", true)]
+        [TestCase("FakePolicyAssignmentResource", "Delete", true)]
         [TestCase("DeploymentExtendedCollection", "CreateOrUpdate", true)]
         [TestCase("DeploymentExtendedCollection", "Get", true)]
         [TestCase("DeploymentExtendedCollection", "GetAll", true)]
         [TestCase("DeploymentExtendedCollection", "GetAllAsGenericResources", false)]
-        [TestCase("DeploymentExtended", "WhatIf", true)]
-        [TestCase("DeploymentExtended", "WhatIfAtTenantScope", false)]
-        [TestCase("DeploymentExtended", "WhatIfAtSubscriptionScope", false)]
-        [TestCase("DeploymentExtended", "WhatIfAtManagementGroupScope", false)]
+        [TestCase("DeploymentExtendedResource", "WhatIf", true)]
+        [TestCase("DeploymentExtendedResource", "WhatIfAtTenantScope", false)]
+        [TestCase("DeploymentExtendedResource", "WhatIfAtSubscriptionScope", false)]
+        [TestCase("DeploymentExtendedResource", "WhatIfAtManagementGroupScope", false)]
         [TestCase("ResourceLinkCollection", "CreateOrUpdate", true)]
         [TestCase("ResourceLinkCollection", "Get", true)]
         //[TestCase("ResourceLinkCollection", "GetAll", true)] // TODO -- restore this when this is fixed
         [TestCase("ResourceLinkCollection", "GetAllAsGenericResources", false)]
-        [TestCase("ResourceLink", "Get", true)]
-        [TestCase("ResourceLink", "Delete", true)]
-        public void ValidateScopeResourceMethods(string className, string methodName, bool exist)
+        [TestCase("ResourceLinkResource", "Get", true)]
+        [TestCase("ResourceLinkResource", "Delete", true)]
+        public void ValidateScopeResourceMethods(string className, string methodName, bool exist, params Type[] parameterTypes)
         {
-            var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ManagementGroupExtensions");
-            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.SubscriptionExtensions");
-            var resourceGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ResourceGroupExtensions");
-            var armResourceExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ArmResourceExtensions");
-            var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(managementGroupExtensions).Append(subscriptionExtensions).Append(resourceGroupExtensions).Append(armResourceExtensions);
+            var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(FindExtensionClass());
             var classToCheck = classesToCheck.First(t => t.Name == className);
-            Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
+            var candidates = classToCheck.GetMethods().Where(m => m.Name == methodName).Where(m => ParameterMatch(m.GetParameters(), parameterTypes));
+            Assert.AreEqual(exist, candidates.Any(), $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }
 
+        [Test]
+        public void ValidateBinaryData()
+        {
+            var valueProperty = typeof(ParameterValuesValue).GetProperty("Value");
+            Assert.IsNotNull(valueProperty);
+            Assert.AreEqual(typeof(BinaryData), valueProperty.PropertyType);
+        }
     }
 }

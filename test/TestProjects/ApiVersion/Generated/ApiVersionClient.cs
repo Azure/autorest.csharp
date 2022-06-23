@@ -20,6 +20,7 @@ namespace ApiVersion
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ApiVersionRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ApiVersionClient for mocking. </summary>
         protected ApiVersionClient()
@@ -31,6 +32,7 @@ namespace ApiVersion
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         internal ApiVersionClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "1.0.0")
         {
             RestClient = new ApiVersionRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);

@@ -21,7 +21,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}"
   },
   "OperationPositions": {
-    "/{scope}/providers/Microsoft.Resources/links": [
+    "ResourceLinks_ListAtSourceScope": [
       "collection"
     ]
   },

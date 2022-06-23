@@ -18,9 +18,7 @@ namespace httpInfrastructure
     internal partial class HttpSuccessRestClient
     {
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,11 +27,12 @@ namespace httpInfrastructure
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public HttpSuccessRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateHead200Request()
@@ -42,7 +41,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -85,7 +84,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -138,7 +137,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -191,7 +190,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -238,7 +237,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -285,7 +284,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -332,7 +331,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -379,7 +378,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/201", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -426,7 +425,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/201", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -473,7 +472,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -520,7 +519,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -567,7 +566,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -614,7 +613,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -661,7 +660,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -704,7 +703,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -751,7 +750,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -798,7 +797,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -845,7 +844,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -892,7 +891,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/404", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

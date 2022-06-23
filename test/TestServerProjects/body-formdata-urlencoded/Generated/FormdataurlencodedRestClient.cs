@@ -18,9 +18,7 @@ namespace body_formdata_urlencoded
     internal partial class FormdataurlencodedRestClient
     {
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,11 +27,12 @@ namespace body_formdata_urlencoded
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public FormdataurlencodedRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateUpdatePetWithFormRequest(int petId, PetType petType, PetFood petFood, int petAge, string name, string status)
@@ -42,7 +41,7 @@ namespace body_formdata_urlencoded
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/formsdataurlencoded/pet/add/", false);
             uri.AppendPath(petId, true);
             request.Uri = uri;
@@ -113,7 +112,7 @@ namespace body_formdata_urlencoded
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/formsdataurlencoded/partialConstantBody", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");

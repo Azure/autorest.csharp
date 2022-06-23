@@ -10,6 +10,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
@@ -33,11 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
         public Operation Operation => Method.Operation;
-        /// <summary>
-        /// We use the <see cref="OperationGroup"/> to get a fully quanlified name for this operation
-        /// </summary>
-        public OperationGroup OperationGroup => RestClient.OperationGroup;
-        public string OperationId => Operation.OperationId(OperationGroup);
+
+        public string OperationId => Operation.OperationId!;
         /// <summary>
         /// The name of this operation
         /// </summary>
@@ -63,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private CSharpType? _wrappedMgmtReturnType;
         public CSharpType ReturnType => _wrappedMgmtReturnType ??= GetWrappedMgmtReturnType(MgmtReturnType);
 
-        public string Accessibility => Method.Accessibility;
+        public MethodSignatureModifiers Accessibility => Method.Accessibility;
         public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
 
         private bool? _isListOperation;
@@ -111,12 +109,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             ContextualPath = contextualPath;
             Name = methodName;
             Resource = GetResourceMatch(restClient, method, requestPath);
-            FinalStateVia = Method.Operation.IsLongRunning? Method.Operation.LongRunningFinalStateVia : null;
+            FinalStateVia = Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalStateVia : null;
             OriginalReturnType = Method.Operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();
         }
 
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
+            : this(other, nameOverride, overrideReturnType, overrideDescription, other.ContextualPath, overrideParameters)
+        {
+        }
+
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
         {
             //copy values from other method
             _isLongRunning = other.IsLongRunningOperation;
@@ -124,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Method = other.Method;
             RestClient = other.RestClient;
             RequestPath = other.RequestPath;
-            ContextualPath = other.ContextualPath;
+            ContextualPath = contextualPath;
             Resource = other.Resource;
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
@@ -192,20 +195,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
-                foreach (var resourcePath in resource.RequestPaths)
+                var match = GetMatchType(method.Operation.GetHttpMethod(), resource.RequestPath, requestPath, method.IsListMethod(out var _));
+                if (match == ResourceMatchType.Exact)
+                    return resource;
+                if (match != ResourceMatchType.None)
                 {
-                    var match = GetMatchType(method.Operation.GetHttpMethod(), resourcePath, requestPath, method.IsListMethod(out var _));
-                    if (match == ResourceMatchType.Exact)
-                        return resource;
-                    if (match != ResourceMatchType.None)
+                    if (!matches.TryGetValue(match, out var result))
                     {
-                        if (!matches.TryGetValue(match, out var result))
-                        {
-                            result = new HashSet<Resource>();
-                            matches.Add(match, result);
-                        }
-                        result.Add(resource);
+                        result = new HashSet<Resource>();
+                        matches.Add(match, result);
                     }
+                    result.Add(resource);
                 }
             }
 

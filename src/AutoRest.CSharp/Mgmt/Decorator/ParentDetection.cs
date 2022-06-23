@@ -38,12 +38,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
-            return resource.OperationSets.SelectMany(resourceOperationSet => resourceOperationSet.GetParent());
+            return resource.OperationSet.GetParent();
         }
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet)
         {
             var parentRequestPath = resourceOperationSet.ParentRequestPath();
+
+            if (parentRequestPath.Equals(resourceOperationSet.GetRequestPath()))
+            {
+                // my parent is myself? Only tenant has this attribute, return empty
+                return Enumerable.Empty<MgmtTypeProvider>();
+            }
+
             if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
             {
                 return parent.AsIEnumerable();
@@ -64,6 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes()!;
                 return FindScopeParents(types);
             }
+            // otherwise we use the tenant as a fallback
             return MgmtContext.Library.TenantExtensions.AsIEnumerable();
         }
 

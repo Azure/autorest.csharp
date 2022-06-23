@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using System.Threading;
+using AutoRest.CSharp.Output.Models.Shared;
+using Azure;
 using MgmtOperations.Models;
 using NUnit.Framework;
 
@@ -13,24 +15,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("TestSetSharedKeyAsync")]
         public void ValidatePutMethod(string methodName)
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySet");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySetResource");
             var method = resourceOpreations.GetMethod(methodName);
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
             Assert.AreEqual(3, method.GetParameters().Length);
-            var param1 = TypeAsserts.HasParameter(method, "parameters");
-            Assert.AreEqual(typeof(ConnectionSharedKey), param1.ParameterType);
+            var param1 = TypeAsserts.HasParameter(method, "connectionSharedKey", typeof(ConnectionSharedKey));
             Assert.False(param1.IsOptional);
-            var param2 = TypeAsserts.HasParameter(method, "waitForCompletion");
-            Assert.AreEqual(typeof(bool), param2.ParameterType);
-            var param3 = TypeAsserts.HasParameter(method, "cancellationToken");
-            Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
+            TypeAsserts.HasParameter(method, KnownParameters.WaitForCompletion.Name, typeof(WaitUntil));
+            TypeAsserts.HasParameter(method, KnownParameters.CancellationTokenParameter.Name, typeof(CancellationToken));
         }
 
-        [TestCase(true, "AvailabilitySet", "Update")]
-        [TestCase(true, "AvailabilitySet", "UpdateAsync")]
-        [TestCase(false, "UnpatchableResource", "Update")]
-        [TestCase(false, "UnpatchableResource", "UpdateAsync")]
+        [TestCase(true, "AvailabilitySetResource", "Update")]
+        [TestCase(true, "AvailabilitySetResource", "UpdateAsync")]
+        [TestCase(true, "UnpatchableResource", "Update")]
+        [TestCase(true, "UnpatchableResource", "UpdateAsync")]
         public void ValidateMethod(bool exist, string className, string methodName)
         {
             var resource = Assembly.GetExecutingAssembly().GetType($"MgmtOperations.{className}");

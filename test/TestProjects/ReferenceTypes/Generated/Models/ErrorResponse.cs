@@ -5,13 +5,14 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </summary>
     [PropertyReferenceType]
-    internal partial class ErrorResponse
+    public partial class ErrorResponse
     {
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         [InitializationConstructor]
@@ -22,12 +23,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="error"> The error object. </param>
         [SerializationConstructor]
-        internal ErrorResponse(ErrorDetail error)
+        internal ErrorResponse(ResponseError error)
         {
             Error = error;
         }
 
         /// <summary> The error object. </summary>
-        public ErrorDetail Error { get; set; }
+        public ResponseError Error { get; set; }
     }
 }

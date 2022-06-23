@@ -16,7 +16,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -33,14 +33,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
-            IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
+            IsStatic = !IsArmCore && BaseType is null && (this is MgmtExtensions extension || this is MgmtExtensionsWrapper);
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
-        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: IdParamDescription,
-                Type: typeof(ResourceIdentifier), DefaultValue: null, Validate: false);
-        public static Parameter ArmClientParameter => new Parameter(Name: "client", Description: $"The client parameters to use in these operations.",
-            Type: typeof(ArmClient), DefaultValue: null, Validate: false);
+        public Parameter ResourceIdentifierParameter => new(Name: "id", Description: IdParamDescription, Type: typeof(ResourceIdentifier), DefaultValue: null, ValidationType.None, null);
+        public static Parameter ArmClientParameter => new(Name: "client", Description: $"The client parameters to use in these operations.", Type: typeof(ArmClient), DefaultValue: null, ValidationType.None, null);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
@@ -71,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
         public bool IsStatic { get; }
 
-        public abstract string Description { get; }
+        public abstract FormattableString Description { get; }
 
         private HashSet<NameSetKey>? _uniqueSets;
         public HashSet<NameSetKey> UniqueSets => _uniqueSets ??= EnsureUniqueSets();
@@ -119,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
-                Modifiers: "protected",
+                Modifiers: Protected,
                 Parameters: Array.Empty<Parameter>());
         }
 
@@ -138,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var resource = set.Resource;
             var client = set.RestClient;
-            string? resourceName = resource is not null ? resource.Type.Name : client.Resources.Contains(DefaultResource) ? DefaultResource?.Type.Name : null;
+            string? resourceName = resource is not null ? resource.ResourceName : client.Resources.Contains(DefaultResource) ? DefaultResource?.ResourceName : null;
 
             string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
 

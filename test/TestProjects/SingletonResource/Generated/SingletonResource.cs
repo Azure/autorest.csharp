@@ -13,11 +13,15 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace SingletonResource
 {
-    /// <summary> A Class representing a SingletonResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a SingletonResource along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SingletonResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetSingletonResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ParentResource" /> using the GetSingletonResource method.
+    /// </summary>
     public partial class SingletonResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SingletonResource"/> instance. </summary>
@@ -50,9 +54,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SingletonResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
-            _singletonResourceRestClient = new SingletonResourcesRestOperations(_singletonResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, singletonResourceApiVersion);
+            _singletonResourceRestClient = new SingletonResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, singletonResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -84,11 +88,11 @@ namespace SingletonResource
 
         /// <summary>
         /// Singleton non-resource test example with a single-value enum name parameter.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/current
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
         /// Operation Id: SingletonResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
@@ -96,7 +100,7 @@ namespace SingletonResource
             {
                 var response = await _singletonResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _singletonResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -108,7 +112,7 @@ namespace SingletonResource
 
         /// <summary>
         /// Singleton non-resource test example with a single-value enum name parameter.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/current
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
         /// Operation Id: SingletonResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -120,7 +124,7 @@ namespace SingletonResource
             {
                 var response = _singletonResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _singletonResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -132,24 +136,24 @@ namespace SingletonResource
 
         /// <summary>
         /// Singleton non-resource test example with a single-value enum name parameter.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/current
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
         /// Operation Id: SingletonResources_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> The SingletonResource to use. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(WaitUntil waitUntil, SingletonResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _singletonResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, data, cancellationToken).ConfigureAwait(false);
                 var operation = new SingletonResourceArmOperation<SingletonResource>(Response.FromValue(new SingletonResource(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -162,24 +166,24 @@ namespace SingletonResource
 
         /// <summary>
         /// Singleton non-resource test example with a single-value enum name parameter.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/current
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
         /// Operation Id: SingletonResources_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> The SingletonResource to use. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SingletonResource> CreateOrUpdate(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<SingletonResource> CreateOrUpdate(WaitUntil waitUntil, SingletonResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _singletonResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                var response = _singletonResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, data, cancellationToken);
                 var operation = new SingletonResourceArmOperation<SingletonResource>(Response.FromValue(new SingletonResource(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }

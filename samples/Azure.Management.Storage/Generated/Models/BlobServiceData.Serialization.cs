@@ -70,11 +70,11 @@ namespace Azure.Management.Storage
 
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element)
         {
-            Optional<Models.Sku> sku = default;
+            Optional<StorageSku> sku = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<CorsRules> cors = default;
             Optional<string> defaultServiceVersion = default;
             Optional<DeleteRetentionPolicy> deleteRetentionPolicy = default;
@@ -93,7 +93,7 @@ namespace Azure.Management.Storage
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = StorageSku.DeserializeStorageSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -108,11 +108,16 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -214,7 +219,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new BlobServiceData(id, name, type, systemData, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value);
+            return new BlobServiceData(id, name, type, systemData.Value, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value);
         }
     }
 }

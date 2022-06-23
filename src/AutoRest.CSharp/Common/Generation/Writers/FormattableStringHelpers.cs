@@ -8,24 +8,31 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
-        public static FormattableString Join(this ICollection<FormattableString> fss, string separator)
+        public static FormattableString Join(this ICollection<FormattableString> fss, string separator, string? lastSeparator = null)
             => fss.Count switch
             {
                 0 => $"",
                 1 => fss.First(),
+                _ when lastSeparator is not null => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")).ReplaceLast(separator, lastSeparator), fss.ToArray<object>()),
                 _ => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")), fss.ToArray<object>())
             };
 
-        public static FormattableString GetLiteralsFormattable(this ICollection<Parameter> parameters)
+        public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetLiteralsFormattable(parameters.Select(p => p.Name), parameters.Count);
 
-        public static FormattableString GetLiteralsFormattable(this ICollection<Reference> references)
+        public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<Reference> references)
             => GetLiteralsFormattable(references.Select(p => p.Name), references.Count);
+
+        public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<string> literals)
+            => GetLiteralsFormattable(literals, literals.Count);
 
         public static FormattableString GetLiteralsFormattable(this ICollection<string> literals)
             => GetLiteralsFormattable(literals, literals.Count);
@@ -38,13 +45,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'L'), literals.ToArray<object>())
             };
 
-        public static FormattableString GetIdentifiersFormattable(this ICollection<Parameter> parameters)
+        public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetIdentifiersFormattable(parameters.Select(p => p.Name), parameters.Count);
 
-        public static FormattableString GetIdentifiersFormattable(this ICollection<Reference> references)
+        public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<Reference> references)
             => GetIdentifiersFormattable(references.Select(p => p.Name), references.Count);
 
-        public static FormattableString GetIdentifiersFormattable(this ICollection<string> identifiers)
+        public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<string> identifiers)
             => GetIdentifiersFormattable(identifiers, identifiers.Count);
 
         public static FormattableString GetIdentifiersFormattable(this IEnumerable<string> identifiers, int count)
@@ -54,6 +61,52 @@ namespace AutoRest.CSharp.Generation.Writers
                 1 => $"{identifiers.First():I}",
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
+
+        public static FormattableString GetConstantFormattable(this Constant constant)
+        {
+            if (constant.Value == null)
+            {
+                // Cast helps the overload resolution
+                return $"({constant.Type}){null:L}";
+            }
+
+            if (constant.IsNewInstanceSentinel)
+            {
+                return $"new {constant.Type}()";
+            }
+
+            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
+            {
+                return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
+            }
+
+            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
+            {
+                return $"new {constant.Type}({enumValue:L})";
+            }
+
+            Type frameworkType = constant.Type.FrameworkType;
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                var d = (DateTimeOffset)constant.Value;
+                d = d.ToUniversalTime();
+                return $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
+            }
+
+            if (frameworkType == typeof(byte[]))
+            {
+                var bytes = (byte[])constant.Value;
+                var joinedBytes = string.Join(", ", bytes);
+                return $"new byte[] {{{joinedBytes}}}";
+            }
+
+            if (frameworkType == typeof(ResourceType))
+            {
+                return $"{((ResourceType)constant.Value).ToString():L}";
+            }
+
+            return $"{constant.Value:L}";
+        }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)
         {

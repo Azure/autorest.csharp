@@ -20,6 +20,7 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MultipleResponsesRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
         protected MultipleResponsesClient()
@@ -30,6 +31,7 @@ namespace httpInfrastructure
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal MultipleResponsesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new MultipleResponsesRestClient(clientDiagnostics, pipeline, endpoint);

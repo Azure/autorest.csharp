@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 
 namespace MgmtKeyvault.Tests.Mock
@@ -27,10 +28,10 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted vault
-            string location = "westus";
+            AzureLocation location = new AzureLocation("westus");
             string vaultName = "sample-vault";
 
-            var collection = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000")).GetDeletedVaults();
+            var collection = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000")).GetDeletedVaults();
             await collection.GetAsync(location, vaultName);
         }
     }

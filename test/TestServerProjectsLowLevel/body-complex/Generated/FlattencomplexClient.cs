@@ -19,9 +19,7 @@ namespace body_complex_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,32 +34,45 @@ namespace body_complex_LowLevel
 
         /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public FlattencomplexClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestComplexTestServiceClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public FlattencomplexClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public FlattencomplexClient(AzureKeyCredential credential, Uri endpoint, AutoRestComplexTestServiceClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AutoRestComplexTestServiceClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
@@ -82,15 +93,21 @@ namespace body_complex_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetValid(RequestContext context = null)
@@ -111,30 +128,18 @@ namespace body_complex_LowLevel
 
         internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/complex/flatten/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

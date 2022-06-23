@@ -22,9 +22,7 @@ namespace paging_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -39,35 +37,53 @@ namespace paging_LowLevel
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PagingClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new PagingClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of PagingClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, Uri endpoint = null, PagingClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public PagingClient(AzureKeyCredential credential, Uri endpoint, PagingClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new PagingClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetNoItemNamePages");
+            return GetNoItemNamePagesImplementationAsync("PagingClient.GetNoItemNamePages", context);
+        }
+
+        private AsyncPageable<BinaryData> GetNoItemNamePagesImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -85,17 +101,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetNoItemNamePages(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetNoItemNamePages");
+            return GetNoItemNamePagesImplementation("PagingClient.GetNoItemNamePages", context);
+        }
+
+        private Pageable<BinaryData> GetNoItemNamePagesImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -113,24 +140,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            return GetNullNextLinkNamePagesImplementationAsync("PagingClient.GetNullNextLinkNamePages", context);
+        }
+
+        private AsyncPageable<BinaryData> GetNullNextLinkNamePagesImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest(context);
@@ -138,27 +169,32 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            return GetNullNextLinkNamePagesImplementation("PagingClient.GetNullNextLinkNamePages", context);
+        }
+
+        private Pageable<BinaryData> GetNullNextLinkNamePagesImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest(context);
@@ -166,27 +202,32 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetSinglePages");
+            return GetSinglePagesImplementationAsync("PagingClient.GetSinglePages", context);
+        }
+
+        private AsyncPageable<BinaryData> GetSinglePagesImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -204,24 +245,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetSinglePages(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetSinglePages");
+            return GetSinglePagesImplementation("PagingClient.GetSinglePages", context);
+        }
+
+        private Pageable<BinaryData> GetSinglePagesImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -239,17 +284,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.FirstResponseEmpty");
+            return FirstResponseEmptyImplementationAsync("PagingClient.FirstResponseEmpty", context);
+        }
+
+        private AsyncPageable<BinaryData> FirstResponseEmptyImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -267,17 +323,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> FirstResponseEmpty(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.FirstResponseEmpty");
+            return FirstResponseEmptyImplementation("PagingClient.FirstResponseEmpty", context);
+        }
+
+        private Pageable<BinaryData> FirstResponseEmptyImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -298,24 +365,28 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePages");
+            return GetMultiplePagesImplementationAsync("PagingClient.GetMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesImplementationAsync(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -336,24 +407,28 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePages");
+            return GetMultiplePagesImplementation("PagingClient.GetMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesImplementation(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -372,24 +447,28 @@ namespace paging_LowLevel
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetWithQueryParams");
+            return GetWithQueryParamsImplementationAsync("PagingClient.GetWithQueryParams", requiredQueryParameter, context);
+        }
+
+        private AsyncPageable<BinaryData> GetWithQueryParamsImplementationAsync(string diagnosticsScopeName, int requiredQueryParameter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -408,24 +487,28 @@ namespace paging_LowLevel
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetWithQueryParams");
+            return GetWithQueryParamsImplementation("PagingClient.GetWithQueryParams", requiredQueryParameter, context);
+        }
+
+        private Pageable<BinaryData> GetWithQueryParamsImplementation(string diagnosticsScopeName, int requiredQueryParameter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -440,27 +523,111 @@ namespace paging_LowLevel
             }
         }
 
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
+        /// <code>{
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual AsyncPageable<BinaryData> DuplicateParamsAsync(string filter = null, RequestContext context = null)
+        {
+            return DuplicateParamsImplementationAsync("PagingClient.DuplicateParams", filter, context);
+        }
+
+        private AsyncPageable<BinaryData> DuplicateParamsImplementationAsync(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateDuplicateParamsRequest(filter, context)
+                        : CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
+        /// <code>{
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Pageable<BinaryData> DuplicateParams(string filter = null, RequestContext context = null)
+        {
+            return DuplicateParamsImplementation("PagingClient.DuplicateParams", filter, context);
+        }
+
+        private Pageable<BinaryData> DuplicateParamsImplementation(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateDuplicateParamsRequest(filter, context)
+                        : CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            return NextOperationWithQueryParamsImplementationAsync("PagingClient.NextOperationWithQueryParams", context);
+        }
+
+        private AsyncPageable<BinaryData> NextOperationWithQueryParamsImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 using var message = CreateNextOperationWithQueryParamsRequest(context);
@@ -468,27 +635,32 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            return NextOperationWithQueryParamsImplementation("PagingClient.NextOperationWithQueryParams", context);
+        }
+
+        private Pageable<BinaryData> NextOperationWithQueryParamsImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 using var message = CreateNextOperationWithQueryParamsRequest(context);
@@ -496,30 +668,35 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            return GetOdataMultiplePagesImplementationAsync("PagingClient.GetOdataMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private AsyncPageable<BinaryData> GetOdataMultiplePagesImplementationAsync(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -540,24 +717,28 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            return GetOdataMultiplePagesImplementation("PagingClient.GetOdataMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private Pageable<BinaryData> GetOdataMultiplePagesImplementation(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -579,24 +760,28 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            return GetMultiplePagesWithOffsetImplementationAsync("PagingClient.GetMultiplePagesWithOffset", offset, clientRequestId, maxresults, timeout, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesWithOffsetImplementationAsync(string diagnosticsScopeName, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -618,24 +803,28 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            return GetMultiplePagesWithOffsetImplementation("PagingClient.GetMultiplePagesWithOffset", offset, clientRequestId, maxresults, timeout, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesWithOffsetImplementation(string diagnosticsScopeName, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -653,24 +842,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            return GetMultiplePagesRetryFirstImplementationAsync("PagingClient.GetMultiplePagesRetryFirst", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesRetryFirstImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -688,24 +881,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            return GetMultiplePagesRetryFirstImplementation("PagingClient.GetMultiplePagesRetryFirst", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesRetryFirstImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -723,24 +920,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            return GetMultiplePagesRetrySecondImplementationAsync("PagingClient.GetMultiplePagesRetrySecond", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesRetrySecondImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -758,24 +959,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            return GetMultiplePagesRetrySecondImplementation("PagingClient.GetMultiplePagesRetrySecond", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesRetrySecondImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -793,24 +998,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            return GetSinglePagesFailureImplementationAsync("PagingClient.GetSinglePagesFailure", context);
+        }
+
+        private AsyncPageable<BinaryData> GetSinglePagesFailureImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -828,24 +1037,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            return GetSinglePagesFailureImplementation("PagingClient.GetSinglePagesFailure", context);
+        }
+
+        private Pageable<BinaryData> GetSinglePagesFailureImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -863,24 +1076,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            return GetMultiplePagesFailureImplementationAsync("PagingClient.GetMultiplePagesFailure", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFailureImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -898,24 +1115,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            return GetMultiplePagesFailureImplementation("PagingClient.GetMultiplePagesFailure", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFailureImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -933,24 +1154,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            return GetMultiplePagesFailureUriImplementationAsync("PagingClient.GetMultiplePagesFailureUri", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFailureUriImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -968,24 +1193,28 @@ namespace paging_LowLevel
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            return GetMultiplePagesFailureUriImplementation("PagingClient.GetMultiplePagesFailureUri", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFailureUriImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1007,17 +1236,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1027,7 +1255,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            return GetMultiplePagesFragmentNextLinkImplementationAsync("PagingClient.GetMultiplePagesFragmentNextLink", tenant, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkImplementationAsync(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1049,17 +1282,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1069,7 +1301,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            return GetMultiplePagesFragmentNextLinkImplementation("PagingClient.GetMultiplePagesFragmentNextLink", tenant, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFragmentNextLinkImplementation(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1091,17 +1328,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1111,7 +1347,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            return GetMultiplePagesFragmentWithGroupingNextLinkImplementationAsync("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", tenant, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkImplementationAsync(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1133,17 +1374,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1153,7 +1393,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            return GetMultiplePagesFragmentWithGroupingNextLinkImplementation("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", tenant, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkImplementation(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1176,17 +1421,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1197,7 +1441,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragment");
+            return NextFragmentImplementationAsync("PagingClient.NextFragment", tenant, nextLink, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> NextFragmentImplementationAsync(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1218,17 +1467,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1239,7 +1487,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragment");
+            return NextFragmentImplementation("PagingClient.NextFragment", tenant, nextLink, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> NextFragmentImplementation(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1260,17 +1513,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1281,7 +1533,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            return NextFragmentWithGroupingImplementationAsync("PagingClient.NextFragmentWithGrouping", tenant, nextLink, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> NextFragmentWithGroupingImplementationAsync(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1302,17 +1559,16 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1323,7 +1579,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            return NextFragmentWithGroupingImplementation("PagingClient.NextFragmentWithGrouping", tenant, nextLink, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> NextFragmentWithGroupingImplementation(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1338,25 +1599,14 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            return GetPagingModelWithItemNameWithXMSClientNameImplementationAsync("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1373,25 +1623,14 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            return GetPagingModelWithItemNameWithXMSClientNameImplementation("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
+        }
+
+        private Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1407,35 +1646,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="waitForCompletion"> true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(bool waitForCompletion, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(WaitUntil waitUntil, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitForCompletion, CreateEnumerableAsync).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1463,35 +1701,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="waitForCompletion"> true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(bool waitForCompletion, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(WaitUntil waitUntil, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitForCompletion, CreateEnumerable);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
             }
             catch (Exception e)
             {
@@ -1520,67 +1757,63 @@ namespace paging_LowLevel
 
         internal HttpMessage CreateGetNoItemNamePagesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/noitemname", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetNullNextLinkNamePagesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/nullnextlink", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetSinglePagesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/single", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateFirstResponseEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/firstResponseEmpty/1", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1596,48 +1829,62 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/getWithQueryParams", false);
             uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDuplicateParamsRequest(string filter, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/duplicateParams/1", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
         internal HttpMessage CreateNextOperationWithQueryParamsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1653,17 +1900,16 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(offset, true);
             request.Uri = uri;
@@ -1680,119 +1926,111 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetryFirstRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/retryfirst", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/retrysecond", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetSinglePagesFailureRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/single/failure", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/failure", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureUriRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/failureuri", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string tenant, string apiVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string tenant, string apiVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1808,17 +2046,16 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
         }
 
         internal HttpMessage CreateNextFragmentRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
@@ -1826,17 +2063,16 @@ namespace paging_LowLevel
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateNextFragmentWithGroupingRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
@@ -1844,73 +2080,68 @@ namespace paging_LowLevel
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/itemNameWithXMSClientName", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1926,17 +2157,29 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDuplicateParamsNextPageRequest(string nextLink, string filter, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1952,17 +2195,16 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1978,101 +2220,94 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -2088,35 +2323,12 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier202 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    202 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier202;
+        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new StatusCodeClassifier(stackalloc ushort[] { 202 });
     }
 }

@@ -18,8 +18,8 @@ namespace MgmtHierarchicalNonResource.Models
         {
             Optional<string> name = default;
             Optional<string> location = default;
-            Optional<OperatingSystemTypes> osType = default;
-            Optional<OperatingSystemStateTypes> osState = default;
+            Optional<OperatingSystemType> osType = default;
+            Optional<OperatingSystemStateType> osState = default;
             Optional<DateTimeOffset> endOfLifeDate = default;
             Optional<GalleryImageIdentifier> identifier = default;
             Optional<RecommendedMachineConfiguration> recommended = default;
@@ -56,7 +56,7 @@ namespace MgmtHierarchicalNonResource.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            osType = property0.Value.GetString().ToOperatingSystemTypes();
+                            osType = property0.Value.GetString().ToOperatingSystemType();
                             continue;
                         }
                         if (property0.NameEquals("osState"))
@@ -66,7 +66,7 @@ namespace MgmtHierarchicalNonResource.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            osState = property0.Value.GetString().ToOperatingSystemStateTypes();
+                            osState = property0.Value.GetString().ToOperatingSystemStateType();
                             continue;
                         }
                         if (property0.NameEquals("endOfLifeDate"))

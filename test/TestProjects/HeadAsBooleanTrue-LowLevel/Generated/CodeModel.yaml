@@ -33,6 +33,7 @@ operationGroups:
     $key: httpSuccess
     operations:
       - !Operation 
+        operationId: httpSuccess_head200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -91,6 +92,7 @@ operationGroups:
             description: Return 200 status code if successful
         protocol: !Protocols {}
       - !Operation 
+        operationId: httpSuccess_head204
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -149,6 +151,7 @@ operationGroups:
             description: Return 204 status code if successful
         protocol: !Protocols {}
       - !Operation 
+        operationId: httpSuccess_head404
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -214,9 +217,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: HeadAsBooleanTrue

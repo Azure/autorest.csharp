@@ -3,14 +3,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -42,7 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             var addedFilenames = new HashSet<string>();
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
@@ -119,37 +124,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
-            if (!isArmCore)
-            {
-                // we will write the ResourceGroupExtensions and SubscriptionExtensions classes even if it does not contain anything
-                WriteExtensionPair(project, MgmtContext.Library.ResourceGroupExtensionsClient);
-                WriteExtensionPair(project, MgmtContext.Library.SubscriptionExtensionsClient);
-            }
+            // write extension class
+            if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
+                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
-            if (!MgmtContext.Library.ManagementGroupExtensions.IsEmpty)
-            {
-                WriteExtensionPair(project, MgmtContext.Library.ManagementGroupExtensionsClient);
-            }
+            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.TenantExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensionsClient);
 
-            if (!MgmtContext.Library.TenantExtensions.IsEmpty)
+            if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
             {
-                WriteExtensionPair(project, MgmtContext.Library.TenantExtensionsClient);
-            }
-
-            if (!MgmtContext.Library.ArmClientExtensions.IsEmpty)
-            {
-                var armClientExtension = MgmtContext.Library.ArmClientExtensions;
-                var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension);
-                armClientExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, $"Extensions/{armClientExtensionsCodeWriter.FileName}.cs", armClientExtensionsCodeWriter.ToString());
-            }
-
-            if (!MgmtContext.Library.ArmResourceExtensions.IsEmpty)
-            {
-                var armResourceExt = MgmtContext.Library.ArmResourceExtensions;
-                var armResourceExtensionsCodeWriter = new ArmResourceExtensionsWriter(armResourceExt);
-                armResourceExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, $"Extensions/{armResourceExtensionsCodeWriter.FileName}.cs", armResourceExtensionsCodeWriter.ToString());
+                WriteExtensionPiece(project, new ArmClientExtensionsWriter(MgmtContext.Library.ArmClientExtensions));
             }
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
@@ -168,12 +155,26 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+
+            await project.PostProcess(PostProcess);
+
         }
 
-        private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        private static async Task<Project> PostProcess(Project project)
         {
-            WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
-            if (!Configuration.MgmtConfiguration.IsArmCore)
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            project = await Internalizer.InternalizeAsync(project, modelsToKeep);
+
+            project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
+
+            return project;
+        }
+
+        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        {
+            if (Configuration.MgmtConfiguration.IsArmCore && !extensionClient.Extension.IsEmpty)
+                WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
+            if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
                 WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
         }
 
@@ -185,54 +186,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
-            // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
-            // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-            // The includeArmCore parameter should also be removed in FindForType() then.
-            if (!Configuration.MgmtConfiguration.IsArmCore && MgmtContext.Context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
-            {
-                return true;
-            }
-
-            // do not skip generation of reference types in resource manager
-            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
-            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
-            if (model is MgmtReferenceType)
-            {
-                return false;
-            }
-
             if (model is SchemaObjectType objSchema)
             {
-                //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
-                if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
-                    return false;
-
                 if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
                     return true;
-
-                //skip things that had exact match replacements
-                //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-                //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to
-                //get the information that whether the model has been used as a base class for inheritance and as a property.
-                var usedAsInheritance = InheritanceChooser.TryGetCachedExactMatch(objSchema.ObjectSchema, out var inheritanceResult);
-                var usedAsProperty = ReferenceTypePropertyChooser.TryGetCachedExactMatch(objSchema.ObjectSchema, out var propertyResult);
-                if (usedAsInheritance && usedAsProperty)
-                {
-                    //If the model is used both as a base class for inheritance and a property, we only remove the model when it has matches in both cases.
-                    if (inheritanceResult != null && propertyResult != null)
-                        return true;
-                }
-                else if (inheritanceResult != null || propertyResult != null)
-                    return true;
-                else if (model is MgmtObjectType mgmtObjType && model.GetType() != typeof(MgmtReferenceType))
-                {
-                    //In the cache of ReferenceTypePropertyChooser, only models used as a direct property of another model is stored.
-                    //There could be orphaned models that are not a direct property of another model and is not tracked by cache.
-                    //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-                    if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType) != null)
-                        return true;
-                }
             }
+
             return false;
         }
     }

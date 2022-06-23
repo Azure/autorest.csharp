@@ -22,14 +22,17 @@ namespace Azure.ResourceManager.Sample
             writer.WriteStartObject();
             writer.WritePropertyName("sku");
             writer.WriteObjectValue(Sku);
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -55,18 +58,18 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element)
         {
-            Models.Sku sku = default;
-            IDictionary<string, string> tags = default;
+            SampleSku sku = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<int> platformFaultDomain = default;
             Optional<bool> autoReplaceOnFailure = default;
             Optional<string> hostId = default;
             Optional<IReadOnlyList<Resources.Models.SubResource>> virtualMachines = default;
-            Optional<DedicatedHostLicenseTypes> licenseType = default;
+            Optional<DedicatedHostLicenseType> licenseType = default;
             Optional<DateTimeOffset> provisioningTime = default;
             Optional<string> provisioningState = default;
             Optional<DedicatedHostInstanceView> instanceView = default;
@@ -74,11 +77,16 @@ namespace Azure.ResourceManager.Sample
             {
                 if (property.NameEquals("sku"))
                 {
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -89,7 +97,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -104,11 +112,16 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -168,7 +181,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            licenseType = property0.Value.GetString().ToDedicatedHostLicenseTypes();
+                            licenseType = property0.Value.GetString().ToDedicatedHostLicenseType();
                             continue;
                         }
                         if (property0.NameEquals("provisioningTime"))
@@ -200,7 +213,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new DedicatedHostData(id, name, type, systemData, tags, location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
+            return new DedicatedHostData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
         }
     }
 }

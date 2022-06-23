@@ -20,10 +20,10 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(ExtendedLocationType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type.Value.ToString());
+                writer.WriteStringValue(ExtendedLocationType.Value.ToString());
             }
             writer.WriteEndObject();
         }
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage.Models
         internal static ExtendedLocation DeserializeExtendedLocation(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<ExtendedLocationTypes> type = default;
+            Optional<ExtendedLocationType> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -46,7 +46,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type = new ExtendedLocationTypes(property.Value.GetString());
+                    type = new ExtendedLocationType(property.Value.GetString());
                     continue;
                 }
             }

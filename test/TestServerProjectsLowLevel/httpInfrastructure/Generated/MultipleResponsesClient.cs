@@ -19,9 +19,7 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,35 +34,42 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public MultipleResponsesClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestHttpInfrastructureTestServiceClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public MultipleResponsesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public MultipleResponsesClient(AzureKeyCredential credential, Uri endpoint, AutoRestHttpInfrastructureTestServiceClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context = null)
@@ -86,17 +91,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context = null)
@@ -118,17 +123,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context = null)
@@ -150,17 +155,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context = null)
@@ -182,17 +187,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context = null)
@@ -214,17 +219,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context = null)
@@ -246,17 +251,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context = null)
@@ -278,17 +283,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context = null)
@@ -310,17 +315,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context = null)
@@ -342,17 +347,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context = null)
@@ -374,17 +379,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context = null)
@@ -406,17 +411,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context = null)
@@ -438,17 +443,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context = null)
@@ -470,17 +475,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context = null)
@@ -502,17 +507,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context = null)
@@ -534,17 +539,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context = null)
@@ -566,17 +571,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context = null)
@@ -598,17 +603,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context = null)
@@ -630,17 +635,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context = null)
@@ -662,17 +667,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context = null)
@@ -694,17 +699,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context = null)
@@ -726,17 +731,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context = null)
@@ -758,17 +763,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context = null)
@@ -790,17 +795,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context = null)
@@ -821,15 +826,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -848,15 +844,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError202None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -875,15 +862,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -902,15 +880,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError204None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -929,15 +898,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -956,15 +916,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -1128,11 +1079,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context = null)
@@ -1154,11 +1111,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetDefaultModelA200Valid(RequestContext context = null)
@@ -1180,11 +1143,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context = null)
@@ -1206,11 +1175,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetDefaultModelA200None(RequestContext context = null)
@@ -1231,14 +1206,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1257,14 +1224,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetDefaultModelA400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1283,14 +1242,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1309,14 +1260,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetDefaultModelA400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1480,11 +1423,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context = null)
@@ -1506,11 +1455,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA200None(RequestContext context = null)
@@ -1532,11 +1487,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context = null)
@@ -1558,11 +1519,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA200Valid(RequestContext context = null)
@@ -1584,11 +1551,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context = null)
@@ -1610,11 +1583,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA200Invalid(RequestContext context = null)
@@ -1636,11 +1615,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context = null)
@@ -1662,11 +1647,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA400None(RequestContext context = null)
@@ -1688,11 +1679,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context = null)
@@ -1714,11 +1711,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA400Valid(RequestContext context = null)
@@ -1740,11 +1743,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context = null)
@@ -1766,11 +1775,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA400Invalid(RequestContext context = null)
@@ -1792,11 +1807,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context = null)
@@ -1818,11 +1839,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response Get200ModelA202Valid(RequestContext context = null)
@@ -1843,541 +1870,447 @@ namespace httpInfrastructure_LowLevel
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/200/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/204/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/201/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/202/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/400/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/200/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/201/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/400/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201404);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201404.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201404);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201404.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201404);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201404.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201404);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200201404.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultError202NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/202/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultError204NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/204/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultError400ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/400/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/202/invalid", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/204/none", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/400/none", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/400/invalid", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier202204.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultModelA200ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/A/response/200/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultModelA200NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/A/response/200/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultModelA400ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/A/response/400/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultModelA400NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/A/response/400/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultNone200InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/none/response/200/invalid", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultNone200NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/none/response/200/none", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultNone400InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/none/response/400/invalid", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetDefaultNone400NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/default/none/response/400/none", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA200NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/200/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA200ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/200/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA200InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/200/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA400NoneRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/400/none", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA400ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/400/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA400InvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/400/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet200ModelA202ValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/payloads/200/A/response/202/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200204 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200204();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    204 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200201 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200201();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    201 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200201404 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200201404();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    201 => false,
-                    404 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier202204 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202204();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    202 => false,
-                    204 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200204;
+        private static ResponseClassifier ResponseClassifier200204 => _responseClassifier200204 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 204 });
+        private static ResponseClassifier _responseClassifier200201;
+        private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
+        private static ResponseClassifier _responseClassifier200201404;
+        private static ResponseClassifier ResponseClassifier200201404 => _responseClassifier200201404 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201, 404 });
+        private static ResponseClassifier _responseClassifier202204;
+        private static ResponseClassifier ResponseClassifier202204 => _responseClassifier202204 ??= new StatusCodeClassifier(stackalloc ushort[] { 202, 204 });
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

@@ -18,10 +18,8 @@ namespace azure_special_properties
     {
         private readonly HttpPipeline _pipeline;
         private readonly string _subscriptionId;
+        private readonly Uri _endpoint;
         private readonly string _apiVersion;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -32,14 +30,15 @@ namespace azure_special_properties
         /// <param name="subscriptionId"> The subscription id, which appears in the path, always modeled in credentials. The value is always &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public SubscriptionInCredentialsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreatePostMethodGlobalValidRequest()
@@ -48,7 +47,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/", false);
             uri.AppendPath(_subscriptionId, true);
             request.Uri = uri;
@@ -92,7 +91,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/global/null/", false);
             uri.AppendPath(_subscriptionId, true);
             request.Uri = uri;
@@ -136,7 +135,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -181,7 +180,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/", false);
             uri.AppendPath(_subscriptionId, true);
             request.Uri = uri;
@@ -225,7 +224,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/", false);
             uri.AppendPath(_subscriptionId, true);
             request.Uri = uri;

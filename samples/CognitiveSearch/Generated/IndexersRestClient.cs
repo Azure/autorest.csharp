@@ -19,10 +19,8 @@ namespace CognitiveSearch
     internal partial class IndexersRestClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly string _endpoint;
         private readonly string _apiVersion;
-
-        /// <summary> The endpoint URL of the search service. </summary>
-        public string Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -32,13 +30,13 @@ namespace CognitiveSearch
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The endpoint URL of the search service. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public IndexersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateResetRequest(string indexerName, RequestOptions requestOptions)
@@ -47,7 +45,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers('", false);
             uri.AppendPath(indexerName, true);
             uri.AppendPath("')/search.reset", false);
@@ -109,7 +107,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers('", false);
             uri.AppendPath(indexerName, true);
             uri.AppendPath("')/search.run", false);
@@ -171,7 +169,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers('", false);
             uri.AppendPath(indexerName, true);
             uri.AppendPath("')", false);
@@ -272,7 +270,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers('", false);
             uri.AppendPath(indexerName, true);
             uri.AppendPath("')", false);
@@ -346,7 +344,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers('", false);
             uri.AppendPath(indexerName, true);
             uri.AppendPath("')", false);
@@ -418,7 +416,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers", false);
             if (select != null)
             {
@@ -480,7 +478,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -554,7 +552,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(Endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/indexers('", false);
             uri.AppendPath(indexerName, true);
             uri.AppendPath("')/search.status", false);

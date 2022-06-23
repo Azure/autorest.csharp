@@ -16,13 +16,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtLRO
 {
-    /// <summary> A class representing collection of Bar and their operations over its parent. </summary>
-    public partial class BarCollection : ArmCollection, IEnumerable<Bar>, IAsyncEnumerable<Bar>
+    /// <summary>
+    /// A class representing a collection of <see cref="BarResource" /> and their operations.
+    /// Each <see cref="BarResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="BarCollection" /> instance call the GetBars method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
+    public partial class BarCollection : ArmCollection, IEnumerable<BarResource>, IAsyncEnumerable<BarResource>
     {
         private readonly ClientDiagnostics _barClientDiagnostics;
         private readonly BarsRestOperations _barRestClient;
@@ -37,9 +40,9 @@ namespace MgmtLRO
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _barClientDiagnostics = new ClientDiagnostics("MgmtLRO", Bar.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
-            _barRestClient = new BarsRestOperations(_barClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
+            _barClientDiagnostics = new ClientDiagnostics("MgmtLRO", BarResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(BarResource.ResourceType, out string barApiVersion);
+            _barRestClient = new BarsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -47,8 +50,8 @@ namespace MgmtLRO
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -56,24 +59,24 @@ namespace MgmtLRO
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The name of the fake. </param>
-        /// <param name="body"> The Bar to use. </param>
+        /// <param name="data"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<ArmOperation<Bar>> CreateOrUpdateAsync(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-            Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtLROArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, data).Request, response, OperationFinalStateVia.Location);
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -89,24 +92,24 @@ namespace MgmtLRO
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The name of the fake. </param>
-        /// <param name="body"> The Bar to use. </param>
+        /// <param name="data"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<Bar> CreateOrUpdate(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-            Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new MgmtLROArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, data, cancellationToken);
+                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, data).Request, response, OperationFinalStateVia.Location);
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -126,7 +129,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public async virtual Task<Response<Bar>> GetAsync(string barName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetAsync(string barName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
@@ -136,8 +139,8 @@ namespace MgmtLRO
             {
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _barClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,7 +158,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public virtual Response<Bar> Get(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> Get(string barName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
@@ -165,8 +168,8 @@ namespace MgmtLRO
             {
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
                 if (response.Value == null)
-                    throw _barClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -181,17 +184,17 @@ namespace MgmtLRO
         /// Operation Id: Bars_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Bar> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<BarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<Bar>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Bar(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,17 +211,17 @@ namespace MgmtLRO
         /// Operation Id: Bars_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Bar> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<BarResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<Bar> FirstPageFunc(int? pageSizeHint)
+            Page<BarResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Bar(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +241,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string barName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
@@ -246,7 +249,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -273,7 +276,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = GetIfExists(barName, cancellationToken: cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -283,65 +286,7 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
-        /// </summary>
-        /// <param name="barName"> The name of the fake. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public async virtual Task<Response<Bar>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
-        /// </summary>
-        /// <param name="barName"> The name of the fake. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public virtual Response<Bar> GetIfExists(string barName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        IEnumerator<Bar> IEnumerable<Bar>.GetEnumerator()
+        IEnumerator<BarResource> IEnumerable<BarResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -351,7 +296,7 @@ namespace MgmtLRO
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<Bar> IAsyncEnumerable<Bar>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<BarResource> IAsyncEnumerable<BarResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

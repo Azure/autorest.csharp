@@ -20,6 +20,7 @@ namespace required_optional
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ImplicitRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ImplicitClient for mocking. </summary>
         protected ImplicitClient()
@@ -33,6 +34,8 @@ namespace required_optional
         /// <param name="requiredGlobalQuery"> number of items to skip. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="optionalGlobalQuery"> number of items to skip. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="requiredGlobalPath"/> or <paramref name="requiredGlobalQuery"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="requiredGlobalPath"/> is an empty string, and was expected to be non-empty. </exception>
         internal ImplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
             RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, endpoint, optionalGlobalQuery);

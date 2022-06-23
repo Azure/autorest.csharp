@@ -192,6 +192,18 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\Generated"
     },
+    "dpg-customization-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
+    },
+    "dpg-initial-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-initial\\Generated"
+    },
+    "dpg-update1-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-update1\\Generated"
+    },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchFlattenInheritance\\Generated"
@@ -280,6 +292,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
     },
+    "MgmtDiscriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtDiscriminator\\Generated"
+    },
     "MgmtExpandResourceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExpandResourceTypes\\Generated"
@@ -299,6 +315,10 @@
     "MgmtKeyvault": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtKeyvault\\src\\Generated"
+    },
+    "MgmtKeyvault.Tests": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtKeyvault\\tests\\Generated"
     },
     "MgmtListMethods": {
       "commandName": "Project",
@@ -335,6 +355,10 @@
     "MgmtRenameRules": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtRenameRules\\Generated"
+    },
+    "MgmtResourceName": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtResourceName\\Generated"
     },
     "MgmtSafeFlatten": {
       "commandName": "Project",
@@ -431,6 +455,10 @@
     "ResourceRename": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
+    },
+    "SecurityDefinition-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SecurityDefinition-LowLevel\\Generated"
     },
     "SingletonResource": {
       "commandName": "Project",

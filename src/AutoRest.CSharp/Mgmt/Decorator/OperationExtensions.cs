@@ -53,17 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool TryGetConfigOperationName(this Operation operation, [MaybeNullWhen(false)] out string name)
         {
-            var operationId = operation.OperationId(MgmtContext.Library.GetRestClient(operation).OperationGroup);
-            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
-        }
-
-        public static string OperationId(this Operation operation, OperationGroup operationGroup)
-        {
-            if (_operationIdCache.TryGetValue(operation, out var result))
-                return result;
-            result = operationGroup.Key.IsNullOrEmpty() ? operation.Language.Default.Name : $"{operationGroup.Key}_{operation.Language.Default.Name}";
-            _operationIdCache.TryAdd(operation, result);
-            return result;
+            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name);
         }
 
         public static RequestPath GetRequestPath(this Operation operation, ResourceTypeSegment? hint = null)
@@ -205,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static RequestParameter? GetBodyParameter(this Operation operation)
         {
             var serviceRequest = operation.GetServiceRequest();
-            return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == ParameterLocation.Body);
+            return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == HttpParameterIn.Body);
         }
 
         public static ServiceRequest? GetServiceRequest(this Operation operation)

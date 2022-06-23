@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Azure.ResourceManager.Core;
+using Azure;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Fake.Models;
 using NUnit.Framework;
 using ReferenceTypes.Models;
@@ -23,11 +24,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private const string ProjectNamespace = "ReferenceTypes.Models";
         private IEnumerable<Type>? _referenceTypes;
         private IEnumerable<Type>? _projectTypes;
-        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(Resource)).GetTypes().Where(
+        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(ReferenceTypesResourceData)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ReferenceNamespace &&
             !t.IsEnum);
-        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(Resource)).GetTypes().Where(
+        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(ReferenceTypesResourceData)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ProjectNamespace &&
             !t.IsEnum);
@@ -51,10 +52,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(Resource), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesResourceData), ReferenceNamespace)]
         [TestCase(typeof(TrackedResource), ReferenceNamespace)]
-        [TestCase(typeof(Sku), ReferenceNamespace)]
-        [TestCase(typeof(SkuTier), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesSku), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesSkuTier), ReferenceNamespace)]
         [TestCase(typeof(CreatedByType), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
         [TestCase(typeof(PrivateLinkResourceData), ReferenceNamespace)]
@@ -68,9 +69,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(expectedNamespace, typeToTest.Namespace);
         }
 
-        [TestCase(typeof(Resource), typeof(ReferenceTypeAttribute))]
+        [TestCase(typeof(ReferenceTypesResourceData), typeof(ReferenceTypeAttribute))]
         [TestCase(typeof(TrackedResource), typeof(ReferenceTypeAttribute))]
-        [TestCase(typeof(Sku), typeof(PropertyReferenceTypeAttribute))]
+        [TestCase(typeof(ReferenceTypesSku), typeof(PropertyReferenceTypeAttribute))]
         [TestCase(typeof(PrivateLinkResourceData), typeof(TypeReferenceTypeAttribute))]
         [TestCase(typeof(PrivateLinkResourceList), typeof(TypeReferenceTypeAttribute))]
         [TestCase(typeof(PrivateEndpointConnectionData), typeof(TypeReferenceTypeAttribute))]
@@ -81,6 +82,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var ctors = referenceType.GetConstructors();
             Assert.IsNotNull(ctors.Any(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute)) != null), $"InitializationConstructor attribute was not found for {referenceType.Name}");
             Assert.IsNotNull(ctors.Any(c => c.GetCustomAttribute(typeof(SerializationConstructorAttribute)) != null), $"SerializationConstructor attribute was not found for {referenceType.Name}");
+        }
+
+        [Test]
+        public void ValidateResponseErrorFromAzureCore()
+        {
+            var property = typeof(ErrorResponse).GetProperty("Error");
+            Assert.IsNotNull(property);
+            Assert.AreEqual(typeof(ResponseError), property.PropertyType);
         }
     }
 }

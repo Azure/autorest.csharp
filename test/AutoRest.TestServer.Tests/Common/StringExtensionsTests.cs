@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace AutoRest.CSharp.Utilities
+namespace AutoRest.CSharp.Utilities.Tests
 {
     public class StringExtensionsTests
     {
@@ -170,6 +170,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("ListByFarmerId", "ApplicationData", "GetAllApplicationDataByFarmerId")]
         [TestCase("ListDataTip", "", "GetDataTips")]
         [TestCase("ListTipData", "", "GetAllTipData")]
+        [TestCase("ListMetricFeedbacksNext", "", "GetMetricFeedbacksNext")]
         public void ValidateRenameListToGet(string methodName, string resourceName, string expected)
         {
             var result = methodName.RenameListToGet(resourceName);

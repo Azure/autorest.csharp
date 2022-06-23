@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -43,7 +44,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
-            Description = BuilderHelpers.CreateDescription(objectSchema);
 
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
@@ -120,7 +120,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     property.Description,
                     type,
                     null,
-                    false
+                    ValidationType.None,
+                    null
                 );
 
                 ownsDiscriminatorProperty |= property == Discriminator?.Property;
@@ -149,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? "protected" : "internal",
+                IsAbstract ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
@@ -212,12 +213,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
+                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.Description,
                         inputType,
                         defaultParameterValue,
-                        property.SchemaProperty?.Nullable != true
+                        validate,
+                        null
                     );
 
                     defaultCtorParameters.Add(defaultCtorParameter);
@@ -252,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? "protected" : _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
+                IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
@@ -573,6 +576,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return objectProperty != null;
+        }
+
+        protected override string CreateDescription()
+        {
+            return BuilderHelpers.CreateDescription(ObjectSchema);
         }
     }
 }

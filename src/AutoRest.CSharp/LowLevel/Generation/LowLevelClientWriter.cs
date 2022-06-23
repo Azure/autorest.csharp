@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -22,20 +24,23 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Response = Azure.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter : ClientWriter
     {
-        private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
-        private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
-        private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
-        private static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", "Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), false) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
+        private static readonly Parameter ScopeNameParameter = new("diagnosticsScopeName", null, new CSharpType(typeof(string)), null, ValidationType.None, null);
+        private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, ValidationType.None, null);
+        private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
+        private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, ValidationType.None, null);
 
         private static readonly FormattableString PageableProcessMessageMethodName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessage)}";
         private static readonly FormattableString PageableProcessMessageMethodAsyncName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessageAsync)}";
-        private static readonly FormattableString LroProcessMessageMethodName = $"{typeof(LowLevelOperationHelpers)}.{nameof(LowLevelOperationHelpers.ProcessMessage)}";
-        private static readonly FormattableString LroProcessMessageMethodAsyncName = $"{typeof(LowLevelOperationHelpers)}.{nameof(LowLevelOperationHelpers.ProcessMessageAsync)}";
+        private static readonly FormattableString LroProcessMessageMethodName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessage)}";
+        private static readonly FormattableString LroProcessMessageMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageAsync)}";
+        private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValue)}";
+        private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync)}";
         private static readonly FormattableString CreatePageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}";
         private static readonly FormattableString CreateAsyncPageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}";
 
@@ -99,10 +104,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConstructors(CodeWriter writer, LowLevelClient client)
         {
-            WriteEmptyConstructor(writer, client);
-            foreach (var constructor in client.PublicConstructors)
+            foreach (var constructor in client.SecondaryConstructors)
             {
-                WritePublicConstructor(writer, client, constructor);
+                WriteSecondaryPublicConstructor(writer, constructor);
+            }
+
+            foreach (var constructor in client.PrimaryConstructors)
+            {
+                WritePrimaryPublicConstructor(writer, client, constructor);
             }
 
             if (client.IsSubClient)
@@ -111,16 +120,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteEmptyConstructor(CodeWriter writer, TypeProvider client)
+        private static void WriteSecondaryPublicConstructor(CodeWriter writer, ConstructorSignature signature)
         {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
-            using (writer.Scope($"protected {client.Type.Name:D}()"))
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
             {
             }
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
+        private static void WritePrimaryPublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -129,7 +138,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
-                writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I});");
+                writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
                 FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
                 FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
@@ -199,12 +208,13 @@ namespace AutoRest.CSharp.Generation.Writers
             var restMethod = clientMethod.RequestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
 
-            var returnType = async
-                ? headAsBoolean ? typeof(Task<Response<bool>>) : typeof(Task<Response>)
-                : headAsBoolean ? typeof(Response<bool>) : typeof(Response);
-
-            using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
+            using (WriteClientMethodDeclaration(writer, clientMethod, async))
             {
+                if (restMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.RequestMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
+                {
+                    writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.RequestMethod.ConditionHeaderFlag);
+                    writer.Line();
+                }
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
@@ -229,26 +239,39 @@ namespace AutoRest.CSharp.Generation.Writers
             var method = clientMethod.RequestMethod;
             var pagingInfo = clientMethod.PagingInfo!;
             var nextPageMethod = pagingInfo.NextPageMethod;
-            var returnType = async ? typeof(AsyncPageable<BinaryData>) : typeof(Pageable<BinaryData>);
-
-            var createPageableMethodName = async ? CreateAsyncPageableMethodName : CreatePageableMethodName;
-
-            using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
+            var privateMethodSignature = (clientMethod.Signature with
             {
-                var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
-                var createEnumerableParameters = async ? new[] { NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter } : new[] { NextLinkParameter, PageSizeHintParameter };
-                var createEnumerableReturnType = async ? typeof(IAsyncEnumerable<Page<BinaryData>>) : typeof(IEnumerable<Page<BinaryData>>);
+                Name = $"{clientMethod.Signature.Name}Implementation",
+                Modifiers = Private,
+                Description = null,
+                Parameters = clientMethod.Signature.Parameters
+                    .Select(p => p with { DefaultValue = null })
+                    .Prepend(ScopeNameParameter).ToArray()
+            }).WithAsync(async);
 
-                writer.Line($"return {createPageableMethodName}({createEnumerableMethod:D}, {fields.ClientDiagnosticsProperty.Name:I}, {clientMethod.Diagnostic.ScopeName:L});");
+            using (WriteClientMethodDeclaration(writer, clientMethod, async))
+            {
+                writer.Line($"return {privateMethodSignature.Name}({clientMethod.Diagnostic.ScopeName:L}, {clientMethod.Signature.Parameters.GetIdentifiersFormattable()});");
+            }
+
+            writer.Line();
+
+            using (writer.WriteMethodDeclaration(privateMethodSignature))
+            {
+                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
+
+                var createPageableMethodName = async ? CreateAsyncPageableMethodName : CreatePageableMethodName;
+                writer.Line($"return {createPageableMethodName}({createEnumerableMethod:D}, {fields.ClientDiagnosticsProperty.Name:I}, {ScopeNameParameter.Name:I});");
 
                 // We don't properly handle the case when one of the parameters has a name "nextLink" but isn't a continuation token
                 // So we assume that it is a string and use variable "nextLink" without declaration.
-                var createEnumerableMethodSignature = new MethodSignature(createEnumerableMethod.ActualName, null, async ? "async " : string.Empty, createEnumerableReturnType, null, createEnumerableParameters);
-                using (writer.WriteMethodDeclaration(createEnumerableMethodSignature))
+
+                using (writer.WriteMethodDeclaration(createEnumerableMethodSignature with { Name = createEnumerableMethod.ActualName }))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var pageVariable = new CodeWriterDeclaration("page");
-                    FormattableString processMessageMethodParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                    FormattableString processMessageMethodParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {KnownParameters.EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                     if (nextPageMethod == null)
                     {
@@ -256,30 +279,31 @@ namespace AutoRest.CSharp.Generation.Writers
                             .Line($"using var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});")
                             .Append($"var {pageVariable:D} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, processMessageMethodParameters)
                             .Line($"yield return {pageVariable};");
-                        return;
                     }
-
-                    using (writer.Scope($"do", newLine: false))
+                    else
                     {
-                        if (method != nextPageMethod)
+                        using (writer.Scope($"do", newLine: false))
                         {
+                            if (method != nextPageMethod)
+                            {
+                                writer
+                                    .Line($"var {messageVariable:D} = string.IsNullOrEmpty(nextLink)")
+                                    .Line($"    ? Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()})")
+                                    .Line($"    : Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
+                            }
+                            else
+                            {
+                                writer.Line($"var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});");
+                            }
+
                             writer
-                                .Line($"var {messageVariable:D} = string.IsNullOrEmpty(nextLink)")
-                                .Line($"    ? Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()})")
-                                .Line($"    : Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
-                        }
-                        else
-                        {
-                            writer.Line($"var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});");
+                                .Append($"var {pageVariable:D} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, processMessageMethodParameters)
+                                .Line($"nextLink = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
+                                .Line($"yield return {pageVariable};");
                         }
 
-                        writer
-                            .Append($"var {pageVariable:D} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, processMessageMethodParameters)
-                            .Line($"nextLink = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
-                            .Line($"yield return {pageVariable};");
+                        writer.Line($"while (!string.IsNullOrEmpty(nextLink));");
                     }
-
-                    writer.Line($"while (!string.IsNullOrEmpty(nextLink));");
                 }
             }
 
@@ -288,73 +312,88 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
-            var startMethod = clientMethod.RequestMethod;
             var pagingInfo = clientMethod.PagingInfo;
-            var nextPageMethod = clientMethod.PagingInfo?.NextPageMethod;
-            var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
-            var scopeName = clientMethod.Diagnostic.ScopeName;
-            var isPageable = nextPageMethod != null;
+            var nextPageMethod = pagingInfo?.NextPageMethod;
 
-            var returnType = isPageable
-                ? async ? typeof(Task<Operation<AsyncPageable<BinaryData>>>) : typeof(Operation<Pageable<BinaryData>>)
-                : async ? typeof(Task<Operation<BinaryData>>) : typeof(Operation<BinaryData>);
-
-            using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
+            if (pagingInfo != null && nextPageMethod != null)
             {
-                var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
-                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+                WritePageableLongRunningOperationMethod(writer, clientMethod, fields, pagingInfo, nextPageMethod, async);
+            }
+            else
+            {
+                var startMethod = clientMethod.RequestMethod;
+                var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
+                var scopeName = clientMethod.Diagnostic.ScopeName;
+
+                using (WriteClientMethodDeclaration(writer, clientMethod, async))
                 {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    var processMessageParameters = isPageable
-                        ? (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}, {createEnumerableMethod:D}"
-                        : (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
-
-                    writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
-                        .AppendRaw("return ")
-                        .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
-                }
-
-                if (nextPageMethod != null && pagingInfo != null)
-                {
-                    var createEnumerableParameters = async
-                        ? new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter }
-                        : new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter };
-                    var createEnumerableReturnType = async ? typeof(IAsyncEnumerable<Page<BinaryData>>) : typeof(IEnumerable<Page<BinaryData>>);
-                    var createEnumerableSignature = new MethodSignature(createEnumerableMethod.ActualName, null, async ? "async " : string.Empty, createEnumerableReturnType, null, createEnumerableParameters);
-
-                    using (writer.Line().WriteMethodDeclaration(createEnumerableSignature))
+                    using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
                     {
-                        var pageVariable = new CodeWriterDeclaration("page");
-                        writer.Line($"Page<BinaryData> {pageVariable:D};");
+                        var messageVariable = new CodeWriterDeclaration("message");
+                        var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
 
-                        // We don't properly handle the case when one of the parameters has a name "nextLink" but isn't a continuation token
-                        // So we assume that it is a string and use variable "nextLink" without declaration.
-                        using (writer.Scope($"if ({NextLinkParameter.Name} == null)"))
-                        {
-                            writer
-                                .Line($"{pageVariable} = {typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.BuildPageForResponse)}(response, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L});")
-                                .Line($"{NextLinkParameter.Name} = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
-                                .Line($"yield return {pageVariable};");
-                        }
-
-                        using (writer.Scope($"while (!string.IsNullOrEmpty({NextLinkParameter.Name}))"))
-                        {
-                            var messageVariable = new CodeWriterDeclaration("message");
-                            writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
-
-                            FormattableString pageableProcessMessageParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
-
-                            writer
-                                .Append($"{pageVariable} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, pageableProcessMessageParameters)
-                                .Line($"{NextLinkParameter.Name} = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
-                                .Line($"yield return {pageVariable};");
-                        }
+                        writer
+                            .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
+                            .AppendRaw("return ")
+                            .WriteMethodCall(async, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                     }
                 }
             }
 
             writer.Line();
+        }
+
+        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, bool async)
+        {
+            var startMethod = clientMethod.RequestMethod;
+            var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
+            var scopeName = clientMethod.Diagnostic.ScopeName;
+
+            using (WriteClientMethodDeclaration(writer, clientMethod, async))
+            {
+                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
+
+                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+                {
+                    var messageVariable = new CodeWriterDeclaration("message");
+                    var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}, {createEnumerableMethod:D}";
+
+                    writer
+                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
+                        .AppendRaw("return ")
+                        .WriteMethodCall(async, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
+                }
+
+                using (writer.Line().WriteMethodDeclaration(createEnumerableMethodSignature with { Name = createEnumerableMethod.ActualName }))
+                {
+                    var pageVariable = new CodeWriterDeclaration("page");
+                    writer.Line($"Page<BinaryData> {pageVariable:D};");
+
+                    // We don't properly handle the case when one of the parameters has a name "nextLink" but isn't a continuation token
+                    // So we assume that it is a string and use variable "nextLink" without declaration.
+                    using (writer.Scope($"if ({NextLinkParameter.Name} == null)"))
+                    {
+                        writer
+                            .Line($"{pageVariable} = {typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.BuildPageForResponse)}(response, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L});")
+                            .Line($"{NextLinkParameter.Name} = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
+                            .Line($"yield return {pageVariable};");
+                    }
+
+                    using (writer.Scope($"while (!string.IsNullOrEmpty({NextLinkParameter.Name}))"))
+                    {
+                        var messageVariable = new CodeWriterDeclaration("message");
+                        writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
+
+                        FormattableString pageableProcessMessageParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {KnownParameters.EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+
+                        writer
+                            .Append($"{pageVariable} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, pageableProcessMessageParameters)
+                            .Line($"{NextLinkParameter.Name} = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
+                            .Line($"yield return {pageVariable};");
+                    }
+                }
+            }
         }
 
         private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelClient client)
@@ -414,43 +453,55 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteResponseClassifier(CodeWriter writer, string responseClassifierTypeName, StatusCodes[] statusCodes)
         {
-            using (writer.Scope($"private sealed class {responseClassifierTypeName} : {typeof(ResponseClassifier)}"))
+            var hasStatusCodeRanges = statusCodes.Any(statusCode => statusCode.Family != null);
+            if (hasStatusCodeRanges)
             {
-                writer.Line($"private static {typeof(ResponseClassifier)} _instance;");
-                writer.Line($"public static {typeof(ResponseClassifier)} Instance => _instance ??= new {responseClassifierTypeName}();");
-
-                using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
+                // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
+                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
                 {
-                    using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
+                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
                     {
-                        foreach (var statusCode in statusCodes)
+                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
                         {
-                            if (statusCode.Code != null)
-                            {
-                                writer.Line($"{statusCode.Code} => false,");
-                            }
-                            else
+                            foreach (var statusCode in statusCodes)
                             {
                                 writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
                             }
-                        }
 
-                        writer.LineRaw("_ => true");
+                            writer.LineRaw("_ => true");
+                        }
                     }
                 }
+                writer.Line();
+            }
+
+            writer.Line($"private static {typeof(ResponseClassifier)} _{responseClassifierTypeName.FirstCharToLowerCase()};");
+            writer.Append($"private static {typeof(ResponseClassifier)} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
+            if (hasStatusCodeRanges)
+            {
+                writer.Line($"{responseClassifierTypeName}Override();");
+            }
+            else
+            {
+                writer.Append($"{typeof(StatusCodeClassifier)}(stackalloc ushort[]{{");
+                foreach (var statusCode in statusCodes)
+                {
+                    if (statusCode.Code != null)
+                    {
+                        writer.Append($"{statusCode.Code}, ");
+                    }
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($"}});");
             }
         }
 
-        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)
+        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var parameters = clientMethod.IsLongRunning
-                ? clientMethod.RequestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
-                : clientMethod.RequestMethod.Parameters;
-            var asyncText = async && (clientMethod.PagingInfo == null || clientMethod.IsLongRunning) ? " async" : string.Empty;
-            var methodSignature = new MethodSignature(CreateMethodName(clientMethod.RequestMethod.Name, async), clientMethod.RequestMethod.Description, $"{clientMethod.RequestMethod.Accessibility} virtual{asyncText}", returnType, null, parameters);
+            var methodSignature = clientMethod.Signature.WithAsync(async);
 
             writer.WriteMethodDocumentation(methodSignature);
-            WriteSchemaDocumentationRemarks(writer, operationSchemas);
+            WriteSchemaDocumentationRemarks(writer, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
@@ -465,20 +516,64 @@ namespace AutoRest.CSharp.Generation.Writers
             return new ResponseClassifierType(statusCodes);
         }
 
-        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelOperationSchemaInfo documentationSchemas)
+        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
+            var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            AddDocumentationForSchema(schemas, documentationSchemas.RequestBodySchema, "Request Body", true);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseErrorSchema, "Response Error", false);
+            bool hasRequestSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+
+            bool hasResponseSchema = false;
+            if (clientMethod.PagingInfo != null && clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responseObj)
+            {
+                Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
+                hasResponseSchema = AddResquestOrResponseSchema(schemas, itemSchema, "Response Body", true);
+            }
+            else
+            {
+                hasResponseSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+
+            }
 
             if (schemas.Count > 0)
             {
-                writer.WriteXmlDocumentation("remarks", $"{schemas}");
+                var schemaDesription = "";
+                if (hasRequestSchema && hasResponseSchema)
+                {
+                    if (clientMethod.PagingInfo == null)
+                    {
+                        schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                    } else
+                    {
+                        schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
+                    }
+                } else if (hasRequestSchema)
+                {
+                    schemaDesription = "Below is the JSON schema for the request payload.";
+                } else if (hasResponseSchema)
+                {
+                    if (clientMethod.PagingInfo == null)
+                    {
+                        schemaDesription = "Below is the JSON schema for the response payload.";
+                    }
+                    else
+                    {
+                        schemaDesription = "Below is the JSON schema for one item in the pageable response.";
+                    }
+                }
+                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
             }
 
-            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
+            static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
+            {
+                if (restMethod.Operation.ExternalDocs != null)
+                {
+                    return $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.Operation.ExternalDocs.Url}{Environment.NewLine}";
+                }
+                return $"";
+            }
+
+            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried, bool collapse = false)
             {
                 if (schema == null)
                 {
@@ -489,8 +584,56 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (docs != null)
                 {
-                    formattedSchemas.Add($"Schema for <c>{schemaName}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    if (collapse)
+                    {
+                        formattedSchemas.Add($"<details><summary>{schema.CSharpName()}</summary>");
+                    }
+                    formattedSchemas.Add($"Schema for <c>{schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    if (collapse)
+                    {
+                        formattedSchemas.Add($"</details>{Environment.NewLine}");
+                    }
                 }
+            }
+
+            static bool AddResquestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
+            {
+                if (schema == null)
+                {
+                    return false;
+                }
+
+                var schemasToAdd = new List<FormattableString>();
+                // check if it is base schema. if so, add children schemas.
+                if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
+                {
+                    if (objSchema.Children.All.Count > 1) schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
+                    foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
+                    {
+                        if (child.index == 1)
+                        {
+                            schemasToAdd.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
+                        }
+                        AddDocumentationForSchema(schemasToAdd, child.schema, $"{child.schema.CSharpName()} {schemaName}", showRequired, true);
+                    }
+                    if (objSchema.Children.All.Count > 1)
+                    {
+                        schemasToAdd.Add($"</details>{Environment.NewLine}");
+                    }
+                }
+                else
+                {
+                    AddDocumentationForSchema(schemasToAdd, schema, schemaName, showRequired);
+                }
+
+                if (schemasToAdd.Count > 0)
+                {
+                    formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}{Environment.NewLine}");
+                    formattedSchemas.AddRange(schemasToAdd);
+                    return true;
+                }
+
+                return false;
             }
         }
 
@@ -508,7 +651,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var row in doc.DocumentationRows)
             {
-                var required = showRequired && row.Required ? " (required)" : string.Empty;
+                var required = showRequired ? (row.Required ? " # Required." : " # Optional.") : string.Empty;
+                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # {row.Description}" : $" {row.Description}");
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
                 builder.AppendIndentation(indentation).Append($"{row.Name}: ");
@@ -522,10 +666,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         builder.AppendIndentation(indentation + 2).AppendLine("{");
                         BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 4);
                         builder.AppendIndentation(indentation + 2).AppendLine("}");
-                        builder.AppendIndentation(indentation).AppendLine($"]{required},");
+                        builder.AppendIndentation(indentation).AppendLine($"],{required}{description}");
                     }
                     else
-                        builder.AppendLine($"[{rowType}]{required},");
+                        builder.AppendLine($"[{rowType}],{required}{description}");
                 }
                 else
                 {
@@ -535,15 +679,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         var docToProcess = docDict[rowType];
                         docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
                         BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 2);
-                        builder.AppendIndentation(indentation).Append("}").AppendLine($"{required},");
+                        builder.AppendIndentation(indentation).Append("}").AppendLine($",{required}{description}");
                     }
                     else
-                        builder.AppendLine($"{rowType}{required},");
+                        builder.AppendLine($"{rowType},{required}{description}");
                 }
             }
-            // Remove the last "," by first removing ",\n", then add back "\n".
-            builder.Length -= 1 + Environment.NewLine.Length;
-            builder.AppendLine();
         }
 
         private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
@@ -584,6 +725,20 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (Property prop in s.Properties)
                             {
+                                if (prop.Schema is ChoiceSchema cs && o.DiscriminatorValue != null)
+                                {
+                                    if (s.Discriminator != null && s.Discriminator.Property.Language.Default.Name == prop.Language.Default.Name)
+                                    {
+                                        propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
+                                            prop.SerializedName,
+                                            o.DiscriminatorValue,
+                                            prop.Required ?? false,
+                                            BuilderHelpers.EscapeXmlDescription(prop.Language.Default.Description)));
+
+                                        schemasToExplore.Enqueue(prop.Schema);
+                                        continue;
+                                    }
+                                }
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     prop.SerializedName,
                                     BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(prop.Schema)),

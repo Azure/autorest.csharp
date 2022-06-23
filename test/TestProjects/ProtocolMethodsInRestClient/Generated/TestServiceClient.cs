@@ -21,6 +21,7 @@ namespace ProtocolMethodsInRestClient
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal TestServiceRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of TestServiceClient for mocking. </summary>
         protected TestServiceClient()
@@ -49,6 +50,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal TestServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new TestServiceRestClient(clientDiagnostics, pipeline, endpoint);

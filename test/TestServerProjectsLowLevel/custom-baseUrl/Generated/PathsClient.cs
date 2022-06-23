@@ -34,16 +34,23 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PathsClient(AzureKeyCredential credential) : this(credential, "host", new PathsClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of PathsClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential, string host = "host", PathsClientOptions options = null)
+        public PathsClient(AzureKeyCredential credential, string host, PathsClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(host, nameof(host));
             options ??= new PathsClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
@@ -53,15 +60,6 @@ namespace custom_baseUrl_LowLevel
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -84,15 +82,6 @@ namespace custom_baseUrl_LowLevel
         /// <param name="accountName"> Account Name. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -113,7 +102,7 @@ namespace custom_baseUrl_LowLevel
 
         internal HttpMessage CreateGetEmptyRequest(string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -123,22 +112,10 @@ namespace custom_baseUrl_LowLevel
             uri.AppendPath("/customuri", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

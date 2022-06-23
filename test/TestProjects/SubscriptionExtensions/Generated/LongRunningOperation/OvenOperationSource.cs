@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace SubscriptionExtensions
 {
-    internal class OvenOperationSource : IOperationSource<Oven>
+    internal class OvenOperationSource : IOperationSource<OvenResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace SubscriptionExtensions
             _client = client;
         }
 
-        Oven IOperationSource<Oven>.CreateResult(Response response, CancellationToken cancellationToken)
+        OvenResource IOperationSource<OvenResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = OvenData.DeserializeOvenData(document.RootElement);
-            return new Oven(_client, data);
+            return new OvenResource(_client, data);
         }
 
-        async ValueTask<Oven> IOperationSource<Oven>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<OvenResource> IOperationSource<OvenResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = OvenData.DeserializeOvenData(document.RootElement);
-            return new Oven(_client, data);
+            return new OvenResource(_client, data);
         }
     }
 }

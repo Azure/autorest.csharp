@@ -18,9 +18,7 @@ namespace body_datetime
     internal partial class DatetimeRestClient
     {
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,11 +27,12 @@ namespace body_datetime
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public DatetimeRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateGetNullRequest()
@@ -42,7 +41,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -109,7 +108,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -162,7 +161,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/overflow", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -215,7 +214,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/underflow", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -268,7 +267,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/utc", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -317,7 +316,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/utc7ms", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -366,7 +365,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/utc/lowercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -419,7 +418,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/utc/uppercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -472,7 +471,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/utc7ms/uppercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -525,7 +524,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/localpositiveoffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -574,7 +573,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -627,7 +626,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -680,7 +679,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/localnegativeoffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -729,7 +728,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -782,7 +781,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -835,7 +834,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/utc", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -884,7 +883,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/utc", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -937,7 +936,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/localpositiveoffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -986,7 +985,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/localpositiveoffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1039,7 +1038,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/localnegativeoffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1088,7 +1087,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/localnegativeoffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1141,7 +1140,7 @@ namespace body_datetime
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/datetime/min/localnooffset", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

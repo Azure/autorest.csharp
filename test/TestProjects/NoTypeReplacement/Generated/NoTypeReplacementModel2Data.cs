@@ -22,10 +22,10 @@ namespace NoTypeReplacement
         /// <summary> Initializes a new instance of NoTypeReplacementModel2Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal NoTypeReplacementModel2Data(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, NoSubResourceModel foo) : base(id, name, type, systemData)
+        internal NoTypeReplacementModel2Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, NoSubResourceModel foo) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
         }

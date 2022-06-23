@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request with non resource. </summary>
     public partial class LROsPutAsyncNonResourceOperation : Operation<Sku>, IOperationSource<Sku>
     {
-        private readonly OperationInternals<Sku> _operation;
+        private readonly OperationInternal<Sku> _operation;
 
         /// <summary> Initializes a new instance of LROsPutAsyncNonResourceOperation for mocking. </summary>
         protected LROsPutAsyncNonResourceOperation()
@@ -28,11 +28,14 @@ namespace lro
 
         internal LROsPutAsyncNonResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncNonResourceOperation");
+            IOperation<Sku> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<Sku>(clientDiagnostics, nextLinkOperation, response, "LROsPutAsyncNonResourceOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override Sku Value => _operation.Value;
@@ -44,13 +47,19 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
 
         /// <inheritdoc />
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
+
+        /// <inheritdoc />
+        public override Response<Sku> WaitForCompletion(CancellationToken cancellationToken = default) => _operation.WaitForCompletion(cancellationToken);
+
+        /// <inheritdoc />
+        public override Response<Sku> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletion(pollingInterval, cancellationToken);
 
         /// <inheritdoc />
         public override ValueTask<Response<Sku>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);

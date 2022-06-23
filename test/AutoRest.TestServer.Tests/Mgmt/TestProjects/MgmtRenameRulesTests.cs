@@ -12,8 +12,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(true, "AutomaticOSUpgradePolicy")]
         [TestCase(false, "AutomaticOsUpgradePolicy")]
-        [TestCase(true, "VmDiskTypes")]
-        [TestCase(false, "VMDiskTypes")]
+        [TestCase(true, "VmDiskType")]
+        [TestCase(false, "VMDiskType")]
         [TestCase(true, "IPVersion")]
         [TestCase(false, "IpVersion")]
         [TestCase(true, "VirtualMachineScaleSetVmInstanceIds")]
@@ -34,6 +34,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(false, "OsState", "ImageOSDisk")]
         [TestCase(true, "IPTagType", "VirtualMachineScaleSetIPTag")]
         [TestCase(false, "IpTagType", "VirtualMachineScaleSetIPTag")]
+        [TestCase(true, "ResourceType", "ImageData")]
+        [TestCase(false, "Type", "ImageData")]
+        [TestCase(true, "VirtualMachineExtensionHandlerInstanceViewType", "VirtualMachineExtensionHandlerInstanceView")]
+        [TestCase(false, "InstanceViewType", "VirtualMachineExtensionHandlerInstanceView")]
         public void ValidatePropertyName(bool exist, string propertyName, string className)
         {
             var type = FindTypeByName(className);

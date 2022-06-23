@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer = new CodeWriter();
             _opSource = opSource;
             _isReturningResource = MgmtContext.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
-            if (_opSource.Resource is not null && Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.Type.Name, out var mappings))
+            if (_opSource.Resource is not null && Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.ResourceName, out var mappings))
                 _operationIdMappings = mappings;
         }
 
@@ -78,10 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"return data;");
                             _writer.Line();
                             _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
-                            var createIdMethods = resource.CreateResourceIdentifierMethodSignature();
-                            if (createIdMethods.Count != 1)
-                                throw new InvalidOperationException($"In order to write mappings we need to have exactly 1 CreateResourceIdentifierMethodSignature.  We found {createIdMethods.Count} for {resource.Type.Name}.");
-                            var createIdMethod = createIdMethods.Values.First();
+                            var createIdMethod = resource.CreateResourceIdentifierMethodSignature();
                             foreach (var param in createIdMethod.Parameters)
                             {
                                 _writer.Line();
@@ -135,13 +132,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, false, valueCallback, responseVariable);
+                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, false, valueCallback, responseVariable, _opSource.ReturnType);
             }
             _writer.Line();
 
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable);
+                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable, _opSource.ReturnType);
             }
         }
 

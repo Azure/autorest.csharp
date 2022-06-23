@@ -21,6 +21,7 @@ namespace MultipleInputFiles
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MultipleInputFilesRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient for mocking. </summary>
         protected MultipleInputFilesClient()
@@ -31,7 +32,7 @@ namespace MultipleInputFiles
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(TokenCredential credential, Source? source = default, MultipleInputFilesClientOptions options = null)
+        public MultipleInputFilesClient(TokenCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
             {
@@ -50,7 +51,7 @@ namespace MultipleInputFiles
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = default, MultipleInputFilesClientOptions options = null)
+        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
             {
@@ -68,7 +69,8 @@ namespace MultipleInputFiles
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="source"> source - server parameter. </param>
-        internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
+        internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = null)
         {
             RestClient = new MultipleInputFilesRestClient(clientDiagnostics, pipeline, source);
             _clientDiagnostics = clientDiagnostics;

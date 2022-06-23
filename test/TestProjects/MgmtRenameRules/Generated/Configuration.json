@@ -9,6 +9,9 @@
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
+  "KeepOrphanedModels": [
+    "VmDiskType"
+  ],
   "RenameRules": {
     "Os": "OS",
     "Ip": "IP",
@@ -18,5 +21,13 @@
     "VM": "Vm",
     "VMs": "Vms",
     "VMScaleSet": "VmScaleSet"
+  },
+  "FormatByNameRules": {
+    "tenantId": "uuid",
+    "resourceType": "resource-type",
+    "etag": "etag",
+    "location": "azure-location",
+    "*Uri": "Uri",
+    "*Uris": "Uri"
   }
 }

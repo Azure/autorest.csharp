@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -13,8 +14,9 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -22,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource)
-            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
+        public ResourceCollection(OperationSet operationSet, IEnumerable<Operation> operations, Resource resource)
+            : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
         {
             Resource = resource;
         }
@@ -31,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmCollection);
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => p.IsRequired))
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
@@ -65,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
               Name: Type.Name,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-              Modifiers: "internal",
+              Modifiers: Internal,
               Parameters: _armClientCtorParameters.Concat(ExtraConstructorParameters).ToArray(),
               Initializer: new(
                   isBase: true,
@@ -77,21 +79,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var result = new List<ContextualParameterMapping>();
             Operation? op = null;
-            OperationSet? opSet = null;
-            foreach ((var operationSet, var operations) in _allOperationMap)
+            foreach (var operation in _clientOperations)
             {
-                foreach (var operation in operations)
+                if (IsListOperation(operation, OperationSet))
                 {
-                    if (IsListOperation(operation, operationSet))
-                    {
-                        op = operation;
-                        opSet = operationSet;
-                        break;
-                    }
+                    op = operation;
+                    break;
                 }
             }
 
-            if (op is null || opSet is null)
+            if (op is null)
                 return result;
 
             RestClientMethod method = MgmtContext.Library.GetRestClientMethod(op);
@@ -101,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var candidatesOfParameters = new List<Parameter>(method.Parameters);
 
             var opRequestPath = op.GetRequestPath(ResourceType);
-            foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(opSet, opRequestPath)))
+            foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(OperationSet, opRequestPath)))
             {
                 var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
                 if (index < 0)
@@ -128,11 +125,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             // if this resource was listed in list-exception section, we suppress the exception here
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
-            var suppressListException = RequestPaths.Any(path => Configuration.MgmtConfiguration.ListException.Contains(path))
+            var suppressListException = Configuration.MgmtConfiguration.ListException.Contains(RequestPath)
                 || Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
             if (!suppressListException && getAllOperation == null)
-                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method");
+                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPath: {RequestPath}) does not have a `GetAll` method");
 
             if (getAllOperation == null)
                 return getAllOperation;
@@ -175,8 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
-            var requestPath = operation.GetHttpPath();
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -202,11 +198,24 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operationRequestPath.GetScopePath().Append(contextualPath.TrimScope());
         }
 
-        protected override string DefaultName => Resource.Type.Name + _suffixValue;
+        // name after `{ResourceName}Collection`
+        protected override string DefaultName => ResourceName + _suffixValue;
 
-        protected override string CreateDescription(string clientPrefix)
+        protected override FormattableString CreateDescription(string clientPrefix)
         {
-            return $"A class representing collection of {clientPrefix} and their operations over its parent.";
+            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            List<FormattableString> lines = new List<FormattableString>();
+            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : Resource.Parent().First();
+
+            lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
+            if (parent is not null)
+            {
+                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+                lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
+                lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+            }
+
+            return FormattableStringHelpers.Join(lines, "\r\n");
         }
 
         protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
@@ -226,12 +235,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Exists",
                         typeof(bool),
                         $"Checks to see if the resource exists in azure.")));
-                result.Add(MgmtClientOperation.FromOperation(
-                    new MgmtRestOperation(
-                        getMgmtRestOperation,
-                        "GetIfExists",
-                        getMgmtRestOperation.MgmtReturnType,
-                        $"Tries to get details for this resource from the service.")));
+                //result.Add(MgmtClientOperation.FromOperation(
+                //    new MgmtRestOperation(
+                //        getMgmtRestOperation,
+                //        "GetIfExists",
+                //        getMgmtRestOperation.MgmtReturnType,
+                //        $"Tries to get details for this resource from the service.")));
             }
 
             return result;

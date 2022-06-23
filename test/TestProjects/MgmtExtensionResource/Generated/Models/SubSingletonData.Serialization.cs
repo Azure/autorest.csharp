@@ -19,7 +19,7 @@ namespace MgmtExtensionResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("something"))
@@ -39,16 +39,21 @@ namespace MgmtExtensionResource
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new SubSingletonData(id, name, type, systemData, something.Value);
+            return new SubSingletonData(id, name, type, systemData.Value, something.Value);
         }
     }
 }

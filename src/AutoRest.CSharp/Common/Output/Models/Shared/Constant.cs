@@ -53,8 +53,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
         }
 
         public static Constant Default(CSharpType type)
-        {
-            return new Constant(null, type);
-        }
+            => type.IsValueType && !type.IsNullable ? new Constant(NewInstanceSentinel, type) : new Constant(null, type);
     }
 }

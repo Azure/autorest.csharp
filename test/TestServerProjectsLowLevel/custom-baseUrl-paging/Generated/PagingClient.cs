@@ -36,16 +36,23 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PagingClient(AzureKeyCredential credential) : this(credential, "host", new PagingClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of PagingClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, string host = "host", PagingClientOptions options = null)
+        public PagingClient(AzureKeyCredential credential, string host, PagingClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(host, nameof(host));
             options ??= new PagingClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
@@ -56,17 +63,16 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -75,7 +81,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagesPartialUrl");
+            return GetPagesPartialUrlImplementationAsync("PagingClient.GetPagesPartialUrl", accountName, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesPartialUrlImplementationAsync(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -95,17 +106,16 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -114,7 +124,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagesPartialUrl");
+            return GetPagesPartialUrlImplementation("PagingClient.GetPagesPartialUrl", accountName, context);
+        }
+
+        private Pageable<BinaryData> GetPagesPartialUrlImplementation(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -134,17 +149,16 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -153,7 +167,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperation");
+            return GetPagesPartialUrlOperationImplementationAsync("PagingClient.GetPagesPartialUrlOperation", accountName, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesPartialUrlOperationImplementationAsync(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -173,17 +192,16 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -192,7 +210,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperation");
+            return GetPagesPartialUrlOperationImplementation("PagingClient.GetPagesPartialUrlOperation", accountName, context);
+        }
+
+        private Pageable<BinaryData> GetPagesPartialUrlOperationImplementation(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -213,17 +236,16 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -233,7 +255,12 @@ namespace custom_baseUrl_paging_LowLevel
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperationNext");
+            return GetPagesPartialUrlOperationNextImplementationAsync("PagingClient.GetPagesPartialUrlOperationNext", accountName, nextLink, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextImplementationAsync(string diagnosticsScopeName, string accountName, string nextLink, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -252,17 +279,16 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -272,7 +298,12 @@ namespace custom_baseUrl_paging_LowLevel
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperationNext");
+            return GetPagesPartialUrlOperationNextImplementation("PagingClient.GetPagesPartialUrlOperationNext", accountName, nextLink, context);
+        }
+
+        private Pageable<BinaryData> GetPagesPartialUrlOperationNextImplementation(string diagnosticsScopeName, string accountName, string nextLink, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -287,7 +318,7 @@ namespace custom_baseUrl_paging_LowLevel
 
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -297,13 +328,12 @@ namespace custom_baseUrl_paging_LowLevel
             uri.AppendPath("/paging/customurl/partialnextlink", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -313,13 +343,12 @@ namespace custom_baseUrl_paging_LowLevel
             uri.AppendPath("/paging/customurl/partialnextlinkop", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -330,13 +359,12 @@ namespace custom_baseUrl_paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -346,22 +374,10 @@ namespace custom_baseUrl_paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

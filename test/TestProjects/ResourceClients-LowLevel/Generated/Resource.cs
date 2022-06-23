@@ -19,15 +19,13 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> Group identifier. </summary>
         public string GroupId { get; }
 
         /// <summary> Item identifier. </summary>
         public string ItemId { get; }
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -41,8 +39,8 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
-        /// <param name="pipeline"> The pipeline instance to use. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="itemId"> Item identifier. </param>
@@ -54,7 +52,7 @@ namespace ResourceClients_LowLevel
             _keyCredential = keyCredential;
             GroupId = groupId;
             ItemId = itemId;
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
@@ -95,33 +93,21 @@ namespace ResourceClients_LowLevel
 
         internal HttpMessage CreateGetItemRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/items/", false);
             uri.AppendPath(GroupId, true);
             uri.AppendPath("/", false);
             uri.AppendPath(ItemId, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

@@ -16,13 +16,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    /// <summary> A class representing collection of TypeTwo and their operations over its parent. </summary>
-    public partial class TypeTwoCollection : ArmCollection, IEnumerable<TypeTwo>, IAsyncEnumerable<TypeTwo>
+    /// <summary>
+    /// A class representing a collection of <see cref="TypeTwoResource" /> and their operations.
+    /// Each <see cref="TypeTwoResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="TypeTwoCollection" /> instance call the GetTypeTwos method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
+    public partial class TypeTwoCollection : ArmCollection, IEnumerable<TypeTwoResource>, IAsyncEnumerable<TypeTwoResource>
     {
         private readonly ClientDiagnostics _typeTwoCommonClientDiagnostics;
         private readonly CommonRestOperations _typeTwoCommonRestClient;
@@ -37,9 +40,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal TypeTwoCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);
-            _typeTwoCommonRestClient = new CommonRestOperations(_typeTwoCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
+            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwoResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(TypeTwoResource.ResourceType, out string typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -47,8 +50,8 @@ namespace MgmtExtensionCommonRestOperation
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -56,24 +59,24 @@ namespace MgmtExtensionCommonRestOperation
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_CreateOrUpdateTypeTwo
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="typeTwoName"> The name. </param>
-        /// <param name="typeTwo"> Information to validate. </param>
+        /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
-        public async virtual Task<ArmOperation<TypeTwo>> CreateOrUpdateAsync(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<TypeTwoResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
-            Argument.AssertNotNull(typeTwo, nameof(typeTwo));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _typeTwoCommonRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeTwo>(Response.FromValue(new TypeTwo(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                var response = await _typeTwoCommonRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeTwoResource>(Response.FromValue(new TypeTwoResource(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -89,24 +92,24 @@ namespace MgmtExtensionCommonRestOperation
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_CreateOrUpdateTypeTwo
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="typeTwoName"> The name. </param>
-        /// <param name="typeTwo"> Information to validate. </param>
+        /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
-        public virtual ArmOperation<TypeTwo> CreateOrUpdate(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<TypeTwoResource> CreateOrUpdate(WaitUntil waitUntil, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
-            Argument.AssertNotNull(typeTwo, nameof(typeTwo));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _typeTwoCommonRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken);
-                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeTwo>(Response.FromValue(new TypeTwo(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                var response = _typeTwoCommonRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, data, cancellationToken);
+                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeTwoResource>(Response.FromValue(new TypeTwoResource(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -126,7 +129,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async virtual Task<Response<TypeTwo>> GetAsync(string typeTwoName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeTwoResource>> GetAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
@@ -136,8 +139,8 @@ namespace MgmtExtensionCommonRestOperation
             {
                 var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _typeTwoCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TypeTwoResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,7 +158,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public virtual Response<TypeTwo> Get(string typeTwoName, CancellationToken cancellationToken = default)
+        public virtual Response<TypeTwoResource> Get(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
@@ -165,8 +168,8 @@ namespace MgmtExtensionCommonRestOperation
             {
                 var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken);
                 if (response.Value == null)
-                    throw _typeTwoCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TypeTwoResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -181,17 +184,17 @@ namespace MgmtExtensionCommonRestOperation
         /// Operation Id: Common_ListTypeTwos
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<TypeTwo> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<TypeTwoResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TypeTwo>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<TypeTwoResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _typeTwoCommonRestClient.ListTypeTwosAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwoResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,17 +211,17 @@ namespace MgmtExtensionCommonRestOperation
         /// Operation Id: Common_ListTypeTwos
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TypeTwo> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<TypeTwoResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TypeTwo> FirstPageFunc(int? pageSizeHint)
+            Page<TypeTwoResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _typeTwoCommonRestClient.ListTypeTwos(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwoResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +241,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
@@ -246,7 +249,7 @@ namespace MgmtExtensionCommonRestOperation
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -273,7 +276,7 @@ namespace MgmtExtensionCommonRestOperation
             scope.Start();
             try
             {
-                var response = GetIfExists(typeTwoName, cancellationToken: cancellationToken);
+                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -283,65 +286,7 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// Operation Id: Common_GetTypeTwo
-        /// </summary>
-        /// <param name="typeTwoName"> The name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async virtual Task<Response<TypeTwo>> GetIfExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
-
-            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<TypeTwo>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// Operation Id: Common_GetTypeTwo
-        /// </summary>
-        /// <param name="typeTwoName"> The name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public virtual Response<TypeTwo> GetIfExists(string typeTwoName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
-
-            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<TypeTwo>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        IEnumerator<TypeTwo> IEnumerable<TypeTwo>.GetEnumerator()
+        IEnumerator<TypeTwoResource> IEnumerable<TypeTwoResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -351,7 +296,7 @@ namespace MgmtExtensionCommonRestOperation
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<TypeTwo> IAsyncEnumerable<TypeTwo>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<TypeTwoResource> IAsyncEnumerable<TypeTwoResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

@@ -21,6 +21,7 @@ namespace PublicClientCtor
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PublicClientCtorRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PublicClientCtorClient for mocking. </summary>
         protected PublicClientCtorClient()
@@ -81,6 +82,7 @@ namespace PublicClientCtor
         /// <param name="param1"> Tesing Param1. </param>
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         internal PublicClientCtorClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
             RestClient = new PublicClientCtorRestClient(clientDiagnostics, pipeline, endpoint, param1, param2, apiVersion);

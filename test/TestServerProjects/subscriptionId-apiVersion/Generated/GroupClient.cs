@@ -20,6 +20,7 @@ namespace subscriptionId_apiVersion
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal GroupRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of GroupClient for mocking. </summary>
         protected GroupClient()
@@ -32,6 +33,8 @@ namespace subscriptionId_apiVersion
         /// <param name="subscriptionId"> Subscription Id. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal GroupClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2014-04-01-preview")
         {
             RestClient = new GroupRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);

@@ -15,8 +15,8 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 
-mgmt-debug:
-  show-request-path: true
+keep-orphaned-models:
+- VmDiskType
 
 rename-rules:
   Os: OS
@@ -27,6 +27,14 @@ rename-rules:
   VM: Vm
   VMs: Vms
   VMScaleSet: VmScaleSet
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
   
 directive:
   - rename-model:
@@ -41,4 +49,12 @@ directive:
   - rename-model:
       from: RollingUpgradeStatusInfo
       to: VirtualMachineScaleSetRollingUpgrade
+  - from: MgmtRenameRules.json
+    where: $.definitions.UpgradeOperationHistoricalStatusInfo.properties.type
+    transform: > 
+      $["x-ms-client-name"] = "ResourceType";
+  - from: MgmtRenameRules.json
+    where: $.definitions
+    transform: >
+      $.HyperVGenerationType['x-ms-enum'].name = 'HyperVGenerationType';
 ```

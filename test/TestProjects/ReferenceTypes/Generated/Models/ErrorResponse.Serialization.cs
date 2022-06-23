@@ -8,12 +8,13 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(ErrorResponseConverter))]
-    internal partial class ErrorResponse : IUtf8JsonSerializable
+    public partial class ErrorResponse : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -28,7 +29,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            Optional<ErrorDetail> error = default;
+            Optional<ResponseError> error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -38,7 +39,7 @@ namespace Azure.ResourceManager.Fake.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorDetail.DeserializeErrorDetail(property.Value);
+                    error = JsonSerializer.Deserialize<ResponseError>(property.Value.ToString());
                     continue;
                 }
             }

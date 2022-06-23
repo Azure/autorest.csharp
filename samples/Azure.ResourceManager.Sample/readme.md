@@ -14,7 +14,16 @@ public-clients: false
 head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
-
+keep-orphaned-models: AvailabilitySetSkuTypes
+keep-plural-enums:
+  - HyperVGenerationTypes
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
 directive:
   - rename-model:
       from: SshPublicKey
@@ -28,4 +37,8 @@ directive:
   - rename-model:
       from: RollingUpgradeStatusInfo
       to: VirtualMachineScaleSetRollingUpgrade
+  - from: swagger-document
+    where: $.paths..parameters[?(@.name === "location")]
+    transform: >
+      $["x-ms-format"] = 'azure-location';
 ```

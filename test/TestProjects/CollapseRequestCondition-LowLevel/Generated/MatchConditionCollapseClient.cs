@@ -19,9 +19,7 @@ namespace CollapseRequestCondition_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,19 +34,26 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <summary> Initializes a new instance of MatchConditionCollapseClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public MatchConditionCollapseClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new CollapseRequestConditionsClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of MatchConditionCollapseClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public MatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public MatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint, CollapseRequestConditionsClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CollapseRequestConditionsClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            Endpoint = endpoint;
+            _endpoint = endpoint;
         }
 
         /// <param name="otherHeader"> other header. </param>
@@ -163,49 +168,13 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/MatchConditionCollapse/withHead", false);
             request.Uri = uri;
             if (otherHeader != null)
@@ -216,17 +185,16 @@ namespace CollapseRequestCondition_LowLevel
             {
                 request.Headers.Add(matchConditions);
             }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateCollapsePutRequest(RequestContent content, MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/MatchConditionCollapse/", false);
             request.Uri = uri;
             if (matchConditions != null)
@@ -235,56 +203,26 @@ namespace CollapseRequestCondition_LowLevel
             }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateCollapseGetRequest(MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/MatchConditionCollapse/", false);
             request.Uri = uri;
             if (matchConditions != null)
             {
                 request.Headers.Add(matchConditions);
             }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
-            uri.AppendPath("/MatchConditionCollapse/multi", false);
-            request.Uri = uri;
-            if (requestConditions != null)
-            {
-                request.Headers.Add(requestConditions, "R");
-            }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
             Optional<string> tag = default;
             Optional<DateTimeOffset> timestamp = default;
             Optional<string> objectIdentifier = default;
-            Optional<string> tenantId = default;
+            Optional<Guid> tenantId = default;
             Optional<string> upn = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,12 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("tenantId"))
                 {
-                    tenantId = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    tenantId = property.Value.GetGuid();
                     continue;
                 }
                 if (property.NameEquals("upn"))
@@ -53,7 +58,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new TagProperty(tag.Value, Optional.ToNullable(timestamp), objectIdentifier.Value, tenantId.Value, upn.Value);
+            return new TagProperty(tag.Value, Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value);
         }
     }
 }

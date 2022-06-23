@@ -372,7 +372,6 @@ schemas: !Schemas
                     name: discriminatorProperty
                     description: ''
                 protocol: !Protocols {}
-            discriminatorValue: BaseClassWithDiscriminator
             parents: !Relations 
               all:
                 - *ref_2
@@ -645,13 +644,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: mixed
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_27
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_31
             parameters:
               - !Parameter 
                 schema: *ref_28
@@ -705,6 +705,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_31
         signatureParameters: []
         responses:
           - !SchemaResponse 

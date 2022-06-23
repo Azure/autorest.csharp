@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Core;
+
 namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel3. </summary>
@@ -20,7 +22,7 @@ namespace ExactMatchInheritance.Models
         /// <param name="name"></param>
         /// <param name="bar"></param>
         /// <param name="new"></param>
-        internal ExactMatchModel3(string id, string name, string bar, string @new) : base(id, name, bar)
+        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, string @new) : base(id, name, bar)
         {
             New = @new;
         }

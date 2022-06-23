@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             ArmCoreType = armCoreType;
             DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
             DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
-            Description = Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
+            Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
             ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
@@ -53,15 +53,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
-                false,
-                IsExtensionParameter: true);
+                ValidationType.None,
+                null);
         }
 
         protected virtual string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
 
         public override CSharpType? BaseType => null;
 
-        public override string Description { get; }
+        public override FormattableString Description { get; }
 
         public Type ArmCoreType { get; }
 
@@ -117,9 +117,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var extraLayers = GetExtraLayers(requestPath, resource);
                     if (!extraLayers.Any())
-                        return $"Get{resource.Type.Name.ResourceNameToPlural()}";
+                        return $"Get{resource.ResourceName.ResourceNameToPlural()}";
                     var suffix = string.Join("", extraLayers.Select(segment => segment.ConstantValue.FirstCharToUpperCase().LastWordToSingular()));
-                    return $"Get{resource.Type.Name.ResourceNameToPlural()}By{suffix}";
+                    return $"Get{resource.ResourceName.ResourceNameToPlural()}By{suffix}";
                 }
             }
 

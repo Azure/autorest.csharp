@@ -20,9 +20,7 @@ namespace media_types
     internal partial class MediaTypesRestClient
     {
         private readonly HttpPipeline _pipeline;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -31,11 +29,12 @@ namespace media_types
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public MediaTypesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateAnalyzeBodyRequest(Models.ContentType contentType, Stream input)
@@ -44,7 +43,7 @@ namespace media_types
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -106,7 +105,7 @@ namespace media_types
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -168,7 +167,7 @@ namespace media_types
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/analyzeNoAccept", false);
             request.Uri = uri;
             if (input != null)
@@ -219,7 +218,7 @@ namespace media_types
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/analyzeNoAccept", false);
             request.Uri = uri;
             if (input != null)
@@ -270,7 +269,7 @@ namespace media_types
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -330,7 +329,7 @@ namespace media_types
             var request = message0.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/binaryBodyTwoContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
@@ -393,13 +392,13 @@ namespace media_types
             }
         }
 
-        internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(ContentType1 contentType, Stream message)
+        internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(ContentType2 contentType, Stream message)
         {
             var message0 = _pipeline.CreateMessage();
             var request = message0.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
@@ -413,7 +412,7 @@ namespace media_types
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Stream message, CancellationToken cancellationToken = default)
         {
             if (message == null)
             {
@@ -440,7 +439,7 @@ namespace media_types
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public Response<string> BinaryBodyWithThreeContentTypes(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
+        public Response<string> BinaryBodyWithThreeContentTypes(ContentType2 contentType, Stream message, CancellationToken cancellationToken = default)
         {
             if (message == null)
             {
@@ -462,33 +461,34 @@ namespace media_types
             }
         }
 
-        internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(string message)
+        internal HttpMessage CreatePutTextAndJsonBodyRequest(ContentType3 contentType, string message)
         {
             var message0 = _pipeline.CreateMessage();
             var request = message0.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/textAndJson", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
-            request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Content-Type", contentType.ToSerialString());
             request.Content = new StringRequestContent(message);
             return message0;
         }
 
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <summary> Body that&apos;s either text/plain or application/json. </summary>
+        /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(string message, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutTextAndJsonBodyAsync(ContentType3 contentType, string message, CancellationToken cancellationToken = default)
         {
             if (message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
 
-            using var message0 = CreateBinaryBodyWithThreeContentTypesRequest(message);
+            using var message0 = CreatePutTextAndJsonBodyRequest(contentType, message);
             await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
             switch (message0.Response.Status)
             {
@@ -503,18 +503,19 @@ namespace media_types
             }
         }
 
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <summary> Body that&apos;s either text/plain or application/json. </summary>
+        /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public Response<string> BinaryBodyWithThreeContentTypes(string message, CancellationToken cancellationToken = default)
+        public Response<string> PutTextAndJsonBody(ContentType3 contentType, string message, CancellationToken cancellationToken = default)
         {
             if (message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
 
-            using var message0 = CreateBinaryBodyWithThreeContentTypesRequest(message);
+            using var message0 = CreatePutTextAndJsonBodyRequest(contentType, message);
             _pipeline.Send(message0, cancellationToken);
             switch (message0.Response.Status)
             {

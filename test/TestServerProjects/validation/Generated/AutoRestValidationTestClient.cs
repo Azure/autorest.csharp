@@ -20,6 +20,7 @@ namespace validation
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AutoRestValidationTestRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AutoRestValidationTestClient for mocking. </summary>
         protected AutoRestValidationTestClient()
@@ -32,6 +33,8 @@ namespace validation
         /// <param name="subscriptionId"> Subscription ID. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal AutoRestValidationTestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "1.0.0")
         {
             RestClient = new AutoRestValidationTestRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);

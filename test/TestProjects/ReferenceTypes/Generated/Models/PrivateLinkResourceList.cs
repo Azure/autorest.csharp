@@ -7,13 +7,12 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> A list of private link resources. </summary>
     [TypeReferenceType]
-    internal partial class PrivateLinkResourceList
+    public partial class PrivateLinkResourceList
     {
         /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
         [InitializationConstructor]

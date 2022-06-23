@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -16,6 +18,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -142,9 +145,14 @@ namespace AutoRest.CSharp.Generation.Writers
                             return;
                         }
 
+                        if (frameworkType == typeof(Nullable<>))
+                        {
+                            frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
+                        }
                         bool writeFormat = false;
 
-                        writer.Append($"{writerName}.");
+                        if (frameworkType != typeof(BinaryData))
+                            writer.Append($"{writerName}.");
                         if (frameworkType == typeof(decimal) ||
                             frameworkType == typeof(double) ||
                             frameworkType == typeof(float) ||
@@ -160,7 +168,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
-                                 frameworkType == typeof(Guid))
+                                 frameworkType == typeof(Guid) ||
+                                 frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
+                                 frameworkType == typeof(Azure.Core.ResourceType) ||
+                                 frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -197,6 +208,15 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"WriteStringValue({name}.{nameof(Uri.AbsoluteUri)});");
                             return;
                         }
+                        else if (frameworkType == typeof(BinaryData))
+                        {
+                            writer.Line($"#if NET6_0_OR_GREATER");
+                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name});");
+                            writer.Line($"#else");
+                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name}.ToString()).RootElement);");
+                            writer.Line($"#endif");
+                            return;
+                        }
 
                         writer.Append($"({name}")
                             .AppendNullableValue(valueSerialization.Type);
@@ -217,7 +237,14 @@ namespace AutoRest.CSharp.Generation.Writers
                                 var systemObjectType = objectType as SystemObjectType;
                                 if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                                 {
-                                    writer.Append($"JsonSerializer.Serialize(writer, {name});");
+                                    var optionalSerializeOptions = string.Empty;
+                                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                                    {
+                                        writer.UseNamespace("Azure.ResourceManager.Models");
+                                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                                        optionalSerializeOptions = ", serializeOptions";
+                                    }
+                                    writer.Append($"JsonSerializer.Serialize(writer, {name}{optionalSerializeOptions});");
                                 }
                                 else
                                 {
@@ -292,11 +319,22 @@ namespace AutoRest.CSharp.Generation.Writers
                                      property.Property?.ValueType.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                                      property.Property?.ValueType.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
                             {
-                                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                if (Configuration.AzureArm && property.Property?.ValueType.Equals(typeof(Uri)) == true)
                                 {
-                                    writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
-                                    writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
-                                    writer.Append($"continue;");
+                                    using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                    {
+                                        writer.Line($"{propertyVariables[property.Property!].Declaration} = null;");
+                                        writer.Append($"continue;");
+                                    }
+                                }
+                                else
+                                {
+                                    using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                    {
+                                        writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+                                        writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
+                                        writer.Append($"continue;");
+                                    }
                                 }
                             }
 
@@ -403,6 +441,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     var type = objectProperty.ValueType;
                     if (!jsonProperty.IsRequired)
                     {
+                        if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
+                            type = new CSharpType(type.Arguments[0].FrameworkType);
                         type = new CSharpType(typeof(Optional<>), type);
                     }
 
@@ -476,6 +516,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     valueCallback(writer, w => w.Append(dictionaryVariable));
                     return;
                 case JsonValueSerialization valueSerialization:
+                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                    {
+                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                    }
                     valueCallback(writer, w => w.DeserializeValue(valueSerialization, element));
                     return;
             }
@@ -499,11 +543,14 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (serialization.Type.IsFrameworkType)
             {
-                DeserializeFrameworkTypeValue(writer, element, serialization.Type.FrameworkType, serialization.Format);
+                var frameworkType = serialization.Type.FrameworkType;
+                if (frameworkType == typeof(Nullable<>))
+                    frameworkType = serialization.Type.Arguments[0].FrameworkType;
+                DeserializeFrameworkTypeValue(writer, element, frameworkType, serialization.Format);
             }
             else
             {
-                writer.DeserializeImplementation(serialization.Type.Implementation, element);
+                writer.DeserializeImplementation(serialization.Type.Implementation, serialization, element);
             }
         }
 
@@ -511,24 +558,23 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             bool includeFormat = false;
 
-            if (frameworkType == typeof(ETag))
+            if (frameworkType == typeof(ETag) ||
+                frameworkType == typeof(Uri) ||
+                frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
+                frameworkType == typeof(Azure.Core.ResourceType) ||
+                frameworkType == typeof(Azure.Core.AzureLocation))
             {
-                writer.Append($"new {typeof(ETag)}({element}.GetString())");
-                return;
-            }
-            else if (frameworkType == typeof(Uri))
-            {
-                writer.Append($"new {typeof(Uri)}({element}.GetString())");
-                return;
-            }
-            else if (frameworkType == typeof(Azure.Core.ResourceIdentifier))
-            {
-                writer.Append($"new {typeof(Azure.Core.ResourceIdentifier)}({element}.GetString())");
+                writer.Append($"new {frameworkType}({element}.GetString())");
                 return;
             }
             else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))
             {
                 writer.Append($"JsonSerializer.Deserialize<{typeof(Azure.ResourceManager.Models.SystemData)}>({element}.ToString())");
+                return;
+            }
+            else if (frameworkType == typeof(BinaryData))
+            {
+                writer.Append($"{typeof(BinaryData)}.FromString({element}.GetRawText())");
                 return;
             }
             else
@@ -602,7 +648,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return systemObjectType.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
         }
 
-        public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, CodeWriterDelegate element)
+        public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, JsonSerialization serialization, CodeWriterDelegate element)
         {
             switch (implementation)
             {
@@ -611,7 +657,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         var systemObjectType = objectType as SystemObjectType;
                         if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                         {
-                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())");
+                            var optionalSerializeOptions = (serialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3) ? ", serializeOptions" : string.Empty;
+                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})");
                         }
                         else if (objectType is MgmtObjectType mgmtObjectType && TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema))
                         {
@@ -641,29 +688,44 @@ namespace AutoRest.CSharp.Generation.Writers
             SerializationFormat.Bytes_Base64Url => "U",
             SerializationFormat.Bytes_Base64 => "D",
             SerializationFormat.Duration_ISO8601 => "P",
+            SerializationFormat.Duration_Constant => "c",
             SerializationFormat.Time_ISO8601 => "T",
             _ => null
         };
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, JsonSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> callback, string response)
+            Action<CodeWriter, CodeWriterDelegate> callback, string response, bool isBinaryData)
         {
-            var documentVariable = new CodeWriterDeclaration("document");
-            writer.Append($"using var {documentVariable:D} = ");
-            if (async)
+            if (isBinaryData)
             {
-                writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                if (async)
+                {
+                    callback(writer, w => w.Append($"await {typeof(BinaryData)}.FromStreamAsync({response}.ContentStream).ConfigureAwait(false)"));
+                }
+                else
+                {
+                    callback(writer, w => w.Append($"{typeof(BinaryData)}.FromStream({response}.ContentStream)"));
+                }
             }
             else
             {
-                writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
-            }
+                var documentVariable = new CodeWriterDeclaration("document");
+                writer.Append($"using var {documentVariable:D} = ");
+                if (async)
+                {
+                    writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                }
+                else
+                {
+                    writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
+                }
 
-            writer.DeserializeValue(
-                serialization,
-                w => w.Append($"{documentVariable}.RootElement"),
-                callback
-            );
+                writer.DeserializeValue(
+                    serialization,
+                    w => w.Append($"{documentVariable}.RootElement"),
+                    callback
+                );
+            }
         }
 
         private readonly struct ObjectPropertyVariable

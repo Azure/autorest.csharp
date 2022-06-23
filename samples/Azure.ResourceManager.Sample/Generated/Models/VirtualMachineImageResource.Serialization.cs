@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
         internal static VirtualMachineImageResource DeserializeVirtualMachineImageResource(JsonElement element)
         {
             string name = default;
-            string location = default;
+            AzureLocation location = default;
             Optional<IDictionary<string, string>> tags = default;
             Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tags"))

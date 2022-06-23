@@ -99,6 +99,7 @@ operationGroups:
     $key: files
     operations:
       - !Operation 
+        operationId: files_GetFile
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -168,6 +169,7 @@ operationGroups:
             description: Get file
         protocol: !Protocols {}
       - !Operation 
+        operationId: files_GetFileLarge
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -237,6 +239,7 @@ operationGroups:
             description: Get a large file
         protocol: !Protocols {}
       - !Operation 
+        operationId: files_GetEmptyFile
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -313,9 +316,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AutoRestSwaggerBATFileService

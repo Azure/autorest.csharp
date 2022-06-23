@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace TenantOnly
 {
-    internal class BillingAccountOperationSource : IOperationSource<BillingAccount>
+    internal class BillingAccountOperationSource : IOperationSource<BillingAccountResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace TenantOnly
             _client = client;
         }
 
-        BillingAccount IOperationSource<BillingAccount>.CreateResult(Response response, CancellationToken cancellationToken)
+        BillingAccountResource IOperationSource<BillingAccountResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
-            return new BillingAccount(_client, data);
+            return new BillingAccountResource(_client, data);
         }
 
-        async ValueTask<BillingAccount> IOperationSource<BillingAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<BillingAccountResource> IOperationSource<BillingAccountResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
-            return new BillingAccount(_client, data);
+            return new BillingAccountResource(_client, data);
         }
     }
 }

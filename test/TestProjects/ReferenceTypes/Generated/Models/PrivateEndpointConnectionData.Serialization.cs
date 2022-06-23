@@ -26,10 +26,10 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("privateEndpoint");
                 writer.WriteObjectValue(PrivateEndpoint);
             }
-            if (Optional.IsDefined(PrivateLinkServiceConnectionState))
+            if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState");
-                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
+                writer.WriteObjectValue(ConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -40,10 +40,10 @@ namespace Azure.ResourceManager.Fake.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            ResourceManager.Models.SystemData systemData = default;
+            Optional<ResourceManager.Models.SystemData> systemData = default;
             Optional<PrivateEndpoint> privateEndpoint = default;
-            Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
+            Optional<ReferenceTypesPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            Optional<ReferenceTypesPrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -58,11 +58,16 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<ResourceManager.Models.SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -92,7 +97,7 @@ namespace Azure.ResourceManager.Fake.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            privateLinkServiceConnectionState = PrivateLinkServiceConnectionState.DeserializePrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = ReferenceTypesPrivateLinkServiceConnectionState.DeserializeReferenceTypesPrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -102,14 +107,14 @@ namespace Azure.ResourceManager.Fake.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            provisioningState = new PrivateEndpointConnectionProvisioningState(property0.Value.GetString());
+                            provisioningState = new ReferenceTypesPrivateEndpointConnectionProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new PrivateEndpointConnectionData(id, name, type, systemData, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new PrivateEndpointConnectionData(id, name, type, systemData.Value, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
 
         internal partial class PrivateEndpointConnectionDataConverter : JsonConverter<PrivateEndpointConnectionData>

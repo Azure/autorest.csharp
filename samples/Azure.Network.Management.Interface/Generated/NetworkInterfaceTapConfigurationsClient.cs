@@ -21,10 +21,35 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal NetworkInterfaceTapConfigurationsRestClient RestClient { get; }
+        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient for mocking. </summary>
         protected NetworkInterfaceTapConfigurationsClient()
         {
+        }
+
+        /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient. </summary>
+        /// <param name="subscriptionId"> The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        public NetworkInterfaceTapConfigurationsClient(string subscriptionId, TokenCredential credential, Uri endpoint = null, AzureNetworkManagementInterfaceClientOptions options = null)
+        {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("https://management.azure.com");
+
+            options ??= new AzureNetworkManagementInterfaceClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            string[] scopes = { "user_impersonation" };
+            _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
+            RestClient = new NetworkInterfaceTapConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version);
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient. </summary>
@@ -33,6 +58,8 @@ namespace Azure.Network.Management.Interface
         /// <param name="subscriptionId"> The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal NetworkInterfaceTapConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-11-01")
         {
             RestClient = new NetworkInterfaceTapConfigurationsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);

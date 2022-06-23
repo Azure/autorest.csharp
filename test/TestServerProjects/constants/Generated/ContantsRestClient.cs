@@ -18,12 +18,10 @@ namespace constants
     internal partial class ContantsRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Enum8 _headerConstant;
-        private readonly Enum9 _queryConstant;
-        private readonly Enum10 _pathConstant;
-
-        /// <summary> server parameter. </summary>
-        public Uri Endpoint { get; }
+        private readonly Uri _endpoint;
+        private readonly bool _headerConstant;
+        private readonly int _queryConstant;
+        private readonly string _pathConstant;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -31,18 +29,20 @@ namespace constants
         /// <summary> Initializes a new instance of ContantsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="headerConstant"> Constant header property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="pathConstant"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathConstant"/> is an empty string, and was expected to be non-empty. </exception>
+        public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, bool headerConstant = true, int queryConstant = 100, string pathConstant = "path")
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
             _headerConstant = headerConstant;
             _queryConstant = queryConstant;
-            _pathConstant = pathConstant;
-            Endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            _pathConstant = pathConstant ?? throw new ArgumentNullException(nameof(pathConstant));
         }
 
         internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueNoDefaultRequest(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)
@@ -51,7 +51,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault", false);
             if (input != null)
             {
@@ -99,7 +99,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueDefault", false);
             if (input != null)
             {
@@ -147,7 +147,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -190,7 +190,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -233,7 +233,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueNoDefault", false);
             uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
@@ -278,7 +278,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueDefault", false);
             uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
@@ -323,7 +323,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -366,7 +366,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -409,7 +409,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueNoDefault", false);
             if (input != null)
             {
@@ -457,7 +457,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueDefault", false);
             if (input != null)
             {
@@ -470,7 +470,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringNoRequiredTwoValueDefaultAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringNoRequiredTwoValueDefaultAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -488,7 +488,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -509,7 +509,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueNoDefault", false);
             if (input != null)
             {
@@ -557,7 +557,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueDefault", false);
             if (input != null)
             {
@@ -570,7 +570,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringNoRequiredOneValueDefaultAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringNoRequiredOneValueDefaultAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
 
@@ -588,7 +588,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
 
@@ -609,7 +609,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueNoDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
             request.Uri = uri;
@@ -654,7 +654,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueDefault", false);
             if (input != null)
             {
@@ -667,7 +667,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringRequiredTwoValueDefaultAsync(ModelAsStringRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringRequiredTwoValueDefaultAsync(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -685,7 +685,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -706,7 +706,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
             request.Uri = uri;
@@ -751,7 +751,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueDefault", false);
             if (input != null)
             {
@@ -764,7 +764,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringRequiredOneValueDefaultAsync(ModelAsStringRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringRequiredOneValueDefaultAsync(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
 
@@ -782,7 +782,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
 
@@ -803,12 +803,12 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(Endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/constants/clientConstants/", false);
-            uri.AppendPath(_pathConstant.ToString(), true);
-            uri.AppendQuery("query-constant", _queryConstant.ToString(), true);
+            uri.AppendPath(_pathConstant, true);
+            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant.ToString());
+            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 

@@ -238,7 +238,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_82
+    - !StringSchema &ref_84
       type: string
       apiVersions:
         - !ApiVersion 
@@ -249,7 +249,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_83
+    - !StringSchema &ref_85
       type: string
       apiVersions:
         - !ApiVersion 
@@ -260,7 +260,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_87
+    - !StringSchema &ref_90
       type: string
       apiVersions:
         - !ApiVersion 
@@ -271,7 +271,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_88
+    - !StringSchema &ref_91
       type: string
       apiVersions:
         - !ApiVersion 
@@ -282,7 +282,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_89
+    - !StringSchema &ref_92
       type: string
       apiVersions:
         - !ApiVersion 
@@ -293,7 +293,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_97
+    - !StringSchema &ref_100
       type: string
       apiVersions:
         - !ApiVersion 
@@ -304,7 +304,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_98
+    - !StringSchema &ref_101
       type: string
       apiVersions:
         - !ApiVersion 
@@ -315,7 +315,7 @@ schemas: !Schemas
           description: ''
           header: Last-Modified
       protocol: !Protocols {}
-    - !StringSchema &ref_99
+    - !StringSchema &ref_102
       type: string
       apiVersions:
         - !ApiVersion 
@@ -346,7 +346,7 @@ schemas: !Schemas
           name: LabelListResultNextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !Protocols {}
-    - !StringSchema &ref_107
+    - !StringSchema &ref_110
       type: string
       apiVersions:
         - !ApiVersion 
@@ -357,7 +357,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_113
+    - !StringSchema &ref_116
       type: string
       apiVersions:
         - !ApiVersion 
@@ -368,7 +368,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_118
+    - !StringSchema &ref_122
       type: string
       apiVersions:
         - !ApiVersion 
@@ -379,7 +379,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_119
+    - !StringSchema &ref_123
       type: string
       apiVersions:
         - !ApiVersion 
@@ -390,7 +390,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_124
+    - !StringSchema &ref_129
       type: string
       apiVersions:
         - !ApiVersion 
@@ -401,7 +401,7 @@ schemas: !Schemas
           description: ''
           header: ETag
       protocol: !Protocols {}
-    - !StringSchema &ref_125
+    - !StringSchema &ref_130
       type: string
       apiVersions:
         - !ApiVersion 
@@ -412,7 +412,7 @@ schemas: !Schemas
           description: ''
           header: Sync-Token
       protocol: !Protocols {}
-    - !StringSchema &ref_132
+    - !StringSchema &ref_138
       type: string
       apiVersions:
         - !ApiVersion 
@@ -868,7 +868,7 @@ schemas: !Schemas
       valueType: *ref_0
       language: !Languages 
         default:
-          name: Accept1
+          name: Accept2
           description: 'Accept: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
       protocol: !Protocols {}
     - !ConstantSchema &ref_76
@@ -881,15 +881,65 @@ schemas: !Schemas
           name: ApplicationVndMicrosoftAppconfigKvJson
           description: Content Type 'application/vnd.microsoft.appconfig.kv+json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_101
+    - !ConstantSchema &ref_77
+      type: constant
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept3
+          description: 'Accept: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_86
+      type: constant
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept4
+          description: 'Accept: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_104
       type: constant
       value: !ConstantValue 
         value: application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json
       valueType: *ref_0
       language: !Languages 
         default:
-          name: Accept1
+          name: Accept5
           description: 'Accept: application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_117
+      type: constant
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept6
+          description: 'Accept: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_124
+      type: constant
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept7
+          description: 'Accept: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_132
+      type: constant
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept8
+          description: 'Accept: application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json'
       protocol: !Protocols {}
   dictionaries:
     - !DictionarySchema &ref_15
@@ -1159,7 +1209,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_19
-    - !ObjectSchema &ref_106
+    - !ObjectSchema &ref_109
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1262,7 +1312,7 @@ schemas: !Schemas
           name: ArrayOfget7ItemsItem
           description: Array of get-7-itemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_90
+    - !ArraySchema &ref_93
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1273,7 +1323,7 @@ schemas: !Schemas
           name: ArrayOfhead7ItemsItem
           description: Array of head-7-itemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_100
+    - !ArraySchema &ref_103
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1285,7 +1335,7 @@ schemas: !Schemas
           description: Array of get-5-itemsItem
       protocol: !Protocols {}
     - *ref_30
-    - !ArraySchema &ref_108
+    - !ArraySchema &ref_111
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1296,7 +1346,7 @@ schemas: !Schemas
           name: ArrayOfhead5ItemsItem
           description: Array of head-5-itemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_126
+    - !ArraySchema &ref_131
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1307,7 +1357,7 @@ schemas: !Schemas
           name: ArrayOfpaths18S2Vl1RevisionsGetParameters6SchemaItems
           description: Array of paths·18s2vl1·revisions·get·parameters·6·schema·items
       protocol: !Protocols {}
-    - !ArraySchema &ref_133
+    - !ArraySchema &ref_139
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1369,6 +1419,7 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: GetKeys
         apiVersions:
           - !ApiVersion 
             version: '1.0'
@@ -1506,6 +1557,7 @@ operationGroups:
             summary: Gets a list of keys.
         protocol: !Protocols {}
       - !Operation 
+        operationId: CheckKeys
         apiVersions:
           - !ApiVersion 
             version: '1.0'
@@ -1606,6 +1658,7 @@ operationGroups:
             summary: Requests the headers and status of the given resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetKeyValues
         apiVersions:
           - !ApiVersion 
             version: '1.0'
@@ -1798,6 +1851,7 @@ operationGroups:
             summary: Gets a list of key-values.
         protocol: !Protocols {}
       - !Operation 
+        operationId: CheckKeyValues
         apiVersions:
           - !ApiVersion 
             version: '1.0'
@@ -1923,6 +1977,7 @@ operationGroups:
             summary: Requests the headers and status of the given resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetKeyValue
         apiVersions:
           - !ApiVersion 
             version: '1.0'
@@ -2159,12 +2214,13 @@ operationGroups:
             summary: Gets a single key-value.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PutKeyValue
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_78
+          - !Parameter &ref_80
             schema: *ref_75
             implementation: Method
             required: true
@@ -2176,7 +2232,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_81
             schema: *ref_75
             implementation: Method
             language: !Languages 
@@ -2189,7 +2245,7 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_80
+          - !Parameter &ref_82
             schema: *ref_75
             implementation: Method
             language: !Languages 
@@ -2200,7 +2256,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_81
+          - !Parameter &ref_83
             schema: *ref_75
             implementation: Method
             language: !Languages 
@@ -2211,8 +2267,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/*+json: !Request &ref_79
             parameters:
               - !Parameter 
                 schema: *ref_76
@@ -2227,7 +2283,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_77
+              - !Parameter &ref_78
                 schema: *ref_19
                 implementation: Method
                 required: false
@@ -2240,7 +2296,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_66
+                schema: *ref_77
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2253,7 +2309,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_77
+              - *ref_78
             language: !Languages 
               default:
                 name: ''
@@ -2271,11 +2327,18 @@ operationGroups:
                   - application/*+json
                   - application/json-patch+json
                 uri: '{endpoint}'
-        signatureParameters:
-          - *ref_78
+          application/json: *ref_79
+          application/json-patch+json: *ref_79
+          application/vnd.microsoft.appconfig.kv+json: *ref_79
+          application/vnd.microsoft.appconfig.kvset+json: *ref_79
+          text/json: *ref_79
+        requests:
           - *ref_79
+        signatureParameters:
           - *ref_80
           - *ref_81
+          - *ref_82
+          - *ref_83
         responses:
           - !SchemaResponse 
             schema: *ref_19
@@ -2294,7 +2357,7 @@ operationGroups:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !HttpHeader 
-                    schema: *ref_82
+                    schema: *ref_84
                     header: ETag
                     language:
                       default:
@@ -2375,13 +2438,14 @@ operationGroups:
             summary: Creates a key-value.
         protocol: !Protocols {}
       - !Operation 
+        operationId: DeleteKeyValue
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_84
-            schema: *ref_83
+          - !Parameter &ref_87
+            schema: *ref_85
             implementation: Method
             required: true
             language: !Languages 
@@ -2392,8 +2456,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_85
-            schema: *ref_83
+          - !Parameter &ref_88
+            schema: *ref_85
             implementation: Method
             language: !Languages 
               default:
@@ -2405,8 +2469,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_86
-            schema: *ref_83
+          - !Parameter &ref_89
+            schema: *ref_85
             implementation: Method
             language: !Languages 
               default:
@@ -2420,7 +2484,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_66
+                schema: *ref_86
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2443,9 +2507,9 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_84
-          - *ref_85
-          - *ref_86
+          - *ref_87
+          - *ref_88
+          - *ref_89
         responses:
           - !SchemaResponse 
             schema: *ref_19
@@ -2457,14 +2521,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_83
+                    schema: *ref_85
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !HttpHeader 
-                    schema: *ref_87
+                    schema: *ref_90
                     header: ETag
                     language:
                       default:
@@ -2486,7 +2550,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_88
+                    schema: *ref_91
                     header: Sync-Token
                     language:
                       default:
@@ -2564,13 +2628,14 @@ operationGroups:
             summary: Deletes a key-value.
         protocol: !Protocols {}
       - !Operation 
+        operationId: CheckKeyValue
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_91
-            schema: *ref_89
+          - !Parameter &ref_94
+            schema: *ref_92
             implementation: Method
             required: true
             language: !Languages 
@@ -2581,8 +2646,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
-            schema: *ref_89
+          - !Parameter &ref_95
+            schema: *ref_92
             implementation: Method
             language: !Languages 
               default:
@@ -2594,8 +2659,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_93
-            schema: *ref_89
+          - !Parameter &ref_96
+            schema: *ref_92
             implementation: Method
             language: !Languages 
               default:
@@ -2605,8 +2670,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_94
-            schema: *ref_89
+          - !Parameter &ref_97
+            schema: *ref_92
             implementation: Method
             language: !Languages 
               default:
@@ -2616,8 +2681,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_95
-            schema: *ref_89
+          - !Parameter &ref_98
+            schema: *ref_92
             implementation: Method
             language: !Languages 
               default:
@@ -2627,8 +2692,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_96
-            schema: *ref_90
+          - !Parameter &ref_99
+            schema: *ref_93
             implementation: Method
             language: !Languages 
               default:
@@ -2651,12 +2716,12 @@ operationGroups:
                 method: head
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_91
-          - *ref_92
-          - *ref_93
           - *ref_94
           - *ref_95
           - *ref_96
+          - *ref_97
+          - *ref_98
+          - *ref_99
         responses:
           - !Response 
             language: !Languages 
@@ -2667,21 +2732,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_89
+                    schema: *ref_92
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !HttpHeader 
-                    schema: *ref_97
+                    schema: *ref_100
                     header: ETag
                     language:
                       default:
                         name: ETag
                         description: An identifier representing the returned state of the resource.
                   - !HttpHeader 
-                    schema: *ref_98
+                    schema: *ref_101
                     header: Last-Modified
                     language:
                       default:
@@ -2746,13 +2811,14 @@ operationGroups:
             summary: Requests the headers and status of the given resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetLabels
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_102
-            schema: *ref_99
+          - !Parameter &ref_105
+            schema: *ref_102
             implementation: Method
             language: !Languages 
               default:
@@ -2764,8 +2830,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_103
-            schema: *ref_99
+          - !Parameter &ref_106
+            schema: *ref_102
             implementation: Method
             language: !Languages 
               default:
@@ -2775,8 +2841,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_104
-            schema: *ref_99
+          - !Parameter &ref_107
+            schema: *ref_102
             implementation: Method
             language: !Languages 
               default:
@@ -2786,8 +2852,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_105
-            schema: *ref_100
+          - !Parameter &ref_108
+            schema: *ref_103
             implementation: Method
             language: !Languages 
               default:
@@ -2802,7 +2868,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_101
+                schema: *ref_104
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2825,13 +2891,13 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_102
-          - *ref_103
-          - *ref_104
           - *ref_105
+          - *ref_106
+          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
-            schema: *ref_106
+            schema: *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -2840,7 +2906,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_99
+                    schema: *ref_102
                     header: Sync-Token
                     language:
                       default:
@@ -2899,13 +2965,14 @@ operationGroups:
             summary: Gets a list of labels.
         protocol: !Protocols {}
       - !Operation 
+        operationId: CheckLabels
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_109
-            schema: *ref_107
+          - !Parameter &ref_112
+            schema: *ref_110
             implementation: Method
             language: !Languages 
               default:
@@ -2917,8 +2984,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_110
-            schema: *ref_107
+          - !Parameter &ref_113
+            schema: *ref_110
             implementation: Method
             language: !Languages 
               default:
@@ -2928,8 +2995,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_111
-            schema: *ref_107
+          - !Parameter &ref_114
+            schema: *ref_110
             implementation: Method
             language: !Languages 
               default:
@@ -2939,8 +3006,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_112
-            schema: *ref_108
+          - !Parameter &ref_115
+            schema: *ref_111
             implementation: Method
             language: !Languages 
               default:
@@ -2963,10 +3030,10 @@ operationGroups:
                 method: head
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_109
-          - *ref_110
-          - *ref_111
           - *ref_112
+          - *ref_113
+          - *ref_114
+          - *ref_115
         responses:
           - !Response 
             language: !Languages 
@@ -2977,7 +3044,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_107
+                    schema: *ref_110
                     header: Sync-Token
                     language:
                       default:
@@ -3012,13 +3079,14 @@ operationGroups:
             summary: Requests the headers and status of the given resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PutLock
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_114
-            schema: *ref_113
+          - !Parameter &ref_118
+            schema: *ref_116
             implementation: Method
             required: true
             language: !Languages 
@@ -3029,8 +3097,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_115
-            schema: *ref_113
+          - !Parameter &ref_119
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -3042,8 +3110,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_116
-            schema: *ref_113
+          - !Parameter &ref_120
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -3053,8 +3121,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_117
-            schema: *ref_113
+          - !Parameter &ref_121
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -3068,7 +3136,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_66
+                schema: *ref_117
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3091,10 +3159,10 @@ operationGroups:
                 method: put
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_114
-          - *ref_115
-          - *ref_116
-          - *ref_117
+          - *ref_118
+          - *ref_119
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
             schema: *ref_19
@@ -3106,14 +3174,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_113
+                    schema: *ref_116
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !HttpHeader 
-                    schema: *ref_118
+                    schema: *ref_122
                     header: ETag
                     language:
                       default:
@@ -3194,13 +3262,14 @@ operationGroups:
             summary: Locks a key-value.
         protocol: !Protocols {}
       - !Operation 
+        operationId: DeleteLock
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_120
-            schema: *ref_119
+          - !Parameter &ref_125
+            schema: *ref_123
             implementation: Method
             required: true
             language: !Languages 
@@ -3211,8 +3280,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_121
-            schema: *ref_119
+          - !Parameter &ref_126
+            schema: *ref_123
             implementation: Method
             language: !Languages 
               default:
@@ -3224,8 +3293,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_122
-            schema: *ref_119
+          - !Parameter &ref_127
+            schema: *ref_123
             implementation: Method
             language: !Languages 
               default:
@@ -3235,8 +3304,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_123
-            schema: *ref_119
+          - !Parameter &ref_128
+            schema: *ref_123
             implementation: Method
             language: !Languages 
               default:
@@ -3250,7 +3319,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_66
+                schema: *ref_124
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3273,10 +3342,10 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_120
-          - *ref_121
-          - *ref_122
-          - *ref_123
+          - *ref_125
+          - *ref_126
+          - *ref_127
+          - *ref_128
         responses:
           - !SchemaResponse 
             schema: *ref_19
@@ -3288,14 +3357,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_119
+                    schema: *ref_123
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !HttpHeader 
-                    schema: *ref_124
+                    schema: *ref_129
                     header: ETag
                     language:
                       default:
@@ -3376,13 +3445,14 @@ operationGroups:
             summary: Unlocks a key-value.
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetRevisions
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_127
-            schema: *ref_125
+          - !Parameter &ref_133
+            schema: *ref_130
             implementation: Method
             language: !Languages 
               default:
@@ -3392,8 +3462,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_128
-            schema: *ref_125
+          - !Parameter &ref_134
+            schema: *ref_130
             implementation: Method
             language: !Languages 
               default:
@@ -3405,8 +3475,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_129
-            schema: *ref_125
+          - !Parameter &ref_135
+            schema: *ref_130
             implementation: Method
             language: !Languages 
               default:
@@ -3416,8 +3486,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_130
-            schema: *ref_125
+          - !Parameter &ref_136
+            schema: *ref_130
             implementation: Method
             language: !Languages 
               default:
@@ -3427,8 +3497,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_131
-            schema: *ref_126
+          - !Parameter &ref_137
+            schema: *ref_131
             implementation: Method
             language: !Languages 
               default:
@@ -3443,7 +3513,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_51
+                schema: *ref_132
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3466,11 +3536,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_127
-          - *ref_128
-          - *ref_129
-          - *ref_130
-          - *ref_131
+          - *ref_133
+          - *ref_134
+          - *ref_135
+          - *ref_136
+          - *ref_137
         responses:
           - !SchemaResponse 
             schema: *ref_57
@@ -3482,7 +3552,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_125
+                    schema: *ref_130
                     header: Sync-Token
                     language:
                       default:
@@ -3560,13 +3630,14 @@ operationGroups:
             summary: Gets a list of key-value revisions.
         protocol: !Protocols {}
       - !Operation 
+        operationId: CheckRevisions
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !Parameter &ref_134
-            schema: *ref_132
+          - !Parameter &ref_140
+            schema: *ref_138
             implementation: Method
             language: !Languages 
               default:
@@ -3576,8 +3647,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_135
-            schema: *ref_132
+          - !Parameter &ref_141
+            schema: *ref_138
             implementation: Method
             language: !Languages 
               default:
@@ -3589,8 +3660,8 @@ operationGroups:
                 in: query
           - *ref_37
           - *ref_38
-          - !Parameter &ref_136
-            schema: *ref_132
+          - !Parameter &ref_142
+            schema: *ref_138
             implementation: Method
             language: !Languages 
               default:
@@ -3600,8 +3671,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_137
-            schema: *ref_132
+          - !Parameter &ref_143
+            schema: *ref_138
             implementation: Method
             language: !Languages 
               default:
@@ -3611,8 +3682,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_138
-            schema: *ref_133
+          - !Parameter &ref_144
+            schema: *ref_139
             implementation: Method
             language: !Languages 
               default:
@@ -3635,11 +3706,11 @@ operationGroups:
                 method: head
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_134
-          - *ref_135
-          - *ref_136
-          - *ref_137
-          - *ref_138
+          - *ref_140
+          - *ref_141
+          - *ref_142
+          - *ref_143
+          - *ref_144
         responses:
           - !Response 
             language: !Languages 
@@ -3650,7 +3721,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_132
+                    schema: *ref_138
                     header: Sync-Token
                     language:
                       default:
