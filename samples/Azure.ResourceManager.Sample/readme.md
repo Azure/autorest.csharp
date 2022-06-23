@@ -15,6 +15,8 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 keep-orphaned-models: AvailabilitySetSkuTypes
+keep-plural-enums:
+  - HyperVGenerationTypes
 format-by-name-rules:
   'tenantId': 'uuid'
   'resourceType': 'resource-type'

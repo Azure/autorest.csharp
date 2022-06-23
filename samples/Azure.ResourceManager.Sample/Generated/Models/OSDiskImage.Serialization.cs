@@ -22,12 +22,12 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static OSDiskImage DeserializeOSDiskImage(JsonElement element)
         {
-            OperatingSystemTypes operatingSystem = default;
+            OperatingSystemType operatingSystem = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("operatingSystem"))
                 {
-                    operatingSystem = property.Value.GetString().ToOperatingSystemTypes();
+                    operatingSystem = property.Value.GetString().ToOperatingSystemType();
                     continue;
                 }
             }
