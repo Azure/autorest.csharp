@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -127,11 +126,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachines_Get
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineResource>> GetAsync(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineResource>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -139,7 +137,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -157,11 +155,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachines_Get
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<VirtualMachineResource> Get(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineResource> Get(string vmName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -169,7 +166,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, expand, cancellationToken);
+                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -271,11 +268,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachines_Get
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -283,7 +279,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -299,11 +295,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachines_Get
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<bool> Exists(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string vmName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -311,7 +306,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, expand, cancellationToken: cancellationToken);
+                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

@@ -8,7 +8,7 @@
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**. </summary>
-    public enum OperatingSystemTypes
+    public enum OperatingSystemType
     {
         /// <summary> Windows. </summary>
         Windows,

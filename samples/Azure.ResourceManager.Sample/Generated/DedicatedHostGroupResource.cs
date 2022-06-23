@@ -102,14 +102,13 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: DedicatedHosts_Get
         /// </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            return await GetDedicatedHosts().GetAsync(hostName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetDedicatedHosts().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -118,14 +117,13 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: DedicatedHosts_Get
         /// </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, CancellationToken cancellationToken = default)
         {
-            return GetDedicatedHosts().Get(hostName, expand, cancellationToken);
+            return GetDedicatedHosts().Get(hostName, cancellationToken);
         }
 
         /// <summary>
@@ -133,15 +131,14 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
         /// Operation Id: DedicatedHostGroups_Get
         /// </summary>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
@@ -158,15 +155,14 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
         /// Operation Id: DedicatedHostGroups_Get
         /// </summary>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DedicatedHostGroupResource> Get(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroupResource> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
@@ -303,7 +299,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -334,7 +330,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -364,7 +360,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -394,7 +390,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -423,7 +419,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -452,7 +448,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

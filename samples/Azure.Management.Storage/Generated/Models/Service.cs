@@ -11,13 +11,13 @@ using System.ComponentModel;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f). </summary>
-    public readonly partial struct Services : IEquatable<Services>
+    public readonly partial struct Service : IEquatable<Service>
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of <see cref="Services"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Service"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public Services(string value)
+        public Service(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
@@ -28,25 +28,25 @@ namespace Azure.Management.Storage.Models
         private const string FValue = "f";
 
         /// <summary> b. </summary>
-        public static Services B { get; } = new Services(BValue);
+        public static Service B { get; } = new Service(BValue);
         /// <summary> q. </summary>
-        public static Services Q { get; } = new Services(QValue);
+        public static Service Q { get; } = new Service(QValue);
         /// <summary> t. </summary>
-        public static Services T { get; } = new Services(TValue);
+        public static Service T { get; } = new Service(TValue);
         /// <summary> f. </summary>
-        public static Services F { get; } = new Services(FValue);
-        /// <summary> Determines if two <see cref="Services"/> values are the same. </summary>
-        public static bool operator ==(Services left, Services right) => left.Equals(right);
-        /// <summary> Determines if two <see cref="Services"/> values are not the same. </summary>
-        public static bool operator !=(Services left, Services right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Services"/>. </summary>
-        public static implicit operator Services(string value) => new Services(value);
+        public static Service F { get; } = new Service(FValue);
+        /// <summary> Determines if two <see cref="Service"/> values are the same. </summary>
+        public static bool operator ==(Service left, Service right) => left.Equals(right);
+        /// <summary> Determines if two <see cref="Service"/> values are not the same. </summary>
+        public static bool operator !=(Service left, Service right) => !left.Equals(right);
+        /// <summary> Converts a string to a <see cref="Service"/>. </summary>
+        public static implicit operator Service(string value) => new Service(value);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object obj) => obj is Services other && Equals(other);
+        public override bool Equals(object obj) => obj is Service other && Equals(other);
         /// <inheritdoc />
-        public bool Equals(Services other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
+        public bool Equals(Service other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]

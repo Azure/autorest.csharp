@@ -420,7 +420,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName, InstanceViewTypes? expand)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -433,10 +433,7 @@ namespace MgmtRenameRules
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
             uri.AppendPath(vmName, true);
-            if (expand != null)
-            {
-                uri.AppendQuery("$expand", expand.Value.ToString(), true);
-            }
+            uri.AppendQuery("$expand", "instanceView", true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -448,17 +445,16 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VirtualMachineData>> GetAsync(string subscriptionId, string resourceGroupName, string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineData>> GetAsync(string subscriptionId, string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -480,17 +476,16 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VirtualMachineData> Get(string subscriptionId, string resourceGroupName, string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineData> Get(string subscriptionId, string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

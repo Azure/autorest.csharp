@@ -60,7 +60,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -99,7 +101,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -138,7 +142,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -171,7 +177,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -204,7 +212,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -243,7 +253,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -282,7 +294,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -321,7 +335,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -363,7 +379,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -405,7 +423,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -445,7 +465,9 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -485,7 +507,9 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -525,7 +549,9 @@ namespace paging_LowLevel
 
         /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -565,7 +591,9 @@ namespace paging_LowLevel
 
         /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -604,7 +632,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -637,7 +667,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -673,7 +705,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -715,7 +749,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -758,7 +794,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -801,7 +839,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -840,7 +880,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -879,7 +921,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -918,7 +962,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -957,7 +1003,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -996,7 +1044,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1035,7 +1085,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1074,7 +1126,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1113,7 +1167,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1152,7 +1208,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1191,7 +1249,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1232,9 +1292,11 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1278,9 +1340,11 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1324,9 +1388,11 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1370,9 +1436,11 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1417,9 +1485,11 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1463,9 +1533,11 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1509,9 +1581,11 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1555,9 +1629,11 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1598,7 +1674,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
         {
             return GetPagingModelWithItemNameWithXMSClientNameImplementationAsync("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
@@ -1622,7 +1700,9 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
         {
             return GetPagingModelWithItemNameWithXMSClientNameImplementation("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
@@ -1650,7 +1730,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service containing a list of <see cref="AsyncPageable{T}"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -1705,7 +1787,9 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service containing a list of <see cref="Pageable{T}"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 

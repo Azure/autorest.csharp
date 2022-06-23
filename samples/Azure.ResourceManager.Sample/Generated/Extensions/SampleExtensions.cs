@@ -736,14 +736,13 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDedicatedHostGroups().GetAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -753,14 +752,13 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDedicatedHostGroups().Get(hostGroupName, expand, cancellationToken);
+            return resourceGroupResource.GetDedicatedHostGroups().Get(hostGroupName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SshPublicKeyResources in the ResourceGroupResource. </summary>
@@ -818,14 +816,13 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroupResource resourceGroupResource, string vmName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetVirtualMachines().GetAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -835,14 +832,13 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroupResource resourceGroupResource, string vmName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetVirtualMachines().Get(vmName, expand, cancellationToken);
+            return resourceGroupResource.GetVirtualMachines().Get(vmName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ImageResources in the ResourceGroupResource. </summary>

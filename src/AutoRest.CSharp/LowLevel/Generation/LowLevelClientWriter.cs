@@ -500,11 +500,41 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
-            writer.WriteMethodDocumentation(methodSignature);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod);
             WriteSchemaDocumentationRemarks(writer, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
+        }
+
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod)
+        {
+            codeWriter.WriteMethodDocumentation(methodSignature);
+            codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+
+            if (methodSignature.ReturnType != null)
+            {
+                bool containsResponseBody = ContainsObjectSchema(clientMethod.OperationSchemas.ResponseBodySchema);
+                CSharpType responseType = methodSignature.ReturnType.Trim("Task");
+                string responseTypeText = responseType.ToGenericTemplateName();
+                string responseTypeParameterText = responseType.Trim().ToGenericTemplateName();
+
+                string text;
+                if (clientMethod.PagingInfo != null)
+                {
+                    text = $"The <see cref=\"{responseTypeText}\"/> from the service containing a list of <see cref=\"{responseTypeParameterText}\"/> objects.{(containsResponseBody ? " Details of the body schema for each item in the collection are in the Remarks section below." : string.Empty)}";
+                }
+                else if (clientMethod.IsLongRunning)
+                {
+                    text = containsResponseBody ? $"The <see cref=\"{responseTypeText}\"/> from the service that will contain a <see cref=\"{responseTypeParameterText}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below." : $"The <see cref=\"{responseTypeText}\"/> representing an asynchronous operation on the service.";
+                }
+                else
+                {
+                    text = $"The response returned from the service.{(containsResponseBody ? " Details of the response body schema are in the Remarks section below." : string.Empty)}";
+                }
+
+                codeWriter.WriteXmlDocumentationReturns($"{text}");
+            }
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
@@ -705,18 +735,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 switch (toExplore)
                 {
-                    case OrSchema o:
-                        foreach (Schema s in o.AnyOf)
-                        {
-                            schemasToExplore.Enqueue(s);
-                        }
-                        break;
-                    case DictionarySchema d:
-                        schemasToExplore.Enqueue(d.ElementType);
-                        break;
-                    case ArraySchema a:
-                        schemasToExplore.Enqueue(a.ElementType);
-                        break;
                     case ObjectSchema o:
                         List<SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
 
@@ -751,6 +769,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         documentationObjects.Add(new(schema == o ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(o)), propertyDocumentation));
                         break;
+
+                    default:
+                        HandleNonObjectSchema(toExplore, schemasToExplore);
+                        break;
                 }
 
                 visitedSchema.Add(toExplore.Name);
@@ -762,6 +784,58 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return documentationObjects.Select(o => new SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
+        }
+
+        private static bool ContainsObjectSchema(Schema? schema)
+        {
+            if (schema == null)
+            {
+                return false;
+            }
+
+            var visitedSchema = new HashSet<string>();
+            var schemasToExplore = new Queue<Schema>(new[] { schema });
+
+            while (schemasToExplore.Any())
+            {
+                Schema toExplore = schemasToExplore.Dequeue();
+                if (visitedSchema.Contains(toExplore.Name))
+                {
+                    continue;
+                }
+
+                switch (toExplore)
+                {
+                    case ObjectSchema o:
+                        return true;
+                    default:
+                        HandleNonObjectSchema(toExplore, schemasToExplore);
+                        break;
+                }
+
+                visitedSchema.Add(toExplore.Name);
+            }
+
+            return false;
+        }
+
+        private static void HandleNonObjectSchema(Schema schema, Queue<Schema> schemasToExplore)
+        {
+            switch (schema)
+            {
+                case OrSchema o:
+                    foreach (Schema s in o.AnyOf)
+                    {
+                        schemasToExplore.Enqueue(s);
+                    }
+                    break;
+                case DictionarySchema d:
+                    schemasToExplore.Enqueue(d.ElementType);
+                    break;
+                case ArraySchema a:
+                    schemasToExplore.Enqueue(a.ElementType);
+                    break;
+            }
         }
 
         private static string StringifyTypeForTable(Schema schema)

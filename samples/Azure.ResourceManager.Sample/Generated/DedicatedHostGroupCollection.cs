@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -127,11 +126,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: DedicatedHostGroups_Get
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -139,7 +137,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
@@ -157,11 +155,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: DedicatedHostGroups_Get
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual Response<DedicatedHostGroupResource> Get(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroupResource> Get(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -169,7 +166,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, expand, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
@@ -271,11 +268,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: DedicatedHostGroups_Get
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -283,7 +279,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -299,11 +295,10 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: DedicatedHostGroups_Get
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual Response<bool> Exists(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -311,7 +306,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, expand, cancellationToken: cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

@@ -57,7 +57,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> Head501Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
@@ -75,7 +77,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response Head501(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
@@ -93,7 +97,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> Get501Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
@@ -111,7 +117,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response Get501(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
@@ -129,8 +137,10 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
@@ -148,8 +158,10 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response Post505(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
@@ -167,8 +179,10 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
@@ -186,8 +200,10 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response Delete505(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
