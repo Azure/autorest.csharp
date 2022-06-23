@@ -131,7 +131,7 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineResource>> GetAsync(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineResource>> GetAsync(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -161,7 +161,7 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<VirtualMachineResource> Get(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineResource> Get(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -189,7 +189,7 @@ namespace MgmtPropertyChooser
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineResource> GetAllAsync(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineResource> GetAllAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<VirtualMachineResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -217,7 +217,7 @@ namespace MgmtPropertyChooser
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineResource> GetAll(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineResource> GetAll(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Page<VirtualMachineResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -247,7 +247,7 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
@@ -275,7 +275,7 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<bool> Exists(string vmName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 

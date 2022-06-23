@@ -131,7 +131,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -161,7 +161,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual Response<DedicatedHostGroupResource> Get(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroupResource> Get(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -189,7 +189,7 @@ namespace MgmtParamOrdering
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DedicatedHostGroupResource> GetAllAsync(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DedicatedHostGroupResource> GetAllAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<DedicatedHostGroupResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -217,7 +217,7 @@ namespace MgmtParamOrdering
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DedicatedHostGroupResource> GetAll(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<DedicatedHostGroupResource> GetAll(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Page<DedicatedHostGroupResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -247,7 +247,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
@@ -275,7 +275,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual Response<bool> Exists(string hostGroupName, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 

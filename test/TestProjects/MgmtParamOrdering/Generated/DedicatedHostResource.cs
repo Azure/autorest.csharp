@@ -95,7 +95,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DedicatedHostResource>> GetAsync(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostResource.Get");
             scope.Start();
@@ -120,7 +120,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DedicatedHostResource> Get(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> Get(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostResource.Get");
             scope.Start();
