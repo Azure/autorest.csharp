@@ -23,10 +23,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;
-                string name = schema.Language.Default.Name;
-                if (enumsToKeepPlural.Contains(name))
+                string schemaName = schema.Language.Default.Name;
+                if (enumsToKeepPlural.Contains(schemaName))
                     continue;
-                schema.Language.Default.Name = name.LastWordToSingular(inputIsKnownToBePlural: false);
+                schema.Language.Default.Name = schemaName.LastWordToSingular(inputIsKnownToBePlural: false);
             }
         }
     }
