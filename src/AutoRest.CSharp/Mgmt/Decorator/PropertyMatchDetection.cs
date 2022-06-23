@@ -29,15 +29,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             int matchCount = 0;
-            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
+            var parentSerializedNameDict = new Dictionary<string, PropertyInfo>();
+            var serializedNameDict = ReferenceClassFinder.GetPropertyMetadata(sourceType);
             foreach (var parentProperty in parentProperties)
             {
-                parentDict.Add(parentProperty.Name, parentProperty);
+                parentSerializedNameDict.Add(serializedNameDict[parentProperty.Name].SerializedName, parentProperty);
             }
 
             foreach (var childProperty in childProperties)
             {
-                if (!DoesPropertyExistInParent(sourceType, targetType, childProperty, parentDict, propertiesInComparison))
+                if (!DoesPropertyExistInParent(sourceType, targetType, childProperty, parentSerializedNameDict, propertiesInComparison))
                 {
                     if (allowExtra)
                         continue;
@@ -78,10 +79,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Check if a <c>System.Type</c> has the same properties as our own <c>MgmtObjectType</c>.
+        /// Check if a <see cref="Type"/> has the same properties as our own <see cref="MgmtObjectType"/>.
         /// </summary>
-        /// <param name="sourceType"><c>System.Type</c> from reflection.</param>
-        /// <param name="targetType">A <c>MgmtObjectType</c> from M4 output.</param>
+        /// <param name="sourceType"><see cref="Type"/> from reflection.</param>
+        /// <param name="targetType">A <see cref="MgmtObjectType"/> from M4 output.</param>
         /// <returns></returns>
         internal static bool IsEqual(Type sourceType, MgmtObjectType targetType)
         {
@@ -91,30 +92,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return IsEqual(sourceType, targetType, sourceTypeProperties, targetTypeProperties, new Dictionary<Type, CSharpType> { { sourceType, targetType.Type } });
         }
 
-        internal static bool DoesPropertyExistInParent(Type sourceType, MgmtObjectType targetType, ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
+        internal static bool DoesPropertyExistInParent(Type sourceType, MgmtObjectType targetType, ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentSerializedNameDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
-            PropertyInfo? parentProperty;
-            CSharpType childPropertyType = childProperty.Declaration.Type;
 
-            if (!parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
+            var childSchemaProperty = childProperty.SchemaProperty;
+            if (childSchemaProperty == null)
+                return false;
+
+            if (!parentSerializedNameDict.TryGetValue(childSchemaProperty.SerializedName, out var parentProperty))
             {
-                // If exact property name match fails, try to match ResourceType with Type, match ManagedServiceIdentityType and SystemAssignedServiceIdentityType with Type or XXType.
-                if (childProperty.Declaration.Name.Equals("Type", StringComparison.Ordinal))
-                {
-                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type", StringComparison.Ordinal)).Value;
-                }
-                else if (childProperty.Declaration.Name.EndsWith("Type", StringComparison.Ordinal))
-                { //TODO: enhance the code so that we don't match two different types in a child with the same type in parent.
-                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type", StringComparison.Ordinal) && !p.Key.Equals("ResourceType", StringComparison.Ordinal)).Value;
-                }
-                if (parentProperty == null)
-                    return false;
+                // no matter what the property is called now, the serialized name of them must be the same
+                // otherwise, if we replaced a MgmtObjectType with the class with different serialized name
+                // the serialized result will be different and the SDK user will definitely have an error.
+                return false;
             }
 
+            var childPropertyType = childProperty.Declaration.Type;
             if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
                 IsAssignable(parentProperty.PropertyType, childPropertyType))
             {
-                if (childProperty.IsReadOnly != (parentProperty.GetSetMethod() == null))
+                if (childProperty.IsReadOnly != IsReadOnly(parentProperty))
                     return false;
             }
             else if (!ArePropertyTypesMatch(sourceType, targetType, parentProperty.PropertyType!, childPropertyType, propertiesInComparison))
@@ -123,6 +120,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return true;
+        }
+
+        private static bool IsReadOnly(PropertyInfo property)
+        {
+            if (TypeFactory.IsCollectionType(property.PropertyType))
+            {
+                return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
+            }
+
+            return property.GetSetMethod() == null;
         }
 
         private static bool ArePropertyTypesMatch(Type sourceType, MgmtObjectType targetType, Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null)

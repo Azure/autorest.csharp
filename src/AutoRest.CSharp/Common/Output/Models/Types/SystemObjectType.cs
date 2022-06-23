@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Property prop = new Property()
                 {
                     Nullable = isNullable,
-                    ReadOnly = IsReadOnly(property), //TODO read this from attribute from reference object
+                    ReadOnly = IsReadOnly(property),
                     SerializedName = GetSerializedName(property.Name),
                     Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
                     Required = IsRequired(property),

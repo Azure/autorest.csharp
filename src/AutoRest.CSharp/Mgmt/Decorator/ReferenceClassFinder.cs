@@ -44,6 +44,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             },
             [typeof(TrackedResourceData)] = new()
             {
+                ["Id"] = new PropertyMetadata("id", true),
+                ["Name"] = new PropertyMetadata("name", true),
+                ["ResourceType"] = new PropertyMetadata("type", true),
+                ["SystemData"] = new PropertyMetadata("systemData", false),
                 ["Location"] = new PropertyMetadata("location", true),
                 ["Tags"] = new PropertyMetadata("tags"),
             },
@@ -60,6 +64,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 ["TenantId"] = new PropertyMetadata("tenantId"),
                 ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type", true),
             },
+            [typeof(ResponseError)] = new()
+            {
+                ["Code"] = new PropertyMetadata("code", true),
+                ["Message"] = new PropertyMetadata("message", true),
+                ["InnerError"] = new PropertyMetadata("innerError"),
+                ["Target"] = new PropertyMetadata("target"),
+                ["Details"] = new PropertyMetadata("details")
+            }
         };
 
         public static Dictionary<string, PropertyMetadata> GetPropertyMetadata(Type systemObjectType)
@@ -127,10 +139,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static IList<Type> GetReferenceClassCollectionInternal()
         {
             return ExternalTypes.Where(t =>
-                !t.Name.Equals("Resource") && //temp while we have both Resource and ResourceData
-                !t.Name.Equals("TrackedResource") && //temp while we have both TrackedResource and TrackedResourceData
-                t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
+                IsReferenceType(t) && !IsObsolete(t)).ToList();
         }
+
+        private static bool IsReferenceType(Type type)
+            => type.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Any();
+
+        private static bool IsObsolete(Type type)
+            => type.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ObsoleteAttribute)).Any();
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {

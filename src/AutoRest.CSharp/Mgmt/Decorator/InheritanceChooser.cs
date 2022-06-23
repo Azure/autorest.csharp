@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
+            foreach (Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
@@ -78,11 +78,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parentProperties.Count >= childProperties.Count)
                 return false;
 
-            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
             int matchCount = 0;
+            var parentSerializedNameDict = new Dictionary<string, PropertyInfo>();
+            var serializedNameDict = ReferenceClassFinder.GetPropertyMetadata(parentType);
             foreach (var parentProperty in parentProperties)
             {
-                parentDict.Add(parentProperty.Name, parentProperty);
+                parentSerializedNameDict.Add(serializedNameDict[parentProperty.Name].SerializedName, parentProperty);
             }
 
             foreach (var childProperty in childProperties)
@@ -90,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (parentProperties.Count == matchCount)
                     break;
 
-                if (PropertyMatchDetection.DoesPropertyExistInParent(parentType, originalType, childProperty, parentDict))
+                if (PropertyMatchDetection.DoesPropertyExistInParent(parentType, originalType, childProperty, parentSerializedNameDict))
                     matchCount++;
             }
 
