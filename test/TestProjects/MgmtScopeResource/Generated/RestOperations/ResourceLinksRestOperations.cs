@@ -307,7 +307,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateListAtSourceScopeRequest(string scope)
+        internal Azure.Core.HttpMessage CreateListAtSourceScopeRequest(string scope, Filter? filter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -317,7 +317,10 @@ namespace MgmtScopeResource
             uri.AppendPath("/", false);
             uri.AppendPath(scope, false);
             uri.AppendPath("/providers/Microsoft.Resources/links", false);
-            uri.AppendQuery("$filter", "atScope()", true);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter.Value.ToString(), true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -327,13 +330,14 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public async Task<Response<ResourceLinkResult>> ListAtSourceScopeAsync(string scope, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceLinkResult>> ListAtSourceScopeAsync(string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
 
-            using var message = CreateListAtSourceScopeRequest(scope);
+            using var message = CreateListAtSourceScopeRequest(scope, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -351,13 +355,14 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public Response<ResourceLinkResult> ListAtSourceScope(string scope, CancellationToken cancellationToken = default)
+        public Response<ResourceLinkResult> ListAtSourceScope(string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
 
-            using var message = CreateListAtSourceScopeRequest(scope);
+            using var message = CreateListAtSourceScopeRequest(scope, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -443,7 +448,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateListAtSourceScopeNextPageRequest(string nextLink, string scope)
+        internal Azure.Core.HttpMessage CreateListAtSourceScopeNextPageRequest(string nextLink, string scope, Filter? filter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -460,14 +465,15 @@ namespace MgmtScopeResource
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
-        public async Task<Response<ResourceLinkResult>> ListAtSourceScopeNextPageAsync(string nextLink, string scope, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceLinkResult>> ListAtSourceScopeNextPageAsync(string nextLink, string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(scope, nameof(scope));
 
-            using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope);
+            using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -486,14 +492,15 @@ namespace MgmtScopeResource
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
-        public Response<ResourceLinkResult> ListAtSourceScopeNextPage(string nextLink, string scope, CancellationToken cancellationToken = default)
+        public Response<ResourceLinkResult> ListAtSourceScopeNextPage(string nextLink, string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(scope, nameof(scope));
 
-            using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope);
+            using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
