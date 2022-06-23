@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of DataDisk. </summary>
         /// <param name="lun"> Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. </param>
         /// <param name="createOption"> Specifies how the virtual machine should be created.&lt;br&gt;&lt;br&gt; Possible values are:&lt;br&gt;&lt;br&gt; **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.&lt;br&gt;&lt;br&gt; **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described. </param>
-        public DataDisk(int lun, DiskCreateOptionTypes createOption)
+        public DataDisk(int lun, DiskCreateOptionType createOption)
         {
             Lun = lun;
             CreateOption = createOption;
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="toBeDetached"> Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset. </param>
         /// <param name="diskIopsReadWrite"> Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set. </param>
         /// <param name="diskMBpsReadWrite"> Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set. </param>
-        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingTypes? caching, bool? writeAcceleratorEnabled, DiskCreateOptionTypes createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite)
+        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite)
         {
             Lun = lun;
             Name = name;
@@ -83,11 +83,11 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None for Standard storage. ReadOnly for Premium storage**. </summary>
-        public CachingTypes? Caching { get; set; }
+        public CachingType? Caching { get; set; }
         /// <summary> Specifies whether writeAccelerator should be enabled or disabled on the disk. </summary>
         public bool? WriteAcceleratorEnabled { get; set; }
         /// <summary> Specifies how the virtual machine should be created.&lt;br&gt;&lt;br&gt; Possible values are:&lt;br&gt;&lt;br&gt; **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.&lt;br&gt;&lt;br&gt; **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described. </summary>
-        public DiskCreateOptionTypes CreateOption { get; set; }
+        public DiskCreateOptionType CreateOption { get; set; }
         /// <summary> Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. &lt;br&gt;&lt;br&gt; This value cannot be larger than 1023 GB. </summary>
         public int? DiskSizeGB { get; set; }
         /// <summary> The managed disk parameters. </summary>

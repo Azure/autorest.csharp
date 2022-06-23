@@ -12,12 +12,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         /// <summary> Initializes a new instance of OSDiskImage. </summary>
         /// <param name="operatingSystem"> The operating system of the osDiskImage. </param>
-        public OSDiskImage(OperatingSystemTypes operatingSystem)
+        public OSDiskImage(OperatingSystemType operatingSystem)
         {
             OperatingSystem = operatingSystem;
         }
 
         /// <summary> The operating system of the osDiskImage. </summary>
-        public OperatingSystemTypes OperatingSystem { get; set; }
+        public OperatingSystemType OperatingSystem { get; set; }
     }
 }

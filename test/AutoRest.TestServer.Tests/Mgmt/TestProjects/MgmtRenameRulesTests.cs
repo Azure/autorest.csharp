@@ -12,8 +12,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(true, "AutomaticOSUpgradePolicy")]
         [TestCase(false, "AutomaticOsUpgradePolicy")]
-        [TestCase(true, "VmDiskTypes")]
-        [TestCase(false, "VMDiskTypes")]
+        [TestCase(true, "VmDiskType")]
+        [TestCase(false, "VMDiskType")]
         [TestCase(true, "IPVersion")]
         [TestCase(false, "IpVersion")]
         [TestCase(true, "VirtualMachineScaleSetVmInstanceIds")]

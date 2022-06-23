@@ -43,15 +43,15 @@ new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"000000
 {
 Keys =
 {
-KeyPermissions.Encrypt,KeyPermissions.Decrypt,KeyPermissions.WrapKey,KeyPermissions.UnwrapKey,KeyPermissions.Sign,KeyPermissions.Verify,KeyPermissions.Get,KeyPermissions.List,KeyPermissions.Create,KeyPermissions.Update,KeyPermissions.Import,KeyPermissions.Delete,KeyPermissions.Backup,KeyPermissions.Restore,KeyPermissions.Recover,KeyPermissions.Purge
+KeyPermission.Encrypt,KeyPermission.Decrypt,KeyPermission.WrapKey,KeyPermission.UnwrapKey,KeyPermission.Sign,KeyPermission.Verify,KeyPermission.Get,KeyPermission.List,KeyPermission.Create,KeyPermission.Update,KeyPermission.Import,KeyPermission.Delete,KeyPermission.Backup,KeyPermission.Restore,KeyPermission.Recover,KeyPermission.Purge
 },
 Secrets =
 {
-SecretPermissions.Get,SecretPermissions.List,SecretPermissions.Set,SecretPermissions.Delete,SecretPermissions.Backup,SecretPermissions.Restore,SecretPermissions.Recover,SecretPermissions.Purge
+SecretPermission.Get,SecretPermission.List,SecretPermission.Set,SecretPermission.Delete,SecretPermission.Backup,SecretPermission.Restore,SecretPermission.Recover,SecretPermission.Purge
 },
 Certificates =
 {
-CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.Delete,CertificatePermissions.Create,CertificatePermissions.Import,CertificatePermissions.Update,CertificatePermissions.Managecontacts,CertificatePermissions.Getissuers,CertificatePermissions.Listissuers,CertificatePermissions.Setissuers,CertificatePermissions.Deleteissuers,CertificatePermissions.Manageissuers,CertificatePermissions.Recover,CertificatePermissions.Purge
+CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delete,CertificatePermission.Create,CertificatePermission.Import,CertificatePermission.Update,CertificatePermission.Managecontacts,CertificatePermission.Getissuers,CertificatePermission.Listissuers,CertificatePermission.Setissuers,CertificatePermission.Deleteissuers,CertificatePermission.Manageissuers,CertificatePermission.Recover,CertificatePermission.Purge
 },
 })
 },
@@ -78,7 +78,7 @@ CertificatePermissions.Get,CertificatePermissions.List,CertificatePermissions.De
                 EnabledForTemplateDeployment = true,
                 NetworkAcls = new NetworkRuleSet()
                 {
-                    Bypass = NetworkRuleBypassOptions.AzureServices,
+                    Bypass = NetworkRuleBypassOption.AzureServices,
                     DefaultAction = NetworkRuleAction.Deny,
                     IpRules =
 {

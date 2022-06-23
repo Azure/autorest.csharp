@@ -74,12 +74,12 @@ namespace Azure.ResourceManager.Sample.Models
         internal static VirtualMachineScaleSetOSDisk DeserializeVirtualMachineScaleSetOSDisk(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<CachingTypes> caching = default;
+            Optional<CachingType> caching = default;
             Optional<bool> writeAcceleratorEnabled = default;
-            DiskCreateOptionTypes createOption = default;
+            DiskCreateOptionType createOption = default;
             Optional<DiffDiskSettings> diffDiskSettings = default;
             Optional<int> diskSizeGB = default;
-            Optional<OperatingSystemTypes> osType = default;
+            Optional<OperatingSystemType> osType = default;
             Optional<VirtualHardDisk> image = default;
             Optional<IList<string>> vhdContainers = default;
             Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
@@ -97,7 +97,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    caching = property.Value.GetString().ToCachingTypes();
+                    caching = property.Value.GetString().ToCachingType();
                     continue;
                 }
                 if (property.NameEquals("writeAcceleratorEnabled"))
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("createOption"))
                 {
-                    createOption = new DiskCreateOptionTypes(property.Value.GetString());
+                    createOption = new DiskCreateOptionType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("diffDiskSettings"))
@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    osType = property.Value.GetString().ToOperatingSystemTypes();
+                    osType = property.Value.GetString().ToOperatingSystemType();
                     continue;
                 }
                 if (property.NameEquals("image"))

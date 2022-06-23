@@ -52,7 +52,7 @@ namespace MgmtMockTest.Models
 
         internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element)
         {
-            Optional<NetworkRuleBypassOptions> bypass = default;
+            Optional<NetworkRuleBypassOption> bypass = default;
             Optional<NetworkRuleAction> defaultAction = default;
             Optional<IList<MhsmipRule>> ipRules = default;
             Optional<IList<WritableSubResource>> virtualNetworkRules = default;
@@ -65,7 +65,7 @@ namespace MgmtMockTest.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    bypass = new NetworkRuleBypassOptions(property.Value.GetString());
+                    bypass = new NetworkRuleBypassOption(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("defaultAction"))

@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="provisioningOn"> The date when the host was first provisioned. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="instanceView"> The dedicated host instance view. </param>
-        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseTypes? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(id, name, resourceType, systemData, tags, location)
+        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             PlatformFaultDomain = platformFaultDomain;
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> A list of references to all virtual machines in the Dedicated Host. </summary>
         public IReadOnlyList<Resources.Models.SubResource> VirtualMachines { get; }
         /// <summary> Specifies the software license type that will be applied to the VMs deployed on the dedicated host. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **Windows_Server_Hybrid** &lt;br&gt;&lt;br&gt; **Windows_Server_Perpetual** &lt;br&gt;&lt;br&gt; Default: **None**. </summary>
-        public DedicatedHostLicenseTypes? LicenseType { get; set; }
+        public DedicatedHostLicenseType? LicenseType { get; set; }
         /// <summary> The date when the host was first provisioned. </summary>
         public DateTimeOffset? ProvisioningOn { get; }
         /// <summary> The provisioning state, which only appears in the response. </summary>

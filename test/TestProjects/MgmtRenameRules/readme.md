@@ -16,7 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 keep-orphaned-models:
-- VmDiskTypes
+- VmDiskType
 
 rename-rules:
   Os: OS
@@ -53,4 +53,8 @@ directive:
     where: $.definitions.UpgradeOperationHistoricalStatusInfo.properties.type
     transform: > 
       $["x-ms-client-name"] = "ResourceType";
+  - from: MgmtRenameRules.json
+    where: $.definitions
+    transform: >
+      $.HyperVGenerationType['x-ms-enum'].name = 'HyperVGenerationType';
 ```

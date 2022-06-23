@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static HardwareProfile DeserializeHardwareProfile(JsonElement element)
         {
-            Optional<VirtualMachineSizeTypes> vmSize = default;
+            Optional<VirtualMachineSizeType> vmSize = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vmSize"))
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    vmSize = new VirtualMachineSizeTypes(property.Value.GetString());
+                    vmSize = new VirtualMachineSizeType(property.Value.GetString());
                     continue;
                 }
             }

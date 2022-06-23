@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Contains the os disk image information. </summary>
         internal OSDiskImage OsDiskImage { get; set; }
         /// <summary> The operating system of the osDiskImage. </summary>
-        public OperatingSystemTypes? OsDiskImageOperatingSystem
+        public OperatingSystemType? OsDiskImageOperatingSystem
         {
-            get => OsDiskImage is null ? default(OperatingSystemTypes?) : OsDiskImage.OperatingSystem;
+            get => OsDiskImage is null ? default(OperatingSystemType?) : OsDiskImage.OperatingSystem;
             set
             {
                 OsDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies disallowed configuration for the VirtualMachine created from the image. </summary>
         internal DisallowedConfiguration Disallowed { get; set; }
         /// <summary> VM disk types which are disallowed. </summary>
-        public VmDiskTypes? DisallowedVmDiskType
+        public VmDiskType? DisallowedVmDiskType
         {
             get => Disallowed is null ? default : Disallowed.VmDiskType;
             set
