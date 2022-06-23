@@ -10,7 +10,7 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "KeepOrphanedModels": [
-    "VmDiskTypes"
+    "VmDiskType"
   ],
   "RenameRules": {
     "Os": "OS",
