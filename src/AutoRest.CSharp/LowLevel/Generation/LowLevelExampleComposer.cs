@@ -21,18 +21,16 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelExampleComposer
     {
-        private CodeWriter Writer { get; }
         private string ClientTypeName { get; }
         private BuildContext<LowLevelOutputLibrary> Context { get; }
 
-        public LowLevelExampleComposer(CodeWriter writer, string clientTypeName, BuildContext<LowLevelOutputLibrary> context)
+        public LowLevelExampleComposer(string clientTypeName, BuildContext<LowLevelOutputLibrary> context)
         {
-            Writer = writer;
             ClientTypeName = clientTypeName;
             Context = context;
         }
 
-        public void Write(LowLevelClientMethod clientMethod, bool async)
+        public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
         {
             var methodSignature = clientMethod.Signature.WithAsync(async);
             var operationSchema = clientMethod.OperationSchemas;
@@ -64,7 +62,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 examples.Add(GenerateExampleWithRequiredParameters(clientMethod, methodSignature.Name, async));
             }
 
-            Writer.WriteXmlDocumentation("example", $"{string.Join(Environment.NewLine, examples)}");
+            return $"{string.Join(Environment.NewLine, examples)}";
         }
 
         private bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)

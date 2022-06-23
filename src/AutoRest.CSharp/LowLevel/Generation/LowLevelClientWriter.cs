@@ -603,8 +603,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
             WriteMethodDocumentation(writer, methodSignature, clientMethod);
-            var exampleComposer = new LowLevelExampleComposer(writer, clientTypeName, context);
-            exampleComposer.Write(clientMethod, async);
+            var exampleComposer = new LowLevelExampleComposer(clientTypeName, context);
+            writer.WriteXmlDocumentation("example", exampleComposer.Compose(clientMethod, async));
             WriteSchemaDocumentationRemarks(writer, methodSignature, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
