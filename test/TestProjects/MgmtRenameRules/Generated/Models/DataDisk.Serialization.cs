@@ -68,9 +68,9 @@ namespace MgmtRenameRules.Models
             Optional<string> name = default;
             Optional<VirtualHardDisk> vhd = default;
             Optional<VirtualHardDisk> image = default;
-            Optional<CachingTypes> caching = default;
+            Optional<CachingType> caching = default;
             Optional<bool> writeAcceleratorEnabled = default;
-            DiskCreateOptionTypes createOption = default;
+            DiskCreateOptionType createOption = default;
             Optional<int> diskSizeGB = default;
             Optional<ManagedDiskParameters> managedDisk = default;
             Optional<bool> toBeDetached = default;
@@ -115,7 +115,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    caching = property.Value.GetString().ToCachingTypes();
+                    caching = property.Value.GetString().ToCachingType();
                     continue;
                 }
                 if (property.NameEquals("writeAcceleratorEnabled"))
@@ -130,7 +130,7 @@ namespace MgmtRenameRules.Models
                 }
                 if (property.NameEquals("createOption"))
                 {
-                    createOption = new DiskCreateOptionTypes(property.Value.GetString());
+                    createOption = new DiskCreateOptionType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("diskSizeGB"))
