@@ -515,18 +515,18 @@ namespace AutoRest.CSharp.Generation.Writers
             if (methodSignature.ReturnType != null)
             {
                 bool containsResponseBody = ContainsObjectSchema(clientMethod.OperationSchemas.ResponseBodySchema);
-                bool isAsync = methodSignature.Modifiers.HasFlag(Async);
-                string returnBodyText = methodSignature.ReturnType.ToCommentShortNameWithoutTaskString();
-                string returnContainingText = methodSignature.ReturnType.ToCommentContainingShortNameString();
+                CSharpType responseType = methodSignature.ReturnType.Trim("Task");
+                string responseTypeText = responseType.ToGenericTemplateName();
+                string responseTypeParameterText = responseType.Trim().ToGenericTemplateName();
 
                 string text;
                 if (clientMethod.PagingInfo != null)
                 {
-                    text = $"The <![CDATA[{returnBodyText}]]> from the service containing a list of <![CDATA[{returnContainingText}]]> objects.{(containsResponseBody ? " Details of the body schema for each item in the collection are in the Remarks section below." : string.Empty)}";
+                    text = $"The <see cref=\"{responseTypeText}\"/> from the service containing a list of <see cref=\"{responseTypeParameterText}\"/> objects.{(containsResponseBody ? " Details of the body schema for each item in the collection are in the Remarks section below." : string.Empty)}";
                 }
                 else if (clientMethod.IsLongRunning)
                 {
-                    text = containsResponseBody ? $"The <![CDATA[{returnBodyText}]]> from the service that will contain a <![CDATA[{returnContainingText}]]> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below." : $"The <![CDATA[{returnBodyText}]]> representing an asynchronous operation on the service.";
+                    text = containsResponseBody ? $"The <see cref=\"{responseTypeText}\"/> from the service that will contain a <see cref=\"{responseTypeParameterText}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below." : $"The <see cref=\"{responseTypeText}\"/> representing an asynchronous operation on the service.";
                 }
                 else
                 {

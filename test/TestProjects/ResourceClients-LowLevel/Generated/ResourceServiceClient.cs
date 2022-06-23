@@ -142,7 +142,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <![CDATA[AsyncPageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. </returns>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. </returns>
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
         {
             return GetAllItemsImplementationAsync("ResourceServiceClient.GetAllItems", context);
@@ -168,7 +168,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <![CDATA[Pageable<BinaryData>]]> from the service containing a list of <![CDATA[BinaryData]]> objects. </returns>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. </returns>
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
         {
             return GetAllItemsImplementation("ResourceServiceClient.GetAllItems", context);
