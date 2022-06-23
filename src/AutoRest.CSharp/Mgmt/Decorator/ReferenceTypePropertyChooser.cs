@@ -32,12 +32,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
         private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
-        private static IList<System.Type> GetReferenceClassCollection()
+        private static IEnumerable<System.Type> GetReferenceClassCollection()
         {
-            return ReferenceClassFinder.ExternalTypes.Where(t =>
-            {
-                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName);
-            }).ToList();
+            return ReferenceClassFinder.ExternalTypes.Where(t => t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName));
         }
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
