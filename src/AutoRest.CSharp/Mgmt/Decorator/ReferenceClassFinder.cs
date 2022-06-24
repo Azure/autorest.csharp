@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             public PropertyMetadata(string serializedName) : this(serializedName, false)
             {
             }
+
+            public static implicit operator PropertyMetadata(string serializedName) => new PropertyMetadata(serializedName);
         }
 
         private static readonly Dictionary<Type, Dictionary<string, PropertyMetadata>> _referenceTypesPropertyMetadata = new()
@@ -63,6 +65,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 ["PrincipalId"] = new PropertyMetadata("principalId"),
                 ["TenantId"] = new PropertyMetadata("tenantId"),
                 ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type", true),
+            },
+            [typeof(SystemData)] = new()
+            {
+                ["CreatedBy"] = "createdBy",
+                ["CreatedByType"] = "createdByType",
+                ["CreatedOn"] = "createdAt",
+                ["LastModifiedBy"] = "lastModifiedBy",
+                ["LastModifiedByType"] = "lastModifiedByType",
+                ["LastModifiedOn"] = "lastModifiedAt"
             },
             [typeof(ResponseError)] = new()
             {
