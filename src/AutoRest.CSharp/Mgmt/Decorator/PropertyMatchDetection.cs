@@ -5,15 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -111,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
                 IsAssignable(parentProperty.PropertyType, childPropertyType))
             {
-                if (childProperty.IsReadOnly != IsReadOnly(parentProperty))
+                if (childProperty.IsReadOnly != parentProperty.IsReadOnly())
                     return false;
             }
             else if (!ArePropertyTypesMatch(sourceType, targetType, parentProperty.PropertyType!, childPropertyType, propertiesInComparison))
@@ -120,16 +115,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return true;
-        }
-
-        private static bool IsReadOnly(PropertyInfo property)
-        {
-            if (TypeFactory.IsCollectionType(property.PropertyType))
-            {
-                return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
-            }
-
-            return property.GetSetMethod() == null;
         }
 
         private static bool ArePropertyTypesMatch(Type sourceType, MgmtObjectType targetType, Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null)
