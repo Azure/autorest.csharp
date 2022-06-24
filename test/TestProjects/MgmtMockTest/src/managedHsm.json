@@ -815,6 +815,10 @@
     },
     "ManagedHsmProperties": {
       "properties": {
+        "settings": {
+          "type": "object",
+          "description": "The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object"
+        },
         "tenantId": {
           "type": "string",
           "format": "uuid",

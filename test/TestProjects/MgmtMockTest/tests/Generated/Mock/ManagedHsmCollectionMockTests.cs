@@ -39,6 +39,15 @@ namespace MgmtMockTest.Tests.Mock
             {
                 Properties = new ManagedHsmProperties()
                 {
+                    Settings = BinaryData.FromObjectAsJson(new
+                    {
+                        config1 = "value1",
+                        config2 = "true",
+                        config3 = new
+                        {
+                            inner = "something"
+                        }
+                    }),
                     TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
                     InitialAdminObjectIds =
 {

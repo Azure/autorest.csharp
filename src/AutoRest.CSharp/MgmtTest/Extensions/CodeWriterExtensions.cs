@@ -39,17 +39,17 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 writer.AppendTypeProviderValue(type, exampleValue);
         }
 
-        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, Parameter parameter, ExampleParameterValue exampleValue)
+        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, Parameter parameter, ExampleParameterValue exampleParameterValue)
         {
             // for optional parameter, we write the parameter name here
             if (parameter.DefaultValue != null)
                 writer.Append($"{parameter.Name}: ");
-            if (exampleValue.Value != null)
-                writer.AppendExampleValue(exampleValue.Value);
-            else if (exampleValue.RawValue != null)
-                writer.Append(exampleValue.RawValue);
+            if (exampleParameterValue.Value != null)
+                writer.AppendExampleValue(exampleParameterValue.Value);
+            else if (exampleParameterValue.RawValue != null)
+                writer.Append(exampleParameterValue.RawValue);
             else
-                throw new InvalidOperationException($"No value for parameter {exampleValue.Parameter.Name} assigned");
+                throw new InvalidOperationException($"No value for parameter {exampleParameterValue.Parameter.Name} assigned");
             return writer;
         }
 
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (type.FrameworkType == typeof(BinaryData))
                 return writer.AppendBinaryData(exampleValue);
 
-            return writer.AppendSimpleFrameworkType(type.FrameworkType, exampleValue);
+            return writer.AppendRawValue(type.FrameworkType, exampleValue.RawValue);
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             var initialization = includeInitialization ? (FormattableString)$"new {type}()" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
-                foreach ((var key, var value) in (Dictionary<string, ExampleValue>)exampleValue.Properties)
+                foreach ((var key, var value) in exampleValue.Properties)
                 {
                     // write key
                     writer.Append($"[{key:L}] = ");
@@ -110,15 +110,62 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendBinaryData(this CodeWriter writer, ExampleValue exampleValue)
         {
-            // TODO
-            return writer.AppendRaw("default");
+            // determine which method on BinaryData we want to use to serialize this BinaryData
+            string method = exampleValue.RawValue != null && exampleValue.RawValue is string ? "FromString" : "FromObjectAsJson";
+            writer.Append($"{typeof(BinaryData)}.{method}(");
+            writer.AppendAnonymousObject(exampleValue);
+            return writer.AppendRaw(")");
         }
 
-        private static CodeWriter AppendSimpleFrameworkType(this CodeWriter writer, Type type, ExampleValue exampleValue) => exampleValue.RawValue switch
+        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, ExampleValue exampleValue)
         {
+            // check if this is simple type
+            if (exampleValue.RawValue != null)
+            {
+                return writer.AppendRawValue(exampleValue.RawValue.GetType(), exampleValue.RawValue);
+            }
+            // check if this is an array
+            if (exampleValue.Elements.Any())
+            {
+                return writer.AppendListValue(typeof(object), exampleValue);
+            }
+            // fallback to complex object
+            using (writer.Scope($"new "))
+            {
+                foreach ((var key, var value) in exampleValue.Properties)
+                {
+                    writer.Append($"{key} = ");
+                    writer.AppendAnonymousObject(value);
+                }
+            }
+
+            return writer;
+        }
+
+        private static CodeWriter AppendRawDictionary(this CodeWriter writer, Dictionary<object, object?> dict)
+        {
+            using (writer.Scope($"new ", newLine: false))
+            {
+                foreach ((var key, var value) in dict)
+                {
+                    writer.Append($"{key.ToString()} = ");
+                    writer.AppendRawValue(value?.GetType() ?? typeof(object), value);
+                    writer.LineRaw(",");
+                }
+                writer.RemoveTrailingComma();
+            }
+
+            return writer;
+        }
+
+        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue) => rawValue switch
+        {
+            // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
+            // https://github.com/Azure/autorest.csharp/issues/2377
             string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
-            null => throw new InvalidOperationException($"Example value is null for framework type {type}"),
-            _ => writer.AppendRaw(exampleValue.RawValue.ToString()!)
+            null => writer.AppendRaw("null"),
+            Dictionary<object, object?> dict => writer.AppendRawDictionary(dict),
+            _ => writer.AppendRaw(rawValue.ToString()!)
         };
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value) => type switch
@@ -150,20 +197,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             switch (type.Implementation)
             {
                 case ObjectType objectType:
-                    return writer.AppendObjectTypeValue(objectType, (Dictionary<string, ExampleValue>)exampleValue.Properties);
+                    return writer.AppendObjectTypeValue(objectType, exampleValue.Properties);
                 case EnumType enumType:
                     return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
             }
             return writer.AppendRaw("default");
         }
-
-        //private static string? GetPropertySerializedName(ObjectType objectType, ObjectTypeProperty property)
-        //{
-        //    if (objectType is not SystemObjectType systemObjectType)
-        //        return property.SchemaProperty?.SerializedName;
-
-        //    return SystemObjectTypeHandler.GetPropertySerializedName(systemObjectType, property.Declaration.Name);
-        //}
 
         private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
         {

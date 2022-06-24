@@ -6,6 +6,13 @@
     "api-version": "2021-10-01",
     "parameters": {
       "properties": {
+        "settings": {
+          "config1": "value1",
+          "config2": true,
+          "config3": {
+            "inner": "something"
+          }
+        },
         "tenantId": "00000000-0000-0000-0000-000000000000",
         "initialAdminObjectIds": [
           "00000000-0000-0000-0000-000000000000"
