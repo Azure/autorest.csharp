@@ -153,13 +153,14 @@ namespace MgmtRenameRules
         /// Operation Id: VirtualMachineScaleSetVMs_Get
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<VirtualMachineScaleSetVmResource>> GetVirtualMachineScaleSetVmAsync(string instanceId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetVmResource>> GetVirtualMachineScaleSetVmAsync(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetVirtualMachineScaleSetVms().GetAsync(instanceId, cancellationToken).ConfigureAwait(false);
+            return await GetVirtualMachineScaleSetVms().GetAsync(instanceId, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -168,13 +169,14 @@ namespace MgmtRenameRules
         /// Operation Id: VirtualMachineScaleSetVMs_Get
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual Response<VirtualMachineScaleSetVmResource> GetVirtualMachineScaleSetVm(string instanceId, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSetVmResource> GetVirtualMachineScaleSetVm(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineScaleSetVms().Get(instanceId, cancellationToken);
+            return GetVirtualMachineScaleSetVms().Get(instanceId, expand, cancellationToken);
         }
 
         /// <summary>

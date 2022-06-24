@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtParent.Models;
 
 namespace MgmtParent
 {
@@ -172,13 +173,14 @@ namespace MgmtParent
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetDedicatedHostGroups().GetAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -188,13 +190,14 @@ namespace MgmtParent
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, CancellationToken cancellationToken = default)
+        public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDedicatedHostGroups().Get(hostGroupName, cancellationToken);
+            return resourceGroupResource.GetDedicatedHostGroups().Get(hostGroupName, expand, cancellationToken);
         }
 
         #region AvailabilitySetResource
