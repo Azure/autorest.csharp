@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void Transform(CachedDictionary<string, HashSet<OperationSet>> dataSchemaDict)
+        public static void Transform()
         {
             OmitOperationGroups.RemoveOperationGroups();
             SubscriptionIdUpdater.Update();
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             RearrangeParameterOrder.Update();
             RenamePluralEnums.Update();
 
-            NormalizeParamNames.Update(dataSchemaDict);
+            //NormalizeParamNames.Update(dataSchemaDict);
 
             CodeModelValidator.Validate();
         }
