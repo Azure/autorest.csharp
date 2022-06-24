@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using MgmtKeyvault;
+using MgmtMockTest;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class MgmtKeyvaultTests : TestProjectTests
+    public class MgmtMockTest : TestProjectTests
     {
-        public MgmtKeyvaultTests() : base("MgmtKeyvault", "src") { }
+        public MgmtMockTest() : base("MgmtMockTest", "src") { }
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DeletedManagedHsmCollection), typeof(DeletedVaultCollection) };
     }
