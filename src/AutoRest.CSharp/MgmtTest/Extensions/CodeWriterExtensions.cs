@@ -142,6 +142,19 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
+        private static CodeWriter AppendRawList(this CodeWriter writer, List<object?> list)
+        {
+            writer.AppendRaw("new[] { ");
+            foreach (var item in list)
+            {
+                writer.AppendRawValue(item?.GetType() ?? typeof(object), item);
+                writer.AppendRaw(", ");
+            }
+            writer.RemoveTrailingComma();
+            writer.AppendRaw(" }");
+            return writer;
+        }
+
         private static CodeWriter AppendRawDictionary(this CodeWriter writer, Dictionary<object, object?> dict)
         {
             using (writer.Scope($"new ", newLine: false))
@@ -164,6 +177,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // https://github.com/Azure/autorest.csharp/issues/2377
             string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
             null => writer.AppendRaw("null"),
+            List<object?> list => writer.AppendRawList(list),
             Dictionary<object, object?> dict => writer.AppendRawDictionary(dict),
             _ => writer.AppendRaw(rawValue.ToString()!)
         };

@@ -8,9 +8,20 @@
       "properties": {
         "settings": {
           "config1": "value1",
-          "config2": true,
-          "config3": {
+          "config2": 8427,
+          "config3": false,
+          "config4": ["1", "2"],
+          "config5": {
             "inner": "something"
+          }
+        },
+        "protectedSettings": {
+          "protected1": "value2",
+          "protected2": 10,
+          "protected3": false,
+          "protected4": ["1", "2", "3"],
+          "protected5": {
+            "protectedInner": "something else"
           }
         },
         "tenantId": "00000000-0000-0000-0000-000000000000",

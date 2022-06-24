@@ -42,10 +42,23 @@ namespace MgmtMockTest.Tests.Mock
                     Settings = BinaryData.FromObjectAsJson(new
                     {
                         config1 = "value1",
-                        config2 = "true",
-                        config3 = new
+                        config2 = "8427",
+                        config3 = "false",
+                        config4 = new[] { "1", "2" },
+                        config5 = new
                         {
                             inner = "something"
+                        }
+                    }),
+                    ProtectedSettings = BinaryData.FromObjectAsJson(new
+                    {
+                        protected1 = "value2",
+                        protected2 = "10",
+                        protected3 = "false",
+                        protected4 = new[] { "1", "2", "3" },
+                        protected5 = new
+                        {
+                            protectedInner = "something else"
                         }
                     }),
                     TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),

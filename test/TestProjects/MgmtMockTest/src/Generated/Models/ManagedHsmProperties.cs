@@ -23,6 +23,7 @@ namespace MgmtMockTest.Models
 
         /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
         /// <param name="settings"> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
+        /// <param name="protectedSettings"> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool. </param>
         /// <param name="initialAdminObjectIds"> Array of initial administrators object ids for this managed hsm pool. </param>
         /// <param name="hsmUri"> The URI of the managed hsm pool for performing operations on keys. </param>
@@ -36,9 +37,10 @@ namespace MgmtMockTest.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connections associated with the managed hsm pool. </param>
         /// <param name="publicNetworkAccess"> Control permission for data plane traffic coming from public networks while private endpoint is enabled. </param>
         /// <param name="scheduledPurgeOn"> The scheduled purge date in UTC. </param>
-        internal ManagedHsmProperties(BinaryData settings, Guid? tenantId, IList<string> initialAdminObjectIds, Uri hsmUri, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enablePurgeProtection, CreateMode? createMode, string statusMessage, ProvisioningState? provisioningState, MhsmNetworkRuleSet networkAcls, IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections, PublicNetworkAccess? publicNetworkAccess, DateTimeOffset? scheduledPurgeOn)
+        internal ManagedHsmProperties(BinaryData settings, BinaryData protectedSettings, Guid? tenantId, IList<string> initialAdminObjectIds, Uri hsmUri, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enablePurgeProtection, CreateMode? createMode, string statusMessage, ProvisioningState? provisioningState, MhsmNetworkRuleSet networkAcls, IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections, PublicNetworkAccess? publicNetworkAccess, DateTimeOffset? scheduledPurgeOn)
         {
             Settings = settings;
+            ProtectedSettings = protectedSettings;
             TenantId = tenantId;
             InitialAdminObjectIds = initialAdminObjectIds;
             HsmUri = hsmUri;
@@ -56,6 +58,8 @@ namespace MgmtMockTest.Models
 
         /// <summary> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </summary>
         public BinaryData Settings { get; set; }
+        /// <summary> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </summary>
+        public BinaryData ProtectedSettings { get; set; }
         /// <summary> The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool. </summary>
         public Guid? TenantId { get; set; }
         /// <summary> Array of initial administrators object ids for this managed hsm pool. </summary>
