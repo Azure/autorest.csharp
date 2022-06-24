@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
         /// <param name="name"> The name of the type of usage. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal SampleUsage(int currentValue, long limit, UsageName name)
+        internal SampleUsage(int currentValue, long limit, SampleUsageName name)
         {
             if (name == null)
             {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
         /// <param name="name"> The name of the type of usage. </param>
-        internal SampleUsage(UsageUnit unit, int currentValue, long limit, UsageName name)
+        internal SampleUsage(UsageUnit unit, int currentValue, long limit, SampleUsageName name)
         {
             Unit = unit;
             CurrentValue = currentValue;
@@ -50,6 +50,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The maximum permitted usage of the resource. </summary>
         public long Limit { get; }
         /// <summary> The name of the type of usage. </summary>
-        public UsageName Name { get; }
+        public SampleUsageName Name { get; }
     }
 }

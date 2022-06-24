@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
             UsageUnit unit = default;
             int currentValue = default;
             long limit = default;
-            UsageName name = default;
+            SampleUsageName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unit"))
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    name = UsageName.DeserializeUsageName(property.Value);
+                    name = SampleUsageName.DeserializeSampleUsageName(property.Value);
                     continue;
                 }
             }
