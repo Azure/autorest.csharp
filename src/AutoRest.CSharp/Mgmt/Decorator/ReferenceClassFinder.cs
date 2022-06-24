@@ -137,13 +137,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         private static IList<Type> GetReferenceClassCollectionInternal()
-        {
-            return ExternalTypes.Where(t =>
-                IsReferenceType(t) && !IsObsolete(t)).ToList();
-        }
+            => ExternalTypes.Where(t => IsReferenceType(t) && !IsObsolete(t)).ToList();
 
-        private static bool IsReferenceType(Type type)
-            => type.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Any();
+        internal static bool HasAttribute(Type type, string attributeName)
+            => type.GetCustomAttributes(false).Where(a => a.GetType().Name == attributeName).Any();
+
+        private static bool IsReferenceType(Type type) => HasAttribute(type, ReferenceTypeAttributeName);
 
         private static bool IsObsolete(Type type)
             => type.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ObsoleteAttribute)).Any();

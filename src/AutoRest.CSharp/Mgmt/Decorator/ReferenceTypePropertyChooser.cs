@@ -32,13 +32,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
         private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
-        private static IList<System.Type> GetReferenceClassCollection()
-        {
-            return ReferenceClassFinder.ExternalTypes.Where(t =>
-            {
-                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName);
-            }).ToList();
-        }
+        private static IEnumerable<Type> GetPropertyReferenceClassCollection()
+            => ReferenceClassFinder.ExternalTypes.Where(t => ReferenceClassFinder.HasAttribute(t, PropertyReferenceAttributeName));
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
@@ -57,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!typeToReplace.ShouldNotReplaceForProperty())
             {
-                foreach (System.Type replacementType in GetReferenceClassCollection())
+                foreach (Type replacementType in GetPropertyReferenceClassCollection())
                 {
                     var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
                     var propertiesToSkipArray = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
