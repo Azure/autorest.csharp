@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class UsageName
+    public partial class SampleUsageName
     {
-        internal static UsageName DeserializeUsageName(JsonElement element)
+        internal static SampleUsageName DeserializeSampleUsageName(JsonElement element)
         {
             Optional<string> value = default;
             Optional<string> localizedValue = default;
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new UsageName(value.Value, localizedValue.Value);
+            return new SampleUsageName(value.Value, localizedValue.Value);
         }
     }
 }

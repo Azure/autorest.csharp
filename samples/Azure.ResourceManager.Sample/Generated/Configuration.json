@@ -15,6 +15,9 @@
   "KeepPluralEnums": [
     "HyperVGenerationTypes"
   ],
+  "PrependRPPrefix": [
+    "UsageName"
+  ],
   "FormatByNameRules": {
     "tenantId": "uuid",
     "resourceType": "resource-type",

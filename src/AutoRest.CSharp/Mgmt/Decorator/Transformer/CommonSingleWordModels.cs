@@ -13,7 +13,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class CommonSingleWordModels
     {
-        //TODO: Move into configuration in the future
         private static readonly HashSet<string> _schemasToChange = new HashSet<string>()
         {
             "Sku",
@@ -36,11 +35,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             "PrivateLinkServiceConnectionStateProperty",
             // internal, but could be public in the future, also make the names more consistent
             "PrivateEndpointConnectionListResult",
-            "PrivateLinkResourceListResult",
+            "PrivateLinkResourceListResult"
         };
 
         public static void Update()
         {
+            foreach (var schemaName in Configuration.MgmtConfiguration.PrependRPPrefix)
+            {
+                _schemasToChange.Add(schemaName);
+            }
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (_schemasToChange.Contains(schema.Name))
