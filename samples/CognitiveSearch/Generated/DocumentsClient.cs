@@ -22,6 +22,8 @@ namespace CognitiveSearch
         private readonly HttpPipeline _pipeline;
         internal DocumentsRestClient RestClient { get; }
 
+        public Uri Endpoint { get; }
+
         /// <summary> Initializes a new instance of DocumentsClient for mocking. </summary>
         protected DocumentsClient()
         {
@@ -35,11 +37,12 @@ namespace CognitiveSearch
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, <paramref name="indexName"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="indexName"/> is an empty string, and was expected to be non-empty. </exception>
-        internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
+        internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
             RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, endpoint, indexName, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Queries the number of documents in the index. </summary>

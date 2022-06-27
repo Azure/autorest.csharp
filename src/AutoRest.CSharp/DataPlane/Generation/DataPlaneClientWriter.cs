@@ -306,12 +306,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var field = fields.GetFieldByParameter("endpoint", typeof(Uri));
             _endpointProperty = field == null ? null : new FieldDeclaration($"{field.Description ?? $"{string.Empty}"}", FieldModifiers.Public | FieldModifiers.ReadOnly, field.Type, field.Name.TrimStart('_').FirstCharToUpperCase(), writeAsProperty: true);
-
-            // TO-DO: delete
-            //if (field == null)
-            //{
-            //    throw new Exception("endpoint not found");
-            //}
         }
 
         private void ResetEndpointProperty()

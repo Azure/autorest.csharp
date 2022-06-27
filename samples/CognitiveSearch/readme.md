@@ -23,6 +23,6 @@ directive:
 ``` yaml
 directive:
   from: swagger-document
-  where: $.parameters.Endpoint
+  where: $.parameters.EndpointParameter
   transform: $.format = "url"
 ```
