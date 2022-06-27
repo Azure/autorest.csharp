@@ -24,16 +24,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             int matchCount = 0;
-            var parentSerializedNameDict = new Dictionary<string, PropertyInfo>();
-            var serializedNameDict = ReferenceClassFinder.GetPropertyMetadata(sourceType);
+            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
             foreach (var parentProperty in parentProperties)
             {
-                parentSerializedNameDict.Add(serializedNameDict[parentProperty.Name].SerializedName, parentProperty);
+                parentDict.Add(parentProperty.Name, parentProperty);
             }
 
             foreach (var childProperty in childProperties)
             {
-                if (!DoesPropertyExistInParent(sourceType, targetType, childProperty, parentSerializedNameDict, propertiesInComparison))
+                if (!DoesPropertyExistInParent(sourceType, targetType, childProperty, parentDict, propertiesInComparison))
                 {
                     if (allowExtra)
                         continue;
@@ -87,21 +86,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return IsEqual(sourceType, targetType, sourceTypeProperties, targetTypeProperties, new Dictionary<Type, CSharpType> { { sourceType, targetType.Type } });
         }
 
-        internal static bool DoesPropertyExistInParent(Type sourceType, MgmtObjectType targetType, ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentSerializedNameDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
+        internal static bool DoesPropertyExistInParent(Type sourceType, MgmtObjectType targetType, ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
-
-            var childSchemaProperty = childProperty.SchemaProperty;
-            if (childSchemaProperty == null)
-                return false;
-
-            if (!parentSerializedNameDict.TryGetValue(childSchemaProperty.SerializedName, out var parentProperty))
+            if (!parentDict.TryGetValue(childProperty.Declaration.Name, out var parentProperty))
             {
-                // no matter what the property is called now, the serialized name of them must be the same
-                // otherwise, if we replaced a MgmtObjectType with the class with different serialized name
-                // the serialized result will be different and the SDK user will definitely have an error.
+                // If exact property name match fails, we match their serialized name
+                // first get the serialized name dict
+                if (ReferenceClassFinder.TryGetPropertyMetadata(sourceType, out var serializedNameDict))
+                {
+                    // see if the property could match by its serialized name
+                    return serializedNameDict.ContainsKey(childProperty.SchemaProperty!.SerializedName);
+                }
+
+                // otherwise we always return false - they do not match
                 return false;
             }
 
+            // here we cannot find a property from its declared name
             var childPropertyType = childProperty.Declaration.Type;
             if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
                 IsAssignable(parentProperty.PropertyType, childPropertyType))

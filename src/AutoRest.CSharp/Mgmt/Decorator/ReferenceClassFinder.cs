@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -85,27 +86,53 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         };
 
-        public static Dictionary<string, PropertyMetadata> GetPropertyMetadata(Type systemObjectType)
+        public static bool TryGetPropertyMetadata(Type type, [MaybeNullWhen(false)] out Dictionary<string, PropertyMetadata> dict)
         {
-            if (_referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict))
+            dict = null;
+            if (_referenceTypesPropertyMetadata.TryGetValue(type, out dict))
+                return dict != null;
+
+            if (TryConstructPropertyMetadata(type, out dict))
+            {
+                _referenceTypesPropertyMetadata.Add(type, dict);
+                return true;
+            }
+
+            return false;
+        }
+
+        public static Dictionary<string, PropertyMetadata> GetPropertyMetadata(Type type)
+        {
+            if (_referenceTypesPropertyMetadata.TryGetValue(type, out var dict))
                 return dict;
-            dict = ConstructPropertyMetadata(systemObjectType);
-            _referenceTypesPropertyMetadata.Add(systemObjectType, dict);
+            dict = ConstructPropertyMetadata(type);
+            _referenceTypesPropertyMetadata.Add(type, dict);
             return dict;
         }
 
-        private static Dictionary<string, PropertyMetadata> ConstructPropertyMetadata(Type type)
+        private static bool TryConstructPropertyMetadata(Type type, [MaybeNullWhen(false)] out Dictionary<string, PropertyMetadata> dict)
         {
-            var dict = new Dictionary<string, PropertyMetadata>();
             var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
             if (publicCtor == null)
-                throw new InvalidOperationException($"Property metadata information for type {type} cannot be constructed automatically because it does not have a public constructor");
+            {
+                dict = null;
+                return false;
+            }
+            dict = new Dictionary<string, PropertyMetadata>();
             foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type))
             {
                 var metadata = new PropertyMetadata(property.Name.ToVariableName(), GetRequired(publicCtor, property));
                 dict.Add(property.Name, metadata);
             }
-            return dict;
+            return true;
+        }
+
+        private static Dictionary<string, PropertyMetadata> ConstructPropertyMetadata(Type type)
+        {
+            if (TryConstructPropertyMetadata(type, out var dict))
+                return dict;
+
+            throw new InvalidOperationException($"Property metadata information for type {type} cannot be constructed automatically because it does not have a public constructor");
         }
 
         private static bool GetRequired(ConstructorInfo publicCtor, PropertyInfo property)
