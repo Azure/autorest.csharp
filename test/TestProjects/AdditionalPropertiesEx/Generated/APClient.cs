@@ -20,6 +20,7 @@ namespace AdditionalPropertiesEx
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal APRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of APClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace AdditionalPropertiesEx
             RestClient = new APRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>

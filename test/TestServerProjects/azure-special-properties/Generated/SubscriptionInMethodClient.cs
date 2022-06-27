@@ -19,6 +19,7 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal SubscriptionInMethodRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of SubscriptionInMethodClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace azure_special_properties
             RestClient = new SubscriptionInMethodRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>

@@ -20,6 +20,7 @@ namespace body_file
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FilesRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of FilesClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace body_file
             RestClient = new FilesRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get file. </summary>

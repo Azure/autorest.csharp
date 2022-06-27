@@ -20,6 +20,7 @@ namespace JsonAsBinary
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal JsonAsBinaryRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of JsonAsBinaryClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace JsonAsBinary
             RestClient = new JsonAsBinaryRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="body"> The binary to use. </param>

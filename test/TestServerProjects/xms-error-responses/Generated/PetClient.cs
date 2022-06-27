@@ -20,6 +20,7 @@ namespace xms_error_responses
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PetRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PetClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace xms_error_responses
             RestClient = new PetRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Gets pets by id. </summary>

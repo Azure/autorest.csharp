@@ -19,7 +19,9 @@ namespace dpg_update1_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -53,7 +55,7 @@ namespace dpg_update1_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
@@ -400,7 +402,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/parameters", false);
             if (newParameter != null)
             {
@@ -417,7 +419,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/parameters", false);
             uri.AppendQuery("parameter", parameter, true);
             if (newParameter != null)
@@ -435,7 +437,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/parameters", false);
             uri.AppendQuery("requiredParam", requiredParam, true);
             if (optionalParam != null)
@@ -457,7 +459,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/parameters", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -472,7 +474,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/parameters", false);
             request.Uri = uri;
             return message;
@@ -484,7 +486,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/moreParameters", false);
             if (optionalParam != null)
             {
@@ -505,7 +507,7 @@ namespace dpg_update1_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/serviceDriven/newPath", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

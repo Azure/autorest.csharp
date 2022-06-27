@@ -11,7 +11,7 @@ info: !Info
   title: CognitiveServices.TextAnalytics
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_105
+    - !BooleanSchema &ref_106
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -221,13 +221,6 @@ schemas: !Schemas
           description: The length of the sentence by Unicode standard.
       protocol: !Protocols {}
   strings:
-    - !StringSchema &ref_0
-      type: string
-      language: !Languages 
-        default:
-          name: String
-          description: simple string
-      protocol: !Protocols {}
     - !StringSchema &ref_1
       type: string
       apiVersions:
@@ -237,6 +230,13 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
       protocol: !Protocols {}
     - !StringSchema &ref_2
       type: string
@@ -792,7 +792,7 @@ schemas: !Schemas
           description: The predicted Sentiment for the sentence.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_106
+    - !ConstantSchema &ref_107
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -802,7 +802,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_108
+    - !ConstantSchema &ref_109
       type: constant
       value: !ConstantValue 
         value: application/json, text/json
@@ -821,8 +821,26 @@ schemas: !Schemas
           name: InnerErrorDetails
           description: Error details.
       protocol: !Protocols {}
+  uris:
+    - !UriSchema &ref_104
+      type: uri
+      language: !Languages 
+        default:
+          name: Endpoint
+          description: ''
+      protocol: !Protocols {}
+    - !UriSchema 
+      type: uri
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      language: !Languages 
+        default:
+          name: Uri
+          description: ''
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_107
+    - !ObjectSchema &ref_108
       type: object
       apiVersions:
         - !ApiVersion 
@@ -900,7 +918,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_5
-    - !ObjectSchema &ref_113
+    - !ObjectSchema &ref_114
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1411,7 +1429,7 @@ schemas: !Schemas
     - *ref_27
     - *ref_26
     - *ref_38
-    - !ObjectSchema &ref_114
+    - !ObjectSchema &ref_115
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1436,7 +1454,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_119
+    - !ObjectSchema &ref_120
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1712,7 +1730,7 @@ schemas: !Schemas
     - *ref_50
     - *ref_51
     - *ref_52
-    - !ObjectSchema &ref_124
+    - !ObjectSchema &ref_125
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1856,7 +1874,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_56
-    - !ObjectSchema &ref_125
+    - !ObjectSchema &ref_126
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1934,7 +1952,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_60
-    - !ObjectSchema &ref_130
+    - !ObjectSchema &ref_131
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2111,7 +2129,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_66
     - *ref_67
-    - !ObjectSchema &ref_135
+    - !ObjectSchema &ref_136
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2402,11 +2420,12 @@ schemas: !Schemas
     - *ref_102
     - *ref_103
 globalParameters:
-  - !Parameter &ref_104
-    schema: *ref_0
+  - !Parameter &ref_105
+    schema: *ref_104
     implementation: Client
     required: true
     extensions:
+      x-format: url
       x-in: path
       x-ms-priority: 0
       x-ms-skip-url-encoding: true
@@ -2431,8 +2450,8 @@ operationGroups:
           - !ApiVersion 
             version: v3.0
         parameters:
-          - *ref_104
-          - !Parameter &ref_111
+          - *ref_105
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2443,8 +2462,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_112
-            schema: *ref_105
+          - !Parameter &ref_113
+            schema: *ref_106
             implementation: Method
             language: !Languages 
               default:
@@ -2455,10 +2474,10 @@ operationGroups:
               http: !HttpParameter 
                 in: query
         requestMediaTypes:
-          application/json: !Request &ref_110
+          application/json: !Request &ref_111
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2470,8 +2489,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_109
-                schema: *ref_107
+              - !Parameter &ref_110
+                schema: *ref_108
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2483,7 +2502,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_108
+                schema: *ref_109
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2496,7 +2515,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_109
+              - *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -2510,15 +2529,15 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_110
+          text/json: *ref_111
         requests:
-          - *ref_110
-        signatureParameters:
           - *ref_111
+        signatureParameters:
           - *ref_112
+          - *ref_113
         responses:
           - !SchemaResponse 
-            schema: *ref_113
+            schema: *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -2533,7 +2552,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -2620,8 +2639,8 @@ operationGroups:
           - !ApiVersion 
             version: v3.0
         parameters:
-          - *ref_104
-          - !Parameter &ref_117
+          - *ref_105
+          - !Parameter &ref_118
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2632,8 +2651,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_118
-            schema: *ref_105
+          - !Parameter &ref_119
+            schema: *ref_106
             implementation: Method
             language: !Languages 
               default:
@@ -2644,10 +2663,10 @@ operationGroups:
               http: !HttpParameter 
                 in: query
         requestMediaTypes:
-          application/json: !Request &ref_116
+          application/json: !Request &ref_117
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2659,8 +2678,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_115
-                schema: *ref_107
+              - !Parameter &ref_116
+                schema: *ref_108
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2672,7 +2691,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_108
+                schema: *ref_109
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2685,7 +2704,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_115
+              - *ref_116
             language: !Languages 
               default:
                 name: ''
@@ -2699,15 +2718,15 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_116
+          text/json: *ref_117
         requests:
-          - *ref_116
-        signatureParameters:
           - *ref_117
+        signatureParameters:
           - *ref_118
+          - *ref_119
         responses:
           - !SchemaResponse 
-            schema: *ref_119
+            schema: *ref_120
             language: !Languages 
               default:
                 name: ''
@@ -2722,7 +2741,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -2810,8 +2829,8 @@ operationGroups:
           - !ApiVersion 
             version: v3.0
         parameters:
-          - *ref_104
-          - !Parameter &ref_122
+          - *ref_105
+          - !Parameter &ref_123
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2822,8 +2841,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_123
-            schema: *ref_105
+          - !Parameter &ref_124
+            schema: *ref_106
             implementation: Method
             language: !Languages 
               default:
@@ -2834,10 +2853,10 @@ operationGroups:
               http: !HttpParameter 
                 in: query
         requestMediaTypes:
-          application/json: !Request &ref_121
+          application/json: !Request &ref_122
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2849,8 +2868,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_120
-                schema: *ref_107
+              - !Parameter &ref_121
+                schema: *ref_108
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2862,7 +2881,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_108
+                schema: *ref_109
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2875,7 +2894,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_120
+              - *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -2889,15 +2908,15 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_121
+          text/json: *ref_122
         requests:
-          - *ref_121
-        signatureParameters:
           - *ref_122
+        signatureParameters:
           - *ref_123
+          - *ref_124
         responses:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_125
             language: !Languages 
               default:
                 name: ''
@@ -2912,7 +2931,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -2976,8 +2995,8 @@ operationGroups:
           - !ApiVersion 
             version: v3.0
         parameters:
-          - *ref_104
-          - !Parameter &ref_128
+          - *ref_105
+          - !Parameter &ref_129
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2988,8 +3007,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_129
-            schema: *ref_105
+          - !Parameter &ref_130
+            schema: *ref_106
             implementation: Method
             language: !Languages 
               default:
@@ -3000,10 +3019,10 @@ operationGroups:
               http: !HttpParameter 
                 in: query
         requestMediaTypes:
-          application/json: !Request &ref_127
+          application/json: !Request &ref_128
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -3015,8 +3034,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_126
-                schema: *ref_125
+              - !Parameter &ref_127
+                schema: *ref_126
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3028,7 +3047,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_108
+                schema: *ref_109
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3041,7 +3060,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_126
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -3055,15 +3074,15 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_127
+          text/json: *ref_128
         requests:
-          - *ref_127
-        signatureParameters:
           - *ref_128
+        signatureParameters:
           - *ref_129
+          - *ref_130
         responses:
           - !SchemaResponse 
-            schema: *ref_130
+            schema: *ref_131
             language: !Languages 
               default:
                 name: ''
@@ -3078,7 +3097,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -3145,8 +3164,8 @@ operationGroups:
           - !ApiVersion 
             version: v3.0
         parameters:
-          - *ref_104
-          - !Parameter &ref_133
+          - *ref_105
+          - !Parameter &ref_134
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3157,8 +3176,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_134
-            schema: *ref_105
+          - !Parameter &ref_135
+            schema: *ref_106
             implementation: Method
             language: !Languages 
               default:
@@ -3169,10 +3188,10 @@ operationGroups:
               http: !HttpParameter 
                 in: query
         requestMediaTypes:
-          application/json: !Request &ref_132
+          application/json: !Request &ref_133
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -3184,8 +3203,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_131
-                schema: *ref_107
+              - !Parameter &ref_132
+                schema: *ref_108
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3197,7 +3216,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_108
+                schema: *ref_109
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3210,7 +3229,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_131
+              - *ref_132
             language: !Languages 
               default:
                 name: ''
@@ -3224,15 +3243,15 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_132
+          text/json: *ref_133
         requests:
-          - *ref_132
-        signatureParameters:
           - *ref_133
+        signatureParameters:
           - *ref_134
+          - *ref_135
         responses:
           - !SchemaResponse 
-            schema: *ref_135
+            schema: *ref_136
             language: !Languages 
               default:
                 name: ''
@@ -3247,7 +3266,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''

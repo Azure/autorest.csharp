@@ -19,6 +19,7 @@ namespace body_integer
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal IntRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of IntClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_integer
             RestClient = new IntRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null Int value. </summary>

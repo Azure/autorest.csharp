@@ -20,6 +20,7 @@ namespace extensible_enums_swagger
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PetRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PetClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace extensible_enums_swagger
             RestClient = new PetRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> get pet by id. </summary>

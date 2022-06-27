@@ -20,6 +20,7 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MultipleResponsesRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace httpInfrastructure
             RestClient = new MultipleResponsesRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>

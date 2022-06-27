@@ -20,7 +20,9 @@ namespace url_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -54,7 +56,7 @@ namespace url_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
@@ -1103,7 +1105,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/bool/true/", false);
             uri.AppendPath(true, true);
             request.Uri = uri;
@@ -1117,7 +1119,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/bool/false/", false);
             uri.AppendPath(false, true);
             request.Uri = uri;
@@ -1131,7 +1133,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/int/1000000/", false);
             uri.AppendPath(1000000, true);
             request.Uri = uri;
@@ -1145,7 +1147,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/int/-1000000/", false);
             uri.AppendPath(-1000000, true);
             request.Uri = uri;
@@ -1159,7 +1161,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/long/10000000000/", false);
             uri.AppendPath(10000000000L, true);
             request.Uri = uri;
@@ -1173,7 +1175,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/long/-10000000000/", false);
             uri.AppendPath(-10000000000L, true);
             request.Uri = uri;
@@ -1187,7 +1189,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/float/1.034E+20/", false);
             uri.AppendPath(1.034E+20F, true);
             request.Uri = uri;
@@ -1201,7 +1203,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/float/-1.034E-20/", false);
             uri.AppendPath(-1.034E-20F, true);
             request.Uri = uri;
@@ -1215,7 +1217,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/double/9999999.999/", false);
             uri.AppendPath(9999999.999, true);
             request.Uri = uri;
@@ -1229,7 +1231,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/double/-9999999.999/", false);
             uri.AppendPath(-9999999.999, true);
             request.Uri = uri;
@@ -1243,7 +1245,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/unicode/", false);
             uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
             request.Uri = uri;
@@ -1257,7 +1259,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
             uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
             request.Uri = uri;
@@ -1271,7 +1273,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
             uri.AppendPath("begin!*'();:@&=+$,end", false);
             request.Uri = uri;
@@ -1285,7 +1287,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/empty/", false);
             uri.AppendPath("", true);
             request.Uri = uri;
@@ -1299,7 +1301,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/null/", false);
             uri.AppendPath(stringPath, true);
             request.Uri = uri;
@@ -1313,7 +1315,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/enum/green%20color/", false);
             uri.AppendPath(enumPath, true);
             request.Uri = uri;
@@ -1327,7 +1329,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/null/", false);
             uri.AppendPath(enumPath, true);
             request.Uri = uri;
@@ -1341,7 +1343,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/byte/multibyte/", false);
             uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
@@ -1355,7 +1357,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/byte/empty/", false);
             uri.AppendPath(new byte[] { }, "D", true);
             request.Uri = uri;
@@ -1369,7 +1371,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/byte/null/", false);
             uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
@@ -1383,7 +1385,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/date/2012-01-01/", false);
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
             request.Uri = uri;
@@ -1397,7 +1399,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/date/null/", false);
             uri.AppendPath(datePath, "D", true);
             request.Uri = uri;
@@ -1411,7 +1413,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
@@ -1425,7 +1427,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/datetime/null/", false);
             uri.AppendPath(dateTimePath, "O", true);
             request.Uri = uri;
@@ -1439,7 +1441,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/string/bG9yZW0/", false);
             uri.AppendPath(base64UrlPath, "U", true);
             request.Uri = uri;
@@ -1453,7 +1455,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
             uri.AppendPath(arrayPath, true);
             request.Uri = uri;
@@ -1467,7 +1469,7 @@ namespace url_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paths/int/1460505600/", false);
             uri.AppendPath(unixTimeUrlPath, "U", true);
             request.Uri = uri;

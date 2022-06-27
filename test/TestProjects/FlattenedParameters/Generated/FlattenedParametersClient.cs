@@ -20,6 +20,7 @@ namespace FlattenedParameters
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FlattenedParametersRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of FlattenedParametersClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace FlattenedParameters
             RestClient = new FlattenedParametersRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="items"> The PatchContentSchemaItems to use. </param>

@@ -19,8 +19,10 @@ namespace Azure.Analytics.Purview.Account
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -44,7 +46,7 @@ namespace Azure.Analytics.Purview.Account
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _tokenCredential = tokenCredential;
-            _endpoint = endpoint;
+            Endpoint = endpoint;
             _apiVersion = apiVersion;
         }
 
@@ -768,7 +770,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/resourceSetRuleConfigs/defaultResourceSetRuleConfig", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -782,7 +784,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/resourceSetRuleConfigs/defaultResourceSetRuleConfig", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -798,7 +800,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/resourceSetRuleConfigs/defaultResourceSetRuleConfig", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

@@ -19,6 +19,7 @@ namespace lro
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal LrosaDsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of LrosaDsClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace lro
             RestClient = new LrosaDsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>

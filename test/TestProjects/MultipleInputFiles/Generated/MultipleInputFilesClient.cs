@@ -21,7 +21,6 @@ namespace MultipleInputFiles
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MultipleInputFilesRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient for mocking. </summary>
         protected MultipleInputFilesClient()

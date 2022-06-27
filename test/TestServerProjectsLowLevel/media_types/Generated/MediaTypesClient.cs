@@ -19,7 +19,9 @@ namespace media_types_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -53,7 +55,7 @@ namespace media_types_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -318,7 +320,7 @@ namespace media_types_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -333,7 +335,7 @@ namespace media_types_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/mediatypes/analyzeNoAccept", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", contentType.ToString());
@@ -347,7 +349,7 @@ namespace media_types_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -362,7 +364,7 @@ namespace media_types_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/mediatypes/binaryBodyTwoContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
@@ -377,7 +379,7 @@ namespace media_types_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
@@ -392,7 +394,7 @@ namespace media_types_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/mediatypes/textAndJson", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");

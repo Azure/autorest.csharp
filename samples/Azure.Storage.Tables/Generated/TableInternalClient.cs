@@ -21,7 +21,6 @@ namespace Azure.Storage.Tables
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal TableInternalRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of TableInternalClient for mocking. </summary>
         protected TableInternalClient()

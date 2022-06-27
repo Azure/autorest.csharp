@@ -21,6 +21,7 @@ namespace ProtocolMethodsInRestClient
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ThirdTemplateRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ThirdTemplateClient for mocking. </summary>
@@ -43,7 +44,7 @@ namespace ProtocolMethodsInRestClient
             options ??= new TestServiceClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Fake-Subscription-Key"));
-            RestClient = new ThirdTemplateRestClient(_clientDiagnostics, _pipeline, endpoint);
+            RestClient = new ThirdTemplateRestClient(_clientDiagnostics, _pipeline, endpoint); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of ThirdTemplateClient. </summary>
@@ -56,6 +57,7 @@ namespace ProtocolMethodsInRestClient
             RestClient = new ThirdTemplateRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Delete resource. </summary>

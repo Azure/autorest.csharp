@@ -20,6 +20,7 @@ namespace body_formdata_urlencoded
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FormdataurlencodedRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of FormdataurlencodedClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace body_formdata_urlencoded
             RestClient = new FormdataurlencodedRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Updates a pet in the store with form data. </summary>

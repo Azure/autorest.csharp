@@ -19,6 +19,7 @@ namespace body_number
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal NumberRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of NumberClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_number
             RestClient = new NumberRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null Number value. </summary>

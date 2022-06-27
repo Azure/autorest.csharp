@@ -17,3 +17,12 @@ directive:
   where: $.definitions.SearchError
   transform: $["x-ms-client-name"] = "SearchServiceError"
 ```
+
+### Make Endpoint type as Uri
+
+``` yaml
+directive:
+  from: swagger-document
+  where: $.parameters.Endpoint
+  transform: $.format = "url"
+```

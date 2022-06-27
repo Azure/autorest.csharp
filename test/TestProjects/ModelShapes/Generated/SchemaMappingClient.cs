@@ -20,6 +20,7 @@ namespace ModelShapes
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal SchemaMappingRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of SchemaMappingClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace ModelShapes
             RestClient = new SchemaMappingRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="value"> The InputModel to use. </param>

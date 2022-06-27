@@ -9,3 +9,12 @@ require: $(this-folder)/../../readme.md
 input-file: https://github.com/Azure/azure-rest-api-specs/blob/c00cf4ad1e2c44ccddb08b98a472cf9822b4d687/specification/cognitiveservices/data-plane/TextAnalytics/stable/v3.0/TextAnalytics.json
 namespace: Azure.CognitiveServices.TextAnalytics
 ```
+
+### Make Endpoint type as Uri
+
+``` yaml
+directive:
+  from: swagger-document
+  where: $.parameters.Endpoint
+  transform: $.format = "url"
+```

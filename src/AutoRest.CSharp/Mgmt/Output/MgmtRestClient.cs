@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, GetOrderedParameters(clientBuilder))
         {
             _clientBuilder = clientBuilder;
-            Fields = ClientFields.CreateForRestClient(new[] { KnownParameters.Pipeline }.Union(clientBuilder.GetOrderedParametersByRequired()));
+            Fields = new ClientFields(new[] { KnownParameters.Pipeline }.Union(clientBuilder.GetOrderedParametersByRequired()), MgmtContext.Context);
         }
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()

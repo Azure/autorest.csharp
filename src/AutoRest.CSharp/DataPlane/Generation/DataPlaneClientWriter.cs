@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -25,12 +26,15 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class DataPlaneClientWriter : ClientWriter
     {
+        private FieldDeclaration? _endpointProperty;
+
         public void WriteClient(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {
             var cs = client.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
+                InitializeEndpointProperty(client.RestClient.Fields);
                 writer.WriteXmlDocumentationSummary($"{client.Description}");
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
@@ -55,13 +59,17 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteStartOperationOperation(writer, longRunningOperation, false);
                     }
                 }
+                ResetEndpointProperty();
             }
         }
 
-        protected new void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
+        protected void WriteClientFields(CodeWriter writer, DataPlaneRestClient client, bool writePipelineField)
         {
             base.WriteClientFields(writer, client, writePipelineField);
-            writer.Append($"{UriPropertyAccessibility} {typeof(Uri)} {UriProperty}").LineRaw(" { get; }");
+            if (_endpointProperty != null)
+            {
+                writer.WriteFieldDeclaration(_endpointProperty);
+            }
         }
 
         private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
@@ -204,6 +212,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         writer.RemoveTrailingComma();
                         writer.Append($");");
+                        WriteEndpointAssignment(writer, client.RestClient.Fields);
                     }
                     writer.Line();
                 }
@@ -264,6 +273,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         writer.RemoveTrailingComma();
                         writer.Append($");");
+                        WriteEndpointAssignment(writer, client.RestClient.Fields);
                     }
                     writer.Line();
                 }
@@ -277,8 +287,35 @@ namespace AutoRest.CSharp.Generation.Writers
                     .Line($"this.RestClient = new {client.RestClient.Type}({client.RestClient.Parameters.GetIdentifiersFormattable()});")
                     .Line($"{ClientDiagnosticsField} = {KnownParameters.ClientDiagnostics.Name:I};")
                     .Line($"{PipelineField} = {KnownParameters.Pipeline.Name:I};");
+
+                WriteEndpointAssignment(writer, client.RestClient.Fields);
             }
             writer.Line();
+        }
+
+        private void WriteEndpointAssignment(CodeWriter writer, ClientFields fields)
+        {
+            if (_endpointProperty != null)
+            {
+                writer.Line($"{_endpointProperty.Name} = endpoint;");
+            }
+        }
+
+        private void InitializeEndpointProperty(ClientFields fields)
+        {
+            var field = fields.GetFieldByParameter("endpoint", typeof(Uri));
+            _endpointProperty = field == null ? null : new FieldDeclaration($"{field.Description ?? $"{string.Empty}"}", FieldModifiers.Public | FieldModifiers.ReadOnly, field.Type, field.Name.TrimStart('_').FirstCharToUpperCase(), writeAsProperty: true);
+
+            // TO-DO: delete
+            //if (field == null)
+            //{
+            //    throw new Exception("endpoint not found");
+            //}
+        }
+
+        private void ResetEndpointProperty()
+        {
+            _endpointProperty = null;
         }
 
         private void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async)

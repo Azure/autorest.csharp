@@ -20,6 +20,7 @@ namespace ModelWithConverterUsage
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ModelWithConverterUsageRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ModelWithConverterUsageClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace ModelWithConverterUsage
             RestClient = new ModelWithConverterUsageRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="value"> The ModelClass to use. </param>

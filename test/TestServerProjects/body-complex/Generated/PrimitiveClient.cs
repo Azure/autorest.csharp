@@ -20,6 +20,7 @@ namespace body_complex
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PrimitiveRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace body_complex
             RestClient = new PrimitiveRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get complex types with integer properties. </summary>

@@ -20,6 +20,7 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal HttpRedirectsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of HttpRedirectsClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace httpInfrastructure
             RestClient = new HttpRedirectsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>

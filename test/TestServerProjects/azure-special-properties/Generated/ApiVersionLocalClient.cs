@@ -19,6 +19,7 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ApiVersionLocalRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ApiVersionLocalClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace azure_special_properties
             RestClient = new ApiVersionLocalRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>

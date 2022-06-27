@@ -22,7 +22,9 @@ namespace Azure.AI.DocumentTranslation
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -57,7 +59,7 @@ namespace Azure.AI.DocumentTranslation
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
@@ -1252,7 +1254,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches", false);
             request.Uri = uri;
@@ -1268,7 +1270,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches", false);
             if (top != null)
@@ -1314,7 +1316,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches/", false);
             uri.AppendPath(id, true);
@@ -1331,7 +1333,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches/", false);
             uri.AppendPath(id, true);
@@ -1346,7 +1348,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches/", false);
             uri.AppendPath(id, true);
@@ -1361,7 +1363,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches/", false);
             uri.AppendPath(id, true);
@@ -1409,7 +1411,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/documents/formats", false);
             request.Uri = uri;
@@ -1423,7 +1425,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/glossaries/formats", false);
             request.Uri = uri;
@@ -1437,7 +1439,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/storagesources", false);
             request.Uri = uri;
@@ -1451,7 +1453,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
@@ -1465,7 +1467,7 @@ namespace Azure.AI.DocumentTranslation
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;

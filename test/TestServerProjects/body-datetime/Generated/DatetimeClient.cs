@@ -19,6 +19,7 @@ namespace body_datetime
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal DatetimeRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of DatetimeClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_datetime
             RestClient = new DatetimeRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null datetime value. </summary>

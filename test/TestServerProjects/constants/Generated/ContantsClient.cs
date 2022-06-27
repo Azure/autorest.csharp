@@ -20,6 +20,7 @@ namespace constants
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ContantsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ContantsClient for mocking. </summary>
@@ -41,6 +42,7 @@ namespace constants
             RestClient = new ContantsRestClient(clientDiagnostics, pipeline, endpoint, headerConstant, queryConstant, pathConstant);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Puts constants to the testserver. </summary>

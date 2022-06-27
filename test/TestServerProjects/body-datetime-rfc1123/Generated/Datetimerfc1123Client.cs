@@ -19,6 +19,7 @@ namespace body_datetime_rfc1123
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal Datetimerfc1123RestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of Datetimerfc1123Client for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_datetime_rfc1123
             RestClient = new Datetimerfc1123RestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null datetime value. </summary>

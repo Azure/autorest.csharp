@@ -21,7 +21,9 @@ namespace SubClients_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly string _cachedParameter;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -61,7 +63,7 @@ namespace SubClients_LowLevel
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _cachedParameter = cachedParameter;
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -103,7 +105,7 @@ namespace SubClients_LowLevel
         /// <summary> Initializes a new instance of Parameter. </summary>
         public virtual Parameter GetParameterClient()
         {
-            return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedParameter0;
+            return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(ClientDiagnostics, _pipeline, _keyCredential, Endpoint), null) ?? _cachedParameter0;
         }
 
         internal HttpMessage CreateGetCachedParameterRequest(RequestContext context)
@@ -112,7 +114,7 @@ namespace SubClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/root/", false);
             uri.AppendPath(_cachedParameter, true);
             request.Uri = uri;

@@ -20,6 +20,7 @@ namespace body_complex
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FlattencomplexRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of FlattencomplexClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace body_complex
             RestClient = new FlattencomplexRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>

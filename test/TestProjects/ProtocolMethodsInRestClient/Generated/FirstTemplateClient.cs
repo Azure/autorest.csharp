@@ -21,6 +21,7 @@ namespace ProtocolMethodsInRestClient
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FirstTemplateRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of FirstTemplateClient for mocking. </summary>
@@ -43,7 +44,7 @@ namespace ProtocolMethodsInRestClient
             options ??= new TestServiceClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Fake-Subscription-Key"));
-            RestClient = new FirstTemplateRestClient(_clientDiagnostics, _pipeline, endpoint);
+            RestClient = new FirstTemplateRestClient(_clientDiagnostics, _pipeline, endpoint); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of FirstTemplateClient. </summary>
@@ -56,6 +57,7 @@ namespace ProtocolMethodsInRestClient
             RestClient = new FirstTemplateRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Create or update resource. </summary>

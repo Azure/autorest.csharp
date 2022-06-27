@@ -20,6 +20,7 @@ namespace ApiVersion
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ApiVersionRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ApiVersionClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace ApiVersion
             RestClient = new ApiVersionRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="notApiVersionEnum"> The ApiVersion to use. </param>

@@ -20,7 +20,6 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal IndexersRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of IndexersClient for mocking. </summary>
         protected IndexersClient()

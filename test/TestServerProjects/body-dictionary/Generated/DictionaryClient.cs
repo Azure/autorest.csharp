@@ -21,6 +21,7 @@ namespace body_dictionary
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal DictionaryRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of DictionaryClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace body_dictionary
             RestClient = new DictionaryRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null dictionary value. </summary>

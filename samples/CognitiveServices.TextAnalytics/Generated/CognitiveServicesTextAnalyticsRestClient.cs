@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics
     internal partial class CognitiveServicesTextAnalyticsRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _endpoint;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +29,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
-        public CognitiveServicesTextAnalyticsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
+        public CognitiveServicesTextAnalyticsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
@@ -42,7 +42,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.Reset(_endpoint);
             uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/entities/recognition/general", false);
             if (modelVersion != null)
@@ -126,7 +126,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.Reset(_endpoint);
             uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/entities/linking", false);
             if (modelVersion != null)
@@ -210,7 +210,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.Reset(_endpoint);
             uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/keyPhrases", false);
             if (modelVersion != null)
@@ -294,7 +294,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.Reset(_endpoint);
             uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/languages", false);
             if (modelVersion != null)
@@ -378,7 +378,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.Reset(_endpoint);
             uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/sentiment", false);
             if (modelVersion != null)

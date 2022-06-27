@@ -19,7 +19,9 @@ namespace CollapseRequestCondition_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -53,7 +55,7 @@ namespace CollapseRequestCondition_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -426,7 +428,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -444,7 +446,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -460,7 +462,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/missIfNoneMatch", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -476,7 +478,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/missIfMatch", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -492,7 +494,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/missIfModifiedSince", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -508,7 +510,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/missIfUnmodifiedSince", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -524,7 +526,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/missIfMatchIfNoneMatch", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -540,7 +542,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/ifModifiedSince", false);
             request.Uri = uri;
             if (requestConditions != null)
@@ -556,7 +558,7 @@ namespace CollapseRequestCondition_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/RequestConditionCollapse/ifUnmodifiedSince", false);
             request.Uri = uri;
             if (requestConditions != null)

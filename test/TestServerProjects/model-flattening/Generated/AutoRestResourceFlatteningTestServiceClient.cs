@@ -21,6 +21,7 @@ namespace model_flattening
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AutoRestResourceFlatteningTestServiceRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AutoRestResourceFlatteningTestServiceClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace model_flattening
             RestClient = new AutoRestResourceFlatteningTestServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Put External Resource as an Array. </summary>

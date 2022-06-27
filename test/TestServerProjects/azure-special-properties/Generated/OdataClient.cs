@@ -19,6 +19,7 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal OdataRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of OdataClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace azure_special_properties
             RestClient = new OdataRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Specify filter parameter with value &apos;$filter=id gt 5 and name eq &apos;foo&apos;&amp;$orderby=id&amp;$top=10&apos;. </summary>

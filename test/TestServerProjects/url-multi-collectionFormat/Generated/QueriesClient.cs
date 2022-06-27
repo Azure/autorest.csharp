@@ -20,6 +20,7 @@ namespace url_multi_collectionFormat
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal QueriesRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace url_multi_collectionFormat
             RestClient = new QueriesRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>

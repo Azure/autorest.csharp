@@ -20,6 +20,7 @@ namespace validation
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AutoRestValidationTestRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AutoRestValidationTestClient for mocking. </summary>
@@ -40,6 +41,7 @@ namespace validation
             RestClient = new AutoRestValidationTestRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>

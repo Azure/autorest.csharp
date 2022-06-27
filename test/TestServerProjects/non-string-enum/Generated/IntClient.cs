@@ -20,6 +20,7 @@ namespace non_string_enum
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal IntRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of IntClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace non_string_enum
             RestClient = new IntRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Put an int enum. </summary>

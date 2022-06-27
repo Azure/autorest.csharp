@@ -21,7 +21,6 @@ namespace custom_baseUrl_paging
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PagingRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()

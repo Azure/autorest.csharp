@@ -32,11 +32,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<FieldDeclaration> CredentialFields { get; }
 
-        public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, BuildContext context) => new(parameters, context);
-
-        public static ClientFields CreateForRestClient(IEnumerable<Parameter> parameters) => new(parameters, null);
-
-        private ClientFields(IEnumerable<Parameter> parameters, BuildContext? context)
+        public ClientFields(IEnumerable<Parameter> parameters, BuildContext context)
         {
             ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
@@ -46,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models
             var credentialFields = new List<FieldDeclaration>();
             var properties = new List<FieldDeclaration>();
 
-            if (context != null)
+            if (context.BaseLibrary is LowLevelOutputLibrary)
             {
                 parameterNamesToFields[KnownParameters.Pipeline.Name] = PipelineField;
                 parameterNamesToFields[KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty;
@@ -81,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (Parameter parameter in parameters)
             {
-                var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
+                var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier || (context.BaseLibrary is LowLevelOutputLibrary && parameter.Name == "endpoint")
                         ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
                         : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
 
@@ -97,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             fields.AddRange(properties);
-            if (context != null)
+            if (context.BaseLibrary is LowLevelOutputLibrary)
             {
                 fields.Add(ClientDiagnosticsProperty);
             }

@@ -21,6 +21,7 @@ namespace media_types
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MediaTypesRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MediaTypesClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace media_types
             RestClient = new MediaTypesRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>

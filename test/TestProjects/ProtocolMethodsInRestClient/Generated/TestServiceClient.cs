@@ -21,6 +21,7 @@ namespace ProtocolMethodsInRestClient
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal TestServiceRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of TestServiceClient for mocking. </summary>
@@ -43,7 +44,7 @@ namespace ProtocolMethodsInRestClient
             options ??= new TestServiceClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Fake-Subscription-Key"));
-            RestClient = new TestServiceRestClient(_clientDiagnostics, _pipeline, endpoint);
+            RestClient = new TestServiceRestClient(_clientDiagnostics, _pipeline, endpoint); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of TestServiceClient. </summary>
@@ -56,6 +57,7 @@ namespace ProtocolMethodsInRestClient
             RestClient = new TestServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Create or update resource. </summary>

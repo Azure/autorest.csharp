@@ -21,6 +21,7 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal NetworkInterfaceIPConfigurationsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient for mocking. </summary>
@@ -49,7 +50,7 @@ namespace Azure.Network.Management.Interface
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "user_impersonation" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new NetworkInterfaceIPConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version);
+            RestClient = new NetworkInterfaceIPConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient. </summary>
@@ -65,6 +66,7 @@ namespace Azure.Network.Management.Interface
             RestClient = new NetworkInterfaceIPConfigurationsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Gets the specified network interface ip configuration. </summary>

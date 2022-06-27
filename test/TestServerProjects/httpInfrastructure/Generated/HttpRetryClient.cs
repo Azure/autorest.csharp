@@ -19,6 +19,7 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal HttpRetryRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of HttpRetryClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace httpInfrastructure
             RestClient = new HttpRetryRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>

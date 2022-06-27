@@ -20,6 +20,7 @@ namespace ExtensionClientName
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AutoRestParameterFlatteningRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AutoRestParameterFlatteningClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace ExtensionClientName
             RestClient = new AutoRestParameterFlatteningRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="renamedPathParameter"> The String to use. </param>

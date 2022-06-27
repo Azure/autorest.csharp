@@ -19,6 +19,7 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal HttpFailureRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of HttpFailureClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace httpInfrastructure
             RestClient = new HttpFailureRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get empty error form server. </summary>

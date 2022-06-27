@@ -19,6 +19,7 @@ namespace Accessibility
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AccessibilityRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace Accessibility
             RestClient = new AccessibilityRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="body"> The String to use. </param>

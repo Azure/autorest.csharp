@@ -20,6 +20,7 @@ namespace body_complex
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PolymorphicrecursiveRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace body_complex
             RestClient = new PolymorphicrecursiveRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>

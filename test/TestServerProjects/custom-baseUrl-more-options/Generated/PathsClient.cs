@@ -19,7 +19,6 @@ namespace custom_baseUrl_more_options
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PathsRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()

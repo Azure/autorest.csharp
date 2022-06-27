@@ -21,6 +21,7 @@ namespace CognitiveServices.TextAnalytics
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal CognitiveServicesTextAnalyticsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsClient for mocking. </summary>
@@ -32,7 +33,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public CognitiveServicesTextAnalyticsClient(string endpoint, AzureKeyCredential credential, CognitiveServicesTextAnalyticsClientOptions options = null)
+        public CognitiveServicesTextAnalyticsClient(Uri endpoint, AzureKeyCredential credential, CognitiveServicesTextAnalyticsClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -46,7 +47,7 @@ namespace CognitiveServices.TextAnalytics
             options ??= new CognitiveServicesTextAnalyticsClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Ocp-Apim-Subscription-Key"));
-            RestClient = new CognitiveServicesTextAnalyticsRestClient(_clientDiagnostics, _pipeline, endpoint);
+            RestClient = new CognitiveServicesTextAnalyticsRestClient(_clientDiagnostics, _pipeline, endpoint); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsClient. </summary>
@@ -54,11 +55,12 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
-        internal CognitiveServicesTextAnalyticsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
+        internal CognitiveServicesTextAnalyticsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             RestClient = new CognitiveServicesTextAnalyticsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>

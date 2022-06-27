@@ -21,6 +21,7 @@ namespace body_array
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ArrayRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ArrayClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace body_array
             RestClient = new ArrayRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null array value. </summary>

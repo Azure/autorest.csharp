@@ -19,6 +19,7 @@ namespace body_boolean
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal BoolRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of BoolClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_boolean
             RestClient = new BoolRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value. </summary>

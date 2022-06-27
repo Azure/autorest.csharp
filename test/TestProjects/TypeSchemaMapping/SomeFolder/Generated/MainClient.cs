@@ -21,6 +21,7 @@ namespace CustomNamespace
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MainRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MainClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace CustomNamespace
             RestClient = new MainRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="body"> The ModelStruct to use. </param>

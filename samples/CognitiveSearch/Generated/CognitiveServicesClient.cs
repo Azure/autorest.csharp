@@ -20,7 +20,6 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal CognitiveServicesRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of CognitiveServicesClient for mocking. </summary>
         protected CognitiveServicesClient()

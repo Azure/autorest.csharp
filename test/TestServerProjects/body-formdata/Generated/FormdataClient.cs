@@ -21,6 +21,7 @@ namespace body_formdata
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FormdataRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of FormdataClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace body_formdata
             RestClient = new FormdataRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Upload file. </summary>

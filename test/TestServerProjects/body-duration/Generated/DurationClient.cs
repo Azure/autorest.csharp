@@ -19,6 +19,7 @@ namespace body_duration
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal DurationRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of DurationClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_duration
             RestClient = new DurationRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null duration value. </summary>

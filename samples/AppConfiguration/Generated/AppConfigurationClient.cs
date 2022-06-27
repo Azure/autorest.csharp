@@ -22,6 +22,7 @@ namespace AppConfiguration
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AppConfigurationRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of AppConfigurationClient for mocking. </summary>
@@ -36,11 +37,12 @@ namespace AppConfiguration
         /// <param name="syncToken"> Used to guarantee real-time consistency between requests. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        internal AppConfigurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
+        internal AppConfigurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string syncToken = null, string apiVersion = "1.0")
         {
             RestClient = new AppConfigurationRestClient(clientDiagnostics, pipeline, endpoint, syncToken, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>

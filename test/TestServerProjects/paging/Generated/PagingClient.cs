@@ -21,6 +21,7 @@ namespace paging
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PagingRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace paging
             RestClient = new PagingRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>

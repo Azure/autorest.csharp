@@ -20,6 +20,7 @@ namespace required_optional
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ImplicitRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ImplicitClient for mocking. </summary>
@@ -41,6 +42,7 @@ namespace required_optional
             RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, endpoint, optionalGlobalQuery);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Test implicitly required path parameter. </summary>

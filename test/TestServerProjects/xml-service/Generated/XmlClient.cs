@@ -21,6 +21,7 @@ namespace xml_service
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal XmlRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of XmlClient for mocking. </summary>
@@ -38,6 +39,7 @@ namespace xml_service
             RestClient = new XmlRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>

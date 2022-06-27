@@ -19,6 +19,7 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal SkipUrlEncodingRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of SkipUrlEncodingClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace azure_special_properties
             RestClient = new SkipUrlEncodingRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>

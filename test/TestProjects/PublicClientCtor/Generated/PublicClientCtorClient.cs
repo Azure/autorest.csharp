@@ -21,6 +21,7 @@ namespace PublicClientCtor
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PublicClientCtorRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PublicClientCtorClient for mocking. </summary>
@@ -48,7 +49,7 @@ namespace PublicClientCtor
             options ??= new PublicClientCtorClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "fake-key"));
-            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version);
+            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of PublicClientCtorClient. </summary>
@@ -72,7 +73,7 @@ namespace PublicClientCtor
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "https://fakeendpoint.azure.com/.default", "https://dummyendpoint.azure.com/.default" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version);
+            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of PublicClientCtorClient. </summary>
@@ -88,6 +89,7 @@ namespace PublicClientCtor
             RestClient = new PublicClientCtorRestClient(clientDiagnostics, pipeline, endpoint, param1, param2, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <param name="value"> The TestModel to use. </param>

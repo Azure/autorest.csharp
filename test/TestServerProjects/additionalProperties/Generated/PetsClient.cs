@@ -20,6 +20,7 @@ namespace additionalProperties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PetsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of PetsClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace additionalProperties
             RestClient = new PetsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>

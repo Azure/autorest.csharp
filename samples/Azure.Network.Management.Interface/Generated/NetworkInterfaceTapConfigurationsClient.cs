@@ -21,6 +21,7 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal NetworkInterfaceTapConfigurationsRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient for mocking. </summary>
@@ -49,7 +50,7 @@ namespace Azure.Network.Management.Interface
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "user_impersonation" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new NetworkInterfaceTapConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version);
+            RestClient = new NetworkInterfaceTapConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version); Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient. </summary>
@@ -65,6 +66,7 @@ namespace Azure.Network.Management.Interface
             RestClient = new NetworkInterfaceTapConfigurationsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get the specified tap configuration on a network interface. </summary>

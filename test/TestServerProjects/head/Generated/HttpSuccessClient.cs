@@ -19,6 +19,7 @@ namespace head
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal HttpSuccessRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of HttpSuccessClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace head
             RestClient = new HttpSuccessRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Return 200 status code if successful. </summary>

@@ -20,6 +20,7 @@ namespace multiple_inheritance
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MultipleInheritanceServiceRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of MultipleInheritanceServiceClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace multiple_inheritance
             RestClient = new MultipleInheritanceServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get a horse with name &apos;Fred&apos; and isAShowHorse true. </summary>

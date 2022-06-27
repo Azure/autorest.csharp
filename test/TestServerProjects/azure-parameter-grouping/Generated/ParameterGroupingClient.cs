@@ -20,6 +20,7 @@ namespace azure_parameter_grouping
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ParameterGroupingRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of ParameterGroupingClient for mocking. </summary>
@@ -37,6 +38,7 @@ namespace azure_parameter_grouping
             RestClient = new ParameterGroupingRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Post a bunch of required parameters grouped. </summary>

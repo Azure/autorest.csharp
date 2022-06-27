@@ -20,7 +20,6 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal SynonymMapsRestClient RestClient { get; }
-        public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of SynonymMapsClient for mocking. </summary>
         protected SynonymMapsClient()

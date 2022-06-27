@@ -19,6 +19,7 @@ namespace body_string
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal StringRestClient RestClient { get; }
+
         public Uri Endpoint { get; }
 
         /// <summary> Initializes a new instance of StringClient for mocking. </summary>
@@ -36,6 +37,7 @@ namespace body_string
             RestClient = new StringRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get null string value value. </summary>
