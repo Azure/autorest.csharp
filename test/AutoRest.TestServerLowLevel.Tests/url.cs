@@ -91,22 +91,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsDoubleNegative() => TestStatus(async (host) => await new PathsClient(Key, host, null).DoubleDecimalNegativeAsync());
 
         [Test]
-<<<<<<< HEAD
-        public Task UrlPathsDoublePositive() => TestStatus(async (host) => await new PathsClient(Key, host).DoubleDecimalPositiveAsync());
-
-        [Test]
-        public void UriPropertyGenerated()
-        {
-            // Arrange & Act
-            Type uriClient = typeof(PathsClient);
-            Type publicProperty = uriClient.GetProperty("Endpoint").PropertyType;
-
-            // Assert
-            Assert.NotNull(publicProperty);
-            Assert.AreEqual(typeof(Uri), publicProperty);
-        }
-=======
         public Task UrlPathsDoublePositive() => TestStatus(async (host) => await new PathsClient(Key, host, null).DoubleDecimalPositiveAsync());
->>>>>>> 107d1d81ed1a36387eaee6b25efc9cd91f2a24f5
     }
 }
