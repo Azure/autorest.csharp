@@ -24,6 +24,10 @@ format-by-name-rules:
   'location': 'azure-location'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
+
+prepend-rp-prefix:
+- UsageName
+
 directive:
   - rename-model:
       from: SshPublicKey
