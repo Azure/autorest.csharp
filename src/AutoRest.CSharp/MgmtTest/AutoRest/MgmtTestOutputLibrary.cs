@@ -3,13 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -18,10 +21,29 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private MockTestDefinitionModel _mockTestModel;
-        public MgmtTestOutputLibrary()
+        public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+
+            // force trigger the model initialization
+            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            {
+            }
+
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
+            var sourceCodePath = GetSourceCodePath();
+            SourceCodeProject = new SourceCodeProject(sourceCodePath);
         }
+
+        private static string GetSourceCodePath()
+        {
+            if (Configuration.MgmtConfiguration.TestModeler?.SourceCodePath != null)
+                return Configuration.MgmtConfiguration.TestModeler.SourceCodePath;
+
+            return Path.Combine(Configuration.OutputFolder, "../../src");
+        }
+
+        public SourceCodeProject SourceCodeProject { get; }
 
         private Dictionary<MgmtTypeProvider, List<MockTestCase>>? _mockTestCases;
         internal Dictionary<MgmtTypeProvider, List<MockTestCase>> MockTestCases => _mockTestCases ??= EnsureMockTestCases();

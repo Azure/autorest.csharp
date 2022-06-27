@@ -21,7 +21,5 @@
     "*Uri": "Uri",
     "*Uris": "Uri"
   },
-  "TestModeler": {
-    "SourceCodePath": "file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockTest/tests/../src"
-  }
+  "TestModeler": {}
 }

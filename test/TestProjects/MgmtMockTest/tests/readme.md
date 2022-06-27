@@ -5,6 +5,5 @@
 
 ``` yaml
 require: ../src/readme.md
-testmodeler: 
-  source-path: $(this-folder)/../src
+testmodeler: {}
 ```
