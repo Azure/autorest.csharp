@@ -789,6 +789,21 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ChoiceSchema c:
                     builder.Append($"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"");
                     return;
+                case ConstantSchema c:
+                    if (c.Value != null)
+                    {
+                        builder.Append(c.ValueType is StringSchema ? $"\"<{c.Value.Value}>\"" : $"{c.Value.Value}");
+                    }
+                    else
+                    {
+                        ComposeRequestContent(allProperties, c.ValueType, builder, indent + 4, visitedSchema);
+                    }
+                    //var constantCsharpType = Context.TypeFactory.CreateType(c.ValueType, c.Value.Value == null);
+                    //var constantValue = c.Value.Value != null ?
+                    //    BuilderHelpers.ParseConstant(c.Value.Value, constantCsharpType) :
+                    //    Constant.NewInstanceOf(constantCsharpType);
+                    //builder.Append(constantValue.GetConstantFormattable());
+                    return;
                 case SealedChoiceSchema c:
                     builder.Append($"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"");
                     return;

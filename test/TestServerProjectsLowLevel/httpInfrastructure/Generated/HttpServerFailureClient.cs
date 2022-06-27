@@ -192,7 +192,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpServerFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Post505Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -226,7 +226,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpServerFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Post505(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -260,7 +260,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpServerFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Delete505Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -294,7 +294,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpServerFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Delete505(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);

@@ -269,7 +269,7 @@ namespace body_string_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new StringClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = "<>";
         /// 
         /// Response response = await client.PutEmptyAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -306,7 +306,7 @@ namespace body_string_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new StringClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = "<>";
         /// 
         /// Response response = client.PutEmpty(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -409,7 +409,7 @@ namespace body_string_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new StringClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = "<啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€>";
         /// 
         /// Response response = await client.PutMbcsAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -446,7 +446,7 @@ namespace body_string_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new StringClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = "<啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€>";
         /// 
         /// Response response = client.PutMbcs(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -549,7 +549,7 @@ namespace body_string_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new StringClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = "<    Now is the time for all good men to come to the aid of their country    >";
         /// 
         /// Response response = await client.PutWhitespaceAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -586,7 +586,7 @@ namespace body_string_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new StringClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = "<    Now is the time for all good men to come to the aid of their country    >";
         /// 
         /// Response response = client.PutWhitespace(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);

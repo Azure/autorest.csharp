@@ -254,7 +254,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Put400Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -288,7 +288,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Put400(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -322,7 +322,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Patch400Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -356,7 +356,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Patch400(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -390,7 +390,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Post400Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -424,7 +424,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Post400(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -458,7 +458,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Delete400Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -492,7 +492,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Delete400(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -774,7 +774,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Put404Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -808,7 +808,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Put404(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -842,7 +842,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Patch405Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -876,7 +876,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Patch405(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -910,7 +910,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Post406Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -944,7 +944,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Post406(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -978,7 +978,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Delete407Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1012,7 +1012,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Delete407(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1046,7 +1046,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Put409Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1080,7 +1080,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Put409(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1362,7 +1362,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Put413Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1396,7 +1396,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Put413(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1430,7 +1430,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Patch414Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1464,7 +1464,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Patch414(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1498,7 +1498,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Post415Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1532,7 +1532,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Post415(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1628,7 +1628,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Delete417Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -1662,7 +1662,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpClientFailureClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Delete417(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);

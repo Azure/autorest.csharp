@@ -130,7 +130,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Put500Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -164,7 +164,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Put500(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -198,7 +198,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Patch500Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -232,7 +232,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Patch500(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -394,7 +394,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Post503Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -428,7 +428,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Post503(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -462,7 +462,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Delete503Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -496,7 +496,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Delete503(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -530,7 +530,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Put504Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -564,7 +564,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Put504(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -598,7 +598,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = await client.Patch504Async(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -632,7 +632,7 @@ namespace httpInfrastructure_LowLevel
         /// var endpoint = new Uri("<https://my-account-name.azure.com>");
         /// var client = new HttpRetryClient(endpoint, credential);
         /// 
-        /// var data = new {};
+        /// var data = true;
         /// 
         /// Response response = client.Patch504(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
