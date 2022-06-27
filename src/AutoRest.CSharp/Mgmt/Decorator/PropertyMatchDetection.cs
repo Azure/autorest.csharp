@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -94,12 +95,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // first get the serialized name dict
                 if (ReferenceClassFinder.TryGetPropertyMetadata(sourceType, out var serializedNameDict))
                 {
-                    // see if the property could match by its serialized name
-                    return serializedNameDict.ContainsKey(childProperty.SchemaProperty!.SerializedName);
+                    // find if any PropertyInfo in the serializedNameDict could match the serialized name as this childProperty
+                    var childPropertySerializedName = childProperty.SchemaProperty!.SerializedName;
+                    string? parentPropertyName = null;
+                    foreach ((var propertyName, (var serializedName, _)) in serializedNameDict)
+                    {
+                        if (serializedName == childPropertySerializedName)
+                        {
+                            parentPropertyName = propertyName;
+                            break;
+                        }
+                    }
+                    if (parentPropertyName == null)
+                        return false;
+                    // we have a parentPropertyName
+                    parentProperty = parentDict[parentPropertyName];
                 }
-
-                // otherwise we always return false - they do not match
-                return false;
+                else
+                {
+                    // otherwise we always return false - they do not match
+                    return false;
+                }
             }
 
             // here we cannot find a property from its declared name

@@ -80,7 +80,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 ["Code"] = new PropertyMetadata("code", true),
                 ["Message"] = new PropertyMetadata("message", true),
-                ["InnerError"] = new PropertyMetadata("innererror"),
                 ["Target"] = new PropertyMetadata("target"),
                 ["Details"] = new PropertyMetadata("details")
             }
