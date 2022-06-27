@@ -8,8 +8,11 @@ using System.Reflection;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -22,6 +25,68 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string InitializationCtorAttributeName = "InitializationConstructorAttribute";
         internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
         internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
+
+        public record PropertyMetadata(string SerializedName, bool Required)
+        {
+            public PropertyMetadata(string serializedName) : this(serializedName, false)
+            {
+            }
+        }
+
+        private static readonly Dictionary<Type, Dictionary<string, PropertyMetadata>> _referenceTypesPropertyMetadata = new()
+        {
+            [typeof(ResourceData)] = new()
+            {
+                ["Id"] = new PropertyMetadata("id", true),
+                ["Name"] = new PropertyMetadata("name", true),
+                ["ResourceType"] = new PropertyMetadata("type", true),
+                ["SystemData"] = new PropertyMetadata("systemData", false),
+            },
+            [typeof(TrackedResourceData)] = new()
+            {
+                ["Location"] = new PropertyMetadata("location", true),
+                ["Tags"] = new PropertyMetadata("tags"),
+            },
+            [typeof(ManagedServiceIdentity)] = new()
+            {
+                ["PrincipalId"] = new PropertyMetadata("principalId"),
+                ["TenantId"] = new PropertyMetadata("tenantId"),
+                ["ManagedServiceIdentityType"] = new PropertyMetadata("type", true),
+                ["UserAssignedIdentities"] = new PropertyMetadata("userAssignedIdentities"),
+            },
+            [typeof(SystemAssignedServiceIdentity)] = new()
+            {
+                ["PrincipalId"] = new PropertyMetadata("principalId"),
+                ["TenantId"] = new PropertyMetadata("tenantId"),
+                ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type", true),
+            },
+        };
+
+        public static Dictionary<string, PropertyMetadata> GetPropertyMetadata(Type systemObjectType)
+        {
+            if (_referenceTypesPropertyMetadata.TryGetValue(systemObjectType, out var dict))
+                return dict;
+            dict = ConstructPropertyMetadata(systemObjectType);
+            _referenceTypesPropertyMetadata.Add(systemObjectType, dict);
+            return dict;
+        }
+
+        private static Dictionary<string, PropertyMetadata> ConstructPropertyMetadata(Type type)
+        {
+            var dict = new Dictionary<string, PropertyMetadata>();
+            var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
+            if (publicCtor == null)
+                throw new InvalidOperationException($"Property metadata information for type {type} cannot be constructed automatically because it does not have a public constructor");
+            foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type))
+            {
+                var metadata = new PropertyMetadata(property.Name.ToVariableName(), GetRequired(publicCtor, property));
+                dict.Add(property.Name, metadata);
+            }
+            return dict;
+        }
+
+        private static bool GetRequired(ConstructorInfo publicCtor, PropertyInfo property)
+            => publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
 
         private static IList<Type>? _externalTypes;
         private static IList<Type>? _referenceTypes;
@@ -65,7 +130,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 !t.Name.Equals("Resource") && //temp while we have both Resource and ResourceData
                 !t.Name.Equals("TrackedResource") && //temp while we have both TrackedResource and TrackedResourceData
                 t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
-    }
+        }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {

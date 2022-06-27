@@ -14,15 +14,15 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static SampleUsage DeserializeSampleUsage(JsonElement element)
         {
-            string unit = default;
+            UsageUnit unit = default;
             int currentValue = default;
             long limit = default;
-            UsageName name = default;
+            SampleUsageName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unit"))
                 {
-                    unit = property.Value.GetString();
+                    unit = new UsageUnit(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("currentValue"))
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    name = UsageName.DeserializeUsageName(property.Value);
+                    name = SampleUsageName.DeserializeSampleUsageName(property.Value);
                     continue;
                 }
             }

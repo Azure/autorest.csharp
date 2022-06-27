@@ -59,7 +59,9 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetFileAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -77,7 +79,9 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response GetFile(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -95,7 +99,9 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -113,7 +119,9 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response GetFileLarge(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -131,7 +139,9 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -149,7 +159,9 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response GetEmptyFile(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
