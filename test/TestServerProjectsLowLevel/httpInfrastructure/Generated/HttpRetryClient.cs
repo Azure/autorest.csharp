@@ -63,9 +63,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Head408Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// Response response = await client.Head408Async();
         /// Console.WriteLine(response.Status);
@@ -94,9 +93,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Head408.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// Response response = client.Head408();
         /// Console.WriteLine(response.Status);
@@ -126,9 +124,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Put500Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -160,9 +157,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Put500 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -194,9 +190,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Patch500Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -228,9 +223,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Patch500 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -261,9 +255,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Get502Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// Response response = await client.Get502Async();
         /// Console.WriteLine(response.Status);
@@ -292,9 +285,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Get502.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// Response response = client.Get502();
         /// Console.WriteLine(response.Status);
@@ -323,9 +315,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Options502Async and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// Response response = await client.Options502Async();
         /// 
@@ -356,9 +347,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Options502 and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// Response response = client.Options502();
         /// 
@@ -390,9 +380,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Post503Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -424,9 +413,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Post503 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -458,9 +446,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Delete503Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -492,9 +479,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Delete503 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -526,9 +512,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Put504Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -560,9 +545,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Put504 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -594,9 +578,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Patch504Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -628,9 +611,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Patch504 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpRetryClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRetryClient(credential);
         /// 
         /// var data = true;
         /// 

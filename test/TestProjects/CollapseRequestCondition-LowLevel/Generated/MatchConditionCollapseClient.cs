@@ -64,18 +64,16 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call CollapseGetWithHeadAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = await client.CollapseGetWithHeadAsync();
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call CollapseGetWithHeadAsync with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);
@@ -105,18 +103,16 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call CollapseGetWithHead.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = client.CollapseGetWithHead();
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call CollapseGetWithHead with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);
@@ -146,9 +142,8 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call CollapsePutAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -157,9 +152,8 @@ namespace CollapseRequestCondition_LowLevel
         /// ]]></code>
         /// This sample shows how to call CollapsePutAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -191,9 +185,8 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call CollapsePut with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -202,9 +195,8 @@ namespace CollapseRequestCondition_LowLevel
         /// ]]></code>
         /// This sample shows how to call CollapsePut with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -235,18 +227,16 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call CollapseGetAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = await client.CollapseGetAsync();
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call CollapseGetAsync with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);
@@ -275,18 +265,16 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call CollapseGet.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = client.CollapseGet();
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call CollapseGet with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MatchConditionCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
         /// 
         /// Response response = client.CollapseGet(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);

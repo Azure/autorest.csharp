@@ -21,6 +21,10 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelExampleComposer
     {
+        private static readonly CSharpType UriType = new CSharpType(typeof(Uri));
+        private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
+        private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
+
         private string ClientTypeName { get; }
         private BuildContext<LowLevelOutputLibrary> Context { get; }
 
@@ -247,9 +251,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine("<code><![CDATA[");
-            builder.AppendLine("var credential = new DefaultAzureCredential();");
-            builder.AppendLine($"var endpoint = new Uri(\"<{GetEndpoint()}>\");");
-            builder.AppendLine(ComposeGetClientCodes());
+            ComposeGetClientCodes(builder);
             builder.AppendLine();
             if (clientMethod.OperationSchemas.RequestBodySchema != null)
             {
@@ -823,11 +825,26 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private string ComposeGetClientCodes()
+        private void ComposeGetClientCodes(StringBuilder builder)
         {
             var invocationChain = GetClientInvocationChain();
 
-            var code = $"var client = new {invocationChain[0].Name}(endpoint, credential)"; // TODO: webpubsub constructor
+            var clientConstructor = invocationChain[0];
+            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(KeyAuthType)))
+            {
+                builder.AppendLine("var credential = new AzureKeyCredential(\"<key>\");");
+            }
+            else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
+            {
+                builder.AppendLine("var credential = new DefaultAzureCredential();");
+            }
+
+            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(UriType)))
+            {
+                builder.AppendLine($"var endpoint = new Uri(\"<{GetEndpoint()}>\");");
+            }
+
+            var code = $"var client = new {invocationChain[0].Name}({MockClientConstructorParameterValues(invocationChain[0].Parameters)})"; // TODO: webpubsub constructor
 
             if (invocationChain.Count > 1)
             {
@@ -837,7 +854,34 @@ namespace AutoRest.CSharp.Generation.Writers
                     code += GetFactoryMethodCode(factoryMethod);
                 }
             }
-            return code + ";";
+            builder.Append(code).AppendLine(";");
+        }
+
+        private string MockClientConstructorParameterValues(IReadOnlyList<Parameter> parameters)
+        {
+            var parameterValues = new List<string>(parameters.Count);
+            foreach (var parameter in parameters)
+            {
+                if (parameter.Type.EqualsIgnoreNullable(UriType))
+                {
+                    parameterValues.Add("endpoint");
+                }
+                else if (parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
+                {
+                    // sometimes the endpoint parameter cannot be generated as Uri type, best efforts to guesss it
+                    // see: https://github.com/Azure/autorest/issues/4571
+                    parameterValues.Add($"\"<{GetEndpoint()}>\"");
+                }
+                else if (parameter.Type.EqualsIgnoreNullable(KeyAuthType) || parameter.Type.EqualsIgnoreNullable(TokenAuthType))
+                {
+                    parameterValues.Add("credential");
+                }
+                else
+                {
+                    parameterValues.Add(MockParameterValue(parameter));
+                }
+            }
+            return string.Join(", ", parameterValues);
         }
 
         /// <summary>
@@ -852,14 +896,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (client.Type.Name == ClientTypeName)
                 {
-                    chain.Add(client.PrimaryConstructors.OrderBy(c => c.Parameters.Count).First());
+                    chain.Add(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
                     return chain;
                 }
 
                 var childInvocation = GetSubClientInvocationChain(client.SubClients, client.SubClientFactoryMethods);
                 if (childInvocation.Count > 0)
                 {
-                    chain.Add(client.PrimaryConstructors.OrderBy(c => c.Parameters.Count).First());
+                    chain.Add(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
                     chain.AddRange(childInvocation);
                     return chain;
                 }

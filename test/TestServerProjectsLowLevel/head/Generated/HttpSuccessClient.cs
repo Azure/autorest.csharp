@@ -63,9 +63,8 @@ namespace head_LowLevel
         /// <example>
         /// This sample shows how to call Head200Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
         /// Response response = await client.Head200Async();
         /// Console.WriteLine(response.Status);
@@ -94,9 +93,8 @@ namespace head_LowLevel
         /// <example>
         /// This sample shows how to call Head200.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
         /// Response response = client.Head200();
         /// Console.WriteLine(response.Status);
@@ -125,9 +123,8 @@ namespace head_LowLevel
         /// <example>
         /// This sample shows how to call Head204Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
         /// Response response = await client.Head204Async();
         /// Console.WriteLine(response.Status);
@@ -156,9 +153,8 @@ namespace head_LowLevel
         /// <example>
         /// This sample shows how to call Head204.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
         /// Response response = client.Head204();
         /// Console.WriteLine(response.Status);
@@ -187,9 +183,8 @@ namespace head_LowLevel
         /// <example>
         /// This sample shows how to call Head404Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
         /// Response response = await client.Head404Async();
         /// Console.WriteLine(response.Status);
@@ -218,9 +213,8 @@ namespace head_LowLevel
         /// <example>
         /// This sample shows how to call Head404.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
         /// Response response = client.Head404();
         /// Console.WriteLine(response.Status);

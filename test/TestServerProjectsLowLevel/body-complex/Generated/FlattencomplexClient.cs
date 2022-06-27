@@ -62,9 +62,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValidAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new FlattencomplexClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new FlattencomplexClient(credential);
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
@@ -114,9 +113,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValid and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new FlattencomplexClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new FlattencomplexClient(credential);
         /// 
         /// Response response = client.GetValid();
         /// 

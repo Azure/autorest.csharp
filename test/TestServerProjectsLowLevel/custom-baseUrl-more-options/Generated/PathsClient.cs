@@ -76,18 +76,16 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <example>
         /// This sample shows how to call GetEmptyAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PathsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
         /// 
         /// Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call GetEmptyAsync with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PathsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
         /// 
         /// Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
         /// Console.WriteLine(response.Status);
@@ -126,18 +124,16 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <example>
         /// This sample shows how to call GetEmpty with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PathsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
         /// 
         /// Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call GetEmpty with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PathsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
         /// 
         /// Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
         /// Console.WriteLine(response.Status);

@@ -63,9 +63,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetIntAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetIntAsync();
         /// 
@@ -110,9 +109,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetInt and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetInt();
         /// 
@@ -159,9 +157,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutIntAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -170,9 +167,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutIntAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -223,9 +219,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutInt.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -234,9 +229,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutInt with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -285,9 +279,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetLongAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetLongAsync();
         /// 
@@ -332,9 +325,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetLong and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetLong();
         /// 
@@ -381,9 +373,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutLongAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -392,9 +383,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutLongAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -445,9 +435,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutLong.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -456,9 +445,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutLong with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -507,9 +495,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetFloatAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetFloatAsync();
         /// 
@@ -554,9 +541,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetFloat and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetFloat();
         /// 
@@ -603,9 +589,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutFloatAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -614,9 +599,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutFloatAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -667,9 +651,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutFloat.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -678,9 +661,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutFloat with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -729,9 +711,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDoubleAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetDoubleAsync();
         /// 
@@ -776,9 +757,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDouble and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetDouble();
         /// 
@@ -825,9 +805,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDoubleAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -836,9 +815,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDoubleAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -889,9 +867,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDouble.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -900,9 +877,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDouble with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field1 = 1234,
@@ -951,9 +927,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetBoolAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetBoolAsync();
         /// 
@@ -998,9 +973,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetBool and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetBool();
         /// 
@@ -1047,9 +1021,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutBoolAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1058,9 +1031,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutBoolAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field_true = true,
@@ -1111,9 +1083,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutBool.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1122,9 +1093,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutBool with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field_true = true,
@@ -1173,9 +1143,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetStringAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetStringAsync();
         /// 
@@ -1222,9 +1191,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetString and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetString();
         /// 
@@ -1273,9 +1241,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutStringAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1284,9 +1251,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutStringAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<StringWrapperField>",
@@ -1339,9 +1305,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutString.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1350,9 +1315,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutString with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<StringWrapperField>",
@@ -1403,9 +1367,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDateAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetDateAsync();
         /// 
@@ -1450,9 +1413,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDate and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetDate();
         /// 
@@ -1499,9 +1461,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDateAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1510,9 +1471,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDateAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<2022-05-10>",
@@ -1563,9 +1523,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDate.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1574,9 +1533,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDate with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<2022-05-10>",
@@ -1625,9 +1583,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDateTimeAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetDateTimeAsync();
         /// 
@@ -1672,9 +1629,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDateTime and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetDateTime();
         /// 
@@ -1721,9 +1677,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDateTimeAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1732,9 +1687,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDateTimeAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
@@ -1785,9 +1739,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDateTime.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1796,9 +1749,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDateTime with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
@@ -1847,9 +1799,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDateTimeRfc1123Async and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetDateTimeRfc1123Async();
         /// 
@@ -1894,9 +1845,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDateTimeRfc1123 and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetDateTimeRfc1123();
         /// 
@@ -1943,9 +1893,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDateTimeRfc1123Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1954,9 +1903,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDateTimeRfc1123Async with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
@@ -2007,9 +1955,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDateTimeRfc1123.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2018,9 +1965,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDateTimeRfc1123 with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
@@ -2069,9 +2015,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDurationAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetDurationAsync();
         /// 
@@ -2114,9 +2059,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDuration and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetDuration();
         /// 
@@ -2161,9 +2105,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDurationAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2172,9 +2115,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDurationAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<(1.)3:45:67>",
@@ -2223,9 +2165,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutDuration.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2234,9 +2175,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutDuration with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = "<(1.)3:45:67>",
@@ -2283,9 +2223,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetByteAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = await client.GetByteAsync();
         /// 
@@ -2328,9 +2267,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetByte and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// Response response = client.GetByte();
         /// 
@@ -2375,9 +2313,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutByteAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2386,9 +2323,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutByteAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = new {},
@@ -2437,9 +2373,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutByte.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2448,9 +2383,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutByte with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PrimitiveClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
         ///     field = new {},

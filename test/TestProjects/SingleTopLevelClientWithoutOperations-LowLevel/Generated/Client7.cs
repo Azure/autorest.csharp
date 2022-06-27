@@ -51,9 +51,8 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <example>
         /// This sample shows how to call OperationAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithoutOperationClient(endpoint, credential).GetClient7Client();
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
         /// 
         /// Response response = await client.OperationAsync();
         /// 
@@ -83,9 +82,8 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <example>
         /// This sample shows how to call Operation and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithoutOperationClient(endpoint, credential).GetClient7Client();
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
         /// 
         /// Response response = client.Operation();
         /// 

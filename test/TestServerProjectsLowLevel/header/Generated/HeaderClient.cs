@@ -65,9 +65,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamExistingKeyAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamExistingKeyAsync("<userAgent>");
         /// Console.WriteLine(response.Status);
@@ -100,9 +99,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamExistingKey with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamExistingKey("<userAgent>");
         /// Console.WriteLine(response.Status);
@@ -133,9 +131,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseExistingKeyAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseExistingKeyAsync();
         /// Console.WriteLine(response.Status);
@@ -164,9 +161,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseExistingKey.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseExistingKey();
         /// Console.WriteLine(response.Status);
@@ -197,9 +193,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamProtectedKeyAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamProtectedKeyAsync("<contentType>");
         /// Console.WriteLine(response.Status);
@@ -232,9 +227,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamProtectedKey with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamProtectedKey("<contentType>");
         /// Console.WriteLine(response.Status);
@@ -265,9 +259,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseProtectedKeyAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseProtectedKeyAsync();
         /// Console.WriteLine(response.Status);
@@ -296,9 +289,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseProtectedKey.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseProtectedKey();
         /// Console.WriteLine(response.Status);
@@ -330,9 +322,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamIntegerAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamIntegerAsync("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -366,9 +357,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamInteger with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamInteger("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -401,9 +391,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseIntegerAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseIntegerAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -436,9 +425,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseInteger with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseInteger("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -472,9 +460,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamLongAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamLongAsync("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -508,9 +495,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamLong with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamLong("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -543,9 +529,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseLongAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseLongAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -578,9 +563,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseLong with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseLong("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -614,9 +598,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamFloatAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamFloatAsync("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -650,9 +633,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamFloat with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamFloat("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -685,9 +667,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseFloatAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseFloatAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -720,9 +701,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseFloat with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseFloat("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -756,9 +736,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDoubleAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamDoubleAsync("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -792,9 +771,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDouble with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamDouble("<scenario>", 1234);
         /// Console.WriteLine(response.Status);
@@ -827,9 +805,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDoubleAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseDoubleAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -862,9 +839,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDouble with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseDouble("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -898,9 +874,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamBoolAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamBoolAsync("<scenario>", true);
         /// Console.WriteLine(response.Status);
@@ -934,9 +909,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamBool with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamBool("<scenario>", true);
         /// Console.WriteLine(response.Status);
@@ -969,9 +943,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseBoolAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseBoolAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1004,9 +977,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseBool with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseBool("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1040,18 +1012,16 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamStringAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamStringAsync("<scenario>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call ParamStringAsync with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamStringAsync("<scenario>", "<value>");
         /// Console.WriteLine(response.Status);
@@ -1085,18 +1055,16 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamString with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamString("<scenario>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call ParamString with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamString("<scenario>", "<value>");
         /// Console.WriteLine(response.Status);
@@ -1129,9 +1097,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseStringAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseStringAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1164,9 +1131,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseString with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseString("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1200,9 +1166,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDateAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1236,9 +1201,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDate with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamDate("<scenario>", DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1271,9 +1235,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDateAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseDateAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1306,9 +1269,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDate with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseDate("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1342,9 +1304,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDatetimeAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1378,9 +1339,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDatetime with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamDatetime("<scenario>", DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1413,9 +1373,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDatetimeAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseDatetimeAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1448,9 +1407,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDatetime with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseDatetime("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1484,18 +1442,16 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDatetimeRfc1123Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamDatetimeRfc1123Async("<scenario>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call ParamDatetimeRfc1123Async with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1529,18 +1485,16 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDatetimeRfc1123 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamDatetimeRfc1123("<scenario>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call ParamDatetimeRfc1123 with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamDatetimeRfc1123("<scenario>", DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1573,9 +1527,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDatetimeRfc1123Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1608,9 +1561,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDatetimeRfc1123 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseDatetimeRfc1123("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1644,9 +1596,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDurationAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 2, 3));
         /// Console.WriteLine(response.Status);
@@ -1680,9 +1631,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamDuration with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 2, 3));
         /// Console.WriteLine(response.Status);
@@ -1715,9 +1665,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDurationAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseDurationAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1750,9 +1699,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseDuration with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseDuration("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1786,9 +1734,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamByteAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamByteAsync("<scenario>", null);
         /// Console.WriteLine(response.Status);
@@ -1823,9 +1770,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamByte with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamByte("<scenario>", null);
         /// Console.WriteLine(response.Status);
@@ -1859,9 +1805,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseByteAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseByteAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1894,9 +1839,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseByte with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseByte("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -1930,18 +1874,16 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamEnumAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamEnumAsync("<scenario>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call ParamEnumAsync with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ParamEnumAsync("<scenario>", "<value>");
         /// Console.WriteLine(response.Status);
@@ -1975,18 +1917,16 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ParamEnum with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamEnum("<scenario>");
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// This sample shows how to call ParamEnum with all parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ParamEnum("<scenario>", "<value>");
         /// Console.WriteLine(response.Status);
@@ -2019,9 +1959,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseEnumAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.ResponseEnumAsync("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -2054,9 +1993,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call ResponseEnum with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.ResponseEnum("<scenario>");
         /// Console.WriteLine(response.Status);
@@ -2087,9 +2025,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call CustomRequestIdAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = await client.CustomRequestIdAsync();
         /// Console.WriteLine(response.Status);
@@ -2118,9 +2055,8 @@ namespace header_LowLevel
         /// <example>
         /// This sample shows how to call CustomRequestId.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HeaderClient(credential);
         /// 
         /// Response response = client.CustomRequestId();
         /// Console.WriteLine(response.Status);

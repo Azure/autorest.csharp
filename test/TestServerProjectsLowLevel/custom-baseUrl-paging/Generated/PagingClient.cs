@@ -67,9 +67,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesPartialUrlAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>"))
         /// {
@@ -128,9 +127,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesPartialUrl with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetPagesPartialUrl("<accountName>"))
         /// {
@@ -189,9 +187,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesPartialUrlOperationAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>"))
         /// {
@@ -250,9 +247,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesPartialUrlOperation with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetPagesPartialUrlOperation("<accountName>"))
         /// {
@@ -312,9 +308,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesPartialUrlOperationNextAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>"))
         /// {
@@ -373,9 +368,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesPartialUrlOperationNext with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>"))
         /// {

@@ -65,9 +65,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <example>
         /// This sample shows how to call OperationAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
         /// 
         /// Response response = await client.OperationAsync();
         /// 
@@ -97,9 +96,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <example>
         /// This sample shows how to call Operation and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
         /// 
         /// Response response = client.Operation();
         /// 
@@ -132,9 +130,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <example>
         /// This sample shows how to call GetAllAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
         /// 
         /// await foreach (var data in client.GetAllAsync("<filter>"))
         /// {
@@ -176,9 +173,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <example>
         /// This sample shows how to call GetAll with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithOperationClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
         /// 
         /// foreach (var data in client.GetAll("<filter>"))
         /// {

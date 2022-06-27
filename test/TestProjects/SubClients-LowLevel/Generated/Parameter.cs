@@ -54,9 +54,8 @@ namespace SubClients_LowLevel
         /// <example>
         /// This sample shows how to call GetSubParameterAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RootClient(endpoint, credential).GetParameterClient();
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
         /// 
         /// Response response = await client.GetSubParameterAsync("<subParameter>");
         /// 
@@ -91,9 +90,8 @@ namespace SubClients_LowLevel
         /// <example>
         /// This sample shows how to call GetSubParameter with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RootClient(endpoint, credential).GetParameterClient();
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
         /// 
         /// Response response = client.GetSubParameter("<subParameter>");
         /// 

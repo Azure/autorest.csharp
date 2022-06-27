@@ -65,9 +65,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonRetry400Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -79,9 +78,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonRetry400Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -167,9 +165,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonRetry400 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -181,9 +178,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonRetry400 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -269,9 +265,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonRetry201Creating400Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -283,9 +278,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -371,9 +365,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonRetry201Creating400 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -385,9 +378,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -473,9 +465,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -487,9 +478,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -575,9 +565,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonRetry201Creating400InvalidJson with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -589,9 +578,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonRetry201Creating400InvalidJson with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -677,9 +665,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetry400Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -691,9 +678,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetry400Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -779,9 +765,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetry400 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -793,9 +778,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetry400 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -880,9 +864,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteNonRetry400Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
         /// 
@@ -914,9 +897,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteNonRetry400 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.DeleteNonRetry400(WaitUntil.Completed);
         /// 
@@ -948,9 +930,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202NonRetry400Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.Delete202NonRetry400Async(WaitUntil.Completed);
         /// 
@@ -982,9 +963,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202NonRetry400 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.Delete202NonRetry400(WaitUntil.Completed);
         /// 
@@ -1016,9 +996,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetry400Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
         /// 
@@ -1050,9 +1029,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetry400 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
         /// 
@@ -1085,9 +1063,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostNonRetry400Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1098,9 +1075,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostNonRetry400Async with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1163,9 +1139,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostNonRetry400 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1176,9 +1151,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostNonRetry400 with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1241,9 +1215,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202NonRetry400Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1254,9 +1227,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202NonRetry400Async with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1319,9 +1291,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202NonRetry400 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1332,9 +1303,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202NonRetry400 with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1397,9 +1367,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetry400Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1410,9 +1379,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetry400Async with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1475,9 +1443,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetry400 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1488,9 +1455,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetry400 with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1553,9 +1519,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutError201NoProvisioningStatePayloadAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1567,9 +1532,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutError201NoProvisioningStatePayloadAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1655,9 +1619,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutError201NoProvisioningStatePayload with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1669,9 +1632,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutError201NoProvisioningStatePayload with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1757,9 +1719,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1771,9 +1732,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1859,9 +1819,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatus with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1873,9 +1832,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1961,9 +1919,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1975,9 +1932,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2063,9 +2019,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2077,9 +2032,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2164,9 +2118,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete204SucceededAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
         /// 
@@ -2198,9 +2151,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete204Succeeded with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.Delete204Succeeded(WaitUntil.Completed);
         /// 
@@ -2232,9 +2184,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetryNoStatusAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
         /// 
@@ -2266,9 +2217,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetryNoStatus with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
         /// 
@@ -2301,9 +2251,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202NoLocationAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2314,9 +2263,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202NoLocationAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2379,9 +2327,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202NoLocation with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2392,9 +2339,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202NoLocation with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2457,9 +2403,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2470,9 +2415,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2535,9 +2479,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetryNoPayload with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2548,9 +2491,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryNoPayload with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2613,9 +2555,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200InvalidJsonAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2627,9 +2568,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200InvalidJsonAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2715,9 +2655,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200InvalidJson with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2729,9 +2668,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200InvalidJson with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2817,9 +2755,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2831,9 +2768,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2919,9 +2855,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeader with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2933,9 +2868,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3021,9 +2955,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3035,9 +2968,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3123,9 +3055,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3137,9 +3068,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3224,9 +3154,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202RetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
         /// 
@@ -3258,9 +3187,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202RetryInvalidHeader with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
         /// 
@@ -3292,9 +3220,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
         /// 
@@ -3326,9 +3253,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidHeader with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
         /// 
@@ -3360,9 +3286,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPollingAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
         /// 
@@ -3394,9 +3319,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPolling with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
         /// 
@@ -3429,9 +3353,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202RetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3442,9 +3365,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202RetryInvalidHeaderAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3507,9 +3429,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202RetryInvalidHeader with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3520,9 +3441,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202RetryInvalidHeader with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3585,9 +3505,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3598,9 +3517,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3663,9 +3581,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeader with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3676,9 +3593,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeader with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3741,9 +3657,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3754,9 +3669,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3819,9 +3733,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3832,9 +3745,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LrosaDsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {

@@ -70,9 +70,8 @@ namespace SubClients_LowLevel
         /// <example>
         /// This sample shows how to call GetCachedParameterAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RootClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RootClient("<cachedParameter>", credential);
         /// 
         /// Response response = await client.GetCachedParameterAsync();
         /// 
@@ -102,9 +101,8 @@ namespace SubClients_LowLevel
         /// <example>
         /// This sample shows how to call GetCachedParameter and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RootClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RootClient("<cachedParameter>", credential);
         /// 
         /// Response response = client.GetCachedParameter();
         /// 

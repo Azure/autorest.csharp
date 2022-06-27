@@ -65,9 +65,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call AnalyzeBodyAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -102,9 +101,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call AnalyzeBody with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -139,9 +137,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call AnalyzeBodyNoAcceptHeaderAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -174,9 +171,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call AnalyzeBodyNoAcceptHeader with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -208,9 +204,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call ContentTypeWithEncodingAsync with required request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -244,9 +239,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call ContentTypeWithEncoding with required request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -282,9 +276,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call BinaryBodyWithTwoContentTypesAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -322,9 +315,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call BinaryBodyWithTwoContentTypes with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -362,9 +354,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call BinaryBodyWithThreeContentTypesAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -402,9 +393,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call BinaryBodyWithThreeContentTypes with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -442,9 +432,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call PutTextAndJsonBodyAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -482,9 +471,8 @@ namespace media_types_LowLevel
         /// <example>
         /// This sample shows how to call PutTextAndJsonBody with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new MediaTypesClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
         /// 
         /// var data = "<String>";
         /// 

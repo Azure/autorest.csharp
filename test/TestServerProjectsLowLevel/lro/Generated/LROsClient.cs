@@ -65,9 +65,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200SucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -79,9 +78,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200SucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -167,9 +165,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200Succeeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -181,9 +178,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200Succeeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -269,9 +265,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Patch200SucceededIgnoreHeadersAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -283,9 +278,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Patch200SucceededIgnoreHeadersAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -371,9 +365,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Patch200SucceededIgnoreHeaders with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -385,9 +378,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Patch200SucceededIgnoreHeaders with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -473,9 +465,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Patch201RetryWithAsyncHeaderAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -487,9 +478,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Patch201RetryWithAsyncHeaderAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -575,9 +565,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Patch201RetryWithAsyncHeader with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -589,9 +578,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Patch201RetryWithAsyncHeader with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -677,9 +665,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Patch202RetryWithAsyncAndLocationHeaderAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -691,9 +678,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Patch202RetryWithAsyncAndLocationHeaderAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -779,9 +765,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Patch202RetryWithAsyncAndLocationHeader with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -793,9 +778,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Patch202RetryWithAsyncAndLocationHeader with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -881,9 +865,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201SucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -895,9 +878,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201SucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -983,9 +965,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201Succeeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -997,9 +978,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201Succeeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1084,9 +1064,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202ListAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.Post202ListAsync(WaitUntil.Completed);
         /// 
@@ -1145,9 +1124,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202List with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.Post202List(WaitUntil.Completed);
         /// 
@@ -1207,9 +1185,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200SucceededNoStateAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1221,9 +1198,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200SucceededNoStateAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1309,9 +1285,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200SucceededNoState with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1323,9 +1298,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200SucceededNoState with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1411,9 +1385,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put202Retry200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1425,9 +1398,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put202Retry200Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1513,9 +1485,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put202Retry200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1527,9 +1498,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put202Retry200 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1615,9 +1585,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1629,9 +1598,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1717,9 +1685,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1731,9 +1698,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1819,9 +1785,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200UpdatingSucceeded204Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1833,9 +1798,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200UpdatingSucceeded204Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -1921,9 +1885,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200UpdatingSucceeded204 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -1935,9 +1898,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200UpdatingSucceeded204 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2023,9 +1985,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201CreatingFailed200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2037,9 +1998,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201CreatingFailed200Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2125,9 +2085,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201CreatingFailed200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2139,9 +2098,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201CreatingFailed200 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2227,9 +2185,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200Acceptedcanceled200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2241,9 +2198,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200Acceptedcanceled200Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2329,9 +2285,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put200Acceptedcanceled200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2343,9 +2298,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put200Acceptedcanceled200 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2431,9 +2385,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNoHeaderInRetryAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2445,9 +2398,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNoHeaderInRetryAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2533,9 +2485,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNoHeaderInRetry with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2547,9 +2498,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNoHeaderInRetry with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2635,9 +2585,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRetrySucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2649,9 +2598,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2737,9 +2685,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRetrySucceeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2751,9 +2698,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2839,9 +2785,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNoRetrySucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2853,9 +2798,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNoRetrySucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -2941,9 +2885,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNoRetrySucceeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -2955,9 +2898,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNoRetrySucceeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3043,9 +2985,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRetryFailedAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3057,9 +2998,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetryFailedAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3145,9 +3085,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRetryFailed with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3159,9 +3098,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetryFailed with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3247,9 +3185,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNoRetrycanceledAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3261,9 +3198,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNoRetrycanceledAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3349,9 +3285,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNoRetrycanceled with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3363,9 +3298,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNoRetrycanceled with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3451,9 +3385,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNoHeaderInRetryAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3465,9 +3398,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNoHeaderInRetryAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3553,9 +3485,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNoHeaderInRetry with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3567,9 +3498,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNoHeaderInRetry with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -3655,9 +3585,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonResourceAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3669,9 +3598,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonResourceAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     name = "<SkuName>",
@@ -3733,9 +3661,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutNonResource with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3747,9 +3674,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutNonResource with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     name = "<SkuName>",
@@ -3811,9 +3737,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNonResourceAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3825,9 +3750,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNonResourceAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     name = "<SkuName>",
@@ -3889,9 +3813,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncNonResource with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3903,9 +3826,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncNonResource with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     name = "<SkuName>",
@@ -3967,9 +3889,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutSubResourceAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -3981,9 +3902,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutSubResourceAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     properties = new {
@@ -4053,9 +3973,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutSubResource with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -4067,9 +3986,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutSubResource with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     properties = new {
@@ -4139,9 +4057,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncSubResourceAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -4153,9 +4070,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncSubResourceAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     properties = new {
@@ -4225,9 +4141,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncSubResource with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -4239,9 +4154,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncSubResource with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     properties = new {
@@ -4310,9 +4224,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
         /// 
@@ -4371,9 +4284,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteProvisioning202Accepted200Succeeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
         /// 
@@ -4432,9 +4344,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteProvisioning202DeletingFailed200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed);
         /// 
@@ -4493,9 +4404,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteProvisioning202DeletingFailed200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed);
         /// 
@@ -4554,9 +4464,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteProvisioning202Deletingcanceled200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed);
         /// 
@@ -4615,9 +4524,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteProvisioning202Deletingcanceled200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed);
         /// 
@@ -4676,9 +4584,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete204SucceededAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
         /// 
@@ -4710,9 +4617,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete204Succeeded with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.Delete204Succeeded(WaitUntil.Completed);
         /// 
@@ -4744,9 +4650,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202Retry200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
         /// 
@@ -4805,9 +4710,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202Retry200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.Delete202Retry200(WaitUntil.Completed);
         /// 
@@ -4866,9 +4770,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202NoRetry204Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed);
         /// 
@@ -4927,9 +4830,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Delete202NoRetry204 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.Delete202NoRetry204(WaitUntil.Completed);
         /// 
@@ -4988,9 +4890,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteNoHeaderInRetryAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
         /// 
@@ -5022,9 +4923,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteNoHeaderInRetry with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteNoHeaderInRetry(WaitUntil.Completed);
         /// 
@@ -5056,9 +4956,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncNoHeaderInRetryAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
         /// 
@@ -5090,9 +4989,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncNoHeaderInRetry with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Completed);
         /// 
@@ -5124,9 +5022,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRetrySucceededAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
         /// 
@@ -5158,9 +5055,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRetrySucceeded with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Completed);
         /// 
@@ -5192,9 +5088,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncNoRetrySucceededAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
         /// 
@@ -5226,9 +5121,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncNoRetrySucceeded with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Completed);
         /// 
@@ -5260,9 +5154,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRetryFailedAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
         /// 
@@ -5294,9 +5187,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRetryFailed with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRetryFailed(WaitUntil.Completed);
         /// 
@@ -5328,9 +5220,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRetrycanceledAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
         /// 
@@ -5362,9 +5253,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call DeleteAsyncRetrycanceled with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.DeleteAsyncRetrycanceled(WaitUntil.Completed);
         /// 
@@ -5396,9 +5286,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post200WithPayloadAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed);
         /// 
@@ -5445,9 +5334,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post200WithPayload with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.Post200WithPayload(WaitUntil.Completed);
         /// 
@@ -5495,9 +5383,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202Retry200Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -5508,9 +5395,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -5573,9 +5459,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202Retry200 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -5586,9 +5471,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -5651,9 +5535,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202NoRetry204Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -5665,9 +5548,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202NoRetry204Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -5753,9 +5635,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202NoRetry204 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -5767,9 +5648,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202NoRetry204 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -5854,9 +5734,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostDoubleHeadersFinalLocationGetAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed);
         /// 
@@ -5915,9 +5794,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostDoubleHeadersFinalLocationGet with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed);
         /// 
@@ -5976,9 +5854,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed);
         /// 
@@ -6037,9 +5914,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostDoubleHeadersFinalAzureHeaderGet with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed);
         /// 
@@ -6098,9 +5974,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefaultAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed);
         /// 
@@ -6159,9 +6034,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefault with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed);
         /// 
@@ -6221,9 +6095,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetrySucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6235,9 +6108,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6323,9 +6195,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetrySucceeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6337,9 +6208,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6425,9 +6295,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncNoRetrySucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6439,9 +6308,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncNoRetrySucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6527,9 +6395,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncNoRetrySucceeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6541,9 +6408,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncNoRetrySucceeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6629,9 +6495,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetryFailedAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6642,9 +6507,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetryFailedAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6707,9 +6571,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetryFailed with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6720,9 +6583,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetryFailed with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6785,9 +6647,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetrycanceledAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6798,9 +6659,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrycanceledAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -6863,9 +6723,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetrycanceled with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -6876,9 +6735,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrycanceled with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {

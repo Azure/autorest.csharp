@@ -62,9 +62,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetItemAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
         /// 
         /// Response response = await client.GetItemAsync();
         /// 
@@ -95,9 +94,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetItem and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
         /// 
         /// Response response = client.GetItem();
         /// 

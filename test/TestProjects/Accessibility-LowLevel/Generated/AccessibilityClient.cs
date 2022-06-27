@@ -63,9 +63,8 @@ namespace Accessibility_LowLevel
         /// <example>
         /// This sample shows how to call OperationAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new AccessibilityClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new AccessibilityClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -96,9 +95,8 @@ namespace Accessibility_LowLevel
         /// <example>
         /// This sample shows how to call Operation with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new AccessibilityClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new AccessibilityClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -129,9 +127,8 @@ namespace Accessibility_LowLevel
         /// <example>
         /// This sample shows how to call OperationInternalAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new AccessibilityClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new AccessibilityClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -162,9 +159,8 @@ namespace Accessibility_LowLevel
         /// <example>
         /// This sample shows how to call OperationInternal with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new AccessibilityClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new AccessibilityClient(credential);
         /// 
         /// var data = "<String>";
         /// 

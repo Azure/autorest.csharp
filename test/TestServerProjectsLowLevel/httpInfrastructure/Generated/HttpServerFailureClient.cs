@@ -63,9 +63,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Head501Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// Response response = await client.Head501Async();
         /// Console.WriteLine(response.Status);
@@ -94,9 +93,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Head501.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// Response response = client.Head501();
         /// Console.WriteLine(response.Status);
@@ -125,9 +123,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Get501Async.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// Response response = await client.Get501Async();
         /// Console.WriteLine(response.Status);
@@ -156,9 +153,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Get501.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// Response response = client.Get501();
         /// Console.WriteLine(response.Status);
@@ -188,9 +184,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Post505Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -222,9 +217,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Post505 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -256,9 +250,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Delete505Async with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// var data = true;
         /// 
@@ -290,9 +283,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call Delete505 with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpServerFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpServerFailureClient(credential);
         /// 
         /// var data = true;
         /// 

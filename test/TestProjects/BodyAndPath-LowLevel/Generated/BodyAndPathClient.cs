@@ -68,9 +68,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call CreateAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -109,9 +108,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call Create with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -152,9 +150,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call CreateStreamAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -163,9 +160,8 @@ namespace BodyAndPath_LowLevel
         /// ]]></code>
         /// This sample shows how to call CreateStreamAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -206,9 +202,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call CreateStream with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -217,9 +212,8 @@ namespace BodyAndPath_LowLevel
         /// ]]></code>
         /// This sample shows how to call CreateStream with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = File.OpenRead("<binary.data>");
         /// 
@@ -259,9 +253,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call CreateEnumAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -302,9 +295,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call CreateEnum with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -340,9 +332,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call GetBodyAndPathsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// Response response = await client.GetBodyAndPathsAsync();
         /// 
@@ -374,9 +365,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call GetBodyAndPaths and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// Response response = client.GetBodyAndPaths();
         /// 
@@ -408,9 +398,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call GetItemsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// Response response = await client.GetItemsAsync();
         /// 
@@ -442,9 +431,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call GetItems and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// Response response = client.GetItems();
         /// 
@@ -483,9 +471,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call UpdateAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -494,9 +481,8 @@ namespace BodyAndPath_LowLevel
         /// ]]></code>
         /// This sample shows how to call UpdateAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -539,9 +525,8 @@ namespace BodyAndPath_LowLevel
         /// <example>
         /// This sample shows how to call Update with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 
@@ -550,9 +535,8 @@ namespace BodyAndPath_LowLevel
         /// ]]></code>
         /// This sample shows how to call Update with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new BodyAndPathClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BodyAndPathClient(credential);
         /// 
         /// var data = "<any>";
         /// 

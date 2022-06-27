@@ -63,9 +63,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNotExpandableAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// Response response = await client.GetNotExpandableAsync();
         /// 
@@ -96,9 +95,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNotExpandable and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// Response response = client.GetNotExpandable();
         /// 
@@ -131,9 +129,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutNotExpandableAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = "<red color>";
         /// 
@@ -168,9 +165,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutNotExpandable with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = "<red color>";
         /// 
@@ -203,9 +199,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetReferencedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// Response response = await client.GetReferencedAsync();
         /// 
@@ -236,9 +231,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetReferenced and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// Response response = client.GetReferenced();
         /// 
@@ -271,9 +265,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutReferencedAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = "<red color>";
         /// 
@@ -308,9 +301,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutReferenced with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = "<red color>";
         /// 
@@ -343,9 +335,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetReferencedConstantAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// Response response = await client.GetReferencedConstantAsync();
         /// 
@@ -390,9 +381,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetReferencedConstant and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// Response response = client.GetReferencedConstant();
         /// 
@@ -439,9 +429,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutReferencedConstantAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
         ///     ColorConstant = "<green-color>",
@@ -452,9 +441,8 @@ namespace body_string_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutReferencedConstantAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
         ///     ColorConstant = "<green-color>",
@@ -505,9 +493,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutReferencedConstant with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
         ///     ColorConstant = "<green-color>",
@@ -518,9 +505,8 @@ namespace body_string_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutReferencedConstant with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new EnumClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
         ///     ColorConstant = "<green-color>",

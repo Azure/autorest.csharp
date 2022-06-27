@@ -63,9 +63,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValidAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
@@ -219,9 +218,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValid and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = client.GetValid();
         /// 
@@ -377,9 +375,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValidAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -391,9 +388,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValidAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -556,9 +552,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValid with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -570,9 +565,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValid with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -733,9 +727,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDotSyntaxAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = await client.GetDotSyntaxAsync();
         /// 
@@ -783,9 +776,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetDotSyntax and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = client.GetDotSyntax();
         /// 
@@ -833,9 +825,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetComposedWithDiscriminatorAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = await client.GetComposedWithDiscriminatorAsync();
         /// 
@@ -900,9 +891,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetComposedWithDiscriminator and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = client.GetComposedWithDiscriminator();
         /// 
@@ -967,9 +957,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetComposedWithoutDiscriminatorAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = await client.GetComposedWithoutDiscriminatorAsync();
         /// 
@@ -1034,9 +1023,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetComposedWithoutDiscriminator and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = client.GetComposedWithoutDiscriminator();
         /// 
@@ -1101,9 +1089,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetComplicatedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = await client.GetComplicatedAsync();
         /// 
@@ -1167,9 +1154,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetComplicated and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// Response response = client.GetComplicated();
         /// 
@@ -1235,9 +1221,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutComplicatedAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1249,9 +1234,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutComplicatedAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1328,9 +1312,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutComplicated with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1342,9 +1325,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutComplicated with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1421,9 +1403,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutMissingDiscriminatorAsync with required request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1439,9 +1420,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutMissingDiscriminatorAsync with all request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1549,9 +1529,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutMissingDiscriminator with required request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1567,9 +1546,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutMissingDiscriminator with all request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1677,9 +1655,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValidMissingRequiredAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1691,9 +1668,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValidMissingRequiredAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1856,9 +1832,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValidMissingRequired with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",
@@ -1870,9 +1845,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValidMissingRequired with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PolymorphismClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
         ///     fishtype = "<FishFishtype>",

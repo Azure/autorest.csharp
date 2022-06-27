@@ -66,9 +66,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetNoItemNamePagesAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetNoItemNamePagesAsync())
         /// {
@@ -121,9 +120,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetNoItemNamePages and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetNoItemNamePages())
         /// {
@@ -176,9 +174,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetNullNextLinkNamePagesAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetNullNextLinkNamePagesAsync())
         /// {
@@ -227,9 +224,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetNullNextLinkNamePages and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetNullNextLinkNamePages())
         /// {
@@ -278,9 +274,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetSinglePagesAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetSinglePagesAsync())
         /// {
@@ -335,9 +330,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetSinglePages and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetSinglePages())
         /// {
@@ -392,9 +386,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call FirstResponseEmptyAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.FirstResponseEmptyAsync())
         /// {
@@ -447,9 +440,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call FirstResponseEmpty and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.FirstResponseEmpty())
         /// {
@@ -505,9 +497,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesAsync())
         /// {
@@ -517,9 +508,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetMultiplePagesAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesAsync("<clientRequestId>", 1234, 1234))
         /// {
@@ -577,9 +567,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePages and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePages())
         /// {
@@ -589,9 +578,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetMultiplePages with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePages("<clientRequestId>", 1234, 1234))
         /// {
@@ -647,9 +635,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetWithQueryParamsAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetWithQueryParamsAsync(1234))
         /// {
@@ -705,9 +692,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetWithQueryParams with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetWithQueryParams(1234))
         /// {
@@ -763,9 +749,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call DuplicateParamsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.DuplicateParamsAsync())
         /// {
@@ -775,9 +760,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call DuplicateParamsAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.DuplicateParamsAsync("<filter>"))
         /// {
@@ -833,9 +817,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call DuplicateParams and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.DuplicateParams())
         /// {
@@ -845,9 +828,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call DuplicateParams with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.DuplicateParams("<filter>"))
         /// {
@@ -902,9 +884,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call NextOperationWithQueryParamsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.NextOperationWithQueryParamsAsync())
         /// {
@@ -953,9 +934,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call NextOperationWithQueryParams and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.NextOperationWithQueryParams())
         /// {
@@ -1007,9 +987,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetOdataMultiplePagesAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetOdataMultiplePagesAsync())
         /// {
@@ -1019,9 +998,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetOdataMultiplePagesAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetOdataMultiplePagesAsync("<clientRequestId>", 1234, 1234))
         /// {
@@ -1079,9 +1057,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetOdataMultiplePages and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetOdataMultiplePages())
         /// {
@@ -1091,9 +1068,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetOdataMultiplePages with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetOdataMultiplePages("<clientRequestId>", 1234, 1234))
         /// {
@@ -1152,9 +1128,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesWithOffsetAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesWithOffsetAsync(1234))
         /// {
@@ -1164,9 +1139,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetMultiplePagesWithOffsetAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesWithOffsetAsync(1234, "<clientRequestId>", 1234, 1234))
         /// {
@@ -1225,9 +1199,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesWithOffset with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesWithOffset(1234))
         /// {
@@ -1237,9 +1210,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetMultiplePagesWithOffset with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>", 1234, 1234))
         /// {
@@ -1294,9 +1266,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesRetryFirstAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesRetryFirstAsync())
         /// {
@@ -1351,9 +1322,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesRetryFirst and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesRetryFirst())
         /// {
@@ -1408,9 +1378,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesRetrySecondAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesRetrySecondAsync())
         /// {
@@ -1465,9 +1434,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesRetrySecond and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesRetrySecond())
         /// {
@@ -1522,9 +1490,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetSinglePagesFailureAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetSinglePagesFailureAsync())
         /// {
@@ -1579,9 +1546,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetSinglePagesFailure and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetSinglePagesFailure())
         /// {
@@ -1636,9 +1602,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFailureAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesFailureAsync())
         /// {
@@ -1693,9 +1658,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFailure and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesFailure())
         /// {
@@ -1750,9 +1714,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFailureUriAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesFailureUriAsync())
         /// {
@@ -1807,9 +1770,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFailureUri and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesFailureUri())
         /// {
@@ -1868,9 +1830,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFragmentNextLinkAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>"))
         /// {
@@ -1932,9 +1893,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFragmentNextLink with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>"))
         /// {
@@ -1996,9 +1956,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLinkAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>"))
         /// {
@@ -2060,9 +2019,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLink with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>"))
         /// {
@@ -2125,9 +2083,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call NextFragmentAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>"))
         /// {
@@ -2189,9 +2146,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call NextFragment with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>"))
         /// {
@@ -2253,9 +2209,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call NextFragmentWithGroupingAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>"))
         /// {
@@ -2317,9 +2272,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call NextFragmentWithGrouping with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>"))
         /// {
@@ -2376,9 +2330,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagingModelWithItemNameWithXMSClientNameAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// await foreach (var data in client.GetPagingModelWithItemNameWithXMSClientNameAsync())
         /// {
@@ -2418,9 +2371,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetPagingModelWithItemNameWithXMSClientName and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// foreach (var data in client.GetPagingModelWithItemNameWithXMSClientName())
         /// {
@@ -2464,9 +2416,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesLROAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed);
         /// 
@@ -2479,9 +2430,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetMultiplePagesLROAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
         /// 
@@ -2555,9 +2505,8 @@ namespace paging_LowLevel
         /// <example>
         /// This sample shows how to call GetMultiplePagesLRO with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// var operation = client.GetMultiplePagesLRO(WaitUntil.Completed);
         /// 
@@ -2570,9 +2519,8 @@ namespace paging_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetMultiplePagesLRO with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new PagingClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
         /// var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
         /// 

@@ -67,9 +67,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call NoRequestBodyResponseBodyAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234);
         /// 
@@ -78,9 +77,8 @@ namespace RequestContextAllOptional_LowLevel
         /// ]]></code>
         /// This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>);
         /// 
@@ -115,9 +113,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call NoRequestBodyResponseBody with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234);
         /// 
@@ -126,9 +123,8 @@ namespace RequestContextAllOptional_LowLevel
         /// ]]></code>
         /// This sample shows how to call NoRequestBodyResponseBody with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>);
         /// 
@@ -160,9 +156,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call RequestBodyResponseBodyAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -173,9 +168,8 @@ namespace RequestContextAllOptional_LowLevel
         /// ]]></code>
         /// This sample shows how to call RequestBodyResponseBodyAsync with all request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = new {
         ///     Code = "<TestModelCode>",
@@ -235,9 +229,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call RequestBodyResponseBody and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -248,9 +241,8 @@ namespace RequestContextAllOptional_LowLevel
         /// ]]></code>
         /// This sample shows how to call RequestBodyResponseBody with all request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = new {
         ///     Code = "<TestModelCode>",
@@ -311,9 +303,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
         /// 
@@ -348,9 +339,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call DeleteNoRequestBodyResponseBody with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
         /// 
@@ -383,9 +373,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call NoRequestBodyNoResponseBodyAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = await client.NoRequestBodyNoResponseBodyAsync();
         /// Console.WriteLine(response.Status);
@@ -414,9 +403,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call NoRequestBodyNoResponseBody.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// Response response = client.NoRequestBodyNoResponseBody();
         /// Console.WriteLine(response.Status);
@@ -446,9 +434,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call RequestBodyNoResponseBodyAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -480,9 +467,8 @@ namespace RequestContextAllOptional_LowLevel
         /// <example>
         /// This sample shows how to call RequestBodyNoResponseBody with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new RequestContextAllOptionalClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = "<String>";
         /// 

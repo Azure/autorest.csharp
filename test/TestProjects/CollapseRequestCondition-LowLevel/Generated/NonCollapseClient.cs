@@ -64,9 +64,8 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call IfMatchPutAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -75,9 +74,8 @@ namespace CollapseRequestCondition_LowLevel
         /// ]]></code>
         /// This sample shows how to call IfMatchPutAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -109,9 +107,8 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call IfMatchPut with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -120,9 +117,8 @@ namespace CollapseRequestCondition_LowLevel
         /// ]]></code>
         /// This sample shows how to call IfMatchPut with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -154,9 +150,8 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call IfNoneMatchPutAsync with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -165,9 +160,8 @@ namespace CollapseRequestCondition_LowLevel
         /// ]]></code>
         /// This sample shows how to call IfNoneMatchPutAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -199,9 +193,8 @@ namespace CollapseRequestCondition_LowLevel
         /// <example>
         /// This sample shows how to call IfNoneMatchPut with required parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -210,9 +203,8 @@ namespace CollapseRequestCondition_LowLevel
         /// ]]></code>
         /// This sample shows how to call IfNoneMatchPut with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new NonCollapseClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
         /// 
         /// var data = "<String>";
         /// 

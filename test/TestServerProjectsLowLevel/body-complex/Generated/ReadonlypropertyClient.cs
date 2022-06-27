@@ -63,9 +63,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValidAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ReadonlypropertyClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ReadonlypropertyClient(credential);
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
@@ -110,9 +109,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValid and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ReadonlypropertyClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ReadonlypropertyClient(credential);
         /// 
         /// Response response = client.GetValid();
         /// 
@@ -159,9 +157,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValidAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ReadonlypropertyClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ReadonlypropertyClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -170,9 +167,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValidAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ReadonlypropertyClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ReadonlypropertyClient(credential);
         /// 
         /// var data = new {
         ///     size = 1234,
@@ -222,9 +218,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValid.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ReadonlypropertyClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ReadonlypropertyClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -233,9 +228,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValid with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ReadonlypropertyClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ReadonlypropertyClient(credential);
         /// 
         /// var data = new {
         ///     size = 1234,

@@ -66,9 +66,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call HeadNoParamsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = await client.HeadNoParamsAsync();
         /// 
@@ -102,9 +101,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call HeadNoParams and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = client.HeadNoParams();
         /// 
@@ -140,9 +138,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call GetRequiredAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = await client.GetRequiredAsync("<parameter>");
         /// 
@@ -180,9 +177,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call GetRequired with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = client.GetRequired("<parameter>");
         /// 
@@ -218,9 +214,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call PutRequiredOptionalAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
         /// 
@@ -229,9 +224,8 @@ namespace dpg_initial_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutRequiredOptionalAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>");
         /// 
@@ -267,9 +261,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call PutRequiredOptional with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = client.PutRequiredOptional("<requiredParam>");
         /// 
@@ -278,9 +271,8 @@ namespace dpg_initial_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutRequiredOptional with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>");
         /// 
@@ -315,9 +307,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call PostParametersAsync with required request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// var data = new {
         ///     url = "<PostInputUrl>",
@@ -368,9 +359,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call PostParameters with required request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// var data = new {
         ///     url = "<PostInputUrl>",
@@ -423,9 +413,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call GetOptionalAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = await client.GetOptionalAsync();
         /// 
@@ -434,9 +423,8 @@ namespace dpg_initial_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetOptionalAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = await client.GetOptionalAsync("<optionalParam>");
         /// 
@@ -471,9 +459,8 @@ namespace dpg_initial_LowLevel
         /// <example>
         /// This sample shows how to call GetOptional and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = client.GetOptional();
         /// 
@@ -482,9 +469,8 @@ namespace dpg_initial_LowLevel
         /// ]]></code>
         /// This sample shows how to call GetOptional with all parameters, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ParamsClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParamsClient(credential);
         /// 
         /// Response response = client.GetOptional("<optionalParam>");
         /// 

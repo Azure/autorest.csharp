@@ -63,9 +63,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValidAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// Response response = await client.GetValidAsync();
         /// 
@@ -108,9 +107,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetValid and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// Response response = client.GetValid();
         /// 
@@ -155,9 +153,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValidAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -166,9 +163,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValidAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {
         ///     array = new[] {
@@ -219,9 +215,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutValid.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -230,9 +225,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutValid with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {
         ///     array = new[] {
@@ -281,9 +275,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetEmptyAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// Response response = await client.GetEmptyAsync();
         /// 
@@ -326,9 +319,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetEmpty and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// Response response = client.GetEmpty();
         /// 
@@ -373,9 +365,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutEmptyAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -384,9 +375,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutEmptyAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {
         ///     array = new[] {
@@ -437,9 +427,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call PutEmpty.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -448,9 +437,8 @@ namespace body_complex_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutEmpty with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// var data = new {
         ///     array = new[] {
@@ -499,9 +487,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetNotProvidedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// Response response = await client.GetNotProvidedAsync();
         /// 
@@ -544,9 +531,8 @@ namespace body_complex_LowLevel
         /// <example>
         /// This sample shows how to call GetNotProvided and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ArrayClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ArrayClient(credential);
         /// 
         /// Response response = client.GetNotProvided();
         /// 

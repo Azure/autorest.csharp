@@ -63,9 +63,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call GetEmptyErrorAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpFailureClient(credential);
         /// 
         /// Response response = await client.GetEmptyErrorAsync();
         /// 
@@ -96,9 +95,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call GetEmptyError and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpFailureClient(credential);
         /// 
         /// Response response = client.GetEmptyError();
         /// 
@@ -129,9 +127,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call GetNoModelErrorAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpFailureClient(credential);
         /// 
         /// Response response = await client.GetNoModelErrorAsync();
         /// 
@@ -162,9 +159,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call GetNoModelError and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpFailureClient(credential);
         /// 
         /// Response response = client.GetNoModelError();
         /// 
@@ -195,9 +191,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call GetNoModelEmptyAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpFailureClient(credential);
         /// 
         /// Response response = await client.GetNoModelEmptyAsync();
         /// 
@@ -228,9 +223,8 @@ namespace httpInfrastructure_LowLevel
         /// <example>
         /// This sample shows how to call GetNoModelEmpty and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new HttpFailureClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpFailureClient(credential);
         /// 
         /// Response response = client.GetNoModelEmpty();
         /// 

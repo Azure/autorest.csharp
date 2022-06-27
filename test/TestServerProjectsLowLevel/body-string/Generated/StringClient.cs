@@ -63,9 +63,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNullAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetNullAsync();
         /// 
@@ -96,9 +95,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNull and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetNull();
         /// 
@@ -130,9 +128,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutNullAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -164,9 +161,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutNull with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -197,9 +193,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetEmptyAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetEmptyAsync();
         /// 
@@ -230,9 +225,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetEmpty and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetEmpty();
         /// 
@@ -265,9 +259,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutEmptyAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<>";
         /// 
@@ -302,9 +295,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutEmpty with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<>";
         /// 
@@ -337,9 +329,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetMbcsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetMbcsAsync();
         /// 
@@ -370,9 +361,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetMbcs and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetMbcs();
         /// 
@@ -405,9 +395,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutMbcsAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€>";
         /// 
@@ -442,9 +431,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutMbcs with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€>";
         /// 
@@ -477,9 +465,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetWhitespaceAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetWhitespaceAsync();
         /// 
@@ -510,9 +497,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetWhitespace and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetWhitespace();
         /// 
@@ -545,9 +531,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutWhitespaceAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<    Now is the time for all good men to come to the aid of their country    >";
         /// 
@@ -582,9 +567,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutWhitespace with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = "<    Now is the time for all good men to come to the aid of their country    >";
         /// 
@@ -617,9 +601,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNotProvidedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetNotProvidedAsync();
         /// 
@@ -650,9 +633,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNotProvided and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetNotProvided();
         /// 
@@ -683,9 +665,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetBase64EncodedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetBase64EncodedAsync();
         /// 
@@ -716,9 +697,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetBase64Encoded and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetBase64Encoded();
         /// 
@@ -749,9 +729,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetBase64UrlEncodedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetBase64UrlEncodedAsync();
         /// 
@@ -782,9 +761,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetBase64UrlEncoded and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetBase64UrlEncoded();
         /// 
@@ -817,9 +795,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutBase64UrlEncodedAsync with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -854,9 +831,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call PutBase64UrlEncoded with required request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -889,9 +865,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNullBase64UrlEncodedAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = await client.GetNullBase64UrlEncodedAsync();
         /// 
@@ -922,9 +897,8 @@ namespace body_string_LowLevel
         /// <example>
         /// This sample shows how to call GetNullBase64UrlEncoded and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new StringClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new StringClient(credential);
         /// 
         /// Response response = client.GetNullBase64UrlEncoded();
         /// 

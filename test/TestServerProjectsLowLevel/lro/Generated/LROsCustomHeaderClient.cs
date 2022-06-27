@@ -65,9 +65,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRetrySucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -79,9 +78,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -167,9 +165,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PutAsyncRetrySucceeded with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -181,9 +178,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -269,9 +265,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -283,9 +278,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -371,9 +365,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -385,9 +378,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -473,9 +465,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202Retry200Async with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -486,9 +477,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -551,9 +541,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call Post202Retry200 with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -564,9 +553,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -629,9 +617,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetrySucceededAsync with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -642,9 +629,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {
@@ -707,9 +693,8 @@ namespace lro_LowLevel
         /// <example>
         /// This sample shows how to call PostAsyncRetrySucceeded with required parameters.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -720,9 +705,8 @@ namespace lro_LowLevel
         /// ]]></code>
         /// This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new LROsCustomHeaderClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LROsCustomHeaderClient(credential);
         /// 
         /// var data = new {
         ///     tags = new {

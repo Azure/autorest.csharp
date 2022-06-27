@@ -59,9 +59,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <example>
         /// This sample shows how to call PatchAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithOperationClient(endpoint, credential).GetClient4("<clientParameter>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
         /// 
         /// Response response = await client.PatchAsync("<filter>");
         /// 
@@ -96,9 +95,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <example>
         /// This sample shows how to call Patch with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new TopLevelClientWithOperationClient(endpoint, credential).GetClient4("<clientParameter>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
         /// 
         /// Response response = client.Patch("<filter>");
         /// 

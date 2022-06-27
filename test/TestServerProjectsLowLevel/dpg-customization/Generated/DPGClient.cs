@@ -68,9 +68,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call GetModelAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// Response response = await client.GetModelAsync("<mode>");
         /// 
@@ -119,9 +118,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call GetModel with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// Response response = client.GetModel("<mode>");
         /// 
@@ -171,9 +169,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call PostModelAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// var data = new {
         ///     hello = "<InputHello>",
@@ -236,9 +233,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call PostModel with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// var data = new {
         ///     hello = "<InputHello>",
@@ -300,9 +296,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call GetPagesAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// await foreach (var data in client.GetPagesAsync("<mode>"))
         /// {
@@ -357,9 +352,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call GetPages with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// foreach (var data in client.GetPages("<mode>"))
         /// {
@@ -415,9 +409,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call LroAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
         /// 
@@ -468,9 +461,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call Lro with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new DPGClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
         /// 
         /// var operation = client.Lro(WaitUntil.Completed, "<mode>");
         /// 

@@ -66,9 +66,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetParametersAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential);
         /// 
         /// Response response = await client.GetParametersAsync();
         /// 
@@ -99,9 +98,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetParameters and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential);
         /// 
         /// Response response = client.GetParameters();
         /// 
@@ -132,9 +130,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetGroupsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential);
         /// 
         /// Response response = await client.GetGroupsAsync();
         /// 
@@ -165,9 +162,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetGroups and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential);
         /// 
         /// Response response = client.GetGroups();
         /// 
@@ -198,9 +194,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetAllItemsAsync and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential);
         /// 
         /// await foreach (var data in client.GetAllItemsAsync())
         /// {
@@ -238,9 +233,8 @@ namespace ResourceClients_LowLevel
         /// <example>
         /// This sample shows how to call GetAllItems and parse the result.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
-        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential);
         /// 
         /// foreach (var data in client.GetAllItems())
         /// {
