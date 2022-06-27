@@ -425,6 +425,14 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        public void EnsureLine()
+        {
+            if (!WrittenText.EndsWith(_newLine))
+            {
+                AppendRaw(_newLine);
+            }
+        }
+
         public CodeWriter LineRaw(string str)
         {
             AppendRaw(str);

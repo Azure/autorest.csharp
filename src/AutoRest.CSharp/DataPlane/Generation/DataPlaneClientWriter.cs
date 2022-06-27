@@ -297,6 +297,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (_endpointProperty != null)
             {
+                writer.EnsureLine();
                 writer.Line($"{_endpointProperty.Name} = endpoint;");
             }
         }

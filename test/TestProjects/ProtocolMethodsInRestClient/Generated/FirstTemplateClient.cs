@@ -44,7 +44,8 @@ namespace ProtocolMethodsInRestClient
             options ??= new TestServiceClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Fake-Subscription-Key"));
-            RestClient = new FirstTemplateRestClient(_clientDiagnostics, _pipeline, endpoint); Endpoint = endpoint;
+            RestClient = new FirstTemplateRestClient(_clientDiagnostics, _pipeline, endpoint);
+            Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of FirstTemplateClient. </summary>

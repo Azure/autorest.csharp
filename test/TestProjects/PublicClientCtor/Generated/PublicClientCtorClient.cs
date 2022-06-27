@@ -49,7 +49,8 @@ namespace PublicClientCtor
             options ??= new PublicClientCtorClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "fake-key"));
-            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version); Endpoint = endpoint;
+            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version);
+            Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of PublicClientCtorClient. </summary>
@@ -73,7 +74,8 @@ namespace PublicClientCtor
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "https://fakeendpoint.azure.com/.default", "https://dummyendpoint.azure.com/.default" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version); Endpoint = endpoint;
+            RestClient = new PublicClientCtorRestClient(_clientDiagnostics, _pipeline, endpoint, param1, param2, options.Version);
+            Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of PublicClientCtorClient. </summary>

@@ -50,7 +50,8 @@ namespace Azure.Network.Management.Interface
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "user_impersonation" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new NetworkInterfacesRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version); Endpoint = endpoint;
+            RestClient = new NetworkInterfacesRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version);
+            Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of NetworkInterfacesClient. </summary>

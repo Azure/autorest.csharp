@@ -47,7 +47,8 @@ namespace CognitiveServices.TextAnalytics
             options ??= new CognitiveServicesTextAnalyticsClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Ocp-Apim-Subscription-Key"));
-            RestClient = new CognitiveServicesTextAnalyticsRestClient(_clientDiagnostics, _pipeline, endpoint); Endpoint = endpoint;
+            RestClient = new CognitiveServicesTextAnalyticsRestClient(_clientDiagnostics, _pipeline, endpoint);
+            Endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsClient. </summary>
