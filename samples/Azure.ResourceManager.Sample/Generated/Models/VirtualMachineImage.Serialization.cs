@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<OSDiskImage> osDiskImage = default;
             Optional<IList<DataDiskImage>> dataDiskImages = default;
             Optional<AutomaticOSUpgradeProperties> automaticOSUpgradeProperties = default;
-            Optional<HyperVGenerationType> hyperVGeneration = default;
+            Optional<HyperVGeneration> hyperVGeneration = default;
             Optional<DisallowedConfiguration> disallowed = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -182,7 +182,7 @@ namespace Azure.ResourceManager.Sample.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            hyperVGeneration = new HyperVGenerationType(property0.Value.GetString());
+                            hyperVGeneration = new HyperVGeneration(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("disallowed"))

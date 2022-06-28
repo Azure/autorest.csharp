@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Sample
             Optional<WritableSubResource> sourceVirtualMachine = default;
             Optional<ImageStorageProfile> storageProfile = default;
             Optional<string> provisioningState = default;
-            Optional<HyperVGenerationType> hyperVGeneration = default;
+            Optional<HyperVGeneration> hyperVGeneration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
@@ -153,7 +153,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            hyperVGeneration = new HyperVGenerationType(property0.Value.GetString());
+                            hyperVGeneration = new HyperVGeneration(property0.Value.GetString());
                             continue;
                         }
                     }
