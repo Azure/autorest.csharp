@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -117,13 +118,35 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameTarget renameTarget)
         {
+            Debug.Assert(renameTarget.PropertyName != null);
             if (GetOriginalName(schema) != renameTarget.TypeName)
                 return;
-            var property = properties.FirstOrDefault(p => p.SerializedName == renameTarget.PropertyName);
+            // check if the property renaming is targeting a flattened property
+            var flattenedNames = Array.Empty<string>();
+            if (renameTarget.PropertyName.Contains('.'))
+            {
+                flattenedNames = renameTarget.PropertyName.Split('.');
+            }
+            var propertySerializedName = flattenedNames.LastOrDefault() ?? renameTarget.PropertyName;
+            // filter the property name by the serialized name
+            var fliteredProperties = properties.Where(p => p.SerializedName == propertySerializedName);
+            var property = fliteredProperties.FirstOrDefault(p => AreArraysIdentical(p.FlattenedNames, flattenedNames));
             if (property == null)
                 return;
             property.Language.Default.SerializedName ??= property.Language.Default.Name;
             property.Language.Default.Name = renameTarget.NewName;
+        }
+
+        private static bool AreArraysIdentical(IEnumerable<string> x, IEnumerable<string> y)
+        {
+            if (x.Count() != y.Count())
+                return false;
+            foreach ((var first, var second) in x.Zip(y))
+            {
+                if (first != second)
+                    return false;
+            }
+            return true;
         }
 
         public static void UpdateAcronyms()

@@ -28,10 +28,10 @@
     "SshPublicKeyResource": "SshPublicKey",
     "LogAnalyticsOperationResult": "LogAnalytics",
     "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
-    "VirtualMachineScaleSetExtensionProperties.type": "ExtensionType",
+    "VirtualMachineExtension.properties.type": "ExtensionType",
+    "VirtualMachineExtensionUpdate.properties.type": "ExtensionType",
+    "VirtualMachineScaleSetExtension.properties.type": "ExtensionType",
     "HyperVGenerationType": "HyperVGeneration",
-    "HyperVGenerationTypes": "HyperVGeneration",
-    "VirtualMachineExtensionProperties.type": "ExtensionType",
-    "VirtualMachineExtensionUpdateProperties.type": "ExtensionType"
+    "HyperVGenerationTypes": "HyperVGeneration"
   }
 }

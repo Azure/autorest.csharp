@@ -32,9 +32,9 @@ rename-mapping:
   SshPublicKeyResource: SshPublicKey
   LogAnalyticsOperationResult: LogAnalytics
   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
-  VirtualMachineExtensionProperties.type: ExtensionType
-  VirtualMachineExtensionUpdateProperties.type: ExtensionType
-  VirtualMachineScaleSetExtensionProperties.type: ExtensionType
+  VirtualMachineExtension.properties.type: ExtensionType # the properties inside is required because this is a flattened property
+  VirtualMachineExtensionUpdate.properties.type: ExtensionType # the properties inside is required because this is a flattened property
+  VirtualMachineScaleSetExtension.properties.type: ExtensionType # the properties inside is required because this is a flattened property
   HyperVGenerationType: HyperVGeneration
   HyperVGenerationTypes: HyperVGeneration
 ```
