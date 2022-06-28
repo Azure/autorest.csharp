@@ -162,14 +162,20 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return EnsureParameterSerializedNames()[name];
         }
 
+        private IEnumerable<Parameter> GetAllPossibleParameters()
+        {
+            // skip the first parameter if this method is an extension method, since that will be the extension resource
+            var methodParameters = ClientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
+                ClientOperation.MethodParameters.Skip(1) : ClientOperation.MethodParameters;
+
+            return Carrier.ExtraConstructorParameters.Concat(methodParameters);
+        }
+
         private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
         {
             var result = new Dictionary<string, ExampleParameterValue>();
-            // skip the first parameter if this method is an extension method
-            var parameters = ClientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
-                ClientOperation.MethodParameters.Skip(1) : ClientOperation.MethodParameters;
             // get the "serialized name" of the parameters based on the raw request path
-            foreach (var parameter in parameters)
+            foreach (var parameter in GetAllPossibleParameters())
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
