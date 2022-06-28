@@ -97,7 +97,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: MemoryNew
+          name: MemoryResourceNew
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_17
@@ -117,7 +117,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: NetworkNew
+          name: NetworkResourceNew
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_18
@@ -265,7 +265,7 @@ schemas: !Schemas
                             - output
                           language: !Languages 
                             default:
-                              name: Memory
+                              name: MemoryResource
                               description: ''
                               namespace: ''
                           protocol: !Protocols {}
@@ -295,7 +295,7 @@ schemas: !Schemas
                             - output
                           language: !Languages 
                             default:
-                              name: Network
+                              name: NetworkResource
                               description: ''
                               namespace: ''
                           protocol: !Protocols {}
