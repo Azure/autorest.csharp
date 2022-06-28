@@ -28,29 +28,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static RenameTarget ParseRenameKey(string renameKey, string newName)
-        {
-            // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
-            if (renameKey.Contains('.'))
-            {
-                // this should be a renaming of property
-                var segments = renameKey.Split('.');
-                return new RenameTarget(RenameType.Property, segments[0], segments[1], newName);
-            }
-            else
-            {
-                // this should be a renaming of type
-                return new RenameTarget(RenameType.Type, renameKey, null, newName);
-            }
-        }
-
-        private record RenameTarget(RenameType RenameType, string TypeName, string? PropertyName, string NewName);
-
-        private enum RenameType
-        {
-            Type = 0, Property = 1
-        }
-
         private static void ApplyRenameTargets(Schema schema, IEnumerable<RenameTarget> renameTargets)
         {
             foreach (var target in renameTargets)
@@ -114,9 +91,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
+        private static string GetOriginalName(Schema schema)
+        {
+            return schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
+        }
+
         private static void ApplyToType(Schema schema, RenameTarget renameTarget)
         {
-            if (schema.Language.Default.Name != renameTarget.TypeName)
+            if (GetOriginalName(schema) != renameTarget.TypeName)
                 return;
             schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
             schema.Language.Default.Name = renameTarget.NewName;
@@ -124,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static void ApplyToProperty(Schema schema, IEnumerable<ChoiceValue> choices, RenameTarget renameTarget)
         {
-            if (schema.Language.Default.Name != renameTarget.TypeName)
+            if (GetOriginalName(schema) != renameTarget.TypeName)
                 return;
             var choiceValue = choices.FirstOrDefault(choice => choice.Language.Default.Name == renameTarget.PropertyName);
             if (choiceValue == null)
@@ -135,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameTarget renameTarget)
         {
-            if (schema.Language.Default.Name != renameTarget.TypeName)
+            if (GetOriginalName(schema) != renameTarget.TypeName)
                 return;
             var property = properties.FirstOrDefault(p => p.Language.Default.Name == renameTarget.PropertyName);
             if (property == null)
@@ -154,6 +136,29 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             UpdateAcronyms(MgmtContext.CodeModel.AllSchemas, transformer, wordCache);
             // transform all the parameter names
             UpdateAcronyms(MgmtContext.CodeModel.OperationGroups, transformer, wordCache);
+        }
+
+        private static RenameTarget ParseRenameKey(string renameKey, string newName)
+        {
+            // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
+            if (renameKey.Contains('.'))
+            {
+                // this should be a renaming of property
+                var segments = renameKey.Split('.');
+                return new RenameTarget(RenameType.Property, segments[0], segments[1], newName);
+            }
+            else
+            {
+                // this should be a renaming of type
+                return new RenameTarget(RenameType.Type, renameKey, null, newName);
+            }
+        }
+
+        private record RenameTarget(RenameType RenameType, string TypeName, string? PropertyName, string NewName);
+
+        private enum RenameType
+        {
+            Type = 0, Property = 1
         }
 
         public static void UpdateAcronym(Schema schema)

@@ -20,5 +20,8 @@
     "location": "azure-location",
     "*Uri": "Uri",
     "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "ExactMatchModel11.type": "ResourceType"
   }
 }

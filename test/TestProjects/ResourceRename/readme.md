@@ -20,10 +20,10 @@ modelerfour:
 keep-orphaned-models:
 - AnyObjectTests
 
+rename-mapping:
+  SshPublicKeyResource: SshPublicKeyInfo
+
 directive:
-  - rename-model:
-      from: SshPublicKeyResource
-      to: SshPublicKeyInfo
   - from: resourceRename.json
     where: $.definitions.AnyObjectTests.properties.anyObjectDictionary
     transform: >

@@ -27,24 +27,9 @@ format-by-name-rules:
 prepend-rp-prefix:
 - UsageName
 
-# rename-mapping:
-#   SshPublicKey: SshPublicKeyInfo
-
-directive:
-  - rename-model:
-      from: SshPublicKey
-      to: SshPublicKeyInfo
-  - rename-model:
-      from: LogAnalyticsOperationResult
-      to: LogAnalytics
-  - rename-model:
-      from: SshPublicKeyResource
-      to: SshPublicKey
-  - rename-model:
-      from: RollingUpgradeStatusInfo
-      to: VirtualMachineScaleSetRollingUpgrade
-  - from: swagger-document
-    where: $.paths..parameters[?(@.name === "location")]
-    transform: >
-      $["x-ms-format"] = 'azure-location';
+rename-mapping:
+  SshPublicKey: SshPublicKeyInfo
+  SshPublicKeyResource: SshPublicKey
+  LogAnalyticsOperationResult: LogAnalytics
+  RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
 ```
