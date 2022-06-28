@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
+            foreach (Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
