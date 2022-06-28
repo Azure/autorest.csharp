@@ -743,7 +743,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
             ? new MgmtReferenceType(objectSchema)
             : new MgmtObjectType(objectSchema),
-            _ => throw new NotImplementedException()
+            _ => throw new NotImplementedException($"Unhandled schema type {schema.GetType()} with name {schema.Name}")
         };
 
         private TypeProvider BuildResourceData(Schema schema) => schema switch
