@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -137,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Property prop = new Property()
                 {
                     Nullable = isNullable,
-                    ReadOnly = IsReadOnly(property), //TODO read this from attribute from reference object
+                    ReadOnly = property.IsReadOnly(),
                     SerializedName = GetSerializedName(property.Name),
                     Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
                     Required = IsRequired(property),
@@ -176,16 +177,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return BuildInitializationConstructor();
             yield return BuildSerializationConstructor();
-        }
-
-        private bool IsReadOnly(PropertyInfo property)
-        {
-            if (TypeFactory.IsCollectionType(property.PropertyType))
-            {
-                return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
-            }
-
-            return property.GetSetMethod() == null;
         }
 
         private bool IsRequired(PropertyInfo property)
