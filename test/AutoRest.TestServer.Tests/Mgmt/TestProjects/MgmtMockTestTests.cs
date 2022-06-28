@@ -35,8 +35,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             ValidateMethodExist("MgmtMockTest.Tests.Mock.MgmtMockTestPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("CreateOrUpdate")]
-        [TestCase("CreateOrUpdate2")]
+        [TestCase("CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault")]
+        [TestCase("CreateOrUpdate_CreateOrUpdateAVaultWithNetworkAcls")]
         [TestCase("Get")]
         [TestCase("GetAll")]
         public void ValidateVaultCollectionMockTests(string methodName, params string[] argTypes)
