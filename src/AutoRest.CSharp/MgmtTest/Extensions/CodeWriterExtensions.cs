@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 foreach (var itemValue in exampleValue.Elements)
                 {
                     // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
-                    writer.AppendExampleValue(itemValue);
+                    writer.AppendExampleValue(itemValue, elementType);
                     if (type.IsFrameworkType)
                         writer.AppendRaw(",");
                     else

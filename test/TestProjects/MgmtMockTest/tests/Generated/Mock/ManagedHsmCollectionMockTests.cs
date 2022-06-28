@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockTest;
 using MgmtMockTest.Models;
@@ -69,6 +70,16 @@ namespace MgmtMockTest.Tests.Mock
                     EnableSoftDelete = true,
                     SoftDeleteRetentionInDays = 90,
                     EnablePurgeProtection = true,
+                    NetworkAcls = new MhsmNetworkRuleSet()
+                    {
+                        VirtualNetworkRules =
+{
+new WritableSubResource()
+{
+Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default"),
+}
+},
+                    },
                 },
                 Sku = new ManagedHsmSku(ManagedHsmSkuFamily.B, ManagedHsmSkuName.StandardB1),
                 Tags =

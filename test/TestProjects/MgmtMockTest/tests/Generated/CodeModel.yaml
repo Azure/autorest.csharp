@@ -5051,7 +5051,7 @@ schemas: !Schemas
                     - !Property 
                       schema: *ref_145
                       serializedName: etag
-                      language: !Languages &ref_760
+                      language: !Languages &ref_763
                         default:
                           name: etag
                           description: Modified whenever there is a change in the state of private endpoint connection.
@@ -5067,7 +5067,7 @@ schemas: !Schemas
                             schema: *ref_146
                             readOnly: true
                             serializedName: id
-                            language: !Languages &ref_762
+                            language: !Languages &ref_765
                               default:
                                 name: id
                                 description: Full identifier of the private endpoint resource.
@@ -5083,11 +5083,11 @@ schemas: !Schemas
                             description: Private endpoint object properties.
                             namespace: ''
                         protocol: !Protocols {}
-                      flattenedNames: &ref_763
+                      flattenedNames: &ref_766
                         - properties
                         - privateEndpoint
                       serializedName: privateEndpoint
-                      language: !Languages &ref_761
+                      language: !Languages &ref_764
                         default:
                           name: privateEndpoint
                           description: Properties of the private endpoint object.
@@ -5102,7 +5102,7 @@ schemas: !Schemas
                           - !Property 
                             schema: *ref_36
                             serializedName: status
-                            language: !Languages &ref_765
+                            language: !Languages &ref_768
                               default:
                                 name: status
                                 description: Indicates whether the connection has been approved, rejected or removed by the key vault owner.
@@ -5110,7 +5110,7 @@ schemas: !Schemas
                           - !Property 
                             schema: *ref_147
                             serializedName: description
-                            language: !Languages &ref_766
+                            language: !Languages &ref_769
                               default:
                                 name: description
                                 description: The reason for approval or rejection.
@@ -5118,7 +5118,7 @@ schemas: !Schemas
                           - !Property 
                             schema: *ref_38
                             serializedName: actionsRequired
-                            language: !Languages &ref_767
+                            language: !Languages &ref_770
                               default:
                                 name: actionsRequired
                                 description: A message indicating if changes on the service provider require any updates on the consumer.
@@ -5134,22 +5134,22 @@ schemas: !Schemas
                             description: An object that represents the approval state of the private link connection.
                             namespace: ''
                         protocol: !Protocols {}
-                      flattenedNames: &ref_768
+                      flattenedNames: &ref_771
                         - properties
                         - privateLinkServiceConnectionState
                       serializedName: privateLinkServiceConnectionState
-                      language: !Languages &ref_764
+                      language: !Languages &ref_767
                         default:
                           name: privateLinkServiceConnectionState
                           description: Approval state of the private link connection.
                       protocol: !Protocols {}
                     - !Property 
                       schema: *ref_39
-                      flattenedNames: &ref_770
+                      flattenedNames: &ref_773
                         - properties
                         - provisioningState
                       serializedName: provisioningState
-                      language: !Languages &ref_769
+                      language: !Languages &ref_772
                         default:
                           name: provisioningState
                           description: Provisioning state of the private endpoint connection.
@@ -5180,12 +5180,12 @@ schemas: !Schemas
                   properties:
                     - !Property 
                       schema: *ref_148
-                      flattenedNames: &ref_796
+                      flattenedNames: &ref_799
                         - properties
                         - groupId
                       readOnly: true
                       serializedName: groupId
-                      language: !Languages &ref_795
+                      language: !Languages &ref_798
                         default:
                           name: groupId
                           description: Group identifier of private link resource.
@@ -5202,12 +5202,12 @@ schemas: !Schemas
                             name: MhsmPrivateLinkResourcePropertiesRequiredMembers
                             description: Required member names of private link resource.
                         protocol: !Protocols {}
-                      flattenedNames: &ref_798
+                      flattenedNames: &ref_801
                         - properties
                         - requiredMembers
                       readOnly: true
                       serializedName: requiredMembers
-                      language: !Languages &ref_797
+                      language: !Languages &ref_800
                         default:
                           name: requiredMembers
                           description: Required member names of private link resource.
@@ -5224,11 +5224,11 @@ schemas: !Schemas
                             name: MhsmPrivateLinkResourcePropertiesRequiredZoneNames
                             description: Required DNS zone names of the the private link resource.
                         protocol: !Protocols {}
-                      flattenedNames: &ref_800
+                      flattenedNames: &ref_803
                         - properties
                         - requiredZoneNames
                       serializedName: requiredZoneNames
-                      language: !Languages &ref_799
+                      language: !Languages &ref_802
                         default:
                           name: requiredZoneNames
                           description: Required DNS zone names of the the private link resource.
@@ -5253,7 +5253,7 @@ schemas: !Schemas
                 schema: *ref_153
                 readOnly: true
                 serializedName: id
-                language: !Languages &ref_708
+                language: !Languages &ref_711
                   default:
                     name: id
                     description: The Azure Resource Manager resource ID for the managed HSM Pool.
@@ -5262,7 +5262,7 @@ schemas: !Schemas
                 schema: *ref_154
                 readOnly: true
                 serializedName: name
-                language: !Languages &ref_709
+                language: !Languages &ref_712
                   default:
                     name: name
                     description: The name of the managed HSM Pool.
@@ -5271,7 +5271,7 @@ schemas: !Schemas
                 schema: *ref_155
                 readOnly: true
                 serializedName: type
-                language: !Languages &ref_710
+                language: !Languages &ref_713
                   default:
                     name: type
                     description: The resource type of the managed HSM Pool.
@@ -5283,7 +5283,7 @@ schemas: !Schemas
                   x-ms-mutability:
                     - create
                     - read
-                language: !Languages &ref_699
+                language: !Languages &ref_702
                   default:
                     name: location
                     description: The supported Azure location where the managed HSM Pool should be created.
@@ -5299,7 +5299,7 @@ schemas: !Schemas
                       schema: *ref_157
                       required: true
                       serializedName: family
-                      language: !Languages &ref_701
+                      language: !Languages &ref_704
                         default:
                           name: family
                           description: SKU Family of the managed HSM Pool
@@ -5308,7 +5308,7 @@ schemas: !Schemas
                       schema: *ref_158
                       required: true
                       serializedName: name
-                      language: !Languages &ref_702
+                      language: !Languages &ref_705
                         default:
                           name: name
                           description: SKU of the managed HSM Pool
@@ -5325,7 +5325,7 @@ schemas: !Schemas
                       namespace: ''
                   protocol: !Protocols {}
                 serializedName: sku
-                language: !Languages &ref_700
+                language: !Languages &ref_703
                   default:
                     name: sku
                     description: SKU details
@@ -5333,7 +5333,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_159
                 serializedName: tags
-                language: !Languages &ref_703
+                language: !Languages &ref_706
                   default:
                     name: tags
                     description: Resource tags
@@ -5416,7 +5416,7 @@ schemas: !Schemas
                 schema: *ref_164
                 readOnly: true
                 serializedName: hsmUri
-                language: !Languages &ref_705
+                language: !Languages &ref_708
                   default:
                     name: hsmUri
                     description: The URI of the managed hsm pool for performing operations on keys.
@@ -5461,7 +5461,7 @@ schemas: !Schemas
                 schema: *ref_168
                 readOnly: true
                 serializedName: statusMessage
-                language: !Languages &ref_706
+                language: !Languages &ref_709
                   default:
                     name: statusMessage
                     description: Resource Status Message.
@@ -5470,7 +5470,7 @@ schemas: !Schemas
                 schema: *ref_169
                 readOnly: true
                 serializedName: provisioningState
-                language: !Languages &ref_707
+                language: !Languages &ref_710
                   default:
                     name: provisioningState
                     description: Provisioning state.
@@ -5557,7 +5557,7 @@ schemas: !Schemas
                               schema: *ref_171
                               required: true
                               serializedName: id
-                              language: !Languages 
+                              language: !Languages &ref_701
                                 default:
                                   name: id
                                   description: Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'.
@@ -5579,7 +5579,7 @@ schemas: !Schemas
                             description: The list of virtual network rules.
                         protocol: !Protocols {}
                       serializedName: virtualNetworkRules
-                      language: !Languages 
+                      language: !Languages &ref_700
                         default:
                           name: virtualNetworkRules
                           description: The list of virtual network rules.
@@ -5596,7 +5596,7 @@ schemas: !Schemas
                       namespace: ''
                   protocol: !Protocols {}
                 serializedName: networkAcls
-                language: !Languages 
+                language: !Languages &ref_699
                   default:
                     name: networkAcls
                     description: Rules governing the accessibility of the key vault from specific network locations.
@@ -5810,7 +5810,7 @@ schemas: !Schemas
                 description: The list of managed HSM Pools.
             protocol: !Protocols {}
           serializedName: value
-          language: !Languages &ref_730
+          language: !Languages &ref_733
             default:
               name: value
               description: The list of managed HSM Pools.
@@ -5818,7 +5818,7 @@ schemas: !Schemas
         - !Property 
           schema: *ref_185
           serializedName: nextLink
-          language: !Languages &ref_731
+          language: !Languages &ref_734
             default:
               name: nextLink
               description: The URL to get the next set of managed HSM Pools.
@@ -5852,7 +5852,7 @@ schemas: !Schemas
                 description: The private endpoint connection associated with a managed HSM Pools.
             protocol: !Protocols {}
           serializedName: value
-          language: !Languages &ref_759
+          language: !Languages &ref_762
             default:
               name: value
               description: The private endpoint connection associated with a managed HSM Pools.
@@ -5860,7 +5860,7 @@ schemas: !Schemas
         - !Property 
           schema: *ref_186
           serializedName: nextLink
-          language: !Languages &ref_771
+          language: !Languages &ref_774
             default:
               name: nextLink
               description: The URL to get the next set of managed HSM Pools.
@@ -5898,7 +5898,7 @@ schemas: !Schemas
                   schema: *ref_187
                   readOnly: true
                   serializedName: id
-                  language: !Languages &ref_737
+                  language: !Languages &ref_740
                     default:
                       name: id
                       description: The Azure Resource Manager resource ID for the deleted managed HSM Pool.
@@ -5907,7 +5907,7 @@ schemas: !Schemas
                   schema: *ref_188
                   readOnly: true
                   serializedName: name
-                  language: !Languages &ref_738
+                  language: !Languages &ref_741
                     default:
                       name: name
                       description: The name of the managed HSM Pool.
@@ -5916,7 +5916,7 @@ schemas: !Schemas
                   schema: *ref_189
                   readOnly: true
                   serializedName: type
-                  language: !Languages &ref_739
+                  language: !Languages &ref_742
                     default:
                       name: type
                       description: The resource type of the managed HSM Pool.
@@ -5932,7 +5932,7 @@ schemas: !Schemas
                         schema: *ref_190
                         readOnly: true
                         serializedName: mhsmId
-                        language: !Languages &ref_741
+                        language: !Languages &ref_744
                           default:
                             name: mhsmId
                             description: The resource id of the original managed HSM.
@@ -5941,7 +5941,7 @@ schemas: !Schemas
                         schema: *ref_191
                         readOnly: true
                         serializedName: location
-                        language: !Languages &ref_742
+                        language: !Languages &ref_745
                           default:
                             name: location
                             description: The location of the original managed HSM.
@@ -5950,7 +5950,7 @@ schemas: !Schemas
                         schema: *ref_192
                         readOnly: true
                         serializedName: deletionDate
-                        language: !Languages &ref_743
+                        language: !Languages &ref_746
                           default:
                             name: deletionDate
                             description: The deleted date.
@@ -5959,7 +5959,7 @@ schemas: !Schemas
                         schema: *ref_193
                         readOnly: true
                         serializedName: scheduledPurgeDate
-                        language: !Languages &ref_744
+                        language: !Languages &ref_747
                           default:
                             name: scheduledPurgeDate
                             description: The scheduled purged date.
@@ -5968,7 +5968,7 @@ schemas: !Schemas
                         schema: *ref_194
                         readOnly: true
                         serializedName: purgeProtectionEnabled
-                        language: !Languages &ref_745
+                        language: !Languages &ref_748
                           default:
                             name: purgeProtectionEnabled
                             description: Purge protection status of the original managed HSM.
@@ -5977,7 +5977,7 @@ schemas: !Schemas
                         schema: *ref_195
                         readOnly: true
                         serializedName: tags
-                        language: !Languages &ref_746
+                        language: !Languages &ref_749
                           default:
                             name: tags
                             description: Tags of the original managed HSM.
@@ -5993,7 +5993,7 @@ schemas: !Schemas
                         namespace: ''
                     protocol: !Protocols {}
                   serializedName: properties
-                  language: !Languages &ref_740
+                  language: !Languages &ref_743
                     default:
                       name: properties
                       description: Properties of the deleted managed HSM
@@ -6014,7 +6014,7 @@ schemas: !Schemas
                 description: The list of deleted managed HSM Pools.
             protocol: !Protocols {}
           serializedName: value
-          language: !Languages &ref_736
+          language: !Languages &ref_739
             default:
               name: value
               description: The list of deleted managed HSM Pools.
@@ -6022,7 +6022,7 @@ schemas: !Schemas
         - !Property 
           schema: *ref_196
           serializedName: nextLink
-          language: !Languages &ref_747
+          language: !Languages &ref_750
             default:
               name: nextLink
               description: The URL to get the next set of deleted managed HSM Pools.
@@ -6058,7 +6058,7 @@ schemas: !Schemas
                 description: Array of private link resources
             protocol: !Protocols {}
           serializedName: value
-          language: !Languages &ref_794
+          language: !Languages &ref_797
             default:
               name: value
               description: Array of private link resources
@@ -6095,7 +6095,7 @@ schemas: !Schemas
                 - !Property 
                   schema: *ref_199
                   serializedName: name
-                  language: !Languages &ref_805
+                  language: !Languages &ref_808
                     default:
                       name: name
                       description: 'Operation name: {provider}/{resource}/{operation}'
@@ -6110,7 +6110,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_200
                         serializedName: provider
-                        language: !Languages &ref_807
+                        language: !Languages &ref_810
                           default:
                             name: provider
                             description: 'Service provider: Microsoft Key Vault.'
@@ -6118,7 +6118,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_201
                         serializedName: resource
-                        language: !Languages &ref_808
+                        language: !Languages &ref_811
                           default:
                             name: resource
                             description: Resource on which the operation is performed etc.
@@ -6126,7 +6126,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_202
                         serializedName: operation
-                        language: !Languages &ref_809
+                        language: !Languages &ref_812
                           default:
                             name: operation
                             description: 'Type of operation: get, read, delete, etc.'
@@ -6134,7 +6134,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_203
                         serializedName: description
-                        language: !Languages &ref_810
+                        language: !Languages &ref_813
                           default:
                             name: description
                             description: Description of operation.
@@ -6150,7 +6150,7 @@ schemas: !Schemas
                         namespace: ''
                     protocol: !Protocols {}
                   serializedName: display
-                  language: !Languages &ref_806
+                  language: !Languages &ref_809
                     default:
                       name: display
                       description: Display metadata associated with the operation.
@@ -6158,7 +6158,7 @@ schemas: !Schemas
                 - !Property 
                   schema: *ref_204
                   serializedName: origin
-                  language: !Languages &ref_812
+                  language: !Languages &ref_815
                     default:
                       name: origin
                       description: The origin of operations.
@@ -6166,7 +6166,7 @@ schemas: !Schemas
                 - !Property 
                   schema: *ref_205
                   serializedName: isDataAction
-                  language: !Languages &ref_811
+                  language: !Languages &ref_814
                     default:
                       name: isDataAction
                       description: Property to specify whether the action is a data action.
@@ -6193,7 +6193,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_206
                                 serializedName: name
-                                language: !Languages &ref_815
+                                language: !Languages &ref_818
                                   default:
                                     name: name
                                     description: Name of log specification.
@@ -6201,7 +6201,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_207
                                 serializedName: displayName
-                                language: !Languages &ref_816
+                                language: !Languages &ref_819
                                   default:
                                     name: displayName
                                     description: Display name of log specification.
@@ -6209,7 +6209,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_208
                                 serializedName: blobDuration
-                                language: !Languages &ref_817
+                                language: !Languages &ref_820
                                   default:
                                     name: blobDuration
                                     description: Blob duration of specification.
@@ -6230,7 +6230,7 @@ schemas: !Schemas
                               description: Log specifications of operation.
                           protocol: !Protocols {}
                         serializedName: logSpecifications
-                        language: !Languages &ref_814
+                        language: !Languages &ref_817
                           default:
                             name: logSpecifications
                             description: Log specifications of operation.
@@ -6250,7 +6250,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_209
                                 serializedName: name
-                                language: !Languages &ref_819
+                                language: !Languages &ref_822
                                   default:
                                     name: name
                                     description: Name of metric specification.
@@ -6258,7 +6258,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_210
                                 serializedName: displayName
-                                language: !Languages &ref_820
+                                language: !Languages &ref_823
                                   default:
                                     name: displayName
                                     description: Display name of metric specification.
@@ -6266,7 +6266,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_211
                                 serializedName: displayDescription
-                                language: !Languages &ref_821
+                                language: !Languages &ref_824
                                   default:
                                     name: displayDescription
                                     description: Display description of metric specification.
@@ -6274,7 +6274,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_212
                                 serializedName: unit
-                                language: !Languages &ref_822
+                                language: !Languages &ref_825
                                   default:
                                     name: unit
                                     description: 'The metric unit. Possible values include: ''Bytes'', ''Count'', ''Milliseconds''.'
@@ -6282,7 +6282,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_213
                                 serializedName: aggregationType
-                                language: !Languages &ref_823
+                                language: !Languages &ref_826
                                   default:
                                     name: aggregationType
                                     description: 'The metric aggregation type. Possible values include: ''Average'', ''Count'', ''Total''.'
@@ -6300,7 +6300,7 @@ schemas: !Schemas
                                       description: The supported aggregation types for the metrics.
                                   protocol: !Protocols {}
                                 serializedName: supportedAggregationTypes
-                                language: !Languages &ref_824
+                                language: !Languages &ref_827
                                   default:
                                     name: supportedAggregationTypes
                                     description: The supported aggregation types for the metrics.
@@ -6318,7 +6318,7 @@ schemas: !Schemas
                                       description: The supported time grain types for the metrics.
                                   protocol: !Protocols {}
                                 serializedName: supportedTimeGrainTypes
-                                language: !Languages &ref_825
+                                language: !Languages &ref_828
                                   default:
                                     name: supportedTimeGrainTypes
                                     description: The supported time grain types for the metrics.
@@ -6326,7 +6326,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_216
                                 serializedName: lockAggregationType
-                                language: !Languages &ref_826
+                                language: !Languages &ref_829
                                   default:
                                     name: lockAggregationType
                                     description: The metric lock aggregation type.
@@ -6346,7 +6346,7 @@ schemas: !Schemas
                                       - !Property 
                                         schema: *ref_217
                                         serializedName: name
-                                        language: !Languages &ref_828
+                                        language: !Languages &ref_831
                                           default:
                                             name: name
                                             description: Name of dimension.
@@ -6354,7 +6354,7 @@ schemas: !Schemas
                                       - !Property 
                                         schema: *ref_218
                                         serializedName: displayName
-                                        language: !Languages &ref_829
+                                        language: !Languages &ref_832
                                           default:
                                             name: displayName
                                             description: Display name of dimension.
@@ -6362,7 +6362,7 @@ schemas: !Schemas
                                       - !Property 
                                         schema: *ref_219
                                         serializedName: toBeExportedForShoebox
-                                        language: !Languages &ref_830
+                                        language: !Languages &ref_833
                                           default:
                                             name: toBeExportedForShoebox
                                             description: Property to specify whether the dimension should be exported for Shoebox.
@@ -6383,7 +6383,7 @@ schemas: !Schemas
                                       description: The dimensions of metric
                                   protocol: !Protocols {}
                                 serializedName: dimensions
-                                language: !Languages &ref_827
+                                language: !Languages &ref_830
                                   default:
                                     name: dimensions
                                     description: The dimensions of metric
@@ -6391,7 +6391,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_220
                                 serializedName: fillGapWithZero
-                                language: !Languages &ref_831
+                                language: !Languages &ref_834
                                   default:
                                     name: fillGapWithZero
                                     description: Property to specify whether to fill gap with zero.
@@ -6399,7 +6399,7 @@ schemas: !Schemas
                               - !Property 
                                 schema: *ref_221
                                 serializedName: internalMetricName
-                                language: !Languages &ref_832
+                                language: !Languages &ref_835
                                   default:
                                     name: internalMetricName
                                     description: The internal metric name.
@@ -6420,7 +6420,7 @@ schemas: !Schemas
                               description: Metric specifications of operation.
                           protocol: !Protocols {}
                         serializedName: metricSpecifications
-                        language: !Languages &ref_818
+                        language: !Languages &ref_821
                           default:
                             name: metricSpecifications
                             description: Metric specifications of operation.
@@ -6435,11 +6435,11 @@ schemas: !Schemas
                         description: One property of operation, include log specifications.
                         namespace: ''
                     protocol: !Protocols {}
-                  flattenedNames: &ref_833
+                  flattenedNames: &ref_836
                     - properties
                     - serviceSpecification
                   serializedName: serviceSpecification
-                  language: !Languages &ref_813
+                  language: !Languages &ref_816
                     default:
                       name: serviceSpecification
                       description: One property of operation, include metric specifications.
@@ -6460,7 +6460,7 @@ schemas: !Schemas
                 description: List of Storage operations supported by the Storage resource provider.
             protocol: !Protocols {}
           serializedName: value
-          language: !Languages &ref_804
+          language: !Languages &ref_807
             default:
               name: value
               description: List of Storage operations supported by the Storage resource provider.
@@ -10946,10 +10946,10 @@ operationGroups:
         name: DiskEncryptionSets
         description: ''
     protocol: !Protocols {}
-  - !OperationGroup &ref_713
+  - !OperationGroup &ref_716
     $key: ManagedHsms
     operations:
-      - !Operation &ref_712
+      - !Operation &ref_715
         operationId: ManagedHsms_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
@@ -11045,7 +11045,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_143
-            language: !Languages &ref_704
+            language: !Languages &ref_707
               default:
                 name: ''
                 description: Created or updated managed HSM Pool
@@ -11058,7 +11058,7 @@ operationGroups:
                   - '200'
           - !SchemaResponse 
             schema: *ref_143
-            language: !Languages &ref_711
+            language: !Languages &ref_714
               default:
                 name: ''
                 description: Accepted and the operation will complete asynchronously.
@@ -11096,6 +11096,9 @@ operationGroups:
                     enableSoftDelete: true
                     initialAdminObjectIds:
                       - 00000000-0000-0000-0000-000000000000
+                    networkAcls:
+                      virtualNetworkRules:
+                        - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default
                     protectedSettings: &ref_693
                       protected1: value2
                       protected2: 10
@@ -11176,7 +11179,7 @@ operationGroups:
             name: CreateOrUpdate
             description: Create or update a managed HSM Pool in the specified subscription.
         protocol: !Protocols {}
-      - !Operation &ref_719
+      - !Operation &ref_722
         operationId: ManagedHsms_Update
         apiVersions:
           - !ApiVersion 
@@ -11187,7 +11190,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_714
+            language: !Languages &ref_717
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -11199,7 +11202,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_715
+            language: !Languages &ref_718
               default:
                 name: name
                 description: Name of the managed HSM Pool
@@ -11229,7 +11232,7 @@ operationGroups:
                 schema: *ref_143
                 implementation: Method
                 required: true
-                language: !Languages &ref_716
+                language: !Languages &ref_719
                   default:
                     name: parameters
                     description: Parameters to patch the managed HSM Pool
@@ -11272,7 +11275,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_143
-            language: !Languages &ref_717
+            language: !Languages &ref_720
               default:
                 name: ''
                 description: Patched managed HSM Pool
@@ -11285,7 +11288,7 @@ operationGroups:
                   - '200'
           - !SchemaResponse 
             schema: *ref_143
-            language: !Languages &ref_718
+            language: !Languages &ref_721
               default:
                 name: ''
                 description: Accepted and the operation will complete asynchronously.
@@ -11376,7 +11379,7 @@ operationGroups:
             name: Update
             description: Update a managed HSM Pool in the specified subscription.
         protocol: !Protocols {}
-      - !Operation &ref_722
+      - !Operation &ref_725
         operationId: ManagedHsms_Delete
         apiVersions:
           - !ApiVersion 
@@ -11387,7 +11390,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_720
+            language: !Languages &ref_723
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -11399,7 +11402,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_721
+            language: !Languages &ref_724
               default:
                 name: name
                 description: The name of the managed HSM Pool to delete
@@ -11498,7 +11501,7 @@ operationGroups:
             name: Delete
             description: Deletes the specified managed HSM Pool.
         protocol: !Protocols {}
-      - !Operation &ref_727
+      - !Operation &ref_730
         operationId: ManagedHsms_Get
         apiVersions:
           - !ApiVersion 
@@ -11509,7 +11512,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_723
+            language: !Languages &ref_726
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -11521,7 +11524,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_724
+            language: !Languages &ref_727
               default:
                 name: name
                 description: The name of the managed HSM Pool.
@@ -11563,7 +11566,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_143
-            language: !Languages &ref_725
+            language: !Languages &ref_728
               default:
                 name: ''
                 description: Retrieved managed HSM Pool
@@ -11638,7 +11641,7 @@ operationGroups:
                       Dept: hsm
                       Environment: dogfood
                 '202':
-                  headers: &ref_726
+                  headers: &ref_729
                     Location: >-
                       https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1?api-version=2021-10-01&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9
                     Retry-After: '60'
@@ -11648,7 +11651,7 @@ operationGroups:
             name: Get
             description: Gets the specified managed HSM Pool.
         protocol: !Protocols {}
-      - !Operation &ref_732
+      - !Operation &ref_735
         operationId: ManagedHsms_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
@@ -11659,7 +11662,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_728
+            language: !Languages &ref_731
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -11712,7 +11715,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_373
-            language: !Languages &ref_729
+            language: !Languages &ref_732
               default:
                 name: ''
                 description: Get information about all managed HSM Pools in the specified resource group.
@@ -11798,7 +11801,7 @@ operationGroups:
             paging:
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - !Operation &ref_734
+      - !Operation &ref_737
         operationId: ManagedHsms_ListBySubscription
         apiVersions:
           - !ApiVersion 
@@ -11849,7 +11852,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_373
-            language: !Languages &ref_733
+            language: !Languages &ref_736
               default:
                 name: ''
                 description: Get information about all managed HSM Pools in the specified subscription.
@@ -11934,7 +11937,7 @@ operationGroups:
             paging:
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - !Operation &ref_748
+      - !Operation &ref_751
         operationId: ManagedHsms_ListDeleted
         apiVersions:
           - !ApiVersion 
@@ -11973,7 +11976,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_375
-            language: !Languages &ref_735
+            language: !Languages &ref_738
               default:
                 name: ''
                 description: Retrieved information about all managed HSMs in the specified subscription.
@@ -12042,7 +12045,7 @@ operationGroups:
             paging:
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - !Operation &ref_752
+      - !Operation &ref_755
         operationId: ManagedHsms_GetDeleted
         apiVersions:
           - !ApiVersion 
@@ -12053,7 +12056,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_749
+            language: !Languages &ref_752
               default:
                 name: name
                 description: The name of the deleted managed HSM.
@@ -12065,7 +12068,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_750
+            language: !Languages &ref_753
               default:
                 name: location
                 description: The location of the deleted managed HSM.
@@ -12107,7 +12110,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_197
-            language: !Languages &ref_751
+            language: !Languages &ref_754
               default:
                 name: ''
                 description: Retrieved information about the specified deleted managed HSM.
@@ -12160,7 +12163,7 @@ operationGroups:
             name: GetDeleted
             description: Gets the specified deleted managed HSM.
         protocol: !Protocols {}
-      - !Operation &ref_755
+      - !Operation &ref_758
         operationId: ManagedHsms_PurgeDeleted
         apiVersions:
           - !ApiVersion 
@@ -12171,7 +12174,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_753
+            language: !Languages &ref_756
               default:
                 name: name
                 description: The name of the soft-deleted managed HSM.
@@ -12183,7 +12186,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_754
+            language: !Languages &ref_757
               default:
                 name: location
                 description: The location of the soft-deleted managed HSM.
@@ -12267,10 +12270,10 @@ operationGroups:
         name: ManagedHsms
         description: ''
     protocol: !Protocols {}
-  - !OperationGroup &ref_773
+  - !OperationGroup &ref_776
     $key: MHSMPrivateEndpointConnections
     operations:
-      - !Operation &ref_772
+      - !Operation &ref_775
         operationId: MHSMPrivateEndpointConnections_ListByResource
         apiVersions:
           - !ApiVersion 
@@ -12283,7 +12286,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_756
+            language: !Languages &ref_759
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -12295,7 +12298,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_757
+            language: !Languages &ref_760
               default:
                 name: name
                 description: Name of the managed HSM Pool
@@ -12335,7 +12338,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_382
-            language: !Languages &ref_758
+            language: !Languages &ref_761
               default:
                 name: ''
                 description: Get information about all managed HSM Pools in the specified subscription.
@@ -12406,7 +12409,7 @@ operationGroups:
             paging:
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - !Operation &ref_778
+      - !Operation &ref_781
         operationId: MHSMPrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
@@ -12418,7 +12421,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_774
+            language: !Languages &ref_777
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -12430,7 +12433,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_775
+            language: !Languages &ref_778
               default:
                 name: name
                 description: Name of the managed HSM Pool
@@ -12442,7 +12445,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_776
+            language: !Languages &ref_779
               default:
                 name: privateEndpointConnectionName
                 description: Name of the private endpoint connection associated with the managed hsm pool.
@@ -12484,7 +12487,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_151
-            language: !Languages &ref_777
+            language: !Languages &ref_780
               default:
                 name: ''
                 description: Private endpoint connection successfully returned.
@@ -12538,7 +12541,7 @@ operationGroups:
             name: Get
             description: Gets the specified private endpoint connection associated with the managed HSM Pool.
         protocol: !Protocols {}
-      - !Operation &ref_784
+      - !Operation &ref_787
         operationId: MHSMPrivateEndpointConnections_Put
         apiVersions:
           - !ApiVersion 
@@ -12550,7 +12553,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_779
+            language: !Languages &ref_782
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -12562,7 +12565,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_780
+            language: !Languages &ref_783
               default:
                 name: name
                 description: Name of the managed HSM Pool
@@ -12574,7 +12577,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_781
+            language: !Languages &ref_784
               default:
                 name: privateEndpointConnectionName
                 description: Name of the private endpoint connection associated with the managed hsm pool.
@@ -12603,7 +12606,7 @@ operationGroups:
                 schema: *ref_151
                 implementation: Method
                 required: true
-                language: !Languages &ref_782
+                language: !Languages &ref_785
                   default:
                     name: properties
                     description: The intended state of private endpoint connection.
@@ -12647,7 +12650,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_151
-            language: !Languages &ref_783
+            language: !Languages &ref_786
               default:
                 name: ''
                 description: The state of private endpoint connection was updated successfully.
@@ -12720,7 +12723,7 @@ operationGroups:
             name: Put
             description: Updates the specified private endpoint connection associated with the managed hsm pool.
         protocol: !Protocols {}
-      - !Operation &ref_790
+      - !Operation &ref_793
         operationId: MHSMPrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
@@ -12732,7 +12735,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_785
+            language: !Languages &ref_788
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -12744,7 +12747,7 @@ operationGroups:
             schema: *ref_391
             implementation: Method
             required: true
-            language: !Languages &ref_786
+            language: !Languages &ref_789
               default:
                 name: name
                 description: Name of the managed HSM Pool
@@ -12756,7 +12759,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_787
+            language: !Languages &ref_790
               default:
                 name: privateEndpointConnectionName
                 description: Name of the private endpoint connection associated with the managed hsm pool.
@@ -12798,7 +12801,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_151
-            language: !Languages &ref_788
+            language: !Languages &ref_791
               default:
                 name: ''
                 description: The private endpoint connection was successfully deleted.
@@ -12874,7 +12877,7 @@ operationGroups:
                     properties:
                       provisioningState: Disconnected
                 '202':
-                  headers: &ref_789
+                  headers: &ref_792
                     Location: https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec?operationid=25334578
                     Retry-After: '60'
                 '204': {}
@@ -12889,10 +12892,10 @@ operationGroups:
         name: MhsmPrivateEndpointConnections
         description: ''
     protocol: !Protocols {}
-  - !OperationGroup &ref_802
+  - !OperationGroup &ref_805
     $key: MHSMPrivateLinkResources
     operations:
-      - !Operation &ref_801
+      - !Operation &ref_804
         operationId: MHSMPrivateLinkResources_ListByMHSMResource
         apiVersions:
           - !ApiVersion 
@@ -12904,7 +12907,7 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
-            language: !Languages &ref_791
+            language: !Languages &ref_794
               default:
                 name: resourceGroupName
                 description: Name of the resource group that contains the managed HSM pool.
@@ -12916,7 +12919,7 @@ operationGroups:
             schema: *ref_396
             implementation: Method
             required: true
-            language: !Languages &ref_792
+            language: !Languages &ref_795
               default:
                 name: name
                 description: Name of the managed HSM Pool
@@ -12957,7 +12960,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_399
-            language: !Languages &ref_793
+            language: !Languages &ref_796
               default:
                 name: ''
                 description: Successfully retrieved private link resources.
@@ -13013,10 +13016,10 @@ operationGroups:
         name: MhsmPrivateLinkResources
         description: ''
     protocol: !Protocols {}
-  - !OperationGroup &ref_835
+  - !OperationGroup &ref_838
     $key: Operations
     operations:
-      - !Operation &ref_834
+      - !Operation &ref_837
         operationId: Operations_List
         apiVersions:
           - !ApiVersion 
@@ -13054,7 +13057,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_400
-            language: !Languages &ref_803
+            language: !Languages &ref_806
               default:
                 name: ''
                 description: OK. The request has succeeded.
@@ -19001,7 +19004,7 @@ testModel:
                     location:
                       schema: *ref_156
                       rawValue: westus
-                      language: *ref_699
+                      language: *ref_702
                     properties:
                       schema: *ref_176
                       parentsValue: {}
@@ -19020,6 +19023,22 @@ testModel:
                             - schema: *ref_163
                               rawValue: 00000000-0000-0000-0000-000000000000
                           language: *ref_695
+                        networkAcls:
+                          schema: *ref_177
+                          parentsValue: {}
+                          properties:
+                            virtualNetworkRules:
+                              schema: *ref_251
+                              elements:
+                                - schema: *ref_179
+                                  parentsValue: {}
+                                  properties:
+                                    id:
+                                      schema: *ref_171
+                                      rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default
+                                      language: *ref_701
+                              language: *ref_700
+                          language: *ref_699
                         protectedSettings:
                           schema: *ref_161
                           rawValue: *ref_693
@@ -19044,12 +19063,12 @@ testModel:
                         name:
                           schema: *ref_158
                           rawValue: Standard_B1
-                          language: *ref_702
+                          language: *ref_705
                         family:
                           schema: *ref_157
                           rawValue: B
-                          language: *ref_701
-                      language: *ref_700
+                          language: *ref_704
+                      language: *ref_703
                     tags:
                       schema: *ref_159
                       properties:
@@ -19059,11 +19078,11 @@ testModel:
                         Environment:
                           schema: *ref_4
                           rawValue: dogfood
-                      language: *ref_703
+                      language: *ref_706
                   language: *ref_688
                 parameter: *ref_358
-            operation: *ref_712
-            operationGroup: *ref_713
+            operation: *ref_715
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -19074,19 +19093,19 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: hsm1
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedHSMs
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                      language: *ref_708
+                      language: *ref_711
                     location:
                       schema: *ref_156
                       rawValue: westus
-                      language: *ref_699
+                      language: *ref_702
                     properties:
                       schema: *ref_176
                       parentsValue: {}
@@ -19102,7 +19121,7 @@ testModel:
                         hsmUri:
                           schema: *ref_164
                           rawValue: https://westus.hsm1.managedhsm.azure.net
-                          language: *ref_705
+                          language: *ref_708
                         initialAdminObjectIds:
                           schema: *ref_249
                           elements:
@@ -19112,7 +19131,7 @@ testModel:
                         provisioningState:
                           schema: *ref_169
                           rawValue: Succeeded
-                          language: *ref_707
+                          language: *ref_710
                         softDeleteRetentionInDays:
                           schema: *ref_166
                           rawValue: 90
@@ -19120,7 +19139,7 @@ testModel:
                         statusMessage:
                           schema: *ref_168
                           rawValue: ManagedHsm is functional.
-                          language: *ref_706
+                          language: *ref_709
                         tenantId:
                           schema: *ref_162
                           rawValue: 00000000-0000-0000-0000-000000000000
@@ -19133,12 +19152,12 @@ testModel:
                         name:
                           schema: *ref_158
                           rawValue: Standard_B1
-                          language: *ref_702
+                          language: *ref_705
                         family:
                           schema: *ref_157
                           rawValue: B
-                          language: *ref_701
-                      language: *ref_700
+                          language: *ref_704
+                      language: *ref_703
                     tags:
                       schema: *ref_159
                       properties:
@@ -19148,8 +19167,8 @@ testModel:
                         Environment:
                           schema: *ref_4
                           rawValue: dogfood
-                      language: *ref_703
-                  language: *ref_704
+                      language: *ref_706
+                  language: *ref_707
               '202':
                 body:
                   schema: *ref_143
@@ -19158,19 +19177,19 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: hsm1
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedHSMs
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                      language: *ref_708
+                      language: *ref_711
                     location:
                       schema: *ref_156
                       rawValue: westus
-                      language: *ref_699
+                      language: *ref_702
                     properties:
                       schema: *ref_176
                       parentsValue: {}
@@ -19186,7 +19205,7 @@ testModel:
                         hsmUri:
                           schema: *ref_164
                           rawValue: null
-                          language: *ref_705
+                          language: *ref_708
                         initialAdminObjectIds:
                           schema: *ref_249
                           elements:
@@ -19196,7 +19215,7 @@ testModel:
                         provisioningState:
                           schema: *ref_169
                           rawValue: Provisioning
-                          language: *ref_707
+                          language: *ref_710
                         softDeleteRetentionInDays:
                           schema: *ref_166
                           rawValue: 90
@@ -19204,7 +19223,7 @@ testModel:
                         statusMessage:
                           schema: *ref_168
                           rawValue: Allocating hardware
-                          language: *ref_706
+                          language: *ref_709
                         tenantId:
                           schema: *ref_162
                           rawValue: 00000000-0000-0000-0000-000000000000
@@ -19217,12 +19236,12 @@ testModel:
                         name:
                           schema: *ref_158
                           rawValue: Standard_B1
-                          language: *ref_702
+                          language: *ref_705
                         family:
                           schema: *ref_157
                           rawValue: B
-                          language: *ref_701
-                      language: *ref_700
+                          language: *ref_704
+                      language: *ref_703
                     tags:
                       schema: *ref_159
                       properties:
@@ -19232,10 +19251,10 @@ testModel:
                         Environment:
                           schema: *ref_4
                           rawValue: dogfood
-                      language: *ref_703
-                  language: *ref_711
-        operation: *ref_712
-        operationGroup: *ref_713
+                      language: *ref_706
+                  language: *ref_714
+        operation: *ref_715
+        operationGroup: *ref_716
       - operationId: ManagedHsms_Update
         examples:
           - name: Update an existing managed HSM Pool
@@ -19254,12 +19273,12 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm-group
-                  language: *ref_714
+                  language: *ref_717
                 parameter: *ref_365
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm1
-                  language: *ref_715
+                  language: *ref_718
                 parameter: *ref_366
               - exampleValue:
                   schema: *ref_143
@@ -19277,11 +19296,11 @@ testModel:
                         Slice:
                           schema: *ref_4
                           rawValue: A
-                      language: *ref_703
-                  language: *ref_716
+                      language: *ref_706
+                  language: *ref_719
                 parameter: *ref_363
-            operation: *ref_719
-            operationGroup: *ref_713
+            operation: *ref_722
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -19292,19 +19311,19 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: hsm1
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedHSMs
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                      language: *ref_708
+                      language: *ref_711
                     location:
                       schema: *ref_156
                       rawValue: westus
-                      language: *ref_699
+                      language: *ref_702
                     properties:
                       schema: *ref_176
                       parentsValue: {}
@@ -19320,7 +19339,7 @@ testModel:
                         hsmUri:
                           schema: *ref_164
                           rawValue: https://westus.hsm1.managedhsm.azure.net
-                          language: *ref_705
+                          language: *ref_708
                         initialAdminObjectIds:
                           schema: *ref_249
                           elements:
@@ -19330,7 +19349,7 @@ testModel:
                         provisioningState:
                           schema: *ref_169
                           rawValue: Succeeded
-                          language: *ref_707
+                          language: *ref_710
                         softDeleteRetentionInDays:
                           schema: *ref_166
                           rawValue: 90
@@ -19338,7 +19357,7 @@ testModel:
                         statusMessage:
                           schema: *ref_168
                           rawValue: ManagedHsm is functional.
-                          language: *ref_706
+                          language: *ref_709
                         tenantId:
                           schema: *ref_162
                           rawValue: 00000000-0000-0000-0000-000000000000
@@ -19351,12 +19370,12 @@ testModel:
                         name:
                           schema: *ref_158
                           rawValue: Standard_B1
-                          language: *ref_702
+                          language: *ref_705
                         family:
                           schema: *ref_157
                           rawValue: B
-                          language: *ref_701
-                      language: *ref_700
+                          language: *ref_704
+                      language: *ref_703
                     tags:
                       schema: *ref_159
                       properties:
@@ -19369,8 +19388,8 @@ testModel:
                         Slice:
                           schema: *ref_4
                           rawValue: A
-                      language: *ref_703
-                  language: *ref_717
+                      language: *ref_706
+                  language: *ref_720
               '202':
                 body:
                   schema: *ref_143
@@ -19379,19 +19398,19 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: hsm1
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedHSMs
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                      language: *ref_708
+                      language: *ref_711
                     location:
                       schema: *ref_156
                       rawValue: westus
-                      language: *ref_699
+                      language: *ref_702
                     properties:
                       schema: *ref_176
                       parentsValue: {}
@@ -19407,7 +19426,7 @@ testModel:
                         hsmUri:
                           schema: *ref_164
                           rawValue: https://westus.hsm1.managedhsm.azure.net
-                          language: *ref_705
+                          language: *ref_708
                         initialAdminObjectIds:
                           schema: *ref_249
                           elements:
@@ -19417,7 +19436,7 @@ testModel:
                         provisioningState:
                           schema: *ref_169
                           rawValue: Updating
-                          language: *ref_707
+                          language: *ref_710
                         softDeleteRetentionInDays:
                           schema: *ref_166
                           rawValue: 90
@@ -19425,7 +19444,7 @@ testModel:
                         statusMessage:
                           schema: *ref_168
                           rawValue: ManagedHsm is updating.
-                          language: *ref_706
+                          language: *ref_709
                         tenantId:
                           schema: *ref_162
                           rawValue: 00000000-0000-0000-0000-000000000000
@@ -19438,12 +19457,12 @@ testModel:
                         name:
                           schema: *ref_158
                           rawValue: Standard_B1
-                          language: *ref_702
+                          language: *ref_705
                         family:
                           schema: *ref_157
                           rawValue: B
-                          language: *ref_701
-                      language: *ref_700
+                          language: *ref_704
+                      language: *ref_703
                     tags:
                       schema: *ref_159
                       properties:
@@ -19456,10 +19475,10 @@ testModel:
                         Slice:
                           schema: *ref_4
                           rawValue: A
-                      language: *ref_703
-                  language: *ref_718
-        operation: *ref_719
-        operationGroup: *ref_713
+                      language: *ref_706
+                  language: *ref_721
+        operation: *ref_722
+        operationGroup: *ref_716
       - operationId: ManagedHsms_Delete
         examples:
           - name: Delete a managed HSM Pool
@@ -19478,22 +19497,22 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm-group
-                  language: *ref_720
+                  language: *ref_723
                 parameter: *ref_367
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm1
-                  language: *ref_721
+                  language: *ref_724
                 parameter: *ref_368
-            operation: *ref_722
-            operationGroup: *ref_713
+            operation: *ref_725
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200': {}
               '202': {}
               '204': {}
-        operation: *ref_722
-        operationGroup: *ref_713
+        operation: *ref_725
+        operationGroup: *ref_716
       - operationId: ManagedHsms_Get
         examples:
           - name: Retrieve a managed HSM Pool
@@ -19512,15 +19531,15 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm-group
-                  language: *ref_723
+                  language: *ref_726
                 parameter: *ref_369
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm1
-                  language: *ref_724
+                  language: *ref_727
                 parameter: *ref_370
-            operation: *ref_727
-            operationGroup: *ref_713
+            operation: *ref_730
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -19531,19 +19550,19 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: hsm1
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedHSMs
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                      language: *ref_708
+                      language: *ref_711
                     location:
                       schema: *ref_156
                       rawValue: westus
-                      language: *ref_699
+                      language: *ref_702
                     properties:
                       schema: *ref_176
                       parentsValue: {}
@@ -19559,7 +19578,7 @@ testModel:
                         hsmUri:
                           schema: *ref_164
                           rawValue: https://westus.hsm1.managedhsm.azure.net
-                          language: *ref_705
+                          language: *ref_708
                         initialAdminObjectIds:
                           schema: *ref_249
                           elements:
@@ -19569,7 +19588,7 @@ testModel:
                         provisioningState:
                           schema: *ref_169
                           rawValue: Succeeded
-                          language: *ref_707
+                          language: *ref_710
                         softDeleteRetentionInDays:
                           schema: *ref_166
                           rawValue: 90
@@ -19577,7 +19596,7 @@ testModel:
                         statusMessage:
                           schema: *ref_168
                           rawValue: ManagedHsm is functional.
-                          language: *ref_706
+                          language: *ref_709
                         tenantId:
                           schema: *ref_162
                           rawValue: 00000000-0000-0000-0000-000000000000
@@ -19590,12 +19609,12 @@ testModel:
                         name:
                           schema: *ref_158
                           rawValue: Standard_B1
-                          language: *ref_702
+                          language: *ref_705
                         family:
                           schema: *ref_157
                           rawValue: B
-                          language: *ref_701
-                      language: *ref_700
+                          language: *ref_704
+                      language: *ref_703
                     tags:
                       schema: *ref_159
                       properties:
@@ -19605,13 +19624,13 @@ testModel:
                         Environment:
                           schema: *ref_4
                           rawValue: dogfood
-                      language: *ref_703
-                  language: *ref_725
+                      language: *ref_706
+                  language: *ref_728
               '202':
-                headers: *ref_726
+                headers: *ref_729
               '204': {}
-        operation: *ref_727
-        operationGroup: *ref_713
+        operation: *ref_730
+        operationGroup: *ref_716
       - operationId: ManagedHsms_ListByResourceGroup
         examples:
           - name: List managed HSM Pools in a resource group
@@ -19630,10 +19649,10 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm-group
-                  language: *ref_728
+                  language: *ref_731
                 parameter: *ref_371
-            operation: *ref_732
-            operationGroup: *ref_713
+            operation: *ref_735
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -19644,7 +19663,7 @@ testModel:
                     nextLink:
                       schema: *ref_185
                       rawValue: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                      language: *ref_731
+                      language: *ref_734
                     value:
                       schema: *ref_253
                       elements:
@@ -19654,19 +19673,19 @@ testModel:
                             name:
                               schema: *ref_154
                               rawValue: hsm1
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedHSMs
-                              language: *ref_710
+                              language: *ref_713
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                              language: *ref_708
+                              language: *ref_711
                             location:
                               schema: *ref_156
                               rawValue: westus
-                              language: *ref_699
+                              language: *ref_702
                             properties:
                               schema: *ref_176
                               parentsValue: {}
@@ -19682,7 +19701,7 @@ testModel:
                                 hsmUri:
                                   schema: *ref_164
                                   rawValue: https://westus.hsm1.managedhsm.azure.net
-                                  language: *ref_705
+                                  language: *ref_708
                                 initialAdminObjectIds:
                                   schema: *ref_249
                                   elements:
@@ -19692,7 +19711,7 @@ testModel:
                                 provisioningState:
                                   schema: *ref_169
                                   rawValue: Succeeded
-                                  language: *ref_707
+                                  language: *ref_710
                                 softDeleteRetentionInDays:
                                   schema: *ref_166
                                   rawValue: 90
@@ -19700,7 +19719,7 @@ testModel:
                                 statusMessage:
                                   schema: *ref_168
                                   rawValue: ManagedHsm is functional.
-                                  language: *ref_706
+                                  language: *ref_709
                                 tenantId:
                                   schema: *ref_162
                                   rawValue: 00000000-0000-0000-0000-000000000000
@@ -19713,12 +19732,12 @@ testModel:
                                 name:
                                   schema: *ref_158
                                   rawValue: Standard_B1
-                                  language: *ref_702
+                                  language: *ref_705
                                 family:
                                   schema: *ref_157
                                   rawValue: B
-                                  language: *ref_701
-                              language: *ref_700
+                                  language: *ref_704
+                              language: *ref_703
                             tags:
                               schema: *ref_159
                               properties:
@@ -19728,26 +19747,26 @@ testModel:
                                 Environment:
                                   schema: *ref_4
                                   rawValue: dogfood
-                              language: *ref_703
+                              language: *ref_706
                         - schema: *ref_143
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_154
                               rawValue: hsm2
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedHSMs
-                              language: *ref_710
+                              language: *ref_713
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2
-                              language: *ref_708
+                              language: *ref_711
                             location:
                               schema: *ref_156
                               rawValue: westus
-                              language: *ref_699
+                              language: *ref_702
                             properties:
                               schema: *ref_176
                               parentsValue: {}
@@ -19763,7 +19782,7 @@ testModel:
                                 hsmUri:
                                   schema: *ref_164
                                   rawValue: https://westus.hsm2.managedhsm.azure.net
-                                  language: *ref_705
+                                  language: *ref_708
                                 initialAdminObjectIds:
                                   schema: *ref_249
                                   elements:
@@ -19773,7 +19792,7 @@ testModel:
                                 provisioningState:
                                   schema: *ref_169
                                   rawValue: Succeeded
-                                  language: *ref_707
+                                  language: *ref_710
                                 softDeleteRetentionInDays:
                                   schema: *ref_166
                                   rawValue: 90
@@ -19781,7 +19800,7 @@ testModel:
                                 statusMessage:
                                   schema: *ref_168
                                   rawValue: ManagedHsm is functional.
-                                  language: *ref_706
+                                  language: *ref_709
                                 tenantId:
                                   schema: *ref_162
                                   rawValue: 00000000-0000-0000-0000-000000000000
@@ -19794,12 +19813,12 @@ testModel:
                                 name:
                                   schema: *ref_158
                                   rawValue: Standard_B1
-                                  language: *ref_702
+                                  language: *ref_705
                                 family:
                                   schema: *ref_157
                                   rawValue: B
-                                  language: *ref_701
-                              language: *ref_700
+                                  language: *ref_704
+                              language: *ref_703
                             tags:
                               schema: *ref_159
                               properties:
@@ -19809,11 +19828,11 @@ testModel:
                                 Environment:
                                   schema: *ref_4
                                   rawValue: production
-                              language: *ref_703
-                      language: *ref_730
-                  language: *ref_729
-        operation: *ref_732
-        operationGroup: *ref_713
+                              language: *ref_706
+                      language: *ref_733
+                  language: *ref_732
+        operation: *ref_735
+        operationGroup: *ref_716
       - operationId: ManagedHsms_ListBySubscription
         examples:
           - name: List managed HSM Pools in a subscription
@@ -19829,8 +19848,8 @@ testModel:
                   language: *ref_402
                 parameter: *ref_270
             methodParameters: []
-            operation: *ref_734
-            operationGroup: *ref_713
+            operation: *ref_737
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -19841,7 +19860,7 @@ testModel:
                     nextLink:
                       schema: *ref_185
                       rawValue: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/managedHSMs?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                      language: *ref_731
+                      language: *ref_734
                     value:
                       schema: *ref_253
                       elements:
@@ -19851,19 +19870,19 @@ testModel:
                             name:
                               schema: *ref_154
                               rawValue: hsm1
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedHSMs
-                              language: *ref_710
+                              language: *ref_713
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                              language: *ref_708
+                              language: *ref_711
                             location:
                               schema: *ref_156
                               rawValue: westus
-                              language: *ref_699
+                              language: *ref_702
                             properties:
                               schema: *ref_176
                               parentsValue: {}
@@ -19879,7 +19898,7 @@ testModel:
                                 hsmUri:
                                   schema: *ref_164
                                   rawValue: https://westus.hsm1.managedhsm.azure.net
-                                  language: *ref_705
+                                  language: *ref_708
                                 initialAdminObjectIds:
                                   schema: *ref_249
                                   elements:
@@ -19889,7 +19908,7 @@ testModel:
                                 provisioningState:
                                   schema: *ref_169
                                   rawValue: Succeeded
-                                  language: *ref_707
+                                  language: *ref_710
                                 softDeleteRetentionInDays:
                                   schema: *ref_166
                                   rawValue: 90
@@ -19897,7 +19916,7 @@ testModel:
                                 statusMessage:
                                   schema: *ref_168
                                   rawValue: ManagedHsm is functional.
-                                  language: *ref_706
+                                  language: *ref_709
                                 tenantId:
                                   schema: *ref_162
                                   rawValue: 00000000-0000-0000-0000-000000000000
@@ -19910,12 +19929,12 @@ testModel:
                                 name:
                                   schema: *ref_158
                                   rawValue: Standard_B1
-                                  language: *ref_702
+                                  language: *ref_705
                                 family:
                                   schema: *ref_157
                                   rawValue: B
-                                  language: *ref_701
-                              language: *ref_700
+                                  language: *ref_704
+                              language: *ref_703
                             tags:
                               schema: *ref_159
                               properties:
@@ -19925,26 +19944,26 @@ testModel:
                                 Environment:
                                   schema: *ref_4
                                   rawValue: dogfood
-                              language: *ref_703
+                              language: *ref_706
                         - schema: *ref_143
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_154
                               rawValue: hsm2
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedHSMs
-                              language: *ref_710
+                              language: *ref_713
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2
-                              language: *ref_708
+                              language: *ref_711
                             location:
                               schema: *ref_156
                               rawValue: westus
-                              language: *ref_699
+                              language: *ref_702
                             properties:
                               schema: *ref_176
                               parentsValue: {}
@@ -19960,7 +19979,7 @@ testModel:
                                 hsmUri:
                                   schema: *ref_164
                                   rawValue: https://westus.hsm2.managedhsm.azure.net
-                                  language: *ref_705
+                                  language: *ref_708
                                 initialAdminObjectIds:
                                   schema: *ref_249
                                   elements:
@@ -19970,7 +19989,7 @@ testModel:
                                 provisioningState:
                                   schema: *ref_169
                                   rawValue: Succeeded
-                                  language: *ref_707
+                                  language: *ref_710
                                 softDeleteRetentionInDays:
                                   schema: *ref_166
                                   rawValue: 90
@@ -19978,7 +19997,7 @@ testModel:
                                 statusMessage:
                                   schema: *ref_168
                                   rawValue: ManagedHsm is functional.
-                                  language: *ref_706
+                                  language: *ref_709
                                 tenantId:
                                   schema: *ref_162
                                   rawValue: 00000000-0000-0000-0000-000000000000
@@ -19991,12 +20010,12 @@ testModel:
                                 name:
                                   schema: *ref_158
                                   rawValue: Standard_B1
-                                  language: *ref_702
+                                  language: *ref_705
                                 family:
                                   schema: *ref_157
                                   rawValue: B
-                                  language: *ref_701
-                              language: *ref_700
+                                  language: *ref_704
+                              language: *ref_703
                             tags:
                               schema: *ref_159
                               properties:
@@ -20006,11 +20025,11 @@ testModel:
                                 Environment:
                                   schema: *ref_4
                                   rawValue: production
-                              language: *ref_703
-                      language: *ref_730
-                  language: *ref_733
-        operation: *ref_734
-        operationGroup: *ref_713
+                              language: *ref_706
+                      language: *ref_733
+                  language: *ref_736
+        operation: *ref_737
+        operationGroup: *ref_716
       - operationId: ManagedHsms_ListDeleted
         examples:
           - name: List deleted managed HSMs in the specified subscription
@@ -20026,8 +20045,8 @@ testModel:
                   language: *ref_402
                 parameter: *ref_270
             methodParameters: []
-            operation: *ref_748
-            operationGroup: *ref_713
+            operation: *ref_751
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -20038,7 +20057,7 @@ testModel:
                     nextLink:
                       schema: *ref_196
                       rawValue: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/deletedManagedHSMs?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                      language: *ref_747
+                      language: *ref_750
                     value:
                       schema: *ref_255
                       elements:
@@ -20048,15 +20067,15 @@ testModel:
                             name:
                               schema: *ref_188
                               rawValue: vault-agile-drawer-6404
-                              language: *ref_738
+                              language: *ref_741
                             type:
                               schema: *ref_189
                               rawValue: Microsoft.KeyVault/deletedManagedHSMs
-                              language: *ref_739
+                              language: *ref_742
                             id:
                               schema: *ref_187
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1
-                              language: *ref_737
+                              language: *ref_740
                             properties:
                               schema: *ref_198
                               parentsValue: {}
@@ -20064,23 +20083,23 @@ testModel:
                                 deletionDate:
                                   schema: *ref_192
                                   rawValue: '2021-04-01T00:00:59Z'
-                                  language: *ref_743
+                                  language: *ref_746
                                 location:
                                   schema: *ref_191
                                   rawValue: westus
-                                  language: *ref_742
+                                  language: *ref_745
                                 mhsmId:
                                   schema: *ref_190
                                   rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                                  language: *ref_741
+                                  language: *ref_744
                                 purgeProtectionEnabled:
                                   schema: *ref_194
                                   rawValue: true
-                                  language: *ref_745
+                                  language: *ref_748
                                 scheduledPurgeDate:
                                   schema: *ref_193
                                   rawValue: '2021-04-01T00:00:59Z'
-                                  language: *ref_744
+                                  language: *ref_747
                                 tags:
                                   schema: *ref_195
                                   properties:
@@ -20090,23 +20109,23 @@ testModel:
                                     Environment:
                                       schema: *ref_4
                                       rawValue: production
-                                  language: *ref_746
-                              language: *ref_740
+                                  language: *ref_749
+                              language: *ref_743
                         - schema: *ref_197
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_188
                               rawValue: vault-agile-drawer-6404
-                              language: *ref_738
+                              language: *ref_741
                             type:
                               schema: *ref_189
                               rawValue: Microsoft.KeyVault/deletedManagedHSMs
-                              language: *ref_739
+                              language: *ref_742
                             id:
                               schema: *ref_187
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm2
-                              language: *ref_737
+                              language: *ref_740
                             properties:
                               schema: *ref_198
                               parentsValue: {}
@@ -20114,23 +20133,23 @@ testModel:
                                 deletionDate:
                                   schema: *ref_192
                                   rawValue: '2021-04-01T00:00:59Z'
-                                  language: *ref_743
+                                  language: *ref_746
                                 location:
                                   schema: *ref_191
                                   rawValue: westus
-                                  language: *ref_742
+                                  language: *ref_745
                                 mhsmId:
                                   schema: *ref_190
                                   rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2
-                                  language: *ref_741
+                                  language: *ref_744
                                 purgeProtectionEnabled:
                                   schema: *ref_194
                                   rawValue: true
-                                  language: *ref_745
+                                  language: *ref_748
                                 scheduledPurgeDate:
                                   schema: *ref_193
                                   rawValue: '2021-04-01T00:00:59Z'
-                                  language: *ref_744
+                                  language: *ref_747
                                 tags:
                                   schema: *ref_195
                                   properties:
@@ -20140,12 +20159,12 @@ testModel:
                                     Environment:
                                       schema: *ref_4
                                       rawValue: production
-                                  language: *ref_746
-                              language: *ref_740
-                      language: *ref_736
-                  language: *ref_735
-        operation: *ref_748
-        operationGroup: *ref_713
+                                  language: *ref_749
+                              language: *ref_743
+                      language: *ref_739
+                  language: *ref_738
+        operation: *ref_751
+        operationGroup: *ref_716
       - operationId: ManagedHsms_GetDeleted
         examples:
           - name: Retrieve a deleted managed HSM
@@ -20164,15 +20183,15 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm1
-                  language: *ref_749
+                  language: *ref_752
                 parameter: *ref_376
               - exampleValue:
                   schema: *ref_4
                   rawValue: westus
-                  language: *ref_750
+                  language: *ref_753
                 parameter: *ref_377
-            operation: *ref_752
-            operationGroup: *ref_713
+            operation: *ref_755
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '200':
@@ -20183,15 +20202,15 @@ testModel:
                     name:
                       schema: *ref_188
                       rawValue: vault-agile-drawer-6404
-                      language: *ref_738
+                      language: *ref_741
                     type:
                       schema: *ref_189
                       rawValue: Microsoft.KeyVault/deletedManagedHSMs
-                      language: *ref_739
+                      language: *ref_742
                     id:
                       schema: *ref_187
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1
-                      language: *ref_737
+                      language: *ref_740
                     properties:
                       schema: *ref_198
                       parentsValue: {}
@@ -20199,23 +20218,23 @@ testModel:
                         deletionDate:
                           schema: *ref_192
                           rawValue: '2021-04-01T00:00:59Z'
-                          language: *ref_743
+                          language: *ref_746
                         location:
                           schema: *ref_191
                           rawValue: westus
-                          language: *ref_742
+                          language: *ref_745
                         mhsmId:
                           schema: *ref_190
                           rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                          language: *ref_741
+                          language: *ref_744
                         purgeProtectionEnabled:
                           schema: *ref_194
                           rawValue: true
-                          language: *ref_745
+                          language: *ref_748
                         scheduledPurgeDate:
                           schema: *ref_193
                           rawValue: '2021-04-01T00:00:59Z'
-                          language: *ref_744
+                          language: *ref_747
                         tags:
                           schema: *ref_195
                           properties:
@@ -20225,11 +20244,11 @@ testModel:
                             Environment:
                               schema: *ref_4
                               rawValue: production
-                          language: *ref_746
-                      language: *ref_740
-                  language: *ref_751
-        operation: *ref_752
-        operationGroup: *ref_713
+                          language: *ref_749
+                      language: *ref_743
+                  language: *ref_754
+        operation: *ref_755
+        operationGroup: *ref_716
       - operationId: ManagedHsms_PurgeDeleted
         examples:
           - name: Purge a managed HSM Pool
@@ -20248,20 +20267,20 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: hsm1
-                  language: *ref_753
+                  language: *ref_756
                 parameter: *ref_378
               - exampleValue:
                   schema: *ref_4
                   rawValue: westus
-                  language: *ref_754
+                  language: *ref_757
                 parameter: *ref_379
-            operation: *ref_755
-            operationGroup: *ref_713
+            operation: *ref_758
+            operationGroup: *ref_716
             originalFile: ''
             responses:
               '202': {}
-        operation: *ref_755
-        operationGroup: *ref_713
+        operation: *ref_758
+        operationGroup: *ref_716
       - operationId: MhsmPrivateEndpointConnections_ListByResource
         examples:
           - name: List managed HSM Pools in a subscription
@@ -20280,15 +20299,15 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-group
-                  language: *ref_756
+                  language: *ref_759
                 parameter: *ref_380
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-mhsm
-                  language: *ref_757
+                  language: *ref_760
                 parameter: *ref_381
-            operation: *ref_772
-            operationGroup: *ref_773
+            operation: *ref_775
+            operationGroup: *ref_776
             originalFile: ''
             responses:
               '200':
@@ -20299,7 +20318,7 @@ testModel:
                     nextLink:
                       schema: *ref_186
                       rawValue: null
-                      language: *ref_771
+                      language: *ref_774
                     value:
                       schema: *ref_254
                       elements:
@@ -20309,108 +20328,108 @@ testModel:
                             name:
                               schema: *ref_154
                               rawValue: sample-pec1
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                              language: *ref_710
+                              language: *ref_713
                             etag:
                               schema: *ref_145
                               rawValue: ''
-                              language: *ref_760
+                              language: *ref_763
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec1
-                              language: *ref_708
+                              language: *ref_711
                             privateEndpoint:
                               schema: *ref_172
-                              flattenedNames: *ref_763
+                              flattenedNames: *ref_766
                               parentsValue: {}
                               properties:
                                 id:
                                   schema: *ref_146
                                   rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe1
-                                  language: *ref_762
-                              language: *ref_761
+                                  language: *ref_765
+                              language: *ref_764
                             privateLinkServiceConnectionState:
                               schema: *ref_173
-                              flattenedNames: *ref_768
+                              flattenedNames: *ref_771
                               parentsValue: {}
                               properties:
                                 description:
                                   schema: *ref_147
                                   rawValue: This was automatically approved by user1234@contoso.com
-                                  language: *ref_766
+                                  language: *ref_769
                                 actionsRequired:
                                   schema: *ref_38
                                   rawValue: None
-                                  language: *ref_767
+                                  language: *ref_770
                                 status:
                                   schema: *ref_36
                                   rawValue: Approved
-                                  language: *ref_765
-                              language: *ref_764
+                                  language: *ref_768
+                              language: *ref_767
                             provisioningState:
                               schema: *ref_39
-                              flattenedNames: *ref_770
+                              flattenedNames: *ref_773
                               rawValue: Succeeded
-                              language: *ref_769
+                              language: *ref_772
                         - schema: *ref_151
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_154
                               rawValue: sample-pec2
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                              language: *ref_710
+                              language: *ref_713
                             etag:
                               schema: *ref_145
                               rawValue: ''
-                              language: *ref_760
+                              language: *ref_763
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec2
-                              language: *ref_708
+                              language: *ref_711
                             privateEndpoint:
                               schema: *ref_172
-                              flattenedNames: *ref_763
+                              flattenedNames: *ref_766
                               parentsValue: {}
                               properties:
                                 id:
                                   schema: *ref_146
                                   rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe2
-                                  language: *ref_762
-                              language: *ref_761
+                                  language: *ref_765
+                              language: *ref_764
                             privateLinkServiceConnectionState:
                               schema: *ref_173
-                              flattenedNames: *ref_768
+                              flattenedNames: *ref_771
                               parentsValue: {}
                               properties:
                                 description:
                                   schema: *ref_147
                                   rawValue: This was automatically approved by user1234@contoso.com
-                                  language: *ref_766
+                                  language: *ref_769
                                 actionsRequired:
                                   schema: *ref_38
                                   rawValue: None
-                                  language: *ref_767
+                                  language: *ref_770
                                 status:
                                   schema: *ref_36
                                   rawValue: Approved
-                                  language: *ref_765
-                              language: *ref_764
+                                  language: *ref_768
+                              language: *ref_767
                             provisioningState:
                               schema: *ref_39
-                              flattenedNames: *ref_770
+                              flattenedNames: *ref_773
                               rawValue: Succeeded
-                              language: *ref_769
-                      language: *ref_759
-                  language: *ref_758
-        operation: *ref_772
-        operationGroup: *ref_773
+                              language: *ref_772
+                      language: *ref_762
+                  language: *ref_761
+        operation: *ref_775
+        operationGroup: *ref_776
       - operationId: MhsmPrivateEndpointConnections_Get
         examples:
           - name: ManagedHsmGetPrivateEndpointConnection
@@ -20429,20 +20448,20 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-group
-                  language: *ref_774
+                  language: *ref_777
                 parameter: *ref_383
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-mhsm
-                  language: *ref_775
+                  language: *ref_778
                 parameter: *ref_384
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-pec
-                  language: *ref_776
+                  language: *ref_779
                 parameter: *ref_385
-            operation: *ref_778
-            operationGroup: *ref_773
+            operation: *ref_781
+            operationGroup: *ref_776
             originalFile: ''
             responses:
               '200':
@@ -20453,55 +20472,55 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: sample-pec
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                      language: *ref_710
+                      language: *ref_713
                     etag:
                       schema: *ref_145
                       rawValue: ''
-                      language: *ref_760
+                      language: *ref_763
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec
-                      language: *ref_708
+                      language: *ref_711
                     privateEndpoint:
                       schema: *ref_172
-                      flattenedNames: *ref_763
+                      flattenedNames: *ref_766
                       parentsValue: {}
                       properties:
                         id:
                           schema: *ref_146
                           rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                          language: *ref_762
-                      language: *ref_761
+                          language: *ref_765
+                      language: *ref_764
                     privateLinkServiceConnectionState:
                       schema: *ref_173
-                      flattenedNames: *ref_768
+                      flattenedNames: *ref_771
                       parentsValue: {}
                       properties:
                         description:
                           schema: *ref_147
                           rawValue: This was automatically approved by user1234@contoso.com
-                          language: *ref_766
+                          language: *ref_769
                         actionsRequired:
                           schema: *ref_38
                           rawValue: None
-                          language: *ref_767
+                          language: *ref_770
                         status:
                           schema: *ref_36
                           rawValue: Approved
-                          language: *ref_765
-                      language: *ref_764
+                          language: *ref_768
+                      language: *ref_767
                     provisioningState:
                       schema: *ref_39
-                      flattenedNames: *ref_770
+                      flattenedNames: *ref_773
                       rawValue: Succeeded
-                      language: *ref_769
-                  language: *ref_777
-        operation: *ref_778
-        operationGroup: *ref_773
+                      language: *ref_772
+                  language: *ref_780
+        operation: *ref_781
+        operationGroup: *ref_776
       - operationId: MhsmPrivateEndpointConnections_Put
         examples:
           - name: ManagedHsmPutPrivateEndpointConnection
@@ -20520,17 +20539,17 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-group
-                  language: *ref_779
+                  language: *ref_782
                 parameter: *ref_388
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-mhsm
-                  language: *ref_780
+                  language: *ref_783
                 parameter: *ref_389
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-pec
-                  language: *ref_781
+                  language: *ref_784
                 parameter: *ref_390
               - exampleValue:
                   schema: *ref_151
@@ -20538,22 +20557,22 @@ testModel:
                   properties:
                     privateLinkServiceConnectionState:
                       schema: *ref_173
-                      flattenedNames: *ref_768
+                      flattenedNames: *ref_771
                       parentsValue: {}
                       properties:
                         description:
                           schema: *ref_147
                           rawValue: My name is Joe and I'm approving this.
-                          language: *ref_766
+                          language: *ref_769
                         status:
                           schema: *ref_36
                           rawValue: Approved
-                          language: *ref_765
-                      language: *ref_764
-                  language: *ref_782
+                          language: *ref_768
+                      language: *ref_767
+                  language: *ref_785
                 parameter: *ref_386
-            operation: *ref_784
-            operationGroup: *ref_773
+            operation: *ref_787
+            operationGroup: *ref_776
             originalFile: ''
             responses:
               '200':
@@ -20564,51 +20583,51 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: sample-pec
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec
-                      language: *ref_708
+                      language: *ref_711
                     privateEndpoint:
                       schema: *ref_172
-                      flattenedNames: *ref_763
+                      flattenedNames: *ref_766
                       parentsValue: {}
                       properties:
                         id:
                           schema: *ref_146
                           rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                          language: *ref_762
-                      language: *ref_761
+                          language: *ref_765
+                      language: *ref_764
                     privateLinkServiceConnectionState:
                       schema: *ref_173
-                      flattenedNames: *ref_768
+                      flattenedNames: *ref_771
                       parentsValue: {}
                       properties:
                         description:
                           schema: *ref_147
                           rawValue: My name is Joe and I'm approving this.
-                          language: *ref_766
+                          language: *ref_769
                         actionsRequired:
                           schema: *ref_38
                           rawValue: None
-                          language: *ref_767
+                          language: *ref_770
                         status:
                           schema: *ref_36
                           rawValue: Approved
-                          language: *ref_765
-                      language: *ref_764
+                          language: *ref_768
+                      language: *ref_767
                     provisioningState:
                       schema: *ref_39
-                      flattenedNames: *ref_770
+                      flattenedNames: *ref_773
                       rawValue: Succeeded
-                      language: *ref_769
-                  language: *ref_783
-        operation: *ref_784
-        operationGroup: *ref_773
+                      language: *ref_772
+                  language: *ref_786
+        operation: *ref_787
+        operationGroup: *ref_776
       - operationId: MhsmPrivateEndpointConnections_Delete
         examples:
           - name: ManagedHsmDeletePrivateEndpointConnection
@@ -20627,20 +20646,20 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-group
-                  language: *ref_785
+                  language: *ref_788
                 parameter: *ref_392
               - exampleValue:
                   schema: *ref_391
                   rawValue: sample-mhsm
-                  language: *ref_786
+                  language: *ref_789
                 parameter: *ref_393
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-pec
-                  language: *ref_787
+                  language: *ref_790
                 parameter: *ref_394
-            operation: *ref_790
-            operationGroup: *ref_773
+            operation: *ref_793
+            operationGroup: *ref_776
             originalFile: ''
             responses:
               '200':
@@ -20651,26 +20670,26 @@ testModel:
                     name:
                       schema: *ref_154
                       rawValue: sample-pec
-                      language: *ref_709
+                      language: *ref_712
                     type:
                       schema: *ref_155
                       rawValue: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                      language: *ref_710
+                      language: *ref_713
                     id:
                       schema: *ref_153
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-vault/privateEndpointConnections/sample-pec
-                      language: *ref_708
+                      language: *ref_711
                     provisioningState:
                       schema: *ref_39
-                      flattenedNames: *ref_770
+                      flattenedNames: *ref_773
                       rawValue: Disconnected
-                      language: *ref_769
-                  language: *ref_788
+                      language: *ref_772
+                  language: *ref_791
               '202':
-                headers: *ref_789
+                headers: *ref_792
               '204': {}
-        operation: *ref_790
-        operationGroup: *ref_773
+        operation: *ref_793
+        operationGroup: *ref_776
       - operationId: MhsmPrivateLinkResources_ListByMhsmResource
         examples:
           - name: KeyVaultListPrivateLinkResources
@@ -20689,15 +20708,15 @@ testModel:
               - exampleValue:
                   schema: *ref_4
                   rawValue: sample-group
-                  language: *ref_791
+                  language: *ref_794
                 parameter: *ref_397
               - exampleValue:
                   schema: *ref_396
                   rawValue: sample-mhsm
-                  language: *ref_792
+                  language: *ref_795
                 parameter: *ref_398
-            operation: *ref_801
-            operationGroup: *ref_802
+            operation: *ref_804
+            operationGroup: *ref_805
             originalFile: ''
             responses:
               '200':
@@ -20714,38 +20733,38 @@ testModel:
                             name:
                               schema: *ref_154
                               rawValue: managedhsm
-                              language: *ref_709
+                              language: *ref_712
                             type:
                               schema: *ref_155
                               rawValue: Microsoft.KeyVault/managedhsms/privateLinkResources
-                              language: *ref_710
+                              language: *ref_713
                             groupId:
                               schema: *ref_148
-                              flattenedNames: *ref_796
+                              flattenedNames: *ref_799
                               rawValue: managedhsms
-                              language: *ref_795
+                              language: *ref_798
                             id:
                               schema: *ref_153
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateLinkResources/managedhsm
-                              language: *ref_708
+                              language: *ref_711
                             requiredMembers:
                               schema: *ref_256
                               elements:
                                 - schema: *ref_149
                                   rawValue: default
-                              flattenedNames: *ref_798
-                              language: *ref_797
+                              flattenedNames: *ref_801
+                              language: *ref_800
                             requiredZoneNames:
                               schema: *ref_257
                               elements:
                                 - schema: *ref_150
                                   rawValue: privatelink.managedhsm.azure.net
-                              flattenedNames: *ref_800
-                              language: *ref_799
-                      language: *ref_794
-                  language: *ref_793
-        operation: *ref_801
-        operationGroup: *ref_802
+                              flattenedNames: *ref_803
+                              language: *ref_802
+                      language: *ref_797
+                  language: *ref_796
+        operation: *ref_804
+        operationGroup: *ref_805
       - operationId: Operations_List
         examples:
           - name: Lists available Rest API operations.
@@ -20756,8 +20775,8 @@ testModel:
                   language: *ref_401
                 parameter: *ref_269
             methodParameters: []
-            operation: *ref_834
-            operationGroup: *ref_835
+            operation: *ref_837
+            operationGroup: *ref_838
             originalFile: ''
             responses:
               '200':
@@ -20774,7 +20793,7 @@ testModel:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20782,31 +20801,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: View the properties of a key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: View Key Vault
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/write
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20814,31 +20833,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Create a new key vault or update the properties of an existing key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Update Key Vault
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/delete
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20846,31 +20865,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Delete a key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Delete Key Vault
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/deploy/action
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20878,31 +20897,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Enables access to secrets in a key vault when deploying Azure resources
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Use Vault for Azure Deployments
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/secrets/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20910,31 +20929,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: View the properties of a secret, but not its value
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: View Secret Properties
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Secret
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/secrets/write
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20942,31 +20961,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Create a new secret or update the value of an existing secret
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Update Secret
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Secret
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/accessPolicies/write
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -20974,31 +20993,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Update an existing access policy by merging or replacing, or add a new access policy to a vault.
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Update Access Policy
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Access Policy
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/logDefinitions/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21006,31 +21025,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Gets the available logs for a key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Read log definition
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault Log Definition
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                             origin:
                               schema: *ref_204
                               rawValue: system
-                              language: *ref_812
+                              language: *ref_815
                             serviceSpecification:
                               schema: *ref_225
-                              flattenedNames: *ref_833
+                              flattenedNames: *ref_836
                               parentsValue: {}
                               properties:
                                 logSpecifications:
@@ -21042,16 +21061,16 @@ testModel:
                                         name:
                                           schema: *ref_206
                                           rawValue: AuditEvent
-                                          language: *ref_815
+                                          language: *ref_818
                                         blobDuration:
                                           schema: *ref_208
                                           rawValue: PT1H
-                                          language: *ref_817
+                                          language: *ref_820
                                         displayName:
                                           schema: *ref_207
                                           rawValue: Audit Logs
-                                          language: *ref_816
-                                  language: *ref_814
+                                          language: *ref_819
+                                  language: *ref_817
                                 metricSpecifications:
                                   schema: *ref_263
                                   elements:
@@ -21061,11 +21080,11 @@ testModel:
                                         name:
                                           schema: *ref_209
                                           rawValue: ServiceApiHit
-                                          language: *ref_819
+                                          language: *ref_822
                                         aggregationType:
                                           schema: *ref_213
                                           rawValue: ''
-                                          language: *ref_823
+                                          language: *ref_826
                                         dimensions:
                                           schema: *ref_262
                                           elements:
@@ -21075,76 +21094,76 @@ testModel:
                                                 name:
                                                   schema: *ref_217
                                                   rawValue: ActivityType
-                                                  language: *ref_828
+                                                  language: *ref_831
                                                 displayName:
                                                   schema: *ref_218
                                                   rawValue: ''
-                                                  language: *ref_829
+                                                  language: *ref_832
                                                 toBeExportedForShoebox:
                                                   schema: *ref_219
                                                   rawValue: true
-                                                  language: *ref_830
+                                                  language: *ref_833
                                             - schema: *ref_228
                                               parentsValue: {}
                                               properties:
                                                 name:
                                                   schema: *ref_217
                                                   rawValue: ActivityName
-                                                  language: *ref_828
+                                                  language: *ref_831
                                                 displayName:
                                                   schema: *ref_218
                                                   rawValue: ''
-                                                  language: *ref_829
+                                                  language: *ref_832
                                                 toBeExportedForShoebox:
                                                   schema: *ref_219
                                                   rawValue: true
-                                                  language: *ref_830
-                                          language: *ref_827
+                                                  language: *ref_833
+                                          language: *ref_830
                                         displayDescription:
                                           schema: *ref_211
                                           rawValue: ''
-                                          language: *ref_821
+                                          language: *ref_824
                                         displayName:
                                           schema: *ref_210
                                           rawValue: ''
-                                          language: *ref_820
+                                          language: *ref_823
                                         fillGapWithZero:
                                           schema: *ref_220
                                           rawValue: false
-                                          language: *ref_831
+                                          language: *ref_834
                                         internalMetricName:
                                           schema: *ref_221
                                           rawValue: AuditEvent
-                                          language: *ref_832
+                                          language: *ref_835
                                         lockAggregationType:
                                           schema: *ref_216
                                           rawValue: ''
-                                          language: *ref_826
+                                          language: *ref_829
                                         supportedAggregationTypes:
                                           schema: *ref_260
                                           elements:
                                             - schema: *ref_214
                                               rawValue: ''
-                                          language: *ref_824
+                                          language: *ref_827
                                         supportedTimeGrainTypes:
                                           schema: *ref_261
                                           elements:
                                             - schema: *ref_215
                                               rawValue: ''
-                                          language: *ref_825
+                                          language: *ref_828
                                         unit:
                                           schema: *ref_212
                                           rawValue: ''
-                                          language: *ref_822
-                                  language: *ref_818
-                              language: *ref_813
+                                          language: *ref_825
+                                  language: *ref_821
+                              language: *ref_816
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/diagnosticSettings/Read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21152,35 +21171,35 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Gets the diagnostic setting for the resource
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Read diagnostic setting
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault Diagnostic Settings
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                             origin:
                               schema: *ref_204
                               rawValue: system
-                              language: *ref_812
+                              language: *ref_815
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/diagnosticSettings/Write
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21188,35 +21207,35 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Creates or updates the diagnostic setting for the resource
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Write diagnostic setting
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault Diagnostic Settings
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                             origin:
                               schema: *ref_204
                               rawValue: system
-                              language: *ref_812
+                              language: *ref_815
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/register/action
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21224,31 +21243,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Registers a subscription
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Register Subscription
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Subscription
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/unregister/action
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21256,31 +21275,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Unregisters a subscription
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Unregister Subscription
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Subscription
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/operations/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21288,31 +21307,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Lists operations available on Microsoft.KeyVault resource provider
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Available Key Vault Operations
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Operations
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/checkNameAvailability/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21320,31 +21339,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Checks that a key vault name is valid and is not in use
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Check Name Availability
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Name Availability
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/deletedVaults/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21352,31 +21371,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: View the properties of soft deleted key vaults
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: View Soft Deleted Vaults
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Soft Deleted Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/locations/deletedVaults/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21384,31 +21403,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: View the properties of a soft deleted key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: View Soft Deleted Key Vault
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Soft Deleted Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/locations/deletedVaults/purge/action
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21416,31 +21435,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Purge a soft deleted key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Purge Soft Deleted Key Vault
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Soft Deleted Key Vault
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/locations/operationResults/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21448,31 +21467,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Check the result of a long run operation
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Check Operation Result
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Long Run Operation Result
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/hsmPools/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21480,31 +21499,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: View the properties of an HSM pool
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: View HSM pool
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: HSM pool
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/hsmPools/write
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21512,31 +21531,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Create a new HSM pool of update the properties of an existing HSM pool
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Create or Update HSM pool
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: HSM pool
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/hsmPools/delete
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21544,31 +21563,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Delete an HSM pool
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Delete HSM pool
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: HSM pool
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/hsmPools/joinVault/action
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21576,31 +21595,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Join a key vault to an HSM pool
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Join KeyVault to HSM pool
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: HSM pool
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/managedHSMs/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21608,31 +21627,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: View the properties of a Managed HSM
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: View Managed HSM
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Managed HSM
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/managedHSMs/write
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21640,31 +21659,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Create a new Managed HSM of update the properties of an existing Managed HSM
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Create or Update Managed HSM
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Managed HSM
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/managedHSMs/delete
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21672,31 +21691,31 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Delete a Managed HSM
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Delete Managed HSM
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Managed HSM
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/metricDefinitions/read
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21704,41 +21723,41 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Gets the available metrics for a key vault
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: Read metric definition
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Key Vault Metric Definition
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                             origin:
                               schema: *ref_204
                               rawValue: system
-                              language: *ref_812
+                              language: *ref_815
                             serviceSpecification:
                               schema: *ref_225
-                              flattenedNames: *ref_833
+                              flattenedNames: *ref_836
                               parentsValue: {}
                               properties: {}
-                              language: *ref_813
+                              language: *ref_816
                         - schema: *ref_223
                           parentsValue: {}
                           properties:
                             name:
                               schema: *ref_199
                               rawValue: Microsoft.KeyVault/locations/deleteVirtualNetworkOrSubnets/action
-                              language: *ref_805
+                              language: *ref_808
                             display:
                               schema: *ref_224
                               parentsValue: {}
@@ -21746,32 +21765,32 @@ testModel:
                                 description:
                                   schema: *ref_203
                                   rawValue: Notifies Microsoft.KeyVault that a virtual network or subnet is being deleted
-                                  language: *ref_810
+                                  language: *ref_813
                                 operation:
                                   schema: *ref_202
                                   rawValue: 'Modify Network ACLs containing the deleted Vitual Network or Subnet '
-                                  language: *ref_809
+                                  language: *ref_812
                                 provider:
                                   schema: *ref_200
                                   rawValue: Microsoft Key Vault
-                                  language: *ref_807
+                                  language: *ref_810
                                 resource:
                                   schema: *ref_201
                                   rawValue: Location
-                                  language: *ref_808
-                              language: *ref_806
+                                  language: *ref_811
+                              language: *ref_809
                             isDataAction:
                               schema: *ref_205
                               rawValue: false
-                              language: *ref_811
+                              language: *ref_814
                             origin:
                               schema: *ref_204
                               rawValue: system
-                              language: *ref_812
-                      language: *ref_804
-                  language: *ref_803
-        operation: *ref_834
-        operationGroup: *ref_835
+                              language: *ref_815
+                      language: *ref_807
+                  language: *ref_806
+        operation: *ref_837
+        operationGroup: *ref_838
   scenarioTests: []
 language: !Languages 
   default:

@@ -30,7 +30,14 @@
         ],
         "enableSoftDelete": true,
         "softDeleteRetentionInDays": 90,
-        "enablePurgeProtection": true
+        "enablePurgeProtection": true,
+        "networkAcls": {
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default"
+            }
+          ]
+        }
       },
       "location": "westus",
       "sku": {

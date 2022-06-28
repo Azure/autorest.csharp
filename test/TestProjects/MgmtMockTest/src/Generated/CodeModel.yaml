@@ -11096,6 +11096,9 @@ operationGroups:
                     enableSoftDelete: true
                     initialAdminObjectIds:
                       - 00000000-0000-0000-0000-000000000000
+                    networkAcls:
+                      virtualNetworkRules:
+                        - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default
                     protectedSettings:
                       protected1: value2
                       protected2: 10
