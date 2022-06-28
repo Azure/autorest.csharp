@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             if (GetOriginalName(schema) != renameTarget.TypeName)
                 return;
-            var choiceValue = choices.FirstOrDefault(choice => choice.Language.Default.Name == renameTarget.PropertyName);
+            var choiceValue = choices.FirstOrDefault(choice => choice.Value == renameTarget.PropertyName);
             if (choiceValue == null)
                 return;
             choiceValue.Language.Default.SerializedName ??= choiceValue.Language.Default.Name;
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             if (GetOriginalName(schema) != renameTarget.TypeName)
                 return;
-            var property = properties.FirstOrDefault(p => p.Language.Default.Name == renameTarget.PropertyName);
+            var property = properties.FirstOrDefault(p => p.SerializedName == renameTarget.PropertyName);
             if (property == null)
                 return;
             property.Language.Default.SerializedName ??= property.Language.Default.Name;
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (renameKey.Contains('.'))
             {
                 // this should be a renaming of property
-                var segments = renameKey.Split('.');
+                var segments = renameKey.Split('.', 2); // split at the first dot
                 return new RenameTarget(RenameType.Property, segments[0], segments[1], newName);
             }
             else

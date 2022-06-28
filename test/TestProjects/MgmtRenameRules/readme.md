@@ -42,4 +42,5 @@ rename-mapping:
   LogAnalyticsOperationResult: LogAnalytics
   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
   UpgradeOperationHistoricalStatusInfo.type: ResourceType
+  DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
 ```

@@ -35,6 +35,7 @@
     "SshPublicKeyResource": "SshPublicKey",
     "LogAnalyticsOperationResult": "LogAnalytics",
     "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
-    "UpgradeOperationHistoricalStatusInfo.type": "ResourceType"
+    "UpgradeOperationHistoricalStatusInfo.type": "ResourceType",
+    "DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey": "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey"
   }
 }

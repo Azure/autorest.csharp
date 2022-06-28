@@ -33,7 +33,8 @@ namespace MgmtRenameRules.Models
         /// <param name="image"> Specifies information about the unmanaged user image to base the scale set on. </param>
         /// <param name="vhdContainers"> Specifies the container urls that are used to store operating system disks for the scale set. </param>
         /// <param name="managedDisk"> The managed disk parameters. </param>
-        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk)
+        /// <param name="securityType"> Specifies the SecurityType of the VM. Applicable for OS disks only. </param>
+        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, DiskSecurityType? securityType)
         {
             Name = name;
             Caching = caching;
@@ -45,6 +46,7 @@ namespace MgmtRenameRules.Models
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
+            SecurityType = securityType;
         }
 
         /// <summary> The disk name. </summary>
@@ -79,5 +81,7 @@ namespace MgmtRenameRules.Models
         public IList<string> VhdContainers { get; }
         /// <summary> The managed disk parameters. </summary>
         public VirtualMachineScaleSetManagedDiskParameters ManagedDisk { get; set; }
+        /// <summary> Specifies the SecurityType of the VM. Applicable for OS disks only. </summary>
+        public DiskSecurityType? SecurityType { get; set; }
     }
 }
