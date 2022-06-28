@@ -835,14 +835,14 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -901,14 +901,14 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -967,14 +967,14 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1033,14 +1033,14 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons").Item[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("fishes").Item[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1098,9 +1098,9 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("fishtype").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
@@ -1163,9 +1163,9 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("fishtype").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
@@ -1447,9 +1447,9 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("fishtype").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
@@ -1573,9 +1573,9 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("fishtype").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("species").ToString());
-        /// Console.WriteLine(result.GetProperty("siblings").Item[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>

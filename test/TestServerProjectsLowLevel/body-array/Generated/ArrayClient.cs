@@ -69,7 +69,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
@@ -101,7 +101,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetNull(RequestContext context = null)
@@ -133,7 +133,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetInvalidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
@@ -165,7 +165,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetInvalid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetInvalid(RequestContext context = null)
@@ -197,7 +197,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetEmptyAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
@@ -229,7 +229,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetEmpty();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetEmpty(RequestContext context = null)
@@ -337,7 +337,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetBooleanTfftAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context = null)
@@ -369,7 +369,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetBooleanTfft();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetBooleanTfft(RequestContext context = null)
@@ -477,7 +477,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetBooleanInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context = null)
@@ -509,7 +509,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetBooleanInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetBooleanInvalidNull(RequestContext context = null)
@@ -541,7 +541,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetBooleanInvalidStringAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context = null)
@@ -573,7 +573,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetBooleanInvalidString();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetBooleanInvalidString(RequestContext context = null)
@@ -605,7 +605,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetIntegerValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetIntegerValidAsync(RequestContext context = null)
@@ -637,7 +637,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetIntegerValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetIntegerValid(RequestContext context = null)
@@ -745,7 +745,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetIntInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context = null)
@@ -777,7 +777,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetIntInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetIntInvalidNull(RequestContext context = null)
@@ -809,7 +809,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetIntInvalidStringAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context = null)
@@ -841,7 +841,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetIntInvalidString();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetIntInvalidString(RequestContext context = null)
@@ -873,7 +873,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetLongValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetLongValidAsync(RequestContext context = null)
@@ -905,7 +905,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetLongValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetLongValid(RequestContext context = null)
@@ -1013,7 +1013,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetLongInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context = null)
@@ -1045,7 +1045,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetLongInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetLongInvalidNull(RequestContext context = null)
@@ -1077,7 +1077,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetLongInvalidStringAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context = null)
@@ -1109,7 +1109,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetLongInvalidString();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetLongInvalidString(RequestContext context = null)
@@ -1141,7 +1141,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetFloatValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetFloatValidAsync(RequestContext context = null)
@@ -1173,7 +1173,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetFloatValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetFloatValid(RequestContext context = null)
@@ -1281,7 +1281,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetFloatInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context = null)
@@ -1313,7 +1313,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetFloatInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetFloatInvalidNull(RequestContext context = null)
@@ -1345,7 +1345,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetFloatInvalidStringAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context = null)
@@ -1377,7 +1377,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetFloatInvalidString();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetFloatInvalidString(RequestContext context = null)
@@ -1409,7 +1409,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDoubleValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDoubleValidAsync(RequestContext context = null)
@@ -1441,7 +1441,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDoubleValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDoubleValid(RequestContext context = null)
@@ -1549,7 +1549,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDoubleInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context = null)
@@ -1581,7 +1581,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDoubleInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDoubleInvalidNull(RequestContext context = null)
@@ -1613,7 +1613,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDoubleInvalidStringAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context = null)
@@ -1645,7 +1645,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDoubleInvalidString();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDoubleInvalidString(RequestContext context = null)
@@ -1677,7 +1677,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetStringValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetStringValidAsync(RequestContext context = null)
@@ -1709,7 +1709,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetStringValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetStringValid(RequestContext context = null)
@@ -1817,7 +1817,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetEnumValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetEnumValidAsync(RequestContext context = null)
@@ -1849,7 +1849,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetEnumValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetEnumValid(RequestContext context = null)
@@ -1957,7 +1957,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetStringEnumValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context = null)
@@ -1989,7 +1989,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetStringEnumValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetStringEnumValid(RequestContext context = null)
@@ -2097,7 +2097,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetStringWithNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetStringWithNullAsync(RequestContext context = null)
@@ -2129,7 +2129,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetStringWithNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetStringWithNull(RequestContext context = null)
@@ -2161,7 +2161,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetStringWithInvalidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context = null)
@@ -2193,7 +2193,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetStringWithInvalid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetStringWithInvalid(RequestContext context = null)
@@ -2225,7 +2225,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetUuidValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetUuidValidAsync(RequestContext context = null)
@@ -2257,7 +2257,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetUuidValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetUuidValid(RequestContext context = null)
@@ -2365,7 +2365,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetUuidInvalidCharsAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context = null)
@@ -2397,7 +2397,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetUuidInvalidChars();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetUuidInvalidChars(RequestContext context = null)
@@ -2429,7 +2429,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateValidAsync(RequestContext context = null)
@@ -2461,7 +2461,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateValid(RequestContext context = null)
@@ -2569,7 +2569,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context = null)
@@ -2601,7 +2601,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateInvalidNull(RequestContext context = null)
@@ -2633,7 +2633,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateInvalidCharsAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context = null)
@@ -2665,7 +2665,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateInvalidChars();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateInvalidChars(RequestContext context = null)
@@ -2697,7 +2697,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateTimeValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context = null)
@@ -2729,7 +2729,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateTimeValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateTimeValid(RequestContext context = null)
@@ -2837,7 +2837,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateTimeInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context = null)
@@ -2869,7 +2869,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateTimeInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateTimeInvalidNull(RequestContext context = null)
@@ -2901,7 +2901,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateTimeInvalidCharsAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context = null)
@@ -2933,7 +2933,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateTimeInvalidChars();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateTimeInvalidChars(RequestContext context = null)
@@ -2965,7 +2965,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDateTimeRfc1123ValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
@@ -2997,7 +2997,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDateTimeRfc1123Valid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDateTimeRfc1123Valid(RequestContext context = null)
@@ -3105,7 +3105,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDurationValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDurationValidAsync(RequestContext context = null)
@@ -3137,7 +3137,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDurationValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDurationValid(RequestContext context = null)
@@ -3245,7 +3245,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetByteValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetByteValidAsync(RequestContext context = null)
@@ -3277,7 +3277,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetByteValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetByteValid(RequestContext context = null)
@@ -3385,7 +3385,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetByteInvalidNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context = null)
@@ -3417,7 +3417,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetByteInvalidNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetByteInvalidNull(RequestContext context = null)
@@ -3449,7 +3449,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetBase64UrlAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetBase64UrlAsync(RequestContext context = null)
@@ -3481,7 +3481,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetBase64Url();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].ToString());
+        /// Console.WriteLine(result[0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetBase64Url(RequestContext context = null)
@@ -3513,8 +3513,8 @@ namespace body_array_LowLevel
         /// Response response = await client.GetComplexNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3559,8 +3559,8 @@ namespace body_array_LowLevel
         /// Response response = client.GetComplexNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3605,8 +3605,8 @@ namespace body_array_LowLevel
         /// Response response = await client.GetComplexEmptyAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3651,8 +3651,8 @@ namespace body_array_LowLevel
         /// Response response = client.GetComplexEmpty();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3697,8 +3697,8 @@ namespace body_array_LowLevel
         /// Response response = await client.GetComplexItemNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3743,8 +3743,8 @@ namespace body_array_LowLevel
         /// Response response = client.GetComplexItemNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3789,8 +3789,8 @@ namespace body_array_LowLevel
         /// Response response = await client.GetComplexItemEmptyAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3835,8 +3835,8 @@ namespace body_array_LowLevel
         /// Response response = client.GetComplexItemEmpty();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3881,8 +3881,8 @@ namespace body_array_LowLevel
         /// Response response = await client.GetComplexValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3927,8 +3927,8 @@ namespace body_array_LowLevel
         /// Response response = client.GetComplexValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("integer").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("string").ToString());
+        /// Console.WriteLine(result[0].GetProperty("integer").ToString());
+        /// Console.WriteLine(result[0].GetProperty("string").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -4080,7 +4080,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = await client.GetArrayNullAsync();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetArrayNullAsync(RequestContext context = null)
@@ -4111,7 +4112,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = client.GetArrayNull();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetArrayNull(RequestContext context = null)
@@ -4142,7 +4144,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = await client.GetArrayEmptyAsync();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context = null)
@@ -4173,7 +4176,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = client.GetArrayEmpty();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetArrayEmpty(RequestContext context = null)
@@ -4204,7 +4208,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = await client.GetArrayItemNullAsync();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context = null)
@@ -4235,7 +4240,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = client.GetArrayItemNull();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetArrayItemNull(RequestContext context = null)
@@ -4266,7 +4272,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = await client.GetArrayItemEmptyAsync();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context = null)
@@ -4297,7 +4304,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = client.GetArrayItemEmpty();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetArrayItemEmpty(RequestContext context = null)
@@ -4328,7 +4336,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = await client.GetArrayValidAsync();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetArrayValidAsync(RequestContext context = null)
@@ -4359,7 +4368,8 @@ namespace body_array_LowLevel
         /// 
         /// Response response = client.GetArrayValid();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result[0][0].ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetArrayValid(RequestContext context = null)
@@ -4471,7 +4481,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDictionaryNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context = null)
@@ -4503,7 +4513,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDictionaryNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDictionaryNull(RequestContext context = null)
@@ -4535,7 +4545,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDictionaryEmptyAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context = null)
@@ -4567,7 +4577,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDictionaryEmpty();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDictionaryEmpty(RequestContext context = null)
@@ -4599,7 +4609,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDictionaryItemNullAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context = null)
@@ -4631,7 +4641,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDictionaryItemNull();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDictionaryItemNull(RequestContext context = null)
@@ -4663,7 +4673,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDictionaryItemEmptyAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context = null)
@@ -4695,7 +4705,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDictionaryItemEmpty();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDictionaryItemEmpty(RequestContext context = null)
@@ -4727,7 +4737,7 @@ namespace body_array_LowLevel
         /// Response response = await client.GetDictionaryValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context = null)
@@ -4759,7 +4769,7 @@ namespace body_array_LowLevel
         /// Response response = client.GetDictionaryValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         public virtual Response GetDictionaryValid(RequestContext context = null)

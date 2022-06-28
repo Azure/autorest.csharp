@@ -1071,13 +1071,13 @@ namespace lro_LowLevel
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("id").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("type").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("tags").GetProperty("<test>").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("location").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("name").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result[0].GetProperty("type").ToString());
+        /// Console.WriteLine(result[0].GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result[0].GetProperty("name").ToString());
+        /// Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1131,13 +1131,13 @@ namespace lro_LowLevel
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.Item[0].GetProperty("id").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("type").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("tags").GetProperty("<test>").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("location").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("name").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.Item[0].GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result[0].GetProperty("type").ToString());
+        /// Console.WriteLine(result[0].GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result[0].GetProperty("name").ToString());
+        /// Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>

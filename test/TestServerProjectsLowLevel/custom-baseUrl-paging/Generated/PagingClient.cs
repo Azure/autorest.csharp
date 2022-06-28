@@ -73,9 +73,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -133,9 +132,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// foreach (var data in client.GetPagesPartialUrl("<accountName>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -193,9 +191,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -253,9 +250,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// foreach (var data in client.GetPagesPartialUrlOperation("<accountName>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -314,9 +310,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -374,9 +369,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("properties").GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
         /// }
         /// ]]></code>
         /// </example>

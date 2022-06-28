@@ -70,9 +70,9 @@ namespace body_complex_LowLevel
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("color").ToString());
-        /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("food").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("breed").ToString());
@@ -130,9 +130,9 @@ namespace body_complex_LowLevel
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("color").ToString());
-        /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("hates").Item[0].GetProperty("food").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("breed").ToString());

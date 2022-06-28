@@ -302,8 +302,7 @@ namespace dpg_customization_LowLevel
         /// await foreach (var data in client.GetPagesAsync("<mode>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("received").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("received").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -358,8 +357,7 @@ namespace dpg_customization_LowLevel
         /// foreach (var data in client.GetPages("<mode>"))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("values").Item[0].GetProperty("received").ToString());
-        ///     Console.WriteLine(result.GetProperty("nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("received").ToString());
         /// }
         /// ]]></code>
         /// </example>

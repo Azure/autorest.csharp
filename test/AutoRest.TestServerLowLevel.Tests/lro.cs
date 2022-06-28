@@ -106,6 +106,22 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
+        [Ignore("Example")]
+        [Test]
+        public Task CustomHeaderPutSucceededExample([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
+            options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitUntil, value);
+            BinaryData data = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            Assert.AreEqual("100", result.GetProperty("id").GetString());
+            Assert.AreEqual("foo", result.GetProperty("name").GetString());
+            Assert.AreEqual("Succeeded", result.GetProperty("properties").GetProperty("provisioningState").GetString());
+        });
+
         [Test]
         public Task CustomHeaderPutSucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
@@ -118,6 +134,22 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Ignore("Example")]
+        [Test]
+        public Task CustomHeaderPutSucceeded_SyncExample([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
+            options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
+            var value = RequestContent.Create(new object());
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitUntil, value);
+            BinaryData data = operation.WaitForCompletion();
+            JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+            Assert.AreEqual("100", result.GetProperty("id").GetString());
+            Assert.AreEqual("foo", result.GetProperty("name").GetString());
+            Assert.AreEqual("Succeeded", result.GetProperty("properties").GetProperty("provisioningState").GetString());
         });
 
         [Test]

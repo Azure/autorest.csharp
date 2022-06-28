@@ -613,11 +613,11 @@ namespace Azure.AI.DocumentTranslation
         /// Response response = await client.GetSupportedDocumentFormatsAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -672,11 +672,11 @@ namespace Azure.AI.DocumentTranslation
         /// Response response = client.GetSupportedDocumentFormats();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -731,11 +731,11 @@ namespace Azure.AI.DocumentTranslation
         /// Response response = await client.GetSupportedGlossaryFormatsAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -790,11 +790,11 @@ namespace Azure.AI.DocumentTranslation
         /// Response response = client.GetSupportedGlossaryFormats();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
-        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -849,7 +849,7 @@ namespace Azure.AI.DocumentTranslation
         /// Response response = await client.GetSupportedStorageSourcesAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -895,7 +895,7 @@ namespace Azure.AI.DocumentTranslation
         /// Response response = client.GetSupportedStorageSources();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -967,17 +967,17 @@ namespace Azure.AI.DocumentTranslation
         /// await foreach (var data in client.GetTranslationsStatusAsync())
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
         /// }
         /// ]]></code>
         /// This sample shows how to call GetTranslationsStatusAsync with all parameters, and how to parse the result.
@@ -988,24 +988,23 @@ namespace Azure.AI.DocumentTranslation
         /// await foreach (var data in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
-        ///     Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -1133,17 +1132,17 @@ namespace Azure.AI.DocumentTranslation
         /// foreach (var data in client.GetTranslationsStatus())
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
         /// }
         /// ]]></code>
         /// This sample shows how to call GetTranslationsStatus with all parameters, and how to parse the result.
@@ -1154,24 +1153,23 @@ namespace Azure.AI.DocumentTranslation
         /// foreach (var data in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
-        ///     Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -1300,13 +1298,13 @@ namespace Azure.AI.DocumentTranslation
         /// await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid()))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
         /// }
         /// ]]></code>
         /// This sample shows how to call GetDocumentsStatusAsync with all parameters, and how to parse the result.
@@ -1317,22 +1315,21 @@ namespace Azure.AI.DocumentTranslation
         /// await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("path").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("characterCharged").ToString());
-        ///     Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("path").ToString());
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("characterCharged").ToString());
         /// }
         /// ]]></code>
         /// </example>
@@ -1454,13 +1451,13 @@ namespace Azure.AI.DocumentTranslation
         /// foreach (var data in client.GetDocumentsStatus(Guid.NewGuid()))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
         /// }
         /// ]]></code>
         /// This sample shows how to call GetDocumentsStatus with all parameters, and how to parse the result.
@@ -1471,22 +1468,21 @@ namespace Azure.AI.DocumentTranslation
         /// foreach (var data in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
         ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("path").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("characterCharged").ToString());
-        ///     Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        ///     Console.WriteLine(result.GetProperty("path").ToString());
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("characterCharged").ToString());
         /// }
         /// ]]></code>
         /// </example>
