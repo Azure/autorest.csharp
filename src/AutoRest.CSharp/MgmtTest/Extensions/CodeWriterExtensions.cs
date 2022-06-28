@@ -240,6 +240,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             _ when IsPrimitiveType(type) => writer.AppendRaw(value),
             _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
             _ when IsParsableInitializedStringLikeType(type) => writer.Append($"{type}.Parse({value:L})"),
+            _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
             _ => writer.Append($"{value:L}"),
         };
 

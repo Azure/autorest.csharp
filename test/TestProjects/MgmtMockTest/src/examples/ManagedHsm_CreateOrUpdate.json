@@ -24,6 +24,7 @@
             "protectedInner": "something else"
           }
         },
+        "rawMessage": "PFX-or-PEM-blob",
         "tenantId": "00000000-0000-0000-0000-000000000000",
         "initialAdminObjectIds": [
           "00000000-0000-0000-0000-000000000000"

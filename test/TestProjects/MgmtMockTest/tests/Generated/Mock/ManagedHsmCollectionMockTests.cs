@@ -62,6 +62,7 @@ namespace MgmtMockTest.Tests.Mock
                             protectedInner = "something else"
                         }
                     }),
+                    RawMessage = Convert.FromBase64String("PFX-or-PEM-blob"),
                     TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
                     InitialAdminObjectIds =
 {

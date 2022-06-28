@@ -35,6 +35,11 @@ namespace MgmtMockTest.Models
                 JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
 #endif
             }
+            if (Optional.IsDefined(RawMessage))
+            {
+                writer.WritePropertyName("rawMessage");
+                writer.WriteBase64StringValue(RawMessage, "D");
+            }
             if (Optional.IsDefined(TenantId))
             {
                 writer.WritePropertyName("tenantId");
@@ -87,6 +92,7 @@ namespace MgmtMockTest.Models
         {
             Optional<BinaryData> settings = default;
             Optional<BinaryData> protectedSettings = default;
+            Optional<byte[]> rawMessage = default;
             Optional<Guid> tenantId = default;
             Optional<IList<string>> initialAdminObjectIds = default;
             Optional<Uri> hsmUri = default;
@@ -120,6 +126,16 @@ namespace MgmtMockTest.Models
                         continue;
                     }
                     protectedSettings = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("rawMessage"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    rawMessage = property.Value.GetBytesFromBase64("D");
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -258,7 +274,7 @@ namespace MgmtMockTest.Models
                     continue;
                 }
             }
-            return new ManagedHsmProperties(settings.Value, protectedSettings.Value, Optional.ToNullable(tenantId), Optional.ToList(initialAdminObjectIds), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, Optional.ToList(privateEndpointConnections), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate));
+            return new ManagedHsmProperties(settings.Value, protectedSettings.Value, rawMessage.Value, Optional.ToNullable(tenantId), Optional.ToList(initialAdminObjectIds), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, Optional.ToList(privateEndpointConnections), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate));
         }
     }
 }
