@@ -14,9 +14,8 @@ public-clients: false
 head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
-keep-orphaned-models: AvailabilitySetSkuTypes
-keep-plural-enums:
-  - HyperVGenerationTypes
+keep-orphaned-models: AvailabilitySetSkuType
+
 format-by-name-rules:
   'tenantId': 'uuid'
   'resourceType': 'resource-type'
@@ -27,6 +26,9 @@ format-by-name-rules:
 
 prepend-rp-prefix:
 - UsageName
+
+# rename-mapping:
+#   SshPublicKey: SshPublicKeyInfo
 
 directive:
   - rename-model:

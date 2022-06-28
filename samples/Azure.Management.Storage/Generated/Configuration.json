@@ -33,6 +33,10 @@
     "*Uri": "Uri",
     "*Uris": "Uri"
   },
+  "RenameMapping": {
+    "BlobServiceProperties": "BlobService",
+    "FileServiceProperties": "FileService"
+  },
   "OverrideOperationName": {
     "DeletedAccounts_List": "GetAll"
   }
