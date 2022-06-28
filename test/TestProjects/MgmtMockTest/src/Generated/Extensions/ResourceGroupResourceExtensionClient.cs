@@ -38,6 +38,13 @@ namespace MgmtMockTest
             return GetCachedClient(Client => new VaultCollection(Client, Id));
         }
 
+        /// <summary> Gets a collection of DiskEncryptionSetResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of DiskEncryptionSetResources and their operations over a DiskEncryptionSetResource. </returns>
+        public virtual DiskEncryptionSetCollection GetDiskEncryptionSets()
+        {
+            return GetCachedClient(Client => new DiskEncryptionSetCollection(Client, Id));
+        }
+
         /// <summary> Gets a collection of ManagedHsmResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ManagedHsmResources and their operations over a ManagedHsmResource. </returns>
         public virtual ManagedHsmCollection GetManagedHsms()

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -64,6 +65,9 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (type.FrameworkType == typeof(BinaryData))
                 return writer.AppendBinaryData(exampleValue);
 
+            if (exampleValue.Schema is ObjectSchema objectSchema)
+                return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
+
             return writer.AppendRawValue(type.FrameworkType, exampleValue.RawValue);
         }
 
@@ -91,7 +95,9 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
-            // since this is a dictionary, we take the first generic argument as the key type which is always string
+            // since this is a dictionary, we take the first generic argument as the key type
+            // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
+            var keyType = type.Arguments[0];
             // the second as the value type
             var valueType = type.Arguments[1];
             var initialization = includeInitialization ? (FormattableString)$"new {type}()" : (FormattableString)$"";
@@ -100,8 +106,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 foreach ((var key, var value) in exampleValue.Properties)
                 {
                     // write key
-                    writer.Append($"[{key:L}] = ");
-                    writer.AppendExampleValue(value);
+                    writer.AppendRaw("[");
+                    writer.AppendExampleValue(new ExampleValue() { RawValue = key, Schema = new StringSchema() }, keyType);
+                    writer.AppendRaw("] = ");
+                    writer.AppendExampleValue(value, valueType);
                     writer.LineRaw(", ");
                 }
             }
@@ -115,6 +123,51 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.Append($"{typeof(BinaryData)}.{method}(");
             writer.AppendAnonymousObject(exampleValue);
             return writer.AppendRaw(")");
+        }
+
+        private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, ObjectSchema objectSchema, Type type, ExampleValue exampleValue)
+        {
+            var propertyMetadataDict = ReferenceClassFinder.GetPropertyMetadata(type);
+            // get the first constructor
+            var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).First();
+            // find the required parameters and put it into the constructor
+            writer.Append($"new {type}(");
+            foreach (var parameter in publicCtor.GetParameters())
+            {
+                // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
+                var value = exampleValue.Properties[parameter.Name!];
+                writer.AppendExampleValue(value, parameter.ParameterType);
+                writer.AppendRaw(",");
+            }
+            writer.RemoveTrailingComma();
+            writer.AppendRaw(")");
+            // assign values to the optional parameters
+            var optionalProperties = new Dictionary<string, ExampleValue>();
+            foreach ((var propertyName, var metadata) in propertyMetadataDict)
+            {
+                if (metadata.Required)
+                    continue;
+                // find if we have a value for this property
+                if (exampleValue.Properties.TryGetValue(propertyName, out var value))
+                {
+                    optionalProperties.Add(propertyName, value);
+                }
+            }
+            if (optionalProperties.Count > 0)
+            {
+                using (writer.Scope($"", newLine: false))
+                {
+                    foreach ((var propertyName, var value) in optionalProperties)
+                    {
+                        writer.Append($"{propertyName} = ");
+                        writer.AppendExampleValue(value);
+                        writer.LineRaw(",");
+                    }
+                    writer.RemoveTrailingComma();
+                }
+            }
+
+            return writer;
         }
 
         private static CodeWriter AppendAnonymousObject(this CodeWriter writer, ExampleValue exampleValue)

@@ -24,6 +24,8 @@ namespace MgmtMockTest
         private VaultsRestOperations _vaultRestClient;
         private ClientDiagnostics _vaultsClientDiagnostics;
         private VaultsRestOperations _vaultsRestClient;
+        private ClientDiagnostics _diskEncryptionSetClientDiagnostics;
+        private DiskEncryptionSetsRestOperations _diskEncryptionSetRestClient;
         private ClientDiagnostics _managedHsmClientDiagnostics;
         private ManagedHsmsRestOperations _managedHsmRestClient;
         private ClientDiagnostics _managedHsmsClientDiagnostics;
@@ -45,6 +47,8 @@ namespace MgmtMockTest
         private VaultsRestOperations VaultRestClient => _vaultRestClient ??= new VaultsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(VaultResource.ResourceType));
         private ClientDiagnostics VaultsClientDiagnostics => _vaultsClientDiagnostics ??= new ClientDiagnostics("MgmtMockTest", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private VaultsRestOperations VaultsRestClient => _vaultsRestClient ??= new VaultsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics DiskEncryptionSetClientDiagnostics => _diskEncryptionSetClientDiagnostics ??= new ClientDiagnostics("MgmtMockTest", DiskEncryptionSetResource.ResourceType.Namespace, Diagnostics);
+        private DiskEncryptionSetsRestOperations DiskEncryptionSetRestClient => _diskEncryptionSetRestClient ??= new DiskEncryptionSetsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(DiskEncryptionSetResource.ResourceType));
         private ClientDiagnostics ManagedHsmClientDiagnostics => _managedHsmClientDiagnostics ??= new ClientDiagnostics("MgmtMockTest", ManagedHsmResource.ResourceType.Namespace, Diagnostics);
         private ManagedHsmsRestOperations ManagedHsmRestClient => _managedHsmRestClient ??= new ManagedHsmsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ManagedHsmResource.ResourceType));
         private ClientDiagnostics ManagedHsmsClientDiagnostics => _managedHsmsClientDiagnostics ??= new ClientDiagnostics("MgmtMockTest", ProviderConstants.DefaultProviderNamespace, Diagnostics);
@@ -293,6 +297,90 @@ namespace MgmtMockTest
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Lists all the disk encryption sets under a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets
+        /// Operation Id: DiskEncryptionSets_List
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<DiskEncryptionSetResource> GetDiskEncryptionSetsAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<DiskEncryptionSetResource>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = DiskEncryptionSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDiskEncryptionSets");
+                scope.Start();
+                try
+                {
+                    var response = await DiskEncryptionSetRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DiskEncryptionSetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<DiskEncryptionSetResource>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = DiskEncryptionSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDiskEncryptionSets");
+                scope.Start();
+                try
+                {
+                    var response = await DiskEncryptionSetRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DiskEncryptionSetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary>
+        /// Lists all the disk encryption sets under a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets
+        /// Operation Id: DiskEncryptionSets_List
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<DiskEncryptionSetResource> GetDiskEncryptionSets(CancellationToken cancellationToken = default)
+        {
+            Page<DiskEncryptionSetResource> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = DiskEncryptionSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDiskEncryptionSets");
+                scope.Start();
+                try
+                {
+                    var response = DiskEncryptionSetRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DiskEncryptionSetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<DiskEncryptionSetResource> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = DiskEncryptionSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDiskEncryptionSets");
+                scope.Start();
+                try
+                {
+                    var response = DiskEncryptionSetRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DiskEncryptionSetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>

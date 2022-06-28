@@ -251,6 +251,32 @@ namespace MgmtMockTest
         }
 
         /// <summary>
+        /// Lists all the disk encryption sets under a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets
+        /// Operation Id: DiskEncryptionSets_List
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<DiskEncryptionSetResource> GetDiskEncryptionSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscriptionResource).GetDiskEncryptionSetsAsync(cancellationToken);
+        }
+
+        /// <summary>
+        /// Lists all the disk encryption sets under a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets
+        /// Operation Id: DiskEncryptionSets_List
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<DiskEncryptionSetResource> GetDiskEncryptionSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscriptionResource).GetDiskEncryptionSets(cancellationToken);
+        }
+
+        /// <summary>
         /// The List operation gets information about the managed HSM Pools associated with the subscription.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/managedHSMs
         /// Operation Id: ManagedHsms_ListBySubscription
@@ -351,6 +377,46 @@ namespace MgmtMockTest
         public static Response<VaultResource> GetVault(this ResourceGroupResource resourceGroupResource, string vaultName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetVaults().Get(vaultName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of DiskEncryptionSetResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DiskEncryptionSetResources and their operations over a DiskEncryptionSetResource. </returns>
+        public static DiskEncryptionSetCollection GetDiskEncryptionSets(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetExtensionClient(resourceGroupResource).GetDiskEncryptionSets();
+        }
+
+        /// <summary>
+        /// Gets information about a disk encryption set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}
+        /// Operation Id: DiskEncryptionSets_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can&apos;t be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="diskEncryptionSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="diskEncryptionSetName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<DiskEncryptionSetResource>> GetDiskEncryptionSetAsync(this ResourceGroupResource resourceGroupResource, string diskEncryptionSetName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroupResource.GetDiskEncryptionSets().GetAsync(diskEncryptionSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets information about a disk encryption set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}
+        /// Operation Id: DiskEncryptionSets_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can&apos;t be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="diskEncryptionSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="diskEncryptionSetName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<DiskEncryptionSetResource> GetDiskEncryptionSet(this ResourceGroupResource resourceGroupResource, string diskEncryptionSetName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroupResource.GetDiskEncryptionSets().Get(diskEncryptionSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ManagedHsmResources in the ResourceGroupResource. </summary>
@@ -464,6 +530,25 @@ namespace MgmtMockTest
             {
                 VirtualMachineExtensionImageResource.ValidateResourceId(id);
                 return new VirtualMachineExtensionImageResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region DiskEncryptionSetResource
+        /// <summary>
+        /// Gets an object representing a <see cref="DiskEncryptionSetResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DiskEncryptionSetResource.CreateResourceIdentifier" /> to create a <see cref="DiskEncryptionSetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="DiskEncryptionSetResource" /> object. </returns>
+        public static DiskEncryptionSetResource GetDiskEncryptionSetResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                DiskEncryptionSetResource.ValidateResourceId(id);
+                return new DiskEncryptionSetResource(client, id);
             }
             );
         }
