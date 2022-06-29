@@ -170,8 +170,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             // this is the path of the scope of this operation
             var scopePath = testCase.RequestPath.GetScopePath();
             _writer.Append($"var {idVar:D} = new {typeof(ResourceIdentifier)}(");
-            // TODO -- how to build a resource identifier here? Maybe use string.Format?
-            // this is wrong, but we put it here as a placeholder
+            // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
             _writer.Append($"{typeof(string)}.Format(\"");
             int refIndex = 0;
             foreach (var segment in scopePath)
