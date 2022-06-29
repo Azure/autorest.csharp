@@ -26,6 +26,7 @@ format-by-name-rules:
   'tenantId': 'uuid'
   'resourceType': 'resource-type'
   'location': 'azure-location'
+  'ETag': 'etag'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
 directive:
