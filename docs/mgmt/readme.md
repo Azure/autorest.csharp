@@ -685,6 +685,22 @@ rename-rules:
 
 The above configuration will search case sensitively in the public API of generated resources/collections/models, and replace the occurrences to the corresponding value to keep the casing of some acronyms unified across the generated SDK.
 
+### Change format by name rules
+
+This is a bulk update rule to change property's format by its name which this name demonstrates a specific type implicitly. This is a convenient configuration to replace using directive change the property format attribute.
+
+```yaml
+format-by-name-rules:
+  'ETag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
+```
+
+The name match supports 3 patterns: full, start-with, and end-with. And it’s case sensitive compare. 
+For example, in the above configuration, the `ETag` and `location` are full match, `*Uri` and `*Uris` are end-with match.
+
+
 ### Management debug options
 
 A debug configuration is also introduced to show some extra information in the generated code. Usage:
