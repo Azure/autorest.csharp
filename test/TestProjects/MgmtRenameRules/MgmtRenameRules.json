@@ -5893,12 +5893,47 @@
                 "managedDisk": {
                     "description": "The managed disk parameters.",
                     "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+                },
+                "securityType": {
+                  "$ref": "#/definitions/DiskSecurityType"
                 }
             },
             "required": [
                 "createOption"
             ],
             "description": "Describes a virtual machine scale set operating system disk."
+        },
+        "DiskSecurityType": {
+          "type": "string",
+          "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+          "enum": [
+            "TrustedLaunch",
+            "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+            "ConfidentialVM_DiskEncryptedWithPlatformKey",
+            "ConfidentialVM_DiskEncryptedWithCustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "DiskSecurityTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TrustedLaunch",
+                "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+              },
+              {
+                "value": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+                "description": "Indicates Confidential VM disk with only VM guest state encrypted"
+              },
+              {
+                "value": "ConfidentialVM_DiskEncryptedWithPlatformKey",
+                "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key"
+              },
+              {
+                "value": "ConfidentialVM_DiskEncryptedWithCustomerKey",
+                "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key"
+              }
+            ]
+          }
         },
         "VirtualMachineScaleSetUpdateOSDisk": {
             "properties": {

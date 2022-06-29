@@ -16,6 +16,13 @@ input-file:
 namespace: Azure.ReferenceTypes
 keep-orphaned-models: ResourceNon # the remover will remove this since this is not internally used or a reference type if we do not have this configuration
 
+rename-mapping:
+  PrivateLinkResource: PrivateLinkResourceData
+  PrivateEndpointConnection: PrivateEndpointConnectionData
+  PrivateEndpointConnectionListResult: PrivateEndpointConnectionList
+  PrivateLinkResourceListResult: PrivateLinkResourceList
+  CheckNameAvailabilityRequest.type: ResourceType
+
 directive:
   - remove-model: "AzureEntityResource"
   - remove-model: "ProxyResource"
@@ -88,22 +95,6 @@ directive:
     where: $.definitions.PrivateLinkResourceListResult.properties.value
     transform: >
       $["readOnly"] = true
-# Rename to avoid name duplication with Resource classes in each RP
-  - rename-model:
-      from: PrivateLinkResource
-      to: PrivateLinkResourceData
-  - rename-model:
-      from: PrivateEndpointConnection
-      to: PrivateEndpointConnectionData
-  - rename-model:
-      from: PrivateEndpointConnectionListResult
-      to: PrivateEndpointConnectionList
-  - rename-model:
-      from: PrivateLinkResourceListResult
-      to: PrivateLinkResourceList
-  - from: types.json
-    where: $.definitions.CheckNameAvailabilityRequest.properties.type
-    transform: $["x-ms-client-name"] = "ResourceType"
 # Needs to go last in order to override the global setting
   - from: types.json
     where: $.definitions.ErrorDetail

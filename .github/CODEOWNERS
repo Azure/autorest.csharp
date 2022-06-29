@@ -3,4 +3,5 @@
 ################
 
 # Git Hub bot rules
-/.github/fabricbot.json  @AlexGhiondea @jsquire
+/.github/CODEOWNERS  @jsquire @ronniegeraghty
+/.github/fabricbot.json  @jsquire @ronniegeraghty

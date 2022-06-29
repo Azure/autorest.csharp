@@ -14,30 +14,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class NormalizeParamNames
     {
-        public static void Update(CachedDictionary<string, HashSet<OperationSet>> dataSchemaDict)
-        {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    foreach (var request in operation.Requests)
-                    {
-                        foreach (var param in request.SignatureParameters)
-                        {
-                            if (param.In != HttpParameterIn.Body)
-                                continue;
-
-                            if (param.Schema is not ObjectSchema objectSchema)
-                                continue;
-
-                            param.Language.Default.SerializedName ??= param.Language.Default.Name;
-                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema.Name, dataSchemaDict);
-                        }
-                    }
-                }
-            }
-        }
-
         internal static string GetNewName(string paramName, string schemaName, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
         {
             if (schemaName.EndsWith("Options", StringComparison.Ordinal))

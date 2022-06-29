@@ -13,5 +13,12 @@
   "KeepOrphanedModels": [
     "ResourceNon"
   ],
+  "RenameMapping": {
+    "PrivateLinkResource": "PrivateLinkResourceData",
+    "PrivateEndpointConnection": "PrivateEndpointConnectionData",
+    "PrivateEndpointConnectionListResult": "PrivateEndpointConnectionList",
+    "PrivateLinkResourceListResult": "PrivateLinkResourceList",
+    "CheckNameAvailabilityRequest.type": "ResourceType"
+  },
   "ArmCore": true
 }

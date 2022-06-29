@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
 
             // TODO -- find a way to get rid of this input parameter
-            CodeModelTransformer.Transform(ResourceDataSchemaNameToOperationSets);
+            CodeModelTransformer.Transform();
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -122,6 +122,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             List<Schema> updatedModels = new List<Schema>();
+
+            // run one pass to get the schema usage count
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
@@ -149,6 +151,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
+            // run second pass to rename the ones based on the schema usage count
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
@@ -196,6 +199,28 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
+
+            // run third pass to rename the corresponding parameters
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var request in operation.Requests)
+                    {
+                        foreach (var param in request.SignatureParameters)
+                        {
+                            if (param.In != HttpParameterIn.Body)
+                                continue;
+
+                            if (param.Schema is not ObjectSchema objectSchema)
+                                continue;
+
+                            param.Language.Default.Name = NormalizeParamNames.GetNewName(param.Language.Default.Name, objectSchema.Name, ResourceDataSchemaNameToOperationSets);
+                        }
+                    }
+                }
+            }
+
             return updatedModels;
         }
 
@@ -743,7 +768,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
             ? new MgmtReferenceType(objectSchema)
             : new MgmtObjectType(objectSchema),
-            _ => throw new NotImplementedException()
+            _ => throw new NotImplementedException($"Unhandled schema type {schema.GetType()} with name {schema.Name}")
         };
 
         private TypeProvider BuildResourceData(Schema schema) => schema switch

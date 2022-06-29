@@ -14,9 +14,8 @@ public-clients: false
 head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
-keep-orphaned-models: AvailabilitySetSkuTypes
-keep-plural-enums:
-  - HyperVGenerationTypes
+keep-orphaned-models: AvailabilitySetSkuType
+
 format-by-name-rules:
   'tenantId': 'uuid'
   'resourceType': 'resource-type'
@@ -28,21 +27,14 @@ format-by-name-rules:
 prepend-rp-prefix:
 - UsageName
 
-directive:
-  - rename-model:
-      from: SshPublicKey
-      to: SshPublicKeyInfo
-  - rename-model:
-      from: LogAnalyticsOperationResult
-      to: LogAnalytics
-  - rename-model:
-      from: SshPublicKeyResource
-      to: SshPublicKey
-  - rename-model:
-      from: RollingUpgradeStatusInfo
-      to: VirtualMachineScaleSetRollingUpgrade
-  - from: swagger-document
-    where: $.paths..parameters[?(@.name === "location")]
-    transform: >
-      $["x-ms-format"] = 'azure-location';
+rename-mapping:
+  SshPublicKey: SshPublicKeyInfo
+  SshPublicKeyResource: SshPublicKey
+  LogAnalyticsOperationResult: LogAnalytics
+  RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
+  VirtualMachineExtension.properties.type: ExtensionType # the properties inside is required because this is a flattened property
+  VirtualMachineExtensionUpdate.properties.type: ExtensionType # the properties inside is required because this is a flattened property
+  VirtualMachineScaleSetExtension.properties.type: ExtensionType # the properties inside is required because this is a flattened property
+  HyperVGenerationType: HyperVGeneration
+  HyperVGenerationTypes: HyperVGeneration
 ```

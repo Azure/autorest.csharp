@@ -10,10 +10,7 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "KeepOrphanedModels": [
-    "AvailabilitySetSkuTypes"
-  ],
-  "KeepPluralEnums": [
-    "HyperVGenerationTypes"
+    "AvailabilitySetSkuType"
   ],
   "PrependRPPrefix": [
     "UsageName"
@@ -25,5 +22,16 @@
     "location": "azure-location",
     "*Uri": "Uri",
     "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "SshPublicKey": "SshPublicKeyInfo",
+    "SshPublicKeyResource": "SshPublicKey",
+    "LogAnalyticsOperationResult": "LogAnalytics",
+    "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
+    "VirtualMachineExtension.properties.type": "ExtensionType",
+    "VirtualMachineExtensionUpdate.properties.type": "ExtensionType",
+    "VirtualMachineScaleSetExtension.properties.type": "ExtensionType",
+    "HyperVGenerationType": "HyperVGeneration",
+    "HyperVGenerationTypes": "HyperVGeneration"
   }
 }
