@@ -2,11 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.MgmtTest.AutoRest;
 using AutoRest.CSharp.MgmtTest.Generation.Mock;
+using System.Collections.Generic;
+using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.MgmtTest.Models;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -42,6 +47,57 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             extensionWrapperTestWriter.Write();
 
             project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+
+
+            if (Configuration.MgmtConfiguration.TestModeler.GenerateSdkSample == false)
+                return;
+
+            var generated = new HashSet<string>();
+            foreach (var collectionTest in library.ResourceCollectionMockTests)
+            {
+                foreach (var testCase in collectionTest.MockTestCases)
+                {
+                    var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                    collectionTestWriter.WriteSample(testCase);
+                    var filename = GenExampleFileName(testCase);
+                    if (!generated.Contains(filename))
+                    {
+                        project.AddGeneratedFile(filename, collectionTestWriter.ToString());
+                        generated.Add(filename);
+                    }
+                }
+            }
+
+            foreach (var resourceTest in library.ResourceMockTests)
+            {
+                foreach (var testCase in resourceTest.MockTestCases)
+                {
+                    var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                    resourceTestWriter.WriteSample(testCase);
+                    var filename = GenExampleFileName(testCase);
+                    if (!generated.Contains(filename))
+                    {
+                        project.AddGeneratedFile(filename, resourceTestWriter.ToString());
+                        generated.Add(filename);
+                    }
+                }
+            }
+            foreach (var testCase in extensionWrapperTest.MockTestCases)
+            {
+                var extensionWrapperTestWriter2 = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+                extensionWrapperTestWriter2.WriteSample(testCase);
+                var filename = GenExampleFileName(testCase);
+                if (!generated.Contains(filename))
+                {
+                    project.AddGeneratedFile(GenExampleFileName(testCase), extensionWrapperTestWriter2.ToString());
+                    generated.Add(filename);
+                }
+            }
+        }
+
+        private static string GenExampleFileName(MockTestCase testCase)
+        {
+            return $"../../Samples/Generated/{testCase.RestOperation.Operation.OperationId}$${testCase.Example.Name}.cs";
         }
     }
 }

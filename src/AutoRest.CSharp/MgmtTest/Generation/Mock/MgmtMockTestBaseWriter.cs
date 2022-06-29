@@ -26,6 +26,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         protected CodeWriter _writer;
         protected MgmtMockTestProvider<TProvider> This { get; }
 
+        protected bool generatingSample = false;
+
         public MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider)
         {
             _writer = writer;
@@ -42,6 +44,49 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                     WriteImplementations();
                 }
             }
+        }
+
+        public virtual void WriteSample(MockTestCase testCase)
+        {
+            generatingSample = true;
+            _writer.UseNamespace("Azure.ResourceManager");
+            _writer.UseNamespace("System");
+            _writer.UseNamespace("Azure.Identity");
+            _writer.UseNamespace("System.Threading.Tasks");
+            _writer.Line($"ArmClient GetArmClient() => new ArmClient(new DefaultAzureCredential());");
+            RequestPath parentRP = testCase.Carrier switch
+            {
+                ResourceCollection parentCollection => parentCollection.RequestPath,
+                Resource parentResource => parentResource.RequestPath,
+                MgmtExtensions parentExtension => parentExtension.ContextualPath,
+                _ => throw new InvalidOperationException($"Unknown parent {testCase.Carrier.GetType()}"),
+            };
+            foreach (var fs in testCase.ComposeResourceIdentifierParameterValues(parentRP, true))
+            {
+                var s = $"{fs}";
+                // s = s.Substring(1, s.Length - 2);
+                if (s == "subscriptionId")
+                {
+                    _writer.Line($"var subscriptionId = Environment.GetEnvironmentVariable(\"SUBSCRIPTION_ID\") ?? \"00000000-0000-0000-0000-000000000000\";");
+                }
+                else
+                {
+                    object? rawValue = null;
+                    foreach (var param in testCase.Example.AllParameters)
+                    {
+                        if (param.Parameter.Language.Default.SerializedName == s)
+                            rawValue = param.ExampleValue.RawValue;
+                    }
+                    _writer.Append($"var {s} = ");
+                    _writer.AppendRawValue(rawValue?.GetType() ?? typeof(object), rawValue);
+                    _writer.Line($";");
+                }
+            }
+            _writer.Line($"// api-version: {testCase.RestOperation.Operation.ApiVersions.FirstOrDefault().Version}");
+            _writer.Line($"// x-ms-original-file: {testCase.Example.OriginalFile}");
+            WriteTestMethodBody(testCase);
+
+            generatingSample = false;
         }
 
         protected void WriteClassDeclaration()
@@ -135,7 +180,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
             _writer.Append($"var {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath))
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath, generatingSample))
             {
                 _writer.Append(value).AppendRaw(",");
             }
@@ -182,7 +227,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                     _writer.Append($"{{{refIndex++}}}");
             }
             _writer.AppendRaw("\", ");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(scopePath))
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(scopePath, generatingSample))
             {
                 _writer.Append(value).AppendRaw(",");
             }
@@ -197,7 +242,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
             _writer.Append($"var {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath, generatingSample))
             {
                 _writer.Append(value).AppendRaw(",");
             }
@@ -212,23 +257,76 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             // we will always use the Async version of methods
             if (testCase.ClientOperation.IsPagingOperation)
             {
-                _writer.Append($"await foreach (var _ in ");
+                _writer.Append($"{(generatingSample ? $"" : $"await ")}foreach (var _ in ");
                 WriteTestMethodInvocation(declaration, testCase);
                 using (_writer.Scope($")"))
-                { }
+                {
+                    if (generatingSample && !testCase.ClientOperation.ReturnType.IsFrameworkType && testCase.ClientOperation.ReturnType.Implementation is Resource)
+                    {
+                        _writer.UseNamespace("System.Text.Json");
+                        _writer.Line($"Console.WriteLine($\"ResourceId: {{_.Data.Id}}\");");
+                        _writer.Line($"Console.WriteLine($\"Full Resource content: {{JsonSerializer.Serialize(_.Data)}}\");");
+                    }
+                }
             }
             else
             {
-                _writer.Append($"await ");
+                CodeWriterDeclaration operation = new CodeWriterDeclaration("operation");
+                if (generatingSample)
+                {
+                    _writer.Append($"var {operation:D} = ");
+                }
+                else
+                {
+                    _writer.Append($"await ");
+                }
                 WriteTestMethodInvocation(declaration, testCase);
                 _writer.LineRaw(";");
+                if (generatingSample)
+                {
+                    if (testCase.ClientOperation.ReturnType.Name == "ArmOperation")
+                    {
+                        _writer.UseNamespace("System.Text.Json");
+                        if (testCase.ClientOperation.ReturnType.Arguments.Length > 0 && testCase.ClientOperation.ReturnType.Arguments[0].Implementation is Resource)
+                        {
+                            _writer.Line($"Console.WriteLine($\"Succeed on ResourceId: {{{operation}.Value.Data.Id}}\");");
+                            _writer.Line($"Console.WriteLine($\"Full Resource content: {{JsonSerializer.Serialize({operation}.Value.Data)}}\");");
+                        }
+                        else
+                        {
+                            _writer.Line($"Console.WriteLine($\"Response: {{JsonSerializer.Serialize({operation}.Value)}}\");");
+                        }
+                    }
+                    else if (testCase.ClientOperation.ReturnType.Name == "Response" && testCase.ClientOperation.ReturnType.Arguments.Length > 0)
+                    {
+                        if (testCase.ClientOperation.ReturnType.Arguments[0].IsFrameworkType)
+                        {
+                            _writer.Line($"Console.WriteLine($\"Succeed with return: {{{operation}.Value}}\");");
+                        }
+                        else if (testCase.ClientOperation.ReturnType.Arguments[0].Implementation is Resource)
+                        {
+                            _writer.UseNamespace("System.Text.Json");
+                            _writer.Line($"Console.WriteLine($\"Succeed on ResourceId: {{{operation}.Value.Data.Id}}\");");
+                            _writer.Line($"Console.WriteLine($\"Full Resource content: {{JsonSerializer.Serialize({operation}.Value.Data)}}\");");
+                        }
+                        else
+                        {
+                            _writer.UseNamespace("System.Text.Json");
+                            _writer.Line($"Console.WriteLine($\"Response: {{JsonSerializer.Serialize({operation}.Value)}}\");");
+                        }
+                    }
+                    else
+                    {
+                        _writer.Line($"Console.WriteLine(\"Succeed.\");");
+                    }
+                }
             }
         }
 
         protected void WriteTestMethodInvocation(CodeWriterDeclaration declaration, MockTestCase testCase)
         {
             var clientOperation = testCase.ClientOperation;
-            var methodName = CreateMethodName(clientOperation.Name);
+            var methodName = CreateMethodName(clientOperation.Name, !generatingSample);
             _writer.Append($"{declaration}.{methodName}(");
             foreach (var parameter in clientOperation.MethodParameters)
             {

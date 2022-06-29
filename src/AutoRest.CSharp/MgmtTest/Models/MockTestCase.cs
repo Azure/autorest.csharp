@@ -38,6 +38,8 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public MgmtTypeProvider Carrier { get ; }
 
+        public ExampleModel Example => _example;
+
         public MockTestCase(string operationId, MgmtTypeProvider provider, MgmtClientOperation clientOperation, ExampleModel example)
         {
             OperationId = operationId;
@@ -79,7 +81,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         /// <param name="requestPath"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public IEnumerable<FormattableString> ComposeResourceIdentifierParameterValues(RequestPath requestPath)
+        public IEnumerable<FormattableString> ComposeResourceIdentifierParameterValues(RequestPath requestPath, bool generatingSample)
         {
             // we first take the same amount of segments from my own request path, in case there is a case that the parameter names between different paths are different
             var piecesFromMyOwn = RequestPath.Take(requestPath.Count);
@@ -96,8 +98,13 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // replace the value of subscription id to avoid the sdk complain about the values not being a guid
                 if (serializedName == "subscriptionId")
                     rawValue = ReplaceValueForSubscriptionId((string)rawValue);
-
-                yield return $"\"{rawValue}\"";
+                if (generatingSample) {
+                    yield return $"{serializedName}";
+                }
+                else
+                {
+                    yield return $"\"{rawValue}\"";
+                }
             }
         }
 

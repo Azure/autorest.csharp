@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue) => rawValue switch
+        public static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue) => rawValue switch
         {
             // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
             // https://github.com/Azure/autorest.csharp/issues/2377
@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             _ => writer.AppendRaw(rawValue.ToString()!)
         };
 
-        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value) => type switch
+        public static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value) => type switch
         {
             _ when IsPrimitiveType(type) => writer.AppendRaw(value),
             _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),

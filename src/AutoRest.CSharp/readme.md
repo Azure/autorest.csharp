@@ -51,11 +51,14 @@ pipeline:
 
 modelerfour:
   emit-yaml-tags: true
+  include-x-ms-examples-original-file: true
+include-x-ms-examples-original-file: true
 
 testmodeler:
   use-parents-value: true
   split-parents-value: false
   add-armtemplate-payload-string: true
+
 ```
 
 ## Customization

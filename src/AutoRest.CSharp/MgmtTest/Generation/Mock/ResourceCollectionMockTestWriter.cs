@@ -55,5 +55,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
             return collectionName;
         }
+
+        public void WriteSampleMethod(MockTestCase testCase, bool hasSuffix)
+        {
+            WriteTestAttribute();
+            // TODO -- find a way to determine when we need to add the suffix
+            using (_writer.WriteMethodDeclaration(testCase.GetMethodSignature(hasSuffix)))
+            {
+                WriteTestMethodBody(testCase);
+            }
+        }
     }
 }
