@@ -13,6 +13,7 @@ using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.MgmtTest.Extensions
@@ -253,7 +254,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             => IsType<bool>(type) || IsType<int>(type) || IsType<long>(type) || IsType<double>(type) || IsType<decimal>(type);
 
         private static bool IsNewInstanceInitializedStringLikeType(Type type)
-            => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type);
+            => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type) || IsType<ETag>(type);
 
         private static bool IsParsableInitializedStringLikeType(Type type)
             => IsType<DateTimeOffset>(type) || IsType<Guid>(type) || IsType<TimeSpan>(type);
