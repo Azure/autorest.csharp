@@ -6,12 +6,14 @@ Run `dotnet build /t:GenerateCode` to generate code.
 
 ``` yaml
 azure-arm: true
+title: MgmtMockTest
 library-name: MgmtMockTest
 require: $(this-folder)/../../../../readme.md
 input-file:
 - $(this-folder)/keyvault.json
 - $(this-folder)/managedHsm.json
 - $(this-folder)/providers.json
+- $(this-folder)/authorization.json
 clear-output-folder: true
 namespace: MgmtMockTest
 modelerfour:

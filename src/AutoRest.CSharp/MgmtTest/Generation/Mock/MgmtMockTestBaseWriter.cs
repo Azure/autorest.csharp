@@ -8,12 +8,16 @@ using System.Net;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
@@ -143,27 +147,64 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             return resourceVar;
         }
 
-        protected CodeWriterDeclaration WriteGetExtension(MgmtExtensions parentExtension, MockTestCase testCase)
+        protected CodeWriterDeclaration WriteGetExtension(MgmtExtensions parentExtension, MockTestCase testCase) => parentExtension.ArmCoreType switch
+        {
+            _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, testCase),
+            _ when parentExtension.ArmCoreType == typeof(ArmResource) => WriteGetArmResource(parentExtension, testCase),
+            _ => WriteGetOtherExtension(parentExtension, testCase)
+        };
+
+        private CodeWriterDeclaration WriteGetTenantResource(MgmtExtensions parentExtension, MockTestCase testCase)
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
-            if (parentExtension == MgmtContext.Library.TenantExtensions)
-            {
-                _writer.UseNamespace("System.Linq");
-                _writer.Line($"var {resourceVar:D} = GetArmClient().GetTenants().First();");
-            }
-            else
-            {
-                var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
-                _writer.Append($"var {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
-                foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
-                {
-                    _writer.Append(value).AppendRaw(",");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.LineRaw(");");
-                _writer.Line($"var {resourceVar:D} = GetArmClient().Get{parentExtension.ArmCoreType.Name}({idVar});");
-            }
+            _writer.UseNamespace("System.Linq");
+            _writer.Line($"var {resourceVar:D} = GetArmClient().GetTenants().First();");
+            return resourceVar;
+        }
 
+        private CodeWriterDeclaration WriteGetArmResource(MgmtExtensions parentExtension, MockTestCase testCase)
+        {
+            var resourceVar = new CodeWriterDeclaration("resource");
+            // everytime we go into this branch, this resource must be a scope resource
+            var idVar = new CodeWriterDeclaration($"resourceId");
+            // this is the path of the scope of this operation
+            var scopePath = testCase.RequestPath.GetScopePath();
+            _writer.Append($"var {idVar:D} = new {typeof(ResourceIdentifier)}(");
+            // TODO -- how to build a resource identifier here? Maybe use string.Format?
+            // this is wrong, but we put it here as a placeholder
+            _writer.Append($"{typeof(string)}.Format(\"");
+            int refIndex = 0;
+            foreach (var segment in scopePath)
+            {
+                _writer.AppendRaw("/");
+                if (segment.IsConstant)
+                    _writer.AppendRaw(segment.ConstantValue);
+                else
+                    _writer.Append($"{{{refIndex++}}}");
+            }
+            _writer.AppendRaw("\", ");
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(scopePath))
+            {
+                _writer.Append(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.LineRaw("));");
+            _writer.Line($"var {resourceVar:D} = GetArmClient().GetGenericResource({idVar});");
+            return resourceVar;
+        }
+
+        private CodeWriterDeclaration WriteGetOtherExtension(MgmtExtensions parentExtension, MockTestCase testCase)
+        {
+            var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
+            var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
+            _writer.Append($"var {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
+            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
+            {
+                _writer.Append(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.LineRaw(");");
+            _writer.Line($"var {resourceVar:D} = GetArmClient().Get{parentExtension.ArmCoreType.Name}({idVar});");
             return resourceVar;
         }
 

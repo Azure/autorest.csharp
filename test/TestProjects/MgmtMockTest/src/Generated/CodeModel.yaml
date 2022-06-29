@@ -1,7 +1,7 @@
 !CodeModel 
 info: !Info 
   description: The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.
-  title: KeyVaultManagementClient
+  title: MgmtMockTest
 schemas: !Schemas 
   booleans:
     - !BooleanSchema &ref_20
@@ -164,6 +164,20 @@ schemas: !Schemas
           name: Boolean
           description: Property to specify whether the action is a data action.
       protocol: !Protocols {}
+    - !BooleanSchema &ref_236
+      type: boolean
+      language: !Languages 
+        default:
+          name: Boolean
+          description: The Delegation flag for the role assignment
+      protocol: !Protocols {}
+    - !BooleanSchema &ref_241
+      type: boolean
+      language: !Languages 
+        default:
+          name: Boolean
+          description: The delegation flag used for creating a role assignment
+      protocol: !Protocols {}
   numbers:
     - !NumberSchema &ref_23
       type: integer
@@ -188,7 +202,7 @@ schemas: !Schemas
           name: VaultPatchPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_296
+    - !NumberSchema &ref_310
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -200,7 +214,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_321
+    - !NumberSchema &ref_335
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -212,7 +226,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_336
+    - !NumberSchema &ref_350
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -236,7 +250,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_396
+    - !NumberSchema &ref_410
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -267,12 +281,24 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_269
+    - !StringSchema &ref_283
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       pattern: ^[a-zA-Z0-9-]{3,24}$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_281
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-01'
+        - !ApiVersion 
+          version: 2017-10-01-preview
       language: !Languages 
         default:
           name: String
@@ -733,7 +759,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Azure location of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_322
+    - !StringSchema &ref_336
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1109,7 +1135,7 @@ schemas: !Schemas
           name: DeletedManagedHsmListResultNextLink
           description: The URL to get the next set of deleted managed HSM Pools.
       protocol: !Protocols {}
-    - !StringSchema &ref_392
+    - !StringSchema &ref_406
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1120,7 +1146,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_397
+    - !StringSchema &ref_411
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1370,7 +1396,107 @@ schemas: !Schemas
           name: OperationListResultNextLink
           description: The URL to get the next set of operations.
       protocol: !Protocols {}
+    - !StringSchema &ref_416
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
     - !StringSchema &ref_230
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentId
+          description: The role assignment ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_231
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentName
+          description: The role assignment name.
+      protocol: !Protocols {}
+    - !StringSchema &ref_232
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentType
+          description: The role assignment type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_233
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentPropertiesWithScope
+          description: The role assignment scope.
+      protocol: !Protocols {}
+    - !StringSchema &ref_234
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentPropertiesWithScopeRoleDefinitionId
+          description: The role definition ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_235
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentPropertiesWithScopePrincipalId
+          description: The principal ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_237
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentListResultNextLink
+          description: The URL to use for getting the next set of results.
+      protocol: !Protocols {}
+    - !StringSchema &ref_239
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentPropertiesRoleDefinitionId
+          description: The role definition ID used in the role assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_240
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentPropertiesPrincipalId
+          description: The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.
+      protocol: !Protocols {}
+    - !StringSchema &ref_242
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1379,6 +1505,16 @@ schemas: !Schemas
         default:
           name: ResourceListResultNextLink
           description: The URL to get the next set of vault resources.
+      protocol: !Protocols {}
+    - !StringSchema &ref_243
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      language: !Languages 
+        default:
+          name: RoleAssignmentFilterPrincipalId
+          description: Returns role assignment of the specific principal.
       protocol: !Protocols {}
   choices:
     - !ChoiceSchema &ref_8
@@ -2228,7 +2364,7 @@ schemas: !Schemas
             The type of identity used for the vault. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual
             machine.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_289
+    - !SealedChoiceSchema &ref_303
       choices:
         - !ChoiceValue 
           value: add
@@ -2307,7 +2443,7 @@ schemas: !Schemas
           description: SKU of the managed HSM Pool
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_267
+    - !ConstantSchema &ref_284
       type: constant
       value: !ConstantValue 
         value: '2021-10-01'
@@ -2317,7 +2453,7 @@ schemas: !Schemas
           name: ApiVersion20211001
           description: Api Version (2021-10-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_272
+    - !ConstantSchema &ref_286
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -2327,7 +2463,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_274
+    - !ConstantSchema &ref_288
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -2349,6 +2485,16 @@ schemas: !Schemas
         default:
           name: Type
           description: The type of resource, Microsoft.KeyVault/vaults
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_417
+      type: constant
+      value: !ConstantValue 
+        value: 2017-10-01-preview
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20171001Preview
+          description: Api Version (2017-10-01-preview)
       protocol: !Protocols {}
   dictionaries:
     - !DictionarySchema &ref_6
@@ -2628,7 +2774,7 @@ schemas: !Schemas
           description: The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool.
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_273
+    - !ObjectSchema &ref_287
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2712,7 +2858,7 @@ schemas: !Schemas
                     description: SKU details
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_235
+                schema: !ArraySchema &ref_248
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -2758,7 +2904,7 @@ schemas: !Schemas
                               version: '2021-10-01'
                           properties:
                             - !Property 
-                              schema: !ArraySchema &ref_231
+                              schema: !ArraySchema &ref_244
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2776,7 +2922,7 @@ schemas: !Schemas
                                   description: Permissions to keys
                               protocol: !Protocols {}
                             - !Property 
-                              schema: !ArraySchema &ref_232
+                              schema: !ArraySchema &ref_245
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2794,7 +2940,7 @@ schemas: !Schemas
                                   description: Permissions to secrets
                               protocol: !Protocols {}
                             - !Property 
-                              schema: !ArraySchema &ref_233
+                              schema: !ArraySchema &ref_246
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2812,7 +2958,7 @@ schemas: !Schemas
                                   description: Permissions to certificates
                               protocol: !Protocols {}
                             - !Property 
-                              schema: !ArraySchema &ref_234
+                              schema: !ArraySchema &ref_247
                                 type: array
                                 apiVersions:
                                   - !ApiVersion 
@@ -2894,7 +3040,7 @@ schemas: !Schemas
                     description: The resource id of HSM Pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_236
+                schema: !ArraySchema &ref_249
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -3010,7 +3156,7 @@ schemas: !Schemas
                           description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_237
+                      schema: !ArraySchema &ref_250
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -3053,7 +3199,7 @@ schemas: !Schemas
                           description: The list of IP address rules.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_238
+                      schema: !ArraySchema &ref_251
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -3132,7 +3278,7 @@ schemas: !Schemas
                     description: Provisioning state of the vault.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_239
+                schema: !ArraySchema &ref_252
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -3734,7 +3880,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_75
-    - !ObjectSchema &ref_279
+    - !ObjectSchema &ref_293
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3794,7 +3940,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_78
-    - !ObjectSchema &ref_280
+    - !ObjectSchema &ref_294
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3832,7 +3978,7 @@ schemas: !Schemas
                     description: SKU details
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_240
+                schema: !ArraySchema &ref_253
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -3965,7 +4111,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_86
-    - !ObjectSchema &ref_290
+    - !ObjectSchema &ref_304
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4019,7 +4165,7 @@ schemas: !Schemas
                 version: '2021-10-01'
             properties:
               - !Property 
-                schema: !ArraySchema &ref_241
+                schema: !ArraySchema &ref_254
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -4069,14 +4215,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_91
-    - !ObjectSchema &ref_299
+    - !ObjectSchema &ref_313
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_242
+          schema: !ArraySchema &ref_255
             type: array
             apiVersions:
               - !ApiVersion 
@@ -4111,14 +4257,14 @@ schemas: !Schemas
           description: List of vaults
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_301
+    - !ObjectSchema &ref_315
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_243
+          schema: !ArraySchema &ref_256
             type: array
             apiVersions:
               - !ApiVersion 
@@ -4274,7 +4420,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_104
     - *ref_105
-    - !ObjectSchema &ref_306
+    - !ObjectSchema &ref_320
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4308,7 +4454,7 @@ schemas: !Schemas
           description: The parameters used to check the availability of the vault name.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_309
+    - !ObjectSchema &ref_323
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4390,7 +4536,7 @@ schemas: !Schemas
                           description: Group identifier of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_245
+                      schema: !ArraySchema &ref_258
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -4412,7 +4558,7 @@ schemas: !Schemas
                           description: Required member names of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_246
+                      schema: !ArraySchema &ref_259
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -4627,7 +4773,7 @@ schemas: !Schemas
                           description: The key vault key which is currently used by this disk encryption set.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_248
+                      schema: !ArraySchema &ref_261
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -4833,14 +4979,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_112
-    - !ObjectSchema &ref_325
+    - !ObjectSchema &ref_339
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_244
+          schema: !ArraySchema &ref_257
             type: array
             apiVersions:
               - !ApiVersion 
@@ -4875,14 +5021,14 @@ schemas: !Schemas
           description: List of private endpoint connections.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_328
+    - !ObjectSchema &ref_342
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_247
+          schema: !ArraySchema &ref_260
             type: array
             apiVersions:
               - !ApiVersion 
@@ -4914,7 +5060,7 @@ schemas: !Schemas
     - *ref_131
     - *ref_124
     - *ref_139
-    - !ObjectSchema &ref_348
+    - !ObjectSchema &ref_362
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4990,14 +5136,14 @@ schemas: !Schemas
           description: disk encryption set update resource.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_358
+    - !ObjectSchema &ref_372
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_249
+          schema: !ArraySchema &ref_262
             type: array
             apiVersions:
               - !ApiVersion 
@@ -5203,7 +5349,7 @@ schemas: !Schemas
                           description: Group identifier of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_257
+                      schema: !ArraySchema &ref_270
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -5225,7 +5371,7 @@ schemas: !Schemas
                           description: Required member names of private link resource.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_258
+                      schema: !ArraySchema &ref_271
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -5415,7 +5561,7 @@ schemas: !Schemas
                     description: The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_250
+                schema: !ArraySchema &ref_263
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -5519,7 +5665,7 @@ schemas: !Schemas
                           description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_251
+                      schema: !ArraySchema &ref_264
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -5562,7 +5708,7 @@ schemas: !Schemas
                           description: The list of IP address rules.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: !ArraySchema &ref_252
+                      schema: !ArraySchema &ref_265
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -5622,7 +5768,7 @@ schemas: !Schemas
                     description: Rules governing the accessibility of the key vault from specific network locations.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_253
+                schema: !ArraySchema &ref_266
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -5743,7 +5889,7 @@ schemas: !Schemas
     - *ref_174
     - *ref_144
     - *ref_182
-    - !ObjectSchema &ref_363
+    - !ObjectSchema &ref_377
       type: object
       apiVersions:
         - !ApiVersion 
@@ -5811,14 +5957,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_185
-    - !ObjectSchema &ref_374
+    - !ObjectSchema &ref_388
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_254
+          schema: !ArraySchema &ref_267
             type: array
             apiVersions:
               - !ApiVersion 
@@ -5853,14 +5999,14 @@ schemas: !Schemas
           description: List of managed HSM Pools
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_383
+    - !ObjectSchema &ref_397
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_255
+          schema: !ArraySchema &ref_268
             type: array
             apiVersions:
               - !ApiVersion 
@@ -5896,14 +6042,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_151
-    - !ObjectSchema &ref_376
+    - !ObjectSchema &ref_390
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_256
+          schema: !ArraySchema &ref_269
             type: array
             apiVersions:
               - !ApiVersion 
@@ -6059,14 +6205,14 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_198
     - *ref_199
-    - !ObjectSchema &ref_400
+    - !ObjectSchema &ref_414
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_259
+          schema: !ArraySchema &ref_272
             type: array
             apiVersions:
               - !ApiVersion 
@@ -6094,14 +6240,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_152
-    - !ObjectSchema &ref_401
+    - !ObjectSchema &ref_415
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_265
+          schema: !ArraySchema &ref_278
             type: array
             apiVersions:
               - !ApiVersion 
@@ -6199,7 +6345,7 @@ schemas: !Schemas
                         version: '2021-10-01'
                     properties:
                       - !Property 
-                        schema: !ArraySchema &ref_260
+                        schema: !ArraySchema &ref_273
                           type: array
                           apiVersions:
                             - !ApiVersion 
@@ -6256,7 +6402,7 @@ schemas: !Schemas
                             description: Log specifications of operation.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_264
+                        schema: !ArraySchema &ref_277
                           type: array
                           apiVersions:
                             - !ApiVersion 
@@ -6308,7 +6454,7 @@ schemas: !Schemas
                                     description: 'The metric aggregation type. Possible values include: ''Average'', ''Count'', ''Total''.'
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: !ArraySchema &ref_261
+                                schema: !ArraySchema &ref_274
                                   type: array
                                   apiVersions:
                                     - !ApiVersion 
@@ -6326,7 +6472,7 @@ schemas: !Schemas
                                     description: The supported aggregation types for the metrics.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: !ArraySchema &ref_262
+                                schema: !ArraySchema &ref_275
                                   type: array
                                   apiVersions:
                                     - !ApiVersion 
@@ -6352,7 +6498,7 @@ schemas: !Schemas
                                     description: The metric lock aggregation type.
                                 protocol: !Protocols {}
                               - !Property 
-                                schema: !ArraySchema &ref_263
+                                schema: !ArraySchema &ref_276
                                   type: array
                                   apiVersions:
                                     - !ApiVersion 
@@ -6509,6 +6655,184 @@ schemas: !Schemas
     - *ref_227
     - *ref_228
     - *ref_229
+    - !ObjectSchema &ref_424
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_279
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 2017-10-01-preview
+            elementType: !ObjectSchema &ref_238
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: 2017-10-01-preview
+              properties:
+                - !Property 
+                  schema: *ref_230
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: The role assignment ID.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_231
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: The role assignment name.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_232
+                  readOnly: true
+                  serializedName: type
+                  language: !Languages 
+                    default:
+                      name: type
+                      description: The role assignment type.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_233
+                  flattenedNames:
+                    - properties
+                    - scope
+                  serializedName: scope
+                  language: !Languages 
+                    default:
+                      name: scope
+                      description: The role assignment scope.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_234
+                  flattenedNames:
+                    - properties
+                    - roleDefinitionId
+                  serializedName: roleDefinitionId
+                  language: !Languages 
+                    default:
+                      name: roleDefinitionId
+                      description: The role definition ID.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_235
+                  flattenedNames:
+                    - properties
+                    - principalId
+                  serializedName: principalId
+                  language: !Languages 
+                    default:
+                      name: principalId
+                      description: The principal ID.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_236
+                  flattenedNames:
+                    - properties
+                    - canDelegate
+                  serializedName: canDelegate
+                  language: !Languages 
+                    default:
+                      name: canDelegate
+                      description: The Delegation flag for the role assignment
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+              language: !Languages 
+                default:
+                  name: RoleAssignment
+                  description: Role Assignments
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: RoleAssignmentListResultValue
+                description: Role assignment list.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Role assignment list.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_237
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URL to use for getting the next set of results.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: RoleAssignmentListResult
+          description: Role assignment list operation result.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_238
+    - !ObjectSchema &ref_429
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      properties:
+        - !Property 
+          schema: *ref_239
+          flattenedNames:
+            - properties
+            - roleDefinitionId
+          serializedName: roleDefinitionId
+          language: !Languages 
+            default:
+              name: roleDefinitionId
+              description: The role definition ID used in the role assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_240
+          flattenedNames:
+            - properties
+            - principalId
+          serializedName: principalId
+          language: !Languages 
+            default:
+              name: principalId
+              description: The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_241
+          flattenedNames:
+            - properties
+            - canDelegate
+          serializedName: canDelegate
+          language: !Languages 
+            default:
+              name: canDelegate
+              description: The delegation flag used for creating a role assignment
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: RoleAssignmentCreateParameters
+          description: Role assignment create parameters.
+          namespace: ''
+      protocol: !Protocols {}
     - !ObjectSchema 
       type: object
       apiVersions:
@@ -6516,7 +6840,7 @@ schemas: !Schemas
           version: '2021-10-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_266
+          schema: !ArraySchema &ref_280
             type: array
             apiVersions:
               - !ApiVersion 
@@ -6534,7 +6858,7 @@ schemas: !Schemas
               description: The list of vault resources.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_230
+          schema: *ref_242
           serializedName: nextLink
           language: !Languages 
             default:
@@ -6547,46 +6871,39 @@ schemas: !Schemas
           description: List of vault resources.
           namespace: ''
       protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 2017-10-01-preview
+      properties:
+        - !Property 
+          schema: *ref_243
+          serializedName: principalId
+          language: !Languages 
+            default:
+              name: principalId
+              description: Returns role assignment of the specific principal.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_236
+          serializedName: canDelegate
+          language: !Languages 
+            default:
+              name: canDelegate
+              description: The Delegation flag for the role assignment
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: RoleAssignmentFilter
+          description: Role Assignments filter
+          namespace: ''
+      protocol: !Protocols {}
   arrays:
-    - *ref_231
-    - *ref_232
-    - *ref_233
-    - *ref_234
-    - *ref_235
-    - *ref_236
-    - *ref_237
-    - *ref_238
-    - *ref_239
-    - *ref_240
-    - *ref_241
-    - *ref_242
-    - *ref_243
     - *ref_244
     - *ref_245
     - *ref_246
     - *ref_247
-    - !ArraySchema &ref_335
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-10-01'
-      elementType: *ref_130
-      language: !Languages 
-        default:
-          name: ArrayOfVirtualMachineExtensionImage
-          description: Array of VirtualMachineExtensionImage
-      protocol: !Protocols {}
-    - !ArraySchema &ref_343
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-10-01'
-      elementType: *ref_130
-      language: !Languages 
-        default:
-          name: ArrayOfVirtualMachineExtensionImage
-          description: Array of VirtualMachineExtensionImage
-      protocol: !Protocols {}
     - *ref_248
     - *ref_249
     - *ref_250
@@ -6600,15 +6917,51 @@ schemas: !Schemas
     - *ref_258
     - *ref_259
     - *ref_260
+    - !ArraySchema &ref_349
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-01'
+      elementType: *ref_130
+      language: !Languages 
+        default:
+          name: ArrayOfVirtualMachineExtensionImage
+          description: Array of VirtualMachineExtensionImage
+      protocol: !Protocols {}
+    - !ArraySchema &ref_357
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-01'
+      elementType: *ref_130
+      language: !Languages 
+        default:
+          name: ArrayOfVirtualMachineExtensionImage
+          description: Array of VirtualMachineExtensionImage
+      protocol: !Protocols {}
     - *ref_261
     - *ref_262
     - *ref_263
     - *ref_264
     - *ref_265
     - *ref_266
+    - *ref_267
+    - *ref_268
+    - *ref_269
+    - *ref_270
+    - *ref_271
+    - *ref_272
+    - *ref_273
+    - *ref_274
+    - *ref_275
+    - *ref_276
+    - *ref_277
+    - *ref_278
+    - *ref_279
+    - *ref_280
 globalParameters:
-  - !Parameter &ref_271
-    schema: *ref_1
+  - !Parameter &ref_285
+    schema: *ref_281
     implementation: Client
     required: true
     extensions:
@@ -6621,7 +6974,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_268
+  - !Parameter &ref_282
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -6637,19 +6990,6 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_270
-    schema: *ref_267
-    implementation: Client
-    origin: modelerfour:synthesized/api-version
-    required: true
-    language: !Languages 
-      default:
-        name: apiVersion
-        description: Api Version
-        serializedName: api-version
-    protocol: !Protocols 
-      http: !HttpParameter 
-        in: query
 operationGroups:
   - !OperationGroup 
     $key: Vaults
@@ -6660,8 +7000,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_277
+          - *ref_282
+          - !Parameter &ref_291
             schema: *ref_1
             implementation: Method
             required: true
@@ -6673,8 +7013,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_278
-            schema: *ref_269
+          - !Parameter &ref_292
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -6685,13 +7025,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requestMediaTypes:
-          application/json: !Request &ref_276
+          application/json: !Request &ref_290
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -6703,8 +7055,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_275
-                schema: *ref_273
+              - !Parameter &ref_289
+                schema: *ref_287
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6716,7 +7068,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -6729,7 +7081,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_275
+              - *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -6743,10 +7095,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_276
+          - *ref_290
         signatureParameters:
-          - *ref_277
-          - *ref_278
+          - *ref_291
+          - *ref_292
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -6776,7 +7128,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -7134,8 +7486,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_283
+          - *ref_282
+          - !Parameter &ref_297
             schema: *ref_1
             implementation: Method
             required: true
@@ -7147,8 +7499,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_284
-            schema: *ref_269
+          - !Parameter &ref_298
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -7159,13 +7511,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requestMediaTypes:
-          application/json: !Request &ref_282
+          application/json: !Request &ref_296
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -7177,8 +7541,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_281
-                schema: *ref_280
+              - !Parameter &ref_295
+                schema: *ref_294
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7190,7 +7554,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7203,7 +7567,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_281
+              - *ref_295
             language: !Languages 
               default:
                 name: ''
@@ -7217,10 +7581,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_282
+          - *ref_296
         signatureParameters:
-          - *ref_283
-          - *ref_284
+          - *ref_297
+          - *ref_298
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -7250,7 +7614,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -7496,8 +7860,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_285
+          - *ref_282
+          - !Parameter &ref_299
             schema: *ref_1
             implementation: Method
             required: true
@@ -7509,7 +7873,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_286
+          - !Parameter &ref_300
             schema: *ref_1
             implementation: Method
             required: true
@@ -7521,13 +7885,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7550,8 +7926,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_285
-          - *ref_286
+          - *ref_299
+          - *ref_300
         responses:
           - !Response 
             language: !Languages 
@@ -7573,7 +7949,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -7609,8 +7985,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_287
+          - *ref_282
+          - !Parameter &ref_301
             schema: *ref_1
             implementation: Method
             required: true
@@ -7622,7 +7998,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_288
+          - !Parameter &ref_302
             schema: *ref_1
             implementation: Method
             required: true
@@ -7634,13 +8010,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7663,8 +8051,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_287
-          - *ref_288
+          - *ref_301
+          - *ref_302
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -7681,7 +8069,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -7784,8 +8172,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_293
+          - *ref_282
+          - !Parameter &ref_307
             schema: *ref_1
             implementation: Method
             required: true
@@ -7797,8 +8185,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_294
-            schema: *ref_269
+          - !Parameter &ref_308
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -7809,8 +8197,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_295
-            schema: *ref_289
+          - !Parameter &ref_309
+            schema: *ref_303
             implementation: Method
             required: true
             language: !Languages 
@@ -7821,13 +8209,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requestMediaTypes:
-          application/json: !Request &ref_292
+          application/json: !Request &ref_306
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -7839,8 +8239,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_291
-                schema: *ref_290
+              - !Parameter &ref_305
+                schema: *ref_304
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7852,7 +8252,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -7865,7 +8265,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_291
+              - *ref_305
             language: !Languages 
               default:
                 name: ''
@@ -7879,14 +8279,14 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_292
+          - *ref_306
         signatureParameters:
-          - *ref_293
-          - *ref_294
-          - *ref_295
+          - *ref_307
+          - *ref_308
+          - *ref_309
         responses:
           - !SchemaResponse 
-            schema: *ref_290
+            schema: *ref_304
             language: !Languages 
               default:
                 name: ''
@@ -7899,7 +8299,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_290
+            schema: *ref_304
             language: !Languages 
               default:
                 name: ''
@@ -7913,7 +8313,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -7988,8 +8388,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_297
+          - *ref_282
+          - !Parameter &ref_311
             schema: *ref_1
             implementation: Method
             required: true
@@ -8001,8 +8401,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_298
-            schema: *ref_296
+          - !Parameter &ref_312
+            schema: *ref_310
             implementation: Method
             language: !Languages 
               default:
@@ -8012,13 +8412,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8041,11 +8453,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_297
-          - *ref_298
+          - *ref_311
+          - *ref_312
         responses:
           - !SchemaResponse 
-            schema: *ref_299
+            schema: *ref_313
             language: !Languages 
               default:
                 name: ''
@@ -8059,7 +8471,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8168,9 +8580,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_300
-            schema: *ref_296
+          - *ref_282
+          - !Parameter &ref_314
+            schema: *ref_310
             implementation: Method
             language: !Languages 
               default:
@@ -8180,13 +8592,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8209,10 +8633,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_300
+          - *ref_314
         responses:
           - !SchemaResponse 
-            schema: *ref_299
+            schema: *ref_313
             language: !Languages 
               default:
                 name: ''
@@ -8226,7 +8650,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8334,14 +8758,26 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_270
-          - *ref_271
+          - *ref_282
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8366,7 +8802,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_301
+            schema: *ref_315
             language: !Languages 
               default:
                 name: ''
@@ -8380,7 +8816,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8430,8 +8866,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_302
+          - *ref_282
+          - !Parameter &ref_316
             schema: *ref_1
             implementation: Method
             required: true
@@ -8443,7 +8879,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_303
+          - !Parameter &ref_317
             schema: *ref_1
             implementation: Method
             required: true
@@ -8455,13 +8891,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8484,8 +8932,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_302
-          - *ref_303
+          - *ref_316
+          - *ref_317
         responses:
           - !SchemaResponse 
             schema: *ref_104
@@ -8502,7 +8950,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8547,8 +8995,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_304
+          - *ref_282
+          - !Parameter &ref_318
             schema: *ref_1
             implementation: Method
             required: true
@@ -8560,7 +9008,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_305
+          - !Parameter &ref_319
             schema: *ref_1
             implementation: Method
             required: true
@@ -8572,13 +9020,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8601,8 +9061,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_304
-          - *ref_305
+          - *ref_318
+          - *ref_319
         responses:
           - !Response 
             language: !Languages 
@@ -8624,7 +9084,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8661,14 +9121,26 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_270
-          - *ref_271
+          - *ref_282
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requestMediaTypes:
-          application/json: !Request &ref_308
+          application/json: !Request &ref_322
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -8680,8 +9152,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_307
-                schema: *ref_306
+              - !Parameter &ref_321
+                schema: *ref_320
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8693,7 +9165,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8706,7 +9178,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_307
+              - *ref_321
             language: !Languages 
               default:
                 name: ''
@@ -8720,11 +9192,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_308
+          - *ref_322
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_309
+            schema: *ref_323
             language: !Languages 
               default:
                 name: ''
@@ -8738,7 +9210,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8782,9 +9254,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_310
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_324
             schema: *ref_1
             implementation: Method
             required: true
@@ -8796,8 +9268,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_311
-            schema: *ref_269
+          - !Parameter &ref_325
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -8808,7 +9280,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_312
+          - !Parameter &ref_326
             schema: *ref_1
             implementation: Method
             required: true
@@ -8820,12 +9292,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -8848,9 +9332,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_310
-          - *ref_311
-          - *ref_312
+          - *ref_324
+          - *ref_325
+          - *ref_326
         responses:
           - !SchemaResponse 
             schema: *ref_111
@@ -8876,7 +9360,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -8925,9 +9409,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_315
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_329
             schema: *ref_1
             implementation: Method
             required: true
@@ -8939,8 +9423,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_316
-            schema: *ref_269
+          - !Parameter &ref_330
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -8951,7 +9435,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_317
+          - !Parameter &ref_331
             schema: *ref_1
             implementation: Method
             required: true
@@ -8963,12 +9447,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requestMediaTypes:
-          application/json: !Request &ref_314
+          application/json: !Request &ref_328
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -8980,7 +9476,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_313
+              - !Parameter &ref_327
                 schema: *ref_111
                 implementation: Method
                 required: true
@@ -8993,7 +9489,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9006,7 +9502,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_313
+              - *ref_327
             language: !Languages 
               default:
                 name: ''
@@ -9020,11 +9516,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_314
+          - *ref_328
         signatureParameters:
-          - *ref_315
-          - *ref_316
-          - *ref_317
+          - *ref_329
+          - *ref_330
+          - *ref_331
         responses:
           - !SchemaResponse 
             schema: *ref_111
@@ -9036,7 +9532,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_296
+                    schema: *ref_310
                     header: Retry-After
                     language:
                       default:
@@ -9056,7 +9552,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -9109,9 +9605,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_318
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_332
             schema: *ref_1
             implementation: Method
             required: true
@@ -9123,8 +9619,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_319
-            schema: *ref_269
+          - !Parameter &ref_333
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -9135,7 +9631,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_320
+          - !Parameter &ref_334
             schema: *ref_1
             implementation: Method
             required: true
@@ -9147,12 +9643,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9175,9 +9683,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_318
-          - *ref_319
-          - *ref_320
+          - *ref_332
+          - *ref_333
+          - *ref_334
         responses:
           - !SchemaResponse 
             schema: *ref_111
@@ -9201,14 +9709,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_321
+                    schema: *ref_335
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_322
+                    schema: *ref_336
                     header: Location
                     language:
                       default:
@@ -9227,7 +9735,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -9273,9 +9781,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_323
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_337
             schema: *ref_1
             implementation: Method
             required: true
@@ -9287,8 +9795,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_324
-            schema: *ref_269
+          - !Parameter &ref_338
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -9299,12 +9807,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9327,11 +9847,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_323
-          - *ref_324
+          - *ref_337
+          - *ref_338
         responses:
           - !SchemaResponse 
-            schema: *ref_325
+            schema: *ref_339
             language: !Languages 
               default:
                 name: ''
@@ -9345,7 +9865,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -9417,9 +9937,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_326
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_340
             schema: *ref_1
             implementation: Method
             required: true
@@ -9431,8 +9951,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_327
-            schema: *ref_269
+          - !Parameter &ref_341
+            schema: *ref_283
             implementation: Method
             required: true
             language: !Languages 
@@ -9443,12 +9963,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9471,11 +10003,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_326
-          - *ref_327
+          - *ref_340
+          - *ref_341
         responses:
           - !SchemaResponse 
-            schema: *ref_328
+            schema: *ref_342
             language: !Languages 
               default:
                 name: ''
@@ -9489,7 +10021,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -9541,8 +10073,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_329
+          - *ref_282
+          - !Parameter &ref_343
             schema: *ref_4
             implementation: Method
             required: true
@@ -9554,7 +10086,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_330
+          - !Parameter &ref_344
             schema: *ref_4
             implementation: Method
             required: true
@@ -9566,7 +10098,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_331
+          - !Parameter &ref_345
             schema: *ref_4
             implementation: Method
             required: true
@@ -9578,7 +10110,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_332
+          - !Parameter &ref_346
             schema: *ref_4
             implementation: Method
             required: true
@@ -9590,13 +10122,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9619,10 +10163,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_329
-          - *ref_330
-          - *ref_331
-          - *ref_332
+          - *ref_343
+          - *ref_344
+          - *ref_345
+          - *ref_346
         responses:
           - !SchemaResponse 
             schema: *ref_130
@@ -9686,8 +10230,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_333
+          - *ref_282
+          - !Parameter &ref_347
             schema: *ref_4
             implementation: Method
             required: true
@@ -9699,7 +10243,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_334
+          - !Parameter &ref_348
             schema: *ref_4
             implementation: Method
             required: true
@@ -9711,13 +10255,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9740,11 +10296,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_333
-          - *ref_334
+          - *ref_347
+          - *ref_348
         responses:
           - !SchemaResponse 
-            schema: *ref_335
+            schema: *ref_349
             language: !Languages 
               default:
                 name: ''
@@ -9801,8 +10357,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_337
+          - *ref_282
+          - !Parameter &ref_351
             schema: *ref_4
             implementation: Method
             required: true
@@ -9814,7 +10370,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_338
+          - !Parameter &ref_352
             schema: *ref_4
             implementation: Method
             required: true
@@ -9826,7 +10382,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_339
+          - !Parameter &ref_353
             schema: *ref_4
             implementation: Method
             required: true
@@ -9838,7 +10394,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_340
+          - !Parameter &ref_354
             schema: *ref_4
             implementation: Method
             language: !Languages 
@@ -9849,8 +10405,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_341
-            schema: *ref_336
+          - !Parameter &ref_355
+            schema: *ref_350
             implementation: Method
             language: !Languages 
               default:
@@ -9860,7 +10416,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_342
+          - !Parameter &ref_356
             schema: *ref_4
             implementation: Method
             language: !Languages 
@@ -9871,13 +10427,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -9900,15 +10468,15 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_337
-          - *ref_338
-          - *ref_339
-          - *ref_340
-          - *ref_341
-          - *ref_342
+          - *ref_351
+          - *ref_352
+          - *ref_353
+          - *ref_354
+          - *ref_355
+          - *ref_356
         responses:
           - !SchemaResponse 
-            schema: *ref_343
+            schema: *ref_357
             language: !Languages 
               default:
                 name: ''
@@ -9979,9 +10547,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_346
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_360
             schema: *ref_1
             implementation: Method
             required: true
@@ -9993,7 +10561,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_347
+          - !Parameter &ref_361
             schema: *ref_4
             implementation: Method
             required: true
@@ -10007,12 +10575,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requestMediaTypes:
-          application/json: !Request &ref_345
+          application/json: !Request &ref_359
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -10024,7 +10604,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_344
+              - !Parameter &ref_358
                 schema: *ref_131
                 implementation: Method
                 required: true
@@ -10037,7 +10617,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10050,7 +10630,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_344
+              - *ref_358
             language: !Languages 
               default:
                 name: ''
@@ -10064,10 +10644,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_345
+          - *ref_359
         signatureParameters:
-          - *ref_346
-          - *ref_347
+          - *ref_360
+          - *ref_361
         responses:
           - !SchemaResponse 
             schema: *ref_131
@@ -10235,9 +10815,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_351
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_365
             schema: *ref_1
             implementation: Method
             required: true
@@ -10249,7 +10829,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_352
+          - !Parameter &ref_366
             schema: *ref_4
             implementation: Method
             required: true
@@ -10263,12 +10843,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requestMediaTypes:
-          application/json: !Request &ref_350
+          application/json: !Request &ref_364
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -10280,8 +10872,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_349
-                schema: *ref_348
+              - !Parameter &ref_363
+                schema: *ref_362
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10293,7 +10885,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10306,7 +10898,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_349
+              - *ref_363
             language: !Languages 
               default:
                 name: ''
@@ -10320,10 +10912,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_350
+          - *ref_364
         signatureParameters:
-          - *ref_351
-          - *ref_352
+          - *ref_365
+          - *ref_366
         responses:
           - !SchemaResponse 
             schema: *ref_131
@@ -10509,9 +11101,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_353
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_367
             schema: *ref_1
             implementation: Method
             required: true
@@ -10523,7 +11115,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_354
+          - !Parameter &ref_368
             schema: *ref_4
             implementation: Method
             required: true
@@ -10537,12 +11129,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10565,8 +11169,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_353
-          - *ref_354
+          - *ref_367
+          - *ref_368
         responses:
           - !SchemaResponse 
             schema: *ref_131
@@ -10650,9 +11254,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_355
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_369
             schema: *ref_1
             implementation: Method
             required: true
@@ -10664,7 +11268,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_356
+          - !Parameter &ref_370
             schema: *ref_4
             implementation: Method
             required: true
@@ -10678,7 +11282,19 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             language: !Languages 
@@ -10691,8 +11307,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_355
-          - *ref_356
+          - *ref_369
+          - *ref_370
         responses:
           - !Response 
             language: !Languages 
@@ -10745,9 +11361,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_357
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_371
             schema: *ref_1
             implementation: Method
             required: true
@@ -10759,12 +11375,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10787,10 +11415,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_357
+          - *ref_371
         responses:
           - !SchemaResponse 
-            schema: *ref_358
+            schema: *ref_372
             language: !Languages 
               default:
                 name: ''
@@ -10863,14 +11491,26 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - *ref_270
+          - *ref_282
+          - *ref_285
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -10895,7 +11535,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_358
+            schema: *ref_372
             language: !Languages 
               default:
                 name: ''
@@ -10975,8 +11615,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_361
+          - *ref_282
+          - !Parameter &ref_375
             schema: *ref_4
             implementation: Method
             required: true
@@ -10988,7 +11628,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_362
+          - !Parameter &ref_376
             schema: *ref_4
             implementation: Method
             required: true
@@ -11000,13 +11640,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requestMediaTypes:
-          application/json: !Request &ref_360
+          application/json: !Request &ref_374
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -11018,7 +11670,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_359
+              - !Parameter &ref_373
                 schema: *ref_143
                 implementation: Method
                 required: true
@@ -11031,7 +11683,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11044,7 +11696,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_359
+              - *ref_373
             language: !Languages 
               default:
                 name: ''
@@ -11058,10 +11710,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_360
+          - *ref_374
         signatureParameters:
-          - *ref_361
-          - *ref_362
+          - *ref_375
+          - *ref_376
         responses:
           - !SchemaResponse 
             schema: *ref_143
@@ -11091,7 +11743,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -11206,8 +11858,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_366
+          - *ref_282
+          - !Parameter &ref_380
             schema: *ref_4
             implementation: Method
             required: true
@@ -11219,7 +11871,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_367
+          - !Parameter &ref_381
             schema: *ref_4
             implementation: Method
             required: true
@@ -11231,13 +11883,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requestMediaTypes:
-          application/json: !Request &ref_365
+          application/json: !Request &ref_379
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -11249,7 +11913,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_364
+              - !Parameter &ref_378
                 schema: *ref_143
                 implementation: Method
                 required: true
@@ -11262,7 +11926,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11275,7 +11939,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_364
+              - *ref_378
             language: !Languages 
               default:
                 name: ''
@@ -11289,10 +11953,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_365
+          - *ref_379
         signatureParameters:
-          - *ref_366
-          - *ref_367
+          - *ref_380
+          - *ref_381
         responses:
           - !SchemaResponse 
             schema: *ref_143
@@ -11322,7 +11986,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -11406,8 +12070,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_368
+          - *ref_282
+          - !Parameter &ref_382
             schema: *ref_4
             implementation: Method
             required: true
@@ -11419,7 +12083,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_369
+          - !Parameter &ref_383
             schema: *ref_4
             implementation: Method
             required: true
@@ -11431,13 +12095,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11460,8 +12136,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_368
-          - *ref_369
+          - *ref_382
+          - *ref_383
         responses:
           - !Response 
             language: !Languages 
@@ -11492,7 +12168,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -11528,8 +12204,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_370
+          - *ref_282
+          - !Parameter &ref_384
             schema: *ref_4
             implementation: Method
             required: true
@@ -11541,7 +12217,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_371
+          - !Parameter &ref_385
             schema: *ref_4
             implementation: Method
             required: true
@@ -11553,13 +12229,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11582,8 +12270,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_370
-          - *ref_371
+          - *ref_384
+          - *ref_385
         responses:
           - !SchemaResponse 
             schema: *ref_143
@@ -11618,7 +12306,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -11678,8 +12366,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_372
+          - *ref_282
+          - !Parameter &ref_386
             schema: *ref_4
             implementation: Method
             required: true
@@ -11691,8 +12379,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_373
-            schema: *ref_336
+          - !Parameter &ref_387
+            schema: *ref_350
             implementation: Method
             language: !Languages 
               default:
@@ -11702,13 +12390,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11731,11 +12431,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_372
-          - *ref_373
+          - *ref_386
+          - *ref_387
         responses:
           - !SchemaResponse 
-            schema: *ref_374
+            schema: *ref_388
             language: !Languages 
               default:
                 name: ''
@@ -11749,7 +12449,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -11828,9 +12528,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_375
-            schema: *ref_336
+          - *ref_282
+          - !Parameter &ref_389
+            schema: *ref_350
             implementation: Method
             language: !Languages 
               default:
@@ -11840,13 +12540,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11869,10 +12581,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_375
+          - *ref_389
         responses:
           - !SchemaResponse 
-            schema: *ref_374
+            schema: *ref_388
             language: !Languages 
               default:
                 name: ''
@@ -11886,7 +12598,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -11964,14 +12676,26 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_270
-          - *ref_271
+          - *ref_282
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -11996,7 +12720,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_376
+            schema: *ref_390
             language: !Languages 
               default:
                 name: ''
@@ -12010,7 +12734,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -12072,8 +12796,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_377
+          - *ref_282
+          - !Parameter &ref_391
             schema: *ref_4
             implementation: Method
             required: true
@@ -12085,7 +12809,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_378
+          - !Parameter &ref_392
             schema: *ref_4
             implementation: Method
             required: true
@@ -12097,13 +12821,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12126,8 +12862,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_377
-          - *ref_378
+          - *ref_391
+          - *ref_392
         responses:
           - !SchemaResponse 
             schema: *ref_198
@@ -12144,7 +12880,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -12190,8 +12926,8 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - !Parameter &ref_379
+          - *ref_282
+          - !Parameter &ref_393
             schema: *ref_4
             implementation: Method
             required: true
@@ -12203,7 +12939,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_380
+          - !Parameter &ref_394
             schema: *ref_4
             implementation: Method
             required: true
@@ -12215,13 +12951,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
-          - *ref_271
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12244,8 +12992,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_379
-          - *ref_380
+          - *ref_393
+          - *ref_394
         responses:
           - !Response 
             language: !Languages 
@@ -12258,7 +13006,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -12300,10 +13048,22 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_270
-          - *ref_271
-          - !Parameter &ref_381
+          - *ref_282
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
+          - !Parameter &ref_395
             schema: *ref_4
             implementation: Method
             required: true
@@ -12315,7 +13075,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_382
+          - !Parameter &ref_396
             schema: *ref_4
             implementation: Method
             required: true
@@ -12331,7 +13091,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12354,11 +13114,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_381
-          - *ref_382
+          - *ref_395
+          - *ref_396
         responses:
           - !SchemaResponse 
-            schema: *ref_383
+            schema: *ref_397
             language: !Languages 
               default:
                 name: ''
@@ -12372,7 +13132,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -12436,9 +13196,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_384
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_398
             schema: *ref_4
             implementation: Method
             required: true
@@ -12450,7 +13210,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_385
+          - !Parameter &ref_399
             schema: *ref_4
             implementation: Method
             required: true
@@ -12462,7 +13222,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_386
+          - !Parameter &ref_400
             schema: *ref_4
             implementation: Method
             required: true
@@ -12474,12 +13234,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12502,9 +13274,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_384
-          - *ref_385
-          - *ref_386
+          - *ref_398
+          - *ref_399
+          - *ref_400
         responses:
           - !SchemaResponse 
             schema: *ref_151
@@ -12521,7 +13293,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_377
             language: !Languages 
               default:
                 name: ''
@@ -12568,9 +13340,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_389
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_403
             schema: *ref_4
             implementation: Method
             required: true
@@ -12582,7 +13354,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_390
+          - !Parameter &ref_404
             schema: *ref_4
             implementation: Method
             required: true
@@ -12594,7 +13366,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_391
+          - !Parameter &ref_405
             schema: *ref_4
             implementation: Method
             required: true
@@ -12606,12 +13378,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requestMediaTypes:
-          application/json: !Request &ref_388
+          application/json: !Request &ref_402
             parameters:
               - !Parameter 
-                schema: *ref_272
+                schema: *ref_286
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -12623,7 +13407,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_387
+              - !Parameter &ref_401
                 schema: *ref_151
                 implementation: Method
                 required: true
@@ -12636,7 +13420,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12649,7 +13433,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_387
+              - *ref_401
             language: !Languages 
               default:
                 name: ''
@@ -12663,11 +13447,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_388
+          - *ref_402
         signatureParameters:
-          - *ref_389
-          - *ref_390
-          - *ref_391
+          - *ref_403
+          - *ref_404
+          - *ref_405
         responses:
           - !SchemaResponse 
             schema: *ref_151
@@ -12679,7 +13463,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_336
+                    schema: *ref_350
                     header: Retry-After
                     language:
                       default:
@@ -12699,7 +13483,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -12750,9 +13534,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_393
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_407
             schema: *ref_4
             implementation: Method
             required: true
@@ -12764,8 +13548,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_394
-            schema: *ref_392
+          - !Parameter &ref_408
+            schema: *ref_406
             implementation: Method
             required: true
             language: !Languages 
@@ -12776,7 +13560,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_395
+          - !Parameter &ref_409
             schema: *ref_4
             implementation: Method
             required: true
@@ -12788,12 +13572,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12816,9 +13612,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_393
-          - *ref_394
-          - *ref_395
+          - *ref_407
+          - *ref_408
+          - *ref_409
         responses:
           - !SchemaResponse 
             schema: *ref_151
@@ -12842,14 +13638,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_396
+                    schema: *ref_410
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_392
+                    schema: *ref_406
                     header: Location
                     language:
                       default:
@@ -12868,7 +13664,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -12922,9 +13718,9 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_271
-          - !Parameter &ref_398
+          - *ref_282
+          - *ref_285
+          - !Parameter &ref_412
             schema: *ref_4
             implementation: Method
             required: true
@@ -12936,8 +13732,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_399
-            schema: *ref_397
+          - !Parameter &ref_413
+            schema: *ref_411
             implementation: Method
             required: true
             language: !Languages 
@@ -12948,12 +13744,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_270
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -12976,11 +13784,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_398
-          - *ref_399
+          - *ref_412
+          - *ref_413
         responses:
           - !SchemaResponse 
-            schema: *ref_400
+            schema: *ref_414
             language: !Languages 
               default:
                 name: ''
@@ -12994,7 +13802,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -13046,13 +13854,25 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-01'
         parameters:
-          - *ref_268
-          - *ref_270
+          - *ref_282
+          - !Parameter 
+            schema: *ref_284
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_274
+                schema: *ref_288
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -13077,7 +13897,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_401
+            schema: *ref_415
             language: !Languages 
               default:
                 name: ''
@@ -13091,7 +13911,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_293
             language: !Languages 
               default:
                 name: ''
@@ -13348,6 +14168,918 @@ operationGroups:
         name: Operations
         description: ''
     protocol: !Protocols {}
+  - !OperationGroup 
+    $key: RoleAssignments
+    operations:
+      - !Operation 
+        operationId: RoleAssignments_ListForResource
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_418
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group that contains the key vault.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_419
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceProviderNamespace
+                description: The namespace of the resource provider.
+                serializedName: resourceProviderNamespace
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_420
+            schema: *ref_416
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: parentResourcePath
+                description: The parent resource identity.
+                serializedName: parentResourcePath
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_421
+            schema: *ref_416
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: resourceType
+                description: The resource type of the resource.
+                serializedName: resourceType
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_422
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceName
+                description: The name of the resource to get role assignments for.
+                serializedName: resourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_423
+            schema: *ref_416
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the
+                  specified principal.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/roleAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_418
+          - *ref_419
+          - *ref_420
+          - *ref_421
+          - *ref_422
+          - *ref_423
+        responses:
+          - !SchemaResponse 
+            schema: *ref_424
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of role assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-examples:
+            List role assignments for resource:
+              parameters:
+                api-version: 2017-10-01-preview
+                parentResourcePath: parentResourcePath
+                resourceGroupName: rgname
+                resourceName: resourceName
+                resourceProviderNamespace: resourceProviderNamespace
+                resourceType: resourceType
+                subscriptionId: subId
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: raId
+                        type: Microsoft.Authorization/roleAssignments
+                        id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                        properties:
+                          canDelegate: false
+                          principalId: Pid
+                          roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                          scope: /subscriptions/subId/resourcegroups/rgname
+          x-ms-odata: '#/components/schemas/RoleAssignmentFilter'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListForResource
+            description: Gets role assignments for a resource.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: RoleAssignments_ListForResourceGroup
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_425
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group that contains the key vault.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_426
+            schema: *ref_416
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the
+                  specified principal.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_425
+          - *ref_426
+        responses:
+          - !SchemaResponse 
+            schema: *ref_424
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of role assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-examples:
+            List role assignments for resource group:
+              parameters:
+                api-version: 2017-10-01-preview
+                resourceGroupName: rgname
+                subscriptionId: subId
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: raId
+                        type: Microsoft.Authorization/roleAssignments
+                        id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                        properties:
+                          canDelegate: false
+                          principalId: Pid
+                          roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                          scope: /subscriptions/subId/resourcegroups/rgname
+          x-ms-odata: '#/components/schemas/RoleAssignmentFilter'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListForResourceGroup
+            description: Gets role assignments for a resource group.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: RoleAssignments_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_427
+            schema: *ref_416
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The scope of the role assignment to delete.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_428
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: roleAssignmentName
+                description: The name of the role assignment to delete.
+                serializedName: roleAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_427
+          - *ref_428
+        responses:
+          - !SchemaResponse 
+            schema: *ref_238
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the role assignment.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Role assignment already deleted or does not exist.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        extensions:
+          x-ms-examples:
+            Delete role assignment by name:
+              parameters:
+                api-version: 2017-10-01-preview
+                roleAssignmentName: roleAssignmentName
+                scope: scope
+              responses:
+                '200':
+                  body:
+                    name: roleassignmentId
+                    type: Microsoft.Authorization/roleAssignments
+                    id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                    properties:
+                      canDelegate: false
+                      principalId: Pid
+                      roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                      scope: /subscriptions/subId/resourcegroups/rgname
+                '204': {}
+        language: !Languages 
+          default:
+            name: Delete
+            description: Deletes a role assignment.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: RoleAssignments_Create
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_432
+            schema: *ref_416
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: >-
+                  The scope of the role assignment to create. The scope can be any REST resource instance. For example, use '/subscriptions/{subscription-id}/' for a subscription,
+                  '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and
+                  '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_433
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: roleAssignmentName
+                description: A GUID for the role assignment to create. The name must be unique and different for each role assignment.
+                serializedName: roleAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requestMediaTypes:
+          application/json: !Request &ref_431
+            parameters:
+              - !Parameter 
+                schema: *ref_286
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_430
+                schema: *ref_429
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters for the role assignment.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_430
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_431
+        signatureParameters:
+          - *ref_432
+          - *ref_433
+        responses:
+          - !SchemaResponse 
+            schema: *ref_238
+            language: !Languages 
+              default:
+                name: ''
+                description: Created - Returns information about the role assignment.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        extensions:
+          x-ms-examples:
+            Create role assignment:
+              parameters:
+                api-version: 2017-10-01-preview
+                parameters:
+                  properties:
+                    canDelegate: false
+                    principalId: d93a38bc-d029-4160-bfb0-fbda779ac214
+                    roleDefinitionId: /subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772
+                roleAssignmentName: roleAssignmentName
+                scope: scope
+              responses:
+                '201':
+                  body:
+                    name: roleassignmentId
+                    type: Microsoft.Authorization/roleAssignments
+                    id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                    properties:
+                      canDelegate: false
+                      principalId: Pid
+                      roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                      scope: /subscriptions/subId/resourcegroups/rgname
+        language: !Languages 
+          default:
+            name: Create
+            description: Creates a role assignment.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: RoleAssignments_Get
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_434
+            schema: *ref_416
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The scope of the role assignment.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_435
+            schema: *ref_416
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: roleAssignmentName
+                description: The name of the role assignment to get.
+                serializedName: roleAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_434
+          - *ref_435
+        responses:
+          - !SchemaResponse 
+            schema: *ref_238
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the role assignment.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-examples:
+            Get role assignment by name:
+              parameters:
+                api-version: 2017-10-01-preview
+                roleAssignmentName: roleAssignmentName
+                scope: scope
+                subscriptionId: subId
+              responses:
+                '200':
+                  body:
+                    name: raId
+                    type: Microsoft.Authorization/roleAssignments
+                    id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                    properties:
+                      canDelegate: false
+                      principalId: Pid
+                      roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                      scope: /subscriptions/subId/resourcegroups/rgname
+        language: !Languages 
+          default:
+            name: Get
+            description: Get the specified role assignment.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: RoleAssignments_List
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_436
+            schema: *ref_416
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the
+                  specified principal.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_285
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_436
+        responses:
+          - !SchemaResponse 
+            schema: *ref_424
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of role assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-examples:
+            List role assignments for subscription:
+              parameters:
+                api-version: 2017-10-01-preview
+                subscriptionId: subId
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: raId
+                        type: Microsoft.Authorization/roleAssignments
+                        id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                        properties:
+                          canDelegate: false
+                          principalId: Pid
+                          roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                          scope: /subscriptions/subId/resourcegroups/rgname
+          x-ms-odata: '#/components/schemas/RoleAssignmentFilter'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Gets all role assignments for the subscription.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: RoleAssignments_ListForScope
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_282
+          - !Parameter &ref_437
+            schema: *ref_416
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The scope of the role assignments.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_438
+            schema: *ref_416
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the
+                  specified principal.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter 
+            schema: *ref_417
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_288
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Authorization/roleAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_437
+          - *ref_438
+        responses:
+          - !SchemaResponse 
+            schema: *ref_424
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of role assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-examples:
+            List role assignments for scope:
+              parameters:
+                api-version: 2017-10-01-preview
+                scope: scope
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: raId
+                        type: Microsoft.Authorization/roleAssignments
+                        id: /subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId
+                        properties:
+                          canDelegate: false
+                          principalId: Pid
+                          roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
+                          scope: /subscriptions/subId/resourcegroups/rgname
+          x-ms-odata: '#/components/schemas/RoleAssignmentFilter'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListForScope
+            description: Gets role assignments for a scope.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: RoleAssignments
+        description: ''
+    protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
   schemes:
@@ -13357,7 +15089,7 @@ security: !Security
         - https://management.azure.com/.default
 language: !Languages 
   default:
-    name: KeyVaultManagementClient
+    name: MgmtMockTest
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

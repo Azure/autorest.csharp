@@ -459,6 +459,55 @@ namespace MgmtMockTest
             return resourceGroupResource.GetManagedHsms().Get(name, cancellationToken);
         }
 
+        private static ArmResourceExtensionClient GetExtensionClient(ArmResource armResource)
+        {
+            return armResource.GetCachedClient((client) =>
+            {
+                return new ArmResourceExtensionClient(client, armResource.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
+        public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
+        {
+            return GetExtensionClient(armResource).GetRoleAssignments();
+        }
+
+        /// <summary>
+        /// Get the specified role assignment.
+        /// Request Path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+        /// Operation Id: RoleAssignments_Get
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return await armResource.GetRoleAssignments().GetAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the specified role assignment.
+        /// Request Path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+        /// Operation Id: RoleAssignments_Get
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return armResource.GetRoleAssignments().Get(roleAssignmentName, cancellationToken);
+        }
+
         #region VaultResource
         /// <summary>
         /// Gets an object representing a <see cref="VaultResource" /> along with the instance operations that can be performed on it but with no data.
@@ -606,6 +655,25 @@ namespace MgmtMockTest
             {
                 MhsmPrivateEndpointConnectionResource.ValidateResourceId(id);
                 return new MhsmPrivateEndpointConnectionResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region RoleAssignmentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="RoleAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RoleAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="RoleAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="RoleAssignmentResource" /> object. </returns>
+        public static RoleAssignmentResource GetRoleAssignmentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                RoleAssignmentResource.ValidateResourceId(id);
+                return new RoleAssignmentResource(client, id);
             }
             );
         }
