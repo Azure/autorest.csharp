@@ -130,23 +130,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             var propertySerializedName = flattenedNames.LastOrDefault() ?? renameTarget.PropertyName;
             // filter the property name by the serialized name
             var fliteredProperties = properties.Where(p => p.SerializedName == propertySerializedName);
-            var property = fliteredProperties.FirstOrDefault(p => AreArraysIdentical(p.FlattenedNames, flattenedNames));
+            var property = fliteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
             if (property == null)
                 return;
             property.Language.Default.SerializedName ??= property.Language.Default.Name;
             property.Language.Default.Name = renameTarget.NewName;
-        }
-
-        private static bool AreArraysIdentical(IEnumerable<string> x, IEnumerable<string> y)
-        {
-            if (x.Count() != y.Count())
-                return false;
-            foreach ((var first, var second) in x.Zip(y))
-            {
-                if (first != second)
-                    return false;
-            }
-            return true;
         }
 
         public static void UpdateAcronyms()

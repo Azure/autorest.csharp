@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private MockTestDefinitionModel _mockTestModel;
         public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
+            var sourceCodePath = GetSourceCodePath();
+            SourceCodeProject = new SourceCodeProject(sourceCodePath);
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
@@ -31,8 +33,6 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             }
 
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
-            var sourceCodePath = GetSourceCodePath();
-            SourceCodeProject = new SourceCodeProject(sourceCodePath);
         }
 
         private static string GetSourceCodePath()

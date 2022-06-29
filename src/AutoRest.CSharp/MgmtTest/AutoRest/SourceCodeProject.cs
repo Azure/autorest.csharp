@@ -27,13 +27,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             }
 
             sourceCodeProject = CreateGeneratedCodeProject();
-            foreach (string sourceFile in Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories))
+            foreach (var sourceFile in Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories))
             {
-                //// Ignore existing generated code
-                //if (sourceFile.StartsWith(outputDirectory))
-                //{
-                //    continue;
-                //}
+                if (sourceFile.Contains($"{Path.PathSeparator}Generated{Path.PathSeparator}", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
                 sourceCodeProject = sourceCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
