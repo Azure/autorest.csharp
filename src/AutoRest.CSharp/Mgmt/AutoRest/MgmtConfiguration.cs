@@ -74,12 +74,16 @@ namespace AutoRest.CSharp.Input
             public string? IgnoreReason { get; }
             public string? SourceCodePath { get; }
 
+            public bool? GenerateSdkSample { get; }
+
             public TestModelerConfiguration(
                 JsonElement? ignoreReason = default,
-                JsonElement? sourceCodePath = default)
+                JsonElement? sourceCodePath = default,
+                JsonElement? generateSdkSample = default)
             {
                 IgnoreReason = !IsValidJsonElement(ignoreReason) ? null : ignoreReason.ToString();
                 SourceCodePath = !IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
+                GenerateSdkSample = generateSdkSample is null || !IsValidJsonElement(generateSdkSample) ? null : generateSdkSample.Value.GetBoolean();
             }
 
             internal static TestModelerConfiguration? LoadConfiguration(JsonElement root)
@@ -89,10 +93,12 @@ namespace AutoRest.CSharp.Input
 
                 root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
                 root.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
+                root.TryGetProperty(nameof(GenerateSdkSample), out var generateSdkSample);
 
                 return new TestModelerConfiguration(
                     ignoreReason: ignoreReason,
-                    sourceCodePath: sourceCodePath);
+                    sourceCodePath: sourceCodePath,
+                    generateSdkSample: generateSdkSample);
             }
 
             internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
@@ -104,7 +110,8 @@ namespace AutoRest.CSharp.Input
                 }
                 return new TestModelerConfiguration(
                     ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
-                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "source-path")).GetAwaiter().GetResult());
+                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "source-path")).GetAwaiter().GetResult(),
+                    generateSdkSample: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "generate-sdk-sample")).GetAwaiter().GetResult());
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -116,6 +123,9 @@ namespace AutoRest.CSharp.Input
 
                 if (SourceCodePath is not null)
                     writer.WriteString(nameof(SourceCodePath), SourceCodePath);
+
+                if (GenerateSdkSample is not null)
+                    writer.WriteBoolean(nameof(GenerateSdkSample), GenerateSdkSample == true);
 
                 writer.WriteEndObject();
             }

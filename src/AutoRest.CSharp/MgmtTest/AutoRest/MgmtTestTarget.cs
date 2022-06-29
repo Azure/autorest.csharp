@@ -2,11 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.MgmtTest.AutoRest;
 using AutoRest.CSharp.MgmtTest.Generation.Mock;
+using System.Collections.Generic;
+using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.MgmtTest.Models;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -23,25 +28,112 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
-                var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
-                collectionTestWriter.Write();
+                try
+                {
+                    var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                    collectionTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
+                    project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
+                }
+                catch
+                {
+                }
             }
 
             foreach (var resourceTest in library.ResourceMockTests)
             {
-                var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
-                resourceTestWriter.Write();
+                try
+                {
+                    var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                    resourceTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
+                    project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
+                }
+                catch
+                {
+                }
             }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
-            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
-            extensionWrapperTestWriter.Write();
+            try
+            {
+                var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+                extensionWrapperTestWriter.Write();
 
-            project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+                project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+            }
+            catch
+            {
+            }
+
+
+            if (Configuration.MgmtConfiguration.TestModeler.GenerateSdkSample == false)
+                return;
+
+            var generated = new HashSet<string>();
+            foreach (var collectionTest in library.ResourceCollectionMockTests)
+            {
+                foreach (var testCase in collectionTest.MockTestCases)
+                {
+                    try
+                    {
+                        var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                        collectionTestWriter.WriteSample(testCase);
+                        var filename = GenExampleFileName(testCase);
+                        if (!generated.Contains(filename))
+                        {
+                            project.AddGeneratedFile(filename, collectionTestWriter.ToString());
+                            generated.Add(filename);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+
+            foreach (var resourceTest in library.ResourceMockTests)
+            {
+                foreach (var testCase in resourceTest.MockTestCases)
+                {
+                    try
+                    {
+                        var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                        resourceTestWriter.WriteSample(testCase);
+                        var filename = GenExampleFileName(testCase);
+                        if (!generated.Contains(filename))
+                        {
+                            project.AddGeneratedFile(filename, resourceTestWriter.ToString());
+                            generated.Add(filename);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            foreach (var testCase in extensionWrapperTest.MockTestCases)
+            {
+                try
+                {
+                    var extensionWrapperTestWriter2 = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+                    extensionWrapperTestWriter2.WriteSample(testCase);
+                    var filename = GenExampleFileName(testCase);
+                    if (!generated.Contains(filename))
+                    {
+                        project.AddGeneratedFile(GenExampleFileName(testCase), extensionWrapperTestWriter2.ToString());
+                        generated.Add(filename);
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private static string GenExampleFileName(MockTestCase testCase)
+        {
+            return $"../../Samples/Generated/{testCase.RestOperation.Operation.OperationId}$${testCase.Example.Name}.cs";
         }
     }
 }
