@@ -697,8 +697,22 @@ format-by-name-rules:
   '*Uris': 'Uri'
 ```
 
+The key is the name of property, and the value is the data type.
+
 The name match supports 3 patterns: full, start-with, and end-with. And it’s case sensitive compare. 
 For example, in the above configuration, the `ETag` and `location` are full match, `*Uri` and `*Uris` are end-with match.
+
+Here is list of the format we support:
+| Format | Data type |
+| :--- | :--- |
+| arm-id | [ResourceIdentifier](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourceidentifier?view=azure-dotnet) |
+| azure-location | [AzureLocation](https://docs.microsoft.com/en-us/dotnet/api/azure.core.azurelocation?view=azure-dotnet) |
+| duration-constant | [TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan) |
+| etag | [ETag](https://docs.microsoft.com/en-us/dotnet/api/azure.etag?view=azure-dotnet) |
+| resource-type | [ResourceType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourcetype?view=azure-dotnet) |
+| date-time | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
+| uri | [Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=net-6.0) |
+| uuid | [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid?view=net-6.0) |
 
 
 ### Management debug options
