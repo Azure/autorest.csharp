@@ -1883,7 +1883,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoPath
+          name: SshPublicKeyPath
           description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
       protocol: !Protocols {}
     - !StringSchema &ref_174
@@ -1893,7 +1893,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoKeyData
+          name: SshPublicKeyData
           description: >-
             SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in
             Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
@@ -8280,7 +8280,7 @@ schemas: !Schemas
                     - output
                   language: !Languages 
                     default:
-                      name: SshPublicKey
+                      name: SshPublicKeyResource
                       description: Specifies information about the SSH public key.
                       namespace: ''
                   protocol: !Protocols {}
@@ -9685,7 +9685,7 @@ schemas: !Schemas
                                               - output
                                             language: !Languages 
                                               default:
-                                                name: SshPublicKeyInfo
+                                                name: SshPublicKey
                                                 description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
                                                 namespace: ''
                                             protocol: !Protocols {}
@@ -12734,7 +12734,7 @@ schemas: !Schemas
                     - input
                   language: !Languages 
                     default:
-                      name: VirtualMachineScaleSetRollingUpgrade
+                      name: RollingUpgradeStatusInfo
                       description: The status of the latest virtual machine scale set rolling upgrade.
                       namespace: ''
                   protocol: !Protocols {}
@@ -17014,7 +17014,7 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: LogAnalytics
+          name: LogAnalyticsOperationResult
           description: LogAnalytics operation status response
           namespace: ''
       protocol: !Protocols {}
@@ -20167,8 +20167,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -20276,8 +20274,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -20359,8 +20355,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21070,8 +21064,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21192,8 +21184,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21337,8 +21327,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21420,8 +21408,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21490,8 +21476,6 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21594,8 +21578,6 @@ operationGroups:
             schema: *ref_768
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21677,8 +21659,6 @@ operationGroups:
             schema: *ref_768
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -23714,8 +23694,6 @@ operationGroups:
             schema: *ref_768
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -29635,8 +29613,6 @@ operationGroups:
             schema: *ref_768
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -29749,8 +29725,6 @@ operationGroups:
             schema: *ref_768
             implementation: Method
             required: true
-            extensions:
-              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location

@@ -36,25 +36,11 @@ format-by-name-rules:
   '*Uri': 'Uri'
   '*Uris': 'Uri'
   
-directive:
-  - rename-model:
-      from: SshPublicKey
-      to: SshPublicKeyInfo
-  - rename-model:
-      from: LogAnalyticsOperationResult
-      to: LogAnalytics
-  - rename-model:
-      from: SshPublicKeyResource
-      to: SshPublicKey
-  - rename-model:
-      from: RollingUpgradeStatusInfo
-      to: VirtualMachineScaleSetRollingUpgrade
-  - from: MgmtRenameRules.json
-    where: $.definitions.UpgradeOperationHistoricalStatusInfo.properties.type
-    transform: > 
-      $["x-ms-client-name"] = "ResourceType";
-  - from: MgmtRenameRules.json
-    where: $.definitions
-    transform: >
-      $.HyperVGenerationType['x-ms-enum'].name = 'HyperVGenerationType';
+rename-mapping:
+  SshPublicKey: SshPublicKeyInfo
+  SshPublicKeyResource: SshPublicKey
+  LogAnalyticsOperationResult: LogAnalytics
+  RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
+  UpgradeOperationHistoricalStatusInfo.type: ResourceType
+  DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
 ```

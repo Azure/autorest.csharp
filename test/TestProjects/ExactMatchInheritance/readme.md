@@ -18,14 +18,15 @@ format-by-name-rules:
   'location': 'azure-location'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
+
 # the remover will remove this since this is not internally used or a reference type if we do not have this configuration
 keep-orphaned-models:
 - ExactMatchModel11
+
+rename-mapping:
+  ExactMatchModel11.type: ResourceType
+
 directive:
-  - from: ExactMatchInheritance.json
-    where: $.definitions.ExactMatchModel11.properties.type
-    transform: >
-       $["x-ms-client-name"] = "ResourceType";
   - from: ExactMatchInheritance.json
     where: $.definitions.ExactMatchModel1.properties.type1
     transform: >

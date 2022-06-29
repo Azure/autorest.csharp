@@ -68,6 +68,11 @@ namespace MgmtRenameRules.Models
                 writer.WritePropertyName("managedDisk");
                 writer.WriteObjectValue(ManagedDisk);
             }
+            if (Optional.IsDefined(SecurityType))
+            {
+                writer.WritePropertyName("securityType");
+                writer.WriteStringValue(SecurityType.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
@@ -83,6 +88,7 @@ namespace MgmtRenameRules.Models
             Optional<VirtualHardDisk> image = default;
             Optional<IList<string>> vhdContainers = default;
             Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
+            Optional<DiskSecurityType> securityType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -180,8 +186,18 @@ namespace MgmtRenameRules.Models
                     managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value);
                     continue;
                 }
+                if (property.NameEquals("securityType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    securityType = new DiskSecurityType(property.Value.GetString());
+                    continue;
+                }
             }
-            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value);
+            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value, Optional.ToNullable(securityType));
         }
     }
 }

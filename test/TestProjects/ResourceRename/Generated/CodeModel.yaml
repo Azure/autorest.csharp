@@ -28,7 +28,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoId
+          name: SshPublicKeyResourceId
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_3
@@ -38,7 +38,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoType
+          name: SshPublicKeyResourceType
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_4
@@ -48,7 +48,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoName
+          name: SshPublicKeyResourceName
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_5
@@ -234,7 +234,7 @@ schemas: !Schemas
                 - output
               language: !Languages 
                 default:
-                  name: SshPublicKeyInfo
+                  name: SshPublicKeyResource
                   description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
                   namespace: ''
               protocol: !Protocols {}

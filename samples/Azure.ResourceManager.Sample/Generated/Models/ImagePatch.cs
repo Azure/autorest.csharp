@@ -37,6 +37,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The provisioning state. </summary>
         public string ProvisioningState { get; }
         /// <summary> Gets the HyperVGenerationType of the VirtualMachine created from the image. </summary>
-        public HyperVGenerationTypes? HyperVGeneration { get; set; }
+        public HyperVGeneration? HyperVGeneration { get; set; }
     }
 }

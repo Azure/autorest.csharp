@@ -39,13 +39,11 @@ format-by-name-rules:
   '*Uri': 'Uri'
   '*Uris': 'Uri'
 
+rename-mapping:
+  BlobServiceProperties: BlobService
+  FileServiceProperties: FileService
+
 directive:
-  - rename-model:
-      from: BlobServiceProperties
-      to: BlobService
-  - rename-model:
-      from: FileServiceProperties
-      to: FileService
   - from: swagger-document
     where: $.definitions.FileShareItems.properties.value.items["$ref"]
     transform: return "#/definitions/FileShare"

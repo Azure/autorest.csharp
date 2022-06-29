@@ -29,5 +29,13 @@
     "location": "azure-location",
     "*Uri": "Uri",
     "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "SshPublicKey": "SshPublicKeyInfo",
+    "SshPublicKeyResource": "SshPublicKey",
+    "LogAnalyticsOperationResult": "LogAnalytics",
+    "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
+    "UpgradeOperationHistoricalStatusInfo.type": "ResourceType",
+    "DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey": "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey"
   }
 }
