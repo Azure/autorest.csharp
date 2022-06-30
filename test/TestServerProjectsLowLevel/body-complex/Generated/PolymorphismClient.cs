@@ -398,6 +398,8 @@ namespace body_complex_LowLevel
         ///     siblings = new[] {
         ///         
         ///     },
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         /// };
         /// 
         /// Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -575,6 +577,8 @@ namespace body_complex_LowLevel
         ///     siblings = new[] {
         ///         
         ///     },
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         /// };
         /// 
         /// Response response = client.PutValid(RequestContent.Create(data));
@@ -1238,6 +1242,8 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
@@ -1249,10 +1255,11 @@ namespace body_complex_LowLevel
         ///             siblings = new[] {
         ///                 
         ///             },
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
         ///         }
         ///     },
-        ///     location = "<SalmonLocation>",
-        ///     iswild = true,
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
@@ -1329,6 +1336,8 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
@@ -1340,10 +1349,11 @@ namespace body_complex_LowLevel
         ///             siblings = new[] {
         ///                 
         ///             },
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
         ///         }
         ///     },
-        ///     location = "<SalmonLocation>",
-        ///     iswild = true,
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = client.PutComplicated(RequestContent.Create(data));
@@ -1424,6 +1434,8 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
@@ -1435,10 +1447,11 @@ namespace body_complex_LowLevel
         ///             siblings = new[] {
         ///                 
         ///             },
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
         ///         }
         ///     },
-        ///     location = "<SalmonLocation>",
-        ///     iswild = true,
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
@@ -1550,6 +1563,8 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
@@ -1561,10 +1576,11 @@ namespace body_complex_LowLevel
         ///             siblings = new[] {
         ///                 
         ///             },
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
         ///         }
         ///     },
-        ///     location = "<SalmonLocation>",
-        ///     iswild = true,
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
@@ -1678,6 +1694,8 @@ namespace body_complex_LowLevel
         ///     siblings = new[] {
         ///         
         ///     },
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         /// };
         /// 
         /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
@@ -1855,6 +1873,8 @@ namespace body_complex_LowLevel
         ///     siblings = new[] {
         ///         
         ///     },
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         /// };
         /// 
         /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));

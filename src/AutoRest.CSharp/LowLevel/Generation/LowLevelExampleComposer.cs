@@ -129,7 +129,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     return false;
                 case ObjectSchema o:
                     // We must also include any properties introduced by our parent chain.
-                    foreach (ObjectSchema s in GetAllSchemaInherited(o))
+                    // Try to get the concrete child type for polymorphism
+                    foreach (ObjectSchema s in GetAllSchemaInherited(GetConcreteChildType(o)))
                     {
                         foreach (Property prop in s.Properties)
                         {
@@ -199,7 +200,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                     case ObjectSchema o:
                         // We must also include any properties introduced by our parent chain.
-                        foreach (ObjectSchema s in GetAllSchemaInherited(o))
+                        // Try to get the concrete child type for polymorphism
+                        foreach (ObjectSchema s in GetAllSchemaInherited(GetConcreteChildType(o)))
                         {
                             foreach (Property prop in s.Properties)
                             {
@@ -735,7 +737,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     // }
                     var properties = new List<Property>();
                     // We must also include any properties introduced by our parent chain.
-                    foreach (ObjectSchema s in GetAllSchemaInherited(obj))
+                    // Try to get the concrete child type for polymorphism
+                    foreach (ObjectSchema s in GetAllSchemaInherited(GetConcreteChildType(obj)))
                     {
                         if (allProperties)
                         {
@@ -952,6 +955,11 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // TODO: is there a way to compose a data plane endpoint from swagger?
             return "https://my-account-name.azure.com";
+        }
+
+        private static ObjectSchema GetConcreteChildType(ObjectSchema o)
+        {
+            return (ObjectSchema)(o.Children != null && o.Children.All.Count > 0 ? o.Children!.All.First() : o);
         }
 
         private static IEnumerable<ObjectSchema> GetAllSchemaInherited(ObjectSchema o)

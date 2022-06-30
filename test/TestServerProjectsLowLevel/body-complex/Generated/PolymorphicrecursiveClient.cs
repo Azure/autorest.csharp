@@ -398,6 +398,8 @@ namespace body_complex_LowLevel
         ///     siblings = new[] {
         ///         
         ///     },
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         /// };
         /// 
         /// Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -575,6 +577,8 @@ namespace body_complex_LowLevel
         ///     siblings = new[] {
         ///         
         ///     },
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
         /// };
         /// 
         /// Response response = client.PutValid(RequestContent.Create(data));
