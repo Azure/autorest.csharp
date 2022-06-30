@@ -3,6 +3,9 @@
 - [Rename Rules](#rename-rules)
 - [Change Format by Name Rules](#change-format-by-name-rules)
 - [Rename Mapping](#rename-mapping)
+    - [Rename a Type](#rename-a-type)
+    - [Rename a Property in a Class](#rename-a-property-in-a-class)
+    - [Rename an Enumeration Value in an Enumeration Type](#rename-an-enumeration-value-in-an-enumeration-type)
 
 ## Rename rules
 
