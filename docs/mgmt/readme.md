@@ -1,5 +1,21 @@
 # Management plane SDK generator - how it works and its corresponding configurations
 
+- [Understanding the Resource Hierarchy in Management Plane SDK](#resource-hierarchy-in-management-plane-sdk)
+- [How does the Generator Generate the Hierarchies](#how-does-the-generator-build-hierarchical-structure-of-resources)
+- [Management Plane Configurations](#management-plane-configurations)
+    - [Change the Resource Data](#change-resource-data)
+    - [Change the Resource Name](#change-resource-name)
+    - [Change the Criteria of ARM Resources](#change-the-criteria-of-arm-resources)
+    - [Change the Resource Type](#change-the-resource-type)
+    - [Mark a Request Path is a Non-Resource](#mark-a-request-path-is-a-non-resource)
+    - [Change Parent of Request Paths](#change-parent-of-request-paths)
+    - [Change Singleton Resources](#change-singleton-resources)
+    - [Change the Name of Operations](#change-the-name-of-operations)
+    - [List Exception](#list-exception)
+    - [Scope Resources](#scope-resources)
+    - [SDK Polishing Configurations](#sdk-polishing-configurations)
+    - [Management Debug Options](#management-debug-options)
+
 ## Resource hierarchy in management plane SDK
 
 For the basic management plane SDK concepts, please refer the detailed document [here](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts) first.
@@ -673,47 +689,11 @@ public static partial class ResourcesExtension
 }
 ```
 
-### Rename rules
+### SDK polishing configurations
 
-A mechanism of renaming is introduced in the generator to unify the casing of some words.
+During the SDK review, we would like to make some polish to our generated SDK according to the review comments, for instance, changing names of types, properties, making type of properties more specific, etc. To achieve these, you will need the SDK polishing configurations.
 
-```yaml
-rename-rules:
-  Ip: IP
-  Ips: IPs
-```
-
-The above configuration will search case sensitively in the public API of generated resources/collections/models, and replace the occurrences to the corresponding value to keep the casing of some acronyms unified across the generated SDK.
-
-### Change format by name rules
-
-This is a bulk update rule to change property's format by its name which this name demonstrates a specific type implicitly. This is a convenient configuration to replace using directive change the property format attribute.
-
-```yaml
-format-by-name-rules:
-  'ETag': 'etag'
-  'location': 'azure-location'
-  '*Uri': 'Uri'
-  '*Uris': 'Uri'
-```
-
-The key is the name of property, and the value is the data type.
-
-The name match supports 3 patterns: full, start-with, and end-with. And it’s case sensitive compare. 
-For example, in the above configuration, the `ETag` and `location` are full match, `*Uri` and `*Uris` are end-with match.
-
-Here is list of the format we support:
-| Format | Data type |
-| :--- | :--- |
-| arm-id | [ResourceIdentifier](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourceidentifier?view=azure-dotnet) |
-| azure-location | [AzureLocation](https://docs.microsoft.com/en-us/dotnet/api/azure.core.azurelocation?view=azure-dotnet) |
-| duration-constant | [TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan) |
-| etag | [ETag](https://docs.microsoft.com/en-us/dotnet/api/azure.etag?view=azure-dotnet) |
-| resource-type | [ResourceType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourcetype?view=azure-dotnet) |
-| date-time | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
-| uri | [Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=net-6.0) |
-| uuid | [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid?view=net-6.0) |
-
+Please see [this document](./polishing.md) for full details of the SDK polishing configurations.
 
 ### Management debug options
 
