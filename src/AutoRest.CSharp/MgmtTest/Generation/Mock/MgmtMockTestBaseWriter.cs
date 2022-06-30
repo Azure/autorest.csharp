@@ -18,6 +18,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
@@ -27,6 +28,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         protected MgmtMockTestProvider<TProvider> This { get; }
 
         protected bool generatingSample = false;
+        protected List<string> parameterVariables = new List<string>();
 
         public MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider)
         {
@@ -49,19 +51,29 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         public virtual void WriteSample(MockTestCase testCase)
         {
             generatingSample = true;
+            Regex pattern = new Regex(@".*(Azure.ResourceManager.*\\)");
+            Match match = pattern.Match(Configuration.OutputFolder);
+            if (match.Success)
+            {
+                _writer.additionalComments.Add($"// Need to install {match.Groups[1].Value} v1.0.0 to execute below sample code");
+            }
+            _writer.addUsingRegion = true;
             _writer.UseNamespace("Azure.ResourceManager");
             _writer.UseNamespace("System");
             _writer.UseNamespace("Azure.Identity");
             _writer.UseNamespace("System.Threading.Tasks");
+
+            _writer.Line($"#region decalarations");
             _writer.Line($"ArmClient GetArmClient() => new ArmClient(new DefaultAzureCredential());");
-            RequestPath parentRP = testCase.Carrier switch
-            {
-                ResourceCollection parentCollection => parentCollection.RequestPath,
-                Resource parentResource => parentResource.RequestPath,
-                MgmtExtensions parentExtension => parentExtension.ContextualPath,
-                _ => throw new InvalidOperationException($"Unknown parent {testCase.Carrier.GetType()}"),
-            };
-            foreach (var fs in testCase.ComposeResourceIdentifierParameterValues(parentRP, true))
+            //RequestPath requestPath = testCase.Carrier switch
+            //{
+            //    ResourceCollection parentCollection => parentCollection.RequestPath,
+            //    Resource parentResource => parentResource.RequestPath,
+            //    MgmtExtensions parentExtension => parentExtension.ContextualPath,
+            //    _ => throw new InvalidOperationException($"Unknown parent {testCase.Carrier.GetType()}"),
+            //};
+            RequestPath requestPath = testCase.RequestPath;
+            foreach (var fs in testCase.ComposeResourceIdentifierParameterValues(requestPath, true))
             {
                 var s = $"{fs}";
                 // s = s.Substring(1, s.Length - 2);
@@ -72,20 +84,35 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 else
                 {
                     object? rawValue = null;
+                    string? description = null;
                     foreach (var param in testCase.Example.AllParameters)
                     {
                         if (param.Parameter.Language.Default.SerializedName == s)
+                        {
                             rawValue = param.ExampleValue.RawValue;
+                            description = param.Parameter.Summary ?? param.Parameter.Language.Default.Description;
+                        }
                     }
                     _writer.Append($"var {s} = ");
                     _writer.AppendRawValue(rawValue?.GetType() ?? typeof(object), rawValue);
-                    _writer.Line($";");
+                    if (description is not null)
+                    {
+                        _writer.Line($";  // {description}");
+                    }
+                    else
+                    {
+                        _writer.Line($";");
+                    }
+                    parameterVariables.Add(s);
                 }
             }
+            _writer.Line($"#endregion");
+            _writer.Line($"");
+            _writer.Line($"#region API invocation");
             _writer.Line($"// api-version: {testCase.RestOperation.Operation.ApiVersions.FirstOrDefault().Version}");
             _writer.Line($"// x-ms-original-file: {testCase.Example.OriginalFile}");
             WriteTestMethodBody(testCase);
-
+            _writer.Line($"#endregion");
             generatingSample = false;
         }
 
@@ -282,6 +309,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 }
                 WriteTestMethodInvocation(declaration, testCase);
                 _writer.LineRaw(";");
+                _writer.Line();
                 if (generatingSample)
                 {
                     if (testCase.ClientOperation.ReturnType.Name == "ArmOperation")
@@ -330,7 +358,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             _writer.Append($"{declaration}.{methodName}(");
             foreach (var parameter in clientOperation.MethodParameters)
             {
-                if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                if (testCase.ParameterSerializedNames.TryGetValue(parameter.Name, out var parameterVariable) && parameterVariables.Contains(parameterVariable))
+                {
+                    _writer.Append($"{parameterVariable},");
+                }
+                else if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
                     _writer.AppendExampleParameterValue(parameter, parameterValue);
                     _writer.AppendRaw(",");

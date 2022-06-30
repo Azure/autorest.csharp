@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private char[] _builder;
         private int _length;
+        public List<string> additionalComments = new List<string>();
+        public bool addUsingRegion = false;
 
         public CodeWriter()
         {
@@ -536,9 +538,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.AppendLine("#nullable disable");
                 builder.AppendLine();
 
+                foreach (string comments in additionalComments)
+                {
+                    builder.AppendLine(comments);
+                }
+
+                if (addUsingRegion)
+                {
+                    builder.AppendLine("#region usings");
+                }
                 foreach (string ns in namespaces)
                 {
                     builder.Append("using ").Append(ns).AppendLine(";");
+                }
+                if (addUsingRegion)
+                {
+                    builder.AppendLine("#endregion");
                 }
 
                 if (namespaces.Any())

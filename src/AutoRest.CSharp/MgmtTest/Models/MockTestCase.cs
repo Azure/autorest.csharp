@@ -141,6 +141,8 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
+        private Dictionary<string, string>? _parameterSerializedNames;
+        public Dictionary<string, string> ParameterSerializedNames => _parameterSerializedNames ??= EnsureParameterSerializedNames();
 
         private Dictionary<string, string> EnsureParameterSerializedNames()
         {
@@ -164,7 +166,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         private Dictionary<string, string>? _parameterNameToSerializedNameMapping;
 
-        private string GetParameterSerializedName(string name)
+        public string GetParameterSerializedName(string name)
         {
             return EnsureParameterSerializedNames()[name];
         }
