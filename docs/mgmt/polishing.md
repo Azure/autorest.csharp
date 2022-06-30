@@ -47,4 +47,100 @@ Here is list of the format we support:
 
 ## Rename mapping
 
+To rename an element in the generated SDK, like a type name, a property name, you could do that by writing `directive`s which autorest supports. You could refer [this document](https://github.com/Azure/autorest/blob/main/docs/generate/directives.md) for more details and usages.
 
+But this configuration provides a simpler syntax for you to change the name of a type or a property.
+
+### Rename a type
+
+To rename a type (models and enumerations included), you could just use this syntax:
+```yaml
+rename-mapping:
+  OriginalName: NewName
+```
+where the `OriginalName` is the original name of this model in the swagger. **Please be sure the name is its original swagger name**, because our generator will dynamically change names of some models from their context and roles inside the SDK.
+
+After applying this configuration, you will see the following changes:
+```diff
+-public partial class OriginalName
++public partial class NewName
+{
+    /* other things inside the class */
+}
+```
+
+### Rename a property in a class
+
+To rename a property in a class, you could just use this syntax:
+```yaml
+rename-mapping:
+  Model.oldProperty: NewProperty
+```
+where the `Model` is the original name of this model in the **swagger**, and the `oldProperty` is its original name of this property in the **swagger**.
+
+After applying this configuration, you will see the following changes:
+```diff
+public partial class Model
+{
+    /* other things inside the class */
+
+-    public string OldProperty { get; set; }
++    public string NewProperty { get; set; }
+
+    /* other things inside the class */
+}
+```
+
+It is special that some properties might be "flattened" from another model into this property. When this happens, you will have to include a full path of the property to make sure that the generator could precisely locate the property. For instance, we might have this inside our swagger:
+```json
+"definitions": {
+    "Model": {
+        "type": "object",
+        "properties": {
+            "properties": {
+                "$ref": "#definitions/ModelProperties",
+                "x-ms-client-flatten": true
+            }
+        }
+    },
+    "ModelProperties": {
+        "type": "object",
+        "properties": {
+            "flattenedProperty": {
+                "type": "string"
+            }
+        }
+    }
+}
+```
+This piece of swagger will generate into the following code:
+```csharp
+public partial class Model
+{
+    /* constructors */
+    public string FlattenedProperty { get; set; }
+}
+```
+The model `ModelProperties` will disappear in our generated code, and the properties inside `ModelProperties` will be promoted into the owner class. In case the name of this property needs to be changed, you will have to use the following configuration:
+```yaml
+rename-mapping:
+  Model.properties.flattenedProperty: NewFlattenedProperty
+```
+After applying this configuration, you will see the following changes:
+```diff
+public partial class Model
+{
+    /* constructors */
+-   public string FlattenedProperty { get; set; }
++   public string NewFlattenedProperty { get; set; }
+}
+```
+
+### Rename an enumeration value in an enumeration type
+
+The generator regards the enumeration values as static properties, therefore you could use basically the same syntax as renaming a property to rename an enumeration value:
+```yaml
+rename-mapping:
+  EnumType.enum_value: NewValue
+```
+where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors.
