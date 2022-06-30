@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         public virtual void WriteSample(MockTestCase testCase)
         {
             generatingSample = true;
-            Regex pattern = new Regex(@".*(Azure.ResourceManager.*\\)");
+            Regex pattern = new Regex(@".*(Azure.ResourceManager.\w+)/.*");
             Match match = pattern.Match(Configuration.OutputFolder);
             if (match.Success)
             {
