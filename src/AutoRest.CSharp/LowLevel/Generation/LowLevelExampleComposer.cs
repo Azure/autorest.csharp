@@ -284,17 +284,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            // var operation = await client.{methodName}(...);
-            //
-            // var response = await operation.WaitForCompletionAsync();
-            // await foreach (var data in response.Value)
-            // {
-            //     Console.WriteLine(data.ToString());
-            // or
-            //     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-            //     Console.WriteLine(result[.GetProperty(...)...].ToString());
-            //     ...
-            // }
+            /* CODE PATTEN
+             * var operation = await client.{methodName}(...);
+             *
+             * var response = await operation.WaitForCompletionAsync();
+             * await foreach (var data in response.Value)
+             * {
+             *     Console.WriteLine(data.ToString());
+             * or
+             *     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             *     Console.WriteLine(result[.GetProperty(...)...].ToString());
+             *     ...
+             * }
+             */
             builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
             builder.AppendLine();
             builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
@@ -306,15 +308,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleLongRunningResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            // var operation = await client.{methodName}(...);
-            //
-            // var response = await operation.WaitForCompletionResponseAsync();
-            // Console.WriteLine(response.Status);
-            // or
-            // BinaryData data = await operation.WaitForCompletionAsync();
-            // JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-            // Console.WriteLine(result[.GetProperty(...)...].ToString());
-            // ...
+            /* GENERATED CODE PATTERN
+             * var operation = await client.{methodName}(...);
+             *
+             * var response = await operation.WaitForCompletionResponseAsync();
+             * Console.WriteLine(response.Status);
+             * or
+             * BinaryData data = await operation.WaitForCompletionAsync();
+             * JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             * Console.WriteLine(result[.GetProperty(...)...].ToString());
+             * ...
+             */
             builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
             builder.AppendLine();
 
@@ -361,14 +365,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandlePageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            // await foreach (var data in client.{methodName}(...))
-            // {
-            //     Console.WriteLine(data.ToString());
-            // or
-            //     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-            //     Console.WriteLine(result[.GetProperty(...)...].ToString());
-            //     ...
-            // }
+            /* GENERATED CODE PATTERN
+             * await foreach (var data in client.{methodName}(...))
+             * {
+             *     Console.WriteLine(data.ToString());
+             * or
+             *     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+             *     Console.WriteLine(result[.GetProperty(...)...].ToString());
+             *     ...
+             * }
+             */
             using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes((ObjectSchema)clientMethod.OperationSchemas.ResponseBodySchema!, clientMethod.PagingInfo!.ItemName, allParameters, builder);
@@ -407,7 +413,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            // Respones response = await client.{methodName}(...);
             builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
             if (clientMethod.OperationSchemas.ResponseBodySchema != null)
             {
@@ -672,7 +677,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeRequestContent(bool composeAll, Schema requestBodySchema, StringBuilder builder)
         {
-            // var data = {value_expressioin};
+            // var data = {value_expression};
             builder.Append("var data = ");
             ComposeRequestContent(composeAll, requestBodySchema, builder, 0, new HashSet<string>());
             builder.AppendLine(";");
@@ -688,9 +693,11 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (schema)
             {
                 case ArraySchema a:
-                    // new[] {
-                    //     {value_expression}
-                    // }
+                    /* GENERATED CODE PATTERN
+                     * new[] {
+                     *     {value_expression}
+                     * }
+                     */
                     using (Scope("new[] ", indent, builder))
                     {
                         builder.Append(' ', indent + 4);
@@ -699,9 +706,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     return;
                 case DictionarySchema d:
-                    // new {
-                    //     key = {value_expression},
-                    // }
+                    /* GENERATED CODE PATTERN
+                     * new {
+                     *     key = {value_expression},
+                     * }
+                     */
                     using (Scope("new ", indent, builder))
                     {
                         builder.Append(' ', indent + 4).Append("key = ");
@@ -730,11 +739,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     return;
                 case ObjectSchema obj:
-                    // new {
-                    //     prop1 = {value_expression},
-                    //     prop2 = {value_expression},
-                    //     ...
-                    // }
+                    /* GENERATED CODE PATTERN
+                     * new {
+                     *     prop1 = {value_expression},
+                     *     prop2 = {value_expression},
+                     *     ...
+                     * }
+                     */
                     var properties = new List<Property>();
                     // We must also include any properties introduced by our parent chain.
                     // Try to get the concrete child type for polymorphism
@@ -809,11 +820,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         ComposeRequestContent(allProperties, c.ValueType, builder, indent, visitedSchema);
                     }
-                    //var constantCsharpType = Context.TypeFactory.CreateType(c.ValueType, c.Value.Value == null);
-                    //var constantValue = c.Value.Value != null ?
-                    //    BuilderHelpers.ParseConstant(c.Value.Value, constantCsharpType) :
-                    //    Constant.NewInstanceOf(constantCsharpType);
-                    //builder.Append(constantValue.GetConstantFormattable());
                     return;
                 case SealedChoiceSchema c:
                     builder.Append($"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"");
