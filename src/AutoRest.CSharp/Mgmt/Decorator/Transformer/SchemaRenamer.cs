@@ -129,8 +129,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
             var propertySerializedName = flattenedNames.LastOrDefault() ?? renameTarget.PropertyName;
             // filter the property name by the serialized name
-            var fliteredProperties = properties.Where(p => p.SerializedName == propertySerializedName);
-            var property = fliteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
+            var filteredProperties = properties.Where(p => p.SerializedName == propertySerializedName);
+            var property = filteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
             if (property == null)
                 return;
             property.Language.Default.SerializedName ??= property.Language.Default.Name;
