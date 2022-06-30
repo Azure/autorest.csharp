@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -21,6 +22,18 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class SystemObjectType : ObjectType
     {
+        private static ConcurrentDictionary<Type, SystemObjectType> _typeCache = new ConcurrentDictionary<Type, SystemObjectType>();
+
+        public static SystemObjectType Create(Type type, BuildContext context)
+        {
+            if (_typeCache.TryGetValue(type, out var result))
+                return result;
+
+            result = new SystemObjectType(type, context);
+            _typeCache.TryAdd(type, result);
+            return result;
+        }
+
         private Type _type;
 
         public SystemObjectType(Type type, BuildContext context)
@@ -48,7 +61,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal static bool TryGetCtor(Type type, string attributeType, [MaybeNullWhen(false)] out ConstructorInfo result)
         {
-            result = null;
             foreach (var ctor in type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
                 if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
@@ -57,6 +69,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return true;
                 }
             }
+
+            result = null;
             return false;
         }
 
@@ -144,10 +158,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     Required = IsRequired(property),
                     Language = new Languages()
                     {
-                        Default = new Language()
-                        {
-                            Name = property.Name,
-                        }
+                        Default = new Language() { Name = property.Name },
                     }
                 };
 

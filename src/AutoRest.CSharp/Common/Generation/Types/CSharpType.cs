@@ -157,7 +157,8 @@ namespace AutoRest.CSharp.Generation.Types
         internal static CSharpType FromSystemType(BuildContext context, Type type)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
-            var systemObjectType = new SystemObjectType(type, context);
+            var systemObjectType = SystemObjectType.Create(type, context);
+            // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
             return new CSharpType(
                 systemObjectType,
                 type.Namespace ?? context.DefaultNamespace,

@@ -129,24 +129,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
             var propertySerializedName = flattenedNames.LastOrDefault() ?? renameTarget.PropertyName;
             // filter the property name by the serialized name
-            var fliteredProperties = properties.Where(p => p.SerializedName == propertySerializedName);
-            var property = fliteredProperties.FirstOrDefault(p => AreArraysIdentical(p.FlattenedNames, flattenedNames));
+            var filteredProperties = properties.Where(p => p.SerializedName == propertySerializedName);
+            var property = filteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
             if (property == null)
                 return;
             property.Language.Default.SerializedName ??= property.Language.Default.Name;
             property.Language.Default.Name = renameTarget.NewName;
-        }
-
-        private static bool AreArraysIdentical(IEnumerable<string> x, IEnumerable<string> y)
-        {
-            if (x.Count() != y.Count())
-                return false;
-            foreach ((var first, var second) in x.Zip(y))
-            {
-                if (first != second)
-                    return false;
-            }
-            return true;
         }
 
         public static void UpdateAcronyms()
@@ -266,14 +254,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private static void TransformLanguage(Languages languages, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
             var originalName = languages.Default.Name;
-            if (wordCache.TryGetValue(originalName, out var result))
+            if (!wordCache.TryGetValue(originalName, out var result))
             {
-                languages.Default.Name = result;
-                return;
+                result = transformer.EnsureNameCase(originalName);
+                wordCache.TryAdd(originalName, result);
             }
-            result = transformer.EnsureNameCase(originalName);
             languages.Default.Name = result;
-            wordCache.TryAdd(originalName, result);
+            languages.Default.SerializedName ??= originalName;
         }
 
         private static void TransformObjectSchema(ObjectSchema objSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)

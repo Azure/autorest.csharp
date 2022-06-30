@@ -54,18 +54,21 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null)
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter);
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
         }
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
         {
             _operations = operations;
             _extensionParameter = extensionParameter;
+            IsConvenientOperation = isConvenientOperation;
         }
+
+        public bool IsConvenientOperation { get; }
 
         public MgmtRestOperation this[int index] => _operations[index];
 

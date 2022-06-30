@@ -554,7 +554,7 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "responses")]
         public Dictionary<string, ExampleResponse> Responses { get; set; } // statusCode-->ExampleResponse
 
-        public IEnumerable<ExampleParameter> AllParameter => this.ClientParameters.Concat(this.MethodParameters);
+        public IEnumerable<ExampleParameter> AllParameters => this.ClientParameters.Concat(this.MethodParameters);
     }
 
     internal partial class ExampleResponse
