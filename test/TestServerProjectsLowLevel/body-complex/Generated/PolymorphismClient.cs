@@ -395,9 +395,7 @@ namespace body_complex_LowLevel
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
-        ///     siblings = new[] {
-        ///         
-        ///     },
+        ///     siblings = new[] {},
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
         /// };
@@ -574,9 +572,7 @@ namespace body_complex_LowLevel
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
-        ///     siblings = new[] {
-        ///         
-        ///     },
+        ///     siblings = new[] {},
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
         /// };
@@ -1252,9 +1248,7 @@ namespace body_complex_LowLevel
         ///             fishtype = "<FishFishtype>",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
-        ///             siblings = new[] {
-        ///                 
-        ///             },
+        ///             siblings = new[] {},
         ///             location = "<SalmonLocation>",
         ///             iswild = true,
         ///         }
@@ -1346,9 +1340,7 @@ namespace body_complex_LowLevel
         ///             fishtype = "<FishFishtype>",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
-        ///             siblings = new[] {
-        ///                 
-        ///             },
+        ///             siblings = new[] {},
         ///             location = "<SalmonLocation>",
         ///             iswild = true,
         ///         }
@@ -1444,9 +1436,7 @@ namespace body_complex_LowLevel
         ///             fishtype = "<FishFishtype>",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
-        ///             siblings = new[] {
-        ///                 
-        ///             },
+        ///             siblings = new[] {},
         ///             location = "<SalmonLocation>",
         ///             iswild = true,
         ///         }
@@ -1573,9 +1563,7 @@ namespace body_complex_LowLevel
         ///             fishtype = "<FishFishtype>",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
-        ///             siblings = new[] {
-        ///                 
-        ///             },
+        ///             siblings = new[] {},
         ///             location = "<SalmonLocation>",
         ///             iswild = true,
         ///         }
@@ -1691,9 +1679,7 @@ namespace body_complex_LowLevel
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
-        ///     siblings = new[] {
-        ///         
-        ///     },
+        ///     siblings = new[] {},
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
         /// };
@@ -1870,9 +1856,7 @@ namespace body_complex_LowLevel
         ///     fishtype = "<FishFishtype>",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
-        ///     siblings = new[] {
-        ///         
-        ///     },
+        ///     siblings = new[] {},
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
         /// };

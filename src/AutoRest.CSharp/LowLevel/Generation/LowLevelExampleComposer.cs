@@ -679,15 +679,15 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // var data = {value_expression};
             builder.Append("var data = ");
-            ComposeRequestContent(composeAll, requestBodySchema, builder, 0, new HashSet<string>());
+            builder.Append(ComposeRequestContent(composeAll, requestBodySchema, 0, new HashSet<Schema>()));
             builder.AppendLine(";");
         }
 
-        private void ComposeRequestContent(bool allProperties, Schema schema, StringBuilder builder, int indent, HashSet<string> visitedSchema)
+        private string ComposeRequestContent(bool allProperties, Schema schema, int indent, HashSet<Schema> visitedSchema)
         {
-            if (visitedSchema.Contains(schema.Name))
+            if (visitedSchema.Contains(schema))
             {
-                return;
+                return "";
             }
 
             switch (schema)
@@ -695,49 +695,61 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ArraySchema a:
                     /* GENERATED CODE PATTERN
                      * new[] {
-                     *     {value_expression}
+                     *     {element_expression}
                      * }
+                     * or
+                     * new[] {}
                      */
+                    var elementExpr = ComposeRequestContent(allProperties, a.ElementType, indent + 4, visitedSchema);
+                    if (elementExpr == "")
+                    {
+                        return "new[] {}";
+                    }
+
+                    var builder = new StringBuilder();
                     using (Scope("new[] ", indent, builder))
                     {
-                        builder.Append(' ', indent + 4);
-                        ComposeRequestContent(allProperties, a.ElementType, builder, indent + 4, visitedSchema);
-                        builder.AppendLine();
+                        builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
                     }
-                    return;
+                    return builder.ToString();
                 case DictionarySchema d:
                     /* GENERATED CODE PATTERN
                      * new {
                      *     key = {value_expression},
                      * }
+                     * or
+                     * new {}
                      */
+                    var valueExpr = ComposeRequestContent(allProperties, d.ElementType, indent + 4, visitedSchema);
+                    if (valueExpr == "")
+                    {
+                        return "new {}";
+                    }
+
+                    builder = new StringBuilder();
                     using (Scope("new ", indent, builder))
                     {
-                        builder.Append(' ', indent + 4).Append("key = ");
-                        ComposeRequestContent(allProperties, d.ElementType, builder, indent + 4, visitedSchema);
-                        builder.AppendLine(",");
+                        builder.Append(' ', indent + 4).AppendLine($"key = {valueExpr},");
                     }
-                    return;
+                    return builder.ToString();
                 case OrSchema or:
                     foreach (var o in or.AnyOf)
                     {
-                        if (!visitedSchema.Contains(o.Name))
+                        if (!visitedSchema.Contains(o))
                         {
-                            ComposeRequestContent(allProperties, o, builder, indent, visitedSchema);
-                            break;
+                            return ComposeRequestContent(allProperties, o, indent, visitedSchema);
                         }
                     }
-                    return;
+                    return "";
                 case XorSchema xor:
                     foreach (var o in xor.OneOf)
                     {
-                        if (!visitedSchema.Contains(o.Name))
+                        if (!visitedSchema.Contains(o))
                         {
-                            ComposeRequestContent(allProperties, o, builder, indent, visitedSchema);
-                            break;
+                            return ComposeRequestContent(allProperties, o, indent, visitedSchema);
                         }
                     }
-                    return;
+                    return "";
                 case ObjectSchema obj:
                     /* GENERATED CODE PATTERN
                      * new {
@@ -745,6 +757,8 @@ namespace AutoRest.CSharp.Generation.Writers
                      *     prop2 = {value_expression},
                      *     ...
                      * }
+                     * or
+                     * new {}
                      */
                     var properties = new List<Property>();
                     // We must also include any properties introduced by our parent chain.
@@ -761,82 +775,77 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (properties.Any())
+                    if (!properties.Any())
                     {
-                        visitedSchema.Add(obj.Name);
-                        using (Scope("new ", indent, builder))
+                        return "new {}";
+                    }
+
+                    visitedSchema.Add(obj);
+                    var propertyExpressions = new List<string>();
+                    foreach (Property p in properties)
+                    {
+                        var propertyValueExpr = ComposeRequestContent(allProperties, p.Schema, indent + 4, visitedSchema);
+                        if (propertyValueExpr != "")
                         {
-                            foreach (Property p in properties)
-                            {
-                                builder.Append(' ', indent + 4).Append($"{p.SerializedName} = ");
-                                ComposeRequestContent(allProperties, p.Schema, builder, indent + 4, visitedSchema);
-                                builder.AppendLine(",");
-                            }
+                            var propertyExprBuilder = new StringBuilder();
+                            propertyExprBuilder.Append(' ', indent + 4).Append($"{p.SerializedName} = {propertyValueExpr},");
+                            propertyExpressions.Add(propertyExprBuilder.ToString());
                         }
-                        visitedSchema.Remove(obj.Name);
                     }
-                    else
+                    visitedSchema.Remove(obj);
+
+                    if (propertyExpressions.Count == 0)
                     {
-                        builder.Append("new {}");
+                        return "new {}";
                     }
-                    return;
+
+                    builder = new StringBuilder();
+                    using (Scope("new ", indent, builder))
+                    {
+                        foreach (var expr in propertyExpressions)
+                        {
+                            builder.AppendLine(expr);
+                        }
+                    }
+                    return builder.ToString();
                 case AnySchema a:
-                    builder.Append($"\"<{a.DefaultValue ?? a.Name}>\"");
-                    return;
+                    return $"\"<{a.DefaultValue ?? a.Name}>\"";
                 case BooleanSchema b:
-                    builder.Append($"{(b.DefaultValue ?? "true")}");
-                    return;
+                    return $"{(b.DefaultValue ?? "true")}";
                 case NumberSchema n:
-                    builder.Append($"{(n.DefaultValue ?? "1234")}");
-                    return;
+                    return $"{(n.DefaultValue ?? "1234")}";
                 case StringSchema s:
-                    builder.Append($"\"<{(s.DefaultValue ?? s.Name)}>\"");
-                    return;
+                    return $"\"<{(s.DefaultValue ?? s.Name)}>\"";
                 case CharSchema c:
-                    builder.Append($"\"<{(c.DefaultValue ?? "t")}>\"");
-                    return;
+                    return $"\"<{(c.DefaultValue ?? "t")}>\"";
                 case DateSchema d:
-                    builder.Append($"\"<{(d.DefaultValue ?? "2022-05-10")}>\"");
-                    return;
+                    return $"\"<{(d.DefaultValue ?? "2022-05-10")}>\"";
                 case TimeSchema t:
-                    builder.Append($"\"<{(t.DefaultValue ?? "14:57:31.2311892")}>\"");
-                    return;
+                    return $"\"<{(t.DefaultValue ?? "14:57:31.2311892")}>\"";
                 case DateTimeSchema dt:
-                    builder.Append($"\"<{(dt.DefaultValue ?? "2022-05-10T14:57:31.2311892-04:00")}>\"");
-                    return;
+                    return $"\"<{(dt.DefaultValue ?? "2022-05-10T14:57:31.2311892-04:00")}>\"";
                 case DurationSchema d:
                     // duration format is P1H2M3S
-                    builder.Append($"\"<{(d.DefaultValue ?? "(1.)3:45:67")}>\"");
-                    return;
+                    return $"\"<{(d.DefaultValue ?? "(1.)3:45:67")}>\"";
                 case ChoiceSchema c:
-                    builder.Append($"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"");
-                    return;
+                    return $"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"";
                 case ConstantSchema c:
-                    if (c.Value != null)
+                    if (c.Value == null)
                     {
-                        builder.Append(c.ValueType is StringSchema ? $"\"<{c.Value.Value}>\"" : $"{c.Value.Value}");
+                        return ComposeRequestContent(allProperties, c.ValueType, indent, visitedSchema);
                     }
-                    else
-                    {
-                        ComposeRequestContent(allProperties, c.ValueType, builder, indent, visitedSchema);
-                    }
-                    return;
+                    return (c.ValueType is StringSchema ? $"\"<{c.Value.Value}>\"" : $"{c.Value.Value}");
                 case SealedChoiceSchema c:
-                    builder.Append($"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"");
-                    return;
+                    return $"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"";
                 case UuidSchema u:
-                    builder.Append($"\"<{(u.DefaultValue ?? "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")}>\"");
-                    return;
+                    return $"\"<{(u.DefaultValue ?? "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")}>\"";
                 case UriSchema u:
-                    builder.Append($"\"<{(u.DefaultValue ?? "http://my-account-name.azure.com")}>\"");
-                    return;
+                    return $"\"<{(u.DefaultValue ?? "http://my-account-name.azure.com")}>\"";
                 case BinarySchema b:
-                    builder.Append($"File.OpenRead(\"<{b.Name}.data>\")");
-                    return;
+                    return $"File.OpenRead(\"<{b.Name}.data>\")";
                 default:
                     // unknown type
-                    builder.Append($"{(schema.DefaultValue ?? "new {}")}");
-                    return;
+                    return $"{(schema.DefaultValue ?? "new {}")}";
             }
         }
 
