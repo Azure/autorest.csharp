@@ -172,14 +172,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private bool HasOptionalAndWritableProperty(Schema schema)
         {
             // Visit each schema in the graph and for object schemas, check if any property is optional
-            var visitedSchema = new HashSet<string>();
+            var visitedSchema = new HashSet<Schema>();
             var schemasToExplore = new Queue<Schema>(new[] { schema });
 
             while (schemasToExplore.Any())
             {
                 Schema toExplore = schemasToExplore.Dequeue();
 
-                if (visitedSchema.Contains(toExplore.Name))
+                if (visitedSchema.Contains(toExplore))
                 {
                     continue;
                 }
@@ -214,7 +214,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         break;
                 }
-                visitedSchema.Add(toExplore.Name);
+                visitedSchema.Add(toExplore);
             }
 
             return false;
@@ -346,7 +346,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<string>() { responseSchema.Name });
+            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { responseSchema });
             var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
 
             if (apiInvocationChainList.Count == 0)
@@ -388,7 +388,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (property.SerializedName == pagingItemName && property.Schema is ArraySchema itemArraySchema)
                 {
                     var apiInvocationChainList = new List<IReadOnlyList<string>>();
-                    ComposeResponseParsingCode(allProperties, itemArraySchema.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<string>() { responseSchema.Name });
+                    ComposeResponseParsingCode(allProperties, itemArraySchema.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { responseSchema });
                     var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
 
                     if (apiInvocationChainList.Count == 0)
@@ -439,7 +439,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<string>() { responseSchema.Name });
+            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { responseSchema });
             var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
 
             builder.AppendLine();
@@ -458,18 +458,13 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeResponseParsingCode(bool allProperties, Schema schema, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentAPIInvocationChain, HashSet<string> visitedSchema)
+        private void ComposeResponseParsingCode(bool allProperties, Schema schema, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentAPIInvocationChain, HashSet<Schema> visitedSchema)
         {
             switch (schema)
             {
                 case ArraySchema a:
                     // {parentOp}[0]
-                    if (visitedSchema.Contains(a.ElementType.Name) &&
-                        a.Name != a.ElementType.Name)// sometimes array will have same schema name as element
-                    #region
-                    // see:  https://github.com/Azure/azure-rest-api-specs/blob/2c66a689c610dbef623d6c4e4c4e913446d5ac68/specification/purview/data-plane/Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json#L5723-L5726
-                    // and: https://github.com/Azure/autorest.testserver/blob/53da532ad210e4caf51fbb74582a3fc66ac6ca8e/swagger/body-array.json#L1566-L1574
-                    #endregion
+                    if (visitedSchema.Contains(a.ElementType))
                     {
                         return;
                     }
@@ -479,7 +474,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return;
                 case DictionarySchema d:
                     // .GetProperty("<test>")
-                    if (visitedSchema.Contains(d.ElementType.Name))
+                    if (visitedSchema.Contains(d.ElementType))
                     {
                         return;
                     }
@@ -490,7 +485,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case OrSchema o:
                     foreach (Schema s in o.AnyOf)
                     {
-                        if (visitedSchema.Contains(s.Name))
+                        if (visitedSchema.Contains(s))
                         {
                             return;
                         }
@@ -500,7 +495,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case XorSchema o:
                     foreach (Schema s in o.OneOf)
                     {
-                        if (visitedSchema.Contains(s.Name))
+                        if (visitedSchema.Contains(s))
                         {
                             return;
                         }
@@ -531,16 +526,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         foreach (Property prop in propertiesToExplore)
                         {
-                            if (visitedSchema.Contains(prop.Schema.Name))
+                            if (visitedSchema.Contains(prop.Schema))
                             {
                                 continue;
                             }
                             // .GetProperty("{property_name}")
-                            visitedSchema.Add(prop.Schema.Name);
+                            visitedSchema.Add(prop.Schema);
                             currentAPIInvocationChain.Push($"GetProperty(\"{prop.SerializedName}\")");
                             ComposeResponseParsingCode(allProperties, prop.Schema, apiInvocationChainList, currentAPIInvocationChain, visitedSchema);
                             currentAPIInvocationChain.Pop();
-                            visitedSchema.Remove(prop.Schema.Name);
+                            visitedSchema.Remove(prop.Schema);
                         }
                     }
                     return;
