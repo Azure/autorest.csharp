@@ -6392,6 +6392,30 @@
         }
     },
     "definitions": {
+        "ExtendedLocationType": {
+            "type": "string",
+            "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
+            "enum": [
+              "EdgeZone"
+            ],
+            "x-ms-enum": {
+              "name": "ExtendedLocationTypes",
+              "modelAsString": true
+            }
+        },
+          "ExtendedLocation": {
+            "description": "ExtendedLocation complex type.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the extended location."
+              },
+              "type": {
+                "$ref": "#/definitions/ExtendedLocationType",
+                "description": "The type of the extended location."
+              }
+            }
+        },
         "ComputeOperationListResult": {
             "properties": {
                 "value": {
@@ -6693,6 +6717,10 @@
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ProximityPlacementGroupProperties",
                     "description": "Describes the properties of a Proximity Placement Group."
+                },
+                "extendedLocation": {
+                    "$ref": "./definitions/ExtendedLocation",
+                    "description": "The extended location of the custom IP prefix."
                 }
             },
             "allOf": [
