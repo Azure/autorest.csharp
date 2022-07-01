@@ -6719,7 +6719,7 @@
                     "description": "Describes the properties of a Proximity Placement Group."
                 },
                 "extendedLocation": {
-                    "$ref": "./definitions/ExtendedLocation",
+                    "$ref": "#/definitions/ExtendedLocation",
                     "description": "The extended location of the custom IP prefix."
                 }
             },
