@@ -186,7 +186,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
-            if (model is SchemaObjectType objSchema)
+            // since MgmtReferenceType inherits from MgmtObjectType which inherits from SchemaObjectType, we definitely do not want to exclude any generation of ReferenceTypes
+            if (model is SchemaObjectType objSchema && model is not MgmtReferenceType)
             {
                 if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
                     return true;
