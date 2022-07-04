@@ -2806,8 +2806,8 @@ schemas: !Schemas
           version: '2021-10-01'
       language: !Languages 
         default:
-          name: VaultPropertiesCreatedOn
-          description: The date and time when the cluster was created.
+          name: VaultPropertiesCreateOn
+          description: The date and time when the cluster creating.
       protocol: !Protocols {}
     - !DateTimeSchema &ref_74
       type: date-time
@@ -3002,13 +3002,12 @@ schemas: !Schemas
                 protocol: !Protocols {}
               - !Property 
                 schema: *ref_8
-                readOnly: true
                 required: false
-                serializedName: createdOn
+                serializedName: createOn
                 language: !Languages &ref_472
                   default:
-                    name: createdOn
-                    description: The date and time when the cluster was created.
+                    name: createOn
+                    description: The date and time when the cluster creating.
                 protocol: !Protocols {}
               - !Property 
                 schema: *ref_9
@@ -7629,7 +7628,7 @@ operationGroups:
                             - recover
                             - purge
                         tenantId: 00000000-0000-0000-0000-000000000000
-                    createdOn: '2017-05-04T07:12:28.191Z'
+                    createOn: '2017-05-04T07:12:28.191Z'
                     duration: P7D
                     enabledForDeployment: true
                     enabledForDiskEncryption: true
@@ -15820,7 +15819,7 @@ testModel:
                                   rawValue: 00000000-0000-0000-0000-000000000000
                                   language: *ref_478
                           language: *ref_477
-                        createdOn:
+                        createOn:
                           schema: *ref_8
                           rawValue: '2017-05-04T07:12:28.191Z'
                           language: *ref_472

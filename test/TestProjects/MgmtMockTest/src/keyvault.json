@@ -1573,11 +1573,10 @@
           "description": "Time elapsed for task.",
           "type": "string"
         },
-        "createdOn": {
+        "createOn": {
           "type": "string",
-          "description": "The date and time when the cluster was created.",
-          "format": "date-time",
-          "readOnly": true
+          "description": "The date and time when the cluster creating.",
+          "format": "date-time"
         },
         "tenantId": {
           "type": "string",

@@ -39,6 +39,7 @@ namespace MgmtMockTest.Tests.Mock
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
             {
                 Duration = XmlConvert.ToTimeSpan("P7D"),
+                CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
                 AccessPolicies =
 {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
