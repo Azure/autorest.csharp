@@ -379,7 +379,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -392,7 +392,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {},
@@ -556,7 +556,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -569,7 +569,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {},
@@ -1225,7 +1225,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -1240,12 +1240,12 @@ namespace body_complex_LowLevel
         /// var data = new {
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "<FishFishtype>",
+        ///             fishtype = "salmon",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
         ///             siblings = new[] {},
@@ -1317,7 +1317,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -1332,12 +1332,12 @@ namespace body_complex_LowLevel
         /// var data = new {
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "<FishFishtype>",
+        ///             fishtype = "salmon",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
         ///             siblings = new[] {},
@@ -1409,7 +1409,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -1428,12 +1428,12 @@ namespace body_complex_LowLevel
         /// var data = new {
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "<FishFishtype>",
+        ///             fishtype = "salmon",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
         ///             siblings = new[] {},
@@ -1536,7 +1536,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -1555,12 +1555,12 @@ namespace body_complex_LowLevel
         /// var data = new {
         ///     location = "<SalmonLocation>",
         ///     iswild = true,
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "smart_salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "<FishFishtype>",
+        ///             fishtype = "salmon",
         ///             species = "<FishSpecies>",
         ///             length = 1234,
         ///             siblings = new[] {},
@@ -1663,7 +1663,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -1676,7 +1676,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {},
@@ -1840,7 +1840,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     length = 1234,
         /// };
         /// 
@@ -1853,7 +1853,7 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "<FishFishtype>",
+        ///     fishtype = "salmon",
         ///     species = "<FishSpecies>",
         ///     length = 1234,
         ///     siblings = new[] {},

@@ -758,7 +758,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     var properties = new List<Property>();
                     // We must also include any properties introduced by our parent chain.
                     // Try to get the concrete child type for polymorphism
-                    foreach (ObjectSchema s in GetAllSchemaInherited(GetConcreteChildType(obj)))
+                    var concreteObj = GetConcreteChildType(obj);
+                    foreach (ObjectSchema s in GetAllSchemaInherited(concreteObj))
                     {
                         if (allProperties)
                         {
@@ -779,7 +780,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     var propertyExpressions = new List<string>();
                     foreach (Property p in properties)
                     {
-                        var propertyValueExpr = ComposeRequestContent(allProperties, p.Schema, indent + 4, visitedSchema);
+                        string propertyValueExpr = "";
+                        if (p.IsDiscriminator == true)
+                        {
+                            propertyValueExpr = MockDiscriminatorValue(concreteObj.DiscriminatorValue!, p.Schema);
+                        }
+                        else
+                        {
+                            propertyValueExpr = ComposeRequestContent(allProperties, p.Schema, indent + 4, visitedSchema);
+
+                        }
+
                         if (propertyValueExpr != "")
                         {
                             var propertyExprBuilder = new StringBuilder();
@@ -841,6 +852,21 @@ namespace AutoRest.CSharp.Generation.Writers
                 default:
                     // unknown type
                     return $"{(schema.DefaultValue ?? "new {}")}";
+            }
+        }
+
+        private string MockDiscriminatorValue(string value, Schema discriminatorPropertySchema)
+        {
+            switch (discriminatorPropertySchema)
+            {
+
+                case BooleanSchema b:
+                case NumberSchema n:
+                    return value;
+                case ConstantSchema c:
+                    return MockDiscriminatorValue(value, c.ValueType);
+                default:
+                    return $"\"{value}\"";
             }
         }
 
