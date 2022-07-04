@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -69,7 +70,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (exampleValue.Schema is ObjectSchema objectSchema)
                 return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
 
-            return writer.AppendRawValue(type.FrameworkType, exampleValue.RawValue);
+            return writer.AppendRawValue(type.FrameworkType, exampleValue.RawValue, exampleValue.Schema.Type);
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
@@ -225,19 +226,20 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue) => rawValue switch
+        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue, AllSchemaTypes? schemaType=null) => rawValue switch
         {
             // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
             // https://github.com/Azure/autorest.csharp/issues/2377
-            string str => writer.AppendStringValue(type, str), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
+            string str => writer.AppendStringValue(type, str, schemaType), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
             null => writer.AppendRaw("null"),
             List<object?> list => writer.AppendRawList(list),
             Dictionary<object, object?> dict => writer.AppendRawDictionary(dict),
             _ => writer.AppendRaw(rawValue.ToString()!)
         };
 
-        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value) => type switch
+        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, AllSchemaTypes? schemaType) => type switch
         {
+            _ when schemaType == AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
             _ when IsPrimitiveType(type) => writer.AppendRaw(value),
             _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
             _ when IsParsableInitializedStringLikeType(type) => writer.Append($"{type}.Parse({value:L})"),

@@ -33,6 +33,8 @@ namespace MgmtMockTest.Models
         }
 
         /// <summary> Initializes a new instance of VaultProperties. </summary>
+        /// <param name="duration"> Time elapsed for task. </param>
+        /// <param name="createdOn"> The date and time when the cluster was created. </param>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <param name="accessPolicies"> An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault&apos;s tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required. </param>
@@ -53,8 +55,10 @@ namespace MgmtMockTest.Models
         /// <param name="readWriteSingleStringProperty"> This is a single property of string. </param>
         /// <param name="readOnlySingleStringProperty"> This is a single property of read-only string. </param>
         /// <param name="extremelyDeepStringProperty"> This is a single property of string. </param>
-        internal VaultProperties(Guid tenantId, MgmtMockTestSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty)
+        internal VaultProperties(TimeSpan? duration, DateTimeOffset? createdOn, Guid tenantId, MgmtMockTestSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty)
         {
+            Duration = duration;
+            CreatedOn = createdOn;
             TenantId = tenantId;
             Sku = sku;
             AccessPolicies = accessPolicies;
@@ -77,6 +81,10 @@ namespace MgmtMockTest.Models
             ExtremelyDeepStringProperty = extremelyDeepStringProperty;
         }
 
+        /// <summary> Time elapsed for task. </summary>
+        public TimeSpan? Duration { get; set; }
+        /// <summary> The date and time when the cluster was created. </summary>
+        public DateTimeOffset? CreatedOn { get; }
         /// <summary> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </summary>
         public Guid TenantId { get; set; }
         /// <summary> SKU details. </summary>

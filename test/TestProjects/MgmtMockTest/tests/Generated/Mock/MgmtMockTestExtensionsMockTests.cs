@@ -57,5 +57,16 @@ namespace MgmtMockTest.Tests.Mock
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetTenantActivityLogs()
+        {
+            // Example: Get Tenant Activity Logs without filter or select
+
+            var tenantResource = GetArmClient().GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
+            await foreach (var _ in tenantResource.GetTenantActivityLogsAsync())
+            {
+            }
+        }
     }
 }

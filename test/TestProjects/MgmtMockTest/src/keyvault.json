@@ -1568,6 +1568,17 @@
     },
     "VaultProperties": {
       "properties": {
+        "duration": {
+          "format": "duration",
+          "description": "Time elapsed for task.",
+          "type": "string"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "The date and time when the cluster was created.",
+          "format": "date-time",
+          "readOnly": true
+        },
         "tenantId": {
           "type": "string",
           "format": "uuid",
