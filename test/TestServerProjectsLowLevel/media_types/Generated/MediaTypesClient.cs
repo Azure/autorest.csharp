@@ -68,7 +68,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
@@ -104,7 +104,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
@@ -140,7 +140,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// Console.WriteLine(response.Status);
@@ -174,7 +174,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// Console.WriteLine(response.Status);
@@ -279,7 +279,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
@@ -318,7 +318,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
@@ -357,7 +357,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 
@@ -396,7 +396,7 @@ namespace media_types_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new MediaTypesClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// 

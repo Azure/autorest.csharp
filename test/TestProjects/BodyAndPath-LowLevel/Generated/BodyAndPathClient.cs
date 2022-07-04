@@ -153,7 +153,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// Console.WriteLine(response.Status);
@@ -163,7 +163,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"});
         /// Console.WriteLine(response.Status);
@@ -205,7 +205,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
         /// Console.WriteLine(response.Status);
@@ -215,7 +215,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = File.OpenRead("<binary.data>");
+        /// var data = File.OpenRead("<filePath>");
         /// 
         /// Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"});
         /// Console.WriteLine(response.Status);

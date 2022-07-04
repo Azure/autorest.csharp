@@ -338,7 +338,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (responseSchema is BinarySchema binarySchema)
             {
-                using (Scope($"using(Stream outFileStream = File.OpenWrite(\"<{responseSchema.Name}.data>\")", 0, builder, true))
+                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 0, builder, true))
                 {
                     builder.AppendLine("    data.ToStream().CopyTo(outFileStream);");
                 }
@@ -430,7 +430,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (Scope("if (response.ContentStream != null)", 0, builder, true))
                 {
-                    using (Scope($"    using(Stream outFileStream = File.OpenWrite(\"<{responseSchema.Name}.data>\")", 4, builder, true))
+                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 4, builder, true))
                     {
                         builder.AppendLine("        response.ContentStream.CopyTo(outFileStream);");
                     }
@@ -837,7 +837,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case UriSchema u:
                     return $"\"<{(u.DefaultValue ?? "http://my-account-name.azure.com")}>\"";
                 case BinarySchema b:
-                    return $"File.OpenRead(\"<{b.Name}.data>\")";
+                    return "File.OpenRead(\"<filePath>\")";
                 default:
                     // unknown type
                     return $"{(schema.DefaultValue ?? "new {}")}";
