@@ -17,6 +17,16 @@ namespace MgmtMockTest.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Duration))
+            {
+                writer.WritePropertyName("duration");
+                writer.WriteStringValue(Duration.Value, "P");
+            }
+            if (Optional.IsDefined(CreateOn))
+            {
+                writer.WritePropertyName("createOn");
+                writer.WriteStringValue(CreateOn.Value, "O");
+            }
             writer.WritePropertyName("tenantId");
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku");
@@ -116,6 +126,8 @@ namespace MgmtMockTest.Models
 
         internal static VaultProperties DeserializeVaultProperties(JsonElement element)
         {
+            Optional<TimeSpan> duration = default;
+            Optional<DateTimeOffset> createOn = default;
             Guid tenantId = default;
             MgmtMockTestSku sku = default;
             Optional<IList<AccessPolicyEntry>> accessPolicies = default;
@@ -138,6 +150,26 @@ namespace MgmtMockTest.Models
             Optional<ExtremelyDeepSinglePropertyModel> extremelyDeepStringProperty = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("duration"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    duration = property.Value.GetTimeSpan("P");
+                    continue;
+                }
+                if (property.NameEquals("createOn"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    createOn = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
                 if (property.NameEquals("tenantId"))
                 {
                     tenantId = property.Value.GetGuid();
@@ -334,7 +366,7 @@ namespace MgmtMockTest.Models
                     continue;
                 }
             }
-            return new VaultProperties(tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
+            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
         }
     }
 }

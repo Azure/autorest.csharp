@@ -10,6 +10,8 @@
         "type": "SystemAssigned"
       },
       "properties": {
+        "duration": "P7D",
+        "createOn": "2017-05-04T07:12:28.191Z",
         "tenantId": "00000000-0000-0000-0000-000000000000",
         "sku": {
           "family": "A",

@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
@@ -37,6 +38,8 @@ namespace MgmtMockTest.Tests.Mock
             var collection = resourceGroupResource.GetVaults();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockTestSku(MgmtMockTestSkuFamily.A, MgmtMockTestSkuName.Standard))
             {
+                Duration = XmlConvert.ToTimeSpan("P7D"),
+                CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
                 AccessPolicies =
 {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
