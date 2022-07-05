@@ -27,9 +27,10 @@ namespace AutoRest.CSharp.Input
             public const string AttachDebuggerFormat = "{0}.attach";
             public const string ProjectFolder = "project-folder";
             public const string ProtocolMethodList = "protocol-method-list";
+            public const string SkipSerializationFormatXml= "skip-serialization-format-xml";
         }
 
-        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool generation1ConvenienceClient, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
+        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool generation1ConvenienceClient, bool singleTopLevelClient, bool skipSerializationFormatXml, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
         {
             _outputFolder = outputFolder;
             Namespace = ns;
@@ -45,6 +46,7 @@ namespace AutoRest.CSharp.Input
             SingleTopLevelClient = singleTopLevelClient;
             _projectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
             _protocolMethodList = protocolMethodList;
+            SkipSerializationFormatXml = skipSerializationFormatXml;
             _mgmtConfiguration = mgmtConfiguration;
         }
 
@@ -63,6 +65,7 @@ namespace AutoRest.CSharp.Input
         public static bool SkipCSProjPackageReference { get; private set; }
         public static bool Generation1ConvenienceClient { get; private set; }
         public static bool SingleTopLevelClient { get; private set; }
+        public static bool SkipSerializationFormatXml { get; private set; }
 
         private static string[]? _protocolMethodList;
         public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -88,6 +91,7 @@ namespace AutoRest.CSharp.Input
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 generation1ConvenienceClient: GetOptionValue(autoRest, Options.Generation1ConvenienceClient),
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
+                skipSerializationFormatXml: GetOptionValue(autoRest, Options.SkipSerializationFormatXml),
                 projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
@@ -118,6 +122,8 @@ namespace AutoRest.CSharp.Input
                 case Options.Generation1ConvenienceClient:
                     return false;
                 case Options.SingleTopLevelClient:
+                    return false;
+                case Options.SkipSerializationFormatXml:
                     return false;
                 default:
                     return null;

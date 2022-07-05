@@ -322,6 +322,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectSerialization[] BuildSerializations()
         {
             var formats = ObjectSchema.SerializationFormats;
+            if (Configuration.SkipSerializationFormatXml)
+                formats.Remove(KnownMediaType.Xml);
 
             if (ObjectSchema.Extensions != null)
             {
