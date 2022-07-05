@@ -226,7 +226,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue, AllSchemaTypes? schemaType=null) => rawValue switch
+        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue, AllSchemaTypes? schemaType = null) => rawValue switch
         {
             // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
             // https://github.com/Azure/autorest.csharp/issues/2377
