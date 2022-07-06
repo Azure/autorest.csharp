@@ -220,7 +220,7 @@ function  MockTestInit {
         $CommitId = (git rev-parse HEAD).Substring(0,40)
 
         # Clone Azure/azure-sdk-for-net
-        & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
+        & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\..\azure-sdk-for-net
         $netRepoRoot = Join-Path $projRoot ".." "azure-sdk-for-net"
         $netRepoRoot = Resolve-Path -Path $netRepoRoot
         $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
