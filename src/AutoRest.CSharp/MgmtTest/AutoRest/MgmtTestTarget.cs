@@ -35,9 +35,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                     project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
                 }
-                catch (System.Exception ex)
+                catch
                 {
-                    System.Console.WriteLine(ex.ToString());
+                    // System.Console.WriteLine(ex.ToString());
                 }
             }
 
@@ -50,9 +50,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                     project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
                 }
-                catch (System.Exception ex)
+                catch
                 {
-                    System.Console.WriteLine(ex.ToString());
+                    // System.Console.WriteLine(ex.ToString());
                 }
         }
 
@@ -64,9 +64,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
             }
-            catch (System.Exception ex)
+            catch
             {
-                System.Console.WriteLine(ex.ToString());
+                // System.Console.WriteLine(ex.ToString());
             }
 
 
@@ -89,9 +89,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                             generated.Add(filename);
                         }
                     }
-                    catch (System.Exception ex)
+                    catch
                     {
-                        System.Console.WriteLine(ex.ToString());
+                        // System.Console.WriteLine(ex.ToString());
                     }
                 }
             }
@@ -111,9 +111,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                             generated.Add(filename);
                         }
                     }
-                    catch (System.Exception ex)
+                    catch
                     {
-                        System.Console.WriteLine(ex.ToString());
+                        // System.Console.WriteLine(ex.ToString());
                     }
                 }
             }
@@ -130,9 +130,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         generated.Add(filename);
                     }
                 }
-                catch (System.Exception ex)
+                catch
                 {
-                    System.Console.WriteLine(ex.ToString());
+                    // System.Console.WriteLine(ex.ToString());
                 }
             }
         }
