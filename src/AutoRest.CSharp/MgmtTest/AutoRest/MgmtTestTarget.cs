@@ -28,25 +28,46 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
-                var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
-                collectionTestWriter.Write();
+                try
+                {
+                    var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                    collectionTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
+                    project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
+                }
+                catch (System.Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
             }
 
             foreach (var resourceTest in library.ResourceMockTests)
             {
-                var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
-                resourceTestWriter.Write();
+                try
+                {
+                    var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                    resourceTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
-            }
+                    project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
+                }
+                catch (System.Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
+        }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
-            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
-            extensionWrapperTestWriter.Write();
+            try
+            {
+                var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+                extensionWrapperTestWriter.Write();
 
-            project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+                project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+            }
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
 
 
             if (Configuration.MgmtConfiguration.TestModeler.GenerateSdkSample == false)
@@ -57,13 +78,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 foreach (var testCase in collectionTest.MockTestCases)
                 {
-                    var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
-                    collectionTestWriter.WriteSample(testCase);
-                    var filename = GenExampleFileName(testCase);
-                    if (!generated.Contains(filename))
+                    try
                     {
-                        project.AddGeneratedFile(filename, collectionTestWriter.ToString());
-                        generated.Add(filename);
+                        var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                        collectionTestWriter.WriteSample(testCase);
+                        var filename = GenExampleFileName(testCase);
+                        if (!generated.Contains(filename))
+                        {
+                            project.AddGeneratedFile(filename, collectionTestWriter.ToString());
+                            generated.Add(filename);
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Console.WriteLine(ex.ToString());
                     }
                 }
             }
@@ -72,25 +100,39 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 foreach (var testCase in resourceTest.MockTestCases)
                 {
-                    var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
-                    resourceTestWriter.WriteSample(testCase);
-                    var filename = GenExampleFileName(testCase);
-                    if (!generated.Contains(filename))
+                    try
                     {
-                        project.AddGeneratedFile(filename, resourceTestWriter.ToString());
-                        generated.Add(filename);
+                        var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                        resourceTestWriter.WriteSample(testCase);
+                        var filename = GenExampleFileName(testCase);
+                        if (!generated.Contains(filename))
+                        {
+                            project.AddGeneratedFile(filename, resourceTestWriter.ToString());
+                            generated.Add(filename);
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Console.WriteLine(ex.ToString());
                     }
                 }
             }
             foreach (var testCase in extensionWrapperTest.MockTestCases)
             {
-                var extensionWrapperTestWriter2 = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
-                extensionWrapperTestWriter2.WriteSample(testCase);
-                var filename = GenExampleFileName(testCase);
-                if (!generated.Contains(filename))
+                try
                 {
-                    project.AddGeneratedFile(GenExampleFileName(testCase), extensionWrapperTestWriter2.ToString());
-                    generated.Add(filename);
+                    var extensionWrapperTestWriter2 = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+                    extensionWrapperTestWriter2.WriteSample(testCase);
+                    var filename = GenExampleFileName(testCase);
+                    if (!generated.Contains(filename))
+                    {
+                        project.AddGeneratedFile(GenExampleFileName(testCase), extensionWrapperTestWriter2.ToString());
+                        generated.Add(filename);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
                 }
             }
         }
