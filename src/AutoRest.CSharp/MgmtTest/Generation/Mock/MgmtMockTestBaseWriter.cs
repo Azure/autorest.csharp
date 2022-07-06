@@ -157,8 +157,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         private CodeWriterDeclaration WriteGetTenantResource(MgmtExtensions parentExtension, MockTestCase testCase)
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
-            _writer.UseNamespace("System.Linq");
-            _writer.Line($"var {resourceVar:D} = GetArmClient().GetTenants().First();");
+            _writer.Line($"var {resourceVar:D} = GetArmClient().GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
             return resourceVar;
         }
 

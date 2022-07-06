@@ -14,6 +14,7 @@ input-file:
 - $(this-folder)/managedHsm.json
 - $(this-folder)/providers.json
 - $(this-folder)/authorization.json
+- $(this-folder)/tenantActivityLogs_API.json
 clear-output-folder: true
 namespace: MgmtMockTest
 modelerfour:
