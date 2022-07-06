@@ -221,7 +221,7 @@ function  MockTestInit {
 
         # Clone Azure/azure-sdk-for-net
         & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
-        $netRepoRoot = Join-Path $projRoot "azure-sdk-for-net"
+        $netRepoRoot = Join-Path $projRoot ".." "azure-sdk-for-net"
         $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
         Update-AutorestTarget -file $CodeGenTargetFile -autorestVersion $autorestVersion
@@ -234,7 +234,7 @@ function  MockTestInit {
         # Launch Mock-service-host
         # Warning: Only absolute paths can be used in ScriptBlock.
         & git config --system core.longpaths true
-        $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
+        $task = { D:\a\_work\1\s\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
         Start-Job -ScriptBlock $task
 
         # Generate Track2 SDK Template
