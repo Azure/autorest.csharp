@@ -222,6 +222,7 @@ function  MockTestInit {
         # Clone Azure/azure-sdk-for-net
         & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
         $netRepoRoot = Join-Path $projRoot ".." "azure-sdk-for-net"
+        $netRepoRoot = Resolve-Path -Path $netRepoRoot
         $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
         Update-AutorestTarget -file $CodeGenTargetFile -autorestVersion $autorestVersion
