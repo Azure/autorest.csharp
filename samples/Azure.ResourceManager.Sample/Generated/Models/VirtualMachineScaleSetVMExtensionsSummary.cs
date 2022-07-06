@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Extensions summary for virtual machines of a virtual machine scale set. </summary>
+    /// <summary>
+    /// Extensions summary for virtual machines of a virtual machine scale set.
+    /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary
+    /// </summary>
     public partial class VirtualMachineScaleSetVMExtensionsSummary
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
@@ -20,17 +23,29 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
-        /// <param name="name"> The extension name. </param>
-        /// <param name="statusesSummary"> The extensions information. </param>
+        /// <param name="name">
+        /// The extension name.
+        /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
+        /// </param>
+        /// <param name="statusesSummary">
+        /// The extensions information.
+        /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.statusesSummary
+        /// </param>
         internal VirtualMachineScaleSetVMExtensionsSummary(string name, IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
         {
             Name = name;
             StatusesSummary = statusesSummary;
         }
 
-        /// <summary> The extension name. </summary>
+        /// <summary>
+        /// The extension name.
+        /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
+        /// </summary>
         public string Name { get; }
-        /// <summary> The extensions information. </summary>
+        /// <summary>
+        /// The extensions information.
+        /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.statusesSummary
+        /// </summary>
         public IReadOnlyList<VirtualMachineStatusCodeCount> StatusesSummary { get; }
     }
 }

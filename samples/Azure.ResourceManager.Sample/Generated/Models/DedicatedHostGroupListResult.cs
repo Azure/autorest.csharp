@@ -12,11 +12,17 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The List Dedicated Host Group with resource group response. </summary>
+    /// <summary>
+    /// The List Dedicated Host Group with resource group response.
+    /// Serialized Name: DedicatedHostGroupListResult
+    /// </summary>
     internal partial class DedicatedHostGroupListResult
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
-        /// <param name="value"> The list of dedicated host groups. </param>
+        /// <param name="value">
+        /// The list of dedicated host groups
+        /// Serialized Name: DedicatedHostGroupListResult.value
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal DedicatedHostGroupListResult(IEnumerable<DedicatedHostGroupData> value)
         {
@@ -29,17 +35,29 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
-        /// <param name="value"> The list of dedicated host groups. </param>
-        /// <param name="nextLink"> The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups. </param>
+        /// <param name="value">
+        /// The list of dedicated host groups
+        /// Serialized Name: DedicatedHostGroupListResult.value
+        /// </param>
+        /// <param name="nextLink">
+        /// The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups.
+        /// Serialized Name: DedicatedHostGroupListResult.nextLink
+        /// </param>
         internal DedicatedHostGroupListResult(IReadOnlyList<DedicatedHostGroupData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary> The list of dedicated host groups. </summary>
+        /// <summary>
+        /// The list of dedicated host groups
+        /// Serialized Name: DedicatedHostGroupListResult.value
+        /// </summary>
         public IReadOnlyList<DedicatedHostGroupData> Value { get; }
-        /// <summary> The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups. </summary>
+        /// <summary>
+        /// The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups.
+        /// Serialized Name: DedicatedHostGroupListResult.nextLink
+        /// </summary>
         public string NextLink { get; }
     }
 }
