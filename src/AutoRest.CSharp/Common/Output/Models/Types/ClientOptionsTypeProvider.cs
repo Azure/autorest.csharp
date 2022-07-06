@@ -3,12 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ClientOptionsTypeProvider : TypeProvider
     {
+        private static TextInfo TextInfo = new CultureInfo("en-us", false).TextInfo;
         public FormattableString Description { get; }
         public IReadOnlyList<ApiVersion> ApiVersions { get;}
         protected override string DefaultName { get; }
@@ -38,6 +40,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public record ApiVersion(string Name, string Description, int Value, string StringValue);
 
-        private static string ToVersionProperty(string s) => "V" + s.Replace(".", "_").Replace('-', '_');
+        private static string ToVersionProperty(string s) => TextInfo.ToTitleCase("V" + s.Replace(".", "_").Replace('-', '_'));
     }
 }
