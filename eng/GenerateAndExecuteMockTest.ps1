@@ -147,7 +147,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 
     # Generate MockTest code
     if ((Test-Path $mockMd) -and (Test-Path $csproj)) {
-        $result = & autorest --use=$autorestVersion $mockMd --testmodeler="{}" --debug
+        $result = & autorest --max-memory-size=8192 --use=$autorestVersion $mockMd --testmodeler="{}" --debug 
         if ($?) {
             Write-Host "$RPName MockTest Generate Successed"
             $Script:testGenerateSuccessedRps += $RPName
@@ -419,4 +419,5 @@ function  MockTestInit {
 
 # Generate & Run All SDK
 $GenerateNewSDKs = $true
+$env:NODE_OPTIONS="--max_old_space_size=8192"
 MockTestInit -GenerateNewSDKs $GenerateNewSDKs
