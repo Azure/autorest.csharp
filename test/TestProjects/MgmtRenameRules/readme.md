@@ -27,6 +27,10 @@ rename-rules:
   VM: Vm
   VMs: Vms
   VMScaleSet: VmScaleSet
+  Ipsec: IPsec|ipsec
+  IPSec: IPsec|ipsec
+  P2s: P2S|p2s
+  P2S: P2S|p2s
 
 format-by-name-rules:
   'tenantId': 'uuid'

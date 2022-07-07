@@ -121,6 +121,22 @@ namespace AutoRest.CSharp.Input
             }
         }
 
+        public record RenameRuleTarget(string Value, string? ParameterValue)
+        {
+            internal static RenameRuleTarget Parse(string rawValue)
+            {
+                var spans = rawValue.AsSpan();
+                var index = spans.IndexOf('|');
+                if (index < 0)
+                    return new RenameRuleTarget(rawValue, null);
+
+                return new RenameRuleTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString());
+            }
+        }
+
+        private static IReadOnlyDictionary<string, RenameRuleTarget> ParseRenameRules(IReadOnlyDictionary<string, string> renameRules)
+            => renameRules.ToDictionary(kv => kv.Key, kv => RenameRuleTarget.Parse(kv.Value));
+
         public MgmtConfiguration(
             IReadOnlyList<string> operationGroupsToOmit,
             IReadOnlyList<string> requestPathIsNonResource,
@@ -158,7 +174,7 @@ namespace AutoRest.CSharp.Input
             RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
             OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
-            RenameRules = !IsValidJsonElement(renameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(renameRules.ToString());
+            RawRenameRules = !IsValidJsonElement(renameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(renameRules.ToString());
             FormatByNameRules = !IsValidJsonElement(formatByNameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(formatByNameRules.ToString());
             RenameMapping = !IsValidJsonElement(renameMapping) ? new Dictionary<string, string>() :
                 JsonSerializer.Deserialize<Dictionary<string, string>>(renameMapping.ToString());
@@ -220,7 +236,9 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> OverrideOperationName { get; }
-        public IReadOnlyDictionary<string, string> RenameRules { get; }
+        private IReadOnlyDictionary<string, string> RawRenameRules { get; }
+        private IReadOnlyDictionary<string, RenameRuleTarget>? _renameRules;
+        public IReadOnlyDictionary<string, RenameRuleTarget> RenameRules => _renameRules ??= ParseRenameRules(RawRenameRules);
         public IReadOnlyDictionary<string, string> FormatByNameRules { get; }
         public IReadOnlyDictionary<string, string> RenameMapping { get; }
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
@@ -292,7 +310,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
-            WriteNonEmptySettings(writer, nameof(RenameRules), RenameRules);
+            WriteNonEmptySettings(writer, nameof(RawRenameRules), RawRenameRules);
             WriteNonEmptySettings(writer, nameof(FormatByNameRules), FormatByNameRules);
             WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
@@ -330,7 +348,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
-            root.TryGetProperty(nameof(RenameRules), out var renameRules);
+            root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
             root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
             root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
