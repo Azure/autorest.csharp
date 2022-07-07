@@ -2,10 +2,12 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 using static AutoRest.CSharp.Input.MgmtConfiguration;
 
@@ -13,8 +15,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class NameTransformer
     {
+        private static NameTransformer? _instance;
+        public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
+
         private IReadOnlyDictionary<string, RenameRuleTarget> _renameRules;
         private Regex _regex;
+        private ConcurrentDictionary<string, string> _wordCache;
 
         /// <summary>
         /// Instanciate a NameTranformer which usign the dictionary to tranform the abbreviations in this word to correct casing
@@ -24,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             _renameRules = renameRules;
             _regex = BuildRegex(renameRules.Keys);
+            _wordCache = new ConcurrentDictionary<string, string>();
         }
 
         private static Regex BuildRegex(IEnumerable<string> renameItems)
@@ -47,6 +54,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <returns></returns>
         public string EnsureNameCase(string name)
         {
+            if (_wordCache.TryGetValue(name, out var result))
+                return result;
+
             var builder = new StringBuilder();
             var strToMatch = name.FirstCharToUpperCase();
             var match = _regex.Match(strToMatch);
@@ -66,7 +76,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (strToMatch.Length > 0)
                 builder.Append(strToMatch);
 
-            return builder.ToString();
+            result = builder.ToString();
+            _wordCache.TryAdd(name, result);
+            _wordCache.TryAdd(strToMatch, result);
+
+            return result;
         }
+
+        internal record NameInfo(string Name, string ParameterName);
     }
 }
