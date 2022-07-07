@@ -59,6 +59,16 @@ namespace MgmtRenameRules
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
+            if (Optional.IsDefined(IPsecSomething))
+            {
+                writer.WritePropertyName("ipsecSomething");
+                writer.WriteStringValue(IPsecSomething);
+            }
+            if (Optional.IsDefined(TestIPsec))
+            {
+                writer.WritePropertyName("testIPSec");
+                writer.WriteStringValue(TestIPsec);
+            }
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy");
@@ -135,6 +145,8 @@ namespace MgmtRenameRules
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
+            Optional<string> ipsecSomething = default;
+            Optional<string> testIPSec = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
             Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
@@ -250,6 +262,16 @@ namespace MgmtRenameRules
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("ipsecSomething"))
+                        {
+                            ipsecSomething = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("testIPSec"))
+                        {
+                            testIPSec = property0.Value.GetString();
+                            continue;
+                        }
                         if (property0.NameEquals("upgradePolicy"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
@@ -384,7 +406,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPSec.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }

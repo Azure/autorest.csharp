@@ -20,7 +20,9 @@
     "IDs": "Ids",
     "VM": "Vm",
     "VMs": "Vms",
-    "VMScaleSet": "VmScaleSet"
+    "VMScaleSet": "VmScaleSet",
+    "Ipsec": "IPsec|ipsec",
+    "IPSec": "IPsec|ipsec"
   },
   "FormatByNameRules": {
     "tenantId": "uuid",

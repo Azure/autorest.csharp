@@ -6697,6 +6697,14 @@
         },
         "VirtualMachineScaleSetProperties": {
             "properties": {
+                "ipsecSomething": {
+                    "type": "string",
+                    "description": "The IPsec"
+                },
+                "testIPSec": {
+                    "type": "string",
+                    "description": "The IPsec"
+                },
                 "upgradePolicy": {
                     "$ref": "#/definitions/UpgradePolicy",
                     "description": "The upgrade policy."

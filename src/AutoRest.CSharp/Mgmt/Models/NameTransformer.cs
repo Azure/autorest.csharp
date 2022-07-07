@@ -3,30 +3,32 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Input.MgmtConfiguration;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class NameTransformer
     {
-        private IReadOnlyDictionary<string, string> _renameRules;
+        private IReadOnlyDictionary<string, RenameRuleTarget> _renameRules;
         private Regex _regex;
 
         /// <summary>
         /// Instanciate a NameTranformer which usign the dictionary to tranform the abbreviations in this word to correct casing
         /// </summary>
         /// <param name="renameRules"></param>
-        public NameTransformer(IReadOnlyDictionary<string, string> renameRules)
+        public NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
         {
             _renameRules = renameRules;
-            _regex = BuildRegex(renameRules);
+            _regex = BuildRegex(renameRules.Keys);
         }
 
-        private static Regex BuildRegex(IReadOnlyDictionary<string, string> renameRules)
+        private static Regex BuildRegex(IEnumerable<string> renameItems)
         {
-            var regexRawString = string.Join("|", renameRules.Keys);
+            var regexRawString = string.Join("|", renameItems);
             // we are building the regex that matches
             // 1. it starts with a lower case letter or a digit which is considered as the end of its previous word
             //    or it is at the beginning of this string
@@ -56,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 // append everything between the beginning and the index of this match
                 builder.Append(strToMatch.Substring(0, matchGroup.Index));
                 // append the replaced value
-                builder.Append(replaceValue);
+                builder.Append(replaceValue.Value);
                 // move to whatever is left unmatched
                 strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
                 match = _regex.Match(strToMatch);
