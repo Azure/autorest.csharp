@@ -14,6 +14,28 @@ namespace AutoRest.TestServer.Tests
     public class DpgCustomizationTest : TestServerLowLevelTestBase
     {
         [Test]
+        public Task GetRawModel() => Test(async (host) =>
+        {
+            Response result = await new DPGClient(Key, host, null).GetModelAsync("raw");
+            JsonData responseBody = JsonData.FromBytes(result.Content.ToMemory());
+            Assert.AreEqual("raw", (string)responseBody["received"]);
+        });
+
+        [Test]
+        public Task GetHandwrittenModel() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            var scopes = diagnosticListener.Scopes;
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Response<Product> result = await new DPGClient(Key, host, null).GetModelValueAsync("model");
+            Assert.AreEqual(1, scopes.Count);
+            Assert.AreEqual("DPGClient.GetModelValue", scopes[0].Name);
+            Assert.True(scopes[0].IsCompleted);
+            Assert.AreEqual("model", $"{result.Value.Received}");
+        });
+
+        [Test]
         public Task PostRawModel() => Test(async (host) =>
         {
             var value = new

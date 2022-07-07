@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task SecurityKey() => Test(async (host) =>
         {
-            await new AutorestSecurityKeyClient(new AzureKeyCredential("123456789")).HeadAsync();
+            await new AutorestSecurityKeyClient(new AzureKeyCredential("123456789"), host, null).HeadAsync();
         });
     }
 }
