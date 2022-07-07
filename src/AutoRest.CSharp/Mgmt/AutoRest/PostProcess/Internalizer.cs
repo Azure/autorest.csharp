@@ -8,9 +8,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -155,6 +155,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                             identifiers = identifierNodes.Select(identifier => identifier.Identifier.ToFullString()).ToImmutableHashSet();
                             return true;
                         }
+                    }
+                }
+                // When a base class with discriminator is only used as input parameter, it doesn't contain a deserialization method
+                // therefore adding a comment check here as a redundant verification
+                else if (classDeclaration.HasLeadingTrivia)
+                {
+                    var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
+                    if (BuilderHelpers.DiscriminatorDescFixedPart.All(syntaxTriviaList.ToFullString().Contains))
+                    {
+                        var identifierNodes = syntaxTriviaList.FirstOrDefault().GetStructure()?.DescendantNodes().OfType<XmlCrefAttributeSyntax>();
+                        identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToImmutableHashSet();
+                        return true;
                     }
                 }
                 return false;
