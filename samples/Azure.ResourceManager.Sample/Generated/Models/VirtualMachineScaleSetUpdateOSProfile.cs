@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a virtual machine scale set OS profile. </summary>
+    /// <summary>
+    /// Describes a virtual machine scale set OS profile.
+    /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile
+    /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSProfile
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSProfile. </summary>
@@ -19,13 +22,25 @@ namespace Azure.ResourceManager.Sample.Models
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
-        /// <summary> A base-64 encoded string of custom data. </summary>
+        /// <summary>
+        /// A base-64 encoded string of custom data.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.customData
+        /// </summary>
         public string CustomData { get; set; }
-        /// <summary> The Windows Configuration of the OS profile. </summary>
+        /// <summary>
+        /// The Windows Configuration of the OS profile.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.windowsConfiguration
+        /// </summary>
         public WindowsConfiguration WindowsConfiguration { get; set; }
-        /// <summary> The Linux Configuration of the OS profile. </summary>
+        /// <summary>
+        /// The Linux Configuration of the OS profile.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.linuxConfiguration
+        /// </summary>
         public LinuxConfiguration LinuxConfiguration { get; set; }
-        /// <summary> The List of certificates for addition to the VM. </summary>
+        /// <summary>
+        /// The List of certificates for addition to the VM.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.secrets
+        /// </summary>
         public IList<VaultSecretGroup> Secrets { get; }
     }
 }

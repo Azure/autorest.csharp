@@ -7,7 +7,10 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Response after calling a manual recovery walk. </summary>
+    /// <summary>
+    /// Response after calling a manual recovery walk
+    /// Serialized Name: RecoveryWalkResponse
+    /// </summary>
     public partial class RecoveryWalkResponse
     {
         /// <summary> Initializes a new instance of RecoveryWalkResponse. </summary>
@@ -16,17 +19,29 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of RecoveryWalkResponse. </summary>
-        /// <param name="walkPerformed"> Whether the recovery walk was performed. </param>
-        /// <param name="nextPlatformUpdateDomain"> The next update domain that needs to be walked. Null means walk spanning all update domains has been completed. </param>
+        /// <param name="walkPerformed">
+        /// Whether the recovery walk was performed
+        /// Serialized Name: RecoveryWalkResponse.walkPerformed
+        /// </param>
+        /// <param name="nextPlatformUpdateDomain">
+        /// The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
+        /// Serialized Name: RecoveryWalkResponse.nextPlatformUpdateDomain
+        /// </param>
         internal RecoveryWalkResponse(bool? walkPerformed, int? nextPlatformUpdateDomain)
         {
             WalkPerformed = walkPerformed;
             NextPlatformUpdateDomain = nextPlatformUpdateDomain;
         }
 
-        /// <summary> Whether the recovery walk was performed. </summary>
+        /// <summary>
+        /// Whether the recovery walk was performed
+        /// Serialized Name: RecoveryWalkResponse.walkPerformed
+        /// </summary>
         public bool? WalkPerformed { get; }
-        /// <summary> The next update domain that needs to be walked. Null means walk spanning all update domains has been completed. </summary>
+        /// <summary>
+        /// The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
+        /// Serialized Name: RecoveryWalkResponse.nextPlatformUpdateDomain
+        /// </summary>
         public int? NextPlatformUpdateDomain { get; }
     }
 }

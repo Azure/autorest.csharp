@@ -17,10 +17,15 @@ namespace AutoRest.CSharp.Input
 
             public bool SuppressListException { get; }
 
+            public bool ShowSerializedNames { get; }
+
             public MgmtDebugConfiguration(
-                JsonElement? suppressListException = default)
+                JsonElement? suppressListException = default,
+                JsonElement? showSerializedNames = default
+            )
             {
                 SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+                ShowSerializedNames = showSerializedNames == null || !IsValidJsonElement(showSerializedNames) ? false : Convert.ToBoolean(showSerializedNames.ToString());
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
@@ -29,16 +34,20 @@ namespace AutoRest.CSharp.Input
                     return new MgmtDebugConfiguration();
 
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
+                root.TryGetProperty(nameof(ShowSerializedNames), out var showSerializedNames);
 
                 return new MgmtDebugConfiguration(
-                    suppressListException: suppressListException
+                    suppressListException: suppressListException,
+                    showSerializedNames: showSerializedNames
                 );
             }
 
             internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
             {
                 return new MgmtDebugConfiguration(
-                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult());
+                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult(),
+                    showSerializedNames: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-serialized-names")).GetAwaiter().GetResult()
+                );
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -51,6 +60,9 @@ namespace AutoRest.CSharp.Input
                 if (SuppressListException)
                     writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
 
+                if (ShowSerializedNames)
+                    writer.WriteBoolean(nameof(ShowSerializedNames), ShowSerializedNames);
+
                 writer.WriteEndObject();
             }
         }
@@ -60,10 +72,14 @@ namespace AutoRest.CSharp.Input
             private const string TestModelerOptionsFormat = "testmodeler.{0}";
 
             public string? IgnoreReason { get; }
+            public string? SourceCodePath { get; }
 
-            public TestModelerConfiguration(JsonElement? ignoreReason = default)
+            public TestModelerConfiguration(
+                JsonElement? ignoreReason = default,
+                JsonElement? sourceCodePath = default)
             {
-                IgnoreReason = (ignoreReason is null || ignoreReason.Value.ValueKind == JsonValueKind.Null) ? null : ignoreReason.ToString();
+                IgnoreReason = !IsValidJsonElement(ignoreReason) ? null : ignoreReason.ToString();
+                SourceCodePath = !IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
             }
 
             internal static TestModelerConfiguration? LoadConfiguration(JsonElement root)
@@ -71,20 +87,24 @@ namespace AutoRest.CSharp.Input
                 if (root.ValueKind != JsonValueKind.Object)
                     return null;
 
-                var hasIgnoreReason = root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                root.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
 
-                return new TestModelerConfiguration(ignoreReason: hasIgnoreReason ? ignoreReason : null);
+                return new TestModelerConfiguration(
+                    ignoreReason: ignoreReason,
+                    sourceCodePath: sourceCodePath);
             }
 
             internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
             {
                 var testModeler = autoRest.GetValue<JsonElement?>("testmodeler").GetAwaiter().GetResult();
-                if (testModeler is null || testModeler.Value.ValueKind == JsonValueKind.Null)
+                if (!IsValidJsonElement(testModeler))
                 {
                     return null;
                 }
                 return new TestModelerConfiguration(
-                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult());
+                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
+                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "source-path")).GetAwaiter().GetResult());
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -93,6 +113,9 @@ namespace AutoRest.CSharp.Input
 
                 if (IgnoreReason is not null)
                     writer.WriteString(nameof(IgnoreReason), IgnoreReason);
+
+                if (SourceCodePath is not null)
+                    writer.WriteString(nameof(SourceCodePath), SourceCodePath);
 
                 writer.WriteEndObject();
             }
