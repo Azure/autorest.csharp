@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 using Humanizer;
 using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
@@ -95,10 +96,9 @@ namespace AutoRest.CSharp.Utilities
         [return: NotNullIfNotNull("name")]
         public static string ToMgmtVariableName(this string name)
         {
-            var combinationsToCheck = Configuration.MgmtConfiguration.RenameRules.Select(kv => kv.Value)
-                .Where(t => t.ParameterValue != null);
+            var variableName = NameTransformer.Instance.EnsureNameCase(name).VariableName;
 
-            return ToCleanName(name, isCamelCase: false);
+            return ToCleanName(variableName, isCamelCase: false);
         }
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);

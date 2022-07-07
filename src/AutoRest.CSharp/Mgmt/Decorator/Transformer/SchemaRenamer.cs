@@ -138,8 +138,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
-            var wordCache = new ConcurrentDictionary<string, string>();
             // first transform all the name of schemas, properties
             UpdateAcronyms(MgmtContext.CodeModel.AllSchemas);
             // transform all the parameter names
@@ -250,7 +248,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             var originalName = languages.Default.Name;
             var result = NameTransformer.Instance.EnsureNameCase(originalName);
-            languages.Default.Name = result;
+            languages.Default.Name = result.Name;
             languages.Default.SerializedName ??= originalName;
         }
 

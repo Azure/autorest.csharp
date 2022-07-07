@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis.CSharp;
 using static AutoRest.CSharp.Input.MgmtConfiguration;
 
 namespace AutoRest.CSharp.Mgmt.Models
@@ -20,17 +21,17 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private IReadOnlyDictionary<string, RenameRuleTarget> _renameRules;
         private Regex _regex;
-        private ConcurrentDictionary<string, string> _wordCache;
+        private ConcurrentDictionary<string, NameInfo> _wordCache;
 
         /// <summary>
-        /// Instanciate a NameTranformer which usign the dictionary to tranform the abbreviations in this word to correct casing
+        /// Instanciate a NameTransformer which uses the dictionary to transform the abbreviations in this word to correct casing
         /// </summary>
         /// <param name="renameRules"></param>
-        public NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
+        private NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
         {
             _renameRules = renameRules;
             _regex = BuildRegex(renameRules.Keys);
-            _wordCache = new ConcurrentDictionary<string, string>();
+            _wordCache = new ConcurrentDictionary<string, NameInfo>();
         }
 
         private static Regex BuildRegex(IEnumerable<string> renameItems)
@@ -52,37 +53,55 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public string EnsureNameCase(string name)
+        public NameInfo EnsureNameCase(string name)
         {
             if (_wordCache.TryGetValue(name, out var result))
                 return result;
 
-            var builder = new StringBuilder();
+            var propertyNameBuilder = new StringBuilder();
+            var parameterNameBuilder = new StringBuilder();
             var strToMatch = name.FirstCharToUpperCase();
             var match = _regex.Match(strToMatch);
+            bool hasFirstWord = false;
             while (match.Success)
             {
                 // in our regular expression, the content we want to find is in the second group
                 var matchGroup = match.Groups[2];
                 var replaceValue = _renameRules[matchGroup.Value];
                 // append everything between the beginning and the index of this match
-                builder.Append(strToMatch.Substring(0, matchGroup.Index));
+                var everythingBeforeMatch = strToMatch.Substring(0, matchGroup.Index);
+                // append everything before myself
+                propertyNameBuilder.Append(everythingBeforeMatch);
+                parameterNameBuilder.Append(everythingBeforeMatch);
                 // append the replaced value
-                builder.Append(replaceValue.Value);
+                propertyNameBuilder.Append(replaceValue.Value);
+                // see if everything before myself is empty, or is all invalid character for an identifier which will be trimmed off, which makes the current word the first word
+                if (!hasFirstWord && IsEquivelantEmpty(everythingBeforeMatch))
+                {
+                    hasFirstWord = true;
+                    parameterNameBuilder.Append(replaceValue.ParameterValue ?? replaceValue.Value);
+                }
+                else
+                    parameterNameBuilder.Append(replaceValue.Value);
                 // move to whatever is left unmatched
                 strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
                 match = _regex.Match(strToMatch);
             }
             if (strToMatch.Length > 0)
-                builder.Append(strToMatch);
+            {
+                propertyNameBuilder.Append(strToMatch);
+                parameterNameBuilder.Append(strToMatch);
+            }
 
-            result = builder.ToString();
+            result = new NameInfo(propertyNameBuilder.ToString(), parameterNameBuilder.ToString());
             _wordCache.TryAdd(name, result);
-            _wordCache.TryAdd(strToMatch, result);
+            _wordCache.TryAdd(result.Name, result); // in some other scenarios we might need to use the property name as keys
 
             return result;
         }
 
-        internal record NameInfo(string Name, string ParameterName);
+        private static bool IsEquivelantEmpty(string s) => string.IsNullOrWhiteSpace(s) || s.All(c => !SyntaxFacts.IsIdentifierStartCharacter(c));
+
+        internal record NameInfo(string Name, string VariableName);
     }
 }

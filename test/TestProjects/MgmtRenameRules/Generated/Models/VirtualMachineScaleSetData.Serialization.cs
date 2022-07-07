@@ -146,13 +146,13 @@ namespace MgmtRenameRules
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<string> ipsecSomething = default;
-            Optional<string> testIPSec = default;
+            Optional<string> testIPsec = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
             Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
             Optional<string> provisioningState = default;
             Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVMs = default;
+            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
             Optional<string> uniqueId = default;
             Optional<bool> singlePlacementGroup = default;
             Optional<bool> zoneBalance = default;
@@ -269,7 +269,7 @@ namespace MgmtRenameRules
                         }
                         if (property0.NameEquals("testIPSec"))
                         {
-                            testIPSec = property0.Value.GetString();
+                            testIPsec = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("upgradePolicy"))
@@ -324,7 +324,7 @@ namespace MgmtRenameRules
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            doNotRunExtensionsOnOverprovisionedVMs = property0.Value.GetBoolean();
+                            doNotRunExtensionsOnOverprovisionedVms = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("uniqueId"))
@@ -406,7 +406,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPSec.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPsec.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }
