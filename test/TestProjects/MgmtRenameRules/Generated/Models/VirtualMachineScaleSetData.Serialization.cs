@@ -69,6 +69,11 @@ namespace MgmtRenameRules
                 writer.WritePropertyName("testIPSec");
                 writer.WriteStringValue(TestIPsec);
             }
+            if (Optional.IsDefined(P2SServer))
+            {
+                writer.WritePropertyName("p2sServer");
+                writer.WriteStringValue(P2SServer);
+            }
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy");
@@ -147,6 +152,7 @@ namespace MgmtRenameRules
             Optional<SystemData> systemData = default;
             Optional<string> ipsecSomething = default;
             Optional<string> testIPsec = default;
+            Optional<string> p2sServer = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
             Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
@@ -270,6 +276,11 @@ namespace MgmtRenameRules
                         if (property0.NameEquals("testIPSec"))
                         {
                             testIPsec = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("p2sServer"))
+                        {
+                            p2sServer = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("upgradePolicy"))
@@ -406,7 +417,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPsec.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPsec.Value, p2sServer.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }

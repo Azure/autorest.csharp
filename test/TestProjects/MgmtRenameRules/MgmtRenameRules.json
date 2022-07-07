@@ -6705,6 +6705,10 @@
                     "type": "string",
                     "description": "The IPsec"
                 },
+                "p2sServer": {
+                    "type": "string",
+                    "description": "The P2S Server"
+                },
                 "upgradePolicy": {
                     "$ref": "#/definitions/UpgradePolicy",
                     "description": "The upgrade policy."

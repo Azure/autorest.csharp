@@ -36,6 +36,7 @@ namespace MgmtRenameRules
         /// <param name="zones"> The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set. </param>
         /// <param name="ipsecSomething"> The IPsec. </param>
         /// <param name="testIPsec"> The IPsec. </param>
+        /// <param name="p2sServer"> The P2S Server. </param>
         /// <param name="upgradePolicy"> The upgrade policy. </param>
         /// <param name="automaticRepairsPolicy"> Policy for automatic repairs. </param>
         /// <param name="virtualMachineProfile"> The virtual machine profile. </param>
@@ -50,7 +51,7 @@ namespace MgmtRenameRules
         /// <param name="hostGroup"> Specifies information about the dedicated host group that the virtual machine scale set resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </param>
         /// <param name="additionalCapabilities"> Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type. </param>
         /// <param name="scaleInPolicy"> Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in. </param>
-        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPsec, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPsec, string p2sServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Plan = plan;
@@ -58,6 +59,7 @@ namespace MgmtRenameRules
             Zones = zones;
             IPsecSomething = ipsecSomething;
             TestIPsec = testIPsec;
+            P2SServer = p2sServer;
             UpgradePolicy = upgradePolicy;
             AutomaticRepairsPolicy = automaticRepairsPolicy;
             VirtualMachineProfile = virtualMachineProfile;
@@ -86,6 +88,8 @@ namespace MgmtRenameRules
         public string IPsecSomething { get; set; }
         /// <summary> The IPsec. </summary>
         public string TestIPsec { get; set; }
+        /// <summary> The P2S Server. </summary>
+        public string P2SServer { get; set; }
         /// <summary> The upgrade policy. </summary>
         public UpgradePolicy UpgradePolicy { get; set; }
         /// <summary> Policy for automatic repairs. </summary>
