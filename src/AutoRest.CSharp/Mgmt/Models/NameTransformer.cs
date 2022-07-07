@@ -58,6 +58,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (_wordCache.TryGetValue(name, out var result))
                 return result;
 
+            // escape the following logic if we do not have any rules
+            if (_renameRules.Count == 0)
+            {
+                result = new NameInfo(name, name);
+                _wordCache.TryAdd(name, result);
+                return result;
+            }
+
             var propertyNameBuilder = new StringBuilder();
             var parameterNameBuilder = new StringBuilder();
             var strToMatch = name.FirstCharToUpperCase();
