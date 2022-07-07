@@ -7,7 +7,10 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a virtual machines scale set IP Configuration&apos;s PublicIPAddress configuration. </summary>
+    /// <summary>
+    /// Describes a virtual machines scale set IP Configuration&apos;s PublicIPAddress configuration
+    /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
+    /// </summary>
     public partial class VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdatePublicIPAddressConfiguration. </summary>
@@ -16,9 +19,18 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdatePublicIPAddressConfiguration. </summary>
-        /// <param name="name"> The publicIP address configuration name. </param>
-        /// <param name="idleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
-        /// <param name="dnsSettings"> The dns settings to be applied on the publicIP addresses . </param>
+        /// <param name="name">
+        /// The publicIP address configuration name.
+        /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.name
+        /// </param>
+        /// <param name="idleTimeoutInMinutes">
+        /// The idle timeout of the public IP address.
+        /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties.idleTimeoutInMinutes
+        /// </param>
+        /// <param name="dnsSettings">
+        /// The dns settings to be applied on the publicIP addresses .
+        /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties.dnsSettings
+        /// </param>
         internal VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings)
         {
             Name = name;
@@ -26,13 +38,25 @@ namespace Azure.ResourceManager.Sample.Models
             DnsSettings = dnsSettings;
         }
 
-        /// <summary> The publicIP address configuration name. </summary>
+        /// <summary>
+        /// The publicIP address configuration name.
+        /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.name
+        /// </summary>
         public string Name { get; set; }
-        /// <summary> The idle timeout of the public IP address. </summary>
+        /// <summary>
+        /// The idle timeout of the public IP address.
+        /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties.idleTimeoutInMinutes
+        /// </summary>
         public int? IdleTimeoutInMinutes { get; set; }
-        /// <summary> The dns settings to be applied on the publicIP addresses . </summary>
+        /// <summary>
+        /// The dns settings to be applied on the publicIP addresses .
+        /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties.dnsSettings
+        /// </summary>
         internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings DnsSettings { get; set; }
-        /// <summary> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </summary>
+        /// <summary>
+        /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
+        /// </summary>
         public string DnsDomainNameLabel
         {
             get => DnsSettings is null ? default : DnsSettings.DomainNameLabel;

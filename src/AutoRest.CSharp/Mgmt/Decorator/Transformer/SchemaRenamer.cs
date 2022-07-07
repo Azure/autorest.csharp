@@ -92,10 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static string GetOriginalName(Schema schema)
-        {
-            return schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
-        }
+        internal static string GetOriginalName(Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
 
         private static void ApplyToType(Schema schema, RenameTarget renameTarget)
         {

@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private IEnumerable<Schema> allGeneralSchemas;
         private IEnumerable<OperationGroup> allOperationGroups;
         private IReadOnlyDictionary<string, string> allFormatByNameRules;
-        private Dictionary<Schema, string> schemaCache = new();
+        private Dictionary<Guid, string> schemaCache = new Dictionary<Guid, string>();
 
         internal SchemaFormatByNameTransformer(
             IEnumerable<Schema> generalSchemas,
@@ -123,10 +123,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             int ruleIdx = -1;
             if (schema is not PrimitiveSchema)
                 return ruleIdx;
-            if (schemaCache.ContainsKey(schema))
+            if (schemaCache.ContainsKey(schema.Id))
             {
-                if (!name.Equals(schemaCache[schema]))
-                    Console.Error.WriteLine($"WARNING: The schema '{schema.CSharpName()}' is shared by '{name}' and '{schemaCache[schema]}' which is unexpected.");
+                if (!name.Equals(schemaCache[schema.Id]))
+                    Console.Error.WriteLine($"WARNING: The schema '{schema.CSharpName()}' is shared by '{name}' and '{schemaCache[schema.Id]}' which is unexpected.");
                 return ruleIdx;
             }
             ruleIdx = CheckRules(name, rules);
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     schema.Extensions.Format = rules[ruleIdx].ExtentionType;
                 }
             }
-            schemaCache[schema] = name;
+            schemaCache[schema.Id] = name;
             return ruleIdx;
         }
 

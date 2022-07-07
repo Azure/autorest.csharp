@@ -7,12 +7,21 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The last action performed on the rolling upgrade. </summary>
+    /// <summary>
+    /// The last action performed on the rolling upgrade.
+    /// Serialized Name: RollingUpgradeActionType
+    /// </summary>
     public enum RollingUpgradeActionType
     {
-        /// <summary> Start. </summary>
+        /// <summary>
+        /// Start
+        /// Serialized Name: RollingUpgradeActionType.Start
+        /// </summary>
         Start,
-        /// <summary> Cancel. </summary>
+        /// <summary>
+        /// Cancel
+        /// Serialized Name: RollingUpgradeActionType.Cancel
+        /// </summary>
         Cancel
     }
 }

@@ -7,7 +7,10 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Information about rollback on failed VM instances after a OS Upgrade operation. </summary>
+    /// <summary>
+    /// Information about rollback on failed VM instances after a OS Upgrade operation.
+    /// Serialized Name: RollbackStatusInfo
+    /// </summary>
     public partial class RollbackStatusInfo
     {
         /// <summary> Initializes a new instance of RollbackStatusInfo. </summary>
@@ -16,9 +19,18 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of RollbackStatusInfo. </summary>
-        /// <param name="successfullyRolledbackInstanceCount"> The number of instances which have been successfully rolled back. </param>
-        /// <param name="failedRolledbackInstanceCount"> The number of instances which failed to rollback. </param>
-        /// <param name="rollbackError"> Error details if OS rollback failed. </param>
+        /// <param name="successfullyRolledbackInstanceCount">
+        /// The number of instances which have been successfully rolled back.
+        /// Serialized Name: RollbackStatusInfo.successfullyRolledbackInstanceCount
+        /// </param>
+        /// <param name="failedRolledbackInstanceCount">
+        /// The number of instances which failed to rollback.
+        /// Serialized Name: RollbackStatusInfo.failedRolledbackInstanceCount
+        /// </param>
+        /// <param name="rollbackError">
+        /// Error details if OS rollback failed.
+        /// Serialized Name: RollbackStatusInfo.rollbackError
+        /// </param>
         internal RollbackStatusInfo(int? successfullyRolledbackInstanceCount, int? failedRolledbackInstanceCount, ApiError rollbackError)
         {
             SuccessfullyRolledbackInstanceCount = successfullyRolledbackInstanceCount;
@@ -26,11 +38,20 @@ namespace Azure.ResourceManager.Sample.Models
             RollbackError = rollbackError;
         }
 
-        /// <summary> The number of instances which have been successfully rolled back. </summary>
+        /// <summary>
+        /// The number of instances which have been successfully rolled back.
+        /// Serialized Name: RollbackStatusInfo.successfullyRolledbackInstanceCount
+        /// </summary>
         public int? SuccessfullyRolledbackInstanceCount { get; }
-        /// <summary> The number of instances which failed to rollback. </summary>
+        /// <summary>
+        /// The number of instances which failed to rollback.
+        /// Serialized Name: RollbackStatusInfo.failedRolledbackInstanceCount
+        /// </summary>
         public int? FailedRolledbackInstanceCount { get; }
-        /// <summary> Error details if OS rollback failed. </summary>
+        /// <summary>
+        /// Error details if OS rollback failed.
+        /// Serialized Name: RollbackStatusInfo.rollbackError
+        /// </summary>
         public ApiError RollbackError { get; }
     }
 }

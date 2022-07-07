@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
@@ -71,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    if (MethodsRequiredBodyParameter.Contains(operation.GetHttpMethod()))
+                    if (operation.GetHttpMethod() == HttpMethod.Patch)
                     {
                         var bodyParameter = operation.GetBodyParameter();
                         if (bodyParameter != null)
@@ -80,7 +79,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
             }
         }
-
-        private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
     }
 }
