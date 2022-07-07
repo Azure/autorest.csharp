@@ -11,7 +11,10 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a virtual machine scale set network profile. </summary>
+    /// <summary>
+    /// Describes a virtual machine scale set network profile.
+    /// Serialized Name: VirtualMachineScaleSetUpdateNetworkProfile
+    /// </summary>
     public partial class VirtualMachineScaleSetUpdateNetworkProfile
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkProfile. </summary>
@@ -20,7 +23,10 @@ namespace Azure.ResourceManager.Sample.Models
             NetworkInterfaceConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateNetworkConfiguration>();
         }
 
-        /// <summary> A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;. </summary>
+        /// <summary>
+        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkProfile.healthProbe
+        /// </summary>
         internal WritableSubResource HealthProbe { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier HealthProbeId
@@ -34,7 +40,10 @@ namespace Azure.ResourceManager.Sample.Models
             }
         }
 
-        /// <summary> The list of network configurations. </summary>
+        /// <summary>
+        /// The list of network configurations.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkProfile.networkInterfaceConfigurations
+        /// </summary>
         public IList<VirtualMachineScaleSetUpdateNetworkConfiguration> NetworkInterfaceConfigurations { get; }
     }
 }

@@ -12,7 +12,10 @@ using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a Virtual Machine Scale Set Extension. </summary>
+    /// <summary>
+    /// Describes a Virtual Machine Scale Set Extension.
+    /// Serialized Name: VirtualMachineScaleSetExtensionUpdate
+    /// </summary>
     public partial class VirtualMachineScaleSetExtensionPatch : ResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionPatch. </summary>
@@ -26,16 +29,46 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="forceUpdateTag"> If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed. </param>
-        /// <param name="publisher"> The name of the extension handler publisher. </param>
-        /// <param name="typePropertiesType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
-        /// <param name="typeHandlerVersion"> Specifies the version of the script handler. </param>
-        /// <param name="autoUpgradeMinorVersion"> Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. </param>
-        /// <param name="enableAutomaticUpgrade"> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </param>
-        /// <param name="settings"> Json formatted public settings for the extension. </param>
-        /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
-        /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        /// <param name="provisionAfterExtensions"> Collection of extension names after which this extension needs to be provisioned. </param>
+        /// <param name="forceUpdateTag">
+        /// If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.forceUpdateTag
+        /// </param>
+        /// <param name="publisher">
+        /// The name of the extension handler publisher.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.publisher
+        /// </param>
+        /// <param name="typePropertiesType">
+        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.type
+        /// </param>
+        /// <param name="typeHandlerVersion">
+        /// Specifies the version of the script handler.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.typeHandlerVersion
+        /// </param>
+        /// <param name="autoUpgradeMinorVersion">
+        /// Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.autoUpgradeMinorVersion
+        /// </param>
+        /// <param name="enableAutomaticUpgrade">
+        /// Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.enableAutomaticUpgrade
+        /// </param>
+        /// <param name="settings">
+        /// Json formatted public settings for the extension.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.settings
+        /// </param>
+        /// <param name="protectedSettings">
+        /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.protectedSettings
+        /// </param>
+        /// <param name="provisioningState">
+        /// The provisioning state, which only appears in the response.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.provisioningState
+        /// </param>
+        /// <param name="provisionAfterExtensions">
+        /// Collection of extension names after which this extension needs to be provisioned.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.provisionAfterExtensions
+        /// </param>
         internal VirtualMachineScaleSetExtensionPatch(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id, name, resourceType, systemData)
         {
             ForceUpdateTag = forceUpdateTag;
@@ -50,25 +83,55 @@ namespace Azure.ResourceManager.Sample.Models
             ProvisionAfterExtensions = provisionAfterExtensions;
         }
 
-        /// <summary> If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed. </summary>
+        /// <summary>
+        /// If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.forceUpdateTag
+        /// </summary>
         public string ForceUpdateTag { get; set; }
-        /// <summary> The name of the extension handler publisher. </summary>
+        /// <summary>
+        /// The name of the extension handler publisher.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.publisher
+        /// </summary>
         public string Publisher { get; set; }
-        /// <summary> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </summary>
+        /// <summary>
+        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.type
+        /// </summary>
         public string TypePropertiesType { get; set; }
-        /// <summary> Specifies the version of the script handler. </summary>
+        /// <summary>
+        /// Specifies the version of the script handler.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.typeHandlerVersion
+        /// </summary>
         public string TypeHandlerVersion { get; set; }
-        /// <summary> Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. </summary>
+        /// <summary>
+        /// Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.autoUpgradeMinorVersion
+        /// </summary>
         public bool? AutoUpgradeMinorVersion { get; set; }
-        /// <summary> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </summary>
+        /// <summary>
+        /// Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.enableAutomaticUpgrade
+        /// </summary>
         public bool? EnableAutomaticUpgrade { get; set; }
-        /// <summary> Json formatted public settings for the extension. </summary>
+        /// <summary>
+        /// Json formatted public settings for the extension.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.settings
+        /// </summary>
         public BinaryData Settings { get; set; }
-        /// <summary> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </summary>
+        /// <summary>
+        /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.protectedSettings
+        /// </summary>
         public BinaryData ProtectedSettings { get; set; }
-        /// <summary> The provisioning state, which only appears in the response. </summary>
+        /// <summary>
+        /// The provisioning state, which only appears in the response.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.provisioningState
+        /// </summary>
         public string ProvisioningState { get; }
-        /// <summary> Collection of extension names after which this extension needs to be provisioned. </summary>
+        /// <summary>
+        /// Collection of extension names after which this extension needs to be provisioned.
+        /// Serialized Name: VirtualMachineScaleSetExtensionUpdate.properties.provisionAfterExtensions
+        /// </summary>
         public IList<string> ProvisionAfterExtensions { get; }
     }
 }

@@ -37,4 +37,7 @@ rename-mapping:
   VirtualMachineScaleSetExtension.properties.type: ExtensionType # the properties inside is required because this is a flattened property
   HyperVGenerationType: HyperVGeneration
   HyperVGenerationTypes: HyperVGeneration
+
+mgmt-debug:
+  show-serialized-names: true
 ```

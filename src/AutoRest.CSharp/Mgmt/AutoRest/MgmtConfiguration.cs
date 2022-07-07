@@ -17,10 +17,15 @@ namespace AutoRest.CSharp.Input
 
             public bool SuppressListException { get; }
 
+            public bool ShowSerializedNames { get; }
+
             public MgmtDebugConfiguration(
-                JsonElement? suppressListException = default)
+                JsonElement? suppressListException = default,
+                JsonElement? showSerializedNames = default
+            )
             {
                 SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+                ShowSerializedNames = showSerializedNames == null || !IsValidJsonElement(showSerializedNames) ? false : Convert.ToBoolean(showSerializedNames.ToString());
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
@@ -29,16 +34,20 @@ namespace AutoRest.CSharp.Input
                     return new MgmtDebugConfiguration();
 
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
+                root.TryGetProperty(nameof(ShowSerializedNames), out var showSerializedNames);
 
                 return new MgmtDebugConfiguration(
-                    suppressListException: suppressListException
+                    suppressListException: suppressListException,
+                    showSerializedNames: showSerializedNames
                 );
             }
 
             internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
             {
                 return new MgmtDebugConfiguration(
-                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult());
+                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult(),
+                    showSerializedNames: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-serialized-names")).GetAwaiter().GetResult()
+                );
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -50,6 +59,9 @@ namespace AutoRest.CSharp.Input
 
                 if (SuppressListException)
                     writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
+
+                if (ShowSerializedNames)
+                    writer.WriteBoolean(nameof(ShowSerializedNames), ShowSerializedNames);
 
                 writer.WriteEndObject();
             }

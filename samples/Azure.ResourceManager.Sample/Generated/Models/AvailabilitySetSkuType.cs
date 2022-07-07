@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Specifies the sku of an Availability Set. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;. </summary>
+    /// <summary>
+    /// Specifies the sku of an Availability Set. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
+    /// Serialized Name: AvailabilitySetSkuTypes
+    /// </summary>
     internal readonly partial struct AvailabilitySetSkuType : IEquatable<AvailabilitySetSkuType>
     {
         private readonly string _value;
@@ -25,9 +28,15 @@ namespace Azure.ResourceManager.Sample.Models
         private const string ClassicValue = "Classic";
         private const string AlignedValue = "Aligned";
 
-        /// <summary> Classic. </summary>
+        /// <summary>
+        /// Classic
+        /// Serialized Name: AvailabilitySetSkuTypes.Classic
+        /// </summary>
         public static AvailabilitySetSkuType Classic { get; } = new AvailabilitySetSkuType(ClassicValue);
-        /// <summary> Aligned. </summary>
+        /// <summary>
+        /// Aligned
+        /// Serialized Name: AvailabilitySetSkuTypes.Aligned
+        /// </summary>
         public static AvailabilitySetSkuType Aligned { get; } = new AvailabilitySetSkuType(AlignedValue);
         /// <summary> Determines if two <see cref="AvailabilitySetSkuType"/> values are the same. </summary>
         public static bool operator ==(AvailabilitySetSkuType left, AvailabilitySetSkuType right) => left.Equals(right);
