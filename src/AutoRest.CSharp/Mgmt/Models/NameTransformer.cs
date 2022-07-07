@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// Instanciate a NameTransformer which uses the dictionary to transform the abbreviations in this word to correct casing
         /// </summary>
         /// <param name="renameRules"></param>
-        private NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
+        internal NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
         {
             _renameRules = renameRules;
             _regex = BuildRegex(renameRules.Keys);
