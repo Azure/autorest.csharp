@@ -13,13 +13,13 @@ namespace Azure.AI.DocumentTranslation
     /// <summary> Client options for DocumentTranslationClient. </summary>
     public partial class DocumentTranslationClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.Vv1_0_Preview_1;
+        private const ServiceVersion LatestVersion = ServiceVersion.V1_0_Preview_1;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
             /// <summary> Service version "v1.0-preview.1". </summary>
-            Vv1_0_Preview_1 = 1,
+            V1_0_Preview_1 = 1,
         }
 
         internal string Version { get; }
@@ -29,7 +29,7 @@ namespace Azure.AI.DocumentTranslation
         {
             Version = version switch
             {
-                ServiceVersion.Vv1_0_Preview_1 => "v1.0-preview.1",
+                ServiceVersion.V1_0_Preview_1 => "v1.0-preview.1",
                 _ => throw new NotSupportedException()
             };
         }
