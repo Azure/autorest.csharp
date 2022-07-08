@@ -37,7 +37,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 catch
                 {
-                    // System.Console.WriteLine(ex.ToString());
                 }
             }
 
@@ -52,9 +51,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 catch
                 {
-                    // System.Console.WriteLine(ex.ToString());
                 }
-        }
+            }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
             try
@@ -66,7 +64,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             catch
             {
-                // System.Console.WriteLine(ex.ToString());
             }
 
 
@@ -91,7 +88,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     }
                     catch
                     {
-                        // System.Console.WriteLine(ex.ToString());
                     }
                 }
             }
@@ -113,7 +109,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     }
                     catch
                     {
-                        // System.Console.WriteLine(ex.ToString());
                     }
                 }
             }
@@ -132,7 +127,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 catch
                 {
-                    // System.Console.WriteLine(ex.ToString());
                 }
             }
         }

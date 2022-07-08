@@ -63,7 +63,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             _writer.UseNamespace("Azure.Identity");
             _writer.UseNamespace("System.Threading.Tasks");
 
-            _writer.Line($"#region decalarations");
+            _writer.Line($"#region Parameter decalarations");
+            _writer.Line($"// Below parameters are extracted from swagger example files, please use your own values to execute the API lively.");
             _writer.Line($"ArmClient GetArmClient() => new ArmClient(new DefaultAzureCredential());");
             //RequestPath requestPath = testCase.Carrier switch
             //{
