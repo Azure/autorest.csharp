@@ -7210,6 +7210,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/createVault.json
               responses:
                 '200':
                   body:
@@ -7409,6 +7410,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/createVaultWithNetworkAcls.json
               responses:
                 '200':
                   body:
@@ -7689,6 +7691,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/updateVault.json
               responses:
                 '200':
                   body:
@@ -7969,6 +7972,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/deleteVault.json
               responses:
                 '200':
                   headers: &ref_535 {}
@@ -8089,6 +8093,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/getVault.json
               responses:
                 '200':
                   body:
@@ -8346,6 +8351,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/updateAccessPoliciesAdd.json
               responses:
                 '200':
                   body:
@@ -8491,6 +8497,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listVaultByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -8669,6 +8676,7 @@ operationGroups:
                 $top: 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listVaultBySubscription.json
               responses:
                 '200':
                   body:
@@ -8835,6 +8843,7 @@ operationGroups:
                 $top: 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listDeletedVaults.json
               responses:
                 '200':
                   body:
@@ -8970,6 +8979,7 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/getDeletedVault.json
               responses:
                 '200':
                   body:
@@ -9104,6 +9114,7 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/purgeDeletedVault.json
               responses:
                 '200':
                   headers: &ref_598 {}
@@ -9231,6 +9242,7 @@ operationGroups:
                 vaultName:
                   name: sample-vault
                   type: Microsoft.KeyVault/vaults
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/checkVaultNameAvailability.json
               responses:
                 '200':
                   body:
@@ -9381,6 +9393,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/getPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -9579,6 +9592,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/putPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -9756,6 +9770,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/deletePrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -9885,6 +9900,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -10041,6 +10057,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -10191,6 +10208,7 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
                 version: aaaaaaaaaaaaaa
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -10214,6 +10232,7 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
                 version: aaa
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -10320,6 +10339,7 @@ operationGroups:
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -10341,6 +10361,7 @@ operationGroups:
                 location: aaaa
                 publisherName: aa
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -10500,6 +10521,7 @@ operationGroups:
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -10522,6 +10544,7 @@ operationGroups:
                 location: aaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -10691,6 +10714,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json
               responses:
                 '200':
                   body:
@@ -10731,6 +10755,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json
               responses:
                 '200':
                   body:
@@ -10776,6 +10801,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create.json
               responses:
                 '200':
                   body:
@@ -10959,6 +10985,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabled.json
               responses:
                 '200':
                   body:
@@ -11004,6 +11031,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabledInProgress.json
               responses:
                 '200':
                   body:
@@ -11053,6 +11081,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update.json
               responses:
                 '200':
                   body:
@@ -11193,6 +11222,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get_WithAutoKeyRotationError.json
               responses:
                 '200':
                   body:
@@ -11223,6 +11253,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get.json
               responses:
                 '200':
                   body:
@@ -11345,6 +11376,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Delete.json
               responses:
                 '200': {}
                 '202': {}
@@ -11437,6 +11469,7 @@ operationGroups:
                 api-version: '2022-03-02'
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -11553,6 +11586,7 @@ operationGroups:
               parameters:
                 api-version: '2022-03-02'
                 subscriptionId: '{subscription-id}'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListBySubscription.json
               responses:
                 '200':
                   body:
@@ -11801,6 +11835,7 @@ operationGroups:
                     Environment: dogfood
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_CreateOrUpdate.json
               responses:
                 '200':
                   body:
@@ -12011,6 +12046,7 @@ operationGroups:
                     Slice: A
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_Update.json
               responses:
                 '200':
                   body:
@@ -12188,6 +12224,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_Delete.json
               responses:
                 '200': {}
                 '202': {}
@@ -12326,6 +12363,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_Get.json
               responses:
                 '200':
                   body:
@@ -12468,6 +12506,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_ListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -12616,6 +12655,7 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_ListBySubscription.json
               responses:
                 '200':
                   body:
@@ -12752,6 +12792,7 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeletedManagedHsm_List.json
               responses:
                 '200':
                   body:
@@ -12900,6 +12941,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeletedManagedHsm_Get.json
               responses:
                 '200':
                   body:
@@ -13026,6 +13068,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeletedManagedHsm_Purge.json
               responses:
                 '202': {}
           x-ms-long-running-operation: true
@@ -13152,6 +13195,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json
               responses:
                 '200':
                   body:
@@ -13314,6 +13358,7 @@ operationGroups:
                 privateEndpointConnectionName: sample-pec
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_getPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -13509,6 +13554,7 @@ operationGroups:
                       status: Approved
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_putPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -13685,6 +13731,7 @@ operationGroups:
                 privateEndpointConnectionName: sample-pec
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_deletePrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -13822,6 +13869,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_listPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -13928,6 +13976,7 @@ operationGroups:
             Lists available Rest API operations.:
               parameters:
                 api-version: '2021-10-01'
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listOperations.json
               responses:
                 '200':
                   body:
@@ -14327,6 +14376,7 @@ operationGroups:
                 resourceProviderNamespace: resourceProviderNamespace
                 resourceType: resourceType
                 subscriptionId: subId
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentsForResource.json
               responses:
                 '200':
                   body:
@@ -14445,6 +14495,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 resourceGroupName: rgname
                 subscriptionId: subId
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentsForResourceGroup.json
               responses:
                 '200':
                   body:
@@ -14572,6 +14623,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 roleAssignmentName: roleAssignmentName
                 scope: scope
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeleteRoleAssignmentByName.json
               responses:
                 '200':
                   body:
@@ -14724,6 +14776,7 @@ operationGroups:
                     roleDefinitionId: /subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772
                 roleAssignmentName: roleAssignmentName
                 scope: scope
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/PutRoleAssignment.json
               responses:
                 '201':
                   body:
@@ -14837,6 +14890,7 @@ operationGroups:
                 roleAssignmentName: roleAssignmentName
                 scope: scope
                 subscriptionId: subId
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentByName.json
               responses:
                 '200':
                   body:
@@ -14935,6 +14989,7 @@ operationGroups:
               parameters:
                 api-version: 2017-10-01-preview
                 subscriptionId: subId
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetAllRoleAssignments.json
               responses:
                 '200':
                   body:
@@ -15053,6 +15108,7 @@ operationGroups:
               parameters:
                 api-version: 2017-10-01-preview
                 scope: scope
+              x-ms-original-file: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentByScope.json
               responses:
                 '200':
                   body:
@@ -15278,7 +15334,7 @@ testModel:
                 parameter: *ref_289
             operation: *ref_504
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/createVault.json
             responses:
               '200':
                 body:
@@ -15952,7 +16008,7 @@ testModel:
                 parameter: *ref_289
             operation: *ref_504
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/createVaultWithNetworkAcls.json
             responses:
               '200':
                 body:
@@ -16405,7 +16461,7 @@ testModel:
                 parameter: *ref_295
             operation: *ref_530
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/updateVault.json
             responses:
               '200':
                 body:
@@ -16933,7 +16989,7 @@ testModel:
                 parameter: *ref_533
             operation: *ref_537
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/deleteVault.json
             responses:
               '200':
                 headers: *ref_535
@@ -16968,7 +17024,7 @@ testModel:
                 parameter: *ref_540
             operation: *ref_543
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/getVault.json
             responses:
               '200':
                 body:
@@ -17262,7 +17318,7 @@ testModel:
                 parameter: *ref_305
             operation: *ref_556
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/updateAccessPoliciesAdd.json
             responses:
               '200':
                 body:
@@ -17407,7 +17463,7 @@ testModel:
                 parameter: *ref_559
             operation: *ref_565
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listVaultByResourceGroup.json
             responses:
               '200':
                 body:
@@ -17653,7 +17709,7 @@ testModel:
                 parameter: *ref_567
             operation: *ref_570
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listVaultBySubscription.json
             responses:
               '200':
                 body:
@@ -17894,7 +17950,7 @@ testModel:
                 parameter: *ref_571
             operation: *ref_586
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listDeletedVaults.json
             responses:
               '200':
                 body:
@@ -17984,7 +18040,7 @@ testModel:
                 parameter: *ref_589
             operation: *ref_593
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/getDeletedVault.json
             responses:
               '200':
                 body:
@@ -18063,7 +18119,7 @@ testModel:
                 parameter: *ref_596
             operation: *ref_600
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/purgeDeletedVault.json
             responses:
               '200':
                 headers: *ref_598
@@ -18102,7 +18158,7 @@ testModel:
                 parameter: *ref_321
             operation: *ref_608
             operationGroup: *ref_505
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/checkVaultNameAvailability.json
             responses:
               '200':
                 body:
@@ -18148,7 +18204,7 @@ testModel:
                 parameter: *ref_612
             operation: *ref_627
             operationGroup: *ref_628
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/getPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -18265,7 +18321,7 @@ testModel:
                 parameter: *ref_327
             operation: *ref_636
             operationGroup: *ref_628
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/putPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -18356,7 +18412,7 @@ testModel:
                 parameter: *ref_640
             operation: *ref_644
             operationGroup: *ref_628
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/deletePrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -18413,7 +18469,7 @@ testModel:
                 parameter: *ref_647
             operation: *ref_652
             operationGroup: *ref_628
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -18562,7 +18618,7 @@ testModel:
                 parameter: *ref_655
             operation: *ref_665
             operationGroup: *ref_666
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listPrivateLinkResources.json
             responses:
               '200':
                 body:
@@ -18647,7 +18703,7 @@ testModel:
                 parameter: *ref_671
             operation: *ref_686
             operationGroup: *ref_687
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MaximumSet_Gen.json
             responses:
               '200':
                 body:
@@ -18738,7 +18794,7 @@ testModel:
                 parameter: *ref_671
             operation: *ref_686
             operationGroup: *ref_687
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MinimumSet_Gen.json
             responses:
               '200':
                 body:
@@ -18783,7 +18839,7 @@ testModel:
                 parameter: *ref_690
             operation: *ref_693
             operationGroup: *ref_687
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen.json
             responses:
               '200':
                 body:
@@ -18866,7 +18922,7 @@ testModel:
                 parameter: *ref_690
             operation: *ref_693
             operationGroup: *ref_687
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen.json
             responses:
               '200':
                 body:
@@ -18933,7 +18989,7 @@ testModel:
                 parameter: *ref_700
             operation: *ref_703
             operationGroup: *ref_687
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen.json
             responses:
               '200':
                 body:
@@ -19021,7 +19077,7 @@ testModel:
                 parameter: *ref_700
             operation: *ref_703
             operationGroup: *ref_687
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen.json
             responses:
               '200':
                 body:
@@ -19102,7 +19158,7 @@ testModel:
                 parameter: *ref_358
             operation: *ref_719
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json
             responses:
               '200':
                 body:
@@ -19262,7 +19318,7 @@ testModel:
                 parameter: *ref_358
             operation: *ref_719
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json
             responses:
               '200':
                 body:
@@ -19444,7 +19500,7 @@ testModel:
                 parameter: *ref_358
             operation: *ref_719
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create.json
             responses:
               '200':
                 body:
@@ -19614,7 +19670,7 @@ testModel:
                 parameter: *ref_363
             operation: *ref_747
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabled.json
             responses:
               '200':
                 body:
@@ -19789,7 +19845,7 @@ testModel:
                 parameter: *ref_363
             operation: *ref_747
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabledInProgress.json
             responses:
               '200':
                 body:
@@ -19981,7 +20037,7 @@ testModel:
                 parameter: *ref_363
             operation: *ref_747
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update.json
             responses:
               '200':
                 body:
@@ -20142,7 +20198,7 @@ testModel:
                 parameter: *ref_753
             operation: *ref_756
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get_WithAutoKeyRotationError.json
             responses:
               '200':
                 body:
@@ -20249,7 +20305,7 @@ testModel:
                 parameter: *ref_753
             operation: *ref_756
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get.json
             responses:
               '200':
                 body:
@@ -20355,7 +20411,7 @@ testModel:
                 parameter: *ref_759
             operation: *ref_761
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_Delete.json
             responses:
               '200': {}
               '202': {}
@@ -20384,7 +20440,7 @@ testModel:
                 parameter: *ref_763
             operation: *ref_768
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListByResourceGroup.json
             responses:
               '200':
                 body:
@@ -20563,7 +20619,7 @@ testModel:
                 parameter: *ref_769
             operation: *ref_772
             operationGroup: *ref_720
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListBySubscription.json
             responses:
               '200':
                 body:
@@ -20840,7 +20896,7 @@ testModel:
                 parameter: *ref_373
             operation: *ref_805
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_CreateOrUpdate.json
             responses:
               '200':
                 body:
@@ -21058,7 +21114,7 @@ testModel:
                 parameter: *ref_378
             operation: *ref_814
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_Update.json
             responses:
               '200':
                 body:
@@ -21263,7 +21319,7 @@ testModel:
                 parameter: *ref_817
             operation: *ref_819
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_Delete.json
             responses:
               '200': {}
               '202': {}
@@ -21297,7 +21353,7 @@ testModel:
                 parameter: *ref_822
             operation: *ref_826
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_Get.json
             responses:
               '200':
                 body:
@@ -21410,7 +21466,7 @@ testModel:
                 parameter: *ref_828
             operation: *ref_833
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_ListByResourceGroup.json
             responses:
               '200':
                 body:
@@ -21607,7 +21663,7 @@ testModel:
                 parameter: *ref_834
             operation: *ref_837
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_ListBySubscription.json
             responses:
               '200':
                 body:
@@ -21804,7 +21860,7 @@ testModel:
                 parameter: *ref_838
             operation: *ref_853
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeletedManagedHsm_List.json
             responses:
               '200':
                 body:
@@ -21949,7 +22005,7 @@ testModel:
                 parameter: *ref_856
             operation: *ref_859
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeletedManagedHsm_Get.json
             responses:
               '200':
                 body:
@@ -22033,7 +22089,7 @@ testModel:
                 parameter: *ref_862
             operation: *ref_864
             operationGroup: *ref_806
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeletedManagedHsm_Purge.json
             responses:
               '202': {}
         operation: *ref_864
@@ -22065,7 +22121,7 @@ testModel:
                 parameter: *ref_396
             operation: *ref_883
             operationGroup: *ref_884
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json
             responses:
               '200':
                 body:
@@ -22219,7 +22275,7 @@ testModel:
                 parameter: *ref_888
             operation: *ref_891
             operationGroup: *ref_884
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_getPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -22330,7 +22386,7 @@ testModel:
                 parameter: *ref_401
             operation: *ref_899
             operationGroup: *ref_884
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_putPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -22417,7 +22473,7 @@ testModel:
                 parameter: *ref_903
             operation: *ref_907
             operationGroup: *ref_884
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_deletePrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -22474,7 +22530,7 @@ testModel:
                 parameter: *ref_910
             operation: *ref_920
             operationGroup: *ref_921
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/ManagedHsm_listPrivateLinkResources.json
             responses:
               '200':
                 body:
@@ -22534,7 +22590,7 @@ testModel:
                 parameter: *ref_922
             operation: *ref_955
             operationGroup: *ref_956
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/listOperations.json
             responses:
               '200':
                 body:
@@ -23590,7 +23646,7 @@ testModel:
                 parameter: *ref_962
             operation: *ref_977
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentsForResource.json
             responses:
               '200':
                 body:
@@ -23661,7 +23717,7 @@ testModel:
                 parameter: *ref_980
             operation: *ref_983
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentsForResourceGroup.json
             responses:
               '200':
                 body:
@@ -23732,7 +23788,7 @@ testModel:
                 parameter: *ref_986
             operation: *ref_989
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/DeleteRoleAssignmentByName.json
             responses:
               '200':
                 body:
@@ -23818,7 +23874,7 @@ testModel:
                 parameter: *ref_430
             operation: *ref_1002
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/PutRoleAssignment.json
             responses:
               '201':
                 body:
@@ -23882,7 +23938,7 @@ testModel:
                 parameter: *ref_1005
             operation: *ref_1008
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentByName.json
             responses:
               '200':
                 body:
@@ -23941,7 +23997,7 @@ testModel:
                 parameter: *ref_1009
             operation: *ref_1012
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetAllRoleAssignments.json
             responses:
               '200':
                 body:
@@ -24007,7 +24063,7 @@ testModel:
                 parameter: *ref_1014
             operation: *ref_1017
             operationGroup: *ref_978
-            originalFile: ''
+            originalFile: file:///C:/ZZ/projects/codegen/autorest.csharp/test/TestProjects/MgmtMockTest/src/examples/GetRoleAssignmentByScope.json
             responses:
               '200':
                 body:
