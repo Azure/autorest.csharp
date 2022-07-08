@@ -28,11 +28,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ClientTypeName { get; }
         private BuildContext<LowLevelOutputLibrary> Context { get; }
+        private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
 
         public LowLevelExampleComposer(string clientTypeName, BuildContext<LowLevelOutputLibrary> context)
         {
             ClientTypeName = clientTypeName;
             Context = context;
+            ClientInvocationChain = context.Library.RestClientInitExamplePaths[clientTypeName];
         }
 
         public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
@@ -872,9 +874,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeGetClientCodes(StringBuilder builder)
         {
-            var invocationChain = GetClientInvocationChain();
-
-            var clientConstructor = invocationChain[0];
+            var clientConstructor = ClientInvocationChain[0];
             if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(KeyAuthType)))
             {
                 builder.AppendLine("var credential = new AzureKeyCredential(\"<key>\");");
@@ -889,13 +889,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.AppendLine($"var endpoint = new Uri(\"<{GetEndpoint()}>\");");
             }
 
-            var code = $"var client = new {invocationChain[0].Name}({MockClientConstructorParameterValues(invocationChain[0].Parameters)})";
+            var code = $"var client = new {ClientInvocationChain[0].Name}({MockClientConstructorParameterValues(ClientInvocationChain[0].Parameters)})";
 
-            if (invocationChain.Count > 1)
+            if (ClientInvocationChain.Count > 1)
             {
-                for (int i = 1; i < invocationChain.Count; i++)
+                for (int i = 1; i < ClientInvocationChain.Count; i++)
                 {
-                    var factoryMethod = invocationChain[i];
+                    var factoryMethod = ClientInvocationChain[i];
                     code += GetFactoryMethodCode(factoryMethod);
                 }
             }
@@ -927,59 +927,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
             return string.Join(", ", parameterValues);
-        }
-
-        /// <summary>
-        /// Get the methods to be called to get the client, it should be like `Client(...).GetXXClient(..).GetYYClient(..)`.
-        /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
-        /// </summary>
-        /// <returns></returns>
-        private IReadOnlyList<MethodSignatureBase> GetClientInvocationChain()
-        {
-            var chain = new List<MethodSignatureBase>();
-            foreach (var client in Context.Library.RestClients.Where(r => !r.IsSubClient))
-            {
-                if (client.Type.Name == ClientTypeName)
-                {
-                    chain.Add(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
-                    return chain;
-                }
-
-                var childInvocation = GetSubClientInvocationChain(client.SubClients, client.SubClientFactoryMethods);
-                if (childInvocation.Count > 0)
-                {
-                    chain.Add(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
-                    chain.AddRange(childInvocation);
-                    return chain;
-                }
-            }
-            return chain;
-        }
-
-        private IReadOnlyList<MethodSignatureBase> GetSubClientInvocationChain(IReadOnlyList<LowLevelClient> subClients, IReadOnlyList<LowLevelSubClientFactoryMethod> subClientFactoryMethods)
-        {
-            var chain = new List<MethodSignatureBase>();
-            foreach (var factoryMethod in subClientFactoryMethods)
-            {
-                if (factoryMethod.ClientTypeName == ClientTypeName)
-                {
-                    chain.Add(factoryMethod.Signature);
-                    return chain;
-                }
-            }
-
-            foreach (var subClient in subClients)
-            {
-                var childInvocation = GetSubClientInvocationChain(subClient.SubClients, subClient.SubClientFactoryMethods);
-                if (childInvocation.Count > 0)
-                {
-                    var factoryMethod = subClientFactoryMethods.First(m => m.ClientTypeName == subClient.Type.Name);
-                    chain.Add(factoryMethod.Signature);
-                    chain.AddRange(childInvocation);
-                    return chain;
-                }
-            }
-            return chain;
         }
 
         private string GetFactoryMethodCode(MethodSignatureBase factoryMethod)
