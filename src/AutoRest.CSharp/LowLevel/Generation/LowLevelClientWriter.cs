@@ -55,22 +55,23 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client);
                     WriteConstructors(writer, client);
 
+                    var exampleComposer = new LowLevelExampleComposer(clientType.Name, context);
                     foreach (var clientMethod in client.ClientMethods)
                     {
                         if (clientMethod.IsLongRunning)
                         {
-                            WriteLongRunningOperationMethod(writer, clientType.Name, clientMethod, client.Fields, true, context);
-                            WriteLongRunningOperationMethod(writer, clientType.Name, clientMethod, client.Fields, false, context);
+                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, true, exampleComposer, context);
+                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, false, exampleComposer, context);
                         }
                         else if (clientMethod.PagingInfo != null)
                         {
-                            WritePagingMethod(writer, clientType.Name, clientMethod, client.Fields, true, context);
-                            WritePagingMethod(writer, clientType.Name, clientMethod, client.Fields, false, context);
+                            WritePagingMethod(writer, clientMethod, client.Fields, true, exampleComposer, context);
+                            WritePagingMethod(writer, clientMethod, client.Fields, false, exampleComposer, context);
                         }
                         else
                         {
-                            WriteClientMethod(writer, clientType.Name, clientMethod, client.Fields, true, context);
-                            WriteClientMethod(writer, clientType.Name, clientMethod, client.Fields, false, context);
+                            WriteClientMethod(writer, clientMethod, client.Fields, true, exampleComposer, context);
+                            WriteClientMethod(writer, clientMethod, client.Fields, false, exampleComposer, context);
                         }
                     }
 
@@ -212,9 +213,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteClientMethod(CodeWriter writer, string clientTypeName, LowLevelClientMethod clientMethod, ClientFields fields, bool async, BuildContext<LowLevelOutputLibrary> context)
+        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async, LowLevelExampleComposer exampleComposer, BuildContext<LowLevelOutputLibrary> context)
         {
-            using (WriteClientMethodDeclaration(writer, clientTypeName, clientMethod, async, context))
+            using (WriteClientMethodDeclaration(writer, clientMethod, async, exampleComposer, context))
             {
                 WriteClientMethodBody(writer, clientMethod, fields, async);
             }
@@ -264,11 +265,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WritePagingMethod(CodeWriter writer, string clientTypeName, LowLevelClientMethod clientMethod, ClientFields fields, bool async, BuildContext<LowLevelOutputLibrary> context)
+        public static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async, LowLevelExampleComposer exampleComposer, BuildContext<LowLevelOutputLibrary> context)
         {
             MethodSignature privateMethodSignature = PreparePrivatePagingMethodSignature(clientMethod, async);
 
-            using (WriteClientMethodDeclaration(writer, clientTypeName, clientMethod, async, context))
+            using (WriteClientMethodDeclaration(writer, clientMethod, async, exampleComposer, context))
             {
                 writer.Line($"return {privateMethodSignature.Name}({clientMethod.Diagnostic.ScopeName:L}, {clientMethod.Signature.Parameters.GetIdentifiersFormattable()});");
             }
@@ -370,18 +371,18 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteLongRunningOperationMethod(CodeWriter writer, string clientTypeName, LowLevelClientMethod clientMethod, ClientFields fields, bool async, BuildContext<LowLevelOutputLibrary> context)
+        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async, LowLevelExampleComposer exampleComposer, BuildContext<LowLevelOutputLibrary> context)
         {
             var pagingInfo = clientMethod.PagingInfo;
             var nextPageMethod = pagingInfo?.NextPageMethod;
 
             if (pagingInfo != null && nextPageMethod != null)
             {
-                WritePageableLongRunningOperationMethod(writer, clientTypeName, clientMethod, fields, pagingInfo, nextPageMethod, async, context);
+                WritePageableLongRunningOperationMethod(writer, clientMethod, fields, pagingInfo, nextPageMethod, async, exampleComposer, context);
             }
             else
             {
-                WriteNonPageableLongRunningOperationMethod(writer, clientTypeName, clientMethod, fields, async, context);
+                WriteNonPageableLongRunningOperationMethod(writer, clientMethod, fields, async, exampleComposer, context);
             }
 
             writer.Line();
@@ -395,9 +396,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteNonPageableLongRunningOperationMethod(CodeWriter writer, string clientTypeName, LowLevelClientMethod clientMethod, ClientFields fields, bool async, BuildContext<LowLevelOutputLibrary> context)
+        private static void WriteNonPageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async, LowLevelExampleComposer exampleComposer, BuildContext<LowLevelOutputLibrary> context)
         {
-            using (WriteClientMethodDeclaration(writer, clientTypeName, clientMethod, async, context))
+            using (WriteClientMethodDeclaration(writer, clientMethod, async, exampleComposer, context))
             {
                 WriteNonPageableLongRunningOperationMethodBody(writer, clientMethod, fields, async);
             }
@@ -429,9 +430,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, string clientTypeName, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, bool async, BuildContext<LowLevelOutputLibrary> context)
+        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, bool async, LowLevelExampleComposer exampleComposer, BuildContext<LowLevelOutputLibrary> context)
         {
-            using (WriteClientMethodDeclaration(writer, clientTypeName, clientMethod, async, context))
+            using (WriteClientMethodDeclaration(writer, clientMethod, async, exampleComposer, context))
             {
                 WritePageableLongRunningOperationMethodBody(writer, clientMethod, fields, pagingInfo, nextPageMethod, async);
             }
@@ -598,12 +599,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return scope;
         }
 
-        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, string clientTypeName, LowLevelClientMethod clientMethod, bool async, BuildContext<LowLevelOutputLibrary> context)
+        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async, LowLevelExampleComposer exampleComposer, BuildContext<LowLevelOutputLibrary> context)
         {
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
             WriteMethodDocumentation(writer, methodSignature, clientMethod);
-            var exampleComposer = new LowLevelExampleComposer(clientTypeName, context);
             writer.WriteXmlDocumentation("example", exampleComposer.Compose(clientMethod, async));
             WriteSchemaDocumentationRemarks(writer, methodSignature, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
