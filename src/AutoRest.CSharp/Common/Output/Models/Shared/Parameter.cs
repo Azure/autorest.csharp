@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var initializer = (FormattableString?)null;
 
-            if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            if (defaultValue != null && !operationParameter.IsConstant &&  !TypeFactory.CanBeInitializedInline(type, defaultValue))
             {
                 initializer = GetParameterInitializer(type, defaultValue.Value);
                 type = type.WithNullable(true);

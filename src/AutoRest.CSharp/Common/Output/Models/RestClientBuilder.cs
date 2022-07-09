@@ -427,14 +427,14 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReferenceOrConstant CreateReference(OperationParameter operationParameter, Parameter parameter)
         {
+            if (operationParameter.IsInClient)
+            {
+                return (ReferenceOrConstant)_parameters[operationParameter.Name];
+            }
+
             if (operationParameter.IsConstant && parameter.DefaultValue != null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
-            }
-
-            if (!operationParameter.IsInMethod)
-            {
-                return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
             var groupedByParameter = operationParameter.GroupedBy;

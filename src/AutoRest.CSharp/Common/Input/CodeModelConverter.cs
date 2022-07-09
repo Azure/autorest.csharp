@@ -73,6 +73,7 @@ namespace AutoRest.CSharp.Common.Input
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
             IsEndpoint: input.Origin == "modelerfour:synthesized/host",
             IsInMethod: input.Implementation == ImplementationLocation.Method && input.Schema is not ConstantSchema && !input.IsFlattened && input.GroupedBy == null,
+            IsInClient: input.Implementation == ImplementationLocation.Client,
             ArraySerializationDelimiter: GetArraySerializationDelimiter(input),
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,

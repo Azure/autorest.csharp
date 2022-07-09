@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Common.Input
         bool IsContentType,
         bool IsEndpoint,
         bool IsInMethod,
+        bool IsInClient,
         bool SkipUrlEncoding,
         bool Explode,
         string? ArraySerializationDelimiter,
