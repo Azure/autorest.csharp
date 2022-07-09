@@ -9,7 +9,10 @@ using System;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a Virtual Machine Extension. </summary>
+    /// <summary>
+    /// Describes a Virtual Machine Extension.
+    /// Serialized Name: VirtualMachineExtensionUpdate
+    /// </summary>
     public partial class VirtualMachineExtensionUpdate : UpdateResource
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionUpdate. </summary>
@@ -17,21 +20,45 @@ namespace Azure.ResourceManager.Sample.Models
         {
         }
 
-        /// <summary> How the extension handler should be forced to update even if the extension configuration has not changed. </summary>
+        /// <summary>
+        /// How the extension handler should be forced to update even if the extension configuration has not changed.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.forceUpdateTag
+        /// </summary>
         public string ForceUpdateTag { get; set; }
-        /// <summary> The name of the extension handler publisher. </summary>
+        /// <summary>
+        /// The name of the extension handler publisher.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.publisher
+        /// </summary>
         public string Publisher { get; set; }
-        /// <summary> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </summary>
+        /// <summary>
+        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.type
+        /// </summary>
         public string ExtensionType { get; set; }
-        /// <summary> Specifies the version of the script handler. </summary>
+        /// <summary>
+        /// Specifies the version of the script handler.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.typeHandlerVersion
+        /// </summary>
         public string TypeHandlerVersion { get; set; }
-        /// <summary> Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. </summary>
+        /// <summary>
+        /// Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.autoUpgradeMinorVersion
+        /// </summary>
         public bool? AutoUpgradeMinorVersion { get; set; }
-        /// <summary> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </summary>
+        /// <summary>
+        /// Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.enableAutomaticUpgrade
+        /// </summary>
         public bool? EnableAutomaticUpgrade { get; set; }
-        /// <summary> Json formatted public settings for the extension. </summary>
+        /// <summary>
+        /// Json formatted public settings for the extension.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.settings
+        /// </summary>
         public BinaryData Settings { get; set; }
-        /// <summary> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </summary>
+        /// <summary>
+        /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.protectedSettings
+        /// </summary>
         public BinaryData ProtectedSettings { get; set; }
     }
 }

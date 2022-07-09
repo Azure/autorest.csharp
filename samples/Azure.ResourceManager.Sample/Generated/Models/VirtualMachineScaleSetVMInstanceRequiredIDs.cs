@@ -11,11 +11,17 @@ using System.Linq;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
+    /// <summary>
+    /// Specifies a list of virtual machine instance IDs from the VM scale set.
+    /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs
+    /// </summary>
     public partial class VirtualMachineScaleSetVMInstanceRequiredIDs
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
-        /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>
+        /// <param name="instanceIds">
+        /// The virtual machine scale set instance ids.
+        /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceIds"/> is null. </exception>
         public VirtualMachineScaleSetVMInstanceRequiredIDs(IEnumerable<string> instanceIds)
         {
@@ -27,7 +33,10 @@ namespace Azure.ResourceManager.Sample.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary> The virtual machine scale set instance ids. </summary>
+        /// <summary>
+        /// The virtual machine scale set instance ids.
+        /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
+        /// </summary>
         public IList<string> InstanceIds { get; }
     }
 }
