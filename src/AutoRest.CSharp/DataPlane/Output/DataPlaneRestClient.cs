@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -29,21 +30,14 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
+            var operations = CodeModelConverter.CreateOperations(OperationGroup.Operations);
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var (serviceRequest, operation) in operations)
             {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    // See also LowLevelClient::EnsureNormalMethods if changing
-                    if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                    {
-                        continue;
-                    }
-                    var headerModel = _context.Library.FindHeaderModel(operation);
-                    var accessibility = operation.Accessibility ?? "public";
-                    requestMethods.Add(serviceRequest, ClientBuilder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, accessibility));
-                }
+                var headerModel = _context.Library.FindHeaderModel(operation.Source);
+                var accessibility = operation.Accessibility ?? "public";
+                requestMethods.Add(serviceRequest, ClientBuilder.BuildMethod(operation, headerModel, accessibility));
             }
 
             return requestMethods;

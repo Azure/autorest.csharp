@@ -9,13 +9,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
-using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -28,25 +28,42 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
-        public CSharpType CreateType(Schema schema, bool isNullable) => CreateType(schema, schema.Extensions, isNullable);
-
-        // This function provide the capability to support the extensions is coming from outside, like parameter.
-        public CSharpType CreateType(Schema schema, RecordOfStringAndAny? extensions, bool isNullable) => schema switch
+        public CSharpType CreateType(InputType inputType) => inputType.Kind switch
         {
-            ConstantSchema constantSchema => ToXMsFormatType(constantSchema.Extensions?.Format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
+            InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
+            InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
+            InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+            InputTypeKind.Dictionary => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(inputType.ValuesType!)),
+            InputTypeKind.Enum => CreateType(inputType.ValuesType! with { IsNullable = inputType.IsNullable }),
+            InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
+            InputTypeKind.ExtensibleEnum => CreateType(inputType.ValuesType! with { IsNullable = inputType.IsNullable }),
+            InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
+            InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
+            InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
+            InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
+            InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
+            InputTypeKind.List => new CSharpType(typeof(IList<>), inputType.IsNullable, CreateType(inputType.ValuesType!)),
+            InputTypeKind.Object => new CSharpType(typeof(object), inputType.IsNullable),
+            InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
+            InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
+            InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
+            InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
+            InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+            InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
+            _ => throw new Exception("Unknown type")
+        };
+
+        public CSharpType CreateType(Schema schema, bool isNullable) => schema switch
+        {
+            ConstantSchema constantSchema => ToXMsFormatType(schema.Extensions?.Format) is { } type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(
-                typeof(IList<>),
-                isNullable,
-                CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary => new CSharpType(
-                typeof(IDictionary<,>),
-                isNullable,
-                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            _ when ToFrameworkType(schema, extensions) is Type type => new CSharpType(type, isNullable),
+            _ when ToFrameworkType(schema) is { } type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
 
@@ -180,9 +197,7 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsOperationOfPageable(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsPageable(type.Arguments[0]);
 
-        internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions);
-
-        internal static Type? ToFrameworkType(Schema schema, RecordOfStringAndAny? extensions) => schema.Type switch
+        internal static Type? ToFrameworkType(Schema schema) => schema.Type switch
         {
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
@@ -191,7 +206,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.String => ToXMsFormatType(extensions?.Format) ?? typeof(string),
+            AllSchemaTypes.String => ToXMsFormatType(schema.Extensions?.Format) ?? typeof(string),
             AllSchemaTypes.Time => typeof(TimeSpan),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),

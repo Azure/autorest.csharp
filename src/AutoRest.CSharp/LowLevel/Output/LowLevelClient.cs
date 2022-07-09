@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<InputOperation> operations, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
             : base(context)
         {
             DefaultName = name;
@@ -66,10 +67,10 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(builder, serviceRequests, Declaration.Name).ToArray();
+            var clientMethods = BuildMethods(builder, operations, Declaration.Name).ToArray();
 
             ClientMethods = clientMethods
-                .OrderBy(m => m.IsLongRunning ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
+                .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
 
             RequestMethods = clientMethods.Select(m => m.RequestMethod)
@@ -80,35 +81,26 @@ namespace AutoRest.CSharp.Output.Models
             SubClientFactoryMethods = BuildSubClientFactoryMethods().ToArray();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, string clientName)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName)
         {
-            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-            foreach (var (serviceRequest, operation) in serviceRequests)
+            var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
+            foreach (var operation in operations)
             {
-                // See also DataPlaneRestClient::EnsureNormalMethods if changing
-                if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                {
-                    continue;
-                }
-
-                requestMethods.Add(serviceRequest, builder.BuildRequestMethod(operation, serviceRequest, httpRequest));
+                requestMethods.Add(operation, builder.BuildRequestMethod(operation));
             }
 
-            foreach (var (request, requestMethod) in requestMethods)
+            foreach (var (operation, requestMethod) in requestMethods)
             {
-                var operation = requestMethod.Operation;
-                var paging = operation.Language.Default.Paging;
-                Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
-                Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
-                Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
-                var operationSchemas = new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema);
+                var paging = operation.Paging;
+                Schema? requestSchema = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Source.Schema;
+                Schema? responseSchema = requestMethod.Operation.Responses.FirstOrDefault()?.Source.ResponseSchema;
                 var diagnostic = new Diagnostic($"{clientName}.{requestMethod.Name}");
 
                 LowLevelPagingInfo? pagingInfo = null;
                 CSharpType returnType;
                 if (paging != null)
                 {
-                    if (!operation.IsLongRunning && requestMethod.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
+                    if (operation.LongRunning == null && requestMethod.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
                     {
                         throw new InvalidOperationException($"Method {requestMethod.Name} has to have a return value");
                     }
@@ -117,30 +109,30 @@ namespace AutoRest.CSharp.Output.Models
                     var nextLinkName = paging.NextLinkName;
 
                     RestClientMethod? nextPageMethod = nextLinkOperation != null
-                        ? requestMethods[nextLinkOperation.Requests.Single()]
+                        ? requestMethods[nextLinkOperation]
                         : nextLinkName != null ? RestClientBuilder.BuildNextPageMethod(requestMethod) : null;
 
                     pagingInfo = new LowLevelPagingInfo(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
-                    returnType = operation.IsLongRunning
+                    returnType = operation.LongRunning != null
                         ? typeof(Azure.Operation<Azure.Pageable<BinaryData>>)
                         : typeof(Azure.Pageable<BinaryData>);
                 }
                 else
                 {
                     var headAsBoolean = requestMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
-                    returnType = operation.IsLongRunning
-                        ? ((responseSchema != null) ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation))
+                    returnType = operation.LongRunning != null
+                        ? responseSchema != null ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation)
                         : headAsBoolean
                             ? typeof(Azure.Response<bool>)
                             : typeof(Azure.Response);
                 }
 
-                var parameters = operation.IsLongRunning
+                var parameters = operation.LongRunning != null
                     ? requestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
                     : requestMethod.Parameters;
                 var methodSignature = new MethodSignature(requestMethod.Name, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
 
-                yield return new LowLevelClientMethod(methodSignature, requestMethod, operationSchemas, diagnostic, pagingInfo, operation.IsLongRunning);
+                yield return new LowLevelClientMethod(methodSignature, requestMethod, requestSchema, responseSchema, diagnostic, pagingInfo, operation.LongRunning);
             }
         }
 

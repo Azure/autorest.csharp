@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -12,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None)
+        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, InputOperation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None)
         {
             Name = name;
             Request = request;
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public bool BufferResponse { get; }
         public CSharpType? ReturnType { get; }
         public MethodSignatureModifiers Accessibility { get; }
-        public Operation Operation { get; }
+        public InputOperation Operation { get; }
         public RequestConditionHeaders ConditionHeaderFlag { get; set; }
     }
 }

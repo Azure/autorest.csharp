@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
-        public Operation Operation => Method.Operation;
+        public Operation Operation => Method.Operation.Source;
 
         public string OperationId => Operation.OperationId!;
         /// <summary>
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public OperationFinalStateVia? FinalStateVia { get; }
 
-        public Schema? FinalResponseSchema => Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalResponse.ResponseSchema : null;
+        public Schema? FinalResponseSchema => Method.Operation.LongRunning?.FinalResponse.ResponseSchema;
 
         public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
         {
@@ -109,8 +109,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             ContextualPath = contextualPath;
             Name = methodName;
             Resource = GetResourceMatch(restClient, method, requestPath);
-            FinalStateVia = Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalStateVia : null;
-            OriginalReturnType = Method.Operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
+            FinalStateVia = Method.Operation.LongRunning?.FinalStateVia;
+            OriginalReturnType = Method.Operation.LongRunning != null ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();
         }
 
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private CSharpType? GetFinalResponse()
         {
-            var finalSchema = Method.Operation.LongRunningFinalResponse.ResponseSchema;
+            var finalSchema = Method.Operation.LongRunning?.FinalResponse.ResponseSchema;
             if (finalSchema is null)
                 return null;
 
@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
-                var match = GetMatchType(method.Operation.GetHttpMethod(), resource.RequestPath, requestPath, method.IsListMethod(out var _));
+                var match = GetMatchType(method.Operation.HttpMethod, resource.RequestPath, requestPath, method.IsListMethod(out var _));
                 if (match == ResourceMatchType.Exact)
                     return resource;
                 if (match != ResourceMatchType.None)
@@ -252,7 +252,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return true;
         }
 
-        internal static ResourceMatchType GetMatchType(HttpMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
+        internal static ResourceMatchType GetMatchType(RequestMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
         {
             //check exact match
             if (resourcePath == requestPath)
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             //check for a list by an ancestor
             var requestLastSegment = requestPath[requestPath.Count - 1];
             if (isList &&
-                httpMethod == HttpMethod.Get &&
+                httpMethod == RequestMethod.Get &&
                 requestPath.Count < resourcePath.Count &&
                 requestLastSegment.IsConstant &&
                 resourcePath[0] == requestPath[0] && //first two items much be the same
@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (resourcePath.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 0, 1))
                 return isList ? ResourceMatchType.ChildList : ResourceMatchType.Context;
 
-            if (httpMethod == HttpMethod.Get)
+            if (httpMethod == RequestMethod.Get)
                 return ResourceMatchType.None;
 
             var resourceLastSegement = resourcePath[resourcePath.Count - 1];

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -33,22 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
-            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-
-            foreach (var operation in OperationGroup.Operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    // See also LowLevelRestClient::EnsureNormalMethods if changing
-                    if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                    {
-                        continue;
-                    }
-                    requestMethods.Add(serviceRequest, _clientBuilder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
-                }
-            }
-
-            return requestMethods;
+            var operations = CodeModelConverter.CreateOperations(OperationGroup.Operations);
+            return operations.ToDictionary(kvp => kvp.Key, kvp => _clientBuilder.BuildMethod(kvp.Value, null, "public", ShouldReturnNullOn404(kvp.Value.Source)));
         }
 
         private static Func<string?, bool> ShouldReturnNullOn404(Operation operation)

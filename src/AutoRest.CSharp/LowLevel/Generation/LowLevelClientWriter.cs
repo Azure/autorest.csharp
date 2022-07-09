@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
@@ -57,10 +58,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in client.ClientMethods)
                     {
-                        if (clientMethod.IsLongRunning)
+                        var longRunning = clientMethod.LongRunning;
+                        if (longRunning != null)
                         {
-                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, true);
-                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, false);
+                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, longRunning, true);
+                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, longRunning, false);
                         }
                         else if (clientMethod.PagingInfo != null)
                         {
@@ -310,19 +312,19 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, bool async)
         {
             var pagingInfo = clientMethod.PagingInfo;
             var nextPageMethod = pagingInfo?.NextPageMethod;
 
             if (pagingInfo != null && nextPageMethod != null)
             {
-                WritePageableLongRunningOperationMethod(writer, clientMethod, fields, pagingInfo, nextPageMethod, async);
+                WritePageableLongRunningOperationMethod(writer, clientMethod, fields, pagingInfo, nextPageMethod, longRunning, async);
             }
             else
             {
                 var startMethod = clientMethod.RequestMethod;
-                var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
+                var finalStateVia = longRunning.FinalStateVia;
                 var scopeName = clientMethod.Diagnostic.ScopeName;
 
                 using (WriteClientMethodDeclaration(writer, clientMethod, async))
@@ -335,7 +337,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer
                             .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                             .AppendRaw("return ")
-                            .WriteMethodCall(async, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
+                            .WriteMethodCall(async, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                     }
                 }
             }
@@ -343,10 +345,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, bool async)
+        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
         {
             var startMethod = clientMethod.RequestMethod;
-            var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
+            var finalStateVia = longRunning.FinalStateVia;
             var scopeName = clientMethod.Diagnostic.ScopeName;
 
             using (WriteClientMethodDeclaration(writer, clientMethod, async))
@@ -362,7 +364,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer
                         .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                         .AppendRaw("return ")
-                        .WriteMethodCall(async, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.OperationSchemas.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
+                        .WriteMethodCall(async, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                 }
 
                 using (writer.Line().WriteMethodDeclaration(createEnumerableMethodSignature with { Name = createEnumerableMethod.ActualName }))
@@ -514,7 +516,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (methodSignature.ReturnType != null)
             {
-                bool containsResponseBody = ContainsObjectSchema(clientMethod.OperationSchemas.ResponseBodySchema);
+                bool containsResponseBody = ContainsObjectSchema(clientMethod.ResponseBodySchema);
                 CSharpType responseType = methodSignature.ReturnType.Trim("Task");
                 string responseTypeText = responseType.ToGenericTemplateName();
                 string responseTypeParameterText = responseType.Trim().ToGenericTemplateName();
@@ -524,7 +526,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     text = $"The <see cref=\"{responseTypeText}\"/> from the service containing a list of <see cref=\"{responseTypeParameterText}\"/> objects.{(containsResponseBody ? " Details of the body schema for each item in the collection are in the Remarks section below." : string.Empty)}";
                 }
-                else if (clientMethod.IsLongRunning)
+                else if (clientMethod.LongRunning != null)
                 {
                     text = containsResponseBody ? $"The <see cref=\"{responseTypeText}\"/> from the service that will contain a <see cref=\"{responseTypeParameterText}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below." : $"The <see cref=\"{responseTypeText}\"/> representing an asynchronous operation on the service.";
                 }
@@ -548,20 +550,23 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
-            var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
+            var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
+                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
+                : (FormattableString) $"";
+
             var schemas = new List<FormattableString>();
 
-            bool hasRequestSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            bool hasRequestSchema = AddRequestOrResponseSchema(schemas, clientMethod.RequestBodySchema, "Request Body", true);
 
             bool hasResponseSchema = false;
-            if (clientMethod.PagingInfo != null && clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responseObj)
+            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodySchema is ObjectSchema responseObj)
             {
                 Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
-                hasResponseSchema = AddResquestOrResponseSchema(schemas, itemSchema, "Response Body", true);
+                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemSchema, "Response Body", true);
             }
             else
             {
-                hasResponseSchema = AddResquestOrResponseSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
+                hasResponseSchema = AddRequestOrResponseSchema(schemas, clientMethod.ResponseBodySchema, "Response Body", true);
 
             }
 
@@ -591,16 +596,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         schemaDesription = "Below is the JSON schema for one item in the pageable response.";
                     }
                 }
-                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
-            }
-
-            static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
-            {
-                if (restMethod.Operation.ExternalDocs != null)
-                {
-                    return $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.Operation.ExternalDocs.Url}{Environment.NewLine}";
-                }
-                return $"";
+                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
             }
 
             static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried, bool collapse = false)
@@ -626,7 +622,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            static bool AddResquestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
+            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
             {
                 if (schema == null)
                 {
@@ -635,7 +631,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 var schemasToAdd = new List<FormattableString>();
                 // check if it is base schema. if so, add children schemas.
-                if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
+                if (schema is ObjectSchema {Children: { }} objSchema && objSchema.Children.All.Count > 0)
                 {
                     if (objSchema.Children.All.Count > 1) schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
                     foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))

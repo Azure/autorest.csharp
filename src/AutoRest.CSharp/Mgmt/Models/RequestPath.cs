@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -72,17 +73,13 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
         {
-            foreach (var request in operation.Requests)
+            foreach (var inputOperation in CodeModelConverter.CreateOperations(operationGroup.Operations).Values.Where(o => o.Source == operation))
             {
-                var httpRequest = request.Protocol.Http as HttpRequest;
-                if (httpRequest is null)
-                    continue;
-
-                var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(operation, request.Parameters);
+                var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(inputOperation);
                 var segments = new List<Segment>();
                 var segmentIndex = 0;
-                CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
-                CreateSegments(httpRequest.Path, references, segments, ref segmentIndex);
+                CreateSegments(inputOperation.Uri, references, segments, ref segmentIndex);
+                CreateSegments(inputOperation.Path, references, segments, ref segmentIndex);
 
                 return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
             }

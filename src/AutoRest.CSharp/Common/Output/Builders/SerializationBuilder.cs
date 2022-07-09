@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -30,18 +31,19 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type)
+        public ObjectSerialization Build(BodyFormat bodyFormat, Schema schema, CSharpType type) => bodyFormat switch
         {
-            switch (mediaType)
-            {
-                case KnownMediaType.Json:
-                    return BuildSerialization(schema, type);
-                case KnownMediaType.Xml:
-                    return BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true);
-                default:
-                    throw new NotImplementedException(mediaType.ToString());
-            }
-        }
+            BodyFormat.Json => BuildSerialization(schema, type),
+            BodyFormat.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
+            _ => throw new NotImplementedException(bodyFormat.ToString())
+        };
+
+        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
+        {
+            KnownMediaType.Json => BuildSerialization(schema, type),
+            KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
+            _ => throw new NotImplementedException(mediaType.ToString())
+        };
 
         private XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
         {
@@ -97,9 +99,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
             {
-                return new JsonValueSerialization(
-                    type,
-                    BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
+                return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
             }
 
             switch (schema)

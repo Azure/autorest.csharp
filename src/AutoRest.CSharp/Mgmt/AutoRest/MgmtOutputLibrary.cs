@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // skip all internal methods
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
-                    restClientMethods.Add(restClientMethod.Operation, restClientMethod);
+                    restClientMethods.Add(restClientMethod.Operation.Source, restClientMethod);
                 }
             }
 

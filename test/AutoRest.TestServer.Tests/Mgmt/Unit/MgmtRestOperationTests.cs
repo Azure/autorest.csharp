@@ -2,13 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
-using MgmtNonStringPathVariable.Models;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using NUnit.Framework;
 using static AutoRest.CSharp.Mgmt.Models.MgmtRestOperation;
 
@@ -22,7 +20,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         {
             RequestPath resourcePath = GetFromString(resourcePathStr);
             RequestPath requestPath = GetFromString(requestPathStr);
-            Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod, resourcePath, requestPath, isList));
+            Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod.ToCoreRequestMethod() ?? RequestMethod.Get, resourcePath, requestPath, isList));
         }
 
         [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
