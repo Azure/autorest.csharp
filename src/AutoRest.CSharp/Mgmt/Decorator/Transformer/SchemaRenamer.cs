@@ -138,12 +138,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
-            var wordCache = new ConcurrentDictionary<string, string>();
             // first transform all the name of schemas, properties
-            UpdateAcronyms(MgmtContext.CodeModel.AllSchemas, transformer, wordCache);
+            UpdateAcronyms(MgmtContext.CodeModel.AllSchemas);
             // transform all the parameter names
-            UpdateAcronyms(MgmtContext.CodeModel.OperationGroups, transformer, wordCache);
+            UpdateAcronyms(MgmtContext.CodeModel.OperationGroups);
         }
 
         private static RenameTarget ParseRenameKey(string renameKey, string newName)
@@ -173,37 +171,35 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
-            var wordCache = new ConcurrentDictionary<string, string>();
-            TransformSchema(schema, transformer, wordCache);
+            TransformSchema(schema);
         }
 
-        private static void UpdateAcronyms(IEnumerable<Schema> allSchemas, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void UpdateAcronyms(IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
             {
-                TransformSchema(schema, transformer, wordCache);
+                TransformSchema(schema);
             }
         }
 
-        private static void UpdateAcronyms(IEnumerable<OperationGroup> operationGroups, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void UpdateAcronyms(IEnumerable<OperationGroup> operationGroups)
         {
             foreach (var operationGroup in operationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    TransformOperation(operation, transformer, wordCache);
+                    TransformOperation(operation);
                 }
             }
         }
 
-        private static void TransformOperation(Operation operation, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformOperation(Operation operation)
         {
-            TransformLanguage(operation.Language, transformer, wordCache);
+            TransformLanguage(operation.Language);
             // this iteration only applies to path and query parameter (maybe headers?) but not to body parameter
             foreach (var parameter in operation.Parameters)
             {
-                TransformLanguage(parameter.Language, transformer, wordCache);
+                TransformLanguage(parameter.Language);
             }
 
             // we need to iterate over the parameters in each request (actually only one request) to ensure the name of body parameters are also taken care of
@@ -211,62 +207,58 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 foreach (var parameter in request.Parameters)
                 {
-                    TransformLanguage(parameter.Language, transformer, wordCache);
+                    TransformLanguage(parameter.Language);
                 }
             }
         }
 
-        private static void TransformSchema(Schema schema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformSchema(Schema schema)
         {
             switch (schema)
             {
                 case ChoiceSchema choiceSchema:
-                    TransformChoiceSchema(choiceSchema.Language, choiceSchema.Choices, transformer, wordCache);
+                    TransformChoiceSchema(choiceSchema.Language, choiceSchema.Choices);
                     break;
                 case SealedChoiceSchema sealedChoiceSchema:
-                    TransformChoiceSchema(sealedChoiceSchema.Language, sealedChoiceSchema.Choices, transformer, wordCache);
+                    TransformChoiceSchema(sealedChoiceSchema.Language, sealedChoiceSchema.Choices);
                     break;
                 case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
-                    TransformObjectSchema(objSchema, transformer, wordCache);
+                    TransformObjectSchema(objSchema);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
             }
         }
 
-        private static void TransformChoiceSchema(Languages languages, ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformChoiceSchema(Languages languages, ICollection<ChoiceValue> choiceValues)
         {
-            TransformLanguage(languages, transformer, wordCache);
-            TransformChoices(choiceValues, transformer, wordCache);
+            TransformLanguage(languages);
+            TransformChoices(choiceValues);
         }
 
-        private static void TransformChoices(ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformChoices(ICollection<ChoiceValue> choiceValues)
         {
             foreach (var choiceValue in choiceValues)
             {
-                TransformLanguage(choiceValue.Language, transformer, wordCache);
+                TransformLanguage(choiceValue.Language);
             }
         }
 
-        private static void TransformLanguage(Languages languages, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformLanguage(Languages languages)
         {
             var originalName = languages.Default.Name;
-            if (!wordCache.TryGetValue(originalName, out var result))
-            {
-                result = transformer.EnsureNameCase(originalName);
-                wordCache.TryAdd(originalName, result);
-            }
-            languages.Default.Name = result;
+            var result = NameTransformer.Instance.EnsureNameCase(originalName);
+            languages.Default.Name = result.Name;
             languages.Default.SerializedName ??= originalName;
         }
 
-        private static void TransformObjectSchema(ObjectSchema objSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformObjectSchema(ObjectSchema objSchema)
         {
             // transform the name of this schema
-            TransformLanguage(objSchema.Language, transformer, wordCache);
+            TransformLanguage(objSchema.Language);
             foreach (var property in objSchema.Properties)
             {
-                TransformLanguage(property.Language, transformer, wordCache);
+                TransformLanguage(property.Language);
             }
         }
     }

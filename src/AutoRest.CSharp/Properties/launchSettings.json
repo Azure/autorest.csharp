@@ -460,6 +460,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
     },
+    "security-aad-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-aad\\Generated"
+    },
+    "security-key-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-key\\Generated"
+    },
     "SecurityDefinition-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SecurityDefinition-LowLevel\\Generated"
