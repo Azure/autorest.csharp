@@ -40,11 +40,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         public static IEnumerable<OperationParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations) =>
-            operations
+            CodeModelConverter.CreateOperationParameters(operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct(new ParameterCompareer())
-                .Select(CodeModelConverter.CreateOperationParameter);
+                .ToList());
 
         public override Parameter BuildConstructorParameter(OperationParameter operationParameter)
         {

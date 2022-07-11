@@ -18,6 +18,20 @@ namespace AutoRest.CSharp.Output.Builders
 {
     internal class SerializationBuilder
     {
+        public static SerializationFormat GetSerializationFormat(InputType type) => type.SerializationFormat switch
+        {
+            InputTypeSerializationFormat.Base64Url => SerializationFormat.Bytes_Base64Url,
+            InputTypeSerializationFormat.Byte => SerializationFormat.Bytes_Base64,
+            InputTypeSerializationFormat.Date => SerializationFormat.Date_ISO8601,
+            InputTypeSerializationFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+            InputTypeSerializationFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+            InputTypeSerializationFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
+            InputTypeSerializationFormat.Duration => SerializationFormat.Duration_ISO8601,
+            InputTypeSerializationFormat.DurationConstant => SerializationFormat.Duration_Constant,
+            InputTypeSerializationFormat.Time => SerializationFormat.Time_ISO8601,
+            _ => SerializationFormat.Default
+        };
+
         public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, SchemaObjectType type)
         {
             switch (mediaType)
@@ -31,12 +45,20 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public ObjectSerialization Build(BodyFormat bodyFormat, Schema schema, CSharpType type) => bodyFormat switch
+        public ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type)
         {
-            BodyFormat.Json => BuildSerialization(schema, type),
-            BodyFormat.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
-            _ => throw new NotImplementedException(bodyFormat.ToString())
-        };
+            if (inputType is CodeModelType cmt && bodyMediaType == BodyMediaType.Xml)
+            {
+                return BuildXmlElementSerialization(cmt.Schema, type, null, true);
+            }
+
+            if (bodyMediaType == BodyMediaType.Json)
+            {
+                return BuildSerialization(inputType, type);
+            }
+
+            throw new NotImplementedException(bodyMediaType.ToString());
+        }
 
         public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
         {
@@ -93,6 +115,31 @@ namespace AutoRest.CSharp.Output.Builders
                 return true;
             }
             return false;
+        }
+
+        private JsonSerialization BuildSerialization(InputType inputType, CSharpType type)
+        {
+            if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
+            {
+                return new JsonValueSerialization(type, GetSerializationFormat(inputType), type.IsNullable);
+            }
+
+            if (TypeFactory.IsList(type))
+            {
+                return new JsonArraySerialization(TypeFactory.GetImplementationType(type), BuildSerialization(inputType.ValuesType!, TypeFactory.GetElementType(type)), type.IsNullable);
+            }
+
+            if (TypeFactory.IsDictionary(type))
+            {
+                return new JsonDictionarySerialization(TypeFactory.GetImplementationType(type), BuildSerialization(inputType.ValuesType!, TypeFactory.GetElementType(type)), type.IsNullable);
+            }
+
+            if (inputType is CodeModelType cmt)
+            {
+                return BuildSerialization(cmt.Schema, type);
+            }
+
+            return new JsonValueSerialization(type, GetSerializationFormat(inputType), type.IsNullable);
         }
 
         private JsonSerialization BuildSerialization(Schema schema, CSharpType type)

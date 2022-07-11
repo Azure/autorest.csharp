@@ -2225,7 +2225,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2258,7 +2258,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2291,7 +2291,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2324,7 +2324,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2357,7 +2357,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2390,7 +2390,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2423,7 +2423,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2456,7 +2456,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2489,7 +2489,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2522,7 +2522,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2557,7 +2557,7 @@ namespace body_array_LowLevel
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -2594,7 +2594,7 @@ namespace body_array_LowLevel
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.

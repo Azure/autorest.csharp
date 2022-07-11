@@ -646,7 +646,7 @@ namespace lro_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
@@ -687,7 +687,7 @@ namespace lro_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type

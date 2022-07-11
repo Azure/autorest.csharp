@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public OperationFinalStateVia? FinalStateVia { get; }
 
-        public Schema? FinalResponseSchema => Method.Operation.LongRunning?.FinalResponse.ResponseSchema;
+        public Schema? FinalResponseSchema => Method.Operation.LongRunning?.FinalResponseType?.Schema;
 
         public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
         {
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private CSharpType? GetFinalResponse()
         {
-            var finalSchema = Method.Operation.LongRunning?.FinalResponse.ResponseSchema;
+            var finalSchema = Method.Operation.LongRunning?.FinalResponseType?.Schema;
             if (finalSchema is null)
                 return null;
 

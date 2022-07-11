@@ -44,10 +44,10 @@ namespace AutoRest.CSharp.Common.Input
                 Name: operation.Language.Default.Name,
                 Description: operation.Language.Default.Description,
                 Accessibility: operation.Accessibility,
-                Parameters: operation.Parameters.Concat(serviceRequest.Parameters).Select(CreateOperationParameter).ToList(),
+                Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
                 Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
                 HttpMethod: httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
-                RequestBodyFormat: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
+                RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
                 Uri: httpRequest.Uri,
                 Path: httpRequest.Path,
                 ExternalDocsUrl: operation.ExternalDocs?.Url,
@@ -58,7 +58,18 @@ namespace AutoRest.CSharp.Common.Input
                 Source: operation);
         }
 
-        public static OperationParameter CreateOperationParameter(RequestParameter input) => new(
+        public static List<OperationParameter> CreateOperationParameters(ICollection<RequestParameter> requestParameters)
+        {
+            var parametersCache = new Dictionary<RequestParameter, Func<OperationParameter>>();
+            foreach (var parameter in requestParameters)
+            {
+                parametersCache.Add(parameter, CacheResult(() => CreateOperationParameter(parameter, parametersCache)));
+            }
+
+            return requestParameters.Select(rp => parametersCache[rp]()).ToList();
+        }
+
+        public static OperationParameter CreateOperationParameter(RequestParameter input, IReadOnlyDictionary<RequestParameter, Func<OperationParameter>> parametersCache) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,
@@ -67,7 +78,7 @@ namespace AutoRest.CSharp.Common.Input
             DefaultValue: GetDefaultValue(input),
             IsConstant: input.Schema is ConstantSchema,
             IsRequired: input.IsRequired,
-            GroupedBy: input.GroupedBy,
+            GroupedBy: input.GroupedBy != null ? parametersCache[input.GroupedBy]() : null,
             IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
@@ -84,8 +95,7 @@ namespace AutoRest.CSharp.Common.Input
         public static OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
-            BodyFormat: GetBodyFormat(response.HttpResponse.KnownMediaType),
-            Source: response
+            BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType)
         );
 
         private static OperationLongRunning? CreateLongRunning(Operation operation)
@@ -95,7 +105,12 @@ namespace AutoRest.CSharp.Common.Input
                 return null;
             }
 
-            return new OperationLongRunning(FinalStateVia: operation.LongRunningFinalStateVia, FinalResponse: operation.LongRunningFinalResponse);
+            var responseSchema = operation.LongRunningFinalResponse.ResponseSchema;
+
+            return new OperationLongRunning(
+                FinalStateVia: operation.LongRunningFinalStateVia,
+                FinalResponseType: responseSchema != null ? new CodeModelType(responseSchema, InputTypeKind.Object) : null
+            );
         }
 
         private static OperationPaging? CreateOperationPaging(Operation operation, IReadOnlyDictionary<ServiceRequest, Func<InputOperation>> operationsCache)
@@ -132,15 +147,15 @@ namespace AutoRest.CSharp.Common.Input
             _ => null
         };
 
-        private static BodyFormat GetBodyFormat(KnownMediaType? knownMediaType) => knownMediaType switch
+        private static BodyMediaType GetBodyFormat(KnownMediaType? knownMediaType) => knownMediaType switch
         {
-            KnownMediaType.Binary => BodyFormat.Binary,
-            KnownMediaType.Form => BodyFormat.Form,
-            KnownMediaType.Json => BodyFormat.Json,
-            KnownMediaType.Multipart => BodyFormat.Multipart,
-            KnownMediaType.Text => BodyFormat.Text,
-            KnownMediaType.Xml => BodyFormat.Xml,
-            _ => BodyFormat.None
+            KnownMediaType.Binary => BodyMediaType.Binary,
+            KnownMediaType.Form => BodyMediaType.Form,
+            KnownMediaType.Json => BodyMediaType.Json,
+            KnownMediaType.Multipart => BodyMediaType.Multipart,
+            KnownMediaType.Text => BodyMediaType.Text,
+            KnownMediaType.Xml => BodyMediaType.Xml,
+            _ => BodyMediaType.None
         };
 
         private static InputType? GetResponseBodyType(ServiceResponse response) => response switch
@@ -196,7 +211,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } => KnownInputTypes.String,
             { Type: AllSchemaTypes.Boolean } => KnownInputTypes.Boolean,
             { Type: AllSchemaTypes.Uri } => KnownInputTypes.Uri,
-            _ => new InputType(schema.Name, InputTypeKind.Object)
+            _ => new CodeModelType(schema, InputTypeKind.Object)
         };
 
         private static InputType CreateEnumType(string name, InputType choiceType, IEnumerable<ChoiceValue> choices, InputTypeKind kind) => new(Name: name, Kind: kind)

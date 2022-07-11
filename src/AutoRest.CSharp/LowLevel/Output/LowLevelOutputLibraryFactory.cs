@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var clientName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context) + ClientBuilder.GetClientSuffix(context);
                 var clientNamespace = context.DefaultNamespace;
-                var endpointParameter = context.CodeModel.GlobalParameters.Select(CodeModelConverter.CreateOperationParameter).FirstOrDefault(p => p.IsEndpoint);
+                var endpointParameter = CodeModelConverter.CreateOperationParameters(context.CodeModel.GlobalParameters).FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<OperationParameter>();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters);

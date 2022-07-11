@@ -7,5 +7,5 @@ using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelClientMethod(MethodSignature Signature, RestClientMethod RequestMethod, Schema? RequestBodySchema, Schema? ResponseBodySchema, Diagnostic Diagnostic, LowLevelPagingInfo? PagingInfo, OperationLongRunning? LongRunning);
+    internal record LowLevelClientMethod(MethodSignature Signature, RestClientMethod RequestMethod, InputType? RequestBodyType, InputType? ResponseBodyType, Diagnostic Diagnostic, LowLevelPagingInfo? PagingInfo, OperationLongRunning? LongRunning);
 }

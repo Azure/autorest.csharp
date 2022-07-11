@@ -92,8 +92,8 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var (operation, requestMethod) in requestMethods)
             {
                 var paging = operation.Paging;
-                Schema? requestSchema = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Source.Schema;
-                Schema? responseSchema = requestMethod.Operation.Responses.FirstOrDefault()?.Source.ResponseSchema;
+                var requestBodyType = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
+                var responseBodyType = requestMethod.Operation.Responses.FirstOrDefault()?.BodyType;
                 var diagnostic = new Diagnostic($"{clientName}.{requestMethod.Name}");
 
                 LowLevelPagingInfo? pagingInfo = null;
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     var headAsBoolean = requestMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
                     returnType = operation.LongRunning != null
-                        ? responseSchema != null ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation)
+                        ? responseBodyType != null ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation)
                         : headAsBoolean
                             ? typeof(Azure.Response<bool>)
                             : typeof(Azure.Response);
@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models
                     : requestMethod.Parameters;
                 var methodSignature = new MethodSignature(requestMethod.Name, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
 
-                yield return new LowLevelClientMethod(methodSignature, requestMethod, requestSchema, responseSchema, diagnostic, pagingInfo, operation.LongRunning);
+                yield return new LowLevelClientMethod(methodSignature, requestMethod, requestBodyType, responseBodyType, diagnostic, pagingInfo, operation.LongRunning);
             }
         }
 

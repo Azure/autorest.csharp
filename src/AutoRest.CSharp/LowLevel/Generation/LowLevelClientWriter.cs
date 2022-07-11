@@ -4,13 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -26,6 +24,7 @@ using Azure.Core.Pipeline;
 using Response = Azure.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -337,7 +336,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer
                             .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                             .AppendRaw("return ")
-                            .WriteMethodCall(async, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
+                            .WriteMethodCall(async, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                     }
                 }
             }
@@ -364,7 +363,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer
                         .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                         .AppendRaw("return ")
-                        .WriteMethodCall(async, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodySchema != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
+                        .WriteMethodCall(async, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                 }
 
                 using (writer.Line().WriteMethodDeclaration(createEnumerableMethodSignature with { Name = createEnumerableMethod.ActualName }))
@@ -502,41 +501,64 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
-            WriteMethodDocumentation(writer, methodSignature, clientMethod);
-            WriteSchemaDocumentationRemarks(writer, clientMethod);
+            var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
+            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks);
+            WriteDocumentationRemarks(writer, clientMethod, remarks, hasRequestRemarks, hasResponseRemarks);
+
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
         }
 
-        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod)
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool hasResponseRemarks)
         {
             codeWriter.WriteMethodDocumentation(methodSignature);
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
 
-            if (methodSignature.ReturnType != null)
+            if (methodSignature.ReturnType == null)
             {
-                bool containsResponseBody = ContainsObjectSchema(clientMethod.ResponseBodySchema);
-                CSharpType responseType = methodSignature.ReturnType.Trim("Task");
-                string responseTypeText = responseType.ToGenericTemplateName();
-                string responseTypeParameterText = responseType.Trim().ToGenericTemplateName();
-
-                string text;
-                if (clientMethod.PagingInfo != null)
-                {
-                    text = $"The <see cref=\"{responseTypeText}\"/> from the service containing a list of <see cref=\"{responseTypeParameterText}\"/> objects.{(containsResponseBody ? " Details of the body schema for each item in the collection are in the Remarks section below." : string.Empty)}";
-                }
-                else if (clientMethod.LongRunning != null)
-                {
-                    text = containsResponseBody ? $"The <see cref=\"{responseTypeText}\"/> from the service that will contain a <see cref=\"{responseTypeParameterText}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below." : $"The <see cref=\"{responseTypeText}\"/> representing an asynchronous operation on the service.";
-                }
-                else
-                {
-                    text = $"The response returned from the service.{(containsResponseBody ? " Details of the response body schema are in the Remarks section below." : string.Empty)}";
-                }
-
-                codeWriter.WriteXmlDocumentationReturns($"{text}");
+                return;
             }
+
+            if (!methodSignature.ReturnType.IsFrameworkType)
+            {
+                throw new InvalidOperationException($"Xml documentation generation is supported only for protocol methods. {methodSignature.ReturnType} can't be a return type of a protocol method.");
+            }
+
+            var returnType = methodSignature.ReturnType;
+
+            FormattableString text;
+            if (clientMethod.PagingInfo != null && clientMethod.LongRunning != null)
+            {
+                CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
+                text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
+            }
+            else if (clientMethod.PagingInfo != null)
+            {
+                text = $"The <see cref=\"{returnType.Name}{{T}}\"/> from the service containing a list of <see cref=\"{returnType.Arguments[0]}\"/> objects. Details of the body schema for each item in the collection are in the Remarks section below.";
+            }
+            else if (clientMethod.LongRunning != null)
+            {
+                text = hasResponseRemarks
+                    ? $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{nameof(BinaryData)}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below."
+                    : (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
+            }
+            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response>)) || returnType.EqualsIgnoreNullable(typeof(Response)))
+            {
+                text = hasResponseRemarks
+                    ? $"The response returned from the service. Details of the response body schema are in the Remarks section below."
+                    : (FormattableString)$"The response returned from the service.";
+            }
+            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response<bool>>)) || returnType.EqualsIgnoreNullable(typeof(Response<bool>)))
+            {
+                text = $"The response returned from the service.";
+            }
+            else
+            {
+                throw new InvalidOperationException($"Xml documentation generation for return type {methodSignature.ReturnType} is not supported!");
+            }
+
+            codeWriter.WriteXmlDocumentationReturns(text);
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
@@ -548,81 +570,33 @@ namespace AutoRest.CSharp.Generation.Writers
             return new ResponseClassifierType(statusCodes);
         }
 
-        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod)
+        private static IReadOnlyList<FormattableString> CreateSchemaDocumentationRemarks(LowLevelClientMethod clientMethod, out bool hasRequestSchema, out bool hasResponseSchema)
         {
-            var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
-                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
-                : (FormattableString) $"";
-
             var schemas = new List<FormattableString>();
 
-            bool hasRequestSchema = AddRequestOrResponseSchema(schemas, clientMethod.RequestBodySchema, "Request Body", true);
+            hasRequestSchema = AddRequestOrResponseInputType(schemas, clientMethod.RequestBodyType, "Request Body");
 
-            bool hasResponseSchema = false;
-            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodySchema is ObjectSchema responseObj)
+            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is CodeModelType { Schema: ObjectSchema responseObj })
             {
                 Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
-                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemSchema, "Response Body", true);
+                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemSchema, "Response Body");
             }
             else
             {
-                hasResponseSchema = AddRequestOrResponseSchema(schemas, clientMethod.ResponseBodySchema, "Response Body", true);
-
+                hasResponseSchema = AddRequestOrResponseInputType(schemas, clientMethod.ResponseBodyType, "Response Body");
             }
 
-            if (schemas.Count > 0)
-            {
-                var schemaDesription = "";
-                if (hasRequestSchema && hasResponseSchema)
-                {
-                    if (clientMethod.PagingInfo == null)
-                    {
-                        schemaDesription = "Below is the JSON schema for the request and response payloads.";
-                    } else
-                    {
-                        schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
-                    }
-                } else if (hasRequestSchema)
-                {
-                    schemaDesription = "Below is the JSON schema for the request payload.";
-                } else if (hasResponseSchema)
-                {
-                    if (clientMethod.PagingInfo == null)
-                    {
-                        schemaDesription = "Below is the JSON schema for the response payload.";
-                    }
-                    else
-                    {
-                        schemaDesription = "Below is the JSON schema for one item in the pageable response.";
-                    }
-                }
-                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
-            }
+            return schemas;
 
-            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried, bool collapse = false)
-            {
-                if (schema == null)
+            static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
+                bodyType switch
                 {
-                    return;
-                }
+                    {Kind: InputTypeKind.List or InputTypeKind.Dictionary} => AddRequestOrResponseInputType(formattedSchemas, bodyType.ValuesType!, schemaName),
+                    CodeModelType {Schema: { } schema} => AddRequestOrResponseSchema(formattedSchemas, schema, schemaName),
+                    _ => false
+                };
 
-                var docs = GetSchemaDocumentationsForSchema(schema, schemaName);
-
-                if (docs != null)
-                {
-                    if (collapse)
-                    {
-                        formattedSchemas.Add($"<details><summary>{schema.CSharpName()}</summary>");
-                    }
-                    formattedSchemas.Add($"Schema for <c>{schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
-                    if (collapse)
-                    {
-                        formattedSchemas.Add($"</details>{Environment.NewLine}");
-                    }
-                }
-            }
-
-            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequired = true)
+            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName)
             {
                 if (schema == null)
                 {
@@ -640,7 +614,14 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             schemasToAdd.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
                         }
-                        AddDocumentationForSchema(schemasToAdd, child.schema, $"{child.schema.CSharpName()} {schemaName}", showRequired, true);
+
+                        var docs = GetSchemaDocumentationsForSchema(child.schema, $"{child.schema.CSharpName()} {schemaName}");
+                        if (docs != null)
+                        {
+                            schemasToAdd.Add($"<details><summary>{child.schema.CSharpName()}</summary>");
+                            schemasToAdd.Add($"Schema for <c>{child.schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
+                            schemasToAdd.Add($"</details>{Environment.NewLine}");
+                        }
                     }
                     if (objSchema.Children.All.Count > 1)
                     {
@@ -649,7 +630,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    AddDocumentationForSchema(schemasToAdd, schema, schemaName, showRequired);
+                    var docs = GetSchemaDocumentationsForSchema(schema, schemaName);
+                    if (docs != null)
+                    {
+                        schemasToAdd.Add($"Schema for <c>{schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
+                    }
                 }
 
                 if (schemasToAdd.Count > 0)
@@ -663,21 +648,63 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static string BuildSchemaFromDocs(SchemaDocumentation[] docs, bool showRequired)
+        private static void WriteDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
+        {
+            if (schemas.Count <= 0)
+            {
+                return;
+            }
+
+            var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
+                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
+                : (FormattableString)$"";
+
+            var schemaDesription = "";
+            if (hasRequestRemarks && hasResponseRemarks)
+            {
+                if (clientMethod.PagingInfo == null)
+                {
+                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
+                }
+                else
+                {
+                    schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
+                }
+            }
+            else if (hasRequestRemarks)
+            {
+                schemaDesription = "Below is the JSON schema for the request payload.";
+            }
+            else if (hasResponseRemarks)
+            {
+                if (clientMethod.PagingInfo == null)
+                {
+                    schemaDesription = "Below is the JSON schema for the response payload.";
+                }
+                else
+                {
+                    schemaDesription = "Below is the JSON schema for one item in the pageable response.";
+                }
+            }
+
+            writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
+        }
+
+        private static string BuildSchemaFromDocs(SchemaDocumentation[] docs)
         {
             var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
             var builder = new StringBuilder();
             builder.AppendLine("{");
-            BuildSchemaFromDoc(builder, docs.First(), docDict, showRequired, 2);
+            BuildSchemaFromDoc(builder, docs.First(), docDict, 2);
             builder.AppendLine("}");
             return builder.ToString();
         }
 
-        private static void BuildSchemaFromDoc(StringBuilder builder, SchemaDocumentation doc, IDictionary<string, SchemaDocumentation> docDict, bool showRequired, int indentation = 0)
+        private static void BuildSchemaFromDoc(StringBuilder builder, SchemaDocumentation doc, IDictionary<string, SchemaDocumentation> docDict, int indentation = 0)
         {
             foreach (var row in doc.DocumentationRows)
             {
-                var required = showRequired ? (row.Required ? " # Required." : " # Optional.") : string.Empty;
+                var required = row.Required ? " # Required." : " # Optional.";
                 var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # {row.Description}" : $" {row.Description}");
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
@@ -690,7 +717,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var docToProcess = docDict[rowType];
                         docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
                         builder.AppendIndentation(indentation + 2).AppendLine("{");
-                        BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 4);
+                        BuildSchemaFromDoc(builder, docToProcess, docDict, indentation + 4);
                         builder.AppendIndentation(indentation + 2).AppendLine("}");
                         builder.AppendIndentation(indentation).AppendLine($"],{required}{description}");
                     }
@@ -704,7 +731,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         builder.AppendLine("{");
                         var docToProcess = docDict[rowType];
                         docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
-                        BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 2);
+                        BuildSchemaFromDoc(builder, docToProcess, docDict, indentation + 2);
                         builder.AppendIndentation(indentation).Append("}").AppendLine($",{required}{description}");
                     }
                     else
@@ -766,8 +793,17 @@ namespace AutoRest.CSharp.Generation.Writers
                         documentationObjects.Add(new(schema == o ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(o)), propertyDocumentation));
                         break;
 
-                    default:
-                        HandleNonObjectSchema(toExplore, schemasToExplore);
+                    case OrSchema o:
+                        foreach (ComplexSchema s in o.AnyOf)
+                        {
+                            schemasToExplore.Enqueue(s);
+                        }
+                        break;
+                    case DictionarySchema d:
+                        schemasToExplore.Enqueue(d.ElementType);
+                        break;
+                    case ArraySchema a:
+                        schemasToExplore.Enqueue(a.ElementType);
                         break;
                 }
 
@@ -780,58 +816,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return documentationObjects.Select(o => new SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
-        }
-
-        private static bool ContainsObjectSchema(Schema? schema)
-        {
-            if (schema == null)
-            {
-                return false;
-            }
-
-            var visitedSchema = new HashSet<string>();
-            var schemasToExplore = new Queue<Schema>(new[] { schema });
-
-            while (schemasToExplore.Any())
-            {
-                Schema toExplore = schemasToExplore.Dequeue();
-                if (visitedSchema.Contains(toExplore.Name))
-                {
-                    continue;
-                }
-
-                switch (toExplore)
-                {
-                    case ObjectSchema o:
-                        return true;
-                    default:
-                        HandleNonObjectSchema(toExplore, schemasToExplore);
-                        break;
-                }
-
-                visitedSchema.Add(toExplore.Name);
-            }
-
-            return false;
-        }
-
-        private static void HandleNonObjectSchema(Schema schema, Queue<Schema> schemasToExplore)
-        {
-            switch (schema)
-            {
-                case OrSchema o:
-                    foreach (Schema s in o.AnyOf)
-                    {
-                        schemasToExplore.Enqueue(s);
-                    }
-                    break;
-                case DictionarySchema d:
-                    schemasToExplore.Enqueue(d.ElementType);
-                    break;
-                case ArraySchema a:
-                    schemasToExplore.Enqueue(a.ElementType);
-                    break;
-            }
         }
 
         private static string StringifyTypeForTable(Schema schema)

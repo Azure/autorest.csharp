@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Input
         IReadOnlyList<OperationParameter> Parameters,
         IReadOnlyList<OperationResponse> Responses,
         RequestMethod HttpMethod,
-        BodyFormat RequestBodyFormat,
+        BodyMediaType RequestBodyMediaType,
         string Uri,
         string Path,
         string? ExternalDocsUrl,
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Input
         RequestLocation Location,
         InputConstant? DefaultValue,
         RequestParameter Source,
-        RequestParameter? GroupedBy,
+        OperationParameter? GroupedBy,
         bool IsConstant,
         bool IsRequired,
         bool IsApiVersion,
@@ -48,9 +48,9 @@ namespace AutoRest.CSharp.Common.Input
         string? ArraySerializationDelimiter,
         string? HeaderCollectionPrefix);
 
-    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyFormat BodyFormat, ServiceResponse Source);
+    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType);
 
-    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, ServiceResponse FinalResponse);
+    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, CodeModelType? FinalResponseType);
 
     internal record OperationPaging(string? NextLinkName, string? ItemName)
     {
@@ -63,6 +63,9 @@ namespace AutoRest.CSharp.Common.Input
         public InputType? ValuesType { get; init; }
         public IReadOnlyList<InputTypeValue>? AllowedValues { get; init; }
     }
+
+    internal record CodeModelType(Schema Schema, InputTypeKind Kind, bool IsNullable = false, InputTypeSerializationFormat SerializationFormat = InputTypeSerializationFormat.Default)
+        : InputType(Schema.Name, Kind, IsNullable, SerializationFormat);
 
     internal record InputConstant(object? Value, InputType Type);
 
@@ -90,7 +93,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputType Uri { get; } = new(nameof(InputTypeKind.Uri), InputTypeKind.Uri);
     }
 
-    internal enum BodyFormat
+    internal enum BodyMediaType
     {
         None,
         Binary,
@@ -117,6 +120,7 @@ namespace AutoRest.CSharp.Common.Input
         Int32,
         Int64,
         List,
+        Model,
         Object,
         ResourceIdentifier,
         ResourceType,
