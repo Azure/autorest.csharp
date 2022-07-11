@@ -139,32 +139,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             // only class models will have discriminators
             if (node is ClassDeclarationSyntax classDeclaration)
             {
-                var methodName = $"Deserialize{classDeclaration.Identifier.Text}";
-                var deserializeMethod = classDeclaration.Members.OfType<MethodDeclarationSyntax>().FirstOrDefault(method => method.Identifier.Text.Equals(methodName));
-                if (deserializeMethod != null && deserializeMethod.Body != null)
-                {
-                    var switchStatementNode = deserializeMethod.Body.DescendantNodes().OfType<SwitchStatementSyntax>();
-                    foreach (var switchNode in switchStatementNode)
-                    {
-                        if (switchNode.Expression.ToFullString().Contains("discriminator.GetString"))
-                        {
-                            // get the identifiers in the switch statements, some of them are class names of the derived classes
-                            // but since we do not have the full semantic model here, we cannot directly get which of them is
-                            // therefore here we just return all of them, and see if the derived type name shows in this list
-                            var identifierNodes = switchNode.Sections.SelectMany(section => section.DescendantNodes().OfType<IdentifierNameSyntax>());
-                            identifiers = identifierNodes.Select(identifier => identifier.Identifier.ToFullString()).ToImmutableHashSet();
-                            return true;
-                        }
-                    }
-                }
-                // When a base class with discriminator is only used as input parameter, it doesn't contain a deserialization method
-                // therefore adding a comment check here as a redundant verification
-                else if (classDeclaration.HasLeadingTrivia)
+                if (classDeclaration.HasLeadingTrivia)
                 {
                     var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
-                    if (BuilderHelpers.DiscriminatorDescFixedPart.All(syntaxTriviaList.ToFullString().Contains))
+                    var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => BuilderHelpers.DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
+                    if (filteredTriviaList.Count() == 1)
                     {
-                        var identifierNodes = syntaxTriviaList.FirstOrDefault().GetStructure()?.DescendantNodes().OfType<XmlCrefAttributeSyntax>();
+                        var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
+                        var filteredDescendantNodes = descendantNodes.Where((val, index) =>
+                            index >= descendantNodes?.FindLastIndex(node => node.ToFullString().Contains(BuilderHelpers.DiscriminatorDescFixedPart.Last())));
+                        var identifierNodes = filteredDescendantNodes.SelectMany(node => node.DescendantNodes().OfType<XmlCrefAttributeSyntax>());
                         identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToImmutableHashSet();
                         return true;
                     }
