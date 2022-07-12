@@ -9,5 +9,8 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "RequestPathToSingletonResource": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}/brakes/{default}": "brakes/default"
+  }
 }
