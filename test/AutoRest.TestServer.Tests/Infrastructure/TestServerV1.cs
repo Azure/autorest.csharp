@@ -24,41 +24,41 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public TestServerV1()
         {
-            //var portPhrase = "Started server on port ";
-            //var startup = Path.Combine(GetBaseDirectory(), "dist", "cli", "cli.js");
-            //var coverageDirectory = Path.Combine(_buildProperties.Value.ArtifactsDirectory, "coverage");
+            var portPhrase = "Started server on port ";
+            var startup = Path.Combine(GetBaseDirectory(), "dist", "cli", "cli.js");
+            var coverageDirectory = Path.Combine(_buildProperties.Value.ArtifactsDirectory, "coverage");
 
-            //var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0 --coverageDirectory {coverageDirectory}")
-            //{
-            //    // Use random port
-            //    Environment = {["PORT"] = "0"},
-            //    RedirectStandardOutput = true,
-            //    RedirectStandardError = true
-            //};
+            var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0 --coverageDirectory {coverageDirectory}")
+            {
+                // Use random port
+                Environment = { ["PORT"] = "0" },
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
 
-            //_process = Process.Start(processStartInfo);
-            //ProcessTracker.Add(_process);
-            //Debug.Assert(_process != null);
-            //while (!_process.HasExited)
-            //{
-            //    var s = _process.StandardOutput.ReadLine();
-            //    var indexOfPort = s?.IndexOf(portPhrase);
-            //    if (indexOfPort > 0)
-            //    {
+            _process = Process.Start(processStartInfo);
+            ProcessTracker.Add(_process);
+            Debug.Assert(_process != null);
+            while (!_process.HasExited)
+            {
+                var s = _process.StandardOutput.ReadLine();
+                var indexOfPort = s?.IndexOf(portPhrase);
+                if (indexOfPort > 0)
+                {
                     Host = new Uri($"http://localhost:3000");
                     Client = new HttpClient
                     {
                         BaseAddress = Host
                     };
-            //        _ = Task.Run(ReadOutput);
-            //        return;
-            //    }
-            //}
+                    _ = Task.Run(ReadOutput);
+                    return;
+                }
+            }
 
-            //if (Client == null)
-            //{
-            //    throw new InvalidOperationException($"Unable to detect server port {_process.StandardOutput.ReadToEnd()} {_process.StandardError.ReadToEnd()}");
-            //}
+            if (Client == null)
+            {
+                throw new InvalidOperationException($"Unable to detect server port {_process.StandardOutput.ReadToEnd()} {_process.StandardError.ReadToEnd()}");
+            }
 
         }
 
