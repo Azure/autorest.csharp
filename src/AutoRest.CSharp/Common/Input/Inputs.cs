@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.Common.Input
     internal record InputOperation(
         string Name,
         string Description,
-        string? OperationId,
         string? Accessibility,
         IReadOnlyList<OperationParameter> Parameters,
         IReadOnlyList<OperationResponse> Responses,
@@ -24,8 +23,7 @@ namespace AutoRest.CSharp.Common.Input
         IReadOnlyList<string>? RequestMediaTypes,
         bool BufferResponse,
         OperationLongRunning? LongRunning,
-        OperationPaging? Paging,
-        Operation Source);
+        OperationPaging? Paging);
 
     internal record OperationParameter(
         string Name,
@@ -65,9 +63,6 @@ namespace AutoRest.CSharp.Common.Input
         public InputType? ValuesType { get; init; }
         public IReadOnlyList<InputTypeValue>? AllowedValues { get; init; }
     }
-
-    internal record CodeModelType(Schema Schema, InputTypeKind Kind, bool IsNullable = false, InputTypeSerializationFormat SerializationFormat = InputTypeSerializationFormat.Default)
-        : InputType(Schema.Name, Kind, IsNullable, SerializationFormat);
 
     internal record InputConstant(object? Value, InputType Type);
 

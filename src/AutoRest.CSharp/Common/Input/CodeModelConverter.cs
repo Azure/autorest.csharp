@@ -13,9 +13,9 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal static class CodeModelConverter
     {
-        public static IReadOnlyDictionary<ServiceRequest, InputOperation> CreateOperations(IEnumerable<Operation> operations)
+        public static IReadOnlyDictionary<ServiceRequest, CodeModelOperation> CreateOperations(IEnumerable<Operation> operations)
         {
-            var inputOperations = new Dictionary<ServiceRequest, Func<InputOperation>>();
+            var inputOperations = new Dictionary<ServiceRequest, Func<CodeModelOperation>>();
 
             foreach (var operation in operations)
             {
@@ -38,9 +38,9 @@ namespace AutoRest.CSharp.Common.Input
             return inputOperations.ToDictionary(kvp => kvp.Key, kvp => kvp.Value());
         }
 
-        private static InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest, IReadOnlyDictionary<ServiceRequest, Func<InputOperation>> operationsCache)
+        private static CodeModelOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest, IReadOnlyDictionary<ServiceRequest, Func<CodeModelOperation>> operationsCache)
         {
-            return new InputOperation(
+            return new CodeModelOperation(
                 Name: operation.Language.Default.Name,
                 Description: operation.Language.Default.Description,
                 OperationId: operation.OperationId,
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Common.Input
             );
         }
 
-        private static OperationPaging? CreateOperationPaging(Operation operation, IReadOnlyDictionary<ServiceRequest, Func<InputOperation>> operationsCache)
+        private static OperationPaging? CreateOperationPaging(Operation operation, IReadOnlyDictionary<ServiceRequest, Func<CodeModelOperation>> operationsCache)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)

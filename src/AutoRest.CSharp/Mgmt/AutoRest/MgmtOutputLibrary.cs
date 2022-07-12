@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
@@ -335,9 +336,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var restClientMethod in restClient.Methods)
                 {
                     // skip all internal methods
-                    if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
-                        continue;
-                    restClientMethods.Add(restClientMethod.Operation.Source, restClientMethod);
+                    if (restClientMethod.Accessibility == MethodSignatureModifiers.Public && restClientMethod.Operation is CodeModelOperation operation)
+                    {
+                        restClientMethods.Add(operation.Source, restClientMethod);
+                    }
                 }
             }
 

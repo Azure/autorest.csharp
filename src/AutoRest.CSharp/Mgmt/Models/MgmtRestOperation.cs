@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
-        public InputOperation Operation => Method.Operation;
+        public CodeModelOperation Operation => (CodeModelOperation)Method.Operation;
 
         public string OperationId => Operation.OperationId!;
         /// <summary>
