@@ -269,7 +269,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var parentProperties = parentPropertyType.GetProperties().ToList();
             if (parentProperties.Count != childPropertyType.Values.Count)
-                return false;
+            {
+                if (parentPropertyType != typeof(Azure.ResourceManager.Models.ManagedServiceIdentityType))
+                    return false;
+                else if (parentProperties.Count < childPropertyType.Values.Count)
+                    return false;
+            }
             Dictionary<string, PropertyInfo> parentDict = parentProperties.ToDictionary(p => p.Name, p => p);
             foreach (var enumValue in childPropertyType.Values)
             {

@@ -59,12 +59,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 ["ManagedServiceIdentityType"] = new PropertyMetadata("type", true),
                 ["UserAssignedIdentities"] = new PropertyMetadata("userAssignedIdentities"),
             },
-            [typeof(SystemAssignedServiceIdentity)] = new()
-            {
-                ["PrincipalId"] = new PropertyMetadata("principalId"),
-                ["TenantId"] = new PropertyMetadata("tenantId"),
-                ["SystemAssignedServiceIdentityType"] = new PropertyMetadata("type", true),
-            },
             [typeof(SystemData)] = new()
             {
                 ["CreatedBy"] = new PropertyMetadata("createdBy"),

@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
         private static IEnumerable<Type> GetPropertyReferenceClassCollection()
-            => ReferenceClassFinder.ExternalTypes.Where(t => ReferenceClassFinder.HasAttribute(t, PropertyReferenceAttributeName));
+            => ReferenceClassFinder.ExternalTypes.Where(t => ReferenceClassFinder.HasAttribute(t, PropertyReferenceAttributeName) && !t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ObsoleteAttribute)).Any());
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
@@ -54,11 +54,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 foreach (Type replacementType in GetPropertyReferenceClassCollection())
                 {
+                    var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
                     var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
-                    var propertiesToSkipArray = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
-                    var propertiesToSkip = propertiesToSkipArray.Select(p => p.Name).ToHashSet();
-                    List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
-                    List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
+                    var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
+                    List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.Name) || typeToReplacePropertyNames.Contains(p.Name)).ToList();
+                    List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.ToList();
 
                     if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace, replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
