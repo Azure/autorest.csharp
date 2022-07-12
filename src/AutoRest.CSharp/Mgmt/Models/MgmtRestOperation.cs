@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -16,7 +17,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
-        public Operation Operation => Method.Operation.Source;
+        public InputOperation Operation => Method.Operation;
 
         public string OperationId => Operation.OperationId!;
         /// <summary>
@@ -62,10 +62,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         public CSharpType ReturnType => _wrappedMgmtReturnType ??= GetWrappedMgmtReturnType(MgmtReturnType);
 
         public MethodSignatureModifiers Accessibility => Method.Accessibility;
-        public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
+        public bool IsPagingOperation => Operation.Paging != null || IsListOperation;
 
         private bool? _isListOperation;
-        private bool IsListOperation => _isListOperation ??= MgmtContext.Library.GetRestClientMethod(Operation).IsListMethod(out var _);
+        private bool IsListOperation => _isListOperation ??= GetListMethodItemType() != null;
         public CSharpType? OriginalReturnType { get; }
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool ThrowIfNull { get; }
 
-        public bool IsLongRunningOperation => _isLongRunning.HasValue ? _isLongRunning.Value : Operation.IsLongRunning;
+        public bool IsLongRunningOperation => _isLongRunning.HasValue ? _isLongRunning.Value : Operation.LongRunning != null;
 
-        public bool IsFakeLongRunningOperation => IsLongRunningOperation && !Operation.IsLongRunning;
+        public bool IsFakeLongRunningOperation => IsLongRunningOperation && Operation.LongRunning == null;
 
         public Parameter[] OverrideParameters { get; } = Array.Empty<Parameter>();
 
@@ -389,8 +389,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Method.ReturnType is null)
                 return null;
 
-            var restClientMethod = MgmtContext.Library.GetRestClientMethod(Operation);
-            return restClientMethod.IsListMethod(out var item) ? item : null;
+            return Method.ReturnType.IsListMethod(out var item) ? item : null;
         }
 
         private PagingMethodWrapper EnsurePagingMethodWrapper()

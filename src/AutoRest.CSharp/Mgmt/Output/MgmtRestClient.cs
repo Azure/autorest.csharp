@@ -35,10 +35,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
             var operations = CodeModelConverter.CreateOperations(OperationGroup.Operations);
-            return operations.ToDictionary(kvp => kvp.Key, kvp => _clientBuilder.BuildMethod(kvp.Value, null, "public", ShouldReturnNullOn404(kvp.Value.Source)));
+            return operations.ToDictionary(kvp => kvp.Key, kvp => _clientBuilder.BuildMethod(kvp.Value, null, "public", ShouldReturnNullOn404(kvp.Value)));
         }
 
-        private static Func<string?, bool> ShouldReturnNullOn404(Operation operation)
+        private static Func<string?, bool> ShouldReturnNullOn404(InputOperation operation)
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
                     return false;
 
-                return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
+                return operation.Responses.Any(r => r.BodyType is CodeModelType cmt && cmt.Schema == resourceData.ObjectSchema);
             };
             return f;
         }

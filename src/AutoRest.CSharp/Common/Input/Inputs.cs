@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.Common.Input
     internal record InputOperation(
         string Name,
         string Description,
+        string? OperationId,
         string? Accessibility,
         IReadOnlyList<OperationParameter> Parameters,
         IReadOnlyList<OperationResponse> Responses,

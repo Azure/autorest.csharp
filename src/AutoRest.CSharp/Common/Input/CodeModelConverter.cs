@@ -43,10 +43,11 @@ namespace AutoRest.CSharp.Common.Input
             return new InputOperation(
                 Name: operation.Language.Default.Name,
                 Description: operation.Language.Default.Description,
+                OperationId: operation.OperationId,
                 Accessibility: operation.Accessibility,
                 Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
                 Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
-                HttpMethod: httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
                 RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
                 Uri: httpRequest.Uri,
                 Path: httpRequest.Path,
@@ -90,8 +91,7 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            VirtualParameter: input is VirtualParameter {Schema: not ConstantSchema} vp ? vp : null,
-            Source: input
+            VirtualParameter: input is VirtualParameter {Schema: not ConstantSchema} vp ? vp : null
         );
 
         public static OperationResponse CreateOperationResponse(ServiceResponse response) => new(

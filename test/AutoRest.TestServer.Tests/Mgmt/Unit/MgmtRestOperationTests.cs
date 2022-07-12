@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         {
             RequestPath resourcePath = GetFromString(resourcePathStr);
             RequestPath requestPath = GetFromString(requestPathStr);
-            Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod.ToCoreRequestMethod() ?? RequestMethod.Get, resourcePath, requestPath, isList));
+            Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod.ToCoreRequestMethod(), resourcePath, requestPath, isList));
         }
 
         [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
