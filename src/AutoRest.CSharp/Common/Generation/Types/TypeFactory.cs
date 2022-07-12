@@ -44,7 +44,6 @@ namespace AutoRest.CSharp.Generation.Types
             InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
             InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
             InputTypeKind.List => new CSharpType(typeof(IList<>), inputType.IsNullable, CreateType(inputType.ValuesType!)),
-            InputTypeKind.Object => new CSharpType(typeof(object), inputType.IsNullable),
             InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
             InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
             InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
@@ -52,6 +51,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
             InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
             _ when inputType is CodeModelType cmt => CreateType(cmt.Schema, inputType.IsNullable),
+            InputTypeKind.Object => new CSharpType(typeof(object), inputType.IsNullable),
             _ => throw new Exception("Unknown type")
         };
 

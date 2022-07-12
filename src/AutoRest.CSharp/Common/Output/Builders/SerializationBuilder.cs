@@ -45,19 +45,22 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type)
+        public ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
-            if (inputType is CodeModelType cmt && bodyMediaType == BodyMediaType.Xml)
-            {
-                return BuildXmlElementSerialization(cmt.Schema, type, null, true);
-            }
+            BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
+            BodyMediaType.Json => BuildSerialization(inputType, type),
+            _ => throw new NotImplementedException(bodyMediaType.ToString())
+        };
 
-            if (bodyMediaType == BodyMediaType.Json)
+        private XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
+        {
+            string xmlName = (inputType as CodeModelType)?.Schema.XmlName ?? name ?? inputType.Name;
+            return inputType.Kind switch
             {
-                return BuildSerialization(inputType, type);
-            }
-
-            throw new NotImplementedException(bodyMediaType.ToString());
+                InputTypeKind.List => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(inputType.ValuesType!, TypeFactory.GetElementType(type), null, false), xmlName, isRoot),
+                InputTypeKind.Dictionary => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(inputType.ValuesType!, TypeFactory.GetElementType(type), null, false), xmlName),
+                _ => new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
+            };
         }
 
         public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
@@ -66,6 +69,7 @@ namespace AutoRest.CSharp.Output.Builders
             KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
             _ => throw new NotImplementedException(mediaType.ToString())
         };
+
 
         private XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
         {

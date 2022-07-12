@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.Input
 
                     inputOperations[serviceRequest] = CacheResult(() => CreateOperation(serviceRequest, operation, httpRequest, inputOperations));
 
-                    if (operation.RequestMediaTypes != null)
+                    if (operation.RequestMediaTypes != null && !Configuration.Generation1ConvenienceClient)
                     {
                         break;
                     }
@@ -171,8 +171,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputType CreateType(Schema schema) => schema switch
         {
-            ArraySchema array           => KnownInputTypes.List with { ValuesType = CreateType(array.ElementType, array.NullableItems ?? false) },
-            DictionarySchema dictionary => KnownInputTypes.Dictionary with { ValuesType = CreateType(dictionary.ElementType, dictionary.NullableItems ?? false) },
+            ArraySchema array           => new(schema.Name, InputTypeKind.List) { ValuesType = CreateType(array.ElementType, array.NullableItems ?? false) },
+            DictionarySchema dictionary => new(schema.Name, InputTypeKind.Dictionary) { ValuesType = CreateType(dictionary.ElementType, dictionary.NullableItems ?? false) },
 
             BinarySchema => KnownInputTypes.Stream,
 
@@ -196,8 +196,8 @@ namespace AutoRest.CSharp.Common.Input
             NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => KnownInputTypes.Int64,
             NumberSchema { Type: AllSchemaTypes.Integer } => KnownInputTypes.Int32,
 
-            ChoiceSchema choiceSchema =>       CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType), choiceSchema.Choices, InputTypeKind.ExtensibleEnum),
-            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType), choiceSchema.Choices, InputTypeKind.Enum),
+            ChoiceSchema choiceSchema =>       CreateEnumType(choiceSchema),
+            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema),
 
             { Type: AllSchemaTypes.String, Extensions.Format: XMsFormat.DurationConstant } => KnownInputTypes.Time with { SerializationFormat = InputTypeSerializationFormat.DurationConstant },
             { Type: AllSchemaTypes.String, Extensions.Format: XMsFormat.ArmId }         => KnownInputTypes.ResourceIdentifier,
@@ -213,6 +213,16 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uri } => KnownInputTypes.Uri,
             _ => new CodeModelType(schema, InputTypeKind.Object)
         };
+
+        private static InputType CreateEnumType(ChoiceSchema choiceSchema) =>
+            Configuration.Generation1ConvenienceClient || Configuration.AzureArm
+                ? new CodeModelType(choiceSchema, InputTypeKind.Object)
+                : CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType), choiceSchema.Choices, InputTypeKind.ExtensibleEnum);
+
+        private static InputType CreateEnumType(SealedChoiceSchema choiceSchema) =>
+            Configuration.Generation1ConvenienceClient || Configuration.AzureArm
+                ? new CodeModelType(choiceSchema, InputTypeKind.Object)
+                : CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType), choiceSchema.Choices, InputTypeKind.Enum);
 
         private static InputType CreateEnumType(string name, InputType choiceType, IEnumerable<ChoiceValue> choices, InputTypeKind kind) => new(Name: name, Kind: kind)
         {

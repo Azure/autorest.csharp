@@ -755,23 +755,11 @@ namespace AutoRest.CSharp.Output.Models
             private void AddContentTypeRequestParameter(OperationParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
             {
                 var name = operationParameter.Name.ToVariableName();
-                var description = CreateDescriptionWithMediaTypes(operationParameter, requestMediaTypes);
+                var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
                 var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
 
                 _referencesByName[operationParameter.NameInRequest] = new ParameterInfo(operationParameter, parameter);
                 _parameters.Add(parameter);
-            }
-
-            private string CreateDescriptionWithMediaTypes(OperationParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
-            {
-                var description = string.IsNullOrWhiteSpace(operationParameter.Description) ?
-                    $"The {operationParameter.Type.Name} to use." :
-                    BuilderHelpers.EscapeXmlDescription(operationParameter.Description);
-                var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
-
-                return string.IsNullOrEmpty(allowedValues)
-                    ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
             }
 
             private void AddRequestParameter(OperationParameter operationParameter, Type? frameworkParameterType = null)

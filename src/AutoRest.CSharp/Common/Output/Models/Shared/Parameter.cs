@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type),
+                CreateDescription(operationParameter, type, operationParameter.Type.AllowedValues?.Select(c => c.Value)),
                 inputType,
                 defaultValue,
                 validation,
@@ -68,21 +69,19 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return defaultValue?.GetConstantFormattable();
         }
 
-
-        private static string CreateDescription(OperationParameter operationParameter, CSharpType type)
+        public static string CreateDescription(OperationParameter operationParameter, CSharpType type, IEnumerable<string>? values)
         {
-            var description = string.IsNullOrWhiteSpace(operationParameter.Description) ?
-                $"The {operationParameter.Type.Name} to use." :
-                BuilderHelpers.EscapeXmlDescription(operationParameter.Description);
+            string description = string.IsNullOrWhiteSpace(operationParameter.Description)
+                ? $"The {operationParameter.Type.Name} to use."
+                : BuilderHelpers.EscapeXmlDescription(operationParameter.Description);
 
-            if (!type.IsFrameworkType || operationParameter.Type.AllowedValues == null)
+            if (!type.IsFrameworkType || values == null)
             {
                 return description;
             }
 
-            var allowedValues = string.Join(" | ", operationParameter.Type.AllowedValues.Select(c => c.Value).Select(v => $"\"{v}\""));
+            var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
             return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
-
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
