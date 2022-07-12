@@ -22,7 +22,7 @@ function Invoke($command)
     }
 }
 
-function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast)
+function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
 {
     $outputPath = Join-Path $baseOutput "Generated"
     if ($projectName -eq "TypeSchemaMapping")
@@ -34,7 +34,8 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
 
     if ($fast)
     {
-        $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
+        $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
+        $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
     }
 
     Invoke $command

@@ -395,14 +395,15 @@ namespace AutoRest.CSharp.Output.Models
                             bodyParameterValue.Type);
 
                         // This method has a flattened body
-                        if (bodyRequestParameter.Source.Flattened == true)
+                        if (bodyRequestParameter.IsFlattened)
                         {
-                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(bodyRequestParameter.Source.Schema).Implementation;
+                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach (var (parameter, _) in allParameters.Values)
                             {
-                                if (parameter?.Source is not VirtualParameter virtualParameter || virtualParameter.Schema is ConstantSchema)
+                                var virtualParameter = parameter?.VirtualParameter;
+                                if (virtualParameter == null)
                                 {
                                     continue;
                                 }
@@ -443,7 +444,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(groupedByParameter.Source.Schema, false).Implementation;
+            var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(((CodeModelType)groupedByParameter.Type).Schema, false).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(operationParameter);
 
             return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);

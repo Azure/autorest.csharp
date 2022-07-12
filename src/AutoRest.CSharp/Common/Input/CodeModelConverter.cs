@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,
-            Type: CreateType(input.Schema, input.Extensions?.Format, input.IsNullable || !input.IsRequired),
+            Type: CreateType(input),
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsConstant: input.Schema is ConstantSchema,
@@ -83,12 +83,14 @@ namespace AutoRest.CSharp.Common.Input
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
             IsEndpoint: input.Origin == "modelerfour:synthesized/host",
+            IsFlattened: input.Flattened ?? false,
             IsInMethod: input.Implementation == ImplementationLocation.Method && input.Schema is not ConstantSchema && !input.IsFlattened && input.GroupedBy == null,
             IsInClient: input.Implementation == ImplementationLocation.Client,
             ArraySerializationDelimiter: GetArraySerializationDelimiter(input),
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
+            VirtualParameter: input is VirtualParameter {Schema: not ConstantSchema} vp ? vp : null,
             Source: input
         );
 
@@ -166,6 +168,9 @@ namespace AutoRest.CSharp.Common.Input
             _ => null
         };
 
+        public static InputType CreateType(RequestParameter requestParameter)
+            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, requestParameter.IsNullable || !requestParameter.IsRequired);
+
         private static InputType CreateType(Schema schema, bool isNullable)
             => CreateType(schema, schema.Extensions?.Format, isNullable);
 
@@ -174,8 +179,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputType CreateType(Schema schema, string? format) => schema switch
         {
-            ArraySchema array           => new(schema.Name, InputTypeKind.List) { ValuesType = CreateType(array.ElementType, array.NullableItems ?? false) },
-            DictionarySchema dictionary => new(schema.Name, InputTypeKind.Dictionary) { ValuesType = CreateType(dictionary.ElementType, dictionary.NullableItems ?? false) },
+            ArraySchema array           => CreateType(schema, InputTypeKind.List, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary => CreateType(schema, InputTypeKind.Dictionary, CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
 
             BinarySchema => KnownInputTypes.Stream,
 
@@ -217,13 +222,18 @@ namespace AutoRest.CSharp.Common.Input
             _ => new CodeModelType(schema, InputTypeKind.Object)
         };
 
-        private static InputType CreateEnumType(ChoiceSchema choiceSchema) =>
-            Configuration.Generation1ConvenienceClient || Configuration.AzureArm
+        private static InputType CreateType(Schema schema, InputTypeKind kind, InputType valuesType)
+            => Configuration.Generation1ConvenienceClient || Configuration.AzureArm
+                ? new CodeModelType(schema, kind) { ValuesType = valuesType }
+                : new InputType(schema.Name, kind) { ValuesType = valuesType };
+
+        private static InputType CreateEnumType(ChoiceSchema choiceSchema)
+            => Configuration.Generation1ConvenienceClient || Configuration.AzureArm
                 ? new CodeModelType(choiceSchema, InputTypeKind.Object)
                 : CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, InputTypeKind.ExtensibleEnum);
 
-        private static InputType CreateEnumType(SealedChoiceSchema choiceSchema) =>
-            Configuration.Generation1ConvenienceClient || Configuration.AzureArm
+        private static InputType CreateEnumType(SealedChoiceSchema choiceSchema)
+            => Configuration.Generation1ConvenienceClient || Configuration.AzureArm
                 ? new CodeModelType(choiceSchema, InputTypeKind.Object)
                 : CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, InputTypeKind.Enum);
 

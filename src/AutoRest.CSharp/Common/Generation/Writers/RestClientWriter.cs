@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, false, restClient.Parameters);
                         WriteOperation(writer, restClient, method, true);
                         WriteOperation(writer, restClient, method, false);
-                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
+                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Source.Equals(method.Operation.Source));
                         if (protocolMethod != null)
                         {
                             WriteProtocolMethods(writer, restClient, protocolMethod, responseClassifierTypes);
