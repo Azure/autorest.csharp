@@ -43,16 +43,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Input", Content);
             var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
+            // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 
         internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
+            bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
         }
 
         private static void UpdateRequestParameter(RequestParameter parameter, string parameterName, string schemaName)
         {
+            parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
             parameter.Language.Default.Name = parameterName;
             parameter.Schema.Language.Default.Name = schemaName;
             if (parameter.Schema is ChoiceSchema ||

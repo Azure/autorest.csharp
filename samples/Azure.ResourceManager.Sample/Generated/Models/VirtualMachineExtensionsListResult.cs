@@ -11,7 +11,10 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The List Extension operation response. </summary>
+    /// <summary>
+    /// The List Extension operation response
+    /// Serialized Name: VirtualMachineExtensionsListResult
+    /// </summary>
     internal partial class VirtualMachineExtensionsListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
@@ -21,13 +24,19 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
-        /// <param name="value"> The list of extensions. </param>
+        /// <param name="value">
+        /// The list of extensions
+        /// Serialized Name: VirtualMachineExtensionsListResult.value
+        /// </param>
         internal VirtualMachineExtensionsListResult(IReadOnlyList<VirtualMachineExtensionData> value)
         {
             Value = value;
         }
 
-        /// <summary> The list of extensions. </summary>
+        /// <summary>
+        /// The list of extensions
+        /// Serialized Name: VirtualMachineExtensionsListResult.value
+        /// </summary>
         public IReadOnlyList<VirtualMachineExtensionData> Value { get; }
     }
 }

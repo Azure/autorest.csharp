@@ -7,7 +7,10 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> LogAnalytics output properties. </summary>
+    /// <summary>
+    /// LogAnalytics output properties
+    /// Serialized Name: LogAnalyticsOutput
+    /// </summary>
     internal partial class LogAnalyticsOutput
     {
         /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
@@ -16,13 +19,19 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
-        /// <param name="output"> Output file Uri path to blob container. </param>
+        /// <param name="output">
+        /// Output file Uri path to blob container.
+        /// Serialized Name: LogAnalyticsOutput.output
+        /// </param>
         internal LogAnalyticsOutput(string output)
         {
             Output = output;
         }
 
-        /// <summary> Output file Uri path to blob container. </summary>
+        /// <summary>
+        /// Output file Uri path to blob container.
+        /// Serialized Name: LogAnalyticsOutput.output
+        /// </summary>
         public string Output { get; }
     }
 }

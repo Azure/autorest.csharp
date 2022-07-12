@@ -154,6 +154,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.Generation1ConvenienceClient),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
+                ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)

@@ -3,63 +3,69 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Utilities;
 using NUnit.Framework;
+using static AutoRest.CSharp.Input.MgmtConfiguration;
 
 namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
     internal class NameTransformerTests
     {
-        private Dictionary<string, string> renameRules;
+        private Dictionary<string, RenameRuleTarget> renameRules;
 
         [OneTimeSetUp]
         public void SetRenameRules()
         {
-            renameRules = new Dictionary<string, string>
+            renameRules = new Dictionary<string, RenameRuleTarget>
             {
-                { "Os", "OS" },
-                { "Ip", "IP" },
-                { "Ips", "IPs" },
-                { "ID", "Id" },
-                { "IDs", "Ids" },
-                { "VM", "Vm" },
-                { "VMs", "Vms" },
-                { "VPN", "Vpn" },
-                { "WAN", "Wan" },
-                { "WANs", "Wans" },
-                { "DNS", "Dns" },
+                { "Os", new RenameRuleTarget("OS", null) },
+                { "Ip", new RenameRuleTarget("IP", null) },
+                { "Ips", new RenameRuleTarget("IPs", "ips") },
+                { "ID", new RenameRuleTarget("Id", null) },
+                { "IDs", new RenameRuleTarget("Ids", null) },
+                { "VM", new RenameRuleTarget("Vm", null) },
+                { "VMs", new RenameRuleTarget("Vms", null) },
+                { "VPN", new RenameRuleTarget("Vpn", null) },
+                { "WAN", new RenameRuleTarget("Wan", null) },
+                { "WANs", new RenameRuleTarget("Wans", null) },
+                { "DNS", new RenameRuleTarget("Dns", null) },
+                { "P2s", new RenameRuleTarget("P2S", "p2s") },
             };
         }
 
-        [TestCase("OsType", "OSType")]
-        [TestCase("DNSIp", "DnsIP")]
-        [TestCase("DnsIp", "DnsIP")]
-        [TestCase("OsProfile", "OSProfile")]
-        [TestCase("ipAddress", "IPAddress")]
-        [TestCase("vipAddress", "VipAddress")]
-        [TestCase("publicIp", "PublicIP")]
-        [TestCase("publicIps", "PublicIPs")]
-        [TestCase("resourceId", "ResourceId")]
-        [TestCase("resourceIds", "ResourceIds")]
-        [TestCase("resourceIDs", "ResourceIds")]
-        [TestCase("resourceIdSuffix", "ResourceIdSuffix")]
-        [TestCase("IpsilateralDisablity", "IpsilateralDisablity")]
-        [TestCase("HumanIpsilateralDisablity", "HumanIpsilateralDisablity")]
-        [TestCase("DnsIpAddressIDsForWindowsOs", "DnsIPAddressIdsForWindowsOS")]
-        [TestCase("DnsIpAddressIDsForWindowsOsPlatform", "DnsIPAddressIdsForWindowsOSPlatform")]
-        [TestCase("something_IDs_Ip_Os", "Something_Ids_IP_OS")]
-        [TestCase("Dynamic365IDs", "Dynamic365Ids")]
-        [TestCase("VirtualWAN", "VirtualWan")]
-        [TestCase("VirtualWANs", "VirtualWans")]
-        [TestCase("VPNIp", "VpnIP")]
-        [TestCase("VMIp", "VmIP")]
-        [TestCase("SomethingVPNIp", "SomethingVpnIP")]
-        [TestCase("SomethingVPNIP", "SomethingVpnIP")]
-        [TestCase("RestorePointSourceVMOSDisk", "RestorePointSourceVmOSDisk")]
-        public void EnsureNameCaseTest(string name, string expected)
+        [TestCase("OsType", "OSType", "osType")]
+        [TestCase("DNSIp", "DnsIP", "dnsIP")]
+        [TestCase("DnsIp", "DnsIP", "dnsIP")]
+        [TestCase("OsProfile", "OSProfile", "osProfile")]
+        [TestCase("ipAddress", "IPAddress", "ipAddress")]
+        [TestCase("vipAddress", "VipAddress", "vipAddress")]
+        [TestCase("publicIp", "PublicIP", "publicIP")]
+        [TestCase("publicIps", "PublicIPs", "publicIPs")]
+        [TestCase("resourceId", "ResourceId", "resourceId")]
+        [TestCase("resourceIds", "ResourceIds", "resourceIds")]
+        [TestCase("resourceIDs", "ResourceIds", "resourceIds")]
+        [TestCase("resourceIdSuffix", "ResourceIdSuffix", "resourceIdSuffix")]
+        [TestCase("IpsilateralDisablity", "IpsilateralDisablity", "ipsilateralDisablity")]
+        [TestCase("HumanIpsilateralDisablity", "HumanIpsilateralDisablity", "humanIpsilateralDisablity")]
+        [TestCase("DnsIpAddressIDsForWindowsOs", "DnsIPAddressIdsForWindowsOS", "dnsIPAddressIdsForWindowsOS")]
+        [TestCase("DnsIpAddressIDsForWindowsOsPlatform", "DnsIPAddressIdsForWindowsOSPlatform", "dnsIPAddressIdsForWindowsOSPlatform")]
+        [TestCase("something_IDs_Ip_Os", "Something_Ids_IP_OS", "somethingIdsIPOS")]
+        [TestCase("Dynamic365IDs", "Dynamic365Ids", "dynamic365Ids")]
+        [TestCase("VirtualWAN", "VirtualWan", "virtualWan")]
+        [TestCase("VirtualWANs", "VirtualWans", "virtualWans")]
+        [TestCase("VPNIp", "VpnIP", "vpnIP")]
+        [TestCase("VMIp", "VmIP", "vmIP")]
+        [TestCase("SomethingVPNIp", "SomethingVpnIP", "somethingVpnIP")]
+        [TestCase("SomethingVPNIP", "SomethingVpnIP", "somethingVpnIP")]
+        [TestCase("RestorePointSourceVMOSDisk", "RestorePointSourceVmOSDisk", "restorePointSourceVmOSDisk")]
+        [TestCase("p2sServer", "P2SServer", "p2sServer")]
+        [TestCase("P2sServer", "P2SServer", "p2sServer")]
+        public void EnsureNameCaseTest(string name, string expectedPropertyName, string expectedVariableName)
         {
             var transformer = new NameTransformer(renameRules);
             var result = transformer.EnsureNameCase(name);
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expectedPropertyName, result.Name);
+            Assert.AreEqual(expectedVariableName, result.VariableName.ToCleanName(false));
         }
     }
 }

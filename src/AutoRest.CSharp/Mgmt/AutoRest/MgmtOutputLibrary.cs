@@ -300,7 +300,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
 
-        public RestClientMethod GetRestClientMethod(Operation operation) => RestClientMethods[operation];
+        public RestClientMethod GetRestClientMethod(Operation operation)
+        {
+            if (RestClientMethods.TryGetValue(operation, out var restClientMethod))
+            {
+                return restClientMethod;
+            }
+            throw new Exception($"The {operation.OperationId} method does not exist.");
+        }
 
         public RequestPath GetRequestPath(Operation operation) => OperationsToRequestPaths[operation];
 

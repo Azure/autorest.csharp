@@ -7,14 +7,26 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The level code. </summary>
+    /// <summary>
+    /// The level code.
+    /// Serialized Name: StatusLevelTypes
+    /// </summary>
     public enum StatusLevelType
     {
-        /// <summary> Info. </summary>
+        /// <summary>
+        /// Info
+        /// Serialized Name: StatusLevelTypes.Info
+        /// </summary>
         Info,
-        /// <summary> Warning. </summary>
+        /// <summary>
+        /// Warning
+        /// Serialized Name: StatusLevelTypes.Warning
+        /// </summary>
         Warning,
-        /// <summary> Error. </summary>
+        /// <summary>
+        /// Error
+        /// Serialized Name: StatusLevelTypes.Error
+        /// </summary>
         Error
     }
 }

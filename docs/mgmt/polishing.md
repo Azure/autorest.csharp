@@ -19,6 +19,46 @@ rename-rules:
 
 The above configuration will search case sensitively in the public API of generated resources/collections/models, and replace the occurrences to the corresponding value to keep the casing of some acronyms unified across the generated SDK.
 
+The `rename-rules` configuration also supports parameter name because in some cases the default logic to get the variable name form from a property name might be problematic. For instance, we usually could have a class like this:
+```csharp
+public partial class PublicIPAddress
+{
+    public PublicIPAddress()
+    {
+    }
+
+    internal PublicIPAddress(IReadOnlyList<string> iPs)
+    {
+        IPs = iPs;
+    }
+
+    public IReadOnlyList<string> IPs { get; }
+}
+```
+The default logic to create a variable name from a property name is usually lower case the first letter. But this introduces a weird combination of `iPs` in the internal constructor. To fix this, you could manually assign a variable version of the replaced key:
+```yaml
+rename-rules:
+  Ip: IP
+  Ips: IPs|ips
+```
+and after applying this configuration and regenerating, you should see the following differences:
+```diff
+public partial class PublicIPAddress
+{
+    public PublicIPAddress()
+    {
+    }
+
+-   internal PublicIPAddress(IReadOnlyList<string> iPs)
++   internal PublicIPAddress(IReadOnlyList<string> ips)
+    {
+        IPs = ips;
+    }
+
+    public IReadOnlyList<string> IPs { get; }
+}
+```
+
 ## Change format by name rules
 
 This is a bulk update rule to change property's format by its name which this name demonstrates a specific type implicitly. This is a convenient configuration to replace using directive change the property format attribute.
@@ -44,7 +84,7 @@ Here is list of the format we support:
 | duration-constant | [TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan) |
 | etag | [ETag](https://docs.microsoft.com/en-us/dotnet/api/azure.etag?view=azure-dotnet) |
 | resource-type | [ResourceType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourcetype?view=azure-dotnet) |
-| date-time | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
+| datetime | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
 | uri | [Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=net-6.0) |
 | uuid | [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid?view=net-6.0) |
 
