@@ -54,6 +54,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return new MethodSignature(
                 Name: methodName,
                 Description: null,
+                Summary: null,
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Async,
                 ReturnType: typeof(Task),
                 ReturnDescription: null,
