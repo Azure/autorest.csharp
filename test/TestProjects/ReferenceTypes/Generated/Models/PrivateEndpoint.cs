@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
         /// <param name="id"> The ARM identifier for Private Endpoint. </param>
         [SerializationConstructor]
-        internal PrivateEndpoint(ResourceIdentifier id)
+        protected PrivateEndpoint(ResourceIdentifier id)
         {
             Id = id;
         }

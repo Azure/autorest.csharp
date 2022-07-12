@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? Protected : Internal,
+                (IsAbstract || ObjectSchema?.Extensions?.MgmtTypeReferenceType == true) ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
