@@ -40,8 +40,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCreateResourceIdentifierMethods()
         {
             var method = This.CreateResourceIdentifierMethodSignature();
-            _writer.WriteXmlDocumentationSummary($"{method.Description}");
+            _writer.WriteXmlDocumentationSummary($"{method.SummaryText}");
             var parameterList = string.Join(", ", method.Parameters.Select(param => $"{param.Type.Name} {param.Name}"));
+            _writer.WriteXmlDocumentation("remarks", $"{method.DescriptionText}");
 
             var requestPath = This.RequestPath;
             using (_writer.Scope($"public static {method.ReturnType?.Name} {method.Name}({parameterList})"))

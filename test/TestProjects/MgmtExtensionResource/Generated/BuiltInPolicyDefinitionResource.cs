@@ -88,11 +88,12 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// This operation retrieves the built-in policy definition with the given name.
+        /// Retrieves a built-in policy definition.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> This operation retrieves the built-in policy definition with the given name. </remarks>
         public virtual async Task<Response<BuiltInPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
@@ -112,11 +113,12 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// This operation retrieves the built-in policy definition with the given name.
+        /// Retrieves a built-in policy definition.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> This operation retrieves the built-in policy definition with the given name. </remarks>
         public virtual Response<BuiltInPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");

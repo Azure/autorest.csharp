@@ -43,6 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private string? _description;
         public string? Description => _description ??= Method.Description;
+        private string? _summary;
+        public string? Summary => _summary ??= Method.Summary;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
 
         public OperationSource? OperationSource { get; }

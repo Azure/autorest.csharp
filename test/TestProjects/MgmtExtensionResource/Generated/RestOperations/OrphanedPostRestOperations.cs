@@ -57,12 +57,13 @@ namespace MgmtExtensionResource
             return message;
         }
 
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary> Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public async Task<Response> ValidateSomethingAsync(string subscriptionId, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
@@ -79,12 +80,13 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary> Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public Response ValidateSomething(string subscriptionId, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));

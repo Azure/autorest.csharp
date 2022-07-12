@@ -93,6 +93,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Singleton that belongs to a subscription. </remarks>
         public virtual async Task<Response<SubSingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Get");
@@ -117,6 +118,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Singleton that belongs to a subscription. </remarks>
         public virtual Response<SubSingletonResource> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Get");
@@ -141,6 +143,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Execute
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Singleton that belongs to a subscription. </remarks>
         public virtual async Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Execute");
@@ -163,6 +166,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Execute
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Singleton that belongs to a subscription. </remarks>
         public virtual Response Execute(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Execute");

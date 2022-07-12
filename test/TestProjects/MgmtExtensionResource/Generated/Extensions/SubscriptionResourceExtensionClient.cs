@@ -110,12 +110,13 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// Operation Id: OrphanedPost_ValidateSomething
         /// </summary>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
             using var scope = OrphanedPostClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.ValidateSomethingOrphanedPost");
@@ -133,12 +134,13 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// Operation Id: OrphanedPost_ValidateSomething
         /// </summary>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Response ValidateSomethingOrphanedPost(ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
             using var scope = OrphanedPostClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.ValidateSomethingOrphanedPost");

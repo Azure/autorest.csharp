@@ -336,7 +336,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
+        /// Retrieves a policy assignment.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
@@ -345,6 +345,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        /// <remarks> This operation retrieves a single policy assignment, given its name and the scope it was created at. </remarks>
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -352,7 +353,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
+        /// Retrieves a policy assignment.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
@@ -361,6 +362,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        /// <remarks> This operation retrieves a single policy assignment, given its name and the scope it was created at. </remarks>
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {

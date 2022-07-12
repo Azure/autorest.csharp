@@ -55,7 +55,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_CreateOrUpdateTypeOne
         /// </summary>
@@ -65,6 +65,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="data"/> is null. </exception>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<ArmOperation<TypeOneResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
@@ -88,7 +89,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_CreateOrUpdateTypeOne
         /// </summary>
@@ -98,6 +99,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="data"/> is null. </exception>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual ArmOperation<TypeOneResource> CreateOrUpdate(WaitUntil waitUntil, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
@@ -121,7 +123,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
@@ -129,6 +131,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<Response<TypeOneResource>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
@@ -150,7 +153,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
@@ -158,6 +161,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Response<TypeOneResource> Get(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
@@ -179,12 +183,13 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes
         /// Operation Id: Common_ListTypeOnes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<TypeOneResource>> FirstPageFunc(int? pageSizeHint)
@@ -206,12 +211,13 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Description for Validate information for a certificate order.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes
         /// Operation Id: Common_ListTypeOnes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Pageable<TypeOneResource> GetAll(CancellationToken cancellationToken = default)
         {
             Page<TypeOneResource> FirstPageFunc(int? pageSizeHint)
@@ -233,7 +239,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Checks to see if the resource exists in azure.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
@@ -241,6 +247,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual async Task<Response<bool>> ExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
@@ -260,7 +267,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Checks to see if the resource exists in azure.
+        /// Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
@@ -268,6 +275,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual Response<bool> Exists(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));

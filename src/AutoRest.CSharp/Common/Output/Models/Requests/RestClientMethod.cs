@@ -12,13 +12,14 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None)
+        public RestClientMethod(string name, string? description, string? summary, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None)
         {
             Name = name;
             Request = request;
             Parameters = parameters;
             Responses = responses;
             Description = description;
+            Summary = summary;
             ReturnType = returnType;
             HeaderModel = headerModel;
             BufferResponse = bufferResponse;
@@ -39,6 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public string Name { get; }
         public string? Description { get; }
+        public string? Summary { get; }
         public Request Request { get; }
         public Parameter[] Parameters { get; }
         public Response[] Responses { get; }

@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+                Summary: null,
                 Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
                 Initializer: new(

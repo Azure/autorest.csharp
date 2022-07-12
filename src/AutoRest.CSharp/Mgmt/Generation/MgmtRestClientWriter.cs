@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)
         {
             var constructorParameters = restClient.Parameters;
-            var constructor = new ConstructorSignature(restClient.Type.Name, $"Initializes a new instance of {restClient.Type.Name}", MethodSignatureModifiers.Public, restClient.Parameters);
+            var constructor = new ConstructorSignature(restClient.Type.Name, $"Initializes a new instance of {restClient.Type.Name}", null, MethodSignatureModifiers.Public, restClient.Parameters);
 
             writer.WriteMethodDocumentation(constructor);
             using (writer.WriteMethodDeclaration(constructor))
@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : new CSharpType(typeof(Response));
 
             var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature(operation.Name, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature(operation.Name, operation.Description, operation.Summary, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
 
             writer.WriteMethodDocumentation(method);
             using (writer.WriteMethodDeclaration(method))

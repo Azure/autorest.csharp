@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -73,6 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
             Name,
             Description,
+            Summary,
             Accessibility == Public
                 ? _extensionParameter != null
                     ? Public | Static | Extension
@@ -89,10 +91,18 @@ namespace AutoRest.CSharp.Mgmt.Models
         private string? _description;
         public string Description => _description ??= BuildDescription();
 
+        private string? _summary;
+        public string Summary => _summary ??= BuildSummary();
+
         private string BuildDescription()
         {
+            return $"{(_operations.First().Summary.IsNullOrEmpty() ? string.Empty : _operations.First().Description)}";
+        }
+
+        private string BuildSummary()
+        {
             var pathInformation = string.Join('\n', _operations.Select(operation => $"Request Path: {operation.Operation.GetHttpPath()}\nOperation Id: {operation.OperationId}"));
-            var descriptionOfOperation = _operations.First().Description;
+            var descriptionOfOperation = _operations.First().Summary.IsNullOrEmpty() ? _operations.First().Description : _operations.First().Summary;
             if (descriptionOfOperation != null)
                 return $"{descriptionOfOperation}\n{pathInformation}";
             return $"{pathInformation}";
