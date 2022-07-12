@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -19,12 +20,12 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientBuilder ClientBuilder { get; }
         public ClientFields Fields { get; }
 
-        public DataPlaneRestClient(OperationGroup operationGroup, IReadOnlyList<LowLevelClientMethod> protocolMethods, RestClientBuilder clientBuilder, BuildContext<DataPlaneOutputLibrary> context)
-            : base(operationGroup, context, context.Library.FindClient(operationGroup)?.Declaration.Name, GetOrderedParameters(clientBuilder, protocolMethods))
+        public DataPlaneRestClient(OperationGroup operationGroup, RestClientBuilder clientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+            : base(operationGroup, context, GetClientName(operationGroup, context), GetOrderedParameters(clientBuilder))
         {
             _context = context;
             ClientBuilder = clientBuilder;
-            ProtocolMethods = protocolMethods;
+            ProtocolMethods = GetProtocolMethods(operationGroup, clientBuilder, context).ToList();
             Fields = ClientFields.CreateForRestClient(Parameters);
         }
 
@@ -43,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestMethods;
         }
 
-        private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder, IReadOnlyList<LowLevelClientMethod> protocolMethods)
+        private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder)
         {
             var parameters = new List<Parameter>();
             parameters.Add(KnownParameters.ClientDiagnostics);
@@ -51,5 +52,36 @@ namespace AutoRest.CSharp.Output.Models
             parameters.AddRange(clientBuilder.GetOrderedParametersByRequired());
             return parameters;
         }
+
+        private static IEnumerable<string> GetProtocolMethodsByOperationGroup(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
+        {
+            context.Library.ProtocolMethodsDictionary.TryGetValue(operationGroup.Key, out var methodList);
+            return methodList ?? Enumerable.Empty<string>();
+        }
+
+        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(OperationGroup operationGroup, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+        {
+            // At least one protocol method is found in the config for this operationGroup
+            if (!operationGroup.Operations.Any(operation => IsProtocolMethodExists(operation, operationGroup, context)))
+            {
+                return Enumerable.Empty<LowLevelClientMethod>();
+            }
+
+            // Filter protocol method requests for this operationGroup based on the config
+            var operations = Methods
+                .Select(m => m.Operation)
+                .Where(operation => IsProtocolMethodExists(operation, operationGroup, context));
+
+            return LowLevelClient.BuildMethods(restClientBuilder, operations, GetClientName(operationGroup, context));
+        }
+
+        private static string GetClientName(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
+            => context.Library.FindClient(operationGroup)?.Declaration.Name ?? operationGroup.Language.Default.Name;
+
+        private static bool IsProtocolMethodExists(Operation operation, OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
+            => GetProtocolMethodsByOperationGroup(operationGroup, context).Any(m => m.Equals(operation.Language.Default.Name, StringComparison.OrdinalIgnoreCase));
+
+        private static bool IsProtocolMethodExists(InputOperation operation, OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
+            => GetProtocolMethodsByOperationGroup(operationGroup, context).Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
     }
 }

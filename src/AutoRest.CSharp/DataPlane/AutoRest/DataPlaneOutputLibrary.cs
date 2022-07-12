@@ -205,8 +205,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var clientParameters = RestClientBuilder.GetParametersFromOperations(operationGroup.Operations).ToList();
                 var restClient = new RestClientBuilder(clientParameters, _context);
-                var protocolMethods = GetProtocolMethods(operationGroup, restClient, _context).ToArray();
-                restClients.Add(operationGroup, new DataPlaneRestClient(operationGroup, protocolMethods, restClient, _context));
+                restClients.Add(operationGroup, new DataPlaneRestClient(operationGroup, restClient, _context));
             }
 
             return restClients;
@@ -251,33 +250,5 @@ namespace AutoRest.CSharp.Output.Models.Types
                 methodList.Add(methodName);
             }
         }
-
-        private IEnumerable<string> GetProtocolMethodsByOperationGroup(OperationGroup operationGroup)
-        {
-            _protocolMethodsDictionary.TryGetValue(operationGroup.Key, out var methodList);
-            return methodList ?? Enumerable.Empty<string>();
-        }
-
-        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(OperationGroup operationGroup, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
-        {
-            // At least one protocol method is found in the config for this operationGroup
-            if (operationGroup.Operations.Any(operation => IsProtocolMethodExists(operation, operationGroup)))
-            {
-                var clientInfo = LowLevelOutputLibraryFactory.CreateClientInfo(operationGroup, context);
-                var clientInfoByName = context.Library.DPGClientInfosByName[clientInfo.Name];
-
-                // Filter protocol method requests for this operationGroup based on the config
-                var requests = clientInfoByName.Requests.Where(operation => IsProtocolMethodExists(operation, operationGroup));
-                return LowLevelClient.BuildMethods(restClientBuilder, requests, clientInfo.Name);
-            }
-
-            return Enumerable.Empty<LowLevelClientMethod>();
-        }
-
-        private bool IsProtocolMethodExists(Operation operation, OperationGroup operationGroup)
-            => GetProtocolMethodsByOperationGroup(operationGroup).Any(m => m.Equals(operation.Language.Default.Name, StringComparison.OrdinalIgnoreCase));
-
-        private bool IsProtocolMethodExists(InputOperation operation, OperationGroup operationGroup)
-            => GetProtocolMethodsByOperationGroup(operationGroup).Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
     }
 }
