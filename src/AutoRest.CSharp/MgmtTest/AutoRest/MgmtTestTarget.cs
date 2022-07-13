@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static string GenExampleFileName(MockTestCase testCase)
         {
-            return $"../../Samples/Generated/{testCase.RestOperation.Operation.OperationId}$${testCase.Example.Name}.cs";
+            return $"../../Samples/Generated/{testCase.RestOperation.Operation.OperationId}$${System.IO.Path.GetFileNameWithoutExtension(testCase.Example.OriginalFile)}.cs";
         }
     }
 }
