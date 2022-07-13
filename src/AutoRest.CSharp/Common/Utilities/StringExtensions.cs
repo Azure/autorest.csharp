@@ -7,6 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 using Humanizer;
 using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
@@ -89,7 +91,15 @@ namespace AutoRest.CSharp.Utilities
         }
 
         [return: NotNullIfNotNull("name")]
-        public static string ToVariableName(this string name) => ToCleanName(name, isCamelCase: false);
+        public static string ToVariableName(this string name) => Configuration.AzureArm ? name.ToMgmtVariableName() : ToCleanName(name, isCamelCase: false);
+
+        [return: NotNullIfNotNull("name")]
+        public static string ToMgmtVariableName(this string name)
+        {
+            var variableName = NameTransformer.Instance.EnsureNameCase(name).VariableName;
+
+            return ToCleanName(variableName, isCamelCase: false);
+        }
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);
 

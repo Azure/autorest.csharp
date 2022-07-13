@@ -7,7 +7,10 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The ScheduledEventsProfile. </summary>
+    /// <summary>
+    /// The ScheduledEventsProfile.
+    /// Serialized Name: ScheduledEventsProfile
+    /// </summary>
     internal partial class ScheduledEventsProfile
     {
         /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
@@ -16,13 +19,19 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
-        /// <param name="terminateNotificationProfile"> Specifies Terminate Scheduled Event related configurations. </param>
+        /// <param name="terminateNotificationProfile">
+        /// Specifies Terminate Scheduled Event related configurations.
+        /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile
+        /// </param>
         internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile)
         {
             TerminateNotificationProfile = terminateNotificationProfile;
         }
 
-        /// <summary> Specifies Terminate Scheduled Event related configurations. </summary>
+        /// <summary>
+        /// Specifies Terminate Scheduled Event related configurations.
+        /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile
+        /// </summary>
         public TerminateNotificationProfile TerminateNotificationProfile { get; set; }
     }
 }

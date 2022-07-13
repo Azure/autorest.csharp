@@ -115,12 +115,20 @@ $testNamesLowLevel =
     'url',
     'head',
     'body-array';
+$testNamesLowLevelWithoutArgs =
+    'security-aad',
+    'security-key';
 
 if (!($Exclude -contains "TestServerLowLevel"))
 {
     foreach ($testName in $testNamesLowLevel)
     {
         Add-TestServer-Swagger $testName "-LowLevel" $testServerLowLevelDirectory $llcArgs
+    }
+
+    foreach ($testName in $testNamesLowLevelWithoutArgs)
+    {
+        Add-TestServer-Swagger $testName "-LowLevel" $testServerLowLevelDirectory
     }
 }
 

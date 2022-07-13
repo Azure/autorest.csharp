@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The pass name. Currently, the only allowable value is OobeSystem. </summary>
+    /// <summary>
+    /// The pass name. Currently, the only allowable value is OobeSystem.
+    /// Serialized Name: PassNames
+    /// </summary>
     public readonly partial struct PassName : IEquatable<PassName>
     {
         private readonly string _value;
@@ -24,7 +27,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         private const string OobeSystemValue = "OobeSystem";
 
-        /// <summary> OobeSystem. </summary>
+        /// <summary>
+        /// OobeSystem
+        /// Serialized Name: PassNames.OobeSystem
+        /// </summary>
         public static PassName OobeSystem { get; } = new PassName(OobeSystemValue);
         /// <summary> Determines if two <see cref="PassName"/> values are the same. </summary>
         public static bool operator ==(PassName left, PassName right) => left.Equals(right);
