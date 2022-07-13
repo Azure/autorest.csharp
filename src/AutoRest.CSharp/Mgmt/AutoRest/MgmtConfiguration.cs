@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Input
 
             public void Write(Utf8JsonWriter writer, string settingName)
             {
-                if (!SuppressListException)
+                if (!SuppressListException && !ShowSerializedNames)
                     return;
 
                 writer.WriteStartObject(settingName);
