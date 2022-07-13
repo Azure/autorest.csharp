@@ -72,6 +72,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.MgmtReferenceType;
 
+        public bool IsInheritableCommonType => ObjectSchema != null &&
+            ObjectSchema.Extensions != null &&
+            (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
+
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
             get
@@ -150,7 +154,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? Protected : Internal,
+                IsInheritableCommonType ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
