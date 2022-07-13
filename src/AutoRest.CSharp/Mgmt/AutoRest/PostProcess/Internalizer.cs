@@ -146,8 +146,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                     if (filteredTriviaList.Count() == 1)
                     {
                         var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
-                        var filteredDescendantNodes = descendantNodes.Where((val, index) =>
-                            index >= descendantNodes?.FindLastIndex(node => node.ToFullString().Contains(BuilderHelpers.DiscriminatorDescFixedPart.Last())));
+                        var filteredDescendantNodes = FilterTriviaWithDiscriminator(descendantNodes);
                         var identifierNodes = filteredDescendantNodes.SelectMany(node => node.DescendantNodes().OfType<XmlCrefAttributeSyntax>());
                         identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToImmutableHashSet();
                         return true;
@@ -157,6 +156,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             }
 
             return false;
+        }
+
+        private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)
+        {
+            // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
+            // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
+            var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(BuilderHelpers.DiscriminatorDescFixedPart.Last()));
+            return nodes.Where((val, index) => index >= targetIndex);
         }
 
         private static Project MarkInternal(Project project, BaseTypeDeclarationSyntax declarationNode)
