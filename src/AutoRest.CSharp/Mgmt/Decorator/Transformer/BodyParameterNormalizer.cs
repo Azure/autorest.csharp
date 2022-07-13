@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName)
         {
             switch (method)
             {
@@ -65,19 +65,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 SchemaRenamer.UpdateAcronym(parameter.Schema);
         }
 
-        public static void UpdatePatchOperations()
+        internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
         {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            if (MethodsRequiredBodyParameter.Contains(method))
             {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    if (MethodsRequiredBodyParameter.Contains(operation.GetHttpMethod()))
-                    {
-                        var bodyParameter = operation.GetBodyParameter();
-                        if (bodyParameter != null)
-                            bodyParameter.Required = true;
-                    }
-                }
+                bodyParameter.Required = true;
             }
         }
 

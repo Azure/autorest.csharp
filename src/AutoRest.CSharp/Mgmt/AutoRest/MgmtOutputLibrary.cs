@@ -171,26 +171,30 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (!usageCounts.TryGetValue(bodyParam.Schema, out var count))
                             continue;
 
-                        if (count != 1)
-                        {
-                            //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
-                            continue;
-                        }
-
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
-                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
-                        if (resourceDataModelName.Key is not null)
+                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet)).Key;
+                        if (resourceDataModelName is not null)
                         {
-                            //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
-                            //types use the same model they should have a common name, but since this case doesn't exist yet
-                            //we don't know for sure
-                            if (requestPath.IsExpandable)
-                                throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
-                            var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
-                            updatedModels.Add(bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, ResourceDataSchemaNameToOperationSets);
+                            // this means this operation is one of the operations of this resource
+                            if (count == 1)
+                            {
+                                //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
+                                //types use the same model they should have a common name, but since this case doesn't exist yet
+                                //we don't know for sure
+                                if (requestPath.IsExpandable)
+                                    throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
+                                var name = GetResourceName(resourceDataModelName, operationSet, requestPath);
+                                updatedModels.Add(bodyParam.Schema);
+                                BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
+                            }
+                            else
+                            {
+                                //even if it has multiple uses for a model type we should normalize the param name just not change the type
+                                BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
+                            }
+                            // mark the body parameter required if this is put or patch
+                            BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
                         }
                         else
                         {
