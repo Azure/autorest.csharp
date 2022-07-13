@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -177,9 +176,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (resourceDataModelName is not null)
                         {
                             // this means this operation is one of the operations of this resource
+                            // mark the body parameter required if this is put or patch
+                            BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
                             if (count == 1)
                             {
-                                //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
+                                //TODO handle expandable request paths. We assume that this is fine since if all of the expanded
                                 //types use the same model they should have a common name, but since this case doesn't exist yet
                                 //we don't know for sure
                                 if (requestPath.IsExpandable)
@@ -193,8 +194,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 //even if it has multiple uses for a model type we should normalize the param name just not change the type
                                 BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
                             }
-                            // mark the body parameter required if this is put or patch
-                            BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
                         }
                         else
                         {

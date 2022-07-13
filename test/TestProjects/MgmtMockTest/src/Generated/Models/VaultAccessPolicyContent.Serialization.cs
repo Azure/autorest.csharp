@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMockTest.Models
 {
-    public partial class VaultAccessPolicyParameters : IUtf8JsonSerializable
+    public partial class VaultAccessPolicyContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -21,7 +21,7 @@ namespace MgmtMockTest.Models
             writer.WriteEndObject();
         }
 
-        internal static VaultAccessPolicyParameters DeserializeVaultAccessPolicyParameters(JsonElement element)
+        internal static VaultAccessPolicyContent DeserializeVaultAccessPolicyContent(JsonElement element)
         {
             Optional<AzureLocation> location = default;
             VaultAccessPolicyProperties properties = default;
@@ -72,7 +72,7 @@ namespace MgmtMockTest.Models
                     continue;
                 }
             }
-            return new VaultAccessPolicyParameters(id, name, type, systemData.Value, Optional.ToNullable(location), properties);
+            return new VaultAccessPolicyContent(id, name, type, systemData.Value, Optional.ToNullable(location), properties);
         }
     }
 }

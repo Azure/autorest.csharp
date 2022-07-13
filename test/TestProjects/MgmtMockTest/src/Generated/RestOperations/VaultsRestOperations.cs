@@ -355,7 +355,7 @@ namespace MgmtMockTest
             }
         }
 
-        internal HttpMessage CreateUpdateAccessPolicyRequest(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyParameters vaultAccessPolicyParameters)
+        internal HttpMessage CreateUpdateAccessPolicyRequest(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -375,7 +375,7 @@ namespace MgmtMockTest
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(vaultAccessPolicyParameters);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
@@ -386,27 +386,27 @@ namespace MgmtMockTest
         /// <param name="resourceGroupName"> The name of the Resource Group to which the vault belongs. </param>
         /// <param name="vaultName"> Name of the vault. </param>
         /// <param name="operationKind"> Name of the operation. </param>
-        /// <param name="vaultAccessPolicyParameters"> Access policy to merge into the vault. </param>
+        /// <param name="content"> Access policy to merge into the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="vaultAccessPolicyParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VaultAccessPolicyParameters>> UpdateAccessPolicyAsync(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyParameters vaultAccessPolicyParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<VaultAccessPolicyContent>> UpdateAccessPolicyAsync(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
-            Argument.AssertNotNull(vaultAccessPolicyParameters, nameof(vaultAccessPolicyParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using var message = CreateUpdateAccessPolicyRequest(subscriptionId, resourceGroupName, vaultName, operationKind, vaultAccessPolicyParameters);
+            using var message = CreateUpdateAccessPolicyRequest(subscriptionId, resourceGroupName, vaultName, operationKind, content);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                 case 201:
                     {
-                        VaultAccessPolicyParameters value = default;
+                        VaultAccessPolicyContent value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VaultAccessPolicyParameters.DeserializeVaultAccessPolicyParameters(document.RootElement);
+                        value = VaultAccessPolicyContent.DeserializeVaultAccessPolicyContent(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -419,27 +419,27 @@ namespace MgmtMockTest
         /// <param name="resourceGroupName"> The name of the Resource Group to which the vault belongs. </param>
         /// <param name="vaultName"> Name of the vault. </param>
         /// <param name="operationKind"> Name of the operation. </param>
-        /// <param name="vaultAccessPolicyParameters"> Access policy to merge into the vault. </param>
+        /// <param name="content"> Access policy to merge into the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="vaultAccessPolicyParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VaultAccessPolicyParameters> UpdateAccessPolicy(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyParameters vaultAccessPolicyParameters, CancellationToken cancellationToken = default)
+        public Response<VaultAccessPolicyContent> UpdateAccessPolicy(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
-            Argument.AssertNotNull(vaultAccessPolicyParameters, nameof(vaultAccessPolicyParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using var message = CreateUpdateAccessPolicyRequest(subscriptionId, resourceGroupName, vaultName, operationKind, vaultAccessPolicyParameters);
+            using var message = CreateUpdateAccessPolicyRequest(subscriptionId, resourceGroupName, vaultName, operationKind, content);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                 case 201:
                     {
-                        VaultAccessPolicyParameters value = default;
+                        VaultAccessPolicyContent value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VaultAccessPolicyParameters.DeserializeVaultAccessPolicyParameters(document.RootElement);
+                        value = VaultAccessPolicyContent.DeserializeVaultAccessPolicyContent(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

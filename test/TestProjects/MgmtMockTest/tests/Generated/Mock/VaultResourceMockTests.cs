@@ -116,7 +116,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
 
             var vaultResourceId = MgmtMockTest.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
-            await vaultResource.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockTest.Models.AccessPolicyEntry[]
+            await vaultResource.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyContent(new VaultAccessPolicyProperties(new MgmtMockTest.Models.AccessPolicyEntry[]
             {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
