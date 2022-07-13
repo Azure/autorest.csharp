@@ -6,21 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal static class LowLevelOutputLibraryFactory
     {
-        public static LowLevelOutputLibrary Create(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
+        public static LowLevelOutputLibrary Create(InputNamespace rootNamespace, BuildContext<LowLevelOutputLibrary> context)
         {
-            UpdateListMethodNames(codeModel);
+            var inputClients = UpdateListMethodNames(rootNamespace);
 
-            var clientInfosByName = codeModel.OperationGroups
+            var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, context))
                 .ToDictionary(ci => ci.Name);
 
@@ -36,17 +36,17 @@ namespace AutoRest.CSharp.Output.Models
             }, clientOptions);
         }
 
-        private static void UpdateListMethodNames(CodeModel codeModel)
+        private static IEnumerable<InputClient> UpdateListMethodNames(InputNamespace rootNamespace)
         {
-            var defaultName = codeModel.Language.Default.Name.ReplaceLast("Client", "");
-            foreach (var operationGroup in codeModel.OperationGroups)
+            var defaultName = rootNamespace.Name.ReplaceLast("Client", "");
+            foreach (var client in rootNamespace.Clients)
             {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var resourceName = operationGroup.Key.IsNullOrEmpty() ? defaultName : operationGroup.Key;
-                    operation.Language.Default.Name = operation.Language.Default.Name.RenameGetMethod(resourceName).RenameListToGet(resourceName);
-                }
+                var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
+                yield return client with { Operations = client.Operations.Select(op => UpdateMethodName(op, clientName)).ToList() };
             }
+
+            static InputOperation UpdateMethodName(InputOperation operation, string clientName)
+                => operation with { Name = operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName) };
         }
 
         private static ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos, BuildContext context)
@@ -77,26 +77,26 @@ namespace AutoRest.CSharp.Output.Models
             return allClients;
         }
 
-        public static ClientInfo CreateClientInfo(OperationGroup operationGroup, BuildContext context)
+        public static ClientInfo CreateClientInfo(InputClient ns, BuildContext context)
         {
-            var clientNamePrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
+            var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, context);
             var clientNamespace = context.DefaultNamespace;
-            var clientDescription = operationGroup.Language.Default.Description;
-            var operations = operationGroup.Operations;
+            var clientDescription = ns.Description;
+            var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Key) || resourceParameters.Any();
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any();
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix(context);
 
             INamedTypeSymbol? existingType;
             if (context.SourceInputModel == null || (existingType = context.SourceInputModel.FindForType(context.DefaultNamespace, clientName)) == null)
             {
-                return new ClientInfo(operationGroup.Key, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
+                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
             }
 
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
-            return new ClientInfo(operationGroup.Key, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
+            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
         }
 
         private static IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName, BuildContext context)
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
                 var clientName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context) + ClientBuilder.GetClientSuffix(context);
                 var clientNamespace = context.DefaultNamespace;
                 var endpointParameter = CodeModelConverter.CreateOperationParameters(context.CodeModel.GlobalParameters).FirstOrDefault(p => p.IsEndpoint);
-                var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<OperationParameter>();
+                var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputOperationParameter>();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters);
             }
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var clientInfo in clientInfos)
             {
-                foreach (var operation in CodeModelConverter.CreateOperations(clientInfo.Operations).Values)
+                foreach (var operation in clientInfo.Operations)
                 {
                     SetRequestToClient(clientInfo, operation);
                 }
@@ -225,20 +225,20 @@ namespace AutoRest.CSharp.Output.Models
             public string Namespace { get; }
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }
-            public ICollection<Operation> Operations { get; }
-            public IReadOnlyList<OperationParameter> ClientParameters { get; }
-            public ISet<OperationParameter> ResourceParameters { get; }
+            public IReadOnlyList<InputOperation> Operations { get; }
+            public IReadOnlyList<InputOperationParameter> ClientParameters { get; }
+            public ISet<InputOperationParameter> ResourceParameters { get; }
 
             public ClientInfo? Parent { get; set; }
             public IList<ClientInfo> Children { get; }
             public IList<InputOperation> Requests { get; }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, ICollection<Operation> operations, IReadOnlyList<OperationParameter> clientParameters, ISet<OperationParameter> resourceParameters)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputOperationParameter> clientParameters, ISet<InputOperationParameter> resourceParameters)
                 : this(operationGroupKey, clientName, clientNamespace, clientDescription, null, operations, clientParameters, resourceParameters)
             {
             }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, ICollection<Operation> operations, IReadOnlyList<OperationParameter> clientParameters, ISet<OperationParameter> resourceParameters)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputOperationParameter> clientParameters, ISet<InputOperationParameter> resourceParameters)
             {
                 OperationGroupKey = operationGroupKey;
                 Name = clientName;
@@ -252,16 +252,16 @@ namespace AutoRest.CSharp.Output.Models
                 Requests = new List<InputOperation>();
             }
 
-            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<OperationParameter> clientParameters)
+            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputOperationParameter> clientParameters)
             {
                 OperationGroupKey = string.Empty;
                 Name = clientName;
                 Namespace = clientNamespace;
                 Description = string.Empty;
                 ExistingType = null;
-                Operations = Array.Empty<Operation>();
+                Operations = Array.Empty<InputOperation>();
                 ClientParameters = clientParameters;
-                ResourceParameters = new HashSet<OperationParameter>();
+                ResourceParameters = new HashSet<InputOperationParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
             }

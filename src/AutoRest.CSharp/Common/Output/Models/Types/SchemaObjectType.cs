@@ -553,7 +553,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
-        public ObjectTypeProperty GetPropertyForGroupedParameter(OperationParameter groupedParameter, bool includeParents = false)
+        public ObjectTypeProperty GetPropertyForGroupedParameter(InputOperationParameter groupedParameter, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty is GroupProperty gp && gp.OriginalParameter.Any(rp => rp.Language.Default.Name == groupedParameter.Name && CodeModelConverter.CreateType(rp) == groupedParameter.Type), out ObjectTypeProperty? objectProperty, includeParents))
             {

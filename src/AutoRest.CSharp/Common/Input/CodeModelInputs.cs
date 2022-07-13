@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Common.Input
             string Description,
             string? OperationId,
             string? Accessibility,
-            IReadOnlyList<OperationParameter> Parameters,
+            IReadOnlyList<InputOperationParameter> Parameters,
             IReadOnlyList<OperationResponse> Responses,
             RequestMethod HttpMethod,
             BodyMediaType RequestBodyMediaType,

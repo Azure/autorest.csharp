@@ -39,14 +39,14 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
         }
 
-        public static IEnumerable<OperationParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations) =>
+        public static IEnumerable<InputOperationParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations) =>
             CodeModelConverter.CreateOperationParameters(operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct(new ParameterCompareer())
                 .ToList());
 
-        public override Parameter BuildConstructorParameter(OperationParameter operationParameter)
+        public override Parameter BuildConstructorParameter(InputOperationParameter operationParameter)
         {
             var parameter = base.BuildConstructorParameter(operationParameter);
             return parameter.IsApiVersionParameter
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 : parameter;
         }
 
-        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<OperationParameter, Parameter> allParameters)
+        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputOperationParameter, Parameter> allParameters)
         {
             List<Parameter> requiredParameters = new();
             List<Parameter> optionalParameters = new();

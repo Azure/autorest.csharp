@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public static Parameter FromRequestParameter(in OperationParameter operationParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromRequestParameter(in InputOperationParameter operationParameter, CSharpType type, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return defaultValue?.GetConstantFormattable();
         }
 
-        public static string CreateDescription(OperationParameter operationParameter, CSharpType type, IEnumerable<string>? values)
+        public static string CreateDescription(InputOperationParameter operationParameter, CSharpType type, IEnumerable<string>? values)
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {operationParameter.Type.Name} to use."

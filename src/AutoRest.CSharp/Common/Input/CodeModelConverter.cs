@@ -13,6 +13,27 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal static class CodeModelConverter
     {
+        public static InputNamespace CreateNamespace(CodeModel codeModel) => new(
+            Name: codeModel.Language.Default.Name,
+            Description: codeModel.Language.Default.Description,
+            Clients: CreateClients(codeModel.OperationGroups));
+
+        public static IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
+            => operationGroups.Select(CreateResourceClient).ToList();
+
+        private static InputClient CreateResourceClient(OperationGroup operationGroup)
+        {
+            if (!operationGroup.Key.Equals(operationGroup.Language.Default.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException($"OperationGroup has name `{operationGroup.Language.Default.Name}` and $key `{operationGroup.Key}`");
+            }
+
+            return new(
+                Name: operationGroup.Language.Default.Name,
+                Description: operationGroup.Language.Default.Description,
+                Operations: CreateOperations(operationGroup.Operations).Values.ToArray());
+        }
+
         public static IReadOnlyDictionary<ServiceRequest, CodeModelOperation> CreateOperations(IEnumerable<Operation> operations)
         {
             var inputOperations = new Dictionary<ServiceRequest, Func<CodeModelOperation>>();
@@ -38,9 +59,7 @@ namespace AutoRest.CSharp.Common.Input
             return inputOperations.ToDictionary(kvp => kvp.Key, kvp => kvp.Value());
         }
 
-        private static CodeModelOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest, IReadOnlyDictionary<ServiceRequest, Func<CodeModelOperation>> operationsCache)
-        {
-            return new CodeModelOperation(
+        private static CodeModelOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest, IReadOnlyDictionary<ServiceRequest, Func<CodeModelOperation>> operationsCache) => new(
                 Name: operation.Language.Default.Name,
                 Description: operation.Language.Default.Description,
                 OperationId: operation.OperationId,
@@ -57,11 +76,10 @@ namespace AutoRest.CSharp.Common.Input
                 LongRunning: CreateLongRunning(operation),
                 Paging: CreateOperationPaging(operation, operationsCache),
                 Source: operation);
-        }
 
-        public static List<OperationParameter> CreateOperationParameters(ICollection<RequestParameter> requestParameters)
+        public static List<InputOperationParameter> CreateOperationParameters(ICollection<RequestParameter> requestParameters)
         {
-            var parametersCache = new Dictionary<RequestParameter, Func<OperationParameter>>();
+            var parametersCache = new Dictionary<RequestParameter, Func<InputOperationParameter>>();
             foreach (var parameter in requestParameters)
             {
                 parametersCache.Add(parameter, CacheResult(() => CreateOperationParameter(parameter, parametersCache)));
@@ -70,7 +88,7 @@ namespace AutoRest.CSharp.Common.Input
             return requestParameters.Select(rp => parametersCache[rp]()).ToList();
         }
 
-        public static OperationParameter CreateOperationParameter(RequestParameter input, IReadOnlyDictionary<RequestParameter, Func<OperationParameter>> parametersCache) => new(
+        public static InputOperationParameter CreateOperationParameter(RequestParameter input, IReadOnlyDictionary<RequestParameter, Func<InputOperationParameter>> parametersCache) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,

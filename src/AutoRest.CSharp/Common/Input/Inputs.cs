@@ -9,11 +9,15 @@ using Azure.Core;
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
+    internal record InputNamespace(string Name, string Description, IReadOnlyList<InputClient> Clients);
+
+    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations);
+
     internal record InputOperation(
         string Name,
         string Description,
         string? Accessibility,
-        IReadOnlyList<OperationParameter> Parameters,
+        IReadOnlyList<InputOperationParameter> Parameters,
         IReadOnlyList<OperationResponse> Responses,
         RequestMethod HttpMethod,
         BodyMediaType RequestBodyMediaType,
@@ -25,7 +29,7 @@ namespace AutoRest.CSharp.Common.Input
         OperationLongRunning? LongRunning,
         OperationPaging? Paging);
 
-    internal record OperationParameter(
+    internal record InputOperationParameter(
         string Name,
         string NameInRequest,
         string? Description,
@@ -33,7 +37,7 @@ namespace AutoRest.CSharp.Common.Input
         RequestLocation Location,
         InputConstant? DefaultValue,
         VirtualParameter? VirtualParameter,
-        OperationParameter? GroupedBy,
+        InputOperationParameter? GroupedBy,
         bool IsConstant,
         bool IsRequired,
         bool IsApiVersion,

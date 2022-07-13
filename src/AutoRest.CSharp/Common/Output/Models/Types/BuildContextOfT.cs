@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                library = (T)(object)LowLevelOutputLibraryFactory.Create(CodeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
+                library = (T)(object)LowLevelOutputLibraryFactory.Create(CodeModelConverter.CreateNamespace(CodeModel), (BuildContext<LowLevelOutputLibrary>)(object)this);
             }
             BaseLibrary = library;
             return library;
