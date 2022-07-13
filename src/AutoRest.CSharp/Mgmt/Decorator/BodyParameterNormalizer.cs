@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class BodyParameterNormalizer
     {
