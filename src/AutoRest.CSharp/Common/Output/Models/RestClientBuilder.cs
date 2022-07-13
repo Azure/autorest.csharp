@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models
         public static IEnumerable<InputOperationParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
             operations
                 .SelectMany(op => op.Parameters)
-                .Where(p => p.IsInClient)
+                .Where(p => p.Kind == InputOperationParameterKind.Client)
                 .Distinct()
                 .ToList();
 
@@ -306,10 +306,10 @@ namespace AutoRest.CSharp.Output.Models
         protected virtual Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputOperationParameter, Parameter> allParameters)
         {
             List<Parameter> methodParameters = new();
-            foreach (var (requestParameter, parameter) in allParameters)
+            foreach (var (operationParameter, parameter) in allParameters)
             {
                 // Grouped and flattened parameters shouldn't be added to methods
-                if (requestParameter.IsInMethod)
+                if (operationParameter.Kind == InputOperationParameterKind.Method)
                 {
                     methodParameters.Add(parameter);
                 }
@@ -395,7 +395,7 @@ namespace AutoRest.CSharp.Output.Models
                             bodyParameterValue.Type);
 
                         // This method has a flattened body
-                        if (bodyRequestParameter.IsFlattened)
+                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
                         {
                             var objectType = (SchemaObjectType)_library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
 
@@ -428,12 +428,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReferenceOrConstant CreateReference(InputOperationParameter operationParameter, Parameter parameter)
         {
-            if (operationParameter.IsInClient)
+            if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter.IsConstant && parameter.DefaultValue != null)
+            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
@@ -777,7 +777,7 @@ namespace AutoRest.CSharp.Output.Models
                 var reference = _parent.CreateReference(operationParameter, parameter);
 
                 _referencesByName[name] = new ParameterInfo(operationParameter, reference);
-                if (operationParameter.IsInMethod)
+                if (operationParameter.Kind == InputOperationParameterKind.Method)
                 {
                     _parameters.Add(parameter);
                 }

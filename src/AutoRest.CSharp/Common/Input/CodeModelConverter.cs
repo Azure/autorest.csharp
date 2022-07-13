@@ -95,16 +95,13 @@ namespace AutoRest.CSharp.Common.Input
             Type: CreateType(input),
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
-            IsConstant: input.Schema is ConstantSchema,
             IsRequired: input.IsRequired,
             GroupedBy: input.GroupedBy != null ? parametersCache[input.GroupedBy]() : null,
+            Kind: GetOperationParameterKind(input),
             IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
             IsEndpoint: input.Origin == "modelerfour:synthesized/host",
-            IsFlattened: input.Flattened ?? false,
-            IsInMethod: input.Implementation == ImplementationLocation.Method && input.Schema is not ConstantSchema && !input.IsFlattened && input.GroupedBy == null,
-            IsInClient: input.Implementation == ImplementationLocation.Client,
             ArraySerializationDelimiter: GetArraySerializationDelimiter(input),
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
@@ -149,6 +146,17 @@ namespace AutoRest.CSharp.Common.Input
 
             return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName) { NextLinkOperationRef = nextLinkOperationRef };
         }
+
+        private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
+        {
+            { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
+            { Schema: ConstantSchema }                        => InputOperationParameterKind.Constant,
+
+            // Grouped and flattened parameters shouldn't be added to methods
+            { IsFlattened: true }                             => InputOperationParameterKind.Flattened,
+            { GroupedBy: not null }                           => InputOperationParameterKind.Grouped,
+            _                                                 => InputOperationParameterKind.Method
+        };
 
         private static string? GetArraySerializationDelimiter(RequestParameter input) => input.In switch
         {

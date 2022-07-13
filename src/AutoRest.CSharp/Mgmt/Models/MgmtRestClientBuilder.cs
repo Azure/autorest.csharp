@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var (requestParameter, parameter) in allParameters)
             {
                 // Grouped and flattened parameters shouldn't be added to methods
-                if (requestParameter.IsInMethod)
+                if (requestParameter.Kind == InputOperationParameterKind.Method)
                 {
                     // sort the parameters by the following sequence:
                     // 1. required parameters

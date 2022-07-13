@@ -38,15 +38,12 @@ namespace AutoRest.CSharp.Common.Input
         InputConstant? DefaultValue,
         VirtualParameter? VirtualParameter,
         InputOperationParameter? GroupedBy,
-        bool IsConstant,
+        InputOperationParameterKind Kind,
         bool IsRequired,
         bool IsApiVersion,
         bool IsResourceParameter,
         bool IsContentType,
         bool IsEndpoint,
-        bool IsFlattened,
-        bool IsInMethod,
-        bool IsInClient,
         bool SkipUrlEncoding,
         bool Explode,
         string? ArraySerializationDelimiter,
@@ -92,6 +89,15 @@ namespace AutoRest.CSharp.Common.Input
         public static InputType String { get; } = new(nameof(InputTypeKind.String), InputTypeKind.String);
         public static InputType Time { get; } = new(nameof(InputTypeKind.Time), InputTypeKind.Time);
         public static InputType Uri { get; } = new(nameof(InputTypeKind.Uri), InputTypeKind.Uri);
+    }
+
+    internal enum InputOperationParameterKind
+    {
+        Client,
+        Constant,
+        Method,
+        Flattened,
+        Grouped,
     }
 
     internal enum BodyMediaType
