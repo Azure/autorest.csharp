@@ -13,12 +13,12 @@ using Azure.ResourceManager.Models;
 namespace MgmtMockTest.Models
 {
     /// <summary> Parameters for updating the access policy in a vault. </summary>
-    public partial class VaultAccessPolicyContent : ResourceData
+    public partial class VaultAccessPolicyParameters : ResourceData
     {
-        /// <summary> Initializes a new instance of VaultAccessPolicyContent. </summary>
+        /// <summary> Initializes a new instance of VaultAccessPolicyParameters. </summary>
         /// <param name="properties"> Properties of the access policy. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public VaultAccessPolicyContent(VaultAccessPolicyProperties properties)
+        public VaultAccessPolicyParameters(VaultAccessPolicyProperties properties)
         {
             if (properties == null)
             {
@@ -28,14 +28,14 @@ namespace MgmtMockTest.Models
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of VaultAccessPolicyContent. </summary>
+        /// <summary> Initializes a new instance of VaultAccessPolicyParameters. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The resource type of the access policy. </param>
         /// <param name="properties"> Properties of the access policy. </param>
-        internal VaultAccessPolicyContent(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties) : base(id, name, resourceType, systemData)
+        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;
