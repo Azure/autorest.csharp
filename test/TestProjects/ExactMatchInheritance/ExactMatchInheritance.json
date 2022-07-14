@@ -512,7 +512,13 @@
                         }
                       ]
                     }
-                  }
+                  },
+                "type3": {
+                    "type": "string"
+                },
+                "type4": {
+                    "type": "string"
+                }
             },
             "allOf": [
                 {
