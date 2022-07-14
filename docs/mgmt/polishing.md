@@ -1,11 +1,12 @@
 # Management SDK polishing configurations
 
-- [Rename Rules](#rename-rules)
-- [Change Format by Name Rules](#change-format-by-name-rules)
-- [Rename Mapping](#rename-mapping)
-    - [Rename a Type](#rename-a-type)
-    - [Rename a Property in a Class](#rename-a-property-in-a-class)
-    - [Rename an Enumeration Value in an Enumeration Type](#rename-an-enumeration-value-in-an-enumeration-type)
+- [Management SDK polishing configurations](#management-sdk-polishing-configurations)
+  - [Rename rules](#rename-rules)
+  - [Change format by name rules](#change-format-by-name-rules)
+  - [Rename mapping](#rename-mapping)
+    - [Rename a type](#rename-a-type)
+    - [Rename a property in a class](#rename-a-property-in-a-class)
+    - [Rename an enumeration value in an enumeration type](#rename-an-enumeration-value-in-an-enumeration-type)
 
 ## Rename rules
 
@@ -81,10 +82,12 @@ Here is list of the format we support:
 | :--- | :--- |
 | arm-id | [ResourceIdentifier](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourceidentifier?view=azure-dotnet) |
 | azure-location | [AzureLocation](https://docs.microsoft.com/en-us/dotnet/api/azure.core.azurelocation?view=azure-dotnet) |
+| datetime | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
 | duration-constant | [TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan) |
 | etag | [ETag](https://docs.microsoft.com/en-us/dotnet/api/azure.etag?view=azure-dotnet) |
+| ip-address | [IPAddress](https://docs.microsoft.com/en-us/dotnet/api/system.net.ipaddress?view=net-6.0) |
+| object | [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object?view=net-6.0) |
 | resource-type | [ResourceType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourcetype?view=azure-dotnet) |
-| datetime | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
 | uri | [Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=net-6.0) |
 | uuid | [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid?view=net-6.0) |
 
