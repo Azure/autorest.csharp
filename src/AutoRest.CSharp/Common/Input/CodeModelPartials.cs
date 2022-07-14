@@ -159,6 +159,8 @@ namespace AutoRest.CSharp.Input
         public const string DurationConstant = "duration-constant";
         public const string ETag = "etag";
         public const string ResourceType = "resource-type";
+        public const string Object = "object";
+        public const string IPAddress = "ip-address";
     }
 
     internal partial class ServiceResponse
