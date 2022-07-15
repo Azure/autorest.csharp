@@ -38,7 +38,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a built-in policy definition.
+        /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
@@ -47,7 +47,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the built-in policy definition with the given name. </remarks>
         [ForwardsClientCalls]
         public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -55,7 +54,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a built-in policy definition.
+        /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
@@ -64,7 +63,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the built-in policy definition with the given name. </remarks>
         [ForwardsClientCalls]
         public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -97,7 +95,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a policy definition in a subscription.
+        /// This operation retrieves the policy definition in the given subscription with the given name.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_Get
         /// </summary>
@@ -106,7 +104,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the policy definition in the given subscription with the given name. </remarks>
         [ForwardsClientCalls]
         public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionAsync(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -114,7 +111,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a policy definition in a subscription.
+        /// This operation retrieves the policy definition in the given subscription with the given name.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_Get
         /// </summary>
@@ -123,7 +120,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the policy definition in the given subscription with the given name. </remarks>
         [ForwardsClientCalls]
         public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinition(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -169,7 +165,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// Operation Id: OrphanedPost_ValidateSomething
         /// </summary>
@@ -177,7 +173,6 @@ namespace MgmtExtensionResource
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public static async Task<Response> ValidateSomethingOrphanedPostAsync(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -186,7 +181,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// Operation Id: OrphanedPost_ValidateSomething
         /// </summary>
@@ -194,7 +189,6 @@ namespace MgmtExtensionResource
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public static Response ValidateSomethingOrphanedPost(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -220,7 +214,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieve a policy definition in a management group.
+        /// This operation retrieves the policy definition in the given management group with the given name.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
         /// </summary>
@@ -229,7 +223,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the policy definition in the given management group with the given name. </remarks>
         [ForwardsClientCalls]
         public static async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -237,7 +230,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieve a policy definition in a management group.
+        /// This operation retrieves the policy definition in the given management group with the given name.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
         /// </summary>
@@ -246,7 +239,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the policy definition in the given management group with the given name. </remarks>
         [ForwardsClientCalls]
         public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {

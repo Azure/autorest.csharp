@@ -55,7 +55,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_CreateOrUpdateTypeTwo
         /// </summary>
@@ -65,7 +65,6 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="data"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<ArmOperation<TypeTwoResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
@@ -89,7 +88,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_CreateOrUpdateTypeTwo
         /// </summary>
@@ -99,7 +98,6 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="data"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual ArmOperation<TypeTwoResource> CreateOrUpdate(WaitUntil waitUntil, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
@@ -123,7 +121,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
@@ -131,7 +129,6 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<Response<TypeTwoResource>> GetAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
@@ -153,7 +150,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
@@ -161,7 +158,6 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Response<TypeTwoResource> Get(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
@@ -183,13 +179,12 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
         /// Operation Id: Common_ListTypeTwos
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual AsyncPageable<TypeTwoResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<TypeTwoResource>> FirstPageFunc(int? pageSizeHint)
@@ -211,13 +206,12 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
         /// Operation Id: Common_ListTypeTwos
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Pageable<TypeTwoResource> GetAll(CancellationToken cancellationToken = default)
         {
             Page<TypeTwoResource> FirstPageFunc(int? pageSizeHint)
@@ -239,7 +233,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Checks to see if the resource exists in azure.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
@@ -247,7 +241,6 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual async Task<Response<bool>> ExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
@@ -267,7 +260,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Checks to see if the resource exists in azure.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
@@ -275,7 +268,6 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual Response<bool> Exists(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));

@@ -89,12 +89,11 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<Response<TypeOneResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.Get");
@@ -114,12 +113,11 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Response<TypeOneResource> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.Get");
@@ -139,7 +137,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_CreateOrUpdateTypeOne
         /// </summary>
@@ -147,7 +145,6 @@ namespace MgmtSafeFlatten
         /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<ArmOperation<TypeOneResource>> UpdateAsync(WaitUntil waitUntil, TypeOneData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
@@ -170,7 +167,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_CreateOrUpdateTypeOne
         /// </summary>
@@ -178,7 +175,6 @@ namespace MgmtSafeFlatten
         /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual ArmOperation<TypeOneResource> Update(WaitUntil waitUntil, TypeOneData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
@@ -201,7 +197,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
@@ -209,7 +205,6 @@ namespace MgmtSafeFlatten
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        /// <remarks> Add a tag to the current resource. </remarks>
         public virtual async Task<Response<TypeOneResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
@@ -233,7 +228,7 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
@@ -241,7 +236,6 @@ namespace MgmtSafeFlatten
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        /// <remarks> Add a tag to the current resource. </remarks>
         public virtual Response<TypeOneResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
@@ -265,14 +259,13 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        /// <remarks> Replace the tags on the resource with the given set. </remarks>
         public virtual async Task<Response<TypeOneResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
@@ -296,14 +289,13 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        /// <remarks> Replace the tags on the resource with the given set. </remarks>
         public virtual Response<TypeOneResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
@@ -327,14 +319,13 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        /// <remarks> Removes a tag by key from the resource. </remarks>
         public virtual async Task<Response<TypeOneResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
@@ -357,14 +348,13 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_GetTypeOne
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        /// <remarks> Removes a tag by key from the resource. </remarks>
         public virtual Response<TypeOneResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));

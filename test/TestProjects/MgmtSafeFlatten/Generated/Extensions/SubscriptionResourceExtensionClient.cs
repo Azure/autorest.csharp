@@ -48,13 +48,12 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
         /// Operation Id: Common_ListTypeOnesBySubscription
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual AsyncPageable<TypeOneResource> GetTypeOnesAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<TypeOneResource>> FirstPageFunc(int? pageSizeHint)
@@ -76,13 +75,12 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
         /// Operation Id: Common_ListTypeOnesBySubscription
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Pageable<TypeOneResource> GetTypeOnes(CancellationToken cancellationToken = default)
         {
             Page<TypeOneResource> FirstPageFunc(int? pageSizeHint)
@@ -104,13 +102,12 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
         /// Operation Id: Common_ListTypeTwosBySubscription
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual AsyncPageable<TypeTwoResource> GetTypeTwosAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<TypeTwoResource>> FirstPageFunc(int? pageSizeHint)
@@ -132,13 +129,12 @@ namespace MgmtSafeFlatten
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
         /// Operation Id: Common_ListTypeTwosBySubscription
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Pageable<TypeTwoResource> GetTypeTwos(CancellationToken cancellationToken = default)
         {
             Page<TypeTwoResource> FirstPageFunc(int? pageSizeHint)

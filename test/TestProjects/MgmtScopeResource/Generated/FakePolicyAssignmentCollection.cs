@@ -46,7 +46,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Creates or updates a policy assignment.
+        ///  This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Create
         /// </summary>
@@ -56,7 +56,6 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="data"/> is null. </exception>
-        /// <remarks> This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group. </remarks>
         public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -80,7 +79,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Creates or updates a policy assignment.
+        ///  This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Create
         /// </summary>
@@ -90,7 +89,6 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="data"/> is null. </exception>
-        /// <remarks> This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group. </remarks>
         public virtual ArmOperation<FakePolicyAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -114,7 +112,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves a policy assignment.
+        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
@@ -122,7 +120,6 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        /// <remarks> This operation retrieves a single policy assignment, given its name and the scope it was created at. </remarks>
         public virtual async Task<Response<FakePolicyAssignmentResource>> GetAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -144,7 +141,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves a policy assignment.
+        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
@@ -152,7 +149,6 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        /// <remarks> This operation retrieves a single policy assignment, given its name and the scope it was created at. </remarks>
         public virtual Response<FakePolicyAssignmentResource> Get(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -174,7 +170,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves all policy assignments that apply to a resource group.
+        /// This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: &apos;atScope()&apos;, &apos;atExactScope()&apos; or &apos;policyDefinitionId eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq &apos;{value}&apos; is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments
         /// Operation Id: FakePolicyAssignments_ListForResourceGroup
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments
@@ -188,7 +184,6 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FakePolicyAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: &apos;atScope()&apos;, &apos;atExactScope()&apos; or &apos;policyDefinitionId eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq &apos;{value}&apos; is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group. </remarks>
         public virtual AsyncPageable<FakePolicyAssignmentResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)
@@ -330,7 +325,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves all policy assignments that apply to a resource group.
+        /// This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: &apos;atScope()&apos;, &apos;atExactScope()&apos; or &apos;policyDefinitionId eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq &apos;{value}&apos; is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments
         /// Operation Id: FakePolicyAssignments_ListForResourceGroup
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments
@@ -344,7 +339,6 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FakePolicyAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: &apos;atScope()&apos;, &apos;atExactScope()&apos; or &apos;policyDefinitionId eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq &apos;{value}&apos; is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group. </remarks>
         public virtual Pageable<FakePolicyAssignmentResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)
@@ -486,7 +480,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves a policy assignment.
+        /// Checks to see if the resource exists in azure.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
@@ -494,7 +488,6 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual async Task<Response<bool>> ExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -514,7 +507,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves a policy assignment.
+        /// Checks to see if the resource exists in azure.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
@@ -522,7 +515,6 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual Response<bool> Exists(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));

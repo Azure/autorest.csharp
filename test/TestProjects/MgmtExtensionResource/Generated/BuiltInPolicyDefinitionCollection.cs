@@ -55,7 +55,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a built-in policy definition.
+        /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
@@ -63,7 +63,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the built-in policy definition with the given name. </remarks>
         public virtual async Task<Response<BuiltInPolicyDefinitionResource>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -85,7 +84,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a built-in policy definition.
+        /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
@@ -93,7 +92,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> This operation retrieves the built-in policy definition with the given name. </remarks>
         public virtual Response<BuiltInPolicyDefinitionResource> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -115,7 +113,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieve built-in policy definitions
+        /// This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose category match the {value}.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions
         /// Operation Id: PolicyDefinitions_ListBuiltIn
         /// </summary>
@@ -123,7 +121,6 @@ namespace MgmtExtensionResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BuiltInPolicyDefinitionResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose category match the {value}. </remarks>
         public virtual AsyncPageable<BuiltInPolicyDefinitionResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<BuiltInPolicyDefinitionResource>> FirstPageFunc(int? pageSizeHint)
@@ -160,7 +157,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieve built-in policy definitions
+        /// This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose category match the {value}.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions
         /// Operation Id: PolicyDefinitions_ListBuiltIn
         /// </summary>
@@ -168,7 +165,6 @@ namespace MgmtExtensionResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BuiltInPolicyDefinitionResource" /> that may take multiple service requests to iterate over. </returns>
-        /// <remarks> This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose category match the {value}. </remarks>
         public virtual Pageable<BuiltInPolicyDefinitionResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Page<BuiltInPolicyDefinitionResource> FirstPageFunc(int? pageSizeHint)
@@ -205,7 +201,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a built-in policy definition.
+        /// Checks to see if the resource exists in azure.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
@@ -213,7 +209,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual async Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -233,7 +228,7 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// Retrieves a built-in policy definition.
+        /// Checks to see if the resource exists in azure.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
@@ -241,7 +236,6 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        /// <remarks> Checks to see if the resource exists in azure. </remarks>
         public virtual Response<bool> Exists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));

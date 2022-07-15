@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
-            writer.WriteXmlDocumentationSummary($"{GetXmlDocumentationSummaryText(clientMethod.RestClientMethod)}");
+            writer.WriteXmlDocumentationSummary($"{clientMethod.RestClientMethod.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentation("remarks", $"{GetXmlDocumentationDescriptionText(clientMethod.RestClientMethod)}");
+            writer.WriteXmlDocumentation("remarks", $"{clientMethod.RestClientMethod.DescriptionText}");
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
@@ -283,7 +283,7 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
 
-            writer.WriteXmlDocumentationSummary($"{GetXmlDocumentationSummaryText(pagingMethod.Method)}");
+            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentation("remarks", $"{GetXmlDocumentationDescriptionText(pagingMethod.Method)}");
+            writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
 
             writer.Append($"{pagingMethod.Accessibility} virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
@@ -361,7 +361,7 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
             Parameter[] parameters = originalMethod.Parameters;
 
-            writer.WriteXmlDocumentationSummary($"{GetXmlDocumentationSummaryText(originalMethod)}");
+            writer.WriteXmlDocumentationSummary($"{originalMethod.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -369,7 +369,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentation("remarks", $"{GetXmlDocumentationDescriptionText(originalMethod)}");
+            writer.WriteXmlDocumentation("remarks", $"{originalMethod.DescriptionText}");
 
             string asyncText = async ? "async " : string.Empty;
             writer.Append($"{lroMethod.Accessibility} virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
@@ -421,16 +421,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             }
             writer.Line();
-        }
-
-        private string? GetXmlDocumentationSummaryText(RestClientMethod restClientMethod)
-        {
-            return restClientMethod.Summary.IsNullOrEmpty() ? restClientMethod.Description : restClientMethod.Summary;
-        }
-
-        private string? GetXmlDocumentationDescriptionText(RestClientMethod restClientMethod)
-        {
-            return restClientMethod.Summary.IsNullOrEmpty() ? string.Empty : restClientMethod.Description;
         }
 
         private class SecuritySchemesComparer : IEqualityComparer<SecurityScheme>

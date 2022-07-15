@@ -89,12 +89,11 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<Response<TypeTwoResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.Get");
@@ -114,12 +113,11 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual Response<TypeTwoResource> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.Get");
@@ -139,7 +137,7 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_CreateOrUpdateTypeTwo
         /// </summary>
@@ -147,7 +145,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual async Task<ArmOperation<TypeTwoResource>> UpdateAsync(WaitUntil waitUntil, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
@@ -170,7 +167,7 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_CreateOrUpdateTypeTwo
         /// </summary>
@@ -178,7 +175,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        /// <remarks> Description for Validate information for a certificate order. </remarks>
         public virtual ArmOperation<TypeTwoResource> Update(WaitUntil waitUntil, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
@@ -201,7 +197,7 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
@@ -209,7 +205,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        /// <remarks> Add a tag to the current resource. </remarks>
         public virtual async Task<Response<TypeTwoResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
@@ -233,7 +228,7 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
@@ -241,7 +236,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        /// <remarks> Add a tag to the current resource. </remarks>
         public virtual Response<TypeTwoResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
@@ -265,14 +259,13 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        /// <remarks> Replace the tags on the resource with the given set. </remarks>
         public virtual async Task<Response<TypeTwoResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
@@ -296,14 +289,13 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        /// <remarks> Replace the tags on the resource with the given set. </remarks>
         public virtual Response<TypeTwoResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
@@ -327,14 +319,13 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        /// <remarks> Removes a tag by key from the resource. </remarks>
         public virtual async Task<Response<TypeTwoResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
@@ -357,14 +348,13 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary>
-        /// Validate information for a certificate order.
+        /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
         /// Operation Id: Common_GetTypeTwo
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        /// <remarks> Removes a tag by key from the resource. </remarks>
         public virtual Response<TypeTwoResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));

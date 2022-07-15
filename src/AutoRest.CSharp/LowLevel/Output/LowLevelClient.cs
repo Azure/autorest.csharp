@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models
                 var parameters = operation.IsLongRunning
                     ? requestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
                     : requestMethod.Parameters;
-                var methodSignature = new MethodSignature(requestMethod.Name, requestMethod.Description, requestMethod.Summary, requestMethod.Accessibility | Virtual, returnType, null, parameters);
+                var methodSignature = new MethodSignature(requestMethod.Name, requestMethod.Summary, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
 
                 yield return new LowLevelClientMethod(methodSignature, requestMethod, operationSchemas, diagnostic, pagingInfo, operation.IsLongRunning);
             }

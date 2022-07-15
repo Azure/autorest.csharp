@@ -45,7 +45,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 var indexOfPort = s?.IndexOf(portPhrase);
                 if (indexOfPort > 0)
                 {
-                    Host = new Uri($"http://localhost:3000");
+                    Host = new Uri($"http://localhost:{s.Substring(indexOfPort.Value + portPhrase.Length).Trim()}");
                     Client = new HttpClient
                     {
                         BaseAddress = Host

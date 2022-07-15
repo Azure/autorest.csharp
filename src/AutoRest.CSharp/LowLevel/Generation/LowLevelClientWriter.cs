@@ -511,7 +511,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod)
         {
             codeWriter
-                .WriteMethodDocumentationBase(methodSignature)
+                .WriteMethodDocumentation(methodSignature)
                 .WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
 
             if (methodSignature.ReturnType != null)

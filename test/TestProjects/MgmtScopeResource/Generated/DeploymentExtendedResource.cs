@@ -143,13 +143,12 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Deletes a deployment from the deployment history.
+        /// A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_DeleteAtScope
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </remarks>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedResource.Delete");
@@ -170,13 +169,12 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Deletes a deployment from the deployment history.
+        /// A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_DeleteAtScope
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </remarks>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedResource.Delete");
@@ -197,7 +195,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Deploys resources at a given scope.
+        /// You can provide the template and parameters directly in the request or link to JSON files.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_CreateOrUpdateAtScope
         /// </summary>
@@ -205,7 +203,6 @@ namespace MgmtScopeResource
         /// <param name="deployment"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deployment"/> is null. </exception>
-        /// <remarks> You can provide the template and parameters directly in the request or link to JSON files. </remarks>
         public virtual async Task<ArmOperation<DeploymentExtendedResource>> UpdateAsync(WaitUntil waitUntil, Deployment deployment, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(deployment, nameof(deployment));
@@ -228,7 +225,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Deploys resources at a given scope.
+        /// You can provide the template and parameters directly in the request or link to JSON files.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_CreateOrUpdateAtScope
         /// </summary>
@@ -236,7 +233,6 @@ namespace MgmtScopeResource
         /// <param name="deployment"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deployment"/> is null. </exception>
-        /// <remarks> You can provide the template and parameters directly in the request or link to JSON files. </remarks>
         public virtual ArmOperation<DeploymentExtendedResource> Update(WaitUntil waitUntil, Deployment deployment, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(deployment, nameof(deployment));
@@ -259,12 +255,11 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Cancels a currently running template deployment.
+        /// You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel
         /// Operation Id: Deployments_CancelAtScope
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed. </remarks>
         public virtual async Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedResource.CancelAtScope");
@@ -282,12 +277,11 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Cancels a currently running template deployment.
+        /// You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel
         /// Operation Id: Deployments_CancelAtScope
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed. </remarks>
         public virtual Response CancelAtScope(CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedResource.CancelAtScope");

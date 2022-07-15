@@ -87,12 +87,11 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves a policy assignment.
+        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> This operation retrieves a single policy assignment, given its name and the scope it was created at. </remarks>
         public virtual async Task<Response<FakePolicyAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Get");
@@ -112,12 +111,11 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Retrieves a policy assignment.
+        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> This operation retrieves a single policy assignment, given its name and the scope it was created at. </remarks>
         public virtual Response<FakePolicyAssignmentResource> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Get");
@@ -137,13 +135,12 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Deletes a policy assignment.
+        /// This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Delete
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </remarks>
         public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Delete");
@@ -164,13 +161,12 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Deletes a policy assignment.
+        /// This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Delete
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </remarks>
         public virtual ArmOperation<FakePolicyAssignmentResource> Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Delete");
@@ -191,7 +187,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Creates or updates a policy assignment.
+        ///  This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Create
         /// </summary>
@@ -199,7 +195,6 @@ namespace MgmtScopeResource
         /// <param name="data"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        /// <remarks> This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group. </remarks>
         public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> UpdateAsync(WaitUntil waitUntil, FakePolicyAssignmentData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
@@ -222,7 +217,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Creates or updates a policy assignment.
+        ///  This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Create
         /// </summary>
@@ -230,7 +225,6 @@ namespace MgmtScopeResource
         /// <param name="data"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        /// <remarks> This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group. </remarks>
         public virtual ArmOperation<FakePolicyAssignmentResource> Update(WaitUntil waitUntil, FakePolicyAssignmentData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));

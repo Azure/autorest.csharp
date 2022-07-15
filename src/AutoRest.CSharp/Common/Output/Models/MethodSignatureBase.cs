@@ -8,7 +8,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal abstract record MethodSignatureBase(string Name, string? Description, string? Summary, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters)
+    internal abstract record MethodSignatureBase(string Name, string? Summary, string? Description, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters)
     {
         public string? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
         public string? DescriptionText => Summary.IsNullOrEmpty() ? string.Empty : Description;

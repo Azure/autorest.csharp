@@ -116,8 +116,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
                 Name: Type.Name,
-                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 null,
+                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: Protected,
                 Parameters: Array.Empty<Parameter>());
         }

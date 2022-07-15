@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
-            return new MethodSignature(ctor.Name, ctor.Description, ctor.Summary, Public | Static, modelType.Type, returnDescription, methodParameters);
+            return new MethodSignature(ctor.Name, ctor.Summary, ctor.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
         }
 
         private static bool RequiresModelFactory(SchemaObjectType model)
