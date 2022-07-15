@@ -174,7 +174,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            writer.WriteXmlDocumentationSummary($"{methodBase.SummaryText}");
+            return writer
+                .WriteXmlDocumentationSummary($"{methodBase.SummaryText}")
+                .WriteMethodDocumentationSignature(methodBase);
+        }
+
+        public static CodeWriter WriteMethodDocumentationSignature(this CodeWriter writer, MethodSignatureBase methodBase)
+        {
             writer.WriteXmlDocumentationParameters(methodBase.Parameters);
             writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
             writer.WriteXmlDocumentationNonEmptyParametersException(methodBase.Parameters);

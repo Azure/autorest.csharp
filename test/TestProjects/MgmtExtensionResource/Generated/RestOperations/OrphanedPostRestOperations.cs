@@ -57,7 +57,7 @@ namespace MgmtExtensionResource
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -79,7 +79,7 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

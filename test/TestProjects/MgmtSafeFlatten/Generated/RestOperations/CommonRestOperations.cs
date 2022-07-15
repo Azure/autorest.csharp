@@ -54,7 +54,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -79,7 +79,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -121,7 +121,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -146,7 +146,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -190,7 +190,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -217,7 +217,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -263,7 +263,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -290,7 +290,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -337,7 +337,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
@@ -368,7 +368,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
@@ -423,7 +423,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
@@ -454,7 +454,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
@@ -505,7 +505,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
@@ -536,7 +536,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
@@ -591,7 +591,7 @@ namespace MgmtSafeFlatten
             return message;
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
@@ -622,7 +622,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        /// <summary> Validate information for a certificate order. </summary>
+        /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>

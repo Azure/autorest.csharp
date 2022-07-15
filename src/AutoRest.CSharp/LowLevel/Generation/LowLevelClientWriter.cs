@@ -243,8 +243,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 Name = $"{clientMethod.Signature.Name}Implementation",
                 Modifiers = Private,
-                Description = null,
                 Summary = null,
+                Description = null,
                 Parameters = clientMethod.Signature.Parameters
                     .Select(p => p with { DefaultValue = null })
                     .Prepend(ScopeNameParameter).ToArray()

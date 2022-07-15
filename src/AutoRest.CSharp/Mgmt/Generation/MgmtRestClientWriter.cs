@@ -74,7 +74,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
             var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
 
-            writer.WriteMethodDocumentation(method);
+            writer
+                .WriteXmlDocumentationSummary($"{method.Description}")
+                .WriteMethodDocumentationSignature(method);
+
             using (writer.WriteMethodDeclaration(method))
             {
                 writer.WriteParametersValidation(parameters);
