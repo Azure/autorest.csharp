@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -56,7 +57,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
                     var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
-                    var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
+                    // TODO: remove this line and uncomment below line after bumping ResourceManager version.
+                    var optionalPropertiesForMatch = replacementType.Name == nameof(ManagedServiceIdentity) ? new HashSet<string>{"UserAssignedIdentities"} : new HashSet<string>();
+                    //var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
                     List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.Name) || typeToReplacePropertyNames.Contains(p.Name)).ToList();
                     List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.ToList();
 
@@ -93,9 +96,33 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
         {
+            var extraDescription = string.Empty;
+            if (!replacementCSharpType.IsFrameworkType && replacementCSharpType.Implementation is SystemObjectType systemObjectType && systemObjectType.SystemType == typeof(ManagedServiceIdentity))
+            {
+                var originalObjSchema = originalType!.SchemaProperty?.Schema as ObjectSchema;
+                var identityTypeSchema = originalObjSchema?.Properties.First(p => p.SerializedName == "type").Schema;
+                if (identityTypeSchema != null)
+                {
+                    var supportedTypesToShow = new List<string>();
+                    var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
+                    if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                    {
+                        supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
+                    }
+                    else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                    {
+                        supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
+                    }
+                    if (supportedTypesToShow.Count > 0)
+                    {
+                        var period = originalType.Description.EndsWith(".") ? string.Empty : ".";
+                        extraDescription = $"{period} Current supported identity types: {string.Join(", ", supportedTypesToShow)}";
+                    }
+                }
+            }
             return new ObjectTypeProperty(
                     new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, replacementCSharpType),
-                    originalType.Description,
+                    originalType.Description + extraDescription,
                     originalType.IsReadOnly,
                     originalType.SchemaProperty
                     );
