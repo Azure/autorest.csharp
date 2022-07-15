@@ -8,9 +8,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -139,28 +139,31 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             // only class models will have discriminators
             if (node is ClassDeclarationSyntax classDeclaration)
             {
-                var methodName = $"Deserialize{classDeclaration.Identifier.Text}";
-                var deserializeMethod = classDeclaration.Members.OfType<MethodDeclarationSyntax>().FirstOrDefault(method => method.Identifier.Text.Equals(methodName));
-                if (deserializeMethod != null && deserializeMethod.Body != null)
+                if (classDeclaration.HasLeadingTrivia)
                 {
-                    var switchStatementNode = deserializeMethod.Body.DescendantNodes().OfType<SwitchStatementSyntax>();
-                    foreach (var switchNode in switchStatementNode)
+                    var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
+                    var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => BuilderHelpers.DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
+                    if (filteredTriviaList.Count() == 1)
                     {
-                        if (switchNode.Expression.ToFullString().Contains("discriminator.GetString"))
-                        {
-                            // get the identifiers in the switch statements, some of them are class names of the derived classes
-                            // but since we do not have the full semantic model here, we cannot directly get which of them is
-                            // therefore here we just return all of them, and see if the derived type name shows in this list
-                            var identifierNodes = switchNode.Sections.SelectMany(section => section.DescendantNodes().OfType<IdentifierNameSyntax>());
-                            identifiers = identifierNodes.Select(identifier => identifier.Identifier.ToFullString()).ToImmutableHashSet();
-                            return true;
-                        }
+                        var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
+                        var filteredDescendantNodes = FilterTriviaWithDiscriminator(descendantNodes);
+                        var identifierNodes = filteredDescendantNodes.SelectMany(node => node.DescendantNodes().OfType<XmlCrefAttributeSyntax>());
+                        identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToImmutableHashSet();
+                        return true;
                     }
                 }
                 return false;
             }
 
             return false;
+        }
+
+        private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)
+        {
+            // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
+            // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
+            var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(BuilderHelpers.DiscriminatorDescFixedPart.Last()));
+            return nodes.Where((val, index) => index >= targetIndex);
         }
 
         private static Project MarkInternal(Project project, BaseTypeDeclarationSyntax declarationNode)

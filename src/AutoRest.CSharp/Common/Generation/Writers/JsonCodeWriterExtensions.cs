@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -198,7 +199,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                             writeFormat = true;
                         }
-                        else if (frameworkType == typeof(ETag))
+                        else if (frameworkType == typeof(ETag) || frameworkType == typeof(IPAddress))
                         {
                             writer.Line($"WriteStringValue({name}.ToString());");
                             return;
@@ -565,6 +566,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 frameworkType == typeof(Azure.Core.AzureLocation))
             {
                 writer.Append($"new {frameworkType}({element}.GetString())");
+                return;
+            }
+            else if (frameworkType == typeof(IPAddress))
+            {
+                writer.Append($"{frameworkType}.Parse({element}.GetString())");
                 return;
             }
             else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))

@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="connectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
         [SerializationConstructor]
-        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, PrivateEndpoint privateEndpoint, ReferenceTypesPrivateLinkServiceConnectionState connectionState, ReferenceTypesPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData)
+        protected PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, PrivateEndpoint privateEndpoint, ReferenceTypesPrivateLinkServiceConnectionState connectionState, ReferenceTypesPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData)
         {
             PrivateEndpoint = privateEndpoint;
             ConnectionState = connectionState;
