@@ -252,8 +252,9 @@ namespace Azure.Service.Models
 
 ### Change a model or client namespace
 
-Define a class with a desired namespace and mark it with `[CodeGenModel("OriginalName")]`
-The same works for a client, if marked with `[CodeGenClient("ClientName")]`
+Define a class with a desired namespace and mark it with `[CodeGenModel("OriginalName")]`.
+
+The same works for a client, if marked with `[CodeGenClient("ClientName")]`.
 
 <details>
 
