@@ -18,7 +18,7 @@ ___
 - [Customizing the generated code](#customizing-the-generated-code)
     - [Make a model internal](#make-a-model-internal)
     - [Rename a model class](#rename-a-model-class)
-    - [Change a model or client namespace](#change-a-model-namespace)
+    - [Change a model or client namespace](#change-a-model-or-client-namespace)
     - [Make model property internal](#make-model-property-internal)
     - [Rename a model property](#rename-a-model-property)
     - [Change a model property type](#change-a-model-property-type)
@@ -250,7 +250,7 @@ namespace Azure.Service.Models
 
 </details>
 
-### Change a model namespace
+### Change a model or client namespace
 
 Define a class with a desired namespace and mark it with `[CodeGenModel("OriginalName")]`
 The same works for a client, if marked with `[CodeGenClient("ClientName")]`
