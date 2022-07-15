@@ -37,7 +37,7 @@ namespace MgmtPropertyChooser
         /// <param name="identity"> The identity of the virtual machine, if configured. </param>
         /// <param name="identityWithRenamedProperty"> The identity of the virtual machine, if configured. </param>
         /// <param name="identityWithDifferentPropertyType"> The identity of the virtual machine, if configured. </param>
-        /// <param name="identityWithNoUserIdentity"> The identity of the virtual machine, if configured. </param>
+        /// <param name="identityWithNoUserIdentity"> The identity of the virtual machine, if configured. Current supported identity types: None, SystemAssigned. </param>
         /// <param name="identityWithNoSystemIdentity"> The identity of the virtual machine, if configured. </param>
         /// <param name="identityV3"> The identity of the virtual machine, if configured. </param>
         /// <param name="zones"> The virtual machine zones. </param>
@@ -78,7 +78,7 @@ namespace MgmtPropertyChooser
         public IdentityWithRenamedProperty IdentityWithRenamedProperty { get; set; }
         /// <summary> The identity of the virtual machine, if configured. </summary>
         public IdentityWithDifferentPropertyType IdentityWithDifferentPropertyType { get; set; }
-        /// <summary> The identity of the virtual machine, if configured. </summary>
+        /// <summary> The identity of the virtual machine, if configured. Current supported identity types: None, SystemAssigned. </summary>
         public ManagedServiceIdentity IdentityWithNoUserIdentity { get; set; }
         /// <summary> The identity of the virtual machine, if configured. </summary>
         public IdentityWithNoSystemIdentity IdentityWithNoSystemIdentity { get; set; }

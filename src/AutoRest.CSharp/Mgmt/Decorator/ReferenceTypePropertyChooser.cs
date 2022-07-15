@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var extraDescription = BuilderHelpers.CreateExtraDescriptionForManagedServiceIdentity(originalType, replacementCSharpType);
             var originalDescription = string.IsNullOrWhiteSpace(originalType.Description) ? originalType.CreateDefaultPropertyDescription().ToString() : originalType.Description;
             var periodAndSpace = originalDescription.ToString().EndsWith(".") ? " " : ". ";
-            var description = string.IsNullOrEmpty(extraDescription) ? originalType.Description : $"{originalDescription}{periodAndSpace}{extraDescription}";
+            var description = string.IsNullOrEmpty(extraDescription) ? originalDescription : $"{originalDescription}{periodAndSpace}{extraDescription}";
             return new ObjectTypeProperty(
                     new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, replacementCSharpType),
                     description,

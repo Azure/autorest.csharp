@@ -63,6 +63,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.IsTrue(properties.Any(p => p.Name == "FakeSubResource" && p.PropertyType == typeof(SubResource)));
             // FakeWritableSubResource is replaced by WritableSubResource
             Assert.IsTrue(properties.Any(p => p.Name == "FakeWritableSubResource" && p.PropertyType == typeof(WritableSubResource)));
+            // IdentityWithNoUserIdentity is replaced by ManagedServiceIdentity
+            Assert.IsTrue(properties.Any(p => p.Name == "IdentityWithNoUserIdentity" && p.PropertyType == typeof(ManagedServiceIdentity)));
         }
 
         [TestCase]
@@ -127,35 +129,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             Assert.IsTrue(properties.Any(p => p.Name == "IdentityWithDifferentPropertyType"));
             Assert.IsTrue(properties.Any(p => p.PropertyType == typeof(IdentityWithDifferentPropertyType)));
-        }
-
-        [TestCase]
-        public void ValidateIdentityWithNoUserIdentity()
-        {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithNoUserIdentity");
-            var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            var principalIdProperty = properties[0];
-            Assert.NotNull(principalIdProperty);
-            Assert.AreEqual("PrincipalId", principalIdProperty.Name);
-            Assert.AreEqual(typeof(string), principalIdProperty.PropertyType);
-
-            var tenantIdProperty = properties[1];
-            Assert.NotNull(tenantIdProperty);
-            Assert.AreEqual("TenantId", tenantIdProperty.Name);
-            Assert.AreEqual(typeof(string), tenantIdProperty.PropertyType);
-
-            Assert.IsFalse(properties.Any(p => p.Name == "UserAssignedIdentities"));
-        }
-
-        [TestCase]
-        public void ValidateIdentityWithNoUserIdentityNotReplaced()
-        {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
-            var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            Assert.IsTrue(properties.Any(p => p.Name == "IdentityWithNoUserIdentity"));
-            Assert.IsTrue(properties.Any(p => p.PropertyType == typeof(IdentityWithNoUserIdentity)));
         }
 
         [TestCase]
