@@ -85,8 +85,8 @@ namespace AutoRest.CSharp.Output.Builders
             if (!type.IsFrameworkType && type.Implementation is SystemObjectType systemObjectType
                 && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
                 && schema is ObjectSchema objectSchema
-                && (objectSchema.Properties.First(p => p.SerializedName == "type")?.Schema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)
-                    || objectSchema.Properties.First(p => p.SerializedName == "type")?.Schema is ChoiceSchema choiceSchema && choiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)))
+                && (objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Schema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)
+                    || objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Schema is ChoiceSchema choiceSchema && choiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)))
             {
                 return true;
             }

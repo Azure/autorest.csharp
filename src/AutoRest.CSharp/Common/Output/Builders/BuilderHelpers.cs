@@ -10,11 +10,13 @@ using System.Security;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -198,6 +200,48 @@ namespace AutoRest.CSharp.Output.Builders
                     $"{System.Environment.NewLine}The available derived classes include {FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
             }
             return string.Empty;
+        }
+
+        public static string CreateExtraDescriptionForManagedServiceIdentity(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
+        {
+            var extraDescription = string.Empty;
+            if (!replacementCSharpType.IsFrameworkType && replacementCSharpType.Implementation is SystemObjectType systemObjectType && systemObjectType.SystemType == typeof(ManagedServiceIdentity))
+            {
+                var originalObjSchema = originalType.SchemaProperty?.Schema as ObjectSchema;
+                var identityTypeSchema = originalObjSchema?.GetAllProperties().FirstOrDefault(p => p.SerializedName == "type").Schema;
+                if (identityTypeSchema != null)
+                {
+                    var supportedTypesToShow = new List<string>();
+                    var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
+                    if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                    {
+                        supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
+                    }
+                    else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                    {
+                        supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
+                    }
+                    if (supportedTypesToShow.Count > 0)
+                    {
+                        extraDescription = $"Current supported identity types: {string.Join(", ", supportedTypesToShow)}";
+                    }
+                }
+            }
+            return extraDescription;
+        }
+
+        public static FormattableString CreateDefaultPropertyDescription(this ObjectTypeProperty property, string? overrideName = null)
+        {
+            var nameToUse = overrideName ?? property.Declaration.Name;
+            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
+            if (property.IsReadOnly)
+            {
+                return $"Gets the {splitDeclarationName}";
+            }
+            else
+            {
+                return $"Gets or sets the {splitDeclarationName}";
+            }
         }
     }
 }

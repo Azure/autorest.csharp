@@ -10,6 +10,7 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -96,33 +97,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
         {
-            var extraDescription = string.Empty;
-            if (!replacementCSharpType.IsFrameworkType && replacementCSharpType.Implementation is SystemObjectType systemObjectType && systemObjectType.SystemType == typeof(ManagedServiceIdentity))
-            {
-                var originalObjSchema = originalType!.SchemaProperty?.Schema as ObjectSchema;
-                var identityTypeSchema = originalObjSchema?.Properties.First(p => p.SerializedName == "type").Schema;
-                if (identityTypeSchema != null)
-                {
-                    var supportedTypesToShow = new List<string>();
-                    var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
-                    if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
-                    {
-                        supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
-                    }
-                    else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
-                    {
-                        supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
-                    }
-                    if (supportedTypesToShow.Count > 0)
-                    {
-                        var period = originalType.Description.EndsWith(".") ? string.Empty : ".";
-                        extraDescription = $"{period} Current supported identity types: {string.Join(", ", supportedTypesToShow)}";
-                    }
-                }
-            }
+            var extraDescription = BuilderHelpers.CreateExtraDescriptionForManagedServiceIdentity(originalType, replacementCSharpType);
+            var originalDescription = string.IsNullOrWhiteSpace(originalType.Description) ? originalType.CreateDefaultPropertyDescription().ToString() : originalType.Description;
+            var periodAndSpace = originalDescription.ToString().EndsWith(".") ? " " : ". ";
+            var description = string.IsNullOrEmpty(extraDescription) ? originalType.Description : $"{originalDescription}{periodAndSpace}{extraDescription}";
             return new ObjectTypeProperty(
                     new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, replacementCSharpType),
-                    originalType.Description + extraDescription,
+                    description,
                     originalType.IsReadOnly,
                     originalType.SchemaProperty
                     );

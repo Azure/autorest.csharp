@@ -42,7 +42,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
                 writer.WritePropertyName("identityWithNoUserIdentity");
-                writer.WriteObjectValue(IdentityWithNoUserIdentity);
+                JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
             }
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
@@ -111,7 +111,7 @@ namespace MgmtPropertyChooser
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
             Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
-            Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
+            Optional<ManagedServiceIdentity> identityWithNoUserIdentity = default;
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<ManagedServiceIdentity> identityV3 = default;
             Optional<IList<string>> zones = default;
@@ -192,7 +192,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identityWithNoUserIdentity = IdentityWithNoUserIdentity.DeserializeIdentityWithNoUserIdentity(property.Value);
+                    identityWithNoUserIdentity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("identityWithNoSystemIdentity"))
@@ -344,7 +344,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }
