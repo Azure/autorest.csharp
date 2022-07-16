@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models
         private DataPlaneRestClient? _restClient;
 
         public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context) :
-            this(operationGroup, context, ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context), ClientBuilder.GetClientSuffix(context))
+            this(operationGroup, context, ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context), ClientBuilder.GetClientSuffix())
         {
         }
 

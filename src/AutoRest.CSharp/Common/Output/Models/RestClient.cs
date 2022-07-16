@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var clientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
             ClientPrefix = clientPrefix;
-            DefaultName = clientPrefix + "Rest" + ClientBuilder.GetClientSuffix(context);
+            DefaultName = clientPrefix + "Rest" + ClientBuilder.GetClientSuffix();
         }
 
         private IEnumerable<RestClientMethod> BuildAllMethods()

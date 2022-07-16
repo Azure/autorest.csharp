@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {
-                    var csharpType = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
+                    var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
                     _valueCache.TryAdd(typeToReplace.ObjectSchema, csharpType);
                     return csharpType;
                 }

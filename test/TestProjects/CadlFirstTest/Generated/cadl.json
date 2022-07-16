@@ -1,0 +1,183 @@
+{
+  "Name": "demo.helloworld",
+  "Description": "",
+  "ApiVersions": ["0.1.0"],
+  "Clients": [
+    {
+      "Name": "HelloWorld",
+      "Operations": [
+        {
+          "Name": "topAction",
+          "Description": "",
+          "Parameters": [
+            {
+              "$id": "1",
+              "Name": "Endpoint",
+              "NameInRequest": "Endpoint",
+              "Description": "",
+              "Type": {"Name": "Uri", "Kind": "Uri"},
+              "Location": "Uri",
+              "IsRequired": true,
+              "IsEndpoint": true,
+              "Kind": "Client"
+            },
+            {
+              "Name": "action",
+              "NameInRequest": "action",
+              "Description": "",
+              "Type": {"Name": "string", "Kind": "String"},
+              "Location": "Path",
+              "IsRequired": true,
+              "IsApiVersion": false,
+              "IsResourceParameter": false,
+              "IsContentType": false,
+              "IsEndpoint": false,
+              "Kind": "Method",
+              "SkipUrlEncoding": true,
+              "Explode": false
+            },
+            {
+              "$id": "2",
+              "Name": "apiVersion",
+              "NameInRequest": "apiVersion",
+              "Description": "",
+              "Type": {"Name": "string", "Kind": "String"},
+              "Location": "Query",
+              "IsRequired": true,
+              "IsApiVersion": true,
+              "Kind": "Client"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/top/{action}",
+          "BufferResponse": false
+        },
+        {
+          "Name": "topAction2",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "1"
+            },
+            {
+              "$ref": "2"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/top2",
+          "BufferResponse": false
+        }
+      ]
+    },
+    {
+      "Name": "Demo",
+      "Operations": [
+        {
+          "Name": "sayHi",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "1"
+            },
+            {
+              "$ref": "2"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/hello",
+          "BufferResponse": false
+        }
+      ]
+    },
+    {
+      "Name": "Demo2",
+      "Operations": [
+        {
+          "Name": "helloAgain",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "1"
+            },
+            {
+              "$ref": "2"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/againHi",
+          "BufferResponse": false
+        },
+        {
+          "Name": "helloDemo2",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "1"
+            },
+            {
+              "$ref": "2"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/demoHi",
+          "BufferResponse": false
+        }
+      ]
+    }
+  ]
+}

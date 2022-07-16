@@ -4,21 +4,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Operation = AutoRest.CSharp.Input.Operation;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using Diagnostic = AutoRest.CSharp.Output.Models.Requests.Diagnostic;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -47,14 +47,12 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<InputOperation> operations, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
-            : base(context)
+        public LowLevelClient(string name, string ns, string description, string libraryName, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions)
+            : base(ns, sourceInputModel)
         {
             DefaultName = name;
             DefaultNamespace = ns;
-            Description = BuilderHelpers.EscapeXmlDescription(string.IsNullOrWhiteSpace(description)
-                ? $"The {ClientBuilder.GetClientPrefix(Declaration.Name, context)} service client."
-                : BuilderHelpers.EscapeXmlDescription(description));
+            Description = description;
             IsSubClient = isSubClient;
             SubClients = subClients;
 
@@ -63,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
 
             Parameters = builder.GetOrderedParametersByRequired();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
-            Fields = ClientFields.CreateForClient(Parameters, context);
+            Fields = ClientFields.CreateForClient(Parameters, authorization);
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
@@ -78,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Distinct()
                 .ToArray();
 
-            SubClientFactoryMethods = BuildSubClientFactoryMethods().ToArray();
+            SubClientFactoryMethods = BuildSubClientFactoryMethods(libraryName).ToArray();
         }
 
         public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName)
@@ -236,7 +234,7 @@ namespace AutoRest.CSharp.Output.Models
             return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
-        public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods()
+        public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods(string libraryName)
         {
             foreach (var subClient in SubClients)
             {
@@ -244,14 +242,13 @@ namespace AutoRest.CSharp.Output.Models
                 var methodParameters = constructorCallParameters.Where(p => Fields.GetFieldByParameter(p) == null).ToArray();
 
                 var subClientName = subClient.Type.Name;
-                var libraryName = Context.DefaultLibraryName;
                 var methodName = subClientName.StartsWith(libraryName)
                     ? subClientName[libraryName.Length..]
                     : subClientName;
 
                 if (!subClient.IsResourceClient)
                 {
-                    methodName += ClientBuilder.GetClientSuffix(Context);
+                    methodName += ClientBuilder.GetClientSuffix();
                 }
 
                 var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", Public | Virtual, subClient.Type, null, methodParameters.ToArray());

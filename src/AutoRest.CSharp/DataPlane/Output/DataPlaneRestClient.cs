@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
-            var operations = CodeModelConverter.CreateOperations(OperationGroup.Operations);
+            var operations = new CodeModelConverter().CreateOperations(OperationGroup.Operations);
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
             foreach (var (serviceRequest, operation) in operations)

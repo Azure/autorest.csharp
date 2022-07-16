@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
         {
-            foreach (var inputOperation in CodeModelConverter.CreateOperations(operationGroup.Operations).Values.Where(o => o.Source == operation))
+            foreach (var inputOperation in new CodeModelConverter().CreateOperations(operationGroup.Operations).Values.Where(o => o.Source == operation))
             {
                 var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(inputOperation);
                 var segments = new List<Segment>();

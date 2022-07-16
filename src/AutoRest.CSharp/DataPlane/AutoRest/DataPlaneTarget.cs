@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -62,8 +63,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (Configuration.PublicClients && context.Library.Clients.Any())
             {
-                var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-                var clientOptionsType = new ClientOptionsTypeProvider(context, $"{clientPrefix}ClientOptions", $"{clientPrefix}Client");
+                var clientOptionsType = new ClientOptionsTypeProvider(context);
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, clientOptionsType);
 

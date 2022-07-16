@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private const string ClientSuffixValue = "Client";
         private const string OperationsSuffixValue = "Operations";
 
-        public static string GetClientSuffix(BuildContext context) => Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
+        public static string GetClientSuffix() => Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
 
         public static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
@@ -29,8 +29,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         public static string GetClientPrefix(string name, BuildContext context)
+            => GetClientPrefix(name, context.CodeModel.Language.Default.Name);
+
+        public static string GetClientPrefix(string? name, string namespaceName)
         {
-            name = string.IsNullOrEmpty(name) ? context.CodeModel.Language.Default.Name : name.ToCleanName();
+            name = string.IsNullOrEmpty(name) ? namespaceName : name.ToCleanName();
 
             if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
             {

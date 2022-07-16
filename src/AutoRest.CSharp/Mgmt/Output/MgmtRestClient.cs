@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
-            var operations = CodeModelConverter.CreateOperations(OperationGroup.Operations);
+            var operations = new CodeModelConverter().CreateOperations(OperationGroup.Operations);
             return operations.ToDictionary(kvp => kvp.Key, kvp => _clientBuilder.BuildMethod(kvp.Value, null, "public", ShouldReturnNullOn404(kvp.Value)));
         }
 

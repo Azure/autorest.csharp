@@ -8,12 +8,14 @@ using Azure.Core;
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
+    internal record CodeModelSecurity(IReadOnlyList<SecurityScheme> Schemes) : InputAuth();
+
     internal record CodeModelOperation(
             string Name,
             string Description,
             string? OperationId,
             string? Accessibility,
-            IReadOnlyList<InputOperationParameter> Parameters,
+            IReadOnlyList<InputParameter> Parameters,
             IReadOnlyList<OperationResponse> Responses,
             RequestMethod HttpMethod,
             BodyMediaType RequestBodyMediaType,

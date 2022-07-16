@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
         internal CachedDictionary<Schema, TypeProvider> SchemaMap => _models;
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
-        public IDictionary<string, LowLevelOutputLibraryFactory.ClientInfo> DPGClientInfosByName => GetDpgClientInfosByName();
+        public IDictionary<string, DpgLibraryBuilder.ClientInfo> DPGClientInfosByName => GetDpgClientInfosByName();
         public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
 
         public override CSharpType FindTypeForSchema(Schema schema)
@@ -87,14 +87,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        private IDictionary<string, LowLevelOutputLibraryFactory.ClientInfo> GetDpgClientInfosByName()
+        private IDictionary<string, DpgLibraryBuilder.ClientInfo> GetDpgClientInfosByName()
         {
-            var clientInfosByName = CodeModelConverter.CreateNamespace(_context.CodeModel)
+            var clientInfosByName = new CodeModelConverter().CreateNamespace(_codeModel)
                 .Clients
-                .Select(og => LowLevelOutputLibraryFactory.CreateClientInfo(og, _context))
+                .Select(og => DpgLibraryBuilder.CreateClientInfo(og, _context.SourceInputModel, _context.CodeModel.Language.Default.Name))
                 .ToDictionary(ci => ci.Name);
 
-            LowLevelOutputLibraryFactory.SetRequestsToClients(clientInfosByName.Values);
+            DpgLibraryBuilder.SetRequestsToClients(clientInfosByName.Values);
             return clientInfosByName;
         }
 
@@ -204,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var restClients = new Dictionary<OperationGroup, DataPlaneRestClient>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                var operations = CodeModelConverter.CreateOperations(operationGroup.Operations);
+                var operations = new CodeModelConverter().CreateOperations(operationGroup.Operations);
                 var clientParameters = RestClientBuilder.GetParametersFromOperations(operations.Values).ToList();
                 var restClient = new RestClientBuilder(clientParameters, _context);
                 restClients.Add(operationGroup, new DataPlaneRestClient(operationGroup, restClient, _context));

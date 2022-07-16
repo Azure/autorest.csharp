@@ -9,7 +9,12 @@ using Azure.Core;
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputNamespace(string Name, string Description, IReadOnlyList<InputClient> Clients);
+    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputClient> Clients, InputAuth Auth)
+    {
+        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: Array.Empty<string>(), Clients: Array.Empty<InputClient>(), Auth: new InputAuth()) {}
+    }
+
+    internal record InputAuth();
 
     internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations);
 
@@ -17,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
         string Name,
         string Description,
         string? Accessibility,
-        IReadOnlyList<InputOperationParameter> Parameters,
+        IReadOnlyList<InputParameter> Parameters,
         IReadOnlyList<OperationResponse> Responses,
         RequestMethod HttpMethod,
         BodyMediaType RequestBodyMediaType,
@@ -29,7 +34,7 @@ namespace AutoRest.CSharp.Common.Input
         OperationLongRunning? LongRunning,
         OperationPaging? Paging);
 
-    internal record InputOperationParameter(
+    internal record InputParameter(
         string Name,
         string NameInRequest,
         string? Description,
@@ -37,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input
         RequestLocation Location,
         InputConstant? DefaultValue,
         VirtualParameter? VirtualParameter,
-        InputOperationParameter? GroupedBy,
+        InputParameter? GroupedBy,
         InputOperationParameterKind Kind,
         bool IsRequired,
         bool IsApiVersion,
@@ -47,7 +52,29 @@ namespace AutoRest.CSharp.Common.Input
         bool SkipUrlEncoding,
         bool Explode,
         string? ArraySerializationDelimiter,
-        string? HeaderCollectionPrefix);
+        string? HeaderCollectionPrefix)
+    {
+        public InputParameter() : this(
+            Name: string.Empty,
+            NameInRequest: string.Empty,
+            Description: null,
+            Type: new InputType("", InputTypeKind.Object),
+            Location: RequestLocation.None,
+            DefaultValue: null,
+            VirtualParameter: null,
+            GroupedBy: null,
+            Kind: InputOperationParameterKind.Method,
+            IsRequired: false,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsEndpoint: false,
+            SkipUrlEncoding: false,
+            Explode: false,
+            ArraySerializationDelimiter: null,
+            HeaderCollectionPrefix: null)
+        { }
+    }
 
     internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType);
 
@@ -76,15 +103,15 @@ namespace AutoRest.CSharp.Common.Input
         public static InputType ByteArray { get; } = new(nameof(InputTypeKind.Bytes), InputTypeKind.Bytes);
         public static InputType DateTime { get; } = new(nameof(InputTypeKind.DateTime), InputTypeKind.DateTime);
         public static InputType Dictionary { get; } = new(nameof(InputTypeKind.Dictionary), InputTypeKind.Dictionary);
-        public static InputType ETag { get; } = new(nameof(InputTypeKind.ETag), InputTypeKind.DateTime);
+        public static InputType ETag { get; } = new(nameof(InputTypeKind.ETag), InputTypeKind.ETag);
         public static InputType Float32 { get; } = new(nameof(InputTypeKind.Float32), InputTypeKind.Float32);
         public static InputType Float64 { get; } = new(nameof(InputTypeKind.Float64), InputTypeKind.Float64);
         public static InputType Float128 { get; } = new(nameof(InputTypeKind.Float128), InputTypeKind.Float128);
         public static InputType Int32 { get; } = new(nameof(InputTypeKind.Int32), InputTypeKind.Int32);
         public static InputType Int64 { get; } = new(nameof(InputTypeKind.Int64), InputTypeKind.Int64);
         public static InputType List { get; } = new(nameof(InputTypeKind.List), InputTypeKind.List);
-        public static InputType ResourceIdentifier { get; } = new(nameof(InputTypeKind.DateTime), InputTypeKind.ResourceIdentifier);
-        public static InputType ResourceType { get; } = new(nameof(InputTypeKind.DateTime), InputTypeKind.ResourceType);
+        public static InputType ResourceIdentifier { get; } = new(nameof(InputTypeKind.ResourceIdentifier), InputTypeKind.ResourceIdentifier);
+        public static InputType ResourceType { get; } = new(nameof(InputTypeKind.ResourceType), InputTypeKind.ResourceType);
         public static InputType Stream { get; } = new(nameof(InputTypeKind.Stream), InputTypeKind.Stream);
         public static InputType String { get; } = new(nameof(InputTypeKind.String), InputTypeKind.String);
         public static InputType Time { get; } = new(nameof(InputTypeKind.Time), InputTypeKind.Time);
@@ -93,11 +120,11 @@ namespace AutoRest.CSharp.Common.Input
 
     internal enum InputOperationParameterKind
     {
-        Client,
-        Constant,
-        Method,
-        Flattened,
-        Grouped,
+        Method = 0,
+        Client = 1,
+        Constant = 2,
+        Flattened = 3,
+        Grouped = 4,
     }
 
     internal enum BodyMediaType

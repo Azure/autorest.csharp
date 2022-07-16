@@ -3,25 +3,41 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal static class CodeModelConverter
+    internal class CodeModelConverter
     {
-        public static InputNamespace CreateNamespace(CodeModel codeModel) => new(
-            Name: codeModel.Language.Default.Name,
-            Description: codeModel.Language.Default.Description,
-            Clients: CreateClients(codeModel.OperationGroups));
+        private readonly Dictionary<ServiceRequest, Func<CodeModelOperation>> _operationsCache;
+        private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
 
-        public static IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
-            => operationGroups.Select(CreateResourceClient).ToList();
+        public CodeModelConverter()
+        {
+            _operationsCache = new Dictionary<ServiceRequest, Func<CodeModelOperation>>();
+            _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
+        }
 
-        private static InputClient CreateResourceClient(OperationGroup operationGroup)
+        public InputNamespace CreateNamespace(CodeModel codeModel) => new(Name: codeModel.Language.Default.Name,
+                Description: codeModel.Language.Default.Description,
+                Clients: CreateClients(codeModel.OperationGroups),
+                ApiVersions: GetApiVersions(codeModel),
+                Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().ToList()));
+
+        public static IReadOnlyList<string> GetApiVersions(CodeModel codeModel)
+            => codeModel.OperationGroups
+                .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
+                .Select(v => v.Version)
+                .Distinct()
+                .OrderBy(v => v)
+                .ToList();
+
+        public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
+            => operationGroups.Select(CreateClient).ToList();
+
+        private InputClient CreateClient(OperationGroup operationGroup)
         {
             if (!operationGroup.Key.Equals(operationGroup.Language.Default.Name, StringComparison.OrdinalIgnoreCase))
             {
@@ -34,10 +50,9 @@ namespace AutoRest.CSharp.Common.Input
                 Operations: CreateOperations(operationGroup.Operations).Values.ToArray());
         }
 
-        public static IReadOnlyDictionary<ServiceRequest, CodeModelOperation> CreateOperations(IEnumerable<Operation> operations)
+        public IReadOnlyDictionary<ServiceRequest, CodeModelOperation> CreateOperations(IEnumerable<Operation> operations)
         {
-            var inputOperations = new Dictionary<ServiceRequest, Func<CodeModelOperation>>();
-
+            var serviceRequests = new List<ServiceRequest>();
             foreach (var operation in operations)
             {
                 foreach (var serviceRequest in operation.Requests)
@@ -47,7 +62,8 @@ namespace AutoRest.CSharp.Common.Input
                         continue;
                     }
 
-                    inputOperations[serviceRequest] = CacheResult(() => CreateOperation(serviceRequest, operation, httpRequest, inputOperations));
+                    serviceRequests.Add(serviceRequest);
+                    CacheResult(serviceRequest, _operationsCache, () => CreateOperation(serviceRequest, operation, httpRequest));
 
                     if (operation.RequestMediaTypes != null && !Configuration.Generation1ConvenienceClient)
                     {
@@ -56,39 +72,38 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return inputOperations.ToDictionary(kvp => kvp.Key, kvp => kvp.Value());
+            return serviceRequests.ToDictionary(sr => sr, sr => _operationsCache[sr]());
         }
 
-        private static CodeModelOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest, IReadOnlyDictionary<ServiceRequest, Func<CodeModelOperation>> operationsCache) => new(
-                Name: operation.Language.Default.Name,
-                Description: operation.Language.Default.Description,
-                OperationId: operation.OperationId,
-                Accessibility: operation.Accessibility,
-                Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
-                Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
-                HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
-                RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
-                Uri: httpRequest.Uri,
-                Path: httpRequest.Path,
-                ExternalDocsUrl: operation.ExternalDocs?.Url,
-                RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
-                BufferResponse: operation.Extensions?.BufferResponse ?? true,
-                LongRunning: CreateLongRunning(operation),
-                Paging: CreateOperationPaging(operation, operationsCache),
-                Source: operation);
+        private CodeModelOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest) => new(
+            Name: operation.Language.Default.Name,
+            Description: operation.Language.Default.Description,
+            OperationId: operation.OperationId,
+            Accessibility: operation.Accessibility,
+            Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
+            Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
+            HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
+            RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
+            Uri: httpRequest.Uri,
+            Path: httpRequest.Path,
+            ExternalDocsUrl: operation.ExternalDocs?.Url,
+            RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
+            BufferResponse: operation.Extensions?.BufferResponse ?? true,
+            LongRunning: CreateLongRunning(operation),
+            Paging: CreateOperationPaging(operation),
+            Source: operation);
 
-        public static List<InputOperationParameter> CreateOperationParameters(ICollection<RequestParameter> requestParameters)
+        public List<InputParameter> CreateOperationParameters(ICollection<RequestParameter> requestParameters)
         {
-            var parametersCache = new Dictionary<RequestParameter, Func<InputOperationParameter>>();
             foreach (var parameter in requestParameters)
             {
-                parametersCache.Add(parameter, CacheResult(() => CreateOperationParameter(parameter, parametersCache)));
+                CacheResult(parameter, _parametersCache, () => CreateOperationParameter(parameter));
             }
 
-            return requestParameters.Select(rp => parametersCache[rp]()).ToList();
+            return requestParameters.Select(rp => _parametersCache[rp]()).ToList();
         }
 
-        public static InputOperationParameter CreateOperationParameter(RequestParameter input, IReadOnlyDictionary<RequestParameter, Func<InputOperationParameter>> parametersCache) => new(
+        public InputParameter CreateOperationParameter(RequestParameter input) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,
@@ -96,7 +111,7 @@ namespace AutoRest.CSharp.Common.Input
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsRequired: input.IsRequired,
-            GroupedBy: input.GroupedBy != null ? parametersCache[input.GroupedBy]() : null,
+            GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
             Kind: GetOperationParameterKind(input),
             IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
@@ -130,7 +145,7 @@ namespace AutoRest.CSharp.Common.Input
             );
         }
 
-        private static OperationPaging? CreateOperationPaging(Operation operation, IReadOnlyDictionary<ServiceRequest, Func<CodeModelOperation>> operationsCache)
+        private OperationPaging? CreateOperationPaging(Operation operation)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)
@@ -139,7 +154,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
-            if (nextLinkServiceRequest == null || !operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
+            if (nextLinkServiceRequest == null || !_operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
                 return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName);
             }
@@ -300,10 +315,15 @@ namespace AutoRest.CSharp.Common.Input
             return null;
         }
 
-        private static Func<T> CacheResult<T>(Func<T> create)
+        private static void CacheResult<TSource, TResult>(TSource source, IDictionary<TSource, Func<TResult>> cache, Func<TResult> create) where TSource : notnull
         {
-            T? value = default;
-            return () => value ??= create();
+            if (cache.ContainsKey(source))
+            {
+                return;
+            }
+
+            TResult? value = default;
+            cache[source] = () => value ??= create();
         }
     }
 }

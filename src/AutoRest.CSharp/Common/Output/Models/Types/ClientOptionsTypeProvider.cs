@@ -4,6 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -14,27 +17,27 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        public ClientOptionsTypeProvider(BuildContext context, string name, string? clientName) : base(context)
+        public ClientOptionsTypeProvider(BuildContext context) : base(context)
+        {
+            var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
+            DefaultName = $"{clientPrefix}ClientOptions";
+            DefaultAccessibility = "public";
+            Description = $"Client options for {clientPrefix}Client.";
+
+            ApiVersions = ConvertApiVersions(CodeModelConverter.GetApiVersions(context.CodeModel));
+        }
+
+        public ClientOptionsTypeProvider(IReadOnlyList<string> versions, string name, string ns, FormattableString description, SourceInputModel? sourceInputModel) : base(ns, sourceInputModel)
         {
             DefaultName = name;
             DefaultAccessibility = "public";
-            if (clientName != null)
-            {
-                Description = $"Client options for {clientName}.";
-            }
-            else
-            {
-                Description = $"Client options for {context.DefaultLibraryName} library clients.";
-            }
+            Description = description;
 
-            ApiVersions = context.CodeModel.OperationGroups
-                .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
-                .Select(v => v.Version)
-                .Distinct()
-                .OrderBy(v => v)
-                .Select((v, i) => new ApiVersion(ToVersionProperty(v), $"Service version \"{v}\"", i + 1, v))
-                .ToArray();
+            ApiVersions = ConvertApiVersions(versions);
         }
+
+        private static ApiVersion[] ConvertApiVersions(IReadOnlyList<string> versions) =>
+            versions.Select((v, i) => new ApiVersion(ToVersionProperty(v), $"Service version \"{v}\"", i + 1, v)).ToArray();
 
         public record ApiVersion(string Name, string Description, int Value, string StringValue);
 

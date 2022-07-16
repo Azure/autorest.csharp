@@ -10,24 +10,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class LowLevelOutputLibrary : OutputLibrary
     {
-        private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private readonly Lazy<IReadOnlyList<LowLevelClient>> _restClients;
-
-        public IReadOnlyList<LowLevelClient> RestClients => _restClients.Value;
+        private readonly TypeFactory _typeFactory;
+        public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public LowLevelOutputLibrary(BuildContext<LowLevelOutputLibrary> context, Func<IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
+        public LowLevelOutputLibrary(Func<TypeFactory, IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
         {
-            _context = context;
-            _restClients = new Lazy<IReadOnlyList<LowLevelClient>>(restClientsFactory);
+            _typeFactory = new TypeFactory(this);
+            RestClients = restClientsFactory(_typeFactory);
             ClientOptions = clientOptions;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
             => schema.Type switch
             {
-                AllSchemaTypes.Choice => _context.TypeFactory.CreateType(((ChoiceSchema)schema).ChoiceType, false),
-                AllSchemaTypes.SealedChoice => _context.TypeFactory.CreateType(((SealedChoiceSchema)schema).ChoiceType, false),
+                AllSchemaTypes.Choice => _typeFactory.CreateType(((ChoiceSchema)schema).ChoiceType, false),
+                AllSchemaTypes.SealedChoice => _typeFactory.CreateType(((SealedChoiceSchema)schema).ChoiceType, false),
                 // This is technically invalid behavior, we are hitting this in generating responses we throw away.
                 // https://github.com/Azure/autorest.csharp/issues/1108
                 // throw new InvalidOperationException($"FindTypeForSchema of invalid schema {schema.Name} in LowLevelOutputLibrary");
