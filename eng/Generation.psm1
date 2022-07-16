@@ -29,13 +29,16 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     {
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
     }
-    $namespace = $projectName.Replace('-', '_')
-    $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
-    if ($fast)
+    if ($fast -or ($projectName -eq "CadlFirstTest"))
     {
         $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
         $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
+    }
+    else
+    {
+        $namespace = $projectName.Replace('-', '_')
+        $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
     }
 
     Invoke $command
