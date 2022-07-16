@@ -201,6 +201,10 @@ namespace AutoRest.CSharp.Output.Builders
             return name;
         }
 
+        public static readonly List<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
+            " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
+            "The available derived classes include " };
+
         public static string CreateExtraDescriptionWithDiscriminator(MgmtObjectType objectType)
         {
             if (objectType.Discriminator?.HasDescendants == true)
@@ -210,8 +214,8 @@ namespace AutoRest.CSharp.Output.Builders
                 {
                     childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
                 }
-                return $"{System.Environment.NewLine}Please note <see cref=\"{objectType.Type.Name}\"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes." +
-                    $"{System.Environment.NewLine}The available derived classes include {FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{objectType.Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
+                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
             }
             return string.Empty;
         }

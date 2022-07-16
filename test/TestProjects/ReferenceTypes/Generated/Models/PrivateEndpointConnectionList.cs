@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of PrivateEndpointConnectionList. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
         [SerializationConstructor]
-        internal PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value)
+        protected PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value)
         {
             Value = value;
         }

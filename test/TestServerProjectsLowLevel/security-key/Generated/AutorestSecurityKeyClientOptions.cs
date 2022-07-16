@@ -13,13 +13,13 @@ namespace security_key_LowLevel
     /// <summary> Client options for AutorestSecurityKeyClient. </summary>
     public partial class AutorestSecurityKeyClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2022_03_01_preview;
+        private const ServiceVersion LatestVersion = ServiceVersion.V2022_03_01_Preview;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
             /// <summary> Service version "2022-03-01-preview". </summary>
-            V2022_03_01_preview = 1,
+            V2022_03_01_Preview = 1,
         }
 
         internal string Version { get; }
@@ -29,7 +29,7 @@ namespace security_key_LowLevel
         {
             Version = version switch
             {
-                ServiceVersion.V2022_03_01_preview => "2022-03-01-preview",
+                ServiceVersion.V2022_03_01_Preview => "2022-03-01-preview",
                 _ => throw new NotSupportedException()
             };
         }
