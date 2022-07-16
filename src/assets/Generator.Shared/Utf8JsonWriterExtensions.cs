@@ -26,11 +26,6 @@ namespace Azure.Core
         public static void WriteStringValue(this Utf8JsonWriter writer, char value) =>
             writer.WriteStringValue(value.ToString(CultureInfo.InvariantCulture));
 
-        public static void WriteObjectValue(this Utf8JsonWriter writer, IUtf8JsonSerializable value)
-        {
-            value.Write(writer);
-        }
-
         public static void WriteNonEmptyArray(this Utf8JsonWriter writer, string name, string[] values)
         {
             if (values.Any())
@@ -75,7 +70,7 @@ namespace Azure.Core
                     writer.WriteNullValue();
                     break;
                 case IUtf8JsonSerializable serializable:
-                    writer.WriteObjectValue(serializable);
+                    serializable.Write(writer);
                     break;
                 case byte[] bytes:
                     writer.WriteBase64StringValue(bytes);
