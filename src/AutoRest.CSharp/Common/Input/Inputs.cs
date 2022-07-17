@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputAuth();
 
-    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations);
+    internal record InputClient(string Name, string Key, string Description, IReadOnlyList<InputOperation> Operations);
 
     internal record InputOperation(
         string Name,
@@ -76,9 +76,12 @@ namespace AutoRest.CSharp.Common.Input
         { }
     }
 
-    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType);
+    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<HttpResponseHeader> Headers)
+    {
+        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<HttpResponseHeader>()) { }
+    }
 
-    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, CodeModelType? FinalResponseType);
+    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
 
     internal record OperationPaging(string? NextLinkName, string? ItemName)
     {

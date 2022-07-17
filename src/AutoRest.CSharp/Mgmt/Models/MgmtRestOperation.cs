@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public OperationFinalStateVia? FinalStateVia { get; }
 
-        public Schema? FinalResponseSchema => Method.Operation.LongRunning?.FinalResponseType?.Schema;
+        public InputType? FinalResponseType => Method.Operation.LongRunning?.FinalResponse.BodyType;
 
         public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
         {
@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
                 MgmtContext.Library.CsharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
-                operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
+                operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseType!);
                 MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
             return operationSource;
@@ -162,17 +162,17 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private CSharpType? GetFinalResponse()
         {
-            var finalSchema = Method.Operation.LongRunning?.FinalResponseType?.Schema;
-            if (finalSchema is null)
+            var finalResponseType = Method.Operation.LongRunning?.FinalResponse.BodyType;
+            if (finalResponseType is null)
                 return null;
 
             try
             {
-                return finalSchema.Type == AllSchemaTypes.Object ? MgmtContext.Library.FindTypeForSchema(finalSchema) : new TypeFactory(MgmtContext.Library).CreateType(finalSchema, false);
+                return finalResponseType is CodeModelType cmt ? MgmtContext.Library.FindTypeForSchema(cmt.Schema) : new TypeFactory(MgmtContext.Library).CreateType(finalResponseType with {IsNullable = false});
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Final response for {RestClient.OperationGroup.Key}.{Method.Name} was not found it was of type {finalSchema.Name}", ex);
+                throw new InvalidOperationException($"Final response for {RestClient.InputClient.Name}.{Method.Name} was not found it was of type {finalResponseType.Name}", ex);
             }
         }
 

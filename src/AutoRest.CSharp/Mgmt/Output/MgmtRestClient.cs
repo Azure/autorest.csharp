@@ -25,17 +25,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public ClientFields Fields { get; }
 
-        public MgmtRestClient(OperationGroup operationGroup, MgmtRestClientBuilder clientBuilder)
-            : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, GetOrderedParameters(clientBuilder))
+        public MgmtRestClient(InputClient inputClient, MgmtRestClientBuilder clientBuilder)
+            : base(inputClient, MgmtContext.Context, inputClient.Name, GetOrderedParameters(clientBuilder))
         {
             _clientBuilder = clientBuilder;
             Fields = ClientFields.CreateForRestClient(new[] { KnownParameters.Pipeline }.Union(clientBuilder.GetOrderedParametersByRequired()));
         }
 
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
+        protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
         {
-            var operations = new CodeModelConverter().CreateOperations(OperationGroup.Operations);
-            return operations.ToDictionary(kvp => kvp.Key, kvp => _clientBuilder.BuildMethod(kvp.Value, null, "public", ShouldReturnNullOn404(kvp.Value)));
+            return InputClient.Operations.ToDictionary(op => op, op => _clientBuilder.BuildMethod(op, null, "public", ShouldReturnNullOn404(op)));
         }
 
         private static Func<string?, bool> ShouldReturnNullOn404(InputOperation operation)
@@ -57,9 +56,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyList<Resource> GetResources()
         {
             HashSet<Resource> candidates = new HashSet<Resource>();
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var operation in InputClient.Operations.OfType<CodeModelOperation>())
             {
-                foreach (var resource in operation.GetResourceFromResourceType())
+                foreach (var resource in operation.Source.GetResourceFromResourceType())
                 {
                     candidates.Add(resource);
                 }

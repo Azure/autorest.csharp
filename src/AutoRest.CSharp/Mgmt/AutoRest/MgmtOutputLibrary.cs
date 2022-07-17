@@ -318,7 +318,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
             foreach (var restClient in RestClients)
             {
-                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
+                var methods = ClientBuilder.BuildPagingMethods(restClient.InputClient, restClient, placeholder);
                 foreach (var method in methods)
                 {
                     pagingMethods.Add(method.Method, method);
@@ -490,7 +490,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (TryGetRestClients(requestPath, out var restClients))
             {
                 // return the first client that contains this operation
-                return restClients.Single(client => client.OperationGroup.Operations.Contains(operation));
+                return restClients.Single(client => client.InputClient.Operations.OfType<CodeModelOperation>().Select(cmo => cmo.Source).Contains(operation));
             }
 
             throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath} with method {operation.GetHttpMethod()}");
@@ -504,9 +504,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
+            var codeModelConverter = new CodeModelConverter();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
-                var restClient = new MgmtRestClient(operationGroup, new MgmtRestClientBuilder(operationGroup));
+                var inputClient = codeModelConverter.CreateClient(operationGroup);
+                var restClient = new MgmtRestClient(inputClient, new MgmtRestClientBuilder(operationGroup));
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))

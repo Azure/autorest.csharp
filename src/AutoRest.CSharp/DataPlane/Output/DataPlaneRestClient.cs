@@ -20,25 +20,24 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientBuilder ClientBuilder { get; }
         public ClientFields Fields { get; }
 
-        public DataPlaneRestClient(OperationGroup operationGroup, RestClientBuilder clientBuilder, BuildContext<DataPlaneOutputLibrary> context)
-            : base(operationGroup, context, GetClientName(operationGroup, context), GetOrderedParameters(clientBuilder))
+        public DataPlaneRestClient(InputClient inputClient, RestClientBuilder clientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+            : base(inputClient, context, GetClientName(inputClient, context), GetOrderedParameters(clientBuilder))
         {
             _context = context;
             ClientBuilder = clientBuilder;
-            ProtocolMethods = GetProtocolMethods(operationGroup, clientBuilder, context).ToList();
+            ProtocolMethods = GetProtocolMethods(inputClient, clientBuilder, context).ToList();
             Fields = ClientFields.CreateForRestClient(Parameters);
         }
 
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
+        protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
         {
-            var operations = new CodeModelConverter().CreateOperations(OperationGroup.Operations);
-            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
 
-            foreach (var (serviceRequest, operation) in operations)
+            foreach (var operation in InputClient.Operations)
             {
-                var headerModel = _context.Library.FindHeaderModel(operation.Source);
+                var headerModel = _context.Library.FindHeaderModel(operation);
                 var accessibility = operation.Accessibility ?? "public";
-                requestMethods.Add(serviceRequest, ClientBuilder.BuildMethod(operation, headerModel, accessibility));
+                requestMethods.Add(operation, ClientBuilder.BuildMethod(operation, headerModel, accessibility));
             }
 
             return requestMethods;
@@ -59,10 +58,10 @@ namespace AutoRest.CSharp.Output.Models
             return methodList ?? Enumerable.Empty<string>();
         }
 
-        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(OperationGroup operationGroup, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(InputClient inputClient, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
         {
             // At least one protocol method is found in the config for this operationGroup
-            if (!operationGroup.Operations.Any(operation => IsProtocolMethodExists(operation, operationGroup, context)))
+            if (!inputClient.Operations.Any(operation => IsProtocolMethodExists(operation, inputClient, context)))
             {
                 return Enumerable.Empty<LowLevelClientMethod>();
             }
@@ -70,18 +69,16 @@ namespace AutoRest.CSharp.Output.Models
             // Filter protocol method requests for this operationGroup based on the config
             var operations = Methods
                 .Select(m => m.Operation)
-                .Where(operation => IsProtocolMethodExists(operation, operationGroup, context));
+                .Where(operation => IsProtocolMethodExists(operation, inputClient, context));
 
-            return LowLevelClient.BuildMethods(restClientBuilder, operations, GetClientName(operationGroup, context));
+            return LowLevelClient.BuildMethods(restClientBuilder, operations, GetClientName(inputClient, context));
         }
 
-        private static string GetClientName(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
-            => context.Library.FindClient(operationGroup)?.Declaration.Name ?? operationGroup.Language.Default.Name;
+        private static string GetClientName(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
+            => context.Library.FindClient(inputClient)?.Declaration.Name ?? inputClient.Name;
 
-        private static bool IsProtocolMethodExists(Operation operation, OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
-            => GetProtocolMethodsByOperationGroup(operationGroup, context).Any(m => m.Equals(operation.Language.Default.Name, StringComparison.OrdinalIgnoreCase));
-
-        private static bool IsProtocolMethodExists(InputOperation operation, OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
-            => GetProtocolMethodsByOperationGroup(operationGroup, context).Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
+        private static bool IsProtocolMethodExists(InputOperation operation, InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
+            => context.Library.ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods) &&
+               protocolMethods.Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
     }
 }

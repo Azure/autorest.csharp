@@ -37,15 +37,11 @@ namespace AutoRest.CSharp.Common.Input
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
             => operationGroups.Select(CreateClient).ToList();
 
-        private InputClient CreateClient(OperationGroup operationGroup)
+        public InputClient CreateClient(OperationGroup operationGroup)
         {
-            if (!operationGroup.Key.Equals(operationGroup.Language.Default.Name, StringComparison.OrdinalIgnoreCase))
-            {
-                throw new InvalidOperationException($"OperationGroup has name `{operationGroup.Language.Default.Name}` and $key `{operationGroup.Key}`");
-            }
-
             return new(
                 Name: operationGroup.Language.Default.Name,
+                Key: operationGroup.Key,
                 Description: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations).Values.ToArray());
         }
@@ -127,7 +123,8 @@ namespace AutoRest.CSharp.Common.Input
         public static OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
-            BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType)
+            BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
+            Headers: response.HttpResponse.Headers.ToList()
         );
 
         private static OperationLongRunning? CreateLongRunning(Operation operation)
@@ -137,11 +134,9 @@ namespace AutoRest.CSharp.Common.Input
                 return null;
             }
 
-            var responseSchema = operation.LongRunningFinalResponse.ResponseSchema;
-
             return new OperationLongRunning(
                 FinalStateVia: operation.LongRunningFinalStateVia,
-                FinalResponseType: responseSchema != null ? new CodeModelType(responseSchema, InputTypeKind.Object) : null
+                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse)
             );
         }
 

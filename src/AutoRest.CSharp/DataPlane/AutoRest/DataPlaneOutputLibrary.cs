@@ -19,25 +19,27 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DataPlaneOutputLibrary : OutputLibrary
     {
-        private CachedDictionary<OperationGroup, DataPlaneRestClient> _restClients;
-        private CachedDictionary<OperationGroup, DataPlaneClient> _clients;
-        private CachedDictionary<Operation, LongRunningOperation> _operations;
-        private CachedDictionary<Operation, DataPlaneResponseHeaderGroupType> _headerModels;
+        private CachedDictionary<InputClient, DataPlaneRestClient> _restClients;
+        private CachedDictionary<InputClient, DataPlaneClient> _clients;
+        private CachedDictionary<InputOperation, LongRunningOperation> _operations;
+        private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
         private CachedDictionary<Schema, TypeProvider> _models;
         private Lazy<ModelFactoryTypeProvider?> _modelFactory;
         private BuildContext<DataPlaneOutputLibrary> _context;
         public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
-        private CodeModel _codeModel;
+        private readonly CodeModel _codeModel;
+        private readonly InputNamespace _input;
 
         public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context)
         {
             _context = context;
             _codeModel = codeModel;
+            _input = new CodeModelConverter().CreateNamespace(codeModel);
 
-            _restClients = new CachedDictionary<OperationGroup, DataPlaneRestClient>(EnsureRestClients);
-            _clients = new CachedDictionary<OperationGroup, DataPlaneClient>(EnsureClients);
-            _operations = new CachedDictionary<Operation, LongRunningOperation>(EnsureLongRunningOperations);
-            _headerModels = new CachedDictionary<Operation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
+            _restClients = new CachedDictionary<InputClient, DataPlaneRestClient>(EnsureRestClients);
+            _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
+            _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
+            _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _models = new CachedDictionary<Schema, TypeProvider>(BuildModels);
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(context, Models));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
@@ -98,33 +100,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             return clientInfosByName;
         }
 
-        public LongRunningOperation FindLongRunningOperation(Operation operation)
+        public LongRunningOperation FindLongRunningOperation(InputOperation operation)
         {
-            Debug.Assert(operation.IsLongRunning);
+            Debug.Assert(operation.LongRunning != null);
 
             return _operations[operation];
         }
 
-        public DataPlaneClient? FindClient(OperationGroup operationGroup)
+        public DataPlaneClient? FindClient(InputClient inputClient)
         {
-            _clients.TryGetValue(operationGroup, out var client);
+            _clients.TryGetValue(inputClient, out var client);
             return client;
         }
 
-        public DataPlaneResponseHeaderGroupType? FindHeaderModel(Operation operation)
+        public DataPlaneResponseHeaderGroupType? FindHeaderModel(InputOperation operation)
         {
             _headerModels.TryGetValue(operation, out var model);
             return model;
         }
 
-        public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
+        public LongRunningOperationInfo FindLongRunningOperationInfo(InputClient inputClient, InputOperation operation)
         {
-            var client = FindClient(operationGroup);
+            var client = FindClient(inputClient);
 
             Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disabled.");
 
-            var nextOperationMethod = operation?.Language?.Default?.Paging != null
-                ? client.RestClient.GetNextOperationMethod(operation.Requests.Single())
+            var nextOperationMethod = operation.Paging != null
+                ? client.RestClient.GetNextOperationMethod(operation)
                 : null;
 
             return new LongRunningOperationInfo(
@@ -135,19 +137,19 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Values;
 
-        public DataPlaneRestClient FindRestClient(OperationGroup operationGroup)
+        public DataPlaneRestClient FindRestClient(InputClient client)
         {
-            return _restClients[operationGroup];
+            return _restClients[client];
         }
 
-        private Dictionary<Operation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
+        private Dictionary<InputOperation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
         {
-            var headerModels = new Dictionary<Operation, DataPlaneResponseHeaderGroupType>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            var headerModels = new Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>();
+            foreach (var inputClient in _input.Clients)
             {
-                foreach (var operation in operationGroup.Operations)
+                foreach (var operation in inputClient.Operations)
                 {
-                    var headers = DataPlaneResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
+                    var headers = DataPlaneResponseHeaderGroupType.TryCreate(inputClient, operation, _context);
                     if (headers != null)
                     {
                         headerModels.Add(operation, headers);
@@ -158,24 +160,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             return headerModels;
         }
 
-        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
+        private Dictionary<InputOperation, LongRunningOperation> EnsureLongRunningOperations()
         {
-            var operations = new Dictionary<Operation, LongRunningOperation>();
+            var operations = new Dictionary<InputOperation, LongRunningOperation>();
 
             if (Configuration.PublicClients)
             {
-                foreach (var operationGroup in _codeModel.OperationGroups)
+                foreach (var client in _input.Clients)
                 {
-                    foreach (var operation in operationGroup.Operations)
+                    foreach (var operation in client.Operations)
                     {
-                        if (operation.IsLongRunning)
+                        if (operation.LongRunning != null)
                         {
-                            operations.Add(
-                                operation,
-                                new LongRunningOperation(
-                                    operation,
-                                    _context,
-                                    FindLongRunningOperationInfo(operationGroup, operation)));
+                            operations.Add(operation, new LongRunningOperation(operation, _context, FindLongRunningOperationInfo(client, operation)));
                         }
                     }
                 }
@@ -184,30 +181,29 @@ namespace AutoRest.CSharp.Output.Models.Types
             return operations;
         }
 
-        private Dictionary<OperationGroup, DataPlaneClient> EnsureClients()
+        private Dictionary<InputClient, DataPlaneClient> EnsureClients()
         {
-            var clients = new Dictionary<OperationGroup, DataPlaneClient>();
+            var clients = new Dictionary<InputClient, DataPlaneClient>();
 
             if (Configuration.PublicClients)
             {
-                foreach (var operationGroup in _codeModel.OperationGroups)
+                foreach (var client in _input.Clients)
                 {
-                    clients.Add(operationGroup, new DataPlaneClient(operationGroup, _context));
+                    clients.Add(client, new DataPlaneClient(client, _context));
                 }
             }
 
             return clients;
         }
 
-        private Dictionary<OperationGroup, DataPlaneRestClient> EnsureRestClients()
+        private Dictionary<InputClient, DataPlaneRestClient> EnsureRestClients()
         {
-            var restClients = new Dictionary<OperationGroup, DataPlaneRestClient>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            var restClients = new Dictionary<InputClient, DataPlaneRestClient>();
+            foreach (var client in _input.Clients)
             {
-                var operations = new CodeModelConverter().CreateOperations(operationGroup.Operations);
-                var clientParameters = RestClientBuilder.GetParametersFromOperations(operations.Values).ToList();
+                var clientParameters = RestClientBuilder.GetParametersFromOperations(client.Operations).ToList();
                 var restClient = new RestClientBuilder(clientParameters, _context);
-                restClients.Add(operationGroup, new DataPlaneRestClient(operationGroup, restClient, _context));
+                restClients.Add(client, new DataPlaneRestClient(client, restClient, _context));
             }
 
             return restClients;

@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 
@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class PagingResponseInfo
     {
-        public PagingResponseInfo(Paging paging, CSharpType type)
+        public PagingResponseInfo(OperationPaging paging, CSharpType type)
         {
             ResponseType = type;
 
