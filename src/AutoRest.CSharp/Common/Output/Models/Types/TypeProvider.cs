@@ -44,19 +44,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                 existingTypeOverrides: TypeKind == TypeKind.Enum);
         }
 
-        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
+        public static string GetDefaultModelNamespace(string? namespaceExtension, string rootNamespaceName)
         {
-            var result = context.DefaultNamespace;
             if (namespaceExtension != default)
             {
-                result = namespaceExtension;
+                return namespaceExtension;
             }
-            else if (Configuration.ModelNamespace)
+
+            var defaultNamespace = Configuration.Namespace ?? rootNamespaceName;
+
+            if (Configuration.ModelNamespace)
             {
-                result = $"{context.DefaultNamespace}.Models";
+                return $"{defaultNamespace}.Models";
             }
-            return result;
+
+            return defaultNamespace;
         }
+
+        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
+            => GetDefaultModelNamespace(namespaceExtension, context.DefaultNamespace);
 
         public override bool Equals(object? obj)
         {

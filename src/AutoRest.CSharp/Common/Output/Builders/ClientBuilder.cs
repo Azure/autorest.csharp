@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 : BuilderHelpers.EscapeXmlDescription(description);
 
         public static string GetClientPrefix(string name, BuildContext context)
-            => GetClientPrefix(name, context.CodeModel.Language.Default.Name);
+            => GetClientPrefix(name, context.DefaultName);
 
         public static string GetClientPrefix(string? name, string namespaceName)
         {

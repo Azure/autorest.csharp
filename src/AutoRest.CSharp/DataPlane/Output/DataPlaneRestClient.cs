@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -52,12 +51,6 @@ namespace AutoRest.CSharp.Output.Models
             return parameters;
         }
 
-        private static IEnumerable<string> GetProtocolMethodsByOperationGroup(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
-        {
-            context.Library.ProtocolMethodsDictionary.TryGetValue(operationGroup.Key, out var methodList);
-            return methodList ?? Enumerable.Empty<string>();
-        }
-
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(InputClient inputClient, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
         {
             // At least one protocol method is found in the config for this operationGroup
@@ -79,6 +72,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private static bool IsProtocolMethodExists(InputOperation operation, InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
             => context.Library.ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods) &&
-               protocolMethods.Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
+                protocolMethods.Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
     }
 }

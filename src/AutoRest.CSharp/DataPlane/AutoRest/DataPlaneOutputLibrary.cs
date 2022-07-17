@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -24,40 +25,55 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CachedDictionary<InputOperation, LongRunningOperation> _operations;
         private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
         private CachedDictionary<Schema, TypeProvider> _models;
-        private Lazy<ModelFactoryTypeProvider?> _modelFactory;
         private BuildContext<DataPlaneOutputLibrary> _context;
         public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
-        private readonly CodeModel _codeModel;
+
         private readonly InputNamespace _input;
+        private readonly SourceInputModel? _sourceInputModel;
+        private readonly Lazy<ModelFactoryTypeProvider?> _modelFactory;
+        private readonly string _defaultNamespace;
+        private readonly string _libraryName;
 
         public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context)
         {
             _context = context;
-            _codeModel = codeModel;
+            _sourceInputModel = context.SourceInputModel;
             _input = new CodeModelConverter().CreateNamespace(codeModel);
+
+            _defaultNamespace = Configuration.Namespace ?? _input.Name;
+            _libraryName = Configuration.LibraryName ?? _input.Name;
 
             _restClients = new CachedDictionary<InputClient, DataPlaneRestClient>(EnsureRestClients);
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
-            _models = new CachedDictionary<Schema, TypeProvider>(BuildModels);
-            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(context, Models));
+            _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
+            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_input, Models, _sourceInputModel));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
+
+            ClientOptions = CreateClientOptions();
+        }
+
+        private ClientOptionsTypeProvider? CreateClientOptions()
+        {
+            if (!Configuration.PublicClients || !_input.Clients.Any())
+            {
+                return null;
+            }
+
+            var clientPrefix = ClientBuilder.GetClientPrefix(_libraryName, _input.Name);
+            return new ClientOptionsTypeProvider(_input.ApiVersions, $"{clientPrefix}ClientOptions", _defaultNamespace, $"Client options for {clientPrefix}Client.", _sourceInputModel);
         }
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
+        public ClientOptionsTypeProvider? ClientOptions { get; }
         public IEnumerable<DataPlaneClient> Clients => _clients.Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
-        internal CachedDictionary<Schema, TypeProvider> SchemaMap => _models;
-        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
-        public IDictionary<string, DpgLibraryBuilder.ClientInfo> DPGClientInfosByName => GetDpgClientInfosByName();
+        public IEnumerable<TypeProvider> Models => _models.Values;
         public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
 
-        public override CSharpType FindTypeForSchema(Schema schema)
-        {
-            return SchemaMap[schema].Type;
-        }
+        public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
 
         public override CSharpType? FindTypeByName(string originalName)
         {
@@ -71,12 +87,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        protected virtual Dictionary<Schema, TypeProvider> BuildModels()
+        private Dictionary<Schema, TypeProvider> BuildModels(CodeModel codeModel)
         {
-            var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(_codeModel.Schemas.SealedChoices)
-                .Concat(_codeModel.Schemas.Objects)
-                .Concat(_codeModel.Schemas.Groups);
+            var allSchemas = codeModel.Schemas.Choices.Cast<Schema>()
+                .Concat(codeModel.Schemas.SealedChoices)
+                .Concat(codeModel.Schemas.Objects)
+                .Concat(codeModel.Schemas.Groups);
 
             return allSchemas.ToDictionary(schema => schema, BuildModel);
         }
@@ -88,17 +104,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
-
-        private IDictionary<string, DpgLibraryBuilder.ClientInfo> GetDpgClientInfosByName()
-        {
-            var clientInfosByName = new CodeModelConverter().CreateNamespace(_codeModel)
-                .Clients
-                .Select(og => DpgLibraryBuilder.CreateClientInfo(og, _context.SourceInputModel, _context.CodeModel.Language.Default.Name))
-                .ToDictionary(ci => ci.Name);
-
-            DpgLibraryBuilder.SetRequestsToClients(clientInfosByName.Values);
-            return clientInfosByName;
-        }
 
         public LongRunningOperation FindLongRunningOperation(InputOperation operation)
         {

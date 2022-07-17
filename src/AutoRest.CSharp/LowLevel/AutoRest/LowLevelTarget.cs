@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
-            var library = new DpgLibraryBuilder(inputNamespace, sourceInputModel).Build();
+            var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build();
             foreach (var client in library.RestClients)
             {
                 var codeWriter = new CodeWriter();

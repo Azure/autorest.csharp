@@ -16,14 +16,14 @@ using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class DpgLibraryBuilder
+    internal class DpgOutputLibraryBuilder
     {
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly string _defaultNamespace;
         private readonly string _libraryName;
 
-        public DpgLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
+        public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
