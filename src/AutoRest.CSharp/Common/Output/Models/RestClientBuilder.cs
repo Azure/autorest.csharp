@@ -92,6 +92,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.CSharpName(),
+                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Summary ?? string.Empty),
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 responseType,
                 request,
@@ -133,6 +134,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.CSharpName(),
+                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Summary ?? string.Empty),
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 responseType,
                 request,
@@ -669,6 +671,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 $"{method.Name}NextPage",
+                method.Summary,
                 method.Description,
                 method.ReturnType,
                 request,

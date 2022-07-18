@@ -243,6 +243,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 Name = $"{clientMethod.Signature.Name}Implementation",
                 Modifiers = Private,
+                Summary = null,
                 Description = null,
                 Parameters = clientMethod.Signature.Parameters
                     .Select(p => p with { DefaultValue = null })
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.WriteMethodDeclaration(privateMethodSignature))
             {
-                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
                 var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
                 var createPageableMethodName = async ? CreateAsyncPageableMethodName : CreatePageableMethodName;
@@ -351,7 +352,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, async))
             {
-                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
                 var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
@@ -501,7 +502,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
             WriteMethodDocumentation(writer, methodSignature, clientMethod);
-            WriteSchemaDocumentationRemarks(writer, clientMethod);
+            WriteSchemaDocumentationRemarks(writer, methodSignature, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
@@ -509,8 +510,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod)
         {
-            codeWriter.WriteMethodDocumentation(methodSignature);
-            codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+            codeWriter
+                .WriteMethodDocumentation(methodSignature)
+                .WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
 
             if (methodSignature.ReturnType != null)
             {
@@ -546,7 +548,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return new ResponseClassifierType(statusCodes);
         }
 
-        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod)
+        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, MethodSignature methodSignature, LowLevelClientMethod clientMethod)
         {
             var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
@@ -573,14 +575,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (clientMethod.PagingInfo == null)
                     {
                         schemaDesription = "Below is the JSON schema for the request and response payloads.";
-                    } else
+                    }
+                    else
                     {
                         schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
                     }
-                } else if (hasRequestSchema)
+                }
+                else if (hasRequestSchema)
                 {
                     schemaDesription = "Below is the JSON schema for the request payload.";
-                } else if (hasResponseSchema)
+                }
+                else if (hasResponseSchema)
                 {
                     if (clientMethod.PagingInfo == null)
                     {
@@ -591,7 +596,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         schemaDesription = "Below is the JSON schema for one item in the pageable response.";
                     }
                 }
-                writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
+                string? descriptionInRemarks = (!methodSignature.DescriptionText.IsNullOrEmpty()) ? $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}" : string.Empty;
+                writer.WriteXmlDocumentation("remarks", $"{descriptionInRemarks}{schemaDesription}{Environment.NewLine}{docinfo}{schemas}");
+            }
+            else
+            {
+                writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
             }
 
             static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
@@ -637,7 +647,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 // check if it is base schema. if so, add children schemas.
                 if ((schema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
                 {
-                    if (objSchema.Children.All.Count > 1) schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
+                    if (objSchema.Children.All.Count > 1)
+                        schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
                     foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
                     {
                         if (child.index == 1)

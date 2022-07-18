@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
         {
             return new ConstructorSignature(
                 Name: Type.Name,
+                null,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: MethodSignatureModifiers.Public,
                 Parameters: new[] { IsAsyncParameter },

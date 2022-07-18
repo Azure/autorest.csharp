@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0 --coverageDirectory {coverageDirectory}")
             {
                 // Use random port
-                Environment = {["PORT"] = "0"},
+                Environment = { ["PORT"] = "0" },
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };

@@ -60,13 +60,15 @@ namespace Azure.AI.DocumentTranslation
             _endpoint = endpoint;
         }
 
-        /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <summary> Returns the status for a specific document. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns the translation status for a specific document based on the request Id and document Id.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -117,13 +119,15 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <summary> Returns the status for a specific document. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns the translation status for a specific document based on the request Id and document Id.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -174,15 +178,15 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns the status for a document translation request.
-        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
-        /// </summary>
+        /// <summary> Returns the status for a document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns the status for a document translation request.
+        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -237,15 +241,15 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns the status for a document translation request.
-        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
-        /// </summary>
+        /// <summary> Returns the status for a document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns the status for a document translation request.
+        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -300,18 +304,18 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Cancel a currently processing or queued translation.
-        /// Cancel a currently processing or queued translation.
-        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
-        /// All documents that have completed translation will not be cancelled and will be charged.
-        /// All pending documents will be cancelled if possible.
-        /// </summary>
+        /// <summary> Cancel a currently processing or queued translation. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Cancel a currently processing or queued translation.
+        /// Cancel a currently processing or queued translation.
+        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
+        /// All documents that have completed translation will not be cancelled and will be charged.
+        /// All pending documents will be cancelled if possible.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -366,18 +370,18 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Cancel a currently processing or queued translation.
-        /// Cancel a currently processing or queued translation.
-        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
-        /// All documents that have completed translation will not be cancelled and will be charged.
-        /// All pending documents will be cancelled if possible.
-        /// </summary>
+        /// <summary> Cancel a currently processing or queued translation. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Cancel a currently processing or queued translation.
+        /// Cancel a currently processing or queued translation.
+        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
+        /// All documents that have completed translation will not be cancelled and will be charged.
+        /// All pending documents will be cancelled if possible.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -432,14 +436,14 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// The list of supported document formats supported by the Document Translation service.
-        /// The list includes the common file extension, as well as the content-type if using the upload API.
-        /// </summary>
+        /// <summary> Returns a list of supported document formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// The list of supported document formats supported by the Document Translation service.
+        /// The list includes the common file extension, as well as the content-type if using the upload API.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -475,14 +479,14 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// The list of supported document formats supported by the Document Translation service.
-        /// The list includes the common file extension, as well as the content-type if using the upload API.
-        /// </summary>
+        /// <summary> Returns a list of supported document formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// The list of supported document formats supported by the Document Translation service.
+        /// The list includes the common file extension, as well as the content-type if using the upload API.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -518,14 +522,14 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// The list of supported glossary formats supported by the Document Translation service.
-        /// The list includes the common file extension used.
-        /// </summary>
+        /// <summary> Returns the list of supported glossary formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// The list of supported glossary formats supported by the Document Translation service.
+        /// The list includes the common file extension used.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -561,14 +565,14 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// The list of supported glossary formats supported by the Document Translation service.
-        /// The list includes the common file extension used.
-        /// </summary>
+        /// <summary> Returns the list of supported glossary formats. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// The list of supported glossary formats supported by the Document Translation service.
+        /// The list includes the common file extension used.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -604,11 +608,13 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <summary> Returns a list of supported storage sources. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns a list of storage sources/options supported by the Document Translation service.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -636,11 +642,13 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <summary> Returns a list of supported storage sources. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns a list of storage sources/options supported by the Document Translation service.
+        /// 
         /// Below is the JSON schema for the response payload.
         /// 
         /// Response Body:
@@ -668,31 +676,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns a list of batch requests submitted and the status for each request.
-        /// This list only contains batch requests submitted by the user (based on the resource).
-        ///             
-        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
-        /// The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -723,6 +707,30 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        ///             
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
@@ -783,31 +791,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns a list of batch requests submitted and the status for each request.
-        /// This list only contains batch requests submitted by the user (based on the resource).
-        ///             
-        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
-        /// The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -838,6 +822,30 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        ///             
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
@@ -898,28 +906,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns the status for all documents in a batch document translation request.
-        ///             
-        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
-        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -951,6 +938,27 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns the status for all documents in a batch document translation request.
+        ///             
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
@@ -1007,28 +1015,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns the status for all documents in a batch document translation request.
-        ///             
-        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
-        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1060,6 +1047,27 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <remarks>
+        /// Returns the status for all documents in a batch document translation request.
+        ///             
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
         /// Below is the JSON schema for one item in the pageable response.
         /// 
         /// Response Body:
@@ -1116,7 +1124,15 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <remarks>
         /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
         /// Each request can contain multiple documents and must contain a source and destination container for each document.
         ///             
@@ -1126,15 +1142,7 @@ namespace Azure.AI.DocumentTranslation
         ///             
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
-        /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <remarks>
+        /// 
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
@@ -1199,7 +1207,15 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <remarks>
         /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
         /// Each request can contain multiple documents and must contain a source and destination container for each document.
         ///             
@@ -1209,15 +1225,7 @@ namespace Azure.AI.DocumentTranslation
         ///             
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
-        /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <remarks>
+        /// 
         /// Below is the JSON schema for the request payload.
         /// 
         /// Request Body:
