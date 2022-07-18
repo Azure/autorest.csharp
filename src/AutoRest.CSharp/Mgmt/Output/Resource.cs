@@ -96,6 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
               Name: Type.Name,
+              null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
               Modifiers: Internal,
               Parameters: _armClientCtorParameters,
@@ -108,6 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
                 Name: Type.Name,
+                null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
@@ -404,6 +406,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new MethodSignature(
                     Name: "CreateResourceIdentifier",
+                    null,
                     Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
                     Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),

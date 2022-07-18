@@ -100,6 +100,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.Name.ToCleanName(),
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
                 request,
@@ -141,6 +142,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 operation.Name.ToCleanName(),
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
                 BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
                 request,
@@ -612,6 +614,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new RestClientMethod(
                 $"{method.Name}NextPage",
+                method.Summary,
                 method.Description,
                 method.ReturnType,
                 request,

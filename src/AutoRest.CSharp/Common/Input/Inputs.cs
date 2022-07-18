@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputOperation(
         string Name,
+        string? Summary,
         string Description,
         string? Accessibility,
         IReadOnlyList<InputParameter> Parameters,

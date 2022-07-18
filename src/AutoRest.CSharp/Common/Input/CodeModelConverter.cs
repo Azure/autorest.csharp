@@ -72,6 +72,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var inputOperation = new InputOperation(
                 Name: operation.Language.Default.Name,
+                Summary: operation.Language.Default.Summary,
                 Description: operation.Language.Default.Description,
                 Accessibility: operation.Accessibility,
                 Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),

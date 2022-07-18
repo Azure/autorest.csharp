@@ -242,6 +242,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var privateMethodSignature = (clientMethod.Signature with
             {
                 Name = $"{clientMethod.Signature.Name}Implementation",
+                Summary = null,
                 Modifiers = Private,
                 Description = null,
                 Parameters = clientMethod.Signature.Parameters
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.WriteMethodDeclaration(privateMethodSignature))
             {
-                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
                 var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
                 var createPageableMethodName = async ? CreateAsyncPageableMethodName : CreatePageableMethodName;
@@ -351,7 +352,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, async))
             {
-                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
                 var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
@@ -502,7 +503,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
             WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks);
-            WriteDocumentationRemarks(writer, clientMethod, remarks, hasRequestRemarks, hasResponseRemarks);
+            WriteDocumentationRemarks(writer, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
 
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
@@ -647,10 +648,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
+        private static void WriteDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks)
         {
             if (schemas.Count <= 0)
             {
+                writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
                 return;
             }
 
@@ -684,6 +686,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     schemaDesription = "Below is the JSON schema for one item in the pageable response.";
                 }
+            }
+
+            if (!methodSignature.DescriptionText.IsNullOrEmpty())
+            {
+                schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
             }
 
             writer.WriteXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");

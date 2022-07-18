@@ -537,10 +537,11 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
@@ -557,10 +558,11 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
