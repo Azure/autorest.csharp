@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var client = set.RestClient;
             string? resourceName = resource is not null ? resource.ResourceName : client.Resources.Contains(DefaultResource) ? DefaultResource?.ResourceName : null;
 
-            string uniqueName = GetUniqueName(resourceName, client.InputClient.Key);
+            string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
 
             string uniqueVariable = uniqueName.ToVariableName();
             var result = new NameSet(
@@ -224,8 +224,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (operation.TryGetConfigOperationName(out var name))
                 return name;
 
-            var inputClient = MgmtContext.Library.GetRestClient(operation).InputClient;
-            if (inputClient.Key == clientResourceName)
+            var operationGroup = MgmtContext.Library.GetRestClient(operation).OperationGroup;
+            if (operationGroup.Key == clientResourceName)
             {
                 return operation.MgmtCSharpName(false);
             }
@@ -233,7 +233,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var resourceName = string.Empty;
             if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out _))
             {
-                resourceName = inputClient.Key.IsNullOrEmpty() ? string.Empty : inputClient.Key.ResourceNameToPlural();
+                resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());
                 // Remove 'By[Resource]' if the method is put in the [Resource] class. For instance, GetByDatabaseDatabaseColumns now becomes GetDatabaseColumns under Database resource class.
                 if (opName.EndsWith($"By{clientResourceName.LastWordToSingular()}"))
@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 return $"{opName}{resourceName}";
             }
-            resourceName = inputClient.Key.IsNullOrEmpty() ? string.Empty : inputClient.Key.LastWordToSingular();
+            resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.LastWordToSingular();
             return $"{operation.MgmtCSharpName(!resourceName.IsNullOrEmpty())}{resourceName}";
         }
 

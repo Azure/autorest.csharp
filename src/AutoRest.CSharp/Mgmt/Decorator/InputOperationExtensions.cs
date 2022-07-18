@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InputOperationExtensions
     {
-
         public static string GetHttpPath(this InputOperation operation)
         {
             var path = operation.Path;
