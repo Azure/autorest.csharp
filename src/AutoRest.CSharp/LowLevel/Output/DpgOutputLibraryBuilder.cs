@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
             return allClients;
         }
 
-        public static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
+        private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
         {
             var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
             var clientNamespace = Configuration.Namespace ?? rootNamespaceName;
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public static void SetRequestsToClients(IEnumerable<ClientInfo> clientInfos)
+        private static void SetRequestsToClients(IEnumerable<ClientInfo> clientInfos)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public static void SetRequestToClient(ClientInfo clientInfo, InputOperation operation)
+        private static void SetRequestToClient(ClientInfo clientInfo, InputOperation operation)
         {
             switch (clientInfo.ResourceParameters.Count)
             {
@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public class ClientInfo
+        private class ClientInfo
         {
             public string OperationGroupKey { get; }
             public string Name { get; }
