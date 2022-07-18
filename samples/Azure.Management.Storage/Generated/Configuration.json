@@ -39,5 +39,8 @@
   },
   "OverrideOperationName": {
     "DeletedAccounts_List": "GetAll"
+  },
+  "EnableLroInterimState": {
+    "Microsoft.Storage/storageAccounts/restoreBlobRanges": "Post"
   }
 }

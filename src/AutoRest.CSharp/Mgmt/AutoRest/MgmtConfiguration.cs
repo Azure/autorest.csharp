@@ -165,6 +165,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
             TestModelerConfiguration? testmodeler = default,
+            JsonElement? enableLroInterimState =default,
             JsonElement? operationIdMappings = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
@@ -212,6 +213,9 @@ namespace AutoRest.CSharp.Input
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
             DoesSingletonRequiresKeyword = !IsValidJsonElement(singletonRequiresKeyword) ? false : Convert.ToBoolean(singletonRequiresKeyword.ToString());
             TestModeler = testmodeler;
+            EnableLroInterimState = !IsValidJsonElement(enableLroInterimState)
+                ? new Dictionary<string, string>()
+                : JsonSerializer.Deserialize<Dictionary<string, string>>(enableLroInterimState.ToString());
             OperationIdMappings = !IsValidJsonElement(operationIdMappings)
                 ? new Dictionary<string, IReadOnlyDictionary<string, string>>()
                 : JsonSerializer.Deserialize<Dictionary<string, IReadOnlyDictionary<string, string>>>(operationIdMappings.ToString());
@@ -252,6 +256,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepOrphanedModels { get; }
         public IReadOnlyList<string> KeepPluralEnums { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
+        public IReadOnlyDictionary<string, string> EnableLroInterimState { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
@@ -289,6 +294,7 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
+                enableLroInterimState: autoRest.GetValue<JsonElement?>("enable-lro-interim-state").GetAwaiter().GetResult(),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
         }
 
@@ -327,6 +333,7 @@ namespace AutoRest.CSharp.Input
             {
                 TestModeler.Write(writer, nameof(TestModeler));
             }
+            WriteNonEmptySettings(writer, nameof(EnableLroInterimState), EnableLroInterimState);
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
         }
@@ -393,6 +400,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
             root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
+            root.TryGetProperty(nameof(EnableLroInterimState), out var enableLroInterimState);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
 
             return new MgmtConfiguration(
@@ -423,6 +431,7 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
+                enableLroInterimState: enableLroInterimState,
                 operationIdMappings: operationIdMappings);
         }
 

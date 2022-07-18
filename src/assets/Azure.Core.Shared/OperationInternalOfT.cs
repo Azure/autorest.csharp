@@ -53,6 +53,7 @@ namespace Azure.Core
     {
         private readonly IOperation<T> _operation;
         private readonly AsyncLockWithValue<OperationState<T>> _stateLock;
+        private readonly T? _interimValue;
         private Response _rawResponse;
 
         /// <summary>
@@ -92,18 +93,21 @@ namespace Azure.Core
         /// </param>
         /// <param name="scopeAttributes">The attributes to use during diagnostic scope creation.</param>
         /// <param name="fallbackStrategy">The fallback delay strategy when Retry-After header is not present.  When it is present, the longer of the two delays will be used. Default is <see cref="ConstantDelayStrategy"/>.</param>
+        /// <param name="interimValue">The interim result of the long-running operation.</param>
         public OperationInternal(
             ClientDiagnostics clientDiagnostics,
             IOperation<T> operation,
             Response rawResponse,
             string? operationTypeName = null,
             IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null,
-            DelayStrategy? fallbackStrategy = null)
+            DelayStrategy? fallbackStrategy = null,
+            T? interimValue = default)
             : base(clientDiagnostics, operationTypeName ?? operation.GetType().Name, scopeAttributes, fallbackStrategy)
         {
             _operation = operation;
             _rawResponse = rawResponse;
             _stateLock = new AsyncLockWithValue<OperationState<T>>();
+            _interimValue = interimValue;
         }
 
         private OperationInternal(OperationState<T> finalState)
@@ -152,6 +156,11 @@ namespace Azure.Core
                     }
 
                     throw state.OperationFailedException!;
+                }
+
+                if (_interimValue is not null)
+                {
+                    return _interimValue;
                 }
 
                 throw new InvalidOperationException("The operation has not completed yet.");
