@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
             TestModelerConfiguration? testmodeler = default,
-            JsonElement? enableLroInterimState =default,
+            JsonElement? enableLroInterimState = default,
             JsonElement? operationIdMappings = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
