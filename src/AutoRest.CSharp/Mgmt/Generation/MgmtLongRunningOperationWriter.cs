@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _operationMapping = isGeneric && Configuration.MgmtConfiguration.EnableLroInterimState.Count > 0
                 ? Configuration.MgmtConfiguration.EnableLroInterimState
                 : null;
-            _optionalInterimString = _operationMapping is null ? string.Empty : ", interimValue: intermediateValue";
+            _optionalInterimString = _operationMapping is null ? string.Empty : $", interimValue: new InterimValue<T>(intermediateValue)";
         }
 
         public void Write()

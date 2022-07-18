@@ -42,7 +42,7 @@ namespace Azure.Management.Storage
             T intermediateValue = default;
             if (_operationMappings.TryGetValue(new ResourceIdentifier(request.Uri.ToUri().AbsolutePath).ResourceType, out var method) && request.Method == RequestMethod.Parse(method))
                 intermediateValue = source.CreateResult(response, default);
-            _operation = new OperationInternal<T>(clientDiagnostics, nextLinkOperation, response, "StorageArmOperation", fallbackStrategy: new ExponentialDelayStrategy(), interimValue: intermediateValue);
+            _operation = new OperationInternal<T>(clientDiagnostics, nextLinkOperation, response, "StorageArmOperation", fallbackStrategy: new ExponentialDelayStrategy(), interimValue: new InterimValue<T>(intermediateValue));
         }
 
         /// <inheritdoc />
