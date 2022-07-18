@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -43,9 +44,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
-                if (!MgmtContext.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
+                if (!MgmtContext.Library.TryGetResourceData(GetHttpPath(operation), out var resourceData))
                     return false;
-                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
+                if (!IsGetResourceOperation(operation, responseBodyType, resourceData))
                     return false;
 
                 return operation.Responses.Any(r => r.BodyType is CodeModelType cmt && cmt.Schema == resourceData.ObjectSchema);
@@ -70,5 +71,24 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder)
             => new[] {KnownParameters.Pipeline, ApplicationIdParameter}.Union(clientBuilder.GetOrderedParametersByRequired()).ToArray();
+
+        private static bool IsGetResourceOperation(InputOperation operation, string? responseBodyType, ResourceData resourceData)
+        {
+            // first we need to be a GET operation
+            if (operation.HttpMethod != RequestMethod.Get)
+                return false;
+            // then we get the corresponding OperationSet and see if this OperationSet corresponds to a resource
+            var operationSet = MgmtContext.Library.GetOperationSet(GetHttpPath(operation));
+            if (!operationSet.IsResource())
+                return false;
+            return responseBodyType == resourceData.Type.Name;
+        }
+
+        private static string GetHttpPath(InputOperation operation)
+        {
+            var path = operation.Path;
+            // Do not trim the tenant resource path '/'.
+            return path.Length == 1 ? path : path.TrimEnd('/');
+        }
     }
 }

@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -20,16 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<ApiVersion> ApiVersions { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
-
-        public ClientOptionsTypeProvider(BuildContext context) : base(context)
-        {
-            var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-            DefaultName = $"{clientPrefix}ClientOptions";
-            DefaultAccessibility = "public";
-            Description = $"Client options for {clientPrefix}Client.";
-
-            ApiVersions = ConvertApiVersions(CodeModelConverter.GetApiVersions(context.CodeModel));
-        }
 
         public ClientOptionsTypeProvider(IReadOnlyList<string> versions, string name, string ns, FormattableString description, SourceInputModel? sourceInputModel) : base(ns, sourceInputModel)
         {
