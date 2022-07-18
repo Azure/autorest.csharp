@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class OperationSource
     {
-        public OperationSource(CSharpType returnType, Resource? resource, InputType inputType)
+        public OperationSource(CSharpType returnType, Resource? resource, Schema schema)
         {
             ReturnType = returnType;
             TypeName = $"{(resource != null ? resource.ResourceName : returnType.Name)}OperationSource";
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");
             ArmClientCtor = new ConstructorSignature(TypeName, null, Internal, new[] { MgmtTypeProvider.ArmClientParameter });
             var serializationType = resource is null ? ReturnType : resource.Type.Equals(returnType) ? resource.ResourceData.Type : ReturnType;
-            ResponseSerialization = new SerializationBuilder().Build(BodyMediaType.Json, inputType, serializationType);
+            ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, serializationType);
         }
 
         public CSharpType ReturnType { get; }

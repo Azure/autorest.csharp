@@ -16,7 +16,16 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputAuth();
 
-    internal record InputClient(string Name, string Key, string Description, IReadOnlyList<InputOperation> Operations);
+    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations)
+    {
+        private readonly string? _key;
+
+        public string Key
+        {
+            get => _key ?? Name;
+            init => _key = value;
+        }
+    }
 
     internal record InputOperation(
         string Name,

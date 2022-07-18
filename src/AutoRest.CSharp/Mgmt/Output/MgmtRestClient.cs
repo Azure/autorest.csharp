@@ -24,10 +24,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyList<Resource>? _resources;
 
         public ClientFields Fields { get; }
+        public OperationGroup OperationGroup { get; }
 
-        public MgmtRestClient(InputClient inputClient, MgmtRestClientBuilder clientBuilder)
+        public MgmtRestClient(InputClient inputClient, OperationGroup operationGroup, MgmtRestClientBuilder clientBuilder)
             : base(inputClient, MgmtContext.Context, inputClient.Name, GetOrderedParameters(clientBuilder))
         {
+            OperationGroup = operationGroup;
             _clientBuilder = clientBuilder;
             Fields = ClientFields.CreateForRestClient(new[] { KnownParameters.Pipeline }.Union(clientBuilder.GetOrderedParametersByRequired()));
         }
@@ -56,9 +58,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyList<Resource> GetResources()
         {
             HashSet<Resource> candidates = new HashSet<Resource>();
-            foreach (var operation in InputClient.Operations.OfType<CodeModelOperation>())
+            foreach (var operation in OperationGroup.Operations)
             {
-                foreach (var resource in operation.Source.GetResourceFromResourceType())
+                foreach (var resource in operation.GetResourceFromResourceType())
                 {
                     candidates.Add(resource);
                 }

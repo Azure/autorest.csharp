@@ -82,7 +82,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels;
 
-        private Dictionary<string, string> _mergedOperations;
+        private readonly Dictionary<string, string> _mergedOperations;
+
+        private readonly CodeModelConverter _codeModelConverter;
 
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
@@ -91,6 +93,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
+            _codeModelConverter = new CodeModelConverter();
+
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
             OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
@@ -336,9 +340,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var restClientMethod in restClient.Methods)
                 {
                     // skip all internal methods
-                    if (restClientMethod.Accessibility == MethodSignatureModifiers.Public && restClientMethod.Operation is CodeModelOperation operation)
+                    if (restClientMethod.Accessibility == MethodSignatureModifiers.Public && _codeModelConverter.InputOperationToOperationMap.TryGetValue(restClientMethod.Operation, out var operation))
                     {
-                        restClientMethods.Add(operation.Source, restClientMethod);
+                        restClientMethods.Add(operation, restClientMethod);
                     }
                 }
             }
@@ -490,7 +494,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (TryGetRestClients(requestPath, out var restClients))
             {
                 // return the first client that contains this operation
-                return restClients.Single(client => client.InputClient.Operations.OfType<CodeModelOperation>().Select(cmo => cmo.Source).Contains(operation));
+                return restClients.Single(client => client.OperationGroup.Operations.Contains(operation));
             }
 
             throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath} with method {operation.GetHttpMethod()}");
@@ -504,11 +508,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
-            var codeModelConverter = new CodeModelConverter();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
-                var inputClient = codeModelConverter.CreateClient(operationGroup);
-                var restClient = new MgmtRestClient(inputClient, new MgmtRestClientBuilder(operationGroup));
+                var inputClient = _codeModelConverter.CreateClient(operationGroup);
+                var restClient = new MgmtRestClient(inputClient, operationGroup, new MgmtRestClientBuilder(operationGroup));
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))

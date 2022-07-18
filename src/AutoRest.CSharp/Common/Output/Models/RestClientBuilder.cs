@@ -113,10 +113,12 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(InputOperation operation)
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
         {
-            var allParameters = GetOperationAllParameters(operation);
-            return allParameters.ToDictionary(kvp => kvp.Key.NameInRequest, kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
+            var inputParameters = new CodeModelConverter().CreateOperationParameters(operation.Parameters.Concat(requestParameters).ToArray());
+            return inputParameters
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                .ToDictionary(p => p.NameInRequest, p => (CreateReference(p, BuildParameter(p)), p.SkipUrlEncoding));
         }
 
         /// <summary>
@@ -456,6 +458,31 @@ namespace AutoRest.CSharp.Output.Models
 
             return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
 
+        }
+
+        private ReferenceOrConstant CreateReference(InputParameter inputParameter)
+        {
+            var name = inputParameter.Name.ToVariableName();
+            if (inputParameter.Kind == InputOperationParameterKind.Client)
+            {
+                return new Reference(name, inputParameter.IsEndpoint ? typeof(Uri) : _typeFactory.CreateType(inputParameter.Type));
+            }
+
+            if (inputParameter.Kind == InputOperationParameterKind.Constant && inputParameter.DefaultValue != null)
+            {
+                return BuilderHelpers.ParseConstant(inputParameter.DefaultValue.Value, _typeFactory.CreateType(inputParameter.DefaultValue.Type));
+            }
+
+            var groupedByParameter = inputParameter.GroupedBy;
+            if (groupedByParameter == null)
+            {
+                return new Reference(name, _typeFactory.CreateType(inputParameter.Type));
+            }
+
+            var groupModel = (SchemaObjectType)_typeFactory.CreateType(((CodeModelType)groupedByParameter.Type).Schema, false).Implementation;
+            var property = groupModel.GetPropertyForGroupedParameter(inputParameter);
+
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
         }
 
         private ResponseBody? BuildResponseBody(OperationResponse response)

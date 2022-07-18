@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class MgmtRestClientBuilder : RestClientBuilder
     {
-        private class ParameterCompareer : IEqualityComparer<RequestParameter>
+        private class ParameterComparer : IEqualityComparer<RequestParameter>
         {
             public bool Equals([AllowNull] RequestParameter x, [AllowNull] RequestParameter y)
             {
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             new CodeModelConverter().CreateOperationParameters(operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct(new ParameterCompareer())
+                .Distinct(new ParameterComparer())
                 .ToList());
 
         public override Parameter BuildConstructorParameter(InputParameter operationParameter)

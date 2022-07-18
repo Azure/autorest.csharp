@@ -73,13 +73,17 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
         {
-            foreach (var inputOperation in new CodeModelConverter().CreateOperations(operationGroup.Operations).Values.Where(o => o.Source == operation))
+            foreach (var request in operation.Requests)
             {
-                var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(inputOperation);
+                var httpRequest = request.Protocol.Http as HttpRequest;
+                if (httpRequest is null)
+                    continue;
+
+                var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(operation, request.Parameters);
                 var segments = new List<Segment>();
                 var segmentIndex = 0;
-                CreateSegments(inputOperation.Uri, references, segments, ref segmentIndex);
-                CreateSegments(inputOperation.Path, references, segments, ref segmentIndex);
+                CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
+                CreateSegments(httpRequest.Path, references, segments, ref segmentIndex);
 
                 return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
             }

@@ -88,14 +88,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels(CodeModel codeModel)
-        {
-            var allSchemas = codeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(codeModel.Schemas.SealedChoices)
-                .Concat(codeModel.Schemas.Objects)
-                .Concat(codeModel.Schemas.Groups);
-
-            return allSchemas.ToDictionary(schema => schema, BuildModel);
-        }
+            => codeModel.AllSchemas.ToDictionary(schema => schema, BuildModel);
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
