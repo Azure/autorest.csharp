@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _operationMapping = isGeneric && Configuration.MgmtConfiguration.EnableLroInterimState.Count > 0
                 ? Configuration.MgmtConfiguration.EnableLroInterimState
                 : null;
-            _optionalInterimString = _operationMapping is null ? string.Empty : $", interimValue: new InterimValue<T>(intermediateValue)";
+            _optionalInterimString = _operationMapping is null ? string.Empty : $", interimValue: intermediateValue";
         }
 
         public void Write()
@@ -97,9 +97,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);");
                         if (_operationMapping is not null)
                         {
-                            _writer.Line($"T intermediateValue = default;");
+                            _writer.Line($"{typeof(InterimValue<>)} intermediateValue = null;");
                             _writer.Line($"if (_operationMappings.TryGetValue(new {typeof(ResourceIdentifier)}(request.Uri.ToUri().AbsolutePath).ResourceType, out var method) && request.Method == {typeof(RequestMethod)}.Parse(method))");
-                            _writer.Line($"intermediateValue = source.CreateResult(response, default);");
+                            _writer.Line($"intermediateValue = new {typeof(InterimValue<>)}(source.CreateResult(response, default));");
                         }
                         _writer.Line($"_operation = new {_operationInternalType}(clientDiagnostics, {nextLinkOperation}, response, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}(){_optionalInterimString});");
                     }
