@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var resourceName = string.Empty;
             if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out _))
             {
-                resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ResourceNameToPlural();
+                resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.LastWordToSingular().ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());
                 // Remove 'By[Resource]' if the method is put in the [Resource] class. For instance, GetByDatabaseDatabaseColumns now becomes GetDatabaseColumns under Database resource class.
                 if (opName.EndsWith($"By{clientResourceName.LastWordToSingular()}"))

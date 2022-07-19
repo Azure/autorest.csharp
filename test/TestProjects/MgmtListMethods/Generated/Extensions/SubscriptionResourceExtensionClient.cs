@@ -994,11 +994,11 @@ namespace MgmtListMethods
         /// <param name="content"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateAllQuotaAsync(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             async Task<Page<UpdateWorkspaceQuotas>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = QuotasClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.UpdateQuotas");
+                using var scope = QuotasClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.UpdateAllQuota");
                 scope.Start();
                 try
                 {
@@ -1023,11 +1023,11 @@ namespace MgmtListMethods
         /// <param name="content"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<UpdateWorkspaceQuotas> UpdateQuotas(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
+        public virtual Pageable<UpdateWorkspaceQuotas> UpdateAllQuota(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             Page<UpdateWorkspaceQuotas> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = QuotasClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.UpdateQuotas");
+                using var scope = QuotasClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.UpdateAllQuota");
                 scope.Start();
                 try
                 {
