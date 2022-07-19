@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.Common.Input
             get => _key ?? Name;
             init => _key = value;
         }
+
+        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>()) { }
     }
 
     internal record InputOperation(
@@ -42,7 +44,26 @@ namespace AutoRest.CSharp.Common.Input
         IReadOnlyList<string>? RequestMediaTypes,
         bool BufferResponse,
         OperationLongRunning? LongRunning,
-        OperationPaging? Paging);
+        OperationPaging? Paging)
+    {
+        public InputOperation() : this(
+            Name: string.Empty,
+            Summary: null,
+            Description: string.Empty,
+            Accessibility: null,
+            Parameters: Array.Empty<InputParameter>(),
+            Responses: Array.Empty<OperationResponse>(),
+            HttpMethod: RequestMethod.Get,
+            RequestBodyMediaType: BodyMediaType.None,
+            Uri: string.Empty,
+            Path: string.Empty,
+            ExternalDocsUrl: null,
+            RequestMediaTypes: Array.Empty<string>(),
+            BufferResponse: false,
+            LongRunning: null,
+            Paging: null)
+        { }
+    }
 
     internal record InputParameter(
         string Name,
@@ -103,6 +124,9 @@ namespace AutoRest.CSharp.Common.Input
     {
         public InputType? ValuesType { get; init; }
         public IReadOnlyList<InputTypeValue>? AllowedValues { get; init; }
+
+        public InputType() : this(nameof(InputTypeKind.Object), InputTypeKind.Object)
+        { }
     }
 
     internal record InputConstant(object? Value, InputType Type);
