@@ -29,10 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static string ResourceNameToPlural(this string resourceName)
         {
             var pluralResourceName = resourceName.LastWordToPlural(false);
-            var singularResourceName = resourceName.LastWordToSingular(false);
-            return pluralResourceName != singularResourceName ?
+            return pluralResourceName != resourceName ?
                 pluralResourceName :
-                $"All{pluralResourceName}";
+                $"All{resourceName}";
         }
 
         /// <summary>
