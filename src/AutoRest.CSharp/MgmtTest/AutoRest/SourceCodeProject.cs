@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return compilation;
         }
 
-        // TODO -- this code is the similar to the one in GeneratedCodeWorkspace, we might need to refactor this
+        // TODO -- this code is similar to the one in GeneratedCodeWorkspace, we might need to refactor this
         private static Project CreateSourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
         {
             var sourceCodeProject = CreateGeneratedCodeProject();
