@@ -84,8 +84,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentCollection", "GetAll", true)]
         [TestCase("FakeParentResource", "GetAll", false)]
 
-        [TestCase("MgmtListMethodsExtensions", "UpdateQuotas", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "UpdateQuotas", false, typeof(ResourceGroupResource))]
+        [TestCase("MgmtListMethodsExtensions", "UpdateAllQuota", true, typeof(SubscriptionResource))]
+        [TestCase("MgmtListMethodsExtensions", "UpdateAllQuota", false, typeof(ResourceGroupResource))]
         public void ValidateFakesResourceAsAParentListMethods(string className, string methodName, bool exist, params Type[] parameterTypes)
         {
             ValidateListMethods(className, methodName, exist, parameterTypes);
