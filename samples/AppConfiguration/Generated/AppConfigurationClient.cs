@@ -47,7 +47,6 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual async Task<Response> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeys");
@@ -68,7 +67,6 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual Response CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeys");
@@ -91,7 +89,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual async Task<Response> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValues");
@@ -114,7 +111,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual Response CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValues");
@@ -138,7 +134,6 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a single key-value. </remarks>
         public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.GetKeyValue");
@@ -162,7 +157,6 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a single key-value. </remarks>
         public virtual Response<KeyValue> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.GetKeyValue");
@@ -185,7 +179,6 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Creates a key-value. </remarks>
         public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
@@ -208,7 +201,6 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Creates a key-value. </remarks>
         public virtual Response<KeyValue> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
@@ -229,7 +221,6 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Deletes a key-value. </remarks>
         public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteKeyValue");
@@ -250,7 +241,6 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Deletes a key-value. </remarks>
         public virtual Response<KeyValue> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteKeyValue");
@@ -274,7 +264,6 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual async Task<Response> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValue");
@@ -298,7 +287,6 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual Response CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValue");
@@ -320,7 +308,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual async Task<Response> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Head5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckLabels");
@@ -342,7 +329,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual Response CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Head5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckLabels");
@@ -364,7 +350,6 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Locks a key-value. </remarks>
         public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutLock");
@@ -386,7 +371,6 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Locks a key-value. </remarks>
         public virtual Response<KeyValue> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutLock");
@@ -408,7 +392,6 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Unlocks a key-value. </remarks>
         public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteLock");
@@ -430,7 +413,6 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Unlocks a key-value. </remarks>
         public virtual Response<KeyValue> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteLock");
@@ -453,7 +435,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual async Task<Response> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum7> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckRevisions");
@@ -476,7 +457,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Requests the headers and status of the given resource. </remarks>
         public virtual Response CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum7> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckRevisions");
@@ -497,7 +477,6 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of keys. </remarks>
         public virtual AsyncPageable<Key> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
@@ -538,7 +517,6 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of keys. </remarks>
         public virtual Pageable<Key> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             Page<Key> FirstPageFunc(int? pageSizeHint)
@@ -581,7 +559,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of key-values. </remarks>
         public virtual AsyncPageable<KeyValue> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
@@ -624,7 +601,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of key-values. </remarks>
         public virtual Pageable<KeyValue> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
@@ -666,7 +642,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of labels. </remarks>
         public virtual AsyncPageable<Label> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
@@ -708,7 +683,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of labels. </remarks>
         public virtual Pageable<Label> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             Page<Label> FirstPageFunc(int? pageSizeHint)
@@ -751,7 +725,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of key-value revisions. </remarks>
         public virtual AsyncPageable<KeyValue> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
@@ -794,7 +767,6 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Gets a list of key-value revisions. </remarks>
         public virtual Pageable<KeyValue> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
