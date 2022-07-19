@@ -30,7 +30,7 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
     }
 
-    if ($fast -or ($projectName -eq "CadlFirstTest"))
+    if ($fast -or ($projectName -eq "CadlFirstTest") -or ($projectName -eq "CadlPetStore"))
     {
         $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
         $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
