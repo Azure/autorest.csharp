@@ -4,12 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -399,7 +396,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelClient client)
         {
-            foreach (var (_, field, _) in client.SubClientFactoryMethods)
+            foreach (var field in client.SubClients.Select(s => s.FactoryMethod?.CachingField))
             {
                 if (field != null)
                 {
@@ -409,7 +406,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.Line();
 
-            foreach (var (methodSignature, field, constructorCallParameters) in client.SubClientFactoryMethods)
+            foreach (var (methodSignature, field, constructorCallParameters) in client.SubClients.Select(s => s.FactoryMethod).WhereNotNull())
             {
                 writer.WriteMethodDocumentation(methodSignature);
                 using (writer.WriteMethodDeclaration(methodSignature))
