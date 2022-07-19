@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -12,13 +14,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtConfiguration.TestModeler is not null);
 
-            // contruct the MgmtTestOutputLibrary
-            var library = new MgmtTestOutputLibrary(codeModel, Configuration.SharedSourceFolders);
+            var sourceCodePath = GetSourceCodePath();
+            var sourceCodeProject = new SourceCodeProject(sourceCodePath, Configuration.SharedSourceFolders);
+            var sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
+
+            // construct the MgmtTestOutputLibrary
+            var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
 
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
@@ -42,6 +48,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             extensionWrapperTestWriter.Write();
 
             project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+        }
+
+        private static string GetSourceCodePath()
+        {
+            if (Configuration.MgmtConfiguration.TestModeler?.SourceCodePath != null)
+                return Configuration.MgmtConfiguration.TestModeler.SourceCodePath;
+
+            return Path.Combine(Configuration.OutputFolder, "../../src");
         }
     }
 }

@@ -21,11 +21,8 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private MockTestDefinitionModel _mockTestModel;
-        public MgmtTestOutputLibrary(CodeModel codeModel, string[] sharedSourceFolders)
+        public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
-            var sourceCodePath = GetSourceCodePath();
-            SourceCodeProject = new SourceCodeProject(sourceCodePath, sharedSourceFolders);
-            var sourceInputModel = new SourceInputModel(SourceCodeProject.Compilation);
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
@@ -35,16 +32,6 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
         }
-
-        private static string GetSourceCodePath()
-        {
-            if (Configuration.MgmtConfiguration.TestModeler?.SourceCodePath != null)
-                return Configuration.MgmtConfiguration.TestModeler.SourceCodePath;
-
-            return Path.Combine(Configuration.OutputFolder, "../../src");
-        }
-
-        public SourceCodeProject SourceCodeProject { get; }
 
         private Dictionary<MgmtTypeProvider, List<MockTestCase>>? _mockTestCases;
         internal Dictionary<MgmtTypeProvider, List<MockTestCase>> MockTestCases => _mockTestCases ??= EnsureMockTestCases();

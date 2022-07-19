@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -14,7 +15,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class SourceCodeProject
     {
         private static readonly string[] SharedFolders = { GeneratedCodeWorkspace.SharedFolder };
-        private Project sourceCodeProject;
+        private Project _sourceCodeProject;
         public SourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
         {
             if (Uri.IsWellFormedUriString(sourceCodePath, UriKind.RelativeOrAbsolute))
@@ -27,7 +28,20 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 sourceCodePath = Path.GetFullPath(sourceCodePath);
             }
 
-            sourceCodeProject = CreateGeneratedCodeProject();
+            _sourceCodeProject = CreateSourceCodeProject(sourceCodePath, sharedSourceFolders);
+        }
+
+        public async Task<Compilation> GetCompilationAsync()
+        {
+            var compilation = await _sourceCodeProject.GetCompilationAsync() as CSharpCompilation;
+            Debug.Assert(compilation != null);
+            return compilation;
+        }
+
+        // TODO -- this code is the similar to the one in GeneratedCodeWorkspace, we might need to refactor this
+        private static Project CreateSourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
+        {
+            var sourceCodeProject = CreateGeneratedCodeProject();
             var sourceCodeGeneratedDirectory = Path.Join(sourceCodePath, GeneratedCodeWorkspace.GeneratedFolder);
             foreach (var sourceFile in Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories))
             {
@@ -46,11 +60,10 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 }
             }
 
-            Compilation = sourceCodeProject.GetCompilationAsync().GetAwaiter().GetResult()!;
-            Debug.Assert(Compilation != null);
-        }
+            sourceCodeProject = sourceCodeProject.WithParseOptions(new CSharpParseOptions(preprocessorSymbols: new[] { "EXPERIMENTAL" }));
 
-        public Compilation Compilation { get; }
+            return sourceCodeProject;
+        }
 
         private static Project CreateGeneratedCodeProject()
         {
