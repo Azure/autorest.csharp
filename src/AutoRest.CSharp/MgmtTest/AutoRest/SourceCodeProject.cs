@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
+using AutoRest.CSharp.AutoRest.Plugins;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -13,8 +13,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class SourceCodeProject
     {
+        private static readonly string[] SharedFolders = { GeneratedCodeWorkspace.SharedFolder };
         private Project sourceCodeProject;
-        public SourceCodeProject(string sourceCodePath)
+        public SourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
         {
             if (Uri.IsWellFormedUriString(sourceCodePath, UriKind.RelativeOrAbsolute))
             {
@@ -27,13 +28,22 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             }
 
             sourceCodeProject = CreateGeneratedCodeProject();
+            var sourceCodeGeneratedDirectory = Path.Join(sourceCodePath, GeneratedCodeWorkspace.GeneratedFolder);
             foreach (var sourceFile in Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories))
             {
-                if (sourceFile.Contains($"{Path.PathSeparator}Generated{Path.PathSeparator}", StringComparison.OrdinalIgnoreCase))
+                if (sourceFile.StartsWith(sourceCodeGeneratedDirectory))
                 {
                     continue;
                 }
                 sourceCodeProject = sourceCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
+            }
+
+            foreach (var sharedSourceFolder in sharedSourceFolders)
+            {
+                foreach (var sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
+                {
+                    sourceCodeProject = sourceCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
+                }
             }
 
             Compilation = sourceCodeProject.GetCompilationAsync().GetAwaiter().GetResult()!;

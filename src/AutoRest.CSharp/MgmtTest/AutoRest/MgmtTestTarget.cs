@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Debug.Assert(Configuration.MgmtConfiguration.TestModeler is not null);
 
             // contruct the MgmtTestOutputLibrary
-            var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+            var library = new MgmtTestOutputLibrary(codeModel, Configuration.SharedSourceFolders);
 
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)

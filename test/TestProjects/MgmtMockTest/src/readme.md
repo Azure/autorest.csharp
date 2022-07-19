@@ -30,6 +30,10 @@ format-by-name-rules:
   'ETag': 'etag'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
+
+rename-mapping:
+  Type: EncryptionType
+
 directive:
   - from: swagger-document
     where: $.paths

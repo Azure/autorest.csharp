@@ -21,10 +21,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private MockTestDefinitionModel _mockTestModel;
-        public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public MgmtTestOutputLibrary(CodeModel codeModel, string[] sharedSourceFolders)
         {
             var sourceCodePath = GetSourceCodePath();
-            SourceCodeProject = new SourceCodeProject(sourceCodePath);
+            SourceCodeProject = new SourceCodeProject(sourceCodePath, sharedSourceFolders);
+            var sourceInputModel = new SourceInputModel(SourceCodeProject.Compilation);
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
