@@ -13,6 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt
         [TestCase("MetadataRole", "MetadataRoles")]
         [TestCase("KeyInformation", "AllKeyInformation")]
         [TestCase("RoleMetadata", "AllRoleMetadata")]
+        [TestCase("Redis", "AllRedis")]
         public void ValidateResourceNameToPlural(string resourceName, string expected)
         {
             var result = resourceName.ResourceNameToPlural();
