@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Describes a scale-in policy for a virtual machine scale set.
     /// Serialized Name: ScaleInPolicy
     /// </summary>
-    internal partial class ScaleInPolicy
+    public partial class ScaleInPolicy
     {
         /// <summary> Initializes a new instance of ScaleInPolicy. </summary>
         public ScaleInPolicy()

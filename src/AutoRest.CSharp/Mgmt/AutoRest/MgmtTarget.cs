@@ -153,11 +153,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
+            var modelFactoryProvider = MgmtContext.Library.ModelFactory;
+            if (modelFactoryProvider != null)
+            {
+                var codeWriter = new CodeWriter();
+                ModelFactoryWriter.WriteModelFactory(codeWriter, modelFactoryProvider);
+                AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", codeWriter.ToString());
+            }
+
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
             await project.PostProcess(PostProcess);
-
         }
 
         private static async Task<Project> PostProcess(Project project)

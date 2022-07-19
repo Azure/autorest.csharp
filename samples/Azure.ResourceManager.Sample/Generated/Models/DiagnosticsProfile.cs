@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Specifies the boot diagnostic settings state. &lt;br&gt;&lt;br&gt;Minimum api-version: 2015-06-15.
     /// Serialized Name: DiagnosticsProfile
     /// </summary>
-    internal partial class DiagnosticsProfile
+    public partial class DiagnosticsProfile
     {
         /// <summary> Initializes a new instance of DiagnosticsProfile. </summary>
         public DiagnosticsProfile()

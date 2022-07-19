@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Enables or disables a capability on the virtual machine or virtual machine scale set.
     /// Serialized Name: AdditionalCapabilities
     /// </summary>
-    internal partial class AdditionalCapabilities
+    public partial class AdditionalCapabilities
     {
         /// <summary> Initializes a new instance of AdditionalCapabilities. </summary>
         public AdditionalCapabilities()

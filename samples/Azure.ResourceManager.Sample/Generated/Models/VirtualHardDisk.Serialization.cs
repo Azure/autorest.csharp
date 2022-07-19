@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualHardDisk : IUtf8JsonSerializable
+    public partial class VirtualHardDisk : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

@@ -344,6 +344,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return restClientMethods;
         }
 
+        private ModelFactoryTypeProvider? _modelFactory;
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(MgmtContext.Context, AllSchemaMap.Values);
+
         public ArmClientExtensions ArmClientExtensions => EnsureArmClientExtensions();
 
         private MgmtExtensions? _tenantExtensions;

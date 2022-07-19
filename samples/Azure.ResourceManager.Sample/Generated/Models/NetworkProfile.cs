@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Specifies the network interfaces of the virtual machine.
     /// Serialized Name: NetworkProfile
     /// </summary>
-    internal partial class NetworkProfile
+    public partial class NetworkProfile
     {
         /// <summary> Initializes a new instance of NetworkProfile. </summary>
         public NetworkProfile()

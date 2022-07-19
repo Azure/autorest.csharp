@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// The List Extension operation response
     /// Serialized Name: VirtualMachineExtensionsListResult
     /// </summary>
-    internal partial class VirtualMachineExtensionsListResult
+    public partial class VirtualMachineExtensionsListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
         internal VirtualMachineExtensionsListResult()

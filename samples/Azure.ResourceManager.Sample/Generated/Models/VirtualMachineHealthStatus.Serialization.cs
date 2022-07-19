@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualMachineHealthStatus
+    public partial class VirtualMachineHealthStatus
     {
         internal static VirtualMachineHealthStatus DeserializeVirtualMachineHealthStatus(JsonElement element)
         {

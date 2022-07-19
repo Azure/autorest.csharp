@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
+    public partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
         internal static VirtualMachineScaleSetInstanceViewStatusesSummary DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(JsonElement element)
         {

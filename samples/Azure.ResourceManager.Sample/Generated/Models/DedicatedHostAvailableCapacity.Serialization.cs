@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class DedicatedHostAvailableCapacity
+    public partial class DedicatedHostAvailableCapacity
     {
         internal static DedicatedHostAvailableCapacity DeserializeDedicatedHostAvailableCapacity(JsonElement element)
         {

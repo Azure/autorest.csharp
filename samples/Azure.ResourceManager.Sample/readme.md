@@ -8,6 +8,7 @@
 azure-arm: true
 require: $(this-folder)/../../readme.md
 input-file: $(this-folder)/sample.json
+library-name: Sample
 namespace: Azure.ResourceManager.Sample
 model-namespace: false
 public-clients: false

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Instance view statuses summary for virtual machines of a virtual machine scale set.
     /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary
     /// </summary>
-    internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
+    public partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
         internal VirtualMachineScaleSetInstanceViewStatusesSummary()

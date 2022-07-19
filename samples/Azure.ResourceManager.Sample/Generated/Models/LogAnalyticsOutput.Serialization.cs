@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class LogAnalyticsOutput
+    public partial class LogAnalyticsOutput
     {
         internal static LogAnalyticsOutput DeserializeLogAnalyticsOutput(JsonElement element)
         {

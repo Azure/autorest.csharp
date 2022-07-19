@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// LogAnalytics output properties
     /// Serialized Name: LogAnalyticsOutput
     /// </summary>
-    internal partial class LogAnalyticsOutput
+    public partial class LogAnalyticsOutput
     {
         /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
         internal LogAnalyticsOutput()
