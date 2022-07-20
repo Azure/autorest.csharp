@@ -1,6 +1,7 @@
 # CADL to .Net
 
 DPG 1.1 requires CADL as input, if service would like to generate models.
+
 ## Pipeline
 
 Cadl->net.emitter-> json -> outputLibrary -> sdk
