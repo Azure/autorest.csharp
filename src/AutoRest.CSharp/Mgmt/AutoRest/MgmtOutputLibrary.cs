@@ -805,9 +805,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     // ensure the name of resource data is singular
                     var schemaName = resourceDataSchema.Name;
-                    resourceDataSchema.Language.Default.SerializedName ??= schemaName;
-                    resourceDataSchema.Language.Default.Name = schemaName.LastWordToSingular(false);
-                    // TODO -- add a new configuration to omit this step
+                    // skip this step if the configuration is set to keep this plural
+                    if (!Configuration.MgmtConfiguration.KeepOrphanedModels.Contains(schemaName))
+                    {
+                        resourceDataSchema.Language.Default.SerializedName ??= schemaName;
+                        resourceDataSchema.Language.Default.Name = schemaName.LastWordToSingular(false);
+                    }
                     // if this operation set corresponds to a SDK resource, we add it to the map
                     if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchema, out HashSet<OperationSet>? result))
                     {

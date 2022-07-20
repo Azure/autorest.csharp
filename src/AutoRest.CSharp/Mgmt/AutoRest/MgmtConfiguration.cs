@@ -145,6 +145,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> promptedEnumValues,
             IReadOnlyList<string> keepOrphanedModels,
             IReadOnlyList<string> keepPluralEnums,
+            IReadOnlyList<string> keepPluralResourceData,
             IReadOnlyList<string> noResourceSuffix,
             IReadOnlyList<string> schemasToPrependRPPrefix,
             MgmtDebugConfiguration mgmtDebug,
@@ -207,6 +208,7 @@ namespace AutoRest.CSharp.Input
             PromptedEnumValues = promptedEnumValues;
             KeepOrphanedModels = keepOrphanedModels;
             KeepPluralEnums = keepPluralEnums;
+            KeepPluralResourceData = keepPluralResourceData;
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
@@ -254,6 +256,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> PromptedEnumValues { get; }
         public IReadOnlyList<string> KeepOrphanedModels { get; }
         public IReadOnlyList<string> KeepPluralEnums { get; }
+        public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
@@ -272,6 +275,7 @@ namespace AutoRest.CSharp.Input
                 promptedEnumValues: autoRest.GetValue<string[]?>("prompted-enum-values").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 keepOrphanedModels: autoRest.GetValue<string[]?>("keep-orphaned-models").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 keepPluralEnums: autoRest.GetValue<string[]?>("keep-plural-enums").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                keepPluralResourceData: autoRest.GetValue<string[]?>("keep-plural-resource-data").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
@@ -344,6 +348,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(ListException), out var listException);
             root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModels);
             root.TryGetProperty(nameof(KeepPluralEnums), out var keepPluralEnums);
+            root.TryGetProperty(nameof(KeepPluralResourceData), out var keepPluralResourceData);
             root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffix);
             root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefix);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
@@ -386,6 +391,9 @@ namespace AutoRest.CSharp.Input
             var keepPluralEnumsList = keepPluralEnums.ValueKind == JsonValueKind.Array
                 ? keepPluralEnums.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
+            var keepPluralResourceDataList = keepPluralResourceData.ValueKind == JsonValueKind.Array
+                ? keepPluralResourceData.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : Array.Empty<string>();
             var noResourceSuffixList = noResourceSuffix.ValueKind == JsonValueKind.Array
                 ? noResourceSuffix.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
@@ -409,6 +417,7 @@ namespace AutoRest.CSharp.Input
                 promptedEnumValues: promptedEnumValuesList,
                 keepOrphanedModels: keepOrphanedModelsList,
                 keepPluralEnums: keepPluralEnumsList,
+                keepPluralResourceData: keepPluralResourceDataList,
                 noResourceSuffix: noResourceSuffixList,
                 schemasToPrependRPPrefix: prependRPPrefixList,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
