@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public string? Summary { get; }
         public string? Description { get; }
         public string? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
-        public string? DescriptionText => Summary.IsNullOrEmpty() ? string.Empty : Description;
+        public string? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary ? string.Empty : Description;
         public Request Request { get; }
         public Parameter[] Parameters { get; }
         public Response[] Responses { get; }
