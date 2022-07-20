@@ -533,7 +533,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             var requestPathToResources = new Dictionary<RequestPath, ResourceObjectAssociation>();
 
-            foreach ((var resourceDataSchema, var operationSets) in ResourceDataSchemaNameToOperationSets)
+            foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach ((var operationSet, var operations) in resourceOperationsList)
@@ -547,7 +547,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType();
-                        var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchema, operationSet, resourcePath), resourceType, resourceData);
+                        var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
                         var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
                         resource.ResourceCollection = collection;
 
