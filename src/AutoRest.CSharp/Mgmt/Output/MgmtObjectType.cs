@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
-            return isResourceType ? name.LastWordToSingular(false) + "Data" : name;
+            return isResourceType ? name + "Data" : name;
         }
 
         private static string GetDefaultNamespace(BuildContext context, Schema objectSchema, bool isResourceType)

@@ -590,7 +590,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 // this is a regular resource and the name is unique
                 if (countOfSameResourceDataName == 1)
-                    return candidateName.LastWordToSingular(false);
+                    return candidateName;
 
                 // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
                 // if we have the unique resource type, we just use the resource type to construct our resource type name
@@ -803,6 +803,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                 {
+                    // ensure the name of resource data is singular
+                    var schemaName = resourceDataSchema.Name;
+                    resourceDataSchema.Language.Default.SerializedName ??= schemaName;
+                    resourceDataSchema.Language.Default.Name = schemaName.LastWordToSingular(false);
+                    // TODO -- add a new configuration to omit this step
                     // if this operation set corresponds to a SDK resource, we add it to the map
                     if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchema, out HashSet<OperationSet>? result))
                     {
