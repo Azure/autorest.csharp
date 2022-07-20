@@ -2590,6 +2590,19 @@
           "federatedClientId": {
             "type": "string",
             "description": "Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property."
+          },
+          "minimumTlsVersion": {
+            "type": "string",
+            "description": "The minimum tls version",
+            "enum": [
+              "TLS1_0",
+              "TLS1_1",
+              "TLS1_2"
+            ],
+            "x-ms-enum": {
+              "name": "MinimumTlsVersion",
+              "modelAsString": true
+            }
           }
         }
       },

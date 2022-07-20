@@ -41,6 +41,7 @@ namespace MgmtMockTest.Tests.Mock
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}")),
+                MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
             });
         }
 

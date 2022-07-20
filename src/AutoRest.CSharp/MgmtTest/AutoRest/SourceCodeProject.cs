@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
+using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -13,8 +14,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class SourceCodeProject
     {
-        private Project sourceCodeProject;
-        public SourceCodeProject(string sourceCodePath)
+        private static readonly string[] SharedFolders = { GeneratedCodeWorkspace.SharedFolder };
+        private Project _sourceCodeProject;
+        public SourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
         {
             if (Uri.IsWellFormedUriString(sourceCodePath, UriKind.RelativeOrAbsolute))
             {
@@ -26,21 +28,42 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 sourceCodePath = Path.GetFullPath(sourceCodePath);
             }
 
-            sourceCodeProject = CreateGeneratedCodeProject();
+            _sourceCodeProject = CreateSourceCodeProject(sourceCodePath, sharedSourceFolders);
+        }
+
+        public async Task<Compilation> GetCompilationAsync()
+        {
+            var compilation = await _sourceCodeProject.GetCompilationAsync() as CSharpCompilation;
+            Debug.Assert(compilation != null);
+            return compilation;
+        }
+
+        // TODO -- this code is similar to the one in GeneratedCodeWorkspace, we might need to refactor this
+        private static Project CreateSourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
+        {
+            var sourceCodeProject = CreateGeneratedCodeProject();
+            var sourceCodeGeneratedDirectory = Path.Join(sourceCodePath, GeneratedCodeWorkspace.GeneratedFolder);
             foreach (var sourceFile in Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories))
             {
-                if (sourceFile.Contains($"{Path.PathSeparator}Generated{Path.PathSeparator}", StringComparison.OrdinalIgnoreCase))
+                if (sourceFile.StartsWith(sourceCodeGeneratedDirectory))
                 {
                     continue;
                 }
                 sourceCodeProject = sourceCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
-            Compilation = sourceCodeProject.GetCompilationAsync().GetAwaiter().GetResult()!;
-            Debug.Assert(Compilation != null);
-        }
+            foreach (var sharedSourceFolder in sharedSourceFolders)
+            {
+                foreach (var sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
+                {
+                    sourceCodeProject = sourceCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
+                }
+            }
 
-        public Compilation Compilation { get; }
+            sourceCodeProject = sourceCodeProject.WithParseOptions(new CSharpParseOptions(preprocessorSymbols: new[] { "EXPERIMENTAL" }));
+
+            return sourceCodeProject;
+        }
 
         private static Project CreateGeneratedCodeProject()
         {
