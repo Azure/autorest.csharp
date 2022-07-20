@@ -102,5 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
         }
+
+        internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
     }
 }

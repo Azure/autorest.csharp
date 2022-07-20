@@ -14,8 +14,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class NormalizeParamNames
     {
-        internal static string GetNewName(string paramName, string schemaName, IDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        internal static string GetNewName(string paramName, Schema schema, IDictionary<Schema, HashSet<OperationSet>> dataSchemaHash)
         {
+            var schemaName = schema.Name;
             if (schemaName.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
 
@@ -34,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 return "input";
 
-            if (schemaName.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(schemaName))
+            if (schemaName.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(schema))
                 return "data";
 
             if (paramName.Equals("parameters", StringComparison.OrdinalIgnoreCase))
