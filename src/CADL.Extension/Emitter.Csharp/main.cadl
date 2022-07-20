@@ -1,0 +1,15 @@
+import "@cadl-lang/rest";
+
+@serviceTitle("Hello world")
+@serviceVersion("0.1.0")
+namespace Demo.HelloWorld;
+
+using Cadl.Http;
+
+@doc("Hello world service")
+@route("/hello")
+namespace Hello {
+  @doc("Returns 'hi'")
+  @get
+  op sayHi(): OkResponse<"hi">;
+}
