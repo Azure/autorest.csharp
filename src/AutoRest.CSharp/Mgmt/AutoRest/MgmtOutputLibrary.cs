@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
-        private CachedDictionary<string, HashSet<OperationSet>> ResourceDataSchemaNameToOperationSets { get; }
+        private Dictionary<string, HashSet<OperationSet>> ResourceDataSchemaNameToOperationSets { get; }
 
         /// <summary>
         /// This is a map from raw request path to their corresponding <see cref="OperationSet"/>,
@@ -95,7 +95,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
             OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
             OperationsToRequestPaths = new CachedDictionary<Operation, RequestPath>(PopulateOperationsToRequestPaths);
-            ResourceDataSchemaNameToOperationSets = new CachedDictionary<string, HashSet<OperationSet>>(DecorateOperationSets);
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
@@ -112,6 +111,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             ApplyGlobalConfigurations();
             CodeModelTransformer.Transform();
+
+            ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
         }
 
         private static void ApplyGlobalConfigurations()

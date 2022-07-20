@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             switch (method)
             {
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             var schemaName = bodyParameter.Schema.Language.Default.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
