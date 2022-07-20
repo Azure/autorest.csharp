@@ -13,53 +13,15 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private readonly Lazy<IReadOnlyList<LowLevelClient>> _restClients;
-        private readonly Lazy<IReadOnlyDictionary<string, IReadOnlyList<MethodSignatureBase>>> _restClientInitExamplePaths;
 
         public IReadOnlyList<LowLevelClient> RestClients => _restClients.Value;
-        public IReadOnlyDictionary<string, IReadOnlyList<MethodSignatureBase>> RestClientInitExamplePaths => _restClientInitExamplePaths.Value;
         public ClientOptionsTypeProvider ClientOptions { get; }
 
         public LowLevelOutputLibrary(BuildContext<LowLevelOutputLibrary> context, Func<IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
         {
             _context = context;
             _restClients = new Lazy<IReadOnlyList<LowLevelClient>>(restClientsFactory);
-            _restClientInitExamplePaths = new Lazy<IReadOnlyDictionary<string, IReadOnlyList<MethodSignatureBase>>>(GetRestClientInitExamplePaths);
             ClientOptions = clientOptions;
-        }
-
-        /// <summary>
-        /// Calculate the method invocation chains fo examples on how to get a client, like `Client(...).GetXXClient(..).GetYYClient(..)`.
-        /// </summary>
-        /// <returns> A dictionary indexed by client type name. Each value is a list of the method invocation to get a specific client. </returns>
-        private IReadOnlyDictionary<string, IReadOnlyList<MethodSignatureBase>> GetRestClientInitExamplePaths()
-        {
-            var paths = new Dictionary<string, IReadOnlyList<MethodSignatureBase>>();
-
-            foreach (var client in RestClients.Where(r => !r.IsSubClient))
-            {
-                // use the secondary constructor with minimal parameters
-                var path = new List<MethodSignatureBase> { client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First() };
-                paths.Add(client.Type.Name, path);
-                GetSubRestClientInitExamplePaths(client.SubClients, client.SubClientFactoryMethods, path, paths);
-            }
-            return paths;
-        }
-
-        private void GetSubRestClientInitExamplePaths(IReadOnlyList<LowLevelClient> subClients, IReadOnlyList<LowLevelSubClientFactoryMethod> subClientFactoryMethods, List<MethodSignatureBase> parentPath, Dictionary<string, IReadOnlyList<MethodSignatureBase>> paths)
-        {
-            foreach (var client in subClients)
-            {
-                foreach (var factoryMethod in subClientFactoryMethods)
-                {
-                    if (client.Type.Name == factoryMethod.ClientTypeName)
-                    {
-                        var path = new List<MethodSignatureBase>(parentPath);
-                        path.Add(factoryMethod.Signature);
-                        paths.Add(client.Type.Name, path);
-                        GetSubRestClientInitExamplePaths(client.SubClients, client.SubClientFactoryMethods, path, paths);
-                    }
-                }
-            }
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)

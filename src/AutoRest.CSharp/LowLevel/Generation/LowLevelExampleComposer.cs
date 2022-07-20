@@ -26,15 +26,16 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
         private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
 
-        private string ClientTypeName { get; }
-        private BuildContext<LowLevelOutputLibrary> Context { get; }
-        private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
+        private string ClientTypeName { get; init; }
+        private BuildContext<LowLevelOutputLibrary> Context { get; init; }
+        private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; init; }
 
-        public LowLevelExampleComposer(string clientTypeName, BuildContext<LowLevelOutputLibrary> context)
+
+        public LowLevelExampleComposer(LowLevelClient client, BuildContext<LowLevelOutputLibrary> context)
         {
-            ClientTypeName = clientTypeName;
+            ClientTypeName = client.Type.Name;
             Context = context;
-            ClientInvocationChain = context.Library.RestClientInitExamplePaths[clientTypeName];
+            ClientInvocationChain = GetClientInvocationChain(client);
         }
 
         public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
@@ -927,6 +928,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
             return string.Join(", ", parameterValues);
+        }
+
+        /// <summary>
+        /// Get the methods to be called to get the client, it should be like `Client(...).GetXXClient(..).GetYYClient(..)`.
+        /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
+        /// </summary>
+        /// <returns></returns>
+        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        {
+            var callChain = new Stack<MethodSignatureBase>();
+            while (client.FactoryMethod != null)
+            {
+                callChain.Push(client.FactoryMethod.Signature);
+                if (client.ParentClient == null)
+                {
+                    break;
+                }
+
+                client = client.ParentClient;
+            }
+            callChain.Push(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
+
+            return callChain.ToList();
         }
 
         private string GetFactoryMethodCode(MethodSignatureBase factoryMethod)
