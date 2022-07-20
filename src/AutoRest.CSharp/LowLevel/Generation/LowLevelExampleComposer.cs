@@ -961,7 +961,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static string GetEndpoint()
         {
             // TODO: is there a way to compose a data plane endpoint from swagger?
-            return "https://my-account-name.azure.com";
+            return "https://my-service.azure.com";
         }
 
         private static ObjectSchema GetConcreteChildType(ObjectSchema o)
