@@ -22,6 +22,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
+using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -109,8 +110,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
 
-            // TODO -- find a way to get rid of this input parameter
+            ApplyGlobalConfigurations();
             CodeModelTransformer.Transform();
+        }
+
+        private static void ApplyGlobalConfigurations()
+        {
+            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
+            {
+                Vocabularies.Default.AddIrregular(word, plural);
+            }
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -577,7 +586,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 // this is a regular resource and the name is unique
                 if (countOfSameResourceDataName == 1)
-                    return candidateName;
+                    return candidateName.LastWordToSingular(false);
 
                 // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
                 // if we have the unique resource type, we just use the resource type to construct our resource type name

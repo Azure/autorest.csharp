@@ -159,6 +159,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? renameRules = default,
             JsonElement? formatByNameRules = default,
             JsonElement? renameMapping = default,
+            JsonElement? irregularPluralWords = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
@@ -178,6 +179,7 @@ namespace AutoRest.CSharp.Input
             FormatByNameRules = !IsValidJsonElement(formatByNameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(formatByNameRules.ToString());
             RenameMapping = !IsValidJsonElement(renameMapping) ? new Dictionary<string, string>() :
                 JsonSerializer.Deserialize<Dictionary<string, string>>(renameMapping.ToString());
+            IrregularPluralWords = !IsValidJsonElement(irregularPluralWords) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(irregularPluralWords.ToString());
             try
             {
                 OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
@@ -241,6 +243,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, RenameRuleTarget> RenameRules => _renameRules ??= ParseRenameRules(RawRenameRules);
         public IReadOnlyDictionary<string, string> FormatByNameRules { get; }
         public IReadOnlyDictionary<string, string> RenameMapping { get; }
+        public IReadOnlyDictionary<string, string> IrregularPluralWords { get; }
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
@@ -283,6 +286,7 @@ namespace AutoRest.CSharp.Input
                 renameRules: autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
                 renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
+                irregularPluralWords: autoRest.GetValue<JsonElement?>("irregular-plural-words").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
@@ -313,6 +317,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RawRenameRules), RawRenameRules);
             WriteNonEmptySettings(writer, nameof(FormatByNameRules), FormatByNameRules);
             WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
+            WriteNonEmptySettings(writer, nameof(IrregularPluralWords), IrregularPluralWords);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
@@ -351,6 +356,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
             root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
             root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
+            root.TryGetProperty(nameof(IrregularPluralWords), out var irregularPluralWords);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValues);
@@ -417,6 +423,7 @@ namespace AutoRest.CSharp.Input
                 renameRules: renameRules,
                 formatByNameRules: formatByNameRules,
                 renameMapping: renameMapping,
+                irregularPluralWords: irregularPluralWords,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
