@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
-        private Dictionary<Schema, HashSet<OperationSet>> ResourceDataSchemaToOperationSets { get; }
+        private Dictionary<string, HashSet<OperationSet>> ResourceDataSchemaNameToOperationSets { get; }
 
         /// <summary>
         /// This is a map from raw request path to their corresponding <see cref="OperationSet"/>,
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<string, string> _mergedOperations;
 
-        private LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
+        private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
 
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
-            ResourceDataSchemaToOperationSets = DecorateOperationSets();
+            ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
 
             // others are populated later
             OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
@@ -186,13 +186,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (count != 1)
                         {
                             //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaToOperationSets);
+                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
                             continue;
                         }
 
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
-                        var resourceDataModelName = ResourceDataSchemaToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
+                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
                         if (resourceDataModelName.Key is not null)
                         {
                             //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         }
                         else
                         {
-                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaToOperationSets);
+                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets);
                         }
                     }
                 }
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
-                            param.Language.Default.Name = NormalizeParamNames.GetNewName(param.Language.Default.Name, objectSchema, ResourceDataSchemaToOperationSets);
+                            param.Language.Default.Name = NormalizeParamNames.GetNewName(param.Language.Default.Name, objectSchema.Name, ResourceDataSchemaNameToOperationSets);
                         }
                     }
                 }
@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // first, construct resource data models
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
-                var model = ResourceDataSchemaToOperationSets.ContainsKey(schema) ? BuildResourceData(schema) : BuildModel(schema);
+                var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
                 _schemaOrNameToModels.Add(schema, model);
             }
 
@@ -306,7 +306,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
-        public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= ResourceDataSchemaToOperationSets.SelectMany(pair => pair.Value);
+        public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= ResourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
 
         public OperationGroup GetOperationGroup(Operation operation) => OperationsToOperationGroups[operation];
 
@@ -533,7 +533,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             var requestPathToResources = new Dictionary<RequestPath, ResourceObjectAssociation>();
 
-            foreach ((var resourceDataSchema, var operationSets) in ResourceDataSchemaToOperationSets)
+            foreach ((var resourceDataSchema, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach ((var operationSet, var operations) in resourceOperationsList)
@@ -569,16 +569,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        private string GetResourceName(Schema schema, OperationSet operationSet, RequestPath requestPath)
+        private string GetResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath)
         {
-            var candidateName = schema.Name;
             // read configuration to see if we could get a configuration for this resource
             var resourceType = requestPath.GetResourceType();
             var defaultNameFromConfig = GetDefaultNameFromConfiguration(operationSet, resourceType);
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var resourcesWithSameName = ResourceDataSchemaToOperationSets[schema];
+            var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
             var resourcesWithSameType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())
                 .Where(rqPath => rqPath.GetResourceType().Equals(resourceType));
@@ -728,7 +727,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var rawRequestPathToResourceData = new Dictionary<string, ResourceData>();
             foreach ((var schema, var provider) in ResourceSchemaMap)
             {
-                if (ResourceDataSchemaToOperationSets.TryGetValue(schema, out var operationSets))
+                if (ResourceDataSchemaNameToOperationSets.TryGetValue(schema.Name, out var operationSets))
                 {
                     // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
                     var resourceData = (ResourceData)provider;
@@ -750,7 +749,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             TypeProvider? result;
             if (!AllSchemaMap.IsPopulated)
             {
-                result = ResourceDataSchemaToOperationSets.ContainsKey(schema) ? BuildResourceData(schema) : BuildModel(schema);
+                result = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
             }
             else if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
             {
@@ -796,9 +795,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _ => throw new NotImplementedException()
         };
 
-        private Dictionary<Schema, HashSet<OperationSet>> DecorateOperationSets()
+        private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {
-            Dictionary<Schema, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<Schema, HashSet<OperationSet>>();
+            Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
                 if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
@@ -809,13 +808,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (!Configuration.MgmtConfiguration.KeepOrphanedModels.Contains(schemaName))
                     {
                         resourceDataSchema.Language.Default.SerializedName ??= schemaName;
-                        resourceDataSchema.Language.Default.Name = schemaName.LastWordToSingular(false);
+                        schemaName = schemaName.LastWordToSingular(false);
+                        resourceDataSchema.Language.Default.Name = schemaName;
                     }
                     // if this operation set corresponds to a SDK resource, we add it to the map
-                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchema, out HashSet<OperationSet>? result))
+                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(schemaName, out HashSet<OperationSet>? result))
                     {
                         result = new HashSet<OperationSet>();
-                        resourceDataSchemaNameToOperationSets.Add(resourceDataSchema, result);
+                        resourceDataSchemaNameToOperationSets.Add(schemaName, result);
                     }
                     result.Add(operationSet);
                 }
