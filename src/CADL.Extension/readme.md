@@ -1,6 +1,7 @@
 # CADL to .Net
 
 DPG 1.1 requires CADL as input, if service would like to generate models.
+
 ## Pipeline
 
 Cadl->net.emitter-> json -> outputLibrary -> sdk
@@ -72,10 +73,8 @@ We will add parent relationship in target model.
 
 Map server to endpoint client parameter.
 
-#### run Csharp emitter
+#### run csharp emitter
 
-cadl compile main.cadl
-cadl compile . --warn-as-error --import @cadl-lang/library-linter --emit @cadl-lang/csharp-emitter
 cadl compile [--emit <csharp-emitter>] [--output-path <outputDirectory>] <cadl-file-path>
 
 e.g.
@@ -85,10 +84,10 @@ e.g.
 cadl compile --output-path test\TestProjects test\TestProjects\string-format.cadl --emit @cadl-lang/csharp-emitter
 ```
 
-
 #### debug
 
 node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile main.cadl
+
 node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path samples\petStore\ samples\petStore\petstore.cadl --emit @cadl-lang/csharp-emitter
 
 ### serialize
@@ -141,4 +140,4 @@ eng/Generate.ps1 petstore
 ```
 
 ## E2E flow
-Integrate .net codegen into CADL compile
+Integrate autorst.csharp into CADL compile
