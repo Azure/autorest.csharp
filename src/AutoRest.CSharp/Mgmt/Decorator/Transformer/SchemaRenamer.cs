@@ -92,11 +92,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        internal static string GetOriginalName(Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
-
         private static void ApplyToType(Schema schema, RenameTarget renameTarget)
         {
-            if (GetOriginalName(schema) != renameTarget.TypeName)
+            if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
             schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
             schema.Language.Default.Name = renameTarget.NewName;
@@ -104,7 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static void ApplyToProperty(Schema schema, IEnumerable<ChoiceValue> choices, RenameTarget renameTarget)
         {
-            if (GetOriginalName(schema) != renameTarget.TypeName)
+            if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
             var choiceValue = choices.FirstOrDefault(choice => choice.Value == renameTarget.PropertyName);
             if (choiceValue == null)
@@ -116,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameTarget renameTarget)
         {
             Debug.Assert(renameTarget.PropertyName != null);
-            if (GetOriginalName(schema) != renameTarget.TypeName)
+            if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
             // check if the property renaming is targeting a flattened property
             var flattenedNames = Array.Empty<string>();
