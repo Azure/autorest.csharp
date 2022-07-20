@@ -45,7 +45,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringNoRequiredTwoValueNoDefaultAsync(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredTwoValueNoDefault");
@@ -64,7 +63,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringNoRequiredTwoValueNoDefault(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredTwoValueNoDefault");
@@ -83,7 +81,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringNoRequiredTwoValueDefaultAsync(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredTwoValueDefault");
@@ -102,7 +99,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredTwoValueDefault");
@@ -120,7 +116,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueNoDefault");
@@ -138,7 +133,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringNoRequiredOneValueNoDefault(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueNoDefault");
@@ -156,7 +150,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueDefault");
@@ -174,7 +167,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringNoRequiredOneValueDefault(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueDefault");
@@ -193,7 +185,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringRequiredTwoValueNoDefaultAsync(NoModelAsStringRequiredTwoValueNoDefaultOpEnum input, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredTwoValueNoDefault");
@@ -212,7 +203,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringRequiredTwoValueNoDefault(NoModelAsStringRequiredTwoValueNoDefaultOpEnum input, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredTwoValueNoDefault");
@@ -231,7 +221,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringRequiredTwoValueDefaultAsync(NoModelAsStringRequiredTwoValueDefaultOpEnum input = NoModelAsStringRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredTwoValueDefault");
@@ -250,7 +239,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultOpEnum input = NoModelAsStringRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredTwoValueDefault");
@@ -268,7 +256,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringRequiredOneValueNoDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredOneValueNoDefault");
@@ -286,7 +273,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringRequiredOneValueNoDefault(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredOneValueNoDefault");
@@ -304,7 +290,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutNoModelAsStringRequiredOneValueDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredOneValueDefault");
@@ -322,7 +307,6 @@ namespace constants
 
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutNoModelAsStringRequiredOneValueDefault(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringRequiredOneValueDefault");
@@ -341,7 +325,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringNoRequiredTwoValueNoDefaultAsync(ModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredTwoValueNoDefault");
@@ -360,7 +343,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringNoRequiredTwoValueNoDefault(ModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredTwoValueNoDefault");
@@ -379,7 +361,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringNoRequiredTwoValueDefaultAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredTwoValueDefault");
@@ -398,7 +379,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredTwoValueDefault");
@@ -417,7 +397,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringNoRequiredOneValueNoDefaultAsync(ModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredOneValueNoDefault");
@@ -436,7 +415,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringNoRequiredOneValueNoDefault(ModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredOneValueNoDefault");
@@ -455,7 +433,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringNoRequiredOneValueDefaultAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredOneValueDefault");
@@ -474,7 +451,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringNoRequiredOneValueDefault");
@@ -493,7 +469,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringRequiredTwoValueNoDefaultAsync(ModelAsStringRequiredTwoValueNoDefaultOpEnum input, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredTwoValueNoDefault");
@@ -512,7 +487,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringRequiredTwoValueNoDefault(ModelAsStringRequiredTwoValueNoDefaultOpEnum input, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredTwoValueNoDefault");
@@ -531,7 +505,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringRequiredTwoValueDefaultAsync(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredTwoValueDefault");
@@ -550,7 +523,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredTwoValueDefault");
@@ -569,7 +541,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringRequiredOneValueNoDefaultAsync(ModelAsStringRequiredOneValueNoDefaultOpEnum input, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredOneValueNoDefault");
@@ -588,7 +559,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultOpEnum input, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredOneValueNoDefault");
@@ -607,7 +577,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual async Task<Response> PutModelAsStringRequiredOneValueDefaultAsync(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredOneValueDefault");
@@ -626,7 +595,6 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Puts constants to the testserver. </remarks>
         public virtual Response PutModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutModelAsStringRequiredOneValueDefault");

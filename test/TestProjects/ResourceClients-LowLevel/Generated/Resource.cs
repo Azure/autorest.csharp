@@ -59,6 +59,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetItemAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+        /// 
+        /// Response response = await client.GetItemAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetItemAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
@@ -79,6 +91,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetItem and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+        /// 
+        /// Response response = client.GetItem();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetItem(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");

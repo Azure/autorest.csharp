@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Diagnostic = AutoRest.CSharp.Output.Models.Requests.Diagnostic;
 
@@ -28,7 +27,6 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility => "public";
 
-        private readonly bool _hasPublicConstructors;
         private ConstructorSignature? _subClientInternalConstructor;
 
         public string Description { get; }
@@ -36,10 +34,11 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
-        public IReadOnlyList<LowLevelClient> SubClients;
-        public IReadOnlyList<RestClientMethod> RequestMethods;
+        public IReadOnlyList<LowLevelClient> SubClients { get; init; }
+        public IReadOnlyList<RestClientMethod> RequestMethods { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
-        public IReadOnlyList<LowLevelSubClientFactoryMethod> SubClientFactoryMethods { get; }
+        public LowLevelClient? ParentClient;
+        public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
@@ -47,17 +46,16 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
             DefaultNamespace = ns;
             Description = description;
-            IsSubClient = isSubClient;
-            SubClients = subClients;
+            IsSubClient = parentClient != null;
+            ParentClient = parentClient;
 
             ClientOptions = clientOptions;
-            _hasPublicConstructors = !IsSubClient;
 
             Parameters = builder.GetOrderedParametersByRequired();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
@@ -76,7 +74,9 @@ namespace AutoRest.CSharp.Output.Models
                 .Distinct()
                 .ToArray();
 
-            SubClientFactoryMethods = BuildSubClientFactoryMethods(libraryName).ToArray();
+            FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
+
+            SubClients = Array.Empty<LowLevelClient>();
         }
 
         public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName)
@@ -234,42 +234,43 @@ namespace AutoRest.CSharp.Output.Models
             return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
-        public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods(string libraryName)
-        {
-            foreach (var subClient in SubClients)
-            {
-                var constructorCallParameters = GetSubClientFactoryMethodParameters(subClient).ToArray();
-                var methodParameters = constructorCallParameters.Where(p => Fields.GetFieldByParameter(p) == null).ToArray();
-
-                var subClientName = subClient.Type.Name;
-                var methodName = subClientName.StartsWith(libraryName)
-                    ? subClientName[libraryName.Length..]
-                    : subClientName;
-
-                if (!subClient.IsResourceClient)
-                {
-                    methodName += ClientBuilder.GetClientSuffix();
-                }
-
-                var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", null, Public | Virtual, subClient.Type, null, methodParameters.ToArray());
-                FieldDeclaration? cachingField = methodParameters.Any() ? null : new FieldDeclaration(FieldModifiers.Private, subClient.Type, $"_cached{subClient.Type.Name}");
-
-                yield return new LowLevelSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters);
-            }
-        }
-
         private ConstructorSignature BuildSubClientInternalConstructor()
         {
-            var constructorParameters = GetSubClientFactoryMethodParameters(this)
-                .Select(p => p with {DefaultValue = null, Validation = ValidationType.None, Initializer = null})
+            var constructorParameters = GetSubClientFactoryMethodParameters()
+                .Select(p => p with { DefaultValue = null, Validation = ValidationType.None, Initializer = null })
                 .ToArray();
 
             return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
         }
 
-        private static IEnumerable<Parameter> GetSubClientFactoryMethodParameters(LowLevelClient subClient)
+        public LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
+        {
+            var constructorCallParameters = GetSubClientFactoryMethodParameters().ToArray();
+            var methodParameters = constructorCallParameters.Where(p => parentFields.GetFieldByParameter(p) == null).ToArray();
+
+            var subClientName = Type.Name;
+            var methodName = subClientName.StartsWith(libraryName)
+                ? subClientName[libraryName.Length..]
+                : subClientName;
+
+            if (!IsResourceClient)
+            {
+                methodName += ClientBuilder.GetClientSuffix();
+            }
+
+            var methodSignature = new MethodSignature($"Get{methodName}",
+                $"Initializes a new instance of {Type.Name}", null, Public | Virtual, Type, null,
+                methodParameters.ToArray());
+            FieldDeclaration? cachingField = methodParameters.Any()
+                ? null
+                : new FieldDeclaration(FieldModifiers.Private, this.Type, $"_cached{Type.Name}");
+
+            return new LowLevelSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters);
+        }
+
+        private IEnumerable<Parameter> GetSubClientFactoryMethodParameters()
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
-                .Concat(RestClientBuilder.GetConstructorParameters(subClient.Parameters, null, includeAPIVersion: true))
-                .Where(p => subClient.Fields.GetFieldByParameter(p) != null);
+                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
+                .Where(p => Fields.GetFieldByParameter(p) != null);
     }
 }

@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new LowLevelOutputLibrary(typeFactory =>
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions);
+                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
                 return EnumerateAllClients(topLevelClients);
             }, clientOptions);
         }
@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -219,24 +219,26 @@ namespace AutoRest.CSharp.Output.Models
                     ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} service client."
                     : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
-                var subClients = clientInfo.Children.Count > 0
-                    ? CreateClients(clientInfo.Children, typeFactory, clientOptions).ToArray()
-                    : Array.Empty<LowLevelClient>();
+                var subClients = new List<LowLevelClient>();
 
-                var isSubClient = clientInfo.Parent != null;
-
-                yield return new LowLevelClient(
+                var client = new LowLevelClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
                     description,
                     _libraryName,
-                    isSubClient,
-                    subClients,
+                    parentClient,
                     clientInfo.Requests,
                     new RestClientBuilder(clientInfo.ClientParameters, typeFactory),
                     _rootNamespace.Auth,
                     _sourceInputModel,
-                    clientOptions);
+                    clientOptions)
+                {
+                    SubClients = subClients
+                };
+
+                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+
+                 yield return client;
             }
         }
 

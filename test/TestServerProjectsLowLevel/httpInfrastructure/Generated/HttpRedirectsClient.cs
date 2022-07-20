@@ -60,6 +60,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head300Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Head300Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head300Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
@@ -80,6 +90,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head300.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Head300();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head300(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
@@ -100,6 +120,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get300Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Get300Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Get300Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -120,6 +150,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get300.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Get300();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Get300(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -140,6 +180,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head301Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Head301Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head301Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
@@ -160,6 +210,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head301.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Head301();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head301(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
@@ -180,6 +240,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get301Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Get301Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Get301Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
@@ -200,6 +270,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get301.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Get301();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Get301(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
@@ -221,6 +301,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put301Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Put301Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Put301Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
@@ -242,6 +334,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put301 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Put301(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Put301(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
@@ -262,6 +366,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head302Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Head302Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head302Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
@@ -282,6 +396,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head302.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Head302();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head302(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
@@ -302,6 +426,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get302Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Get302Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Get302Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
@@ -322,6 +456,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get302.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Get302();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Get302(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
@@ -343,6 +487,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch302Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Patch302Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Patch302Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
@@ -364,6 +520,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch302 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Patch302(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Patch302(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
@@ -385,6 +553,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post303Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Post303Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Post303Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
@@ -406,6 +586,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post303 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Post303(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Post303(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
@@ -426,6 +618,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head307Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Head307Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head307Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
@@ -446,6 +648,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head307.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Head307();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head307(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
@@ -466,6 +678,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get307Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Get307Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Get307Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
@@ -486,6 +708,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get307.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Get307();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Get307(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
@@ -506,6 +738,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Options307Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = await client.Options307Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Options307Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
@@ -526,6 +768,16 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Options307.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// Response response = client.Options307();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Options307(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
@@ -547,6 +799,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put307Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Put307Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Put307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
@@ -568,6 +832,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put307 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Put307(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Put307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
@@ -589,6 +865,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch307Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Patch307Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Patch307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
@@ -610,6 +898,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch307 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Patch307(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Patch307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
@@ -631,6 +931,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post307Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Post307Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Post307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
@@ -652,6 +964,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post307 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Post307(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Post307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
@@ -673,6 +997,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete307Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = await client.Delete307Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Delete307Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
@@ -694,6 +1030,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete307 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpRedirectsClient(credential);
+        /// 
+        /// var data = true;
+        /// 
+        /// Response response = client.Delete307(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Delete307(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");

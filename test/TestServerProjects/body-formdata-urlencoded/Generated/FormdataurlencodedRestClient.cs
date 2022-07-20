@@ -70,7 +70,6 @@ namespace body_formdata_urlencoded
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Updates a pet in the store with form data. </remarks>
         public async Task<Response> UpdatePetWithFormAsync(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateUpdatePetWithFormRequest(petId, petType, petFood, petAge, name, status);
@@ -93,7 +92,6 @@ namespace body_formdata_urlencoded
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Updates a pet in the store with form data. </remarks>
         public Response UpdatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateUpdatePetWithFormRequest(petId, petType, petFood, petAge, name, status);

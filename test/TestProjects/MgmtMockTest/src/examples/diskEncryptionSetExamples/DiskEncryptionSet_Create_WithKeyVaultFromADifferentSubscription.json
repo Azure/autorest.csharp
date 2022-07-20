@@ -13,7 +13,8 @@
         "activeKey": {
           "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
         },
-        "encryptionType": "EncryptionAtRestWithCustomerKey"
+        "encryptionType": "EncryptionAtRestWithCustomerKey",
+        "minimumTlsVersion": "TLS1_1"
       }
     }
   },

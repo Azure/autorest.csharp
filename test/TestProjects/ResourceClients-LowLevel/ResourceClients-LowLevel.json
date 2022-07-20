@@ -36,13 +36,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type":"string"
+              "$ref": "#/definitions/Items"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
       }
     },
     "/groups/{groupId}": {
@@ -73,7 +73,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type":"string"
+              "$ref": "#/definitions/Items"
             }
           }
         },
@@ -95,7 +95,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type":"string"
+              "$ref": "#/definitions/Items"
             }
           }
         },
@@ -127,7 +127,22 @@
       }
     }
   },
-  "definitions": { },
+  "definitions": {
+    "Items": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "parameters": { 
     "groupId": {
       "in": "path",

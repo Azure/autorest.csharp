@@ -62,6 +62,20 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call AnalyzeBodyAsync with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -84,6 +98,20 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call AnalyzeBody with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -106,6 +134,18 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call AnalyzeBodyNoAcceptHeaderAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -128,6 +168,18 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call AnalyzeBodyNoAcceptHeader with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -149,6 +201,20 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ContentTypeWithEncodingAsync with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
@@ -170,6 +236,20 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ContentTypeWithEncoding with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.ContentTypeWithEncoding(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
@@ -193,6 +273,20 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call BinaryBodyWithTwoContentTypesAsync with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = await client.BinaryBodyWithTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> BinaryBodyWithTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -218,6 +312,20 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call BinaryBodyWithTwoContentTypes with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = client.BinaryBodyWithTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response BinaryBodyWithTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -243,6 +351,20 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call BinaryBodyWithThreeContentTypesAsync with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = await client.BinaryBodyWithThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -268,6 +390,20 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call BinaryBodyWithThreeContentTypes with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = File.OpenRead("<filePath>");
+        /// 
+        /// Response response = client.BinaryBodyWithThreeContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -293,6 +429,20 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutTextAndJsonBodyAsync with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.PutTextAndJsonBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> PutTextAndJsonBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -318,6 +468,20 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutTextAndJsonBody with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MediaTypesClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.PutTextAndJsonBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response PutTextAndJsonBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

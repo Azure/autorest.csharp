@@ -36,11 +36,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 if (Configuration.MgmtConfiguration.TestModeler is not null)
                 {
-                    MgmtTestTarget.Execute(project, codeModel, sourceInputModel);
+                    // we currently do not need this sourceInputModel when generating the test code because it only has information about the "non-generated" test code.
+                    await MgmtTestTarget.ExecuteAsync(project, codeModel);
                 }
                 else
                 {
-                    await MgmtTarget.Execute(project, codeModel, sourceInputModel);
+                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
             }
             else
