@@ -128,7 +128,6 @@ function createModel(program: Program): any {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
-
         //create endpoint parameter from servers
         let endPointParam = undefined;
         if (servers !== undefined) {
@@ -138,7 +137,6 @@ function createModel(program: Program): any {
                 endPointParam = calServers[0].parameters[0];
             }
         }
-
         const apiVersionParam: InputParameter = {
             Name: "apiVersion",
             NameInRequest: "apiVersion",
@@ -265,7 +263,6 @@ function loadOperation(
     const parameters: InputParameter[] = [];
     if (endpoint !== undefined) parameters.push(endpoint);
     if (apiVersion !== undefined) parameters.push(apiVersion);
-
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
