@@ -80,14 +80,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
 
-        private LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels;
-
         private Dictionary<string, string> _mergedOperations;
+
+        private LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
 
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
         /// </summary>
-        private readonly Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
+        private readonly Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths = new();
 
         public MgmtOutputLibrary()
         {
@@ -95,7 +95,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             CodeModelTransformer.Transform();
 
             // these dictionaries are initialized right now and they would not change later
-            _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataSchemaToOperationSets = DecorateOperationSets();
 
@@ -111,7 +110,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<string, HashSet<Operation>>(EnsureResourceChildOperations);
-            _schemaOrNameToModels = new LookupDictionary<Schema, string, TypeProvider>(schema => schema.Name);
+
+            // TODO -- remove this since this is never used
             _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
