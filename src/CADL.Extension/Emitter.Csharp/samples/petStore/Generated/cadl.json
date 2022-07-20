@@ -1,0 +1,295 @@
+{
+ "$id": "1",
+ "Name": "petstore",
+ "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+ "ApiVersions": [
+  "2021-03-25"
+ ],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "Pets",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "delete",
+     "Description": "Delete a pet.",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "petStoreUrl",
+       "NameInRequest": "petStoreUrl",
+       "Type": {
+        "$id": "5",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "6",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Description": "",
+       "Type": {
+        "$id": "7",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "8",
+       "Name": "petId",
+       "NameInRequest": "petId",
+       "Description": "The id of pet.",
+       "Type": {
+        "$id": "9",
+        "Name": "Int32",
+        "Kind": "Int32",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "10",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "DELETE",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{petStoreUrl}/",
+     "Path": "/pets/{petId}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "11",
+     "Name": "read",
+     "Description": "Returns a pet. Supports eTags.",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$ref": "6"
+      },
+      {
+       "$id": "12",
+       "Name": "petId",
+       "NameInRequest": "petId",
+       "Description": "The id of pet.",
+       "Type": {
+        "$id": "13",
+        "Name": "Int32",
+        "Kind": "Int32",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "15",
+        "Name": "Pet",
+        "Kind": "Object",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "BodyMediaType": "Json"
+      },
+      {
+       "$id": "16",
+       "StatusCodes": [
+        304
+       ],
+       "BodyType": {
+        "$id": "17",
+        "Name": "Pet",
+        "Kind": "Object",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{petStoreUrl}/",
+     "Path": "/pets/{petId}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "18",
+     "Name": "create",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$ref": "6"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "19",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "20",
+        "Name": "Pet",
+        "Kind": "Object",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{petStoreUrl}/",
+     "Path": "/pets",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "21"
+   }
+  },
+  {
+   "$id": "22",
+   "Name": "ListPetToysResponse",
+   "Operations": [
+    {
+     "$id": "23",
+     "Name": "list",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$ref": "6"
+      },
+      {
+       "$id": "24",
+       "Name": "petId",
+       "NameInRequest": "petId",
+       "Type": {
+        "$id": "25",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "26",
+       "Name": "nameFilter",
+       "NameInRequest": "nameFilter",
+       "Type": {
+        "$id": "27",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "28",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "29",
+        "Name": "ToyListResults",
+        "Kind": "Object",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{petStoreUrl}/",
+     "Path": "/pets/{petId}/toys",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "30"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "31"
+ }
+}

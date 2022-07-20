@@ -1,0 +1,53 @@
+Name: stringformat
+ApiVersions:
+  - '2015-06-18'
+Clients:
+  - Name: stringFormat
+    Operations:
+      - Name: stringFormat
+        Description: Path parameter is string with format
+        Parameters:
+          - Name: apiVersion
+            NameInRequest: apiVersion
+            Description: ''
+            Type:
+              Name: string
+              Kind: String
+              IsNullable: false
+              SerializationFormat: 0
+            Location: Query
+            IsRequired: true
+            IsApiVersion: true
+            IsContentType: false
+            IsEndpoint: false
+            IsResourceParameter: false
+            SkipUrlEncoding: false
+            Explode: false
+            Kind: Client
+          - Name: action
+            NameInRequest: action
+            Type:
+              Name: string
+              Kind: String
+              IsNullable: false
+              SerializationFormat: 0
+            Location: Path
+            IsRequired: true
+            IsApiVersion: false
+            IsResourceParameter: false
+            IsContentType: false
+            IsEndpoint: false
+            SkipUrlEncoding: true
+            Explode: false
+            Kind: Method
+        Responses:
+          - StatusCodes:
+              - 204
+            BodyMediaType: Json
+        HttpMethod: GET
+        RequestBodyMediaType: Json
+        Uri: ''
+        Path: /stringFormat/{action}
+        BufferResponse: false
+    Protocol: {}
+Auth: {}

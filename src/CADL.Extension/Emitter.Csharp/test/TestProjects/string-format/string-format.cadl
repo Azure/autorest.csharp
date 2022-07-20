@@ -1,0 +1,15 @@
+import "@cadl-lang/rest";
+
+@serviceTitle("stringFormat")
+@serviceVersion("2015-06-18")
+namespace stringFormat;
+
+using Cadl.Http;
+
+@route("/stringFormat")
+@doc("Path parameter is string with format")
+@get
+op stringFormat(
+    @path
+    @format("date")
+    action: string): void;
