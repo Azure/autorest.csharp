@@ -63,7 +63,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call DeleteAsync with required parameters.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.DeleteAsync(1234);
@@ -93,7 +93,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call Delete with required parameters.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.Delete(1234);
@@ -123,7 +123,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call ReadAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.ReadAsync(1234);
@@ -155,7 +155,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call Read with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.Read(1234);
@@ -186,7 +186,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call CreateAsync and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.CreateAsync();
@@ -217,7 +217,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call Create and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.Create();

@@ -62,7 +62,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloAgainAsync and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.HelloAgainAsync();
@@ -93,7 +93,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloAgain and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.HelloAgain();
@@ -124,7 +124,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloDemo2Async and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.HelloDemo2Async();
@@ -155,7 +155,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloDemo2 and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.HelloDemo2();

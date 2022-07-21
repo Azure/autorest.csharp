@@ -65,7 +65,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call ListAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new ListPetToysResponseClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.ListAsync("<petId>", "<nameFilter>");
@@ -102,7 +102,7 @@ namespace CadlPetStore
         /// <example>
         /// This sample shows how to call List with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new ListPetToysResponseClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.List("<petId>", "<nameFilter>");

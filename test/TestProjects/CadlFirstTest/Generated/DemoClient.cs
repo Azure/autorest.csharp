@@ -62,7 +62,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call SayHiAsync and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new DemoClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.SayHiAsync();
@@ -93,7 +93,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call SayHi and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new DemoClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.SayHi();

@@ -64,7 +64,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopActionAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.TopActionAsync("<action>");
@@ -99,7 +99,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.TopAction("<action>");
@@ -132,7 +132,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2Async and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = await client.TopAction2Async();
@@ -163,7 +163,7 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2 and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
         /// Response response = client.TopAction2();
