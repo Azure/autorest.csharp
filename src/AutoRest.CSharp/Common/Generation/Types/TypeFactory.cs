@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
             InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
             _ when inputType is CodeModelType cmt => CreateType(cmt.Schema, inputType.IsNullable),
+            InputTypeKind.Model => new CSharpType(typeof(object), inputType.IsNullable),
             InputTypeKind.Object => new CSharpType(typeof(object), inputType.IsNullable),
             _ => throw new Exception("Unknown type")
         };

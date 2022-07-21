@@ -172,8 +172,8 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = new {
-        ///     Code = "<TestModelCode>",
-        ///     Status = "<TestModelStatus>",
+        ///     Code = "<String>",
+        ///     Status = "<String>",
         /// };
         /// 
         /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
@@ -245,8 +245,8 @@ namespace RequestContextAllOptional_LowLevel
         /// var client = new RequestContextAllOptionalClient(credential);
         /// 
         /// var data = new {
-        ///     Code = "<TestModelCode>",
-        ///     Status = "<TestModelStatus>",
+        ///     Code = "<String>",
+        ///     Status = "<String>",
         /// };
         /// 
         /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));

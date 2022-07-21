@@ -178,8 +178,8 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     id = 1234,
-        ///     name = "<BasicName>",
-        ///     color = "<cyan>",
+        ///     name = "<Name property with a very long description that does not fit on a single line and a line break.>",
+        ///     color = "cyan",
         /// };
         /// 
         /// Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -242,8 +242,8 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     id = 1234,
-        ///     name = "<BasicName>",
-        ///     color = "<cyan>",
+        ///     name = "<Name property with a very long description that does not fit on a single line and a line break.>",
+        ///     color = "cyan",
         /// };
         /// 
         /// Response response = client.PutValid(RequestContent.Create(data));

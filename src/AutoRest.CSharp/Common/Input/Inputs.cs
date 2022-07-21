@@ -9,9 +9,9 @@ using Azure.Core;
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputClient> Clients, InputAuth Auth)
+    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputModel> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
     {
-        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: Array.Empty<string>(), Clients: Array.Empty<InputClient>(), Auth: new InputAuth()) {}
+        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: new List<string>(), Models: new List<InputModel>(), Clients: new List<InputClient>(), Auth: new InputAuth()) {}
     }
 
     internal record InputAuth();
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Common.Input
             init => _key = value;
         }
 
-        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>()) { }
+        public InputClient() : this(string.Empty, string.Empty, new List<InputOperation>()) { }
     }
 
     internal record InputOperation(
@@ -51,14 +51,14 @@ namespace AutoRest.CSharp.Common.Input
             Summary: null,
             Description: string.Empty,
             Accessibility: null,
-            Parameters: Array.Empty<InputParameter>(),
-            Responses: Array.Empty<OperationResponse>(),
+            Parameters: new List<InputParameter>(),
+            Responses: new List<OperationResponse>(),
             HttpMethod: RequestMethod.Get,
             RequestBodyMediaType: BodyMediaType.None,
             Uri: string.Empty,
             Path: string.Empty,
             ExternalDocsUrl: null,
-            RequestMediaTypes: Array.Empty<string>(),
+            RequestMediaTypes: new List<string>(),
             BufferResponse: false,
             LongRunning: null,
             Paging: null)
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: string.Empty,
             NameInRequest: string.Empty,
             Description: null,
-            Type: new InputType("", InputTypeKind.Object),
+            Type: new InputType(InputTypeKind.Object),
             Location: RequestLocation.None,
             DefaultValue: null,
             VirtualParameter: null,
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<HttpResponseHeader> Headers)
     {
-        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<HttpResponseHeader>()) { }
+        public OperationResponse() : this(StatusCodes: new List<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: new List<HttpResponseHeader>()) { }
     }
 
     internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
@@ -120,13 +120,48 @@ namespace AutoRest.CSharp.Common.Input
         public Func<InputOperation>? NextLinkOperationRef { get; init; }
     }
 
-    internal record InputType(string Name, InputTypeKind Kind, bool IsNullable = false, InputTypeSerializationFormat SerializationFormat = InputTypeSerializationFormat.Default)
+    internal record InputType(InputTypeKind Kind, bool IsNullable = false, InputTypeSerializationFormat SerializationFormat = InputTypeSerializationFormat.Default)
     {
+        private readonly string? _name;
         public InputType? ValuesType { get; init; }
         public IReadOnlyList<InputTypeValue>? AllowedValues { get; init; }
+        public InputModel? Model { get; init; }
 
-        public InputType() : this(nameof(InputTypeKind.Object), InputTypeKind.Object)
-        { }
+        public string Name
+        {
+            get => _name ?? Model?.Name ?? Kind.ToString();
+            init => _name = value;
+        }
+
+        public InputType() : this(InputTypeKind.Object) { }
+
+        public InputType(string name, InputTypeKind kind, bool isNullable, InputTypeSerializationFormat serializationFormat) : this(kind, isNullable, serializationFormat)
+        {
+            Name = name;
+        }
+    }
+
+    internal record InputModel(string Name, string? Namespace, string? Accessibility, IReadOnlyList<InputModelProperty> Properties, InputModel? BaseModel, IReadOnlyList<InputModel> DerivedModels)
+    {
+        public InputModel() : this(string.Empty, null, null, new List<InputModelProperty>(), null, new List<InputModel>()) { }
+
+        public IEnumerable<InputModel> GetSelfAndBaseModels() => EnumerateBase(this);
+
+        public IEnumerable<InputModel> GetAllBaseModels() => EnumerateBase(BaseModel);
+
+        private static IEnumerable<InputModel> EnumerateBase(InputModel? model)
+        {
+            while (model != null)
+            {
+                yield return model;
+                model = model.BaseModel;
+            }
+        }
+    }
+
+    internal record InputModelProperty(string Name, string SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+    {
+        public InputModelProperty() : this(string.Empty, string.Empty, string.Empty, new InputType(), false, false, false) { }
     }
 
     internal record InputConstant(object? Value, InputType Type);
@@ -135,25 +170,25 @@ namespace AutoRest.CSharp.Common.Input
 
     internal static class KnownInputTypes
     {
-        public static InputType AzureLocation { get; } = new(nameof(InputTypeKind.AzureLocation), InputTypeKind.AzureLocation);
-        public static InputType Boolean { get; } = new(nameof(InputTypeKind.Boolean), InputTypeKind.Boolean);
-        public static InputType ByteArray { get; } = new(nameof(InputTypeKind.Bytes), InputTypeKind.Bytes);
-        public static InputType DateTime { get; } = new(nameof(InputTypeKind.DateTime), InputTypeKind.DateTime);
-        public static InputType Dictionary { get; } = new(nameof(InputTypeKind.Dictionary), InputTypeKind.Dictionary);
-        public static InputType ETag { get; } = new(nameof(InputTypeKind.ETag), InputTypeKind.ETag);
-        public static InputType Float32 { get; } = new(nameof(InputTypeKind.Float32), InputTypeKind.Float32);
-        public static InputType Float64 { get; } = new(nameof(InputTypeKind.Float64), InputTypeKind.Float64);
-        public static InputType Float128 { get; } = new(nameof(InputTypeKind.Float128), InputTypeKind.Float128);
-        public static InputType Guid { get; } = new(nameof(InputTypeKind.Guid), InputTypeKind.Guid);
-        public static InputType Int32 { get; } = new(nameof(InputTypeKind.Int32), InputTypeKind.Int32);
-        public static InputType Int64 { get; } = new(nameof(InputTypeKind.Int64), InputTypeKind.Int64);
-        public static InputType List { get; } = new(nameof(InputTypeKind.List), InputTypeKind.List);
-        public static InputType ResourceIdentifier { get; } = new(nameof(InputTypeKind.ResourceIdentifier), InputTypeKind.ResourceIdentifier);
-        public static InputType ResourceType { get; } = new(nameof(InputTypeKind.ResourceType), InputTypeKind.ResourceType);
-        public static InputType Stream { get; } = new(nameof(InputTypeKind.Stream), InputTypeKind.Stream);
-        public static InputType String { get; } = new(nameof(InputTypeKind.String), InputTypeKind.String);
-        public static InputType Time { get; } = new(nameof(InputTypeKind.Time), InputTypeKind.Time);
-        public static InputType Uri { get; } = new(nameof(InputTypeKind.Uri), InputTypeKind.Uri);
+        public static InputType AzureLocation { get; } = new(InputTypeKind.AzureLocation);
+        public static InputType Boolean { get; } = new(InputTypeKind.Boolean);
+        public static InputType ByteArray { get; } = new(InputTypeKind.Bytes);
+        public static InputType DateTime { get; } = new(InputTypeKind.DateTime);
+        public static InputType Dictionary { get; } = new(InputTypeKind.Dictionary);
+        public static InputType ETag { get; } = new(InputTypeKind.ETag);
+        public static InputType Float32 { get; } = new(InputTypeKind.Float32);
+        public static InputType Float64 { get; } = new(InputTypeKind.Float64);
+        public static InputType Float128 { get; } = new(InputTypeKind.Float128);
+        public static InputType Guid { get; } = new(InputTypeKind.Guid);
+        public static InputType Int32 { get; } = new(InputTypeKind.Int32);
+        public static InputType Int64 { get; } = new(InputTypeKind.Int64);
+        public static InputType List { get; } = new(InputTypeKind.List);
+        public static InputType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
+        public static InputType ResourceType { get; } = new(InputTypeKind.ResourceType);
+        public static InputType Stream { get; } = new(InputTypeKind.Stream);
+        public static InputType String { get; } = new(InputTypeKind.String);
+        public static InputType Time { get; } = new(InputTypeKind.Time);
+        public static InputType Uri { get; } = new(InputTypeKind.Uri);
     }
 
     internal enum InputOperationParameterKind

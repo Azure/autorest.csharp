@@ -85,9 +85,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -185,9 +185,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -285,9 +285,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -385,9 +385,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -485,9 +485,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -585,9 +585,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -685,9 +685,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -785,9 +785,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -885,9 +885,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -985,9 +985,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1205,9 +1205,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1305,9 +1305,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1405,9 +1405,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1505,9 +1505,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1605,9 +1605,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1705,9 +1705,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1805,9 +1805,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -1905,9 +1905,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2005,9 +2005,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2105,9 +2105,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2205,9 +2205,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2305,9 +2305,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2405,9 +2405,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2505,9 +2505,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2605,9 +2605,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2705,9 +2705,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2805,9 +2805,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -2905,9 +2905,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3005,9 +3005,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3105,9 +3105,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3205,9 +3205,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3305,9 +3305,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3405,9 +3405,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3505,9 +3505,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3602,8 +3602,8 @@ namespace lro_LowLevel
         /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
-        ///     name = "<SkuName>",
-        ///     id = "<SkuId>",
+        ///     name = "<String>",
+        ///     id = "<String>",
         /// };
         /// 
         /// var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -3678,8 +3678,8 @@ namespace lro_LowLevel
         /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
-        ///     name = "<SkuName>",
-        ///     id = "<SkuId>",
+        ///     name = "<String>",
+        ///     id = "<String>",
         /// };
         /// 
         /// var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
@@ -3754,8 +3754,8 @@ namespace lro_LowLevel
         /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
-        ///     name = "<SkuName>",
-        ///     id = "<SkuId>",
+        ///     name = "<String>",
+        ///     id = "<String>",
         /// };
         /// 
         /// var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -3830,8 +3830,8 @@ namespace lro_LowLevel
         /// var client = new LROsClient(credential);
         /// 
         /// var data = new {
-        ///     name = "<SkuName>",
-        ///     id = "<SkuId>",
+        ///     name = "<String>",
+        ///     id = "<String>",
         /// };
         /// 
         /// var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
@@ -3907,7 +3907,7 @@ namespace lro_LowLevel
         /// 
         /// var data = new {
         ///     properties = new {
-        ///         provisioningState = "<SubProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -3991,7 +3991,7 @@ namespace lro_LowLevel
         /// 
         /// var data = new {
         ///     properties = new {
-        ///         provisioningState = "<SubProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -4075,7 +4075,7 @@ namespace lro_LowLevel
         /// 
         /// var data = new {
         ///     properties = new {
-        ///         provisioningState = "<SubProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -4159,7 +4159,7 @@ namespace lro_LowLevel
         /// 
         /// var data = new {
         ///     properties = new {
-        ///         provisioningState = "<SubProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -5402,9 +5402,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -5478,9 +5478,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -5555,9 +5555,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -5655,9 +5655,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6115,9 +6115,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6215,9 +6215,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6315,9 +6315,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6415,9 +6415,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6514,9 +6514,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6590,9 +6590,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6666,9 +6666,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 
@@ -6742,9 +6742,9 @@ namespace lro_LowLevel
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
+        ///     location = "<Resource Location>",
         ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
+        ///         provisioningState = "<String>",
         ///     },
         /// };
         /// 

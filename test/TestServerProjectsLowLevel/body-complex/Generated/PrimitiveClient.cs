@@ -387,8 +387,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field1 = 1234,
-        ///     field2 = 1234,
+        ///     field1 = 1234L,
+        ///     field2 = 1234L,
         /// };
         /// 
         /// Response response = await client.PutLongAsync(RequestContent.Create(data));
@@ -449,8 +449,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field1 = 1234,
-        ///     field2 = 1234,
+        ///     field1 = 1234L,
+        ///     field2 = 1234L,
         /// };
         /// 
         /// Response response = client.PutLong(RequestContent.Create(data));
@@ -603,8 +603,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field1 = 1234,
-        ///     field2 = 1234,
+        ///     field1 = 123.45f,
+        ///     field2 = 123.45f,
         /// };
         /// 
         /// Response response = await client.PutFloatAsync(RequestContent.Create(data));
@@ -665,8 +665,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field1 = 1234,
-        ///     field2 = 1234,
+        ///     field1 = 123.45f,
+        ///     field2 = 123.45f,
         /// };
         /// 
         /// Response response = client.PutFloat(RequestContent.Create(data));
@@ -819,8 +819,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field1 = 1234,
-        ///     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 1234,
+        ///     field1 = 123.45d,
+        ///     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
         /// };
         /// 
         /// Response response = await client.PutDoubleAsync(RequestContent.Create(data));
@@ -881,8 +881,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field1 = 1234,
-        ///     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 1234,
+        ///     field1 = 123.45d,
+        ///     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
         /// };
         /// 
         /// Response response = client.PutDouble(RequestContent.Create(data));
@@ -1255,9 +1255,9 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<StringWrapperField>",
-        ///     empty = "<StringWrapperEmpty>",
-        ///     null = "<StringWrapperNull>",
+        ///     field = "<String>",
+        ///     empty = "<String>",
+        ///     null = "<String>",
         /// };
         /// 
         /// Response response = await client.PutStringAsync(RequestContent.Create(data));
@@ -1319,9 +1319,9 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<StringWrapperField>",
-        ///     empty = "<StringWrapperEmpty>",
-        ///     null = "<StringWrapperNull>",
+        ///     field = "<String>",
+        ///     empty = "<String>",
+        ///     null = "<String>",
         /// };
         /// 
         /// Response response = client.PutString(RequestContent.Create(data));
@@ -1384,8 +1384,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField, # Optional.
-        ///   leap: DateWrapperLeap, # Optional.
+        ///   field: DateTime, # Optional.
+        ///   leap: DateTime, # Optional.
         /// }
         /// </code>
         /// 
@@ -1430,8 +1430,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField, # Optional.
-        ///   leap: DateWrapperLeap, # Optional.
+        ///   field: DateTime, # Optional.
+        ///   leap: DateTime, # Optional.
         /// }
         /// </code>
         /// 
@@ -1475,8 +1475,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<2022-05-10>",
-        ///     leap = "<2022-05-10>",
+        ///     field = "2022-05-10",
+        ///     leap = "2022-05-10",
         /// };
         /// 
         /// Response response = await client.PutDateAsync(RequestContent.Create(data));
@@ -1490,8 +1490,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField, # Optional.
-        ///   leap: DateWrapperLeap, # Optional.
+        ///   field: DateTime, # Optional.
+        ///   leap: DateTime, # Optional.
         /// }
         /// </code>
         /// 
@@ -1537,8 +1537,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<2022-05-10>",
-        ///     leap = "<2022-05-10>",
+        ///     field = "2022-05-10",
+        ///     leap = "2022-05-10",
         /// };
         /// 
         /// Response response = client.PutDate(RequestContent.Create(data));
@@ -1552,8 +1552,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField, # Optional.
-        ///   leap: DateWrapperLeap, # Optional.
+        ///   field: DateTime, # Optional.
+        ///   leap: DateTime, # Optional.
         /// }
         /// </code>
         /// 
@@ -1691,8 +1691,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
-        ///     now = "<2022-05-10T14:57:31.2311892-04:00>",
+        ///     field = "2022-05-10T14:57:31.2311892-04:00",
+        ///     now = "2022-05-10T14:57:31.2311892-04:00",
         /// };
         /// 
         /// Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
@@ -1753,8 +1753,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
-        ///     now = "<2022-05-10T14:57:31.2311892-04:00>",
+        ///     field = "2022-05-10T14:57:31.2311892-04:00",
+        ///     now = "2022-05-10T14:57:31.2311892-04:00",
         /// };
         /// 
         /// Response response = client.PutDateTime(RequestContent.Create(data));
@@ -1816,8 +1816,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format), # Optional.
-        ///   now: string (ISO 8601 Format), # Optional.
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1862,8 +1862,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format), # Optional.
-        ///   now: string (ISO 8601 Format), # Optional.
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1907,8 +1907,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
-        ///     now = "<2022-05-10T14:57:31.2311892-04:00>",
+        ///     field = "2022-05-10T14:57:31.2311892-04:00",
+        ///     now = "2022-05-10T14:57:31.2311892-04:00",
         /// };
         /// 
         /// Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
@@ -1922,8 +1922,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format), # Optional.
-        ///   now: string (ISO 8601 Format), # Optional.
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1969,8 +1969,8 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<2022-05-10T14:57:31.2311892-04:00>",
-        ///     now = "<2022-05-10T14:57:31.2311892-04:00>",
+        ///     field = "2022-05-10T14:57:31.2311892-04:00",
+        ///     now = "2022-05-10T14:57:31.2311892-04:00",
         /// };
         /// 
         /// Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
@@ -1984,8 +1984,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format), # Optional.
-        ///   now: string (ISO 8601 Format), # Optional.
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -2031,7 +2031,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField, # Optional.
+        ///   field: Time, # Optional.
         /// }
         /// </code>
         /// 
@@ -2075,7 +2075,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField, # Optional.
+        ///   field: Time, # Optional.
         /// }
         /// </code>
         /// 
@@ -2119,7 +2119,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<(1.)3:45:67>",
+        ///     field = PT1H23M45S,
         /// };
         /// 
         /// Response response = await client.PutDurationAsync(RequestContent.Create(data));
@@ -2133,7 +2133,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField, # Optional.
+        ///   field: Time, # Optional.
         /// }
         /// </code>
         /// 
@@ -2179,7 +2179,7 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<(1.)3:45:67>",
+        ///     field = PT1H23M45S,
         /// };
         /// 
         /// Response response = client.PutDuration(RequestContent.Create(data));
@@ -2193,7 +2193,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField, # Optional.
+        ///   field: Time, # Optional.
         /// }
         /// </code>
         /// 
@@ -2239,7 +2239,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField, # Optional.
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
@@ -2283,7 +2283,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField, # Optional.
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
@@ -2341,7 +2341,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField, # Optional.
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
@@ -2401,7 +2401,7 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField, # Optional.
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 

@@ -168,7 +168,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     array = new[] {
-        ///         "<ArrayWrapperArrayItem>"
+        ///         "<String>"
         ///     },
         /// };
         /// 
@@ -230,7 +230,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     array = new[] {
-        ///         "<ArrayWrapperArrayItem>"
+        ///         "<String>"
         ///     },
         /// };
         /// 
@@ -380,7 +380,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     array = new[] {
-        ///         "<ArrayWrapperArrayItem>"
+        ///         "<String>"
         ///     },
         /// };
         /// 
@@ -442,7 +442,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     array = new[] {
-        ///         "<ArrayWrapperArrayItem>"
+        ///         "<String>"
         ///     },
         /// };
         /// 

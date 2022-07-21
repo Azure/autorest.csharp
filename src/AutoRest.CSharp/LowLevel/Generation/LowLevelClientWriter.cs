@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -680,10 +681,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
             hasRequestSchema = AddRequestOrResponseInputType(schemas, clientMethod.RequestBodyType, "Request Body");
 
-            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is CodeModelType { Schema: ObjectSchema responseObj })
+            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is {Model: { } model})
             {
-                Schema? itemSchema = responseObj.Properties.FirstOrDefault(p => p.Language.Default.Name == clientMethod.PagingInfo.ItemName)?.Schema;
-                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemSchema, "Response Body");
+                var itemType = model.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingInfo.ItemName)?.Type;
+                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemType, "Response Body");
             }
             else
             {
@@ -695,49 +696,53 @@ namespace AutoRest.CSharp.Generation.Writers
             static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
                 bodyType switch
                 {
-                    {Kind: InputTypeKind.List or InputTypeKind.Dictionary} => AddRequestOrResponseInputType(formattedSchemas, bodyType.ValuesType!, schemaName),
-                    CodeModelType {Schema: { } schema} => AddRequestOrResponseSchema(formattedSchemas, schema, schemaName),
-                    _ => false
+                    { Kind: InputTypeKind.List or InputTypeKind.Dictionary } => AddRequestOrResponseInputType(formattedSchemas, bodyType.ValuesType!, schemaName),
+                    _ => AddRequestOrResponseSchema(formattedSchemas, bodyType, schemaName),
                 };
 
-            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName)
+            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, InputType? type, string schemaName)
             {
-                if (schema == null)
+                if (type is null)
                 {
                     return false;
                 }
 
                 var schemasToAdd = new List<FormattableString>();
-                // check if it is base schema. if so, add children schemas.
-                if (schema is ObjectSchema {Children: { }} objSchema && objSchema.Children.All.Count > 0)
+                if (type is { Model.DerivedModels.Count: > 0 })
                 {
-                    if (objSchema.Children.All.Count > 1) schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
-                    foreach (var child in objSchema.Children.All.Select((schema, index) => (schema, index)))
+                    var derivedModels = type.Model.DerivedModels;
+                    if (derivedModels.Count > 1)
                     {
-                        if (child.index == 1)
+                        schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
+                    }
+
+                    for (var index = 0; index < derivedModels.Count; index++)
+                    {
+                        var derivedModel = derivedModels[index];
+                        if (index == 1)
                         {
-                            schemasToAdd.Add($"<details><summary>~+ {objSchema.Children.All.Count - 1} more JSON objects</summary>");
+                            schemasToAdd.Add($"<details><summary>~+ {derivedModels.Count - 1} more JSON objects</summary>");
                         }
 
-                        var docs = GetSchemaDocumentationsForSchema(child.schema, $"{child.schema.CSharpName()} {schemaName}");
+                        var docs = GetSchemaDocumentationsForSchema(new InputType(InputTypeKind.Model) { Model = derivedModel }, $"{derivedModel.Name.ToCleanName()} {schemaName}");
                         if (docs != null)
                         {
-                            schemasToAdd.Add($"<details><summary>{child.schema.CSharpName()}</summary>");
-                            schemasToAdd.Add($"Schema for <c>{child.schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
+                            schemasToAdd.Add($"<details><summary>{derivedModel.Name.ToCleanName()}</summary>");
+                            schemasToAdd.Add($"Schema for <c>{derivedModel.Name.ToCleanName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
                             schemasToAdd.Add($"</details>{Environment.NewLine}");
                         }
                     }
-                    if (objSchema.Children.All.Count > 1)
+                    if (derivedModels.Count > 1)
                     {
                         schemasToAdd.Add($"</details>{Environment.NewLine}");
                     }
                 }
                 else
                 {
-                    var docs = GetSchemaDocumentationsForSchema(schema, schemaName);
+                    var docs = GetSchemaDocumentationsForSchema(type, schemaName);
                     if (docs != null)
                     {
-                        schemasToAdd.Add($"Schema for <c>{schema.CSharpName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
+                        schemasToAdd.Add($"Schema for <c>{type.Name.ToCleanName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
                     }
                 }
 
@@ -850,16 +855,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
+        private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(InputType type, string schemaName)
         {
             // Visit each schema in the graph and for object schemas, collect information about all the properties.
             var visitedSchema = new HashSet<string>();
-            var schemasToExplore = new Queue<Schema>(new[] { schema });
+            var typesToExplore = new Queue<InputType>(new[] { type });
             var documentationObjects = new List<(string SchemaName, List<SchemaDocumentation.DocumentationRow> Rows)>();
 
-            while (schemasToExplore.Any())
+            while (typesToExplore.Any())
             {
-                Schema toExplore = schemasToExplore.Dequeue();
+                InputType toExplore = typesToExplore.Dequeue();
 
                 if (visitedSchema.Contains(toExplore.Name))
                 {
@@ -868,52 +873,42 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 switch (toExplore)
                 {
-                    case ObjectSchema o:
+                    case { Model: { } model }:
                         List<SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
 
                         // We must also include any properties introduced by our parent chain.
-                        foreach (ObjectSchema s in (o.Parents?.All ?? Array.Empty<ComplexSchema>()).Concat(new ComplexSchema[] { o }).OfType<ObjectSchema>())
+                        foreach (InputModel modelOrBase in model.GetSelfAndBaseModels().Reverse())
                         {
-                            foreach (Property prop in s.Properties)
+                            foreach (InputModelProperty property in modelOrBase.Properties)
                             {
-                                if (prop.Schema is ChoiceSchema cs && o.DiscriminatorValue != null)
-                                {
-                                    if (s.Discriminator != null && s.Discriminator.Property.Language.Default.Name == prop.Language.Default.Name)
-                                    {
-                                        propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                            prop.SerializedName,
-                                            o.DiscriminatorValue,
-                                            prop.Required ?? false,
-                                            BuilderHelpers.EscapeXmlDescription(prop.Language.Default.Description)));
+                                //if (property.Type.Kind == InputTypeKind.ExtensibleEnum && model.DiscriminatorValue != null)
+                                //{
+                                //    if (modelOrBase.Discriminator != null && modelOrBase.Discriminator.Property.Name == property.Name)
+                                //    {
+                                //        propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
+                                //            property.SerializedName,
+                                //            model.DiscriminatorValue,
+                                //            property.IsRequired,
+                                //            BuilderHelpers.EscapeXmlDescription(property.Description)));
 
-                                        schemasToExplore.Enqueue(prop.Schema);
-                                        continue;
-                                    }
-                                }
+                                //        typesToExplore.Enqueue(property.Type);
+                                //        continue;
+                                //    }
+                                //}
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                    prop.SerializedName,
-                                    BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(prop.Schema)),
-                                    prop.Required ?? false,
-                                    BuilderHelpers.EscapeXmlDescription(prop.Language.Default.Description)));
+                                    property.SerializedName,
+                                    BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),
+                                    property.IsRequired,
+                                    BuilderHelpers.EscapeXmlDescription(property.Description)));
 
-                                schemasToExplore.Enqueue(prop.Schema);
+                                typesToExplore.Enqueue(property.Type);
                             }
                         }
 
-                        documentationObjects.Add(new(schema == o ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(o)), propertyDocumentation));
+                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
                         break;
-
-                    case OrSchema o:
-                        foreach (ComplexSchema s in o.AnyOf)
-                        {
-                            schemasToExplore.Enqueue(s);
-                        }
-                        break;
-                    case DictionarySchema d:
-                        schemasToExplore.Enqueue(d.ElementType);
-                        break;
-                    case ArraySchema a:
-                        schemasToExplore.Enqueue(a.ElementType);
+                    case {Kind: InputTypeKind.Dictionary or InputTypeKind.List}:
+                        typesToExplore.Enqueue(toExplore.ValuesType!);
                         break;
                 }
 
@@ -928,24 +923,28 @@ namespace AutoRest.CSharp.Generation.Writers
             return documentationObjects.Select(o => new SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
         }
 
-        private static string StringifyTypeForTable(Schema schema)
+        private static string StringifyTypeForTable(InputType type)
         {
-            string RemovePrefix(string s, string prefix)
-            {
-                return s.StartsWith(prefix) ? s[prefix.Length..] : s;
-            }
+            static string RemovePrefix(string s, string prefix)
+                => s.StartsWith(prefix) ? s[prefix.Length..] : s;
 
-            return schema switch
+            return type switch
             {
-                BooleanSchema => "boolean",
-                StringSchema => "string",
-                NumberSchema => "number",
-                AnySchema => "object",
-                DateTimeSchema => "string (ISO 8601 Format)",
-                ChoiceSchema choiceSchema => string.Join(" | ", choiceSchema.Choices.Select(c => $"\"{c.Value}\"")),
-                DictionarySchema d => $"Dictionary<string, {StringifyTypeForTable(d.ElementType)}>",
-                ArraySchema a => $"{StringifyTypeForTable(a.ElementType)}[]",
-                _ => $"{RemovePrefix(schema.Name, "Json")}"
+                { Kind: InputTypeKind.Boolean } => "boolean",
+                { Kind: InputTypeKind.String } => "string",
+                { Kind: InputTypeKind.Int32 } => "number",
+                { Kind: InputTypeKind.Int64 } => "number",
+                { Kind: InputTypeKind.Float32 } => "number",
+                { Kind: InputTypeKind.Float64 } => "number",
+                { Kind: InputTypeKind.Float128 } => "number",
+                { Kind: InputTypeKind.Object } => "object",
+                { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.DateTime } => "string (ISO 8601 Format)",
+                { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.DateTimeRFC1123 } => "string (RFC1123 Format)",
+                { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.DateTimeUnix } => "string (Unix Format)",
+                { Kind: InputTypeKind.Enum or InputTypeKind.ExtensibleEnum } => string.Join(" | ", type.AllowedValues!.Select(c => $"\"{c.Value}\"")),
+                { Kind: InputTypeKind.Dictionary } => $"Dictionary<string, {StringifyTypeForTable(type.ValuesType!)}>",
+                { Kind: InputTypeKind.List } => $"{StringifyTypeForTable(type.ValuesType!)}[]",
+                _ => RemovePrefix(type.Name, "Json")
             };
         }
 

@@ -173,7 +173,7 @@ namespace dpg_customization_LowLevel
         /// var client = new DPGClient(credential);
         /// 
         /// var data = new {
-        ///     hello = "<InputHello>",
+        ///     hello = "<String>",
         /// };
         /// 
         /// Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
@@ -237,7 +237,7 @@ namespace dpg_customization_LowLevel
         /// var client = new DPGClient(credential);
         /// 
         /// var data = new {
-        ///     hello = "<InputHello>",
+        ///     hello = "<String>",
         /// };
         /// 
         /// Response response = client.PostModel("<mode>", RequestContent.Create(data));

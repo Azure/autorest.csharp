@@ -3975,7 +3975,7 @@ namespace body_array_LowLevel
         /// var data = new[] {
         ///     new {
         ///         integer = 1234,
-        ///         string = "<ProductString>",
+        ///         string = "<String>",
         ///     }
         /// };
         /// 
@@ -4029,7 +4029,7 @@ namespace body_array_LowLevel
         /// var data = new[] {
         ///     new {
         ///         integer = 1234,
-        ///         string = "<ProductString>",
+        ///         string = "<String>",
         ///     }
         /// };
         /// 

@@ -69,12 +69,12 @@ namespace body_complex_LowLevel
         /// Response response = await client.GetValidAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
         /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("breed").ToString());
         /// ]]></code>
         /// </example>
@@ -85,6 +85,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Siamese</c>:
         /// <code>{
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         ///   color: string, # Optional.
         ///   hates: [
         ///     {
@@ -93,8 +95,6 @@ namespace body_complex_LowLevel
         ///       food: string, # Optional.
         ///     }
         ///   ], # Optional.
-        ///   id: number, # Optional.
-        ///   name: string, # Optional.
         ///   breed: string, # Optional.
         /// }
         /// </code>
@@ -129,12 +129,12 @@ namespace body_complex_LowLevel
         /// Response response = client.GetValid();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("color").ToString());
         /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("breed").ToString());
         /// ]]></code>
         /// </example>
@@ -145,6 +145,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Siamese</c>:
         /// <code>{
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         ///   color: string, # Optional.
         ///   hates: [
         ///     {
@@ -153,8 +155,6 @@ namespace body_complex_LowLevel
         ///       food: string, # Optional.
         ///     }
         ///   ], # Optional.
-        ///   id: number, # Optional.
-        ///   name: string, # Optional.
         ///   breed: string, # Optional.
         /// }
         /// </code>
@@ -199,17 +199,17 @@ namespace body_complex_LowLevel
         /// var client = new InheritanceClient(credential);
         /// 
         /// var data = new {
-        ///     color = "<CatColor>",
+        ///     id = 1234,
+        ///     name = "<String>",
+        ///     color = "<String>",
         ///     hates = new[] {
         ///         new {
         ///             id = 1234,
-        ///             name = "<PetName>",
-        ///             food = "<DogFood>",
+        ///             name = "<String>",
+        ///             food = "<String>",
         ///         }
         ///     },
-        ///     id = 1234,
-        ///     name = "<PetName>",
-        ///     breed = "<SiameseBreed>",
+        ///     breed = "<String>",
         /// };
         /// 
         /// Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -223,6 +223,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Siamese</c>:
         /// <code>{
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         ///   color: string, # Optional.
         ///   hates: [
         ///     {
@@ -231,8 +233,6 @@ namespace body_complex_LowLevel
         ///       food: string, # Optional.
         ///     }
         ///   ], # Optional.
-        ///   id: number, # Optional.
-        ///   name: string, # Optional.
         ///   breed: string, # Optional.
         /// }
         /// </code>
@@ -279,17 +279,17 @@ namespace body_complex_LowLevel
         /// var client = new InheritanceClient(credential);
         /// 
         /// var data = new {
-        ///     color = "<CatColor>",
+        ///     id = 1234,
+        ///     name = "<String>",
+        ///     color = "<String>",
         ///     hates = new[] {
         ///         new {
         ///             id = 1234,
-        ///             name = "<PetName>",
-        ///             food = "<DogFood>",
+        ///             name = "<String>",
+        ///             food = "<String>",
         ///         }
         ///     },
-        ///     id = 1234,
-        ///     name = "<PetName>",
-        ///     breed = "<SiameseBreed>",
+        ///     breed = "<String>",
         /// };
         /// 
         /// Response response = client.PutValid(RequestContent.Create(data));
@@ -303,6 +303,8 @@ namespace body_complex_LowLevel
         /// 
         /// Schema for <c>Siamese</c>:
         /// <code>{
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         ///   color: string, # Optional.
         ///   hates: [
         ///     {
@@ -311,8 +313,6 @@ namespace body_complex_LowLevel
         ///       food: string, # Optional.
         ///     }
         ///   ], # Optional.
-        ///   id: number, # Optional.
-        ///   name: string, # Optional.
         ///   breed: string, # Optional.
         /// }
         /// </code>

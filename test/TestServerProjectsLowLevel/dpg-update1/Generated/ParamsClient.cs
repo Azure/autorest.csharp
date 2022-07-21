@@ -352,7 +352,7 @@ namespace dpg_update1_LowLevel
         /// var client = new ParamsClient(credential);
         /// 
         /// var data = new {
-        ///     url = "<PostInputUrl>",
+        ///     url = "<String>",
         /// };
         /// 
         /// Response response = await client.PostParametersAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
@@ -405,7 +405,7 @@ namespace dpg_update1_LowLevel
         /// var client = new ParamsClient(credential);
         /// 
         /// var data = new {
-        ///     url = "<PostInputUrl>",
+        ///     url = "<String>",
         /// };
         /// 
         /// Response response = client.PostParameters(RequestContent.Create(data), ContentType.ApplicationOctetStream);

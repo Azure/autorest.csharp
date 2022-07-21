@@ -111,8 +111,8 @@ namespace SecurityDefinition_LowLevel
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
         /// var data = new {
-        ///     Code = "<TestModelCode>",
-        ///     Status = "<TestModelStatus>",
+        ///     Code = "<String>",
+        ///     Status = "<String>",
         /// };
         /// 
         /// Response response = await client.OperationAsync(RequestContent.Create(data));
@@ -174,8 +174,8 @@ namespace SecurityDefinition_LowLevel
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
         /// var data = new {
-        ///     Code = "<TestModelCode>",
-        ///     Status = "<TestModelStatus>",
+        ///     Code = "<String>",
+        ///     Status = "<String>",
         /// };
         /// 
         /// Response response = client.Operation(RequestContent.Create(data));
