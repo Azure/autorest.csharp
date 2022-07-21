@@ -36,9 +36,7 @@ pipeline:
 
 ```yaml $(testmodeler)
 use-extension:
-  # "@autorest/testmodeler": "D://projects//codegen//azure-sdk-tools//tools//sdk-testgen//packages//autorest.testmodeler"
-  "@autorest/testmodeler": "2.2.3"
-
+  "@autorest/testmodeler": "2.3.0"
 
 pipeline:
   test-modeler:
@@ -56,6 +54,7 @@ testmodeler:
   use-parents-value: true
   split-parents-value: false
   add-armtemplate-payload-string: true
+  export-explicit-type: true
 ```
 
 ## Customization

@@ -14,6 +14,8 @@ using AutoRest.CSharp.Output.Models.Requests;
 using Azure.Core;
 using System.ComponentModel;
 using System.Collections.Immutable;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
@@ -148,7 +150,7 @@ namespace AutoRest.CSharp.Input
         private string? format;
     }
 
-    internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>
+    internal partial class RecordOfStringAndRequest : System.Collections.Generic.Dictionary<string, ServiceRequest>
     {
     }
 
@@ -309,17 +311,17 @@ namespace AutoRest.CSharp.Input
 
     internal partial class OavVariableScope
     {
+        [YamlMember(Alias = "variables")]
+        public Dictionary<string, object?> Variables { get; set; } = new Dictionary<string, object?>();
+
         [YamlMember(Alias = "requiredVariables")]
         public ICollection<string> RequiredVariables { get; set; } = Array.Empty<string>();
-
-        [YamlMember(Alias = "requiredVariablesDefault")]
-        public Dictionary<string, string> RequiredVariablesDefault { get; set; }
 
         [YamlMember(Alias = "secretVariables")]
         public ICollection<string> SecretVariables { get; set; } = Array.Empty<string>();
 
-        [YamlMember(Alias = "variables")]
-        public Dictionary<string, object?> Variables { get; set; } = new Dictionary<string, object?>();
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public Dictionary<string, string> RequiredVariablesDefault { get; set; }
 
         [YamlMember(Alias = "outputVariables")]
         public Dictionary<string, string> OutputVariables { get; set; } = new Dictionary<string, string>();
@@ -340,25 +342,43 @@ namespace AutoRest.CSharp.Input
         ResourceGroup,
     }
 
-    internal partial class TestDefinitionModel : OavVariableScope
+    internal partial class ScenarioDefinition : VariableScope
     {
-        [YamlMember(Alias = "useArmTemplate")]
-        public bool UseArmTemplate { get; set; }
+        [YamlMember(Alias = "scope")]
+        public TestDefinitionScope? Scope { get; set; }
 
         [YamlMember(Alias = "prepareSteps")]
         public ICollection<TestStep> PrepareSteps { get; set; }
 
-        [YamlMember(Alias = "cleanUpSteps")]
-        public ICollection<TestStep> CleanUpSteps { get; set; }
-
         [YamlMember(Alias = "scenarios")]
         public ICollection<Scenario> Scenarios { get; set; }
 
+        [YamlMember(Alias = "cleanUpSteps")]
+        public ICollection<TestStep> CleanUpSteps { get; set; }
+
         [YamlMember(Alias = "_filePath")]
         public string FilePath { get; set; }
+    }
 
-        [YamlMember(Alias = "scope")]
-        public TestDefinitionScope? Scope { get; set; }
+    internal partial class VariableScope
+    {
+        [YamlMember(Alias = "variables")]
+        public Dictionary<string, string> Variables { get; set; } = new Dictionary<string, string>();
+
+        [YamlMember(Alias = "requiredVariables")]
+        public ICollection<string> RequiredVariables { get; set; } = Array.Empty<string>();
+
+        [YamlMember(Alias = "secretVariables")]
+        public ICollection<string> SecretVariables { get; set; } = Array.Empty<string>();
+    }
+
+    internal partial class TestDefinitionModel : ScenarioDefinition
+    {
+        [YamlMember(Alias = "useArmTemplate")]
+        public bool UseArmTemplate { get; set; }
+
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public Dictionary<string, string> RequiredVariablesDefault;
     };
 
     internal partial class JsonPatchOp
@@ -403,48 +423,50 @@ namespace AutoRest.CSharp.Input
         RawCall,
     }
 
-    internal partial class TestStep : OavVariableScope
+    internal enum VariableType
     {
-        [YamlMember(Alias = "type")]
-        public TestStepType Type { get; set; }
+        [System.Runtime.Serialization.EnumMember(Value = @"string")]
+        String,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"secureString")]
+        SecureString,
+    }
+
+    internal partial class StepBase : VariableScope
+    {
         [YamlMember(Alias = "description")]
         public string? Description { get; set; }
 
         [YamlMember(Alias = "step")]
         public string? Step { get; set; }
 
-        [YamlMember(Alias = "requestUpdate")]
-        public ICollection<JsonPatchOp> RequestUpdate { get; set; } = Array.Empty<JsonPatchOp>();
-
-        [YamlMember(Alias = "resourceUpdate")]
-        public ICollection<JsonPatchOp> ResourceUpdate { get; set; } = Array.Empty<JsonPatchOp>();
-
-        [YamlMember(Alias = "responseUpdate")]
-        public ICollection<JsonPatchOp> ResponseUpdate { get; set; } = Array.Empty<JsonPatchOp>();
-
-        [YamlMember(Alias = "statusCode")]
-        public int? StatusCode { get; set; }
+        [YamlMember(Alias = "outputVariables")]
+        public Dictionary<string, OutputVariable> OutputVariables { get; set; } = new Dictionary<string, OutputVariable>();
 
         [YamlMember(Alias = "isPrepareStep")]
         public bool? IsPrepareStep { get; set; }
 
         [YamlMember(Alias = "isCleanUpStep")]
         public bool? IsCleanUpStep { get; set; }
+    }
 
-        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
-        [YamlMember(Alias = "armTemplate")]
-        public String? ArmTemplate { get; set; }
+    internal partial class OutputVariable
+    {
+        [YamlMember(Alias = "type")]
+        public VariableType Type { get; set; }
 
-        [YamlMember(Alias = "armTemplatePayload")]
-        public RecordOfStringAndAny? ArmTemplatePayload { get; set; }
+        [YamlMember(Alias = "fromResponse")]
+        public string FromResponse { get; set; }
+    }
 
-        [YamlMember(Alias = "armTemplatePayloadString")]
-        public string? ArmTemplatePayloadString { get; set; }
-
+    internal partial class RestCallStep : TestStep
+    {
         // for TestStepRestCall (type==restCall)
         [YamlMember(Alias = "operationId")]
-        public String? OperationId { get; set; }
+        public string? OperationId { get; set; }
+
+        [YamlMember(Alias = "operation")]
+        public Operation? Operation { get; set; }
 
         [YamlMember(Alias = "exampleName")]
         public string? ExampleName { get; set; }
@@ -452,19 +474,68 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "exampleFile")]
         public string? ExampleFile { get; set; }
 
+        [YamlMember(Alias = "resourceName")]
+        public string? ResourceName { get; set; }
+
+        [YamlMember(Alias = "exampleFilePath")]
+        public string? ExampleFilePath { get; set; }
+
         [YamlMember(Alias = "requestParameters")]
         public RecordOfStringAndAny? RequestParameters { get; set; }
 
         [YamlMember(Alias = "expectedResponse")]
         public object? ExpectedResponse { get; set; }
 
-        // test-modeler properties
-        [YamlMember(Alias = "exampleModel")]
-        public ExampleModel? ExampleModel { get; set; }
+        [YamlMember(Alias = "statusCode")]
+        public int? StatusCode { get; set; }
 
-        [YamlMember(Alias = "outputVariablesModel")]
-        public Dictionary<string, ICollection<OutputVariableModel>> OutputVariablesModel { get; set; } = new Dictionary<string, ICollection<OutputVariableModel>>();
-    };
+        [YamlMember(Alias = "resourceUpdate")]
+        public ICollection<JsonPatchOp> ResourceUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "requestUpdate")]
+        public ICollection<JsonPatchOp> RequestUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "responseUpdate")]
+        public ICollection<JsonPatchOp> ResponseUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+    }
+
+    internal partial class ArmTemplateStep : TestStep
+    {
+        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
+        [YamlMember(Alias = "armTemplate")]
+        public string? ArmTemplate { get; set; }
+
+        // TODO
+        //[YamlMember(Alias = "armTemplatePayload")]
+        //public ArmTemplate? ArmTemplatePayload { get; set; }
+    }
+
+    internal partial class RawCallStep : TestStep
+    {
+        [YamlMember(Alias = "method")]
+        public HttpMethod Method { get; set; }
+
+        [YamlMember(Alias = "rawUrl")]
+        public string? RawUrl { get; set; }
+
+        [YamlMember(Alias = "requestHeaders")]
+        public Dictionary<string, string> RequestHeaders { get; set; } = new();
+
+        [YamlMember(Alias = "requestBody")]
+        public string? RequestBody { get; set; }
+
+        [YamlMember(Alias = "statusCode")]
+        public int? StatusCode { get; set; }
+
+        [YamlMember(Alias = "expectedResponse")]
+        public string? ExpectedResponse { get; set; }
+    }
+
+    internal partial class TestStep : StepBase
+    {
+        [YamlMember(Alias = "type")]
+        public TestStepType Type { get; set; }
+    }
 
     internal partial class OutputVariableModel
     {
