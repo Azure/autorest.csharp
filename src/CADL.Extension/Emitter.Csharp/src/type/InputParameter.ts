@@ -7,11 +7,8 @@ import { InputType } from "./InputType";
 import { RequestLocation } from "./RequestLocation";
 
 //TODO: Define VirtualParameter for HLC
-export interface VirtualParameter {
-
-}
-export interface InputParameter
-{
+export interface VirtualParameter {}
+export interface InputParameter {
     Name: string;
     NameInRequest: string;
     Description?: string;
@@ -28,6 +25,6 @@ export interface InputParameter
     IsEndpoint: boolean;
     SkipUrlEncoding: boolean;
     Explode: boolean;
-    ArraySerializationDelimiter? : string;
+    ArraySerializationDelimiter?: string;
     HeaderCollectionPrefix?: string;
 }

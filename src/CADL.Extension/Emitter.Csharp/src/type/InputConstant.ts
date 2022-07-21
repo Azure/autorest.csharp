@@ -3,8 +3,7 @@
 
 import { InputType } from "./InputType";
 
-export interface InputConstant
-{
+export interface InputConstant {
     Value?: any;
     Type: InputType;
 }

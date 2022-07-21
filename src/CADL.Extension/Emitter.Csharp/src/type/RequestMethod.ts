@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-export enum RequestMethod{
+export enum RequestMethod {
     GET = "GET",
     POST = "POST",
     PUT = "PUT",
@@ -25,6 +25,6 @@ export function parseHttpRequestMethod(method: string): RequestMethod {
         if (method.toLowerCase() === "options") return RequestMethod.OPTIONS;
         if (method.toLowerCase() === "trace") return RequestMethod.TRACE;
     }
- 
+
     return RequestMethod.NONE;
 }

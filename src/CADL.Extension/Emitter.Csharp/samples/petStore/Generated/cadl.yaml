@@ -10,6 +10,7 @@ Clients:
   - Name: Pets
     Operations:
       - Name: delete
+        Summary: delete.
         Description: Delete a pet.
         Parameters:
           - &ref_0

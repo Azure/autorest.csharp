@@ -4,8 +4,7 @@
 import { CodeModelType } from "./CodeModelType";
 import { OperationFinalStateVia } from "./OperationFinalStateVia";
 
-export interface OperationLongRunning
-{
+export interface OperationLongRunning {
     FinalStateVia: OperationFinalStateVia;
     FinalResponseType?: CodeModelType;
 }

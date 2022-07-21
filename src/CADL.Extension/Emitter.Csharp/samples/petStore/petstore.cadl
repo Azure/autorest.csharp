@@ -56,10 +56,12 @@ model PetId {
   petId: int32;
 }
 
-@doc("Manage your pets.")
+@doc("Manage your pets. You can delete or get the Pet from pet store.")
+@summary("Manage your pets.")
 @route("/pets")
 namespace Pets {
   @doc("Delete a pet.")
+  @summary("delete.")
   @delete
   op delete(...PetId): {
     ...Response<200>;

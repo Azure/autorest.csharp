@@ -13,6 +13,7 @@
     {
      "$id": "3",
      "Name": "delete",
+     "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {

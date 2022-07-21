@@ -3,8 +3,7 @@
 
 import { InputOperation } from "./InputOperation";
 
-export interface OperationPaging
-{
+export interface OperationPaging {
     NextLinkName?: string;
     ItemName?: string;
     NextLinkOperation?: InputOperation;

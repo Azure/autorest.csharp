@@ -12,7 +12,6 @@ export interface Paging {
     NextLinkName?: string;
     ItemName: string;
     NextPageMethod?: string;
-
 }
 
 export interface InputOperation {

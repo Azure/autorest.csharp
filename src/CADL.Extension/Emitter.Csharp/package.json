@@ -26,7 +26,10 @@
         "test": "mocha",
         "test-official": "c8 mocha --forbid-only",
         "lint": "eslint . --ext .ts --max-warnings=0",
-        "lint:fix": "eslint . --fix --ext .ts"
+        "lint:fix": "eslint . --fix --ext .ts",
+        "prettier:fix": "prettier --write ./src/**/*.ts",
+        "prettier": "prettier --check ./src/**/*.ts"
+
     },
     "files": [
         "dist/**"

@@ -5,6 +5,9 @@ import { Program, Type } from "@cadl-lang/compiler";
 import { ExternalDocs } from "../type/ExternalDocs.js";
 
 const externalDocsKey = Symbol("externalDocs");
-export function getExternalDocs(program: Program, entity: Type): ExternalDocs | undefined {
+export function getExternalDocs(
+    program: Program,
+    entity: Type
+): ExternalDocs | undefined {
     return program.stateMap(externalDocsKey).get(entity);
 }
