@@ -82,24 +82,6 @@ namespace body_complex_LowLevel
         /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   location: string, # Optional.
-        ///   iswild: boolean, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-        /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -113,30 +95,49 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
-        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
+        ///   picture: Bytes, # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -150,12 +151,13 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -169,8 +171,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// </details>
@@ -237,24 +237,6 @@ namespace body_complex_LowLevel
         /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   location: string, # Optional.
-        ///   iswild: boolean, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-        /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -268,30 +250,49 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
-        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
+        ///   picture: Bytes, # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -305,12 +306,13 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -324,8 +326,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// </details>
@@ -380,7 +380,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -392,12 +392,12 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
-        ///     siblings = new[] {},
-        ///     location = "<SalmonLocation>",
+        ///     location = "<location>",
         ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
         /// };
         /// 
         /// Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -412,24 +412,6 @@ namespace body_complex_LowLevel
         /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   location: string, # Optional.
-        ///   iswild: boolean, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-        /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -443,30 +425,49 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
-        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
+        ///   picture: Bytes, # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -480,12 +481,13 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -499,8 +501,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// </details>
@@ -557,7 +557,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = client.PutValid(RequestContent.Create(data));
@@ -569,12 +569,12 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
-        ///     siblings = new[] {},
-        ///     location = "<SalmonLocation>",
+        ///     location = "<location>",
         ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
         /// };
         /// 
         /// Response response = client.PutValid(RequestContent.Create(data));
@@ -589,24 +589,6 @@ namespace body_complex_LowLevel
         /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   location: string, # Optional.
-        ///   iswild: boolean, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-        /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -620,30 +602,49 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
-        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
+        ///   picture: Bytes, # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -657,12 +658,13 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -676,8 +678,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// </details>
@@ -744,10 +744,10 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>DotSalmon</summary>Schema for <c>DotSalmon</c>:
         /// <code>{
-        ///   fish.type: string, # Required.
-        ///   species: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
+        ///   fish.type: string, # Required.
+        ///   species: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -793,10 +793,10 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>DotSalmon</summary>Schema for <c>DotSalmon</c>:
         /// <code>{
-        ///   fish.type: string, # Required.
-        ///   species: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
+        ///   fish.type: string, # Required.
+        ///   species: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -831,14 +831,14 @@ namespace body_complex_LowLevel
         /// Response response = await client.GetComposedWithDiscriminatorAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
@@ -853,10 +853,10 @@ namespace body_complex_LowLevel
         /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string, # Required.
-        ///     species: string, # Optional.
         ///     location: string, # Optional.
         ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
         ///   }, # Optional.
         ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
@@ -897,14 +897,14 @@ namespace body_complex_LowLevel
         /// Response response = client.GetComposedWithDiscriminator();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
@@ -919,10 +919,10 @@ namespace body_complex_LowLevel
         /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string, # Required.
-        ///     species: string, # Optional.
         ///     location: string, # Optional.
         ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
         ///   }, # Optional.
         ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
@@ -963,14 +963,14 @@ namespace body_complex_LowLevel
         /// Response response = await client.GetComposedWithoutDiscriminatorAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
@@ -985,10 +985,10 @@ namespace body_complex_LowLevel
         /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string, # Required.
-        ///     species: string, # Optional.
         ///     location: string, # Optional.
         ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
         ///   }, # Optional.
         ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
@@ -1029,14 +1029,14 @@ namespace body_complex_LowLevel
         /// Response response = client.GetComposedWithoutDiscriminator();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
         /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
@@ -1051,10 +1051,10 @@ namespace body_complex_LowLevel
         /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string, # Required.
-        ///     species: string, # Optional.
         ///     location: string, # Optional.
         ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
         ///   }, # Optional.
         ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
@@ -1095,14 +1095,14 @@ namespace body_complex_LowLevel
         /// Response response = await client.GetComplicatedAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1112,6 +1112,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1125,7 +1126,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1160,14 +1160,14 @@ namespace body_complex_LowLevel
         /// Response response = client.GetComplicated();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1177,6 +1177,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1190,7 +1191,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1226,7 +1226,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "smart_salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
@@ -1238,22 +1238,22 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     location = "<SalmonLocation>",
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
         ///     iswild = true,
         ///     fishtype = "smart_salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
+        ///     species = "<species>",
+        ///     length = 123.45f,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "salmon",
-        ///             species = "<FishSpecies>",
-        ///             length = 1234,
-        ///             siblings = new[] {},
-        ///             location = "<SalmonLocation>",
+        ///             location = "<location>",
         ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
         ///         }
         ///     },
-        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
@@ -1267,6 +1267,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1280,7 +1281,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1318,7 +1318,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "smart_salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = client.PutComplicated(RequestContent.Create(data));
@@ -1330,22 +1330,22 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     location = "<SalmonLocation>",
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
         ///     iswild = true,
         ///     fishtype = "smart_salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
+        ///     species = "<species>",
+        ///     length = 123.45f,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "salmon",
-        ///             species = "<FishSpecies>",
-        ///             length = 1234,
-        ///             siblings = new[] {},
-        ///             location = "<SalmonLocation>",
+        ///             location = "<location>",
         ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
         ///         }
         ///     },
-        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = client.PutComplicated(RequestContent.Create(data));
@@ -1359,6 +1359,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1372,7 +1373,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1410,14 +1410,12 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "smart_salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
-        /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutMissingDiscriminatorAsync with all request content, and how to parse the result.
@@ -1426,35 +1424,35 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     location = "<SalmonLocation>",
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
         ///     iswild = true,
         ///     fishtype = "smart_salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
+        ///     species = "<species>",
+        ///     length = 123.45f,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "salmon",
-        ///             species = "<FishSpecies>",
-        ///             length = 1234,
-        ///             siblings = new[] {},
-        ///             location = "<SalmonLocation>",
+        ///             location = "<location>",
         ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
         ///         }
         ///     },
-        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1464,6 +1462,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1477,7 +1476,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1486,6 +1484,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1499,7 +1498,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1537,14 +1535,12 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "smart_salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
-        /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// This sample shows how to call PutMissingDiscriminator with all request content, and how to parse the result.
@@ -1553,35 +1549,35 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     location = "<SalmonLocation>",
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
         ///     iswild = true,
         ///     fishtype = "smart_salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
+        ///     species = "<species>",
+        ///     length = 123.45f,
         ///     siblings = new[] {
         ///         new {
-        ///             fishtype = "salmon",
-        ///             species = "<FishSpecies>",
-        ///             length = 1234,
-        ///             siblings = new[] {},
-        ///             location = "<SalmonLocation>",
+        ///             location = "<location>",
         ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
         ///         }
         ///     },
-        ///     college_degree = "<SmartSalmonCollegeDegree>",
         /// };
         /// 
         /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-        /// Console.WriteLine(result.GetProperty("location").ToString());
-        /// Console.WriteLine(result.GetProperty("iswild").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1591,6 +1587,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1604,7 +1601,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1613,6 +1609,7 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
+        ///   college_degree: string, # Optional.
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1626,7 +1623,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1664,7 +1660,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
@@ -1676,12 +1672,12 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
-        ///     siblings = new[] {},
-        ///     location = "<SalmonLocation>",
+        ///     location = "<location>",
         ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
         /// };
         /// 
         /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
@@ -1696,24 +1692,6 @@ namespace body_complex_LowLevel
         /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   location: string, # Optional.
-        ///   iswild: boolean, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-        /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1727,30 +1705,49 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
-        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
+        ///   picture: Bytes, # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -1764,12 +1761,13 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -1783,8 +1781,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// </details>
@@ -1841,7 +1837,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     fishtype = "salmon",
-        ///     length = 1234,
+        ///     length = 123.45f,
         /// };
         /// 
         /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));
@@ -1853,12 +1849,12 @@ namespace body_complex_LowLevel
         /// var client = new PolymorphismClient(credential);
         /// 
         /// var data = new {
-        ///     fishtype = "salmon",
-        ///     species = "<FishSpecies>",
-        ///     length = 1234,
-        ///     siblings = new[] {},
-        ///     location = "<SalmonLocation>",
+        ///     location = "<location>",
         ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
         /// };
         /// 
         /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));
@@ -1873,24 +1869,6 @@ namespace body_complex_LowLevel
         /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
         /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
-        ///   location: string, # Optional.
-        ///   iswild: boolean, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
-        /// <code>{
         ///   location: string, # Optional.
         ///   iswild: boolean, # Optional.
         ///   fishtype: string, # Required.
@@ -1904,30 +1882,49 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// </details>
-        /// <details><summary>Shark</summary>Schema for <c>Shark</c>:
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   fishtype: string, # Required.
-        ///   species: string, # Optional.
-        ///   length: number, # Required.
-        ///   siblings: [
-        ///     {
-        ///       fishtype: string, # Required.
-        ///       species: string, # Optional.
-        ///       length: number, # Required.
-        ///       siblings: [Fish], # Optional.
-        ///     }
-        ///   ], # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
         /// <code>{
+        ///   picture: Bytes, # Optional.
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -1941,12 +1938,13 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   picture: SawsharkPicture, # Optional.
         /// }
         /// </code>
         /// </details>
         /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
         /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         ///   age: number, # Optional.
         ///   birthday: string (ISO 8601 Format), # Required.
         ///   fishtype: string, # Required.
@@ -1960,8 +1958,6 @@ namespace body_complex_LowLevel
         ///       siblings: [Fish], # Optional.
         ///     }
         ///   ], # Optional.
-        ///   jawsize: number, # Optional.
-        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
         /// }
         /// </code>
         /// </details>

@@ -398,6 +398,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputModel> visitedModels)
         {
+            InputType? nextType = type;
+            while (nextType != null)
+            {
+                if (nextType.Model != null && visitedModels.Contains(nextType.Model))
+                {
+                    return;
+                }
+
+                nextType = nextType.ValuesType;
+            }
+
             switch (type)
             {
                 case { Kind: InputTypeKind.List }:
@@ -412,7 +423,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     ComposeResponseParsingCode(allProperties, type.ValuesType!, apiInvocationChainList, currentApiInvocationChain, visitedModels);
                     currentApiInvocationChain.Pop();
                     return;
-                case { Model: {} model } when !visitedModels.Contains(model):
+                case { Model: {} model }:
                     visitedModels.Add(model);
                     ComposeResponseParsingCode(allProperties, model, apiInvocationChainList, currentApiInvocationChain, visitedModels);
                     visitedModels.Remove(model);
@@ -425,7 +436,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeResponseParsingCode(bool allProperties, InputModel model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputModel> visitedModels)
         {
-            foreach (var modelOrBase in model.GetSelfAndBaseModels().Reverse())
+            foreach (var modelOrBase in model.GetSelfAndBaseModels())
             {
                 if (!modelOrBase.Properties.Any())
                 {
@@ -669,7 +680,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (visitedModels.Contains(model))
             {
-                return "new {}";
+                return "";
             }
 
             /* GENERATED CODE PATTERN
@@ -685,7 +696,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // We must also include any properties introduced by our parent chain.
             // Try to get the concrete child type for polymorphism
             var concreteModel = GetConcreteChildModel(model);
-            foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels().Reverse())
+            foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
             {
                 if (allProperties)
                 {
@@ -709,11 +720,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 string propertyValueExpr = "";
                 if (property.IsDiscriminator)
                 {
-                    propertyValueExpr = property is {Type.Kind: InputTypeKind.Boolean or InputTypeKind.Int32} ? "123" : "\"derived\"";
+                    propertyValueExpr = property is {Type.Kind: InputTypeKind.Boolean or InputTypeKind.Int32} ? $"{concreteModel.DiscriminatorValue}" : $"\"{concreteModel.DiscriminatorValue}\"";
                 }
                 else
                 {
-                    propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.Description, indent + 4, visitedModels);
+                    propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.SerializedName, indent + 4, visitedModels);
 
                 }
 

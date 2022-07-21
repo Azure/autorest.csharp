@@ -433,7 +433,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<Referenced Color Constant Description.>",
+        ///     ColorConstant = "<ColorConstant>",
         /// };
         /// 
         /// Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
@@ -445,8 +445,8 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<Referenced Color Constant Description.>",
-        ///     field1 = "<Sample string.>",
+        ///     ColorConstant = "<ColorConstant>",
+        ///     field1 = "<field1>",
         /// };
         /// 
         /// Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
@@ -497,7 +497,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<Referenced Color Constant Description.>",
+        ///     ColorConstant = "<ColorConstant>",
         /// };
         /// 
         /// Response response = client.PutReferencedConstant(RequestContent.Create(data));
@@ -509,8 +509,8 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<Referenced Color Constant Description.>",
-        ///     field1 = "<Sample string.>",
+        ///     ColorConstant = "<ColorConstant>",
+        ///     field1 = "<field1>",
         /// };
         /// 
         /// Response response = client.PutReferencedConstant(RequestContent.Create(data));

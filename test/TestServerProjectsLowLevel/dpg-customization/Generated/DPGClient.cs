@@ -84,8 +84,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -134,8 +134,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -173,7 +173,7 @@ namespace dpg_customization_LowLevel
         /// var client = new DPGClient(credential);
         /// 
         /// var data = new {
-        ///     hello = "<String>",
+        ///     hello = "<hello>",
         /// };
         /// 
         /// Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
@@ -197,8 +197,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -237,7 +237,7 @@ namespace dpg_customization_LowLevel
         /// var client = new DPGClient(credential);
         /// 
         /// var data = new {
-        ///     hello = "<String>",
+        ///     hello = "<hello>",
         /// };
         /// 
         /// Response response = client.PostModel("<mode>", RequestContent.Create(data));
@@ -261,8 +261,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -414,8 +414,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.GetProperty("received").ToString());
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -425,8 +425,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 
@@ -466,8 +466,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.GetProperty("received").ToString());
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -477,8 +477,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 

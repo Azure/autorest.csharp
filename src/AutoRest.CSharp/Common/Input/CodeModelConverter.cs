@@ -215,7 +215,8 @@ namespace AutoRest.CSharp.Common.Input
                 BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
                     ? GetOrCreateModel(parent)
                     : null,
-                DerivedModels: derived
+                DerivedModels: derived,
+                DiscriminatorValue: schema.DiscriminatorValue
             );
 
             _modelsCache[schema] = model;

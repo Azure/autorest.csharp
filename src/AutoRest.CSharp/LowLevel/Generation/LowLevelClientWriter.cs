@@ -710,7 +710,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var schemasToAdd = new List<FormattableString>();
                 if (type is { Model.DerivedModels.Count: > 0 })
                 {
-                    var derivedModels = type.Model.DerivedModels;
+                    var derivedModels = type.Model.GetAllDerivedModels();
                     if (derivedModels.Count > 1)
                     {
                         schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
@@ -877,24 +877,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         List<SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
 
                         // We must also include any properties introduced by our parent chain.
-                        foreach (InputModel modelOrBase in model.GetSelfAndBaseModels().Reverse())
+                        foreach (InputModel modelOrBase in model.GetSelfAndBaseModels())
                         {
                             foreach (InputModelProperty property in modelOrBase.Properties)
                             {
-                                //if (property.Type.Kind == InputTypeKind.ExtensibleEnum && model.DiscriminatorValue != null)
-                                //{
-                                //    if (modelOrBase.Discriminator != null && modelOrBase.Discriminator.Property.Name == property.Name)
-                                //    {
-                                //        propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                //            property.SerializedName,
-                                //            model.DiscriminatorValue,
-                                //            property.IsRequired,
-                                //            BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                if (property.IsDiscriminator && property.Type.Kind == InputTypeKind.ExtensibleEnum && model.DiscriminatorValue != null)
+                                {
+                                    propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
+                                        property.SerializedName,
+                                        model.DiscriminatorValue,
+                                        property.IsRequired,
+                                        BuilderHelpers.EscapeXmlDescription(property.Description)));
 
-                                //        typesToExplore.Enqueue(property.Type);
-                                //        continue;
-                                //    }
-                                //}
+                                    typesToExplore.Enqueue(property.Type);
+                                    continue;
+                                }
+
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     property.SerializedName,
                                     BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),

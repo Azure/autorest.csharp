@@ -141,13 +141,24 @@ namespace AutoRest.CSharp.Common.Input
         }
     }
 
-    internal record InputModel(string Name, string? Namespace, string? Accessibility, IReadOnlyList<InputModelProperty> Properties, InputModel? BaseModel, IReadOnlyList<InputModel> DerivedModels)
+    internal record InputModel(string Name, string? Namespace, string? Accessibility, IReadOnlyList<InputModelProperty> Properties, InputModel? BaseModel, IReadOnlyList<InputModel> DerivedModels, string? DiscriminatorValue)
     {
-        public InputModel() : this(string.Empty, null, null, new List<InputModelProperty>(), null, new List<InputModel>()) { }
+        public InputModel() : this(string.Empty, null, null, new List<InputModelProperty>(), null, new List<InputModel>(), null) { }
 
         public IEnumerable<InputModel> GetSelfAndBaseModels() => EnumerateBase(this);
 
         public IEnumerable<InputModel> GetAllBaseModels() => EnumerateBase(BaseModel);
+
+        public IReadOnlyList<InputModel> GetAllDerivedModels()
+        {
+            var list = new List<InputModel>(DerivedModels);
+            for (var i = 0; i < list.Count; i++)
+            {
+                list.AddRange(list[i].DerivedModels);
+            }
+
+            return list;
+        }
 
         private static IEnumerable<InputModel> EnumerateBase(InputModel? model)
         {

@@ -178,7 +178,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     id = 1234,
-        ///     name = "<Name property with a very long description that does not fit on a single line and a line break.>",
+        ///     name = "<name>",
         ///     color = "cyan",
         /// };
         /// 
@@ -242,7 +242,7 @@ namespace body_complex_LowLevel
         /// 
         /// var data = new {
         ///     id = 1234,
-        ///     name = "<Name property with a very long description that does not fit on a single line and a line break.>",
+        ///     name = "<name>",
         ///     color = "cyan",
         /// };
         /// 

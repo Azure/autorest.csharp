@@ -123,7 +123,7 @@ namespace Azure.AI.DocumentTranslation
         /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
         ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   progress: number, # Required. Progress of the translation if available
-        ///   id: DocumentStatusId, # Required. Document Id
+        ///   id: Guid, # Required. Document Id
         ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
@@ -208,7 +208,7 @@ namespace Azure.AI.DocumentTranslation
         /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
         ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   progress: number, # Required. Progress of the translation if available
-        ///   id: DocumentStatusId, # Required. Document Id
+        ///   id: Guid, # Required. Document Id
         ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
@@ -273,7 +273,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   id: Guid, # Required. Id of the operation.
         ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
         ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
         ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
@@ -364,7 +364,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   id: Guid, # Required. Id of the operation.
         ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
         ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
         ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
@@ -458,7 +458,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   id: Guid, # Required. Id of the operation.
         ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
         ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
         ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
@@ -552,7 +552,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   id: Guid, # Required. Id of the operation.
         ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
         ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
         ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
@@ -1039,7 +1039,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Schema for <c>TranslationsStatusValue</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   id: Guid, # Required. Id of the operation.
         ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
         ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
         ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
@@ -1204,7 +1204,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// Schema for <c>TranslationsStatusValue</c>:
         /// <code>{
-        ///   id: TranslationStatusId, # Required. Id of the operation.
+        ///   id: Guid, # Required. Id of the operation.
         ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
         ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
         ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
@@ -1383,7 +1383,7 @@ namespace Azure.AI.DocumentTranslation
         /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
         ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   progress: number, # Required. Progress of the translation if available
-        ///   id: DocumentStatusId, # Required. Document Id
+        ///   id: Guid, # Required. Document Id
         ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
@@ -1536,7 +1536,7 @@ namespace Azure.AI.DocumentTranslation
         /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
         ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   progress: number, # Required. Progress of the translation if available
-        ///   id: DocumentStatusId, # Required. Document Id
+        ///   id: Guid, # Required. Document Id
         ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
@@ -1582,31 +1582,31 @@ namespace Azure.AI.DocumentTranslation
         ///     inputs = new[] {
         ///         new {
         ///             source = new {
-        ///                 sourceUrl = "<SourceInputSourceUrl>",
+        ///                 sourceUrl = "<sourceUrl>",
         ///                 filter = new {
-        ///                     prefix = "<DocumentFilterPrefix>",
-        ///                     suffix = "<DocumentFilterSuffix>",
+        ///                     prefix = "<prefix>",
+        ///                     suffix = "<suffix>",
         ///                 },
-        ///                 language = "<SourceInputLanguage>",
-        ///                 storageSource = "<AzureBlob>",
+        ///                 language = "<language>",
+        ///                 storageSource = "AzureBlob",
         ///             },
         ///             targets = new[] {
         ///                 new {
-        ///                     targetUrl = "<TargetInputTargetUrl>",
-        ///                     category = "<TargetInputCategory>",
-        ///                     language = "<TargetInputLanguage>",
+        ///                     targetUrl = "<targetUrl>",
+        ///                     category = "<category>",
+        ///                     language = "<language>",
         ///                     glossaries = new[] {
         ///                         new {
-        ///                             glossaryUrl = "<GlossaryUrl>",
-        ///                             format = "<GlossaryFormat>",
-        ///                             version = "<GlossaryVersion>",
-        ///                             storageSource = "<AzureBlob>",
+        ///                             glossaryUrl = "<glossaryUrl>",
+        ///                             format = "<format>",
+        ///                             version = "<version>",
+        ///                             storageSource = "AzureBlob",
         ///                         }
         ///                     },
-        ///                     storageSource = "<AzureBlob>",
+        ///                     storageSource = "AzureBlob",
         ///                 }
         ///             },
-        ///             storageType = "<Folder>",
+        ///             storageType = "Folder",
         ///         }
         ///     },
         /// };
@@ -1710,31 +1710,31 @@ namespace Azure.AI.DocumentTranslation
         ///     inputs = new[] {
         ///         new {
         ///             source = new {
-        ///                 sourceUrl = "<SourceInputSourceUrl>",
+        ///                 sourceUrl = "<sourceUrl>",
         ///                 filter = new {
-        ///                     prefix = "<DocumentFilterPrefix>",
-        ///                     suffix = "<DocumentFilterSuffix>",
+        ///                     prefix = "<prefix>",
+        ///                     suffix = "<suffix>",
         ///                 },
-        ///                 language = "<SourceInputLanguage>",
-        ///                 storageSource = "<AzureBlob>",
+        ///                 language = "<language>",
+        ///                 storageSource = "AzureBlob",
         ///             },
         ///             targets = new[] {
         ///                 new {
-        ///                     targetUrl = "<TargetInputTargetUrl>",
-        ///                     category = "<TargetInputCategory>",
-        ///                     language = "<TargetInputLanguage>",
+        ///                     targetUrl = "<targetUrl>",
+        ///                     category = "<category>",
+        ///                     language = "<language>",
         ///                     glossaries = new[] {
         ///                         new {
-        ///                             glossaryUrl = "<GlossaryUrl>",
-        ///                             format = "<GlossaryFormat>",
-        ///                             version = "<GlossaryVersion>",
-        ///                             storageSource = "<AzureBlob>",
+        ///                             glossaryUrl = "<glossaryUrl>",
+        ///                             format = "<format>",
+        ///                             version = "<version>",
+        ///                             storageSource = "AzureBlob",
         ///                         }
         ///                     },
-        ///                     storageSource = "<AzureBlob>",
+        ///                     storageSource = "AzureBlob",
         ///                 }
         ///             },
-        ///             storageType = "<Folder>",
+        ///             storageType = "Folder",
         ///         }
         ///     },
         /// };

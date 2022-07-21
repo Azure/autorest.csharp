@@ -1255,9 +1255,9 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<String>",
-        ///     empty = "<String>",
-        ///     null = "<String>",
+        ///     field = "<field>",
+        ///     empty = "<empty>",
+        ///     null = "<null>",
         /// };
         /// 
         /// Response response = await client.PutStringAsync(RequestContent.Create(data));
@@ -1319,9 +1319,9 @@ namespace body_complex_LowLevel
         /// var client = new PrimitiveClient(credential);
         /// 
         /// var data = new {
-        ///     field = "<String>",
-        ///     empty = "<String>",
-        ///     null = "<String>",
+        ///     field = "<field>",
+        ///     empty = "<empty>",
+        ///     null = "<null>",
         /// };
         /// 
         /// Response response = client.PutString(RequestContent.Create(data));
