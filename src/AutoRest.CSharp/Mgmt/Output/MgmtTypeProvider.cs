@@ -226,7 +226,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return name;
 
             var operationGroup = MgmtContext.Library.GetRestClient(operation).OperationGroup;
-            if (operationGroup.Key == clientResourceName)
+            var ogKey = operationGroup.Key;
+            var singularOGKey = ogKey.LastWordToSingular();
+            if (ogKey == clientResourceName || singularOGKey == clientResourceName)
             {
                 return operation.MgmtCSharpName(false);
             }
@@ -234,7 +236,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var resourceName = string.Empty;
             if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out _))
             {
-                resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.LastWordToSingular().ResourceNameToPlural();
+                resourceName = ogKey.IsNullOrEmpty() ? string.Empty : singularOGKey.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());
                 // Remove 'By[Resource]' if the method is put in the [Resource] class. For instance, GetByDatabaseDatabaseColumns now becomes GetDatabaseColumns under Database resource class.
                 if (opName.EndsWith($"By{clientResourceName.LastWordToSingular()}"))
@@ -248,7 +250,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 return $"{opName}{resourceName}";
             }
-            resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.LastWordToSingular();
+            resourceName = ogKey.IsNullOrEmpty() ? string.Empty : singularOGKey;
             return $"{operation.MgmtCSharpName(!resourceName.IsNullOrEmpty())}{resourceName}";
         }
 

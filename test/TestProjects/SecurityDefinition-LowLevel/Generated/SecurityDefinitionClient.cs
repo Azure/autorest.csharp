@@ -96,7 +96,7 @@ namespace SecurityDefinition_LowLevel
         /// This sample shows how to call OperationAsync.
         /// <code><![CDATA[
         /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
         /// var data = new {};
@@ -107,7 +107,7 @@ namespace SecurityDefinition_LowLevel
         /// This sample shows how to call OperationAsync with all request content.
         /// <code><![CDATA[
         /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
         /// var data = new {
@@ -159,7 +159,7 @@ namespace SecurityDefinition_LowLevel
         /// This sample shows how to call Operation.
         /// <code><![CDATA[
         /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
         /// var data = new {};
@@ -170,7 +170,7 @@ namespace SecurityDefinition_LowLevel
         /// This sample shows how to call Operation with all request content.
         /// <code><![CDATA[
         /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
         /// var data = new {

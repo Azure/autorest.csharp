@@ -70,7 +70,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetDocumentStatusAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
         /// 
@@ -155,7 +155,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetDocumentStatus with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid());
         /// 
@@ -239,7 +239,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetTranslationStatusAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
         /// 
@@ -330,7 +330,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetTranslationStatus with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = client.GetTranslationStatus(Guid.NewGuid());
         /// 
@@ -421,7 +421,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call CancelTranslationAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = await client.CancelTranslationAsync(Guid.NewGuid());
         /// 
@@ -515,7 +515,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call CancelTranslation with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = client.CancelTranslation(Guid.NewGuid());
         /// 
@@ -608,7 +608,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetSupportedDocumentFormatsAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = await client.GetSupportedDocumentFormatsAsync();
         /// 
@@ -667,7 +667,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetSupportedDocumentFormats and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = client.GetSupportedDocumentFormats();
         /// 
@@ -726,7 +726,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetSupportedGlossaryFormatsAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = await client.GetSupportedGlossaryFormatsAsync();
         /// 
@@ -785,7 +785,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetSupportedGlossaryFormats and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = client.GetSupportedGlossaryFormats();
         /// 
@@ -844,7 +844,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetSupportedStorageSourcesAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = await client.GetSupportedStorageSourcesAsync();
         /// 
@@ -890,7 +890,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetSupportedStorageSources and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// Response response = client.GetSupportedStorageSources();
         /// 
@@ -962,7 +962,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetTranslationsStatusAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// await foreach (var data in client.GetTranslationsStatusAsync())
         /// {
@@ -983,7 +983,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetTranslationsStatusAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// await foreach (var data in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
@@ -1127,7 +1127,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetTranslationsStatus and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// foreach (var data in client.GetTranslationsStatus())
         /// {
@@ -1148,7 +1148,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetTranslationsStatus with all parameters, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// foreach (var data in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
@@ -1293,7 +1293,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetDocumentsStatusAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid()))
         /// {
@@ -1310,7 +1310,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetDocumentsStatusAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
@@ -1446,7 +1446,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetDocumentsStatus with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// foreach (var data in client.GetDocumentsStatus(Guid.NewGuid()))
         /// {
@@ -1463,7 +1463,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call GetDocumentsStatus with all parameters, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// foreach (var data in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
         /// {
@@ -1576,7 +1576,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call StartTranslationAsync with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// var data = new {
         ///     inputs = new[] {
@@ -1704,7 +1704,7 @@ namespace Azure.AI.DocumentTranslation
         /// This sample shows how to call StartTranslation with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DocumentTranslationClient("<https://my-account-name.azure.com>", credential);
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
         /// 
         /// var data = new {
         ///     inputs = new[] {
