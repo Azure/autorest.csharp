@@ -81,6 +81,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             try
             {
+                await codeModelTask;
                 var project = await ExecuteAsync(codeModelTask);
                 await foreach (var file in project.GetGeneratedFilesAsync())
                 {
