@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     ComposeExampleWithoutParameter(clientMethod, methodSignature.Name, async, false, builder);
                 }
-                else if (requestSchema != null && HasRequiredAndWritablePropertyFromTop(requestSchema))
+                else if (requestBodyType != null && (requestSchema == null || HasRequiredAndWritablePropertyFromTop(requestSchema)))
                 {
                     ComposeExampleWithParametersAndRequestContent(clientMethod, methodSignature.Name, async, false, builder);
                 }
@@ -73,15 +73,13 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{builder.ToString()}";
         }
 
-        private bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)
-        {
-            return !parameters.Any(p => p.Type.Name != nameof(RequestContext)); // `RequestContext = null` is excluded
-        }
+        // `RequestContext = null` is excluded
+        private static bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)
+            => parameters.Count == 0 || parameters.Count == 1 && parameters[0].Equals(KnownParameters.RequestContext);
 
-        private bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
-        {
-            return parameters.Any(p => p.RequestLocation != RequestLocation.Body && p.Type.Name != nameof(RequestContext));// RequestContext is excluded
-        }
+        // RequestContext is excluded
+        private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
+            => parameters.Any(p => p.RequestLocation != RequestLocation.Body && !p.Equals(KnownParameters.RequestContext));
 
         private void ComposeExampleWithoutRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
         {
@@ -144,26 +142,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private bool HasOptionalInputValue(IReadOnlyList<Parameter> parameters, InputType? requestBodyType, out Schema? requestSchema)
         {
-            requestSchema = null;
-            foreach (var parameter in parameters.Where(p => p.RequestLocation != RequestLocation.Body)) // exclude RequestContext
+            requestSchema = requestBodyType is CodeModelType cmt ? cmt.Schema : null;
+            if (parameters.Any(p => p.IsOptionalInSignature && !p.Equals(KnownParameters.RequestContext)))
             {
-                if (parameter.DefaultValue != null)
-                {
-                    return true;
-                }
+                return true;
             }
 
-            if (requestBodyType is not CodeModelType cmt)
-            {
-                return false;
-            }
-
-            requestSchema = cmt.Schema;
-            return HasOptionalAndWritableProperty(requestSchema);
+            return requestSchema != null && HasOptionalAndWritableProperty(requestSchema);
         }
 
         /// <summary>
-        /// Check if there is any optional and wriable property in the given schema hierarchy.
+        /// Check if there is any optional and writable property in the given schema hierarchy.
         /// </summary>
         /// <param name="schema"></param>
         /// <returns></returns>
@@ -450,13 +439,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            if (responseBodyType is not CodeModelType codeModelType)
-            {
-                return;
-            }
-
             var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, codeModelType.Schema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { codeModelType.Schema });
+            ComposeResponseParsingCode(allProperties, responseBodyType, apiInvocationChainList, new Stack<string>(new[] { "result" }));
 
             builder.AppendLine();
 
@@ -472,6 +456,31 @@ namespace AutoRest.CSharp.Generation.Writers
                     builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
                 }
             }
+        }
+
+        private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentAPIInvocationChain)
+        {
+            switch (type)
+            {
+                case { Kind: InputTypeKind.List }:
+                    // {parentOp}[0]
+                    var parentOp = currentAPIInvocationChain.Pop();
+                    currentAPIInvocationChain.Push($"{parentOp}[0]");
+                    ComposeResponseParsingCode(allProperties, type.ValuesType!, apiInvocationChainList, currentAPIInvocationChain);
+                    return;
+                case { Kind: InputTypeKind.Dictionary }:
+                    // .GetProperty("<test>")
+                    currentAPIInvocationChain.Push("GetProperty(\"<test>\")");
+                    ComposeResponseParsingCode(allProperties, type.ValuesType!, apiInvocationChainList, currentAPIInvocationChain);
+                    currentAPIInvocationChain.Pop();
+                    return;
+                case CodeModelType codeModelType:
+                    ComposeResponseParsingCode(allProperties, codeModelType.Schema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { codeModelType.Schema });
+                    return;
+            }
+
+            // primitive types, return
+            AddAPIInvocationChainResult(apiInvocationChainList, currentAPIInvocationChain);
         }
 
         private void ComposeResponseParsingCode(bool allProperties, Schema schema, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentAPIInvocationChain, HashSet<Schema> visitedSchema)
@@ -699,6 +708,15 @@ namespace AutoRest.CSharp.Generation.Writers
             { Kind: InputTypeKind.List }       => ComposeArrayRequestContent(allProperties, inputType.ValuesType!, indent),
             { Kind: InputTypeKind.Dictionary } => ComposeDictionaryRequestContent(allProperties, inputType.ValuesType!, indent),
             { Kind: InputTypeKind.Stream }     => "File.OpenRead(\"<filePath>\")",
+            { Kind: InputTypeKind.Boolean }    => "true",
+            { Kind: InputTypeKind.DateTime }   => "new DateTimeOffset(DateTime.UtcNow)",
+            { Kind: InputTypeKind.Float32 }    => "123.45",
+            { Kind: InputTypeKind.Float64 }    => "123.45",
+            { Kind: InputTypeKind.Float128 }   => "123.45",
+            { Kind: InputTypeKind.Int32 }      => "1234",
+            { Kind: InputTypeKind.Int64 }      => "1234",
+            { Kind: InputTypeKind.String }     => "\"<String>\"",
+            { Kind: InputTypeKind.Time }       => "new TimeSpan(1, 23, 45)",
             CodeModelType codeModelType        => ComposeRequestContent(allProperties, codeModelType.Schema, indent, new HashSet<Schema>()),
             _ => "new {}"
         };

@@ -60,6 +60,16 @@ namespace CadlPetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DeleteAsync with required parameters.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.DeleteAsync(1234);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DeleteAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Delete");
@@ -80,6 +90,16 @@ namespace CadlPetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete with required parameters.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.Delete(1234);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Delete(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Delete");
@@ -100,6 +120,18 @@ namespace CadlPetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ReadAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.ReadAsync(1234);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
@@ -120,6 +152,18 @@ namespace CadlPetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Read with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.Read(1234);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Read(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
@@ -139,6 +183,18 @@ namespace CadlPetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CreateAsync and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.CreateAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> CreateAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");
@@ -158,6 +214,18 @@ namespace CadlPetStore
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Create and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.Create();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Create(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");

@@ -62,6 +62,18 @@ namespace CadlPetStore
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> or <paramref name="nameFilter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ListAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ListPetToysResponseClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.ListAsync("<petId>", "<nameFilter>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ListAsync(string petId, string nameFilter, RequestContext context = null)
         {
             Argument.AssertNotNull(petId, nameof(petId));
@@ -87,6 +99,18 @@ namespace CadlPetStore
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> or <paramref name="nameFilter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call List with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ListPetToysResponseClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.List("<petId>", "<nameFilter>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response List(string petId, string nameFilter, RequestContext context = null)
         {
             Argument.AssertNotNull(petId, nameof(petId));

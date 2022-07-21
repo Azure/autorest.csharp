@@ -61,6 +61,18 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call TopActionAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.TopActionAsync("<action>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
@@ -84,6 +96,18 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call TopAction with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.TopAction("<action>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response TopAction(string action, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
@@ -105,6 +129,18 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call TopAction2Async and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.TopAction2Async();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2");
@@ -124,6 +160,18 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call TopAction2 and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.TopAction2();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response TopAction2(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2");

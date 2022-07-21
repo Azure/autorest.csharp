@@ -62,6 +62,18 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OperationAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
+        /// 
+        /// Response response = await client.OperationAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
@@ -81,6 +93,18 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Operation and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
+        /// 
+        /// Response response = client.Operation();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Operation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
@@ -103,6 +127,19 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetAllAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
+        /// 
+        /// await foreach (var data in client.GetAllAsync("<filter>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));
@@ -133,6 +170,19 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetAll with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential);
+        /// 
+        /// foreach (var data in client.GetAll("<filter>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));

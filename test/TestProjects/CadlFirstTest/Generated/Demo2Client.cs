@@ -59,6 +59,18 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call HelloAgainAsync and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new Demo2Client(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.HelloAgainAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> HelloAgainAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
@@ -78,6 +90,18 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call HelloAgain and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new Demo2Client(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.HelloAgain();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response HelloAgain(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
@@ -97,6 +121,18 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call HelloDemo2Async and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new Demo2Client(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.HelloDemo2Async();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
@@ -116,6 +152,18 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call HelloDemo2 and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new Demo2Client(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.HelloDemo2();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response HelloDemo2(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
