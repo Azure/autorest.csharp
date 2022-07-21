@@ -75,16 +75,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             if (Configuration.SaveInputs)
             {
-                // We are unsuspectingly crashing, so output anything that might help us reproduce the issue
-                File.WriteAllText(Path.Combine(Configuration.OutputFolder, "Configuration.json"), StandaloneGeneratorRunner.SaveConfiguration());
-                File.WriteAllText(Path.Combine(Configuration.OutputFolder, "CodeModel.yaml"), codeModelYaml);
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }
 
             try
             {
-                await codeModelTask;
                 var project = await ExecuteAsync(codeModelTask);
                 await foreach (var file in project.GetGeneratedFilesAsync())
                 {

@@ -3620,8 +3620,8 @@ operationGroups:
                           disableLocalAuth: !!bool false
                           encryption:
                             keyVaultProperties:
-                              identityClientId: !!null null
-                              keyIdentifier: !!null null
+                              identityClientId: null
+                              keyIdentifier: null
                           endpoint: https://contoso.azconfig.io
                           privateEndpointConnections: []
                           provisioningState: Succeeded
@@ -3649,8 +3649,8 @@ operationGroups:
                           disableLocalAuth: !!bool false
                           encryption:
                             keyVaultProperties:
-                              identityClientId: !!null null
-                              keyIdentifier: !!null null
+                              identityClientId: null
+                              keyIdentifier: null
                           endpoint: https://contoso2.azconfig.io
                           privateEndpointConnections: []
                           provisioningState: Succeeded
@@ -3785,8 +3785,8 @@ operationGroups:
                           disableLocalAuth: !!bool false
                           encryption:
                             keyVaultProperties:
-                              identityClientId: !!null null
-                              keyIdentifier: !!null null
+                              identityClientId: null
+                              keyIdentifier: null
                           endpoint: https://contoso.azconfig.io
                           privateEndpointConnections: []
                           provisioningState: Succeeded
@@ -3810,8 +3810,8 @@ operationGroups:
                           disableLocalAuth: !!bool false
                           encryption:
                             keyVaultProperties:
-                              identityClientId: !!null null
-                              keyIdentifier: !!null null
+                              identityClientId: null
+                              keyIdentifier: null
                           endpoint: https://contoso2.azconfig.io
                           privateEndpointConnections: []
                           provisioningState: Succeeded
@@ -3949,8 +3949,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4131,8 +4131,8 @@ operationGroups:
                       enablePurgeProtection: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4160,8 +4160,8 @@ operationGroups:
                       enablePurgeProtection: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Creating
@@ -4213,8 +4213,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4248,8 +4248,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Creating
@@ -4288,8 +4288,8 @@ operationGroups:
                       disableLocalAuth: !!bool true
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4314,8 +4314,8 @@ operationGroups:
                       disableLocalAuth: !!bool true
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Creating
@@ -4616,8 +4616,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4644,8 +4644,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Updating
@@ -4684,8 +4684,8 @@ operationGroups:
                       disableLocalAuth: !!bool true
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4711,8 +4711,8 @@ operationGroups:
                       disableLocalAuth: !!bool true
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Updating
@@ -4762,8 +4762,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Succeeded
@@ -4798,8 +4798,8 @@ operationGroups:
                       disableLocalAuth: !!bool false
                       encryption:
                         keyVaultProperties:
-                          identityClientId: !!null null
-                          keyIdentifier: !!null null
+                          identityClientId: null
+                          keyIdentifier: null
                       endpoint: https://contoso.azconfig.io
                       privateEndpointConnections: []
                       provisioningState: Updating
@@ -5565,7 +5565,7 @@ operationGroups:
                   body:
                     message: The specified name is available.
                     nameAvailable: !!bool true
-                    reason: !!null null
+                    reason: null
             ConfigurationStores_CheckNameNotAvailable:
               parameters:
                 api-version: 2022-05-01
@@ -5794,7 +5794,7 @@ operationGroups:
                   body:
                     message: The specified name is available.
                     nameAvailable: !!bool true
-                    reason: !!null null
+                    reason: null
             ConfigurationStores_CheckNameNotAvailable:
               parameters:
                 api-version: 2022-05-01
@@ -7338,11 +7338,11 @@ testModel:
                                   properties:
                                     identityClientId:
                                       schema: *ref_26
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_253
                                     keyIdentifier:
                                       schema: *ref_25
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_252
                                   language: *ref_251
                               language: *ref_250
@@ -7465,11 +7465,11 @@ testModel:
                                   properties:
                                     identityClientId:
                                       schema: *ref_26
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_253
                                     keyIdentifier:
                                       schema: *ref_25
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_252
                                   language: *ref_251
                               language: *ref_250
@@ -7628,11 +7628,11 @@ testModel:
                                   properties:
                                     identityClientId:
                                       schema: *ref_26
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_253
                                     keyIdentifier:
                                       schema: *ref_25
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_252
                                   language: *ref_251
                               language: *ref_250
@@ -7738,11 +7738,11 @@ testModel:
                                   properties:
                                     identityClientId:
                                       schema: *ref_26
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_253
                                     keyIdentifier:
                                       schema: *ref_25
-                                      rawValue: !!null null
+                                      rawValue: null
                                       language: *ref_252
                                   language: *ref_251
                               language: *ref_250
@@ -7883,11 +7883,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -8075,11 +8075,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -8196,11 +8196,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -8382,11 +8382,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -8526,11 +8526,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -8721,11 +8721,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -8829,11 +8829,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -9024,11 +9024,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -9140,11 +9140,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -9303,11 +9303,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -9416,11 +9416,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -9595,11 +9595,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -9744,11 +9744,11 @@ testModel:
                           properties:
                             identityClientId:
                               schema: *ref_26
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_253
                             keyIdentifier:
                               schema: *ref_25
-                              rawValue: !!null null
+                              rawValue: null
                               language: *ref_252
                           language: *ref_251
                       language: *ref_250
@@ -10323,7 +10323,7 @@ testModel:
                       language: *ref_356
                     reason:
                       schema: *ref_62
-                      rawValue: !!null null
+                      rawValue: null
                       language: *ref_358
                   language: *ref_355
           - name: ConfigurationStores_CheckNameNotAvailable
@@ -10434,7 +10434,7 @@ testModel:
                       language: *ref_356
                     reason:
                       schema: *ref_62
-                      rawValue: !!null null
+                      rawValue: null
                       language: *ref_358
                   language: *ref_364
           - name: ConfigurationStores_CheckNameNotAvailable
