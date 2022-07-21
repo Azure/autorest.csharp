@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal static class Internalizer
     {
+        // TODO -- make sure Internalizer could ignore model factory, and internalize the corresponding entries of the not publicly used models in the model factory
         public static async Task<Project> InternalizeAsync(Project project, ImmutableHashSet<string> modelsToKeep)
         {
             var compilation = await GetCompilationAsync(project);

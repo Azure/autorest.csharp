@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal static class Remover
     {
+        // TODO -- make sure Remover will not remove the model factory, and remove the corresponding entries of the removed models in the model factory
         public static async Task<Project> RemoveUnusedAsync(Project project, ImmutableHashSet<string> modelsToKeep)
         {
             var compilation = await project.GetCompilationAsync();
