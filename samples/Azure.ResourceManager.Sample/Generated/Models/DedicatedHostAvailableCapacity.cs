@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Dedicated host unutilized capacity.
     /// Serialized Name: DedicatedHostAvailableCapacity
     /// </summary>
-    public partial class DedicatedHostAvailableCapacity
+    internal partial class DedicatedHostAvailableCapacity
     {
         /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
         internal DedicatedHostAvailableCapacity()

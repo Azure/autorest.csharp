@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Describes a virtual machine scale set VM network profile.
     /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration
     /// </summary>
-    public partial class VirtualMachineScaleSetVMNetworkProfileConfiguration
+    internal partial class VirtualMachineScaleSetVMNetworkProfileConfiguration
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMNetworkProfileConfiguration. </summary>
         public VirtualMachineScaleSetVMNetworkProfileConfiguration()

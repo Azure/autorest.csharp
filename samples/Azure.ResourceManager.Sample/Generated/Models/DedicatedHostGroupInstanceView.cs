@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// The DedicatedHostGroupInstanceView.
     /// Serialized Name: DedicatedHostGroupInstanceView
     /// </summary>
-    public partial class DedicatedHostGroupInstanceView
+    internal partial class DedicatedHostGroupInstanceView
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupInstanceView. </summary>
         internal DedicatedHostGroupInstanceView()

@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Describes the uri of a disk.
     /// Serialized Name: VirtualHardDisk
     /// </summary>
-    public partial class VirtualHardDisk
+    internal partial class VirtualHardDisk
     {
         /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
         public VirtualHardDisk()

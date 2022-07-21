@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// The health status of the VM.
     /// Serialized Name: VirtualMachineHealthStatus
     /// </summary>
-    public partial class VirtualMachineHealthStatus
+    internal partial class VirtualMachineHealthStatus
     {
         /// <summary> Initializes a new instance of VirtualMachineHealthStatus. </summary>
         internal VirtualMachineHealthStatus()

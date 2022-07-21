@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// Specifies the hardware settings for the virtual machine.
     /// Serialized Name: HardwareProfile
     /// </summary>
-    public partial class HardwareProfile
+    internal partial class HardwareProfile
     {
         /// <summary> Initializes a new instance of HardwareProfile. </summary>
         public HardwareProfile()
