@@ -132,7 +132,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -168,7 +168,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = client.PutNotExpandable(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -268,7 +268,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = await client.PutReferencedAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -304,7 +304,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = client.PutReferenced(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);

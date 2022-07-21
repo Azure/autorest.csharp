@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
             InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
             InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
+            InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
             InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
             InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
             InputTypeKind.List => new CSharpType(typeof(IList<>), inputType.IsNullable, CreateType(inputType.ValuesType!)),

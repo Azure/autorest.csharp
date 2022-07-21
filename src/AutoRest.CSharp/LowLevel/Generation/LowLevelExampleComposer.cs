@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType? inputType, StringBuilder builder)
+        private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
             if (inputType is {Kind: InputTypeKind.Stream})
             {
@@ -337,13 +337,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            if (inputType is not CodeModelType codeModelType)
-            {
-                return;
-            }
-
             var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, codeModelType.Schema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { codeModelType.Schema });
+            ComposeResponseParsingCode(allProperties, inputType, apiInvocationChainList, new Stack<string>(new[] { "result" }));
 
             if (apiInvocationChainList.Count == 0)
             {
@@ -475,7 +470,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     currentAPIInvocationChain.Pop();
                     return;
                 case CodeModelType codeModelType:
-                    ComposeResponseParsingCode(allProperties, codeModelType.Schema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { codeModelType.Schema });
+                    ComposeResponseParsingCode(allProperties, codeModelType.Schema, apiInvocationChainList, currentAPIInvocationChain, new HashSet<Schema>() { codeModelType.Schema });
                     return;
             }
 
@@ -705,19 +700,24 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ComposeRequestContent(bool allProperties, InputType inputType, int indent) => inputType switch
         {
-            { Kind: InputTypeKind.List }       => ComposeArrayRequestContent(allProperties, inputType.ValuesType!, indent),
-            { Kind: InputTypeKind.Dictionary } => ComposeDictionaryRequestContent(allProperties, inputType.ValuesType!, indent),
-            { Kind: InputTypeKind.Stream }     => "File.OpenRead(\"<filePath>\")",
-            { Kind: InputTypeKind.Boolean }    => "true",
-            { Kind: InputTypeKind.DateTime }   => "new DateTimeOffset(DateTime.UtcNow)",
-            { Kind: InputTypeKind.Float32 }    => "123.45",
-            { Kind: InputTypeKind.Float64 }    => "123.45",
-            { Kind: InputTypeKind.Float128 }   => "123.45",
-            { Kind: InputTypeKind.Int32 }      => "1234",
-            { Kind: InputTypeKind.Int64 }      => "1234",
-            { Kind: InputTypeKind.String }     => "\"<String>\"",
-            { Kind: InputTypeKind.Time }       => "new TimeSpan(1, 23, 45)",
-            CodeModelType codeModelType        => ComposeRequestContent(allProperties, codeModelType.Schema, indent, new HashSet<Schema>()),
+            { Kind: InputTypeKind.List }           => ComposeArrayRequestContent(allProperties, inputType.ValuesType!, indent),
+            { Kind: InputTypeKind.Dictionary }     => ComposeDictionaryRequestContent(allProperties, inputType.ValuesType!, indent),
+            { Kind: InputTypeKind.Stream }         => "File.OpenRead(\"<filePath>\")",
+            { Kind: InputTypeKind.Boolean }        => "true",
+            { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.Date } => "\"2022-05-10\"",
+            { Kind: InputTypeKind.DateTime }       => "\"2022-05-10T14:57:31.2311892-04:00\"",
+            { Kind: InputTypeKind.Enum }           => $"\"{inputType.AllowedValues!.First().Value}\"",
+            { Kind: InputTypeKind.ExtensibleEnum } => $"\"{inputType.AllowedValues!.First().Value}\"",
+            { Kind: InputTypeKind.Float32 }        => "123.45f",
+            { Kind: InputTypeKind.Float64 }        => "123.45d",
+            { Kind: InputTypeKind.Float128 }       => "123.45m",
+            { Kind: InputTypeKind.Guid }           => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
+            { Kind: InputTypeKind.Int32 }          => "1234",
+            { Kind: InputTypeKind.Int64 }          => "1234L",
+            { Kind: InputTypeKind.String }         => "\"<String>\"",
+            { Kind: InputTypeKind.Time, SerializationFormat: InputTypeSerializationFormat.Duration } => "PT1H23M45S",
+            { Kind: InputTypeKind.Time }           => "01:23:45",
+            CodeModelType codeModelType            => ComposeRequestContent(allProperties, codeModelType.Schema, indent, new HashSet<Schema>()),
             _ => "new {}"
         };
 

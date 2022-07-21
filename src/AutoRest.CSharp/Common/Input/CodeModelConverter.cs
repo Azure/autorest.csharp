@@ -256,6 +256,7 @@ namespace AutoRest.CSharp.Common.Input
             CredentialSchema => KnownInputTypes.String,
             { Type: AllSchemaTypes.String } => KnownInputTypes.String,
             { Type: AllSchemaTypes.Boolean } => KnownInputTypes.Boolean,
+            { Type: AllSchemaTypes.Uuid } => KnownInputTypes.Guid,
             { Type: AllSchemaTypes.Uri } => KnownInputTypes.Uri,
             _ => new CodeModelType(schema, InputTypeKind.Object)
         };

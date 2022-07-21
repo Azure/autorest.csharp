@@ -144,6 +144,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputType Float32 { get; } = new(nameof(InputTypeKind.Float32), InputTypeKind.Float32);
         public static InputType Float64 { get; } = new(nameof(InputTypeKind.Float64), InputTypeKind.Float64);
         public static InputType Float128 { get; } = new(nameof(InputTypeKind.Float128), InputTypeKind.Float128);
+        public static InputType Guid { get; } = new(nameof(InputTypeKind.Guid), InputTypeKind.Guid);
         public static InputType Int32 { get; } = new(nameof(InputTypeKind.Int32), InputTypeKind.Int32);
         public static InputType Int64 { get; } = new(nameof(InputTypeKind.Int64), InputTypeKind.Int64);
         public static InputType List { get; } = new(nameof(InputTypeKind.List), InputTypeKind.List);
@@ -188,6 +189,7 @@ namespace AutoRest.CSharp.Common.Input
         Float32,
         Float64,
         Float128,
+        Guid,
         Int32,
         Int64,
         List,
