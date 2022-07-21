@@ -11,18 +11,19 @@ export interface Schema {
     Name: string;
 }
 export class CodeModelType implements InputType {
-    public constructor(schema: Schema,
+    public constructor(
+        schema: Schema,
         kind: InputTypeKind,
         isNullable: boolean = false,
-        format: InputTypeSerializationFormat = InputTypeSerializationFormat.Default) {
-            this.Schema = schema;
-            this.Kind = kind;
-            this.Name = schema.Name;
-            this.IsNullable = isNullable;
-            this.AllowedValues = undefined;
-            this.SerializationFormat = format;
-
-        }
+        format: InputTypeSerializationFormat = InputTypeSerializationFormat.Default
+    ) {
+        this.Schema = schema;
+        this.Kind = kind;
+        this.Name = schema.Name;
+        this.IsNullable = isNullable;
+        this.AllowedValues = undefined;
+        this.SerializationFormat = format;
+    }
     Name: string;
     Kind: InputTypeKind;
     IsNullable: boolean;
@@ -30,5 +31,4 @@ export class CodeModelType implements InputType {
     ValuesType?: InputType | undefined;
     AllowedValues?: InputTypeValue[] | undefined;
     public Schema: Schema;
-
 }
