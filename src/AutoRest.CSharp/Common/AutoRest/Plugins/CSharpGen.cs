@@ -106,7 +106,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     {
                         // We are unsuspectingly crashing, so output anything that might help us reproduce the issue
                         File.WriteAllText(Path.Combine(Configuration.OutputFolder, "Configuration.json"), StandaloneGeneratorRunner.SaveConfiguration());
-                        await codeModelTask;
                         File.WriteAllText(Path.Combine(Configuration.OutputFolder, "CodeModel.yaml"), codeModelYaml);
                     }
                 }

@@ -304,13 +304,21 @@ namespace AutoRest.CSharp.Input
     internal partial class VariableScope
     {
         [YamlMember(Alias = "variables")]
-        public Dictionary<string, string> Variables { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, Variable> Variables { get; set; } = new();
 
         [YamlMember(Alias = "requiredVariables")]
         public ICollection<string> RequiredVariables { get; set; } = Array.Empty<string>();
 
         [YamlMember(Alias = "secretVariables")]
         public ICollection<string> SecretVariables { get; set; } = Array.Empty<string>();
+    }
+
+    internal partial class Variable
+    {
+        [YamlMember(Alias = @"type")]
+        public string? Type { get; set; }
+        [YamlMember(Alias = @"value")]
+        public object? Value { get; set; }
     }
 
     internal enum TestDefinitionScope
