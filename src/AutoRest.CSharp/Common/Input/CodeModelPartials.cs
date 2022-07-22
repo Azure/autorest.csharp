@@ -399,13 +399,37 @@ namespace AutoRest.CSharp.Input
         RawCall,
     }
 
-    internal enum VariableType
+    internal enum OutputVariableType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String,
 
         [System.Runtime.Serialization.EnumMember(Value = @"secureString")]
         SecureString,
+    }
+
+    internal enum ArmTemplateVariableType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"string")]
+        String,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"secureString")]
+        SecureString,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"int")]
+        Int,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bool")]
+        Bool,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"object")]
+        Object,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"secureObject")]
+        SecureObject,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"array")]
+        Array,
     }
 
     internal partial class StepBase : VariableScope
@@ -429,7 +453,7 @@ namespace AutoRest.CSharp.Input
     internal partial class OutputVariable
     {
         [YamlMember(Alias = "type")]
-        public VariableType Type { get; set; }
+        public OutputVariableType Type { get; set; }
 
         [YamlMember(Alias = "fromResponse")]
         public string FromResponse { get; set; }
@@ -500,6 +524,43 @@ namespace AutoRest.CSharp.Input
         // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
         [YamlMember(Alias = "armTemplate")]
         public string? ArmTemplate { get; set; }
+
+        [YamlMember(Alias = "armTemplatePayload")]
+        public ArmTemplate ArmTemplatePayload { get; set; }
+
+        [YamlMember(Alias = "armTemplatePayloadString")]
+        public string? ArmTemplatePayloadString { get; set; }
+    }
+
+    internal partial class ArmTemplate
+    {
+        [YamlMember(Alias = @"$schema")]
+        public string? Schema { get; set; }
+
+        [YamlMember(Alias = @"contentVersion")]
+        public string? ContentVersion { get; set; }
+
+        [YamlMember(Alias = @"parameters")]
+        public Dictionary<string, ArmTemplateVariable> Parameters { get; set; } = new();
+
+        [YamlMember(Alias = @"outputs")]
+        public Dictionary<string, ArmTemplateOutput> Outputs { get; set; } = new();
+
+        [YamlMember(Alias = @"resources")]
+        public ICollection<Dictionary<string, object>> Resources { get; set; } = Array.Empty<Dictionary<string, object>>();
+    }
+
+    internal partial class ArmTemplateVariable
+    {
+        [YamlMember(Alias = @"type")]
+        public ArmTemplateVariableType Type { get; set; }
+
+        [YamlMember(Alias = @"defaultValue")]
+        public object? DefaultValue { get; set; }
+    }
+
+    internal partial class ArmTemplateOutput : Dictionary<string, Variable>
+    {
     }
 
     // left this class here for reference. The properties in this class have been populated into TestStep since we could not find a way to introduce polymorphism during yaml deserialization
@@ -576,6 +637,13 @@ namespace AutoRest.CSharp.Input
         #region ArmTemplateStep
         [YamlMember(Alias = "armTemplate")]
         public string? ArmTemplate { get; set; }
+
+        //[YamlMember(Alias = "armTemplatePayload")]
+        [YamlIgnore]
+        public ArmTemplate ArmTemplatePayload { get; set; }
+
+        [YamlMember(Alias = "armTemplatePayloadString")]
+        public string? ArmTemplatePayloadString { get; set; }
         #endregion
 
         #region RawCallStep
@@ -600,6 +668,9 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "expectedResponse")]
         public object? ExpectedResponse { get; set; }
         #endregion
+
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public Dictionary<string, string> RequiredVaraiblesDefault { get; set; } = new();
     }
 
     internal partial class Scenario : VariableScope
