@@ -13,16 +13,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using MgmtScenarioTest.Models;
 
 namespace MgmtScenarioTest
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
     internal partial class SubscriptionResourceExtensionClient : ArmResource
     {
-        private ClientDiagnostics _configurationStoreClientDiagnostics;
-        private ConfigurationStoresRestOperations _configurationStoreRestClient;
-        private ClientDiagnostics _configurationStoresClientDiagnostics;
-        private ConfigurationStoresRestOperations _configurationStoresRestClient;
+        private ClientDiagnostics _serviceResourceServicesClientDiagnostics;
+        private ServicesRestOperations _serviceResourceServicesRestClient;
+        private ClientDiagnostics _skusClientDiagnostics;
+        private SkusRestOperations _skusRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
         protected SubscriptionResourceExtensionClient()
@@ -36,10 +37,10 @@ namespace MgmtScenarioTest
         {
         }
 
-        private ClientDiagnostics ConfigurationStoreClientDiagnostics => _configurationStoreClientDiagnostics ??= new ClientDiagnostics("MgmtScenarioTest", ConfigurationStoreResource.ResourceType.Namespace, Diagnostics);
-        private ConfigurationStoresRestOperations ConfigurationStoreRestClient => _configurationStoreRestClient ??= new ConfigurationStoresRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ConfigurationStoreResource.ResourceType));
-        private ClientDiagnostics ConfigurationStoresClientDiagnostics => _configurationStoresClientDiagnostics ??= new ClientDiagnostics("MgmtScenarioTest", ProviderConstants.DefaultProviderNamespace, Diagnostics);
-        private ConfigurationStoresRestOperations ConfigurationStoresRestClient => _configurationStoresRestClient ??= new ConfigurationStoresRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics ServiceResourceServicesClientDiagnostics => _serviceResourceServicesClientDiagnostics ??= new ClientDiagnostics("MgmtScenarioTest", ServiceResource.ResourceType.Namespace, Diagnostics);
+        private ServicesRestOperations ServiceResourceServicesRestClient => _serviceResourceServicesRestClient ??= new ServicesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ServiceResource.ResourceType));
+        private ClientDiagnostics SkusClientDiagnostics => _skusClientDiagnostics ??= new ClientDiagnostics("MgmtScenarioTest", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private SkusRestOperations SkusRestClient => _skusRestClient ??= new SkusRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -47,31 +48,71 @@ namespace MgmtScenarioTest
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeletedConfigurationStoreResources in the SubscriptionResource. </summary>
-        /// <returns> An object representing collection of DeletedConfigurationStoreResources and their operations over a DeletedConfigurationStoreResource. </returns>
-        public virtual DeletedConfigurationStoreCollection GetDeletedConfigurationStores()
+        /// <summary>
+        /// Checks that the resource name is valid and is not already in use.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/locations/{location}/checkNameAvailability
+        /// Operation Id: Services_CheckNameAvailability
+        /// </summary>
+        /// <param name="location"> the region. </param>
+        /// <param name="content"> Parameters supplied to the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<NameAvailability>> CheckNameAvailabilityServiceAsync(string location, NameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            return GetCachedClient(Client => new DeletedConfigurationStoreCollection(Client, Id));
+            using var scope = ServiceResourceServicesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilityService");
+            scope.Start();
+            try
+            {
+                var response = await ServiceResourceServicesRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, location, content, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
-        /// Lists the configuration stores for a given subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores
-        /// Operation Id: ConfigurationStores_List
+        /// Checks that the resource name is valid and is not already in use.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/locations/{location}/checkNameAvailability
+        /// Operation Id: Services_CheckNameAvailability
         /// </summary>
-        /// <param name="skipToken"> A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls. </param>
+        /// <param name="location"> the region. </param>
+        /// <param name="content"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ConfigurationStoreResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ConfigurationStoreResource> GetConfigurationStoresAsync(string skipToken = null, CancellationToken cancellationToken = default)
+        public virtual Response<NameAvailability> CheckNameAvailabilityService(string location, NameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            async Task<Page<ConfigurationStoreResource>> FirstPageFunc(int? pageSizeHint)
+            using var scope = ServiceResourceServicesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilityService");
+            scope.Start();
+            try
             {
-                using var scope = ConfigurationStoreClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetConfigurationStores");
+                var response = ServiceResourceServicesRestClient.CheckNameAvailability(Id.SubscriptionId, location, content, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Handles requests to list all resources in a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/Spring
+        /// Operation Id: Services_ListBySubscription
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="ServiceResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ServiceResource> GetServiceResourcesAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<ServiceResource>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ServiceResourceServicesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetServiceResources");
                 scope.Start();
                 try
                 {
-                    var response = await ConfigurationStoreRestClient.ListAsync(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await ServiceResourceServicesRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ServiceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -79,14 +120,14 @@ namespace MgmtScenarioTest
                     throw;
                 }
             }
-            async Task<Page<ConfigurationStoreResource>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ServiceResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ConfigurationStoreClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetConfigurationStores");
+                using var scope = ServiceResourceServicesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetServiceResources");
                 scope.Start();
                 try
                 {
-                    var response = await ConfigurationStoreRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await ServiceResourceServicesRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ServiceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -98,23 +139,22 @@ namespace MgmtScenarioTest
         }
 
         /// <summary>
-        /// Lists the configuration stores for a given subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores
-        /// Operation Id: ConfigurationStores_List
+        /// Handles requests to list all resources in a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/Spring
+        /// Operation Id: Services_ListBySubscription
         /// </summary>
-        /// <param name="skipToken"> A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ConfigurationStoreResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ConfigurationStoreResource> GetConfigurationStores(string skipToken = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ServiceResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ServiceResource> GetServiceResources(CancellationToken cancellationToken = default)
         {
-            Page<ConfigurationStoreResource> FirstPageFunc(int? pageSizeHint)
+            Page<ServiceResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ConfigurationStoreClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetConfigurationStores");
+                using var scope = ServiceResourceServicesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetServiceResources");
                 scope.Start();
                 try
                 {
-                    var response = ConfigurationStoreRestClient.List(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = ServiceResourceServicesRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ServiceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -122,14 +162,14 @@ namespace MgmtScenarioTest
                     throw;
                 }
             }
-            Page<ConfigurationStoreResource> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ServiceResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ConfigurationStoreClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetConfigurationStores");
+                using var scope = ServiceResourceServicesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetServiceResources");
                 scope.Start();
                 try
                 {
-                    var response = ConfigurationStoreRestClient.ListNextPage(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = ServiceResourceServicesRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ServiceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -141,22 +181,22 @@ namespace MgmtScenarioTest
         }
 
         /// <summary>
-        /// Gets information about the deleted configuration stores in a subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/deletedConfigurationStores
-        /// Operation Id: ConfigurationStores_ListDeleted
+        /// Lists all of the available skus of the Microsoft.AppPlatform provider.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/skus
+        /// Operation Id: Skus_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedConfigurationStoreResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DeletedConfigurationStoreResource> GetDeletedConfigurationStoresAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResourceSku" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ResourceSku> GetSkusAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<DeletedConfigurationStoreResource>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ResourceSku>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ConfigurationStoresClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDeletedConfigurationStores");
+                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkus");
                 scope.Start();
                 try
                 {
-                    var response = await ConfigurationStoresRestClient.ListDeletedAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await SkusRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -164,14 +204,14 @@ namespace MgmtScenarioTest
                     throw;
                 }
             }
-            async Task<Page<DeletedConfigurationStoreResource>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ResourceSku>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ConfigurationStoresClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDeletedConfigurationStores");
+                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkus");
                 scope.Start();
                 try
                 {
-                    var response = await ConfigurationStoresRestClient.ListDeletedNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await SkusRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -183,22 +223,22 @@ namespace MgmtScenarioTest
         }
 
         /// <summary>
-        /// Gets information about the deleted configuration stores in a subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/deletedConfigurationStores
-        /// Operation Id: ConfigurationStores_ListDeleted
+        /// Lists all of the available skus of the Microsoft.AppPlatform provider.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/skus
+        /// Operation Id: Skus_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedConfigurationStoreResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DeletedConfigurationStoreResource> GetDeletedConfigurationStores(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResourceSku" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ResourceSku> GetSkus(CancellationToken cancellationToken = default)
         {
-            Page<DeletedConfigurationStoreResource> FirstPageFunc(int? pageSizeHint)
+            Page<ResourceSku> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ConfigurationStoresClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDeletedConfigurationStores");
+                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkus");
                 scope.Start();
                 try
                 {
-                    var response = ConfigurationStoresRestClient.ListDeleted(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = SkusRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -206,14 +246,14 @@ namespace MgmtScenarioTest
                     throw;
                 }
             }
-            Page<DeletedConfigurationStoreResource> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ResourceSku> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ConfigurationStoresClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDeletedConfigurationStores");
+                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkus");
                 scope.Start();
                 try
                 {
-                    var response = ConfigurationStoresRestClient.ListDeletedNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedConfigurationStoreResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = SkusRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

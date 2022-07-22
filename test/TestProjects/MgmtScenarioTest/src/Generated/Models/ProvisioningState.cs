@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace MgmtScenarioTest.Models
 {
-    /// <summary> The provisioning state of the configuration store. </summary>
+    /// <summary> Provisioning state of the Service. </summary>
     public readonly partial struct ProvisioningState : IEquatable<ProvisioningState>
     {
         private readonly string _value;
@@ -25,9 +25,12 @@ namespace MgmtScenarioTest.Models
         private const string CreatingValue = "Creating";
         private const string UpdatingValue = "Updating";
         private const string DeletingValue = "Deleting";
+        private const string DeletedValue = "Deleted";
         private const string SucceededValue = "Succeeded";
         private const string FailedValue = "Failed";
-        private const string CanceledValue = "Canceled";
+        private const string MovingValue = "Moving";
+        private const string MovedValue = "Moved";
+        private const string MoveFailedValue = "MoveFailed";
 
         /// <summary> Creating. </summary>
         public static ProvisioningState Creating { get; } = new ProvisioningState(CreatingValue);
@@ -35,12 +38,18 @@ namespace MgmtScenarioTest.Models
         public static ProvisioningState Updating { get; } = new ProvisioningState(UpdatingValue);
         /// <summary> Deleting. </summary>
         public static ProvisioningState Deleting { get; } = new ProvisioningState(DeletingValue);
+        /// <summary> Deleted. </summary>
+        public static ProvisioningState Deleted { get; } = new ProvisioningState(DeletedValue);
         /// <summary> Succeeded. </summary>
         public static ProvisioningState Succeeded { get; } = new ProvisioningState(SucceededValue);
         /// <summary> Failed. </summary>
         public static ProvisioningState Failed { get; } = new ProvisioningState(FailedValue);
-        /// <summary> Canceled. </summary>
-        public static ProvisioningState Canceled { get; } = new ProvisioningState(CanceledValue);
+        /// <summary> Moving. </summary>
+        public static ProvisioningState Moving { get; } = new ProvisioningState(MovingValue);
+        /// <summary> Moved. </summary>
+        public static ProvisioningState Moved { get; } = new ProvisioningState(MovedValue);
+        /// <summary> MoveFailed. </summary>
+        public static ProvisioningState MoveFailed { get; } = new ProvisioningState(MoveFailedValue);
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are the same. </summary>
         public static bool operator ==(ProvisioningState left, ProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are not the same. </summary>

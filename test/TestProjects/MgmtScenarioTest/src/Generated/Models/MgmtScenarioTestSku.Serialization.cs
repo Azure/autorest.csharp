@@ -15,14 +15,29 @@ namespace MgmtScenarioTest.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
-            writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Tier))
+            {
+                writer.WritePropertyName("tier");
+                writer.WriteStringValue(Tier);
+            }
+            if (Optional.IsDefined(Capacity))
+            {
+                writer.WritePropertyName("capacity");
+                writer.WriteNumberValue(Capacity.Value);
+            }
             writer.WriteEndObject();
         }
 
         internal static MgmtScenarioTestSku DeserializeMgmtScenarioTestSku(JsonElement element)
         {
-            string name = default;
+            Optional<string> name = default;
+            Optional<string> tier = default;
+            Optional<int> capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -30,8 +45,23 @@ namespace MgmtScenarioTest.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("tier"))
+                {
+                    tier = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("capacity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    capacity = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new MgmtScenarioTestSku(name);
+            return new MgmtScenarioTestSku(name.Value, tier.Value, Optional.ToNullable(capacity));
         }
     }
 }

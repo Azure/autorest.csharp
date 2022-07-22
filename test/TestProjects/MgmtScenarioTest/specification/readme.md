@@ -37,4 +37,6 @@ These settings apply only when `--tag=2022-05-01` is specified on the command li
 ``` yaml $(tag) == 'package-2022-05-01'
 input-file:
 - appconfiguration.json
+test-resources:
+  - test: scenarios/basic.yaml
 ```

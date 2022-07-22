@@ -54,7 +54,7 @@ testmodeler:
   use-parents-value: true
   split-parents-value: false
   add-armtemplate-payload-string: true
-  export-explicit-type: true
+  # export-explicit-type: true
 ```
 
 ## Customization

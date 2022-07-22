@@ -31,11 +31,11 @@ namespace MgmtScenarioTest
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of ConfigurationStoreResources in the ResourceGroupResource. </summary>
-        /// <returns> An object representing collection of ConfigurationStoreResources and their operations over a ConfigurationStoreResource. </returns>
-        public virtual ConfigurationStoreCollection GetConfigurationStores()
+        /// <summary> Gets a collection of ServiceResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of ServiceResources and their operations over a ServiceResource. </returns>
+        public virtual ServiceResourceCollection GetServiceResources()
         {
-            return GetCachedClient(Client => new ConfigurationStoreCollection(Client, Id));
+            return GetCachedClient(Client => new ServiceResourceCollection(Client, Id));
         }
     }
 }

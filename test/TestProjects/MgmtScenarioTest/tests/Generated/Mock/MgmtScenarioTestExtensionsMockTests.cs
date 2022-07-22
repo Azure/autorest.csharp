@@ -24,13 +24,24 @@ namespace MgmtScenarioTest.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetDeletedConfigurationStores()
+        public async Task GetRuntimeVersionsRuntimeVersions()
         {
-            // Example: DeletedConfigurationStores_List
+            // Example: RuntimeVersions_ListRuntimeVersions
+
+            var tenantResource = GetArmClient().GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
+            await foreach (var _ in tenantResource.GetRuntimeVersionsRuntimeVersionsAsync())
+            {
+            }
+        }
+
+        [RecordedTest]
+        public async Task GetSkus()
+        {
+            // Example: Skus_List
 
             var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
-            await foreach (var _ in subscriptionResource.GetDeletedConfigurationStoresAsync())
+            await foreach (var _ in subscriptionResource.GetSkusAsync())
             {
             }
         }
