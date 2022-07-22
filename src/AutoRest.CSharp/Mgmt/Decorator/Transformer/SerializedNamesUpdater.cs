@@ -80,6 +80,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 ? choiceValue.Value
                 : choiceValue.Language.Default.Description;
 
-        private static string CreateSerializedNameDescription(Schema schema) => $"Serialized Name: {SchemaRenamer.GetOriginalName(schema)}";
+        private static string CreateSerializedNameDescription(Schema schema) => $"Serialized Name: {schema.GetOriginalName()}";
     }
 }

@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
+using Azure;
+using Azure.Identity;
 using body_array_LowLevel;
 using NUnit.Framework;
 
@@ -63,6 +65,16 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, new object[] { "4", "5", "6" }, new object[] { "7", "8", "9" } }, data);
         });
 
+        [Ignore("Example")]
+        [Test]
+        public Task GetArrayArrayValidExample() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(Key, host, null).GetArrayValidAsync(new());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Assert.AreEqual("1", result[0][0].ToString());
+        });
+
         [Test]
         public Task GetArrayBase64Url() => Test(async (host) =>
         {
@@ -95,6 +107,17 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, (bool)responseBody[0]);
             Assert.AreEqual(null, (string)responseBody[1]);
             Assert.AreEqual(false, (bool)responseBody[2]);
+        });
+
+        [Ignore("Example")]
+        [Test]
+        public Task GetArrayBooleanWithNullExample() => Test(async (host) =>
+        {
+            Response response = await new ArrayClient(Key, host, null).GetBooleanInvalidNullAsync();
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Assert.AreEqual(true, result[0].GetBoolean());
+            Assert.AreEqual(null, result[1].GetObject());
+            Assert.AreEqual(false, result[2].GetBoolean());
         });
 
         [Test]
@@ -192,6 +215,24 @@ namespace AutoRest.TestServer.Tests
 
         });
 
+        [Ignore("Example")]
+        [Test]
+        public Task GetArrayComplexValidExample() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(Key, host, null).GetComplexValidAsync(new());
+            var responseBody = JsonData.FromBytes(response.Content.ToMemory());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Assert.AreEqual(3, result.GetArrayLength());
+            Assert.AreEqual(1, result[0].GetProperty("integer").GetInt32());
+            Assert.AreEqual("2", result[0].GetProperty("string").GetString());
+
+            Assert.AreEqual(3, result[1].GetProperty("integer").GetInt32());
+            Assert.AreEqual("4", result[1].GetProperty("string").GetString());
+            Assert.AreEqual(5, result[2].GetProperty("integer").GetInt32());
+            Assert.AreEqual("6", result[2].GetProperty("string").GetString());
+
+        });
         [Test]
         public Task GetArrayDateTimeRfc1123Valid() => Test(async (host) =>
         {
@@ -583,7 +624,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutArrayArrayValid() => TestStatus(async (host) =>
         {
-            var data = new JsonData(new[] { new[] { "1", "2", "3" }, new[] { "4", "5", "6" }, new[] { "7", "8", "9" }});
+            var data = new JsonData(new[] { new[] { "1", "2", "3" }, new[] { "4", "5", "6" }, new[] { "7", "8", "9" } });
             return await new ArrayClient(Key, host, null).PutArrayValidAsync(RequestContent.Create(data));
         });
 

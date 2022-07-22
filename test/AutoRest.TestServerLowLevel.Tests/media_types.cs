@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -32,6 +33,18 @@ namespace AutoRest.TestServer.Tests
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
             var response = await new MediaTypesClient(Key, host, null).AnalyzeBodyAsync(RequestContent.Create(value), new ContentType("application/pdf"));
             Assert.AreEqual("Nice job with PDF", response.Content.ToObjectFromJson<string>());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        });
+
+        [Ignore("TODO: need to test octet-stream")]
+        [Test]
+        public Task MediaTypeOctetStream() => Test(async (host) =>
+        {
+            await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
+            var response = await new MediaTypesClient(Key, host, null).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationOctetStream);
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         });
     }
 }

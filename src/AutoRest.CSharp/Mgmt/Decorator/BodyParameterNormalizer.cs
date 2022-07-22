@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             var schemaName = bodyParameter.Schema.Language.Default.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);

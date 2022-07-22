@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -163,7 +164,7 @@ namespace AutoRest.TestServer.Tests
                 var expectedPages = pages.Skip(i).ToArray();
                 var actualPages = client.GetMultiplePages().AsPages(pages[i - 1].ContinuationToken).ToArray();
 
-                Assert.That(expectedPages, Is.EquivalentTo(actualPages).Using<Page<BinaryData>>((p1, p2)=>
+                Assert.That(expectedPages, Is.EquivalentTo(actualPages).Using<Page<BinaryData>>((p1, p2) =>
                     p1.Values.Count == p2.Values.Count && p1.ContinuationToken == p2.ContinuationToken));
             }
 
@@ -176,7 +177,7 @@ namespace AutoRest.TestServer.Tests
                     actualPages.Add(page);
                 }
 
-                Assert.That(expectedPages, Is.EquivalentTo(actualPages).Using<Page<BinaryData>>((p1, p2)=>
+                Assert.That(expectedPages, Is.EquivalentTo(actualPages).Using<Page<BinaryData>>((p1, p2) =>
                     p1.Values.Count == p2.Values.Count && p1.ContinuationToken == p2.ContinuationToken));
             }
         }, ignoreScenario: true);
@@ -223,6 +224,31 @@ namespace AutoRest.TestServer.Tests
                 product = "product";
             }
             Assert.AreEqual(10, id);
+        });
+
+        [Ignore("Example")]
+        [Test]
+        public Task PagingMultipleExample() => Test(async (endpoint) =>
+        {
+            var pageableAsync = new PagingClient(Key, endpoint, null).GetMultiplePagesAsync(null, null);
+            int id = 1;
+            await foreach (var data in pageableAsync)
+            {
+                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                Assert.AreEqual(id, result.GetProperty("properties").GetProperty("id").GetInt32());
+                Assert.IsTrue("product".Equals(result.GetProperty("properties").GetProperty("name").GetString(), StringComparison.OrdinalIgnoreCase));
+                id++;
+            }
+
+            var pageable = new PagingClient(Key, endpoint, null).GetMultiplePages(null, null);
+            id = 1;
+            foreach (var data in pageable)
+            {
+                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                Assert.AreEqual(id, result.GetProperty("properties").GetProperty("id").GetInt32());
+                Assert.IsTrue("product".Equals(result.GetProperty("properties").GetProperty("name").GetString(), StringComparison.OrdinalIgnoreCase));
+                id++;
+            }
         });
 
         [Test]
@@ -355,6 +381,22 @@ namespace AutoRest.TestServer.Tests
                     product = "product";
                 }
                 id += 1;
+            }
+        });
+
+        [Ignore("Example")]
+        [Test]
+        public Task PagingMultipleLROExample() => Test(async (endpoint) =>
+        {
+            var lro = new PagingClient(Key, endpoint, null).GetMultiplePagesLRO(WaitUntil.Started, "id");
+
+            var response = await lro.WaitForCompletionAsync();
+            int id = 1;
+            foreach (var data in response.Value)
+            {
+                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                Assert.AreEqual(id, result.GetProperty("properties").GetProperty("id").GetInt32());
+                Assert.IsTrue("product".Equals(result.GetProperty("properties").GetProperty("name").GetString(), StringComparison.OrdinalIgnoreCase));
             }
         });
 
@@ -633,6 +675,27 @@ namespace AutoRest.TestServer.Tests
             }
         });
 
+        [Ignore("Example")]
+        [Test]
+        public Task PagingSingleExample() => Test(async (endpoint) =>
+        {
+            var pageableAsync = new PagingClient(Key, endpoint, null);
+            await foreach (var data in pageableAsync.GetSinglePagesAsync())
+            {
+                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                Assert.AreEqual(1, result.GetProperty("properties").GetProperty("id").GetInt32());
+                Assert.AreEqual("Product", result.GetProperty("properties").GetProperty("name"));
+            }
+
+            var pageable = new PagingClient(Key, endpoint, null);
+            foreach (var data in pageable.GetSinglePages())
+            {
+                JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+                Assert.AreEqual(1, result.GetProperty("properties").GetProperty("id").GetInt32());
+                Assert.AreEqual("Product", result.GetProperty("properties").GetProperty("name"));
+            }
+        });
+
         [Test]
         public Task PagingSingleFailure() => Test((endpoint) =>
         {
@@ -704,17 +767,17 @@ namespace AutoRest.TestServer.Tests
         public void RestClientDroppedMethods()
         {
             var client = typeof(PagingClient);
-            Assert.IsNull(client.GetMethod ("CreateNextFragmentNextPageRequest", BindingFlags.Instance | BindingFlags.NonPublic), "CreateNextFragmentNextPageRequest should not be generated");
-            Assert.IsNull(client.GetMethod ("NextFragmentNextPageAsync", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragmentNextPageAsync should not be generated");
-            Assert.IsNull(client.GetMethod ("NextFragmentNextPage", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragmentNextPage should not be generated");
+            Assert.IsNull(client.GetMethod("CreateNextFragmentNextPageRequest", BindingFlags.Instance | BindingFlags.NonPublic), "CreateNextFragmentNextPageRequest should not be generated");
+            Assert.IsNull(client.GetMethod("NextFragmentNextPageAsync", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragmentNextPageAsync should not be generated");
+            Assert.IsNull(client.GetMethod("NextFragmentNextPage", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragmentNextPage should not be generated");
         }
 
         [Test]
         public void ClientDroppedMethods()
         {
             var client = typeof(PagingClient);
-            Assert.IsNull(client.GetMethod ("NextFragmentAsync", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragmentAsync should not be generated");
-            Assert.IsNull(client.GetMethod ("NextFragment", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragment should not be generated");
+            Assert.IsNull(client.GetMethod("NextFragmentAsync", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragmentAsync should not be generated");
+            Assert.IsNull(client.GetMethod("NextFragment", BindingFlags.Instance | BindingFlags.NonPublic), "NextFragment should not be generated");
         }
 
         internal class Product

@@ -28,7 +28,9 @@ rename-mapping:
 
 directive:
   - from: ExactMatchInheritance.json
-    where: $.definitions.ExactMatchModel1.properties.type1
+    where: $.definitions.ExactMatchModel1.properties
     transform: >
-       $["x-ms-format"] = "resource-type";
+       $.type1["x-ms-format"] = "resource-type";
+       $.type3["x-ms-format"] = "ip-address";
+       $.type4["x-ms-format"] = "object";
 ```

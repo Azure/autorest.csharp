@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
         /// <param name="value"> Array of private link resources. </param>
         [SerializationConstructor]
-        internal PrivateLinkResourceList(IReadOnlyList<PrivateLinkResourceData> value)
+        protected PrivateLinkResourceList(IReadOnlyList<PrivateLinkResourceData> value)
         {
             Value = value;
         }

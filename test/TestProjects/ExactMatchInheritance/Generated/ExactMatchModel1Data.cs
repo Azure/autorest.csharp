@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance.Models;
@@ -31,12 +32,16 @@ namespace ExactMatchInheritance
         /// <param name="supportingUris"></param>
         /// <param name="type1"></param>
         /// <param name="type2"></param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2) : base(id, name, resourceType, systemData)
+        /// <param name="type3"></param>
+        /// <param name="type4"></param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
             Type1 = type1;
             Type2 = type2;
+            Type3 = type3;
+            Type4 = type4;
         }
 
         /// <summary> Gets or sets the new. </summary>
@@ -47,5 +52,9 @@ namespace ExactMatchInheritance
         public Type1? Type1 { get; set; }
         /// <summary> Gets or sets the type 2. </summary>
         public Type2? Type2 { get; set; }
+        /// <summary> Gets or sets the type 3. </summary>
+        public IPAddress Type3 { get; set; }
+        /// <summary> Gets or sets the type 4. </summary>
+        public object Type4 { get; set; }
     }
 }
