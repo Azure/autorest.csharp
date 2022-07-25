@@ -655,17 +655,6 @@ namespace AutoRest.CSharp.Output.Models
             return constructorParameters;
         }
 
-        protected static RequestLocation GetRequestLocation(RequestParameter requestParameter)
-            => requestParameter.In switch
-            {
-                HttpParameterIn.Uri => RequestLocation.Uri,
-                HttpParameterIn.Path => RequestLocation.Path,
-                HttpParameterIn.Query => RequestLocation.Query,
-                HttpParameterIn.Header => RequestLocation.Header,
-                HttpParameterIn.Body => RequestLocation.Body,
-                _ => RequestLocation.None
-            };
-
         private record RequestMethodBuildContext(IReadOnlyList<Parameter> OrderedParameters, IReadOnlyDictionary<string, ParameterInfo> References, Parameter? BodyParameter = null, SerializationFormat ConditionalRequestSerializationFormat = SerializationFormat.Default, RequestConditionHeaders RequestConditionFlag = RequestConditionHeaders.None);
 
         private readonly record struct ParameterInfo(InputParameter? Parameter, ReferenceOrConstant Reference);
