@@ -638,8 +638,7 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "armTemplate")]
         public string? ArmTemplate { get; set; }
 
-        //[YamlMember(Alias = "armTemplatePayload")]
-        [YamlIgnore]
+        [YamlMember(Alias = "armTemplatePayload")]
         public ArmTemplate ArmTemplatePayload { get; set; }
 
         [YamlMember(Alias = "armTemplatePayloadString")]
