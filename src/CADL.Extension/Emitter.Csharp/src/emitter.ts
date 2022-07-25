@@ -2,66 +2,25 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    ArrayType,
-    checkIfServiceNamespace,
-    EmitOptionsFor,
-    EnumMemberType,
-    EnumType,
-    getAllTags,
     getDoc,
-    getFormat,
-    getIntrinsicModelName,
-    getKnownValues,
-    getMaxLength,
-    getMaxValue,
-    getMinLength,
-    getMinValue,
-    getPattern,
-    getProperty,
-    getPropertyType,
     getServiceNamespace,
     getServiceNamespaceString,
     getServiceTitle,
     getServiceVersion,
     getSummary,
-    getVisibility,
-    ignoreDiagnostics,
-    isErrorType,
-    isIntrinsic,
-    isNumericType,
-    isSecret,
-    isStringType,
-    isTemplate,
-    ModelType,
-    ModelTypeProperty,
-    NamespaceType,
-    OperationType,
     Program,
-    resolvePath,
-    Type,
-    TypeNameOptions,
-    UnionType,
-    UnionTypeVariant
+    resolvePath
 } from "@cadl-lang/compiler";
-import { Discriminator, getDiscriminator, http } from "@cadl-lang/rest";
 import {
     getAllRoutes,
-    getContentTypes,
-    getHeaderFieldName,
-    getOperationParameters,
-    getPathParamName,
-    getQueryParamName,
     getServers,
-    getStatusCodeDescription,
     HttpOperationParameter,
-    HttpOperationParameters,
     HttpOperationResponse,
-    isStatusCode,
     OperationDetails
 } from "@cadl-lang/rest/http";
 import { CodeModel } from "./type/CodeModel";
 import { InputClient } from "./type/InputClient";
-import { dump, DEFAULT_SCHEMA, Type as YamlType } from "js-yaml";
+import { dump } from "js-yaml";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
@@ -116,14 +75,18 @@ export async function $onEmit(
 
         const root = createModel(program);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
-        await program.host.writeFile(
-            outPath,
-            prettierOutput(stringifyRefs(root, null, 1, PreserveType.Objects))
-        );
-        const yamlOutPath = resolvePath(
-            options.outputFile?.replace(".json", `.yaml`)
-        );
-        await program.host.writeFile(yamlOutPath, dump(root));
+        if (root !== undefined) {
+            await program.host.writeFile(
+                outPath,
+                prettierOutput(
+                    stringifyRefs(root, null, 1, PreserveType.Objects)
+                )
+            );
+            const yamlOutPath = resolvePath(
+                options.outputFile?.replace(".json", `.yaml`)
+            );
+            await program.host.writeFile(yamlOutPath, dump(root));
+        }
     }
 }
 
@@ -135,7 +98,7 @@ function getClient(
     clientName: string
 ): InputClient | undefined {
     for (const client of clients) {
-        if (client.Name == clientName) return client;
+        if (client.Name === clientName) return client;
     }
 
     return undefined;
@@ -196,6 +159,9 @@ function createModel(program: Program): any {
             const groupName: string = operation.groupName;
             let client = getClient(clients, groupName);
             if (client === undefined) {
+                const container = operation.container;
+                const clientDes = getDoc(program, container);
+                const clientSummary = getSummary(program, container);
                 client = {
                     Name: groupName,
                     Operations: [],

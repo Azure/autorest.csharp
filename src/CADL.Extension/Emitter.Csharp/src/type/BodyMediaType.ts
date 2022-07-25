@@ -7,6 +7,6 @@ export enum BodyMediaType {
     Form = "Form",
     Json = "Json",
     Multipart = "Multipart",
-    Text = "Test",
+    Text = "Text",
     Xml = "Xml"
 }
