@@ -66,13 +66,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             Configuration.Initialize(autoRest);
 
-            string codeModelYaml = string.Empty;
-
-            Task<CodeModel> codeModelTask = Task.Run(async () =>
-            {
-                codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-            });
+            string codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+            Task<CodeModel> codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(codeModelYaml));
 
             if (!Path.IsPathRooted(Configuration.OutputFolder))
             {
@@ -80,7 +75,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             if (Configuration.SaveInputs)
             {
-                await codeModelTask;
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }
