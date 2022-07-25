@@ -8,15 +8,17 @@ using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class LowLevelOutputLibrary : OutputLibrary
+    internal class DpgOutputLibrary : OutputLibrary
     {
         private readonly TypeFactory _typeFactory;
+        public IReadOnlyList<ModelTypeProvider> Models { get; }
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public LowLevelOutputLibrary(Func<TypeFactory, IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
+        public DpgOutputLibrary(Func<TypeFactory, IReadOnlyList<ModelTypeProvider>> modelsFactory, Func<TypeFactory, IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
         {
             _typeFactory = new TypeFactory(this);
+            Models = modelsFactory(_typeFactory);
             RestClients = restClientsFactory(_typeFactory);
             ClientOptions = clientOptions;
         }

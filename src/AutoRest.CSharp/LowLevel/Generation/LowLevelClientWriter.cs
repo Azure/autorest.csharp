@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -681,9 +680,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             hasRequestSchema = AddRequestOrResponseInputType(schemas, clientMethod.RequestBodyType, "Request Body");
 
-            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is {Model: { } model})
+            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is InputModelType modelType)
             {
-                var itemType = model.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingInfo.ItemName)?.Type;
+                var itemType = modelType.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingInfo.ItemName)?.Type;
                 hasResponseSchema = AddRequestOrResponseSchema(schemas, itemType, "Response Body");
             }
             else
@@ -696,7 +695,8 @@ namespace AutoRest.CSharp.Generation.Writers
             static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
                 bodyType switch
                 {
-                    { Kind: InputTypeKind.List or InputTypeKind.Dictionary } => AddRequestOrResponseInputType(formattedSchemas, bodyType.ValuesType!, schemaName),
+                    InputListType listType             => AddRequestOrResponseInputType(formattedSchemas, listType.ElementType, schemaName),
+                    InputDictionaryType dictionaryType => AddRequestOrResponseInputType(formattedSchemas, dictionaryType.ValueType, schemaName),
                     _ => AddRequestOrResponseSchema(formattedSchemas, bodyType, schemaName),
                 };
 
@@ -708,9 +708,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 var schemasToAdd = new List<FormattableString>();
-                if (type is { Model.DerivedModels.Count: > 0 })
+                if (type is InputModelType { DerivedModels.Count: > 0 } modelType)
                 {
-                    var derivedModels = type.Model.GetAllDerivedModels();
+                    var derivedModels = modelType.GetAllDerivedModels();
                     if (derivedModels.Count > 1)
                     {
                         schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
@@ -724,7 +724,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             schemasToAdd.Add($"<details><summary>~+ {derivedModels.Count - 1} more JSON objects</summary>");
                         }
 
-                        var docs = GetSchemaDocumentationsForSchema(new InputType(InputTypeKind.Model) { Model = derivedModel }, $"{derivedModel.Name.ToCleanName()} {schemaName}");
+                        var docs = GetSchemaDocumentationsForSchema(derivedModel, $"{derivedModel.Name.ToCleanName()} {schemaName}");
                         if (docs != null)
                         {
                             schemasToAdd.Add($"<details><summary>{derivedModel.Name.ToCleanName()}</summary>");
@@ -873,19 +873,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 switch (toExplore)
                 {
-                    case { Model: { } model }:
+                    case InputModelType modelType:
                         List<SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
 
                         // We must also include any properties introduced by our parent chain.
-                        foreach (InputModel modelOrBase in model.GetSelfAndBaseModels())
+                        foreach (InputModelType modelOrBase in modelType.GetSelfAndBaseModels())
                         {
                             foreach (InputModelProperty property in modelOrBase.Properties)
                             {
-                                if (property.IsDiscriminator && property.Type.Kind == InputTypeKind.ExtensibleEnum && model.DiscriminatorValue != null)
+                                if (property.IsDiscriminator && property.Type is InputEnumType { IsExtensible: true } && modelType.DiscriminatorValue != null)
                                 {
                                     propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                        property.SerializedName,
-                                        model.DiscriminatorValue,
+                                        property.SerializedName ?? property.Name,
+                                        modelType.DiscriminatorValue,
                                         property.IsRequired,
                                         BuilderHelpers.EscapeXmlDescription(property.Description)));
 
@@ -894,7 +894,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 }
 
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                    property.SerializedName,
+                                    property.SerializedName ?? property.Name,
                                     BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),
                                     property.IsRequired,
                                     BuilderHelpers.EscapeXmlDescription(property.Description)));
@@ -905,8 +905,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
                         break;
-                    case {Kind: InputTypeKind.Dictionary or InputTypeKind.List}:
-                        typesToExplore.Enqueue(toExplore.ValuesType!);
+                    case InputListType listType:
+                        typesToExplore.Enqueue(listType.ElementType);
+                        break;
+                    case InputDictionaryType dictionaryType:
+                        typesToExplore.Enqueue(dictionaryType.ValueType);
                         break;
                 }
 
@@ -928,20 +931,21 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return type switch
             {
-                { Kind: InputTypeKind.Boolean } => "boolean",
-                { Kind: InputTypeKind.String } => "string",
-                { Kind: InputTypeKind.Int32 } => "number",
-                { Kind: InputTypeKind.Int64 } => "number",
-                { Kind: InputTypeKind.Float32 } => "number",
-                { Kind: InputTypeKind.Float64 } => "number",
-                { Kind: InputTypeKind.Float128 } => "number",
-                { Kind: InputTypeKind.Object } => "object",
-                { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.DateTime } => "string (ISO 8601 Format)",
-                { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.DateTimeRFC1123 } => "string (RFC1123 Format)",
-                { Kind: InputTypeKind.DateTime, SerializationFormat: InputTypeSerializationFormat.DateTimeUnix } => "string (Unix Format)",
-                { Kind: InputTypeKind.Enum or InputTypeKind.ExtensibleEnum } => string.Join(" | ", type.AllowedValues!.Select(c => $"\"{c.Value}\"")),
-                { Kind: InputTypeKind.Dictionary } => $"Dictionary<string, {StringifyTypeForTable(type.ValuesType!)}>",
-                { Kind: InputTypeKind.List } => $"{StringifyTypeForTable(type.ValuesType!)}[]",
+                InputPrimitiveType { IsNumber: true } => "number",
+                InputPrimitiveType { Kind: InputTypeKind.Boolean } => "boolean",
+                InputPrimitiveType { Kind: InputTypeKind.String } => "string",
+                InputPrimitiveType { Kind: InputTypeKind.Object } => "object",
+                InputPrimitiveType { Kind: InputTypeKind.Date } => "string (date)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTime } => "string (date & time)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeISO8601 } => "string (ISO 8601 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC1123 } => "string (RFC1123 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeUnix } => "string (Unix Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => "string (duration ISO 8601 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DurationConstant } => "string (duration)",
+                InputPrimitiveType { Kind: InputTypeKind.Time } => "string (time)",
+                InputEnumType enumType => string.Join(" | ", enumType.AllowedValues.Select(c => $"\"{c.Value}\"")),
+                InputDictionaryType dictionaryType => $"Dictionary<string, {StringifyTypeForTable(dictionaryType.ValueType)}>",
+                InputListType listType => $"{StringifyTypeForTable(listType.ElementType)}[]",
                 _ => RemovePrefix(type.Name, "Json")
             };
         }

@@ -33,7 +33,7 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public PetsClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
         {
@@ -41,7 +41,7 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public PetsClient(Uri endpoint, string apiVersion, PetstoreClientOptions options)
@@ -119,7 +119,7 @@ namespace CadlPetStore
         /// <param name="petId"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call ReadAsync with required parameters and parse the result.
         /// <code><![CDATA[
@@ -128,10 +128,20 @@ namespace CadlPetStore
         /// 
         /// Response response = await client.ReadAsync(1234);
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
@@ -151,7 +161,7 @@ namespace CadlPetStore
         /// <param name="petId"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call Read with required parameters and parse the result.
         /// <code><![CDATA[
@@ -160,10 +170,20 @@ namespace CadlPetStore
         /// 
         /// Response response = client.Read(1234);
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response Read(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
@@ -182,7 +202,7 @@ namespace CadlPetStore
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call CreateAsync and parse the result.
         /// <code><![CDATA[
@@ -191,10 +211,20 @@ namespace CadlPetStore
         /// 
         /// Response response = await client.CreateAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> CreateAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");
@@ -213,7 +243,7 @@ namespace CadlPetStore
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call Create and parse the result.
         /// <code><![CDATA[
@@ -222,10 +252,20 @@ namespace CadlPetStore
         /// 
         /// Response response = client.Create();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response Create(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");

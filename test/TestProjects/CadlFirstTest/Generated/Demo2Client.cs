@@ -33,7 +33,7 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of Demo2Client. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public Demo2Client(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new DemoHelloworldClientOptions())
         {
@@ -41,7 +41,7 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of Demo2Client. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public Demo2Client(Uri endpoint, string apiVersion, DemoHelloworldClientOptions options)
@@ -56,28 +56,53 @@ namespace CadlFirstTest
             _apiVersion = options.Version;
         }
 
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call HelloAgainAsync and parse the result.
+        /// This sample shows how to call HelloAgainAsync with required request content and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
-        /// Response response = await client.HelloAgainAsync();
+        /// var data = new {};
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Response response = await client.HelloAgainAsync(RequestContent.Create(data));
+        /// 
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
-        public virtual async Task<Response> HelloAgainAsync(RequestContext context = null)
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required. Required string property
+        ///   requiredInt: number, # Required. Required int property
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> HelloAgainAsync(RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloAgainRequest(context);
+                using HttpMessage message = CreateHelloAgainRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -87,28 +112,53 @@ namespace CadlFirstTest
             }
         }
 
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call HelloAgain and parse the result.
+        /// This sample shows how to call HelloAgain with required request content and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
-        /// Response response = client.HelloAgain();
+        /// var data = new {};
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Response response = client.HelloAgain(RequestContent.Create(data));
+        /// 
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
-        public virtual Response HelloAgain(RequestContext context = null)
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required. Required string property
+        ///   requiredInt: number, # Required. Required int property
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response HelloAgain(RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloAgainRequest(context);
+                using HttpMessage message = CreateHelloAgainRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -120,7 +170,7 @@ namespace CadlFirstTest
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call HelloDemo2Async and parse the result.
         /// <code><![CDATA[
@@ -129,10 +179,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.HelloDemo2Async();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
@@ -151,7 +211,7 @@ namespace CadlFirstTest
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call HelloDemo2 and parse the result.
         /// <code><![CDATA[
@@ -160,10 +220,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.HelloDemo2();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response HelloDemo2(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
@@ -180,7 +250,7 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateHelloAgainRequest(RequestContext context)
+        internal HttpMessage CreateHelloAgainRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -192,6 +262,7 @@ namespace CadlFirstTest
             uri.AppendPath("/againHi", false);
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
+            request.Content = content;
             return message;
         }
 

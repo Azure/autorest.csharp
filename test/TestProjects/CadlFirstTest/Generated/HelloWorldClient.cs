@@ -33,7 +33,7 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of HelloWorldClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public HelloWorldClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new DemoHelloworldClientOptions())
         {
@@ -41,7 +41,7 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of HelloWorldClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public HelloWorldClient(Uri endpoint, string apiVersion, DemoHelloworldClientOptions options)
@@ -56,11 +56,11 @@ namespace CadlFirstTest
             _apiVersion = options.Version;
         }
 
-        /// <param name="action"> The string to use. </param>
+        /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call TopActionAsync with required parameters and parse the result.
         /// <code><![CDATA[
@@ -69,10 +69,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.TopActionAsync("<action>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
@@ -91,11 +101,11 @@ namespace CadlFirstTest
             }
         }
 
-        /// <param name="action"> The string to use. </param>
+        /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call TopAction with required parameters and parse the result.
         /// <code><![CDATA[
@@ -104,10 +114,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.TopAction("<action>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response TopAction(string action, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
@@ -128,7 +148,7 @@ namespace CadlFirstTest
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call TopAction2Async and parse the result.
         /// <code><![CDATA[
@@ -137,10 +157,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.TopAction2Async();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2");
@@ -159,7 +189,7 @@ namespace CadlFirstTest
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call TopAction2 and parse the result.
         /// <code><![CDATA[
@@ -168,10 +198,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.TopAction2();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response TopAction2(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2");

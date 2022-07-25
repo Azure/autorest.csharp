@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                LowLevelTarget.Execute(project, new CodeModelConverter().CreateNamespace(codeModel), sourceInputModel);
+                LowLevelTarget.Execute(project, new CodeModelConverter().CreateNamespace(codeModel), sourceInputModel, false);
             }
             return project;
         }
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var projectDirectory = Path.Combine(Configuration.OutputFolder, Configuration.ProjectFolder);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
-            LowLevelTarget.Execute(project, rootNamespace, sourceInputModel);
+            LowLevelTarget.Execute(project, rootNamespace, sourceInputModel, true);
             return project;
         }
 

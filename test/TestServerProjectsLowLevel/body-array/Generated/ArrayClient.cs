@@ -2761,7 +2761,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "2022-05-10T14:57:31.2311892-04:00"
+        ///     "2022-05-10T18:57:31.2311892Z"
         /// };
         /// 
         /// Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
@@ -2799,7 +2799,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "2022-05-10T14:57:31.2311892-04:00"
+        ///     "2022-05-10T18:57:31.2311892Z"
         /// };
         /// 
         /// Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -3029,7 +3029,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "2022-05-10T14:57:31.2311892-04:00"
+        ///     "Tue, 10 May 2022 18:57:31 GMT"
         /// };
         /// 
         /// Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
@@ -3067,7 +3067,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "2022-05-10T14:57:31.2311892-04:00"
+        ///     "Tue, 10 May 2022 18:57:31 GMT"
         /// };
         /// 
         /// Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));

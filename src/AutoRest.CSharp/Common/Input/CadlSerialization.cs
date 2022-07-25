@@ -12,36 +12,42 @@ namespace AutoRest.CSharp.Common.Input
     {
         public static InputNamespace? Deserialize(string json)
         {
+            var referenceHandler = new CadlReferenceHandler();
             var options = new JsonSerializerOptions
             {
-                ReferenceHandler = ReferenceHandler.Preserve,
+                ReferenceHandler = referenceHandler,
                 AllowTrailingCommas = true
             };
 
-            options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
-            options.Converters.Add(new RequestMethodConverter(options));
+            var inputTypeConverter = new CadlInputTypeConverter(referenceHandler);
 
+            options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+            options.Converters.Add(new RequestMethodConverter());
+            options.Converters.Add(inputTypeConverter);
+            options.Converters.Add(new CadlInputListTypeConverter(referenceHandler));
+            options.Converters.Add(new CadlInputDictionaryTypeConverter(referenceHandler));
+            options.Converters.Add(new CadlInputEnumTypeConverter(referenceHandler));
+            options.Converters.Add(new CadlInputModelTypeConverter(referenceHandler));
+            options.Converters.Add(new CadlInputModelPropertyConverter(referenceHandler));
             return JsonSerializer.Deserialize<InputNamespace>(json, options);
         }
 
         private class RequestMethodConverter : JsonConverter<RequestMethod>
         {
-            private readonly JsonConverter<string> _stringConverter;
-
-            public RequestMethodConverter(JsonSerializerOptions options)
-            {
-                _stringConverter = (JsonConverter<string>)options.GetConverter(typeof(string));
-            }
-
             public override RequestMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
-                var stringValue = _stringConverter.Read(ref reader, typeof(string), options);
+                if (reader.TokenType != JsonTokenType.String)
+                {
+                    throw new JsonException();
+                }
+
+                var stringValue = reader.GetString();
                 return stringValue != null ? RequestMethod.Parse(stringValue) : RequestMethod.Get;
             }
 
             public override void Write(Utf8JsonWriter writer, RequestMethod value, JsonSerializerOptions options)
             {
-                _stringConverter.Write(writer, value.Method, options);
+                writer.WriteStringValue(value.Method.AsSpan());
             }
         }
     }

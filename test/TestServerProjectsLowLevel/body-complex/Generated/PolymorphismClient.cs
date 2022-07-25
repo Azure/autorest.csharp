@@ -72,6 +72,9 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -227,6 +230,9 @@ namespace body_complex_LowLevel
         /// Console.WriteLine(result.GetProperty("fishtype").ToString());
         /// Console.WriteLine(result.GetProperty("species").ToString());
         /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>

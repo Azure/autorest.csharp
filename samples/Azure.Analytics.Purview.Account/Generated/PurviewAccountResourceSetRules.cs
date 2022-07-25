@@ -512,7 +512,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// var data = new {
         ///     advancedResourceSet = new {
-        ///         modifiedAt = "2022-05-10T14:57:31.2311892-04:00",
+        ///         modifiedAt = "2022-05-10T18:57:31.2311892Z",
         ///         resourceSetProcessing = "Default",
         ///     },
         ///     pathPatternConfig = new {
@@ -971,7 +971,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// var data = new {
         ///     advancedResourceSet = new {
-        ///         modifiedAt = "2022-05-10T14:57:31.2311892-04:00",
+        ///         modifiedAt = "2022-05-10T18:57:31.2311892Z",
         ///         resourceSetProcessing = "Default",
         ///     },
         ///     pathPatternConfig = new {

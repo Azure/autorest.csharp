@@ -33,7 +33,7 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of ListPetToysResponseClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public ListPetToysResponseClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
         {
@@ -41,7 +41,7 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of ListPetToysResponseClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public ListPetToysResponseClient(Uri endpoint, string apiVersion, PetstoreClientOptions options)
@@ -56,12 +56,12 @@ namespace CadlPetStore
             _apiVersion = options.Version;
         }
 
-        /// <param name="petId"> The string to use. </param>
-        /// <param name="nameFilter"> The string to use. </param>
+        /// <param name="petId"> The String to use. </param>
+        /// <param name="nameFilter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> or <paramref name="nameFilter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call ListAsync with required parameters and parse the result.
         /// <code><![CDATA[
@@ -70,10 +70,20 @@ namespace CadlPetStore
         /// 
         /// Response response = await client.ListAsync("<petId>", "<nameFilter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ToyListResults</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> ListAsync(string petId, string nameFilter, RequestContext context = null)
         {
             Argument.AssertNotNull(petId, nameof(petId));
@@ -93,12 +103,12 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The string to use. </param>
-        /// <param name="nameFilter"> The string to use. </param>
+        /// <param name="petId"> The String to use. </param>
+        /// <param name="nameFilter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> or <paramref name="nameFilter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call List with required parameters and parse the result.
         /// <code><![CDATA[
@@ -107,10 +117,20 @@ namespace CadlPetStore
         /// 
         /// Response response = client.List("<petId>", "<nameFilter>");
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ToyListResults</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response List(string petId, string nameFilter, RequestContext context = null)
         {
             Argument.AssertNotNull(petId, nameof(petId));

@@ -19,13 +19,7 @@
        "$id": "4",
        "Name": "petStorUrl",
        "NameInRequest": "petStorUrl",
-       "Type": {
-        "$id": "5",
-        "Name": "Uri",
-        "Kind": "Uri",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
+       "Type": "Uri",
        "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
@@ -41,13 +35,7 @@
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
-       "Type": {
-        "$id": "7",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
+       "Type": "string",
        "Location": "Query",
        "IsRequired": true,
        "IsApiVersion": true,
@@ -62,13 +50,7 @@
        "$id": "8",
        "Name": "petId",
        "NameInRequest": "petId",
-       "Type": {
-        "$id": "9",
-        "Name": "Int32",
-        "Kind": "Int32",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
+       "Type": "Int32",
        "Location": "Path",
        "IsRequired": true,
        "IsApiVersion": false,
@@ -112,13 +94,7 @@
        "$id": "12",
        "Name": "petId",
        "NameInRequest": "petId",
-       "Type": {
-        "$id": "13",
-        "Name": "Int32",
-        "Kind": "Int32",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
+       "Type": "Int32",
        "Location": "Path",
        "IsRequired": true,
        "IsApiVersion": false,
@@ -140,10 +116,7 @@
        ],
        "BodyType": {
         "$id": "15",
-        "Name": "Pet",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Name": "Pet"
        },
        "BodyMediaType": "Json"
       },
@@ -154,10 +127,7 @@
        ],
        "BodyType": {
         "$id": "17",
-        "Name": "Pet",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Name": "Pet"
        },
        "BodyMediaType": "Json"
       }
@@ -188,10 +158,7 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Name": "Pet",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Name": "Pet"
        },
        "BodyMediaType": "Json"
       }
@@ -226,13 +193,7 @@
        "$id": "24",
        "Name": "petId",
        "NameInRequest": "petId",
-       "Type": {
-        "$id": "25",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
+       "Type": "String",
        "Location": "Path",
        "IsRequired": true,
        "IsApiVersion": false,
@@ -249,13 +210,7 @@
        "$id": "26",
        "Name": "nameFilter",
        "NameInRequest": "nameFilter",
-       "Type": {
-        "$id": "27",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
+       "Type": "String",
        "Location": "Query",
        "IsRequired": true,
        "IsApiVersion": false,
@@ -277,10 +232,7 @@
        ],
        "BodyType": {
         "$id": "29",
-        "Name": "ToyListResults",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Name": "ToyListResults"
        },
        "BodyMediaType": "Json"
       }
@@ -292,12 +244,7 @@
      "BufferResponse": false
     }
    ],
-   "Protocol": {
-    "$id": "30"
-   }
   }
  ],
- "Auth": {
-  "$id": "31"
- }
+ "Auth": { }
 }

@@ -16,18 +16,18 @@ namespace AutoRest.CSharp.Common.Input
     {
         private readonly Dictionary<ServiceRequest, Func<InputOperation>> _operationsCache;
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
-        private readonly Dictionary<ObjectSchema, InputModel> _modelsCache;
+        private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
-        private readonly Dictionary<ObjectSchema, List<InputModel>> _derivedModelsCache;
+        private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
         private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
 
         public CodeModelConverter()
         {
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
-            _modelsCache = new Dictionary<ObjectSchema, InputModel>();
+            _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
-            _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModel>>();
+            _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
 
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.Common.Input
             return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName) { NextLinkOperationRef = nextLinkOperationRef };
         }
 
-        private IReadOnlyList<InputModel> CreateModels(ICollection<ObjectSchema> schemas)
+        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas)
         {
             foreach (var schema in schemas)
             {
@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Common.Input
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
-        private InputModel GetOrCreateModel(ObjectSchema schema)
+        private InputModelType GetOrCreateModel(ObjectSchema schema)
         {
             if (_modelsCache.TryGetValue(schema, out var model))
             {
@@ -206,8 +206,8 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var properties = new List<InputModelProperty>();
-            var derived = new List<InputModel>();
-            model = new InputModel(
+            var derived = new List<InputModelType>();
+            model = new InputModelType(
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
@@ -277,8 +277,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType? GetResponseBodyType(ServiceResponse response) => response switch
         {
-            { HttpResponse.KnownMediaType: KnownMediaType.Text } => KnownInputTypes.String,
-            BinaryResponse => KnownInputTypes.Stream,
+            { HttpResponse.KnownMediaType: KnownMediaType.Text } => InputPrimitiveType.String,
+            BinaryResponse => InputPrimitiveType.Stream,
             SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, schemaResponse.IsNullable),
             _ => null
         };
@@ -294,77 +294,54 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateType(Schema schema, string? format) => schema switch
         {
-            ArraySchema array           => CreateType(schema, InputTypeKind.List, CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary => CreateType(schema, InputTypeKind.Dictionary, CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            BinarySchema => InputPrimitiveType.Stream,
 
-            BinarySchema => KnownInputTypes.Stream,
+            ByteArraySchema { Format: ByteArraySchemaFormat.Base64url } => InputPrimitiveType.BytesBase64Url,
+            ByteArraySchema                                             => InputPrimitiveType.Bytes,
 
-            ByteArraySchema { Format: ByteArraySchemaFormat.Base64url } => KnownInputTypes.ByteArray with { SerializationFormat = InputTypeSerializationFormat.Base64Url },
-            ByteArraySchema { Format: ByteArraySchemaFormat.Byte }      => KnownInputTypes.ByteArray with { SerializationFormat = InputTypeSerializationFormat.Byte },
-            ByteArraySchema                                             => KnownInputTypes.ByteArray,
+            DateSchema                                                      => InputPrimitiveType.Date,
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime }        => InputPrimitiveType.DateTimeISO8601,
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => InputPrimitiveType.DateTimeRFC1123,
+            DateTimeSchema                                                  => InputPrimitiveType.DateTime,
+            UnixTimeSchema                                                  => InputPrimitiveType.DateTimeUnix,
 
-            DateSchema                                                      => KnownInputTypes.DateTime with { SerializationFormat = InputTypeSerializationFormat.Date },
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime }        => KnownInputTypes.DateTime with { SerializationFormat = InputTypeSerializationFormat.DateTime },
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => KnownInputTypes.DateTime with { SerializationFormat = InputTypeSerializationFormat.DateTimeRFC1123 },
-            DateTimeSchema                                                  => KnownInputTypes.DateTime with { SerializationFormat = InputTypeSerializationFormat.Default },
-            UnixTimeSchema                                                  => KnownInputTypes.DateTime with { SerializationFormat = InputTypeSerializationFormat.DateTimeUnix },
+            TimeSchema                                               => InputPrimitiveType.Time,
+            DurationSchema when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
+            DurationSchema                                           => InputPrimitiveType.DurationISO8601,
 
-            TimeSchema                                               => KnownInputTypes.Time with { SerializationFormat = InputTypeSerializationFormat.Time },
-            DurationSchema when format == XMsFormat.DurationConstant => KnownInputTypes.Time with { SerializationFormat = InputTypeSerializationFormat.DurationConstant },
-            DurationSchema                                           => KnownInputTypes.Time with { SerializationFormat = InputTypeSerializationFormat.Duration },
+            NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 }  => InputPrimitiveType.Float32,
+            NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => InputPrimitiveType.Float128,
+            NumberSchema { Type: AllSchemaTypes.Number }                 => InputPrimitiveType.Float64,
+            NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => InputPrimitiveType.Int64,
+            NumberSchema { Type: AllSchemaTypes.Integer }                => InputPrimitiveType.Int32,
 
-            NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => KnownInputTypes.Float32,
-            NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => KnownInputTypes.Float128,
-            NumberSchema { Type: AllSchemaTypes.Number } => KnownInputTypes.Float64,
-            NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => KnownInputTypes.Int64,
-            NumberSchema { Type: AllSchemaTypes.Integer } => KnownInputTypes.Int32,
-
-            ChoiceSchema choiceSchema =>       CreateEnumType(choiceSchema),
-            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema),
-
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => KnownInputTypes.Time with { SerializationFormat = InputTypeSerializationFormat.DurationConstant },
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => KnownInputTypes.ResourceIdentifier,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => KnownInputTypes.AzureLocation,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ETag             => KnownInputTypes.ETag,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType     => KnownInputTypes.ResourceType,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ETag             => InputPrimitiveType.ETag,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType     => InputPrimitiveType.ResourceType,
 
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format),
 
-            CredentialSchema => KnownInputTypes.String,
-            { Type: AllSchemaTypes.String } => KnownInputTypes.String,
-            { Type: AllSchemaTypes.Boolean } => KnownInputTypes.Boolean,
-            { Type: AllSchemaTypes.Uuid } => KnownInputTypes.Guid,
-            { Type: AllSchemaTypes.Uri } => KnownInputTypes.Uri,
+            CredentialSchema                 => InputPrimitiveType.String,
+            { Type: AllSchemaTypes.String }  => InputPrimitiveType.String,
+            { Type: AllSchemaTypes.Boolean } => InputPrimitiveType.Boolean,
+            { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
+            { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
 
-            ObjectSchema objectSchema when !Configuration.Generation1ConvenienceClient && !Configuration.AzureArm
-                => new InputType(InputTypeKind.Model) { Model = _modelsCache[objectSchema] },
+            ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            ChoiceSchema choiceSchema       when IsDPG => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, true),
+            SealedChoiceSchema choiceSchema when IsDPG => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, false),
+            ObjectSchema objectSchema       when IsDPG => _modelsCache[objectSchema],
 
-            _ => new CodeModelType(schema, InputTypeKind.Object)
+            _ => new CodeModelType(schema)
         };
 
-        private InputType CreateType(Schema schema, InputTypeKind kind, InputType valuesType)
-            => Configuration.Generation1ConvenienceClient || Configuration.AzureArm
-                ? new CodeModelType(schema, kind) { ValuesType = valuesType }
-                : new InputType(kind) { Name = schema.Name, ValuesType = valuesType };
+        private static InputEnumType CreateEnumType(string name, InputType choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
+            => new(Name: name, EnumValueType: (InputPrimitiveType)choiceType, AllowedValues: choices.Select(CreateEnumValue).ToList(), IsExtensible: isExtensible);
 
-        private InputType CreateEnumType(ChoiceSchema choiceSchema)
-            => Configuration.Generation1ConvenienceClient || Configuration.AzureArm
-                ? new CodeModelType(choiceSchema, InputTypeKind.Object)
-                : CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, InputTypeKind.ExtensibleEnum);
-
-        private InputType CreateEnumType(SealedChoiceSchema choiceSchema)
-            => Configuration.Generation1ConvenienceClient || Configuration.AzureArm
-                ? new CodeModelType(choiceSchema, InputTypeKind.Object)
-                : CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, InputTypeKind.Enum);
-
-        private static InputType CreateEnumType(string name, InputType choiceType, IEnumerable<ChoiceValue> choices, InputTypeKind kind) => new(Kind: kind)
-        {
-            Name = name,
-            ValuesType = choiceType,
-            AllowedValues = choices.Select(CreateEnumValue).ToList()
-        };
-
-        private static InputTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
+        private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
             Name: choiceValue.Language.Default.Name,
             Description: choiceValue.Language.Default.Description,
             Value: choiceValue.Value
@@ -379,6 +356,8 @@ namespace AutoRest.CSharp.Common.Input
             HttpParameterIn.Body => RequestLocation.Body,
             _ => RequestLocation.None
         };
+
+        private static bool IsDPG => !Configuration.Generation1ConvenienceClient && !Configuration.AzureArm;
 
         private InputConstant? GetDefaultValue(RequestParameter parameter)
         {

@@ -17,6 +17,12 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
+        public static Parameter FromModelProperty(in InputModelProperty property, TypeFactory typeFactory)
+        {
+            var name = property.Name.ToVariableName();
+            return new Parameter(name, property.Description, typeFactory.CreateType(property.Type), null, ValidationType.AssertNotNull, null);
+        }
+
         public static Parameter FromRequestParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();
@@ -48,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type, operationParameter.Type.AllowedValues?.Select(c => c.Value)),
+                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.Value)),
                 inputType,
                 defaultValue,
                 validation,

@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
         }
 
-        public LowLevelOutputLibrary Build()
+        public DpgOutputLibrary Build(bool cadlInput)
         {
             var inputClients = UpdateListMethodNames();
 
@@ -44,11 +44,17 @@ namespace AutoRest.CSharp.Output.Models
             var clientOptions = CreateClientOptions(topLevelClientInfos);
             SetRequestsToClients(clientInfosByName.Values);
 
-            return new LowLevelOutputLibrary(typeFactory =>
+
+            IReadOnlyList<ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
+                => _rootNamespace.Models.Select(m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)).ToList();
+
+            IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
             {
                 var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
                 return EnumerateAllClients(topLevelClients);
-            }, clientOptions);
+            }
+
+            return new DpgOutputLibrary(cadlInput ? ModelsFactory : t => Array.Empty<ModelTypeProvider>(), RestClientsFactory, clientOptions);
         }
 
         private IEnumerable<InputClient> UpdateListMethodNames()

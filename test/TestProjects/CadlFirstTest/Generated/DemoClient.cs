@@ -33,7 +33,7 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of DemoClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public DemoClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new DemoHelloworldClientOptions())
         {
@@ -41,7 +41,7 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of DemoClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public DemoClient(Uri endpoint, string apiVersion, DemoHelloworldClientOptions options)
@@ -58,7 +58,7 @@ namespace CadlFirstTest
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call SayHiAsync and parse the result.
         /// <code><![CDATA[
@@ -67,10 +67,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.SayHiAsync();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> SayHiAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHi");
@@ -89,7 +99,7 @@ namespace CadlFirstTest
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call SayHi and parse the result.
         /// <code><![CDATA[
@@ -98,10 +108,20 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.SayHi();
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
+        /// Console.WriteLine(response.ToString());
         /// ]]></code>
         /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response SayHi(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHi");

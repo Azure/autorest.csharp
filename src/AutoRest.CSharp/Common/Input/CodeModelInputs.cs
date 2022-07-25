@@ -7,8 +7,7 @@ using AutoRest.CSharp.Input;
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record CodeModelSecurity(IReadOnlyList<SecurityScheme> Schemes) : InputAuth();
+    internal record CodeModelSecurity(IReadOnlyList<SecurityScheme> Schemes) : InputAuth;
 
-    internal record CodeModelType(Schema Schema, InputTypeKind Kind, bool IsNullable = false, InputTypeSerializationFormat SerializationFormat = InputTypeSerializationFormat.Default)
-        : InputType(Schema.Name, Kind, IsNullable, SerializationFormat);
+    internal record CodeModelType(Schema Schema, bool IsNullable = false) : InputType(Schema.Name, IsNullable);
 }

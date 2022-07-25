@@ -2,6 +2,28 @@
   "Name": "demo.helloworld",
   "Description": "",
   "ApiVersions": ["0.1.0"],
+  "Models": [
+    {
+      "$id": "1",
+      "Name": "InputModel",
+      "Properties": [
+        {
+          "Name": "requiredString",
+          "Description": "Required string property",
+          "Type": "String",
+          "IsRequired": true,
+          "IsReadOnly": true
+        },
+        {
+          "Name": "requiredInt",
+          "Description": "Required int property",
+          "Type": "Int32",
+          "IsRequired": true,
+          "IsReadOnly": true
+        }
+      ]
+    }
+  ],
   "Clients": [
     {
       "Name": "HelloWorld",
@@ -11,11 +33,11 @@
           "Description": "",
           "Parameters": [
             {
-              "$id": "1",
+              "$id": "2",
               "Name": "Endpoint",
               "NameInRequest": "Endpoint",
               "Description": "",
-              "Type": {"Name": "Uri", "Kind": "Uri"},
+              "Type": {"Kind" :"Uri"},
               "Location": "Uri",
               "IsRequired": true,
               "IsEndpoint": true,
@@ -25,23 +47,18 @@
               "Name": "action",
               "NameInRequest": "action",
               "Description": "",
-              "Type": {"Name": "string", "Kind": "String"},
+              "Type": {"Kind" :"String"},
               "Location": "Path",
               "IsRequired": true,
-              "IsApiVersion": false,
-              "IsResourceParameter": false,
-              "IsContentType": false,
-              "IsEndpoint": false,
               "Kind": "Method",
               "SkipUrlEncoding": true,
-              "Explode": false
             },
             {
-              "$id": "2",
+              "$id": "3",
               "Name": "apiVersion",
               "NameInRequest": "apiVersion",
               "Description": "",
-              "Type": {"Name": "string", "Kind": "String"},
+              "Type": {"Kind" :"String"},
               "Location": "Query",
               "IsRequired": true,
               "IsApiVersion": true,
@@ -53,7 +70,7 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyType": { "Name": "Thing" },
               "BodyMediaType": "Json"
             }
           ],
@@ -68,10 +85,10 @@
           "Description": "",
           "Parameters": [
             {
-              "$ref": "1"
+              "$ref": "2"
             },
             {
-              "$ref": "2"
+              "$ref": "3"
             }
           ],
           "Responses": [
@@ -79,7 +96,7 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyType": { "Name": "Thing" },
               "BodyMediaType": "Json"
             }
           ],
@@ -99,10 +116,10 @@
           "Description": "",
           "Parameters": [
             {
-              "$ref": "1"
+              "$ref": "2"
             },
             {
-              "$ref": "2"
+              "$ref": "3"
             }
           ],
           "Responses": [
@@ -110,7 +127,7 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyType": {"Name": "Thing"},
               "BodyMediaType": "Json"
             }
           ],
@@ -130,10 +147,19 @@
           "Description": "",
           "Parameters": [
             {
-              "$ref": "1"
+              "$ref": "2"
             },
             {
-              "$ref": "2"
+              "Name": "input",
+              "NameInRequest": "action",
+              "Description": "",
+              "Type": { "$ref": "1" } ,
+              "Location": "Body",
+              "IsRequired": true,
+              "Kind": "Method"
+            },
+            {
+              "$ref": "3"
             }
           ],
           "Responses": [
@@ -141,7 +167,7 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyType": {"Name": "Thing"},
               "BodyMediaType": "Json"
             }
           ],
@@ -156,10 +182,10 @@
           "Description": "",
           "Parameters": [
             {
-              "$ref": "1"
+              "$ref": "2"
             },
             {
-              "$ref": "2"
+              "$ref": "3"
             }
           ],
           "Responses": [
@@ -167,7 +193,7 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing", "Kind": "Object"},
+              "BodyType": {"Name": "Thing"},
               "BodyMediaType": "Json"
             }
           ],
