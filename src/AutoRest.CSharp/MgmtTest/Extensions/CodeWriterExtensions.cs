@@ -343,6 +343,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
             foreach (var property in properties)
             {
+                if (property.Declaration.Accessibility.IndexOf("public")<0)
+                    continue;
                 var schemaProperty = property.SchemaProperty;
                 if (!IsPropertyAssignable(property) || schemaProperty == null)
                     continue; // now we explicitly ignore all the AdditionalProperties
