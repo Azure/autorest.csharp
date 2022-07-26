@@ -669,7 +669,7 @@ namespace AutoRest.CSharp.Input
         #endregion
 
         [YamlMember(Alias = "requiredVariablesDefault")]
-        public Dictionary<string, string> RequiredVaraiblesDefault { get; set; } = new();
+        public Dictionary<string, string> RequiredVariablesDefault { get; set; } = new();
     }
 
     internal partial class Scenario : VariableScope
@@ -690,7 +690,7 @@ namespace AutoRest.CSharp.Input
         public ScenarioDefinition? ScenarioDefinition { get; set; }
 
         [YamlMember(Alias = "requiredVariablesDefault")]
-        public Dictionary<string, string> RequiredVaraiblesDefault { get; set; } = new();
+        public Dictionary<string, string> RequiredVariablesDefault { get; set; } = new();
     };
 
 
