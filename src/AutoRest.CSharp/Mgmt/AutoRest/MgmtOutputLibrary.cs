@@ -345,11 +345,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var restClientMethod in restClient.Methods)
+                foreach (var (operation, restClientMethod) in restClient.Methods)
                 {
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
-                    restClientMethods.Add(restClientMethod.Operation, restClientMethod);
+                    restClientMethods.Add(operation, restClientMethod);
                 }
             }
 

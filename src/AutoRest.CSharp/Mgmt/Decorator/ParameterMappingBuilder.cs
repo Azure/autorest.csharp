@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression
                 // if there is none of this, this parameter should be a pass through parameter
-                var mapping = FindContextualParameterForMethod(parameter, operation.RequestPath, contextualParameterMappingCache, method);
+                var mapping = FindContextualParameterForMethod(parameter, operation.RequestPath, contextualParameterMappingCache);
                 // Update parameter type if the method is a `ById` method
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
@@ -336,8 +336,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static ContextualParameterMapping? FindContextualParameterForMethod(Parameter pathParameter, RequestPath requestPath,
-            List<ContextualParameterMapping> contextualParameterMappings, RestClientMethod method)
+        private static ContextualParameterMapping? FindContextualParameterForMethod(Parameter pathParameter, RequestPath requestPath, List<ContextualParameterMapping> contextualParameterMappings)
         {
             // skip non-path parameters
             if (pathParameter.RequestLocation != RequestLocation.Path)

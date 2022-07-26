@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -557,11 +556,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
-        public ObjectTypeProperty GetPropertyForGroupedParameter(InputParameter groupedParameter, bool includeParents = false)
+        public ObjectTypeProperty GetPropertyForGroupedParameter(RequestParameter groupedParameter, bool includeParents = false)
         {
-            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty is GroupProperty gp && gp.OriginalParameter.Any(rp => rp.Language.Default.Name == groupedParameter.Name && new CodeModelConverter().CreateType(rp) == groupedParameter.Type), out ObjectTypeProperty? objectProperty, includeParents))
+            if (!TryGetPropertyForSchemaProperty(
+                    p => (p.SchemaProperty as GroupProperty)?.OriginalParameter.Contains(groupedParameter) == true,
+                    out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Name} in schema {DefaultName}");
+                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {DefaultName}");
             }
 
             return objectProperty;

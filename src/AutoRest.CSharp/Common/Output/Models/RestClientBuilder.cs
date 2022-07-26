@@ -455,10 +455,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(((CodeModelType)groupedByParameter.Type).Schema, false).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(operationParameter);
-
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
+            throw new InvalidOperationException("Grouped parameters aren't supported in DPG.");
         }
 
         private ResponseBody? BuildResponseBody(OperationResponse response)
