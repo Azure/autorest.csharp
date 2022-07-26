@@ -48,7 +48,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
-                        operation,
+                        MgmtContext.Library.GetRestClientMethod(operation),
+                        MgmtContext.Library.GetRestClient(operation),
                         operation.GetRequestPath(),
                         Extension.ContextualPath,
                         operationName));

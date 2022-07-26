@@ -144,10 +144,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             var operation = OperationSet.GetOperation(method);
             if (operation is not null)
             {
+                var restClient = MgmtContext.Library.GetRestClient(operation);
                 var requestPath = operation.GetRequestPath(ResourceType);
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var restOperation = new MgmtRestOperation(
-                    operation,
+                    MgmtContext.Library.GetRestClientMethod(operation),
+                    restClient,
                     requestPath,
                     contextualPath,
                     operationName,
@@ -307,8 +309,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
                     GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                 // get the MgmtRestOperation with a proper name
+                var restClient = MgmtContext.Library.GetRestClient(operation);
                 var restOperation = new MgmtRestOperation(
-                    operation,
+                    MgmtContext.Library.GetRestClientMethod(operation),
+                    restClient,
                     requestPath,
                     contextualPath,
                     methodName);

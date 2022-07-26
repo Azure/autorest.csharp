@@ -2,9 +2,7 @@
 // Licensed under the MIT License
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -98,27 +96,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             return false;
         }
-
-        public static bool IsListMethod(this CSharpType type, [MaybeNullWhen(false)] out CSharpType itemType)
-        {
-            itemType = null;
-            if (type.IsFrameworkType || type.Implementation is not SchemaObjectType)
-            {
-                if (type.FrameworkType == typeof(IReadOnlyList<>))
-                {
-                    itemType = type.Arguments[0];
-                }
-            }
-            else
-            {
-                var schemaObject = (SchemaObjectType)type.Implementation;
-                itemType = GetValueProperty(schemaObject)?.ValueType.Arguments.FirstOrDefault();
-            }
-
-            return itemType != null;
-        }
-
-        private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
-            => schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" && p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
     }
 }

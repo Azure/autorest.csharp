@@ -3,19 +3,23 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class MgmtRestClientBuilder : RestClientBuilder
     {
-        private class ParameterComparer : IEqualityComparer<RequestParameter>
+        private class ParameterCompareer : IEqualityComparer<RequestParameter>
         {
             public bool Equals([AllowNull] RequestParameter x, [AllowNull] RequestParameter y)
             {
@@ -39,22 +43,21 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
         }
 
-        public static IEnumerable<InputParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations) =>
-            new CodeModelConverter().CreateOperationParameters(operations
+        public static IEnumerable<RequestParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations) =>
+            operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct(new ParameterComparer())
-                .ToList());
+                .Distinct(new ParameterCompareer());
 
-        public override Parameter BuildConstructorParameter(InputParameter operationParameter)
+        public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
-            var parameter = base.BuildConstructorParameter(operationParameter);
+            var parameter = base.BuildConstructorParameter(requestParameter);
             return parameter.IsApiVersionParameter
                 ? parameter with { DefaultValue = Constant.Default(parameter.Type.WithNullable(true)), Initializer = parameter.DefaultValue?.GetConstantFormattable() }
                 : parameter;
         }
 
-        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputParameter, Parameter> allParameters)
+        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
         {
             List<Parameter> requiredParameters = new();
             List<Parameter> optionalParameters = new();
@@ -62,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var (requestParameter, parameter) in allParameters)
             {
                 // Grouped and flattened parameters shouldn't be added to methods
-                if (requestParameter.Kind == InputOperationParameterKind.Method)
+                if (IsMethodParameter(requestParameter))
                 {
                     // sort the parameters by the following sequence:
                     // 1. required parameters

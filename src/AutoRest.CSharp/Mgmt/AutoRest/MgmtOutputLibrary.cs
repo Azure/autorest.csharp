@@ -85,8 +85,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
 
-        private readonly CodeModelConverter _codeModelConverter;
-
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
         /// </summary>
@@ -94,8 +92,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
-            _codeModelConverter = new CodeModelConverter();
-
             ApplyGlobalConfigurations();
             CodeModelTransformer.Transform();
 
@@ -334,7 +330,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
             foreach (var restClient in RestClients)
             {
-                var methods = ClientBuilder.BuildPagingMethods(restClient.InputClient, restClient, placeholder);
+                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
                 foreach (var method in methods)
                 {
                     pagingMethods.Add(method.Method, method);
@@ -351,11 +347,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var restClientMethod in restClient.Methods)
                 {
-                    // skip all internal methods
-                    if (restClientMethod.Accessibility == MethodSignatureModifiers.Public && _codeModelConverter.InputOperationToOperationMap.TryGetValue(restClientMethod.Operation, out var operation))
-                    {
-                        restClientMethods.Add(operation, restClientMethod);
-                    }
+                    if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
+                        continue;
+                    restClientMethods.Add(restClientMethod.Operation, restClientMethod);
                 }
             }
 
@@ -522,8 +516,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
-                var inputClient = _codeModelConverter.CreateClient(operationGroup);
-                var restClient = new MgmtRestClient(inputClient, operationGroup, new MgmtRestClientBuilder(operationGroup));
+                var restClient = new MgmtRestClient(operationGroup, new MgmtRestClientBuilder(operationGroup));
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))
