@@ -22668,7 +22668,7 @@ testModel:
               '202': {}
         operation: *ref_893
         operationGroup: *ref_835
-      - operationId: MhsmPrivateEndpointConnections_ListByResource
+      - operationId: MHSMPrivateEndpointConnections_ListByResource
         examples:
           - name: List managed HSM Pools in a subscription
             clientParameters:
@@ -22817,7 +22817,7 @@ testModel:
                   language: *ref_898
         operation: *ref_912
         operationGroup: *ref_913
-      - operationId: MhsmPrivateEndpointConnections_Get
+      - operationId: MHSMPrivateEndpointConnections_Get
         examples:
           - name: ManagedHsmGetPrivateEndpointConnection
             clientParameters:
@@ -22908,7 +22908,7 @@ testModel:
                   language: *ref_919
         operation: *ref_920
         operationGroup: *ref_913
-      - operationId: MhsmPrivateEndpointConnections_Put
+      - operationId: MHSMPrivateEndpointConnections_Put
         examples:
           - name: ManagedHsmPutPrivateEndpointConnection
             clientParameters:
@@ -23015,7 +23015,7 @@ testModel:
                   language: *ref_927
         operation: *ref_928
         operationGroup: *ref_913
-      - operationId: MhsmPrivateEndpointConnections_Delete
+      - operationId: MHSMPrivateEndpointConnections_Delete
         examples:
           - name: ManagedHsmDeletePrivateEndpointConnection
             clientParameters:
@@ -23077,7 +23077,7 @@ testModel:
               '204': {}
         operation: *ref_936
         operationGroup: *ref_913
-      - operationId: MhsmPrivateLinkResources_ListByMhsmResource
+      - operationId: MHSMPrivateLinkResources_ListByMHSMResource
         examples:
           - name: KeyVaultListPrivateLinkResources
             clientParameters:
