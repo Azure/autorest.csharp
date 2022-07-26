@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         // get the request path and operation set
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
-                        if (operationSet.TryGetResourceDataSchemaName(out var resourceDataModelName))
+                        if (operationSet.TryGetResourceDataSchema(out var resourceDataModel))
                         {
                             // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
                             BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
@@ -197,15 +197,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
                             continue;
                         }
-                        //var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet)).Key;
-                        if (resourceDataModelName is not null)
+                        if (resourceDataModel is not null)
                         {
                             //TODO handle expandable request paths. We assume that this is fine since if all of the expanded
                             //types use the same model they should have a common name, but since this case doesn't exist yet
                             //we don't know for sure
                             if (requestPath.IsExpandable)
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
-                            var name = GetResourceName(resourceDataModelName, operationSet, requestPath);
+                            var name = GetResourceName(resourceDataModel.Name, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema);
                             BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
