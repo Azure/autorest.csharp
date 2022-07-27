@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.ToSerializeCall(
                     serialization,
-                    w => w.AppendRaw("this"),
+                    $"this",
                     null,
                     w => w.AppendRaw(namehint));
             }
@@ -170,11 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
-                writer.ToDeserializeCall(
-                    serialization,
-                    w=> w.AppendRaw("element"),
-                    (w, v) => w.Line($"return {v};"),
-                    true);
+                writer.ToDeserializeCall(serialization, $"element", (w, v) => w.Line($"return {v};"), true);
             }
             writer.Line();
         }
@@ -194,7 +190,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             {
                                 writer
                                     .Append($"case {implementation.Key:L}: return ")
-                                    .DeserializeImplementation(implementation.Type.Implementation, jsonSerialization, w => w.Append($"element"));
+                                    .DeserializeImplementation(implementation.Type.Implementation, jsonSerialization, $"element");
                                 writer.Line($";");
                             }
                         }
@@ -207,9 +203,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    writer.DeserializeValue(jsonSerialization,
-                        w => w.AppendRaw("element"),
-                        (w, v) => w.Line($"return {v};"));
+                    writer.DeserializeValue(jsonSerialization, $"element", (w, v) => w.Line($"return {v};"));
                 }
             }
             writer.Line();
@@ -220,7 +214,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
             {
-                writer.ToSerializeCall(jsonSerialization, w => w.AppendRaw("this"));
+                writer.ToSerializeCall(jsonSerialization, $"this");
             }
             writer.Line();
         }

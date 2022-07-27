@@ -388,32 +388,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
-        {
-            if (value.IsConstant)
-            {
-                writer.WriteConstant(value.Constant);
-            }
-            else
-            {
-                var parts = value.Reference.Name.Split(".");
-
-                bool first = true;
-                foreach (var part in parts)
-                {
-                    if (first)
-                    {
-                        first = false;
-                    }
-                    else
-                    {
-                        writer.AppendRaw(".");
-                    }
-                    writer.Identifier(part);
-                }
-            }
-
-            return writer;
-        }
+            => writer.Append(value.GetReferenceOrConstantFormattable());
 
         public static CodeWriter WriteInitialization(
             this CodeWriter writer,

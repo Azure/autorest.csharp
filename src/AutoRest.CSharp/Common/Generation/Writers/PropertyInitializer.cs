@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -8,7 +9,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal readonly struct PropertyInitializer
     {
-        public PropertyInitializer(ObjectTypeProperty property, CodeWriterDelegate value, CSharpType? type = null)
+        public PropertyInitializer(ObjectTypeProperty property, FormattableString value, CSharpType? type = null)
         {
             Property = property;
             Value = value;
@@ -16,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public ObjectTypeProperty Property { get; }
-        public CodeWriterDelegate Value { get; }
+        public FormattableString Value { get; }
         public CSharpType? Type { get; }
     }
 }

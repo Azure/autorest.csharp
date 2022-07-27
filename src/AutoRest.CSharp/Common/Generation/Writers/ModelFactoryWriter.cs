@@ -32,14 +32,13 @@ namespace AutoRest.CSharp.Generation.Writers
             Debug.Assert(modelType != null);
 
             var ctor = modelType.SerializationConstructor;
-            var initializers = method.Parameters
-                .Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, w => w.Identifier($"{p.Name}"), p.Type));
+            var initializes = method.Parameters.Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, $"{p.Name}", p.Type));
 
             writer.WriteMethodDocumentation(method);
             using (writer.WriteMethodDeclaration(method))
             {
                 writer.WriteParameterNullChecks(method.Parameters);
-                writer.WriteInitialization((w, v) => w.Line($"return {v};"), modelType, ctor, initializers);
+                writer.WriteInitialization((w, v) => w.Line($"return {v};"), modelType, ctor, initializes);
             }
         }
     }

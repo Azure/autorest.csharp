@@ -102,11 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, body.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            WriteSerializeContent(
-                                writer,
-                                request,
-                                body.Serialization,
-                                w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true));
                         }
 
                         break;
@@ -173,7 +169,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var initializers = new List<PropertyInitializer>();
                         foreach (var initializer in flattenedSchemaRequestBody.Initializers)
                         {
-                            initializers.Add(new PropertyInitializer(initializer.Property, w => w.WriteReferenceOrConstant(initializer.Value), initializer.Value.Type));
+                            initializers.Add(new PropertyInitializer(initializer.Property, initializer.Value.GetReferenceOrConstantFormattable(), initializer.Value.Type));
                         }
                         var modelVariable = new CodeWriterDeclaration("model");
                         writer.WriteInitialization(
@@ -186,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer,
                             request,
                             flattenedSchemaRequestBody.Serialization,
-                            w => w.Append(modelVariable));
+                            $"{modelVariable}");
                         break;
                     case UrlEncodedBody urlEncodedRequestBody:
                         var urlContent = new CodeWriterDeclaration("content");
@@ -237,7 +233,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, CodeWriterDelegate valueDelegate)
+        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
             switch (bodySerialization)
             {
@@ -246,10 +242,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var content = new CodeWriterDeclaration("content");
 
                         writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                        writer.ToSerializeCall(
-                            jsonSerialization,
-                            valueDelegate,
-                            writerName: w => w.Append($"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
+                        writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
                         writer.Line($"{request}.Content = {content};");
                         break;
                     }
@@ -258,10 +251,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var content = new CodeWriterDeclaration("content");
 
                         writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
-                        writer.ToSerializeCall(
-                            xmlSerialization,
-                            valueDelegate,
-                            writerName: w => w.Append($"{content}.{nameof(XmlWriterContent.XmlWriter)}"));
+                        writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}");
                         writer.Line($"{request}.Content = {content};");
                         break;
                     }
@@ -326,18 +316,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConstantOrParameter(CodeWriter writer, ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool enumAsString = false)
         {
-            if (constantOrReference.IsConstant)
-            {
-                writer.WriteConstant(constantOrReference.Constant);
-            }
-            else
-            {
-                writer.Identifier(constantOrReference.Reference.Name);
-                if (!ignoreNullability)
-                {
-                    writer.AppendNullableValue(constantOrReference.Type);
-                }
-            }
+            writer.Append(GetConstantOrParameter(constantOrReference, ignoreNullability));
 
             if (enumAsString &&
                 !constantOrReference.Type.IsFrameworkType &&
@@ -345,6 +324,21 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.AppendEnumToString(enumType);
             }
+        }
+
+        private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false)
+        {
+            if (constantOrReference.IsConstant)
+            {
+                return constantOrReference.Constant.GetConstantFormattable();
+            }
+
+            if (!ignoreNullability && constantOrReference.Type.IsNullable && constantOrReference.Type.IsValueType)
+            {
+                return $"{constantOrReference.Reference.Name}.Value";
+            }
+
+            return $"{constantOrReference.Reference.Name}";
         }
 
         private static void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
