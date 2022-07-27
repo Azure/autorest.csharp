@@ -5,5 +5,23 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal record QueryParameter(string Name, ReferenceOrConstant Value, RequestParameterSerializationStyle SerializationStyle, bool Escape, SerializationFormat SerializationFormat, bool Explode, bool IsApiVersion);
+    internal class QueryParameter
+    {
+        public QueryParameter(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, bool escape, SerializationFormat serializationFormat, bool explode)
+        {
+            Name = name;
+            Value = value;
+            SerializationStyle = serializationStyle;
+            Escape = escape;
+            SerializationFormat = serializationFormat;
+            Explode = explode;
+        }
+
+        public string Name { get; }
+        public ReferenceOrConstant Value { get; }
+        public RequestParameterSerializationStyle SerializationStyle { get; }
+        public SerializationFormat SerializationFormat { get; }
+        public bool Escape { get; }
+        public bool Explode { get; }
+    }
 }

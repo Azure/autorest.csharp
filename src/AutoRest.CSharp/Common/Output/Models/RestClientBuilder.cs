@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models
                         pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false));
                         break;
                     case HttpParameterIn.Query:
-                        queryParameters.Add(new QueryParameter(parameterName, reference, GetSerializationStyle(requestParameter), escape, serializationFormat, GetExplode(requestParameter), requestParameter.IsApiVersionParameter));
+                        queryParameters.Add(new QueryParameter(parameterName, reference, GetSerializationStyle(requestParameter), escape, serializationFormat, GetExplode(requestParameter)));
                         break;
                     case HttpParameterIn.Header:
                         var headerName = requestParameter.Extensions?.HeaderCollectionPrefix ?? parameterName;
@@ -583,7 +583,7 @@ namespace AutoRest.CSharp.Output.Models
         public virtual Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
             var parameter = BuildParameter(requestParameter);
-            if (!requestParameter.IsEndpointParameter)
+            if (!IsEndpointParameter(requestParameter))
             {
                 return parameter;
             }
@@ -601,6 +601,12 @@ namespace AutoRest.CSharp.Output.Models
 
         protected static bool IsMethodParameter(RequestParameter requestParameter)
             => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
+
+        public static bool IsEndpointParameter(RequestParameter requestParameter)
+            => requestParameter.Origin == "modelerfour:synthesized/host";
+
+        public static bool IsContentTypeParameter(RequestParameter requestParameter)
+            => requestParameter.Origin == "modelerfour:synthesized/content-type";
 
         public static bool IsIgnoredHeaderParameter(RequestParameter requestParameter)
             => requestParameter.In == HttpParameterIn.Header && IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter));
@@ -644,7 +650,7 @@ namespace AutoRest.CSharp.Output.Models
             var request = new Request(
                 RequestMethod.Get,
                 pathSegments,
-                method.Request.Query.Where(p => p.IsApiVersion).ToArray(),
+                Array.Empty<QueryParameter>(),
                 method.Request.Headers,
                 null);
 
