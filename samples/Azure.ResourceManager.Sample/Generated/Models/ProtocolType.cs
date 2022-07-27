@@ -7,21 +7,12 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**
-    /// Serialized Name: ProtocolTypes
-    /// </summary>
+    /// <summary> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </summary>
     public enum ProtocolType
     {
-        /// <summary>
-        /// Http
-        /// Serialized Name: ProtocolTypes.Http
-        /// </summary>
+        /// <summary> Http. </summary>
         Http,
-        /// <summary>
-        /// Https
-        /// Serialized Name: ProtocolTypes.Https
-        /// </summary>
+        /// <summary> Https. </summary>
         Https
     }
 }

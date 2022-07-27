@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the network interfaces of the virtual machine.
-    /// Serialized Name: NetworkProfile
-    /// </summary>
+    /// <summary> Specifies the network interfaces of the virtual machine. </summary>
     internal partial class NetworkProfile
     {
         /// <summary> Initializes a new instance of NetworkProfile. </summary>
@@ -23,19 +20,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of NetworkProfile. </summary>
-        /// <param name="networkInterfaces">
-        /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
-        /// Serialized Name: NetworkProfile.networkInterfaces
-        /// </param>
+        /// <param name="networkInterfaces"> Specifies the list of resource Ids for the network interfaces associated with the virtual machine. </param>
         internal NetworkProfile(IList<NetworkInterfaceReference> networkInterfaces)
         {
             NetworkInterfaces = networkInterfaces;
         }
 
-        /// <summary>
-        /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
-        /// Serialized Name: NetworkProfile.networkInterfaces
-        /// </summary>
+        /// <summary> Specifies the list of resource Ids for the network interfaces associated with the virtual machine. </summary>
         public IList<NetworkInterfaceReference> NetworkInterfaces { get; }
     }
 }

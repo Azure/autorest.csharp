@@ -31,9 +31,9 @@ namespace MgmtMultipleParentResource
             _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
         }
 
-        internal MgmtMultipleParentResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtMultipleParentResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool isInterimStateEnabled)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, isInterimStateEnabled);
             _operation = new OperationInternal<T>(clientDiagnostics, nextLinkOperation, response, "MgmtMultipleParentResourceArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 

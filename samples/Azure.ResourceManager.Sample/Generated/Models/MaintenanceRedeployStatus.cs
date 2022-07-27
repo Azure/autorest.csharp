@@ -9,10 +9,7 @@ using System;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Maintenance Operation Status.
-    /// Serialized Name: MaintenanceRedeployStatus
-    /// </summary>
+    /// <summary> Maintenance Operation Status. </summary>
     public partial class MaintenanceRedeployStatus
     {
         /// <summary> Initializes a new instance of MaintenanceRedeployStatus. </summary>
@@ -21,34 +18,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of MaintenanceRedeployStatus. </summary>
-        /// <param name="isCustomerInitiatedMaintenanceAllowed">
-        /// True, if customer is allowed to perform Maintenance.
-        /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed
-        /// </param>
-        /// <param name="preMaintenanceWindowStartOn">
-        /// Start Time for the Pre Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.preMaintenanceWindowStartTime
-        /// </param>
-        /// <param name="preMaintenanceWindowEndOn">
-        /// End Time for the Pre Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.preMaintenanceWindowEndTime
-        /// </param>
-        /// <param name="maintenanceWindowStartOn">
-        /// Start Time for the Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.maintenanceWindowStartTime
-        /// </param>
-        /// <param name="maintenanceWindowEndOn">
-        /// End Time for the Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.maintenanceWindowEndTime
-        /// </param>
-        /// <param name="lastOperationResultCode">
-        /// The Last Maintenance Operation Result Code.
-        /// Serialized Name: MaintenanceRedeployStatus.lastOperationResultCode
-        /// </param>
-        /// <param name="lastOperationMessage">
-        /// Message returned for the last Maintenance Operation.
-        /// Serialized Name: MaintenanceRedeployStatus.lastOperationMessage
-        /// </param>
+        /// <param name="isCustomerInitiatedMaintenanceAllowed"> True, if customer is allowed to perform Maintenance. </param>
+        /// <param name="preMaintenanceWindowStartOn"> Start Time for the Pre Maintenance Window. </param>
+        /// <param name="preMaintenanceWindowEndOn"> End Time for the Pre Maintenance Window. </param>
+        /// <param name="maintenanceWindowStartOn"> Start Time for the Maintenance Window. </param>
+        /// <param name="maintenanceWindowEndOn"> End Time for the Maintenance Window. </param>
+        /// <param name="lastOperationResultCode"> The Last Maintenance Operation Result Code. </param>
+        /// <param name="lastOperationMessage"> Message returned for the last Maintenance Operation. </param>
         internal MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed, DateTimeOffset? preMaintenanceWindowStartOn, DateTimeOffset? preMaintenanceWindowEndOn, DateTimeOffset? maintenanceWindowStartOn, DateTimeOffset? maintenanceWindowEndOn, MaintenanceOperationResultCodeType? lastOperationResultCode, string lastOperationMessage)
         {
             IsCustomerInitiatedMaintenanceAllowed = isCustomerInitiatedMaintenanceAllowed;
@@ -60,40 +36,19 @@ namespace Azure.ResourceManager.Sample.Models
             LastOperationMessage = lastOperationMessage;
         }
 
-        /// <summary>
-        /// True, if customer is allowed to perform Maintenance.
-        /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed
-        /// </summary>
+        /// <summary> True, if customer is allowed to perform Maintenance. </summary>
         public bool? IsCustomerInitiatedMaintenanceAllowed { get; }
-        /// <summary>
-        /// Start Time for the Pre Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.preMaintenanceWindowStartTime
-        /// </summary>
+        /// <summary> Start Time for the Pre Maintenance Window. </summary>
         public DateTimeOffset? PreMaintenanceWindowStartOn { get; }
-        /// <summary>
-        /// End Time for the Pre Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.preMaintenanceWindowEndTime
-        /// </summary>
+        /// <summary> End Time for the Pre Maintenance Window. </summary>
         public DateTimeOffset? PreMaintenanceWindowEndOn { get; }
-        /// <summary>
-        /// Start Time for the Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.maintenanceWindowStartTime
-        /// </summary>
+        /// <summary> Start Time for the Maintenance Window. </summary>
         public DateTimeOffset? MaintenanceWindowStartOn { get; }
-        /// <summary>
-        /// End Time for the Maintenance Window.
-        /// Serialized Name: MaintenanceRedeployStatus.maintenanceWindowEndTime
-        /// </summary>
+        /// <summary> End Time for the Maintenance Window. </summary>
         public DateTimeOffset? MaintenanceWindowEndOn { get; }
-        /// <summary>
-        /// The Last Maintenance Operation Result Code.
-        /// Serialized Name: MaintenanceRedeployStatus.lastOperationResultCode
-        /// </summary>
+        /// <summary> The Last Maintenance Operation Result Code. </summary>
         public MaintenanceOperationResultCodeType? LastOperationResultCode { get; }
-        /// <summary>
-        /// Message returned for the last Maintenance Operation.
-        /// Serialized Name: MaintenanceRedeployStatus.lastOperationMessage
-        /// </summary>
+        /// <summary> Message returned for the last Maintenance Operation. </summary>
         public string LastOperationMessage { get; }
     }
 }

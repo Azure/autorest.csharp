@@ -11,17 +11,11 @@ using System.Linq;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The Virtual Machine Scale Set List Skus operation response.
-    /// Serialized Name: VirtualMachineScaleSetListSkusResult
-    /// </summary>
+    /// <summary> The Virtual Machine Scale Set List Skus operation response. </summary>
     internal partial class VirtualMachineScaleSetListSkusResult
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
-        /// <param name="value">
-        /// The list of skus available for the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetListSkusResult.value
-        /// </param>
+        /// <param name="value"> The list of skus available for the virtual machine scale set. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal VirtualMachineScaleSetListSkusResult(IEnumerable<VirtualMachineScaleSetSku> value)
         {
@@ -34,29 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
-        /// <param name="value">
-        /// The list of skus available for the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetListSkusResult.value
-        /// </param>
-        /// <param name="nextLink">
-        /// The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
-        /// Serialized Name: VirtualMachineScaleSetListSkusResult.nextLink
-        /// </param>
+        /// <param name="value"> The list of skus available for the virtual machine scale set. </param>
+        /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus. </param>
         internal VirtualMachineScaleSetListSkusResult(IReadOnlyList<VirtualMachineScaleSetSku> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary>
-        /// The list of skus available for the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetListSkusResult.value
-        /// </summary>
+        /// <summary> The list of skus available for the virtual machine scale set. </summary>
         public IReadOnlyList<VirtualMachineScaleSetSku> Value { get; }
-        /// <summary>
-        /// The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
-        /// Serialized Name: VirtualMachineScaleSetListSkusResult.nextLink
-        /// </summary>
+        /// <summary> The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus. </summary>
         public string NextLink { get; }
     }
 }

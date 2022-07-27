@@ -1225,7 +1225,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await LogAnalyticsRestClient.ExportRequestRateByIntervalAsync(Id.SubscriptionId, location, content, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1253,7 +1253,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = LogAnalyticsRestClient.ExportRequestRateByInterval(Id.SubscriptionId, location, content, cancellationToken);
-                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -1281,7 +1281,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await LogAnalyticsRestClient.ExportThrottledRequestsAsync(Id.SubscriptionId, location, content, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1309,7 +1309,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = LogAnalyticsRestClient.ExportThrottledRequests(Id.SubscriptionId, location, content, cancellationToken);
-                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new SampleArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, content).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Inner error details.
-    /// Serialized Name: InnerError
-    /// </summary>
+    /// <summary> Inner error details. </summary>
     public partial class InnerError
     {
         /// <summary> Initializes a new instance of InnerError. </summary>
@@ -19,29 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of InnerError. </summary>
-        /// <param name="exceptiontype">
-        /// The exception type.
-        /// Serialized Name: InnerError.exceptiontype
-        /// </param>
-        /// <param name="errordetail">
-        /// The internal error message or exception dump.
-        /// Serialized Name: InnerError.errordetail
-        /// </param>
+        /// <param name="exceptiontype"> The exception type. </param>
+        /// <param name="errordetail"> The internal error message or exception dump. </param>
         internal InnerError(string exceptiontype, string errordetail)
         {
             Exceptiontype = exceptiontype;
             Errordetail = errordetail;
         }
 
-        /// <summary>
-        /// The exception type.
-        /// Serialized Name: InnerError.exceptiontype
-        /// </summary>
+        /// <summary> The exception type. </summary>
         public string Exceptiontype { get; }
-        /// <summary>
-        /// The internal error message or exception dump.
-        /// Serialized Name: InnerError.errordetail
-        /// </summary>
+        /// <summary> The internal error message or exception dump. </summary>
         public string Errordetail { get; }
     }
 }

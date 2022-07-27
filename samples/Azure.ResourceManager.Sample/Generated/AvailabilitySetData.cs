@@ -31,30 +31,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="sku">
-        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
-        /// Serialized Name: AvailabilitySet.sku
-        /// </param>
-        /// <param name="platformUpdateDomainCount">
-        /// Update Domain count.
-        /// Serialized Name: AvailabilitySet.properties.platformUpdateDomainCount
-        /// </param>
-        /// <param name="platformFaultDomainCount">
-        /// Fault Domain count.
-        /// Serialized Name: AvailabilitySet.properties.platformFaultDomainCount
-        /// </param>
-        /// <param name="virtualMachines">
-        /// A list of references to all virtual machines in the availability set.
-        /// Serialized Name: AvailabilitySet.properties.virtualMachines
-        /// </param>
-        /// <param name="proximityPlacementGroup">
-        /// Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
-        /// Serialized Name: AvailabilitySet.properties.proximityPlacementGroup
-        /// </param>
-        /// <param name="statuses">
-        /// The resource status information.
-        /// Serialized Name: AvailabilitySet.properties.statuses
-        /// </param>
+        /// <param name="sku"> Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;. </param>
+        /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
+        /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
+        /// <param name="virtualMachines"> A list of references to all virtual machines in the availability set. </param>
+        /// <param name="proximityPlacementGroup"> Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01. </param>
+        /// <param name="statuses"> The resource status information. </param>
         internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
@@ -65,30 +47,15 @@ namespace Azure.ResourceManager.Sample
             Statuses = statuses;
         }
 
-        /// <summary>
-        /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;.
-        /// Serialized Name: AvailabilitySet.sku
-        /// </summary>
+        /// <summary> Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;. </summary>
         public SampleSku Sku { get; set; }
-        /// <summary>
-        /// Update Domain count.
-        /// Serialized Name: AvailabilitySet.properties.platformUpdateDomainCount
-        /// </summary>
+        /// <summary> Update Domain count. </summary>
         public int? PlatformUpdateDomainCount { get; set; }
-        /// <summary>
-        /// Fault Domain count.
-        /// Serialized Name: AvailabilitySet.properties.platformFaultDomainCount
-        /// </summary>
+        /// <summary> Fault Domain count. </summary>
         public int? PlatformFaultDomainCount { get; set; }
-        /// <summary>
-        /// A list of references to all virtual machines in the availability set.
-        /// Serialized Name: AvailabilitySet.properties.virtualMachines
-        /// </summary>
+        /// <summary> A list of references to all virtual machines in the availability set. </summary>
         public IList<WritableSubResource> VirtualMachines { get; }
-        /// <summary>
-        /// Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
-        /// Serialized Name: AvailabilitySet.properties.proximityPlacementGroup
-        /// </summary>
+        /// <summary> Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01. </summary>
         internal WritableSubResource ProximityPlacementGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier ProximityPlacementGroupId
@@ -102,10 +69,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary>
-        /// The resource status information.
-        /// Serialized Name: AvailabilitySet.properties.statuses
-        /// </summary>
+        /// <summary> The resource status information. </summary>
         public IReadOnlyList<InstanceViewStatus> Statuses { get; }
     }
 }

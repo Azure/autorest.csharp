@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Contains the data disk images information.
-    /// Serialized Name: DataDiskImage
-    /// </summary>
+    /// <summary> Contains the data disk images information. </summary>
     public partial class DataDiskImage
     {
         /// <summary> Initializes a new instance of DataDiskImage. </summary>
@@ -19,19 +16,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of DataDiskImage. </summary>
-        /// <param name="lun">
-        /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
-        /// Serialized Name: DataDiskImage.lun
-        /// </param>
+        /// <param name="lun"> Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. </param>
         internal DataDiskImage(int? lun)
         {
             Lun = lun;
         }
 
-        /// <summary>
-        /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
-        /// Serialized Name: DataDiskImage.lun
-        /// </summary>
+        /// <summary> Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. </summary>
         public int? Lun { get; }
     }
 }

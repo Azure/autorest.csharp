@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Information about the number of virtual machine instances in each upgrade state.
-    /// Serialized Name: RollingUpgradeProgressInfo
-    /// </summary>
+    /// <summary> Information about the number of virtual machine instances in each upgrade state. </summary>
     public partial class RollingUpgradeProgressInfo
     {
         /// <summary> Initializes a new instance of RollingUpgradeProgressInfo. </summary>
@@ -19,22 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of RollingUpgradeProgressInfo. </summary>
-        /// <param name="successfulInstanceCount">
-        /// The number of instances that have been successfully upgraded.
-        /// Serialized Name: RollingUpgradeProgressInfo.successfulInstanceCount
-        /// </param>
-        /// <param name="failedInstanceCount">
-        /// The number of instances that have failed to be upgraded successfully.
-        /// Serialized Name: RollingUpgradeProgressInfo.failedInstanceCount
-        /// </param>
-        /// <param name="inProgressInstanceCount">
-        /// The number of instances that are currently being upgraded.
-        /// Serialized Name: RollingUpgradeProgressInfo.inProgressInstanceCount
-        /// </param>
-        /// <param name="pendingInstanceCount">
-        /// The number of instances that have not yet begun to be upgraded.
-        /// Serialized Name: RollingUpgradeProgressInfo.pendingInstanceCount
-        /// </param>
+        /// <param name="successfulInstanceCount"> The number of instances that have been successfully upgraded. </param>
+        /// <param name="failedInstanceCount"> The number of instances that have failed to be upgraded successfully. </param>
+        /// <param name="inProgressInstanceCount"> The number of instances that are currently being upgraded. </param>
+        /// <param name="pendingInstanceCount"> The number of instances that have not yet begun to be upgraded. </param>
         internal RollingUpgradeProgressInfo(int? successfulInstanceCount, int? failedInstanceCount, int? inProgressInstanceCount, int? pendingInstanceCount)
         {
             SuccessfulInstanceCount = successfulInstanceCount;
@@ -43,25 +28,13 @@ namespace Azure.ResourceManager.Sample.Models
             PendingInstanceCount = pendingInstanceCount;
         }
 
-        /// <summary>
-        /// The number of instances that have been successfully upgraded.
-        /// Serialized Name: RollingUpgradeProgressInfo.successfulInstanceCount
-        /// </summary>
+        /// <summary> The number of instances that have been successfully upgraded. </summary>
         public int? SuccessfulInstanceCount { get; }
-        /// <summary>
-        /// The number of instances that have failed to be upgraded successfully.
-        /// Serialized Name: RollingUpgradeProgressInfo.failedInstanceCount
-        /// </summary>
+        /// <summary> The number of instances that have failed to be upgraded successfully. </summary>
         public int? FailedInstanceCount { get; }
-        /// <summary>
-        /// The number of instances that are currently being upgraded.
-        /// Serialized Name: RollingUpgradeProgressInfo.inProgressInstanceCount
-        /// </summary>
+        /// <summary> The number of instances that are currently being upgraded. </summary>
         public int? InProgressInstanceCount { get; }
-        /// <summary>
-        /// The number of instances that have not yet begun to be upgraded.
-        /// Serialized Name: RollingUpgradeProgressInfo.pendingInstanceCount
-        /// </summary>
+        /// <summary> The number of instances that have not yet begun to be upgraded. </summary>
         public int? PendingInstanceCount { get; }
     }
 }

@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies how the virtual machine should be created.&lt;br&gt;&lt;br&gt; Possible values are:&lt;br&gt;&lt;br&gt; **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.&lt;br&gt;&lt;br&gt; **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.
-    /// Serialized Name: DiskCreateOptionTypes
-    /// </summary>
+    /// <summary> Specifies how the virtual machine should be created.&lt;br&gt;&lt;br&gt; Possible values are:&lt;br&gt;&lt;br&gt; **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.&lt;br&gt;&lt;br&gt; **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described. </summary>
     public readonly partial struct DiskCreateOptionType : IEquatable<DiskCreateOptionType>
     {
         private readonly string _value;
@@ -29,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
         private const string EmptyValue = "Empty";
         private const string AttachValue = "Attach";
 
-        /// <summary>
-        /// FromImage
-        /// Serialized Name: DiskCreateOptionTypes.FromImage
-        /// </summary>
+        /// <summary> FromImage. </summary>
         public static DiskCreateOptionType FromImage { get; } = new DiskCreateOptionType(FromImageValue);
-        /// <summary>
-        /// Empty
-        /// Serialized Name: DiskCreateOptionTypes.Empty
-        /// </summary>
+        /// <summary> Empty. </summary>
         public static DiskCreateOptionType Empty { get; } = new DiskCreateOptionType(EmptyValue);
-        /// <summary>
-        /// Attach
-        /// Serialized Name: DiskCreateOptionTypes.Attach
-        /// </summary>
+        /// <summary> Attach. </summary>
         public static DiskCreateOptionType Attach { get; } = new DiskCreateOptionType(AttachValue);
         /// <summary> Determines if two <see cref="DiskCreateOptionType"/> values are the same. </summary>
         public static bool operator ==(DiskCreateOptionType left, DiskCreateOptionType right) => left.Equals(right);

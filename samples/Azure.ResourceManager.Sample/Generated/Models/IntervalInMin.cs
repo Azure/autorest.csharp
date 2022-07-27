@@ -7,31 +7,16 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Interval value in minutes used to create LogAnalytics call rate logs.
-    /// Serialized Name: IntervalInMins
-    /// </summary>
+    /// <summary> Interval value in minutes used to create LogAnalytics call rate logs. </summary>
     public enum IntervalInMin
     {
-        /// <summary>
-        /// ThreeMins
-        /// Serialized Name: IntervalInMins.ThreeMins
-        /// </summary>
+        /// <summary> ThreeMins. </summary>
         ThreeMins,
-        /// <summary>
-        /// FiveMins
-        /// Serialized Name: IntervalInMins.FiveMins
-        /// </summary>
+        /// <summary> FiveMins. </summary>
         FiveMins,
-        /// <summary>
-        /// ThirtyMins
-        /// Serialized Name: IntervalInMins.ThirtyMins
-        /// </summary>
+        /// <summary> ThirtyMins. </summary>
         ThirtyMins,
-        /// <summary>
-        /// SixtyMins
-        /// Serialized Name: IntervalInMins.SixtyMins
-        /// </summary>
+        /// <summary> SixtyMins. </summary>
         SixtyMins
     }
 }

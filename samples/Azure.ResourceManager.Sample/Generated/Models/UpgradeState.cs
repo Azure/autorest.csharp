@@ -7,31 +7,16 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Code indicating the current status of the upgrade.
-    /// Serialized Name: UpgradeState
-    /// </summary>
+    /// <summary> Code indicating the current status of the upgrade. </summary>
     public enum UpgradeState
     {
-        /// <summary>
-        /// RollingForward
-        /// Serialized Name: UpgradeState.RollingForward
-        /// </summary>
+        /// <summary> RollingForward. </summary>
         RollingForward,
-        /// <summary>
-        /// Cancelled
-        /// Serialized Name: UpgradeState.Cancelled
-        /// </summary>
+        /// <summary> Cancelled. </summary>
         Cancelled,
-        /// <summary>
-        /// Completed
-        /// Serialized Name: UpgradeState.Completed
-        /// </summary>
+        /// <summary> Completed. </summary>
         Completed,
-        /// <summary>
-        /// Faulted
-        /// Serialized Name: UpgradeState.Faulted
-        /// </summary>
+        /// <summary> Faulted. </summary>
         Faulted
     }
 }

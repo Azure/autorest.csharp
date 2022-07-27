@@ -147,6 +147,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> keepPluralEnums,
             IReadOnlyList<string> noResourceSuffix,
             IReadOnlyList<string> schemasToPrependRPPrefix,
+            IReadOnlyList<string> enableLroInterimState,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -165,7 +166,6 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
             TestModelerConfiguration? testmodeler = default,
-            JsonElement? enableLroInterimState = default,
             JsonElement? operationIdMappings = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
@@ -208,14 +208,12 @@ namespace AutoRest.CSharp.Input
             KeepPluralEnums = keepPluralEnums;
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
+            EnableLroInterimState = enableLroInterimState;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
             DoesSingletonRequiresKeyword = !IsValidJsonElement(singletonRequiresKeyword) ? false : Convert.ToBoolean(singletonRequiresKeyword.ToString());
             TestModeler = testmodeler;
-            EnableLroInterimState = !IsValidJsonElement(enableLroInterimState)
-                ? new Dictionary<string, string>()
-                : JsonSerializer.Deserialize<Dictionary<string, string>>(enableLroInterimState.ToString());
             OperationIdMappings = !IsValidJsonElement(operationIdMappings)
                 ? new Dictionary<string, IReadOnlyDictionary<string, string>>()
                 : JsonSerializer.Deserialize<Dictionary<string, IReadOnlyDictionary<string, string>>>(operationIdMappings.ToString());
@@ -256,7 +254,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepOrphanedModels { get; }
         public IReadOnlyList<string> KeepPluralEnums { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
-        public IReadOnlyDictionary<string, string> EnableLroInterimState { get; }
+        public IReadOnlyList<string> EnableLroInterimState { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
@@ -276,6 +274,7 @@ namespace AutoRest.CSharp.Input
                 keepPluralEnums: autoRest.GetValue<string[]?>("keep-plural-enums").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                enableLroInterimState: autoRest.GetValue<string[]?> ("enable-lro-interim-state").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -294,7 +293,6 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
-                enableLroInterimState: autoRest.GetValue<JsonElement?>("enable-lro-interim-state").GetAwaiter().GetResult(),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
         }
 
@@ -348,6 +346,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(KeepPluralEnums), out var keepPluralEnums);
             root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffix);
             root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefix);
+            root.TryGetProperty(nameof(EnableLroInterimState), out var enableLroInterimState);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -393,6 +392,9 @@ namespace AutoRest.CSharp.Input
             var prependRPPrefixList = prependRPPrefix.ValueKind == JsonValueKind.Array
                 ? prependRPPrefix.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
+            var enableLroInterimStateList = enableLroInterimState.ValueKind == JsonValueKind.Array
+                ? enableLroInterimState.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : Array.Empty<string>();
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -400,7 +402,6 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
             root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
-            root.TryGetProperty(nameof(EnableLroInterimState), out var enableLroInterimState);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
 
             return new MgmtConfiguration(
@@ -413,6 +414,7 @@ namespace AutoRest.CSharp.Input
                 keepPluralEnums: keepPluralEnumsList,
                 noResourceSuffix: noResourceSuffixList,
                 schemasToPrependRPPrefix: prependRPPrefixList,
+                enableLroInterimState: enableLroInterimStateList,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
@@ -431,7 +433,6 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
-                enableLroInterimState: enableLroInterimState,
                 operationIdMappings: operationIdMappings);
         }
 

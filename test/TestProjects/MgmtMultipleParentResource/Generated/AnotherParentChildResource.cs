@@ -208,7 +208,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _anotherParentChildAnotherChildrenRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMultipleParentResourceArmOperation<AnotherParentChildResource>(new AnotherParentChildOperationSource(Client), _anotherParentChildAnotherChildrenClientDiagnostics, Pipeline, _anotherParentChildAnotherChildrenRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtMultipleParentResourceArmOperation<AnotherParentChildResource>(new AnotherParentChildOperationSource(Client), _anotherParentChildAnotherChildrenClientDiagnostics, Pipeline, _anotherParentChildAnotherChildrenRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -238,7 +238,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _anotherParentChildAnotherChildrenRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken);
-                var operation = new MgmtMultipleParentResourceArmOperation<AnotherParentChildResource>(new AnotherParentChildOperationSource(Client), _anotherParentChildAnotherChildrenClientDiagnostics, Pipeline, _anotherParentChildAnotherChildrenRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtMultipleParentResourceArmOperation<AnotherParentChildResource>(new AnotherParentChildOperationSource(Client), _anotherParentChildAnotherChildrenClientDiagnostics, Pipeline, _anotherParentChildAnotherChildrenRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

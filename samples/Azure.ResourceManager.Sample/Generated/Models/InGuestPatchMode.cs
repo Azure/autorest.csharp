@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the mode of in-guest patching to IaaS virtual machine.&lt;br /&gt;&lt;br /&gt; Possible values are:&lt;br /&gt;&lt;br /&gt; **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false&lt;br /&gt;&lt;br /&gt; **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. &lt;br /&gt;&lt;br /&gt; ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true 
-    /// Serialized Name: InGuestPatchMode
-    /// </summary>
+    /// <summary> Specifies the mode of in-guest patching to IaaS virtual machine.&lt;br /&gt;&lt;br /&gt; Possible values are:&lt;br /&gt;&lt;br /&gt; **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false&lt;br /&gt;&lt;br /&gt; **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. &lt;br /&gt;&lt;br /&gt; ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true. </summary>
     public readonly partial struct InGuestPatchMode : IEquatable<InGuestPatchMode>
     {
         private readonly string _value;
@@ -29,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
         private const string AutomaticByOSValue = "AutomaticByOS";
         private const string AutomaticByPlatformValue = "AutomaticByPlatform";
 
-        /// <summary>
-        /// Manual
-        /// Serialized Name: InGuestPatchMode.Manual
-        /// </summary>
+        /// <summary> Manual. </summary>
         public static InGuestPatchMode Manual { get; } = new InGuestPatchMode(ManualValue);
-        /// <summary>
-        /// AutomaticByOS
-        /// Serialized Name: InGuestPatchMode.AutomaticByOS
-        /// </summary>
+        /// <summary> AutomaticByOS. </summary>
         public static InGuestPatchMode AutomaticByOS { get; } = new InGuestPatchMode(AutomaticByOSValue);
-        /// <summary>
-        /// AutomaticByPlatform
-        /// Serialized Name: InGuestPatchMode.AutomaticByPlatform
-        /// </summary>
+        /// <summary> AutomaticByPlatform. </summary>
         public static InGuestPatchMode AutomaticByPlatform { get; } = new InGuestPatchMode(AutomaticByPlatformValue);
         /// <summary> Determines if two <see cref="InGuestPatchMode"/> values are the same. </summary>
         public static bool operator ==(InGuestPatchMode left, InGuestPatchMode right) => left.Equals(right);

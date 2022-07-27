@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Instance view statuses summary for virtual machines of a virtual machine scale set.
-    /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary
-    /// </summary>
+    /// <summary> Instance view statuses summary for virtual machines of a virtual machine scale set. </summary>
     internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
@@ -23,19 +20,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
-        /// <param name="statusesSummary">
-        /// The extensions information.
-        /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary.statusesSummary
-        /// </param>
+        /// <param name="statusesSummary"> The extensions information. </param>
         internal VirtualMachineScaleSetInstanceViewStatusesSummary(IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
         {
             StatusesSummary = statusesSummary;
         }
 
-        /// <summary>
-        /// The extensions information.
-        /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary.statusesSummary
-        /// </summary>
+        /// <summary> The extensions information. </summary>
         public IReadOnlyList<VirtualMachineStatusCodeCount> StatusesSummary { get; }
     }
 }

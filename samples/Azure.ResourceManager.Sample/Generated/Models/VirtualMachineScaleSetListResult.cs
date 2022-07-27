@@ -12,17 +12,11 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The List Virtual Machine operation response.
-    /// Serialized Name: VirtualMachineScaleSetListResult
-    /// </summary>
+    /// <summary> The List Virtual Machine operation response. </summary>
     internal partial class VirtualMachineScaleSetListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
-        /// <param name="value">
-        /// The list of virtual machine scale sets.
-        /// Serialized Name: VirtualMachineScaleSetListResult.value
-        /// </param>
+        /// <param name="value"> The list of virtual machine scale sets. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal VirtualMachineScaleSetListResult(IEnumerable<VirtualMachineScaleSetData> value)
         {
@@ -35,29 +29,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
-        /// <param name="value">
-        /// The list of virtual machine scale sets.
-        /// Serialized Name: VirtualMachineScaleSetListResult.value
-        /// </param>
-        /// <param name="nextLink">
-        /// The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
-        /// Serialized Name: VirtualMachineScaleSetListResult.nextLink
-        /// </param>
+        /// <param name="value"> The list of virtual machine scale sets. </param>
+        /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS. </param>
         internal VirtualMachineScaleSetListResult(IReadOnlyList<VirtualMachineScaleSetData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary>
-        /// The list of virtual machine scale sets.
-        /// Serialized Name: VirtualMachineScaleSetListResult.value
-        /// </summary>
+        /// <summary> The list of virtual machine scale sets. </summary>
         public IReadOnlyList<VirtualMachineScaleSetData> Value { get; }
-        /// <summary>
-        /// The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
-        /// Serialized Name: VirtualMachineScaleSetListResult.nextLink
-        /// </summary>
+        /// <summary> The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS. </summary>
         public string NextLink { get; }
     }
 }

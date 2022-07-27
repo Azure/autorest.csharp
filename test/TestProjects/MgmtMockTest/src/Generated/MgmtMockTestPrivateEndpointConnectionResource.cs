@@ -149,7 +149,7 @@ namespace MgmtMockTest
             try
             {
                 var response = await _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockTestArmOperation<MgmtMockTestPrivateEndpointConnectionResource>(new MgmtMockTestPrivateEndpointConnectionOperationSource(Client), _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtMockTestArmOperation<MgmtMockTestPrivateEndpointConnectionResource>(new MgmtMockTestPrivateEndpointConnectionOperationSource(Client), _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -175,7 +175,7 @@ namespace MgmtMockTest
             try
             {
                 var response = _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtMockTestArmOperation<MgmtMockTestPrivateEndpointConnectionResource>(new MgmtMockTestPrivateEndpointConnectionOperationSource(Client), _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtMockTestArmOperation<MgmtMockTestPrivateEndpointConnectionResource>(new MgmtMockTestPrivateEndpointConnectionOperationSource(Client), _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mgmtMockTestPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

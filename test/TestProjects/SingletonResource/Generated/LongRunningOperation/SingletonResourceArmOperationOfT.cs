@@ -31,9 +31,9 @@ namespace SingletonResource
             _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
         }
 
-        internal SingletonResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal SingletonResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool isInterimStateEnabled)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, isInterimStateEnabled);
             _operation = new OperationInternal<T>(clientDiagnostics, nextLinkOperation, response, "SingletonResourceArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 

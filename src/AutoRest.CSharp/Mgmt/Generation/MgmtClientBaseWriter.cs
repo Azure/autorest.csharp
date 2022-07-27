@@ -852,8 +852,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
+                var interimController = string.Empty;
                 if (operation.OperationSource is not null)
                 {
+                    interimController = Configuration.MgmtConfiguration.EnableLroInterimState.Contains(operation.OperationId) ? ", true" : ", false";
                     _writer.Append($"new {operation.OperationSource.TypeName}(");
                     if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
                         _writer.Append($"{ArmClientReference}");
@@ -863,7 +865,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}{interimController}");
             }
             _writer.Line($");");
             var waitForCompletionMethod = operation.MgmtReturnType is null ?

@@ -7,21 +7,12 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The operating system of the osDiskImage.
-    /// Serialized Name: OperatingSystemTypes
-    /// </summary>
+    /// <summary> The operating system of the osDiskImage. </summary>
     public enum OperatingSystemType
     {
-        /// <summary>
-        /// Windows
-        /// Serialized Name: OperatingSystemTypes.Windows
-        /// </summary>
+        /// <summary> Windows. </summary>
         Windows,
-        /// <summary>
-        /// Linux
-        /// Serialized Name: OperatingSystemTypes.Linux
-        /// </summary>
+        /// <summary> Linux. </summary>
         Linux
     }
 }

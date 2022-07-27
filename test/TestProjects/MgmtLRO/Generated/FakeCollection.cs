@@ -75,7 +75,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtLROArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtLROArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace MgmtLRO
             try
             {
                 var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, data, cancellationToken);
-                var operation = new MgmtLROArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtLROArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

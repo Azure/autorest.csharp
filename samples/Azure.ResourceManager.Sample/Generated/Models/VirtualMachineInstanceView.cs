@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The instance view of a virtual machine.
-    /// Serialized Name: VirtualMachineInstanceView
-    /// </summary>
+    /// <summary> The instance view of a virtual machine. </summary>
     public partial class VirtualMachineInstanceView
     {
         /// <summary> Initializes a new instance of VirtualMachineInstanceView. </summary>
@@ -25,70 +22,22 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineInstanceView. </summary>
-        /// <param name="platformUpdateDomain">
-        /// Specifies the update domain of the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain
-        /// </param>
-        /// <param name="platformFaultDomain">
-        /// Specifies the fault domain of the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.platformFaultDomain
-        /// </param>
-        /// <param name="computerName">
-        /// The computer name assigned to the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.computerName
-        /// </param>
-        /// <param name="osName">
-        /// The Operating System running on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.osName
-        /// </param>
-        /// <param name="osVersion">
-        /// The version of Operating System running on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.osVersion
-        /// </param>
-        /// <param name="hyperVGeneration">
-        /// Specifies the HyperVGeneration Type associated with a resource
-        /// Serialized Name: VirtualMachineInstanceView.hyperVGeneration
-        /// </param>
-        /// <param name="rdpThumbPrint">
-        /// The Remote desktop certificate thumbprint.
-        /// Serialized Name: VirtualMachineInstanceView.rdpThumbPrint
-        /// </param>
-        /// <param name="vmAgent">
-        /// The VM Agent running on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.vmAgent
-        /// </param>
-        /// <param name="maintenanceRedeployStatus">
-        /// The Maintenance Operation status on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.maintenanceRedeployStatus
-        /// </param>
-        /// <param name="disks">
-        /// The virtual machine disk information.
-        /// Serialized Name: VirtualMachineInstanceView.disks
-        /// </param>
-        /// <param name="extensions">
-        /// The extensions information.
-        /// Serialized Name: VirtualMachineInstanceView.extensions
-        /// </param>
-        /// <param name="vmHealth">
-        /// The health status for the VM.
-        /// Serialized Name: VirtualMachineInstanceView.vmHealth
-        /// </param>
-        /// <param name="bootDiagnostics">
-        /// Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor.
-        /// Serialized Name: VirtualMachineInstanceView.bootDiagnostics
-        /// </param>
-        /// <param name="assignedHost">
-        /// Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
-        /// Serialized Name: VirtualMachineInstanceView.assignedHost
-        /// </param>
-        /// <param name="statuses">
-        /// The resource status information.
-        /// Serialized Name: VirtualMachineInstanceView.statuses
-        /// </param>
-        /// <param name="patchStatus">
-        /// The status of virtual machine patch operations.
-        /// Serialized Name: VirtualMachineInstanceView.patchStatus
-        /// </param>
+        /// <param name="platformUpdateDomain"> Specifies the update domain of the virtual machine. </param>
+        /// <param name="platformFaultDomain"> Specifies the fault domain of the virtual machine. </param>
+        /// <param name="computerName"> The computer name assigned to the virtual machine. </param>
+        /// <param name="osName"> The Operating System running on the virtual machine. </param>
+        /// <param name="osVersion"> The version of Operating System running on the virtual machine. </param>
+        /// <param name="hyperVGeneration"> Specifies the HyperVGeneration Type associated with a resource. </param>
+        /// <param name="rdpThumbPrint"> The Remote desktop certificate thumbprint. </param>
+        /// <param name="vmAgent"> The VM Agent running on the virtual machine. </param>
+        /// <param name="maintenanceRedeployStatus"> The Maintenance Operation status on the virtual machine. </param>
+        /// <param name="disks"> The virtual machine disk information. </param>
+        /// <param name="extensions"> The extensions information. </param>
+        /// <param name="vmHealth"> The health status for the VM. </param>
+        /// <param name="bootDiagnostics"> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </param>
+        /// <param name="assignedHost"> Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </param>
+        /// <param name="statuses"> The resource status information. </param>
+        /// <param name="patchStatus"> The status of virtual machine patch operations. </param>
         internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string osName, string osVersion, HyperVGeneration? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus)
         {
             PlatformUpdateDomain = platformUpdateDomain;
@@ -109,94 +58,43 @@ namespace Azure.ResourceManager.Sample.Models
             PatchStatus = patchStatus;
         }
 
-        /// <summary>
-        /// Specifies the update domain of the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain
-        /// </summary>
+        /// <summary> Specifies the update domain of the virtual machine. </summary>
         public int? PlatformUpdateDomain { get; }
-        /// <summary>
-        /// Specifies the fault domain of the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.platformFaultDomain
-        /// </summary>
+        /// <summary> Specifies the fault domain of the virtual machine. </summary>
         public int? PlatformFaultDomain { get; }
-        /// <summary>
-        /// The computer name assigned to the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.computerName
-        /// </summary>
+        /// <summary> The computer name assigned to the virtual machine. </summary>
         public string ComputerName { get; }
-        /// <summary>
-        /// The Operating System running on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.osName
-        /// </summary>
+        /// <summary> The Operating System running on the virtual machine. </summary>
         public string OsName { get; }
-        /// <summary>
-        /// The version of Operating System running on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.osVersion
-        /// </summary>
+        /// <summary> The version of Operating System running on the virtual machine. </summary>
         public string OsVersion { get; }
-        /// <summary>
-        /// Specifies the HyperVGeneration Type associated with a resource
-        /// Serialized Name: VirtualMachineInstanceView.hyperVGeneration
-        /// </summary>
+        /// <summary> Specifies the HyperVGeneration Type associated with a resource. </summary>
         public HyperVGeneration? HyperVGeneration { get; }
-        /// <summary>
-        /// The Remote desktop certificate thumbprint.
-        /// Serialized Name: VirtualMachineInstanceView.rdpThumbPrint
-        /// </summary>
+        /// <summary> The Remote desktop certificate thumbprint. </summary>
         public string RdpThumbPrint { get; }
-        /// <summary>
-        /// The VM Agent running on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.vmAgent
-        /// </summary>
+        /// <summary> The VM Agent running on the virtual machine. </summary>
         public VirtualMachineAgentInstanceView VmAgent { get; }
-        /// <summary>
-        /// The Maintenance Operation status on the virtual machine.
-        /// Serialized Name: VirtualMachineInstanceView.maintenanceRedeployStatus
-        /// </summary>
+        /// <summary> The Maintenance Operation status on the virtual machine. </summary>
         public MaintenanceRedeployStatus MaintenanceRedeployStatus { get; }
-        /// <summary>
-        /// The virtual machine disk information.
-        /// Serialized Name: VirtualMachineInstanceView.disks
-        /// </summary>
+        /// <summary> The virtual machine disk information. </summary>
         public IReadOnlyList<DiskInstanceView> Disks { get; }
-        /// <summary>
-        /// The extensions information.
-        /// Serialized Name: VirtualMachineInstanceView.extensions
-        /// </summary>
+        /// <summary> The extensions information. </summary>
         public IReadOnlyList<VirtualMachineExtensionInstanceView> Extensions { get; }
-        /// <summary>
-        /// The health status for the VM.
-        /// Serialized Name: VirtualMachineInstanceView.vmHealth
-        /// </summary>
+        /// <summary> The health status for the VM. </summary>
         internal VirtualMachineHealthStatus VmHealth { get; }
-        /// <summary>
-        /// The health status information for the VM.
-        /// Serialized Name: VirtualMachineHealthStatus.status
-        /// </summary>
+        /// <summary> The health status information for the VM. </summary>
         public InstanceViewStatus VmHealthStatus
         {
             get => VmHealth?.Status;
         }
 
-        /// <summary>
-        /// Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor.
-        /// Serialized Name: VirtualMachineInstanceView.bootDiagnostics
-        /// </summary>
+        /// <summary> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </summary>
         public BootDiagnosticsInstanceView BootDiagnostics { get; }
-        /// <summary>
-        /// Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
-        /// Serialized Name: VirtualMachineInstanceView.assignedHost
-        /// </summary>
+        /// <summary> Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </summary>
         public string AssignedHost { get; }
-        /// <summary>
-        /// The resource status information.
-        /// Serialized Name: VirtualMachineInstanceView.statuses
-        /// </summary>
+        /// <summary> The resource status information. </summary>
         public IReadOnlyList<InstanceViewStatus> Statuses { get; }
-        /// <summary>
-        /// The status of virtual machine patch operations.
-        /// Serialized Name: VirtualMachineInstanceView.patchStatus
-        /// </summary>
+        /// <summary> The status of virtual machine patch operations. </summary>
         public VirtualMachinePatchStatus PatchStatus { get; }
     }
 }

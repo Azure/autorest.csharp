@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)
-    /// Serialized Name: VirtualMachineSizeTypes
-    /// </summary>
+    /// <summary> Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). </summary>
     public readonly partial struct VirtualMachineSizeType : IEquatable<VirtualMachineSizeType>
     {
         private readonly string _value;
@@ -192,835 +189,337 @@ namespace Azure.ResourceManager.Sample.Models
         private const string StandardNV12Value = "Standard_NV12";
         private const string StandardNV24Value = "Standard_NV24";
 
-        /// <summary>
-        /// Basic_A0
-        /// Serialized Name: VirtualMachineSizeTypes.Basic_A0
-        /// </summary>
+        /// <summary> Basic_A0. </summary>
         public static VirtualMachineSizeType BasicA0 { get; } = new VirtualMachineSizeType(BasicA0Value);
-        /// <summary>
-        /// Basic_A1
-        /// Serialized Name: VirtualMachineSizeTypes.Basic_A1
-        /// </summary>
+        /// <summary> Basic_A1. </summary>
         public static VirtualMachineSizeType BasicA1 { get; } = new VirtualMachineSizeType(BasicA1Value);
-        /// <summary>
-        /// Basic_A2
-        /// Serialized Name: VirtualMachineSizeTypes.Basic_A2
-        /// </summary>
+        /// <summary> Basic_A2. </summary>
         public static VirtualMachineSizeType BasicA2 { get; } = new VirtualMachineSizeType(BasicA2Value);
-        /// <summary>
-        /// Basic_A3
-        /// Serialized Name: VirtualMachineSizeTypes.Basic_A3
-        /// </summary>
+        /// <summary> Basic_A3. </summary>
         public static VirtualMachineSizeType BasicA3 { get; } = new VirtualMachineSizeType(BasicA3Value);
-        /// <summary>
-        /// Basic_A4
-        /// Serialized Name: VirtualMachineSizeTypes.Basic_A4
-        /// </summary>
+        /// <summary> Basic_A4. </summary>
         public static VirtualMachineSizeType BasicA4 { get; } = new VirtualMachineSizeType(BasicA4Value);
-        /// <summary>
-        /// Standard_A0
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A0
-        /// </summary>
+        /// <summary> Standard_A0. </summary>
         public static VirtualMachineSizeType StandardA0 { get; } = new VirtualMachineSizeType(StandardA0Value);
-        /// <summary>
-        /// Standard_A1
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A1
-        /// </summary>
+        /// <summary> Standard_A1. </summary>
         public static VirtualMachineSizeType StandardA1 { get; } = new VirtualMachineSizeType(StandardA1Value);
-        /// <summary>
-        /// Standard_A2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A2
-        /// </summary>
+        /// <summary> Standard_A2. </summary>
         public static VirtualMachineSizeType StandardA2 { get; } = new VirtualMachineSizeType(StandardA2Value);
-        /// <summary>
-        /// Standard_A3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A3
-        /// </summary>
+        /// <summary> Standard_A3. </summary>
         public static VirtualMachineSizeType StandardA3 { get; } = new VirtualMachineSizeType(StandardA3Value);
-        /// <summary>
-        /// Standard_A4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A4
-        /// </summary>
+        /// <summary> Standard_A4. </summary>
         public static VirtualMachineSizeType StandardA4 { get; } = new VirtualMachineSizeType(StandardA4Value);
-        /// <summary>
-        /// Standard_A5
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A5
-        /// </summary>
+        /// <summary> Standard_A5. </summary>
         public static VirtualMachineSizeType StandardA5 { get; } = new VirtualMachineSizeType(StandardA5Value);
-        /// <summary>
-        /// Standard_A6
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A6
-        /// </summary>
+        /// <summary> Standard_A6. </summary>
         public static VirtualMachineSizeType StandardA6 { get; } = new VirtualMachineSizeType(StandardA6Value);
-        /// <summary>
-        /// Standard_A7
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A7
-        /// </summary>
+        /// <summary> Standard_A7. </summary>
         public static VirtualMachineSizeType StandardA7 { get; } = new VirtualMachineSizeType(StandardA7Value);
-        /// <summary>
-        /// Standard_A8
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A8
-        /// </summary>
+        /// <summary> Standard_A8. </summary>
         public static VirtualMachineSizeType StandardA8 { get; } = new VirtualMachineSizeType(StandardA8Value);
-        /// <summary>
-        /// Standard_A9
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A9
-        /// </summary>
+        /// <summary> Standard_A9. </summary>
         public static VirtualMachineSizeType StandardA9 { get; } = new VirtualMachineSizeType(StandardA9Value);
-        /// <summary>
-        /// Standard_A10
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A10
-        /// </summary>
+        /// <summary> Standard_A10. </summary>
         public static VirtualMachineSizeType StandardA10 { get; } = new VirtualMachineSizeType(StandardA10Value);
-        /// <summary>
-        /// Standard_A11
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A11
-        /// </summary>
+        /// <summary> Standard_A11. </summary>
         public static VirtualMachineSizeType StandardA11 { get; } = new VirtualMachineSizeType(StandardA11Value);
-        /// <summary>
-        /// Standard_A1_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A1_v2
-        /// </summary>
+        /// <summary> Standard_A1_v2. </summary>
         public static VirtualMachineSizeType StandardA1V2 { get; } = new VirtualMachineSizeType(StandardA1V2Value);
-        /// <summary>
-        /// Standard_A2_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A2_v2
-        /// </summary>
+        /// <summary> Standard_A2_v2. </summary>
         public static VirtualMachineSizeType StandardA2V2 { get; } = new VirtualMachineSizeType(StandardA2V2Value);
-        /// <summary>
-        /// Standard_A4_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A4_v2
-        /// </summary>
+        /// <summary> Standard_A4_v2. </summary>
         public static VirtualMachineSizeType StandardA4V2 { get; } = new VirtualMachineSizeType(StandardA4V2Value);
-        /// <summary>
-        /// Standard_A8_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A8_v2
-        /// </summary>
+        /// <summary> Standard_A8_v2. </summary>
         public static VirtualMachineSizeType StandardA8V2 { get; } = new VirtualMachineSizeType(StandardA8V2Value);
-        /// <summary>
-        /// Standard_A2m_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A2m_v2
-        /// </summary>
+        /// <summary> Standard_A2m_v2. </summary>
         public static VirtualMachineSizeType StandardA2MV2 { get; } = new VirtualMachineSizeType(StandardA2MV2Value);
-        /// <summary>
-        /// Standard_A4m_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A4m_v2
-        /// </summary>
+        /// <summary> Standard_A4m_v2. </summary>
         public static VirtualMachineSizeType StandardA4MV2 { get; } = new VirtualMachineSizeType(StandardA4MV2Value);
-        /// <summary>
-        /// Standard_A8m_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_A8m_v2
-        /// </summary>
+        /// <summary> Standard_A8m_v2. </summary>
         public static VirtualMachineSizeType StandardA8MV2 { get; } = new VirtualMachineSizeType(StandardA8MV2Value);
-        /// <summary>
-        /// Standard_B1s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_B1s
-        /// </summary>
+        /// <summary> Standard_B1s. </summary>
         public static VirtualMachineSizeType StandardB1S { get; } = new VirtualMachineSizeType(StandardB1SValue);
-        /// <summary>
-        /// Standard_B1ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_B1ms
-        /// </summary>
+        /// <summary> Standard_B1ms. </summary>
         public static VirtualMachineSizeType StandardB1Ms { get; } = new VirtualMachineSizeType(StandardB1MsValue);
-        /// <summary>
-        /// Standard_B2s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_B2s
-        /// </summary>
+        /// <summary> Standard_B2s. </summary>
         public static VirtualMachineSizeType StandardB2S { get; } = new VirtualMachineSizeType(StandardB2SValue);
-        /// <summary>
-        /// Standard_B2ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_B2ms
-        /// </summary>
+        /// <summary> Standard_B2ms. </summary>
         public static VirtualMachineSizeType StandardB2Ms { get; } = new VirtualMachineSizeType(StandardB2MsValue);
-        /// <summary>
-        /// Standard_B4ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_B4ms
-        /// </summary>
+        /// <summary> Standard_B4ms. </summary>
         public static VirtualMachineSizeType StandardB4Ms { get; } = new VirtualMachineSizeType(StandardB4MsValue);
-        /// <summary>
-        /// Standard_B8ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_B8ms
-        /// </summary>
+        /// <summary> Standard_B8ms. </summary>
         public static VirtualMachineSizeType StandardB8Ms { get; } = new VirtualMachineSizeType(StandardB8MsValue);
-        /// <summary>
-        /// Standard_D1
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D1
-        /// </summary>
+        /// <summary> Standard_D1. </summary>
         public static VirtualMachineSizeType StandardD1 { get; } = new VirtualMachineSizeType(StandardD1Value);
-        /// <summary>
-        /// Standard_D2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D2
-        /// </summary>
+        /// <summary> Standard_D2. </summary>
         public static VirtualMachineSizeType StandardD2 { get; } = new VirtualMachineSizeType(StandardD2Value);
-        /// <summary>
-        /// Standard_D3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D3
-        /// </summary>
+        /// <summary> Standard_D3. </summary>
         public static VirtualMachineSizeType StandardD3 { get; } = new VirtualMachineSizeType(StandardD3Value);
-        /// <summary>
-        /// Standard_D4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D4
-        /// </summary>
+        /// <summary> Standard_D4. </summary>
         public static VirtualMachineSizeType StandardD4 { get; } = new VirtualMachineSizeType(StandardD4Value);
-        /// <summary>
-        /// Standard_D11
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D11
-        /// </summary>
+        /// <summary> Standard_D11. </summary>
         public static VirtualMachineSizeType StandardD11 { get; } = new VirtualMachineSizeType(StandardD11Value);
-        /// <summary>
-        /// Standard_D12
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D12
-        /// </summary>
+        /// <summary> Standard_D12. </summary>
         public static VirtualMachineSizeType StandardD12 { get; } = new VirtualMachineSizeType(StandardD12Value);
-        /// <summary>
-        /// Standard_D13
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D13
-        /// </summary>
+        /// <summary> Standard_D13. </summary>
         public static VirtualMachineSizeType StandardD13 { get; } = new VirtualMachineSizeType(StandardD13Value);
-        /// <summary>
-        /// Standard_D14
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D14
-        /// </summary>
+        /// <summary> Standard_D14. </summary>
         public static VirtualMachineSizeType StandardD14 { get; } = new VirtualMachineSizeType(StandardD14Value);
-        /// <summary>
-        /// Standard_D1_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D1_v2
-        /// </summary>
+        /// <summary> Standard_D1_v2. </summary>
         public static VirtualMachineSizeType StandardD1V2 { get; } = new VirtualMachineSizeType(StandardD1V2Value);
-        /// <summary>
-        /// Standard_D2_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D2_v2
-        /// </summary>
+        /// <summary> Standard_D2_v2. </summary>
         public static VirtualMachineSizeType StandardD2V2 { get; } = new VirtualMachineSizeType(StandardD2V2Value);
-        /// <summary>
-        /// Standard_D3_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D3_v2
-        /// </summary>
+        /// <summary> Standard_D3_v2. </summary>
         public static VirtualMachineSizeType StandardD3V2 { get; } = new VirtualMachineSizeType(StandardD3V2Value);
-        /// <summary>
-        /// Standard_D4_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D4_v2
-        /// </summary>
+        /// <summary> Standard_D4_v2. </summary>
         public static VirtualMachineSizeType StandardD4V2 { get; } = new VirtualMachineSizeType(StandardD4V2Value);
-        /// <summary>
-        /// Standard_D5_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D5_v2
-        /// </summary>
+        /// <summary> Standard_D5_v2. </summary>
         public static VirtualMachineSizeType StandardD5V2 { get; } = new VirtualMachineSizeType(StandardD5V2Value);
-        /// <summary>
-        /// Standard_D2_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D2_v3
-        /// </summary>
+        /// <summary> Standard_D2_v3. </summary>
         public static VirtualMachineSizeType StandardD2V3 { get; } = new VirtualMachineSizeType(StandardD2V3Value);
-        /// <summary>
-        /// Standard_D4_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D4_v3
-        /// </summary>
+        /// <summary> Standard_D4_v3. </summary>
         public static VirtualMachineSizeType StandardD4V3 { get; } = new VirtualMachineSizeType(StandardD4V3Value);
-        /// <summary>
-        /// Standard_D8_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D8_v3
-        /// </summary>
+        /// <summary> Standard_D8_v3. </summary>
         public static VirtualMachineSizeType StandardD8V3 { get; } = new VirtualMachineSizeType(StandardD8V3Value);
-        /// <summary>
-        /// Standard_D16_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D16_v3
-        /// </summary>
+        /// <summary> Standard_D16_v3. </summary>
         public static VirtualMachineSizeType StandardD16V3 { get; } = new VirtualMachineSizeType(StandardD16V3Value);
-        /// <summary>
-        /// Standard_D32_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D32_v3
-        /// </summary>
+        /// <summary> Standard_D32_v3. </summary>
         public static VirtualMachineSizeType StandardD32V3 { get; } = new VirtualMachineSizeType(StandardD32V3Value);
-        /// <summary>
-        /// Standard_D64_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D64_v3
-        /// </summary>
+        /// <summary> Standard_D64_v3. </summary>
         public static VirtualMachineSizeType StandardD64V3 { get; } = new VirtualMachineSizeType(StandardD64V3Value);
-        /// <summary>
-        /// Standard_D2s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D2s_v3
-        /// </summary>
+        /// <summary> Standard_D2s_v3. </summary>
         public static VirtualMachineSizeType StandardD2SV3 { get; } = new VirtualMachineSizeType(StandardD2SV3Value);
-        /// <summary>
-        /// Standard_D4s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D4s_v3
-        /// </summary>
+        /// <summary> Standard_D4s_v3. </summary>
         public static VirtualMachineSizeType StandardD4SV3 { get; } = new VirtualMachineSizeType(StandardD4SV3Value);
-        /// <summary>
-        /// Standard_D8s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D8s_v3
-        /// </summary>
+        /// <summary> Standard_D8s_v3. </summary>
         public static VirtualMachineSizeType StandardD8SV3 { get; } = new VirtualMachineSizeType(StandardD8SV3Value);
-        /// <summary>
-        /// Standard_D16s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D16s_v3
-        /// </summary>
+        /// <summary> Standard_D16s_v3. </summary>
         public static VirtualMachineSizeType StandardD16SV3 { get; } = new VirtualMachineSizeType(StandardD16SV3Value);
-        /// <summary>
-        /// Standard_D32s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D32s_v3
-        /// </summary>
+        /// <summary> Standard_D32s_v3. </summary>
         public static VirtualMachineSizeType StandardD32SV3 { get; } = new VirtualMachineSizeType(StandardD32SV3Value);
-        /// <summary>
-        /// Standard_D64s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D64s_v3
-        /// </summary>
+        /// <summary> Standard_D64s_v3. </summary>
         public static VirtualMachineSizeType StandardD64SV3 { get; } = new VirtualMachineSizeType(StandardD64SV3Value);
-        /// <summary>
-        /// Standard_D11_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D11_v2
-        /// </summary>
+        /// <summary> Standard_D11_v2. </summary>
         public static VirtualMachineSizeType StandardD11V2 { get; } = new VirtualMachineSizeType(StandardD11V2Value);
-        /// <summary>
-        /// Standard_D12_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D12_v2
-        /// </summary>
+        /// <summary> Standard_D12_v2. </summary>
         public static VirtualMachineSizeType StandardD12V2 { get; } = new VirtualMachineSizeType(StandardD12V2Value);
-        /// <summary>
-        /// Standard_D13_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D13_v2
-        /// </summary>
+        /// <summary> Standard_D13_v2. </summary>
         public static VirtualMachineSizeType StandardD13V2 { get; } = new VirtualMachineSizeType(StandardD13V2Value);
-        /// <summary>
-        /// Standard_D14_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D14_v2
-        /// </summary>
+        /// <summary> Standard_D14_v2. </summary>
         public static VirtualMachineSizeType StandardD14V2 { get; } = new VirtualMachineSizeType(StandardD14V2Value);
-        /// <summary>
-        /// Standard_D15_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_D15_v2
-        /// </summary>
+        /// <summary> Standard_D15_v2. </summary>
         public static VirtualMachineSizeType StandardD15V2 { get; } = new VirtualMachineSizeType(StandardD15V2Value);
-        /// <summary>
-        /// Standard_DS1
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS1
-        /// </summary>
+        /// <summary> Standard_DS1. </summary>
         public static VirtualMachineSizeType StandardDS1 { get; } = new VirtualMachineSizeType(StandardDS1Value);
-        /// <summary>
-        /// Standard_DS2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS2
-        /// </summary>
+        /// <summary> Standard_DS2. </summary>
         public static VirtualMachineSizeType StandardDS2 { get; } = new VirtualMachineSizeType(StandardDS2Value);
-        /// <summary>
-        /// Standard_DS3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS3
-        /// </summary>
+        /// <summary> Standard_DS3. </summary>
         public static VirtualMachineSizeType StandardDS3 { get; } = new VirtualMachineSizeType(StandardDS3Value);
-        /// <summary>
-        /// Standard_DS4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS4
-        /// </summary>
+        /// <summary> Standard_DS4. </summary>
         public static VirtualMachineSizeType StandardDS4 { get; } = new VirtualMachineSizeType(StandardDS4Value);
-        /// <summary>
-        /// Standard_DS11
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS11
-        /// </summary>
+        /// <summary> Standard_DS11. </summary>
         public static VirtualMachineSizeType StandardDS11 { get; } = new VirtualMachineSizeType(StandardDS11Value);
-        /// <summary>
-        /// Standard_DS12
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS12
-        /// </summary>
+        /// <summary> Standard_DS12. </summary>
         public static VirtualMachineSizeType StandardDS12 { get; } = new VirtualMachineSizeType(StandardDS12Value);
-        /// <summary>
-        /// Standard_DS13
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS13
-        /// </summary>
+        /// <summary> Standard_DS13. </summary>
         public static VirtualMachineSizeType StandardDS13 { get; } = new VirtualMachineSizeType(StandardDS13Value);
-        /// <summary>
-        /// Standard_DS14
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS14
-        /// </summary>
+        /// <summary> Standard_DS14. </summary>
         public static VirtualMachineSizeType StandardDS14 { get; } = new VirtualMachineSizeType(StandardDS14Value);
-        /// <summary>
-        /// Standard_DS1_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS1_v2
-        /// </summary>
+        /// <summary> Standard_DS1_v2. </summary>
         public static VirtualMachineSizeType StandardDS1V2 { get; } = new VirtualMachineSizeType(StandardDS1V2Value);
-        /// <summary>
-        /// Standard_DS2_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS2_v2
-        /// </summary>
+        /// <summary> Standard_DS2_v2. </summary>
         public static VirtualMachineSizeType StandardDS2V2 { get; } = new VirtualMachineSizeType(StandardDS2V2Value);
-        /// <summary>
-        /// Standard_DS3_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS3_v2
-        /// </summary>
+        /// <summary> Standard_DS3_v2. </summary>
         public static VirtualMachineSizeType StandardDS3V2 { get; } = new VirtualMachineSizeType(StandardDS3V2Value);
-        /// <summary>
-        /// Standard_DS4_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS4_v2
-        /// </summary>
+        /// <summary> Standard_DS4_v2. </summary>
         public static VirtualMachineSizeType StandardDS4V2 { get; } = new VirtualMachineSizeType(StandardDS4V2Value);
-        /// <summary>
-        /// Standard_DS5_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS5_v2
-        /// </summary>
+        /// <summary> Standard_DS5_v2. </summary>
         public static VirtualMachineSizeType StandardDS5V2 { get; } = new VirtualMachineSizeType(StandardDS5V2Value);
-        /// <summary>
-        /// Standard_DS11_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS11_v2
-        /// </summary>
+        /// <summary> Standard_DS11_v2. </summary>
         public static VirtualMachineSizeType StandardDS11V2 { get; } = new VirtualMachineSizeType(StandardDS11V2Value);
-        /// <summary>
-        /// Standard_DS12_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS12_v2
-        /// </summary>
+        /// <summary> Standard_DS12_v2. </summary>
         public static VirtualMachineSizeType StandardDS12V2 { get; } = new VirtualMachineSizeType(StandardDS12V2Value);
-        /// <summary>
-        /// Standard_DS13_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS13_v2
-        /// </summary>
+        /// <summary> Standard_DS13_v2. </summary>
         public static VirtualMachineSizeType StandardDS13V2 { get; } = new VirtualMachineSizeType(StandardDS13V2Value);
-        /// <summary>
-        /// Standard_DS14_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS14_v2
-        /// </summary>
+        /// <summary> Standard_DS14_v2. </summary>
         public static VirtualMachineSizeType StandardDS14V2 { get; } = new VirtualMachineSizeType(StandardDS14V2Value);
-        /// <summary>
-        /// Standard_DS15_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS15_v2
-        /// </summary>
+        /// <summary> Standard_DS15_v2. </summary>
         public static VirtualMachineSizeType StandardDS15V2 { get; } = new VirtualMachineSizeType(StandardDS15V2Value);
-        /// <summary>
-        /// Standard_DS13-4_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS13-4_v2
-        /// </summary>
+        /// <summary> Standard_DS13-4_v2. </summary>
         public static VirtualMachineSizeType StandardDS134V2 { get; } = new VirtualMachineSizeType(StandardDS134V2Value);
-        /// <summary>
-        /// Standard_DS13-2_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS13-2_v2
-        /// </summary>
+        /// <summary> Standard_DS13-2_v2. </summary>
         public static VirtualMachineSizeType StandardDS132V2 { get; } = new VirtualMachineSizeType(StandardDS132V2Value);
-        /// <summary>
-        /// Standard_DS14-8_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS14-8_v2
-        /// </summary>
+        /// <summary> Standard_DS14-8_v2. </summary>
         public static VirtualMachineSizeType StandardDS148V2 { get; } = new VirtualMachineSizeType(StandardDS148V2Value);
-        /// <summary>
-        /// Standard_DS14-4_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_DS14-4_v2
-        /// </summary>
+        /// <summary> Standard_DS14-4_v2. </summary>
         public static VirtualMachineSizeType StandardDS144V2 { get; } = new VirtualMachineSizeType(StandardDS144V2Value);
-        /// <summary>
-        /// Standard_E2_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E2_v3
-        /// </summary>
+        /// <summary> Standard_E2_v3. </summary>
         public static VirtualMachineSizeType StandardE2V3 { get; } = new VirtualMachineSizeType(StandardE2V3Value);
-        /// <summary>
-        /// Standard_E4_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E4_v3
-        /// </summary>
+        /// <summary> Standard_E4_v3. </summary>
         public static VirtualMachineSizeType StandardE4V3 { get; } = new VirtualMachineSizeType(StandardE4V3Value);
-        /// <summary>
-        /// Standard_E8_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E8_v3
-        /// </summary>
+        /// <summary> Standard_E8_v3. </summary>
         public static VirtualMachineSizeType StandardE8V3 { get; } = new VirtualMachineSizeType(StandardE8V3Value);
-        /// <summary>
-        /// Standard_E16_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E16_v3
-        /// </summary>
+        /// <summary> Standard_E16_v3. </summary>
         public static VirtualMachineSizeType StandardE16V3 { get; } = new VirtualMachineSizeType(StandardE16V3Value);
-        /// <summary>
-        /// Standard_E32_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E32_v3
-        /// </summary>
+        /// <summary> Standard_E32_v3. </summary>
         public static VirtualMachineSizeType StandardE32V3 { get; } = new VirtualMachineSizeType(StandardE32V3Value);
-        /// <summary>
-        /// Standard_E64_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E64_v3
-        /// </summary>
+        /// <summary> Standard_E64_v3. </summary>
         public static VirtualMachineSizeType StandardE64V3 { get; } = new VirtualMachineSizeType(StandardE64V3Value);
-        /// <summary>
-        /// Standard_E2s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E2s_v3
-        /// </summary>
+        /// <summary> Standard_E2s_v3. </summary>
         public static VirtualMachineSizeType StandardE2SV3 { get; } = new VirtualMachineSizeType(StandardE2SV3Value);
-        /// <summary>
-        /// Standard_E4s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E4s_v3
-        /// </summary>
+        /// <summary> Standard_E4s_v3. </summary>
         public static VirtualMachineSizeType StandardE4SV3 { get; } = new VirtualMachineSizeType(StandardE4SV3Value);
-        /// <summary>
-        /// Standard_E8s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E8s_v3
-        /// </summary>
+        /// <summary> Standard_E8s_v3. </summary>
         public static VirtualMachineSizeType StandardE8SV3 { get; } = new VirtualMachineSizeType(StandardE8SV3Value);
-        /// <summary>
-        /// Standard_E16s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E16s_v3
-        /// </summary>
+        /// <summary> Standard_E16s_v3. </summary>
         public static VirtualMachineSizeType StandardE16SV3 { get; } = new VirtualMachineSizeType(StandardE16SV3Value);
-        /// <summary>
-        /// Standard_E32s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E32s_v3
-        /// </summary>
+        /// <summary> Standard_E32s_v3. </summary>
         public static VirtualMachineSizeType StandardE32SV3 { get; } = new VirtualMachineSizeType(StandardE32SV3Value);
-        /// <summary>
-        /// Standard_E64s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E64s_v3
-        /// </summary>
+        /// <summary> Standard_E64s_v3. </summary>
         public static VirtualMachineSizeType StandardE64SV3 { get; } = new VirtualMachineSizeType(StandardE64SV3Value);
-        /// <summary>
-        /// Standard_E32-16_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E32-16_v3
-        /// </summary>
+        /// <summary> Standard_E32-16_v3. </summary>
         public static VirtualMachineSizeType StandardE3216V3 { get; } = new VirtualMachineSizeType(StandardE3216V3Value);
-        /// <summary>
-        /// Standard_E32-8s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E32-8s_v3
-        /// </summary>
+        /// <summary> Standard_E32-8s_v3. </summary>
         public static VirtualMachineSizeType StandardE328SV3 { get; } = new VirtualMachineSizeType(StandardE328SV3Value);
-        /// <summary>
-        /// Standard_E64-32s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E64-32s_v3
-        /// </summary>
+        /// <summary> Standard_E64-32s_v3. </summary>
         public static VirtualMachineSizeType StandardE6432SV3 { get; } = new VirtualMachineSizeType(StandardE6432SV3Value);
-        /// <summary>
-        /// Standard_E64-16s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_E64-16s_v3
-        /// </summary>
+        /// <summary> Standard_E64-16s_v3. </summary>
         public static VirtualMachineSizeType StandardE6416SV3 { get; } = new VirtualMachineSizeType(StandardE6416SV3Value);
-        /// <summary>
-        /// Standard_F1
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F1
-        /// </summary>
+        /// <summary> Standard_F1. </summary>
         public static VirtualMachineSizeType StandardF1 { get; } = new VirtualMachineSizeType(StandardF1Value);
-        /// <summary>
-        /// Standard_F2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F2
-        /// </summary>
+        /// <summary> Standard_F2. </summary>
         public static VirtualMachineSizeType StandardF2 { get; } = new VirtualMachineSizeType(StandardF2Value);
-        /// <summary>
-        /// Standard_F4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F4
-        /// </summary>
+        /// <summary> Standard_F4. </summary>
         public static VirtualMachineSizeType StandardF4 { get; } = new VirtualMachineSizeType(StandardF4Value);
-        /// <summary>
-        /// Standard_F8
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F8
-        /// </summary>
+        /// <summary> Standard_F8. </summary>
         public static VirtualMachineSizeType StandardF8 { get; } = new VirtualMachineSizeType(StandardF8Value);
-        /// <summary>
-        /// Standard_F16
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F16
-        /// </summary>
+        /// <summary> Standard_F16. </summary>
         public static VirtualMachineSizeType StandardF16 { get; } = new VirtualMachineSizeType(StandardF16Value);
-        /// <summary>
-        /// Standard_F1s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F1s
-        /// </summary>
+        /// <summary> Standard_F1s. </summary>
         public static VirtualMachineSizeType StandardF1S { get; } = new VirtualMachineSizeType(StandardF1SValue);
-        /// <summary>
-        /// Standard_F2s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F2s
-        /// </summary>
+        /// <summary> Standard_F2s. </summary>
         public static VirtualMachineSizeType StandardF2S { get; } = new VirtualMachineSizeType(StandardF2SValue);
-        /// <summary>
-        /// Standard_F4s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F4s
-        /// </summary>
+        /// <summary> Standard_F4s. </summary>
         public static VirtualMachineSizeType StandardF4S { get; } = new VirtualMachineSizeType(StandardF4SValue);
-        /// <summary>
-        /// Standard_F8s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F8s
-        /// </summary>
+        /// <summary> Standard_F8s. </summary>
         public static VirtualMachineSizeType StandardF8S { get; } = new VirtualMachineSizeType(StandardF8SValue);
-        /// <summary>
-        /// Standard_F16s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F16s
-        /// </summary>
+        /// <summary> Standard_F16s. </summary>
         public static VirtualMachineSizeType StandardF16S { get; } = new VirtualMachineSizeType(StandardF16SValue);
-        /// <summary>
-        /// Standard_F2s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F2s_v2
-        /// </summary>
+        /// <summary> Standard_F2s_v2. </summary>
         public static VirtualMachineSizeType StandardF2SV2 { get; } = new VirtualMachineSizeType(StandardF2SV2Value);
-        /// <summary>
-        /// Standard_F4s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F4s_v2
-        /// </summary>
+        /// <summary> Standard_F4s_v2. </summary>
         public static VirtualMachineSizeType StandardF4SV2 { get; } = new VirtualMachineSizeType(StandardF4SV2Value);
-        /// <summary>
-        /// Standard_F8s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F8s_v2
-        /// </summary>
+        /// <summary> Standard_F8s_v2. </summary>
         public static VirtualMachineSizeType StandardF8SV2 { get; } = new VirtualMachineSizeType(StandardF8SV2Value);
-        /// <summary>
-        /// Standard_F16s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F16s_v2
-        /// </summary>
+        /// <summary> Standard_F16s_v2. </summary>
         public static VirtualMachineSizeType StandardF16SV2 { get; } = new VirtualMachineSizeType(StandardF16SV2Value);
-        /// <summary>
-        /// Standard_F32s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F32s_v2
-        /// </summary>
+        /// <summary> Standard_F32s_v2. </summary>
         public static VirtualMachineSizeType StandardF32SV2 { get; } = new VirtualMachineSizeType(StandardF32SV2Value);
-        /// <summary>
-        /// Standard_F64s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F64s_v2
-        /// </summary>
+        /// <summary> Standard_F64s_v2. </summary>
         public static VirtualMachineSizeType StandardF64SV2 { get; } = new VirtualMachineSizeType(StandardF64SV2Value);
-        /// <summary>
-        /// Standard_F72s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_F72s_v2
-        /// </summary>
+        /// <summary> Standard_F72s_v2. </summary>
         public static VirtualMachineSizeType StandardF72SV2 { get; } = new VirtualMachineSizeType(StandardF72SV2Value);
-        /// <summary>
-        /// Standard_G1
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_G1
-        /// </summary>
+        /// <summary> Standard_G1. </summary>
         public static VirtualMachineSizeType StandardG1 { get; } = new VirtualMachineSizeType(StandardG1Value);
-        /// <summary>
-        /// Standard_G2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_G2
-        /// </summary>
+        /// <summary> Standard_G2. </summary>
         public static VirtualMachineSizeType StandardG2 { get; } = new VirtualMachineSizeType(StandardG2Value);
-        /// <summary>
-        /// Standard_G3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_G3
-        /// </summary>
+        /// <summary> Standard_G3. </summary>
         public static VirtualMachineSizeType StandardG3 { get; } = new VirtualMachineSizeType(StandardG3Value);
-        /// <summary>
-        /// Standard_G4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_G4
-        /// </summary>
+        /// <summary> Standard_G4. </summary>
         public static VirtualMachineSizeType StandardG4 { get; } = new VirtualMachineSizeType(StandardG4Value);
-        /// <summary>
-        /// Standard_G5
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_G5
-        /// </summary>
+        /// <summary> Standard_G5. </summary>
         public static VirtualMachineSizeType StandardG5 { get; } = new VirtualMachineSizeType(StandardG5Value);
-        /// <summary>
-        /// Standard_GS1
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS1
-        /// </summary>
+        /// <summary> Standard_GS1. </summary>
         public static VirtualMachineSizeType StandardGS1 { get; } = new VirtualMachineSizeType(StandardGS1Value);
-        /// <summary>
-        /// Standard_GS2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS2
-        /// </summary>
+        /// <summary> Standard_GS2. </summary>
         public static VirtualMachineSizeType StandardGS2 { get; } = new VirtualMachineSizeType(StandardGS2Value);
-        /// <summary>
-        /// Standard_GS3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS3
-        /// </summary>
+        /// <summary> Standard_GS3. </summary>
         public static VirtualMachineSizeType StandardGS3 { get; } = new VirtualMachineSizeType(StandardGS3Value);
-        /// <summary>
-        /// Standard_GS4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS4
-        /// </summary>
+        /// <summary> Standard_GS4. </summary>
         public static VirtualMachineSizeType StandardGS4 { get; } = new VirtualMachineSizeType(StandardGS4Value);
-        /// <summary>
-        /// Standard_GS5
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS5
-        /// </summary>
+        /// <summary> Standard_GS5. </summary>
         public static VirtualMachineSizeType StandardGS5 { get; } = new VirtualMachineSizeType(StandardGS5Value);
-        /// <summary>
-        /// Standard_GS4-8
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS4-8
-        /// </summary>
+        /// <summary> Standard_GS4-8. </summary>
         public static VirtualMachineSizeType StandardGS48 { get; } = new VirtualMachineSizeType(StandardGS48Value);
-        /// <summary>
-        /// Standard_GS4-4
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS4-4
-        /// </summary>
+        /// <summary> Standard_GS4-4. </summary>
         public static VirtualMachineSizeType StandardGS44 { get; } = new VirtualMachineSizeType(StandardGS44Value);
-        /// <summary>
-        /// Standard_GS5-16
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS5-16
-        /// </summary>
+        /// <summary> Standard_GS5-16. </summary>
         public static VirtualMachineSizeType StandardGS516 { get; } = new VirtualMachineSizeType(StandardGS516Value);
-        /// <summary>
-        /// Standard_GS5-8
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_GS5-8
-        /// </summary>
+        /// <summary> Standard_GS5-8. </summary>
         public static VirtualMachineSizeType StandardGS58 { get; } = new VirtualMachineSizeType(StandardGS58Value);
-        /// <summary>
-        /// Standard_H8
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_H8
-        /// </summary>
+        /// <summary> Standard_H8. </summary>
         public static VirtualMachineSizeType StandardH8 { get; } = new VirtualMachineSizeType(StandardH8Value);
-        /// <summary>
-        /// Standard_H16
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_H16
-        /// </summary>
+        /// <summary> Standard_H16. </summary>
         public static VirtualMachineSizeType StandardH16 { get; } = new VirtualMachineSizeType(StandardH16Value);
-        /// <summary>
-        /// Standard_H8m
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_H8m
-        /// </summary>
+        /// <summary> Standard_H8m. </summary>
         public static VirtualMachineSizeType StandardH8M { get; } = new VirtualMachineSizeType(StandardH8MValue);
-        /// <summary>
-        /// Standard_H16m
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_H16m
-        /// </summary>
+        /// <summary> Standard_H16m. </summary>
         public static VirtualMachineSizeType StandardH16M { get; } = new VirtualMachineSizeType(StandardH16MValue);
-        /// <summary>
-        /// Standard_H16r
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_H16r
-        /// </summary>
+        /// <summary> Standard_H16r. </summary>
         public static VirtualMachineSizeType StandardH16R { get; } = new VirtualMachineSizeType(StandardH16RValue);
-        /// <summary>
-        /// Standard_H16mr
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_H16mr
-        /// </summary>
+        /// <summary> Standard_H16mr. </summary>
         public static VirtualMachineSizeType StandardH16Mr { get; } = new VirtualMachineSizeType(StandardH16MrValue);
-        /// <summary>
-        /// Standard_L4s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_L4s
-        /// </summary>
+        /// <summary> Standard_L4s. </summary>
         public static VirtualMachineSizeType StandardL4S { get; } = new VirtualMachineSizeType(StandardL4SValue);
-        /// <summary>
-        /// Standard_L8s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_L8s
-        /// </summary>
+        /// <summary> Standard_L8s. </summary>
         public static VirtualMachineSizeType StandardL8S { get; } = new VirtualMachineSizeType(StandardL8SValue);
-        /// <summary>
-        /// Standard_L16s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_L16s
-        /// </summary>
+        /// <summary> Standard_L16s. </summary>
         public static VirtualMachineSizeType StandardL16S { get; } = new VirtualMachineSizeType(StandardL16SValue);
-        /// <summary>
-        /// Standard_L32s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_L32s
-        /// </summary>
+        /// <summary> Standard_L32s. </summary>
         public static VirtualMachineSizeType StandardL32S { get; } = new VirtualMachineSizeType(StandardL32SValue);
-        /// <summary>
-        /// Standard_M64s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M64s
-        /// </summary>
+        /// <summary> Standard_M64s. </summary>
         public static VirtualMachineSizeType StandardM64S { get; } = new VirtualMachineSizeType(StandardM64SValue);
-        /// <summary>
-        /// Standard_M64ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M64ms
-        /// </summary>
+        /// <summary> Standard_M64ms. </summary>
         public static VirtualMachineSizeType StandardM64Ms { get; } = new VirtualMachineSizeType(StandardM64MsValue);
-        /// <summary>
-        /// Standard_M128s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M128s
-        /// </summary>
+        /// <summary> Standard_M128s. </summary>
         public static VirtualMachineSizeType StandardM128S { get; } = new VirtualMachineSizeType(StandardM128SValue);
-        /// <summary>
-        /// Standard_M128ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M128ms
-        /// </summary>
+        /// <summary> Standard_M128ms. </summary>
         public static VirtualMachineSizeType StandardM128Ms { get; } = new VirtualMachineSizeType(StandardM128MsValue);
-        /// <summary>
-        /// Standard_M64-32ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M64-32ms
-        /// </summary>
+        /// <summary> Standard_M64-32ms. </summary>
         public static VirtualMachineSizeType StandardM6432Ms { get; } = new VirtualMachineSizeType(StandardM6432MsValue);
-        /// <summary>
-        /// Standard_M64-16ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M64-16ms
-        /// </summary>
+        /// <summary> Standard_M64-16ms. </summary>
         public static VirtualMachineSizeType StandardM6416Ms { get; } = new VirtualMachineSizeType(StandardM6416MsValue);
-        /// <summary>
-        /// Standard_M128-64ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M128-64ms
-        /// </summary>
+        /// <summary> Standard_M128-64ms. </summary>
         public static VirtualMachineSizeType StandardM12864Ms { get; } = new VirtualMachineSizeType(StandardM12864MsValue);
-        /// <summary>
-        /// Standard_M128-32ms
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_M128-32ms
-        /// </summary>
+        /// <summary> Standard_M128-32ms. </summary>
         public static VirtualMachineSizeType StandardM12832Ms { get; } = new VirtualMachineSizeType(StandardM12832MsValue);
-        /// <summary>
-        /// Standard_NC6
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC6
-        /// </summary>
+        /// <summary> Standard_NC6. </summary>
         public static VirtualMachineSizeType StandardNC6 { get; } = new VirtualMachineSizeType(StandardNC6Value);
-        /// <summary>
-        /// Standard_NC12
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC12
-        /// </summary>
+        /// <summary> Standard_NC12. </summary>
         public static VirtualMachineSizeType StandardNC12 { get; } = new VirtualMachineSizeType(StandardNC12Value);
-        /// <summary>
-        /// Standard_NC24
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC24
-        /// </summary>
+        /// <summary> Standard_NC24. </summary>
         public static VirtualMachineSizeType StandardNC24 { get; } = new VirtualMachineSizeType(StandardNC24Value);
-        /// <summary>
-        /// Standard_NC24r
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC24r
-        /// </summary>
+        /// <summary> Standard_NC24r. </summary>
         public static VirtualMachineSizeType StandardNC24R { get; } = new VirtualMachineSizeType(StandardNC24RValue);
-        /// <summary>
-        /// Standard_NC6s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC6s_v2
-        /// </summary>
+        /// <summary> Standard_NC6s_v2. </summary>
         public static VirtualMachineSizeType StandardNC6SV2 { get; } = new VirtualMachineSizeType(StandardNC6SV2Value);
-        /// <summary>
-        /// Standard_NC12s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC12s_v2
-        /// </summary>
+        /// <summary> Standard_NC12s_v2. </summary>
         public static VirtualMachineSizeType StandardNC12SV2 { get; } = new VirtualMachineSizeType(StandardNC12SV2Value);
-        /// <summary>
-        /// Standard_NC24s_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC24s_v2
-        /// </summary>
+        /// <summary> Standard_NC24s_v2. </summary>
         public static VirtualMachineSizeType StandardNC24SV2 { get; } = new VirtualMachineSizeType(StandardNC24SV2Value);
-        /// <summary>
-        /// Standard_NC24rs_v2
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC24rs_v2
-        /// </summary>
+        /// <summary> Standard_NC24rs_v2. </summary>
         public static VirtualMachineSizeType StandardNC24RsV2 { get; } = new VirtualMachineSizeType(StandardNC24RsV2Value);
-        /// <summary>
-        /// Standard_NC6s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC6s_v3
-        /// </summary>
+        /// <summary> Standard_NC6s_v3. </summary>
         public static VirtualMachineSizeType StandardNC6SV3 { get; } = new VirtualMachineSizeType(StandardNC6SV3Value);
-        /// <summary>
-        /// Standard_NC12s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC12s_v3
-        /// </summary>
+        /// <summary> Standard_NC12s_v3. </summary>
         public static VirtualMachineSizeType StandardNC12SV3 { get; } = new VirtualMachineSizeType(StandardNC12SV3Value);
-        /// <summary>
-        /// Standard_NC24s_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC24s_v3
-        /// </summary>
+        /// <summary> Standard_NC24s_v3. </summary>
         public static VirtualMachineSizeType StandardNC24SV3 { get; } = new VirtualMachineSizeType(StandardNC24SV3Value);
-        /// <summary>
-        /// Standard_NC24rs_v3
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NC24rs_v3
-        /// </summary>
+        /// <summary> Standard_NC24rs_v3. </summary>
         public static VirtualMachineSizeType StandardNC24RsV3 { get; } = new VirtualMachineSizeType(StandardNC24RsV3Value);
-        /// <summary>
-        /// Standard_ND6s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_ND6s
-        /// </summary>
+        /// <summary> Standard_ND6s. </summary>
         public static VirtualMachineSizeType StandardND6S { get; } = new VirtualMachineSizeType(StandardND6SValue);
-        /// <summary>
-        /// Standard_ND12s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_ND12s
-        /// </summary>
+        /// <summary> Standard_ND12s. </summary>
         public static VirtualMachineSizeType StandardND12S { get; } = new VirtualMachineSizeType(StandardND12SValue);
-        /// <summary>
-        /// Standard_ND24s
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_ND24s
-        /// </summary>
+        /// <summary> Standard_ND24s. </summary>
         public static VirtualMachineSizeType StandardND24S { get; } = new VirtualMachineSizeType(StandardND24SValue);
-        /// <summary>
-        /// Standard_ND24rs
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_ND24rs
-        /// </summary>
+        /// <summary> Standard_ND24rs. </summary>
         public static VirtualMachineSizeType StandardND24Rs { get; } = new VirtualMachineSizeType(StandardND24RsValue);
-        /// <summary>
-        /// Standard_NV6
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NV6
-        /// </summary>
+        /// <summary> Standard_NV6. </summary>
         public static VirtualMachineSizeType StandardNV6 { get; } = new VirtualMachineSizeType(StandardNV6Value);
-        /// <summary>
-        /// Standard_NV12
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NV12
-        /// </summary>
+        /// <summary> Standard_NV12. </summary>
         public static VirtualMachineSizeType StandardNV12 { get; } = new VirtualMachineSizeType(StandardNV12Value);
-        /// <summary>
-        /// Standard_NV24
-        /// Serialized Name: VirtualMachineSizeTypes.Standard_NV24
-        /// </summary>
+        /// <summary> Standard_NV24. </summary>
         public static VirtualMachineSizeType StandardNV24 { get; } = new VirtualMachineSizeType(StandardNV24Value);
         /// <summary> Determines if two <see cref="VirtualMachineSizeType"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineSizeType left, VirtualMachineSizeType right) => left.Equals(right);

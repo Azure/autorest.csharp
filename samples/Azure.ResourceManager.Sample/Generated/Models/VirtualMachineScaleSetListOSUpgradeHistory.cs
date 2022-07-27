@@ -12,17 +12,11 @@ using Azure;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// List of Virtual Machine Scale Set OS Upgrade History operation response.
-    /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory
-    /// </summary>
+    /// <summary> List of Virtual Machine Scale Set OS Upgrade History operation response. </summary>
     internal partial class VirtualMachineScaleSetListOSUpgradeHistory
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
-        /// <param name="value">
-        /// The list of OS upgrades performed on the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
-        /// </param>
+        /// <param name="value"> The list of OS upgrades performed on the virtual machine scale set. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal VirtualMachineScaleSetListOSUpgradeHistory(IEnumerable<UpgradeOperationHistoricalStatusInfo> value)
         {
@@ -35,18 +29,9 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
-        /// <param name="value">
-        /// The list of OS upgrades performed on the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
-        /// </param>
-        /// <param name="etag">
-        /// Modified whenever there is a change.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.etag
-        /// </param>
-        /// <param name="nextLink">
-        /// The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink
-        /// </param>
+        /// <param name="value"> The list of OS upgrades performed on the virtual machine scale set. </param>
+        /// <param name="etag"> Modified whenever there is a change. </param>
+        /// <param name="nextLink"> The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades. </param>
         internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink)
         {
             Value = value;
@@ -54,20 +39,11 @@ namespace Azure.ResourceManager.Sample.Models
             NextLink = nextLink;
         }
 
-        /// <summary>
-        /// The list of OS upgrades performed on the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
-        /// </summary>
+        /// <summary> The list of OS upgrades performed on the virtual machine scale set. </summary>
         public IReadOnlyList<UpgradeOperationHistoricalStatusInfo> Value { get; }
-        /// <summary>
-        /// Modified whenever there is a change.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.etag
-        /// </summary>
+        /// <summary> Modified whenever there is a change. </summary>
         public ETag? Etag { get; }
-        /// <summary>
-        /// The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
-        /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink
-        /// </summary>
+        /// <summary> The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades. </summary>
         public string NextLink { get; }
     }
 }

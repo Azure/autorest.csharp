@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Describes the outcome of an install operation for a given patch.
-    /// Serialized Name: PatchAssessmentState
-    /// </summary>
+    /// <summary> Describes the outcome of an install operation for a given patch. </summary>
     public readonly partial struct PatchAssessmentState : IEquatable<PatchAssessmentState>
     {
         private readonly string _value;
@@ -32,35 +29,17 @@ namespace Azure.ResourceManager.Sample.Models
         private const string PendingValue = "Pending";
         private const string AvailableValue = "Available";
 
-        /// <summary>
-        /// Installed
-        /// Serialized Name: PatchAssessmentState.Installed
-        /// </summary>
+        /// <summary> Installed. </summary>
         public static PatchAssessmentState Installed { get; } = new PatchAssessmentState(InstalledValue);
-        /// <summary>
-        /// Failed
-        /// Serialized Name: PatchAssessmentState.Failed
-        /// </summary>
+        /// <summary> Failed. </summary>
         public static PatchAssessmentState Failed { get; } = new PatchAssessmentState(FailedValue);
-        /// <summary>
-        /// Excluded
-        /// Serialized Name: PatchAssessmentState.Excluded
-        /// </summary>
+        /// <summary> Excluded. </summary>
         public static PatchAssessmentState Excluded { get; } = new PatchAssessmentState(ExcludedValue);
-        /// <summary>
-        /// NotSelected
-        /// Serialized Name: PatchAssessmentState.NotSelected
-        /// </summary>
+        /// <summary> NotSelected. </summary>
         public static PatchAssessmentState NotSelected { get; } = new PatchAssessmentState(NotSelectedValue);
-        /// <summary>
-        /// Pending
-        /// Serialized Name: PatchAssessmentState.Pending
-        /// </summary>
+        /// <summary> Pending. </summary>
         public static PatchAssessmentState Pending { get; } = new PatchAssessmentState(PendingValue);
-        /// <summary>
-        /// Available
-        /// Serialized Name: PatchAssessmentState.Available
-        /// </summary>
+        /// <summary> Available. </summary>
         public static PatchAssessmentState Available { get; } = new PatchAssessmentState(AvailableValue);
         /// <summary> Determines if two <see cref="PatchAssessmentState"/> values are the same. </summary>
         public static bool operator ==(PatchAssessmentState left, PatchAssessmentState right) => left.Equals(right);

@@ -12,17 +12,11 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The list SSH public keys operation response.
-    /// Serialized Name: SshPublicKeysGroupListResult
-    /// </summary>
+    /// <summary> The list SSH public keys operation response. </summary>
     internal partial class SshPublicKeysGroupListResult
     {
         /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
-        /// <param name="value">
-        /// The list of SSH public keys
-        /// Serialized Name: SshPublicKeysGroupListResult.value
-        /// </param>
+        /// <param name="value"> The list of SSH public keys. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SshPublicKeysGroupListResult(IEnumerable<SshPublicKeyData> value)
         {
@@ -35,29 +29,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
-        /// <param name="value">
-        /// The list of SSH public keys
-        /// Serialized Name: SshPublicKeysGroupListResult.value
-        /// </param>
-        /// <param name="nextLink">
-        /// The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
-        /// Serialized Name: SshPublicKeysGroupListResult.nextLink
-        /// </param>
+        /// <param name="value"> The list of SSH public keys. </param>
+        /// <param name="nextLink"> The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys. </param>
         internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary>
-        /// The list of SSH public keys
-        /// Serialized Name: SshPublicKeysGroupListResult.value
-        /// </summary>
+        /// <summary> The list of SSH public keys. </summary>
         public IReadOnlyList<SshPublicKeyData> Value { get; }
-        /// <summary>
-        /// The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
-        /// Serialized Name: SshPublicKeysGroupListResult.nextLink
-        /// </summary>
+        /// <summary> The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys. </summary>
         public string NextLink { get; }
     }
 }

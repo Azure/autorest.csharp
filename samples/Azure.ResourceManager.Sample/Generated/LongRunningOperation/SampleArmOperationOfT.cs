@@ -31,9 +31,9 @@ namespace Azure.ResourceManager.Sample
             _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
         }
 
-        internal SampleArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal SampleArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool isInterimStateEnabled)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, isInterimStateEnabled);
             _operation = new OperationInternal<T>(clientDiagnostics, nextLinkOperation, response, "SampleArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 

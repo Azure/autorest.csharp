@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The current state of the service.
-    /// Serialized Name: OrchestrationServiceState
-    /// </summary>
+    /// <summary> The current state of the service. </summary>
     public readonly partial struct OrchestrationServiceState : IEquatable<OrchestrationServiceState>
     {
         private readonly string _value;
@@ -29,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
         private const string RunningValue = "Running";
         private const string SuspendedValue = "Suspended";
 
-        /// <summary>
-        /// NotRunning
-        /// Serialized Name: OrchestrationServiceState.NotRunning
-        /// </summary>
+        /// <summary> NotRunning. </summary>
         public static OrchestrationServiceState NotRunning { get; } = new OrchestrationServiceState(NotRunningValue);
-        /// <summary>
-        /// Running
-        /// Serialized Name: OrchestrationServiceState.Running
-        /// </summary>
+        /// <summary> Running. </summary>
         public static OrchestrationServiceState Running { get; } = new OrchestrationServiceState(RunningValue);
-        /// <summary>
-        /// Suspended
-        /// Serialized Name: OrchestrationServiceState.Suspended
-        /// </summary>
+        /// <summary> Suspended. </summary>
         public static OrchestrationServiceState Suspended { get; } = new OrchestrationServiceState(SuspendedValue);
         /// <summary> Determines if two <see cref="OrchestrationServiceState"/> values are the same. </summary>
         public static bool operator ==(OrchestrationServiceState left, OrchestrationServiceState right) => left.Equals(right);

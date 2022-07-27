@@ -29,22 +29,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="sourceVirtualMachine">
-        /// The source virtual machine from which Image is created.
-        /// Serialized Name: Image.properties.sourceVirtualMachine
-        /// </param>
-        /// <param name="storageProfile">
-        /// Specifies the storage settings for the virtual machine disks.
-        /// Serialized Name: Image.properties.storageProfile
-        /// </param>
-        /// <param name="provisioningState">
-        /// The provisioning state.
-        /// Serialized Name: Image.properties.provisioningState
-        /// </param>
-        /// <param name="hyperVGeneration">
-        /// Gets the HyperVGenerationType of the VirtualMachine created from the image
-        /// Serialized Name: Image.properties.hyperVGeneration
-        /// </param>
+        /// <param name="sourceVirtualMachine"> The source virtual machine from which Image is created. </param>
+        /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
+        /// <param name="provisioningState"> The provisioning state. </param>
+        /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
         internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration) : base(id, name, resourceType, systemData, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
@@ -53,10 +41,7 @@ namespace Azure.ResourceManager.Sample
             HyperVGeneration = hyperVGeneration;
         }
 
-        /// <summary>
-        /// The source virtual machine from which Image is created.
-        /// Serialized Name: Image.properties.sourceVirtualMachine
-        /// </summary>
+        /// <summary> The source virtual machine from which Image is created. </summary>
         internal WritableSubResource SourceVirtualMachine { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SourceVirtualMachineId
@@ -70,20 +55,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary>
-        /// Specifies the storage settings for the virtual machine disks.
-        /// Serialized Name: Image.properties.storageProfile
-        /// </summary>
+        /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
         public ImageStorageProfile StorageProfile { get; set; }
-        /// <summary>
-        /// The provisioning state.
-        /// Serialized Name: Image.properties.provisioningState
-        /// </summary>
+        /// <summary> The provisioning state. </summary>
         public string ProvisioningState { get; }
-        /// <summary>
-        /// Gets the HyperVGenerationType of the VirtualMachine created from the image
-        /// Serialized Name: Image.properties.hyperVGeneration
-        /// </summary>
+        /// <summary> Gets the HyperVGenerationType of the VirtualMachine created from the image. </summary>
         public HyperVGeneration? HyperVGeneration { get; set; }
     }
 }

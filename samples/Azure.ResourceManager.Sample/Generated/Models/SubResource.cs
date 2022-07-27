@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The SubResource.
-    /// Serialized Name: SubResource
-    /// </summary>
+    /// <summary> The SubResource. </summary>
     public partial class SubResource
     {
         /// <summary> Initializes a new instance of SubResource. </summary>
@@ -19,19 +16,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of SubResource. </summary>
-        /// <param name="id">
-        /// Resource Id
-        /// Serialized Name: SubResource.id
-        /// </param>
+        /// <param name="id"> Resource Id. </param>
         internal SubResource(string id)
         {
             Id = id;
         }
 
-        /// <summary>
-        /// Resource Id
-        /// Serialized Name: SubResource.id
-        /// </summary>
+        /// <summary> Resource Id. </summary>
         public string Id { get; set; }
     }
 }

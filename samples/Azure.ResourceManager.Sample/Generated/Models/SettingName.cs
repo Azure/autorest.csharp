@@ -7,21 +7,12 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.
-    /// Serialized Name: SettingNames
-    /// </summary>
+    /// <summary> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </summary>
     public enum SettingName
     {
-        /// <summary>
-        /// AutoLogon
-        /// Serialized Name: SettingNames.AutoLogon
-        /// </summary>
+        /// <summary> AutoLogon. </summary>
         AutoLogon,
-        /// <summary>
-        /// FirstLogonCommands
-        /// Serialized Name: SettingNames.FirstLogonCommands
-        /// </summary>
+        /// <summary> FirstLogonCommands. </summary>
         FirstLogonCommands
     }
 }

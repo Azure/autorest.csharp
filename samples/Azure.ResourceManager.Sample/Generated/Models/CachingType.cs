@@ -7,26 +7,14 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None for Standard storage. ReadOnly for Premium storage**
-    /// Serialized Name: CachingTypes
-    /// </summary>
+    /// <summary> Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None for Standard storage. ReadOnly for Premium storage**. </summary>
     public enum CachingType
     {
-        /// <summary>
-        /// None
-        /// Serialized Name: CachingTypes.None
-        /// </summary>
+        /// <summary> None. </summary>
         None,
-        /// <summary>
-        /// ReadOnly
-        /// Serialized Name: CachingTypes.ReadOnly
-        /// </summary>
+        /// <summary> ReadOnly. </summary>
         ReadOnly,
-        /// <summary>
-        /// ReadWrite
-        /// Serialized Name: CachingTypes.ReadWrite
-        /// </summary>
+        /// <summary> ReadWrite. </summary>
         ReadWrite
     }
 }

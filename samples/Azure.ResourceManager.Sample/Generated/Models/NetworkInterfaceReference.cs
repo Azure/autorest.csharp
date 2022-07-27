@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Describes a network interface reference.
-    /// Serialized Name: NetworkInterfaceReference
-    /// </summary>
+    /// <summary> Describes a network interface reference. </summary>
     public partial class NetworkInterfaceReference : SubResource
     {
         /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
@@ -19,23 +16,14 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
-        /// <param name="id">
-        /// Resource Id
-        /// Serialized Name: SubResource.id
-        /// </param>
-        /// <param name="primary">
-        /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
-        /// Serialized Name: NetworkInterfaceReference.properties.primary
-        /// </param>
+        /// <param name="id"> Resource Id. </param>
+        /// <param name="primary"> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </param>
         internal NetworkInterfaceReference(string id, bool? primary) : base(id)
         {
             Primary = primary;
         }
 
-        /// <summary>
-        /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
-        /// Serialized Name: NetworkInterfaceReference.properties.primary
-        /// </summary>
+        /// <summary> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </summary>
         public bool? Primary { get; set; }
     }
 }

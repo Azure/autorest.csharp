@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The VirtualMachineScaleSetScaleInRule.
-    /// Serialized Name: VirtualMachineScaleSetScaleInRules
-    /// </summary>
+    /// <summary> The VirtualMachineScaleSetScaleInRule. </summary>
     public readonly partial struct VirtualMachineScaleSetScaleInRule : IEquatable<VirtualMachineScaleSetScaleInRule>
     {
         private readonly string _value;
@@ -29,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
         private const string OldestVMValue = "OldestVM";
         private const string NewestVMValue = "NewestVM";
 
-        /// <summary>
-        /// Default
-        /// Serialized Name: VirtualMachineScaleSetScaleInRules.Default
-        /// </summary>
+        /// <summary> Default. </summary>
         public static VirtualMachineScaleSetScaleInRule Default { get; } = new VirtualMachineScaleSetScaleInRule(DefaultValue);
-        /// <summary>
-        /// OldestVM
-        /// Serialized Name: VirtualMachineScaleSetScaleInRules.OldestVM
-        /// </summary>
+        /// <summary> OldestVM. </summary>
         public static VirtualMachineScaleSetScaleInRule OldestVM { get; } = new VirtualMachineScaleSetScaleInRule(OldestVMValue);
-        /// <summary>
-        /// NewestVM
-        /// Serialized Name: VirtualMachineScaleSetScaleInRules.NewestVM
-        /// </summary>
+        /// <summary> NewestVM. </summary>
         public static VirtualMachineScaleSetScaleInRule NewestVM { get; } = new VirtualMachineScaleSetScaleInRule(NewestVMValue);
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineScaleSetScaleInRule left, VirtualMachineScaleSetScaleInRule right) => left.Equals(right);

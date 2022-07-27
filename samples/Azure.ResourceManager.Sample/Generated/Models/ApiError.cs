@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Api error.
-    /// Serialized Name: ApiError
-    /// </summary>
+    /// <summary> Api error. </summary>
     public partial class ApiError
     {
         /// <summary> Initializes a new instance of ApiError. </summary>
@@ -23,26 +20,11 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of ApiError. </summary>
-        /// <param name="details">
-        /// The Api error details
-        /// Serialized Name: ApiError.details
-        /// </param>
-        /// <param name="innererror">
-        /// The Api inner error
-        /// Serialized Name: ApiError.innererror
-        /// </param>
-        /// <param name="code">
-        /// The error code.
-        /// Serialized Name: ApiError.code
-        /// </param>
-        /// <param name="target">
-        /// The target of the particular error.
-        /// Serialized Name: ApiError.target
-        /// </param>
-        /// <param name="message">
-        /// The error message.
-        /// Serialized Name: ApiError.message
-        /// </param>
+        /// <param name="details"> The Api error details. </param>
+        /// <param name="innererror"> The Api inner error. </param>
+        /// <param name="code"> The error code. </param>
+        /// <param name="target"> The target of the particular error. </param>
+        /// <param name="message"> The error message. </param>
         internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message)
         {
             Details = details;
@@ -52,30 +34,15 @@ namespace Azure.ResourceManager.Sample.Models
             Message = message;
         }
 
-        /// <summary>
-        /// The Api error details
-        /// Serialized Name: ApiError.details
-        /// </summary>
+        /// <summary> The Api error details. </summary>
         public IReadOnlyList<ApiErrorBase> Details { get; }
-        /// <summary>
-        /// The Api inner error
-        /// Serialized Name: ApiError.innererror
-        /// </summary>
+        /// <summary> The Api inner error. </summary>
         public InnerError Innererror { get; }
-        /// <summary>
-        /// The error code.
-        /// Serialized Name: ApiError.code
-        /// </summary>
+        /// <summary> The error code. </summary>
         public string Code { get; }
-        /// <summary>
-        /// The target of the particular error.
-        /// Serialized Name: ApiError.target
-        /// </summary>
+        /// <summary> The target of the particular error. </summary>
         public string Target { get; }
-        /// <summary>
-        /// The error message.
-        /// Serialized Name: ApiError.message
-        /// </summary>
+        /// <summary> The error message. </summary>
         public string Message { get; }
     }
 }

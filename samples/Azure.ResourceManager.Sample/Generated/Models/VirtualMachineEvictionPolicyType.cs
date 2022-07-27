@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the eviction policy for the Azure Spot VM/VMSS
-    /// Serialized Name: VirtualMachineEvictionPolicyTypes
-    /// </summary>
+    /// <summary> Specifies the eviction policy for the Azure Spot VM/VMSS. </summary>
     public readonly partial struct VirtualMachineEvictionPolicyType : IEquatable<VirtualMachineEvictionPolicyType>
     {
         private readonly string _value;
@@ -28,15 +25,9 @@ namespace Azure.ResourceManager.Sample.Models
         private const string DeallocateValue = "Deallocate";
         private const string DeleteValue = "Delete";
 
-        /// <summary>
-        /// Deallocate
-        /// Serialized Name: VirtualMachineEvictionPolicyTypes.Deallocate
-        /// </summary>
+        /// <summary> Deallocate. </summary>
         public static VirtualMachineEvictionPolicyType Deallocate { get; } = new VirtualMachineEvictionPolicyType(DeallocateValue);
-        /// <summary>
-        /// Delete
-        /// Serialized Name: VirtualMachineEvictionPolicyTypes.Delete
-        /// </summary>
+        /// <summary> Delete. </summary>
         public static VirtualMachineEvictionPolicyType Delete { get; } = new VirtualMachineEvictionPolicyType(DeleteValue);
         /// <summary> Determines if two <see cref="VirtualMachineEvictionPolicyType"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineEvictionPolicyType left, VirtualMachineEvictionPolicyType right) => left.Equals(right);

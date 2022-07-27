@@ -211,7 +211,7 @@ namespace MgmtOptionalConstant
             try
             {
                 var response = await _optionalMachineOptionalsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtOptionalConstantArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtOptionalConstantArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -241,7 +241,7 @@ namespace MgmtOptionalConstant
             try
             {
                 var response = _optionalMachineOptionalsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
-                var operation = new MgmtOptionalConstantArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtOptionalConstantArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

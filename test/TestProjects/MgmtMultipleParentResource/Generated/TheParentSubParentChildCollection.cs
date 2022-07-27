@@ -74,7 +74,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _theParentSubParentChildChildrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -107,7 +107,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _theParentSubParentChildChildrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data, cancellationToken);
-                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The InstanceViewType.
-    /// Serialized Name: InstanceViewTypes
-    /// </summary>
+    /// <summary> The InstanceViewType. </summary>
     public readonly partial struct InstanceViewType : IEquatable<InstanceViewType>
     {
         private readonly string _value;
@@ -27,10 +24,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         private const string InstanceViewValue = "instanceView";
 
-        /// <summary>
-        /// instanceView
-        /// Serialized Name: InstanceViewTypes.instanceView
-        /// </summary>
+        /// <summary> instanceView. </summary>
         public static InstanceViewType InstanceView { get; } = new InstanceViewType(InstanceViewValue);
         /// <summary> Determines if two <see cref="InstanceViewType"/> values are the same. </summary>
         public static bool operator ==(InstanceViewType left, InstanceViewType right) => left.Equals(right);

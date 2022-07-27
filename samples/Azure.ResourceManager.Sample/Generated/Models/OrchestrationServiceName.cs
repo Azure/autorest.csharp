@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The name of the service.
-    /// Serialized Name: OrchestrationServiceNames
-    /// </summary>
+    /// <summary> The name of the service. </summary>
     public readonly partial struct OrchestrationServiceName : IEquatable<OrchestrationServiceName>
     {
         private readonly string _value;
@@ -27,10 +24,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         private const string AutomaticRepairsValue = "AutomaticRepairs";
 
-        /// <summary>
-        /// AutomaticRepairs
-        /// Serialized Name: OrchestrationServiceNames.AutomaticRepairs
-        /// </summary>
+        /// <summary> AutomaticRepairs. </summary>
         public static OrchestrationServiceName AutomaticRepairs { get; } = new OrchestrationServiceName(AutomaticRepairsValue);
         /// <summary> Determines if two <see cref="OrchestrationServiceName"/> values are the same. </summary>
         public static bool operator ==(OrchestrationServiceName left, OrchestrationServiceName right) => left.Equals(right);

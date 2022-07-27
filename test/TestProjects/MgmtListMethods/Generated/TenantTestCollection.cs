@@ -75,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantTestRestClient.CreateAsync(tenantTestName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<TenantTestResource>(new TenantTestOperationSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new MgmtListMethodsArmOperation<TenantTestResource>(new TenantTestOperationSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantTestRestClient.Create(tenantTestName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<TenantTestResource>(new TenantTestOperationSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new MgmtListMethodsArmOperation<TenantTestResource>(new TenantTestOperationSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

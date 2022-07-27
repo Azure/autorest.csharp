@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
-    /// Serialized Name: SamplePlan
-    /// </summary>
+    /// <summary> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </summary>
     public partial class SamplePlan
     {
         /// <summary> Initializes a new instance of SamplePlan. </summary>
@@ -19,22 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of SamplePlan. </summary>
-        /// <param name="name">
-        /// The plan ID.
-        /// Serialized Name: SamplePlan.name
-        /// </param>
-        /// <param name="publisher">
-        /// The publisher ID.
-        /// Serialized Name: SamplePlan.publisher
-        /// </param>
-        /// <param name="product">
-        /// Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
-        /// Serialized Name: SamplePlan.product
-        /// </param>
-        /// <param name="promotionCode">
-        /// The promotion code.
-        /// Serialized Name: SamplePlan.promotionCode
-        /// </param>
+        /// <param name="name"> The plan ID. </param>
+        /// <param name="publisher"> The publisher ID. </param>
+        /// <param name="product"> Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element. </param>
+        /// <param name="promotionCode"> The promotion code. </param>
         internal SamplePlan(string name, string publisher, string product, string promotionCode)
         {
             Name = name;
@@ -43,25 +28,13 @@ namespace Azure.ResourceManager.Sample.Models
             PromotionCode = promotionCode;
         }
 
-        /// <summary>
-        /// The plan ID.
-        /// Serialized Name: SamplePlan.name
-        /// </summary>
+        /// <summary> The plan ID. </summary>
         public string Name { get; set; }
-        /// <summary>
-        /// The publisher ID.
-        /// Serialized Name: SamplePlan.publisher
-        /// </summary>
+        /// <summary> The publisher ID. </summary>
         public string Publisher { get; set; }
-        /// <summary>
-        /// Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
-        /// Serialized Name: SamplePlan.product
-        /// </summary>
+        /// <summary> Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element. </summary>
         public string Product { get; set; }
-        /// <summary>
-        /// The promotion code.
-        /// Serialized Name: SamplePlan.promotionCode
-        /// </summary>
+        /// <summary> The promotion code. </summary>
         public string PromotionCode { get; set; }
     }
 }

@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Summary for an orchestration service of a virtual machine scale set.
-    /// Serialized Name: OrchestrationServiceSummary
-    /// </summary>
+    /// <summary> Summary for an orchestration service of a virtual machine scale set. </summary>
     public partial class OrchestrationServiceSummary
     {
         /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
@@ -19,29 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
-        /// <param name="serviceName">
-        /// The name of the service.
-        /// Serialized Name: OrchestrationServiceSummary.serviceName
-        /// </param>
-        /// <param name="serviceState">
-        /// The current state of the service.
-        /// Serialized Name: OrchestrationServiceSummary.serviceState
-        /// </param>
+        /// <param name="serviceName"> The name of the service. </param>
+        /// <param name="serviceState"> The current state of the service. </param>
         internal OrchestrationServiceSummary(OrchestrationServiceName? serviceName, OrchestrationServiceState? serviceState)
         {
             ServiceName = serviceName;
             ServiceState = serviceState;
         }
 
-        /// <summary>
-        /// The name of the service.
-        /// Serialized Name: OrchestrationServiceSummary.serviceName
-        /// </summary>
+        /// <summary> The name of the service. </summary>
         public OrchestrationServiceName? ServiceName { get; }
-        /// <summary>
-        /// The current state of the service.
-        /// Serialized Name: OrchestrationServiceSummary.serviceState
-        /// </summary>
+        /// <summary> The current state of the service. </summary>
         public OrchestrationServiceState? ServiceState { get; }
     }
 }

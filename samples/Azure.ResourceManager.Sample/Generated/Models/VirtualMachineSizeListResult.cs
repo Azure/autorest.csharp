@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The List Virtual Machine operation response.
-    /// Serialized Name: VirtualMachineSizeListResult
-    /// </summary>
+    /// <summary> The List Virtual Machine operation response. </summary>
     internal partial class VirtualMachineSizeListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineSizeListResult. </summary>
@@ -23,19 +20,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineSizeListResult. </summary>
-        /// <param name="value">
-        /// The list of virtual machine sizes.
-        /// Serialized Name: VirtualMachineSizeListResult.value
-        /// </param>
+        /// <param name="value"> The list of virtual machine sizes. </param>
         internal VirtualMachineSizeListResult(IReadOnlyList<VirtualMachineSize> value)
         {
             Value = value;
         }
 
-        /// <summary>
-        /// The list of virtual machine sizes.
-        /// Serialized Name: VirtualMachineSizeListResult.value
-        /// </summary>
+        /// <summary> The list of virtual machine sizes. </summary>
         public IReadOnlyList<VirtualMachineSize> Value { get; }
     }
 }

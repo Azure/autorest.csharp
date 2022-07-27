@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the ephemeral disk option for operating system disk.
-    /// Serialized Name: DiffDiskOptions
-    /// </summary>
+    /// <summary> Specifies the ephemeral disk option for operating system disk. </summary>
     public readonly partial struct DiffDiskOption : IEquatable<DiffDiskOption>
     {
         private readonly string _value;
@@ -27,10 +24,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         private const string LocalValue = "Local";
 
-        /// <summary>
-        /// Local
-        /// Serialized Name: DiffDiskOptions.Local
-        /// </summary>
+        /// <summary> Local. </summary>
         public static DiffDiskOption Local { get; } = new DiffDiskOption(LocalValue);
         /// <summary> Determines if two <see cref="DiffDiskOption"/> values are the same. </summary>
         public static bool operator ==(DiffDiskOption left, DiffDiskOption right) => left.Equals(right);

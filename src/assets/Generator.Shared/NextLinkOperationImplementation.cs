@@ -47,10 +47,10 @@ namespace Azure.Core
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        public static IOperation<T> Create<T>(IOperationSource<T> operationSource, HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation<T> Create<T>(IOperationSource<T> operationSource, HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia, bool isInterimStateEnabled = false)
         {
             var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia);
-            return new OperationToOperationOfT<T>(operationSource, operation);
+            return new OperationToOperationOfT<T>(operationSource, operation, response, isInterimStateEnabled);
         }
 
         private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
@@ -365,11 +365,17 @@ namespace Azure.Core
         {
             private readonly IOperationSource<T> _operationSource;
             private readonly IOperation _operation;
+            private readonly Response _initialResponse;
+            private readonly bool _isInterimStateEnabled;
 
-            public OperationToOperationOfT(IOperationSource<T> operationSource, IOperation operation)
+            private T? _cachedInterimResult;
+
+            public OperationToOperationOfT(IOperationSource<T> operationSource, IOperation operation, Response response, bool isInterimStateEnabled)
             {
                 _operationSource = operationSource;
                 _operation = operation;
+                _initialResponse = response;
+                _isInterimStateEnabled = isInterimStateEnabled;
             }
 
             public async ValueTask<OperationState<T>> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -390,6 +396,18 @@ namespace Azure.Core
                 }
 
                 return OperationState<T>.Pending(state.RawResponse);
+            }
+
+            public bool TryGetInterimState(out OperationState<T>? value)
+            {
+                if (_isInterimStateEnabled)
+                {
+                    _cachedInterimResult ??= _operationSource.CreateResult(_initialResponse, default);
+                    value = OperationState<T>.Interim(_initialResponse, _cachedInterimResult);
+                    return true;
+                }
+                value = default;
+                return false;
             }
         }
     }

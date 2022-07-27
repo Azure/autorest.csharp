@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The instance view of the VM Agent running on the virtual machine.
-    /// Serialized Name: VirtualMachineAgentInstanceView
-    /// </summary>
+    /// <summary> The instance view of the VM Agent running on the virtual machine. </summary>
     public partial class VirtualMachineAgentInstanceView
     {
         /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
@@ -24,18 +21,9 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
-        /// <param name="vmAgentVersion">
-        /// The VM Agent full version.
-        /// Serialized Name: VirtualMachineAgentInstanceView.vmAgentVersion
-        /// </param>
-        /// <param name="extensionHandlers">
-        /// The virtual machine extension handler instance view.
-        /// Serialized Name: VirtualMachineAgentInstanceView.extensionHandlers
-        /// </param>
-        /// <param name="statuses">
-        /// The resource status information.
-        /// Serialized Name: VirtualMachineAgentInstanceView.statuses
-        /// </param>
+        /// <param name="vmAgentVersion"> The VM Agent full version. </param>
+        /// <param name="extensionHandlers"> The virtual machine extension handler instance view. </param>
+        /// <param name="statuses"> The resource status information. </param>
         internal VirtualMachineAgentInstanceView(string vmAgentVersion, IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers, IReadOnlyList<InstanceViewStatus> statuses)
         {
             VmAgentVersion = vmAgentVersion;
@@ -43,20 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = statuses;
         }
 
-        /// <summary>
-        /// The VM Agent full version.
-        /// Serialized Name: VirtualMachineAgentInstanceView.vmAgentVersion
-        /// </summary>
+        /// <summary> The VM Agent full version. </summary>
         public string VmAgentVersion { get; }
-        /// <summary>
-        /// The virtual machine extension handler instance view.
-        /// Serialized Name: VirtualMachineAgentInstanceView.extensionHandlers
-        /// </summary>
+        /// <summary> The virtual machine extension handler instance view. </summary>
         public IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> ExtensionHandlers { get; }
-        /// <summary>
-        /// The resource status information.
-        /// Serialized Name: VirtualMachineAgentInstanceView.statuses
-        /// </summary>
+        /// <summary> The resource status information. </summary>
         public IReadOnlyList<InstanceViewStatus> Statuses { get; }
     }
 }

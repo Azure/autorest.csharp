@@ -7,31 +7,16 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The Last Maintenance Operation Result Code.
-    /// Serialized Name: MaintenanceOperationResultCodeTypes
-    /// </summary>
+    /// <summary> The Last Maintenance Operation Result Code. </summary>
     public enum MaintenanceOperationResultCodeType
     {
-        /// <summary>
-        /// None
-        /// Serialized Name: MaintenanceOperationResultCodeTypes.None
-        /// </summary>
+        /// <summary> None. </summary>
         None,
-        /// <summary>
-        /// RetryLater
-        /// Serialized Name: MaintenanceOperationResultCodeTypes.RetryLater
-        /// </summary>
+        /// <summary> RetryLater. </summary>
         RetryLater,
-        /// <summary>
-        /// MaintenanceAborted
-        /// Serialized Name: MaintenanceOperationResultCodeTypes.MaintenanceAborted
-        /// </summary>
+        /// <summary> MaintenanceAborted. </summary>
         MaintenanceAborted,
-        /// <summary>
-        /// MaintenanceCompleted
-        /// Serialized Name: MaintenanceOperationResultCodeTypes.MaintenanceCompleted
-        /// </summary>
+        /// <summary> MaintenanceCompleted. </summary>
         MaintenanceCompleted
     }
 }

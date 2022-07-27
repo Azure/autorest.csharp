@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The instance view of a virtual machine extension handler.
-    /// Serialized Name: VirtualMachineExtensionHandlerInstanceView
-    /// </summary>
+    /// <summary> The instance view of a virtual machine extension handler. </summary>
     public partial class VirtualMachineExtensionHandlerInstanceView
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionHandlerInstanceView. </summary>
@@ -19,18 +16,9 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionHandlerInstanceView. </summary>
-        /// <param name="virtualMachineExtensionHandlerInstanceViewType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
-        /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.type
-        /// </param>
-        /// <param name="typeHandlerVersion">
-        /// Specifies the version of the script handler.
-        /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.typeHandlerVersion
-        /// </param>
-        /// <param name="status">
-        /// The extension handler status.
-        /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.status
-        /// </param>
+        /// <param name="virtualMachineExtensionHandlerInstanceViewType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
+        /// <param name="typeHandlerVersion"> Specifies the version of the script handler. </param>
+        /// <param name="status"> The extension handler status. </param>
         internal VirtualMachineExtensionHandlerInstanceView(string virtualMachineExtensionHandlerInstanceViewType, string typeHandlerVersion, InstanceViewStatus status)
         {
             VirtualMachineExtensionHandlerInstanceViewType = virtualMachineExtensionHandlerInstanceViewType;
@@ -38,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
             Status = status;
         }
 
-        /// <summary>
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
-        /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.type
-        /// </summary>
+        /// <summary> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </summary>
         public string VirtualMachineExtensionHandlerInstanceViewType { get; }
-        /// <summary>
-        /// Specifies the version of the script handler.
-        /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.typeHandlerVersion
-        /// </summary>
+        /// <summary> Specifies the version of the script handler. </summary>
         public string TypeHandlerVersion { get; }
-        /// <summary>
-        /// The extension handler status.
-        /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.status
-        /// </summary>
+        /// <summary> The extension handler status. </summary>
         public InstanceViewStatus Status { get; }
     }
 }

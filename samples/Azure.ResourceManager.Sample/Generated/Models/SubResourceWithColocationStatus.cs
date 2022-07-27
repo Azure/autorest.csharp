@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The SubResourceWithColocationStatus.
-    /// Serialized Name: SubResourceWithColocationStatus
-    /// </summary>
+    /// <summary> The SubResourceWithColocationStatus. </summary>
     public partial class SubResourceWithColocationStatus : SubResource
     {
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
@@ -19,23 +16,14 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
-        /// <param name="id">
-        /// Resource Id
-        /// Serialized Name: SubResource.id
-        /// </param>
-        /// <param name="colocationStatus">
-        /// Describes colocation status of a resource in the Proximity Placement Group.
-        /// Serialized Name: SubResourceWithColocationStatus.colocationStatus
-        /// </param>
+        /// <param name="id"> Resource Id. </param>
+        /// <param name="colocationStatus"> Describes colocation status of a resource in the Proximity Placement Group. </param>
         internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus) : base(id)
         {
             ColocationStatus = colocationStatus;
         }
 
-        /// <summary>
-        /// Describes colocation status of a resource in the Proximity Placement Group.
-        /// Serialized Name: SubResourceWithColocationStatus.colocationStatus
-        /// </summary>
+        /// <summary> Describes colocation status of a resource in the Proximity Placement Group. </summary>
         public InstanceViewStatus ColocationStatus { get; set; }
     }
 }

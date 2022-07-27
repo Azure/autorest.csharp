@@ -9,10 +9,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Virtual Machine Scale Set OS Upgrade History operation response.
-    /// Serialized Name: UpgradeOperationHistoricalStatusInfo
-    /// </summary>
+    /// <summary> Virtual Machine Scale Set OS Upgrade History operation response. </summary>
     public partial class UpgradeOperationHistoricalStatusInfo
     {
         /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
@@ -21,18 +18,9 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
-        /// <param name="properties">
-        /// Information about the properties of the upgrade operation.
-        /// Serialized Name: UpgradeOperationHistoricalStatusInfo.properties
-        /// </param>
-        /// <param name="upgradeOperationHistoricalStatusInfoType">
-        /// Resource type
-        /// Serialized Name: UpgradeOperationHistoricalStatusInfo.type
-        /// </param>
-        /// <param name="location">
-        /// Resource location
-        /// Serialized Name: UpgradeOperationHistoricalStatusInfo.location
-        /// </param>
+        /// <param name="properties"> Information about the properties of the upgrade operation. </param>
+        /// <param name="upgradeOperationHistoricalStatusInfoType"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
         internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, string upgradeOperationHistoricalStatusInfoType, AzureLocation? location)
         {
             Properties = properties;
@@ -40,20 +28,11 @@ namespace Azure.ResourceManager.Sample.Models
             Location = location;
         }
 
-        /// <summary>
-        /// Information about the properties of the upgrade operation.
-        /// Serialized Name: UpgradeOperationHistoricalStatusInfo.properties
-        /// </summary>
+        /// <summary> Information about the properties of the upgrade operation. </summary>
         public UpgradeOperationHistoricalStatusInfoProperties Properties { get; }
-        /// <summary>
-        /// Resource type
-        /// Serialized Name: UpgradeOperationHistoricalStatusInfo.type
-        /// </summary>
+        /// <summary> Resource type. </summary>
         public string UpgradeOperationHistoricalStatusInfoType { get; }
-        /// <summary>
-        /// Resource location
-        /// Serialized Name: UpgradeOperationHistoricalStatusInfo.location
-        /// </summary>
+        /// <summary> Resource location. </summary>
         public AzureLocation? Location { get; }
     }
 }

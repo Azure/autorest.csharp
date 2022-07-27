@@ -12,17 +12,11 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The List Proximity Placement Group operation response.
-    /// Serialized Name: ProximityPlacementGroupListResult
-    /// </summary>
+    /// <summary> The List Proximity Placement Group operation response. </summary>
     internal partial class ProximityPlacementGroupListResult
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
-        /// <param name="value">
-        /// The list of proximity placement groups
-        /// Serialized Name: ProximityPlacementGroupListResult.value
-        /// </param>
+        /// <param name="value"> The list of proximity placement groups. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ProximityPlacementGroupListResult(IEnumerable<ProximityPlacementGroupData> value)
         {
@@ -35,29 +29,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
-        /// <param name="value">
-        /// The list of proximity placement groups
-        /// Serialized Name: ProximityPlacementGroupListResult.value
-        /// </param>
-        /// <param name="nextLink">
-        /// The URI to fetch the next page of proximity placement groups.
-        /// Serialized Name: ProximityPlacementGroupListResult.nextLink
-        /// </param>
+        /// <param name="value"> The list of proximity placement groups. </param>
+        /// <param name="nextLink"> The URI to fetch the next page of proximity placement groups. </param>
         internal ProximityPlacementGroupListResult(IReadOnlyList<ProximityPlacementGroupData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary>
-        /// The list of proximity placement groups
-        /// Serialized Name: ProximityPlacementGroupListResult.value
-        /// </summary>
+        /// <summary> The list of proximity placement groups. </summary>
         public IReadOnlyList<ProximityPlacementGroupData> Value { get; }
-        /// <summary>
-        /// The URI to fetch the next page of proximity placement groups.
-        /// Serialized Name: ProximityPlacementGroupListResult.nextLink
-        /// </summary>
+        /// <summary> The URI to fetch the next page of proximity placement groups. </summary>
         public string NextLink { get; }
     }
 }

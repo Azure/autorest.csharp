@@ -44,7 +44,7 @@ rename-mapping:
   FileServiceProperties: FileService
 
 enable-lro-interim-state:
-  Microsoft.Storage/storageAccounts/restoreBlobRanges: Post
+  StorageAccounts_RestoreBlobRanges
 
 directive:
   - from: swagger-document

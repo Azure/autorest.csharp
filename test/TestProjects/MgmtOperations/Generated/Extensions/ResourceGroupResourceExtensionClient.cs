@@ -72,7 +72,7 @@ namespace MgmtOperations
             try
             {
                 var response = await AvailabilitySetRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetUpdate).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetUpdate).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -99,7 +99,7 @@ namespace MgmtOperations
             try
             {
                 var response = AvailabilitySetRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetUpdate, cancellationToken);
-                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetUpdate).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetUpdate).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

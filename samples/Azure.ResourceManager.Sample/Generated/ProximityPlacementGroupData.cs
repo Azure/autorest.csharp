@@ -32,30 +32,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="extendedLocation">
-        /// The extended location of the custom IP prefix.
-        /// Serialized Name: ProximityPlacementGroup.extendedLocation
-        /// </param>
-        /// <param name="proximityPlacementGroupType">
-        /// Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use.
-        /// Serialized Name: ProximityPlacementGroup.properties.proximityPlacementGroupType
-        /// </param>
-        /// <param name="virtualMachines">
-        /// A list of references to all virtual machines in the proximity placement group.
-        /// Serialized Name: ProximityPlacementGroup.properties.virtualMachines
-        /// </param>
-        /// <param name="virtualMachineScaleSets">
-        /// A list of references to all virtual machine scale sets in the proximity placement group.
-        /// Serialized Name: ProximityPlacementGroup.properties.virtualMachineScaleSets
-        /// </param>
-        /// <param name="availabilitySets">
-        /// A list of references to all availability sets in the proximity placement group.
-        /// Serialized Name: ProximityPlacementGroup.properties.availabilitySets
-        /// </param>
-        /// <param name="colocationStatus">
-        /// Describes colocation status of the Proximity Placement Group.
-        /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
-        /// </param>
+        /// <param name="extendedLocation"> The extended location of the custom IP prefix. </param>
+        /// <param name="proximityPlacementGroupType"> Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use. </param>
+        /// <param name="virtualMachines"> A list of references to all virtual machines in the proximity placement group. </param>
+        /// <param name="virtualMachineScaleSets"> A list of references to all virtual machine scale sets in the proximity placement group. </param>
+        /// <param name="availabilitySets"> A list of references to all availability sets in the proximity placement group. </param>
+        /// <param name="colocationStatus"> Describes colocation status of the Proximity Placement Group. </param>
         internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, resourceType, systemData, tags, location)
         {
             ExtendedLocation = extendedLocation;
@@ -66,35 +48,17 @@ namespace Azure.ResourceManager.Sample
             ColocationStatus = colocationStatus;
         }
 
-        /// <summary>
-        /// The extended location of the custom IP prefix.
-        /// Serialized Name: ProximityPlacementGroup.extendedLocation
-        /// </summary>
+        /// <summary> The extended location of the custom IP prefix. </summary>
         public ExtendedLocation ExtendedLocation { get; set; }
-        /// <summary>
-        /// Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use.
-        /// Serialized Name: ProximityPlacementGroup.properties.proximityPlacementGroupType
-        /// </summary>
+        /// <summary> Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use. </summary>
         public ProximityPlacementGroupType? ProximityPlacementGroupType { get; set; }
-        /// <summary>
-        /// A list of references to all virtual machines in the proximity placement group.
-        /// Serialized Name: ProximityPlacementGroup.properties.virtualMachines
-        /// </summary>
+        /// <summary> A list of references to all virtual machines in the proximity placement group. </summary>
         public IReadOnlyList<SubResourceWithColocationStatus> VirtualMachines { get; }
-        /// <summary>
-        /// A list of references to all virtual machine scale sets in the proximity placement group.
-        /// Serialized Name: ProximityPlacementGroup.properties.virtualMachineScaleSets
-        /// </summary>
+        /// <summary> A list of references to all virtual machine scale sets in the proximity placement group. </summary>
         public IReadOnlyList<SubResourceWithColocationStatus> VirtualMachineScaleSets { get; }
-        /// <summary>
-        /// A list of references to all availability sets in the proximity placement group.
-        /// Serialized Name: ProximityPlacementGroup.properties.availabilitySets
-        /// </summary>
+        /// <summary> A list of references to all availability sets in the proximity placement group. </summary>
         public IReadOnlyList<SubResourceWithColocationStatus> AvailabilitySets { get; }
-        /// <summary>
-        /// Describes colocation status of the Proximity Placement Group.
-        /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
-        /// </summary>
+        /// <summary> Describes colocation status of the Proximity Placement Group. </summary>
         public InstanceViewStatus ColocationStatus { get; set; }
     }
 }

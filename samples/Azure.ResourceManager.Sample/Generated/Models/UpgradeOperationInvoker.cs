@@ -7,26 +7,14 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Invoker of the Upgrade Operation
-    /// Serialized Name: UpgradeOperationInvoker
-    /// </summary>
+    /// <summary> Invoker of the Upgrade Operation. </summary>
     public enum UpgradeOperationInvoker
     {
-        /// <summary>
-        /// Unknown
-        /// Serialized Name: UpgradeOperationInvoker.Unknown
-        /// </summary>
+        /// <summary> Unknown. </summary>
         Unknown,
-        /// <summary>
-        /// User
-        /// Serialized Name: UpgradeOperationInvoker.User
-        /// </summary>
+        /// <summary> User. </summary>
         User,
-        /// <summary>
-        /// Platform
-        /// Serialized Name: UpgradeOperationInvoker.Platform
-        /// </summary>
+        /// <summary> Platform. </summary>
         Platform
     }
 }

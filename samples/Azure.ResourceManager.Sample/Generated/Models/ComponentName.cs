@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.
-    /// Serialized Name: ComponentNames
-    /// </summary>
+    /// <summary> The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup. </summary>
     public readonly partial struct ComponentName : IEquatable<ComponentName>
     {
         private readonly string _value;
@@ -27,10 +24,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         private const string MicrosoftWindowsShellSetupValue = "Microsoft-Windows-Shell-Setup";
 
-        /// <summary>
-        /// Microsoft-Windows-Shell-Setup
-        /// Serialized Name: ComponentNames.Microsoft-Windows-Shell-Setup
-        /// </summary>
+        /// <summary> Microsoft-Windows-Shell-Setup. </summary>
         public static ComponentName MicrosoftWindowsShellSetup { get; } = new ComponentName(MicrosoftWindowsShellSetupValue);
         /// <summary> Determines if two <see cref="ComponentName"/> values are the same. </summary>
         public static bool operator ==(ComponentName left, ComponentName right) => left.Equals(right);

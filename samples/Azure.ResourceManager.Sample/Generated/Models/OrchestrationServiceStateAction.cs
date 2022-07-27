@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The action to be performed.
-    /// Serialized Name: OrchestrationServiceStateAction
-    /// </summary>
+    /// <summary> The action to be performed. </summary>
     public readonly partial struct OrchestrationServiceStateAction : IEquatable<OrchestrationServiceStateAction>
     {
         private readonly string _value;
@@ -28,15 +25,9 @@ namespace Azure.ResourceManager.Sample.Models
         private const string ResumeValue = "Resume";
         private const string SuspendValue = "Suspend";
 
-        /// <summary>
-        /// Resume
-        /// Serialized Name: OrchestrationServiceStateAction.Resume
-        /// </summary>
+        /// <summary> Resume. </summary>
         public static OrchestrationServiceStateAction Resume { get; } = new OrchestrationServiceStateAction(ResumeValue);
-        /// <summary>
-        /// Suspend
-        /// Serialized Name: OrchestrationServiceStateAction.Suspend
-        /// </summary>
+        /// <summary> Suspend. </summary>
         public static OrchestrationServiceStateAction Suspend { get; } = new OrchestrationServiceStateAction(SuspendValue);
         /// <summary> Determines if two <see cref="OrchestrationServiceStateAction"/> values are the same. </summary>
         public static bool operator ==(OrchestrationServiceStateAction left, OrchestrationServiceStateAction right) => left.Equals(right);

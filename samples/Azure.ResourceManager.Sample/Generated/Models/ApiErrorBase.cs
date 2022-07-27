@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Api error base.
-    /// Serialized Name: ApiErrorBase
-    /// </summary>
+    /// <summary> Api error base. </summary>
     public partial class ApiErrorBase
     {
         /// <summary> Initializes a new instance of ApiErrorBase. </summary>
@@ -19,18 +16,9 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of ApiErrorBase. </summary>
-        /// <param name="code">
-        /// The error code.
-        /// Serialized Name: ApiErrorBase.code
-        /// </param>
-        /// <param name="target">
-        /// The target of the particular error.
-        /// Serialized Name: ApiErrorBase.target
-        /// </param>
-        /// <param name="message">
-        /// The error message.
-        /// Serialized Name: ApiErrorBase.message
-        /// </param>
+        /// <param name="code"> The error code. </param>
+        /// <param name="target"> The target of the particular error. </param>
+        /// <param name="message"> The error message. </param>
         internal ApiErrorBase(string code, string target, string message)
         {
             Code = code;
@@ -38,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
             Message = message;
         }
 
-        /// <summary>
-        /// The error code.
-        /// Serialized Name: ApiErrorBase.code
-        /// </summary>
+        /// <summary> The error code. </summary>
         public string Code { get; }
-        /// <summary>
-        /// The target of the particular error.
-        /// Serialized Name: ApiErrorBase.target
-        /// </summary>
+        /// <summary> The target of the particular error. </summary>
         public string Target { get; }
-        /// <summary>
-        /// The error message.
-        /// Serialized Name: ApiErrorBase.message
-        /// </summary>
+        /// <summary> The error message. </summary>
         public string Message { get; }
     }
 }

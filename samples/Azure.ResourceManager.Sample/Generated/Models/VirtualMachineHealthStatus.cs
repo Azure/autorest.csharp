@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The health status of the VM.
-    /// Serialized Name: VirtualMachineHealthStatus
-    /// </summary>
+    /// <summary> The health status of the VM. </summary>
     internal partial class VirtualMachineHealthStatus
     {
         /// <summary> Initializes a new instance of VirtualMachineHealthStatus. </summary>
@@ -19,19 +16,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineHealthStatus. </summary>
-        /// <param name="status">
-        /// The health status information for the VM.
-        /// Serialized Name: VirtualMachineHealthStatus.status
-        /// </param>
+        /// <param name="status"> The health status information for the VM. </param>
         internal VirtualMachineHealthStatus(InstanceViewStatus status)
         {
             Status = status;
         }
 
-        /// <summary>
-        /// The health status information for the VM.
-        /// Serialized Name: VirtualMachineHealthStatus.status
-        /// </summary>
+        /// <summary> The health status information for the VM. </summary>
         public InstanceViewStatus Status { get; }
     }
 }

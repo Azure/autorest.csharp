@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Describes the reboot requirements of the patch.
-    /// Serialized Name: SoftwareUpdateRebootBehavior
-    /// </summary>
+    /// <summary> Describes the reboot requirements of the patch. </summary>
     public readonly partial struct SoftwareUpdateRebootBehavior : IEquatable<SoftwareUpdateRebootBehavior>
     {
         private readonly string _value;
@@ -29,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
         private const string AlwaysRequiresRebootValue = "AlwaysRequiresReboot";
         private const string CanRequestRebootValue = "CanRequestReboot";
 
-        /// <summary>
-        /// NeverReboots
-        /// Serialized Name: SoftwareUpdateRebootBehavior.NeverReboots
-        /// </summary>
+        /// <summary> NeverReboots. </summary>
         public static SoftwareUpdateRebootBehavior NeverReboots { get; } = new SoftwareUpdateRebootBehavior(NeverRebootsValue);
-        /// <summary>
-        /// AlwaysRequiresReboot
-        /// Serialized Name: SoftwareUpdateRebootBehavior.AlwaysRequiresReboot
-        /// </summary>
+        /// <summary> AlwaysRequiresReboot. </summary>
         public static SoftwareUpdateRebootBehavior AlwaysRequiresReboot { get; } = new SoftwareUpdateRebootBehavior(AlwaysRequiresRebootValue);
-        /// <summary>
-        /// CanRequestReboot
-        /// Serialized Name: SoftwareUpdateRebootBehavior.CanRequestReboot
-        /// </summary>
+        /// <summary> CanRequestReboot. </summary>
         public static SoftwareUpdateRebootBehavior CanRequestReboot { get; } = new SoftwareUpdateRebootBehavior(CanRequestRebootValue);
         /// <summary> Determines if two <see cref="SoftwareUpdateRebootBehavior"/> values are the same. </summary>
         public static bool operator ==(SoftwareUpdateRebootBehavior left, SoftwareUpdateRebootBehavior right) => left.Equals(right);

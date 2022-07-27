@@ -2,12 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
@@ -31,8 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private readonly FormattableString _operationSourceString;
         private readonly string _responseString;
         private readonly string _sourceString;
-        private readonly string _optionalInterimString;
-        private readonly IReadOnlyDictionary<string, string>? _operationMapping;
+        private readonly FormattableString _interimEnableString;
+        private readonly string _interimEnablePassString;
 
         public string Filename { get; }
 
@@ -50,10 +48,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _operationSourceString = isGeneric ? (FormattableString)$"{typeof(IOperationSource<>)} source, " : (FormattableString)$"";
             _responseString = isGeneric ? "response.GetRawResponse(), response.Value" : "response";
             _sourceString = isGeneric ? "source, " : string.Empty;
-            _operationMapping = isGeneric && Configuration.MgmtConfiguration.EnableLroInterimState.Count > 0
-                ? Configuration.MgmtConfiguration.EnableLroInterimState
-                : null;
-            _optionalInterimString = _operationMapping is null ? string.Empty : $", interimValue: intermediateValue";
+            _interimEnableString = isGeneric ? (FormattableString)$", {typeof(bool)} isInterimStateEnabled" : (FormattableString)$"";
+            _interimEnablePassString = isGeneric ? $", isInterimStateEnabled" : $"";
         }
 
         public void Write()
@@ -65,17 +61,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"#pragma warning restore SA1649 // File name should match first type name");
                 using (_writer.Scope())
                 {
-                    if (_operationMapping is not null)
-                    {
-                        using (_writer.Scope($"private readonly {typeof(Dictionary<string, string>)} _operationMappings = new {typeof(Dictionary<string, string>)}()", start: "\t\t{", end: "\t\t};"))
-                        {
-                            foreach (var mapping in _operationMapping)
-                            {
-                                _writer.Line($"\t\t\t{{ \"{mapping.Key}\", \"{mapping.Value}\" }},");
-                            }
-                        }
-                    }
-
                     _writer.Line($"private readonly {_operationInternalType} _operation;");
                     _writer.Line();
 
@@ -91,17 +76,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia{_interimEnableString})"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
-                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);");
-                        if (_operationMapping is not null)
-                        {
-                            _writer.Line($"{typeof(InterimValue<>)} intermediateValue = null;");
-                            _writer.Line($"if (_operationMappings.TryGetValue(new {typeof(ResourceIdentifier)}(request.Uri.ToUri().AbsolutePath).ResourceType, out var method) && request.Method == {typeof(RequestMethod)}.Parse(method))");
-                            _writer.Line($"intermediateValue = new {typeof(InterimValue<>)}(source.CreateResult(response, default));");
-                        }
-                        _writer.Line($"_operation = new {_operationInternalType}(clientDiagnostics, {nextLinkOperation}, response, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}(){_optionalInterimString});");
+                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia{_interimEnablePassString});");
+                        _writer.Line($"_operation = new {_operationInternalType}(clientDiagnostics, {nextLinkOperation}, response, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
                     }
                     _writer.Line();
 

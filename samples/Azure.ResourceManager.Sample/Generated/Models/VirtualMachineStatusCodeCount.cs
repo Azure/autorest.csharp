@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The status code and count of the virtual machine scale set instance view status summary.
-    /// Serialized Name: VirtualMachineStatusCodeCount
-    /// </summary>
+    /// <summary> The status code and count of the virtual machine scale set instance view status summary. </summary>
     public partial class VirtualMachineStatusCodeCount
     {
         /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
@@ -19,29 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
-        /// <param name="code">
-        /// The instance view status code.
-        /// Serialized Name: VirtualMachineStatusCodeCount.code
-        /// </param>
-        /// <param name="count">
-        /// The number of instances having a particular status code.
-        /// Serialized Name: VirtualMachineStatusCodeCount.count
-        /// </param>
+        /// <param name="code"> The instance view status code. </param>
+        /// <param name="count"> The number of instances having a particular status code. </param>
         internal VirtualMachineStatusCodeCount(string code, int? count)
         {
             Code = code;
             Count = count;
         }
 
-        /// <summary>
-        /// The instance view status code.
-        /// Serialized Name: VirtualMachineStatusCodeCount.code
-        /// </summary>
+        /// <summary> The instance view status code. </summary>
         public string Code { get; }
-        /// <summary>
-        /// The number of instances having a particular status code.
-        /// Serialized Name: VirtualMachineStatusCodeCount.count
-        /// </summary>
+        /// <summary> The number of instances having a particular status code. </summary>
         public int? Count { get; }
     }
 }

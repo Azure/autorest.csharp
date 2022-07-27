@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. &lt;br&gt;&lt;br&gt; &apos;Low&apos; enum will be deprecated in the future, please use &apos;Spot&apos; as the enum to deploy Azure Spot VM/VMSS.
-    /// Serialized Name: VirtualMachinePriorityTypes
-    /// </summary>
+    /// <summary> Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. &lt;br&gt;&lt;br&gt; &apos;Low&apos; enum will be deprecated in the future, please use &apos;Spot&apos; as the enum to deploy Azure Spot VM/VMSS. </summary>
     public readonly partial struct VirtualMachinePriorityType : IEquatable<VirtualMachinePriorityType>
     {
         private readonly string _value;
@@ -29,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
         private const string LowValue = "Low";
         private const string SpotValue = "Spot";
 
-        /// <summary>
-        /// Regular
-        /// Serialized Name: VirtualMachinePriorityTypes.Regular
-        /// </summary>
+        /// <summary> Regular. </summary>
         public static VirtualMachinePriorityType Regular { get; } = new VirtualMachinePriorityType(RegularValue);
-        /// <summary>
-        /// Low
-        /// Serialized Name: VirtualMachinePriorityTypes.Low
-        /// </summary>
+        /// <summary> Low. </summary>
         public static VirtualMachinePriorityType Low { get; } = new VirtualMachinePriorityType(LowValue);
-        /// <summary>
-        /// Spot
-        /// Serialized Name: VirtualMachinePriorityTypes.Spot
-        /// </summary>
+        /// <summary> Spot. </summary>
         public static VirtualMachinePriorityType Spot { get; } = new VirtualMachinePriorityType(SpotValue);
         /// <summary> Determines if two <see cref="VirtualMachinePriorityType"/> values are the same. </summary>
         public static bool operator ==(VirtualMachinePriorityType left, VirtualMachinePriorityType right) => left.Equals(right);

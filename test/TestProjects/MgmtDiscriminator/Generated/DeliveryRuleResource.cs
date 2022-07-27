@@ -205,7 +205,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = await _deliveryRuleRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -235,7 +235,7 @@ namespace MgmtDiscriminator
             try
             {
                 var response = _deliveryRuleRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

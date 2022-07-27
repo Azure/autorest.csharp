@@ -152,7 +152,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _ovenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -182,7 +182,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _ovenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

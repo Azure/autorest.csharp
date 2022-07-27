@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the HyperVGeneration Type
-    /// Serialized Name: HyperVGenerationTypes
-    /// </summary>
+    /// <summary> Specifies the HyperVGeneration Type. </summary>
     public readonly partial struct HyperVGeneration : IEquatable<HyperVGeneration>
     {
         private readonly string _value;
@@ -28,15 +25,9 @@ namespace Azure.ResourceManager.Sample.Models
         private const string V1Value = "V1";
         private const string V2Value = "V2";
 
-        /// <summary>
-        /// V1
-        /// Serialized Name: HyperVGenerationTypes.V1
-        /// </summary>
+        /// <summary> V1. </summary>
         public static HyperVGeneration V1 { get; } = new HyperVGeneration(V1Value);
-        /// <summary>
-        /// V2
-        /// Serialized Name: HyperVGenerationTypes.V2
-        /// </summary>
+        /// <summary> V2. </summary>
         public static HyperVGeneration V2 { get; } = new HyperVGeneration(V2Value);
         /// <summary> Determines if two <see cref="HyperVGeneration"/> values are the same. </summary>
         public static bool operator ==(HyperVGeneration left, HyperVGeneration right) => left.Equals(right);

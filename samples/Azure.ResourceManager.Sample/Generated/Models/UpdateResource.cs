@@ -10,10 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// The Update Resource model definition.
-    /// Serialized Name: UpdateResource
-    /// </summary>
+    /// <summary> The Update Resource model definition. </summary>
     public partial class UpdateResource
     {
         /// <summary> Initializes a new instance of UpdateResource. </summary>
@@ -22,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Resource tags
-        /// Serialized Name: UpdateResource.tags
-        /// </summary>
+        /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }
 }

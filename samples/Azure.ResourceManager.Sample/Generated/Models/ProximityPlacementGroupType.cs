@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use.
-    /// Serialized Name: ProximityPlacementGroupType
-    /// </summary>
+    /// <summary> Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use. </summary>
     public readonly partial struct ProximityPlacementGroupType : IEquatable<ProximityPlacementGroupType>
     {
         private readonly string _value;
@@ -28,15 +25,9 @@ namespace Azure.ResourceManager.Sample.Models
         private const string StandardValue = "Standard";
         private const string UltraValue = "Ultra";
 
-        /// <summary>
-        /// Standard
-        /// Serialized Name: ProximityPlacementGroupType.Standard
-        /// </summary>
+        /// <summary> Standard. </summary>
         public static ProximityPlacementGroupType Standard { get; } = new ProximityPlacementGroupType(StandardValue);
-        /// <summary>
-        /// Ultra
-        /// Serialized Name: ProximityPlacementGroupType.Ultra
-        /// </summary>
+        /// <summary> Ultra. </summary>
         public static ProximityPlacementGroupType Ultra { get; } = new ProximityPlacementGroupType(UltraValue);
         /// <summary> Determines if two <see cref="ProximityPlacementGroupType"/> values are the same. </summary>
         public static bool operator ==(ProximityPlacementGroupType left, ProximityPlacementGroupType right) => left.Equals(right);

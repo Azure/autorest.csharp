@@ -10,10 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// VM disk types which are disallowed.
-    /// Serialized Name: VmDiskTypes
-    /// </summary>
+    /// <summary> VM disk types which are disallowed. </summary>
     public readonly partial struct VmDiskType : IEquatable<VmDiskType>
     {
         private readonly string _value;
@@ -28,15 +25,9 @@ namespace Azure.ResourceManager.Sample.Models
         private const string NoneValue = "None";
         private const string UnmanagedValue = "Unmanaged";
 
-        /// <summary>
-        /// None
-        /// Serialized Name: VmDiskTypes.None
-        /// </summary>
+        /// <summary> None. </summary>
         public static VmDiskType None { get; } = new VmDiskType(NoneValue);
-        /// <summary>
-        /// Unmanaged
-        /// Serialized Name: VmDiskTypes.Unmanaged
-        /// </summary>
+        /// <summary> Unmanaged. </summary>
         public static VmDiskType Unmanaged { get; } = new VmDiskType(UnmanagedValue);
         /// <summary> Determines if two <see cref="VmDiskType"/> values are the same. </summary>
         public static bool operator ==(VmDiskType left, VmDiskType right) => left.Equals(right);

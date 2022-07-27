@@ -9,17 +9,11 @@ using System;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Describes a virtual machines scale sets network configuration&apos;s DNS settings.
-    /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
-    /// </summary>
+    /// <summary> Describes a virtual machines scale sets network configuration&apos;s DNS settings. </summary>
     internal partial class VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings. </summary>
-        /// <param name="domainNameLabel">
-        /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
-        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
-        /// </param>
+        /// <param name="domainNameLabel"> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="domainNameLabel"/> is null. </exception>
         public VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(string domainNameLabel)
         {
@@ -31,10 +25,7 @@ namespace Azure.ResourceManager.Sample.Models
             DomainNameLabel = domainNameLabel;
         }
 
-        /// <summary>
-        /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
-        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
-        /// </summary>
+        /// <summary> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </summary>
         public string DomainNameLabel { get; set; }
     }
 }

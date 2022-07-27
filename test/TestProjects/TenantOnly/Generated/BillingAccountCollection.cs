@@ -75,7 +75,7 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountRestClient.CreateAsync(billingAccountName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountRestClient.Create(billingAccountName, data, cancellationToken);
-                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -69,5 +69,11 @@ namespace Azure.Core
 
             return OperationState<T>.Pending(state.RawResponse);
         }
+
+        bool IOperation<T>.TryGetInterimState(out OperationState<T>? value)
+        {
+            value = default;
+            return false;
+        }
     }
 }

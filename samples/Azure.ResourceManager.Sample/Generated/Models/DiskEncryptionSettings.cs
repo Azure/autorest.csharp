@@ -7,10 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary>
-    /// Describes a Encryption Settings for a Disk
-    /// Serialized Name: DiskEncryptionSettings
-    /// </summary>
+    /// <summary> Describes a Encryption Settings for a Disk. </summary>
     public partial class DiskEncryptionSettings
     {
         /// <summary> Initializes a new instance of DiskEncryptionSettings. </summary>
@@ -19,18 +16,9 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of DiskEncryptionSettings. </summary>
-        /// <param name="diskEncryptionKey">
-        /// Specifies the location of the disk encryption key, which is a Key Vault Secret.
-        /// Serialized Name: DiskEncryptionSettings.diskEncryptionKey
-        /// </param>
-        /// <param name="keyEncryptionKey">
-        /// Specifies the location of the key encryption key in Key Vault.
-        /// Serialized Name: DiskEncryptionSettings.keyEncryptionKey
-        /// </param>
-        /// <param name="enabled">
-        /// Specifies whether disk encryption should be enabled on the virtual machine.
-        /// Serialized Name: DiskEncryptionSettings.enabled
-        /// </param>
+        /// <param name="diskEncryptionKey"> Specifies the location of the disk encryption key, which is a Key Vault Secret. </param>
+        /// <param name="keyEncryptionKey"> Specifies the location of the key encryption key in Key Vault. </param>
+        /// <param name="enabled"> Specifies whether disk encryption should be enabled on the virtual machine. </param>
         internal DiskEncryptionSettings(KeyVaultSecretReference diskEncryptionKey, KeyVaultKeyReference keyEncryptionKey, bool? enabled)
         {
             DiskEncryptionKey = diskEncryptionKey;
@@ -38,20 +26,11 @@ namespace Azure.ResourceManager.Sample.Models
             Enabled = enabled;
         }
 
-        /// <summary>
-        /// Specifies the location of the disk encryption key, which is a Key Vault Secret.
-        /// Serialized Name: DiskEncryptionSettings.diskEncryptionKey
-        /// </summary>
+        /// <summary> Specifies the location of the disk encryption key, which is a Key Vault Secret. </summary>
         public KeyVaultSecretReference DiskEncryptionKey { get; set; }
-        /// <summary>
-        /// Specifies the location of the key encryption key in Key Vault.
-        /// Serialized Name: DiskEncryptionSettings.keyEncryptionKey
-        /// </summary>
+        /// <summary> Specifies the location of the key encryption key in Key Vault. </summary>
         public KeyVaultKeyReference KeyEncryptionKey { get; set; }
-        /// <summary>
-        /// Specifies whether disk encryption should be enabled on the virtual machine.
-        /// Serialized Name: DiskEncryptionSettings.enabled
-        /// </summary>
+        /// <summary> Specifies whether disk encryption should be enabled on the virtual machine. </summary>
         public bool? Enabled { get; set; }
     }
 }

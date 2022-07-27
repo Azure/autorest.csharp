@@ -212,7 +212,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _deploymentExtendedDeploymentsRestClient.CreateOrUpdateAtScopeAsync(Id.Parent, Id.Name, deployment, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedOperationSource(Client), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedOperationSource(Client), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -242,7 +242,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _deploymentExtendedDeploymentsRestClient.CreateOrUpdateAtScope(Id.Parent, Id.Name, deployment, cancellationToken);
-                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedOperationSource(Client), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedOperationSource(Client), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -316,7 +316,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _deploymentExtendedDeploymentsRestClient.ValidateAtScopeAsync(Id.Parent, Id.Name, deployment, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtScopeResourceArmOperation<DeploymentValidateResult>(new DeploymentValidateResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtScopeResourceArmOperation<DeploymentValidateResult>(new DeploymentValidateResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -346,7 +346,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _deploymentExtendedDeploymentsRestClient.ValidateAtScope(Id.Parent, Id.Name, deployment, cancellationToken);
-                var operation = new MgmtScopeResourceArmOperation<DeploymentValidateResult>(new DeploymentValidateResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtScopeResourceArmOperation<DeploymentValidateResult>(new DeploymentValidateResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, deployment).Request, response, OperationFinalStateVia.Location, false);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -428,7 +428,7 @@ namespace MgmtScopeResource
                 if (Id.Parent.ResourceType == ResourceGroupResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, deploymentWhatIf, cancellationToken).ConfigureAwait(false);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -436,7 +436,7 @@ namespace MgmtScopeResource
                 else if (Id.Parent.ResourceType == ManagementGroupResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, deploymentWhatIf, cancellationToken).ConfigureAwait(false);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -444,7 +444,7 @@ namespace MgmtScopeResource
                 else if (Id.Parent.ResourceType == SubscriptionResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, deploymentWhatIf, cancellationToken).ConfigureAwait(false);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -452,7 +452,7 @@ namespace MgmtScopeResource
                 else if (Id.Parent.ResourceType == TenantResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScopeAsync(Id.Name, deploymentWhatIf, cancellationToken).ConfigureAwait(false);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -495,7 +495,7 @@ namespace MgmtScopeResource
                 if (Id.Parent.ResourceType == ResourceGroupResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIf(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, deploymentWhatIf, cancellationToken);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -503,7 +503,7 @@ namespace MgmtScopeResource
                 else if (Id.Parent.ResourceType == ManagementGroupResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, deploymentWhatIf, cancellationToken);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -511,7 +511,7 @@ namespace MgmtScopeResource
                 else if (Id.Parent.ResourceType == SubscriptionResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, deploymentWhatIf, cancellationToken);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -519,7 +519,7 @@ namespace MgmtScopeResource
                 else if (Id.Parent.ResourceType == TenantResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScope(Id.Name, deploymentWhatIf, cancellationToken);
-                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location);
+                    var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, deploymentWhatIf).Request, response, OperationFinalStateVia.Location, false);
                     if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
