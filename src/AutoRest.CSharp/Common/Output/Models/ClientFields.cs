@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -32,11 +33,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<FieldDeclaration> CredentialFields { get; }
 
-        public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, BuildContext context) => new(parameters, context);
+        public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, InputAuth authorization) => new(parameters, authorization);
 
         public static ClientFields CreateForRestClient(IEnumerable<Parameter> parameters) => new(parameters, null);
 
-        private ClientFields(IEnumerable<Parameter> parameters, BuildContext? context)
+        private ClientFields(IEnumerable<Parameter> parameters, InputAuth? authorization)
         {
             ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
@@ -46,12 +47,15 @@ namespace AutoRest.CSharp.Output.Models
             var credentialFields = new List<FieldDeclaration>();
             var properties = new List<FieldDeclaration>();
 
-            if (context != null)
+            if (authorization != null)
             {
                 parameterNamesToFields[KnownParameters.Pipeline.Name] = PipelineField;
                 parameterNamesToFields[KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty;
 
-                foreach (var scheme in context.CodeModel.Security.Schemes)
+                var schemes = authorization is CodeModelSecurity security
+                    ? security.Schemes
+                    : Array.Empty<SecurityScheme>();
+                foreach (var scheme in schemes)
                 {
                     switch (scheme)
                     {
@@ -97,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             fields.AddRange(properties);
-            if (context != null)
+            if (authorization != null)
             {
                 fields.Add(ClientDiagnosticsProperty);
             }

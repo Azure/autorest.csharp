@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -30,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                library = (T)(object)LowLevelOutputLibraryFactory.Create(CodeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
+                throw new InvalidOperationException($"{nameof(BuildContext)} isn't supported in DPG");
             }
             BaseLibrary = library;
             return library;

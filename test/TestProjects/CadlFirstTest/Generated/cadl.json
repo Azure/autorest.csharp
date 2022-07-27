@@ -1,0 +1,209 @@
+{
+  "Name": "demo.helloworld",
+  "Description": "",
+  "ApiVersions": ["0.1.0"],
+  "Models": [
+    {
+      "$id": "1",
+      "Name": "InputModel",
+      "Properties": [
+        {
+          "Name": "requiredString",
+          "Description": "Required string property",
+          "Type": "String",
+          "IsRequired": true,
+          "IsReadOnly": true
+        },
+        {
+          "Name": "requiredInt",
+          "Description": "Required int property",
+          "Type": "Int32",
+          "IsRequired": true,
+          "IsReadOnly": true
+        }
+      ]
+    }
+  ],
+  "Clients": [
+    {
+      "Name": "HelloWorld",
+      "Operations": [
+        {
+          "Name": "topAction",
+          "Description": "",
+          "Parameters": [
+            {
+              "$id": "2",
+              "Name": "Endpoint",
+              "NameInRequest": "Endpoint",
+              "Description": "",
+              "Type": {"Kind" :"Uri"},
+              "Location": "Uri",
+              "IsRequired": true,
+              "IsEndpoint": true,
+              "Kind": "Client"
+            },
+            {
+              "Name": "action",
+              "NameInRequest": "action",
+              "Description": "",
+              "Type": {"Kind" :"String"},
+              "Location": "Path",
+              "IsRequired": true,
+              "Kind": "Method",
+              "SkipUrlEncoding": true,
+            },
+            {
+              "$id": "3",
+              "Name": "apiVersion",
+              "NameInRequest": "apiVersion",
+              "Description": "",
+              "Type": {"Kind" :"String"},
+              "Location": "Query",
+              "IsRequired": true,
+              "IsApiVersion": true,
+              "Kind": "Client"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": { "Name": "Thing" },
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/top/{action}",
+          "BufferResponse": false
+        },
+        {
+          "Name": "topAction2",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "2"
+            },
+            {
+              "$ref": "3"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": { "Name": "Thing" },
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/top2",
+          "BufferResponse": false
+        }
+      ]
+    },
+    {
+      "Name": "Demo",
+      "Operations": [
+        {
+          "Name": "sayHi",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "2"
+            },
+            {
+              "$ref": "3"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/hello",
+          "BufferResponse": false
+        }
+      ]
+    },
+    {
+      "Name": "Demo2",
+      "Operations": [
+        {
+          "Name": "helloAgain",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "2"
+            },
+            {
+              "Name": "input",
+              "NameInRequest": "action",
+              "Description": "",
+              "Type": { "$ref": "1" } ,
+              "Location": "Body",
+              "IsRequired": true,
+              "Kind": "Method"
+            },
+            {
+              "$ref": "3"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/againHi",
+          "BufferResponse": false
+        },
+        {
+          "Name": "helloDemo2",
+          "Description": "",
+          "Parameters": [
+            {
+              "$ref": "2"
+            },
+            {
+              "$ref": "3"
+            }
+          ],
+          "Responses": [
+            {
+              "StatusCodes": [
+                200
+              ],
+              "BodyType": {"Name": "Thing"},
+              "BodyMediaType": "Json"
+            }
+          ],
+          "HttpMethod": "GET",
+          "RequestBodyMediaType": "Json",
+          "Uri": "{Endpoint}/partOfUri",
+          "Path": "/demoHi",
+          "BufferResponse": false
+        }
+      ]
+    }
+  ]
+}

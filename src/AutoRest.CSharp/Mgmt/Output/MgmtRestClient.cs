@@ -15,7 +15,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtRestClient : RestClient
+    internal class MgmtRestClient : CmcRestClient
     {
         public static readonly Parameter ApplicationIdParameter = new("applicationId", "The application id to use for user agent", new CSharpType(typeof(string)), null, ValidationType.None, null);
 
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return candidates.ToList();
         }
 
-        private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder)
+        private static IReadOnlyList<Parameter> GetOrderedParameters(CmcRestClientBuilder clientBuilder)
             => new[] {KnownParameters.Pipeline, ApplicationIdParameter}.Union(clientBuilder.GetOrderedParametersByRequired()).ToArray();
     }
 }
