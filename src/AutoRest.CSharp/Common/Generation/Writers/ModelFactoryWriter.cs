@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.WriteMethodDeclaration(method))
             {
                 writer.WriteParameterNullChecks(method.Parameters);
-                writer.WriteInitialization((w, v) => w.Line($"return {v};"), modelType, ctor, initializes);
+                writer.WriteInitialization(v => writer.Line($"return {v};"), modelType, ctor, initializes);
             }
         }
     }

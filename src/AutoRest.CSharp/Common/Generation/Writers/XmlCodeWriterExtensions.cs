@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class XmlCodeWriterExtensions
     {
-        public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, FormattableString name, FormattableString? writerName = null, CodeWriterDelegate? nameHint = null)
+        public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, FormattableString name, FormattableString? writerName = null, string? nameHint = null)
         {
             writerName ??= $"writer";
 
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.LineRaw(");");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, FormattableString element, Action<CodeWriter, CodeWriterDelegate> valueCallback, bool isElement = false)
+        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, FormattableString element, Action<CodeWriterDelegate> valueCallback, bool isElement = false)
         {
             if (isElement)
             {
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, FormattableString element)
+        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriterDelegate> valueCallback, FormattableString element)
         {
             if (serialization is XmlArraySerialization arraySerialization && !arraySerialization.Wrapped)
             {
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void ToDeserializeElementCall(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, FormattableString element)
+        private static void ToDeserializeElementCall(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriterDelegate> valueCallback, FormattableString element)
         {
             switch (serialization)
             {
@@ -219,14 +219,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     using (writer.Scope($"foreach (var {childElementVariable:D} in {element}.Elements({arraySerialization.ValueSerialization.Name:L}))"))
                     {
-                        writer.ToDeserializeCall(
-                            arraySerialization.ValueSerialization,
-                            $"{childElementVariable}",
-                            (w, v) => w.Line($"{arrayVariable}.Add({v});"),
-                            true);
+                        writer.ToDeserializeCall(arraySerialization.ValueSerialization, $"{childElementVariable}", v => writer.Line($"{arrayVariable}.Add({v});"), true);
                     }
 
-                    valueCallback(writer, w => w.Append(arrayVariable));
+                    valueCallback(w => w.Append(arrayVariable));
                     return;
                 }
                 case XmlDictionarySerialization dictionarySerialization:
@@ -238,14 +234,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     using (writer.Scope($"foreach (var {elementVariable:D} in {element}.Elements())"))
                     {
-                        writer.ToDeserializeCall(
-                            dictionarySerialization.ValueSerialization,
-                            $"{elementVariable}",
-                            (w, v) => w.Line($"{dictionaryVariable}.Add({elementVariable}.Name.LocalName, {v});"),
-                            true);
+                        writer.ToDeserializeCall(dictionarySerialization.ValueSerialization, $"{elementVariable}", v => writer.Line($"{dictionaryVariable}.Add({elementVariable}.Name.LocalName, {v});"), true);
                     }
 
-                    valueCallback(writer, w => w.Append(dictionaryVariable));
+                    valueCallback(w => w.Append(dictionaryVariable));
                     return;
                 }
                 case XmlObjectSerialization elementSerialization:
@@ -274,18 +266,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (XmlObjectElementSerialization elem in elementSerialization.Elements)
                     {
-                        writer.ToDeserializeCall(
-                            elem.ValueSerialization,
-                            element,
-                            (w, v) => w.Line($"{propertyVariables[elem.Property]} = {v};"));
+                        writer.ToDeserializeCall(elem.ValueSerialization, element, v => writer.Line($"{propertyVariables[elem.Property]} = {v};"));
                     }
 
                     foreach (var embeddedArray in elementSerialization.EmbeddedArrays)
                     {
-                        writer.ToDeserializeCall(
-                            embeddedArray.ArraySerialization,
-                            (w, v) => w.Line($"{propertyVariables[embeddedArray.Property]} = {v};"),
-                            element);
+                        writer.ToDeserializeCall(embeddedArray.ArraySerialization, v => writer.Line($"{propertyVariables[embeddedArray.Property]} = {v};"), element);
                     }
 
                     if (elementSerialization.ContentSerialization is { } contentSerialization)
@@ -309,7 +295,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return;
                 case XmlElementValueSerialization valueSerialization:
                 {
-                    valueCallback(writer, w => w.ToDeserializeValueCall(valueSerialization.Value, element));
+                    valueCallback(w => w.ToDeserializeValueCall(valueSerialization.Value, element));
                     return;
                 }
             }
@@ -398,7 +384,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
 
                 case EnumType clientEnum:
-                    writer.AppendEnumFromString(clientEnum, w => w.Append($"{element}.Value"));
+                    writer.AppendEnumFromString(clientEnum, $"{element}.Value");
                     break;
 
                 default:
@@ -406,7 +392,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, string response)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriterDelegate> valueCallback, string response)
         {
             var document = new CodeWriterDeclaration("document");
             writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response}.ContentStream, LoadOptions.PreserveWhitespace);");

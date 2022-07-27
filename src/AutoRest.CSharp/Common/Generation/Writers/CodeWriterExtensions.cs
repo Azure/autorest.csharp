@@ -347,8 +347,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, Action<CodeWriterDelegate> valueCallback, string responseVariable, CSharpType? type)
         {
             switch (serialization)
             {
@@ -372,7 +371,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.AppendRaw(enumType.IsExtendable ? ".ToString()" : ".ToSerialString()");
         }
 
-        public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, CodeWriterDelegate value)
+        public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, FormattableString value)
         {
             if (enumType.IsExtendable)
             {
@@ -392,7 +391,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteInitialization(
             this CodeWriter writer,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback,
+            Action<CodeWriterDelegate> valueCallback,
             ObjectType objectType,
             ObjectTypeConstructor constructor,
             IEnumerable<PropertyInitializer> initializers)
@@ -494,11 +493,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 WriteCollectionInitializer(writer, modelVariable);
 
-                valueCallback(writer, w => w.Append(modelVariable));
+                valueCallback(w => w.Append(modelVariable));
             }
             else
             {
-                valueCallback(writer, WriteObjectInitializer);
+                valueCallback(WriteObjectInitializer);
             }
 
 

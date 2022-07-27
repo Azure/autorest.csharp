@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 sb.Append(".").Append($"{i}:I");
             }
 
-            return FormattableStringFactory.Create(sb.ToString(), parts.Cast<object>());
+            return FormattableStringFactory.Create(sb.ToString(), parts.Cast<object>().ToArray());
         }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)

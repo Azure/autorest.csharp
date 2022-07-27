@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     serialization,
                     $"this",
                     null,
-                    w => w.AppendRaw(namehint));
+                    namehint);
             }
             writer.Line();
         }
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
-                writer.ToDeserializeCall(serialization, $"element", (w, v) => w.Line($"return {v};"), true);
+                writer.ToDeserializeCall(serialization, $"element", v => writer.Line($"return {v};"), true);
             }
             writer.Line();
         }
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    writer.DeserializeValue(jsonSerialization, $"element", (w, v) => w.Line($"return {v};"));
+                    writer.DeserializeValue(jsonSerialization, $"element", v => writer.Line($"return {v};"));
                 }
             }
             writer.Line();

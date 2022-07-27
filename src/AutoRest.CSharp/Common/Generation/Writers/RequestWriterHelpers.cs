@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         var modelVariable = new CodeWriterDeclaration("model");
                         writer.WriteInitialization(
-                                (w, v) => w.Line($"var {modelVariable:D} = {v};"),
+                                v => writer.Line($"var {modelVariable:D} = {v};"),
                                 flattenedSchemaRequestBody.ObjectType,
                                 flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
                                 initializers);
