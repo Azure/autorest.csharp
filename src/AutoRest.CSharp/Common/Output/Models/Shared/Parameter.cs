@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 defaultValue,
                 validation,
                 initializer,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                IsApiVersionParameter: requestParameter.IsApiVersionParameter,
                 IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);

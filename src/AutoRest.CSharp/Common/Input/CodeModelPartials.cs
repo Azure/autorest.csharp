@@ -166,6 +166,9 @@ namespace AutoRest.CSharp.Input
     internal partial class RequestParameter
     {
         public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-identifier"));
+        public bool IsEndpointParameter => Origin == "modelerfour:synthesized/host";
+        public bool IsContentTypeParameter => Origin == "modelerfour:synthesized/content-type";
+        public bool IsApiVersionParameter => Origin == "modelerfour:synthesized/api-version";
 
         public HttpParameterIn In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : HttpParameterIn.None;
         public bool IsFlattened => Flattened ?? false;

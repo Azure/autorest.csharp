@@ -1268,6 +1268,7 @@ namespace AppConfiguration
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             if (_syncToken != null)
             {
@@ -1351,6 +1352,7 @@ namespace AppConfiguration
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             if (_syncToken != null)
             {
@@ -1438,6 +1440,7 @@ namespace AppConfiguration
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             if (_syncToken != null)
             {
@@ -1523,6 +1526,7 @@ namespace AppConfiguration
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             if (_syncToken != null)
             {
