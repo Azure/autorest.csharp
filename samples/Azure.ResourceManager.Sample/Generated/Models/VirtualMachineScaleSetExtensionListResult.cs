@@ -12,11 +12,17 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The List VM scale set extension operation response. </summary>
+    /// <summary>
+    /// The List VM scale set extension operation response.
+    /// Serialized Name: VirtualMachineScaleSetExtensionListResult
+    /// </summary>
     internal partial class VirtualMachineScaleSetExtensionListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
-        /// <param name="value"> The list of VM scale set extensions. </param>
+        /// <param name="value">
+        /// The list of VM scale set extensions.
+        /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal VirtualMachineScaleSetExtensionListResult(IEnumerable<VirtualMachineScaleSetExtensionData> value)
         {
@@ -29,17 +35,29 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
-        /// <param name="value"> The list of VM scale set extensions. </param>
-        /// <param name="nextLink"> The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions. </param>
+        /// <param name="value">
+        /// The list of VM scale set extensions.
+        /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
+        /// </param>
+        /// <param name="nextLink">
+        /// The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions.
+        /// Serialized Name: VirtualMachineScaleSetExtensionListResult.nextLink
+        /// </param>
         internal VirtualMachineScaleSetExtensionListResult(IReadOnlyList<VirtualMachineScaleSetExtensionData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary> The list of VM scale set extensions. </summary>
+        /// <summary>
+        /// The list of VM scale set extensions.
+        /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
+        /// </summary>
         public IReadOnlyList<VirtualMachineScaleSetExtensionData> Value { get; }
-        /// <summary> The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions. </summary>
+        /// <summary>
+        /// The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions.
+        /// Serialized Name: VirtualMachineScaleSetExtensionListResult.nextLink
+        /// </summary>
         public string NextLink { get; }
     }
 }

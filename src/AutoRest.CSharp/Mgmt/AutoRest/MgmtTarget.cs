@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static async Task Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             var addedFilenames = new HashSet<string>();
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
@@ -186,7 +186,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
-            if (model is SchemaObjectType objSchema)
+            // since MgmtReferenceType inherits from MgmtObjectType which inherits from SchemaObjectType, we definitely do not want to exclude any generation of ReferenceTypes
+            if (model is SchemaObjectType objSchema && model is not MgmtReferenceType)
             {
                 if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
                     return true;

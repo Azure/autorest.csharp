@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The instance view of a dedicated host. </summary>
+    /// <summary>
+    /// The instance view of a dedicated host.
+    /// Serialized Name: DedicatedHostInstanceView
+    /// </summary>
     public partial class DedicatedHostInstanceView
     {
         /// <summary> Initializes a new instance of DedicatedHostInstanceView. </summary>
@@ -20,9 +23,18 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of DedicatedHostInstanceView. </summary>
-        /// <param name="assetId"> Specifies the unique id of the dedicated physical machine on which the dedicated host resides. </param>
-        /// <param name="availableCapacity"> Unutilized capacity of the dedicated host. </param>
-        /// <param name="statuses"> The resource status information. </param>
+        /// <param name="assetId">
+        /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
+        /// Serialized Name: DedicatedHostInstanceView.assetId
+        /// </param>
+        /// <param name="availableCapacity">
+        /// Unutilized capacity of the dedicated host.
+        /// Serialized Name: DedicatedHostInstanceView.availableCapacity
+        /// </param>
+        /// <param name="statuses">
+        /// The resource status information.
+        /// Serialized Name: DedicatedHostInstanceView.statuses
+        /// </param>
         internal DedicatedHostInstanceView(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses)
         {
             AssetId = assetId;
@@ -30,17 +42,29 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = statuses;
         }
 
-        /// <summary> Specifies the unique id of the dedicated physical machine on which the dedicated host resides. </summary>
+        /// <summary>
+        /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
+        /// Serialized Name: DedicatedHostInstanceView.assetId
+        /// </summary>
         public string AssetId { get; }
-        /// <summary> Unutilized capacity of the dedicated host. </summary>
+        /// <summary>
+        /// Unutilized capacity of the dedicated host.
+        /// Serialized Name: DedicatedHostInstanceView.availableCapacity
+        /// </summary>
         internal DedicatedHostAvailableCapacity AvailableCapacity { get; }
-        /// <summary> The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host. </summary>
+        /// <summary>
+        /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
+        /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
+        /// </summary>
         public IReadOnlyList<DedicatedHostAllocatableVM> AvailableCapacityAllocatableVMs
         {
             get => AvailableCapacity?.AllocatableVMs;
         }
 
-        /// <summary> The resource status information. </summary>
+        /// <summary>
+        /// The resource status information.
+        /// Serialized Name: DedicatedHostInstanceView.statuses
+        /// </summary>
         public IReadOnlyList<InstanceViewStatus> Statuses { get; }
     }
 }

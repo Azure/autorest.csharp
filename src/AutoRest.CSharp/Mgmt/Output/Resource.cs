@@ -96,6 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
               Name: Type.Name,
+              null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
               Modifiers: Internal,
               Parameters: _armClientCtorParameters,
@@ -108,6 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
                 Name: Type.Name,
+                null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
@@ -239,7 +241,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
                         TagKeyParameter,
-                        TagValueParameter)));
+                        TagValueParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -247,7 +249,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        TagSetParameter)));
+                        TagSetParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -255,7 +257,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        TagKeyParameter)));
+                        TagKeyParameter), isConvenientOperation: true));
             }
             return result;
         }
@@ -408,6 +410,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new MethodSignature(
                     Name: "CreateResourceIdentifier",
+                    null,
                     Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
                     Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),

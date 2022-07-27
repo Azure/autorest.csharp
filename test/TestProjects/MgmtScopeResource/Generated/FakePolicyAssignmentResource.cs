@@ -94,8 +94,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FakePolicyAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Get");
-            scope.Start();
+            using var scope0 = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Get");
+            scope0.Start();
             try
             {
                 var response = await _fakePolicyAssignmentRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -105,7 +105,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -118,8 +118,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakePolicyAssignmentResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Get");
-            scope.Start();
+            using var scope0 = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Get");
+            scope0.Start();
             try
             {
                 var response = _fakePolicyAssignmentRestClient.Get(Id.Parent, Id.Name, cancellationToken);
@@ -129,7 +129,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -143,8 +143,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Delete");
-            scope.Start();
+            using var scope0 = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Delete");
+            scope0.Start();
             try
             {
                 var response = await _fakePolicyAssignmentRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -155,7 +155,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -169,8 +169,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation<FakePolicyAssignmentResource> Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Delete");
-            scope.Start();
+            using var scope0 = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Delete");
+            scope0.Start();
             try
             {
                 var response = _fakePolicyAssignmentRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
@@ -181,7 +181,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -199,8 +199,8 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Update");
-            scope.Start();
+            using var scope0 = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Update");
+            scope0.Start();
             try
             {
                 var response = await _fakePolicyAssignmentRestClient.CreateAsync(Id.Parent, Id.Name, data, cancellationToken).ConfigureAwait(false);
@@ -211,7 +211,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -229,8 +229,8 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Update");
-            scope.Start();
+            using var scope0 = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Update");
+            scope0.Start();
             try
             {
                 var response = _fakePolicyAssignmentRestClient.Create(Id.Parent, Id.Name, data, cancellationToken);
@@ -241,7 +241,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }

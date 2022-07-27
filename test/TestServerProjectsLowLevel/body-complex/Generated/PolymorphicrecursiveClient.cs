@@ -60,6 +60,20 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValidAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphicrecursiveClient(credential);
+        /// 
+        /// Response response = await client.GetValidAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -201,6 +215,20 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValid and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphicrecursiveClient(credential);
+        /// 
+        /// Response response = client.GetValid();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -344,6 +372,38 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphicrecursiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphicrecursiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {},
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 
@@ -489,6 +549,38 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValid with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphicrecursiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValid with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphicrecursiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {},
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 

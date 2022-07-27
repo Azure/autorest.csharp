@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;. </summary>
+    /// <summary>
+    /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+    /// Serialized Name: PatchOperationStatus
+    /// </summary>
     public readonly partial struct PatchOperationStatus : IEquatable<PatchOperationStatus>
     {
         private readonly string _value;
@@ -27,13 +30,25 @@ namespace Azure.ResourceManager.Sample.Models
         private const string SucceededValue = "Succeeded";
         private const string CompletedWithWarningsValue = "CompletedWithWarnings";
 
-        /// <summary> InProgress. </summary>
+        /// <summary>
+        /// InProgress
+        /// Serialized Name: PatchOperationStatus.InProgress
+        /// </summary>
         public static PatchOperationStatus InProgress { get; } = new PatchOperationStatus(InProgressValue);
-        /// <summary> Failed. </summary>
+        /// <summary>
+        /// Failed
+        /// Serialized Name: PatchOperationStatus.Failed
+        /// </summary>
         public static PatchOperationStatus Failed { get; } = new PatchOperationStatus(FailedValue);
-        /// <summary> Succeeded. </summary>
+        /// <summary>
+        /// Succeeded
+        /// Serialized Name: PatchOperationStatus.Succeeded
+        /// </summary>
         public static PatchOperationStatus Succeeded { get; } = new PatchOperationStatus(SucceededValue);
-        /// <summary> CompletedWithWarnings. </summary>
+        /// <summary>
+        /// CompletedWithWarnings
+        /// Serialized Name: PatchOperationStatus.CompletedWithWarnings
+        /// </summary>
         public static PatchOperationStatus CompletedWithWarnings { get; } = new PatchOperationStatus(CompletedWithWarningsValue);
         /// <summary> Determines if two <see cref="PatchOperationStatus"/> values are the same. </summary>
         public static bool operator ==(PatchOperationStatus left, PatchOperationStatus right) => left.Equals(right);

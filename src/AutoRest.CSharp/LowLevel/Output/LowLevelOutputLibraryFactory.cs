@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new LowLevelOutputLibrary(context, () =>
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, context, clientOptions);
+                var topLevelClients = CreateClients(topLevelClientInfos, context, clientOptions, null);
                 return EnumerateAllClients(topLevelClients);
             }, clientOptions);
         }
@@ -204,25 +204,28 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add((request, operation));
         }
 
-        private static IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> topLevelClientInfos, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        private static IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
         {
-            foreach (var clientInfo in topLevelClientInfos)
+            foreach (var clientInfo in clientInfos)
             {
-                var subClients = clientInfo.Children.Count > 0
-                    ? CreateClients(clientInfo.Children, context, clientOptions).ToArray()
-                    : Array.Empty<LowLevelClient>();
+                var subClients = new List<LowLevelClient>();
 
-                var isSubClient = clientInfo.Parent != null;
-                yield return new LowLevelClient(
+                var client = new LowLevelClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
                     clientInfo.Description,
-                    isSubClient,
-                    subClients,
+                    parentClient,
                     clientInfo.Requests,
                     new RestClientBuilder(clientInfo.ClientParameters, context),
                     context,
-                    clientOptions);
+                    clientOptions)
+                {
+                    SubClients = subClients
+                };
+
+                 subClients.AddRange(CreateClients(clientInfo.Children, context, clientOptions, client));
+
+                 yield return client;
             }
         }
 

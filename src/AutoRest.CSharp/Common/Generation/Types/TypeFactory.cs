@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -209,6 +210,8 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DurationConstant => typeof(TimeSpan),
             XMsFormat.ETag => typeof(ETag),
             XMsFormat.ResourceType => typeof(ResourceType),
+            XMsFormat.Object => typeof(object),
+            XMsFormat.IPAddress => typeof(IPAddress),
             _ => null
         };
 

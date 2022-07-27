@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -54,24 +55,28 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null)
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter);
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
         }
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
         {
             _operations = operations;
             _extensionParameter = extensionParameter;
+            IsConvenientOperation = isConvenientOperation;
         }
+
+        public bool IsConvenientOperation { get; }
 
         public MgmtRestOperation this[int index] => _operations[index];
 
         private MethodSignature? _methodSignature;
         public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
             Name,
+            null,
             Description,
             Accessibility == Public
                 ? _extensionParameter != null

@@ -7,7 +7,10 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a Virtual Machine Scale Set VM Reimage Parameters. </summary>
+    /// <summary>
+    /// Describes a Virtual Machine Scale Set VM Reimage Parameters.
+    /// Serialized Name: VirtualMachineScaleSetVMReimageParameters
+    /// </summary>
     public partial class VirtualMachineScaleSetVMReimageContent : VirtualMachineReimageContent
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMReimageContent. </summary>

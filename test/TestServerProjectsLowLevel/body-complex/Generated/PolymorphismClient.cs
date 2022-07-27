@@ -60,6 +60,20 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValidAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetValidAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -201,6 +215,20 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValid and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetValid();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -344,6 +372,38 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {},
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 
@@ -489,6 +549,38 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValid with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValid with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {},
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 
@@ -632,6 +724,19 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDotSyntaxAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetDotSyntaxAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -668,6 +773,19 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDotSyntax and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetDotSyntax();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -704,6 +822,29 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithDiscriminatorAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetComposedWithDiscriminatorAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -747,6 +888,29 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithDiscriminator and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetComposedWithDiscriminator();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -790,6 +954,29 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithoutDiscriminatorAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetComposedWithoutDiscriminatorAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -833,6 +1020,29 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithoutDiscriminator and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetComposedWithoutDiscriminator();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -876,6 +1086,25 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComplicatedAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetComplicatedAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -922,6 +1151,25 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComplicated and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetComplicated();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -970,6 +1218,48 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutComplicatedAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutComplicatedAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {
+        ///         new {
+        ///             fishtype = "salmon",
+        ///             species = "<FishSpecies>",
+        ///             length = 1234,
+        ///             siblings = new[] {},
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
+        ///         }
+        ///     },
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
+        /// };
+        /// 
+        /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 
@@ -1020,6 +1310,48 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutComplicated with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = client.PutComplicated(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutComplicated with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {
+        ///         new {
+        ///             fishtype = "salmon",
+        ///             species = "<FishSpecies>",
+        ///             length = 1234,
+        ///             siblings = new[] {},
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
+        ///         }
+        ///     },
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
+        /// };
+        /// 
+        /// Response response = client.PutComplicated(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 
@@ -1070,6 +1402,61 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PutMissingDiscriminatorAsync with required request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call PutMissingDiscriminatorAsync with all request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {
+        ///         new {
+        ///             fishtype = "salmon",
+        ///             species = "<FishSpecies>",
+        ///             length = 1234,
+        ///             siblings = new[] {},
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
+        ///         }
+        ///     },
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
+        /// };
+        /// 
+        /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
         /// 
@@ -1142,6 +1529,61 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PutMissingDiscriminator with required request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call PutMissingDiscriminator with all request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {
+        ///         new {
+        ///             fishtype = "salmon",
+        ///             species = "<FishSpecies>",
+        ///             length = 1234,
+        ///             siblings = new[] {},
+        ///             location = "<SalmonLocation>",
+        ///             iswild = true,
+        ///         }
+        ///     },
+        ///     college_degree = "<SmartSalmonCollegeDegree>",
+        /// };
+        /// 
+        /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
         /// 
@@ -1214,6 +1656,38 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidMissingRequiredAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidMissingRequiredAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {},
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        /// };
+        /// 
+        /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 
@@ -1359,6 +1833,38 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidMissingRequired with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 1234,
+        /// };
+        /// 
+        /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidMissingRequired with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     species = "<FishSpecies>",
+        ///     length = 1234,
+        ///     siblings = new[] {},
+        ///     location = "<SalmonLocation>",
+        ///     iswild = true,
+        /// };
+        /// 
+        /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request payload.
         /// 

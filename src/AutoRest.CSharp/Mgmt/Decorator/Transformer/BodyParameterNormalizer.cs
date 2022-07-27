@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName)
         {
             switch (method)
             {
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             var schemaName = bodyParameter.Schema.Language.Default.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
@@ -43,16 +43,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Input", Content);
             var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
+            // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
+            bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
         }
 
         private static void UpdateRequestParameter(RequestParameter parameter, string parameterName, string schemaName)
         {
+            parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
             parameter.Language.Default.Name = parameterName;
             parameter.Schema.Language.Default.Name = schemaName;
             if (parameter.Schema is ChoiceSchema ||
