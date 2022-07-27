@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
         {
-            string? delimiter = GetSerializationStyleDelimiter(header.SerializationStyle);
+            string? delimiter = header.Delimiter;
             string method = delimiter != null
                 ? nameof(RequestHeaderExtensions.AddDelimited)
                 : nameof(RequestHeaderExtensions.Add);
@@ -358,7 +358,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields, IReadOnlyList<Parameter>? parameters)
         {
-            string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
+            string? delimiter = queryParameter.Delimiter;
             bool explode = queryParameter.Explode;
             string method = delimiter != null && !explode
                 ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
@@ -427,15 +427,5 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return default;
         }
-
-        private static string? GetSerializationStyleDelimiter(RequestParameterSerializationStyle style) => style switch
-        {
-            RequestParameterSerializationStyle.PipeDelimited => "|",
-            RequestParameterSerializationStyle.TabDelimited => "\t",
-            RequestParameterSerializationStyle.SpaceDelimited => " ",
-            RequestParameterSerializationStyle.CommaDelimited => ",",
-            _ => null
-        };
-
     }
 }

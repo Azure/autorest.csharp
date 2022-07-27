@@ -22,19 +22,23 @@ function Invoke($command)
     }
 }
 
-function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast)
+function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
 {
     $outputPath = Join-Path $baseOutput "Generated"
     if ($projectName -eq "TypeSchemaMapping")
     {
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
     }
-    $namespace = $projectName.Replace('-', '_')
-    $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
-    if ($fast)
+    if ($fast -or ($projectName -eq "CadlFirstTest") -or ($projectName -eq "CadlPetStore"))
     {
-        $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
+        $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
+        $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
+    }
+    else
+    {
+        $namespace = $projectName.Replace('-', '_')
+        $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
     }
 
     Invoke $command
