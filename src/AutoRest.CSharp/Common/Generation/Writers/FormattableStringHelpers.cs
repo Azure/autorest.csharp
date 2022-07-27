@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var sb = new StringBuilder("{0:I}");
             for (int i = 1; i < parts.Length; i++)
             {
-                sb.Append(".").Append($"{i}:I");
+                sb.Append(".").Append($"{{{i}:I}}");
             }
 
             return FormattableStringFactory.Create(sb.ToString(), parts.Cast<object>().ToArray());

@@ -35,11 +35,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{writerName}.WriteStartArray();");
                     var collectionItemVariable = new CodeWriterDeclaration("item");
 
-                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name})"))
+                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name:I})"))
                     {
                         writer.ToSerializeCall(
                             array.ValueSerialization,
-                            $"{collectionItemVariable}",
+                            $"{collectionItemVariable:I}",
                             writerName);
                     }
 
@@ -50,12 +50,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{writerName}.WriteStartObject();");
                     var dictionaryItemVariable = new CodeWriterDeclaration("item");
 
-                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {name})"))
+                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {name:I})"))
                     {
-                        writer.Line($"{writerName}.WritePropertyName({dictionaryItemVariable}.Key);");
+                        writer.Line($"{writerName}.WritePropertyName({dictionaryItemVariable:I}.Key);");
                         writer.ToSerializeCall(
                             dictionary.ValueSerialization,
-                            $"{dictionaryItemVariable}.Value",
+                            $"{dictionaryItemVariable:I}.Value",
                             writerName);
                     }
 
@@ -93,11 +93,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 if (objectProperty.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                                 {
-                                    writer.ToSerializeCall(property.ValueSerialization, $"{declarationName}.Value");
+                                    writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
                                 }
                                 else
                                 {
-                                    writer.ToSerializeCall(property.ValueSerialization, $"{declarationName}");
+                                    writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}");
                                 }
                             }
                             if (ifScope != null)
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
                             writer.ToSerializeCall(
                                 obj.AdditionalProperties.ValueSerialization,
-                                $"{itemVariable}.Value",
+                                $"{itemVariable:I}.Value",
                                 writerName);
                         }
                     }
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (frameworkType == typeof(JsonElement))
                         {
-                            writer.Line($"{name}.WriteTo({writerName});");
+                            writer.Line($"{name:I}.WriteTo({writerName});");
                             return;
                         }
 
@@ -194,25 +194,25 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(ETag) || frameworkType == typeof(IPAddress))
                         {
-                            writer.Line($"WriteStringValue({name}.ToString());");
+                            writer.Line($"WriteStringValue({name:I}.ToString());");
                             return;
                         }
                         else if (frameworkType == typeof(Uri))
                         {
-                            writer.Line($"WriteStringValue({name}.{nameof(Uri.AbsoluteUri)});");
+                            writer.Line($"WriteStringValue({name:I}.{nameof(Uri.AbsoluteUri)});");
                             return;
                         }
                         else if (frameworkType == typeof(BinaryData))
                         {
                             writer.Line($"#if NET6_0_OR_GREATER");
-                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name});");
+                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
                             writer.Line($"#else");
-                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name}.ToString()).RootElement);");
+                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
                             writer.Line($"#endif");
                             return;
                         }
 
-                        writer.Append($"({name}")
+                        writer.Append($"({name:I}")
                             .AppendNullableValue(valueSerialization.Type);
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
@@ -238,17 +238,17 @@ namespace AutoRest.CSharp.Generation.Writers
                                         writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                                         optionalSerializeOptions = ", serializeOptions";
                                     }
-                                    writer.Append($"JsonSerializer.Serialize(writer, {name}{optionalSerializeOptions});");
+                                    writer.Append($"JsonSerializer.Serialize(writer, {name:I}{optionalSerializeOptions});");
                                 }
                                 else
                                 {
-                                    writer.Line($"{writerName}.WriteObjectValue({name});");
+                                    writer.Line($"{writerName}.WriteObjectValue({name:I});");
                                 }
                                 return;
                             }
 
                         case EnumType clientEnum:
-                            writer.Append($"{writerName}.WriteStringValue({name}")
+                            writer.Append($"{writerName}.WriteStringValue({name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
                                 .Line($");");

@@ -178,11 +178,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
                                 initializers);
 
-                        WriteSerializeContent(
-                            writer,
-                            request,
-                            flattenedSchemaRequestBody.Serialization,
-                            $"{modelVariable}");
+                        WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}");
                         break;
                     case UrlEncodedBody urlEncodedRequestBody:
                         var urlContent = new CodeWriterDeclaration("content");
@@ -335,10 +331,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (!ignoreNullability && constantOrReference.Type.IsNullable && constantOrReference.Type.IsValueType)
             {
-                return $"{constantOrReference.Reference.Name}.Value";
+                return $"{constantOrReference.Reference.Name:I}.Value";
             }
 
-            return $"{constantOrReference.Reference.Name}";
+            return $"{constantOrReference.Reference.Name:I}";
         }
 
         private static void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
