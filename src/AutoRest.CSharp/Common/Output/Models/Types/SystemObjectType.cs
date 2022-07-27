@@ -34,12 +34,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private Type _type;
+        private readonly Type _type;
+        private readonly BuildContext _context;
 
         public SystemObjectType(Type type, BuildContext context)
             : base(context)
         {
             _type = type;
+            _context = context;
             DefaultName = GetNameWithoutGeneric(type);
         }
 
@@ -217,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(Context, _type.BaseType);
+            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_context, _type.BaseType);
         }
 
         protected override string CreateDescription()

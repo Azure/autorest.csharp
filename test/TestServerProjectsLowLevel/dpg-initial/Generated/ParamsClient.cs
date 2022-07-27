@@ -311,7 +311,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(credential);
         /// 
         /// var data = new {
-        ///     url = "<PostInputUrl>",
+        ///     url = "<url>",
         /// };
         /// 
         /// Response response = await client.PostParametersAsync(RequestContent.Create(data));
@@ -363,7 +363,7 @@ namespace dpg_initial_LowLevel
         /// var client = new ParamsClient(credential);
         /// 
         /// var data = new {
-        ///     url = "<PostInputUrl>",
+        ///     url = "<url>",
         /// };
         /// 
         /// Response response = client.PostParameters(RequestContent.Create(data));

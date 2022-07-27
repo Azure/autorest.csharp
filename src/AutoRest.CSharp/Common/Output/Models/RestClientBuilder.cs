@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -44,16 +45,23 @@ namespace AutoRest.CSharp.Output.Models
         };
 
         private readonly SerializationBuilder _serializationBuilder;
-        protected readonly BuildContext _context;
-        private readonly OutputLibrary _library;
+        private readonly OutputLibrary? _library;
+        private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        public RestClientBuilder(IEnumerable<RequestParameter> clientParameters, BuildContext context)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _serializationBuilder = new SerializationBuilder();
-            _context = context;
-            _library = context.BaseLibrary!;
-            _parameters = clientParameters.ToDictionary(p => p.Language.Default.Name, BuildConstructorParameter);
+            _typeFactory = typeFactory;
+            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+        }
+
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
+        {
+            _serializationBuilder = new SerializationBuilder();
+            _typeFactory = context.TypeFactory;
+            _library = context.BaseLibrary;
+            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
         /// <summary>
@@ -65,11 +73,12 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(_parameters.Values);
         }
 
-        public static IEnumerable<RequestParameter> GetParametersFromOperations(ICollection<Operation> operations) =>
+        public static IEnumerable<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
             operations
-                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
-                .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct();
+                .SelectMany(op => op.Parameters)
+                .Where(p => p.Kind == InputOperationParameterKind.Client)
+                .Distinct()
+                .ToList();
 
         private static string GetRequestParameterName(RequestParameter requestParameter)
         {
@@ -77,29 +86,28 @@ namespace AutoRest.CSharp.Output.Models
             return language.SerializedName ?? language.Name;
         }
 
-        public RestClientMethod BuildRequestMethod(Operation operation, ServiceRequest serviceRequest, HttpRequest httpRequest)
+        public RestClientMethod BuildRequestMethod(InputOperation operation)
         {
             var accessibility = operation.Accessibility ?? "public";
             var requestParameters = operation.Parameters
-                .Concat(serviceRequest.Parameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp));
 
-            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters, operation.RequestMediaTypes?.Keys);
-            Request request = BuildRequest(httpRequest, buildContext);
+            var buildContext = CreateRequestMethodBuildContext(operation, requestParameters);
+            Request request = BuildRequest(operation, buildContext);
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType);
 
             return new RestClientMethod(
-                operation.CSharpName(),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Summary ?? string.Empty),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                operation.Name.ToCleanName(),
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
                 request,
                 buildContext.OrderedParameters.ToArray(),
                 responses,
                 null,
-                operation.Extensions?.BufferResponse ?? true,
+                operation.BufferResponse,
                 accessibility: accessibility,
                 operation,
                 buildContext.RequestConditionFlag
@@ -108,56 +116,53 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
         {
-            var allParameters = GetOperationAllParameters(operation, requestParameters);
-            return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
+            var inputParameters = new CodeModelConverter().CreateOperationParameters(operation.Parameters.Concat(requestParameters).ToArray());
+            return inputParameters
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                .ToDictionary(p => p.NameInRequest, p => (CreateReference(p, BuildParameter(p)), p.SkipUrlEncoding));
         }
 
         /// <summary>
         /// Build RestClientMethod for mgmt and HLC
         /// </summary>
         /// <param name="operation"></param>
-        /// <param name="httpRequest"></param>
-        /// <param name="requestParameters"></param>
         /// <param name="responseHeaderModel"></param>
         /// <param name="accessibility"></param>
         /// <param name="returnNullOn404Func"></param>
         /// <returns></returns>
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
+        public RestClientMethod BuildMethod(InputOperation operation, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
-            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
-            var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
-            var request = BuildRequest(httpRequest, new RequestMethodBuildContext(methodParameters, references));
+            var references = allParameters.ToDictionary(kvp => kvp.Key.NameInRequest, kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
+            var request = BuildRequest(operation, new RequestMethodBuildContext(methodParameters, references));
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType, returnNullOn404Func);
 
             return new RestClientMethod(
-                operation.CSharpName(),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Summary ?? string.Empty),
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                operation.Name.ToCleanName(),
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDescription(operation.Description),
                 responseType,
                 request,
                 methodParameters,
                 responses,
                 responseHeaderModel,
-                operation.Extensions?.BufferResponse ?? true,
+                operation.BufferResponse,
                 accessibility: accessibility,
                 operation
             );
         }
 
-        private Dictionary<RequestParameter, Parameter> GetOperationAllParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
+        private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
         {
-            var parameters = operation.Parameters
-                .Concat(requestParameters)
+            return operation.Parameters
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToArray();
-
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+                .ToDictionary(p => p, parameter => BuildParameter(parameter));
         }
 
-        private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
+        private Response[] BuildResponses(InputOperation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
         {
             if (headAsBoolean)
             {
@@ -177,15 +182,13 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var response in operation.Responses)
             {
                 List<StatusCodes> statusCodes = new List<StatusCodes>();
-                foreach (var statusCode in response.HttpResponse.IntStatusCodes)
+                foreach (var statusCode in response.StatusCodes)
                 {
                     statusCodes.Add(new StatusCodes(statusCode, null));
                 }
 
-                clientResponse.Add(new Response(
-                    operation.IsLongRunning ? null : BuildResponseBody(response),
-                    statusCodes.ToArray()
-                ));
+                var responseBody = operation.LongRunning != null ? null : BuildResponseBody(response);
+                clientResponse.Add(new Response(responseBody, statusCodes.ToArray()));
             }
 
             if (returnNullOn404Func != null && returnNullOn404Func(clientResponse.FirstOrDefault()?.ResponseBody?.Type.Name))
@@ -195,59 +198,59 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ICollection<string>? requestMediaTypes)
+        private RequestMethodBuildContext CreateRequestMethodBuildContext(InputOperation operation, IEnumerable<InputParameter> operationParameters)
         {
-            var pathParameters = new Dictionary<string, RequestParameter>();
-            var requiredRequestParameters = new List<RequestParameter>();
-            var optionalRequestParameters = new List<RequestParameter>();
+            var pathParameters = new Dictionary<string, InputParameter>();
+            var requiredRequestParameters = new List<InputParameter>();
+            var optionalRequestParameters = new List<InputParameter>();
 
             var requestConditionHeaders = RequestConditionHeaders.None;
             var requestConditionSerializationFormat = SerializationFormat.Default;
-            RequestParameter? contentTypeRequestParameter = null;
-            RequestParameter? requestConditionRequestParameter = null;
+            InputParameter? contentTypeRequestParameter = null;
+            InputParameter? requestConditionRequestParameter = null;
 
             Parameter? bodyParameter = null;
 
-            foreach (var requestParameter in requestParameters)
+            foreach (var operationParameter in operationParameters)
             {
-                switch (requestParameter)
+                switch (operationParameter)
                 {
-                    case { In: HttpParameterIn.Body } when bodyParameter != KnownParameters.RequestContent:
-                        bodyParameter = requestParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
+                    case { Location: RequestLocation.Body } when bodyParameter != KnownParameters.RequestContent:
+                        bodyParameter = operationParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
                         break;
-                    case { In: HttpParameterIn.Header, Origin: "modelerfour:synthesized/content-type" } when contentTypeRequestParameter == null:
-                        contentTypeRequestParameter = requestParameter;
+                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
+                        contentTypeRequestParameter = operationParameter;
                         break;
-                    case { In: HttpParameterIn.Header } when ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out var header):
-                        if (requestParameter.IsRequired)
+                    case { Location: RequestLocation.Header } when ConditionRequestHeader.TryGetValue(operationParameter.NameInRequest, out var header):
+                        if (operationParameter.IsRequired)
                         {
                             throw new NotSupportedException("Required conditional request headers are not supported.");
                         }
 
                         requestConditionHeaders |= header;
-                        requestConditionRequestParameter ??= requestParameter;
+                        requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? GetSerializationFormat(requestParameter)
+                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
                             : requestConditionSerializationFormat;
 
                         break;
-                    case { In: HttpParameterIn.Uri or HttpParameterIn.Path }:
-                        pathParameters.Add(GetRequestParameterName(requestParameter), requestParameter);
+                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
+                        pathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
-                    case { Required: true } when !HasDefaultValue(requestParameter):
-                        requiredRequestParameters.Add(requestParameter);
+                    case { IsRequired: true, DefaultValue: null }:
+                        requiredRequestParameters.Add(operationParameter);
                         break;
                     default:
-                        optionalRequestParameters.Add(requestParameter);
+                        optionalRequestParameters.Add(operationParameter);
                         break;
                 }
             }
 
             var parameters = new RequestMethodParametersBuilder(this);
-            parameters.AddUriOrPathParameters(httpRequest.Uri, pathParameters);
-            parameters.AddUriOrPathParameters(httpRequest.Path, pathParameters);
+            parameters.AddUriOrPathParameters(operation.Uri, pathParameters);
+            parameters.AddUriOrPathParameters(operation.Path, pathParameters);
             parameters.AddQueryOrHeaderParameters(requiredRequestParameters);
-            parameters.AddBody(bodyParameter, contentTypeRequestParameter, requestMediaTypes);
+            parameters.AddBody(bodyParameter, contentTypeRequestParameter, operation.RequestMediaTypes);
             parameters.AddQueryOrHeaderParameters(optionalRequestParameters);
             parameters.AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter);
             parameters.AddRequestContext();
@@ -255,55 +258,55 @@ namespace AutoRest.CSharp.Output.Models
             return new RequestMethodBuildContext(parameters.OrderedParameters, parameters.References, bodyParameter, requestConditionSerializationFormat, requestConditionHeaders);
         }
 
-        private Request BuildRequest(HttpRequest httpRequest, RequestMethodBuildContext buildContext)
+        private Request BuildRequest(InputOperation operation, RequestMethodBuildContext buildContext)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();
             var queryParameters = new List<QueryParameter>();
             var headerParameters = new List<RequestHeader>();
-            foreach (var (parameterName, (requestParameter, reference)) in buildContext.References)
+            foreach (var (parameterName, (operationParameter, reference)) in buildContext.References)
             {
-                if (requestParameter == null)
+                if (operationParameter == null)
                 {
                     if (parameterName == KnownParameters.MatchConditionsParameter.Name || parameterName == KnownParameters.RequestConditionsParameter.Name)
                     {
-                        headerParameters.Add(new RequestHeader(parameterName, reference, RequestParameterSerializationStyle.Simple, buildContext.ConditionalRequestSerializationFormat));
+                        headerParameters.Add(new RequestHeader(parameterName, reference, null, buildContext.ConditionalRequestSerializationFormat));
                     }
                     continue;
                 }
 
-                var serializationFormat = GetSerializationFormat(requestParameter);
-                var escape = !requestParameter.Extensions!.SkipEncoding;
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(operationParameter.Type);
+                var escape = !operationParameter.SkipUrlEncoding;
 
-                switch (requestParameter.In)
+                switch (operationParameter.Location)
                 {
-                    case HttpParameterIn.Uri:
+                    case RequestLocation.Uri:
                         uriParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: true));
                         break;
-                    case HttpParameterIn.Path:
+                    case RequestLocation.Path:
                         pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false));
                         break;
-                    case HttpParameterIn.Query:
-                        queryParameters.Add(new QueryParameter(parameterName, reference, GetSerializationStyle(requestParameter), escape, serializationFormat, GetExplode(requestParameter), requestParameter.IsApiVersionParameter));
+                    case RequestLocation.Query:
+                        queryParameters.Add(new QueryParameter(parameterName, reference, operationParameter.ArraySerializationDelimiter, escape, serializationFormat, operationParameter.Explode, operationParameter.IsApiVersion));
                         break;
-                    case HttpParameterIn.Header:
-                        var headerName = requestParameter.Extensions?.HeaderCollectionPrefix ?? parameterName;
-                        headerParameters.Add(new RequestHeader(headerName, reference, GetSerializationStyle(requestParameter), serializationFormat));
+                    case RequestLocation.Header:
+                        var headerName = operationParameter.HeaderCollectionPrefix ?? parameterName;
+                        headerParameters.Add(new RequestHeader(headerName, reference, operationParameter.ArraySerializationDelimiter, serializationFormat));
                         break;
                 }
             }
 
-            var uriParameters = GetPathSegments(httpRequest.Uri, uriParametersMap, isRaw: true);
-            var pathParameters = GetPathSegments(httpRequest.Path, pathParametersMap, isRaw: false);
+            var uriParameters = GetPathSegments(operation.Uri, uriParametersMap, isRaw: true);
+            var pathParameters = GetPathSegments(operation.Path, pathParametersMap, isRaw: false);
 
             var body = buildContext.BodyParameter != null
                 ? new RequestContentRequestBody(buildContext.BodyParameter)
-                : httpRequest is HttpWithBodyRequest httpWithBodyRequest
-                    ? BuildRequestBody(buildContext.References, httpWithBodyRequest.KnownMediaType)
+                : operation.RequestBodyMediaType != BodyMediaType.None
+                    ? BuildRequestBody(buildContext.References, operation.RequestBodyMediaType)
                     : null;
 
             return new Request(
-                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                operation.HttpMethod,
                 uriParameters.Concat(pathParameters).ToArray(),
                 queryParameters.ToArray(),
                 headerParameters.ToArray(),
@@ -311,13 +314,13 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        protected virtual Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
+        protected virtual Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputParameter, Parameter> allParameters)
         {
             List<Parameter> methodParameters = new();
-            foreach (var (requestParameter, parameter) in allParameters)
+            foreach (var (operationParameter, parameter) in allParameters)
             {
                 // Grouped and flattened parameters shouldn't be added to methods
-                if (IsMethodParameter(requestParameter))
+                if (operationParameter.Kind == InputOperationParameterKind.Method)
                 {
                     methodParameters.Add(parameter);
                 }
@@ -326,14 +329,14 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(methodParameters);
         }
 
-        private RequestBody? BuildRequestBody(IReadOnlyDictionary<string, ParameterInfo> allParameters, KnownMediaType mediaType)
+        private RequestBody? BuildRequestBody(IReadOnlyDictionary<string, ParameterInfo> allParameters, BodyMediaType bodyMediaType)
         {
             RequestBody? body = null;
 
-            Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new();
+            Dictionary<InputParameter, ReferenceOrConstant> bodyParameters = new();
             foreach (var (_, (requestParameter, value)) in allParameters)
             {
-                if (requestParameter is { In: HttpParameterIn.Body })
+                if (requestParameter is { Location: RequestLocation.Body })
                 {
                     bodyParameters[requestParameter] = value;
                 }
@@ -341,7 +344,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (bodyParameters.Count > 0)
             {
-                if (mediaType == KnownMediaType.Multipart)
+                if (bodyMediaType == BodyMediaType.Multipart)
                 {
                     List<MultipartRequestBodyPart> value = new List<MultipartRequestBodyPart>();
                     foreach (var parameter in bodyParameters)
@@ -371,12 +374,12 @@ namespace AutoRest.CSharp.Output.Models
 
                     body = new MultipartRequestBody(value.ToArray());
                 }
-                else if (mediaType == KnownMediaType.Form)
+                else if (bodyMediaType == BodyMediaType.Form)
                 {
                     UrlEncodedBody urlbody = new UrlEncodedBody();
                     foreach (var (bodyRequestParameter, bodyParameterValue) in bodyParameters)
                     {
-                        urlbody.Add(GetRequestParameterName(bodyRequestParameter), bodyParameterValue);
+                        urlbody.Add(bodyRequestParameter.NameInRequest, bodyParameterValue);
                     }
 
                     body = urlbody;
@@ -385,32 +388,33 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Debug.Assert(bodyParameters.Count == 1);
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    if (mediaType == KnownMediaType.Binary ||
+                    if (bodyMediaType == BodyMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
-                        bodyRequestParameter.Schema is BinarySchema)
+                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypeKind.Stream })
                     {
                         body = new BinaryRequestBody(bodyParameterValue);
                     }
-                    else if (mediaType == KnownMediaType.Text)
+                    else if (bodyMediaType == BodyMediaType.Text)
                     {
                         body = new TextRequestBody(bodyParameterValue);
                     }
                     else
                     {
                         var serialization = _serializationBuilder.Build(
-                            mediaType,
-                            bodyRequestParameter.Schema,
+                            bodyMediaType,
+                            bodyRequestParameter.Type,
                             bodyParameterValue.Type);
 
                         // This method has a flattened body
-                        if (bodyRequestParameter.Flattened == true)
+                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && _library != null)
                         {
-                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
+                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach (var (parameter, _) in allParameters.Values)
                             {
-                                if (parameter is not VirtualParameter virtualParameter || virtualParameter.Schema is ConstantSchema)
+                                var virtualParameter = parameter?.VirtualParameter;
+                                if (virtualParameter == null)
                                 {
                                     continue;
                                 }
@@ -433,89 +437,52 @@ namespace AutoRest.CSharp.Output.Models
             return body;
         }
 
-        private ReferenceOrConstant CreateReference(RequestParameter requestParameter, Parameter parameter)
+        private ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter)
         {
-            if (requestParameter.Implementation != ImplementationLocation.Method)
+            if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
-                return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
+                return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (requestParameter.Schema is ConstantSchema constant)
+            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
             {
-                return ParseConstant(constant);
+                return (ReferenceOrConstant)parameter.DefaultValue;
             }
 
-            var groupedByParameter = requestParameter.GroupedBy;
+            var groupedByParameter = operationParameter.GroupedBy;
             if (groupedByParameter == null)
             {
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
+            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
 
-            return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
-
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
         }
 
-        private static SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
-            => BuilderHelpers.GetSerializationFormat(GetValueSchema(requestParameter));
-
-        private ResponseBody? BuildResponseBody(ServiceResponse response)
+        private ResponseBody? BuildResponseBody(OperationResponse response)
         {
-            if (response.HttpResponse.KnownMediaType == KnownMediaType.Text)
+            var bodyType = response.BodyType;
+            if (bodyType == null)
+            {
+                return null;
+            }
+
+            if (response.BodyMediaType == BodyMediaType.Text)
             {
                 return new StringResponseBody();
             }
-            else if (response is SchemaResponse schemaResponse)
-            {
-                Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
 
-                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
-
-                return new ObjectResponseBody(responseType, serialization);
-            }
-            else if (response is BinaryResponse)
+            if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
                 return new StreamResponseBody();
             }
 
-            return null;
-        }
+            CSharpType responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(bodyType));
+            ObjectSerialization serialization = _serializationBuilder.Build(response.BodyMediaType, bodyType, responseType);
 
-        private static RequestParameterSerializationStyle GetSerializationStyle(RequestParameter requestParameter)
-        {
-            var valueSchema = GetValueSchema(requestParameter);
-            var httpParameter = requestParameter.Protocol.Http as HttpParameter;
-
-            Debug.Assert(httpParameter!.In == HttpParameterIn.Query || httpParameter.In == HttpParameterIn.Header);
-
-            switch (httpParameter.Style)
-            {
-                case null:
-                case SerializationStyle.Form:
-                case SerializationStyle.Simple:
-                    return valueSchema is ArraySchema ? RequestParameterSerializationStyle.CommaDelimited : RequestParameterSerializationStyle.Simple;
-                case SerializationStyle.PipeDelimited:
-                    return RequestParameterSerializationStyle.PipeDelimited;
-                case SerializationStyle.SpaceDelimited:
-                    return RequestParameterSerializationStyle.SpaceDelimited;
-                case SerializationStyle.TabDelimited:
-                    return RequestParameterSerializationStyle.TabDelimited;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private static bool GetExplode(RequestParameter requestParameter) => requestParameter.Protocol.Http is HttpParameter httpParameter && httpParameter.Explode == true;
-
-        private static Schema GetValueSchema(RequestParameter requestParameter)
-        {
-            Schema valueSchema = requestParameter.Schema;
-            return requestParameter.Schema is ConstantSchema constant
-                ? constant.ValueType
-                : valueSchema;
+            return new ObjectResponseBody(responseType, serialization);
         }
 
         private static IEnumerable<PathSegment> GetPathSegments(string httpRequestUri, IReadOnlyDictionary<string, PathSegment> parameters, bool isRaw)
@@ -580,10 +547,10 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public virtual Parameter BuildConstructorParameter(RequestParameter requestParameter)
+        public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
         {
-            var parameter = BuildParameter(requestParameter);
-            if (!requestParameter.IsEndpointParameter)
+            var parameter = BuildParameter(operationParameter);
+            if (!operationParameter.IsEndpoint)
             {
                 return parameter;
             }
@@ -599,32 +566,14 @@ namespace AutoRest.CSharp.Output.Models
                 : new Parameter(name, description, type, null, parameter.Validation, null, RequestLocation: location);
         }
 
-        protected static bool IsMethodParameter(RequestParameter requestParameter)
-            => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
+        public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
+            => operationParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(operationParameter.NameInRequest);
 
-        public static bool IsIgnoredHeaderParameter(RequestParameter requestParameter)
-            => requestParameter.In == HttpParameterIn.Header && IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter));
-
-        private static bool IsRequestConditionHeader(RequestParameter requestParameter, out RequestConditionHeaders header)
+        private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            header = RequestConditionHeaders.None;
-            return requestParameter.In == HttpParameterIn.Header && ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out header);
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
+            return Parameter.FromRequestParameter(operationParameter, type, _typeFactory);
         }
-
-        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null)
-        {
-            var isNullable = requestParameter.IsNullable || !requestParameter.IsRequired;
-            CSharpType type = typeOverride != null
-                ? new CSharpType(typeOverride, isNullable)
-                : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions, isNullable);
-            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory);
-        }
-
-        private Constant ParseConstant(ConstantSchema constant) =>
-            BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
-
-        private static bool HasDefaultValue(RequestParameter parameter)
-            => parameter.ClientDefaultValue != null || parameter.Schema is ConstantSchema;
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {
@@ -655,7 +604,7 @@ namespace AutoRest.CSharp.Output.Models
             var responses = method.Responses;
 
             // We hardcode 200 as expected response code for paged LRO results
-            if (method.Operation.IsLongRunning)
+            if (method.Operation.LongRunning != null)
             {
                 responses = new[]
                 {
@@ -706,20 +655,9 @@ namespace AutoRest.CSharp.Output.Models
             return constructorParameters;
         }
 
-        protected static RequestLocation GetRequestLocation(RequestParameter requestParameter)
-            => requestParameter.In switch
-            {
-                HttpParameterIn.Uri => RequestLocation.Uri,
-                HttpParameterIn.Path => RequestLocation.Path,
-                HttpParameterIn.Query => RequestLocation.Query,
-                HttpParameterIn.Header => RequestLocation.Header,
-                HttpParameterIn.Body => RequestLocation.Body,
-                _ => RequestLocation.None
-            };
-
         private record RequestMethodBuildContext(IReadOnlyList<Parameter> OrderedParameters, IReadOnlyDictionary<string, ParameterInfo> References, Parameter? BodyParameter = null, SerializationFormat ConditionalRequestSerializationFormat = SerializationFormat.Default, RequestConditionHeaders RequestConditionFlag = RequestConditionHeaders.None);
 
-        private readonly record struct ParameterInfo(RequestParameter? Parameter, ReferenceOrConstant Reference);
+        private readonly record struct ParameterInfo(InputParameter? Parameter, ReferenceOrConstant Reference);
 
         private readonly ref struct RequestMethodParametersBuilder
         {
@@ -737,7 +675,7 @@ namespace AutoRest.CSharp.Output.Models
                 _parameters = new List<Parameter>();
             }
 
-            public void AddUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, RequestParameter> requestParameters)
+            public void AddUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters)
             {
                 foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
                 {
@@ -758,16 +696,16 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            public void AddQueryOrHeaderParameters(IEnumerable<RequestParameter> requestParameters)
+            public void AddQueryOrHeaderParameters(IEnumerable<InputParameter> requestParameters)
             {
                 foreach (var requestParameter in requestParameters)
                 {
                     var parameter = _parent.BuildParameter(requestParameter);
-                    AddRequestParameter(GetRequestParameterName(requestParameter), requestParameter, parameter);
+                    AddRequestParameter(requestParameter.NameInRequest, requestParameter, parameter);
                 }
             }
 
-            public void AddBody(Parameter? bodyParameter, RequestParameter? contentTypeRequestParameter, ICollection<string>? requestMediaTypes = null)
+            public void AddBody(Parameter? bodyParameter, InputParameter? contentTypeRequestParameter, IReadOnlyList<string>? requestMediaTypes)
             {
                 if (bodyParameter != null)
                 {
@@ -786,7 +724,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            public void AddRequestConditionHeaders(RequestConditionHeaders requestConditionHeaders, RequestParameter? requestConditionRequestParameter)
+            public void AddRequestConditionHeaders(RequestConditionHeaders requestConditionHeaders, InputParameter? requestConditionRequestParameter)
             {
                 if (requestConditionHeaders == RequestConditionHeaders.None || requestConditionRequestParameter == null)
                 {
@@ -815,43 +753,31 @@ namespace AutoRest.CSharp.Output.Models
                 _parameters.Add(KnownParameters.RequestContext);
             }
 
-            private void AddContentTypeRequestParameter(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
+            private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
             {
-                var name = requestParameter.CSharpName();
-                var description = CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes);
+                var name = operationParameter.Name.ToVariableName();
+                var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
                 var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
 
-                _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
+                _referencesByName[operationParameter.NameInRequest] = new ParameterInfo(operationParameter, parameter);
                 _parameters.Add(parameter);
             }
 
-            private string CreateDescriptionWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
-            {
-                var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                    $"The {requestParameter.Schema.Name} to use." :
-                    BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
-                var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
+            private void AddRequestParameter(InputParameter operationParameter, Type? frameworkParameterType = null)
+             => AddRequestParameter(operationParameter.NameInRequest, operationParameter, frameworkParameterType);
 
-                return string.IsNullOrEmpty(allowedValues)
-                    ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+            private void AddRequestParameter(string name, InputParameter operationParameter, Type? frameworkParameterType = null)
+            {
+                var parameter = _parent.BuildParameter(operationParameter, frameworkParameterType);
+                AddRequestParameter(name, operationParameter, parameter);
             }
 
-            private void AddRequestParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)
-             => AddRequestParameter(GetRequestParameterName(requestParameter), requestParameter, frameworkParameterType);
-
-            private void AddRequestParameter(string name, RequestParameter requestParameter, Type? frameworkParameterType = null)
+            private void AddRequestParameter(string name, InputParameter operationParameter, Parameter parameter)
             {
-                var parameter = _parent.BuildParameter(requestParameter, frameworkParameterType);
-                AddRequestParameter(name, requestParameter, parameter);
-            }
+                var reference = _parent.CreateReference(operationParameter, parameter);
 
-            private void AddRequestParameter(string name, RequestParameter requestParameter, Parameter parameter)
-            {
-                var reference = _parent.CreateReference(requestParameter, parameter);
-
-                _referencesByName[name] = new ParameterInfo(requestParameter, reference);
-                if (IsMethodParameter(requestParameter))
+                _referencesByName[name] = new ParameterInfo(operationParameter, reference);
+                if (operationParameter.Kind == InputOperationParameterKind.Method)
                 {
                     _parameters.Add(parameter);
                 }

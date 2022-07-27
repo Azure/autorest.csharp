@@ -61,13 +61,19 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call GetFileAsync.
+        /// This sample shows how to call GetFileAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new FilesClient(credential);
         /// 
         /// Response response = await client.GetFileAsync();
-        /// Console.WriteLine(response.Status);
+        /// if (response.ContentStream != null)
+        /// {
+        ///     using(Stream outFileStream = File.OpenWrite("<filePath>")
+        ///     {
+        ///         response.ContentStream.CopyTo(outFileStream);
+        ///     }
+        /// }
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetFileAsync(RequestContext context = null)
@@ -91,13 +97,19 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call GetFile.
+        /// This sample shows how to call GetFile and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new FilesClient(credential);
         /// 
         /// Response response = client.GetFile();
-        /// Console.WriteLine(response.Status);
+        /// if (response.ContentStream != null)
+        /// {
+        ///     using(Stream outFileStream = File.OpenWrite("<filePath>")
+        ///     {
+        ///         response.ContentStream.CopyTo(outFileStream);
+        ///     }
+        /// }
         /// ]]></code>
         /// </example>
         public virtual Response GetFile(RequestContext context = null)
@@ -121,13 +133,19 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call GetFileLargeAsync.
+        /// This sample shows how to call GetFileLargeAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new FilesClient(credential);
         /// 
         /// Response response = await client.GetFileLargeAsync();
-        /// Console.WriteLine(response.Status);
+        /// if (response.ContentStream != null)
+        /// {
+        ///     using(Stream outFileStream = File.OpenWrite("<filePath>")
+        ///     {
+        ///         response.ContentStream.CopyTo(outFileStream);
+        ///     }
+        /// }
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
@@ -151,13 +169,19 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call GetFileLarge.
+        /// This sample shows how to call GetFileLarge and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new FilesClient(credential);
         /// 
         /// Response response = client.GetFileLarge();
-        /// Console.WriteLine(response.Status);
+        /// if (response.ContentStream != null)
+        /// {
+        ///     using(Stream outFileStream = File.OpenWrite("<filePath>")
+        ///     {
+        ///         response.ContentStream.CopyTo(outFileStream);
+        ///     }
+        /// }
         /// ]]></code>
         /// </example>
         public virtual Response GetFileLarge(RequestContext context = null)
@@ -181,13 +205,19 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call GetEmptyFileAsync.
+        /// This sample shows how to call GetEmptyFileAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new FilesClient(credential);
         /// 
         /// Response response = await client.GetEmptyFileAsync();
-        /// Console.WriteLine(response.Status);
+        /// if (response.ContentStream != null)
+        /// {
+        ///     using(Stream outFileStream = File.OpenWrite("<filePath>")
+        ///     {
+        ///         response.ContentStream.CopyTo(outFileStream);
+        ///     }
+        /// }
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
@@ -211,13 +241,19 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call GetEmptyFile.
+        /// This sample shows how to call GetEmptyFile and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new FilesClient(credential);
         /// 
         /// Response response = client.GetEmptyFile();
-        /// Console.WriteLine(response.Status);
+        /// if (response.ContentStream != null)
+        /// {
+        ///     using(Stream outFileStream = File.OpenWrite("<filePath>")
+        ///     {
+        ///         response.ContentStream.CopyTo(outFileStream);
+        ///     }
+        /// }
         /// ]]></code>
         /// </example>
         public virtual Response GetEmptyFile(RequestContext context = null)

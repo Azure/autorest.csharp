@@ -82,26 +82,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -111,15 +111,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -127,15 +127,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -182,26 +182,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -211,15 +211,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -227,15 +227,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -282,26 +282,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -311,15 +311,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -327,15 +327,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -382,26 +382,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutNonRetry201Creating400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -411,15 +411,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -427,15 +427,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -482,26 +482,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -511,15 +511,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -527,15 +527,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -582,26 +582,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -611,15 +611,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -627,15 +627,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -682,26 +682,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -711,15 +711,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -727,15 +727,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -782,26 +782,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -811,15 +811,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -827,15 +827,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1079,13 +1079,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PostNonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
@@ -1101,15 +1101,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1155,13 +1155,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PostNonRetry400(WaitUntil.Completed, RequestContent.Create(data));
@@ -1177,15 +1177,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1231,13 +1231,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.Post202NonRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
@@ -1253,15 +1253,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1307,13 +1307,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.Post202NonRetry400(WaitUntil.Completed, RequestContent.Create(data));
@@ -1329,15 +1329,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1383,13 +1383,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, RequestContent.Create(data));
@@ -1405,15 +1405,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1459,13 +1459,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, RequestContent.Create(data));
@@ -1481,15 +1481,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1536,26 +1536,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1565,15 +1565,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1581,15 +1581,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1636,26 +1636,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1665,15 +1665,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1681,15 +1681,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1736,26 +1736,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1765,15 +1765,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1781,15 +1781,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1836,26 +1836,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1865,15 +1865,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1881,15 +1881,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1936,26 +1936,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -1965,15 +1965,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1981,15 +1981,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2036,26 +2036,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2065,15 +2065,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2081,15 +2081,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2267,13 +2267,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.Post202NoLocationAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -2289,15 +2289,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2343,13 +2343,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.Post202NoLocation(WaitUntil.Completed, RequestContent.Create(data));
@@ -2365,15 +2365,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2419,13 +2419,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -2441,15 +2441,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2495,13 +2495,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, RequestContent.Create(data));
@@ -2517,15 +2517,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2572,26 +2572,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2601,15 +2601,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2617,15 +2617,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2672,26 +2672,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.Put200InvalidJson(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2701,15 +2701,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2717,15 +2717,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2772,26 +2772,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2801,15 +2801,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2817,15 +2817,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2872,26 +2872,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -2901,15 +2901,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2917,15 +2917,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -2972,26 +2972,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = await operation.WaitForCompletionAsync();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3001,15 +3001,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3017,15 +3017,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3072,26 +3072,26 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
         /// 
         /// BinaryData data = operation.WaitForCompletion();
         /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("type").ToString());
         /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("location").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -3101,15 +3101,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3117,15 +3117,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3369,13 +3369,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -3391,15 +3391,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3445,13 +3445,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
@@ -3467,15 +3467,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3521,13 +3521,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -3543,15 +3543,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3597,13 +3597,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, RequestContent.Create(data));
@@ -3619,15 +3619,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3673,13 +3673,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, RequestContent.Create(data));
@@ -3695,15 +3695,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -3749,13 +3749,13 @@ namespace lro_LowLevel
         /// var client = new LrosaDsClient(credential);
         /// 
         /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
         ///     tags = new {
         ///         key = "<String>",
         ///     },
-        ///     location = "<ResourceLocation>",
-        ///     properties = new {
-        ///         provisioningState = "<ProductPropertiesProvisioningState>",
-        ///     },
+        ///     location = "<location>",
         /// };
         /// 
         /// var operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, RequestContent.Create(data));
@@ -3771,15 +3771,15 @@ namespace lro_LowLevel
         /// 
         /// Schema for <c>Product</c>:
         /// <code>{
+        ///   properties: {
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
         ///   id: string, # Optional. Resource Id
         ///   type: string, # Optional. Resource Type
         ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
         ///   location: string, # Optional. Resource Location
         ///   name: string, # Optional. Resource Name
-        ///   properties: {
-        ///     provisioningState: string, # Optional.
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
-        ///   }, # Optional.
         /// }
         /// </code>
         /// 

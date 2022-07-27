@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 
@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class PagingResponseInfo
     {
-        public PagingResponseInfo(Paging paging, CSharpType type)
+        public PagingResponseInfo(string? nextLinkName, string? itemName, CSharpType type)
         {
             ResponseType = type;
 
@@ -21,8 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 throw new InvalidOperationException($"The type '{type}' has to be an object schema to be used in paging");
             }
 
-            string? nextLinkName = paging.NextLinkName;
-            string itemName = paging.ItemName ?? "value";
+            itemName ??= "value";
 
             ObjectTypeProperty itemProperty = objectType.GetPropertyBySerializedName(itemName);
 

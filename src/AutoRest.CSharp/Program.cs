@@ -25,6 +25,12 @@ namespace AutoRest.CSharp
 
             if (args.Contains("--standalone"))
             {
+                if (args.Contains("--debug"))
+                {
+                    await Console.Error.WriteLineAsync("Attempting to attach debugger.");
+                    Debugger.Launch();
+                }
+
                 await StandaloneGeneratorRunner.RunAsync(args);
                 return 0;
             }

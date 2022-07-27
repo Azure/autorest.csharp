@@ -80,12 +80,12 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
+        ///   propD1: string, # Optional.
         ///   kind: Kind1, # Required.
         ///   propB1: string, # Optional.
         ///   helper: {
         ///     propBH1: string, # Optional.
         ///   }, # Optional.
-        ///   propD1: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -131,12 +131,12 @@ namespace body_complex_LowLevel
         /// 
         /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
         /// <code>{
+        ///   propD1: string, # Optional.
         ///   kind: Kind1, # Required.
         ///   propB1: string, # Optional.
         ///   helper: {
         ///     propBH1: string, # Optional.
         ///   }, # Optional.
-        ///   propD1: string, # Optional.
         /// }
         /// </code>
         /// </details>

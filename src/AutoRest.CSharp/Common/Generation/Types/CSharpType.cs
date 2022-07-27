@@ -139,21 +139,6 @@ namespace AutoRest.CSharp.Generation.Types
             return new CodeWriter().Append($"{this}").ToString(false);
         }
 
-        public CSharpType Trim(string name)
-        {
-            return Name == name && IsGenericType ? Arguments[0] : this;
-        }
-
-        public CSharpType Trim()
-        {
-            return IsGenericType ? Arguments[0] : this;
-        }
-
-        public string ToGenericTemplateName()
-        {
-            return IsGenericType ? $"{Name}{{T}}" : $"{Name}";
-        }
-
         internal static CSharpType FromSystemType(BuildContext context, Type type)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
