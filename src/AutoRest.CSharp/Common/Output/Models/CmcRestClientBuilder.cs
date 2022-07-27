@@ -500,7 +500,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected static bool IsMethodParameter(RequestParameter requestParameter)
             => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
-        
+
         public static bool IsIgnoredHeaderParameter(RequestParameter requestParameter)
             => requestParameter.In == HttpParameterIn.Header && IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter));
 
