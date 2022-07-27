@@ -45,6 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal static string NormalizeVersion(string version) =>
             TextInfo.ToTitleCase(new StringBuilder("V")
                 .Append(version.StartsWith("v", true, CultureInfo.InvariantCulture) ? version.Substring(1) : version)
+                .Replace(' ', '_')
                 .Replace('-', '_')
                 .Replace('.', '_')
                 .ToString());
