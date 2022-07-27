@@ -12,7 +12,7 @@ Cadl->net.emitter-> json -> outputLibrary -> sdk
 
 ### csharp emitter
 
-The emitter is responsible for emitting the cadl model as json from cadl file.
+The emitter will emit the cadl model into json file from input CADL file
 
 #### Code Model
 
@@ -92,7 +92,7 @@ node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --o
 
 ### serialize
 
-CadlSerialization is responsible for serializing the json to C# object (json file -> c# codemodel (c# object)).
+CadlSerialization will serialize the cadl json to C# object (json file -> c# codemodel (c# object)).
 
 CalSerialization defines converters to handle special type/model serialization
 
@@ -101,11 +101,11 @@ CalSerialization defines converters to handle special type/model serialization
 In the json model, the value of the property is the enum variable name, the Enum converter will transfer to the enum value.
 
 ### OutputLibrary Constructor
-DpgOutputLibraryBuilder is responsible for converting c# cadl model to output library for DPG.
+DpgOutputLibraryBuilder will convert c# cadl model to output library for DPG.
 
 ### codeModelConvertor
 
-CodeModelConverter is responsible for converting modelfoure to the cadl code model (m4 codemodel c# object -> cadl codemodel c# object).
+CodeModelConverter will convert modelfoure to the cadl code model (m4 codemodel c# object -> cadl codemodel c# object).
 
 ## Generate SDK from CADL
 

@@ -75,7 +75,7 @@ export async function $onEmit(
 
         const root = createModel(program);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
-        if (root !== undefined) {
+        if (root) {
             await program.host.writeFile(
                 outPath,
                 prettierOutput(
@@ -158,7 +158,7 @@ function createModel(program: Program): any {
             console.log(JSON.stringify(operation.path));
             const groupName: string = operation.groupName;
             let client = getClient(clients, groupName);
-            if (client === undefined) {
+            if (!client) {
                 const container = operation.container;
                 const clientDes = getDoc(program, container);
                 const clientSummary = getSummary(program, container);
@@ -226,19 +226,17 @@ function loadOperationResponse(
     program: Program,
     response: HttpOperationResponse
 ): OperationResponse | undefined {
-    if (response.statusCode === undefined || response.statusCode === "*") {
+    if (!response.statusCode || response.statusCode === "*") {
         return undefined;
     }
     const status: number[] = [];
     status.push(Number(response.statusCode));
-    const body = response.responses[0].body;
+    const body = response.responses[0]?.body;
     let type: InputType | undefined = undefined;
-    if (body !== undefined) {
-        if (body.type !== undefined) {
-            const cadlType = body.type;
-            const inputType: InputType = getInputType(program, cadlType);
-            type = inputType;
-        }
+    if (body?.type) {
+        const cadlType = body.type;
+        const inputType: InputType = getInputType(program, cadlType);
+        type = inputType;
     }
 
     return {

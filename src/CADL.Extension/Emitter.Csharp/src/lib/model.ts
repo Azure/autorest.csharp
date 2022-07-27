@@ -80,8 +80,8 @@ export function mapCalTypeToCsharpInputTypeKind(
         case "Array":
             return InputTypeKind.List;
         case "String":
-            if (format == "date") return InputTypeKind.DateTime;
-            if (format == "uri") return InputTypeKind.Uri;
+            if (format === "date") return InputTypeKind.DateTime;
+            if (format === "uri") return InputTypeKind.Uri;
             return InputTypeKind.String;
         default:
             return InputTypeKind.UnKnownKind;
