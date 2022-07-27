@@ -7,11 +7,20 @@ using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class RenameTimeToOn
     {
+        private static readonly Dictionary<string, string> _nounToVerbDicts = new()
+        {
+            {"creation", "created"},
+            {"deletion", "deleted"},
+            {"expiration", "expire"},
+            {"modification", "modified"},
+        };
+
         public static void Update()
         {
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
@@ -27,7 +36,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     var propName = property.Language.Default.Name;
 
                     if (propName.StartsWith("From", StringComparison.Ordinal) ||
-                        propName.StartsWith("To", StringComparison.Ordinal))
+                        propName.StartsWith("To", StringComparison.Ordinal) ||
+                        property.CSharpName().EndsWith("PointInTime", StringComparison.Ordinal))
                         continue;
 
                     var lengthToCut = 0;
@@ -50,7 +60,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                     if (lengthToCut > 0)
                     {
-                        var newName = propName.Substring(0, propName.Length - lengthToCut) + "On";
+                        var prefix = propName.Substring(0, propName.Length - lengthToCut);
+                        var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
                         property.Language.Default.Name = newName;
                     }
                 }
