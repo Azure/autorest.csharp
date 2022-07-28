@@ -37,6 +37,7 @@ format-by-name-rules:
   'resourceType': 'resource-type'
   'etag': 'etag'
   'location': 'azure-location'
+  'contentType': 'content-type'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
   
