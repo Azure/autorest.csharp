@@ -47,7 +47,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
 
-            // TODO -- remove this and read this configuration when transforming code model
             // try to find it in the partial resource list
             if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceSchemaName))
             {

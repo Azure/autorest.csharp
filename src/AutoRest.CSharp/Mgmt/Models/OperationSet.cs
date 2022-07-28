@@ -111,9 +111,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             OperationSet? hintOperationSet = null;
             foreach (var operationSet in MgmtContext.Library.RawRequestPathToOperationSets.Values)
             {
+                // skip myself
                 if (operationSet == this)
                     continue;
-                // TODO -- refine this
+                // also skip the sets that with zero operations, they are operation set of partial resources as well
                 if (operationSet.Count == 0)
                     continue;
 
