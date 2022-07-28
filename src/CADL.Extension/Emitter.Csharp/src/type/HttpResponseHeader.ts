@@ -3,7 +3,7 @@
 
 import { InputType } from "./InputType.js";
 
-export interface InputConstant {
-    Value?: any;
-    Type: InputType;
+export interface HttpResponseHeader {
+    Name: string;
+    type: InputType;
 }

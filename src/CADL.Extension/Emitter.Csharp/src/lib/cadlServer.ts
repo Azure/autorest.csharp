@@ -6,7 +6,7 @@ import { http } from "@cadl-lang/rest/*";
 import { InputConstant } from "../type/InputConstant";
 import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
 import { InputParameter } from "../type/InputParameter.js";
-import { InputType } from "../type/InputType.js";
+import { InputPrimitiveType, InputType } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { RequestLocation } from "../type/RequestLocation.js";
 
@@ -46,7 +46,11 @@ export function resolveServers(
                 Name: "Endpoint",
                 NameInRequest: "Endpoint",
                 Description: "",
-                Type: new InputType("Uri", InputTypeKind.Uri, false),
+                Type: {
+                    Name: "Uri",
+                    Kind: InputTypeKind.Uri,
+                    IsNullable: false
+                } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
                 IsApiVersion: false,
                 IsResourceParameter: false,
@@ -62,14 +66,22 @@ export function resolveServers(
             if (value) {
                 defaultValue = {
                     Value: value,
-                    Type: new InputType("Uri", InputTypeKind.Uri, false)
+                    Type: {
+                        Name: "Uri",
+                        Kind: InputTypeKind.Uri,
+                        IsNullable: false
+                    } as InputPrimitiveType
                 } as InputConstant;
             }
             const variable: InputParameter = {
                 Name: name,
                 NameInRequest: name,
                 Description: getDoc(program, prop),
-                Type: new InputType("Uri", InputTypeKind.Uri, false),
+                Type: {
+                    Name: "Uri",
+                    Kind: InputTypeKind.Uri,
+                    IsNullable: false
+                } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
                 IsApiVersion: false,
                 IsResourceParameter: false,

@@ -6,6 +6,7 @@ Description: >-
   `special-key` to test the authorization filters.
 ApiVersions:
   - '2021-03-25'
+Models: []
 Clients:
   - Name: Pets
     Operations:
@@ -20,7 +21,6 @@ Clients:
               Name: Uri
               Kind: Uri
               IsNullable: false
-              SerializationFormat: 0
             Location: Uri
             IsApiVersion: false
             IsResourceParameter: false
@@ -35,10 +35,9 @@ Clients:
             NameInRequest: apiVersion
             Description: ''
             Type:
-              Name: string
+              Name: String
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Query
             IsRequired: true
             IsApiVersion: true
@@ -55,7 +54,6 @@ Clients:
               Name: Int32
               Kind: Int32
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false
@@ -86,7 +84,6 @@ Clients:
               Name: Int32
               Kind: Int32
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false
@@ -101,17 +98,15 @@ Clients:
               - 200
             BodyType:
               Name: Pet
-              Kind: Object
+              Properties: []
               IsNullable: false
-              SerializationFormat: 0
             BodyMediaType: Json
           - StatusCodes:
               - 304
             BodyType:
               Name: Pet
-              Kind: Object
+              Properties: []
               IsNullable: false
-              SerializationFormat: 0
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json
@@ -127,9 +122,8 @@ Clients:
               - 200
             BodyType:
               Name: Pet
-              Kind: Object
+              Properties: []
               IsNullable: false
-              SerializationFormat: 0
             BodyMediaType: Json
         HttpMethod: POST
         RequestBodyMediaType: Json
@@ -149,7 +143,6 @@ Clients:
               Name: string
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false
@@ -165,7 +158,6 @@ Clients:
               Name: string
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Query
             IsRequired: true
             IsApiVersion: false
@@ -180,9 +172,8 @@ Clients:
               - 200
             BodyType:
               Name: ToyListResults
-              Kind: Object
+              Properties: []
               IsNullable: false
-              SerializationFormat: 0
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json

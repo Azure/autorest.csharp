@@ -17,7 +17,11 @@ import {
     getQueryParamName,
     isStatusCode
 } from "@cadl-lang/rest/http";
-import { InputType } from "../type/InputType.js";
+import {
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 /**
  * Map calType to csharp InputTypeKind
@@ -203,15 +207,22 @@ export function getInputType(program: Program, type: Type): InputType {
             // it's a base Cadl "primitive" that corresponds directly to an c# data type.
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
-            return new InputType(
-                mapCadlIntrinsicModelToCsharpModel(program, type) ?? type.name,
-                builtInKind,
-                false
-            );
+            return {
+                Name:
+                    mapCadlIntrinsicModelToCsharpModel(program, type) ??
+                    type.name,
+                Kind: builtInKind,
+                IsNullable: false
+            } as InputPrimitiveType;
         } else {
             type = getEffectiveSchemaType(program, type) as ModelType;
             const name = getFriendlyName(program, type) ?? type.name;
-            return new InputType(name, builtInKind, false);
+            // TODO: need to get properties of the model.
+            return {
+                Name: name,
+                Properties: [],
+                IsNullable: false
+            } as InputModelType;
         }
     }
 
@@ -221,8 +232,12 @@ export function getInputType(program: Program, type: Type): InputType {
         type.kind === "Boolean"
     ) {
         // For literal types, we just want to emit them directly as well.
-        return new InputType(type.kind, builtInKind, false);
+        return {
+            Name: type.kind,
+            Kind: builtInKind,
+            IsNullable: false
+        } as InputPrimitiveType;
     }
 
-    return new InputType(type.kind, InputTypeKind.UnKnownKind, false);
+    return { Name: InputTypeKind.UnKnownKind, IsNullable: false } as InputType;
 }
