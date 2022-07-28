@@ -6,8 +6,8 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
-    internal class MgmtMockTest : OutputLibraryTestBase
+    internal class MgmtMockAndSampleTests : OutputLibraryTestBase
     {
-        public MgmtMockTest() : base("MgmtMockTest", "src") { }
+        public MgmtMockAndSampleTests() : base("MgmtMockAndSample", "src") { }
     }
 }

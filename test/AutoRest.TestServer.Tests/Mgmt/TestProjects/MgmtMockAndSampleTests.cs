@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MgmtMockTest;
+using MgmtMockAndSample;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class MgmtMockTestTests : TestProjectTests
+    public class MgmtMockAndSampleTests : TestProjectTests
     {
-        public MgmtMockTestTests() : base("MgmtMockTest", "tests") { }
+        public MgmtMockAndSampleTests() : base("MgmtMockAndSample", "tests") { }
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DeletedManagedHsmCollection), typeof(DeletedVaultCollection) };
 
@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAll")]
         public void ValidateMhsmPrivateEndpointConnectionCollectionMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.MhsmPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MhsmPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
         [TestCase("CreateOrUpdate")]
@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAll")]
         public void ValidateManagedHsmCollectionMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.ManagedHsmCollectionMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.ManagedHsmCollectionMockTests", methodName, argTypes);
         }
 
         [TestCase("CreateOrUpdate")]
@@ -32,7 +32,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAll")]
         public void ValidatePrivateEndpointConnectionCollectionMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.MgmtMockTestPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MgmtMockTestPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
         [TestCase("CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault")]
@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAll")]
         public void ValidateVaultCollectionMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.VaultCollectionMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.VaultCollectionMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
@@ -50,21 +50,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetMHSMPrivateLinkResourcesByMhsmResource")]
         public void ValidateManagedHsmResourceMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.ManagedHsmResourceMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.ManagedHsmResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
         [TestCase("Delete")]
         public void ValidateMhsmPrivateEndpointConnectionResourceMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.MhsmPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MhsmPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
         [TestCase("Delete")]
         public void ValidatePrivateEndpointConnectionResourceMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.MgmtMockTestPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MgmtMockTestPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetPrivateLinkResources")]
         public void ValidateVaultResourceMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockTest.Tests.Mock.VaultResourceMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.VaultResourceMockTests", methodName, argTypes);
         }
     }
 }
