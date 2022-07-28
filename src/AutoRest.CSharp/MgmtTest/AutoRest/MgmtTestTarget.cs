@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
-            Debug.Assert(Configuration.MgmtConfiguration.TestModeler is not null);
+            Debug.Assert(Configuration.MgmtConfiguration.TestGen is not null);
 
             var sourceCodePath = GetSourceCodePath();
             var sourceCodeProject = new SourceCodeProject(sourceCodePath, Configuration.SharedSourceFolders);
@@ -52,8 +52,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static string GetSourceCodePath()
         {
-            if (Configuration.MgmtConfiguration.TestModeler?.SourceCodePath != null)
-                return Configuration.MgmtConfiguration.TestModeler.SourceCodePath;
+            if (Configuration.MgmtConfiguration.TestGen?.SourceCodePath != null)
+                return Configuration.MgmtConfiguration.TestGen.SourceCodePath;
 
             return Path.Combine(Configuration.OutputFolder, "../../src");
         }

@@ -34,7 +34,7 @@ pipeline:
     scope: output-scope
 ```
 
-```yaml $(testmodeler)
+```yaml $(testgen)
 use-extension:
   "@autorest/testmodeler": "2.3.0"
 

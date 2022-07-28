@@ -25,5 +25,5 @@
   "RenameMapping": {
     "Type": "EncryptionType"
   },
-  "TestModeler": {}
+  "TestGen": {}
 }

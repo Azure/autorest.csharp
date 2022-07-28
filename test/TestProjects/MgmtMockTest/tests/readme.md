@@ -5,5 +5,8 @@
 
 ``` yaml
 require: ../src/readme.md
-testmodeler: {}
+# testmodeler: {}
+testgen: {}
+#   mock: true
+#   sample: true
 ```
