@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                if (model is EmptyResourceData)
                     continue;
 
                 var codeWriter = new CodeWriter();

@@ -492,7 +492,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var getCollectionMethods = resourceExtensions.GetMethods()
                         .Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}")
-                        .Where(m => ParameterMatch(m.GetParameters(), new[] {typeof(ResourceGroupResource)}));
+                        .Where(m => ParameterMatch(m.GetParameters(), new[] { typeof(ResourceGroupResource) }));
                     Assert.AreEqual(1, getCollectionMethods.Count(), $"Cannot find {resourceExtensions.Name}.Get{resourceName.ResourceNameToPlural()}");
                 }
             }
@@ -708,6 +708,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var operationTypeProperty = operation.GetField("ResourceType");
                 ResourceType operationType = (ResourceType)operationTypeProperty.GetValue(operation);
                 ResourceIdentifier resourceIdentifier = GetSampleResourceId(operation);
+                if (resourceIdentifier == null)
+                    continue;
                 foreach (var collection in FindAllCollections())
                 {
                     if (IsParent(collection, resourceIdentifier))
@@ -752,6 +754,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private ResourceIdentifier GetSampleResourceId(Type operation)
         {
             var createIdMethod = operation.GetMethod("CreateResourceIdentifier", BindingFlags.Static | BindingFlags.Public);
+            // partial resources only have an internal version of this
+            if (createIdMethod == null)
+                return null;
             List<object> keys = new List<object>();
             foreach (var p in createIdMethod.GetParameters())
             {

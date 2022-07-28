@@ -14,14 +14,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(true, "VirtualMachineMgmtPartialResource", "GetConfigurationProfileAssignments")]
         [TestCase(true, "VirtualMachineMgmtPartialResource", "GetConfigurationProfileAssignment")]
         [TestCase(true, "VirtualMachineMgmtPartialResource", "GetConfigurationProfileAssignmentAsync")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtPartialResource", "Get")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtPartialResource", "GetAsync")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtPartialResource", "Delete")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtPartialResource", "DeleteAsync")]
-        [TestCase(true, "VirtualMachineScaleSetMgmtPartialResource", "GetPublicIPAddresses")]
-        [TestCase(true, "VirtualMachineScaleSetMgmtPartialResource", "GetPublicIPAddressesAsync")]
+        [TestCase(false, "PartialVmssResource", "Get")]
+        [TestCase(false, "PartialVmssResource", "GetAsync")]
+        [TestCase(false, "PartialVmssResource", "Delete")]
+        [TestCase(false, "PartialVmssResource", "DeleteAsync")]
+        [TestCase(true, "PartialVmssResource", "GetPublicIPAddresses")]
+        [TestCase(true, "PartialVmssResource", "GetPublicIPAddressesAsync")]
         [TestCase(true, "MgmtPartialResourceExtensions", "GetVirtualMachineMgmtPartialResource")]
-        [TestCase(true, "MgmtPartialResourceExtensions", "GetVirtualMachineScaleSetMgmtPartialResource")]
+        [TestCase(true, "MgmtPartialResourceExtensions", "GetPartialVmssResource")]
         public void ValidateMethod(bool exist, string className, string methodName)
         {
             var resource = Assembly.GetExecutingAssembly().GetType($"MgmtPartialResource.{className}");
@@ -33,8 +33,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(false, "VirtualMachineMgmtPartialResource", "HasData")]
         [TestCase(false, "VirtualMachineMgmtPartialResource", "Data")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtPartialResource", "HasData")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtPartialResource", "Data")]
+        [TestCase(false, "PartialVmssResource", "HasData")]
+        [TestCase(false, "PartialVmssResource", "Data")]
         public void ValidateProperty(bool exist, string className, string propertyName)
         {
             var resource = Assembly.GetExecutingAssembly().GetType($"MgmtPartialResource.{className}");

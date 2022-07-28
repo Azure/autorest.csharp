@@ -418,7 +418,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
-        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Where(data => data is not EmptyResourceData).Distinct();
+        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Distinct();
 
         private IEnumerable<MgmtRestClient>? _restClients;
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= RawRequestPathToRestClient.Values.SelectMany(v => v).Distinct();
