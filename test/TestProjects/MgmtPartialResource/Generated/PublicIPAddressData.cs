@@ -38,7 +38,7 @@ namespace MgmtPartialResource
         /// <param name="migrationPhase"> Migration phase of Public IP Address. </param>
         /// <param name="linkedPublicIPAddress"> The linked public IP address of the public IP address resource. </param>
         /// <param name="deleteOption"> Specify what happens to the public IP address when the VM using it is deleted. </param>
-        internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOptions? deleteOption) : base(id, name, resourceType, systemData)
+        internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOption? deleteOption) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
             Etag = etag;
@@ -77,6 +77,6 @@ namespace MgmtPartialResource
         /// <summary> The linked public IP address of the public IP address resource. </summary>
         public PublicIPAddressData LinkedPublicIPAddress { get; set; }
         /// <summary> Specify what happens to the public IP address when the VM using it is deleted. </summary>
-        public DeleteOptions? DeleteOption { get; set; }
+        public DeleteOption? DeleteOption { get; set; }
     }
 }

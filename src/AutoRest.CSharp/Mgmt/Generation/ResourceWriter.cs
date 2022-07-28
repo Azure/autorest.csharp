@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCreateResourceIdentifierMethods()
         {
             var requestPath = This.RequestPath;
-            var method = This.CreateResourceIdentifierMethodSignature();
+            var method = This.CreateResourceIdentifierMethodSignature;
             _writer.WriteXmlDocumentationSummary($"{method.Description}");
             using (_writer.WriteMethodDeclaration(method))
             {

@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class PartialResource : Resource
     {
-        protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData) : base(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
+        protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, EmptyResourceData resourceData) : base(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
         {
         }
 
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private MethodSignature? _createResourceIdentifierSignature;
-        public override MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierSignature ??= base.CreateResourceIdentifierMethodSignature! with
+        public override MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierSignature ??= base.CreateResourceIdentifierMethodSignature with
         {
             Modifiers = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static
         };

@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void Transform()
         {
             OmitOperationGroups.RemoveOperationGroups();
+            PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.TransformToChoice();
             SchemaRenamer.ApplyRenameMapping();

@@ -87,7 +87,7 @@ namespace MgmtPartialResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<IPAllocationMethod> publicIPAllocationMethod = default;
             Optional<IPVersion> publicIPAddressVersion = default;
             Optional<string> ipAddress = default;
@@ -96,7 +96,7 @@ namespace MgmtPartialResource
             Optional<PublicIPAddressData> servicePublicIPAddress = default;
             Optional<PublicIPAddressMigrationPhase> migrationPhase = default;
             Optional<PublicIPAddressData> linkedPublicIPAddress = default;
-            Optional<DeleteOptions> deleteOption = default;
+            Optional<DeleteOption> deleteOption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"))
@@ -146,6 +146,11 @@ namespace MgmtPartialResource
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -235,14 +240,14 @@ namespace MgmtPartialResource
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            deleteOption = new DeleteOptions(property0.Value.GetString());
+                            deleteOption = new DeleteOption(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new PublicIPAddressData(id, name, type, systemData, sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
+            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
         }
     }
 }

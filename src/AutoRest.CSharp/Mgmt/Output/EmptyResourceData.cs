@@ -10,23 +10,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class EmptyResourceData : ResourceData
     {
-        private static ObjectSchema GetEmptyObjectSchemaWithName(string name)
-        {
-            return new ObjectSchema
-            {
-                Language = new Languages
-                {
-                    Default = new Language
-                    {
-                        Name = name,
-                    }
-                }
-            };
-        }
-
-        public EmptyResourceData(string name) : base(GetEmptyObjectSchemaWithName(name))
-        {
-        }
+        public EmptyResourceData(ObjectSchema objectSchema) : base(objectSchema)
+        { }
 
         // we never need anything in the empty resource data
         internal override bool ShouldSetResourceIdentifier => false;

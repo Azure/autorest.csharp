@@ -47,10 +47,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
 
+            // TODO -- remove this and read this configuration when transforming code model
             // try to find it in the partial resource list
-            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceName))
+            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceSchemaName))
             {
-                _resourceDataSchemaNameCache.TryAdd(set.RequestPath, resourceName);
+                resourceSchema = FindObjectSchemaWithName(resourceSchemaName);
+                if (resourceSchema == null)
+                {
+                    throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceSchemaName} in the request-path-to-resource-data configuration");
+                }
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceSchema);
                 return true;
             }
 

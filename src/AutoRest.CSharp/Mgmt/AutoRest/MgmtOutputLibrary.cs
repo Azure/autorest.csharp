@@ -23,6 +23,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using Humanizer.Inflections;
+using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -39,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// This is a map from raw request path to their corresponding <see cref="OperationSet"/>,
         /// which is a collection of the operations with the same raw request path
         /// </summary>
-        private Dictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
+        internal Dictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
 
         /// <summary>
         /// This is a map from operation to its corresponding operation group
@@ -186,7 +187,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         // get the request path and operation set
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
-                        if (operationSet.TryGetResourceDataSchema(out var resourceDataModel))
+                        if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                         {
                             // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
                             BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
@@ -198,14 +199,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
                             continue;
                         }
-                        if (resourceDataModel is not null)
+                        if (resourceDataSchema is not null)
                         {
                             //TODO handle expandable request paths. We assume that this is fine since if all of the expanded
                             //types use the same model they should have a common name, but since this case doesn't exist yet
                             //we don't know for sure
                             if (requestPath.IsExpandable)
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
-                            var name = GetResourceName(resourceDataModel.Name, operationSet, requestPath);
+                            var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema);
                             BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
@@ -545,10 +546,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // get the corresponding resource data
                     var originalResourcePath = operationSet.GetRequestPath();
                     var resourceData = GetResourceData(originalResourcePath);
-                    if (operationSet.Count > 0)
-                        BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
+                    if (resourceData is EmptyResourceData emptyResourceData)
+                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, emptyResourceData);
                     else
-                        BuildPartialResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
+                        BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                 }
             }
 
@@ -571,11 +572,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData resourceData)
+        private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, EmptyResourceData emptyResourceData)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new PartialResource(operationSet, operations, resourceDataSchemaName, resourceType, resourceData);
-            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), resourceData, resource, null));
+            var resource = new PartialResource(operationSet, operations, resourceDataSchemaName, resourceType, emptyResourceData);
+            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), emptyResourceData, resource, null));
         }
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
@@ -753,12 +754,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            // add partial resource data here (which is empty)
-            foreach ((var requestPath, var resourceDataSchemaName) in Configuration.MgmtConfiguration.PartialResources)
-            {
-                rawRequestPathToResourceData.Add(requestPath, new EmptyResourceData(resourceDataSchemaName));
-            }
-
             return rawRequestPathToResourceData;
         }
 
@@ -809,6 +804,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildResourceData(Schema schema) => schema switch
         {
+            EmptyObjectSchema emptyObjectSchema => new EmptyResourceData(emptyObjectSchema),
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
         };
@@ -830,9 +826,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         resourceDataSchema.Language.Default.Name = schemaName;
                     }
                     // if this operation set corresponds to a SDK resource, we add it to the map
-                    if (!resourceDataSchemaNameToOperationSets.ContainsKey(schemaName))
-                        resourceDataSchemaNameToOperationSets.Add(schemaName, new HashSet<OperationSet>());
-                    resourceDataSchemaNameToOperationSets[schemaName].Add(operationSet);
+                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(schemaName, out HashSet<OperationSet>? result))
+                    {
+                        result = new HashSet<OperationSet>();
+                        resourceDataSchemaNameToOperationSets.Add(schemaName, result);
+                    }
+                    result.Add(operationSet);
                 }
             }
 
