@@ -23,8 +23,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         // TODO -- change this to a virtual resource description
         public override FormattableString Description => CreateDescription(ResourceName);
 
-        protected override string DefaultName => $"{ResourceName}{MgmtContext.RPName}".AddResourceSuffixToResourceName();
-
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
             // virtual resource does not have this constructor

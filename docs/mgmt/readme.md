@@ -657,6 +657,8 @@ public partial class VirtualMachineNetworkResource
 }
 ```
 
+The naming pattern of a partial resource is like `[ResourceName][RPName]Resource`, where `ResourceName` is the value you assigned in the configuration, `RPName` is the name of this RP (for instance, `Network`). The name of a partial resource is also configurable using the `request-path-to-resource-name` configuration, please see [change resource name](#change-resource-name) section for more details.
+
 The difference between a normal resource and a partial resource is that the partial resource is not a concrete resource, therefore it does not have a corresponding collection, and you cannot get the list of it from its direct parent (ResourceGroupResource in the above example).
 But like normal resources, partial resources will have an extension method of `Get[PartialResourceName]` on the `ArmClient` to let you get it from its full Id.
 

@@ -142,20 +142,20 @@ namespace MgmtPartialResource
         }
         #endregion
 
-        #region VirtualMachineScaleSetMgmtPartialResource
+        #region PartialVmssResource
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetMgmtPartialResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetMgmtPartialResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetMgmtPartialResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="PartialVmssResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PartialVmssResource.CreateResourceIdentifier" /> to create a <see cref="PartialVmssResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetMgmtPartialResource" /> object. </returns>
-        public static VirtualMachineScaleSetMgmtPartialResource GetVirtualMachineScaleSetMgmtPartialResource(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PartialVmssResource" /> object. </returns>
+        public static PartialVmssResource GetPartialVmssResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                VirtualMachineScaleSetMgmtPartialResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetMgmtPartialResource(client, id);
+                PartialVmssResource.ValidateResourceId(id);
+                return new PartialVmssResource(client, id);
             }
             );
         }

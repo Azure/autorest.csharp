@@ -19,14 +19,14 @@ using Azure.ResourceManager.Resources;
 namespace MgmtPartialResource
 {
     /// <summary>
-    /// A Class representing a VirtualMachineScaleSet along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineScaleSetMgmtPartialResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetMgmtPartialResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachineScaleSet method.
+    /// A Class representing a PartialVmss along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PartialVmssResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetPartialVmssResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetPartialVmss method.
     /// </summary>
-    public partial class VirtualMachineScaleSetMgmtPartialResource : ArmResource
+    public partial class PartialVmssResource : ArmResource
     {
-        /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetMgmtPartialResource"/> instance. </summary>
+        /// <summary> Generate the resource identifier of a <see cref="PartialVmssResource"/> instance. </summary>
         internal static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string virtualMachineScaleSetName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}";
@@ -36,15 +36,15 @@ namespace MgmtPartialResource
         private readonly ClientDiagnostics _publicIPAddressClientDiagnostics;
         private readonly PublicIPAddressesRestOperations _publicIPAddressRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetMgmtPartialResource"/> class for mocking. </summary>
-        protected VirtualMachineScaleSetMgmtPartialResource()
+        /// <summary> Initializes a new instance of the <see cref="PartialVmssResource"/> class for mocking. </summary>
+        protected PartialVmssResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetMgmtPartialResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PartialVmssResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetMgmtPartialResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal PartialVmssResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _publicIPAddressClientDiagnostics = new ClientDiagnostics("MgmtPartialResource", PublicIPAddressResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(PublicIPAddressResource.ResourceType, out string publicIPAddressApiVersion);
@@ -74,7 +74,7 @@ namespace MgmtPartialResource
         {
             async Task<Page<PublicIPAddressResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtPartialResource.GetPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("PartialVmssResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {
@@ -89,7 +89,7 @@ namespace MgmtPartialResource
             }
             async Task<Page<PublicIPAddressResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtPartialResource.GetPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("PartialVmssResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {
@@ -116,7 +116,7 @@ namespace MgmtPartialResource
         {
             Page<PublicIPAddressResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtPartialResource.GetPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("PartialVmssResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {
@@ -131,7 +131,7 @@ namespace MgmtPartialResource
             }
             Page<PublicIPAddressResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtPartialResource.GetPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("PartialVmssResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {

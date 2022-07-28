@@ -17,10 +17,10 @@ using Azure.ResourceManager.Resources;
 namespace MgmtPartialResource
 {
     /// <summary>
-    /// A Class representing a VirtualMachine along with the instance operations that can be performed on it.
+    /// A Class representing a VirtualMachineMgmtPartialResource along with the instance operations that can be performed on it.
     /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineMgmtPartialResource" />
     /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineMgmtPartialResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachine method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachineMgmtPartialResource method.
     /// </summary>
     public partial class VirtualMachineMgmtPartialResource : ArmResource
     {
@@ -55,7 +55,7 @@ namespace MgmtPartialResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of ConfigurationProfileAssignmentResources in the VirtualMachine. </summary>
+        /// <summary> Gets a collection of ConfigurationProfileAssignmentResources in the VirtualMachineMgmtPartialResource. </summary>
         /// <returns> An object representing collection of ConfigurationProfileAssignmentResources and their operations over a ConfigurationProfileAssignmentResource. </returns>
         public virtual ConfigurationProfileAssignmentCollection GetConfigurationProfileAssignments()
         {

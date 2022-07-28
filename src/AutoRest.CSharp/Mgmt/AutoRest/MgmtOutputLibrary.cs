@@ -575,7 +575,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, EmptyResourceData emptyResourceData)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new PartialResource(operationSet, operations, resourceDataSchemaName, resourceType, emptyResourceData);
+            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceType, emptyResourceData);
             result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), emptyResourceData, resource, null));
         }
 
@@ -589,7 +589,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        private string GetResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath)
+        private string GetResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath, bool isPartial = false)
         {
             // read configuration to see if we could get a configuration for this resource
             var resourceType = requestPath.GetResourceType();
@@ -597,6 +597,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
+            var resourceName = CalculateResourceName(candidateName, operationSet, requestPath, resourceType);
+
+            return isPartial ?
+                $"{resourceName}{MgmtContext.RPName}" :
+                resourceName;
+        }
+
+        private string CalculateResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath, ResourceTypeSegment resourceType)
+        {
             var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
             var resourcesWithSameType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())
