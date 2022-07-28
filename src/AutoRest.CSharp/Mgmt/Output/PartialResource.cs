@@ -3,11 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -16,12 +18,28 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class PartialResource : Resource
     {
-        protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, EmptyResourceData resourceData) : base(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
+        protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType, EmptyResourceData resourceData) : base(operationSet, operations, defaultName, resourceType, resourceData, ResourcePosition)
         {
+            OriginalResourceName = originalResourceName;
         }
 
-        // TODO -- change this to a virtual resource description
+        /// <summary>
+        /// This is the resource name of its original resource, the resource that this partial resource is extending
+        /// </summary>
+        public string OriginalResourceName { get; }
+
         public override FormattableString Description => CreateDescription(ResourceName);
+
+        protected override FormattableString CreateDescription(string clientPrefix)
+        {
+            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            List<FormattableString> lines = new List<FormattableString>();
+
+            lines.Add($"A class extending from the {OriginalResourceName.AddResourceSuffixToResourceName()} in {MgmtContext.DefaultNamespace} along with the instance operations that can be performed on it.");
+            lines.Add($"You can only construct {an} <see cref=\"{Type}\" /> from a <see cref=\"{typeof(ResourceIdentifier)}\" /> with a resource type of {ResourceType}.");
+
+            return FormattableStringHelpers.Join(lines, "\r\n");
+        }
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {

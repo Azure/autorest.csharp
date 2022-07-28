@@ -12,15 +12,12 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 
 namespace MgmtPartialResource
 {
     /// <summary>
-    /// A Class representing a VirtualMachineMgmtPartialResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineMgmtPartialResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineMgmtPartialResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachineMgmtPartialResource method.
+    /// A class extending from the VirtualMachineResource in MgmtPartialResource along with the instance operations that can be performed on it.
+    /// You can only construct a <see cref="VirtualMachineMgmtPartialResource" /> from a <see cref="ResourceIdentifier" /> with a resource type of Microsoft.Compute/virtualMachines.
     /// </summary>
     public partial class VirtualMachineMgmtPartialResource : ArmResource
     {

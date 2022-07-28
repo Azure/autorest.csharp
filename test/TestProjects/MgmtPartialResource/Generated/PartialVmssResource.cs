@@ -14,15 +14,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 
 namespace MgmtPartialResource
 {
     /// <summary>
-    /// A Class representing a PartialVmss along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PartialVmssResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetPartialVmssResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetPartialVmss method.
+    /// A class extending from the VirtualMachineScaleSetResource in MgmtPartialResource along with the instance operations that can be performed on it.
+    /// You can only construct a <see cref="PartialVmssResource" /> from a <see cref="ResourceIdentifier" /> with a resource type of Microsoft.Compute/virtualMachineScaleSets.
     /// </summary>
     public partial class PartialVmssResource : ArmResource
     {
