@@ -328,13 +328,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtLRO\\Generated"
     },
-    "MgmtMockTest": {
+    "MgmtMockAndSample": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockTest\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\src\\Generated"
     },
-    "MgmtMockTest.Tests": {
+    "MgmtMockAndSample.Tests": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockTest\\tests\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\tests\\Generated"
     },
     "MgmtMultipleParentResource": {
       "commandName": "Project",
