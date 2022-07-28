@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static void WriteCreateResultImpl(this CodeWriter writer, bool async, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse)
         {
             // default value callback, just write a return statement
-            Action<CodeWriterDelegate> valueCallback = v => writer.Line($"return {v};");
+            Action<FormattableString> valueCallback = fs => writer.Line($"return {fs};");
 
             if (operation.ResultSerialization != null)
             {
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{pagingResponse.PageType} firstPage = {typeof(Page)}.FromValues(firstPageResult.{itemPropertyName}, firstPageResult.{nextLinkPropertyName}, {responseVariable});");
                     writer.Line();
 
-                    valueCallback(w => w.Append($"{typeof(PageableHelpers)}.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken))"));
+                    valueCallback($"{typeof(PageableHelpers)}.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken))");
                 }
                 else
                 {
@@ -66,15 +66,15 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteNonPagingCreateResultImpl(this CodeWriter writer, bool async, string responseVariable, Action<CodeWriterDelegate> valueCallback)
+        public static void WriteNonPagingCreateResultImpl(this CodeWriter writer, bool async, string responseVariable, Action<FormattableString> valueCallback)
         {
             if (async)
             {
-                valueCallback(w => w.Append($"await new {typeof(ValueTask<Response>)}({responseVariable}).ConfigureAwait(false)"));
+                valueCallback($"await new {typeof(ValueTask<Response>)}({responseVariable}).ConfigureAwait(false)");
             }
             else
             {
-                valueCallback(w => w.Append($"{responseVariable}"));
+                valueCallback($"{responseVariable}");
             }
         }
     }

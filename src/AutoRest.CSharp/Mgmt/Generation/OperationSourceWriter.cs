@@ -114,13 +114,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void WriteCreateResult(string responseVariable)
         {
-            Action<CodeWriterDelegate> valueCallback = v => _writer.Line($"return {v};");
+            Action<FormattableString> valueCallback = fs => _writer.Line($"return {fs};");
             if (_isReturningResource)
             {
-                valueCallback = v =>
+                valueCallback = fs =>
                 {
                     var data = new CodeWriterDeclaration("data");
-                    FormattableString dataString = _operationIdMappings is null ? (FormattableString)$"var {data:D} = {v};" : (FormattableString)$"var {data:D} = ScrubId({v});";
+                    FormattableString dataString = _operationIdMappings is null ? (FormattableString)$"var {data:D} = {fs};" : (FormattableString)$"var {data:D} = ScrubId({fs});";
                     _writer.Line(dataString);
                     if (_opSource.Resource!.ResourceData.ShouldSetResourceIdentifier)
                     {

@@ -188,10 +188,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (var implementation in model.Discriminator.Implementations)
                             {
-                                writer
-                                    .Append($"case {implementation.Key:L}: return ")
-                                    .DeserializeImplementation(implementation.Type.Implementation, jsonSerialization, $"element");
-                                writer.Line($";");
+                                var implementationFormattable = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(implementation.Type.Implementation, jsonSerialization, $"element");
+                                writer.Line($"case {implementation.Key:L}: return {implementationFormattable};");
                             }
                         }
                     }

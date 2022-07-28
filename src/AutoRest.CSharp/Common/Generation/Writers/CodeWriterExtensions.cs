@@ -347,7 +347,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, Action<CodeWriterDelegate> valueCallback, string responseVariable, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, Action<FormattableString> valueCallback, string responseVariable, CSharpType? type)
         {
             switch (serialization)
             {
@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteInitialization(
             this CodeWriter writer,
-            Action<CodeWriterDelegate> valueCallback,
+            Action<FormattableString> valueCallback,
             ObjectType objectType,
             ObjectTypeConstructor constructor,
             IEnumerable<PropertyInitializer> initializers)
@@ -419,7 +419,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Except(collectionInitializers)
                 .ToArray();
 
-            void WriteObjectInitializer(CodeWriter codeWriter)
+            FormattableString GetObjectInitializerFormattable()
             {
                 // writes the new Model(param1, param2)
                 // {
@@ -427,41 +427,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 // }
                 // part
 
-                codeWriter.Append($"new {objectType.Type}(");
-                foreach (var initializer in selectedCtorInitializers)
-                {
-                    if (initializer.Type != null)
-                    {
-                        codeWriter.Append(initializer.Value);
-                        codeWriter.WriteConversion(initializer.Type, initializer.Property.Declaration.Type);
-                    }
+                var initializers = selectedCtorInitializers
+                    .Select(i => (FormattableString)$"{i.Value}{GetConversion(writer, i.Type!, i.Property.Declaration.Type)}")
+                    .ToArray()
+                    .Join(", ");
 
-                    codeWriter.Append($", ");
+                if (!restOfInitializers.Any())
+                {
+                    return $"new {objectType.Type}({initializers})";
                 }
 
-                codeWriter.RemoveTrailingComma();
-                codeWriter.Append($")");
+                var propertyInitializers = restOfInitializers
+                    .Select(pi => (FormattableString)$"{pi.Property.Declaration.Name} = {pi.Value}{GetConversion(writer, pi.Type!, pi.Property.Declaration.Type)}")
+                    .ToArray()
+                    .Join(",\n ");
 
-                if (restOfInitializers.Any())
-                {
-                    using (codeWriter.Scope($"", newLine: false))
-                    {
-                        foreach (var propertyInitializer in restOfInitializers)
-                        {
-                            codeWriter.Append($"{propertyInitializer.Property.Declaration.Name} = ");
-
-                            if (propertyInitializer.Type != null)
-                            {
-                                codeWriter.Append(propertyInitializer.Value);
-                                codeWriter.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type);
-                            }
-
-                            codeWriter.Line($",");
-                        }
-
-                        codeWriter.RemoveTrailingComma();
-                    }
-                }
+                return $"new {objectType.Type}({initializers}) {{\n{propertyInitializers}\n}}";
             }
 
             void WriteCollectionInitializer(CodeWriter writer1, CodeWriterDeclaration codeWriterDeclaration)
@@ -484,20 +465,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            var objectInitializerFormattable = GetObjectInitializerFormattable();
             if (collectionInitializers.Any())
             {
                 var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
-                writer.Append($"{objectType.Type} {modelVariable:D} = ");
-                WriteObjectInitializer(writer);
-                writer.Line($";");
-
+                writer.Line($"{objectType.Type} {modelVariable:D} = {objectInitializerFormattable};");
                 WriteCollectionInitializer(writer, modelVariable);
 
-                valueCallback(w => w.Append(modelVariable));
+                valueCallback($"{modelVariable:I}");
             }
             else
             {
-                valueCallback(WriteObjectInitializer);
+                valueCallback(objectInitializerFormattable);
             }
 
 
@@ -506,23 +485,22 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
+            return writer.AppendRaw(GetConversion(writer, from, to));
+        }
+
+        private static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
+        {
             if (to.IsFrameworkType && from.IsFrameworkType)
             {
-                if (to.FrameworkType == typeof(IReadOnlyList<>) &&
-                    from.FrameworkType == typeof(IEnumerable<>))
+                if (to.FrameworkType == typeof(IReadOnlyList<>) && from.FrameworkType == typeof(IEnumerable<>) ||
+                    to.FrameworkType == typeof(IList<>) && from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
-                    writer.AppendIf($"?", from.IsNullable).Append($".ToList()");
-                }
-                else if (to.FrameworkType == typeof(IList<>) &&
-                    from.FrameworkType == typeof(IEnumerable<>))
-                {
-                    writer.UseNamespace(typeof(Enumerable).Namespace!);
-                    writer.AppendIf($"?", from.IsNullable).Append($".ToList()");
+                    return from.IsNullable ? "?.ToList()" : ".ToList()";
                 }
             }
 
-            return writer;
+            return string.Empty;
         }
 
         internal static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, ObjectTypeProperty? property)
