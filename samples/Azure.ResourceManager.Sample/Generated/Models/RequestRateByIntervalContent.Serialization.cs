@@ -20,9 +20,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WritePropertyName("blobContainerSasUri");
             writer.WriteStringValue(BlobContainerSasUri.AbsoluteUri);
             writer.WritePropertyName("fromTime");
-            writer.WriteStringValue(FromOn, "O");
+            writer.WriteStringValue(FromTime, "O");
             writer.WritePropertyName("toTime");
-            writer.WriteStringValue(ToOn, "O");
+            writer.WriteStringValue(ToTime, "O");
             if (Optional.IsDefined(GroupByThrottlePolicy))
             {
                 writer.WritePropertyName("groupByThrottlePolicy");
