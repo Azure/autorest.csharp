@@ -49,6 +49,9 @@ namespace AutoRest.CSharp.Output.Models
         private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
+        private Parameter? _bodyParameter;
+        public Parameter? BodyParameter => _bodyParameter;
+
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _serializationBuilder = new SerializationBuilder();
@@ -217,6 +220,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     case { Location: RequestLocation.Body } when bodyParameter != KnownParameters.RequestContent:
                         bodyParameter = operationParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
+                        _bodyParameter = this.BuildParameter(operationParameter);
                         break;
                     case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
                         contentTypeRequestParameter = operationParameter;

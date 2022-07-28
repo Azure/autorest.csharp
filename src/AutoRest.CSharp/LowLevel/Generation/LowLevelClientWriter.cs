@@ -75,6 +75,25 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
+                    foreach (var convenienceMethod in client.ConvenienceMethods)
+                    {
+                        var longRunning = convenienceMethod.LowLevelClientMethod.LongRunning;
+                        if (longRunning != null)
+                        {
+                            WriteLongRunningConvenienceMethod(writer, convenienceMethod, true);
+                            WriteLongRunningConvenienceMethod(writer, convenienceMethod, false);
+                        }
+                        else if (convenienceMethod.LowLevelClientMethod.PagingInfo != null)
+                        {
+
+                        }
+                        else
+                        {
+                            WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, true);
+                            WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, false);
+                        }
+                    }
+
                     WriteSubClientFactoryMethod(writer, client);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
@@ -222,6 +241,37 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        public static void WriteClientConvenienceMethod(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, string diagnosticsPropertyName, bool async)
+        {
+            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod, async))
+            {
+                if (convenienceMethod.Diagnostic != null)
+                {
+                    using (WriteDiagnosticScope(writer, convenienceMethod.Diagnostic, diagnosticsPropertyName))
+                    {
+                        WriteClientConvenienceMethodBody(writer, convenienceMethod, async);
+                    }
+                }
+                else
+                {
+                    WriteClientConvenienceMethodBody(writer, convenienceMethod, async);
+                }
+            }
+        }
+
+        public static void WriteClientConvenienceMethodBody(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
+        {
+            if (convenienceMethod.BodyParameter != null)
+            {
+                writer.Line($"{typeof(RequestContent)} content = {convenienceMethod.BodyParameter.Name}.ToRequestContent();");
+            }
+
+            writer.Line($"{typeof(RequestContext)} context = RequestContext.FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});"); // TO-DO: after implementation RequestContext.FromCancellationToken, change to typeof(method)
+
+            var protocolSignature = convenienceMethod.LowLevelClientMethod.Signature;
+            writer.Append($"{typeof(Response)} response = {(async ? "await " : String.Empty)}{protocolSignature.Name}{(async ? "Async" : String.Empty)}({string.Join(", ", protocolSignature.Parameters.Select(parameter => parameter.Name))}){(async ? ".ConfigureAwait(false)" : String.Empty)};");
+        }
+
         private static void WriteClientMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
             var restMethod = clientMethod.RequestMethod;
@@ -279,6 +329,11 @@ namespace AutoRest.CSharp.Generation.Writers
             WritePagingPrivateMethod(writer, clientMethod, fields, privateMethodSignature, async);
 
             writer.Line();
+        }
+
+        public static void WritePagingConvenienceMethod(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
+        {
+
         }
 
         private static MethodSignature PreparePrivatePagingMethodSignature(LowLevelClientMethod clientMethod, bool async)
@@ -368,6 +423,24 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+        }
+
+        public static void WriteLongRunningConvenienceMethod(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
+        {
+            var pagingInfo = convenienceMethod.LowLevelClientMethod.PagingInfo;
+            var nextPageMethod = pagingInfo?.NextPageMethod;
+
+            if (pagingInfo != null && nextPageMethod != null)
+            {
+
+            }
+            else
+            {
+                using (WriteConvenienceMethodDeclaration(writer, convenienceMethod, async))
+                {
+                    // TO-DO
+                }
+            }
         }
 
         public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, LowLevelExampleComposer exampleComposer, bool async)
@@ -609,6 +682,15 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentation("example", exampleComposer.Compose(clientMethod, async));
             WriteDocumentationRemarks(writer, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
 
+            var scope = writer.WriteMethodDeclaration(methodSignature);
+            writer.WriteParametersValidation(methodSignature.Parameters);
+            return scope;
+        }
+
+        private static CodeWriter.CodeWriterScope WriteConvenienceMethodDeclaration(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
+        {
+            var methodSignature = convenienceMethod.Signature.WithAsync(async);
+            writer.WriteMethodDocumentation(methodSignature);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;

@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
+        public IReadOnlyList<LowLevelConvenienceMethod> ConvenienceMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
@@ -68,6 +69,8 @@ namespace AutoRest.CSharp.Output.Models
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
+
+            ConvenienceMethods = ClientMethods.Select(clientMethod => BuildConvenienceMethod(clientMethod, builder)).ToArray();
 
             RequestMethods = clientMethods.Select(m => m.RequestMethod)
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
@@ -134,6 +137,41 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+
+        private LowLevelConvenienceMethod BuildConvenienceMethod(LowLevelClientMethod clientMethod, RestClientBuilder builder)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            MethodSignature protocolSignature = clientMethod.Signature;
+            foreach (var parameter in protocolSignature.Parameters)
+            {
+                if (parameter == KnownParameters.RequestContent || parameter == KnownParameters.RequestContentNullable)
+                {
+                    parameters.Add(builder.BodyParameter!);
+                }
+                else if (parameter == KnownParameters.RequestContext)
+                {
+                    parameters.Add(KnownParameters.CancellationTokenParameter);
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            CSharpType? returnType = clientMethod.RequestMethod.ReturnType;
+            bool isAmbiguous = !protocolSignature.Parameters.Contains(KnownParameters.RequestContent) &&
+                !protocolSignature.Parameters.Contains(KnownParameters.RequestContentNullable);
+            string name = isAmbiguous
+                ? protocolSignature.Name.IsLastWordSingular()
+                    ? $"{protocolSignature.Name}Value"
+                    : $"{protocolSignature.Name.LastWordToSingular()}Values"
+                : protocolSignature.Name;
+
+            MethodSignature convenienceSignature = protocolSignature with { Name = name, ReturnType = returnType, Parameters = parameters };
+
+            Diagnostic? diagnostic = convenienceSignature.Name != protocolSignature.Name ? new Diagnostic($"{Declaration.Name}.{convenienceSignature.Name}") : null;
+            return new LowLevelConvenienceMethod(clientMethod, convenienceSignature, builder.BodyParameter, diagnostic);
+        }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {
