@@ -3,12 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class BodyParameterNormalizer
     {
@@ -64,20 +66,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 SchemaRenamer.UpdateAcronym(parameter.Schema);
         }
 
-        public static void UpdatePatchOperations()
+        internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
         {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            if (MethodsRequiredBodyParameter.Contains(method))
             {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    if (operation.GetHttpMethod() == HttpMethod.Patch)
-                    {
-                        var bodyParameter = operation.GetBodyParameter();
-                        if (bodyParameter != null)
-                            bodyParameter.Required = true;
-                    }
-                }
+                bodyParameter.Required = true;
             }
         }
+
+        private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
     }
 }
