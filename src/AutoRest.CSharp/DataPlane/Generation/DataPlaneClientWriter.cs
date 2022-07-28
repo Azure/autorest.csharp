@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -68,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
-            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
+            writer.WriteXmlDocumentationSummary($"{clientMethod.RestClientMethod.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -76,6 +77,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            writer.WriteXmlDocumentation("remarks", $"{clientMethod.RestClientMethod.DescriptionText}");
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
@@ -281,7 +283,7 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
 
-            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
+            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -290,6 +292,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
+            writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
 
             writer.Append($"{pagingMethod.Accessibility} virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
@@ -358,7 +361,7 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
             Parameter[] parameters = originalMethod.Parameters;
 
-            writer.WriteXmlDocumentationSummary($"{originalMethod.Description}");
+            writer.WriteXmlDocumentationSummary($"{originalMethod.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -366,6 +369,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
+            writer.WriteXmlDocumentation("remarks", $"{originalMethod.DescriptionText}");
 
             string asyncText = async ? "async " : string.Empty;
             writer.Append($"{lroMethod.Accessibility} virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
@@ -502,7 +506,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var constructorParameters = new[]{KnownParameters.ClientDiagnostics, KnownParameters.Pipeline}.Union(client.RestClient.Parameters).ToArray();
             var name = client.Declaration.Name;
-            return new ConstructorSignature(name, $"Initializes a new instance of {name}", MethodSignatureModifiers.Internal, constructorParameters);
+            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, constructorParameters);
         }
     }
 }

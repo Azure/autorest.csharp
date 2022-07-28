@@ -60,48 +60,71 @@ namespace Azure.AI.DocumentTranslation
             _endpoint = endpoint;
         }
 
-        /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <summary> Returns the status for a specific document. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentStatusAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("path").ToString());
+        /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("characterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Returns the translation status for a specific document based on the request Id and document Id.
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DocumentStatus</c>:
         /// <code>{
-        ///   path: string,
-        ///   sourcePath: string,
-        ///   createdDateTimeUtc: string (ISO 8601 Format),
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
-        ///   to: string,
+        ///   path: string, # Optional. Location of the document or folder
+        ///   sourcePath: string, # Required. Location of the source document
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///   to: string, # Required. To language
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   },
-        ///   progress: number,
-        ///   id: DocumentStatusId,
-        ///   characterCharged: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   progress: number, # Required. Progress of the translation if available
+        ///   id: Guid, # Required. Document Id
+        ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
         /// 
@@ -122,48 +145,71 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <summary> Returns the status for a specific document. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentStatus with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid());
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("path").ToString());
+        /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("characterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Returns the translation status for a specific document based on the request Id and document Id.
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DocumentStatus</c>:
         /// <code>{
-        ///   path: string,
-        ///   sourcePath: string,
-        ///   createdDateTimeUtc: string (ISO 8601 Format),
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
-        ///   to: string,
+        ///   path: string, # Optional. Location of the document or folder
+        ///   sourcePath: string, # Required. Location of the source document
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///   to: string, # Required. To language
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   },
-        ///   progress: number,
-        ///   id: DocumentStatusId,
-        ///   characterCharged: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   progress: number, # Required. Progress of the translation if available
+        ///   id: Guid, # Required. Document Id
+        ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
         /// 
@@ -184,54 +230,77 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Returns the status for a document translation request. </summary>
+        /// <param name="id"> Format - uuid.  The operation id. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationStatusAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
-        /// </summary>
-        /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId,
-        ///   createdDateTimeUtc: string (ISO 8601 Format),
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   id: Guid, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   },
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number,
-        ///     failed: number,
-        ///     success: number,
-        ///     inProgress: number,
-        ///     notYetStarted: number,
-        ///     cancelled: number,
-        ///     totalCharacterCharged: number
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
+        ///   }, # Required.
         /// }
         /// </code>
         /// 
@@ -252,54 +321,77 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Returns the status for a document translation request. </summary>
+        /// <param name="id"> Format - uuid.  The operation id. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationStatus with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = client.GetTranslationStatus(Guid.NewGuid());
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
-        /// </summary>
-        /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId,
-        ///   createdDateTimeUtc: string (ISO 8601 Format),
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   id: Guid, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   },
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number,
-        ///     failed: number,
-        ///     success: number,
-        ///     inProgress: number,
-        ///     notYetStarted: number,
-        ///     cancelled: number,
-        ///     totalCharacterCharged: number
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
+        ///   }, # Required.
         /// }
         /// </code>
         /// 
@@ -320,57 +412,80 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Cancel a currently processing or queued translation. </summary>
+        /// <param name="id"> Format - uuid.  The operation-id. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call CancelTranslationAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = await client.CancelTranslationAsync(Guid.NewGuid());
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// Cancel a currently processing or queued translation.
         /// Cancel a currently processing or queued translation.
         /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// All pending documents will be cancelled if possible.
-        /// </summary>
-        /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId,
-        ///   createdDateTimeUtc: string (ISO 8601 Format),
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   id: Guid, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   },
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number,
-        ///     failed: number,
-        ///     success: number,
-        ///     inProgress: number,
-        ///     notYetStarted: number,
-        ///     cancelled: number,
-        ///     totalCharacterCharged: number
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
+        ///   }, # Required.
         /// }
         /// </code>
         /// 
@@ -391,57 +506,80 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Cancel a currently processing or queued translation. </summary>
+        /// <param name="id"> Format - uuid.  The operation-id. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call CancelTranslation with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = client.CancelTranslation(Guid.NewGuid());
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// Cancel a currently processing or queued translation.
         /// Cancel a currently processing or queued translation.
         /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// All pending documents will be cancelled if possible.
-        /// </summary>
-        /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TranslationStatus</c>:
         /// <code>{
-        ///   id: TranslationStatusId,
-        ///   createdDateTimeUtc: string (ISO 8601 Format),
-        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   id: Guid, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   },
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
         ///   summary: {
-        ///     total: number,
-        ///     failed: number,
-        ///     success: number,
-        ///     inProgress: number,
-        ///     notYetStarted: number,
-        ///     cancelled: number,
-        ///     totalCharacterCharged: number
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
+        ///   }, # Required.
         /// }
         /// </code>
         /// 
@@ -462,38 +600,45 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Returns a list of supported document formats. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedDocumentFormatsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = await client.GetSupportedDocumentFormatsAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string,
-        ///       fileExtensions: [string],
-        ///       contentTypes: [string],
-        ///       defaultVersion: string,
-        ///       versions: [string]
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -514,38 +659,45 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Returns a list of supported document formats. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedDocumentFormats and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = client.GetSupportedDocumentFormats();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string,
-        ///       fileExtensions: [string],
-        ///       contentTypes: [string],
-        ///       defaultVersion: string,
-        ///       versions: [string]
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -566,38 +718,45 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Returns the list of supported glossary formats. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedGlossaryFormatsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = await client.GetSupportedGlossaryFormatsAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string,
-        ///       fileExtensions: [string],
-        ///       contentTypes: [string],
-        ///       defaultVersion: string,
-        ///       versions: [string]
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -618,38 +777,45 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Returns the list of supported glossary formats. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedGlossaryFormats and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = client.GetSupportedGlossaryFormats();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>SupportedFileFormats</c>:
         /// <code>{
         ///   value: [
         ///     {
-        ///       format: string,
-        ///       fileExtensions: [string],
-        ///       contentTypes: [string],
-        ///       defaultVersion: string,
-        ///       versions: [string]
+        ///       format: string, # Required. Name of the format
+        ///       fileExtensions: [string], # Required. Supported file extension for this format
+        ///       contentTypes: [string], # Required. Supported Content-Types for this format
+        ///       defaultVersion: string, # Optional. Default version if none is specified
+        ///       versions: [string], # Optional. Supported Version
         ///     }
-        ///   ]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   ], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -670,27 +836,32 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <summary> Returns a list of supported storage sources. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedStorageSourcesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = await client.GetSupportedStorageSourcesAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("value")[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Returns a list of storage sources/options supported by the Document Translation service.
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>SupportedStorageSources</c>:
         /// <code>{
-        ///   value: [&quot;AzureBlob&quot;]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   value: [&quot;AzureBlob&quot;], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -711,27 +882,32 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <summary> Returns a list of supported storage sources. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedStorageSources and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// Response response = client.GetSupportedStorageSources();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("value")[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Returns a list of storage sources/options supported by the Document Translation service.
+        /// 
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>SupportedStorageSources</c>:
         /// <code>{
-        ///   value: [&quot;AzureBlob&quot;]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   value: [&quot;AzureBlob&quot;], # Required. list of objects
         /// }
         /// </code>
         /// 
@@ -752,31 +928,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns a list of batch requests submitted and the status for each request.
-        /// This list only contains batch requests submitted by the user (based on the resource).
-        ///             
-        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
-        /// The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -803,54 +955,118 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   value: [
-        ///     {
-        ///       id: TranslationStatusId,
-        ///       createdDateTimeUtc: string (ISO 8601 Format),
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
-        ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///         message: string,
-        ///         target: string,
-        ///         innerError: {
-        ///           code: string,
-        ///           message: string,
-        ///           target: string,
-        ///           innerError: InnerTranslationError
-        ///         }
-        ///       },
-        ///       summary: {
-        ///         total: number,
-        ///         failed: number,
-        ///         success: number,
-        ///         inProgress: number,
-        ///         notYetStarted: number,
-        ///         cancelled: number,
-        ///         totalCharacterCharged: number
-        ///       }
-        ///     }
-        ///   ],
-        ///   @nextLink: string
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationsStatusAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// await foreach (var data in client.GetTranslationsStatusAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
         /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// ]]></code>
+        /// This sample shows how to call GetTranslationsStatusAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// await foreach (var data in client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        ///             
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TranslationsStatusValue</c>:
         /// <code>{
+        ///   id: Guid, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   summary: {
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
+        ///   }, # Required.
         /// }
         /// </code>
         /// 
@@ -877,31 +1093,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns a list of batch requests submitted and the status for each request.
-        /// This list only contains batch requests submitted by the user (based on the resource).
-        ///             
-        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
-        /// The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -928,54 +1120,118 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   value: [
-        ///     {
-        ///       id: TranslationStatusId,
-        ///       createdDateTimeUtc: string (ISO 8601 Format),
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
-        ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///         message: string,
-        ///         target: string,
-        ///         innerError: {
-        ///           code: string,
-        ///           message: string,
-        ///           target: string,
-        ///           innerError: InnerTranslationError
-        ///         }
-        ///       },
-        ///       summary: {
-        ///         total: number,
-        ///         failed: number,
-        ///         success: number,
-        ///         inProgress: number,
-        ///         notYetStarted: number,
-        ///         cancelled: number,
-        ///         totalCharacterCharged: number
-        ///       }
-        ///     }
-        ///   ],
-        ///   @nextLink: string
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationsStatus and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// foreach (var data in client.GetTranslationsStatus())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
         /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// ]]></code>
+        /// This sample shows how to call GetTranslationsStatus with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// foreach (var data in client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        ///     Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        ///             
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>TranslationsStatusValue</c>:
         /// <code>{
+        ///   id: Guid, # Required. Id of the operation.
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   summary: {
+        ///     total: number, # Required. Total count
+        ///     failed: number, # Required. Failed count
+        ///     success: number, # Required. Number of Success
+        ///     inProgress: number, # Required. Number of in progress
+        ///     notYetStarted: number, # Required. Count of not yet started
+        ///     cancelled: number, # Required. Number of cancelled
+        ///     totalCharacterCharged: number, # Required. Total characters charged by the API
+        ///   }, # Required.
         /// }
         /// </code>
         /// 
@@ -1002,28 +1258,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns the status for all documents in a batch document translation request.
-        ///             
-        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
-        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1051,50 +1286,105 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   value: [
-        ///     {
-        ///       path: string,
-        ///       sourcePath: string,
-        ///       createdDateTimeUtc: string (ISO 8601 Format),
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
-        ///       to: string,
-        ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///         message: string,
-        ///         target: string,
-        ///         innerError: {
-        ///           code: string,
-        ///           message: string,
-        ///           target: string,
-        ///           innerError: InnerTranslationError
-        ///         }
-        ///       },
-        ///       progress: number,
-        ///       id: DocumentStatusId,
-        ///       characterCharged: number
-        ///     }
-        ///   ],
-        ///   @nextLink: string
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentsStatusAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid()))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
         /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// ]]></code>
+        /// This sample shows how to call GetDocumentsStatusAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// await foreach (var data in client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("path").ToString());
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("characterCharged").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Returns the status for all documents in a batch document translation request.
+        ///             
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DocumentsStatusValue</c>:
         /// <code>{
+        ///   path: string, # Optional. Location of the document or folder
+        ///   sourcePath: string, # Required. Location of the source document
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///   to: string, # Required. To language
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   progress: number, # Required. Progress of the translation if available
+        ///   id: Guid, # Required. Document Id
+        ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
         /// 
@@ -1121,28 +1411,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
-        /// Returns the status for all documents in a batch document translation request.
-        ///             
-        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
-        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
-        ///             
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        ///             
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        ///             
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
+        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1170,50 +1439,105 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   value: [
-        ///     {
-        ///       path: string,
-        ///       sourcePath: string,
-        ///       createdDateTimeUtc: string (ISO 8601 Format),
-        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
-        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
-        ///       to: string,
-        ///       error: {
-        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///         message: string,
-        ///         target: string,
-        ///         innerError: {
-        ///           code: string,
-        ///           message: string,
-        ///           target: string,
-        ///           innerError: InnerTranslationError
-        ///         }
-        ///       },
-        ///       progress: number,
-        ///       id: DocumentStatusId,
-        ///       characterCharged: number
-        ///     }
-        ///   ],
-        ///   @nextLink: string
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentsStatus with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// foreach (var data in client.GetDocumentsStatus(Guid.NewGuid()))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
         /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// ]]></code>
+        /// This sample shows how to call GetDocumentsStatus with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// foreach (var data in client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"}))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("path").ToString());
+        ///     Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        ///     Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        ///     Console.WriteLine(result.GetProperty("status").ToString());
+        ///     Console.WriteLine(result.GetProperty("to").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        ///     Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        ///     Console.WriteLine(result.GetProperty("progress").ToString());
+        ///     Console.WriteLine(result.GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("characterCharged").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Returns the status for all documents in a batch document translation request.
+        ///             
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// 
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DocumentsStatusValue</c>:
         /// <code>{
+        ///   path: string, # Optional. Location of the document or folder
+        ///   sourcePath: string, # Required. Location of the source document
+        ///   createdDateTimeUtc: string (ISO 8601 Format), # Required. Operation created date time
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format), # Required. Date time in which the operation&apos;s status has been updated
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;, # Required. List of possible statuses for job or document
+        ///   to: string, # Required. To language
         ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;, # Required. Enums containing high level error codes.
+        ///     message: string, # Required. Gets high level error message.
+        ///     target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
         ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///       code: string, # Required. Gets code error string.
+        ///       message: string, # Required. Gets high level error message.
+        ///       target: string, # Optional. Gets the source of the error. 
+        /// For example it would be &quot;documents&quot; or &quot;document id&quot; in case of invalid document.
+        ///       innerError: InnerTranslationError, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///     }, # Optional. New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+        /// This contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).
+        ///   }, # Optional. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
+        ///   progress: number, # Required. Progress of the translation if available
+        ///   id: Guid, # Required. Document Id
+        ///   characterCharged: number, # Optional. Character charged by the API
         /// }
         /// </code>
         /// 
@@ -1240,7 +1564,60 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call StartTranslationAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// var data = new {
+        ///     inputs = new[] {
+        ///         new {
+        ///             source = new {
+        ///                 sourceUrl = "<sourceUrl>",
+        ///                 filter = new {
+        ///                     prefix = "<prefix>",
+        ///                     suffix = "<suffix>",
+        ///                 },
+        ///                 language = "<language>",
+        ///                 storageSource = "AzureBlob",
+        ///             },
+        ///             targets = new[] {
+        ///                 new {
+        ///                     targetUrl = "<targetUrl>",
+        ///                     category = "<category>",
+        ///                     language = "<language>",
+        ///                     glossaries = new[] {
+        ///                         new {
+        ///                             glossaryUrl = "<glossaryUrl>",
+        ///                             format = "<format>",
+        ///                             version = "<version>",
+        ///                             storageSource = "AzureBlob",
+        ///                         }
+        ///                     },
+        ///                     storageSource = "AzureBlob",
+        ///                 }
+        ///             },
+        ///             storageType = "Folder",
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// var operation = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
         /// Each request can contain multiple documents and must contain a source and destination container for each document.
         ///             
@@ -1250,60 +1627,49 @@ namespace Azure.AI.DocumentTranslation
         ///             
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
-        /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>StartTranslationDetails</c>:
         /// <code>{
         ///   inputs: [
         ///     {
         ///       source: {
-        ///         sourceUrl: string (required),
+        ///         sourceUrl: string, # Required. Location of the folder / container or single file with your documents
         ///         filter: {
-        ///           prefix: string,
-        ///           suffix: string
-        ///         },
-        ///         language: string,
-        ///         storageSource: &quot;AzureBlob&quot;
-        ///       } (required),
+        ///           prefix: string, # Optional. A case-sensitive prefix string to filter documents in the source path for translation. 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        ///           suffix: string, # Optional. A case-sensitive suffix string to filter documents in the source path for translation. 
+        /// This is most often use for file extensions
+        ///         }, # Optional.
+        ///         language: string, # Optional. Language code
+        /// If none is specified, we will perform auto detect on the document
+        ///         storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
+        ///       }, # Required. Source of the input documents
         ///       targets: [
         ///         {
-        ///           targetUrl: string (required),
-        ///           category: string,
-        ///           language: string (required),
+        ///           targetUrl: string, # Required. Location of the folder / container with your documents
+        ///           category: string, # Optional. Category / custom system for translation request
+        ///           language: string, # Required. Target Language
         ///           glossaries: [
         ///             {
-        ///               glossaryUrl: string (required),
-        ///               format: string (required),
-        ///               version: string,
-        ///               storageSource: &quot;AzureBlob&quot;
+        ///               glossaryUrl: string, # Required. Location of the glossary. 
+        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// 
+        /// If the translation language pair is not present in the glossary, it will not be applied
+        ///               format: string, # Required. Format
+        ///               version: string, # Optional. Optional Version.  If not specified, default is used.
+        ///               storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///             }
-        ///           ],
-        ///           storageSource: &quot;AzureBlob&quot;
+        ///           ], # Optional. List of Glossary
+        ///           storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///         }
-        ///       ] (required),
-        ///       storageType: &quot;Folder&quot; | &quot;File&quot;
+        ///       ], # Required. Location of the destination for the output
+        ///       storageType: &quot;Folder&quot; | &quot;File&quot;, # Optional. Storage type of the input documents source string
         ///     }
-        ///   ] (required)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   ], # Required. The input list of documents or folders containing documents
         /// }
         /// </code>
         /// 
@@ -1326,7 +1692,60 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary>
+        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call StartTranslation with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
+        /// 
+        /// var data = new {
+        ///     inputs = new[] {
+        ///         new {
+        ///             source = new {
+        ///                 sourceUrl = "<sourceUrl>",
+        ///                 filter = new {
+        ///                     prefix = "<prefix>",
+        ///                     suffix = "<suffix>",
+        ///                 },
+        ///                 language = "<language>",
+        ///                 storageSource = "AzureBlob",
+        ///             },
+        ///             targets = new[] {
+        ///                 new {
+        ///                     targetUrl = "<targetUrl>",
+        ///                     category = "<category>",
+        ///                     language = "<language>",
+        ///                     glossaries = new[] {
+        ///                         new {
+        ///                             glossaryUrl = "<glossaryUrl>",
+        ///                             format = "<format>",
+        ///                             version = "<version>",
+        ///                             storageSource = "AzureBlob",
+        ///                         }
+        ///                     },
+        ///                     storageSource = "AzureBlob",
+        ///                 }
+        ///             },
+        ///             storageType = "Folder",
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// var operation = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
         /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
         /// Each request can contain multiple documents and must contain a source and destination container for each document.
         ///             
@@ -1336,60 +1755,49 @@ namespace Azure.AI.DocumentTranslation
         ///             
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
-        /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// 
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>StartTranslationDetails</c>:
         /// <code>{
         ///   inputs: [
         ///     {
         ///       source: {
-        ///         sourceUrl: string (required),
+        ///         sourceUrl: string, # Required. Location of the folder / container or single file with your documents
         ///         filter: {
-        ///           prefix: string,
-        ///           suffix: string
-        ///         },
-        ///         language: string,
-        ///         storageSource: &quot;AzureBlob&quot;
-        ///       } (required),
+        ///           prefix: string, # Optional. A case-sensitive prefix string to filter documents in the source path for translation. 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        ///           suffix: string, # Optional. A case-sensitive suffix string to filter documents in the source path for translation. 
+        /// This is most often use for file extensions
+        ///         }, # Optional.
+        ///         language: string, # Optional. Language code
+        /// If none is specified, we will perform auto detect on the document
+        ///         storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
+        ///       }, # Required. Source of the input documents
         ///       targets: [
         ///         {
-        ///           targetUrl: string (required),
-        ///           category: string,
-        ///           language: string (required),
+        ///           targetUrl: string, # Required. Location of the folder / container with your documents
+        ///           category: string, # Optional. Category / custom system for translation request
+        ///           language: string, # Required. Target Language
         ///           glossaries: [
         ///             {
-        ///               glossaryUrl: string (required),
-        ///               format: string (required),
-        ///               version: string,
-        ///               storageSource: &quot;AzureBlob&quot;
+        ///               glossaryUrl: string, # Required. Location of the glossary. 
+        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// 
+        /// If the translation language pair is not present in the glossary, it will not be applied
+        ///               format: string, # Required. Format
+        ///               version: string, # Optional. Optional Version.  If not specified, default is used.
+        ///               storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///             }
-        ///           ],
-        ///           storageSource: &quot;AzureBlob&quot;
+        ///           ], # Optional. List of Glossary
+        ///           storageSource: &quot;AzureBlob&quot;, # Optional. Storage Source
         ///         }
-        ///       ] (required),
-        ///       storageType: &quot;Folder&quot; | &quot;File&quot;
+        ///       ], # Required. Location of the destination for the output
+        ///       storageType: &quot;Folder&quot; | &quot;File&quot;, # Optional. Storage type of the input documents source string
         ///     }
-        ///   ] (required)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
-        ///     message: string,
-        ///     target: string,
-        ///     innerError: {
-        ///       code: string,
-        ///       message: string,
-        ///       target: string,
-        ///       innerError: InnerTranslationError
-        ///     }
-        ///   }
+        ///   ], # Required. The input list of documents or folders containing documents
         /// }
         /// </code>
         /// 

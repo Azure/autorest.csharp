@@ -56,9 +56,33 @@ namespace CollapseRequestCondition_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfMatchPutAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.IfMatchPutAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfMatchPutAsync with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.IfMatchPutAsync(RequestContent.Create(data), null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> IfMatchPutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
@@ -75,9 +99,33 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfMatchPut with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.IfMatchPut(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfMatchPut with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.IfMatchPut(RequestContent.Create(data), null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response IfMatchPut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
@@ -94,9 +142,33 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfNoneMatchPutAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.IfNoneMatchPutAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfNoneMatchPutAsync with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.IfNoneMatchPutAsync(RequestContent.Create(data), null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
@@ -113,9 +185,33 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfNoneMatchPut with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.IfNoneMatchPut(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfNoneMatchPut with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new NonCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.IfNoneMatchPut(RequestContent.Create(data), null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");

@@ -30,7 +30,7 @@ namespace MgmtResourceName
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -55,11 +55,16 @@ namespace MgmtResourceName
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new DisplayResourceData(id, name, type, systemData, @new.Value);
+            return new DisplayResourceData(id, name, type, systemData.Value, @new.Value);
         }
     }
 }

@@ -57,22 +57,145 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValidAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetValidAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
-        ///   siblings: [Fish]
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
+        /// <code>{
+        ///   picture: Bytes, # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
+        /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
@@ -92,22 +215,145 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValid and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetValid();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
-        ///   siblings: [Fish]
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
+        /// <code>{
+        ///   picture: Bytes, # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
+        /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetValid(RequestContext context = null)
@@ -127,24 +373,162 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
+        /// <code>{
+        ///   picture: Bytes, # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
+        /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
@@ -166,24 +550,162 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValid with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValid with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
+        /// <code>{
+        ///   picture: Bytes, # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
+        /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
@@ -205,20 +727,36 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDotSyntaxAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetDotSyntaxAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>DotSalmon</summary>Schema for <c>DotSalmon</c>:
         /// <code>{
-        ///   fish.type: string,
-        ///   species: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fish.type: string, # Required.
+        ///   species: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetDotSyntaxAsync(RequestContext context = null)
@@ -238,20 +776,36 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDotSyntax and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetDotSyntax();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>DotSalmon</summary>Schema for <c>DotSalmon</c>:
         /// <code>{
-        ///   fish.type: string,
-        ///   species: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fish.type: string, # Required.
+        ///   species: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetDotSyntax(RequestContext context = null)
@@ -271,28 +825,51 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithDiscriminatorAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetComposedWithDiscriminatorAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -314,28 +891,51 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithDiscriminator and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetComposedWithDiscriminator();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -357,28 +957,51 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithoutDiscriminatorAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetComposedWithoutDiscriminatorAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -400,28 +1023,51 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComposedWithoutDiscriminator and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetComposedWithoutDiscriminator();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+        /// Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DotFishMarket</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -443,31 +1089,52 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComplicatedAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = await client.GetComplicatedAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetComplicatedAsync(RequestContext context = null)
@@ -487,31 +1154,52 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetComplicated and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// Response response = client.GetComplicated();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response GetComplicated(RequestContext context = null)
@@ -531,33 +1219,77 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutComplicatedAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutComplicatedAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {
+        ///         new {
+        ///             location = "<location>",
+        ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
@@ -579,33 +1311,77 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutComplicated with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = client.PutComplicated(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutComplicated with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {
+        ///         new {
+        ///             location = "<location>",
+        ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.PutComplicated(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
@@ -627,50 +1403,110 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PutMissingDiscriminatorAsync with required request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call PutMissingDiscriminatorAsync with all request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {
+        ///         new {
+        ///             location = "<location>",
+        ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// </details>
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
@@ -692,50 +1528,110 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PutMissingDiscriminator with required request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "smart_salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call PutMissingDiscriminator with all request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     college_degree = "<college_degree>",
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "smart_salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {
+        ///         new {
+        ///             location = "<location>",
+        ///             iswild = true,
+        ///             fishtype = "salmon",
+        ///             species = "<species>",
+        ///             length = 123.45f,
+        ///             siblings = new[] {},
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("iswild").ToString());
+        /// Console.WriteLine(result.GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("length").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+        /// Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// </details>
+        /// 
+        /// Response Body:
+        /// 
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
@@ -757,24 +1653,162 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidMissingRequiredAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidMissingRequiredAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
+        /// };
+        /// 
+        /// Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
+        /// <code>{
+        ///   picture: Bytes, # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
+        /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
@@ -796,24 +1830,162 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidMissingRequired with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     fishtype = "salmon",
+        ///     length = 123.45f,
+        /// };
+        /// 
+        /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidMissingRequired with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PolymorphismClient(credential);
+        /// 
+        /// var data = new {
+        ///     location = "<location>",
+        ///     iswild = true,
+        ///     fishtype = "salmon",
+        ///     species = "<species>",
+        ///     length = 123.45f,
+        ///     siblings = new[] {},
+        /// };
+        /// 
+        /// Response response = client.PutValidMissingRequired(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.
+        /// <details><summary>Salmon</summary>Schema for <c>Salmon</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// </details>
+        /// <details><summary>~+ 5 more JSON objects</summary><details><summary>Shark</summary>Schema for <c>Shark</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
+        /// </details>
+        /// <details><summary>SmartSalmon</summary>Schema for <c>SmartSalmon</c>:
+        /// <code>{
+        ///   college_degree: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Sawshark</summary>Schema for <c>Sawshark</c>:
+        /// <code>{
+        ///   picture: Bytes, # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Goblinshark</summary>Schema for <c>Goblinshark</c>:
+        /// <code>{
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. Colors possible
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// <details><summary>Cookiecuttershark</summary>Schema for <c>Cookiecuttershark</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        /// }
+        /// </code>
+        /// </details>
+        /// </details>
         /// 
         /// </remarks>
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)

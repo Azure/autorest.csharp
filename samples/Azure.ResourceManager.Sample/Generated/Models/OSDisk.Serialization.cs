@@ -72,15 +72,15 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static OSDisk DeserializeOSDisk(JsonElement element)
         {
-            Optional<OperatingSystemTypes> osType = default;
+            Optional<OperatingSystemType> osType = default;
             Optional<DiskEncryptionSettings> encryptionSettings = default;
             Optional<string> name = default;
             Optional<VirtualHardDisk> vhd = default;
             Optional<VirtualHardDisk> image = default;
-            Optional<CachingTypes> caching = default;
+            Optional<CachingType> caching = default;
             Optional<bool> writeAcceleratorEnabled = default;
             Optional<DiffDiskSettings> diffDiskSettings = default;
-            DiskCreateOptionTypes createOption = default;
+            DiskCreateOptionType createOption = default;
             Optional<int> diskSizeGB = default;
             Optional<ManagedDiskParameters> managedDisk = default;
             foreach (var property in element.EnumerateObject())
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    osType = property.Value.GetString().ToOperatingSystemTypes();
+                    osType = property.Value.GetString().ToOperatingSystemType();
                     continue;
                 }
                 if (property.NameEquals("encryptionSettings"))
@@ -137,7 +137,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    caching = property.Value.GetString().ToCachingTypes();
+                    caching = property.Value.GetString().ToCachingType();
                     continue;
                 }
                 if (property.NameEquals("writeAcceleratorEnabled"))
@@ -162,7 +162,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("createOption"))
                 {
-                    createOption = new DiskCreateOptionTypes(property.Value.GetString());
+                    createOption = new DiskCreateOptionType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("diskSizeGB"))

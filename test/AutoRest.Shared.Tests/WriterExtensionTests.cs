@@ -74,6 +74,19 @@ namespace Azure.Core.Tests
             Assert.True (content.didWrite);
         }
 
+        [Test]
+        public static void WriteObjectValueNullIUtf8JsonSerializable ()
+        {
+            using MemoryStream stream = new MemoryStream ();
+            using Utf8JsonWriter writer = new Utf8JsonWriter (stream);
+
+            TestSerialize content = null;
+            writer.WriteObjectValue(content);
+
+            writer.Flush();
+            Assert.AreEqual("null", System.Text.Encoding.UTF8.GetString(stream.ToArray()));
+        }
+
         internal class TestSerialize : IUtf8JsonSerializable
         {
             internal bool didWrite = false;

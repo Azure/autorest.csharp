@@ -9,7 +9,10 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes an available virtual machine scale set sku. </summary>
+    /// <summary>
+    /// Describes an available virtual machine scale set sku.
+    /// Serialized Name: VirtualMachineScaleSetSku
+    /// </summary>
     public partial class VirtualMachineScaleSetSku
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetSku. </summary>
@@ -18,9 +21,18 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetSku. </summary>
-        /// <param name="resourceType"> The type of resource the sku applies to. </param>
-        /// <param name="sku"> The Sku. </param>
-        /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
+        /// <param name="resourceType">
+        /// The type of resource the sku applies to.
+        /// Serialized Name: VirtualMachineScaleSetSku.resourceType
+        /// </param>
+        /// <param name="sku">
+        /// The Sku.
+        /// Serialized Name: VirtualMachineScaleSetSku.sku
+        /// </param>
+        /// <param name="capacity">
+        /// Specifies the number of virtual machines in the scale set.
+        /// Serialized Name: VirtualMachineScaleSetSku.capacity
+        /// </param>
         internal VirtualMachineScaleSetSku(ResourceType? resourceType, SampleSku sku, VirtualMachineScaleSetSkuCapacity capacity)
         {
             ResourceType = resourceType;
@@ -28,11 +40,20 @@ namespace Azure.ResourceManager.Sample.Models
             Capacity = capacity;
         }
 
-        /// <summary> The type of resource the sku applies to. </summary>
+        /// <summary>
+        /// The type of resource the sku applies to.
+        /// Serialized Name: VirtualMachineScaleSetSku.resourceType
+        /// </summary>
         public ResourceType? ResourceType { get; }
-        /// <summary> The Sku. </summary>
+        /// <summary>
+        /// The Sku.
+        /// Serialized Name: VirtualMachineScaleSetSku.sku
+        /// </summary>
         public SampleSku Sku { get; }
-        /// <summary> Specifies the number of virtual machines in the scale set. </summary>
+        /// <summary>
+        /// Specifies the number of virtual machines in the scale set.
+        /// Serialized Name: VirtualMachineScaleSetSku.capacity
+        /// </summary>
         public VirtualMachineScaleSetSkuCapacity Capacity { get; }
     }
 }

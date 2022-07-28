@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
         [SerializationConstructor]
-        internal ReferenceTypesPrivateLinkServiceConnectionState(ReferenceTypesPrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired)
+        protected ReferenceTypesPrivateLinkServiceConnectionState(ReferenceTypesPrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired)
         {
             Status = status;
             Description = description;

@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Describes a virtual machines scale sets network configuration&apos;s DNS settings. </summary>
+    /// <summary>
+    /// Describes a virtual machines scale sets network configuration&apos;s DNS settings.
+    /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings
+    /// </summary>
     internal partial class VirtualMachineScaleSetNetworkConfigurationDnsSettings
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfigurationDnsSettings. </summary>
@@ -20,13 +23,19 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfigurationDnsSettings. </summary>
-        /// <param name="dnsServers"> List of DNS servers IP addresses. </param>
+        /// <param name="dnsServers">
+        /// List of DNS servers IP addresses
+        /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers
+        /// </param>
         internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers)
         {
             DnsServers = dnsServers;
         }
 
-        /// <summary> List of DNS servers IP addresses. </summary>
+        /// <summary>
+        /// List of DNS servers IP addresses
+        /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers
+        /// </summary>
         public IList<string> DnsServers { get; }
     }
 }

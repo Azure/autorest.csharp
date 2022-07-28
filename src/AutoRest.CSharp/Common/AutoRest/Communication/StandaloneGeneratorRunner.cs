@@ -7,8 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using Azure.Core;
 
@@ -21,8 +23,27 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var basePath = args.Single(a => !a.StartsWith("--"));
 
             LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
-            var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
-            var workspace = await new CSharpGen().ExecuteAsync(codeModelTask);
+
+            var codeModelInputPath = Path.Combine(basePath, "CodeModel.yaml");
+            var cadlInputFile = Path.Combine(basePath, "cadl.json");
+
+            GeneratedCodeWorkspace workspace;
+            if (File.Exists(cadlInputFile))
+            {
+                var json = await File.ReadAllTextAsync(cadlInputFile);
+                var rootNamespace = CadlSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
+                workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
+            }
+            else if (File.Exists(codeModelInputPath))
+            {
+                var yaml = await File.ReadAllTextAsync(codeModelInputPath);
+                var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(yaml));
+                workspace = await new CSharpGen().ExecuteAsync(codeModelTask);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {basePath} folder.");
+            }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
             {
@@ -113,7 +134,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
-        private static string ReadStringOption(JsonElement root, string option)
+        private static string? ReadStringOption(JsonElement root, string option)
         {
             if (root.TryGetProperty(option, out JsonElement value))
             {
@@ -121,7 +142,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
             else
             {
-                return Configuration.GetDefaultOptionStringValue(option)!;
+                return Configuration.GetDefaultOptionStringValue(option);
             }
         }
 
@@ -133,7 +154,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
-                sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
+                sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()!));
             }
 
             root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
@@ -142,7 +163,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 : Array.Empty<string>();
 
             Configuration.Initialize(
-                Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
+                Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
@@ -154,7 +175,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.Generation1ConvenienceClient),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
-                ReadStringOption(root, Configuration.Options.ProjectFolder),
+                ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
+                ReadStringOption(root, Configuration.Options.ProjectFolder)!,
                 protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)
             );

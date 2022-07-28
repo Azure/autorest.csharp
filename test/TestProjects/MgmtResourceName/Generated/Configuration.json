@@ -13,5 +13,9 @@
   "NoResourceSuffix": [
     "Disk",
     "Memory"
-  ]
+  ],
+  "RenameMapping": {
+    "NetworkResource": "Network",
+    "MemoryResource": "Memory"
+  }
 }

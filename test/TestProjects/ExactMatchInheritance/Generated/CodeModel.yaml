@@ -3,7 +3,7 @@ info: !Info
   title: ExactMatchInheritance
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_26
+    - !NumberSchema &ref_28
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -52,6 +52,30 @@ schemas: !Schemas
           name: ExactMatchModel1SupportingUrisItem
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      extensions:
+        x-ms-format: ip-address
+      language: !Languages 
+        default:
+          name: ExactMatchModel1Type3
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      extensions:
+        x-ms-format: object
+      language: !Languages 
+        default:
+          name: ExactMatchModel1Type4
+          description: ''
+      protocol: !Protocols {}
     - !StringSchema &ref_3
       type: string
       apiVersions:
@@ -82,7 +106,7 @@ schemas: !Schemas
           name: ExactMatchModel6Type
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_13
       type: string
       apiVersions:
         - !ApiVersion 
@@ -92,7 +116,7 @@ schemas: !Schemas
           name: ExactMatchModel1ListResultNextLink
           description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -102,7 +126,7 @@ schemas: !Schemas
           name: ExactMatchModel2New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -112,7 +136,7 @@ schemas: !Schemas
           name: ExactMatchModel7ID
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -122,7 +146,7 @@ schemas: !Schemas
           name: ExactMatchModel7Name
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -132,7 +156,7 @@ schemas: !Schemas
           name: ExactMatchModel7Type
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_23
+    - !StringSchema &ref_25
       type: string
       apiVersions:
         - !ApiVersion 
@@ -142,7 +166,7 @@ schemas: !Schemas
           name: ExactMatchModel3New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_21
       type: string
       apiVersions:
         - !ApiVersion 
@@ -154,7 +178,7 @@ schemas: !Schemas
           name: ExactMatchModel8Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_20
+    - !StringSchema &ref_22
       type: string
       apiVersions:
         - !ApiVersion 
@@ -164,7 +188,7 @@ schemas: !Schemas
           name: ExactMatchModel8Name
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_21
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
@@ -174,7 +198,7 @@ schemas: !Schemas
           name: ExactMatchModel8Bar
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_24
+    - !StringSchema &ref_26
       type: string
       apiVersions:
         - !ApiVersion 
@@ -184,7 +208,7 @@ schemas: !Schemas
           name: ExactMatchModel3ListResultNextLink
           description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
       protocol: !Protocols {}
-    - !StringSchema &ref_30
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -194,7 +218,7 @@ schemas: !Schemas
           name: ExactMatchModel4New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_27
+    - !StringSchema &ref_29
       type: string
       apiVersions:
         - !ApiVersion 
@@ -204,7 +228,7 @@ schemas: !Schemas
           name: ExactMatchModel9Name
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_30
       type: string
       apiVersions:
         - !ApiVersion 
@@ -214,7 +238,7 @@ schemas: !Schemas
           name: ExactMatchModel9Type
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_39
+    - !StringSchema &ref_41
       type: string
       apiVersions:
         - !ApiVersion 
@@ -224,7 +248,7 @@ schemas: !Schemas
           name: ExactMatchModel5New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_36
+    - !StringSchema &ref_38
       type: string
       apiVersions:
         - !ApiVersion 
@@ -234,7 +258,7 @@ schemas: !Schemas
           name: ExactMatchModel10Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_37
+    - !StringSchema &ref_39
       type: string
       apiVersions:
         - !ApiVersion 
@@ -244,7 +268,7 @@ schemas: !Schemas
           name: ExactMatchModel10Location
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_33
+    - !StringSchema &ref_35
       type: string
       apiVersions:
         - !ApiVersion 
@@ -254,19 +278,17 @@ schemas: !Schemas
           name: ExactMatchModel11Name
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_34
+    - !StringSchema &ref_36
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      extensions:
-        x-ms-format: resource-type
       language: !Languages 
         default:
           name: ExactMatchModel11Type
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_40
+    - !StringSchema &ref_42
       type: string
       apiVersions:
         - !ApiVersion 
@@ -277,7 +299,7 @@ schemas: !Schemas
           description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_45
+    - !ConstantSchema &ref_47
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -315,7 +337,7 @@ schemas: !Schemas
           name: Type2
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_49
+    - !ConstantSchema &ref_51
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -325,7 +347,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_52
+    - !ConstantSchema &ref_54
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -336,7 +358,7 @@ schemas: !Schemas
           description: Content Type 'application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_38
+    - !DictionarySchema &ref_40
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -345,14 +367,14 @@ schemas: !Schemas
           description: Dictionary of <string>
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_51
+    - !ObjectSchema &ref_53
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_42
+          schema: !ArraySchema &ref_44
             type: array
             apiVersions:
               - !ApiVersion 
@@ -425,7 +447,7 @@ schemas: !Schemas
                       description: ''
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_41
+                  schema: !ArraySchema &ref_43
                     type: array
                     apiVersions:
                       - !ApiVersion 
@@ -460,6 +482,26 @@ schemas: !Schemas
                       name: type2
                       description: ''
                   protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_11
+                  serializedName: type3
+                  extensions:
+                    x-ms-format: ip-address
+                  language: !Languages 
+                    default:
+                      name: type3
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_12
+                  serializedName: type4
+                  extensions:
+                    x-ms-format: object
+                  language: !Languages 
+                    default:
+                      name: type4
+                      description: ''
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
@@ -484,7 +526,7 @@ schemas: !Schemas
               description: Gets the list of storage accounts and their properties.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_11
+          schema: *ref_13
           readOnly: true
           serializedName: nextLink
           language: !Languages 
@@ -504,26 +546,26 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_2
     - *ref_6
-    - !ObjectSchema &ref_12
+    - !ObjectSchema &ref_14
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_16
+          - !ObjectSchema &ref_18
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - *ref_12
+                - *ref_14
               immediate:
-                - *ref_12
+                - *ref_14
             properties:
               - !Property 
-                schema: *ref_13
+                schema: *ref_15
                 serializedName: iD
                 language: !Languages 
                   default:
@@ -531,7 +573,7 @@ schemas: !Schemas
                     description: ''
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_14
+                schema: *ref_16
                 serializedName: name
                 language: !Languages 
                   default:
@@ -539,7 +581,7 @@ schemas: !Schemas
                     description: ''
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_15
+                schema: *ref_17
                 serializedName: type
                 language: !Languages 
                   default:
@@ -558,10 +600,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_16
+          - *ref_18
       properties:
         - !Property 
-          schema: *ref_17
+          schema: *ref_19
           serializedName: new
           language: !Languages 
             default:
@@ -579,39 +621,39 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_16
-    - !ObjectSchema &ref_64
+    - *ref_18
+    - !ObjectSchema &ref_66
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_43
+          schema: !ArraySchema &ref_45
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_18
+            elementType: !ObjectSchema &ref_20
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               parents: !Relations 
                 all:
-                  - !ObjectSchema &ref_22
+                  - !ObjectSchema &ref_24
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     children: !Relations 
                       all:
-                        - *ref_18
+                        - *ref_20
                       immediate:
-                        - *ref_18
+                        - *ref_20
                     properties:
                       - !Property 
-                        schema: *ref_19
+                        schema: *ref_21
                         serializedName: id
                         extensions:
                           x-ms-format: arm-id
@@ -621,7 +663,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_20
+                        schema: *ref_22
                         serializedName: name
                         language: !Languages 
                           default:
@@ -629,7 +671,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_21
+                        schema: *ref_23
                         serializedName: bar
                         language: !Languages 
                           default:
@@ -648,10 +690,10 @@ schemas: !Schemas
                         namespace: ''
                     protocol: !Protocols {}
                 immediate:
-                  - *ref_22
+                  - *ref_24
               properties:
                 - !Property 
-                  schema: *ref_23
+                  schema: *ref_25
                   serializedName: new
                   language: !Languages 
                     default:
@@ -682,7 +724,7 @@ schemas: !Schemas
               description: Gets the list of storage accounts and their properties.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_24
+          schema: *ref_26
           readOnly: true
           serializedName: nextLink
           language: !Languages 
@@ -700,28 +742,28 @@ schemas: !Schemas
           description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_18
-    - *ref_22
-    - !ObjectSchema &ref_25
+    - *ref_20
+    - *ref_24
+    - !ObjectSchema &ref_27
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_29
+          - !ObjectSchema &ref_31
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - *ref_25
+                - *ref_27
               immediate:
-                - *ref_25
+                - *ref_27
             properties:
               - !Property 
-                schema: *ref_26
+                schema: *ref_28
                 serializedName: id
                 language: !Languages 
                   default:
@@ -729,7 +771,7 @@ schemas: !Schemas
                     description: ''
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_27
+                schema: *ref_29
                 serializedName: name
                 language: !Languages 
                   default:
@@ -737,7 +779,7 @@ schemas: !Schemas
                     description: ''
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_28
+                schema: *ref_30
                 serializedName: type
                 language: !Languages 
                   default:
@@ -756,10 +798,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_29
+          - *ref_31
       properties:
         - !Property 
-          schema: *ref_30
+          schema: *ref_32
           serializedName: new
           language: !Languages 
             default:
@@ -777,52 +819,52 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_29
-    - !ObjectSchema &ref_76
+    - *ref_31
+    - !ObjectSchema &ref_78
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_44
+          schema: !ArraySchema &ref_46
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_31
+            elementType: !ObjectSchema &ref_33
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               parents: !Relations 
                 all:
-                  - !ObjectSchema &ref_32
+                  - !ObjectSchema &ref_34
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     children: !Relations 
                       all:
-                        - *ref_31
+                        - *ref_33
                       immediate:
-                        - *ref_31
+                        - *ref_33
                     parents: !Relations 
                       all:
-                        - !ObjectSchema &ref_35
+                        - !ObjectSchema &ref_37
                           type: object
                           apiVersions:
                             - !ApiVersion 
                               version: '2020-06-01'
                           children: !Relations 
                             all:
-                              - *ref_32
-                              - *ref_31
+                              - *ref_34
+                              - *ref_33
                             immediate:
-                              - *ref_32
+                              - *ref_34
                           properties:
                             - !Property 
-                              schema: *ref_33
+                              schema: *ref_35
                               readOnly: true
                               serializedName: name
                               language: !Languages 
@@ -831,14 +873,12 @@ schemas: !Schemas
                                   description: ''
                               protocol: !Protocols {}
                             - !Property 
-                              schema: *ref_34
+                              schema: *ref_36
                               readOnly: true
                               serializedName: type
-                              extensions:
-                                x-ms-format: resource-type
                               language: !Languages 
                                 default:
-                                  name: resourceType
+                                  name: type
                                   description: ''
                               protocol: !Protocols {}
                           serializationFormats:
@@ -853,10 +893,10 @@ schemas: !Schemas
                               namespace: ''
                           protocol: !Protocols {}
                       immediate:
-                        - *ref_35
+                        - *ref_37
                     properties:
                       - !Property 
-                        schema: *ref_36
+                        schema: *ref_38
                         readOnly: true
                         serializedName: id
                         language: !Languages 
@@ -865,7 +905,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_37
+                        schema: *ref_39
                         serializedName: location
                         language: !Languages 
                           default:
@@ -873,7 +913,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_38
+                        schema: *ref_40
                         serializedName: tags
                         language: !Languages 
                           default:
@@ -891,12 +931,12 @@ schemas: !Schemas
                         description: ''
                         namespace: ''
                     protocol: !Protocols {}
-                  - *ref_35
+                  - *ref_37
                 immediate:
-                  - *ref_32
+                  - *ref_34
               properties:
                 - !Property 
-                  schema: *ref_39
+                  schema: *ref_41
                   serializedName: new
                   language: !Languages 
                     default:
@@ -927,7 +967,7 @@ schemas: !Schemas
               description: Gets the list of storage accounts and their properties.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_40
+          schema: *ref_42
           readOnly: true
           serializedName: nextLink
           language: !Languages 
@@ -945,16 +985,16 @@ schemas: !Schemas
           description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_31
-    - *ref_32
-    - *ref_35
+    - *ref_33
+    - *ref_34
+    - *ref_37
   arrays:
-    - *ref_41
-    - *ref_42
     - *ref_43
     - *ref_44
+    - *ref_45
+    - *ref_46
 globalParameters:
-  - !Parameter &ref_48
+  - !Parameter &ref_50
     schema: *ref_1
     implementation: Client
     required: true
@@ -968,7 +1008,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_46
+  - !Parameter &ref_48
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -984,8 +1024,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_47
-    schema: *ref_45
+  - !Parameter &ref_49
+    schema: *ref_47
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -1007,8 +1047,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_50
+          - *ref_48
+          - !Parameter &ref_52
             schema: *ref_1
             implementation: Method
             required: true
@@ -1020,13 +1060,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1049,10 +1089,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
+          - *ref_52
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -1075,8 +1115,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_55
+          - *ref_48
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -1088,7 +1128,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_56
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1100,13 +1140,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requestMediaTypes:
-          application/json: !Request &ref_54
+          application/json: !Request &ref_56
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1118,7 +1158,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_53
+              - !Parameter &ref_55
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -1131,7 +1171,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1144,7 +1184,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_53
+              - *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -1158,10 +1198,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_54
-        signatureParameters:
-          - *ref_55
           - *ref_56
+        signatureParameters:
+          - *ref_57
+          - *ref_58
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1187,8 +1227,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_57
+          - *ref_48
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -1200,7 +1240,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_58
+          - !Parameter &ref_60
             schema: *ref_1
             implementation: Method
             required: true
@@ -1212,13 +1252,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1241,8 +1281,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_57
-          - *ref_58
+          - *ref_59
+          - *ref_60
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1276,8 +1316,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_61
+          - *ref_48
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1289,7 +1329,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_62
+          - !Parameter &ref_64
             schema: *ref_1
             implementation: Method
             required: true
@@ -1301,13 +1341,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requestMediaTypes:
-          application/json: !Request &ref_60
+          application/json: !Request &ref_62
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1319,8 +1359,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_59
-                schema: *ref_12
+              - !Parameter &ref_61
+                schema: *ref_14
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1332,7 +1372,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1345,7 +1385,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_59
+              - *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -1359,13 +1399,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_60
-        signatureParameters:
-          - *ref_61
           - *ref_62
+        signatureParameters:
+          - *ref_63
+          - *ref_64
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -1396,8 +1436,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_63
+          - *ref_48
+          - !Parameter &ref_65
             schema: *ref_1
             implementation: Method
             required: true
@@ -1409,13 +1449,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1438,10 +1478,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_63
+          - *ref_65
         responses:
           - !SchemaResponse 
-            schema: *ref_64
+            schema: *ref_66
             language: !Languages 
               default:
                 name: ''
@@ -1464,8 +1504,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_67
+          - *ref_48
+          - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
@@ -1477,7 +1517,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_68
+          - !Parameter &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1489,13 +1529,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requestMediaTypes:
-          application/json: !Request &ref_66
+          application/json: !Request &ref_68
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1507,8 +1547,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_65
-                schema: *ref_18
+              - !Parameter &ref_67
+                schema: *ref_20
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1520,7 +1560,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1533,7 +1573,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_65
+              - *ref_67
             language: !Languages 
               default:
                 name: ''
@@ -1547,13 +1587,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_66
-        signatureParameters:
-          - *ref_67
           - *ref_68
+        signatureParameters:
+          - *ref_69
+          - *ref_70
         responses:
           - !SchemaResponse 
-            schema: *ref_18
+            schema: *ref_20
             language: !Languages 
               default:
                 name: ''
@@ -1576,8 +1616,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_69
+          - *ref_48
+          - !Parameter &ref_71
             schema: *ref_1
             implementation: Method
             required: true
@@ -1589,7 +1629,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_70
+          - !Parameter &ref_72
             schema: *ref_1
             implementation: Method
             required: true
@@ -1601,13 +1641,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1630,11 +1670,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_69
-          - *ref_70
+          - *ref_71
+          - *ref_72
         responses:
           - !SchemaResponse 
-            schema: *ref_18
+            schema: *ref_20
             language: !Languages 
               default:
                 name: ''
@@ -1665,8 +1705,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_73
+          - *ref_48
+          - !Parameter &ref_75
             schema: *ref_1
             implementation: Method
             required: true
@@ -1678,7 +1718,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_74
+          - !Parameter &ref_76
             schema: *ref_1
             implementation: Method
             required: true
@@ -1690,13 +1730,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requestMediaTypes:
-          application/json: !Request &ref_72
+          application/json: !Request &ref_74
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1708,8 +1748,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_71
-                schema: *ref_25
+              - !Parameter &ref_73
+                schema: *ref_27
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1721,7 +1761,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1734,7 +1774,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_71
+              - *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -1748,13 +1788,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_72
-        signatureParameters:
-          - *ref_73
           - *ref_74
+        signatureParameters:
+          - *ref_75
+          - *ref_76
         responses:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_27
             language: !Languages 
               default:
                 name: ''
@@ -1785,8 +1825,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_75
+          - *ref_48
+          - !Parameter &ref_77
             schema: *ref_1
             implementation: Method
             required: true
@@ -1798,13 +1838,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1827,10 +1867,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_75
+          - *ref_77
         responses:
           - !SchemaResponse 
-            schema: *ref_76
+            schema: *ref_78
             language: !Languages 
               default:
                 name: ''
@@ -1853,8 +1893,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_79
+          - *ref_48
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -1866,7 +1906,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_80
+          - !Parameter &ref_82
             schema: *ref_1
             implementation: Method
             required: true
@@ -1878,13 +1918,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requestMediaTypes:
-          application/json: !Request &ref_78
+          application/json: !Request &ref_80
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1896,8 +1936,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_77
-                schema: *ref_31
+              - !Parameter &ref_79
+                schema: *ref_33
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1909,7 +1949,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1922,7 +1962,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_77
+              - *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -1936,13 +1976,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_78
-        signatureParameters:
-          - *ref_79
           - *ref_80
+        signatureParameters:
+          - *ref_81
+          - *ref_82
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -1965,8 +2005,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_46
-          - !Parameter &ref_81
+          - *ref_48
+          - !Parameter &ref_83
             schema: *ref_1
             implementation: Method
             required: true
@@ -1978,7 +2018,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_82
+          - !Parameter &ref_84
             schema: *ref_1
             implementation: Method
             required: true
@@ -1990,13 +2030,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_47
-          - *ref_48
+          - *ref_49
+          - *ref_50
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_49
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2019,11 +2059,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_81
-          - *ref_82
+          - *ref_83
+          - *ref_84
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''

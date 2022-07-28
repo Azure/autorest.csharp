@@ -246,6 +246,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
+                null,
                 $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resource.Type,
@@ -262,6 +263,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
                 $"{GetResourceCollectionMethodName(resourceCollection)}",
+                null,
                 $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resourceCollection.Type,

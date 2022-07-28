@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
@@ -11,19 +12,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void Transform(CachedDictionary<string, HashSet<OperationSet>> dataSchemaDict)
+        public static void Transform()
         {
             OmitOperationGroups.RemoveOperationGroups();
             SubscriptionIdUpdater.Update();
+            ConstantSchemaTransformer.TransformToChoice();
+            SchemaRenamer.ApplyRenameMapping();
             SchemaRenamer.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
-            BodyParameterNormalizer.UpdatePatchOperations();
             FrameworkTypeUpdater.ValidateAndUpdate();
+            SchemaFormatByNameTransformer.Update();
             SealedChoicesUpdater.UpdateSealChoiceTypes();
             CommonSingleWordModels.Update();
             RenameTimeToOn.Update();
             RearrangeParameterOrder.Update();
-            NormalizeParamNames.Update(dataSchemaDict);
+            RenamePluralEnums.Update();
+            DuplicateSchemaResolver.ResolveDuplicates();
+
+            if (Configuration.MgmtConfiguration.MgmtDebug.ShowSerializedNames)
+            {
+                SerializedNamesUpdater.Update();
+            }
 
             CodeModelValidator.Validate();
         }

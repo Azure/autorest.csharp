@@ -5,15 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager;
+using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -78,10 +74,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Check if a <c>System.Type</c> has the same properties as our own <c>MgmtObjectType</c>.
+        /// Check if a <see cref="Type"/> has the same properties as our own <see cref="MgmtObjectType"/>.
         /// </summary>
-        /// <param name="sourceType"><c>System.Type</c> from reflection.</param>
-        /// <param name="targetType">A <c>MgmtObjectType</c> from M4 output.</param>
+        /// <param name="sourceType"><see cref="Type"/> from reflection.</param>
+        /// <param name="targetType">A <see cref="MgmtObjectType"/> from M4 output.</param>
         /// <returns></returns>
         internal static bool IsEqual(Type sourceType, MgmtObjectType targetType)
         {
@@ -93,23 +89,41 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         internal static bool DoesPropertyExistInParent(Type sourceType, MgmtObjectType targetType, ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
-            PropertyInfo? parentProperty;
-            CSharpType childPropertyType = childProperty.Declaration.Type;
-
-            if (!parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
+            if (!parentDict.TryGetValue(childProperty.Declaration.Name, out var parentProperty))
             {
-                if (childProperty.Declaration.Name.EndsWith("Type"))
+                // If exact property name match fails, we match their serialized name
+                // first get the serialized name dict
+                if (ReferenceClassFinder.TryGetPropertyMetadata(sourceType, out var serializedNameDict))
                 {
-                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type")).Value;
+                    // find if any PropertyInfo in the serializedNameDict could match the serialized name as this childProperty
+                    var childPropertySerializedName = childProperty.SchemaProperty!.SerializedName;
+                    string? parentPropertyName = null;
+                    foreach ((var propertyName, (var serializedName, _)) in serializedNameDict)
+                    {
+                        if (serializedName == childPropertySerializedName)
+                        {
+                            parentPropertyName = propertyName;
+                            break;
+                        }
+                    }
+                    if (parentPropertyName == null)
+                        return false;
+                    // we have a parentPropertyName
+                    parentProperty = parentDict[parentPropertyName];
                 }
-                if (parentProperty == null)
+                else
+                {
+                    // otherwise we always return false - they do not match
                     return false;
+                }
             }
 
+            // here we cannot find a property from its declared name
+            var childPropertyType = childProperty.Declaration.Type;
             if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
                 IsAssignable(parentProperty.PropertyType, childPropertyType))
             {
-                if (childProperty.IsReadOnly != (parentProperty.GetSetMethod() == null))
+                if (childProperty.IsReadOnly != parentProperty.IsReadOnly())
                     return false;
             }
             else if (!ArePropertyTypesMatch(sourceType, targetType, parentProperty.PropertyType!, childPropertyType, propertiesInComparison))
@@ -225,7 +239,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool MatchProperty(Type sourceType, MgmtObjectType targetType, Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null, bool fromArePropertyTypesMatch = false)
         {
-            if (propertiesInComparison != null && propertiesInComparison.TryGetValue(parentPropertyType, out var val) && val == childPropertyType)
+            if (propertiesInComparison != null && propertiesInComparison.TryGetValue(parentPropertyType, out var val) && val.Equals(childPropertyType))
                 return true;
 
             if (DoesPropertyReferenceItself(sourceType, targetType, parentPropertyType, childPropertyType))

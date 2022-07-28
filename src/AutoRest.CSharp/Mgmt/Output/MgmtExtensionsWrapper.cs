@@ -40,7 +40,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            throw new NotImplementedException();
+            foreach (var extension in Extensions)
+            {
+                foreach (var operation in extension.ClientOperations)
+                {
+                    yield return operation;
+                }
+            }
         }
     }
 }

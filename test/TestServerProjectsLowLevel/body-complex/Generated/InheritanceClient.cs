@@ -57,27 +57,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that extend others. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValidAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new InheritanceClient(credential);
+        /// 
+        /// Response response = await client.GetValidAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("breed").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Siamese</c>:
         /// <code>{
-        ///   color: string,
+        ///   breed: string, # Optional.
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       food: string, # Optional.
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -99,27 +117,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that extend others. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValid and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new InheritanceClient(credential);
+        /// 
+        /// Response response = client.GetValid();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("breed").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Siamese</c>:
         /// <code>{
-        ///   color: string,
+        ///   breed: string, # Optional.
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       food: string, # Optional.
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -141,29 +177,63 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that extend others. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new InheritanceClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new InheritanceClient(credential);
+        /// 
+        /// var data = new {
+        ///     breed = "<breed>",
+        ///     color = "<color>",
+        ///     hates = new[] {
+        ///         new {
+        ///             food = "<food>",
+        ///             id = 1234,
+        ///             name = "<name>",
+        ///         }
+        ///     },
+        ///     id = 1234,
+        ///     name = "<name>",
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Siamese</c>:
         /// <code>{
-        ///   color: string,
+        ///   breed: string, # Optional.
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       food: string, # Optional.
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -187,29 +257,63 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that extend others. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValid.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new InheritanceClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValid with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new InheritanceClient(credential);
+        /// 
+        /// var data = new {
+        ///     breed = "<breed>",
+        ///     color = "<color>",
+        ///     hates = new[] {
+        ///         new {
+        ///             food = "<food>",
+        ///             id = 1234,
+        ///             name = "<name>",
+        ///         }
+        ///     },
+        ///     id = 1234,
+        ///     name = "<name>",
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Siamese</c>:
         /// <code>{
-        ///   color: string,
+        ///   breed: string, # Optional.
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       food: string, # Optional.
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
         /// }
         /// </code>
         /// 

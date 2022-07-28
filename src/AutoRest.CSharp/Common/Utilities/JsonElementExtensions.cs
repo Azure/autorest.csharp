@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Utilities
         public static JsonProperty? GetPropertyOrNull(this IEnumerable<JsonProperty?> properties, string propertyName) =>
             properties.FirstOrDefault(p => p?.Name == propertyName);
 
-        public static TValue ToObject<TValue>(this JsonElement element, JsonSerializerOptions? options = null) =>
+        public static TValue? ToObject<TValue>(this JsonElement element, JsonSerializerOptions? options = null) =>
             JsonSerializer.Deserialize<TValue>(element.GetRawText(), options);
 
         public static JsonElement? Parse(this string jsonText)
@@ -28,14 +28,12 @@ namespace AutoRest.CSharp.Utilities
         public static JsonElement[] Unwrap(this JsonElement element) =>
             element.ValueKind == JsonValueKind.Array ? element.EnumerateArray().ToArray() : new[] { element };
 
-        public static string[]? ToStringArray(this JsonElement? element)
+        public static string[]? ToStringArray(this JsonElement? element) => element switch
         {
-            if (element?.ValueKind == JsonValueKind.String)
-            {
-                return element.Value.GetString().Split(";");
-            }
-            return element?.ValueKind == JsonValueKind.Array ? element.Value.EnumerateArray().Select(e => e.GetString()).ToArray() : null;
-        }
+            { ValueKind: JsonValueKind.String } jsonElement => jsonElement.GetString()!.Split(";"),
+            { ValueKind: JsonValueKind.Array } jsonElement => jsonElement.EnumerateArray().Select(e => e.GetString()!).ToArray(),
+            _ => null
+        };
 
         public static string? ToStringValue(this JsonElement? element) =>
             element?.ValueKind == JsonValueKind.String ? element.Value.GetString() : null;

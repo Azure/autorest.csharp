@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -145,6 +146,10 @@ namespace AutoRest.CSharp.Generation.Writers
                             return;
                         }
 
+                        if (frameworkType == typeof(Nullable<>))
+                        {
+                            frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
+                        }
                         bool writeFormat = false;
 
                         if (frameworkType != typeof(BinaryData))
@@ -194,7 +199,9 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                             writeFormat = true;
                         }
-                        else if (frameworkType == typeof(ETag))
+                        else if (frameworkType == typeof(ETag) ||
+                            frameworkType == typeof(Azure.Core.ContentType) ||
+                            frameworkType == typeof(IPAddress))
                         {
                             writer.Line($"WriteStringValue({name}.ToString());");
                             return;
@@ -437,6 +444,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     var type = objectProperty.ValueType;
                     if (!jsonProperty.IsRequired)
                     {
+                        if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
+                            type = new CSharpType(type.Arguments[0].FrameworkType);
                         type = new CSharpType(typeof(Optional<>), type);
                     }
 
@@ -537,7 +546,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (serialization.Type.IsFrameworkType)
             {
-                DeserializeFrameworkTypeValue(writer, element, serialization.Type.FrameworkType, serialization.Format);
+                var frameworkType = serialization.Type.FrameworkType;
+                if (frameworkType == typeof(Nullable<>))
+                    frameworkType = serialization.Type.Arguments[0].FrameworkType;
+                DeserializeFrameworkTypeValue(writer, element, frameworkType, serialization.Format);
             }
             else
             {
@@ -553,9 +565,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 frameworkType == typeof(Uri) ||
                 frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                 frameworkType == typeof(Azure.Core.ResourceType) ||
+                frameworkType == typeof(Azure.Core.ContentType) ||
                 frameworkType == typeof(Azure.Core.AzureLocation))
             {
                 writer.Append($"new {frameworkType}({element}.GetString())");
+                return;
+            }
+            else if (frameworkType == typeof(IPAddress))
+            {
+                writer.Append($"{frameworkType}.Parse({element}.GetString())");
                 return;
             }
             else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))

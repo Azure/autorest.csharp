@@ -58,7 +58,27 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="otherHeader"> other header. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapseGetWithHeadAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.CollapseGetWithHeadAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapseGetWithHeadAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -77,7 +97,27 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="otherHeader"> other header. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapseGetWithHead.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.CollapseGetWithHead();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapseGetWithHead with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -94,9 +134,33 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapsePutAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.CollapsePutAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapsePutAsync with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
@@ -113,9 +177,33 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapsePut with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.CollapsePut(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapsePut with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
@@ -133,7 +221,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapseGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.CollapseGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapseGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
@@ -151,7 +259,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapseGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.CollapseGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapseGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new MatchConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.CollapseGet(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response CollapseGet(MatchConditions matchConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");

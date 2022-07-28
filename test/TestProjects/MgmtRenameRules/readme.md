@@ -16,7 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 keep-orphaned-models:
-- VmDiskTypes
+- VmDiskType
 
 rename-rules:
   Os: OS
@@ -27,23 +27,25 @@ rename-rules:
   VM: Vm
   VMs: Vms
   VMScaleSet: VmScaleSet
+  Ipsec: IPsec|ipsec
+  IPSec: IPsec|ipsec
+  P2s: P2S|p2s
+  P2S: P2S|p2s
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  'contentType': 'content-type'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
   
-directive:
-  - rename-model:
-      from: SshPublicKey
-      to: SshPublicKeyInfo
-  - rename-model:
-      from: LogAnalyticsOperationResult
-      to: LogAnalytics
-  - rename-model:
-      from: SshPublicKeyResource
-      to: SshPublicKey
-  - rename-model:
-      from: RollingUpgradeStatusInfo
-      to: VirtualMachineScaleSetRollingUpgrade
-  - from: MgmtRenameRules.json
-    where: $.definitions.UpgradeOperationHistoricalStatusInfo.properties.type
-    transform: > 
-      $["x-ms-format"] = "resource-type";
-      $["x-ms-client-name"] = "ResourceType";
+rename-mapping:
+  SshPublicKey: SshPublicKeyInfo
+  SshPublicKeyResource: SshPublicKey
+  LogAnalyticsOperationResult: LogAnalytics
+  RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
+  UpgradeOperationHistoricalStatusInfo.type: ResourceType
+  DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
 ```

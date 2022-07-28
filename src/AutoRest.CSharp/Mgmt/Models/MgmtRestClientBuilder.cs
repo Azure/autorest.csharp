@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -17,7 +18,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
-    internal class MgmtRestClientBuilder : RestClientBuilder
+    internal class MgmtRestClientBuilder : CmcRestClientBuilder
     {
         private class ParameterCompareer : IEqualityComparer<RequestParameter>
         {

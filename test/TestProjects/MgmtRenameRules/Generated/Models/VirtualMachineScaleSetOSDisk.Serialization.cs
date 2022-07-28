@@ -68,21 +68,27 @@ namespace MgmtRenameRules.Models
                 writer.WritePropertyName("managedDisk");
                 writer.WriteObjectValue(ManagedDisk);
             }
+            if (Optional.IsDefined(SecurityType))
+            {
+                writer.WritePropertyName("securityType");
+                writer.WriteStringValue(SecurityType.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
         internal static VirtualMachineScaleSetOSDisk DeserializeVirtualMachineScaleSetOSDisk(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<CachingTypes> caching = default;
+            Optional<CachingType> caching = default;
             Optional<bool> writeAcceleratorEnabled = default;
-            DiskCreateOptionTypes createOption = default;
+            DiskCreateOptionType createOption = default;
             Optional<DiffDiskSettings> diffDiskSettings = default;
             Optional<int> diskSizeGB = default;
-            Optional<OperatingSystemTypes> osType = default;
+            Optional<OperatingSystemType> osType = default;
             Optional<VirtualHardDisk> image = default;
             Optional<IList<string>> vhdContainers = default;
             Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
+            Optional<DiskSecurityType> securityType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -97,7 +103,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    caching = property.Value.GetString().ToCachingTypes();
+                    caching = property.Value.GetString().ToCachingType();
                     continue;
                 }
                 if (property.NameEquals("writeAcceleratorEnabled"))
@@ -112,7 +118,7 @@ namespace MgmtRenameRules.Models
                 }
                 if (property.NameEquals("createOption"))
                 {
-                    createOption = new DiskCreateOptionTypes(property.Value.GetString());
+                    createOption = new DiskCreateOptionType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("diffDiskSettings"))
@@ -142,7 +148,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    osType = property.Value.GetString().ToOperatingSystemTypes();
+                    osType = property.Value.GetString().ToOperatingSystemType();
                     continue;
                 }
                 if (property.NameEquals("image"))
@@ -180,8 +186,18 @@ namespace MgmtRenameRules.Models
                     managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value);
                     continue;
                 }
+                if (property.NameEquals("securityType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    securityType = new DiskSecurityType(property.Value.GetString());
+                    continue;
+                }
             }
-            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value);
+            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value, Optional.ToNullable(securityType));
         }
     }
 }

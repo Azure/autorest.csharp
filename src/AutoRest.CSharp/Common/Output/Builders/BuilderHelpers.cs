@@ -63,14 +63,30 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
-            ByteArraySchema {Format: ByteArraySchemaFormat.Base64url} => SerializationFormat.Bytes_Base64Url,
-            ByteArraySchema {Format: ByteArraySchemaFormat.Byte} => SerializationFormat.Bytes_Base64,
-            UnixTimeSchema _ => SerializationFormat.DateTime_Unix,
-            DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
-            DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
+            ByteArraySchema byteArraySchema => byteArraySchema.Format switch
+                {
+                    ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
+                    ByteArraySchemaFormat.Byte => SerializationFormat.Bytes_Base64,
+                    _ => SerializationFormat.Default
+                },
+
+            UnixTimeSchema => SerializationFormat.DateTime_Unix,
+            DateTimeSchema dateTimeSchema => dateTimeSchema.Format switch
+                {
+                    DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                    DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
+                    _ => SerializationFormat.Default
+                },
+
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => schema.Extensions?.Format?.Equals(XMsFormat.DurationConstant) == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
+
+            DurationSchema _ => schema.Extensions?.Format switch
+                {
+                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                    _ => SerializationFormat.Duration_ISO8601
+                },
+
             _ => schema.Extensions?.Format switch
                 {
                     XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
@@ -185,6 +201,10 @@ namespace AutoRest.CSharp.Output.Builders
             return name;
         }
 
+        public static readonly List<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
+            " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
+            "The available derived classes include " };
+
         public static string CreateExtraDescriptionWithDiscriminator(MgmtObjectType objectType)
         {
             if (objectType.Discriminator?.HasDescendants == true)
@@ -194,8 +214,8 @@ namespace AutoRest.CSharp.Output.Builders
                 {
                     childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
                 }
-                return $"{System.Environment.NewLine}Please note <see cref=\"{objectType.Type.Name}\"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes." +
-                    $"{System.Environment.NewLine}The available derived classes include {FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{objectType.Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
+                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
             }
             return string.Empty;
         }

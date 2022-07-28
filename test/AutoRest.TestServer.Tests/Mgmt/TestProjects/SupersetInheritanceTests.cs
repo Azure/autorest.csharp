@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(Object), typeof(SupersetModel2))]
         [TestCase(typeof(Object), typeof(SupersetModel3))]
         [TestCase(typeof(TrackedResourceData), typeof(SupersetModel4Data))]
-        [TestCase(typeof(SupersetModel4Data), typeof(SupersetModel5))]
+        [TestCase(typeof(TrackedResourceData), typeof(SupersetModel5))]
         [TestCase(typeof(ResourceData), typeof(SupersetModel6Data))]
         [TestCase(typeof(Object), typeof(SupersetModel7Data))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)

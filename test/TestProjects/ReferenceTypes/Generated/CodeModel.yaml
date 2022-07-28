@@ -327,7 +327,7 @@ schemas: !Schemas
           name: ResourceNonType
           description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -337,7 +337,7 @@ schemas: !Schemas
           name: PrivateEndpointId
           description: The ARM identifier for Private Endpoint
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -347,7 +347,7 @@ schemas: !Schemas
           name: PrivateLinkServiceConnectionStateDescription
           description: The reason for approval/rejection of the connection.
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -357,7 +357,7 @@ schemas: !Schemas
           name: PrivateLinkServiceConnectionStateActionsRequired
           description: A message indicating if changes on the service provider require any updates on the consumer.
       protocol: !Protocols {}
-    - !StringSchema &ref_5
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -367,7 +367,7 @@ schemas: !Schemas
           name: PrivateLinkResourcePropertiesGroupId
           description: The private link resource group id.
       protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -377,7 +377,7 @@ schemas: !Schemas
           name: PrivateLinkResourcePropertiesRequiredMembersItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -494,7 +494,7 @@ schemas: !Schemas
           name: CheckNameAvailabilityReason
           description: The reason why the given name is not available.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_9
+    - !ChoiceSchema &ref_6
       choices:
         - !ChoiceValue 
           value: Pending
@@ -530,7 +530,7 @@ schemas: !Schemas
           name: PrivateEndpointServiceConnectionStatus
           description: The private endpoint connection status.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_12
+    - !ChoiceSchema &ref_9
       choices:
         - !ChoiceValue 
           value: Succeeded
@@ -725,85 +725,6 @@ schemas: !Schemas
                 - *ref_2
             properties:
               - !Property 
-                schema: *ref_5
-                flattenedNames:
-                  - properties
-                  - groupId
-                readOnly: true
-                serializedName: groupId
-                language: !Languages 
-                  default:
-                    name: groupId
-                    description: The private link resource group id.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ArraySchema &ref_57
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '3.0'
-                  elementType: *ref_6
-                  language: !Languages 
-                    default:
-                      name: PrivateLinkResourcePropertiesRequiredMembers
-                      description: The private link resource required member names.
-                  protocol: !Protocols {}
-                flattenedNames:
-                  - properties
-                  - requiredMembers
-                readOnly: true
-                serializedName: requiredMembers
-                language: !Languages 
-                  default:
-                    name: requiredMembers
-                    description: The private link resource required member names.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ArraySchema &ref_58
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '3.0'
-                  elementType: *ref_7
-                  language: !Languages 
-                    default:
-                      name: PrivateLinkResourcePropertiesRequiredZoneNames
-                      description: The private link resource Private link DNS zone name.
-                  protocol: !Protocols {}
-                flattenedNames:
-                  - properties
-                  - requiredZoneNames
-                readOnly: true
-                serializedName: requiredZoneNames
-                language: !Languages 
-                  default:
-                    name: requiredZoneNames
-                    description: The private link resource Private link DNS zone name.
-                protocol: !Protocols {}
-            extensions:
-              x-accessibility: public
-              x-csharp-formats: json
-              x-csharp-usage: model,input,output
-              x-ms-mgmt-typeReferenceType: true
-              x-namespace: Azure.ResourceManager.Fake.Models
-            language: !Languages 
-              default:
-                name: PrivateLinkResourceData
-                description: A private link resource
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_15
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '3.0'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
                 schema: !ObjectSchema &ref_53
                   type: object
                   apiVersions:
@@ -811,7 +732,7 @@ schemas: !Schemas
                       version: '3.0'
                   properties:
                     - !Property 
-                      schema: *ref_8
+                      schema: *ref_5
                       readOnly: true
                       serializedName: id
                       language: !Languages 
@@ -848,7 +769,7 @@ schemas: !Schemas
                       version: '3.0'
                   properties:
                     - !Property 
-                      schema: *ref_9
+                      schema: *ref_6
                       serializedName: status
                       language: !Languages 
                         default:
@@ -856,7 +777,7 @@ schemas: !Schemas
                           description: Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_10
+                      schema: *ref_7
                       serializedName: description
                       language: !Languages 
                         default:
@@ -864,7 +785,7 @@ schemas: !Schemas
                           description: The reason for approval/rejection of the connection.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_11
+                      schema: *ref_8
                       serializedName: actionsRequired
                       language: !Languages 
                         default:
@@ -893,7 +814,7 @@ schemas: !Schemas
                     description: A collection of information about the state of the connection between service consumer and provider.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_12
+                schema: *ref_9
                 flattenedNames:
                   - properties
                   - provisioningState
@@ -912,8 +833,87 @@ schemas: !Schemas
               x-namespace: Azure.ResourceManager.Fake.Models
             language: !Languages 
               default:
-                name: PrivateEndpointConnectionData
+                name: PrivateEndpointConnection
                 description: The Private Endpoint Connection resource.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_15
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '3.0'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_10
+                flattenedNames:
+                  - properties
+                  - groupId
+                readOnly: true
+                serializedName: groupId
+                language: !Languages 
+                  default:
+                    name: groupId
+                    description: The private link resource group id.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_57
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '3.0'
+                  elementType: *ref_11
+                  language: !Languages 
+                    default:
+                      name: PrivateLinkResourcePropertiesRequiredMembers
+                      description: The private link resource required member names.
+                  protocol: !Protocols {}
+                flattenedNames:
+                  - properties
+                  - requiredMembers
+                readOnly: true
+                serializedName: requiredMembers
+                language: !Languages 
+                  default:
+                    name: requiredMembers
+                    description: The private link resource required member names.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_58
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '3.0'
+                  elementType: *ref_12
+                  language: !Languages 
+                    default:
+                      name: PrivateLinkResourcePropertiesRequiredZoneNames
+                      description: The private link resource Private link DNS zone name.
+                  protocol: !Protocols {}
+                flattenedNames:
+                  - properties
+                  - requiredZoneNames
+                readOnly: true
+                serializedName: requiredZoneNames
+                language: !Languages 
+                  default:
+                    name: requiredZoneNames
+                    description: The private link resource Private link DNS zone name.
+                protocol: !Protocols {}
+            extensions:
+              x-accessibility: public
+              x-csharp-formats: json
+              x-csharp-usage: model,input,output
+              x-ms-mgmt-typeReferenceType: true
+              x-namespace: Azure.ResourceManager.Fake.Models
+            language: !Languages 
+              default:
+                name: PrivateLinkResource
+                description: A private link resource
                 namespace: ''
             protocol: !Protocols {}
         immediate:
@@ -1398,7 +1398,7 @@ schemas: !Schemas
           serializedName: type
           language: !Languages 
             default:
-              name: resourceType
+              name: type
               description: The resource type.
           protocol: !Protocols {}
       extensions:
@@ -1502,8 +1502,8 @@ schemas: !Schemas
           summary: ResourceNon
       protocol: !Protocols {}
     - *ref_53
-    - *ref_54
     - *ref_14
+    - *ref_54
     - *ref_15
     - !ObjectSchema 
       type: object
@@ -1517,10 +1517,10 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '3.0'
-            elementType: *ref_15
+            elementType: *ref_14
             language: !Languages 
               default:
-                name: PrivateEndpointConnectionListValue
+                name: PrivateEndpointConnectionListResultValue
                 description: Array of private endpoint connections
             protocol: !Protocols {}
           readOnly: true
@@ -1538,7 +1538,7 @@ schemas: !Schemas
         x-namespace: Azure.ResourceManager.Fake.Models
       language: !Languages 
         default:
-          name: PrivateEndpointConnectionList
+          name: PrivateEndpointConnectionListResult
           description: List of private endpoint connection associated with the specified storage account
           namespace: ''
       protocol: !Protocols {}
@@ -1554,10 +1554,10 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '3.0'
-            elementType: *ref_14
+            elementType: *ref_15
             language: !Languages 
               default:
-                name: PrivateLinkResourceListValue
+                name: PrivateLinkResourceListResultValue
                 description: Array of private link resources
             protocol: !Protocols {}
           readOnly: true
@@ -1575,7 +1575,7 @@ schemas: !Schemas
         x-namespace: Azure.ResourceManager.Fake.Models
       language: !Languages 
         default:
-          name: PrivateLinkResourceList
+          name: PrivateLinkResourceListResult
           description: A list of private link resources
           namespace: ''
       protocol: !Protocols {}

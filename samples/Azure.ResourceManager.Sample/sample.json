@@ -6392,6 +6392,30 @@
         }
     },
     "definitions": {
+        "ExtendedLocationType": {
+            "type": "string",
+            "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
+            "enum": [
+              "EdgeZone"
+            ],
+            "x-ms-enum": {
+              "name": "ExtendedLocationTypes",
+              "modelAsString": true
+            }
+        },
+          "ExtendedLocation": {
+            "description": "ExtendedLocation complex type.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the extended location."
+              },
+              "type": {
+                "$ref": "#/definitions/ExtendedLocationType",
+                "description": "The type of the extended location."
+              }
+            }
+        },
         "ComputeOperationListResult": {
             "properties": {
                 "value": {
@@ -6693,6 +6717,10 @@
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ProximityPlacementGroupProperties",
                     "description": "Describes the properties of a Proximity Placement Group."
+                },
+                "extendedLocation": {
+                    "$ref": "#/definitions/ExtendedLocation",
+                    "description": "The extended location of the custom IP prefix."
                 }
             },
             "allOf": [
@@ -6783,6 +6811,18 @@
                         "type": "string"
                     },
                     "description": "Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
+                },
+                "hostUris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The tenant id of the dedicated host."
                 }
             },
             "allOf": [

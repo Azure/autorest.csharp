@@ -4,6 +4,8 @@
 // </auto-generated>
 //----------------------
 
+using System;
+
 namespace AutoRest.CSharp.Input
 {
     #pragma warning disable // Disable all warnings

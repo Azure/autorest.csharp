@@ -578,8 +578,9 @@ namespace url
             return message;
         }
 
-        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
         public async Task<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlNonEncodedRequest();
@@ -593,8 +594,9 @@ namespace url
             }
         }
 
-        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
         public Response StringUrlNonEncoded(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlNonEncodedRequest();

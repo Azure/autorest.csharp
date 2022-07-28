@@ -1,64 +1,61 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.MgmtTest.Generation;
-using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.MgmtTest.AutoRest;
+using AutoRest.CSharp.MgmtTest.Generation.Mock;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
+            Debug.Assert(Configuration.MgmtConfiguration.TestModeler is not null);
 
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            var sourceCodePath = GetSourceCodePath();
+            var sourceCodeProject = new SourceCodeProject(sourceCodePath, Configuration.SharedSourceFolders);
+            var sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
 
-            // force trigger the model initialization
-            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            // construct the MgmtTestOutputLibrary
+            var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+
+            // write the collection mock tests
+            foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
+                var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                collectionTestWriter.Write();
+
+                project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
             }
 
-            var extensionsWriter = new CodeWriter();
-
-            bool hasCollectionTest = false;
-            foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
+            foreach (var resourceTest in library.ResourceMockTests)
             {
-                var codeWriter = new CodeWriter();
-                var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection);
-                collectionTestWriter.WriteCollectionTest();
+                var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                resourceTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{resourceCollection.Type.Name}Test.cs", codeWriter.ToString());
-                hasCollectionTest = true;
+                project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
             }
 
-            if (hasCollectionTest)
-            {
-                var mockExtensionWriter = new TestHelperWriter(extensionsWriter);
-                mockExtensionWriter.WriteMockExtension();
-                project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
-            }
+            var extensionWrapperTest = library.ExtensionWrapperMockTest;
+            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+            extensionWrapperTestWriter.Write();
 
-            foreach (var resource in MgmtContext.Library.ArmResources)
-            {
-                var codeWriter = new CodeWriter();
-                var resourceTestWriter = new ResourceTestWriter(codeWriter, resource);
-                resourceTestWriter.WriteCollectionTest();
+            project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+        }
 
-                project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());
-            }
+        private static string GetSourceCodePath()
+        {
+            if (Configuration.MgmtConfiguration.TestModeler?.SourceCodePath != null)
+                return Configuration.MgmtConfiguration.TestModeler.SourceCodePath;
 
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter).Write();
-            project.AddGeneratedFile($"Mock/{MgmtContext.Library.ExtensionWrapper.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
+            return Path.Combine(Configuration.OutputFolder, "../../src");
         }
     }
 }

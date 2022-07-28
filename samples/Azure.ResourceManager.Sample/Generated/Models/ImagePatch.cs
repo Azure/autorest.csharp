@@ -10,7 +10,10 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The source user image virtual hard disk. Only tags may be updated. </summary>
+    /// <summary>
+    /// The source user image virtual hard disk. Only tags may be updated.
+    /// Serialized Name: ImageUpdate
+    /// </summary>
     public partial class ImagePatch : UpdateResource
     {
         /// <summary> Initializes a new instance of ImagePatch. </summary>
@@ -18,7 +21,10 @@ namespace Azure.ResourceManager.Sample.Models
         {
         }
 
-        /// <summary> The source virtual machine from which Image is created. </summary>
+        /// <summary>
+        /// The source virtual machine from which Image is created.
+        /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
+        /// </summary>
         internal WritableSubResource SourceVirtualMachine { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SourceVirtualMachineId
@@ -32,11 +38,20 @@ namespace Azure.ResourceManager.Sample.Models
             }
         }
 
-        /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
+        /// <summary>
+        /// Specifies the storage settings for the virtual machine disks.
+        /// Serialized Name: ImageUpdate.properties.storageProfile
+        /// </summary>
         public ImageStorageProfile StorageProfile { get; set; }
-        /// <summary> The provisioning state. </summary>
+        /// <summary>
+        /// The provisioning state.
+        /// Serialized Name: ImageUpdate.properties.provisioningState
+        /// </summary>
         public string ProvisioningState { get; }
-        /// <summary> Gets the HyperVGenerationType of the VirtualMachine created from the image. </summary>
-        public HyperVGenerationTypes? HyperVGeneration { get; set; }
+        /// <summary>
+        /// Gets the HyperVGenerationType of the VirtualMachine created from the image
+        /// Serialized Name: ImageUpdate.properties.hyperVGeneration
+        /// </summary>
+        public HyperVGeneration? HyperVGeneration { get; set; }
     }
 }

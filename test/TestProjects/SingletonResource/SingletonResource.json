@@ -177,6 +177,55 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}/brakes/{default}": {
+            "get": {
+                "tags": [
+                    "Brakes"
+                ],
+                "operationId": "Brakes_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "carName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "default",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "default"
+                        ],
+                        "x-ms-enum": {
+                            "name": "BrakeName",
+                            "modelAsString": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Brake"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}": {
             "put": {
                 "tags": [
@@ -449,6 +498,26 @@
                     "type": "string"
                 },
                 "pushButton": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Brake": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "hitBrake": {
                     "type": "boolean"
                 }
             }

@@ -271,7 +271,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetNsResources in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetNsResources and their operations over a RecordSetNsResource. </returns>
-        public virtual RecordSetNsCollection GetRecordSetNs()
+        public virtual RecordSetNsCollection GetAllRecordSetNs()
         {
             return GetCachedClient(Client => new RecordSetNsCollection(Client, Id));
         }
@@ -287,7 +287,7 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetNsResource>> GetRecordSetNsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetNs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetAllRecordSetNs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public virtual Response<RecordSetNsResource> GetRecordSetNs(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetNs().Get(relativeRecordSetName, cancellationToken);
+            return GetAllRecordSetNs().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetPtrResources in the Zone. </summary>

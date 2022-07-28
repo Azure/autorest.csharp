@@ -57,18 +57,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with integer properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetIntAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetIntAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field2").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -90,18 +103,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with integer properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetInt and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetInt();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field2").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -123,20 +149,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with integer properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutIntAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutIntAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutIntAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 1234,
+        ///     field2 = 1234,
+        /// };
+        /// 
+        /// Response response = await client.PutIntAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -160,20 +211,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with integer properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutInt.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutInt(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutInt with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 1234,
+        ///     field2 = 1234,
+        /// };
+        /// 
+        /// Response response = client.PutInt(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>IntWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -197,18 +273,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with long properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetLongAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetLongAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field2").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -230,18 +319,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with long properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetLong and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetLong();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field2").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -263,20 +365,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with long properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutLongAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutLongAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutLongAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 1234L,
+        ///     field2 = 1234L,
+        /// };
+        /// 
+        /// Response response = await client.PutLongAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -300,20 +427,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with long properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutLong.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutLong(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutLong with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 1234L,
+        ///     field2 = 1234L,
+        /// };
+        /// 
+        /// Response response = client.PutLong(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>LongWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -337,18 +489,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with float properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetFloatAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetFloatAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field2").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -370,18 +535,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with float properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetFloat and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetFloat();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field2").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -403,20 +581,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with float properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutFloatAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutFloatAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutFloatAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 123.45f,
+        ///     field2 = 123.45f,
+        /// };
+        /// 
+        /// Response response = await client.PutFloatAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -440,20 +643,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with float properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutFloat.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutFloat(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutFloat with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 123.45f,
+        ///     field2 = 123.45f,
+        /// };
+        /// 
+        /// Response response = client.PutFloat(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>FloatWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -477,18 +705,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with double properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDoubleAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetDoubleAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -510,18 +751,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with double properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDouble and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetDouble();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -543,20 +797,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with double properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDoubleAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutDoubleAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDoubleAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 123.45d,
+        ///     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
+        /// };
+        /// 
+        /// Response response = await client.PutDoubleAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -580,20 +859,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with double properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDouble.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutDouble(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDouble with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field1 = 123.45d,
+        ///     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
+        /// };
+        /// 
+        /// Response response = client.PutDouble(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DoubleWrapper</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -617,18 +921,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with bool properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetBoolAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetBoolAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field_true").ToString());
+        /// Console.WriteLine(result.GetProperty("field_false").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -650,18 +967,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with bool properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetBool and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetBool();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field_true").ToString());
+        /// Console.WriteLine(result.GetProperty("field_false").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -683,20 +1013,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with bool properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutBoolAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutBoolAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutBoolAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field_true = true,
+        ///     field_false = true,
+        /// };
+        /// 
+        /// Response response = await client.PutBoolAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -720,20 +1075,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with bool properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutBool.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutBool(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutBool with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field_true = true,
+        ///     field_false = true,
+        /// };
+        /// 
+        /// Response response = client.PutBool(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>BooleanWrapper</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -757,19 +1137,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with string properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetStringAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetStringAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("empty").ToString());
+        /// Console.WriteLine(result.GetProperty("null").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -791,19 +1185,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with string properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetString and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetString();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("empty").ToString());
+        /// Console.WriteLine(result.GetProperty("null").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -825,21 +1233,47 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with string properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutStringAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutStringAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutStringAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "<field>",
+        ///     empty = "<empty>",
+        ///     null = "<null>",
+        /// };
+        /// 
+        /// Response response = await client.PutStringAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -863,21 +1297,47 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with string properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutString.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutString(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutString with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "<field>",
+        ///     empty = "<empty>",
+        ///     null = "<null>",
+        /// };
+        /// 
+        /// Response response = client.PutString(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>StringWrapper</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -901,18 +1361,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with date properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDateAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetDateAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("leap").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (date), # Optional.
+        ///   leap: string (date), # Optional.
         /// }
         /// </code>
         /// 
@@ -934,18 +1407,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with date properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDate and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetDate();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("leap").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (date), # Optional.
+        ///   leap: string (date), # Optional.
         /// }
         /// </code>
         /// 
@@ -967,20 +1453,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with date properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDateAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutDateAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDateAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "2022-05-10",
+        ///     leap = "2022-05-10",
+        /// };
+        /// 
+        /// Response response = await client.PutDateAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (date), # Optional.
+        ///   leap: string (date), # Optional.
         /// }
         /// </code>
         /// 
@@ -1004,20 +1515,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with date properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDate.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutDate(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDate with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "2022-05-10",
+        ///     leap = "2022-05-10",
+        /// };
+        /// 
+        /// Response response = client.PutDate(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DateWrapper</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (date), # Optional.
+        ///   leap: string (date), # Optional.
         /// }
         /// </code>
         /// 
@@ -1041,18 +1577,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDateTimeAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetDateTimeAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("now").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1074,18 +1623,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDateTime and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetDateTime();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("now").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1107,20 +1669,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDateTimeAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDateTimeAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "2022-05-10T18:57:31.2311892Z",
+        ///     now = "2022-05-10T18:57:31.2311892Z",
+        /// };
+        /// 
+        /// Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1144,20 +1731,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDateTime.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutDateTime(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDateTime with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "2022-05-10T18:57:31.2311892Z",
+        ///     now = "2022-05-10T18:57:31.2311892Z",
+        /// };
+        /// 
+        /// Response response = client.PutDateTime(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DatetimeWrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1181,18 +1793,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDateTimeRfc1123Async and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetDateTimeRfc1123Async();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("now").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1214,18 +1839,31 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDateTimeRfc1123 and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetDateTimeRfc1123();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// Console.WriteLine(result.GetProperty("now").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1247,20 +1885,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDateTimeRfc1123Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDateTimeRfc1123Async with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "Tue, 10 May 2022 18:57:31 GMT",
+        ///     now = "Tue, 10 May 2022 18:57:31 GMT",
+        /// };
+        /// 
+        /// Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1284,20 +1947,45 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDateTimeRfc1123.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDateTimeRfc1123 with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = "Tue, 10 May 2022 18:57:31 GMT",
+        ///     now = "Tue, 10 May 2022 18:57:31 GMT",
+        /// };
+        /// 
+        /// Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Datetimerfc1123Wrapper</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (RFC1123 Format), # Optional.
+        ///   now: string (RFC1123 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1321,17 +2009,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with duration properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDurationAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetDurationAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (duration ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1353,17 +2053,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with duration properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDuration and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetDuration();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (duration ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1385,19 +2097,43 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with duration properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDurationAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutDurationAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDurationAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = PT1H23M45S,
+        /// };
+        /// 
+        /// Response response = await client.PutDurationAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (duration ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1421,19 +2157,43 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with duration properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutDuration.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutDuration(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutDuration with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = PT1H23M45S,
+        /// };
+        /// 
+        /// Response response = client.PutDuration(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>DurationWrapper</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (duration ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1457,17 +2217,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with byte properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetByteAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = await client.GetByteAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
@@ -1489,17 +2261,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with byte properties. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetByte and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// Response response = client.GetByte();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("field").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
@@ -1521,19 +2305,43 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with byte properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutByteAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutByteAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutByteAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = new {},
+        /// };
+        /// 
+        /// Response response = await client.PutByteAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
@@ -1557,19 +2365,43 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with byte properties. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutByte.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutByte(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutByte with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PrimitiveClient(credential);
+        /// 
+        /// var data = new {
+        ///     field = new {},
+        /// };
+        /// 
+        /// Response response = client.PutByte(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>ByteWrapper</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: Bytes, # Optional.
         /// }
         /// </code>
         /// 
