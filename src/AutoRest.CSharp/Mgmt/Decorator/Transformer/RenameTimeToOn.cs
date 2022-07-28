@@ -15,10 +15,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         private static readonly Dictionary<string, string> _nounToVerbDicts = new()
         {
-            {"creation", "created"},
-            {"deletion", "deleted"},
-            {"expiration", "expire"},
-            {"modification", "modified"},
+            {"Creation", "Created"},
+            {"Deletion", "Deleted"},
+            {"Expiration", "Expire"},
+            {"Modification", "Modified"},
         };
 
         public static void Update()
@@ -33,11 +33,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     if (TypeFactory.ToFrameworkType(property.Schema) != typeof(DateTimeOffset))
                         continue;
 
-                    var propName = property.Language.Default.Name;
+                    var propName = property.CSharpName();
 
                     if (propName.StartsWith("From", StringComparison.Ordinal) ||
                         propName.StartsWith("To", StringComparison.Ordinal) ||
-                        property.CSharpName().EndsWith("PointInTime", StringComparison.Ordinal))
+                        propName.EndsWith("PointInTime", StringComparison.Ordinal))
                         continue;
 
                     var lengthToCut = 0;
