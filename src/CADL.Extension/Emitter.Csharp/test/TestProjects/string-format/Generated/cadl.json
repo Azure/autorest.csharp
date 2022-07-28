@@ -1,0 +1,85 @@
+{
+ "$id": "1",
+ "Name": "stringformat",
+ "ApiVersions": [
+  "2015-06-18"
+ ],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "stringFormat",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "stringFormat",
+     "Description": "Path parameter is string with format",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Description": "",
+       "Type": {
+        "$id": "5",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "6",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$id": "7",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false,
+        "SerializationFormat": 0
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "8",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/stringFormat/{action}",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "9"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "10"
+ }
+}

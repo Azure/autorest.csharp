@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             if (objectTypeProperty.ValueType != null && objectTypeProperty.ValueType.IsFrameworkType)
             {
-                propertyTypeToUse = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, Context) ?? propertyTypeToUse;
+                propertyTypeToUse = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context) ?? propertyTypeToUse;
             }
 
             return propertyTypeToUse;

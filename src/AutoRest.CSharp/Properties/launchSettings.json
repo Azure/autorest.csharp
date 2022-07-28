@@ -152,6 +152,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
+    "CadlFirstTest": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CadlFirstTest\\Generated"
+    },
+    "CadlPetStore": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CadlPetStore\\Generated"
+    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"

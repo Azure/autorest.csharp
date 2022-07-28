@@ -3,18 +3,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class BodyParameterNormalizer
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName)
         {
             switch (method)
             {
@@ -29,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             var schemaName = bodyParameter.Schema.Language.Default.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
@@ -47,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
@@ -64,20 +66,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 SchemaRenamer.UpdateAcronym(parameter.Schema);
         }
 
-        public static void UpdatePatchOperations()
+        internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
         {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            if (MethodsRequiredBodyParameter.Contains(method))
             {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    if (operation.GetHttpMethod() == HttpMethod.Patch)
-                    {
-                        var bodyParameter = operation.GetBodyParameter();
-                        if (bodyParameter != null)
-                            bodyParameter.Required = true;
-                    }
-                }
+                bodyParameter.Required = true;
             }
         }
+
+        private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
     }
 }

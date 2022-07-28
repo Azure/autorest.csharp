@@ -10,13 +10,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
-using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -29,6 +29,44 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
+        public CSharpType CreateType(InputType inputType) => inputType switch
+        {
+            InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
+            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
+            InputEnumType enumType             => CreateType(enumType.EnumValueType with { IsNullable = inputType.IsNullable }),
+            InputModelType model               => new CSharpType(typeof(object), inputType.IsNullable),
+            InputPrimitiveType primitiveType   => primitiveType.Kind switch
+            {
+                InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
+                InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
+                InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeISO8601 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeRFC1123 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeUnix => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DurationISO8601 => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.DurationConstant => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
+                InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
+                InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
+                InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
+                InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
+                InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
+                InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
+                InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
+                InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
+                InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
+                InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
+                InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
+                _ => new CSharpType(typeof(object), inputType.IsNullable),
+            },
+            CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
+            _ => throw new Exception("Unknown type")
+        };
+
         public CSharpType CreateType(Schema schema, bool isNullable) => CreateType(schema, schema.Extensions, isNullable);
 
         // This function provide the capability to support the extensions is coming from outside, like parameter.
@@ -37,14 +75,8 @@ namespace AutoRest.CSharp.Generation.Types
             ConstantSchema constantSchema => ToXMsFormatType(constantSchema.Extensions?.Format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(
-                typeof(IList<>),
-                isNullable,
-                CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary => new CSharpType(
-                typeof(IDictionary<,>),
-                isNullable,
-                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema, extensions) is Type type => new CSharpType(type, isNullable),

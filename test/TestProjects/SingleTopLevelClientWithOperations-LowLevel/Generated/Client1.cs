@@ -48,6 +48,18 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OperationAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
+        /// 
+        /// Response response = await client.OperationAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client1.Operation");
@@ -67,6 +79,18 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Operation and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
+        /// 
+        /// Response response = client.Operation();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Operation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client1.Operation");

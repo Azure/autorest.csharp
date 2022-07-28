@@ -65,6 +65,18 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetModelAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// Response response = await client.GetModelAsync("<mode>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("received").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -72,8 +84,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -103,6 +115,18 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetModel with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// Response response = client.GetModel("<mode>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("received").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -110,8 +134,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -142,6 +166,22 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PostModelAsync with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// var data = new {
+        ///     hello = "<hello>",
+        /// };
+        /// 
+        /// Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("received").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
         /// 
@@ -157,8 +197,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -190,6 +230,22 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PostModel with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// var data = new {
+        ///     hello = "<hello>",
+        /// };
+        /// 
+        /// Response response = client.PostModel("<mode>", RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("received").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the request and response payloads.
         /// 
@@ -205,8 +261,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// <details><summary>LROProduct</summary>Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// </details>
@@ -237,6 +293,19 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// await foreach (var data in client.GetPagesAsync("<mode>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("received").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -279,6 +348,19 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPages with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// foreach (var data in client.GetPages("<mode>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("received").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for one item in the pageable response.
         /// 
@@ -322,6 +404,20 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call LroAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
+        /// 
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("received").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -329,8 +425,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 
@@ -360,6 +456,20 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call Lro with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DPGClient(credential);
+        /// 
+        /// var operation = client.Lro(WaitUntil.Completed, "<mode>");
+        /// 
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("received").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Below is the JSON schema for the response payload.
         /// 
@@ -367,8 +477,8 @@ namespace dpg_customization_LowLevel
         /// 
         /// Schema for <c>LROProduct</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 

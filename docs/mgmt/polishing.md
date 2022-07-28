@@ -6,6 +6,7 @@
     - [Rename a Type](#rename-a-type)
     - [Rename a Property in a Class](#rename-a-property-in-a-class)
     - [Rename an Enumeration Value in an Enumeration Type](#rename-an-enumeration-value-in-an-enumeration-type)
+- [Irregular Plural Words](#irregular-plural-words)
 
 ## Rename rules
 
@@ -189,3 +190,15 @@ rename-mapping:
   EnumType.enum_value: NewValue
 ```
 where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors.
+
+## Irregular Plural Words
+
+The generator needs to convert word into its plural form or convert it back to its singular form in some circumstances. Our generator uses the [Humanizer](https://humanizr.net/) to do that. It has a dictionary of irregular words and if a word is not in the dictionary, it will use some built-in rules to convert the word.
+
+We might have some new words that are not in the dictionary of Humanizer, and plurality rules applied on them might output wrong result, when this happens, you could use the `irregular-plural-words` configuration to add new word to the dictionary.
+
+```yaml
+irregular-plural-words:
+  redis: redis
+```
+This configuration adds a new irregular word into the dictionary that the plural form of `redis` is still `redis`.

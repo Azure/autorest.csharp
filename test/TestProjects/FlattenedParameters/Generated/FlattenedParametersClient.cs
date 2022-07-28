@@ -106,8 +106,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
-        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="required"> The String to use. </param>
+        /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationNotRequiredAsync(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -124,8 +124,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
-        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="required"> The String to use. </param>
+        /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationNotRequired(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -142,8 +142,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
-        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="required"> The String to use. </param>
+        /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -160,8 +160,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
-        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="required"> The String to use. </param>
+        /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
