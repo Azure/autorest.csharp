@@ -26,6 +26,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // construct the MgmtTestOutputLibrary
             var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
 
+            if (Configuration.MgmtConfiguration.TestGen.Mock)
+            {
+                WriteMockTests(project, library);
+            }
+
+            if (Configuration.MgmtConfiguration.TestGen.Sample)
+            {
+                WriteSamples(project, library);
+            }
+        }
+
+        private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
+        {
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
@@ -48,6 +61,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             extensionWrapperTestWriter.Write();
 
             project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+        }
+
+        private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
+        {
+
         }
 
         private static string GetSourceCodePath()

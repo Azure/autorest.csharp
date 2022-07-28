@@ -25,5 +25,8 @@
   "RenameMapping": {
     "Type": "EncryptionType"
   },
-  "TestGen": {}
+  "TestGen": {
+    "Mock": true,
+    "Sample": true
+  }
 }
