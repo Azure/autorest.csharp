@@ -5,6 +5,7 @@
  "ApiVersions": [
   "2021-03-25"
  ],
+ "Models": [],
  "Clients": [
   {
    "$id": "2",
@@ -24,8 +25,7 @@
         "$id": "5",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -44,10 +44,9 @@
        "Description": "",
        "Type": {
         "$id": "7",
-        "Name": "string",
+        "Name": "String",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Query",
        "IsRequired": true,
@@ -68,8 +67,7 @@
         "$id": "9",
         "Name": "Int32",
         "Kind": "Int32",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Path",
        "IsRequired": true,
@@ -117,8 +115,7 @@
         "$id": "13",
         "Name": "Int32",
         "Kind": "Int32",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Path",
        "IsRequired": true,
@@ -140,9 +137,8 @@
        "BodyType": {
         "$id": "15",
         "Name": "Pet",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Properties": [],
+        "IsNullable": false
        },
        "BodyMediaType": "Json"
       },
@@ -154,9 +150,8 @@
        "BodyType": {
         "$id": "17",
         "Name": "Pet",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Properties": [],
+        "IsNullable": false
        },
        "BodyMediaType": "Json"
       }
@@ -187,9 +182,8 @@
        "BodyType": {
         "$id": "20",
         "Name": "Pet",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Properties": [],
+        "IsNullable": false
        },
        "BodyMediaType": "Json"
       }
@@ -227,8 +221,7 @@
         "$id": "25",
         "Name": "string",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Path",
        "IsRequired": true,
@@ -248,8 +241,7 @@
         "$id": "27",
         "Name": "string",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Query",
        "IsRequired": true,
@@ -271,9 +263,8 @@
        "BodyType": {
         "$id": "29",
         "Name": "ToyListResults",
-        "Kind": "Object",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "Properties": [],
+        "IsNullable": false
        },
        "BodyMediaType": "Json"
       }

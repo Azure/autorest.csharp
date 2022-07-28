@@ -27,7 +27,7 @@ import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import { InputType } from "./type/InputType.js";
+import { InputPrimitiveType, InputType } from "./type/InputType.js";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
@@ -141,7 +141,11 @@ function createModel(program: Program): any {
             Name: "apiVersion",
             NameInRequest: "apiVersion",
             Description: "",
-            Type: new InputType("string", InputTypeKind.String, false),
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
             Location: RequestLocation.Query,
             IsRequired: true,
             IsApiVersion: true,
@@ -180,6 +184,7 @@ function createModel(program: Program): any {
             Name: namespace,
             Description: description,
             ApiVersions: apiVersions,
+            Models: [],
             Clients: clients,
             Auth: {}
         } as CodeModel;
