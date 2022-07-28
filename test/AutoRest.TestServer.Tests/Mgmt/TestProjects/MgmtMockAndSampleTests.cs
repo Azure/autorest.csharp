@@ -32,7 +32,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAll")]
         public void ValidatePrivateEndpointConnectionCollectionMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MgmtMockTestPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MgmtMockAndSamplePrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
         [TestCase("CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault")]
@@ -64,7 +64,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Delete")]
         public void ValidatePrivateEndpointConnectionResourceMockTests(string methodName, params string[] argTypes)
         {
-            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MgmtMockTestPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
+            ValidateMethodExist("MgmtMockAndSample.Tests.Mock.MgmtMockAndSamplePrivateEndpointConnectionResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
