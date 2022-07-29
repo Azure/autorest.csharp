@@ -43,14 +43,16 @@ namespace AutoRest.CSharp.Common.Input
         {
             string? id = null;
             string? name = null;
+            bool isNullable = false;
             InputType? result = null;
             var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isIdOrName = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputModelProperty.Name), ref name);
+                var isIdOrNameOrNullable = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                    || reader.TryReadString(nameof(InputModelProperty.Name), ref name)
+                    || reader.TryReadBoolean(nameof(InputType.IsNullable), ref isNullable);
 
-                if (isIdOrName)
+                if (isIdOrNameOrNullable)
                 {
                     continue;
                 }
