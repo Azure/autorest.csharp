@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("$id should be the first defined property");
             }
 
-            isFirstProperty = true;
+            isFirstProperty = false;
 
             reader.Read();
             value = reader.GetString() ?? throw new JsonException();
