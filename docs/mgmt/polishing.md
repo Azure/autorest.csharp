@@ -98,6 +98,8 @@ To rename an element in the generated SDK, like a type name, a property name, yo
 
 But this configuration provides a simpler syntax for you to change the name of a type or a property.
 
+This configuration also allows you to assign a custom type format if it is a property. For valid format values, please refer to the [change format by name rules](#change-format-by-name-rules) section.
+
 ### Rename a type
 
 To rename a type (models and enumerations included), you could just use this syntax:
@@ -182,6 +184,33 @@ public partial class Model
 +   public string NewFlattenedProperty { get; set; }
 }
 ```
+
+### Change the format of a property
+
+To assign a new format to a property, you could use this syntax:
+```yaml
+rename-rules:
+  Model.oldProperty: NewProperty/resource-type
+```
+This will rename this property to its new name, and change its format to `resource-type`:
+```diff
+public partial class Model
+{
+    /* other things inside the class */
+
+-    public string OldProperty { get; set; }
++    public ResourceType? NewProperty { get; set; }
+
+    /* other things inside the class */
+}
+```
+
+If only the type of this property needs change, you could omit its new name, like
+```yaml
+rename-rules:
+  Model.oldProperty: /resource-type
+```
+Please note that the slash `/` here is mandatory. The generator uses this symbol to separate the part for property name and its format.
 
 ### Rename an enumeration value in an enumeration type
 
