@@ -28,7 +28,7 @@ import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import { InputPrimitiveType, InputType } from "./type/InputType.js";
+import { InputEnumType, InputModelType, InputPrimitiveType, InputType } from "./type/InputType.js";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
@@ -125,6 +125,8 @@ function createModel(program: Program): any {
     apiVersions.push(version);
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const inputModels: InputModelType[] = [];
+    const modelMap = new Map<string, InputModelType | InputEnumType>();
     try {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
@@ -177,7 +179,8 @@ function createModel(program: Program): any {
                 program,
                 operation,
                 endPointParam,
-                apiVersionParam
+                apiVersionParam,
+                modelMap
             );
             client.Operations.push(op);
         }
@@ -186,7 +189,7 @@ function createModel(program: Program): any {
             Name: namespace,
             Description: description,
             ApiVersions: apiVersions,
-            Models: [],
+            Models: Array.from(modelMap.values()),
             Clients: clients,
             Auth: {}
         } as CodeModel;
@@ -229,11 +232,15 @@ function loadOperationParameter(
 
 function loadBodyParameter(
     program: Program,
-    body: ModelTypeProperty
+    body: ModelTypeProperty,
+    models: Map<string, InputModelType | InputEnumType>,
 ): InputParameter {
     const { type, name, model: cadlType } = body;
     //const cadlType = body.type;
     const inputType: InputType = getInputType(program, type);
+    if (!models.get(inputType.Name)) {
+        models.set(inputType.Name, inputType as InputModelType);
+    }
     //const requestLocation = requestLocationMap[location];
     const requestLocation = RequestLocation.Body;
     const kind: InputOperationParameterKind =
@@ -242,7 +249,7 @@ function loadBodyParameter(
         Name: name,
         NameInRequest: name,
         Description: getDoc(program, body),
-        Type: inputType,
+        Type: models.get(inputType.Name),
         Location: requestLocation,
         IsRequired: !body.optional,
         IsApiVersion: false,
@@ -257,7 +264,8 @@ function loadBodyParameter(
 
 function loadOperationResponse(
     program: Program,
-    response: HttpOperationResponse
+    response: HttpOperationResponse,
+    models: Map<string, InputModelType | InputEnumType>
 ): OperationResponse | undefined {
     if (!response.statusCode || response.statusCode === "*") {
         return undefined;
@@ -269,7 +277,10 @@ function loadOperationResponse(
     if (body?.type) {
         const cadlType = body.type;
         const inputType: InputType = getInputType(program, cadlType);
-        type = inputType;
+        if (!models.get(inputType.Name)) {
+            models.set(inputType.Name, inputType as InputModelType);
+        }
+        type = models.get(inputType.Name);
     }
 
     return {
@@ -282,7 +293,8 @@ function loadOperation(
     program: Program,
     operation: OperationDetails,
     endpoint: InputParameter | undefined = undefined,
-    apiVersion: InputParameter | undefined = undefined
+    apiVersion: InputParameter | undefined = undefined,
+    models: Map<string, InputModelType | InputEnumType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -304,12 +316,12 @@ function loadOperation(
 
     const body = cadlParameters.body;
     if (body) {
-        parameters.push(loadBodyParameter(program, body));
+        parameters.push(loadBodyParameter(program, body, models));
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res);
+        const operationResponse = loadOperationResponse(program, res, models);
         if (operationResponse) {
             responses.push(operationResponse);
         }
