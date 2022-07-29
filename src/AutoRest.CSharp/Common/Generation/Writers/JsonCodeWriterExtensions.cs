@@ -145,7 +145,9 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                             writeFormat = true;
                         }
-                        else if (frameworkType == typeof(ETag) || frameworkType == typeof(IPAddress))
+                        else if (frameworkType == typeof(ETag) ||
+                            frameworkType == typeof(Azure.Core.ContentType) ||
+                            frameworkType == typeof(IPAddress))
                         {
                             writer.Line($"WriteStringValue({name:I}.ToString());");
                             return;
@@ -523,6 +525,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 frameworkType == typeof(Uri) ||
                 frameworkType == typeof(ResourceIdentifier) ||
                 frameworkType == typeof(ResourceType) ||
+                frameworkType == typeof(ContentType) ||
                 frameworkType == typeof(AzureLocation))
             {
                 return $"new {frameworkType}({element}.GetString())";

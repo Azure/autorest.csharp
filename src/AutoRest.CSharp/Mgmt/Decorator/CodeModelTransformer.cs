@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SchemaRenamer.ApplyRenameMapping();
             SchemaRenamer.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
-            BodyParameterNormalizer.UpdatePatchOperations();
             FrameworkTypeUpdater.ValidateAndUpdate();
             SchemaFormatByNameTransformer.Update();
             SealedChoicesUpdater.UpdateSealChoiceTypes();

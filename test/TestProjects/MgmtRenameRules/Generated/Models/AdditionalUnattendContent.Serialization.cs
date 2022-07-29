@@ -30,6 +30,11 @@ namespace MgmtRenameRules.Models
                 writer.WritePropertyName("settingName");
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
+            if (Optional.IsDefined(ContentType))
+            {
+                writer.WritePropertyName("contentType");
+                writer.WriteStringValue(ContentType.Value.ToString());
+            }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content");
@@ -43,6 +48,7 @@ namespace MgmtRenameRules.Models
             Optional<PassName> passName = default;
             Optional<ComponentName> componentName = default;
             Optional<SettingName> settingName = default;
+            Optional<ContentType> contentType = default;
             Optional<string> content = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -76,13 +82,23 @@ namespace MgmtRenameRules.Models
                     settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
+                if (property.NameEquals("contentType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    contentType = new ContentType(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("content"))
                 {
                     content = property.Value.GetString();
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), content.Value);
+            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(contentType), content.Value);
         }
     }
 }

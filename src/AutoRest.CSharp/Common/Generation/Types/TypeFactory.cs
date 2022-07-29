@@ -244,6 +244,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.ResourceType => typeof(ResourceType),
             XMsFormat.Object => typeof(object),
             XMsFormat.IPAddress => typeof(IPAddress),
+            XMsFormat.ContentType => typeof(ContentType),
             _ => null
         };
 

@@ -20,16 +20,16 @@ namespace Azure.ResourceManager.Sample.Models
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
         /// </param>
-        /// <param name="fromOn">
+        /// <param name="fromTime">
         /// From time of the query
         /// Serialized Name: LogAnalyticsInputBase.fromTime
         /// </param>
-        /// <param name="toOn">
+        /// <param name="toTime">
         /// To time of the query
         /// Serialized Name: LogAnalyticsInputBase.toTime
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainerSasUri"/> is null. </exception>
-        public LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromOn, DateTimeOffset toOn)
+        public LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             if (blobContainerSasUri == null)
             {
@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             BlobContainerSasUri = blobContainerSasUri;
-            FromOn = fromOn;
-            ToOn = toOn;
+            FromTime = fromTime;
+            ToTime = toTime;
         }
 
         /// <summary>
@@ -50,12 +50,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// From time of the query
         /// Serialized Name: LogAnalyticsInputBase.fromTime
         /// </summary>
-        public DateTimeOffset FromOn { get; }
+        public DateTimeOffset FromTime { get; }
         /// <summary>
         /// To time of the query
         /// Serialized Name: LogAnalyticsInputBase.toTime
         /// </summary>
-        public DateTimeOffset ToOn { get; }
+        public DateTimeOffset ToTime { get; }
         /// <summary>
         /// Group query result by Throttle Policy applied.
         /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
