@@ -12,5 +12,5 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelConvenienceMethod(LowLevelClientMethod LowLevelClientMethod, MethodSignature Signature, Parameter? BodyParameter, Diagnostic? Diagnostic);
+    internal record LowLevelConvenienceMethod(LowLevelClientMethod LowLevelClientMethod, MethodSignature Signature, CSharpType? ResponseType, Parameter? BodyParameter, Diagnostic? Diagnostic);
 }

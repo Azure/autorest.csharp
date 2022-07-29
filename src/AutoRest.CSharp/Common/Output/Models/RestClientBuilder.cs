@@ -49,14 +49,19 @@ namespace AutoRest.CSharp.Output.Models
         private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        private Parameter? _bodyParameter;
-        public Parameter? BodyParameter => _bodyParameter;
+        private Dictionary<InputOperation, Parameter> _bodyParameters;
+        public Dictionary<InputOperation, Parameter> BodyParameters => _bodyParameters;
+
+        private Dictionary<InputOperation, CSharpType> _returnTypes;
+        public Dictionary<InputOperation, CSharpType> ReturnTypes => _returnTypes;
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _serializationBuilder = new SerializationBuilder();
             _typeFactory = typeFactory;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            _bodyParameters = new Dictionary<InputOperation, Parameter>();
+            _returnTypes = new Dictionary<InputOperation, CSharpType>();
         }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
@@ -65,6 +70,8 @@ namespace AutoRest.CSharp.Output.Models
             _typeFactory = context.TypeFactory;
             _library = context.BaseLibrary;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            _bodyParameters = new Dictionary<InputOperation, Parameter>();
+            _returnTypes = new Dictionary<InputOperation, CSharpType>();
         }
 
         /// <summary>
@@ -89,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models
             return language.SerializedName ?? language.Name;
         }
 
-        public RestClientMethod BuildRequestMethod(InputOperation operation)
+        public RestClientMethod BuildRequestMethod(InputOperation operation, string? defaultNamespace = null)
         {
             var accessibility = operation.Accessibility ?? "public";
             var requestParameters = operation.Parameters
@@ -100,6 +107,13 @@ namespace AutoRest.CSharp.Output.Models
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType);
+
+            var bodyType = operation.Responses.FirstOrDefault()?.BodyType;
+            if (bodyType != null && bodyType is InputModelType && defaultNamespace != null)
+            {
+                _returnTypes[operation] = new CSharpType(new ModelTypeProvider((bodyType as InputModelType)!, _typeFactory, defaultNamespace, null));
+            }
+            // TO-DO: return type is other types
 
             return new RestClientMethod(
                 operation.Name.ToCleanName(),
@@ -220,7 +234,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     case { Location: RequestLocation.Body } when bodyParameter != KnownParameters.RequestContent:
                         bodyParameter = operationParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
-                        _bodyParameter = this.BuildParameter(operationParameter);
+                        _bodyParameters[operation] = this.BuildParameter(operationParameter);
                         break;
                     case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
                         contentTypeRequestParameter = operationParameter;

@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(builder, operations, Declaration.Name).ToArray();
+            var clientMethods = BuildMethods(builder, operations, Declaration.Name, DefaultNamespace).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
@@ -82,12 +82,12 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName, string? defaultNamespace = null)
         {
             var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
             foreach (var operation in operations)
             {
-                requestMethods.Add(operation, builder.BuildRequestMethod(operation));
+                requestMethods.Add(operation, builder.BuildRequestMethod(operation, defaultNamespace));
             }
 
             foreach (var (operation, requestMethod) in requestMethods)
@@ -137,16 +137,18 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-
-        private LowLevelConvenienceMethod BuildConvenienceMethod(LowLevelClientMethod clientMethod, RestClientBuilder builder)
+        private LowLevelConvenienceMethod BuildConvenienceMethod(in LowLevelClientMethod clientMethod, RestClientBuilder builder)
         {
             List<Parameter> parameters = new List<Parameter>();
             MethodSignature protocolSignature = clientMethod.Signature;
+            InputOperation operation = clientMethod.RequestMethod.Operation;
+            Parameter? bodyParameter = null;
             foreach (var parameter in protocolSignature.Parameters)
             {
                 if (parameter == KnownParameters.RequestContent || parameter == KnownParameters.RequestContentNullable)
                 {
-                    parameters.Add(builder.BodyParameter!);
+                    bodyParameter = builder.BodyParameters[operation];
+                    parameters.Add(bodyParameter);
                 }
                 else if (parameter == KnownParameters.RequestContext)
                 {
@@ -158,7 +160,19 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            CSharpType? returnType = clientMethod.RequestMethod.ReturnType;
+            CSharpType? returnType = null;
+            CSharpType? responseType = null;
+            InputType? bodyType = operation.Responses.FirstOrDefault()?.BodyType;
+            if (bodyType != null && bodyType is InputModelType)
+            {
+                responseType = builder.ReturnTypes[operation];
+                returnType = new CSharpType(typeof(Azure.Response<>), responseType);
+            }
+            else
+            {
+                returnType = typeof(Azure.Response);
+            }
+
             bool isAmbiguous = !protocolSignature.Parameters.Contains(KnownParameters.RequestContent) &&
                 !protocolSignature.Parameters.Contains(KnownParameters.RequestContentNullable);
             string name = isAmbiguous
@@ -170,7 +184,7 @@ namespace AutoRest.CSharp.Output.Models
             MethodSignature convenienceSignature = protocolSignature with { Name = name, ReturnType = returnType, Parameters = parameters };
 
             Diagnostic? diagnostic = convenienceSignature.Name != protocolSignature.Name ? new Diagnostic($"{Declaration.Name}.{convenienceSignature.Name}") : null;
-            return new LowLevelConvenienceMethod(clientMethod, convenienceSignature, builder.BodyParameter, diagnostic);
+            return new LowLevelConvenienceMethod(clientMethod, convenienceSignature, responseType, bodyParameter, diagnostic);
         }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)

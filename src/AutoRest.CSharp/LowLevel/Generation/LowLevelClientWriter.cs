@@ -55,8 +55,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteConstructors(writer, client);
 
                     var exampleComposer = new LowLevelExampleComposer(client);
-                    foreach (var clientMethod in client.ClientMethods)
+                    foreach (var convenienceMethod in client.ConvenienceMethods)
                     {
+                        var clientMethod = convenienceMethod.LowLevelClientMethod;
                         var longRunning = clientMethod.LongRunning;
                         if (longRunning != null)
                         {
@@ -70,27 +71,11 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
-                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
-                        }
-                    }
-
-                    foreach (var convenienceMethod in client.ConvenienceMethods)
-                    {
-                        var longRunning = convenienceMethod.LowLevelClientMethod.LongRunning;
-                        if (longRunning != null)
-                        {
-                            WriteLongRunningConvenienceMethod(writer, convenienceMethod, true);
-                            WriteLongRunningConvenienceMethod(writer, convenienceMethod, false);
-                        }
-                        else if (convenienceMethod.LowLevelClientMethod.PagingInfo != null)
-                        {
-
-                        }
-                        else
-                        {
                             WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, true);
                             WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, false);
+
+                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
+                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
                         }
                     }
 
@@ -257,19 +242,42 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientConvenienceMethodBody(writer, convenienceMethod, async);
                 }
             }
+
+            writer.Line();
         }
 
         public static void WriteClientConvenienceMethodBody(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
         {
-            if (convenienceMethod.BodyParameter != null)
+            string contextVariableName = convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == KnownParameters.RequestContext.Name) != null ? $"{KnownParameters.RequestContext.Name}1" : KnownParameters.RequestContext.Name;
+            writer.Line($"{typeof(RequestContext)} {contextVariableName} = RequestContext.FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});"); // TO-DO: after implementation RequestContext.FromCancellationToken, change to typeof(method)
+
+            string responseVariableName = convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == "response") != null ? "response1" : "response";
+            var protocolSignature = convenienceMethod.LowLevelClientMethod.Signature;
+            writer.Line($"{typeof(Response)} {responseVariableName} = {(async ? "await " : String.Empty)}{protocolSignature.Name}{(async ? "Async" : String.Empty)}({string.Join(", ", protocolSignature.Parameters.Select(parameter => ParameterToItsName(parameter)))}){(async ? ".ConfigureAwait(false)" : String.Empty)};");
+
+            if (convenienceMethod.ResponseType == null)
             {
-                writer.Line($"{typeof(RequestContent)} content = {convenienceMethod.BodyParameter.Name}.ToRequestContent();");
+                writer.Line($"return {responseVariableName};");
+            }
+            else
+            {
+                writer.Line($"return Response.FromValue({convenienceMethod.ResponseType}.FromResponse({responseVariableName}), {responseVariableName});");
             }
 
-            writer.Line($"{typeof(RequestContext)} context = RequestContext.FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});"); // TO-DO: after implementation RequestContext.FromCancellationToken, change to typeof(method)
+            string ParameterToItsName(Parameter parameter)
+            {
+                if (parameter.Name == KnownParameters.RequestContext.Name)
+                {
+                    return contextVariableName;
+                }
 
-            var protocolSignature = convenienceMethod.LowLevelClientMethod.Signature;
-            writer.Append($"{typeof(Response)} response = {(async ? "await " : String.Empty)}{protocolSignature.Name}{(async ? "Async" : String.Empty)}({string.Join(", ", protocolSignature.Parameters.Select(parameter => parameter.Name))}){(async ? ".ConfigureAwait(false)" : String.Empty)};");
+                if (parameter.Name == KnownParameters.RequestContent.Name)
+                {
+                    return $"{convenienceMethod.BodyParameter!.Name}.ToRequestContent()";
+                }
+
+                return parameter.Name;
+            }
         }
 
         private static void WriteClientMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
@@ -690,9 +698,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private static CodeWriter.CodeWriterScope WriteConvenienceMethodDeclaration(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
         {
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
-            writer.WriteMethodDocumentation(methodSignature);
+            writer
+                .WriteMethodDocumentation(methodSignature)
+                .WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
             var scope = writer.WriteMethodDeclaration(methodSignature);
-            writer.WriteParametersValidation(methodSignature.Parameters);
+            if (convenienceMethod.BodyParameter != null)
+            {
+                writer.WriteParametersValidation(new[] { convenienceMethod.BodyParameter });
+            }
             return scope;
         }
 
