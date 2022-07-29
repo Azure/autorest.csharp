@@ -8,6 +8,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ModelTypeProperty,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
@@ -162,10 +163,11 @@ function createModel(program: Program): any {
             let client = getClient(clients, groupName);
             if (!client) {
                 const container = operation.container;
-                const clientDes = getDoc(program, container);
+                const clientDesc = getDoc(program, container);
                 const clientSummary = getSummary(program, container);
                 client = {
                     Name: groupName,
+                    Description: clientDesc,
                     Operations: [],
                     Protocol: {}
                 } as InputClient;
@@ -225,6 +227,34 @@ function loadOperationParameter(
     } as InputParameter;
 }
 
+function loadBodyParameter(
+    program: Program,
+    body: ModelTypeProperty
+): InputParameter {
+    const { type, name, model: cadlType } = body;
+    //const cadlType = body.type;
+    const inputType: InputType = getInputType(program, type);
+    //const requestLocation = requestLocationMap[location];
+    const requestLocation = RequestLocation.Body;
+    const kind: InputOperationParameterKind =
+        InputOperationParameterKind.Method;
+    return {
+        Name: name,
+        NameInRequest: name,
+        Description: getDoc(program, body),
+        Type: inputType,
+        Location: requestLocation,
+        IsRequired: !body.optional,
+        IsApiVersion: false,
+        IsResourceParameter: false,
+        IsContentType: false,
+        IsEndpoint: false,
+        SkipUrlEncoding: true,
+        Explode: false,
+        Kind: kind
+    } as InputParameter;
+}
+
 function loadOperationResponse(
     program: Program,
     response: HttpOperationResponse
@@ -266,16 +296,21 @@ function loadOperation(
     const externalDocs = getExternalDocs(program, op);
 
     const parameters: InputParameter[] = [];
-    if (endpoint !== undefined) parameters.push(endpoint);
-    if (apiVersion !== undefined) parameters.push(apiVersion);
+    if (endpoint) parameters.push(endpoint);
+    if (apiVersion) parameters.push(apiVersion);
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
+    }
+
+    const body = cadlParameters.body;
+    if (body) {
+        parameters.push(loadBodyParameter(program, body));
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
         const operationResponse = loadOperationResponse(program, res);
-        if (operationResponse !== undefined) {
+        if (operationResponse) {
             responses.push(operationResponse);
         }
     }
