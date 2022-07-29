@@ -15,7 +15,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class SchemaNameAndFormatUpdater
     {
-        private const char NameFormatSeparator = '/';
+        private const char NameFormatSeparator = '|';
+        private const string EmptyName = "-";
 
         public static void ApplyRenameMapping()
         {
@@ -204,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     if (segments.Length > 2)
                         throw new InvalidOperationException($"value for rename-mapping can only contains one |, but get `{value}`");
 
-                    NewName = string.IsNullOrEmpty(segments[0]) ? null : segments[0];
+                    NewName = IsEmptyName(segments[0]) ? null : segments[0];
                     NewFormat = FormatPattern.Parse(segments[1]);
                 }
                 else
@@ -213,6 +214,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     NewFormat = null;
                 }
             }
+
+            private static bool IsEmptyName(string name) => string.IsNullOrEmpty(name) || name == EmptyName;
         }
 
         private enum RenameType

@@ -190,7 +190,7 @@ public partial class Model
 To assign a new format to a property, you could use this syntax:
 ```yaml
 rename-rules:
-  Model.oldProperty: NewProperty/resource-type
+  Model.oldProperty: NewProperty|resource-type
 ```
 This will rename this property to its new name, and change its format to `resource-type`:
 ```diff
@@ -208,9 +208,9 @@ public partial class Model
 If only the type of this property needs change, you could omit its new name, like
 ```yaml
 rename-rules:
-  Model.oldProperty: /resource-type
+  Model.oldProperty: -|resource-type
 ```
-Please note that the slash `/` here is mandatory. The generator uses this symbol to separate the part for property name and its format.
+Please note that the dash and slash `-|` here are mandatory as a placeholder for the property name. The generator uses this symbol to separate the part for property name and its format.
 
 ### Rename an enumeration value in an enumeration type
 
