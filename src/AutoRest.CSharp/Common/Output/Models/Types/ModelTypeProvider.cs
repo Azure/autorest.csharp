@@ -6,6 +6,8 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
@@ -21,6 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IReadOnlyList<FieldDeclaration> Fields { get; }
         public ConstructorSignature PublicConstructor { get; }
+        public JsonSerialization Serialization { get; }
 
         public ModelTypeProvider(InputModelType inputModel, TypeFactory typeFactory, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
@@ -29,11 +32,25 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
-            Fields = CreateFields(inputModel).ToArray();
+            Fields = CreateFields(inputModel, typeFactory).ToArray();
             PublicConstructor = BuildPublicConstructor(inputModel);
+            Serialization = new JsonObjectSerialization(new CSharpType(this), CreateProperties(inputModel, Fields).ToArray(), null, false);
         }
 
-        private IEnumerable<FieldDeclaration> CreateFields(InputModelType inputModel)
+        private IEnumerable<JsonPropertySerialization> CreateProperties(InputModelType inputModel, IReadOnlyList<FieldDeclaration> fields)
+        {
+            for (var index = 0; index < inputModel.Properties.Count; index++)
+            {
+                var property = inputModel.Properties[index];
+                var field = fields[index];
+                var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
+                var valueSerialization = new JsonValueSerialization(field.Type, SerializationFormat.Default, field.Type.IsNullable);
+
+                yield return new JsonPropertySerialization(field.Declaration.RequestedName, property.SerializedName ?? property.Name, field.Type, field.Type, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+            }
+        }
+
+        private static IEnumerable<FieldDeclaration> CreateFields(InputModelType inputModel, TypeFactory typeFactory)
         {
             foreach (var property in inputModel.Properties)
             {
@@ -41,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ? Public | ReadOnly
                     : Public;
 
-                yield return new FieldDeclaration($"{property.Description}", fieldModifiers, _typeFactory.CreateType(property.Type), property.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                yield return new FieldDeclaration($"{property.Description}", fieldModifiers, typeFactory.CreateType(property.Type), property.Name.FirstCharToUpperCase(), writeAsProperty: true);
             }
         }
 

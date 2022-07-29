@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -8,6 +9,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -21,6 +23,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 ModelWriter.WriteModel(codeWriter, model);
                 project.AddGeneratedFile($"{model.Type.Name}.cs", codeWriter.ToString());
+
+                //var serializationWriter = new CodeWriter();
+                //ModelWriter.WriteSerialization(serializationWriter, model);
+                //project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationWriter.ToString());
             }
 
             foreach (var client in library.RestClients)
@@ -66,6 +72,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     writer.WriteParametersValidation(signature.Parameters);
                     writer.Line();
+                }
+            }
+
+            public static void WriteSerialization(CodeWriter writer, ModelTypeProvider model)
+            {
+                using (writer.Namespace(model.Type.Namespace))
+                {
+                    using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D} : {typeof(IUtf8JsonSerializable)}"))
+                    {
+                        using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
+                        {
+                            writer.ToSerializeCall(model.Serialization, $"this");
+                        }
+                        writer.Line();
+                        using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
+                        {
+                            writer.DeserializeValue(model.Serialization, $"element", v => writer.Line($"return {v};"));
+                        }
+                    }
                 }
             }
         }

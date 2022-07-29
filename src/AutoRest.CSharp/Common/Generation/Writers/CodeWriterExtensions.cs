@@ -389,7 +389,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static CodeWriter WriteInitialization(
             this CodeWriter writer,
             Action<FormattableString> valueCallback,
-            ObjectType objectType,
+            TypeProvider objectType,
             ObjectTypeConstructor constructor,
             IEnumerable<PropertyInitializer> initializers)
         {
