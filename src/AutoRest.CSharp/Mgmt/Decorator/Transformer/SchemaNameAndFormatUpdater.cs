@@ -12,14 +12,14 @@ using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
-    internal static class SchemaRenamer
+    internal static class SchemaNameAndFormatUpdater
     {
         public static void ApplyRenameMapping()
         {
-            var renameTargets = new List<RenameTarget>();
-            foreach ((var key, var newName) in Configuration.MgmtConfiguration.RenameMapping)
+            var renameTargets = new List<RenameAndReformatTarget>();
+            foreach ((var key, var value) in Configuration.MgmtConfiguration.RenameMapping)
             {
-                renameTargets.Add(ParseRenameKey(key, newName));
+                renameTargets.Add(new RenameAndReformatTarget(key, value));
             }
 
             // apply them one by one
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyRenameTargets(Schema schema, IEnumerable<RenameTarget> renameTargets)
+        private static void ApplyRenameTargets(Schema schema, IEnumerable<RenameAndReformatTarget> renameTargets)
         {
             foreach (var target in renameTargets)
             {
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyRenameTarget(Schema schema, RenameTarget renameTarget)
+        private static void ApplyRenameTarget(Schema schema, RenameAndReformatTarget renameTarget)
         {
             switch (schema)
             {
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyChoiceSchema(ChoiceSchema choiceSchema, RenameTarget renameTarget)
+        private static void ApplyChoiceSchema(ChoiceSchema choiceSchema, RenameAndReformatTarget renameTarget)
         {
             switch (renameTarget.RenameType)
             {
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplySealedChoiceSchema(SealedChoiceSchema sealedChoiceSchema, RenameTarget renameTarget)
+        private static void ApplySealedChoiceSchema(SealedChoiceSchema sealedChoiceSchema, RenameAndReformatTarget renameTarget)
         {
             switch (renameTarget.RenameType)
             {
@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyObjectSchema(ObjectSchema objectSchema, RenameTarget renameTarget)
+        private static void ApplyObjectSchema(ObjectSchema objectSchema, RenameAndReformatTarget renameTarget)
         {
             switch (renameTarget.RenameType)
             {
@@ -92,26 +92,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyToType(Schema schema, RenameTarget renameTarget)
+        private static void ApplyToType(Schema schema, RenameAndReformatTarget renameTarget)
         {
             if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
-            schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
-            schema.Language.Default.Name = renameTarget.NewName;
+            ApplyNewName(schema.Language, renameTarget.NewName);
+            if (renameTarget.NewFormat != null)
+                throw new InvalidOperationException($"The format of a model cannot be changed. Location: {renameTarget.Key}:{renameTarget.Value}");
         }
 
-        private static void ApplyToProperty(Schema schema, IEnumerable<ChoiceValue> choices, RenameTarget renameTarget)
+        private static void ApplyToProperty(Schema schema, IEnumerable<ChoiceValue> choices, RenameAndReformatTarget renameTarget)
         {
             if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
             var choiceValue = choices.FirstOrDefault(choice => choice.Value == renameTarget.PropertyName);
             if (choiceValue == null)
                 return;
-            choiceValue.Language.Default.SerializedName ??= choiceValue.Language.Default.Name;
-            choiceValue.Language.Default.Name = renameTarget.NewName;
+            ApplyNewName(choiceValue.Language, renameTarget.NewName);
+            //ApplyNewFormat();
         }
 
-        private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameTarget renameTarget)
+        private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameAndReformatTarget renameTarget)
         {
             Debug.Assert(renameTarget.PropertyName != null);
             if (schema.GetOriginalName() != renameTarget.TypeName)
@@ -128,8 +129,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             var property = filteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
             if (property == null)
                 return;
-            property.Language.Default.SerializedName ??= property.Language.Default.Name;
-            property.Language.Default.Name = renameTarget.NewName;
+            ApplyNewName(property.Language, renameTarget.NewName);
         }
 
         public static void UpdateAcronyms()
@@ -142,23 +142,61 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             UpdateAcronyms(MgmtContext.CodeModel.OperationGroups);
         }
 
-        private static RenameTarget ParseRenameKey(string renameKey, string newName)
+        private static void ApplyNewName(Languages language, string? value)
         {
-            // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
-            if (renameKey.Contains('.'))
-            {
-                // this should be a renaming of property
-                var segments = renameKey.Split('.', 2); // split at the first dot
-                return new RenameTarget(RenameType.Property, segments[0], segments[1], newName);
-            }
-            else
-            {
-                // this should be a renaming of type
-                return new RenameTarget(RenameType.Type, renameKey, null, newName);
-            }
+            if (value == null)
+                return;
+            language.Default.SerializedName ??= language.Default.Name;
+            language.Default.Name = value;
         }
 
-        private record RenameTarget(RenameType RenameType, string TypeName, string? PropertyName, string NewName);
+        private record RenameAndReformatTarget
+        {
+            internal string Key { get; }
+            internal string Value { get; }
+
+            internal RenameType RenameType { get; }
+            internal string TypeName { get; }
+            internal string? PropertyName { get; }
+            internal string? NewName { get; }
+            internal string? NewFormat { get; }
+
+            internal RenameAndReformatTarget(string renameKey, string value)
+            {
+                Key = renameKey;
+                Value = value;
+                // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
+                if (renameKey.Contains('.'))
+                {
+                    // this should be a renaming of property
+                    var segments = renameKey.Split('.', 2); // split at the first dot
+                    RenameType = RenameType.Property;
+                    TypeName = segments[0];
+                    PropertyName = segments[1];
+                }
+                else
+                {
+                    // this should be a renaming of type
+                    RenameType = RenameType.Type;
+                    TypeName = renameKey;
+                    PropertyName = null;
+                }
+                if (value.Contains('|'))
+                {
+                    var segments = value.Split('|');
+                    if (segments.Length > 2)
+                        throw new InvalidOperationException($"value for rename-mapping can only contains one |, but get `{value}`");
+
+                    NewName = segments[0];
+                    NewFormat = segments[1];
+                }
+                else
+                {
+                    NewName = value;
+                    NewFormat = null;
+                }
+            }
+        }
 
         private enum RenameType
         {

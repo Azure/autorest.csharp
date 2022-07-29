@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parameter.Schema is ChoiceSchema ||
                 parameter.Schema is SealedChoiceSchema ||
                 parameter.Schema is ObjectSchema)
-                SchemaRenamer.UpdateAcronym(parameter.Schema);
+                SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Schema);
         }
 
         internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
