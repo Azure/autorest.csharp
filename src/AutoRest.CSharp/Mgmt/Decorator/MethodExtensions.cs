@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
         {
             return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
-                p.Declaration.Type.IsFrameworkType && (TypeFactory.IsList(p.Declaration.Type)));
+                p.Declaration.Type.IsFrameworkType && TypeFactory.IsList(p.Declaration.Type));
         }
     }
 }
