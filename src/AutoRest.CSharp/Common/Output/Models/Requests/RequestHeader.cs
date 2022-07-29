@@ -26,16 +26,16 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public string Name { get; }
         public ReferenceOrConstant Value { get; }
-        public RequestParameterSerializationStyle SerializationStyle { get; }
+        public string? Delimiter { get; }
         public SerializationFormat Format { get; }
         public bool IsContentHeader { get; }
 
-        public RequestHeader(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, SerializationFormat format = SerializationFormat.Default)
+        public RequestHeader(string name, ReferenceOrConstant value, string? delimiter, SerializationFormat format = SerializationFormat.Default)
         {
             Name = name;
             Value = value;
-            SerializationStyle = serializationStyle;
             Format = format;
+            Delimiter = delimiter;
             IsContentHeader = ContentHeaders.Contains(name);
         }
     }

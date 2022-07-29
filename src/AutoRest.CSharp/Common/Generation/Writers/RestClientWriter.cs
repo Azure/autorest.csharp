@@ -48,10 +48,11 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
 
-            if (protocolMethod.IsLongRunning)
+            var longRunning = protocolMethod.LongRunning;
+            if (longRunning != null)
             {
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, true);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, false);
             }
             else if (protocolMethod.PagingInfo != null)
             {

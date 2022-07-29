@@ -155,6 +155,7 @@ namespace AutoRest.CSharp.Input
         public const string ResourceType = "resource-type";
         public const string Object = "object";
         public const string IPAddress = "ip-address";
+        public const string ContentType = "content-type";
     }
 
     internal partial class ServiceResponse

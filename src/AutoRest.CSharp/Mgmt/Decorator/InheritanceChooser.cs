@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
                 {
-                    result = GetCSharpType(originalType, parentType);
+                    result = GetCSharpType(parentType);
                     _valueCache.TryAdd(originalType.ObjectSchema, result);
                     return result;
                 }
@@ -51,15 +51,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsSuperset(parentType, originalType, properties))
                 {
-                    return GetCSharpType(originalType, parentType);
+                    return GetCSharpType(parentType);
                 }
             }
             return null;
         }
 
-        private static CSharpType GetCSharpType(MgmtObjectType originalType, Type parentType)
+        private static CSharpType GetCSharpType(Type parentType)
         {
-            return CSharpType.FromSystemType(originalType.Context, parentType);
+            return CSharpType.FromSystemType(MgmtContext.Context, parentType);
         }
 
         private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)

@@ -2380,7 +2380,7 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation{T}"/> from the service containing a list of <see cref="AsyncPageable{T}"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call GetMultiplePagesLROAsync with required parameters and parse the result.
         /// <code><![CDATA[
@@ -2468,7 +2468,7 @@ namespace paging_LowLevel
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation{T}"/> from the service containing a list of <see cref="Pageable{T}"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call GetMultiplePagesLRO with required parameters and parse the result.
         /// <code><![CDATA[

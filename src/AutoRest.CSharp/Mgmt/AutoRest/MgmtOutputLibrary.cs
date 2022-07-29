@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -130,7 +130,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private IEnumerable<Schema> UpdateBodyParameterNames()
+        private IEnumerable<Schema> UpdateBodyParameters()
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             List<Schema> updatedModels = new List<Schema>();
@@ -183,24 +183,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (!usageCounts.TryGetValue(bodyParam.Schema, out var count))
                             continue;
 
+                        // get the request path and operation set
+                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
+                        var operationSet = RawRequestPathToOperationSets[requestPath];
+                        if (operationSet.TryGetResourceDataSchema(out var resourceDataModel))
+                        {
+                            // if this is a resource, we need to make sure its body parameter is required when the verb is put or patch
+                            BodyParameterNormalizer.MakeRequired(bodyParam, httpRequest.Method);
+                        }
+
                         if (count != 1)
                         {
                             //even if it has multiple uses for a model type we should normalize the param name just not change the type
                             BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
                             continue;
                         }
-
-                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
-                        var operationSet = RawRequestPathToOperationSets[requestPath];
-                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
-                        if (resourceDataModelName.Key is not null)
+                        if (resourceDataModel is not null)
                         {
-                            //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
+                            //TODO handle expandable request paths. We assume that this is fine since if all of the expanded
                             //types use the same model they should have a common name, but since this case doesn't exist yet
                             //we don't know for sure
                             if (requestPath.IsExpandable)
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
-                            var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
+                            var name = GetResourceName(resourceDataModel.Name, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema);
                             BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
@@ -259,7 +264,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             //this is where we update
-            var updatedModels = UpdateBodyParameterNames();
+            var updatedModels = UpdateBodyParameters();
             foreach (var schema in updatedModels)
             {
                 _schemaOrNameToModels[schema] = BuildModel(schema);
@@ -344,12 +349,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var restClientMethod in restClient.Methods)
+                foreach (var (operation, restClientMethod) in restClient.Methods)
                 {
-                    // skip all internal methods
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
-                    restClientMethods.Add(restClientMethod.Operation, restClientMethod);
+                    restClientMethods.Add(operation, restClientMethod);
                 }
             }
 

@@ -261,7 +261,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<PutContentSchemaItem>"
+        ///     "<String>"
         /// };
         /// 
         /// Response response = await client.PutEmptyAsync(RequestContent.Create(data));
@@ -299,7 +299,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<PutContentSchemaItem>"
+        ///     "<String>"
         /// };
         /// 
         /// Response response = client.PutEmpty(RequestContent.Create(data));
@@ -937,7 +937,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     1234
+        ///     1234L
         /// };
         /// 
         /// Response response = await client.PutLongValidAsync(RequestContent.Create(data));
@@ -975,7 +975,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     1234
+        ///     1234L
         /// };
         /// 
         /// Response response = client.PutLongValid(RequestContent.Create(data));
@@ -1205,7 +1205,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     1234
+        ///     123.45f
         /// };
         /// 
         /// Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
@@ -1243,7 +1243,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     1234
+        ///     123.45f
         /// };
         /// 
         /// Response response = client.PutFloatValid(RequestContent.Create(data));
@@ -1473,7 +1473,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     1234
+        ///     123.45d
         /// };
         /// 
         /// Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
@@ -1511,7 +1511,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     1234
+        ///     123.45d
         /// };
         /// 
         /// Response response = client.PutDoubleValid(RequestContent.Create(data));
@@ -1881,7 +1881,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<foo1>"
+        ///     "foo1"
         /// };
         /// 
         /// Response response = await client.PutEnumValidAsync(RequestContent.Create(data));
@@ -1919,7 +1919,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<foo1>"
+        ///     "foo1"
         /// };
         /// 
         /// Response response = client.PutEnumValid(RequestContent.Create(data));
@@ -2021,7 +2021,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<foo1>"
+        ///     "foo1"
         /// };
         /// 
         /// Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data));
@@ -2059,7 +2059,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<foo1>"
+        ///     "foo1"
         /// };
         /// 
         /// Response response = client.PutStringEnumValid(RequestContent.Create(data));
@@ -2289,7 +2289,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a>"
+        ///     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
         /// };
         /// 
         /// Response response = await client.PutUuidValidAsync(RequestContent.Create(data));
@@ -2327,7 +2327,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a>"
+        ///     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
         /// };
         /// 
         /// Response response = client.PutUuidValid(RequestContent.Create(data));
@@ -2493,7 +2493,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<2022-05-10>"
+        ///     "2022-05-10"
         /// };
         /// 
         /// Response response = await client.PutDateValidAsync(RequestContent.Create(data));
@@ -2531,7 +2531,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<2022-05-10>"
+        ///     "2022-05-10"
         /// };
         /// 
         /// Response response = client.PutDateValid(RequestContent.Create(data));
@@ -2761,7 +2761,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<2022-05-10T14:57:31.2311892-04:00>"
+        ///     "2022-05-10T18:57:31.2311892Z"
         /// };
         /// 
         /// Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
@@ -2799,7 +2799,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<2022-05-10T14:57:31.2311892-04:00>"
+        ///     "2022-05-10T18:57:31.2311892Z"
         /// };
         /// 
         /// Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -3029,7 +3029,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<2022-05-10T14:57:31.2311892-04:00>"
+        ///     "Tue, 10 May 2022 18:57:31 GMT"
         /// };
         /// 
         /// Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
@@ -3067,7 +3067,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<2022-05-10T14:57:31.2311892-04:00>"
+        ///     "Tue, 10 May 2022 18:57:31 GMT"
         /// };
         /// 
         /// Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -3169,7 +3169,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<(1.)3:45:67>"
+        ///     PT1H23M45S
         /// };
         /// 
         /// Response response = await client.PutDurationValidAsync(RequestContent.Create(data));
@@ -3207,7 +3207,7 @@ namespace body_array_LowLevel
         /// var client = new ArrayClient(credential);
         /// 
         /// var data = new[] {
-        ///     "<(1.)3:45:67>"
+        ///     PT1H23M45S
         /// };
         /// 
         /// Response response = client.PutDurationValid(RequestContent.Create(data));
@@ -3522,7 +3522,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3568,7 +3568,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3614,7 +3614,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3660,7 +3660,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3706,7 +3706,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3752,7 +3752,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3798,7 +3798,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3844,7 +3844,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3890,7 +3890,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3936,7 +3936,7 @@ namespace body_array_LowLevel
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -3975,7 +3975,7 @@ namespace body_array_LowLevel
         /// var data = new[] {
         ///     new {
         ///         integer = 1234,
-        ///         string = "<ProductString>",
+        ///         string = "<string>",
         ///     }
         /// };
         /// 
@@ -3988,7 +3988,7 @@ namespace body_array_LowLevel
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -4029,7 +4029,7 @@ namespace body_array_LowLevel
         /// var data = new[] {
         ///     new {
         ///         integer = 1234,
-        ///         string = "<ProductString>",
+        ///         string = "<string>",
         ///     }
         /// };
         /// 
@@ -4042,7 +4042,7 @@ namespace body_array_LowLevel
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>ArrayOfProduct</c>:
+        /// Schema for <c>Product</c>:
         /// <code>{
         ///   integer: number, # Optional.
         ///   string: string, # Optional.
@@ -4402,7 +4402,7 @@ namespace body_array_LowLevel
         /// 
         /// var data = new[] {
         ///     new[] {
-        ///         "<PutContentSchemaItemsItem>"
+        ///         "<String>"
         ///     }
         /// };
         /// 
@@ -4442,7 +4442,7 @@ namespace body_array_LowLevel
         /// 
         /// var data = new[] {
         ///     new[] {
-        ///         "<PutContentSchemaItemsItem>"
+        ///         "<String>"
         ///     }
         /// };
         /// 

@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(Context, ObjectSchema, IsResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, ObjectSchema, IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 // if this type is defined with a base class, we have to use the same base class here
                 // otherwise the compiler will throw an error
-                if (Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
+                if (MgmtContext.Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
                 {
                     // if we could find a type and it is not a framework type meaning that it is a TypeProvider, return that
                     if (!existingBaseType.IsFrameworkType)
@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     {
                         // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
                         // in order to let the constructor builder have the ability to get base constructor
-                        return CSharpType.FromSystemType(Context, existingBaseType.FrameworkType);
+                        return CSharpType.FromSystemType(MgmtContext.Context, existingBaseType.FrameworkType);
                     }
                 }
                 // if we did not find that type, this means the customization code is referencing something unrecognized

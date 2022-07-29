@@ -132,7 +132,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -168,7 +168,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = client.PutNotExpandable(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -268,7 +268,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = await client.PutReferencedAsync(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -304,7 +304,7 @@ namespace body_string_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new EnumClient(credential);
         /// 
-        /// var data = "<red color>";
+        /// var data = "red color";
         /// 
         /// Response response = client.PutReferenced(RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -352,7 +352,7 @@ namespace body_string_LowLevel
         /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
         ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
@@ -398,7 +398,7 @@ namespace body_string_LowLevel
         /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
         ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
@@ -433,7 +433,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<green-color>",
+        ///     ColorConstant = "<ColorConstant>",
         /// };
         /// 
         /// Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
@@ -445,8 +445,8 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<green-color>",
-        ///     field1 = "<RefColorConstantField1>",
+        ///     ColorConstant = "<ColorConstant>",
+        ///     field1 = "<field1>",
         /// };
         /// 
         /// Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
@@ -460,7 +460,7 @@ namespace body_string_LowLevel
         /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
         ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
@@ -497,7 +497,7 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<green-color>",
+        ///     ColorConstant = "<ColorConstant>",
         /// };
         /// 
         /// Response response = client.PutReferencedConstant(RequestContent.Create(data));
@@ -509,8 +509,8 @@ namespace body_string_LowLevel
         /// var client = new EnumClient(credential);
         /// 
         /// var data = new {
-        ///     ColorConstant = "<green-color>",
-        ///     field1 = "<RefColorConstantField1>",
+        ///     ColorConstant = "<ColorConstant>",
+        ///     field1 = "<field1>",
         /// };
         /// 
         /// Response response = client.PutReferencedConstant(RequestContent.Create(data));
@@ -524,7 +524,7 @@ namespace body_string_LowLevel
         /// 
         /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant, # Required. Referenced Color Constant Description.
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
         ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>

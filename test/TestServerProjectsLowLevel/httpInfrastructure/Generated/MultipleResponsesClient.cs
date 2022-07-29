@@ -79,8 +79,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -125,8 +125,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -171,8 +171,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -217,8 +217,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -263,8 +263,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -309,8 +309,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -355,8 +355,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -401,8 +401,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -447,8 +447,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -493,8 +493,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -539,8 +539,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -585,8 +585,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -631,8 +631,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -677,8 +677,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -723,8 +723,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -769,8 +769,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -815,8 +815,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -861,8 +861,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -907,8 +907,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -953,8 +953,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -999,8 +999,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1045,8 +1045,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1091,8 +1091,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1137,8 +1137,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1603,8 +1603,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1649,8 +1649,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1695,8 +1695,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -1741,8 +1741,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2147,8 +2147,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2193,8 +2193,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2239,8 +2239,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2285,8 +2285,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2331,8 +2331,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2377,8 +2377,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2423,8 +2423,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2469,8 +2469,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2515,8 +2515,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2561,8 +2561,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2607,8 +2607,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2653,8 +2653,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2699,8 +2699,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>
@@ -2745,8 +2745,8 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// <details><summary>B</summary>Schema for <c>B</c>:
         /// <code>{
-        ///   statusCode: string, # Optional.
         ///   textStatusCode: string, # Optional.
+        ///   statusCode: string, # Optional.
         /// }
         /// </code>
         /// </details>

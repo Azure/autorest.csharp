@@ -4,6 +4,7 @@
 using System;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 
@@ -14,18 +15,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
 
-        protected TypeProvider(BuildContext context)
+        protected TypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
         {
-            Context = context;
-            _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
+            DefaultNamespace = defaultNamespace;
+            _existingType = new Lazy<INamedTypeSymbol?>(() => sourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
+
+        protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) {}
 
         public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
-        internal BuildContext Context { get; private set; }
         protected abstract string DefaultName { get; }
-        protected virtual string DefaultNamespace => Context.DefaultNamespace;
+        protected virtual string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
@@ -42,19 +44,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                 existingTypeOverrides: TypeKind == TypeKind.Enum);
         }
 
-        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
+        public static string GetDefaultModelNamespace(string? namespaceExtension, string rootNamespaceName)
         {
-            var result = context.DefaultNamespace;
             if (namespaceExtension != default)
             {
-                result = namespaceExtension;
+                return namespaceExtension;
             }
-            else if (Configuration.ModelNamespace)
+
+            var defaultNamespace = Configuration.Namespace ?? rootNamespaceName;
+
+            if (Configuration.ModelNamespace)
             {
-                result = $"{context.DefaultNamespace}.Models";
+                return $"{defaultNamespace}.Models";
             }
-            return result;
+
+            return defaultNamespace;
         }
+
+        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
+            => GetDefaultModelNamespace(namespaceExtension, context.DefaultNamespace);
 
         public override bool Equals(object? obj)
         {
