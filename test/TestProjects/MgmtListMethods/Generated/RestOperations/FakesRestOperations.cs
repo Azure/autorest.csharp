@@ -272,6 +272,87 @@ namespace MgmtListMethods
             }
         }
 
+        internal HttpMessage CreateUpdateConfigurationsRequest(string subscriptionId, string fakeName, FakeConfigurationListResult value)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/updateConfigurations", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(value);
+            request.Content = content;
+            _userAgent.Apply(message);
+            return message;
+        }
+
+        /// <summary> Update configurations for each VM family in workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="value"> The parameters for updating a list of fake configuration. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response<FakeConfigurationListResult>> UpdateConfigurationsAsync(string subscriptionId, string fakeName, FakeConfigurationListResult value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var message = CreateUpdateConfigurationsRequest(subscriptionId, fakeName, value);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeConfigurationListResult value0 = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value0 = FakeConfigurationListResult.DeserializeFakeConfigurationListResult(document.RootElement);
+                        return Response.FromValue(value0, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        /// <summary> Update configurations for each VM family in workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="value"> The parameters for updating a list of fake configuration. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response<FakeConfigurationListResult> UpdateConfigurations(string subscriptionId, string fakeName, FakeConfigurationListResult value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var message = CreateUpdateConfigurationsRequest(subscriptionId, fakeName, value);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeConfigurationListResult value0 = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value0 = FakeConfigurationListResult.DeserializeFakeConfigurationListResult(document.RootElement);
+                        return Response.FromValue(value0, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -304,10 +385,10 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeListResult value = default;
+                        FakeListResult value0 = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
+                        value0 = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value0, message.Response);
                     }
                 default:
                     throw new RequestFailedException(message.Response);
@@ -332,10 +413,10 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeListResult value = default;
+                        FakeListResult value0 = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
+                        value0 = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value0, message.Response);
                     }
                 default:
                     throw new RequestFailedException(message.Response);
