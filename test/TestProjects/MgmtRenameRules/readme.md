@@ -34,7 +34,6 @@ rename-rules:
 
 format-by-name-rules:
   'tenantId': 'uuid'
-  'resourceType': 'resource-type'
   'etag': 'etag'
   'location': 'azure-location'
   'contentType': 'content-type'
@@ -46,6 +45,6 @@ rename-mapping:
   SshPublicKeyResource: SshPublicKey
   LogAnalyticsOperationResult: LogAnalytics
   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
-  UpgradeOperationHistoricalStatusInfo.type: ResourceType
+  UpgradeOperationHistoricalStatusInfo.type: ResourceType|resource-type
   DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
 ```

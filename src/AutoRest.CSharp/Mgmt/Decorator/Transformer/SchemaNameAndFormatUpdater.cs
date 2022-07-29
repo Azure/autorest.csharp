@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using static AutoRest.CSharp.Mgmt.Decorator.Transformer.SchemaFormatByNameTransformer;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
@@ -61,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     ApplyToType(choiceSchema, renameTarget);
                     break;
                 case RenameType.Property:
-                    ApplyToProperty(choiceSchema, choiceSchema.Choices, renameTarget);
+                    ApplyToChoiceValue(choiceSchema, choiceSchema.Choices, renameTarget);
                     break;
             }
         }
@@ -74,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     ApplyToType(sealedChoiceSchema, renameTarget);
                     break;
                 case RenameType.Property:
-                    ApplyToProperty(sealedChoiceSchema, sealedChoiceSchema.Choices, renameTarget);
+                    ApplyToChoiceValue(sealedChoiceSchema, sealedChoiceSchema.Choices, renameTarget);
                     break;
             }
         }
@@ -97,11 +98,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
             ApplyNewName(schema.Language, renameTarget.NewName);
-            if (renameTarget.NewFormat != null)
-                throw new InvalidOperationException($"The format of a model cannot be changed. Location: {renameTarget.Key}:{renameTarget.Value}");
+            // we just ignore the format information on this
         }
 
-        private static void ApplyToProperty(Schema schema, IEnumerable<ChoiceValue> choices, RenameAndReformatTarget renameTarget)
+        private static void ApplyToChoiceValue(Schema schema, IEnumerable<ChoiceValue> choices, RenameAndReformatTarget renameTarget)
         {
             if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (choiceValue == null)
                 return;
             ApplyNewName(choiceValue.Language, renameTarget.NewName);
-            //ApplyNewFormat();
+            // we just ignore the format information on this
         }
 
         private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameAndReformatTarget renameTarget)
@@ -130,6 +130,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (property == null)
                 return;
             ApplyNewName(property.Language, renameTarget.NewName);
+            ApplyNewFormat(property.Schema, renameTarget.NewFormat);
         }
 
         public static void UpdateAcronyms()
@@ -150,6 +151,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             language.Default.Name = value;
         }
 
+        private static void ApplyNewFormat(Schema schema, FormatPattern? formatPattern)
+        {
+            if (formatPattern == null)
+                return;
+            if (formatPattern.IsPrimitiveType)
+                schema.Type = formatPattern.PrimitiveType!.Value;
+            else
+            {
+                if (schema.Extensions == null)
+                    schema.Extensions = new RecordOfStringAndAny();
+                schema.Extensions.Format = formatPattern.ExtensionType!;
+            }
+        }
+
         private record RenameAndReformatTarget
         {
             internal string Key { get; }
@@ -159,7 +174,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             internal string TypeName { get; }
             internal string? PropertyName { get; }
             internal string? NewName { get; }
-            internal string? NewFormat { get; }
+            internal FormatPattern? NewFormat { get; }
 
             internal RenameAndReformatTarget(string renameKey, string value)
             {
@@ -188,7 +203,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         throw new InvalidOperationException($"value for rename-mapping can only contains one |, but get `{value}`");
 
                     NewName = segments[0];
-                    NewFormat = segments[1];
+                    NewFormat = FormatPattern.Parse(segments[1]);
                 }
                 else
                 {
