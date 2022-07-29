@@ -9,6 +9,7 @@ ApiVersions:
 Models: []
 Clients:
   - Name: Pets
+    Description: Manage your pets. You can delete or get the Pet from pet store.
     Operations:
       - Name: delete
         Summary: delete.
@@ -98,15 +99,75 @@ Clients:
               - 200
             BodyType:
               Name: Pet
-              Properties: []
               IsNullable: false
+              Properties:
+                - Name: name
+                  SerializedName: name
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: tag
+                  SerializedName: tag
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: age
+                  SerializedName: age
+                  Description: ''
+                  Type:
+                    Name: Int32
+                    Kind: Int32
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
             BodyMediaType: Json
           - StatusCodes:
               - 304
             BodyType:
               Name: Pet
-              Properties: []
               IsNullable: false
+              Properties:
+                - Name: name
+                  SerializedName: name
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: tag
+                  SerializedName: tag
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: age
+                  SerializedName: age
+                  Description: ''
+                  Type:
+                    Name: Int32
+                    Kind: Int32
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json
@@ -117,13 +178,88 @@ Clients:
         Parameters:
           - *ref_0
           - *ref_1
+          - Name: pet
+            NameInRequest: pet
+            Type:
+              Name: Pet
+              IsNullable: false
+              Properties:
+                - Name: name
+                  SerializedName: name
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: tag
+                  SerializedName: tag
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: age
+                  SerializedName: age
+                  Description: ''
+                  Type:
+                    Name: Int32
+                    Kind: Int32
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+            Location: Body
+            IsRequired: true
+            IsApiVersion: false
+            IsResourceParameter: false
+            IsContentType: false
+            IsEndpoint: false
+            SkipUrlEncoding: true
+            Explode: false
+            Kind: Method
         Responses:
           - StatusCodes:
               - 200
             BodyType:
               Name: Pet
-              Properties: []
               IsNullable: false
+              Properties:
+                - Name: name
+                  SerializedName: name
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: tag
+                  SerializedName: tag
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: age
+                  SerializedName: age
+                  Description: ''
+                  Type:
+                    Name: Int32
+                    Kind: Int32
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
             BodyMediaType: Json
         HttpMethod: POST
         RequestBodyMediaType: Json
@@ -172,8 +308,27 @@ Clients:
               - 200
             BodyType:
               Name: ToyListResults
-              Properties: []
               IsNullable: false
+              Properties:
+                - Name: items
+                  SerializedName: items
+                  Description: ''
+                  Type:
+                    IsNullable: false
+                    Name: UnknownKind
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
+                - Name: nextLink
+                  SerializedName: nextLink
+                  Description: ''
+                  Type:
+                    Name: string
+                    Kind: String
+                    IsNullable: false
+                  IsRequired: true
+                  IsReadOnly: true
+                  IsDiscriminator: false
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json

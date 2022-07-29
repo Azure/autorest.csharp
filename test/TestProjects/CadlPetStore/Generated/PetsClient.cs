@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlPetStore
 {
-    /// <summary> The Pets service client. </summary>
+    /// <summary> Manage your pets. You can delete or get the Pet from pet store. </summary>
     public partial class PetsClient
     {
         private readonly HttpPipeline _pipeline;
@@ -56,7 +56,8 @@ namespace CadlPetStore
             _apiVersion = options.Version;
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> delete. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -70,6 +71,7 @@ namespace CadlPetStore
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// </example>
+        /// <remarks> Delete a pet. </remarks>
         public virtual async Task<Response> DeleteAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Delete");
@@ -86,7 +88,8 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> delete. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -100,6 +103,7 @@ namespace CadlPetStore
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// </example>
+        /// <remarks> Delete a pet. </remarks>
         public virtual Response Delete(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Delete");
@@ -116,7 +120,8 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -128,7 +133,10 @@ namespace CadlPetStore
         /// 
         /// Response response = await client.ReadAsync(1234);
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -138,6 +146,9 @@ namespace CadlPetStore
         /// 
         /// Schema for <c>Pet</c>:
         /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
         /// }
         /// </code>
         /// 
@@ -158,7 +169,8 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -170,7 +182,10 @@ namespace CadlPetStore
         /// 
         /// Response response = client.Read(1234);
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -180,6 +195,9 @@ namespace CadlPetStore
         /// 
         /// Schema for <c>Pet</c>:
         /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
         /// }
         /// </code>
         /// 
@@ -200,38 +218,60 @@ namespace CadlPetStore
             }
         }
 
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call CreateAsync and parse the result.
+        /// This sample shows how to call CreateAsync with required request content and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
-        /// Response response = await client.CreateAsync();
+        /// var data = new {};
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// Response response = await client.CreateAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
-        /// Below is the JSON schema for the response payload.
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
         /// 
         /// Response Body:
         /// 
         /// Schema for <c>Pet</c>:
         /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> CreateAsync(RequestContext context = null)
+        public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(context);
+                using HttpMessage message = CreateCreateRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -241,38 +281,60 @@ namespace CadlPetStore
             }
         }
 
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call Create and parse the result.
+        /// This sample shows how to call Create with required request content and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new PetsClient(endpoint, "<apiVersion>");
         /// 
-        /// Response response = client.Create();
+        /// var data = new {};
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// Response response = client.Create(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
-        /// Below is the JSON schema for the response payload.
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
         /// 
         /// Response Body:
         /// 
         /// Schema for <c>Pet</c>:
         /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response Create(RequestContext context = null)
+        public virtual Response Create(RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(context);
+                using HttpMessage message = CreateCreateRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -314,7 +376,7 @@ namespace CadlPetStore
             return message;
         }
 
-        internal HttpMessage CreateCreateRequest(RequestContext context)
+        internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -326,6 +388,7 @@ namespace CadlPetStore
             uri.AppendPath("/pets", false);
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
+            request.Content = content;
             return message;
         }
 

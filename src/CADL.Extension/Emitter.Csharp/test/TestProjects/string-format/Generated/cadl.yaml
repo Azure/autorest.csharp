@@ -1,6 +1,7 @@
 Name: stringformat
 ApiVersions:
   - '2015-06-18'
+Models: []
 Clients:
   - Name: stringFormat
     Operations:
@@ -11,10 +12,9 @@ Clients:
             NameInRequest: apiVersion
             Description: ''
             Type:
-              Name: string
+              Name: String
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Query
             IsRequired: true
             IsApiVersion: true
@@ -30,7 +30,6 @@ Clients:
               Name: string
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false

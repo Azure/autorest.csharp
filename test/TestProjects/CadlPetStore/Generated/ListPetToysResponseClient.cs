@@ -70,7 +70,8 @@ namespace CadlPetStore
         /// 
         /// Response response = await client.ListAsync("<petId>", "<nameFilter>");
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -80,6 +81,9 @@ namespace CadlPetStore
         /// 
         /// Schema for <c>ToyListResults</c>:
         /// <code>{
+        ///   items: {
+        ///   }, # Required.
+        ///   nextLink: string, # Required.
         /// }
         /// </code>
         /// 
@@ -117,7 +121,8 @@ namespace CadlPetStore
         /// 
         /// Response response = client.List("<petId>", "<nameFilter>");
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("nextLink").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -127,6 +132,9 @@ namespace CadlPetStore
         /// 
         /// Schema for <c>ToyListResults</c>:
         /// <code>{
+        ///   items: {
+        ///   }, # Required.
+        ///   nextLink: string, # Required.
         /// }
         /// </code>
         /// 

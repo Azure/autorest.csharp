@@ -10,6 +10,7 @@
   {
    "$id": "2",
    "Name": "Pets",
+   "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
      "$id": "3",
@@ -137,21 +138,113 @@
        "BodyType": {
         "$id": "15",
         "Name": "Pet",
-        "Properties": [],
-        "IsNullable": false
+        "IsNullable": false,
+        "Properties": [
+         {
+          "$id": "16",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "17",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "18",
+          "Name": "tag",
+          "SerializedName": "tag",
+          "Description": "",
+          "Type": {
+           "$id": "19",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "20",
+          "Name": "age",
+          "SerializedName": "age",
+          "Description": "",
+          "Type": {
+           "$id": "21",
+           "Name": "Int32",
+           "Kind": "Int32",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         }
+        ]
        },
        "BodyMediaType": "Json"
       },
       {
-       "$id": "16",
+       "$id": "22",
        "StatusCodes": [
         304
        ],
        "BodyType": {
-        "$id": "17",
+        "$id": "23",
         "Name": "Pet",
-        "Properties": [],
-        "IsNullable": false
+        "IsNullable": false,
+        "Properties": [
+         {
+          "$id": "24",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "25",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "26",
+          "Name": "tag",
+          "SerializedName": "tag",
+          "Description": "",
+          "Type": {
+           "$id": "27",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "28",
+          "Name": "age",
+          "SerializedName": "age",
+          "Description": "",
+          "Type": {
+           "$id": "29",
+           "Name": "Int32",
+           "Kind": "Int32",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         }
+        ]
        },
        "BodyMediaType": "Json"
       }
@@ -163,7 +256,7 @@
      "BufferResponse": false
     },
     {
-     "$id": "18",
+     "$id": "30",
      "Name": "create",
      "Parameters": [
       {
@@ -171,19 +264,131 @@
       },
       {
        "$ref": "6"
+      },
+      {
+       "$id": "31",
+       "Name": "pet",
+       "NameInRequest": "pet",
+       "Type": {
+        "$id": "32",
+        "Name": "Pet",
+        "IsNullable": false,
+        "Properties": [
+         {
+          "$id": "33",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "34",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "35",
+          "Name": "tag",
+          "SerializedName": "tag",
+          "Description": "",
+          "Type": {
+           "$id": "36",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "37",
+          "Name": "age",
+          "SerializedName": "age",
+          "Description": "",
+          "Type": {
+           "$id": "38",
+           "Name": "Int32",
+           "Kind": "Int32",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         }
+        ]
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "20",
+        "$id": "40",
         "Name": "Pet",
-        "Properties": [],
-        "IsNullable": false
+        "IsNullable": false,
+        "Properties": [
+         {
+          "$id": "41",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "42",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "43",
+          "Name": "tag",
+          "SerializedName": "tag",
+          "Description": "",
+          "Type": {
+           "$id": "44",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "45",
+          "Name": "age",
+          "SerializedName": "age",
+          "Description": "",
+          "Type": {
+           "$id": "46",
+           "Name": "Int32",
+           "Kind": "Int32",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         }
+        ]
        },
        "BodyMediaType": "Json"
       }
@@ -196,15 +401,15 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "47"
    }
   },
   {
-   "$id": "22",
+   "$id": "48",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "23",
+     "$id": "49",
      "Name": "list",
      "Parameters": [
       {
@@ -214,11 +419,11 @@
        "$ref": "6"
       },
       {
-       "$id": "24",
+       "$id": "50",
        "Name": "petId",
        "NameInRequest": "petId",
        "Type": {
-        "$id": "25",
+        "$id": "51",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -234,11 +439,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "26",
+       "$id": "52",
        "Name": "nameFilter",
        "NameInRequest": "nameFilter",
        "Type": {
-        "$id": "27",
+        "$id": "53",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -256,15 +461,45 @@
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "29",
+        "$id": "55",
         "Name": "ToyListResults",
-        "Properties": [],
-        "IsNullable": false
+        "IsNullable": false,
+        "Properties": [
+         {
+          "$id": "56",
+          "Name": "items",
+          "SerializedName": "items",
+          "Description": "",
+          "Type": {
+           "$id": "57",
+           "IsNullable": false,
+           "Name": "UnknownKind"
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         },
+         {
+          "$id": "58",
+          "Name": "nextLink",
+          "SerializedName": "nextLink",
+          "Description": "",
+          "Type": {
+           "$id": "59",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": true,
+          "IsDiscriminator": false
+         }
+        ]
        },
        "BodyMediaType": "Json"
       }
@@ -277,11 +512,11 @@
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "60"
    }
   }
  ],
  "Auth": {
-  "$id": "31"
+  "$id": "61"
  }
 }

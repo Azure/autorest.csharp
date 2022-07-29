@@ -6,7 +6,7 @@ import { InputType } from "./InputType";
 export interface InputModelProperty {
     Name: string;
     SerializedName: string;
-    Description?: string;
+    Description: string;
     Type: InputType;
     IsRequired: boolean;
     IsReadOnly: boolean;

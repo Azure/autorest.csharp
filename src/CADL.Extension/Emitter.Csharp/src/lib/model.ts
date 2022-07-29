@@ -17,6 +17,7 @@ import {
     getQueryParamName,
     isStatusCode
 } from "@cadl-lang/rest/http";
+import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
     InputModelType,
     InputPrimitiveType,
@@ -217,11 +218,26 @@ export function getInputType(program: Program, type: Type): InputType {
         } else {
             type = getEffectiveSchemaType(program, type) as ModelType;
             const name = getFriendlyName(program, type) ?? type.name;
-            // TODO: need to get properties of the model.
+            // Get properties of the model.
+            const properties: InputModelProperty[] = [];
+            type.properties.forEach((value: ModelTypeProperty, key: string) => {
+                // console.log(key, value);
+                const inputProp = {
+                    Name: value.name,
+                    SerializedName: value.name,
+                    Description: "",
+                    Type: getInputType(program, value.type),
+                    IsRequired: true,
+                    IsReadOnly: true,
+                    IsDiscriminator: false
+                };
+                properties.push(inputProp);
+            });
+
             return {
                 Name: name,
-                Properties: [],
-                IsNullable: false
+                IsNullable: false,
+                Properties: properties
             } as InputModelType;
         }
     }
@@ -239,5 +255,5 @@ export function getInputType(program: Program, type: Type): InputType {
         } as InputPrimitiveType;
     }
 
-    return { Name: InputTypeKind.UnKnownKind, IsNullable: false } as InputType;
+    return { IsNullable: false, Name: InputTypeKind.UnKnownKind } as InputType;
 }

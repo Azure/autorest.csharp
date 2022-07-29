@@ -42,25 +42,25 @@ export function resolveServers(
             //   continue;
             // }
 
-            const endPointParam: InputParameter = {
-                Name: "Endpoint",
-                NameInRequest: "Endpoint",
-                Description: "",
-                Type: {
-                    Name: "Uri",
-                    Kind: InputTypeKind.Uri,
-                    IsNullable: false
-                } as InputPrimitiveType,
-                Location: RequestLocation.Uri,
-                IsApiVersion: false,
-                IsResourceParameter: false,
-                IsContentType: false,
-                IsRequired: true,
-                IsEndpoint: true,
-                SkipUrlEncoding: false,
-                Explode: false,
-                Kind: InputOperationParameterKind.Client
-            };
+            // const endPointParam: InputParameter = {
+            //     Name: "Endpoint",
+            //     NameInRequest: "Endpoint",
+            //     Description: "",
+            //     Type: {
+            //         Name: "Uri",
+            //         IsNullable: false,
+            //         Kind: InputTypeKind.Uri
+            //     } as InputPrimitiveType,
+            //     Location: RequestLocation.Uri,
+            //     IsApiVersion: false,
+            //     IsResourceParameter: false,
+            //     IsContentType: false,
+            //     IsRequired: true,
+            //     IsEndpoint: true,
+            //     SkipUrlEncoding: false,
+            //     Explode: false,
+            //     Kind: InputOperationParameterKind.Client
+            // };
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
             if (value) {
