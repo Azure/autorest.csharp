@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -83,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         public void UpdateAllSchemas()
         {
-            IReadOnlyList<FormatRule> rules = ParseRules(allFormatByNameRules);
+            var rules = ParseRules(allFormatByNameRules).ToList();
             if (rules.Count == 0)
                 return;
             UpdateGeneralSchema(rules);
@@ -175,22 +176,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private int CheckRules(string name, IReadOnlyList<FormatRule> rules)
         {
-            bool isMatch = false;
             for (int i = 0; i < rules.Count; i++)
             {
                 var namePattern = rules[i].NamePattern;
-                switch (namePattern.Pattern)
+                var isMatch = namePattern.Pattern switch
                 {
-                    case MatchPattern.StartWith:
-                        isMatch = name.StartsWith(namePattern.Name, StringComparison.Ordinal);
-                        break;
-                    case MatchPattern.EndWith:
-                        isMatch = name.EndsWith(namePattern.Name, StringComparison.Ordinal);
-                        break;
-                    case MatchPattern.Full:
-                        isMatch = FullStringComapre(name, namePattern.Name);
-                        break;
-                }
+                    MatchPattern.StartWith => name.StartsWith(namePattern.Name, StringComparison.Ordinal),
+                    MatchPattern.EndWith => name.EndsWith(namePattern.Name, StringComparison.Ordinal),
+                    MatchPattern.Full => FullStringComapre(name, namePattern.Name),
+                    _ => throw new NotImplementedException($"Unknown pattern {namePattern.Pattern}"),
+                };
                 if (isMatch)
                 {
                     return i;
@@ -199,31 +194,29 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             return -1;
         }
 
-        private IReadOnlyList<FormatRule> ParseRules(IReadOnlyDictionary<string, string> formatByNameRules)
+        private IEnumerable<FormatRule> ParseRules(IReadOnlyDictionary<string, string> formatByNameRules)
         {
-            List<FormatRule> rules = new List<FormatRule>();
             if (formatByNameRules == null)
-                return rules;
-            foreach (var kv in formatByNameRules)
+                yield break;
+            foreach ((var key, var value) in formatByNameRules)
             {
                 // parse match pattern
-                var matchPattern = NamePattern.Parse(kv.Key);
+                var matchPattern = NamePattern.Parse(key);
                 // parse format pattern
-                var formatPattern = FormatPattern.Parse(kv.Value);
-                rules.Add(new FormatRule()
+                var formatPattern = FormatPattern.Parse(value);
+                yield return new FormatRule()
                 {
                     NamePattern = matchPattern,
                     FormatPattern = formatPattern
-                });
+                };
             }
-            return rules;
         }
 
         private bool FullStringComapre(string strA, string strB)
         {
             if (strA.Length != strB.Length)
                 return false;
-            if (Char.ToLower(strA[0]) != Char.ToLower(strB[0]))
+            if (char.ToLower(strA[0]) != char.ToLower(strB[0]))
             {
                 // Ignore case for the first character,
                 // as autorect auto-upper case the first character for model & property name but not for parameter name.
