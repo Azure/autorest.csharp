@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
             {
-                if (returnType.FrameworkType == typeof(IReadOnlyList<>) || returnType.FrameworkType == typeof(IList<>))
+                if (TypeFactory.IsList(returnType))
                 {
                     itemType = returnType.Arguments[0];
                 }
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
         {
             return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
-                p.Declaration.Type.IsFrameworkType && (p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>) || p.Declaration.Type.FrameworkType == typeof(IList<>)));
+                p.Declaration.Type.IsFrameworkType && (TypeFactory.IsList(p.Declaration.Type)));
         }
     }
 }
