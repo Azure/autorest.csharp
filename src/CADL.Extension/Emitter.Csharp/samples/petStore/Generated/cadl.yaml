@@ -6,7 +6,41 @@ Description: >-
   `special-key` to test the authorization filters.
 ApiVersions:
   - '2021-03-25'
-Models: []
+Models:
+  - &ref_2
+    Name: Pet
+    IsNullable: false
+    Properties:
+      - Name: name
+        SerializedName: name
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: tag
+        SerializedName: tag
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: age
+        SerializedName: age
+        Description: ''
+        Type:
+          Name: Int32
+          Kind: Int32
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
 Clients:
   - Name: Pets
     Description: Manage your pets. You can delete or get the Pet from pet store.
@@ -180,40 +214,7 @@ Clients:
           - *ref_1
           - Name: pet
             NameInRequest: pet
-            Type:
-              Name: Pet
-              IsNullable: false
-              Properties:
-                - Name: name
-                  SerializedName: name
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: tag
-                  SerializedName: tag
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: age
-                  SerializedName: age
-                  Description: ''
-                  Type:
-                    Name: Int32
-                    Kind: Int32
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
+            Type: *ref_2
             Location: Body
             IsRequired: true
             IsApiVersion: false

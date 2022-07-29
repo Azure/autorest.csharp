@@ -5,25 +5,78 @@
  "ApiVersions": [
   "2021-03-25"
  ],
- "Models": [],
- "Clients": [
+ "Models": [
   {
    "$id": "2",
+   "Name": "Pet",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "9",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "10",
      "Name": "delete",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "11",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "5",
+        "$id": "12",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -39,12 +92,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "6",
+       "$id": "13",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
        "Type": {
-        "$id": "7",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -60,12 +113,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "8",
+       "$id": "15",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "9",
+        "$id": "16",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -83,7 +136,7 @@
      ],
      "Responses": [
       {
-       "$id": "10",
+       "$id": "17",
        "StatusCodes": [
         200
        ],
@@ -97,23 +150,23 @@
      "BufferResponse": false
     },
     {
-     "$id": "11",
+     "$id": "18",
      "Name": "read",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "11"
       },
       {
-       "$ref": "6"
+       "$ref": "13"
       },
       {
-       "$id": "12",
+       "$id": "19",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "13",
+        "$id": "20",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -131,22 +184,22 @@
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "15",
+        "$id": "22",
         "Name": "Pet",
         "IsNullable": false,
         "Properties": [
          {
-          "$id": "16",
+          "$id": "23",
           "Name": "name",
           "SerializedName": "name",
           "Description": "",
           "Type": {
-           "$id": "17",
+           "$id": "24",
            "Name": "string",
            "Kind": "String",
            "IsNullable": false
@@ -156,12 +209,12 @@
           "IsDiscriminator": false
          },
          {
-          "$id": "18",
+          "$id": "25",
           "Name": "tag",
           "SerializedName": "tag",
           "Description": "",
           "Type": {
-           "$id": "19",
+           "$id": "26",
            "Name": "string",
            "Kind": "String",
            "IsNullable": false
@@ -171,12 +224,12 @@
           "IsDiscriminator": false
          },
          {
-          "$id": "20",
+          "$id": "27",
           "Name": "age",
           "SerializedName": "age",
           "Description": "",
           "Type": {
-           "$id": "21",
+           "$id": "28",
            "Name": "Int32",
            "Kind": "Int32",
            "IsNullable": false
@@ -190,22 +243,22 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "22",
+       "$id": "29",
        "StatusCodes": [
         304
        ],
        "BodyType": {
-        "$id": "23",
+        "$id": "30",
         "Name": "Pet",
         "IsNullable": false,
         "Properties": [
          {
-          "$id": "24",
+          "$id": "31",
           "Name": "name",
           "SerializedName": "name",
           "Description": "",
           "Type": {
-           "$id": "25",
+           "$id": "32",
            "Name": "string",
            "Kind": "String",
            "IsNullable": false
@@ -215,12 +268,12 @@
           "IsDiscriminator": false
          },
          {
-          "$id": "26",
+          "$id": "33",
           "Name": "tag",
           "SerializedName": "tag",
           "Description": "",
           "Type": {
-           "$id": "27",
+           "$id": "34",
            "Name": "string",
            "Kind": "String",
            "IsNullable": false
@@ -230,12 +283,12 @@
           "IsDiscriminator": false
          },
          {
-          "$id": "28",
+          "$id": "35",
           "Name": "age",
           "SerializedName": "age",
           "Description": "",
           "Type": {
-           "$id": "29",
+           "$id": "36",
            "Name": "Int32",
            "Kind": "Int32",
            "IsNullable": false
@@ -256,70 +309,21 @@
      "BufferResponse": false
     },
     {
-     "$id": "30",
+     "$id": "37",
      "Name": "create",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "11"
       },
       {
-       "$ref": "6"
+       "$ref": "13"
       },
       {
-       "$id": "31",
+       "$id": "38",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
-        "$id": "32",
-        "Name": "Pet",
-        "IsNullable": false,
-        "Properties": [
-         {
-          "$id": "33",
-          "Name": "name",
-          "SerializedName": "name",
-          "Description": "",
-          "Type": {
-           "$id": "34",
-           "Name": "string",
-           "Kind": "String",
-           "IsNullable": false
-          },
-          "IsRequired": true,
-          "IsReadOnly": true,
-          "IsDiscriminator": false
-         },
-         {
-          "$id": "35",
-          "Name": "tag",
-          "SerializedName": "tag",
-          "Description": "",
-          "Type": {
-           "$id": "36",
-           "Name": "string",
-           "Kind": "String",
-           "IsNullable": false
-          },
-          "IsRequired": true,
-          "IsReadOnly": true,
-          "IsDiscriminator": false
-         },
-         {
-          "$id": "37",
-          "Name": "age",
-          "SerializedName": "age",
-          "Description": "",
-          "Type": {
-           "$id": "38",
-           "Name": "Int32",
-           "Kind": "Int32",
-           "IsNullable": false
-          },
-          "IsRequired": true,
-          "IsReadOnly": true,
-          "IsDiscriminator": false
-         }
-        ]
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -413,10 +417,10 @@
      "Name": "list",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "11"
       },
       {
-       "$ref": "6"
+       "$ref": "13"
       },
       {
        "$id": "50",
