@@ -386,5 +386,15 @@ namespace AutoRest.CSharp.Generation.Types
         {
             return type.IsFrameworkType && (IsDictionary(type) || IsList(type));
         }
+
+        public static bool RequiresToList(CSharpType from, CSharpType to)
+        {
+            if (!to.IsFrameworkType || !from.IsFrameworkType || from.FrameworkType != typeof(IEnumerable<>))
+            {
+                return false;
+            }
+
+            return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
+        }
     }
 }

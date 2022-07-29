@@ -6,16 +6,13 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal class JsonAdditionalPropertiesSerialization
+    internal class JsonAdditionalPropertiesSerialization : JsonPropertySerialization
     {
-        public ObjectTypeProperty Property { get; }
-        public JsonSerialization ValueSerialization { get; }
         public CSharpType Type { get; }
 
         public JsonAdditionalPropertiesSerialization(ObjectTypeProperty property, JsonSerialization valueSerialization, CSharpType type)
+            : base(property.Declaration.Name, true, property.IsReadOnly, property, valueSerialization)
         {
-            Property = property;
-            ValueSerialization = valueSerialization;
             Type = type;
         }
     }

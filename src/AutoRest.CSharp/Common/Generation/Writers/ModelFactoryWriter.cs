@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Output.Models;
@@ -32,7 +33,12 @@ namespace AutoRest.CSharp.Generation.Writers
             Debug.Assert(modelType != null);
 
             var ctor = modelType.SerializationConstructor;
-            var initializes = method.Parameters.Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, $"{p.Name}", p.Type));
+            var initializes = new List<PropertyInitializer>();
+            foreach (var parameter in method.Parameters)
+            {
+                var property = ctor.FindPropertyInitializedByParameter(parameter)!;
+                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name}", parameter.Type));
+            }
 
             writer.WriteMethodDocumentation(method);
             using (writer.WriteMethodDeclaration(method))

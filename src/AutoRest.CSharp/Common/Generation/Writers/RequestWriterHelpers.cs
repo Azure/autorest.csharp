@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var initializers = new List<PropertyInitializer>();
                         foreach (var initializer in flattenedSchemaRequestBody.Initializers)
                         {
-                            initializers.Add(new PropertyInitializer(initializer.Property, initializer.Value.GetReferenceOrConstantFormattable(), initializer.Value.Type));
+                            initializers.Add(new PropertyInitializer(initializer.Property.Declaration.Name, initializer.Property.Declaration.Type, initializer.Property.IsReadOnly, initializer.Value.GetReferenceOrConstantFormattable(), initializer.Value.Type));
                         }
                         var modelVariable = new CodeWriterDeclaration("model");
                         writer.WriteInitialization(
