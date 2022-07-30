@@ -2,40 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.Generation.Writers;
+using System.Text.Json;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelModelWriter
     {
-        public static void WriteModel(CodeWriter writer, TypeProvider model)
-        {
-            switch (model)
-            {
-                case ModelTypeProvider modelType:
-                    WriteModelType(writer, modelType);
-                    break;
-                // TODO: enum types
-                //case EnumType e when e.IsExtendable:
-                //    WriteExtensibleEnumType(writer, e);
-                //    break;
-                //case EnumType e when !e.IsExtendable:
-                //    WriteSealedEnumType(writer, e);
-                //    break;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        private static void WriteModelType(CodeWriter writer, ModelTypeProvider model)
+        public static void WriteType(CodeWriter writer, ModelTypeProvider model)
         {
             using (writer.Namespace(model.Type.Namespace))
             {
@@ -46,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     // TODO: add inherits or implements
                     WriteFields(writer, model);
-                    WriteConstructor(writer, model.PublicConstructor, model.Fields);
+                    WriteConstructor(writer, model.PublicConstructor, model);
                 }
             }
         }
@@ -60,20 +37,48 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteConstructor(CodeWriter writer, ConstructorSignature signature, IReadOnlyList<FieldDeclaration> fields)
+        private static void WriteConstructor(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
                 writer.WriteParametersValidation(signature.Parameters);
                 writer.Line();
-                var fieldDictionary = fields.ToImmutableDictionary(f => f.Name);
                 foreach (var parameter in signature.Parameters)
                 {
-                    if (fieldDictionary.TryGetValue(parameter.Name.FirstCharToUpperCase(), out var field))
+                    writer.Line($"{model.GetFieldByParameter(parameter).Name:I} = {parameter.Name:I};");
+                }
+            }
+        }
+
+        public static void WriteSerialization(CodeWriter writer, ModelTypeProvider model)
+        {
+            var serialization = model.CreateSerialization();
+            using (writer.Namespace(model.Type.Namespace))
+            {
+                using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D} : {typeof(IUtf8JsonSerializable)}"))
+                {
+                    using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
                     {
-                        writer.Line($"{field.Name} = {parameter.Name};");
-                        // TODO: potential type conversion
+                        writer.ToSerializeCall(serialization, $"this");
+                    }
+                    writer.Line();
+                    using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
+                    {
+                        var initializers = writer.WritePropertiesDeserialization(serialization, $"element").ToDictionary(pi => pi.Name);
+
+                        var parameters = model.SerializationConstructor.Parameters
+                            .Select(p => initializers[model.GetFieldByParameter(p).Name].Value)
+                            .ToArray();
+
+                        if (parameters.Length == initializers.Count)
+                        {
+                            writer.Append($"return new {model.Type}({parameters.Join(", ")});");
+                        }
+                        else
+                        {
+                            throw new NotSupportedException("Initialization of properties outside of serialization constructor is not supported yet.");
+                        }
                     }
                 }
             }

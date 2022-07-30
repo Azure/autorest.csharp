@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -17,59 +18,94 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal sealed class ModelTypeProvider : TypeProvider
     {
         private readonly TypeFactory _typeFactory;
+        private readonly InputModelType _inputModel;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
         public IReadOnlyList<FieldDeclaration> Fields { get; }
         public ConstructorSignature PublicConstructor { get; }
-        public JsonSerialization Serialization { get; }
+        public ConstructorSignature SerializationConstructor { get; }
+
+        private readonly IReadOnlyDictionary<InputModelProperty, Parameter> _inputsToParameters;
+        private readonly IReadOnlyDictionary<InputModelProperty, FieldDeclaration> _inputsToFields;
+        private readonly IReadOnlyDictionary<Parameter, FieldDeclaration> _parametersToFields;
 
         public ModelTypeProvider(InputModelType inputModel, TypeFactory typeFactory, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
+            _inputModel = inputModel;
             _typeFactory = typeFactory;
 
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
-            Fields = CreateFields(inputModel, typeFactory).ToArray();
-            PublicConstructor = BuildPublicConstructor(inputModel);
-            Serialization = new JsonObjectSerialization(new CSharpType(this), CreateProperties(inputModel, Fields).ToArray(), null, false);
+
+            (_inputsToParameters, _inputsToFields, _parametersToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+
+            Fields = _inputsToFields.Values.ToList();
+            PublicConstructor = BuildPublicConstructor(Declaration.Name, _inputsToParameters.Values.ToList());
+
+            // Since we consider all models roundtrip for now, use the same constructor for serialization
+            SerializationConstructor = PublicConstructor;
         }
 
-        private IEnumerable<JsonPropertySerialization> CreateProperties(InputModelType inputModel, IReadOnlyList<FieldDeclaration> fields)
+        // Serialization uses field and property names that first need to verified for uniqueness
+        // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
+        public JsonObjectSerialization CreateSerialization() => new(new CSharpType(this), CreatePropertySerializations(_inputsToFields).ToArray(), null, false);
+
+        public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parametersToFields[parameter];
+
+        private IEnumerable<JsonPropertySerialization> CreatePropertySerializations(IReadOnlyDictionary<InputModelProperty, FieldDeclaration> inputsToFields)
         {
-            for (var index = 0; index < inputModel.Properties.Count; index++)
+            foreach (var (property, field) in inputsToFields)
             {
-                var property = inputModel.Properties[index];
-                var field = fields[index];
+                string name;
+                try
+                {
+                    name = field.Name;
+                }
+                catch (InvalidOperationException e)
+                {
+                    throw new InvalidOperationException($"Field with {field.Declaration.RequestedName} isn't written yet to type {Declaration.Name}", e);
+                }
+
+                var serializedName = property.SerializedName ?? property.Name;
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
                 var valueSerialization = new JsonValueSerialization(field.Type, SerializationFormat.Default, field.Type.IsNullable);
 
-                yield return new JsonPropertySerialization(field.Declaration.RequestedName, property.SerializedName ?? property.Name, field.Type, field.Type, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+                yield return new JsonPropertySerialization(name, serializedName, field.Type, field.Type, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
             }
         }
 
-        private static IEnumerable<FieldDeclaration> CreateFields(InputModelType inputModel, TypeFactory typeFactory)
+        private static (IReadOnlyDictionary<InputModelProperty, Parameter> InputsToParameters, IReadOnlyDictionary<InputModelProperty, FieldDeclaration> InputsToFields, IReadOnlyDictionary<Parameter, FieldDeclaration> ParametersToFields)
+            CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
         {
-            foreach (var property in inputModel.Properties)
+            var inputsToParameters = new Dictionary<InputModelProperty, Parameter>();
+            var inputsToFields = new Dictionary<InputModelProperty, FieldDeclaration>();
+            var parametersToFields = new Dictionary<Parameter, FieldDeclaration>();
+
+            foreach (var inputModelProperty in inputModel.Properties)
             {
-                var fieldModifiers = property.IsReadOnly || property.Type is InputDictionaryType or InputListType
+                var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType
                     ? Public | ReadOnly
                     : Public;
 
-                yield return new FieldDeclaration($"{property.Description}", fieldModifiers, typeFactory.CreateType(property.Type), property.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, typeFactory.CreateType(inputModelProperty.Type), inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                inputsToFields[inputModelProperty] = field;
+                if (inputModelProperty.IsRequired)
+                {
+                    var parameter = Parameter.FromModelProperty(inputModelProperty, typeFactory);
+                    inputsToParameters[inputModelProperty] = parameter;
+                    parametersToFields[parameter] = field;
+                }
             }
+
+            return (inputsToParameters, inputsToFields, parametersToFields);
         }
 
-        private ConstructorSignature BuildPublicConstructor(InputModelType inputModel)
+        private static ConstructorSignature BuildPublicConstructor(string name, IReadOnlyList<Parameter> parameters)
         {
-            var parameters = inputModel.Properties
-                .Where(p => p.IsReadOnly || p.Type is InputDictionaryType or InputListType)
-                .Select(p => Parameter.FromModelProperty(p, _typeFactory))
-                .ToList();
-
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, parameters);
+            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, parameters);
         }
     }
 }

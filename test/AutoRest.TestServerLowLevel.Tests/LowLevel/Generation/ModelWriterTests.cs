@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null);
 
             var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteModel(codeWriter, model);
+            LowLevelModelWriter.WriteType(codeWriter, model);
             var codes = codeWriter.ToString();
 
             Assert.AreEqual(codes, @"// Copyright (c) Microsoft Corporation. All rights reserved.
@@ -50,11 +50,10 @@ public int RequiredInt{ get; }
 /// <summary> Initializes a new instance of InputModel. </summary>
 /// <param name=""requiredString""> Required string, illustrating a reference type property. </param>
 /// <param name=""requiredInt""> Required int, illustrating a value type property. </param>
-/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredString""/> or <paramref name=""requiredInt""/> is null. </exception>
+/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredString""/> is null. </exception>
 public InputModel(string requiredString,int requiredInt)
 {
 global::Azure.Core.Argument.AssertNotNull(requiredString, nameof(requiredString));
-global::Azure.Core.Argument.AssertNotNull(requiredInt, nameof(requiredInt));
 
 RequiredString = requiredString;
 RequiredInt = requiredInt;

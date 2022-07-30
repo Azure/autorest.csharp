@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         switch (serialization)
                         {
-                            case JsonSerialization jsonSerialization:
+                            case JsonObjectSerialization jsonSerialization:
                                 if (model.IncludeSerializer)
                                 {
                                     WriteJsonSerialize(writer, jsonSerialization);
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteJsonDeserialize(CodeWriter writer, SchemaObjectType model, JsonSerialization jsonSerialization)
+        private void WriteJsonDeserialize(CodeWriter writer, SchemaObjectType model, JsonObjectSerialization jsonSerialization)
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
             {
@@ -201,7 +201,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    writer.DeserializeValue(jsonSerialization, $"element", v => writer.Line($"return {v};"));
+                    var initializers = writer.WritePropertiesDeserialization(jsonSerialization, $"element");
+                    writer.WriteInitialization(v => writer.Line($"return {v};"), model, model.SerializationConstructor, initializers);
                 }
             }
             writer.Line();
