@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [Test]
         public void InputBasic()
         {
-            // refer to the original CADL file: https://github.com/annelo-msft/azure-sdk-for-net/blob/cadl-models-input-basic/sdk/template/Azure.Template/src/Generated/Models/InputModel.cs
+            // refer to the original CADL file: https://github.com/annelo-msft/azure-sdk-for-net/blob/cadl-models-roundtrip-basic/sdk/template/Azure.Template/src/Generated/Models/RoundTripModel.cs
             var model = new ModelTypeProvider(
                 new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public",
                     new List<InputModelProperty>{

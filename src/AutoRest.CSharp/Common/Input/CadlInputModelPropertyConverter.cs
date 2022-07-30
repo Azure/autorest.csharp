@@ -43,13 +43,10 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsRequired), ref isRequired)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsDiscriminator), ref isDiscriminator);
 
-                if (isKnownProperty)
+                if (!isKnownProperty)
                 {
-                    continue;
+                    reader.SkipProperty();
                 }
-
-                JsonSerializer.Deserialize<object>(ref reader, options);
-                reader.Read();
             }
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");

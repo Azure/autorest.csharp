@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ConstructorSignature PublicConstructor { get; }
         public ConstructorSignature SerializationConstructor { get; }
 
-        private readonly IReadOnlyDictionary<InputModelProperty, Parameter> _inputsToParameters;
         private readonly IReadOnlyDictionary<InputModelProperty, FieldDeclaration> _inputsToFields;
         private readonly IReadOnlyDictionary<Parameter, FieldDeclaration> _parametersToFields;
 
@@ -40,10 +39,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
 
-            (_inputsToParameters, _inputsToFields, _parametersToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+            (_inputsToFields, _parametersToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
 
             Fields = _inputsToFields.Values.ToList();
-            PublicConstructor = BuildPublicConstructor(Declaration.Name, _inputsToParameters.Values.ToList());
+            PublicConstructor = BuildPublicConstructor(Declaration.Name, _parametersToFields.Keys.ToList());
 
             // Since we consider all models roundtrip for now, use the same constructor for serialization
             SerializationConstructor = PublicConstructor;
@@ -77,10 +76,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private static (IReadOnlyDictionary<InputModelProperty, Parameter> InputsToParameters, IReadOnlyDictionary<InputModelProperty, FieldDeclaration> InputsToFields, IReadOnlyDictionary<Parameter, FieldDeclaration> ParametersToFields)
-            CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
+        private static (IReadOnlyDictionary<InputModelProperty, FieldDeclaration> InputsToFields, IReadOnlyDictionary<Parameter, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
         {
-            var inputsToParameters = new Dictionary<InputModelProperty, Parameter>();
             var inputsToFields = new Dictionary<InputModelProperty, FieldDeclaration>();
             var parametersToFields = new Dictionary<Parameter, FieldDeclaration>();
 
@@ -95,12 +92,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (inputModelProperty.IsRequired)
                 {
                     var parameter = Parameter.FromModelProperty(inputModelProperty, typeFactory);
-                    inputsToParameters[inputModelProperty] = parameter;
                     parametersToFields[parameter] = field;
                 }
             }
 
-            return (inputsToParameters, inputsToFields, parametersToFields);
+            return (inputsToFields, parametersToFields);
         }
 
         private static ConstructorSignature BuildPublicConstructor(string name, IReadOnlyList<Parameter> parameters)

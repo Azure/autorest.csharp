@@ -6,6 +6,8 @@
     {
       "$id": "1",
       "Name": "RoundTripModel",
+      "ObjectToSkip": {"a": "b", "c": "d"},
+      "ArrayToSkip": ["a", {"b": "c"}, "d"],
       "Properties": [
         {
           "Name": "requiredString",
