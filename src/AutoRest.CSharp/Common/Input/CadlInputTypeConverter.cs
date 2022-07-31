@@ -81,10 +81,9 @@ namespace AutoRest.CSharp.Common.Input
             string? inputTypeKindString = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadBoolean(nameof(InputType.IsNullable), ref isNullable)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref inputTypeKindString)
-                    || reader.SkipProperty();
+                    || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref inputTypeKindString);
 
                 if (!isKnownProperty)
                 {
