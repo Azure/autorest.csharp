@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal class Sample
+    internal class OperationSample
     {
     }
 }

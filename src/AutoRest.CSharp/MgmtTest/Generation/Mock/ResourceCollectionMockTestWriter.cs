@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -26,13 +27,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             var parent = parents.First();
 
             _writer.Line();
-            var collectionName = WriteGetCollection(parent, testCase);
+            var collectionName = WriteGetCollection(testCase);
 
             WriteTestOperation(collectionName, testCase);
         }
 
-        protected CodeWriterDeclaration WriteGetCollection(MgmtTypeProvider parent, MockTestCase testCase)
+        protected CodeWriterDeclaration WriteGetCollection(MockTestCase testCase)
         {
+            var parent = testCase.Parent;
+            Debug.Assert(parent is not null);
             var parentVar = WriteGetResource(parent, testCase);
 
             // now we have the parent resource, get the collection from that resource
