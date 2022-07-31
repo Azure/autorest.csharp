@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             _writer.UseNamespace("System");
             _writer.UseNamespace("Azure.Identity");
             _writer.UseNamespace("System.Threading.Tasks");
+            _writer.UseNamespace(match.Groups[1].Value);
 
             _writer.Line($"#region Parameter decalarations");
             _writer.Line($"// Below parameters are extracted from swagger example files, please use your own values to execute the API lively.");
@@ -312,16 +313,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 _writer.Line();
                 if (generatingSample)
                 {
+                    bool hasOutput = false;
                     if (testCase.ClientOperation.ReturnType.Name == "ArmOperation")
                     {
                         _writer.UseNamespace("System.Text.Json");
                         if (testCase.ClientOperation.ReturnType.Arguments.Length > 0 && testCase.ClientOperation.ReturnType.Arguments[0].Implementation is Resource)
                         {
+                            hasOutput = true;
                             _writer.Line($"Console.WriteLine($\"Succeed on ResourceId: {{{operation}.Value.Data.Id}}\");");
                             _writer.Line($"Console.WriteLine($\"Full Resource content: {{JsonSerializer.Serialize({operation}.Value.Data)}}\");");
                         }
-                        else
+                        else if (testCase.ClientOperation.ReturnType.Arguments.Length>0)
                         {
+                            hasOutput = true;
                             _writer.Line($"Console.WriteLine($\"Response: {{JsonSerializer.Serialize({operation}.Value)}}\");");
                         }
                     }
@@ -329,21 +333,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                     {
                         if (testCase.ClientOperation.ReturnType.Arguments[0].IsFrameworkType)
                         {
+                            hasOutput = true;
                             _writer.Line($"Console.WriteLine($\"Succeed with return: {{{operation}.Value}}\");");
                         }
                         else if (testCase.ClientOperation.ReturnType.Arguments[0].Implementation is Resource)
                         {
+                            hasOutput = true;
                             _writer.UseNamespace("System.Text.Json");
                             _writer.Line($"Console.WriteLine($\"Succeed on ResourceId: {{{operation}.Value.Data.Id}}\");");
                             _writer.Line($"Console.WriteLine($\"Full Resource content: {{JsonSerializer.Serialize({operation}.Value.Data)}}\");");
                         }
-                        else
-                        {
-                            _writer.UseNamespace("System.Text.Json");
-                            _writer.Line($"Console.WriteLine($\"Response: {{JsonSerializer.Serialize({operation}.Value)}}\");");
-                        }
                     }
-                    else
+                    if (!hasOutput)
                     {
                         _writer.Line($"Console.WriteLine(\"Succeed.\");");
                     }
