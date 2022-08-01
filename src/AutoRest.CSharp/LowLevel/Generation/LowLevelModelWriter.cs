@@ -5,7 +5,9 @@ using System;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -58,29 +60,72 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D} : {typeof(IUtf8JsonSerializable)}"))
                 {
-                    using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
-                    {
-                        writer.ToSerializeCall(serialization, $"this");
-                    }
+                    WriteUtf8JsonSerializableWriteMethod(writer, serialization);
+
                     writer.Line();
-                    using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
-                    {
-                        var initializers = writer.WritePropertiesDeserialization(serialization, $"element").ToDictionary(pi => pi.Name);
 
-                        var parameters = model.SerializationConstructor.Parameters
-                            .Select(p => initializers[model.GetFieldByParameter(p).Name].Value)
-                            .ToArray();
+                    WriteDeserializeMethod(writer, model, serialization);
 
-                        if (parameters.Length == initializers.Count)
-                        {
-                            writer.Append($"return new {model.Type}({parameters.Join(", ")});");
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("Initialization of properties outside of serialization constructor is not supported yet.");
-                        }
-                    }
+                    writer.Line();
+
+                    WriteToRequestContentMethod(writer);
+
+                    writer.Line();
+
+                    WriteFromResponseMethod(writer, model);
                 }
+            }
+        }
+
+        private static void WriteUtf8JsonSerializableWriteMethod(CodeWriter writer, JsonObjectSerialization serialization)
+        {
+            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
+            {
+                writer.ToSerializeCall(serialization, $"this");
+            }
+        }
+
+        private static void WriteDeserializeMethod(CodeWriter writer, ModelTypeProvider model, JsonObjectSerialization serialization)
+        {
+            using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
+            {
+                var initializers = writer.WritePropertiesDeserialization(serialization, $"element").ToDictionary(pi => pi.Name);
+
+                var parameters = model.SerializationConstructor.Parameters
+                    .Select(p => initializers[model.GetFieldByParameter(p).Name].Value)
+                    .ToArray();
+
+                if (parameters.Length == initializers.Count)
+                {
+                    writer.Append($"return new {model.Type}({parameters.Join(", ")});");
+                }
+                else
+                {
+                    throw new NotSupportedException("Initialization of properties outside of serialization constructor is not supported yet.");
+                }
+            }
+        }
+
+        private static void WriteToRequestContentMethod(CodeWriter writer)
+        {
+            using (writer.Scope($"internal {typeof(RequestContent)} ToRequestContent()"))
+            {
+                var contentVariable = new CodeWriterDeclaration("content");
+                writer
+                    .Line($"var {contentVariable:D} = new {typeof(Utf8JsonRequestContent)}();")
+                    .Line($"{contentVariable:I}.{nameof(Utf8JsonRequestContent.JsonWriter)}.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(this);")
+                    .Line($"return {contentVariable:I};");
+            }
+        }
+
+        private static void WriteFromResponseMethod(CodeWriter writer, ModelTypeProvider model)
+        {
+            using (writer.Scope($"internal static {model.Type} FromResponse({typeof(Response)} response)"))
+            {
+                var documentVariable = new CodeWriterDeclaration("document");
+                writer
+                    .Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{nameof(Response.Content)});")
+                    .Line($"return Deserialize{model.Declaration.Name}({documentVariable:I}.{nameof(JsonDocument.RootElement)});");
             }
         }
     }
