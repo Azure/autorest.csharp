@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var parameter in method.Parameters)
             {
                 var property = ctor.FindPropertyInitializedByParameter(parameter)!;
-                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name}", parameter.Type));
+                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
             }
 
             writer.WriteMethodDocumentation(method);
