@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -37,16 +38,7 @@ namespace MgmtDiscriminator.Models
                     case "UrlSigning": return UrlSigningAction.DeserializeUrlSigningAction(element);
                 }
             }
-            DeliveryRuleActionType name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"))
-                {
-                    name = new DeliveryRuleActionType(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new DeliveryRuleAction(name);
+            throw new NotSupportedException("Deserialization of abstract type 'global::MgmtDiscriminator.Models.DeliveryRuleAction' not supported.");
         }
     }
 }

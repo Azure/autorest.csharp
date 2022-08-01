@@ -166,6 +166,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
+            JsonElement? abstractBaseClassWithDiscriminator = default,
             TestModelerConfiguration? testmodeler = default,
             JsonElement? operationIdMappings = default)
         {
@@ -214,6 +215,7 @@ namespace AutoRest.CSharp.Input
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) || Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) || Convert.ToBoolean(resourceModelRequiresName.ToString());
             DoesSingletonRequiresKeyword = IsValidJsonElement(singletonRequiresKeyword) && Convert.ToBoolean(singletonRequiresKeyword.ToString());
+            EnableAbstractBaseClassWithDiscriminator = !IsValidJsonElement(abstractBaseClassWithDiscriminator) || Convert.ToBoolean(abstractBaseClassWithDiscriminator.ToString());
             TestModeler = testmodeler;
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
         }
@@ -234,6 +236,10 @@ namespace AutoRest.CSharp.Input
         /// Will we only see the resource name to be in the dictionary to make a resource singleton? Defaults to false
         /// </summary>
         public bool DoesSingletonRequiresKeyword { get; }
+        /// <summary>
+        /// Will the base class used in polymorphism to be marked as abstract? Defaults to true
+        /// </summary>
+        public bool EnableAbstractBaseClassWithDiscriminator { get; }
         public IReadOnlyDictionary<string, string> RequestPathToParent { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceName { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceData { get; }
@@ -296,6 +302,7 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
+                abstractBaseClassWithDiscriminator: autoRest.GetValue<JsonElement?>("enable-abstract-base-class-with-discriminator").GetAwaiter().GetResult(),
                 testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
         }
@@ -332,6 +339,8 @@ namespace AutoRest.CSharp.Input
                 writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
             if (DoesSingletonRequiresKeyword)
                 writer.WriteBoolean(nameof(DoesSingletonRequiresKeyword), DoesSingletonRequiresKeyword);
+            if (!EnableAbstractBaseClassWithDiscriminator)
+                writer.WriteBoolean(nameof(EnableAbstractBaseClassWithDiscriminator), EnableAbstractBaseClassWithDiscriminator);
             if (TestModeler is not null)
             {
                 TestModeler.Write(writer, nameof(TestModeler));
@@ -406,6 +415,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
+            root.TryGetProperty(nameof(EnableAbstractBaseClassWithDiscriminator), out var abstractBaseClassWithDiscriminator);
             root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
 
@@ -438,6 +448,7 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
+                abstractBaseClassWithDiscriminator: abstractBaseClassWithDiscriminator,
                 testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
                 operationIdMappings: operationIdMappings);
         }

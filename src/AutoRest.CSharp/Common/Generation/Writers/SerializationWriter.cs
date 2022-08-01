@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (model.Declaration.IsAbstract)
+                if (model.Declaration.IsAbstract || model.IsAbstract)
                 {
                     writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{model.Type}' not supported.\");");
                 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -30,16 +31,7 @@ namespace MgmtSafeFlatten.Models
                     case "LayerOneFoo": return LayerOneFooType.DeserializeLayerOneFooType(element);
                 }
             }
-            LayerOneTypeName name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"))
-                {
-                    name = new LayerOneTypeName(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new LayerOneBaseType(name);
+            throw new NotSupportedException("Deserialization of abstract type 'global::MgmtSafeFlatten.Models.LayerOneBaseType' not supported.");
         }
     }
 }

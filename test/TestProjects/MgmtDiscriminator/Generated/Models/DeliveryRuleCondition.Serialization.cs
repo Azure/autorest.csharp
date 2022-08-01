@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,16 +32,7 @@ namespace MgmtDiscriminator.Models
                     case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element);
                 }
             }
-            MatchVariable name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"))
-                {
-                    name = new MatchVariable(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new DeliveryRuleCondition(name);
+            throw new NotSupportedException("Deserialization of abstract type 'global::MgmtDiscriminator.Models.DeliveryRuleCondition' not supported.");
         }
     }
 }
