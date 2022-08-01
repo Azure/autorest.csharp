@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [Test]
         public void InputBasic()
         {
-            // refer to the original CADL file: https://github.com/annelo-msft/azure-sdk-for-net/blob/cadl-models-input-basic/sdk/template/Azure.Template/src/Generated/Models/InputModel.cs
+            // refer to the original CADL file: https://github.com/annelo-msft/azure-sdk-for-net/blob/cadl-models-roundtrip-basic/sdk/template/Azure.Template/src/Generated/Models/RoundTripModel.cs
             var model = new ModelTypeProvider(
                 new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public",
                     new List<InputModelProperty>{
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null);
 
             var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteModel(codeWriter, model);
+            LowLevelModelWriter.WriteType(codeWriter, model);
             var codes = codeWriter.ToString();
 
             Assert.AreEqual(codes, @"// Copyright (c) Microsoft Corporation. All rights reserved.
@@ -50,11 +50,10 @@ public int RequiredInt{ get; }
 /// <summary> Initializes a new instance of InputModel. </summary>
 /// <param name=""requiredString""> Required string, illustrating a reference type property. </param>
 /// <param name=""requiredInt""> Required int, illustrating a value type property. </param>
-/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredString""/> or <paramref name=""requiredInt""/> is null. </exception>
+/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredString""/> is null. </exception>
 public InputModel(string requiredString,int requiredInt)
 {
 global::Azure.Core.Argument.AssertNotNull(requiredString, nameof(requiredString));
-global::Azure.Core.Argument.AssertNotNull(requiredInt, nameof(requiredInt));
 
 RequiredString = requiredString;
 RequiredInt = requiredInt;

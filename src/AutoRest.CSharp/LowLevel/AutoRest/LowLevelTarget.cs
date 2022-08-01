@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -8,6 +9,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -19,8 +21,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in library.Models)
             {
                 var codeWriter = new CodeWriter();
-                LowLevelModelWriter.WriteModel(codeWriter, model);
+                LowLevelModelWriter.WriteType(codeWriter, model);
                 project.AddGeneratedFile($"{model.Type.Name}.cs", codeWriter.ToString());
+
+                var serializationWriter = new CodeWriter();
+                LowLevelModelWriter.WriteSerialization(serializationWriter, model);
+                project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationWriter.ToString());
             }
 
             foreach (var client in library.RestClients)

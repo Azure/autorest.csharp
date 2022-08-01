@@ -238,21 +238,18 @@ namespace AutoRest.CSharp.Output.Builders
             foreach (Property property in propertyBag.Properties)
             {
                 var objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
-
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
                     property.IsRequired,
                     property.IsReadOnly,
                     objectProperty,
-                    BuildSerialization(property.Schema, objectProperty.ValueType)
-                    );
+                    BuildSerialization(property.Schema, objectProperty.ValueType));
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
-                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, false);
-                yield return new JsonPropertySerialization(name, false, false, null, objectSerialization);
+                yield return new JsonPropertySerialization(name, serializationProperties);
             }
         }
 

@@ -62,6 +62,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
 
+        public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
+            => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
+
         public static FormattableString GetConstantFormattable(this Constant constant)
         {
             if (constant.Value == null)
@@ -106,6 +109,18 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return $"{constant.Value:L}";
+        }
+
+        public static FormattableString GetReferenceFormattable(this Reference reference)
+        {
+            var parts = reference.Name.Split(".");
+            var sb = new StringBuilder("{0:I}");
+            for (int i = 1; i < parts.Length; i++)
+            {
+                sb.Append(".").Append($"{{{i}:I}}");
+            }
+
+            return FormattableStringFactory.Create(sb.ToString(), parts.Cast<object>().ToArray());
         }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)

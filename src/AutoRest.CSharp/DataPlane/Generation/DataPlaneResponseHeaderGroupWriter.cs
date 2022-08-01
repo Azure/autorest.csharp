@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (!type.IsFrameworkType && type.Implementation is EnumType enumType)
             {
                 writer.Append($"{ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {typeof(string)} value) ? ");
-                writer.AppendEnumFromString(enumType, w => w.AppendRaw("value"));
+                writer.AppendEnumFromString(enumType, $"value");
                 writer.Append($" : ({type.WithNullable(true)}) null;");
             }
             else

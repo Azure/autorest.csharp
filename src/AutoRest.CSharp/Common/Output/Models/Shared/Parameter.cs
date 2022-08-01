@@ -21,8 +21,10 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static Parameter FromModelProperty(in InputModelProperty property, TypeFactory typeFactory)
         {
             var name = property.Name.ToVariableName();
-            return new Parameter(name, property.Description, typeFactory.CreateType(property.Type), null, ValidationType.AssertNotNull, null);
+            var validation = typeFactory.CreateType(property.Type).IsValueType ? ValidationType.None : ValidationType.AssertNotNull;
+            return new Parameter(name, property.Description, typeFactory.CreateType(property.Type), null, validation, null);
         }
+
         public static Parameter FromRequestParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();

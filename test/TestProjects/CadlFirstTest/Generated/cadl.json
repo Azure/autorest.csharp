@@ -5,21 +5,23 @@
   "Models": [
     {
       "$id": "1",
-      "Name": "InputModel",
+      "Name": "RoundTripModel",
+      "ObjectToSkip": {"a": "b", "c": "d"},
+      "ArrayToSkip": ["a", {"b": "c"}, "d"],
       "Properties": [
         {
           "Name": "requiredString",
-          "Description": "Required string property",
+          "Description": "Required string, illustrating a reference type property.",
           "Type": "String",
           "IsRequired": true,
-          "IsReadOnly": true
+          "IsReadOnly": false
         },
         {
           "Name": "requiredInt",
-          "Description": "Required int property",
+          "Description": "Required int, illustrating a value type property.",
           "Type": "Int32",
           "IsRequired": true,
-          "IsReadOnly": true
+          "IsReadOnly": false
         }
       ]
     }
