@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -221,7 +221,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.CreateDescription(ObjectSchema) + BuilderHelpers.CreateExtraDescriptionWithDiscriminator(this);
+            return ObjectSchema.CreateDescription() + CreateExtraDescriptionWithDiscriminator();
+        }
+
+        protected virtual string CreateExtraDescriptionWithDiscriminator()
+        {
+            if (Discriminator?.HasDescendants == true)
+            {
+                List<FormattableString> childrenList = new List<FormattableString>();
+                foreach (var implementation in Discriminator.Implementations)
+                {
+                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
+                }
+                return $"{System.Environment.NewLine}Please note <see cref=\"{Type.Name}\"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes." +
+                    $"{System.Environment.NewLine}The available derived classes include {FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+            }
+            return string.Empty;
         }
 
         private ObjectTypeProperty UpdatePropertyDescription(ObjectTypeProperty property)
@@ -234,7 +249,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     if (!type.Arguments.First().IsFrameworkType && type.Arguments.First().Implementation is MgmtObjectType objectType)
                     {
-                        updatedDescription = BuilderHelpers.CreateExtraDescriptionWithDiscriminator(objectType);
+                        updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
                 else if (TypeFactory.IsDictionary(type))
@@ -242,14 +257,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var objectTypes = type.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is MgmtObjectType);
                     if (objectTypes.Count() > 0)
                     {
-                        var subDescription = objectTypes.Select(o => BuilderHelpers.CreateExtraDescriptionWithDiscriminator((MgmtObjectType)o.Implementation));
+                        var subDescription = objectTypes.Select(o => ((MgmtObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
                         updatedDescription = string.Join("", subDescription);
                     }
                 }
             }
             else if (type.Implementation is MgmtObjectType objectType)
             {
-                updatedDescription = BuilderHelpers.CreateExtraDescriptionWithDiscriminator(objectType);
+                updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
             return updatedDescription.IsNullOrEmpty() ? property :
                 new ObjectTypeProperty(property.Declaration,

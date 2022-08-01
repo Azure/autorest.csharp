@@ -6,36 +6,24 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ReferenceTypePropertyChooser
     {
-        internal const string PropertyReferenceAttribute = "PropertyReferenceType";
-        internal const string PropertyReferenceAttributeName = "PropertyReferenceTypeAttribute";
 
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
         private static readonly Type _locationType = typeof(AzureLocation);
         private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
         private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
-
-        private static IEnumerable<Type> GetPropertyReferenceClassCollection()
-            => ReferenceClassFinder.ExternalTypes.Where(t => ReferenceClassFinder.HasAttribute(t, PropertyReferenceAttributeName) && !t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ObsoleteAttribute)).Any());
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
@@ -54,10 +42,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!typeToReplace.ShouldNotReplaceForProperty())
             {
-                foreach (Type replacementType in GetPropertyReferenceClassCollection())
+                foreach (Type replacementType in ReferenceClassFinder.GetPropertyReferenceClassCollection())
                 {
                     var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
-                    var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
+                    var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceClassFinder.PropertyReferenceTypeAttributeName).First();
                     // TODO: remove this line and uncomment below line after bumping ResourceManager version.
                     var optionalPropertiesForMatch = replacementType.Name == nameof(ManagedServiceIdentity) ? new HashSet<string>{"UserAssignedIdentities"} : new HashSet<string>();
                     //var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
@@ -97,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
         {
-            var extraDescription = BuilderHelpers.CreateExtraDescriptionForManagedServiceIdentity(originalType, replacementCSharpType);
+            var extraDescription = IsReplacementTypeManagedServiceIdentity(replacementCSharpType) ? originalType.CreateExtraDescriptionWithManagedServiceIdentity() : string.Empty;
             var originalDescription = string.IsNullOrWhiteSpace(originalType.Description) ? originalType.CreateDefaultPropertyDescription().ToString() : originalType.Description;
             var periodAndSpace = originalDescription.ToString().EndsWith(".") ? " " : ". ";
             var description = string.IsNullOrEmpty(extraDescription) ? originalDescription : $"{originalDescription}{periodAndSpace}{extraDescription}";
@@ -107,6 +95,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     originalType.IsReadOnly,
                     originalType.SchemaProperty
                     );
+        }
+
+        private static bool IsReplacementTypeManagedServiceIdentity(CSharpType replacementCSharpType)
+        {
+            return !replacementCSharpType.IsFrameworkType && replacementCSharpType.Implementation is SystemObjectType systemObjectType && systemObjectType.SystemType == typeof(ManagedServiceIdentity);
         }
     }
 }

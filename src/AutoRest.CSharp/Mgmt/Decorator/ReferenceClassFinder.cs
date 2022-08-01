@@ -6,14 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -26,6 +22,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string InitializationCtorAttributeName = "InitializationConstructorAttribute";
         internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
         internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
+
+        internal const string PropertyReferenceTypeAttribute = "PropertyReferenceType";
+        internal const string PropertyReferenceTypeAttributeName = "PropertyReferenceTypeAttribute";
+
+        internal const string TypeReferenceTypeAttribute = "TypeReferenceType";
+        internal const string TypeReferenceTypeAttributeName = "TypeReferenceTypeAttribute";
 
         public record PropertyMetadata(string SerializedName, bool Required)
         {
@@ -151,6 +153,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static IList<Type> ExternalTypes => _externalTypes ??= GetExternalTypes();
         internal static IList<Type> GetReferenceClassCollection() => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
 
+        internal static IEnumerable<Type> GetPropertyReferenceClassCollection()
+            => ExternalTypes.Where(t => IsPropertyReferenceType(t) && !IsObsolete(t));
+
+        internal static IReadOnlyList<System.Type> GetTypeReferenceTypes()
+            => ExternalTypes.Where(t => IsTypeReferenceType(t)).ToList();
+
         private static IList<Type> GetExternalTypes()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
@@ -173,6 +181,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool IsReferenceType(Type type) => HasAttribute(type, ReferenceTypeAttributeName);
 
+        private static bool IsPropertyReferenceType(Type type) => HasAttribute(type, PropertyReferenceTypeAttributeName);
+
+        private static bool IsTypeReferenceType(Type type) => HasAttribute(type, TypeReferenceTypeAttributeName);
+
         private static bool IsObsolete(Type type)
             => type.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ObsoleteAttribute)).Any();
 
@@ -190,13 +202,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     Node tempNode = queue.Dequeue();
                     treeNodes.Add(tempNode.Type);
-                    List<Node> tempChilren = tempNode.Children;
-                    if (tempChilren != null)
+                    List<Node> tempChildren = tempNode.Children;
+                    if (tempChildren != null)
                     {
-                        int childNum = tempChilren.Count;
+                        int childNum = tempChildren.Count;
                         while (childNum > 0)
                         {
-                            queue.Enqueue(tempChilren[childNum - 1]);
+                            queue.Enqueue(tempChildren[childNum - 1]);
                             childNum--;
                         }
                     }
