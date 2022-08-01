@@ -72,6 +72,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.MgmtReferenceType;
 
+        public bool IsInheritableCommonType => ObjectSchema != null &&
+            ObjectSchema.Extensions != null &&
+            (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
+
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
             get
@@ -150,7 +154,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? Protected : Internal,
+                IsInheritableCommonType ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
@@ -552,13 +556,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
-        public ObjectTypeProperty GetPropertyForGroupedParameter(RequestParameter groupedParameter, bool includeParents = false)
+        public ObjectTypeProperty GetPropertyForGroupedParameter(string groupedParameterName, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(
-                p => (p.SchemaProperty as GroupProperty)?.OriginalParameter.Contains(groupedParameter) == true,
-                out ObjectTypeProperty? objectProperty, includeParents))
+                    p => p.SchemaProperty is GroupProperty groupProperty && groupProperty.OriginalParameter.Any(p => p.Language.Default.Name == groupedParameterName),
+                    out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {DefaultName}");
+                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameterName} in schema {DefaultName}");
             }
 
             return objectProperty;

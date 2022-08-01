@@ -48,10 +48,11 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
 
-            if (protocolMethod.IsLongRunning)
+            var longRunning = protocolMethod.LongRunning;
+            if (longRunning != null)
             {
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, true);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, false);
             }
             else if (protocolMethod.PagingInfo != null)
             {
@@ -98,11 +99,12 @@ namespace AutoRest.CSharp.Generation.Writers
             };
 
             var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature(operation.Name, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
 
-            writer.WriteXmlDocumentationSummary($"{method.Description}")
+            writer.WriteXmlDocumentationSummary($"{method.SummaryText}")
                 .WriteXmlDocumentationParameters(method.Parameters)
-                .WriteXmlDocumentationRequiredParametersException(method.Parameters);
+                .WriteXmlDocumentationRequiredParametersException(method.Parameters)
+                .WriteXmlDocumentation("remarks", $"{method.DescriptionText}");
 
             if (method.ReturnDescription != null)
             {

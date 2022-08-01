@@ -94,6 +94,13 @@ namespace SingletonResource
             return new IgnitionResource(Client, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
         }
 
+        /// <summary> Gets an object representing a BrakeResource along with the instance operations that can be performed on it in the Car. </summary>
+        /// <returns> Returns a <see cref="BrakeResource" /> object. </returns>
+        public virtual BrakeResource GetBrake()
+        {
+            return new BrakeResource(Client, new ResourceIdentifier(Id.ToString() + "/brakes/default"));
+        }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// Operation Id: Cars_Get

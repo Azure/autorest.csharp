@@ -187,7 +187,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -205,7 +205,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
         {

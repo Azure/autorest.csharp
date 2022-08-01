@@ -2,18 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
-using YamlDotNet.Serialization;
-using AutoRest.CSharp.Output.Models.Requests;
 using Azure.Core;
-using System.ComponentModel;
-using System.Collections.Immutable;
+using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
@@ -148,7 +142,7 @@ namespace AutoRest.CSharp.Input
         private string? format;
     }
 
-    internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>
+    internal partial class RecordOfStringAndRequest : System.Collections.Generic.Dictionary<string, ServiceRequest>
     {
     }
 
@@ -159,6 +153,9 @@ namespace AutoRest.CSharp.Input
         public const string DurationConstant = "duration-constant";
         public const string ETag = "etag";
         public const string ResourceType = "resource-type";
+        public const string Object = "object";
+        public const string IPAddress = "ip-address";
+        public const string ContentType = "content-type";
     }
 
     internal partial class ServiceResponse
@@ -305,31 +302,24 @@ namespace AutoRest.CSharp.Input
         }
     }
 
-    internal partial class OavVariableScope
+    internal partial class VariableScope
     {
+        [YamlMember(Alias = "variables")]
+        public Dictionary<string, Variable> Variables { get; set; } = new();
+
         [YamlMember(Alias = "requiredVariables")]
         public ICollection<string> RequiredVariables { get; set; } = Array.Empty<string>();
 
-        [YamlMember(Alias = "requiredVariablesDefault")]
-        public Dictionary<string, string> RequiredVariablesDefault { get; set; }
-
         [YamlMember(Alias = "secretVariables")]
         public ICollection<string> SecretVariables { get; set; } = Array.Empty<string>();
+    }
 
-        [YamlMember(Alias = "variables")]
-        public Dictionary<string, object?> Variables { get; set; } = new Dictionary<string, object?>();
-
-        [YamlMember(Alias = "outputVariables")]
-        public Dictionary<string, string> OutputVariables { get; set; } = new Dictionary<string, string>();
-
-        public HashSet<string> GetAllVariableNames()
-        {
-            HashSet<string> variableNames = new HashSet<string>();
-            variableNames.UnionWith(this.RequiredVariables);
-            variableNames.UnionWith(this.Variables.Keys);
-            variableNames.UnionWith(this.OutputVariables.Keys);
-            return variableNames;
-        }
+    internal partial class Variable
+    {
+        [YamlMember(Alias = @"type")]
+        public string? Type { get; set; }
+        [YamlMember(Alias = @"value")]
+        public object? Value { get; set; }
     }
 
     internal enum TestDefinitionScope
@@ -338,25 +328,34 @@ namespace AutoRest.CSharp.Input
         ResourceGroup,
     }
 
-    internal partial class TestDefinitionModel : OavVariableScope
+    internal partial class ScenarioDefinition : VariableScope
     {
-        [YamlMember(Alias = "useArmTemplate")]
-        public bool UseArmTemplate { get; set; }
+        [YamlMember(Alias = "scope")]
+        public TestDefinitionScope? Scope { get; set; }
 
         [YamlMember(Alias = "prepareSteps")]
-        public ICollection<TestStep> PrepareSteps { get; set; }
-
-        [YamlMember(Alias = "cleanUpSteps")]
-        public ICollection<TestStep> CleanUpSteps { get; set; }
+        public ICollection<TestStep> PrepareSteps { get; set; } = Array.Empty<TestStep>();
 
         [YamlMember(Alias = "scenarios")]
-        public ICollection<Scenario> Scenarios { get; set; }
+        public ICollection<Scenario> Scenarios { get; set; } = Array.Empty<Scenario>();
+
+        [YamlMember(Alias = "cleanUpSteps")]
+        public ICollection<TestStep> CleanUpSteps { get; set; } = Array.Empty<TestStep>();
 
         [YamlMember(Alias = "_filePath")]
         public string FilePath { get; set; }
 
-        [YamlMember(Alias = "scope")]
-        public TestDefinitionScope? Scope { get; set; }
+        [YamlMember(Alias = "_swaggerFilePaths")]
+        public ICollection<string> SwaggerFilePaths { get; set; } = Array.Empty<string>();
+    }
+
+    internal partial class TestDefinitionModel : ScenarioDefinition
+    {
+        [YamlMember(Alias = "useArmTemplate")]
+        public bool UseArmTemplate { get; set; }
+
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public Dictionary<string, string> RequiredVariablesDefault;
     };
 
     internal partial class JsonPatchOp
@@ -401,48 +400,51 @@ namespace AutoRest.CSharp.Input
         RawCall,
     }
 
-    internal partial class TestStep : OavVariableScope
+    internal enum VariableType
     {
-        [YamlMember(Alias = "type")]
-        public TestStepType Type { get; set; }
+        [System.Runtime.Serialization.EnumMember(Value = @"string")]
+        String,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"secureString")]
+        SecureString,
+    }
+
+    internal partial class StepBase : VariableScope
+    {
         [YamlMember(Alias = "description")]
         public string? Description { get; set; }
 
         [YamlMember(Alias = "step")]
         public string? Step { get; set; }
 
-        [YamlMember(Alias = "requestUpdate")]
-        public ICollection<JsonPatchOp> RequestUpdate { get; set; } = Array.Empty<JsonPatchOp>();
-
-        [YamlMember(Alias = "resourceUpdate")]
-        public ICollection<JsonPatchOp> ResourceUpdate { get; set; } = Array.Empty<JsonPatchOp>();
-
-        [YamlMember(Alias = "responseUpdate")]
-        public ICollection<JsonPatchOp> ResponseUpdate { get; set; } = Array.Empty<JsonPatchOp>();
-
-        [YamlMember(Alias = "statusCode")]
-        public int? StatusCode { get; set; }
+        [YamlMember(Alias = "outputVariables")]
+        public Dictionary<string, OutputVariable> OutputVariables { get; set; } = new Dictionary<string, OutputVariable>();
 
         [YamlMember(Alias = "isPrepareStep")]
         public bool? IsPrepareStep { get; set; }
 
         [YamlMember(Alias = "isCleanUpStep")]
         public bool? IsCleanUpStep { get; set; }
+    }
 
-        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
-        [YamlMember(Alias = "armTemplate")]
-        public String? ArmTemplate { get; set; }
+    internal partial class OutputVariable
+    {
+        [YamlMember(Alias = "type")]
+        public VariableType Type { get; set; }
 
-        [YamlMember(Alias = "armTemplatePayload")]
-        public RecordOfStringAndAny? ArmTemplatePayload { get; set; }
+        [YamlMember(Alias = "fromResponse")]
+        public string FromResponse { get; set; }
+    }
 
-        [YamlMember(Alias = "armTemplatePayloadString")]
-        public string? ArmTemplatePayloadString { get; set; }
-
+    // left this class here for reference. The properties in this class have been populated into TestStep since we could not find a way to introduce polymorphism during yaml deserialization
+    internal partial class RestCallStep : TestStepBase
+    {
         // for TestStepRestCall (type==restCall)
         [YamlMember(Alias = "operationId")]
-        public String? OperationId { get; set; }
+        public string? OperationId { get; set; }
+
+        [YamlMember(Alias = "operation")]
+        public Operation? Operation { get; set; }
 
         [YamlMember(Alias = "exampleName")]
         public string? ExampleName { get; set; }
@@ -450,19 +452,36 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "exampleFile")]
         public string? ExampleFile { get; set; }
 
+        [YamlMember(Alias = "resourceName")]
+        public string? ResourceName { get; set; }
+
+        [YamlMember(Alias = "exampleFilePath")]
+        public string? ExampleFilePath { get; set; }
+
         [YamlMember(Alias = "requestParameters")]
         public RecordOfStringAndAny? RequestParameters { get; set; }
 
         [YamlMember(Alias = "expectedResponse")]
         public object? ExpectedResponse { get; set; }
 
-        // test-modeler properties
+        [YamlMember(Alias = "statusCode")]
+        public int? StatusCode { get; set; }
+
+        [YamlMember(Alias = "resourceUpdate")]
+        public ICollection<JsonPatchOp> ResourceUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "requestUpdate")]
+        public ICollection<JsonPatchOp> RequestUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "responseUpdate")]
+        public ICollection<JsonPatchOp> ResponseUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
         [YamlMember(Alias = "exampleModel")]
         public ExampleModel? ExampleModel { get; set; }
 
         [YamlMember(Alias = "outputVariablesModel")]
-        public Dictionary<string, ICollection<OutputVariableModel>> OutputVariablesModel { get; set; } = new Dictionary<string, ICollection<OutputVariableModel>>();
-    };
+        public Dictionary<string, ICollection<OutputVariableModel>> OutputVariablesModel { get; set; } = new();
+    }
 
     internal partial class OutputVariableModel
     {
@@ -473,31 +492,136 @@ namespace AutoRest.CSharp.Input
         public string? Key { get; set; }
 
         [YamlMember(Alias = "languages")]
-        public Languages? Language { get; set; }
-
-        [YamlMember(Alias = "type")]
-        public string Type { get; set; }
+        public Languages Language { get; set; } = new Languages();
     }
 
-    internal partial class Scenario : OavVariableScope
+    // left this class here for reference. The properties in this class have been populated into TestStep since we could not find a way to introduce polymorphism during yaml deserialization
+    internal partial class ArmTemplateStep : TestStepBase
     {
-        [YamlMember(Alias = "description")]
-        public string Description { get; set; }
+        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
+        [YamlMember(Alias = "armTemplate")]
+        public string? ArmTemplate { get; set; }
+    }
 
+    // left this class here for reference. The properties in this class have been populated into TestStep since we could not find a way to introduce polymorphism during yaml deserialization
+    internal partial class RawCallStep : TestStepBase
+    {
+        [YamlMember(Alias = "method")]
+        public HttpMethod Method { get; set; }
+
+        [YamlMember(Alias = "rawUrl")]
+        public string? RawUrl { get; set; }
+
+        [YamlMember(Alias = "requestHeaders")]
+        public Dictionary<string, string> RequestHeaders { get; set; } = new();
+
+        [YamlMember(Alias = "requestBody")]
+        public string? RequestBody { get; set; }
+
+        [YamlMember(Alias = "statusCode")]
+        public int? StatusCode { get; set; }
+
+        [YamlMember(Alias = "expectedResponse")]
+        public string? ExpectedResponse { get; set; }
+    }
+
+    internal partial class TestStepBase : StepBase
+    {
+        [YamlMember(Alias = "type")]
+        public TestStepType Type { get; set; }
+    }
+
+    internal partial class TestStep : StepBase
+    {
+        [YamlMember(Alias = "type")]
+        public TestStepType Type { get; set; }
+
+        #region RestCallStep (type==restCall)
+        [YamlMember(Alias = "operationId")]
+        public string? OperationId { get; set; }
+
+        [YamlMember(Alias = "operation")]
+        public Operation? Operation { get; set; }
+
+        [YamlMember(Alias = "exampleName")]
+        public string? ExampleName { get; set; }
+
+        [YamlMember(Alias = "exampleFile")]
+        public string? ExampleFile { get; set; }
+
+        [YamlMember(Alias = "resourceName")]
+        public string? ResourceName { get; set; }
+
+        [YamlMember(Alias = "exampleFilePath")]
+        public string? ExampleFilePath { get; set; }
+
+        [YamlMember(Alias = "requestParameters")]
+        public RecordOfStringAndAny? RequestParameters { get; set; }
+
+        [YamlMember(Alias = "resourceUpdate")]
+        public ICollection<JsonPatchOp> ResourceUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "requestUpdate")]
+        public ICollection<JsonPatchOp> RequestUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "responseUpdate")]
+        public ICollection<JsonPatchOp> ResponseUpdate { get; set; } = Array.Empty<JsonPatchOp>();
+
+        [YamlMember(Alias = "exampleModel")]
+        public ExampleModel? ExampleModel { get; set; }
+
+        [YamlMember(Alias = "outputVariablesModel")]
+        public Dictionary<string, ICollection<OutputVariableModel>> OutputVariablesModel { get; set; } = new();
+        #endregion
+
+        #region ArmTemplateStep
+        [YamlMember(Alias = "armTemplate")]
+        public string? ArmTemplate { get; set; }
+        #endregion
+
+        #region RawCallStep
+        [YamlMember(Alias = "method")]
+        public HttpMethod Method { get; set; }
+
+        [YamlMember(Alias = "rawUrl")]
+        public string? RawUrl { get; set; }
+
+        [YamlMember(Alias = "requestHeaders")]
+        public Dictionary<string, string> RequestHeaders { get; set; } = new();
+
+        [YamlMember(Alias = "requestBody")]
+        public string? RequestBody { get; set; }
+        #endregion
+
+        #region Both RawCallStep and RestCallStep
+
+        [YamlMember(Alias = "statusCode")]
+        public int? StatusCode { get; set; }
+
+        [YamlMember(Alias = "expectedResponse")]
+        public object? ExpectedResponse { get; set; }
+        #endregion
+    }
+
+    internal partial class Scenario : VariableScope
+    {
         [YamlMember(Alias = "scenario")]
         public string ScenarioName { get; set; }
 
-        [YamlMember(Alias = "steps")]
-        public ICollection<TestStep> Steps { get; set; }
-
-        [YamlMember(Alias = "_scenarioDef")]
-        public TestDefinitionModel? ScenarioDef { get; set; }
-
-        [YamlMember(Alias = "_resolvedSteps")]
-        public ICollection<TestStep> ResolvedSteps { get; set; } = Array.Empty<TestStep>();
-
         [YamlMember(Alias = "shareScope")]
         public bool ShareScope { get; set; }
+
+        [YamlMember(Alias = "description")]
+        public string Description { get; set; }
+
+        [YamlMember(Alias = "steps")]
+        public ICollection<TestStep> Steps { get; set; } = Array.Empty<TestStep>();
+
+        [YamlMember(Alias = "_scenarioDef")]
+        public ScenarioDefinition? ScenarioDefinition { get; set; }
+
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public Dictionary<string, string> RequiredVaraiblesDefault { get; set; } = new();
     };
 
 
@@ -596,18 +720,14 @@ namespace AutoRest.CSharp.Input
         public System.Collections.Generic.ICollection<ExampleValue> Elements { get; set; } = Array.Empty<ExampleValue>();
 
         [YamlMember(Alias = "properties")]
-        public DictionaryOfExamplValue Properties { get; set; } = new DictionaryOfExamplValue();
+        public Dictionary<string, ExampleValue> Properties { get; set; } = new();
 
+        // parent class Name--> value
         [YamlMember(Alias = "parentsValue")]
-        public DictionaryOfExamplValue ParentsValue { get; set; } // parent class Name--> value
+        public Dictionary<string, ExampleValue> ParentsValue { get; set; } = new();
 
         public string CSharpName() =>
             (this.Language.Default.Name == null || this.Language.Default.Name == "null") ? "NullProperty" : this.Language.Default.Name.ToCleanName();
-    }
-
-    internal partial class DictionaryOfExamplValue : System.Collections.Generic.Dictionary<string, ExampleValue>
-    {
-
     }
 }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.

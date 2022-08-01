@@ -59,14 +59,30 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
-            ByteArraySchema {Format: ByteArraySchemaFormat.Base64url} => SerializationFormat.Bytes_Base64Url,
-            ByteArraySchema {Format: ByteArraySchemaFormat.Byte} => SerializationFormat.Bytes_Base64,
-            UnixTimeSchema _ => SerializationFormat.DateTime_Unix,
-            DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
-            DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
+            ByteArraySchema byteArraySchema => byteArraySchema.Format switch
+                {
+                    ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
+                    ByteArraySchemaFormat.Byte => SerializationFormat.Bytes_Base64,
+                    _ => SerializationFormat.Default
+                },
+
+            UnixTimeSchema => SerializationFormat.DateTime_Unix,
+            DateTimeSchema dateTimeSchema => dateTimeSchema.Format switch
+                {
+                    DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                    DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
+                    _ => SerializationFormat.Default
+                },
+
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => schema.Extensions?.Format?.Equals(XMsFormat.DurationConstant) == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
+
+            DurationSchema _ => schema.Extensions?.Format switch
+                {
+                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                    _ => SerializationFormat.Duration_ISO8601
+                },
+
             _ => schema.Extensions?.Format switch
                 {
                     XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,

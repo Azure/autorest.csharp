@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -16,6 +17,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, sourceInputModel);
+
+            var library = context.Library;
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();
@@ -23,7 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
             var longRunningOperationWriter = new LongRunningOperationWriter();
 
-            foreach (var model in context.Library.Models)
+            foreach (var model in library.Models)
             {
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
@@ -36,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            var modelFactoryType = context.Library.ModelFactory;
+            var modelFactoryType = library.ModelFactory;
             if (modelFactoryType != default)
             {
                 var codeWriter = new CodeWriter();
@@ -44,7 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{modelFactoryType.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var client in context.Library.RestClients)
+            foreach (var client in library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
                 restClientWriter.WriteClient(restCodeWriter, client);
@@ -52,7 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (DataPlaneResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
+            foreach (DataPlaneResponseHeaderGroupType responseHeaderModel in library.HeaderModels)
             {
                 var headerModelCodeWriter = new CodeWriter();
                 headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
@@ -60,26 +63,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (Configuration.PublicClients && context.Library.Clients.Any())
+            if (library.ClientOptions is not null)
             {
-                var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-                var clientOptionsType = new ClientOptionsTypeProvider(context, $"{clientPrefix}ClientOptions", $"{clientPrefix}Client");
                 var codeWriter = new CodeWriter();
-                ClientOptionsWriter.WriteClientOptions(codeWriter, clientOptionsType);
-
-                var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-                project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", codeWriter.ToString());
+                ClientOptionsWriter.WriteClientOptions(codeWriter, library.ClientOptions);
+                project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var client in context.Library.Clients)
+            foreach (var client in library.Clients)
             {
                 var codeWriter = new CodeWriter();
                 clientWriter.WriteClient(codeWriter, client, context);
-
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var operation in context.Library.LongRunningOperations)
+            foreach (var operation in library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
                 longRunningOperationWriter.Write(codeWriter, operation);

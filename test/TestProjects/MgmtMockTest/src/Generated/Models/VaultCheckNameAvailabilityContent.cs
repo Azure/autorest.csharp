@@ -23,12 +23,12 @@ namespace MgmtMockTest.Models
             }
 
             Name = name;
-            ResourceType = Type.MicrosoftKeyVaultVaults;
+            ResourceType = EncryptionType.MicrosoftKeyVaultVaults;
         }
 
         /// <summary> The vault name. </summary>
         public string Name { get; }
         /// <summary> The type of resource, Microsoft.KeyVault/vaults. </summary>
-        public Type ResourceType { get; }
+        public EncryptionType ResourceType { get; }
     }
 }

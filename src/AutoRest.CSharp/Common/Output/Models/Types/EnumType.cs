@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly IEnumerable<ChoiceValue> _choices;
         private readonly ModelTypeMapping? _typeMapping;
+        private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
 
         public EnumType(ChoiceSchema schema, BuildContext context)
@@ -30,6 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable) : base(context)
         {
             _choices = choices;
+            _typeFactory = context.TypeFactory;
 
             var usage = context.SchemaUsageProvider.GetUsage(schema);
             var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
@@ -89,7 +91,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var name = BuilderHelpers.DisambiguateName(Type, c.CSharpName());
                 var memberMapping = _typeMapping?.GetForMember(name);
                 values.Add(new EnumTypeValue(
-                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, Context.TypeFactory),
+                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _typeFactory),
                     CreateDescription(c),
                     BuilderHelpers.ParseConstant(c.Value, BaseType)));
             }

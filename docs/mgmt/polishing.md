@@ -6,6 +6,7 @@
     - [Rename a Type](#rename-a-type)
     - [Rename a Property in a Class](#rename-a-property-in-a-class)
     - [Rename an Enumeration Value in an Enumeration Type](#rename-an-enumeration-value-in-an-enumeration-type)
+- [Irregular Plural Words](#irregular-plural-words)
 
 ## Rename rules
 
@@ -81,10 +82,13 @@ Here is list of the format we support:
 | :--- | :--- |
 | arm-id | [ResourceIdentifier](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourceidentifier?view=azure-dotnet) |
 | azure-location | [AzureLocation](https://docs.microsoft.com/en-us/dotnet/api/azure.core.azurelocation?view=azure-dotnet) |
+| datetime | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
 | duration-constant | [TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan) |
 | etag | [ETag](https://docs.microsoft.com/en-us/dotnet/api/azure.etag?view=azure-dotnet) |
+| ip-address | [IPAddress](https://docs.microsoft.com/en-us/dotnet/api/system.net.ipaddress?view=net-6.0) |
+| object | [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object?view=net-6.0) |
 | resource-type | [ResourceType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourcetype?view=azure-dotnet) |
-| datetime | [DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset?view=net-6.0) |
+| content-type | [ContentType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.contenttype?view=azure-dotnet) |
 | uri | [Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=net-6.0) |
 | uuid | [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid?view=net-6.0) |
 
@@ -93,6 +97,8 @@ Here is list of the format we support:
 To rename an element in the generated SDK, like a type name, a property name, you could do that by writing `directive`s which autorest supports. You could refer [this document](https://github.com/Azure/autorest/blob/main/docs/generate/directives.md) for more details and usages.
 
 But this configuration provides a simpler syntax for you to change the name of a type or a property.
+
+This configuration also allows you to assign a custom type format if it is a property. For valid format values, please refer to the [change format by name rules](#change-format-by-name-rules) section.
 
 ### Rename a type
 
@@ -179,6 +185,33 @@ public partial class Model
 }
 ```
 
+### Change the format of a property
+
+To assign a new format to a property, you could use this syntax:
+```yaml
+rename-mapping:
+  Model.oldProperty: NewProperty|resource-type
+```
+This will rename this property to its new name, and change its format to `resource-type`:
+```diff
+public partial class Model
+{
+    /* other things inside the class */
+
+-    public string OldProperty { get; set; }
++    public ResourceType? NewProperty { get; set; }
+
+    /* other things inside the class */
+}
+```
+
+If only the type of this property needs change, you could omit its new name, like
+```yaml
+rename-mapping:
+  Model.oldProperty: -|resource-type
+```
+Please note that the dash and slash `-|` here are mandatory as a placeholder for the property name. The generator uses this symbol to separate the part for property name and its format.
+
 ### Rename an enumeration value in an enumeration type
 
 The generator regards the enumeration values as static properties, therefore you could use basically the same syntax as renaming a property to rename an enumeration value:
@@ -187,3 +220,15 @@ rename-mapping:
   EnumType.enum_value: NewValue
 ```
 where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors.
+
+## Irregular Plural Words
+
+The generator needs to convert word into its plural form or convert it back to its singular form in some circumstances. Our generator uses the [Humanizer](https://humanizr.net/) to do that. It has a dictionary of irregular words and if a word is not in the dictionary, it will use some built-in rules to convert the word.
+
+We might have some new words that are not in the dictionary of Humanizer, and plurality rules applied on them might output wrong result, when this happens, you could use the `irregular-plural-words` configuration to add new word to the dictionary.
+
+```yaml
+irregular-plural-words:
+  redis: redis
+```
+This configuration adds a new irregular word into the dictionary that the plural form of `redis` is still `redis`.

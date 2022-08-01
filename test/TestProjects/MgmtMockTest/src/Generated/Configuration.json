@@ -21,5 +21,8 @@
     "ETag": "etag",
     "*Uri": "Uri",
     "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "Type": "EncryptionType"
   }
 }

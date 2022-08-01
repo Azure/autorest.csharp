@@ -188,7 +188,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="stringBody"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -207,7 +207,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="stringBody"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {

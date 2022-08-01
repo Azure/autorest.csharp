@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -17,6 +18,21 @@ namespace AutoRest.CSharp.Output.Builders
 {
     internal class SerializationBuilder
     {
+        public static SerializationFormat GetSerializationFormat(InputType type)
+            => type is not InputPrimitiveType primitiveType ? SerializationFormat.Default : primitiveType.Kind switch
+            {
+                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
+                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
+                InputTypeKind.Date => SerializationFormat.Date_ISO8601,
+                InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
+                InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
+                InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
+                InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
+                InputTypeKind.Time => SerializationFormat.Time_ISO8601,
+                _ => SerializationFormat.Default
+            };
+
         public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, SchemaObjectType type)
         {
             switch (mediaType)
@@ -30,18 +46,31 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type)
+        public ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
-            switch (mediaType)
+            BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
+            BodyMediaType.Json => BuildSerialization(inputType, type),
+            _ => throw new NotImplementedException(bodyMediaType.ToString())
+        };
+
+        private XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
+        {
+            return inputType switch
             {
-                case KnownMediaType.Json:
-                    return BuildSerialization(schema, type);
-                case KnownMediaType.Xml:
-                    return BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true);
-                default:
-                    throw new NotImplementedException(mediaType.ToString());
-            }
+                InputListType listType => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name, isRoot),
+                InputDictionaryType dictionaryType => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name),
+                CodeModelType cmt => BuildXmlElementSerialization(cmt.Schema, type, name, isRoot),
+                _ => new XmlElementValueSerialization(name ?? inputType.Name, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
+            };
         }
+
+        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
+        {
+            KnownMediaType.Json => BuildSerialization(schema, type),
+            KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
+            _ => throw new NotImplementedException(mediaType.ToString())
+        };
+
 
         private XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
         {
@@ -93,13 +122,26 @@ namespace AutoRest.CSharp.Output.Builders
             return false;
         }
 
+        private JsonSerialization BuildSerialization(InputType inputType, CSharpType type)
+        {
+            if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
+            {
+                return new JsonValueSerialization(type, GetSerializationFormat(inputType), type.IsNullable);
+            }
+
+            if (inputType is CodeModelType cmt)
+            {
+                return BuildSerialization(cmt.Schema, type);
+            }
+
+            return new JsonValueSerialization(type, GetSerializationFormat(inputType), type.IsNullable);
+        }
+
         private JsonSerialization BuildSerialization(Schema schema, CSharpType type)
         {
             if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
             {
-                return new JsonValueSerialization(
-                    type,
-                    BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
+                return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
             }
 
             switch (schema)

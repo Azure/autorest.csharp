@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -44,6 +45,16 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("type2");
                 writer.WriteStringValue(Type2.Value.ToString());
             }
+            if (Optional.IsDefined(Type3))
+            {
+                writer.WritePropertyName("type3");
+                writer.WriteStringValue(Type3.ToString());
+            }
+            if (Optional.IsDefined(Type4))
+            {
+                writer.WritePropertyName("type4");
+                writer.WriteObjectValue(Type4);
+            }
             writer.WriteEndObject();
         }
 
@@ -53,6 +64,8 @@ namespace ExactMatchInheritance
             Optional<IList<Uri>> supportingUris = default;
             Optional<Type1> type1 = default;
             Optional<Type2> type2 = default;
+            Optional<IPAddress> type3 = default;
+            Optional<object> type4 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -99,6 +112,26 @@ namespace ExactMatchInheritance
                     type2 = new Type2(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("type3"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type3 = IPAddress.Parse(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("type4"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type4 = property.Value.GetObject();
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -125,7 +158,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2));
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value);
         }
     }
 }
