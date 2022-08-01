@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Mgmt.Output;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                 if (classDeclaration.HasLeadingTrivia)
                 {
                     var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
-                    var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => BuilderHelpers.DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
+                    var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => MgmtObjectType.DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
                     if (filteredTriviaList.Count() == 1)
                     {
                         var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
         {
             // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
             // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
-            var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(BuilderHelpers.DiscriminatorDescFixedPart.Last()));
+            var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(MgmtObjectType.DiscriminatorDescFixedPart.Last()));
             return nodes.Where((val, index) => index >= targetIndex);
         }
 
@@ -182,8 +182,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
         {
             var originalTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(from));
             var newToken = SyntaxFactory.Token(originalTokenInList.LeadingTrivia, to, originalTokenInList.TrailingTrivia);
-            var newModidiers = memberDeclaration.Modifiers.Replace(originalTokenInList, newToken);
-            return memberDeclaration.WithModifiers(newModidiers);
+            var newModifiers = memberDeclaration.Modifiers.Replace(originalTokenInList, newToken);
+            return memberDeclaration.WithModifiers(newModifiers);
         }
 
         private static async Task<CSharpCompilation> GetCompilationAsync(Project project)

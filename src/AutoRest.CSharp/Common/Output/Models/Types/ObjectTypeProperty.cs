@@ -7,7 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -129,6 +131,31 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return typeName;
             }
             return property.Name;
+        }
+
+        internal string CreateExtraDescriptionWithManagedServiceIdentity()
+        {
+            var extraDescription = string.Empty;
+            var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
+            var identityTypeSchema = originalObjSchema?.GetAllProperties().FirstOrDefault(p => p.SerializedName == "type").Schema;
+            if (identityTypeSchema != null)
+            {
+                var supportedTypesToShow = new List<string>();
+                var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
+                if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                {
+                    supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
+                }
+                else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                {
+                    supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
+                }
+                if (supportedTypesToShow.Count > 0)
+                {
+                    extraDescription = $"Current supported identity types: {string.Join(", ", supportedTypesToShow)}";
+                }
+            }
+            return extraDescription;
         }
     }
 }
