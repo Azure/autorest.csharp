@@ -47,10 +47,10 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isIdOrNameOrNullable = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isIdOrName = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputModelProperty.Name), ref name);
 
-                if (isIdOrNameOrNullable)
+                if (isIdOrName)
                 {
                     continue;
                 }
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? propertyName, string? name, string? id, JsonSerializerOptions options) => propertyName switch
         {
-            PrimitiveTypeKind   => ReadPrimitiveType(ref reader, id, options),
+            PrimitiveTypeKind   => ReadPrimitiveType(ref reader, id),
             ListElementType     => CadlInputListTypeConverter.CreateListType(ref reader, id, name, options),
             DictionaryKeyType   => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
             DictionaryValueType => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Common.Input
             _                   => CadlInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver)
         };
 
-        public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options)
+        public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id)
         {
             var isFirstProperty = id == null;
             var isNullable = false;

@@ -548,62 +548,62 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{typeof(BinaryData)}.FromString({element}.GetRawText())";
             }
 
-            var typeName = string.Empty;
+            var methodName = string.Empty;
             if (frameworkType == typeof(JsonElement))
-                typeName = "Clone";
+                methodName = "Clone";
             if (frameworkType == typeof(object))
-                typeName = "GetObject";
+                methodName = "GetObject";
             if (frameworkType == typeof(bool))
-                typeName = "GetBoolean";
+                methodName = "GetBoolean";
             if (frameworkType == typeof(char))
-                typeName = "GetChar";
+                methodName = "GetChar";
             if (frameworkType == typeof(short))
-                typeName = "GetInt16";
+                methodName = "GetInt16";
             if (frameworkType == typeof(int))
-                typeName = "GetInt32";
+                methodName = "GetInt32";
             if (frameworkType == typeof(long))
-                typeName = "GetInt64";
+                methodName = "GetInt64";
             if (frameworkType == typeof(float))
-                typeName = "GetSingle";
+                methodName = "GetSingle";
             if (frameworkType == typeof(double))
-                typeName = "GetDouble";
+                methodName = "GetDouble";
             if (frameworkType == typeof(decimal))
-                typeName = "GetDecimal";
+                methodName = "GetDecimal";
             if (frameworkType == typeof(string))
-                typeName = "GetString";
+                methodName = "GetString";
             if (frameworkType == typeof(Guid))
-                typeName = "GetGuid";
+                methodName = "GetGuid";
 
             if (frameworkType == typeof(byte[]))
             {
-                typeName = "GetBytesFromBase64";
+                methodName = "GetBytesFromBase64";
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(DateTimeOffset))
             {
-                typeName = "GetDateTimeOffset";
+                methodName = "GetDateTimeOffset";
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(DateTime))
             {
-                typeName = "GetDateTime";
+                methodName = "GetDateTime";
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(TimeSpan))
             {
-                typeName = "GetTimeSpan";
+                methodName = "GetTimeSpan";
                 includeFormat = true;
             }
 
             if (includeFormat && serializationFormat.ToFormatSpecifier() is { } formatString)
             {
-                return $"{element}.{typeName}({formatString:L})";
+                return $"{element}.{methodName}({formatString:L})";
             }
 
-            return $"{element}.{typeName}()";
+            return $"{element}.{methodName}()";
         }
 
         private static bool IsCustomJsonConverterAdded(SystemObjectType systemObjectType)
