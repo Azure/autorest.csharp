@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Core;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </summary>
@@ -19,12 +21,14 @@ namespace MgmtRenameRules.Models
         /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
         /// <param name="componentName"> The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup. </param>
         /// <param name="settingName"> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </param>
+        /// <param name="contentType"> The content type. </param>
         /// <param name="content"> Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted. </param>
-        internal AdditionalUnattendContent(PassName? passName, ComponentName? componentName, SettingName? settingName, string content)
+        internal AdditionalUnattendContent(PassName? passName, ComponentName? componentName, SettingName? settingName, ContentType? contentType, string content)
         {
             PassName = passName;
             ComponentName = componentName;
             SettingName = settingName;
+            ContentType = contentType;
             Content = content;
         }
 
@@ -34,6 +38,8 @@ namespace MgmtRenameRules.Models
         public ComponentName? ComponentName { get; set; }
         /// <summary> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </summary>
         public SettingName? SettingName { get; set; }
+        /// <summary> The content type. </summary>
+        public ContentType? ContentType { get; set; }
         /// <summary> Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted. </summary>
         public string Content { get; set; }
     }

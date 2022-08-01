@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputModelProperty ReadInputModelProperty(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = false;
+            var isFirstProperty = true;
             string? serializedName = null;
             string? description = null;
             InputType? propertyType = null;

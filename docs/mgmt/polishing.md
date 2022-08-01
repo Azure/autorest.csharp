@@ -88,6 +88,7 @@ Here is list of the format we support:
 | ip-address | [IPAddress](https://docs.microsoft.com/en-us/dotnet/api/system.net.ipaddress?view=net-6.0) |
 | object | [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object?view=net-6.0) |
 | resource-type | [ResourceType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.resourcetype?view=azure-dotnet) |
+| content-type | [ContentType](https://docs.microsoft.com/en-us/dotnet/api/azure.core.contenttype?view=azure-dotnet) |
 | uri | [Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=net-6.0) |
 | uuid | [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid?view=net-6.0) |
 
@@ -96,6 +97,8 @@ Here is list of the format we support:
 To rename an element in the generated SDK, like a type name, a property name, you could do that by writing `directive`s which autorest supports. You could refer [this document](https://github.com/Azure/autorest/blob/main/docs/generate/directives.md) for more details and usages.
 
 But this configuration provides a simpler syntax for you to change the name of a type or a property.
+
+This configuration also allows you to assign a custom type format if it is a property. For valid format values, please refer to the [change format by name rules](#change-format-by-name-rules) section.
 
 ### Rename a type
 
@@ -181,6 +184,33 @@ public partial class Model
 +   public string NewFlattenedProperty { get; set; }
 }
 ```
+
+### Change the format of a property
+
+To assign a new format to a property, you could use this syntax:
+```yaml
+rename-mapping:
+  Model.oldProperty: NewProperty|resource-type
+```
+This will rename this property to its new name, and change its format to `resource-type`:
+```diff
+public partial class Model
+{
+    /* other things inside the class */
+
+-    public string OldProperty { get; set; }
++    public ResourceType? NewProperty { get; set; }
+
+    /* other things inside the class */
+}
+```
+
+If only the type of this property needs change, you could omit its new name, like
+```yaml
+rename-mapping:
+  Model.oldProperty: -|resource-type
+```
+Please note that the dash and slash `-|` here are mandatory as a placeholder for the property name. The generator uses this symbol to separate the part for property name and its format.
 
 ### Rename an enumeration value in an enumeration type
 

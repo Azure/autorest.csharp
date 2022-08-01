@@ -19,19 +19,19 @@ namespace MgmtRenameRules.Models
 
         /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
         /// <param name="properties"> Information about the properties of the upgrade operation. </param>
-        /// <param name="resourceType"> Resource type. </param>
+        /// <param name="upgradeOperationHistoricalStatusInfoType"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
-        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? resourceType, AzureLocation? location)
+        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? upgradeOperationHistoricalStatusInfoType, AzureLocation? location)
         {
             Properties = properties;
-            ResourceType = resourceType;
+            UpgradeOperationHistoricalStatusInfoType = upgradeOperationHistoricalStatusInfoType;
             Location = location;
         }
 
         /// <summary> Information about the properties of the upgrade operation. </summary>
         public UpgradeOperationHistoricalStatusInfoProperties Properties { get; }
         /// <summary> Resource type. </summary>
-        public ResourceType? ResourceType { get; }
+        public ResourceType? UpgradeOperationHistoricalStatusInfoType { get; }
         /// <summary> Resource location. </summary>
         public AzureLocation? Location { get; }
     }

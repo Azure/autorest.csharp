@@ -26,6 +26,9 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredInt, nameof(requiredInt));
+
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
         }
     }
 }
