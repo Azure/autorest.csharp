@@ -87,6 +87,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(writer, method, client.Fields, responseClassifierTypes);
                     }
 
+                    if (client.ConvenienceMethods.Count > 0)
+                    {
+                        WriteCancellationTokenToRequestContextMethod(writer);
+                    }
                     WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
@@ -249,7 +253,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static void WriteClientConvenienceMethodBody(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
         {
             string contextVariableName = convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == KnownParameters.RequestContext.Name) != null ? $"{KnownParameters.RequestContext.Name}1" : KnownParameters.RequestContext.Name;
-            writer.Line($"{typeof(RequestContext)} {contextVariableName} = RequestContext.FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});"); // TO-DO: after implementation RequestContext.FromCancellationToken, change to typeof(method)
+            writer.Line($"{typeof(RequestContext)} {contextVariableName} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
 
             string responseVariableName = convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == "response") != null ? "response1" : "response";
             var protocolSignature = convenienceMethod.LowLevelClientMethod.Signature;
@@ -566,6 +570,24 @@ namespace AutoRest.CSharp.Generation.Writers
                         .Line($"yield return {pageVariable};");
                 }
             }
+        }
+
+        private void WriteCancellationTokenToRequestContextMethod(CodeWriter writer)
+        {
+            string defaultRequestContextName = "DefaultRequestContext";
+            writer.Line($"private static {typeof(RequestContext)} {defaultRequestContextName} = new {typeof(RequestContext)}();");
+
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            using (writer.WriteMethodDeclaration(methodSignature))
+            {
+                using (writer.Scope($"if ({KnownParameters.CancellationTokenParameter.Name} == {typeof(CancellationToken)}.None)"))
+                {
+                    writer.Line($"return {defaultRequestContextName};");
+                }
+
+                writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
+            }
+            writer.Line();
         }
 
         private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelClient client)
