@@ -166,7 +166,7 @@ namespace CadlPetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CadlPetStore.Pet>> ReadValueAsync(int petId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> ReadValueAsync(int petId, CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.ReadValue");
             scope.Start();
@@ -174,7 +174,7 @@ namespace CadlPetStore
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ReadAsync(petId, context).ConfigureAwait(false);
-                return Response.FromValue(CadlPetStore.Pet.FromResponse(response), response);
+                return Response.FromValue(Pet.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -186,7 +186,7 @@ namespace CadlPetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CadlPetStore.Pet> ReadValue(int petId, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> ReadValue(int petId, CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.ReadValue");
             scope.Start();
@@ -194,7 +194,7 @@ namespace CadlPetStore
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = Read(petId, context);
-                return Response.FromValue(CadlPetStore.Pet.FromResponse(response), response);
+                return Response.FromValue(Pet.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -304,25 +304,25 @@ namespace CadlPetStore
         /// <param name="pet"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
-        public virtual async Task<Response<CadlPetStore.Pet>> CreateAsync(object pet, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> CreateAsync(Pet pet, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await CreateAsync(pet.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(CadlPetStore.Pet.FromResponse(response), response);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="pet"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
-        public virtual Response<CadlPetStore.Pet> Create(object pet, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> Create(Pet pet, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Create(pet.ToRequestContent(), context);
-            return Response.FromValue(CadlPetStore.Pet.FromResponse(response), response);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>

@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models
             return null;
         }
 
-        public Parameter? GetBodyParameter(InputOperation operation)
+        public Parameter? GetBodyParameter(InputOperation operation, string defaultNamespace)
         {
             var requestParameters = operation.Parameters
                 .Where(rp => !IsIgnoredHeaderParameter(rp));
@@ -106,7 +106,8 @@ namespace AutoRest.CSharp.Output.Models
             var requiredParameter = bodyParameters.Where(parameter => parameter.IsRequired).FirstOrDefault();
 
             var bodyParameter = requiredParameter ?? bodyParameters.FirstOrDefault();
-            return bodyParameter == null ? null : this.BuildParameter(bodyParameter);
+            var bodyParameterType = new CSharpType(new ModelTypeProvider((bodyParameter.Type as InputModelType)!, _typeFactory, defaultNamespace, null));
+            return bodyParameter == null ? null : Parameter.FromRequestParameter(bodyParameter, bodyParameterType, _typeFactory);
         }
 
         public RestClientMethod BuildRequestMethod(InputOperation operation)

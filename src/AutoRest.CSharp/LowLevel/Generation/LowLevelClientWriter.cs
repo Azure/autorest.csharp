@@ -523,7 +523,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-
         private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelClient client)
         {
             foreach (var field in client.SubClients.Select(s => s.FactoryMethod?.CachingField))

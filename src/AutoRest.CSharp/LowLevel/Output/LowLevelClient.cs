@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (parameter == KnownParameters.RequestContent || parameter == KnownParameters.RequestContentNullable)
                 {
-                    bodyParameter = builder.GetBodyParameter(operation);
+                    bodyParameter = builder.GetBodyParameter(operation, DefaultNamespace);
                     parameters.Add(bodyParameter!);
                 }
                 else if (parameter == KnownParameters.RequestContext)
