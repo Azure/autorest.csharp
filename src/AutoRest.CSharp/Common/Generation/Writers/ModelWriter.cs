@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Humanizer;
@@ -291,16 +292,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return $"{property.Description}";
             }
-            var nameToUse = overrideName ?? property.Declaration.Name;
-            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
-            if (property.IsReadOnly)
-            {
-                return $"Gets the {splitDeclarationName}";
-            }
-            else
-            {
-                return $"Gets or sets the {splitDeclarationName}";
-            }
+            return property.CreateDefaultPropertyDescription(overrideName);
         }
 
         private string GetAbstract(SchemaObjectType schema)

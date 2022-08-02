@@ -32,13 +32,10 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputListType.Name), ref name)
                     || reader.TryReadWithConverter(nameof(InputListType.ElementType), options, ref elementType);
 
-                if (isKnownProperty)
+                if (!isKnownProperty)
                 {
-                    continue;
+                    reader.SkipProperty();
                 }
-
-                JsonSerializer.Deserialize<object>(ref reader, options);
-                reader.Read();
             }
 
             elementType = elementType ?? throw new JsonException("List must have element type");

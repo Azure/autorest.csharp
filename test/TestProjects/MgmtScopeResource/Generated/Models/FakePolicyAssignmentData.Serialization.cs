@@ -98,7 +98,7 @@ namespace MgmtScopeResource
         internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element)
         {
             Optional<string> location = default;
-            Optional<SystemAssignedServiceIdentity> identity = default;
+            Optional<ManagedServiceIdentity> identity = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -126,7 +126,7 @@ namespace MgmtScopeResource
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<SystemAssignedServiceIdentity>(property.Value.ToString());
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("id"))

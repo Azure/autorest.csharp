@@ -30,10 +30,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteCreateResultImpl(this CodeWriter writer, bool async, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, Action<CodeWriter, CodeWriterDelegate>? valueCallback = null)
+        public static void WriteCreateResultImpl(this CodeWriter writer, bool async, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse)
         {
             // default value callback, just write a return statement
-            valueCallback ??= (w, v) => w.Line($"return {v};");
+            Action<FormattableString> valueCallback = fs => writer.Line($"return {fs};");
 
             if (operation.ResultSerialization != null)
             {
@@ -46,23 +46,18 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteDeserializationForMethods(
                         operation.ResultSerialization,
                         async: async,
-                        (w, v) => w.Line($"firstPageResult = {v};"),
+                        v => writer.Line($"firstPageResult = {v};"),
                         responseVariable,
                         pagingResponse.ItemProperty.ValueType);
 
                     writer.Line($"{pagingResponse.PageType} firstPage = {typeof(Page)}.FromValues(firstPageResult.{itemPropertyName}, firstPageResult.{nextLinkPropertyName}, {responseVariable});");
                     writer.Line();
 
-                    valueCallback(writer, w => w.Append($"{typeof(PageableHelpers)}.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken))"));
+                    valueCallback($"{typeof(PageableHelpers)}.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken))");
                 }
                 else
                 {
-                    writer.WriteDeserializationForMethods(
-                        operation.ResultSerialization,
-                        async: async,
-                        valueCallback,
-                        responseVariable,
-                        operation.ResultType);
+                    writer.WriteDeserializationForMethods(operation.ResultSerialization, async: async, valueCallback, responseVariable, operation.ResultType);
                 }
             }
             else
@@ -71,15 +66,15 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteNonPagingCreateResultImpl(this CodeWriter writer, bool async, string responseVariable, Action<CodeWriter, CodeWriterDelegate> valueCallback)
+        public static void WriteNonPagingCreateResultImpl(this CodeWriter writer, bool async, string responseVariable, Action<FormattableString> valueCallback)
         {
             if (async)
             {
-                valueCallback(writer, w => w.Append($"await new {typeof(ValueTask<Response>)}({responseVariable}).ConfigureAwait(false)"));
+                valueCallback($"await new {typeof(ValueTask<Response>)}({responseVariable}).ConfigureAwait(false)");
             }
             else
             {
-                valueCallback(writer, w => w.Append($"{responseVariable}"));
+                valueCallback($"{responseVariable}");
             }
         }
     }

@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         switch (serialization)
                         {
-                            case JsonSerialization jsonSerialization:
+                            case JsonObjectSerialization jsonSerialization:
                                 if (model.IncludeSerializer)
                                 {
                                     WriteJsonSerialize(writer, jsonSerialization);
@@ -159,9 +159,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.ToSerializeCall(
                     serialization,
-                    w => w.AppendRaw("this"),
+                    $"this",
                     null,
-                    w => w.AppendRaw(namehint));
+                    namehint);
             }
             writer.Line();
         }
@@ -170,16 +170,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
-                writer.ToDeserializeCall(
-                    serialization,
-                    w=> w.AppendRaw("element"),
-                    (w, v) => w.Line($"return {v};"),
-                    true);
+                writer.ToDeserializeCall(serialization, $"element", v => writer.Line($"return {v};"), true);
             }
             writer.Line();
         }
 
-        private void WriteJsonDeserialize(CodeWriter writer, SchemaObjectType model, JsonSerialization jsonSerialization)
+        private void WriteJsonDeserialize(CodeWriter writer, SchemaObjectType model, JsonObjectSerialization jsonSerialization)
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
             {
@@ -192,10 +188,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (var implementation in model.Discriminator.Implementations)
                             {
-                                writer
-                                    .Append($"case {implementation.Key:L}: return ")
-                                    .DeserializeImplementation(implementation.Type.Implementation, jsonSerialization, w => w.Append($"element"));
-                                writer.Line($";");
+                                var implementationFormattable = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(implementation.Type.Implementation, jsonSerialization, $"element");
+                                writer.Line($"case {implementation.Key:L}: return {implementationFormattable};");
                             }
                         }
                     }
@@ -207,9 +201,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    writer.DeserializeValue(jsonSerialization,
-                        w => w.AppendRaw("element"),
-                        (w, v) => w.Line($"return {v};"));
+                    var initializers = writer.WritePropertiesDeserialization(jsonSerialization, $"element");
+                    writer.WriteInitialization(v => writer.Line($"return {v};"), model, model.SerializationConstructor, initializers);
                 }
             }
             writer.Line();
@@ -220,7 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
             {
-                writer.ToSerializeCall(jsonSerialization, w => w.AppendRaw("this"));
+                writer.ToSerializeCall(jsonSerialization, $"this");
             }
             writer.Line();
         }

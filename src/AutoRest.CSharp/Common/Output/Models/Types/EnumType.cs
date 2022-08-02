@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             BaseType = context.TypeFactory.CreateType(baseType, false);
-            Description = BuilderHelpers.CreateDescription(schema);
+            Description = schema.CreateDescription();
             IsExtendable = isExtendable;
         }
 

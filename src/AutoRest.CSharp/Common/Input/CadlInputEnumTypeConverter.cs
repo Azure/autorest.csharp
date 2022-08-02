@@ -35,13 +35,10 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
 
-                if (isKnownProperty)
+                if (!isKnownProperty)
                 {
-                    continue;
+                    reader.SkipProperty();
                 }
-
-                JsonSerializer.Deserialize<object>(ref reader, options);
-                reader.Read();
             }
 
             name = name ?? throw new JsonException("Enum must have name");

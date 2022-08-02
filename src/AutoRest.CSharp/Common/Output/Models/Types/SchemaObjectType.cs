@@ -586,7 +586,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.CreateDescription(ObjectSchema);
+            return ObjectSchema.CreateDescription();
         }
     }
 }
