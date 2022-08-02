@@ -101,7 +101,7 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - job: 'Build Emitter'
+      - job: 'BuildEmitter'
         steps:
         - task: NodeTool@0
           inputs:
@@ -117,11 +117,12 @@ stages:
           inputs:
             command: custom
             customCommand: run build
-          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
+            workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
         - task: Npm@1
           displayName: 'Pack CADL Csharp emitter'
           inputs:
             command: pack
+            workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
         - script: 
       - template: smoke-test.yml
         parameters:
