@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    EnumMemberType,
+    EnumType,
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
@@ -17,8 +19,10 @@ import {
     getQueryParamName,
     isStatusCode
 } from "@cadl-lang/rest/http";
+import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
+    InputEnumType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -255,5 +259,58 @@ export function getInputType(program: Program, type: Type): InputType {
         } as InputPrimitiveType;
     }
 
-    return { IsNullable: false, Name: InputTypeKind.UnKnownKind } as InputType;
+    if (type.kind === "Enum") {
+        return getInputTypeForEnum(type);
+    }
+
+    return { Name: InputTypeKind.UnKnownKind, IsNullable: false } as InputType;
+}
+
+function getInputTypeForEnum(e: EnumType): InputType {
+    if (e.members.length == 0) {
+        return {
+            Name: InputTypeKind.UnKnownKind,
+            IsNullable: false
+        } as InputType;
+    }
+    const allowValues: InputEnumTypeValue[] = [];
+    const enumValueType = enumMemberType(e.members[0]);
+
+    for (const option of e.members) {
+        if (enumValueType.Kind !== enumMemberType(option).Kind) {
+            // TODO: add error handler
+            continue;
+        }
+
+        const member = {
+            Name: option.name,
+            Value: option.value
+        } as InputEnumTypeValue;
+
+        allowValues.push(member);
+    }
+    //TODO: need to figure out if it is extensible or not.
+    const isExtensible: boolean = false;
+    return {
+        Name: e.name,
+        EnumValueType: enumValueType,
+        AllowedValues: allowValues,
+        IsExtensible: isExtensible,
+        IsNullable: false
+    } as InputEnumType;
+
+    function enumMemberType(member: EnumMemberType): InputPrimitiveType {
+        if (typeof member.value === "number") {
+            return {
+                Name: "Int32",
+                Kind: InputTypeKind.Int32,
+                IsNullable: false
+            } as InputPrimitiveType;
+        }
+        return {
+            Name: "String",
+            Kind: InputTypeKind.String,
+            IsNullable: false
+        } as InputPrimitiveType;
+    }
 }

@@ -3,6 +3,6 @@
 
 export interface InputEnumTypeValue {
     Name: string;
-    Value: string;
+    Value: any;
     Description?: string;
 }

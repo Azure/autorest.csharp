@@ -28,7 +28,12 @@ import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import { InputEnumType, InputModelType, InputPrimitiveType, InputType } from "./type/InputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "./type/InputType.js";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
@@ -233,7 +238,7 @@ function loadOperationParameter(
 function loadBodyParameter(
     program: Program,
     body: ModelTypeProperty,
-    models: Map<string, InputModelType | InputEnumType>,
+    models: Map<string, InputModelType | InputEnumType>
 ): InputParameter {
     const { type, name, model: cadlType } = body;
     //const cadlType = body.type;
