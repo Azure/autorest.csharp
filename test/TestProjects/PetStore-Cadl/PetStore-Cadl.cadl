@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "./decorators.mjs";
 
 using Cadl.Http;
 
@@ -6,10 +7,10 @@ using Cadl.Http;
 @serviceVersion("2021-03-25")
 @doc("This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.")
 @server(
-    "{petStorUrl}",
+    "{petStoreUrl}",
     "Endpoint Service",
     {
-        petStorUrl: string,
+        petStoreUrl: string,
     }
 )
 namespace PetStore;
@@ -50,17 +51,24 @@ model ResponsePage<T> {
 }
 
 model PetId {
-  @path petId: int32;
+  @path
+  @doc("The id of pet.")
+  petId: int32;
 }
 
-@doc("Manage your pets.")
+@doc("Manage your pets. You can delete or get the Pet from pet store.")
+@summary("Manage your pets.")
 @route("/pets")
 namespace Pets {
   @doc("Delete a pet.")
+  @summary("delete.")
   @delete
   op delete(...PetId): {
     ...Response<200>;
   } | Error;
+
+  // @fancyDoc("List pets.")
+  // op list(@query nextLink?: string): OkResponse<ResponsePage<Pet>> | Error;
 
   @doc("Returns a pet. Supports eTags.")
   op read(...PetId): OkResponse<Pet> | NotModified<Pet> | Error;

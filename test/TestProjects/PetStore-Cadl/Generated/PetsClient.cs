@@ -18,7 +18,7 @@ namespace CadlPetStore
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
+        private readonly object _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -33,18 +33,18 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PetsClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
+        public PetsClient(Uri endpoint, object apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PetsClient(Uri endpoint, string apiVersion, PetstoreClientOptions options)
+        public PetsClient(Uri endpoint, object apiVersion, PetstoreClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
@@ -56,22 +56,27 @@ namespace CadlPetStore
             _apiVersion = options.Version;
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> delete. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call DeleteAsync with required parameters.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint, null);
         /// 
-        /// Response response = await client.DeleteAsync(1234);
+        /// Response response = await client.DeleteAsync(null);
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// </example>
-        public virtual async Task<Response> DeleteAsync(int petId, RequestContext context = null)
+        /// <remarks> Delete a pet. </remarks>
+        public virtual async Task<Response> DeleteAsync(object petId, RequestContext context = null)
         {
+            Argument.AssertNotNull(petId, nameof(petId));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Delete");
             scope.Start();
             try
@@ -86,22 +91,27 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> delete. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call Delete with required parameters.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint, null);
         /// 
-        /// Response response = client.Delete(1234);
+        /// Response response = client.Delete(null);
         /// Console.WriteLine(response.Status);
         /// ]]></code>
         /// </example>
-        public virtual Response Delete(int petId, RequestContext context = null)
+        /// <remarks> Delete a pet. </remarks>
+        public virtual Response Delete(object petId, RequestContext context = null)
         {
+            Argument.AssertNotNull(petId, nameof(petId));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Delete");
             scope.Start();
             try
@@ -116,17 +126,19 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call ReadAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint, null);
         /// 
-        /// Response response = await client.ReadAsync(1234);
+        /// Response response = await client.ReadAsync(null);
         /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
@@ -142,8 +154,10 @@ namespace CadlPetStore
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
+        public virtual async Task<Response> ReadAsync(object petId, RequestContext context = null)
         {
+            Argument.AssertNotNull(petId, nameof(petId));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
             scope.Start();
             try
@@ -158,17 +172,19 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The Int32 to use. </param>
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call Read with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint, null);
         /// 
-        /// Response response = client.Read(1234);
+        /// Response response = client.Read(null);
         /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
@@ -184,8 +200,10 @@ namespace CadlPetStore
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response Read(int petId, RequestContext context = null)
+        public virtual Response Read(object petId, RequestContext context = null)
         {
+            Argument.AssertNotNull(petId, nameof(petId));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
             scope.Start();
             try
@@ -207,7 +225,7 @@ namespace CadlPetStore
         /// This sample shows how to call CreateAsync and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint, null);
         /// 
         /// Response response = await client.CreateAsync();
         /// 
@@ -248,7 +266,7 @@ namespace CadlPetStore
         /// This sample shows how to call Create and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint, null);
         /// 
         /// Response response = client.Create();
         /// 
@@ -282,7 +300,7 @@ namespace CadlPetStore
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(int petId, RequestContext context)
+        internal HttpMessage CreateDeleteRequest(object petId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -298,7 +316,7 @@ namespace CadlPetStore
             return message;
         }
 
-        internal HttpMessage CreateReadRequest(int petId, RequestContext context)
+        internal HttpMessage CreateReadRequest(object petId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200304);
             var request = message.Request;

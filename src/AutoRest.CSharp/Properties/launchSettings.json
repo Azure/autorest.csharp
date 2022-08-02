@@ -152,14 +152,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
-    "CadlFirstTest": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CadlFirstTest\\Generated"
-    },
-    "CadlPetStore": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CadlPetStore\\Generated"
-    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"
@@ -439,6 +431,10 @@
     "paging-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\Generated"
+    },
+    "PetStore-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
     },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",

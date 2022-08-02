@@ -81,14 +81,14 @@ e.g.
 
 ```cmd
 
-cadl compile --output-path test\TestProjects\string-format test\TestProjects\string-format\string-format.cadl --emit @cadl-lang/csharp-emitter
+cadl compile --output-path test\TestProjects\string-format test\TestProjects\string-format\string-format.cadl --emit @azure-tools/cadl-csharp
 ```
 
 #### debug
 
 node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile main.cadl
 
-node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path samples\petStore\ samples\petStore\petstore.cadl --emit @cadl-lang/csharp-emitter
+node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path samples\petStore\ samples\petStore\petstore.cadl --emit @azure-tools/cadl-csharp
 
 ### serialize
 
@@ -114,7 +114,7 @@ You can generate sdk step by step as following:
 - emit cadl model json
   
     ```cmd
-    cadl compile --emit @cadl-lang/csharp-emitter <path-to-cadl-file>
+    cadl compile --emit @azure-tools/cadl-csharp <path-to-cadl-file>
     ```
 
 - generate sdk from cadl json

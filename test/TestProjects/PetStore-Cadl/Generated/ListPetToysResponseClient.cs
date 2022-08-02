@@ -18,7 +18,7 @@ namespace CadlPetStore
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
+        private readonly object _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -33,18 +33,18 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of ListPetToysResponseClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public ListPetToysResponseClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
+        public ListPetToysResponseClient(Uri endpoint, object apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ListPetToysResponseClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public ListPetToysResponseClient(Uri endpoint, string apiVersion, PetstoreClientOptions options)
+        public ListPetToysResponseClient(Uri endpoint, object apiVersion, PetstoreClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
@@ -56,8 +56,8 @@ namespace CadlPetStore
             _apiVersion = options.Version;
         }
 
-        /// <param name="petId"> The String to use. </param>
-        /// <param name="nameFilter"> The String to use. </param>
+        /// <param name="petId"> The string to use. </param>
+        /// <param name="nameFilter"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> or <paramref name="nameFilter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -66,9 +66,9 @@ namespace CadlPetStore
         /// This sample shows how to call ListAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new ListPetToysResponseClient(endpoint, "<apiVersion>");
+        /// var client = new ListPetToysResponseClient(endpoint, null);
         /// 
-        /// Response response = await client.ListAsync("<petId>", "<nameFilter>");
+        /// Response response = await client.ListAsync(null, null);
         /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
@@ -84,7 +84,7 @@ namespace CadlPetStore
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> ListAsync(string petId, string nameFilter, RequestContext context = null)
+        public virtual async Task<Response> ListAsync(object petId, object nameFilter, RequestContext context = null)
         {
             Argument.AssertNotNull(petId, nameof(petId));
             Argument.AssertNotNull(nameFilter, nameof(nameFilter));
@@ -103,8 +103,8 @@ namespace CadlPetStore
             }
         }
 
-        /// <param name="petId"> The String to use. </param>
-        /// <param name="nameFilter"> The String to use. </param>
+        /// <param name="petId"> The string to use. </param>
+        /// <param name="nameFilter"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> or <paramref name="nameFilter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -113,9 +113,9 @@ namespace CadlPetStore
         /// This sample shows how to call List with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new ListPetToysResponseClient(endpoint, "<apiVersion>");
+        /// var client = new ListPetToysResponseClient(endpoint, null);
         /// 
-        /// Response response = client.List("<petId>", "<nameFilter>");
+        /// Response response = client.List(null, null);
         /// 
         /// Console.WriteLine(response.ToString());
         /// ]]></code>
@@ -131,7 +131,7 @@ namespace CadlPetStore
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response List(string petId, string nameFilter, RequestContext context = null)
+        public virtual Response List(object petId, object nameFilter, RequestContext context = null)
         {
             Argument.AssertNotNull(petId, nameof(petId));
             Argument.AssertNotNull(nameFilter, nameof(nameFilter));
@@ -150,7 +150,7 @@ namespace CadlPetStore
             }
         }
 
-        internal HttpMessage CreateListRequest(string petId, string nameFilter, RequestContext context)
+        internal HttpMessage CreateListRequest(object petId, object nameFilter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
