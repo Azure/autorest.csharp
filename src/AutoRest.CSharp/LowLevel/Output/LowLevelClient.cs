@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(builder, operations, Declaration.Name, DefaultNamespace).ToArray();
+            var clientMethods = BuildMethods(builder, operations, Declaration.Name).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
@@ -82,12 +82,12 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName, string? defaultNamespace = null)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName)
         {
             var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
             foreach (var operation in operations)
             {
-                requestMethods.Add(operation, builder.BuildRequestMethod(operation, defaultNamespace));
+                requestMethods.Add(operation, builder.BuildRequestMethod(operation));
             }
 
             foreach (var (operation, requestMethod) in requestMethods)
@@ -147,8 +147,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (parameter == KnownParameters.RequestContent || parameter == KnownParameters.RequestContentNullable)
                 {
-                    bodyParameter = builder.BodyParameters[operation];
-                    parameters.Add(bodyParameter);
+                    bodyParameter = builder.GetBodyParameter(operation);
+                    parameters.Add(bodyParameter!);
                 }
                 else if (parameter == KnownParameters.RequestContext)
                 {
@@ -160,18 +160,8 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            CSharpType? returnType = null;
-            CSharpType? responseType = null;
-            InputType? bodyType = operation.Responses.FirstOrDefault()?.BodyType;
-            if (bodyType != null && bodyType is InputModelType)
-            {
-                responseType = builder.ReturnTypes[operation];
-                returnType = new CSharpType(typeof(Azure.Response<>), responseType);
-            }
-            else
-            {
-                returnType = typeof(Azure.Response);
-            }
+            CSharpType? responseType = builder.GetReturnType(operation, DefaultNamespace);
+            CSharpType? returnType = responseType == null ? typeof(Azure.Response) : new CSharpType(typeof(Azure.Response<>), responseType!);
 
             bool isAmbiguous = !protocolSignature.Parameters.Contains(KnownParameters.RequestContent) &&
                 !protocolSignature.Parameters.Contains(KnownParameters.RequestContentNullable);

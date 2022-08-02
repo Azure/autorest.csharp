@@ -54,6 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client);
                     WriteConstructors(writer, client);
 
+                    HashSet<LowLevelClientMethod> visitedMethods = new HashSet<LowLevelClientMethod>();
                     var exampleComposer = new LowLevelExampleComposer(client);
                     foreach (var convenienceMethod in client.ConvenienceMethods)
                     {
@@ -74,6 +75,33 @@ namespace AutoRest.CSharp.Generation.Writers
                             LowLevelConvenienceMethodWriter.WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, true);
                             LowLevelConvenienceMethodWriter.WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, false);
 
+                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
+                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
+                        }
+
+                        visitedMethods.Add(clientMethod);
+                    }
+
+                    foreach (var clientMethod in client.ClientMethods)
+                    {
+                        if (visitedMethods.Contains(clientMethod))
+                        {
+                            continue;
+                        }
+
+                        var longRunning = clientMethod.LongRunning;
+                        if (longRunning != null)
+                        {
+                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, longRunning, exampleComposer, true);
+                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, longRunning, exampleComposer, false);
+                        }
+                        else if (clientMethod.PagingInfo != null)
+                        {
+                            WritePagingMethod(writer, clientMethod, client.Fields, exampleComposer, true);
+                            WritePagingMethod(writer, clientMethod, client.Fields, exampleComposer, false);
+                        }
+                        else
+                        {
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
                         }
