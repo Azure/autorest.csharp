@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace CadlFirstTest
@@ -40,6 +41,19 @@ namespace CadlFirstTest
                 }
             }
             return new RoundTripModel(requiredString, requiredInt);
+        }
+
+        internal RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
+        }
+
+        internal static RoundTripModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeRoundTripModel(document.RootElement);
         }
     }
 }
