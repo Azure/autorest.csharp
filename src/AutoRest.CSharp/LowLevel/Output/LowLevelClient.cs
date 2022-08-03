@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, bool cadlInput)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -70,7 +70,9 @@ namespace AutoRest.CSharp.Output.Models
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
 
-            ConvenienceMethods = ClientMethods.Select(clientMethod => BuildConvenienceMethod(clientMethod, builder)).ToArray();
+            ConvenienceMethods = cadlInput
+                ? ClientMethods.Select(clientMethod => BuildConvenienceMethod(clientMethod, builder)).ToArray()
+                : Array.Empty<LowLevelConvenienceMethod>();
 
             RequestMethods = clientMethods.Select(m => m.RequestMethod)
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())

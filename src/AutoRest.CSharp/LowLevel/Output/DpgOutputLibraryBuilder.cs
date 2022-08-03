@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
 
             IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
+                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, cadlInput);
                 return EnumerateAllClients(topLevelClients);
             }
 
@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool cadlInput)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -237,12 +237,13 @@ namespace AutoRest.CSharp.Output.Models
                     new RestClientBuilder(clientInfo.ClientParameters, typeFactory),
                     _rootNamespace.Auth,
                     _sourceInputModel,
-                    clientOptions)
+                    clientOptions,
+                    cadlInput)
                 {
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, cadlInput));
 
                  yield return client;
             }

@@ -106,7 +106,9 @@ namespace AutoRest.CSharp.Output.Models
             var requiredParameter = bodyParameters.Where(parameter => parameter.IsRequired).FirstOrDefault();
 
             var bodyParameter = requiredParameter ?? bodyParameters.FirstOrDefault();
-            var bodyParameterType = new CSharpType(new ModelTypeProvider((bodyParameter.Type as InputModelType)!, _typeFactory, defaultNamespace, null));
+            var bodyParameterType = bodyParameter.Type is InputModelType
+                ? new CSharpType(new ModelTypeProvider((bodyParameter.Type as InputModelType)!, _typeFactory, defaultNamespace, null))
+                : _typeFactory.CreateType(bodyParameter.Type);
             return bodyParameter == null ? null : Parameter.FromRequestParameter(bodyParameter, bodyParameterType, _typeFactory);
         }
 
