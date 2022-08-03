@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace CadlPetStore
@@ -36,6 +37,19 @@ namespace CadlPetStore
                 }
             }
             return new ToyListResults(items, nextLink);
+        }
+
+        internal RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
+        }
+
+        internal static ToyListResults FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeToyListResults(document.RootElement);
         }
     }
 }
