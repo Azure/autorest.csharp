@@ -35,12 +35,12 @@
         "dist/**"
     ],
     "devDependencies": {
-        "@cadl-lang/compiler": "~0.33.0",
-        "@cadl-lang/eslint-config-cadl": "~0.3.0",
-        "@cadl-lang/eslint-plugin": "~0.1.0",
-        "@cadl-lang/library-linter": "^0.1.2",
-        "@cadl-lang/rest": "^0.15.1",
-        "@cadl-lang/versioning": "~0.6.0",
+        "@cadl-lang/compiler": "latest",
+        "@cadl-lang/eslint-config-cadl": "latest",
+        "@cadl-lang/eslint-plugin": "latest",
+        "@cadl-lang/library-linter": "latest",
+        "@cadl-lang/rest": "latest",
+        "@cadl-lang/versioning": "latest",
         "@types/js-yaml": "^4.0.5",
         "@types/mocha": "~9.1.0",
         "@types/node": "~16.0.3",

@@ -1,0 +1,148 @@
+{
+ "$id": "1",
+ "Name": "cadl.testserver.arraybasic",
+ "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "Array",
+   "ElementType": {
+    "$id": "3",
+    "Name": "Pet",
+    "IsNullable": false,
+    "Properties": [
+     {
+      "$id": "4",
+      "Name": "name",
+      "SerializedName": "name",
+      "Description": "",
+      "Type": {
+       "$id": "5",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "6",
+      "Name": "tag",
+      "SerializedName": "tag",
+      "Description": "",
+      "Type": {
+       "$id": "7",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "8",
+      "Name": "age",
+      "SerializedName": "age",
+      "Description": "",
+      "Type": {
+       "$id": "9",
+       "Name": "Int32",
+       "Kind": "Int32",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true,
+      "IsDiscriminator": false
+     }
+    ]
+   },
+   "IsNullable": false
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "10",
+   "Name": "ArrayBasic",
+   "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+   "Operations": [
+    {
+     "$id": "11",
+     "Name": "list",
+     "Summary": "Manage your pets.",
+     "Description": "Manage your pets. You can delete or get the Pet from pet store.",
+     "Parameters": [
+      {
+       "$id": "12",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Description": "",
+       "Type": {
+        "$id": "13",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "14",
+       "Name": "nextLink",
+       "NameInRequest": "nextLink",
+       "Type": {
+        "$id": "15",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "16",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/pets",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "17"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "18"
+ }
+}

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    ArrayType,
     EnumMemberType,
     EnumType,
     getFormat,
@@ -23,6 +24,7 @@ import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
     InputEnumType,
+    InputListType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -207,43 +209,44 @@ export function getInputType(program: Program, type: Type): InputType {
         type
     );
     if (type.kind === "Model") {
-        if (type.name === getIntrinsicModelName(program, type)) {
-            // if the model is one of the Cadl Intrinsic type.
-            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-            // In such cases, we don't want to emit a ref and instead just
-            // emit the base type directly.
-            return {
-                Name:
-                    mapCadlIntrinsicModelToCsharpModel(program, type) ??
-                    type.name,
-                Kind: builtInKind,
-                IsNullable: false
-            } as InputPrimitiveType;
-        } else {
-            type = getEffectiveSchemaType(program, type) as ModelType;
-            const name = getFriendlyName(program, type) ?? type.name;
-            // Get properties of the model.
-            const properties: InputModelProperty[] = [];
-            type.properties.forEach((value: ModelTypeProperty, key: string) => {
-                // console.log(key, value);
-                const inputProp = {
-                    Name: value.name,
-                    SerializedName: value.name,
-                    Description: "",
-                    Type: getInputType(program, value.type),
-                    IsRequired: true,
-                    IsReadOnly: true,
-                    IsDiscriminator: false
-                };
-                properties.push(inputProp);
-            });
+        // if (type.name === getIntrinsicModelName(program, type)) {
+        //     // if the model is one of the Cadl Intrinsic type.
+        //     // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+        //     // In such cases, we don't want to emit a ref and instead just
+        //     // emit the base type directly.
+        //     return {
+        //         Name:
+        //             mapCadlIntrinsicModelToCsharpModel(program, type) ??
+        //             type.name,
+        //         Kind: builtInKind,
+        //         IsNullable: false
+        //     } as InputPrimitiveType;
+        // } else {
+        //     type = getEffectiveSchemaType(program, type) as ModelType;
+        //     const name = getFriendlyName(program, type) ?? type.name;
+        //     // Get properties of the model.
+        //     const properties: InputModelProperty[] = [];
+        //     type.properties.forEach((value: ModelTypeProperty, key: string) => {
+        //         // console.log(key, value);
+        //         const inputProp = {
+        //             Name: value.name,
+        //             SerializedName: value.name,
+        //             Description: "",
+        //             Type: getInputType(program, value.type),
+        //             IsRequired: true,
+        //             IsReadOnly: true,
+        //             IsDiscriminator: false
+        //         };
+        //         properties.push(inputProp);
+        //     });
 
-            return {
-                Name: name,
-                IsNullable: false,
-                Properties: properties
-            } as InputModelType;
-        }
+        //     return {
+        //         Name: name,
+        //         IsNullable: false,
+        //         Properties: properties
+        //     } as InputModelType;
+        // }
+        return getInputModelType(program, type);
     }
 
     if (
@@ -263,9 +266,55 @@ export function getInputType(program: Program, type: Type): InputType {
         return getInputTypeForEnum(type);
     }
 
+    if (type.kind === "Array") {
+        return getInputTypeForArray(program, type);
+    }
+
     return { Name: InputTypeKind.UnKnownKind, IsNullable: false } as InputType;
 }
+function getInputModelType(program: Program, m: ModelType): InputType {
+    if (m.name === getIntrinsicModelName(program, m)) {
+        // if the model is one of the Cadl Intrinsic type.
+        // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+        // In such cases, we don't want to emit a ref and instead just
+        // emit the base type directly.
+        const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
+            program,
+            m
+        );
+        return {
+            Name:
+                mapCadlIntrinsicModelToCsharpModel(program, m) ??
+                m.name,
+            Kind: builtInKind,
+            IsNullable: false
+        } as InputPrimitiveType;
+    } else {
+        m = getEffectiveSchemaType(program, m) as ModelType;
+        const name = getFriendlyName(program, m) ?? m.name;
+        // Get properties of the model.
+        const properties: InputModelProperty[] = [];
+        m.properties.forEach((value: ModelTypeProperty, key: string) => {
+            // console.log(key, value);
+            const inputProp = {
+                Name: value.name,
+                SerializedName: value.name,
+                Description: "",
+                Type: getInputType(program, value.type),
+                IsRequired: true,
+                IsReadOnly: true,
+                IsDiscriminator: false
+            };
+            properties.push(inputProp);
+        });
 
+        return {
+            Name: name,
+            IsNullable: false,
+            Properties: properties
+        } as InputModelType;
+    }
+}
 function getInputTypeForEnum(e: EnumType): InputType {
     if (e.members.length == 0) {
         return {
@@ -314,3 +363,13 @@ function getInputTypeForEnum(e: EnumType): InputType {
         } as InputPrimitiveType;
     }
 }
+
+function getInputTypeForArray(program: Program, arr: ArrayType): InputListType {
+    const elementType = arr.elementType;
+    return {
+        Name: "Array",
+        ElementType: getInputType(program, elementType),
+        IsNullable: false,
+    } as InputListType;
+}
+

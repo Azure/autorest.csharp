@@ -41,6 +41,63 @@ Models:
         IsRequired: true
         IsReadOnly: true
         IsDiscriminator: false
+  - &ref_3
+    Name: ToyListResults
+    IsNullable: false
+    Properties:
+      - Name: items
+        SerializedName: items
+        Description: ''
+        Type:
+          Name: Array
+          ElementType:
+            Name: Toy
+            IsNullable: false
+            Properties:
+              - Name: id
+                SerializedName: id
+                Description: ''
+                Type:
+                  Name: Int64
+                  Kind: Int64
+                  IsNullable: false
+                IsRequired: true
+                IsReadOnly: true
+                IsDiscriminator: false
+              - Name: petId
+                SerializedName: petId
+                Description: ''
+                Type:
+                  Name: Int64
+                  Kind: Int64
+                  IsNullable: false
+                IsRequired: true
+                IsReadOnly: true
+                IsDiscriminator: false
+              - Name: name
+                SerializedName: name
+                Description: ''
+                Type:
+                  Name: string
+                  Kind: String
+                  IsNullable: false
+                IsRequired: true
+                IsReadOnly: true
+                IsDiscriminator: false
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: nextLink
+        SerializedName: nextLink
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
 Clients:
   - Name: Pets
     Description: Manage your pets. You can delete or get the Pet from pet store.
@@ -131,77 +188,11 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType:
-              Name: Pet
-              IsNullable: false
-              Properties:
-                - Name: name
-                  SerializedName: name
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: tag
-                  SerializedName: tag
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: age
-                  SerializedName: age
-                  Description: ''
-                  Type:
-                    Name: Int32
-                    Kind: Int32
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
+            BodyType: *ref_2
             BodyMediaType: Json
           - StatusCodes:
               - 304
-            BodyType:
-              Name: Pet
-              IsNullable: false
-              Properties:
-                - Name: name
-                  SerializedName: name
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: tag
-                  SerializedName: tag
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: age
-                  SerializedName: age
-                  Description: ''
-                  Type:
-                    Name: Int32
-                    Kind: Int32
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
+            BodyType: *ref_2
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json
@@ -227,40 +218,7 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType:
-              Name: Pet
-              IsNullable: false
-              Properties:
-                - Name: name
-                  SerializedName: name
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: tag
-                  SerializedName: tag
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: age
-                  SerializedName: age
-                  Description: ''
-                  Type:
-                    Name: Int32
-                    Kind: Int32
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
+            BodyType: *ref_2
             BodyMediaType: Json
         HttpMethod: POST
         RequestBodyMediaType: Json
@@ -307,29 +265,7 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType:
-              Name: ToyListResults
-              IsNullable: false
-              Properties:
-                - Name: items
-                  SerializedName: items
-                  Description: ''
-                  Type:
-                    IsNullable: false
-                    Name: UnknownKind
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
-                - Name: nextLink
-                  SerializedName: nextLink
-                  Description: ''
-                  Type:
-                    Name: string
-                    Kind: String
-                    IsNullable: false
-                  IsRequired: true
-                  IsReadOnly: true
-                  IsDiscriminator: false
+            BodyType: *ref_3
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json
