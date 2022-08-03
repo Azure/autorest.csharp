@@ -208,36 +208,33 @@ export function getInputType(
     type: Type,
     models: Map<string, InputModelType>
 ): InputType {
-    const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
-        program,
-        type
-    );
     if (type.kind === "Model") {
         return getInputModelType(program, type);
-    }
-
-    if (
+    } else if (
         type.kind === "String" ||
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
         // For literal types, we just want to emit them directly as well.
+        const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
+            program,
+            type
+        );
         return {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
         } as InputPrimitiveType;
-    }
-
-    if (type.kind === "Enum") {
+    } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
-    }
-
-    if (type.kind === "Array") {
+    } else if (type.kind === "Array") {
         return getInputTypeForArray(program, type);
+    } else {
+        return {
+            Name: InputTypeKind.UnKnownKind,
+            IsNullable: false
+        } as InputType;
     }
-
-    return { Name: InputTypeKind.UnKnownKind, IsNullable: false } as InputType;
 
     function getInputModelType(program: Program, m: ModelType): InputType {
         if (m.name === getIntrinsicModelName(program, m)) {
@@ -245,13 +242,9 @@ export function getInputType(
             // it's a base Cadl "primitive" that corresponds directly to an c# data type.
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
-            const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
-                program,
-                m
-            );
             return {
                 Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
-                Kind: builtInKind,
+                Kind: mapCalTypeToCsharpInputTypeKind(program, m),
                 IsNullable: false
             } as InputPrimitiveType;
         } else {
