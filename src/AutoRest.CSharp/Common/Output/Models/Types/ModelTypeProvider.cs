@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -70,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var serializedName = property.SerializedName ?? property.Name;
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
-                var valueSerialization = new JsonValueSerialization(field.Type, SerializationFormat.Default, field.Type.IsNullable);
+                var valueSerialization = new JsonValueSerialization(field.Type, SerializationBuilder.GetSerializationFormat(property.Type), field.Type.IsNullable);
 
                 yield return new JsonPropertySerialization(name, serializedName, field.Type, field.Type, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
             }
