@@ -7,7 +7,7 @@ Description: >-
 ApiVersions:
   - '2021-03-25'
 Models:
-  - &ref_2
+  - &ref_3
     Name: Pet
     IsNullable: false
     Properties:
@@ -41,7 +41,41 @@ Models:
         IsRequired: true
         IsReadOnly: true
         IsDiscriminator: false
-  - &ref_3
+  - &ref_0
+    Name: Toy
+    IsNullable: false
+    Properties:
+      - Name: id
+        SerializedName: id
+        Description: ''
+        Type:
+          Name: Int64
+          Kind: Int64
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: petId
+        SerializedName: petId
+        Description: ''
+        Type:
+          Name: Int64
+          Kind: Int64
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: name
+        SerializedName: name
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+  - &ref_4
     Name: ToyListResults
     IsNullable: false
     Properties:
@@ -50,40 +84,7 @@ Models:
         Description: ''
         Type:
           Name: Array
-          ElementType:
-            Name: Toy
-            IsNullable: false
-            Properties:
-              - Name: id
-                SerializedName: id
-                Description: ''
-                Type:
-                  Name: Int64
-                  Kind: Int64
-                  IsNullable: false
-                IsRequired: true
-                IsReadOnly: true
-                IsDiscriminator: false
-              - Name: petId
-                SerializedName: petId
-                Description: ''
-                Type:
-                  Name: Int64
-                  Kind: Int64
-                  IsNullable: false
-                IsRequired: true
-                IsReadOnly: true
-                IsDiscriminator: false
-              - Name: name
-                SerializedName: name
-                Description: ''
-                Type:
-                  Name: string
-                  Kind: String
-                  IsNullable: false
-                IsRequired: true
-                IsReadOnly: true
-                IsDiscriminator: false
+          ElementType: *ref_0
           IsNullable: false
         IsRequired: true
         IsReadOnly: true
@@ -106,7 +107,7 @@ Clients:
         Summary: delete.
         Description: Delete a pet.
         Parameters:
-          - &ref_0
+          - &ref_1
             Name: petStoreUrl
             NameInRequest: petStoreUrl
             Type:
@@ -122,7 +123,7 @@ Clients:
             SkipUrlEncoding: false
             Explode: false
             Kind: Client
-          - &ref_1
+          - &ref_2
             Name: apiVersion
             NameInRequest: apiVersion
             Description: ''
@@ -167,8 +168,8 @@ Clients:
       - Name: read
         Description: Returns a pet. Supports eTags.
         Parameters:
-          - *ref_0
           - *ref_1
+          - *ref_2
           - Name: petId
             NameInRequest: petId
             Description: The id of pet.
@@ -188,11 +189,11 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType: *ref_2
+            BodyType: *ref_3
             BodyMediaType: Json
           - StatusCodes:
               - 304
-            BodyType: *ref_2
+            BodyType: *ref_3
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json
@@ -201,11 +202,11 @@ Clients:
         BufferResponse: false
       - Name: create
         Parameters:
-          - *ref_0
           - *ref_1
+          - *ref_2
           - Name: pet
             NameInRequest: pet
-            Type: *ref_2
+            Type: *ref_3
             Location: Body
             IsRequired: true
             IsApiVersion: false
@@ -218,7 +219,7 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType: *ref_2
+            BodyType: *ref_3
             BodyMediaType: Json
         HttpMethod: POST
         RequestBodyMediaType: Json
@@ -230,8 +231,8 @@ Clients:
     Operations:
       - Name: list
         Parameters:
-          - *ref_0
           - *ref_1
+          - *ref_2
           - Name: petId
             NameInRequest: petId
             Type:
@@ -265,7 +266,7 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType: *ref_3
+            BodyType: *ref_4
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json

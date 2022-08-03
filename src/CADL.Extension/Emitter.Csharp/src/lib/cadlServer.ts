@@ -74,7 +74,7 @@ export function resolveServers(
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: defaultValue
             };
-            
+
             parameters.push(variable);
         }
         return {

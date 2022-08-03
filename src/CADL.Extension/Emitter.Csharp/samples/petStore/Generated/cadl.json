@@ -60,68 +60,71 @@
   },
   {
    "$id": "9",
-   "Name": "ToyListResults",
+   "Name": "Toy",
    "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Name": "Int64",
+      "Kind": "Int64",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "12",
+     "Name": "petId",
+     "SerializedName": "petId",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Name": "Int64",
+      "Kind": "Int64",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "14",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "16",
+   "Name": "ToyListResults",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "17",
      "Name": "items",
      "SerializedName": "items",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "18",
       "Name": "Array",
       "ElementType": {
-       "$id": "12",
-       "Name": "Toy",
-       "IsNullable": false,
-       "Properties": [
-        {
-         "$id": "13",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "",
-         "Type": {
-          "$id": "14",
-          "Name": "Int64",
-          "Kind": "Int64",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
-        },
-        {
-         "$id": "15",
-         "Name": "petId",
-         "SerializedName": "petId",
-         "Description": "",
-         "Type": {
-          "$id": "16",
-          "Name": "Int64",
-          "Kind": "Int64",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
-        },
-        {
-         "$id": "17",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "",
-         "Type": {
-          "$id": "18",
-          "Name": "string",
-          "Kind": "String",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
-        }
-       ]
+       "$ref": "9"
       },
       "IsNullable": false
      },
@@ -411,7 +414,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "9"
+        "$ref": "16"
        },
        "BodyMediaType": "Json"
       }

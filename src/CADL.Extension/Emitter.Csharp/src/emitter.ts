@@ -130,8 +130,7 @@ function createModel(program: Program): any {
     apiVersions.push(version);
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
-    const inputModels: InputModelType[] = [];
-    const modelMap = new Map<string, InputModelType | InputEnumType>();
+    const modelMap = new Map<string, InputModelType>();
     try {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
@@ -208,98 +207,12 @@ function createModel(program: Program): any {
     }
 }
 
-function loadOperationParameter(
-    program: Program,
-    parameter: HttpOperationParameter
-): InputParameter {
-    const { type: location, name, param } = parameter;
-    const cadlType = param.type;
-    const inputType: InputType = getInputType(program, cadlType);
-    const requestLocation = requestLocationMap[location];
-    const kind: InputOperationParameterKind =
-        InputOperationParameterKind.Method;
-    return {
-        Name: name,
-        NameInRequest: name,
-        Description: getDoc(program, param),
-        Type: inputType,
-        Location: requestLocation,
-        IsRequired: !param.optional,
-        IsApiVersion: false,
-        IsResourceParameter: false,
-        IsContentType: false,
-        IsEndpoint: false,
-        SkipUrlEncoding: true,
-        Explode: false,
-        Kind: kind
-    } as InputParameter;
-}
-
-function loadBodyParameter(
-    program: Program,
-    body: ModelTypeProperty,
-    models: Map<string, InputModelType | InputEnumType>
-): InputParameter {
-    const { type, name, model: cadlType } = body;
-    //const cadlType = body.type;
-    const inputType: InputType = getInputType(program, type);
-    if (!models.get(inputType.Name)) {
-        models.set(inputType.Name, inputType as InputModelType);
-    }
-    //const requestLocation = requestLocationMap[location];
-    const requestLocation = RequestLocation.Body;
-    const kind: InputOperationParameterKind =
-        InputOperationParameterKind.Method;
-    return {
-        Name: name,
-        NameInRequest: name,
-        Description: getDoc(program, body),
-        Type: models.get(inputType.Name),
-        Location: requestLocation,
-        IsRequired: !body.optional,
-        IsApiVersion: false,
-        IsResourceParameter: false,
-        IsContentType: false,
-        IsEndpoint: false,
-        SkipUrlEncoding: true,
-        Explode: false,
-        Kind: kind
-    } as InputParameter;
-}
-
-function loadOperationResponse(
-    program: Program,
-    response: HttpOperationResponse,
-    models: Map<string, InputModelType | InputEnumType>
-): OperationResponse | undefined {
-    if (!response.statusCode || response.statusCode === "*") {
-        return undefined;
-    }
-    const status: number[] = [];
-    status.push(Number(response.statusCode));
-    const body = response.responses[0]?.body;
-    let type: InputType | undefined = undefined;
-    if (body?.type) {
-        const cadlType = body.type;
-        const inputType: InputType = getInputType(program, cadlType);
-        if (!models.get(inputType.Name)) {
-            models.set(inputType.Name, inputType as InputModelType);
-        }
-        type = models.get(inputType.Name);
-    }
-
-    return {
-        StatusCodes: status,
-        BodyType: type,
-        BodyMediaType: BodyMediaType.Json
-    } as OperationResponse;
-}
 function loadOperation(
     program: Program,
     operation: OperationDetails,
     endpoint: InputParameter | undefined = undefined,
     apiVersion: InputParameter | undefined = undefined,
-    models: Map<string, InputModelType | InputEnumType>
+    models: Map<string, InputModelType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -321,12 +234,12 @@ function loadOperation(
 
     const body = cadlParameters.body;
     if (body) {
-        parameters.push(loadBodyParameter(program, body, models));
+        parameters.push(loadBodyParameter(program, body));
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res, models);
+        const operationResponse = loadOperationResponse(program, res);
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -348,6 +261,93 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         BufferResponse: false
     } as InputOperation;
+
+    function loadOperationParameter(
+        program: Program,
+        parameter: HttpOperationParameter
+    ): InputParameter {
+        const { type: location, name, param } = parameter;
+        const cadlType = param.type;
+        const inputType: InputType = getInputType(program, cadlType, models);
+        const requestLocation = requestLocationMap[location];
+        const kind: InputOperationParameterKind =
+            InputOperationParameterKind.Method;
+        return {
+            Name: name,
+            NameInRequest: name,
+            Description: getDoc(program, param),
+            Type: inputType,
+            Location: requestLocation,
+            IsRequired: !param.optional,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsEndpoint: false,
+            SkipUrlEncoding: true,
+            Explode: false,
+            Kind: kind
+        } as InputParameter;
+    }
+
+    function loadBodyParameter(
+        program: Program,
+        body: ModelTypeProperty
+    ): InputParameter {
+        const { type, name, model: cadlType } = body;
+        //const cadlType = body.type;
+        const inputType: InputType = getInputType(program, type, models);
+
+        //const requestLocation = requestLocationMap[location];
+        const requestLocation = RequestLocation.Body;
+        const kind: InputOperationParameterKind =
+            InputOperationParameterKind.Method;
+        return {
+            Name: name,
+            NameInRequest: name,
+            Description: getDoc(program, body),
+            Type: models.get(inputType.Name),
+            Location: requestLocation,
+            IsRequired: !body.optional,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsEndpoint: false,
+            SkipUrlEncoding: true,
+            Explode: false,
+            Kind: kind
+        } as InputParameter;
+    }
+
+    function loadOperationResponse(
+        program: Program,
+        response: HttpOperationResponse
+    ): OperationResponse | undefined {
+        if (!response.statusCode || response.statusCode === "*") {
+            return undefined;
+        }
+        const status: number[] = [];
+        status.push(Number(response.statusCode));
+        const body = response.responses[0]?.body;
+        let type: InputType | undefined = undefined;
+        if (body?.type) {
+            const cadlType = body.type;
+            const inputType: InputType = getInputType(
+                program,
+                cadlType,
+                models
+            );
+            if (!models.get(inputType.Name)) {
+                models.set(inputType.Name, inputType as InputModelType);
+            }
+            type = models.get(inputType.Name);
+        }
+
+        return {
+            StatusCodes: status,
+            BodyType: type,
+            BodyMediaType: BodyMediaType.Json
+        } as OperationResponse;
+    }
 }
 
 class ErrorTypeFoundError extends Error {
