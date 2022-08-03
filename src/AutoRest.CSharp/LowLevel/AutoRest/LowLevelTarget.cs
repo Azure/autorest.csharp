@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{model.Type.Name}.cs", codeWriter.ToString());
 
                 var serializationWriter = new CodeWriter();
-                LowLevelModelWriter.WriteSerialization(serializationWriter, model);
+                SerializationWriter.WriteModelSerialization(serializationWriter, model);
                 project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationWriter.ToString());
             }
 

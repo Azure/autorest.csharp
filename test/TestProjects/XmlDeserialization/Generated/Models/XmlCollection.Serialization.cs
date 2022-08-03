@@ -15,6 +15,28 @@ namespace XmlDeserialization.Models
 {
     internal partial class XmlCollection
     {
+        internal static XmlCollection DeserializeXmlCollection(XElement element)
+        {
+            long? count = default;
+            string nextLink = default;
+            IReadOnlyList<XmlInstanceData> value = default;
+            if (element.Element("count") is XElement countElement)
+            {
+                count = (long?)countElement;
+            }
+            if (element.Element("nextLink") is XElement nextLinkElement)
+            {
+                nextLink = (string)nextLinkElement;
+            }
+            var array = new List<XmlInstanceData>();
+            foreach (var e in element.Elements("XmlInstance"))
+            {
+                array.Add(XmlInstanceData.DeserializeXmlInstanceData(e));
+            }
+            value = array;
+            return new XmlCollection(value, count, nextLink);
+        }
+
         internal static XmlCollection DeserializeXmlCollection(JsonElement element)
         {
             Optional<IReadOnlyList<XmlInstanceData>> value = default;
@@ -54,28 +76,6 @@ namespace XmlDeserialization.Models
                 }
             }
             return new XmlCollection(Optional.ToList(value), Optional.ToNullable(count), nextLink.Value);
-        }
-
-        internal static XmlCollection DeserializeXmlCollection(XElement element)
-        {
-            long? count = default;
-            string nextLink = default;
-            IReadOnlyList<XmlInstanceData> value = default;
-            if (element.Element("count") is XElement countElement)
-            {
-                count = (long?)countElement;
-            }
-            if (element.Element("nextLink") is XElement nextLinkElement)
-            {
-                nextLink = (string)nextLinkElement;
-            }
-            var array = new List<XmlInstanceData>();
-            foreach (var e in element.Elements("XmlInstance"))
-            {
-                array.Add(XmlInstanceData.DeserializeXmlInstanceData(e));
-            }
-            value = array;
-            return new XmlCollection(value, count, nextLink);
         }
     }
 }

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         private void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string serializationCodes)
         {
             var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteSerialization(codeWriter, model);
+            SerializationWriter.WriteModelSerialization(codeWriter, model);
             var codes = codeWriter.ToString();
             Assert.AreEqual(serializationCodes, codes);
         }

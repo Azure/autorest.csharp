@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
 
@@ -32,19 +33,6 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default
             };
-
-        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, SchemaObjectType type)
-        {
-            switch (mediaType)
-            {
-                case KnownMediaType.Json:
-                    return BuildJsonObjectSerialization(objectSchema, type);
-                case KnownMediaType.Xml:
-                    return BuildXmlObjectSerialization(objectSchema, type);
-                default:
-                    throw new NotImplementedException($"BuildObject with {mediaType} from {objectSchema.Name}");
-            }
-        }
 
         public ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
@@ -168,7 +156,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
             List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
@@ -238,12 +226,22 @@ namespace AutoRest.CSharp.Output.Builders
             foreach (Property property in propertyBag.Properties)
             {
                 var objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
+                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(objectProperty);
+                if (parameter is null)
+                {
+                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {property.SerializedName} input property");
+                }
+
                 yield return new JsonPropertySerialization(
+                    parameter.Name,
+                    objectProperty.Declaration.Name,
                     property.SerializedName,
+                    objectProperty.Declaration.Type,
+                    objectProperty.ValueType,
+                    BuildSerialization(property.Schema, objectProperty.ValueType),
                     property.IsRequired,
                     property.IsReadOnly,
-                    objectProperty,
-                    BuildSerialization(property.Schema, objectProperty.ValueType));
+                    objectProperty.OptionalViaNullability);
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
@@ -253,9 +251,9 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
-            PropertyBag propertyBag = new PropertyBag();
+            var propertyBag = new PropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
@@ -269,11 +267,9 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             PopulatePropertyBag(propertyBag, 0);
-            return new JsonObjectSerialization(
-                objectType.Type,
-                GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(),
-                CreateAdditionalProperties(objectSchema, objectType),
-                false);
+            var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
+            var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
+            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter, false, false);
         }
 
         private class PropertyBag

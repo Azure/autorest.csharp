@@ -28,14 +28,8 @@ namespace multiple_inheritance.Models
         /// <param name="likesMilk"></param>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Cat(string name, bool? likesMilk, bool? meows, bool? hisses) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
             LikesMilk = likesMilk;
             Meows = meows;
             Hisses = hisses;
