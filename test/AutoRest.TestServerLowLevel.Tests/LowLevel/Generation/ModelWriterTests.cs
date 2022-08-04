@@ -190,7 +190,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.PrimitiveProperties
 {
-public partial class PrimitivePropertyModel : global::Azure.Core.IUtf8JsonSerializable
+public partial class PrimitivePropertyModel: global::Azure.Core.IUtf8JsonSerializable
 {
 void global::Azure.Core.IUtf8JsonSerializable.Write(global::System.Text.Json.Utf8JsonWriter writer)
 {
