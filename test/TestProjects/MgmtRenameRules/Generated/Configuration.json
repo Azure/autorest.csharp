@@ -40,6 +40,7 @@
     "LogAnalyticsOperationResult": "LogAnalytics",
     "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
     "UpgradeOperationHistoricalStatusInfo.type": "-|resource-type",
-    "DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey": "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey"
+    "DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey": "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey",
+    "AdditionalUnattendContent.backupFrequency": "-|integer"
   }
 }

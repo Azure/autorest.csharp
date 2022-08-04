@@ -4695,6 +4695,10 @@
                         "modelAsString": false
                     }
                 },
+                "backupFrequency": {
+                    "type": "string",
+                    "description": "Specifies the frequency for content backup"
+                },
                 "contentType": {
                     "type": "string",
                     "description": "The content type."

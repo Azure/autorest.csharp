@@ -30,6 +30,11 @@ namespace MgmtRenameRules.Models
                 writer.WritePropertyName("settingName");
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
+            if (Optional.IsDefined(BackupFrequency))
+            {
+                writer.WritePropertyName("backupFrequency");
+                writer.WriteNumberValue(BackupFrequency.Value);
+            }
             if (Optional.IsDefined(ContentType))
             {
                 writer.WritePropertyName("contentType");
@@ -48,6 +53,7 @@ namespace MgmtRenameRules.Models
             Optional<PassName> passName = default;
             Optional<ComponentName> componentName = default;
             Optional<SettingName> settingName = default;
+            Optional<int> backupFrequency = default;
             Optional<ContentType> contentType = default;
             Optional<string> content = default;
             foreach (var property in element.EnumerateObject())
@@ -82,6 +88,16 @@ namespace MgmtRenameRules.Models
                     settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
+                if (property.NameEquals("backupFrequency"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    backupFrequency = property.Value.GetInt32();
+                    continue;
+                }
                 if (property.NameEquals("contentType"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -98,7 +114,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(contentType), content.Value);
+            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(backupFrequency), Optional.ToNullable(contentType), content.Value);
         }
     }
 }

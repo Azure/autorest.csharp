@@ -16,7 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 keep-orphaned-models:
-- VmDiskType
+  VmDiskType
 
 rename-rules:
   Os: OS
@@ -47,4 +47,5 @@ rename-mapping:
   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
   UpgradeOperationHistoricalStatusInfo.type: -|resource-type # this configuration does not change its property name, only changes its format to resource-type
   DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
+  AdditionalUnattendContent.backupFrequency: -|integer
 ```
