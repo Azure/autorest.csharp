@@ -6,21 +6,114 @@ Description: >-
   `special-key` to test the authorization filters.
 ApiVersions:
   - '2021-03-25'
+Models:
+  - &ref_3
+    Name: Pet
+    IsNullable: false
+    Properties:
+      - Name: name
+        SerializedName: name
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: tag
+        SerializedName: tag
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: age
+        SerializedName: age
+        Description: ''
+        Type:
+          Name: Int32
+          Kind: Int32
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+  - &ref_0
+    Name: Toy
+    IsNullable: false
+    Properties:
+      - Name: id
+        SerializedName: id
+        Description: ''
+        Type:
+          Name: Int64
+          Kind: Int64
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: petId
+        SerializedName: petId
+        Description: ''
+        Type:
+          Name: Int64
+          Kind: Int64
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: name
+        SerializedName: name
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+  - &ref_4
+    Name: ToyListResults
+    IsNullable: false
+    Properties:
+      - Name: items
+        SerializedName: items
+        Description: ''
+        Type:
+          Name: Array
+          ElementType: *ref_0
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
+      - Name: nextLink
+        SerializedName: nextLink
+        Description: ''
+        Type:
+          Name: string
+          Kind: String
+          IsNullable: false
+        IsRequired: true
+        IsReadOnly: true
+        IsDiscriminator: false
 Clients:
   - Name: Pets
+    Description: Manage your pets. You can delete or get the Pet from pet store.
     Operations:
       - Name: delete
         Summary: delete.
         Description: Delete a pet.
         Parameters:
-          - &ref_0
+          - &ref_1
             Name: petStoreUrl
             NameInRequest: petStoreUrl
             Type:
               Name: Uri
               Kind: Uri
               IsNullable: false
-              SerializationFormat: 0
             Location: Uri
             IsApiVersion: false
             IsResourceParameter: false
@@ -30,15 +123,14 @@ Clients:
             SkipUrlEncoding: false
             Explode: false
             Kind: Client
-          - &ref_1
+          - &ref_2
             Name: apiVersion
             NameInRequest: apiVersion
             Description: ''
             Type:
-              Name: string
+              Name: String
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Query
             IsRequired: true
             IsApiVersion: true
@@ -55,7 +147,6 @@ Clients:
               Name: Int32
               Kind: Int32
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false
@@ -77,8 +168,8 @@ Clients:
       - Name: read
         Description: Returns a pet. Supports eTags.
         Parameters:
-          - *ref_0
           - *ref_1
+          - *ref_2
           - Name: petId
             NameInRequest: petId
             Description: The id of pet.
@@ -86,7 +177,6 @@ Clients:
               Name: Int32
               Kind: Int32
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false
@@ -99,19 +189,11 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType:
-              Name: Pet
-              Kind: Object
-              IsNullable: false
-              SerializationFormat: 0
+            BodyType: *ref_3
             BodyMediaType: Json
           - StatusCodes:
               - 304
-            BodyType:
-              Name: Pet
-              Kind: Object
-              IsNullable: false
-              SerializationFormat: 0
+            BodyType: *ref_3
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json
@@ -120,16 +202,24 @@ Clients:
         BufferResponse: false
       - Name: create
         Parameters:
-          - *ref_0
           - *ref_1
+          - *ref_2
+          - Name: pet
+            NameInRequest: pet
+            Type: *ref_3
+            Location: Body
+            IsRequired: true
+            IsApiVersion: false
+            IsResourceParameter: false
+            IsContentType: false
+            IsEndpoint: false
+            SkipUrlEncoding: true
+            Explode: false
+            Kind: Method
         Responses:
           - StatusCodes:
               - 200
-            BodyType:
-              Name: Pet
-              Kind: Object
-              IsNullable: false
-              SerializationFormat: 0
+            BodyType: *ref_3
             BodyMediaType: Json
         HttpMethod: POST
         RequestBodyMediaType: Json
@@ -141,15 +231,14 @@ Clients:
     Operations:
       - Name: list
         Parameters:
-          - *ref_0
           - *ref_1
+          - *ref_2
           - Name: petId
             NameInRequest: petId
             Type:
               Name: string
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Path
             IsRequired: true
             IsApiVersion: false
@@ -165,7 +254,6 @@ Clients:
               Name: string
               Kind: String
               IsNullable: false
-              SerializationFormat: 0
             Location: Query
             IsRequired: true
             IsApiVersion: false
@@ -178,11 +266,7 @@ Clients:
         Responses:
           - StatusCodes:
               - 200
-            BodyType:
-              Name: ToyListResults
-              Kind: Object
-              IsNullable: false
-              SerializationFormat: 0
+            BodyType: *ref_4
             BodyMediaType: Json
         HttpMethod: GET
         RequestBodyMediaType: Json

@@ -1,5 +1,5 @@
 {
-    "name": "@cadl-lang/csharp-emitter",
+    "name": "@azure-tools/cadl-csharp",
     "version": "0.1.0",
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
