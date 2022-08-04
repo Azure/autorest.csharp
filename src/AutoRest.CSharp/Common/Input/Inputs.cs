@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Common.Input
         }
     }
 
-    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsNullable = false)
+    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtendable, bool IsNullable = false)
         : InputType(Name, IsNullable)
     {
         public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Common.Input
                     && x.Description == y.Description
                     && x.EnumValueType.Equals(y.EnumValueType)
                     && x.AllowedValues.SequenceEqual(y.AllowedValues)
-                    && x.IsExtensible == y.IsExtensible;
+                    && x.IsExtendable == y.IsExtendable;
             }
 
             public int GetHashCode(InputEnumType obj)
@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Common.Input
                 hashCode.Add(obj.Accessibility);
                 hashCode.Add(obj.Description);
                 hashCode.Add(obj.EnumValueType);
-                hashCode.Add(obj.IsExtensible);
+                hashCode.Add(obj.IsExtendable);
                 foreach (var item in obj.AllowedValues)
                 {
                     hashCode.Add(item);

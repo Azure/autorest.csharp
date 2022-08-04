@@ -66,8 +66,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var property = _fieldsToInputs[field];
                 var serializedName = property.SerializedName ?? property.Name;
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
-                var valueSerialization = new JsonValueSerialization(field.Type, SerializationBuilder.GetSerializationFormat(property.Type), field.Type.IsNullable);
-                yield return new JsonPropertySerialization(parameter.Name, name, serializedName, field.Type, field.Type, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+                var valueType = field.Type;
+                var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, valueType);
+                yield return new JsonPropertySerialization(parameter.Name, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
             }
         }
 

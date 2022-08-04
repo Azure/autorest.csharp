@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteObjectSerialization(writer, objectSchema);
                     break;
                 case EnumType {IsExtendable: false} sealedChoiceSchema:
-                    WriteSealedChoiceSerialization(writer, sealedChoiceSchema);
+                    WriteEnumSerialization(writer, sealedChoiceSchema);
                     break;
             }
         }
@@ -232,7 +232,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteSealedChoiceSerialization(CodeWriter writer, EnumType schema)
+        public static void WriteEnumSerialization(CodeWriter writer, EnumType schema)
         {
             using (writer.Namespace(schema.Declaration.Namespace))
             {

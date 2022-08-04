@@ -345,14 +345,14 @@ namespace AutoRest.CSharp.Common.Input
             _ => new CodeModelType(schema)
         };
 
-        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
+        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtendable) => new(
             Name: schema.Name,
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
-            IsExtensible: isExtensible
+            IsExtendable: isExtendable
         );
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(

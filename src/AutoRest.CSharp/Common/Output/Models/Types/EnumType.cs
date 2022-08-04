@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
 
-            var isExtendable = input.IsExtensible;
+            var isExtendable = input.IsExtendable;
             if (ExistingType != null)
             {
                 isExtendable = ExistingType.TypeKind switch

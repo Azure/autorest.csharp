@@ -881,7 +881,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (InputModelProperty property in modelOrBase.Properties)
                             {
-                                if (property.IsDiscriminator && property.Type is InputEnumType { IsExtensible: true } && modelType.DiscriminatorValue != null)
+                                if (property.IsDiscriminator && property.Type is InputEnumType { IsExtendable: true } && modelType.DiscriminatorValue != null)
                                 {
                                     propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                         property.SerializedName ?? property.Name,
