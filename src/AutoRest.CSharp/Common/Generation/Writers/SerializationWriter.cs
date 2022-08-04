@@ -65,6 +65,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         .RemoveTrailingComma();
                 }
 
+                writer.Line();
                 using (writer.Scope())
                 {
                     if (xmlSerialization != null)
@@ -198,8 +199,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
         {
-            writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
-            using (writer.Scope())
+
+            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
             {
                 writer.ToSerializeCall(jsonSerialization);
             }
