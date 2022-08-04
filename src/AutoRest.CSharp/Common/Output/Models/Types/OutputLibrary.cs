@@ -12,7 +12,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         public abstract CSharpType FindTypeForSchema(Schema schema);
         public abstract CSharpType? FindTypeByName(string originalName);
 
+        /// <summary>
+        /// Returns CSharpType that matches the enum definition provided in the input model, or a value type that enum can be converted to if enum wasn't defined in the input
+        /// </summary>
         public abstract CSharpType ResolveEnum(InputEnumType enumType);
+
+        /// <summary>
+        /// Returns CSharpType that matches the model definition provided in the input model, or simple object type if model type wasn't defined in the input
+        /// </summary>
         public abstract CSharpType ResolveModel(InputModelType model);
     }
 }
