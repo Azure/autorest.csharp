@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType             => _library.ResolveEnum(enumType),
-            InputModelType model               => _library.ResolveModel(model),
+            InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
