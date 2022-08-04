@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
         }
 
-        public DpgOutputLibrary Build(bool cadlInput)
+        public DpgOutputLibrary Build(bool isCadlInput)
         {
             var inputClients = UpdateListMethodNames();
 
@@ -50,11 +50,11 @@ namespace AutoRest.CSharp.Output.Models
 
             IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, cadlInput);
+                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, isCadlInput);
                 return EnumerateAllClients(topLevelClients);
             }
 
-            return new DpgOutputLibrary(cadlInput ? ModelsFactory : t => Array.Empty<ModelTypeProvider>(), RestClientsFactory, clientOptions);
+            return new DpgOutputLibrary(isCadlInput ? ModelsFactory : t => Array.Empty<ModelTypeProvider>(), RestClientsFactory, clientOptions);
         }
 
         private IEnumerable<InputClient> UpdateListMethodNames()
@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool cadlInput)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool isCadlInput)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -238,12 +238,12 @@ namespace AutoRest.CSharp.Output.Models
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
-                    cadlInput)
+                    isCadlInput)
                 {
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, cadlInput));
+                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, isCadlInput));
 
                  yield return client;
             }

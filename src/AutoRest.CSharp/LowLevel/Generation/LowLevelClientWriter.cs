@@ -72,8 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            LowLevelConvenienceMethodWriter.WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, true);
-                            LowLevelConvenienceMethodWriter.WriteClientConvenienceMethod(writer, convenienceMethod, client.Fields.ClientDiagnosticsProperty.Name, false);
+                            new LowLevelConvenienceMethodWriter(writer, convenienceMethod).WriteClientConvenienceMethod(client.Fields.ClientDiagnosticsProperty.Name);
 
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);

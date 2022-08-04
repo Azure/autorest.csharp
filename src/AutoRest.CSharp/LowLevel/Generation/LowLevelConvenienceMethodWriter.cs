@@ -15,24 +15,19 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelConvenienceMethodWriter : ClientWriter
     {
-        internal static void WriteClientConvenienceMethod(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, string diagnosticsPropertyName, bool async)
-        {
-            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod, async))
-            {
-                if (convenienceMethod.Diagnostic != null)
-                {
-                    using (WriteDiagnosticScope(writer, convenienceMethod.Diagnostic, diagnosticsPropertyName))
-                    {
-                        WriteClientConvenienceMethodBody(writer, convenienceMethod, async);
-                    }
-                }
-                else
-                {
-                    WriteClientConvenienceMethodBody(writer, convenienceMethod, async);
-                }
-            }
+        private CodeWriter _writer;
+        private LowLevelConvenienceMethod _convenienceMethod;
 
-            writer.Line();
+        internal LowLevelConvenienceMethodWriter(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod)
+        {
+            _writer = writer;
+            _convenienceMethod = convenienceMethod;
+        }
+
+        internal void WriteClientConvenienceMethod(string diagnosticsPropertyName)
+        {
+            WriteClientConvenienceMethod(diagnosticsPropertyName, true);
+            WriteClientConvenienceMethod(diagnosticsPropertyName, false);
         }
 
         internal static void WriteCancellationTokenToRequestContextMethod(CodeWriter writer)
@@ -53,36 +48,56 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static CodeWriter.CodeWriterScope WriteConvenienceMethodDeclaration(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
+        private void WriteClientConvenienceMethod(string diagnosticsPropertyName, bool async)
         {
-            var methodSignature = convenienceMethod.Signature.WithAsync(async);
-            writer
+            using (WriteConvenienceMethodDeclaration(async))
+            {
+                if (_convenienceMethod.Diagnostic != null)
+                {
+                    using (WriteDiagnosticScope(_writer, _convenienceMethod.Diagnostic, diagnosticsPropertyName))
+                    {
+                        WriteClientConvenienceMethodBody(async);
+                    }
+                }
+                else
+                {
+                    WriteClientConvenienceMethodBody(async);
+                }
+            }
+
+            _writer.Line();
+        }
+
+        private CodeWriter.CodeWriterScope WriteConvenienceMethodDeclaration(bool async)
+        {
+            var methodSignature = _convenienceMethod.Signature.WithAsync(async);
+            _writer
                 .WriteMethodDocumentation(methodSignature)
                 .WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
-            var scope = writer.WriteMethodDeclaration(methodSignature);
-            if (convenienceMethod.BodyParameter != null)
+            var scope = _writer.WriteMethodDeclaration(methodSignature);
+            if (_convenienceMethod.BodyParameter != null)
             {
-                writer.WriteParametersValidation(new[] { convenienceMethod.BodyParameter });
+                _writer.WriteParametersValidation(new[] { _convenienceMethod.BodyParameter });
             }
             return scope;
         }
 
-        private static void WriteClientConvenienceMethodBody(CodeWriter writer, LowLevelConvenienceMethod convenienceMethod, bool async)
+        private void WriteClientConvenienceMethodBody(bool async)
         {
-            string contextVariableName = convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == KnownParameters.RequestContext.Name) != null ? $"{KnownParameters.RequestContext.Name}1" : KnownParameters.RequestContext.Name;
-            writer.Line($"{typeof(RequestContext)} {contextVariableName} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+            string contextVariableName = _convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == KnownParameters.RequestContext.Name) != null ? $"{KnownParameters.RequestContext.Name}1" : KnownParameters.RequestContext.Name;
+            _writer.Line($"{typeof(RequestContext)} {contextVariableName} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
 
-            string responseVariableName = convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == "response") != null ? "response1" : "response";
-            var protocolSignature = convenienceMethod.LowLevelClientMethod.Signature;
-            writer.Line($"{typeof(Response)} {responseVariableName} = {(async ? "await " : String.Empty)}{protocolSignature.Name}{(async ? "Async" : String.Empty)}({string.Join(", ", protocolSignature.Parameters.Select(parameter => ParameterToItsName(parameter)))}){(async ? ".ConfigureAwait(false)" : String.Empty)};");
+            string responseVariableName = _convenienceMethod.Signature.Parameters.FirstOrDefault(parameter => parameter.Name == "response") != null ? "response1" : "response";
+            var protocolSignature = _convenienceMethod.LowLevelClientMethod.Signature;
+            _writer.Line($"{typeof(Response)} {responseVariableName} = {(async ? "await " : String.Empty)}{protocolSignature.Name}{(async ? "Async" : String.Empty)}({string.Join(", ", protocolSignature.Parameters.Select(parameter => ParameterToItsName(parameter)))}){(async ? ".ConfigureAwait(false)" : String.Empty)};");
 
-            if (convenienceMethod.ResponseType == null)
+            if (_convenienceMethod.ResponseType == null)
             {
-                writer.Line($"return {responseVariableName};");
+                _writer.Line($"return {responseVariableName};");
             }
             else
             {
-                writer.Line($"return Response.FromValue({convenienceMethod.ResponseType}.FromResponse({responseVariableName}), {responseVariableName});");
+                _writer.Line($"return Response.FromValue({_convenienceMethod.ResponseType}.FromResponse({responseVariableName}), {responseVariableName});");
             }
 
             string ParameterToItsName(Parameter parameter)
@@ -94,7 +109,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (parameter.Name == KnownParameters.RequestContent.Name)
                 {
-                    return $"{convenienceMethod.BodyParameter!.Name}.ToRequestContent()";
+                    return $"{_convenienceMethod.BodyParameter!.Name}.ToRequestContent()";
                 }
 
                 return parameter.Name;
