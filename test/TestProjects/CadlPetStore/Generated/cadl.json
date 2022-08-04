@@ -60,18 +60,19 @@
   },
   {
    "$id": "9",
-   "Name": "ToyListResults",
+   "Name": "Toy",
    "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
-     "Name": "items",
-     "SerializedName": "items",
+     "Name": "id",
+     "SerializedName": "id",
      "Description": "",
      "Type": {
       "$id": "11",
-      "IsNullable": false,
-      "Name": "UnknownKind"
+      "Name": "Int64",
+      "Kind": "Int64",
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true,
@@ -79,11 +80,65 @@
     },
     {
      "$id": "12",
+     "Name": "petId",
+     "SerializedName": "petId",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Name": "Int64",
+      "Kind": "Int64",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "14",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "16",
+   "Name": "ToyListResults",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "17",
+     "Name": "items",
+     "SerializedName": "items",
+     "Description": "",
+     "Type": {
+      "$id": "18",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "9"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "19",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "20",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -97,22 +152,22 @@
  ],
  "Clients": [
   {
-   "$id": "14",
+   "$id": "21",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "15",
+     "$id": "22",
      "Name": "delete",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "16",
+       "$id": "23",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "17",
+        "$id": "24",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -128,12 +183,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "18",
+       "$id": "25",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
        "Type": {
-        "$id": "19",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -149,12 +204,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "20",
+       "$id": "27",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "21",
+        "$id": "28",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -172,7 +227,7 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -186,23 +241,23 @@
      "BufferResponse": false
     },
     {
-     "$id": "23",
+     "$id": "30",
      "Name": "read",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "23"
       },
       {
-       "$ref": "18"
+       "$ref": "25"
       },
       {
-       "$id": "24",
+       "$id": "31",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "25",
+        "$id": "32",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -220,7 +275,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
@@ -230,7 +285,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "27",
+       "$id": "34",
        "StatusCodes": [
         304
        ],
@@ -247,17 +302,17 @@
      "BufferResponse": false
     },
     {
-     "$id": "28",
+     "$id": "35",
      "Name": "create",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "23"
       },
       {
-       "$ref": "18"
+       "$ref": "25"
       },
       {
-       "$id": "29",
+       "$id": "36",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -276,7 +331,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
@@ -294,29 +349,29 @@
     }
    ],
    "Protocol": {
-    "$id": "31"
+    "$id": "38"
    }
   },
   {
-   "$id": "32",
+   "$id": "39",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "33",
+     "$id": "40",
      "Name": "list",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "23"
       },
       {
-       "$ref": "18"
+       "$ref": "25"
       },
       {
-       "$id": "34",
+       "$id": "41",
        "Name": "petId",
        "NameInRequest": "petId",
        "Type": {
-        "$id": "35",
+        "$id": "42",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -332,11 +387,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
+       "$id": "43",
        "Name": "nameFilter",
        "NameInRequest": "nameFilter",
        "Type": {
-        "$id": "37",
+        "$id": "44",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -354,12 +409,12 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "9"
+        "$ref": "16"
        },
        "BodyMediaType": "Json"
       }
@@ -372,11 +427,11 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "46"
    }
   }
  ],
  "Auth": {
-  "$id": "40"
+  "$id": "47"
  }
 }

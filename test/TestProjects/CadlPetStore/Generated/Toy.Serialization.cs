@@ -5,14 +5,13 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CadlPetStore
 {
-    public partial class ToyListResults : IUtf8JsonSerializable
+    public partial class Toy : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,24 +19,30 @@ namespace CadlPetStore
             writer.WriteEndObject();
         }
 
-        internal static ToyListResults DeserializeToyListResults(JsonElement element)
+        internal static Toy DeserializeToy(JsonElement element)
         {
-            IList<object> items = default;
-            string nextLink = default;
+            long id = default;
+            long petId = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("items"))
+                if (property.NameEquals("id"))
                 {
-                    items = property.Value.();
+                    id = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("nextLink"))
+                if (property.NameEquals("petId"))
                 {
-                    nextLink = property.Value.GetString();
+                    petId = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new ToyListResults(items, nextLink);
+            return new Toy(id, petId, name);
         }
 
         internal RequestContent ToRequestContent()
@@ -47,10 +52,10 @@ namespace CadlPetStore
             return content;
         }
 
-        internal static ToyListResults FromResponse(Response response)
+        internal static Toy FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeToyListResults(document.RootElement);
+            return DeserializeToy(document.RootElement);
         }
     }
 }

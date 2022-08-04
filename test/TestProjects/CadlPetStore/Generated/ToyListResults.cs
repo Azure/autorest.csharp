@@ -6,13 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CadlPetStore
 {
     public partial class ToyListResults
     {
-        public object Items { get; }
+        public IList<object> Items { get; }
 
         public string NextLink { get; }
 
@@ -20,7 +21,7 @@ namespace CadlPetStore
         /// <param name="items"></param>
         /// <param name="nextLink"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="items"/> or <paramref name="nextLink"/> is null. </exception>
-        public ToyListResults(object items, string nextLink)
+        public ToyListResults(IList<object> items, string nextLink)
         {
             Argument.AssertNotNull(items, nameof(items));
             Argument.AssertNotNull(nextLink, nameof(nextLink));

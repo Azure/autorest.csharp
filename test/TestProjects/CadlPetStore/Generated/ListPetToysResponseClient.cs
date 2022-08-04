@@ -71,6 +71,9 @@ namespace CadlPetStore
         /// Response response = await client.ListAsync("<petId>", "<nameFilter>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("items")[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("items")[0].GetProperty("petId").ToString());
+        /// Console.WriteLine(result.GetProperty("items")[0].GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("nextLink").ToString());
         /// ]]></code>
         /// </example>
@@ -81,8 +84,13 @@ namespace CadlPetStore
         /// 
         /// Schema for <c>ToyListResults</c>:
         /// <code>{
-        ///   items: {
-        ///   }, # Required.
+        ///   items: [
+        ///     {
+        ///       id: number, # Required.
+        ///       petId: number, # Required.
+        ///       name: string, # Required.
+        ///     }
+        ///   ], # Required.
         ///   nextLink: string, # Required.
         /// }
         /// </code>
@@ -122,6 +130,9 @@ namespace CadlPetStore
         /// Response response = client.List("<petId>", "<nameFilter>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("items")[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("items")[0].GetProperty("petId").ToString());
+        /// Console.WriteLine(result.GetProperty("items")[0].GetProperty("name").ToString());
         /// Console.WriteLine(result.GetProperty("nextLink").ToString());
         /// ]]></code>
         /// </example>
@@ -132,8 +143,13 @@ namespace CadlPetStore
         /// 
         /// Schema for <c>ToyListResults</c>:
         /// <code>{
-        ///   items: {
-        ///   }, # Required.
+        ///   items: [
+        ///     {
+        ///       id: number, # Required.
+        ///       petId: number, # Required.
+        ///       name: string, # Required.
+        ///     }
+        ///   ], # Required.
         ///   nextLink: string, # Required.
         /// }
         /// </code>
