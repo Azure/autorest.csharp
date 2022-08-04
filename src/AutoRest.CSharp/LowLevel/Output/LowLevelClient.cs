@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            CSharpType? responseType = builder.GetReturnType(operation, DefaultNamespace);
+            CSharpType? responseType = builder.GetResponseType(operation, DefaultNamespace);
             CSharpType? returnType = responseType == null ? typeof(Azure.Response) : new CSharpType(typeof(Azure.Response<>), responseType!);
 
             bool isAmbiguous = !protocolSignature.Parameters.Contains(KnownParameters.RequestContent) &&

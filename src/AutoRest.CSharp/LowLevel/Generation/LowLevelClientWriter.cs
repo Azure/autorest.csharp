@@ -56,38 +56,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     HashSet<LowLevelClientMethod> visitedMethods = new HashSet<LowLevelClientMethod>();
                     var exampleComposer = new LowLevelExampleComposer(client);
-                    foreach (var convenienceMethod in client.ConvenienceMethods)
-                    {
-                        var clientMethod = convenienceMethod.LowLevelClientMethod;
-                        var longRunning = clientMethod.LongRunning;
-                        if (longRunning != null)
-                        {
-                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, longRunning, exampleComposer, true);
-                            WriteLongRunningOperationMethod(writer, clientMethod, client.Fields, longRunning, exampleComposer, false);
-                        }
-                        else if (clientMethod.PagingInfo != null)
-                        {
-                            WritePagingMethod(writer, clientMethod, client.Fields, exampleComposer, true);
-                            WritePagingMethod(writer, clientMethod, client.Fields, exampleComposer, false);
-                        }
-                        else
-                        {
-                            new LowLevelConvenienceMethodWriter(writer, convenienceMethod).WriteClientConvenienceMethod(client.Fields.ClientDiagnosticsProperty.Name);
-
-                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
-                            WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
-                        }
-
-                        visitedMethods.Add(clientMethod);
-                    }
-
                     foreach (var clientMethod in client.ClientMethods)
                     {
-                        if (visitedMethods.Contains(clientMethod))
-                        {
-                            continue;
-                        }
-
                         var longRunning = clientMethod.LongRunning;
                         if (longRunning != null)
                         {
@@ -101,6 +71,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
+                            var convenienceMethod = client.ConvenienceMethods.FirstOrDefault(convenienceMethod => convenienceMethod.LowLevelClientMethod == clientMethod);
+                            if (convenienceMethod != null)
+                            {
+                                new LowLevelConvenienceMethodWriter(writer, convenienceMethod).WriteClientConvenienceMethod(client.Fields.ClientDiagnosticsProperty.Name);
+                            }
+
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
                         }

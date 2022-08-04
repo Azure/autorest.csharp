@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models
             return language.SerializedName ?? language.Name;
         }
 
-        public CSharpType? GetReturnType(InputOperation operation, string defaultNamespace)
+        public CSharpType? GetResponseType(InputOperation operation, string defaultNamespace)
         {
             var bodyType = operation.Responses.FirstOrDefault()?.BodyType;
             if (bodyType != null && bodyType is InputModelType)
@@ -106,10 +106,15 @@ namespace AutoRest.CSharp.Output.Models
             var requiredParameter = bodyParameters.Where(parameter => parameter.IsRequired).FirstOrDefault();
 
             var bodyParameter = requiredParameter ?? bodyParameters.FirstOrDefault();
+            if (bodyParameter == null)
+            {
+                return null;
+            }
+
             var bodyParameterType = bodyParameter.Type is InputModelType
                 ? new CSharpType(new ModelTypeProvider((bodyParameter.Type as InputModelType)!, _typeFactory, defaultNamespace, null))
                 : _typeFactory.CreateType(bodyParameter.Type);
-            return bodyParameter == null ? null : Parameter.FromRequestParameter(bodyParameter, bodyParameterType, _typeFactory);
+            return Parameter.FromRequestParameter(bodyParameter, bodyParameterType, _typeFactory);
         }
 
         public RestClientMethod BuildRequestMethod(InputOperation operation)
