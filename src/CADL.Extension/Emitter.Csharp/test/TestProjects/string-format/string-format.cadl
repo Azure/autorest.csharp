@@ -12,4 +12,5 @@ using Cadl.Http;
 op stringFormat(
     @path
     @format("date")
+    @intrinsic("string")
     action: string): void;

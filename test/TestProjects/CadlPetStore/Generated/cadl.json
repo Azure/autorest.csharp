@@ -63,41 +63,20 @@
      {
       "$id": "9",
       "Name": "Pets",
-      "Description": "Manage your pets. You can delete or get the Pet from pet store.",
+      "Description": "Manage your pets.",
       "Operations": [
        {
         "$id": "10",
         "Name": "delete",
-        "Summary": "delete.",
         "Description": "Delete a pet.",
         "Parameters": [
          {
           "$id": "11",
-          "Name": "petStoreUrl",
-          "NameInRequest": "petStoreUrl",
-          "Type": {
-           "$id": "12",
-           "Name": "Uri",
-           "Kind": "Uri",
-           "IsNullable": false
-          },
-          "Location": "Uri",
-          "IsApiVersion": false,
-          "IsResourceParameter": false,
-          "IsContentType": false,
-          "IsRequired": true,
-          "IsEndpoint": true,
-          "SkipUrlEncoding": false,
-          "Explode": false,
-          "Kind": "Client"
-         },
-         {
-          "$id": "13",
           "Name": "apiVersion",
           "NameInRequest": "apiVersion",
           "Description": "",
           "Type": {
-           "$id": "14",
+           "$id": "12",
            "Name": "String",
            "Kind": "String",
            "IsNullable": false
@@ -113,12 +92,11 @@
           "Kind": "Client"
          },
          {
-          "$id": "15",
+          "$id": "13",
           "Name": "petId",
           "NameInRequest": "petId",
-          "Description": "The id of pet.",
           "Type": {
-           "$id": "16",
+           "$id": "14",
            "Name": "Int32",
            "Kind": "Int32",
            "IsNullable": false
@@ -136,7 +114,7 @@
         ],
         "Responses": [
          {
-          "$id": "17",
+          "$id": "15",
           "StatusCodes": [
            200
           ],
@@ -145,12 +123,12 @@
         ],
         "HttpMethod": "DELETE",
         "RequestBodyMediaType": "Json",
-        "Uri": "{petStoreUrl}/",
+        "Uri": "",
         "Path": "/pets/{petId}",
         "BufferResponse": false
        },
        {
-        "$id": "18",
+        "$id": "16",
         "Name": "read",
         "Description": "Returns a pet. Supports eTags.",
         "Parameters": [
@@ -158,15 +136,11 @@
           "$ref": "11"
          },
          {
-          "$ref": "13"
-         },
-         {
-          "$id": "19",
+          "$id": "17",
           "Name": "petId",
           "NameInRequest": "petId",
-          "Description": "The id of pet.",
           "Type": {
-           "$id": "20",
+           "$id": "18",
            "Name": "Int32",
            "Kind": "Int32",
            "IsNullable": false
@@ -184,142 +158,41 @@
         ],
         "Responses": [
          {
-          "$id": "21",
+          "$id": "19",
           "StatusCodes": [
            200
           ],
           "BodyType": {
-           "$id": "22",
-           "Name": "Pet",
-           "IsNullable": false,
-           "Properties": [
-            {
-             "$id": "23",
-             "Name": "name",
-             "SerializedName": "name",
-             "Description": "",
-             "Type": {
-              "$id": "24",
-              "Name": "string",
-              "Kind": "String",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            },
-            {
-             "$id": "25",
-             "Name": "tag",
-             "SerializedName": "tag",
-             "Description": "",
-             "Type": {
-              "$id": "26",
-              "Name": "string",
-              "Kind": "String",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            },
-            {
-             "$id": "27",
-             "Name": "age",
-             "SerializedName": "age",
-             "Description": "",
-             "Type": {
-              "$id": "28",
-              "Name": "Int32",
-              "Kind": "Int32",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            }
-           ]
+           "$ref": "2"
           },
           "BodyMediaType": "Json"
          },
          {
-          "$id": "29",
+          "$id": "20",
           "StatusCodes": [
            304
           ],
           "BodyType": {
-           "$id": "30",
-           "Name": "Pet",
-           "IsNullable": false,
-           "Properties": [
-            {
-             "$id": "31",
-             "Name": "name",
-             "SerializedName": "name",
-             "Description": "",
-             "Type": {
-              "$id": "32",
-              "Name": "string",
-              "Kind": "String",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            },
-            {
-             "$id": "33",
-             "Name": "tag",
-             "SerializedName": "tag",
-             "Description": "",
-             "Type": {
-              "$id": "34",
-              "Name": "string",
-              "Kind": "String",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            },
-            {
-             "$id": "35",
-             "Name": "age",
-             "SerializedName": "age",
-             "Description": "",
-             "Type": {
-              "$id": "36",
-              "Name": "Int32",
-              "Kind": "Int32",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            }
-           ]
+           "$ref": "2"
           },
           "BodyMediaType": "Json"
          }
         ],
         "HttpMethod": "GET",
         "RequestBodyMediaType": "Json",
-        "Uri": "{petStoreUrl}/",
+        "Uri": "",
         "Path": "/pets/{petId}",
         "BufferResponse": false
        },
        {
-        "$id": "37",
+        "$id": "21",
         "Name": "create",
         "Parameters": [
          {
           "$ref": "11"
          },
          {
-          "$ref": "13"
-         },
-         {
-          "$id": "38",
+          "$id": "22",
           "Name": "pet",
           "NameInRequest": "pet",
           "Type": {
@@ -338,79 +211,29 @@
         ],
         "Responses": [
          {
-          "$id": "39",
+          "$id": "23",
           "StatusCodes": [
            200
           ],
           "BodyType": {
-           "$id": "40",
-           "Name": "Pet",
-           "IsNullable": false,
-           "Properties": [
-            {
-             "$id": "41",
-             "Name": "name",
-             "SerializedName": "name",
-             "Description": "",
-             "Type": {
-              "$id": "42",
-              "Name": "string",
-              "Kind": "String",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            },
-            {
-             "$id": "43",
-             "Name": "tag",
-             "SerializedName": "tag",
-             "Description": "",
-             "Type": {
-              "$id": "44",
-              "Name": "string",
-              "Kind": "String",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            },
-            {
-             "$id": "45",
-             "Name": "age",
-             "SerializedName": "age",
-             "Description": "",
-             "Type": {
-              "$id": "46",
-              "Name": "Int32",
-              "Kind": "Int32",
-              "IsNullable": false
-             },
-             "IsRequired": true,
-             "IsReadOnly": true,
-             "IsDiscriminator": false
-            }
-           ]
+           "$ref": "2"
           },
           "BodyMediaType": "Json"
          }
         ],
         "HttpMethod": "POST",
         "RequestBodyMediaType": "Json",
-        "Uri": "{petStoreUrl}/",
+        "Uri": "",
         "Path": "/pets",
         "BufferResponse": false
        }
       ],
       "Protocol": {
-       "$id": "47"
+       "$id": "24"
       }
      }
     ],
     "Auth": {
-     "$id": "61"
+     "$id": "25"
     }
    }
-   
