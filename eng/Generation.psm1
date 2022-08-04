@@ -58,7 +58,9 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
     $repoRootPath = Join-Path $PSScriptRoot ".."
     $repoRootPath = Resolve-Path -Path $repoRootPath
     Push-Location $repoRootPath
-    node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
+    # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
+    $emitCommand = "node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath $baseOutput\$projectName.cadl --emit @azure-tools/cadl-csharp"
+    Invoke $emitCommand
     Pop-Location
     
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
@@ -91,6 +93,8 @@ function Invoke-CadlSetup()
         npm install $package --save
     }
     npm install
+    git checkout .\package.json
+    git checkout .\package-lock.json
     Pop-Location
 }
 function Get-AutoRestProject()
