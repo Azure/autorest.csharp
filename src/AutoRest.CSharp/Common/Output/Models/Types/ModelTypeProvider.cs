@@ -51,7 +51,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            var dictionary = new Dictionary<Parameter, JsonPropertySerialization>();
             foreach (var (parameter, field) in _parametersToFields)
             {
                 string name;

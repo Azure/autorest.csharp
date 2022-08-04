@@ -364,7 +364,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var cs = schema.Type;
             string name = schema.Declaration.Name;
-            var isString = schema.BaseType.FrameworkType == typeof(string);
+            var isString = schema.ValueType.FrameworkType == typeof(string);
 
             using (writer.Namespace(schema.Declaration.Namespace))
             {
@@ -373,7 +373,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly {schema.BaseType} _value;");
+                    writer.Line($"private readonly {schema.ValueType} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
@@ -383,7 +383,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteXmlDocumentationException(typeof(ArgumentNullException), $"<paramref name=\"value\"/> is null.");
                     }
 
-                    using (writer.Scope($"public {name}({schema.BaseType} value)"))
+                    using (writer.Scope($"public {name}({schema.ValueType} value)"))
                     {
                         writer.Append($"_value = value");
                         if (isString)
@@ -397,7 +397,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var choice in schema.Values)
                     {
                         var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
-                        writer.Line($"private const {schema.BaseType} {fieldName} = {choice.Value.Value:L};");
+                        writer.Line($"private const {schema.ValueType} {fieldName} = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
@@ -415,7 +415,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
                     writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
-                    writer.Line($"public static implicit operator {cs}({schema.BaseType} value) => new {cs}(value);");
+                    writer.Line($"public static implicit operator {cs}({schema.ValueType} value) => new {cs}(value);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -426,11 +426,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public bool Equals({cs} other) => ");
                     if (isString)
                     {
-                        writer.Line($"{schema.BaseType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
+                        writer.Line($"{schema.ValueType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
                     }
                     else
                     {
-                        writer.Line($"{schema.BaseType}.Equals(_value, other._value);");
+                        writer.Line($"{schema.ValueType}.Equals(_value, other._value);");
                     }
                     writer.Line();
 

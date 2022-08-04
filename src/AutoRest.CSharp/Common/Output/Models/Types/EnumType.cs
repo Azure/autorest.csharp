@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
-            BaseType = typeFactory.CreateType(input.EnumValueType);
+            ValueType = typeFactory.CreateType(input.EnumValueType);
             Description = input.Description;
             IsExtendable = isExtendable;
         }
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static string GetDefaultNamespace(string? ns, string defaultNamespace)
             => ns ?? (Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace);
 
-        public CSharpType BaseType { get; }
+        public CSharpType ValueType { get; }
         public bool IsExtendable { get; }
         public string? Description { get; }
         protected override string DefaultName { get; }
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 values.Add(new EnumTypeValue(
                     BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _typeFactory),
                     CreateDescription(value),
-                    BuilderHelpers.ParseConstant(value.Value, BaseType)));
+                    BuilderHelpers.ParseConstant(value.Value, ValueType)));
             }
 
             return values;

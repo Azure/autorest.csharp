@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Types
         public static bool IsStringLike(CSharpType type) =>
             type.IsFrameworkType
                 ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
+                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtendable;
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);

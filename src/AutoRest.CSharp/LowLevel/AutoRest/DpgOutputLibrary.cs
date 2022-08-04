@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override CSharpType ResolveEnum(InputEnumType enumType) => _enums != null
-            ? _enums.TryGetValue(enumType with {IsNullable = false}, out var typeProvider) ? typeProvider.Type : _typeFactory.CreateType(enumType.EnumValueType)
+            ? _enums.TryGetValue(enumType, out var typeProvider) ? typeProvider.Type : _typeFactory.CreateType(enumType.EnumValueType)
             : throw new InvalidOperationException($"{nameof(ResolveEnum)} is called before enums are generated.");
         public override CSharpType ResolveModel(InputModelType model) => _models != null
             ? _models.TryGetValue(model, out var typeProvider) ? typeProvider.Type : new CSharpType(typeof(object), model.IsNullable)

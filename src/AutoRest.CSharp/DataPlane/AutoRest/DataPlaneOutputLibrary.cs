@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> Models => _models.Values;
         public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
 
-        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums[enumType with {IsNullable = false}].Type;
+        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Dictionary<InputEnumType, EnumType> BuildEnums()
         {
-            var dictionary = new Dictionary<InputEnumType, EnumType>();
+            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             foreach (var (schema, typeProvider) in _models)
             {
                 switch (schema)

@@ -238,11 +238,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 string declaredTypeName = schema.Declaration.Name;
 
-                var isString = schema.BaseType.FrameworkType == typeof(string);
+                var isString = schema.ValueType.FrameworkType == typeof(string);
 
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
-                    using (writer.Scope($"public static {schema.BaseType} ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
+                    using (writer.Scope($"public static {schema.ValueType} ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
@@ -253,11 +253,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.Line();
 
-                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.BaseType} value)"))
+                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.ValueType} value)"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Append($"if ({schema.BaseType}.Equals(value, {value.Value.Value:L}");
+                            writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
                             if (isString)
                             {
                                 writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");

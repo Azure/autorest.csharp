@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Common.Input
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
-            AllowedValues: new ValuesEqualList<InputEnumTypeValue>(choices.Select(CreateEnumValue)),
+            AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible
         );
 

@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
 
 
             IReadOnlyDictionary<InputEnumType, EnumType> EnumFactory(TypeFactory typeFactory)
-                => cadlInput ? _rootNamespace.Enums.ToDictionary(e => e, e => new EnumType(e, _defaultNamespace, "public", typeFactory, _sourceInputModel)) : new Dictionary<InputEnumType, EnumType>();
+                => cadlInput ? _rootNamespace.Enums.ToDictionary(e => e, e => new EnumType(e, _defaultNamespace, "public", typeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer) : new Dictionary<InputEnumType, EnumType>();
 
             IReadOnlyDictionary<InputModelType, ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
                 => cadlInput ? _rootNamespace.Models.ToDictionary(m => m, m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)) : new Dictionary<InputModelType, ModelTypeProvider>();

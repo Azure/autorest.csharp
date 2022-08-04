@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using Azure.Core;
 
@@ -180,7 +181,53 @@ namespace AutoRest.CSharp.Common.Input
         }
     }
 
-    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsNullable = false) : InputType(Name, IsNullable) { }
+    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsNullable = false)
+        : InputType(Name, IsNullable)
+    {
+        public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
+
+        private class IgnoreNullabilityComparerImplementation : IEqualityComparer<InputEnumType>
+        {
+            public bool Equals(InputEnumType? x, InputEnumType? y)
+            {
+                if (x is null || y is null)
+                {
+                    return ReferenceEquals(x, y);
+                }
+
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+
+                return x.Name == y.Name
+                    && x.Namespace == y.Namespace
+                    && x.Accessibility == y.Accessibility
+                    && x.Description == y.Description
+                    && x.EnumValueType.Equals(y.EnumValueType)
+                    && x.AllowedValues.SequenceEqual(y.AllowedValues)
+                    && x.IsExtensible == y.IsExtensible;
+            }
+
+            public int GetHashCode(InputEnumType obj)
+            {
+
+                var hashCode = new HashCode();
+                hashCode.Add(obj.Name);
+                hashCode.Add(obj.Namespace);
+                hashCode.Add(obj.Accessibility);
+                hashCode.Add(obj.Description);
+                hashCode.Add(obj.EnumValueType);
+                hashCode.Add(obj.IsExtensible);
+                foreach (var item in obj.AllowedValues)
+                {
+                    hashCode.Add(item);
+                }
+
+                return hashCode.ToHashCode();
+            }
+        }
+    }
 
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 

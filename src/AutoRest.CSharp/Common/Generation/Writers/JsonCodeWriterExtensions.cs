@@ -628,7 +628,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
 
                 case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueFormattable(element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default);
+                    var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
                     return clientEnum.IsExtendable
                         ? $"new {clientEnum.Type}({value})"
                         : (FormattableString) $"{value}.To{clientEnum.Type:D}()";

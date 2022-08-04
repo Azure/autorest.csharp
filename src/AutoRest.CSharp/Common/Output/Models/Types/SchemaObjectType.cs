@@ -146,6 +146,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, GetPropertyDefaultValue(property)));
             }
 
+            if (InitializationConstructor.Signature.Parameters
+                .Select(p => p.Type)
+                .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
+            {
+                return InitializationConstructor;
+            }
+
             if (Discriminator != null)
             {
                 // Add discriminator initializer to constructor at every level of hierarchy
@@ -285,15 +292,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return InitializationConstructor;
 
-            if (SkipSerializerConstructor)
-            {
-                yield break;
-            }
-
             // Skip serialization ctor if they are the same
-            if (!InitializationConstructor.Signature.Parameters
-                .Select(p => p.Type)
-                .SequenceEqual(SerializationConstructor!.Signature.Parameters.Select(p => p.Type)))
+            if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)
             {
                 yield return SerializationConstructor;
             }
