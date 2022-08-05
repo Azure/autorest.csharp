@@ -269,13 +269,8 @@ export function getInputType(
                             Name: value.name,
                             SerializedName: value.name,
                             Description: "",
-                            Type: getInputType(
-                                program,
-                                value.type,
-                                models,
-                                enums
-                            ),
-                            IsRequired: !value.optional,
+                            Type: getInputType(program, value.type, models),
+                            IsRequired: true,
                             IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
                             IsDiscriminator: false
                         };
