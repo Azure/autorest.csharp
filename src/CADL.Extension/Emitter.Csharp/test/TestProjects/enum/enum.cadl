@@ -47,10 +47,10 @@ model InputModel {
   @doc("Required standard enum value.")
   Day : DayOfTheWeek;
 
-  @doc("Required string enum value.")
-  Language: TranslationLanguage;
+  // @doc("Required string enum value.")
+  // Language: TranslationLanguage;
   Title: EnumWithStringValue;
-  Grade: EnumWithNumberValue;
+  // Grade: EnumWithNumberValue;
 }
 
 @doc("Represents the simple enum with enum string value.")
@@ -60,12 +60,13 @@ enum EnumWithStringValue {
   Three: "3"
 }
 
-@doc("Represents the simple enum with enum number value.")
-enum EnumWithNumberValue {
-  One: 1,
-  Two: 2,
-  Three: 3
-}
+// @doc("Represents the simple enum with enum number value.")
+// enum EnumWithNumberValue {
+//   One: 1,
+//   Two: 2,
+//   Three: 3
+// }
+
 // @doc("Output model with enum properties")
 // model OutputModel {
 

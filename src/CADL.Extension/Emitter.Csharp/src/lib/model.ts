@@ -5,6 +5,7 @@ import {
     ArrayType,
     EnumMemberType,
     EnumType,
+    getDoc,
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
@@ -308,14 +309,15 @@ export function getInputType(
             const enumValueType = enumMemberType(e.members[0]);
 
             for (const option of e.members) {
-                if (enumValueType.Kind !== enumMemberType(option).Kind) {
+                if (enumValueType !== enumMemberType(option)) {
                     // TODO: add error handler
                     continue;
                 }
 
                 const member = {
                     Name: option.name,
-                    Value: option.value
+                    Value: option.value ?? option.name,
+                    Description: getDoc(program, option)
                 } as InputEnumTypeValue;
 
                 allowValues.push(member);
@@ -324,6 +326,9 @@ export function getInputType(
             const isExtensible: boolean = false;
             enumType = {
                 Name: e.name,
+                Namespace: e.namespace?.name,
+                Accessibility: "", //TODO: need to add accessibility
+                Description: getDoc(program, e),
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
                 IsExtensible: isExtensible,
@@ -333,19 +338,11 @@ export function getInputType(
         }
         return enumType;
 
-        function enumMemberType(member: EnumMemberType): InputPrimitiveType {
+        function enumMemberType(member: EnumMemberType): string {
             if (typeof member.value === "number") {
-                return {
-                    Name: "Int32",
-                    Kind: InputTypeKind.Int32,
-                    IsNullable: false
-                } as InputPrimitiveType;
+                return "Int32";
             }
-            return {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType;
+            return "String";
         }
     }
 
