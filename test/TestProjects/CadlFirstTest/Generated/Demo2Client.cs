@@ -67,7 +67,16 @@ namespace CadlFirstTest
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
-        /// var data = new {};
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredCollection = new[] {
+        ///         "1"
+        ///     },
+        ///     requiredDictionary = new {
+        ///         key = "1",
+        ///     },
+        /// };
         /// 
         /// Response response = await client.HelloAgainAsync(RequestContent.Create(data));
         /// 
@@ -79,10 +88,12 @@ namespace CadlFirstTest
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>InputModel</c>:
+        /// Schema for <c>RoundTripModel</c>:
         /// <code>{
-        ///   requiredString: string, # Required. Required string property
-        ///   requiredInt: number, # Required. Required int property
+        ///   requiredString: string, # Required. Required string, illustrating a reference type property.
+        ///   requiredInt: number, # Required. Required int, illustrating a value type property.
+        ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
         /// }
         /// </code>
         /// 
@@ -123,7 +134,16 @@ namespace CadlFirstTest
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new Demo2Client(endpoint, "<apiVersion>");
         /// 
-        /// var data = new {};
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredCollection = new[] {
+        ///         "1"
+        ///     },
+        ///     requiredDictionary = new {
+        ///         key = "1",
+        ///     },
+        /// };
         /// 
         /// Response response = client.HelloAgain(RequestContent.Create(data));
         /// 
@@ -135,10 +155,12 @@ namespace CadlFirstTest
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>InputModel</c>:
+        /// Schema for <c>RoundTripModel</c>:
         /// <code>{
-        ///   requiredString: string, # Required. Required string property
-        ///   requiredInt: number, # Required. Required int property
+        ///   requiredString: string, # Required. Required string, illustrating a reference type property.
+        ///   requiredInt: number, # Required. Required int, illustrating a value type property.
+        ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
         /// }
         /// </code>
         /// 

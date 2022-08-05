@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes an available virtual machine scale set sku. </summary>
@@ -21,7 +19,7 @@ namespace MgmtRenameRules.Models
         /// <param name="resourceType"> The type of resource the sku applies to. </param>
         /// <param name="sku"> The Sku. </param>
         /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
-        internal VirtualMachineScaleSetSku(ResourceType? resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity)
+        internal VirtualMachineScaleSetSku(string resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity)
         {
             ResourceType = resourceType;
             Sku = sku;
@@ -29,7 +27,7 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> The type of resource the sku applies to. </summary>
-        public ResourceType? ResourceType { get; }
+        public string ResourceType { get; }
         /// <summary> The Sku. </summary>
         public MgmtRenameRulesSku Sku { get; }
         /// <summary> Specifies the number of virtual machines in the scale set. </summary>

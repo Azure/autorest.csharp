@@ -60,8 +60,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
                 else
                 {
-                    JsonSerializer.Deserialize<object>(ref reader, options);
-                    reader.Read();
+                    reader.SkipProperty();
                 }
             }
 

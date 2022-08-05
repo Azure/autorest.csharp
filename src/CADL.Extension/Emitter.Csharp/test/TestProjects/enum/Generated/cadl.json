@@ -1,0 +1,156 @@
+{
+ "$id": "1",
+ "Name": "cadl.testserver.enumpropertiesbasic",
+ "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "InputModel",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "Day",
+     "SerializedName": "Day",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "DayOfTheWeek",
+      "EnumValueType": {
+       "$id": "5",
+       "Name": "String",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "AllowedValues": [
+       {
+        "$id": "6",
+        "Name": "Monday"
+       },
+       {
+        "$id": "7",
+        "Name": "Tuesday"
+       },
+       {
+        "$id": "8",
+        "Name": "Wednesday"
+       },
+       {
+        "$id": "9",
+        "Name": "Thursday"
+       },
+       {
+        "$id": "10",
+        "Name": "Friday"
+       },
+       {
+        "$id": "11",
+        "Name": "Saturday"
+       },
+       {
+        "$id": "12",
+        "Name": "Sunday"
+       }
+      ],
+      "IsExtensible": false,
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "13",
+     "Name": "Language",
+     "SerializedName": "Language",
+     "Description": "",
+     "Type": {
+      "$id": "14",
+      "Name": "TranslationLanguage",
+      "IsNullable": false,
+      "Properties": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "15",
+   "Name": "EnumPropertiesBasic",
+   "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+   "Operations": [
+    {
+     "$id": "16",
+     "Name": "sendEnumPropertyModel",
+     "Parameters": [
+      {
+       "$id": "17",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Description": "",
+       "Type": {
+        "$id": "18",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "19",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "20",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/models",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "21"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "22"
+ }
+}

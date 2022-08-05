@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace CadlPetStore
 {
-    /// <summary> Client options for petstore library clients. </summary>
-    public partial class PetstoreClientOptions : ClientOptions
+    /// <summary> Client options for PetsClient. </summary>
+    public partial class PetsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2021_03_25;
 
@@ -24,8 +24,8 @@ namespace CadlPetStore
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of PetstoreClientOptions. </summary>
-        public PetstoreClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of PetsClientOptions. </summary>
+        public PetsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

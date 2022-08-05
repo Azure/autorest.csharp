@@ -8,5 +8,5 @@ export interface InputClient {
     Name: string;
     Description?: string;
     Operations: InputOperation[];
-    Protocol: Protocols;
+    Protocol?: Protocols;
 }

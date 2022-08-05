@@ -26,32 +26,38 @@ namespace AutoRest.CSharp.Common.Input
         public static InputEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
+            string? ns = null;
+            string? accessibility = null;
+            string? description = null;
+            bool isExtendable = false;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputType.Name), ref name)
+                    || reader.TryReadString(nameof(InputEnumType.Name), ref name)
+                    || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
+                    || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
+                    || reader.TryReadString(nameof(InputEnumType.Description), ref description)
+                    || reader.TryReadBoolean(nameof(InputEnumType.IsExtendable), ref isExtendable)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
 
-                if (isKnownProperty)
+                if (!isKnownProperty)
                 {
-                    continue;
+                    reader.SkipProperty();
                 }
-
-                JsonSerializer.Deserialize<object>(ref reader, options);
-                reader.Read();
             }
 
             name = name ?? throw new JsonException("Enum must have name");
+            description = description ?? throw new JsonException("Enum must have a description");
 
             if (allowedValues == null || allowedValues.Count == 0)
             {
                 throw new JsonException("Enum must have at least one value");
             }
 
-            var enumType = new InputEnumType(name, valueType ?? InputPrimitiveType.Int32, allowedValues, false);
+            var enumType = new InputEnumType(name, ns, accessibility, description, valueType ?? InputPrimitiveType.Int32, allowedValues, isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

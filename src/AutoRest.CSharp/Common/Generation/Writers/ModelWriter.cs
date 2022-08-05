@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Humanizer;
@@ -24,10 +25,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteObjectSchema(writer, objectSchema);
                     break;
                 case EnumType e when e.IsExtendable:
-                    WriteChoiceSchema(writer, e);
+                    WriteExtendableEnum(writer, e);
                     break;
                 case EnumType e when !e.IsExtendable:
-                    WriteSealedChoiceSchema(writer, e);
+                    WriteEnum(writer, e);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -291,16 +292,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return $"{property.Description}";
             }
-            var nameToUse = overrideName ?? property.Declaration.Name;
-            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
-            if (property.IsReadOnly)
-            {
-                return $"Gets the {splitDeclarationName}";
-            }
-            else
-            {
-                return $"Gets or sets the {splitDeclarationName}";
-            }
+            return property.CreateDefaultPropertyDescription(overrideName);
         }
 
         private string GetAbstract(SchemaObjectType schema)
@@ -345,7 +337,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteSealedChoiceSchema(CodeWriter writer, EnumType schema)
+        public static void WriteEnum(CodeWriter writer, EnumType schema)
         {
             if (schema.Declaration.IsUserDefined)
             {
@@ -368,20 +360,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteChoiceSchema(CodeWriter writer, EnumType schema)
+        public static void WriteExtendableEnum(CodeWriter writer, EnumType enumType)
         {
-            var cs = schema.Type;
-            string name = schema.Declaration.Name;
-            var isString = schema.BaseType.FrameworkType == typeof(string);
+            var cs = enumType.Type;
+            string name = enumType.Declaration.Name;
+            var isString = enumType.ValueType.FrameworkType == typeof(string);
 
-            using (writer.Namespace(schema.Declaration.Namespace))
+            using (writer.Namespace(enumType.Declaration.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"{schema.Description}");
+                writer.WriteXmlDocumentationSummary($"{enumType.Description}");
 
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
-                using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
+                using (writer.Scope($"{enumType.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly {schema.BaseType} _value;");
+                    writer.Line($"private readonly {enumType.ValueType} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
@@ -391,7 +383,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteXmlDocumentationException(typeof(ArgumentNullException), $"<paramref name=\"value\"/> is null.");
                     }
 
-                    using (writer.Scope($"public {name}({schema.BaseType} value)"))
+                    using (writer.Scope($"public {name}({enumType.ValueType} value)"))
                     {
                         writer.Append($"_value = value");
                         if (isString)
@@ -402,17 +394,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.Line();
 
-                    foreach (var choice in schema.Values)
+                    foreach (var choice in enumType.Values)
                     {
-                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
-                        writer.Line($"private const {schema.BaseType} {fieldName} = {choice.Value.Value:L};");
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
+                        writer.Line($"private const {enumType.ValueType} {fieldName} = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
-                    foreach (var choice in schema.Values)
+                    foreach (var choice in enumType.Values)
                     {
                         writer.WriteXmlDocumentationSummary($"{choice.Description}");
-                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
                     }
 
@@ -423,7 +415,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
                     writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
-                    writer.Line($"public static implicit operator {cs}({schema.BaseType} value) => new {cs}(value);");
+                    writer.Line($"public static implicit operator {cs}({enumType.ValueType} value) => new {cs}(value);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -434,11 +426,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public bool Equals({cs} other) => ");
                     if (isString)
                     {
-                        writer.Line($"{schema.BaseType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
+                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
                     }
                     else
                     {
-                        writer.Line($"{schema.BaseType}.Equals(_value, other._value);");
+                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value);");
                     }
                     writer.Line();
 
@@ -469,7 +461,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private string GetValueFieldName(string enumName, string enumValue, IList<EnumTypeValue> enumValues)
+        private static string GetValueFieldName(string enumName, string enumValue, IList<EnumTypeValue> enumValues)
         {
             if (enumName != $"{enumValue}Value")
             {
@@ -487,7 +479,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{enumValue}Value{index}";
         }
 
-        private void WriteEditorBrowsableFalse(CodeWriter writer)
+        private static void WriteEditorBrowsableFalse(CodeWriter writer)
         {
             writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
         }

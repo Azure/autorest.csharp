@@ -5,37 +5,82 @@
  "ApiVersions": [
   "2021-03-25"
  ],
- "Clients": [
+ "Models": [
   {
    "$id": "2",
-   "Name": "Pets",
-   "Operations": [
+   "Name": "Pet",
+   "IsNullable": false,
+   "Properties": [
     {
      "$id": "3",
-     "Name": "delete",
+     "Name": "name",
+     "SerializedName": "name",
      "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "9",
+   "Name": "Pets",
+   "Description": "Manage your pets.",
+   "Operations": [
+    {
+     "$id": "10",
+     "Name": "delete",
+     "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "4",
-       "Name": "petStorUrl",
-       "NameInRequest": "petStorUrl",
-       "Type": "Uri",
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "6",
+       "$id": "11",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
-       "Type": "string",
+       "Type": {
+        "$id": "12",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
        "Location": "Query",
        "IsRequired": true,
        "IsApiVersion": true,
@@ -47,18 +92,21 @@
        "Kind": "Client"
       },
       {
-       "$id": "8",
+       "$id": "13",
        "Name": "petId",
        "NameInRequest": "petId",
-       "Type": "Int32",
+       "Type": {
+        "$id": "14",
+        "Name": "Int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
        "Location": "Path",
        "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "IsInMethod": true,
-       "IsInClient": false,
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
@@ -66,7 +114,7 @@
      ],
      "Responses": [
       {
-       "$id": "10",
+       "$id": "15",
        "StatusCodes": [
         200
        ],
@@ -75,79 +123,37 @@
      ],
      "HttpMethod": "DELETE",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStorUrl}/",
+     "Uri": "",
      "Path": "/pets/{petId}",
      "BufferResponse": false
     },
     {
-     "$id": "11",
+     "$id": "16",
      "Name": "read",
-     "Description": "",
+     "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "11"
       },
       {
-       "$ref": "6"
-      },
-      {
-       "$id": "12",
+       "$id": "17",
        "Name": "petId",
        "NameInRequest": "petId",
-       "Type": "Int32",
+       "Type": {
+        "$id": "18",
+        "Name": "Int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
        "Location": "Path",
        "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "IsInMethod": true,
-       "IsInClient": false,
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "14",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$id": "15",
-        "Name": "Pet"
-       },
-       "BodyMediaType": "Json"
-      },
-      {
-       "$id": "16",
-       "StatusCodes": [
-        304
-       ],
-       "BodyType": {
-        "$id": "17",
-        "Name": "Pet"
-       },
-       "BodyMediaType": "Json"
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{petStorUrl}/",
-     "Path": "/pets/{petId}",
-     "BufferResponse": false
-    },
-    {
-     "$id": "18",
-     "Name": "create",
-     "Description": "",
-     "Parameters": [
-      {
-       "$ref": "4"
-      },
-      {
-       "$ref": "6"
       }
      ],
      "Responses": [
@@ -157,68 +163,47 @@
         200
        ],
        "BodyType": {
-        "$id": "20",
-        "Name": "Pet"
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      },
+      {
+       "$id": "20",
+       "StatusCodes": [
+        304
+       ],
+       "BodyType": {
+        "$ref": "2"
        },
        "BodyMediaType": "Json"
       }
      ],
-     "HttpMethod": "POST",
+     "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStorUrl}/",
-     "Path": "/pets",
+     "Uri": "",
+     "Path": "/pets/{petId}",
      "BufferResponse": false
-    }
-   ],
-   "Protocol": {
-    "$id": "21"
-   }
-  },
-  {
-   "$id": "22",
-   "Name": "ListPetToysResponse",
-   "Operations": [
+    },
     {
-     "$id": "23",
-     "Name": "list",
-     "Description": "",
+     "$id": "21",
+     "Name": "create",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "11"
       },
       {
-       "$ref": "6"
-      },
-      {
-       "$id": "24",
-       "Name": "petId",
-       "NameInRequest": "petId",
-       "Type": "String",
-       "Location": "Path",
+       "$id": "22",
+       "Name": "pet",
+       "NameInRequest": "pet",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
        "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "IsInMethod": true,
-       "IsInClient": false,
-       "SkipUrlEncoding": true,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "26",
-       "Name": "nameFilter",
-       "NameInRequest": "nameFilter",
-       "Type": "String",
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsInMethod": true,
-       "IsInClient": false,
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
@@ -226,25 +211,29 @@
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "29",
-        "Name": "ToyListResults"
+        "$ref": "2"
        },
        "BodyMediaType": "Json"
       }
      ],
-     "HttpMethod": "GET",
+     "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStorUrl}/",
-     "Path": "/pets/{petId}/toys",
+     "Uri": "",
+     "Path": "/pets",
      "BufferResponse": false
     }
    ],
+   "Protocol": {
+    "$id": "24"
+   }
   }
  ],
- "Auth": { }
+ "Auth": {
+  "$id": "25"
+ }
 }

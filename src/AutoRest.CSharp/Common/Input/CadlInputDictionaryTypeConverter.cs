@@ -34,13 +34,10 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputDictionaryType.KeyType), options, ref keyType)
                     || reader.TryReadWithConverter(nameof(InputDictionaryType.ValueType), options, ref valueType);
 
-                if (isKnownProperty)
+                if (!isKnownProperty)
                 {
-                    continue;
+                    reader.SkipProperty();
                 }
-
-                JsonSerializer.Deserialize<object>(ref reader, options);
-                reader.Read();
             }
 
             keyType = keyType ?? throw new JsonException("Dictionary must have key type");
