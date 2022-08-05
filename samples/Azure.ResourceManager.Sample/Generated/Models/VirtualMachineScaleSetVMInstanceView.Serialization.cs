@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -26,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             Optional<string> assignedHost = default;
-            Optional<string> placementGroupId = default;
+            Optional<Uri> placementGroupId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomain"))
@@ -146,7 +147,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("placementGroupId"))
                 {
-                    placementGroupId = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        placementGroupId = null;
+                        continue;
+                    }
+                    placementGroupId = new Uri(property.Value.GetString());
                     continue;
                 }
             }
