@@ -19,7 +19,7 @@ Models:
           Kind: String
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
       - Name: tag
         SerializedName: tag
@@ -29,7 +29,7 @@ Models:
           Kind: String
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
       - Name: age
         SerializedName: age
@@ -39,7 +39,7 @@ Models:
           Kind: Int32
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
   - &ref_0
     Name: Toy
@@ -53,7 +53,7 @@ Models:
           Kind: Int64
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
       - Name: petId
         SerializedName: petId
@@ -63,7 +63,7 @@ Models:
           Kind: Int64
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
       - Name: name
         SerializedName: name
@@ -73,7 +73,7 @@ Models:
           Kind: String
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
   - &ref_4
     Name: ToyListResults
@@ -87,7 +87,7 @@ Models:
           ElementType: *ref_0
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
       - Name: nextLink
         SerializedName: nextLink
@@ -97,7 +97,7 @@ Models:
           Kind: String
           IsNullable: false
         IsRequired: true
-        IsReadOnly: true
+        IsReadOnly: false
         IsDiscriminator: false
 Clients:
   - Name: Pets

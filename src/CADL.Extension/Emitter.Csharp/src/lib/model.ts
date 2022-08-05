@@ -8,6 +8,7 @@ import {
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
+    getVisibility,
     isIntrinsic,
     ModelType,
     ModelTypeProperty,
@@ -257,13 +258,18 @@ export function getInputType(
                 m.properties.forEach(
                     (value: ModelTypeProperty, key: string) => {
                         // console.log(key, value);
+                        const vis = getVisibility(program, value);
+                        let isReadOnly: boolean = false;
+                        if (vis && vis.includes("read") && vis.length == 1) {
+                            isReadOnly = true;
+                        }
                         const inputProp = {
                             Name: value.name,
                             SerializedName: value.name,
                             Description: "",
                             Type: getInputType(program, value.type, models),
                             IsRequired: true,
-                            IsReadOnly: true,
+                            IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
                             IsDiscriminator: false
                         };
                         properties.push(inputProp);
