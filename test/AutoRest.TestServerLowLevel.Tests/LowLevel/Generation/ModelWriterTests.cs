@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         private void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string serializationCodes)
         {
             var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteSerialization(codeWriter, model);
+            SerializationWriter.WriteModelSerialization(codeWriter, model);
             var codes = codeWriter.ToString();
             Assert.AreEqual(serializationCodes, codes);
         }
@@ -190,7 +190,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.PrimitiveProperties
 {
-public partial class PrimitivePropertyModel : global::Azure.Core.IUtf8JsonSerializable
+public partial class PrimitivePropertyModel: global::Azure.Core.IUtf8JsonSerializable
 {
 void global::Azure.Core.IUtf8JsonSerializable.Write(global::System.Text.Json.Utf8JsonWriter writer)
 {

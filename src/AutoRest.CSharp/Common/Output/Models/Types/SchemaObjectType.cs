@@ -12,6 +12,8 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -26,10 +28,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly SchemaTypeUsage _usage;
 
         private readonly ModelTypeMapping? _sourceTypeMapping;
+        private readonly bool _hasJsonSerialization;
+        private readonly bool _hasXmlSerialization;
+
         private ObjectTypeProperty? _additionalPropertiesProperty;
-        private ObjectSerialization[]? _serializations;
         private CSharpType? _implementsDictionaryType;
         private ObjectTypeDiscriminator? _discriminator;
+        private JsonObjectSerialization? _jsonSerialization;
+        private XmlObjectSerialization? _xmlSerialization;
 
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
@@ -55,6 +61,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
                 }
             }
+
+            var supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
+            _hasJsonSerialization = supportedSerializationFormats.Contains(KnownMediaType.Json);
+            _hasXmlSerialization = supportedSerializationFormats.Contains(KnownMediaType.Xml);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -65,7 +75,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
         public bool IsStruct => ExistingType?.IsValueType == true;
 
-        public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
+        public JsonObjectSerialization? JsonSerialization => _hasJsonSerialization ? _jsonSerialization ??= _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
+        public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public bool IsAbstract => ObjectSchema != null &&
@@ -109,9 +120,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<ObjectPropertyInitializer> serializationInitializers = new List<ObjectPropertyInitializer>();
             ObjectTypeConstructor? baseSerializationCtor = null;
 
-            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
+            if (Inherits is {IsFrameworkType: false, Implementation: ObjectType objectType})
             {
-                baseSerializationCtor = objectType.Constructors.Last();
+                baseSerializationCtor = objectType.SerializationConstructor;
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Signature.Parameters);
             }
 
@@ -133,6 +144,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationConstructorParameters.Add(deserializationParameter);
 
                 serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, GetPropertyDefaultValue(property)));
+            }
+
+            if (InitializationConstructor.Signature.Parameters
+                .Select(p => p.Type)
+                .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
+            {
+                return InitializationConstructor;
             }
 
             if (Discriminator != null)
@@ -177,7 +195,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<Parameter> defaultCtorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
-            ObjectTypeConstructor? baseCtor = GetBaseCtor();
+            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.InitializationConstructor;
             if (baseCtor is not null)
                 defaultCtorParameters.AddRange(baseCtor.Signature.Parameters);
 
@@ -274,15 +292,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return InitializationConstructor;
 
-            if (SkipSerializerConstructor)
-            {
-                yield break;
-            }
-
             // Skip serialization ctor if they are the same
-            if (!InitializationConstructor.Signature.Parameters
-                .Select(p => p.Type)
-                .SequenceEqual(SerializationConstructor!.Signature.Parameters.Select(p => p.Type)))
+            if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)
             {
                 yield return SerializationConstructor;
             }
@@ -323,28 +334,29 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        private ObjectSerialization[] BuildSerializations()
+        private static IReadOnlyList<KnownMediaType> GetSupportedSerializationFormats(ObjectSchema objectSchema, ModelTypeMapping? sourceTypeMapping)
         {
-            var formats = ObjectSchema.SerializationFormats;
+            var formats = objectSchema.SerializationFormats;
             if (Configuration.SkipSerializationFormatXml)
                 formats.Remove(KnownMediaType.Xml);
 
-            if (ObjectSchema.Extensions != null)
+            if (objectSchema.Extensions != null)
             {
-                foreach (var format in ObjectSchema.Extensions.Formats)
+                foreach (var format in objectSchema.Extensions.Formats)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
 
-            if (_sourceTypeMapping?.Formats is { } formatsDefinedInSource)
+            if (sourceTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
-            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, ObjectSchema, this)).ToArray();
+
+            return formats.Distinct().ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
