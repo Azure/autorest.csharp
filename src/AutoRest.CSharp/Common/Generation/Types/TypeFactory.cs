@@ -217,6 +217,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static Type? ToFrameworkType(Schema schema, RecordOfStringAndAny? extensions) => schema.Type switch
         {
+            AllSchemaTypes.Integer => typeof(int),
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
             AllSchemaTypes.Char => typeof(char),
