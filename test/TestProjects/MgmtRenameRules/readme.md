@@ -48,4 +48,6 @@ rename-mapping:
   UpgradeOperationHistoricalStatusInfo.type: -|resource-type # this configuration does not change its property name, only changes its format to resource-type
   DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
   AdditionalUnattendContent.backupFrequency: -|integer
+  AdditionalUnattendContent.method: requestMethod|request-method
+  AdditionalUnattendContent.basePath: basePathUri|uri
 ```

@@ -41,6 +41,8 @@
     "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
     "UpgradeOperationHistoricalStatusInfo.type": "-|resource-type",
     "DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey": "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey",
-    "AdditionalUnattendContent.backupFrequency": "-|integer"
+    "AdditionalUnattendContent.backupFrequency": "-|integer",
+    "AdditionalUnattendContent.method": "requestMethod|request-method",
+    "AdditionalUnattendContent.basePath": "basePathUri|uri"
   }
 }

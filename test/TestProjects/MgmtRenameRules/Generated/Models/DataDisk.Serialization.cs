@@ -59,6 +59,26 @@ namespace MgmtRenameRules.Models
                 writer.WritePropertyName("toBeDetached");
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
+            if (Optional.IsDefined(ContentType))
+            {
+                writer.WritePropertyName("contentType");
+                writer.WriteStringValue(ContentType.Value.ToString());
+            }
+            if (Optional.IsDefined(Content))
+            {
+                writer.WritePropertyName("content");
+                writer.WriteStringValue(Content);
+            }
+            if (Optional.IsDefined(Method))
+            {
+                writer.WritePropertyName("method");
+                writer.WriteStringValue(Method);
+            }
+            if (Optional.IsDefined(BasePath))
+            {
+                writer.WritePropertyName("basePath");
+                writer.WriteStringValue(BasePath);
+            }
             writer.WriteEndObject();
         }
 
@@ -76,6 +96,10 @@ namespace MgmtRenameRules.Models
             Optional<bool> toBeDetached = default;
             Optional<long> diskIOPSReadWrite = default;
             Optional<long> diskMBpsReadWrite = default;
+            Optional<ContentType> contentType = default;
+            Optional<string> content = default;
+            Optional<string> method = default;
+            Optional<string> basePath = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("lun"))
@@ -183,8 +207,33 @@ namespace MgmtRenameRules.Models
                     diskMBpsReadWrite = property.Value.GetInt64();
                     continue;
                 }
+                if (property.NameEquals("contentType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    contentType = new ContentType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("content"))
+                {
+                    content = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("method"))
+                {
+                    method = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("basePath"))
+                {
+                    basePath = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DataDisk(lun, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(toBeDetached), Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite));
+            return new DataDisk(lun, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(toBeDetached), Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite), Optional.ToNullable(contentType), content.Value, method.Value, basePath.Value);
         }
     }
 }
