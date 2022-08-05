@@ -336,6 +336,8 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
 
+            { Type: AllSchemaTypes.ArmId } => InputPrimitiveType.ResourceIdentifier,
+
             ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
             DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
             ChoiceSchema choiceSchema       when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
