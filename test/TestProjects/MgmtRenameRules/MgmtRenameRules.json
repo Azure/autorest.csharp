@@ -4698,14 +4698,6 @@
                 "backupFrequency": {
                     "type": "string",
                     "description": "Specifies the frequency for content backup"
-                },
-                "contentType": {
-                    "type": "string",
-                    "description": "The content type."
-                },
-                "content": {
-                    "type": "string",
-                    "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted."
                 }
             },
             "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied."
@@ -7875,6 +7867,22 @@
                     "readOnly": true,
                     "$ref": "#/definitions/LogAnalyticsOutput",
                     "description": "LogAnalyticsOutput"
+                },
+                "contentType": {
+                    "type": "string",
+                    "description": "The content type."
+                },
+                "content": {
+                    "type": "string",
+                    "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted."
+                },
+                "method": {
+                    "type": "string",
+                    "description": "Gets the workflow trigger callback URL HTTP method."
+                },
+                "basePath": {
+                    "type": "string",
+                    "description": "Gets the workflow trigger callback URL base path."
                 }
             },
             "description": "LogAnalytics operation status response"

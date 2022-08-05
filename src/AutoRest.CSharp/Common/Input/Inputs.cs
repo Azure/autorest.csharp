@@ -129,6 +129,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Boolean { get; }            = new(InputTypeKind.Boolean);
         public static InputPrimitiveType Bytes { get; }              = new(InputTypeKind.Bytes);
         public static InputPrimitiveType BytesBase64Url { get; }     = new(InputTypeKind.BytesBase64Url);
+        public static InputPrimitiveType ContentType { get; }        = new(InputTypeKind.ContentType);
         public static InputPrimitiveType Date { get; }               = new(InputTypeKind.Date);
         public static InputPrimitiveType DateTime { get; }           = new(InputTypeKind.DateTime);
         public static InputPrimitiveType DateTimeISO8601 { get; }    = new(InputTypeKind.DateTimeISO8601);
@@ -144,6 +145,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
+        public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
         public static InputPrimitiveType ResourceType { get; }       = new(InputTypeKind.ResourceType);
         public static InputPrimitiveType Stream { get; }             = new(InputTypeKind.Stream);
@@ -265,6 +267,7 @@ namespace AutoRest.CSharp.Common.Input
         Boolean,
         Bytes,
         BytesBase64Url,
+        ContentType,
         Date,
         DateTime,
         DateTimeISO8601,
@@ -280,6 +283,7 @@ namespace AutoRest.CSharp.Common.Input
         Int32,
         Int64,
         Object,
+        RequestMethod,
         ResourceIdentifier,
         ResourceType,
         Stream,

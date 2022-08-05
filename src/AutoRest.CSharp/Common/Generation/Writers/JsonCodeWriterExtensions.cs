@@ -121,6 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                                  frameworkType == typeof(Azure.Core.ResourceType) ||
+                                 frameworkType == typeof(Azure.Core.RequestMethod) ||
                                  frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
@@ -530,6 +531,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 frameworkType == typeof(ResourceIdentifier) ||
                 frameworkType == typeof(ResourceType) ||
                 frameworkType == typeof(ContentType) ||
+                frameworkType == typeof(RequestMethod) ||
                 frameworkType == typeof(AzureLocation))
             {
                 return $"new {frameworkType}({element}.GetString())";
