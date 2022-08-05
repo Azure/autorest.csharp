@@ -8,7 +8,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
@@ -26,7 +25,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ConstructorSignature SerializationConstructor { get; }
 
         private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
-        private readonly IReadOnlyDictionary<Parameter, FieldDeclaration> _parametersToFields;
+        // parameter name should be unique since it's bound to field property
+        private readonly IReadOnlyDictionary<string, FieldDeclaration> _parameterNamesToFields;
 
         public ModelTypeProvider(InputModelType inputModel, TypeFactory typeFactory, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
@@ -34,24 +34,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
 
-            (_fieldsToInputs, _parametersToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+            (_fieldsToInputs, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
 
             Fields = _fieldsToInputs.Keys.ToList();
-            PublicConstructor = BuildPublicConstructor(Declaration.Name, _parametersToFields.Keys.ToList());
-
-            // Since we consider all models roundtrip for now, use the same constructor for serialization
-            SerializationConstructor = PublicConstructor;
+            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, serializationParameters);
         }
 
         // Serialization uses field and property names that first need to verified for uniqueness
         // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
         public JsonObjectSerialization CreateSerialization() => new(Type, SerializationConstructor, CreatePropertySerializations().ToArray(), null, null, false, true, true);
 
-        public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parametersToFields[parameter];
+        public FieldDeclaration GetFieldByParameterName(string name) => _parameterNamesToFields[name];
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            foreach (var (parameter, field) in _parametersToFields)
+            foreach (var (parameterName, field) in _parameterNamesToFields)
             {
                 string name;
                 try
@@ -68,14 +65,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
                 var valueType = field.Type;
                 var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, valueType);
-                yield return new JsonPropertySerialization(parameter.Name, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+                yield return new JsonPropertySerialization(parameterName, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
             }
         }
 
-        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyDictionary<Parameter, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
+        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyList<Parameter> SerializationParameters, IReadOnlyDictionary<string, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
         {
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
-            var parametersToFields = new Dictionary<Parameter, FieldDeclaration>();
+            var serializatoinParameters = new List<Parameter>();
+            var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
@@ -88,16 +86,35 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (inputModelProperty.IsRequired)
                 {
                     var parameter = Parameter.FromModelProperty(inputModelProperty, typeFactory);
-                    parametersToFields[parameter] = field;
+                    parametersToFields[parameter.Name] = field;
+                    serializatoinParameters.Add(parameter);
                 }
             }
 
-            return (fieldsToInputs, parametersToFields);
+            return (fieldsToInputs, serializatoinParameters, parametersToFields);
         }
 
-        private static ConstructorSignature BuildPublicConstructor(string name, IReadOnlyList<Parameter> parameters)
+        private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, IReadOnlyList<Parameter> serializationParameters)
         {
-            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, parameters);
+            ConstructorSignature publicConstructor;
+            ConstructorSignature serializationConstructor;
+            if (serializationParameters.Where(IsIList).Any())
+            {
+                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
+                publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
+                    serializationParameters.Select(p => IsIList(p) ? FromIListToIEnumerable(p) : p).ToList());
+            }
+            else
+            {
+                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, serializationParameters);
+                publicConstructor = serializationConstructor;
+
+            }
+            return (publicConstructor, serializationConstructor);
         }
+
+        private static bool IsIList(Parameter p) => p.Type.IsFrameworkType && p.Type.FrameworkType == typeof(IList<>);
+
+        private static Parameter FromIListToIEnumerable(Parameter p) => new Parameter(p.Name, p.Description, new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments), p.DefaultValue, p.Validation, p.Initializer);
     }
 }
