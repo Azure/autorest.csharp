@@ -28,6 +28,7 @@ import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
+    InputEnumType,
     InputModelType,
     InputPrimitiveType,
     InputType
