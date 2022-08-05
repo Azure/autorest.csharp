@@ -317,6 +317,7 @@ return DeserializePrimitivePropertyModel(document.RootElement);
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace Cadl.TestServer.CollectionPropertiesBasic
@@ -338,8 +339,8 @@ public RoundTripModel(global::System.Collections.Generic.IEnumerable<string> req
 global::Azure.Core.Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 global::Azure.Core.Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
 
-RequiredStringList = requiredStringList;
-RequiredIntList = requiredIntList;
+RequiredStringList = requiredStringList.ToList();
+RequiredIntList = requiredIntList.ToList();
 }
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 /// <param name=""requiredStringList""> Required collection of strings, illustrating a collection of reference types. </param>
