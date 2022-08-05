@@ -281,7 +281,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private bool IsBaseClassWithDiscriminator => ObjectSchema.Discriminator?.All != null &&
-            ObjectSchema.Parents?.All.Count == 0 &&
-            Configuration.MgmtConfiguration.EnableAbstractBaseClassWithDiscriminator;
+            ObjectSchema.Parents?.All.Count == 0;
     }
 }
