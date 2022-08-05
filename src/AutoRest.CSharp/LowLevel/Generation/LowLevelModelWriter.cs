@@ -52,7 +52,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 foreach (var parameter in signature.Parameters)
                 {
-                    writer.Line($"{model.GetFieldByParameterName(parameter.Name).Name:I} = {parameter.Name:I};");
+                    var field = model.GetFieldByParameterName(parameter.Name);
+                    writer
+                        .Append($"{field.Name:I} = {parameter.Name:I}")
+                        .WriteConversion(parameter.Type, field.Type)
+                        .LineRaw(";");
                 }
             }
         }
