@@ -28,6 +28,7 @@ import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
+    InputEnumType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -125,6 +126,7 @@ function createModel(program: Program): any {
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
     const modelMap = new Map<string, InputModelType>();
+    const enumMap = new Map<string, InputEnumType>();
     try {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
@@ -178,7 +180,8 @@ function createModel(program: Program): any {
                 operation,
                 endPointParam,
                 apiVersionParam,
-                modelMap
+                modelMap,
+                enumMap
             );
             client.Operations.push(op);
         }
@@ -187,6 +190,7 @@ function createModel(program: Program): any {
             Name: namespace,
             Description: description,
             ApiVersions: apiVersions,
+            Enums: Array.from(enumMap.values()),
             Models: Array.from(modelMap.values()),
             Clients: clients,
             Auth: {}
@@ -206,7 +210,8 @@ function loadOperation(
     operation: OperationDetails,
     endpoint: InputParameter | undefined = undefined,
     apiVersion: InputParameter | undefined = undefined,
-    models: Map<string, InputModelType>
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -262,7 +267,12 @@ function loadOperation(
     ): InputParameter {
         const { type: location, name, param } = parameter;
         const cadlType = param.type;
-        const inputType: InputType = getInputType(program, cadlType, models);
+        const inputType: InputType = getInputType(
+            program,
+            cadlType,
+            models,
+            enums
+        );
         const requestLocation = requestLocationMap[location];
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
@@ -289,7 +299,7 @@ function loadOperation(
     ): InputParameter {
         const { type, name, model: cadlType } = body;
         //const cadlType = body.type;
-        const inputType: InputType = getInputType(program, type, models);
+        const inputType: InputType = getInputType(program, type, models, enums);
 
         //const requestLocation = requestLocationMap[location];
         const requestLocation = RequestLocation.Body;
@@ -328,7 +338,8 @@ function loadOperation(
             const inputType: InputType = getInputType(
                 program,
                 cadlType,
-                models
+                models,
+                enums
             );
             if (!models.get(inputType.Name)) {
                 models.set(inputType.Name, inputType as InputModelType);

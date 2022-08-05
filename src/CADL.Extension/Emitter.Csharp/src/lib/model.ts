@@ -207,7 +207,8 @@ function getDefaultValue(type: Type): any {
 export function getInputType(
     program: Program,
     type: Type,
-    models: Map<string, InputModelType>
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
 ): InputType {
     if (type.kind === "Model") {
         return getInputModelType(program, type);
@@ -267,8 +268,13 @@ export function getInputType(
                             Name: value.name,
                             SerializedName: value.name,
                             Description: "",
-                            Type: getInputType(program, value.type, models),
-                            IsRequired: true,
+                            Type: getInputType(
+                                program,
+                                value.type,
+                                models,
+                                enums
+                            ),
+                            IsRequired: !value.optional,
                             IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
                             IsDiscriminator: false
                         };
@@ -290,37 +296,42 @@ export function getInputType(
     }
 
     function getInputTypeForEnum(e: EnumType): InputType {
-        if (e.members.length == 0) {
-            return {
-                Name: InputTypeKind.UnKnownKind,
-                IsNullable: false
-            } as InputType;
-        }
-        const allowValues: InputEnumTypeValue[] = [];
-        const enumValueType = enumMemberType(e.members[0]);
-
-        for (const option of e.members) {
-            if (enumValueType.Kind !== enumMemberType(option).Kind) {
-                // TODO: add error handler
-                continue;
+        let enumType = enums.get(e.name);
+        if (!enumType) {
+            if (e.members.length == 0) {
+                return {
+                    Name: InputTypeKind.UnKnownKind,
+                    IsNullable: false
+                } as InputType;
             }
+            const allowValues: InputEnumTypeValue[] = [];
+            const enumValueType = enumMemberType(e.members[0]);
 
-            const member = {
-                Name: option.name,
-                Value: option.value
-            } as InputEnumTypeValue;
+            for (const option of e.members) {
+                if (enumValueType.Kind !== enumMemberType(option).Kind) {
+                    // TODO: add error handler
+                    continue;
+                }
 
-            allowValues.push(member);
+                const member = {
+                    Name: option.name,
+                    Value: option.value
+                } as InputEnumTypeValue;
+
+                allowValues.push(member);
+            }
+            //TODO: need to figure out if it is extensible or not.
+            const isExtensible: boolean = false;
+            enumType = {
+                Name: e.name,
+                EnumValueType: enumValueType,
+                AllowedValues: allowValues,
+                IsExtensible: isExtensible,
+                IsNullable: false
+            } as InputEnumType;
+            enums.set(e.name, enumType);
         }
-        //TODO: need to figure out if it is extensible or not.
-        const isExtensible: boolean = false;
-        return {
-            Name: e.name,
-            EnumValueType: enumValueType,
-            AllowedValues: allowValues,
-            IsExtensible: isExtensible,
-            IsNullable: false
-        } as InputEnumType;
+        return enumType;
 
         function enumMemberType(member: EnumMemberType): InputPrimitiveType {
             if (typeof member.value === "number") {
@@ -345,7 +356,7 @@ export function getInputType(
         const elementType = arr.elementType;
         return {
             Name: "Array",
-            ElementType: getInputType(program, elementType, models),
+            ElementType: getInputType(program, elementType, models, enums),
             IsNullable: false
         } as InputListType;
     }

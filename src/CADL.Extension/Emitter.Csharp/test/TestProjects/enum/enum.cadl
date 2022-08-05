@@ -5,13 +5,13 @@ using Cadl.Http;
 @serviceTitle("EnumPropertiesBasicClient")
 @serviceVersion("1.0.0")
 @server("http://localhost:3000", "TestServer endpoint")
-@doc("Illustrates input, output, and round-trip models with required enum type properties.")
+@doc("Illustrates input models with required enum type properties.")
 
-namespace Cadl.TestServer.EnumPropertiesBasic;
+namespace Cadl.EnumPropertiesBasic;
 
 @doc("The language to translate the input text into.")
 @knownValues(TranslationLanguageValues)
-model TranslationLanguage is string {}
+model TranslationLanguage is string;
 
 @doc("The supported languages to translate input text into.")
 enum TranslationLanguageValues
@@ -49,8 +49,23 @@ model InputModel {
 
   @doc("Required string enum value.")
   Language: TranslationLanguage;
+  Title: EnumWithStringValue;
+  Grade: EnumWithNumberValue;
 }
 
+@doc("Represents the simple enum with enum string value.")
+enum EnumWithStringValue {
+  One: "1",
+  Two: "2",
+  Three: "3"
+}
+
+@doc("Represents the simple enum with enum number value.")
+enum EnumWithNumberValue {
+  One: 1,
+  Two: 2,
+  Three: 3
+}
 // @doc("Output model with enum properties")
 // model OutputModel {
 
