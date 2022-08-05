@@ -86,37 +86,6 @@ namespace AutoRest.CSharp.Output.Models
             return language.SerializedName ?? language.Name;
         }
 
-        public CSharpType? GetResponseType(InputOperation operation, string defaultNamespace)
-        {
-            var bodyType = operation.Responses.FirstOrDefault()?.BodyType;
-            if (bodyType != null && bodyType is InputModelType)
-            {
-                return new CSharpType(new ModelTypeProvider((bodyType as InputModelType)!, _typeFactory, defaultNamespace, null));
-            }
-
-            return null;
-        }
-
-        public Parameter? GetBodyParameter(InputOperation operation, string defaultNamespace)
-        {
-            var requestParameters = operation.Parameters
-                .Where(rp => !IsIgnoredHeaderParameter(rp));
-
-            var bodyParameters = requestParameters.Where(parameter => parameter.Location == RequestLocation.Body);
-            var requiredParameter = bodyParameters.Where(parameter => parameter.IsRequired).FirstOrDefault();
-
-            var bodyParameter = requiredParameter ?? bodyParameters.FirstOrDefault();
-            if (bodyParameter == null)
-            {
-                return null;
-            }
-
-            var bodyParameterType = bodyParameter.Type is InputModelType
-                ? new CSharpType(new ModelTypeProvider((bodyParameter.Type as InputModelType)!, _typeFactory, defaultNamespace, null))
-                : _typeFactory.CreateType(bodyParameter.Type);
-            return Parameter.FromRequestParameter(bodyParameter, bodyParameterType, _typeFactory);
-        }
-
         public RestClientMethod BuildRequestMethod(InputOperation operation)
         {
             var accessibility = operation.Accessibility ?? "public";

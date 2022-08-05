@@ -54,7 +54,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client);
                     WriteConstructors(writer, client);
 
-                    HashSet<LowLevelClientMethod> visitedMethods = new HashSet<LowLevelClientMethod>();
                     var exampleComposer = new LowLevelExampleComposer(client);
                     foreach (var clientMethod in client.ClientMethods)
                     {
