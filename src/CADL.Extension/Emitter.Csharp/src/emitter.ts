@@ -21,7 +21,6 @@ import {
 } from "@cadl-lang/rest/http";
 import { CodeModel } from "./type/CodeModel";
 import { InputClient } from "./type/InputClient";
-import { dump } from "js-yaml";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
@@ -29,7 +28,6 @@ import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
-    InputEnumType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -88,10 +86,6 @@ export async function $onEmit(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
-            const yamlOutPath = resolvePath(
-                options.outputFile?.replace(".json", `.yaml`)
-            );
-            await program.host.writeFile(yamlOutPath, dump(root));
         }
     }
 }
