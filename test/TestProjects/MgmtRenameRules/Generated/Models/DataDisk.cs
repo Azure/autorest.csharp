@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
@@ -35,11 +34,7 @@ namespace MgmtRenameRules.Models
         /// <param name="toBeDetached"> Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset. </param>
         /// <param name="diskIopsReadWrite"> Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set. </param>
         /// <param name="diskMBpsReadWrite"> Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set. </param>
-        /// <param name="contentType"> The content type. </param>
-        /// <param name="content"> Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted. </param>
-        /// <param name="method"> Gets the workflow trigger callback URL HTTP method. </param>
-        /// <param name="basePath"> Gets the workflow trigger callback URL base path. </param>
-        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite, ContentType? contentType, string content, string method, string basePath)
+        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite)
         {
             Lun = lun;
             Name = name;
@@ -53,10 +48,6 @@ namespace MgmtRenameRules.Models
             ToBeDetached = toBeDetached;
             DiskIopsReadWrite = diskIopsReadWrite;
             DiskMBpsReadWrite = diskMBpsReadWrite;
-            ContentType = contentType;
-            Content = content;
-            Method = method;
-            BasePath = basePath;
         }
 
         /// <summary> Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. </summary>
@@ -107,13 +98,5 @@ namespace MgmtRenameRules.Models
         public long? DiskIopsReadWrite { get; }
         /// <summary> Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set. </summary>
         public long? DiskMBpsReadWrite { get; }
-        /// <summary> The content type. </summary>
-        public ContentType? ContentType { get; set; }
-        /// <summary> Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted. </summary>
-        public string Content { get; set; }
-        /// <summary> Gets the workflow trigger callback URL HTTP method. </summary>
-        public string Method { get; set; }
-        /// <summary> Gets the workflow trigger callback URL base path. </summary>
-        public string BasePath { get; set; }
     }
 }
