@@ -748,6 +748,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToResourceData;
         }
 
+        public override CSharpType ResolveEnum(InputEnumType enumType) => throw new NotImplementedException($"{nameof(ResolveEnum)} is not implemented for MPG yet.");
+        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
+
         public override CSharpType FindTypeForSchema(Schema schema)
         {
             TypeProvider? result;

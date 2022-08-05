@@ -111,9 +111,19 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of AutocompleteItem. </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="queryPlusText"/> is null. </exception>
         /// <returns> A new <see cref="Models.AutocompleteItem"/> instance for mocking. </returns>
         public static AutocompleteItem AutocompleteItem(string text = null, string queryPlusText = null)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (queryPlusText == null)
+            {
+                throw new ArgumentNullException(nameof(queryPlusText));
+            }
+
             return new AutocompleteItem(text, queryPlusText);
         }
 
@@ -259,18 +269,34 @@ namespace CognitiveSearch.Models
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>
         /// <param name="position"> The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="token"/> is null. </exception>
         /// <returns> A new <see cref="Models.TokenInfo"/> instance for mocking. </returns>
         public static TokenInfo TokenInfo(string token = null, int startOffset = default, int endOffset = default, int position = default)
         {
+            if (token == null)
+            {
+                throw new ArgumentNullException(nameof(token));
+            }
+
             return new TokenInfo(token, startOffset, endOffset, position);
         }
 
         /// <summary> Initializes a new instance of ServiceStatistics. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>
         /// <returns> A new <see cref="Models.ServiceStatistics"/> instance for mocking. </returns>
         public static ServiceStatistics ServiceStatistics(ServiceCounters counters = null, ServiceLimits limits = null)
         {
+            if (counters == null)
+            {
+                throw new ArgumentNullException(nameof(counters));
+            }
+            if (limits == null)
+            {
+                throw new ArgumentNullException(nameof(limits));
+            }
+
             return new ServiceStatistics(counters, limits);
         }
 
@@ -282,9 +308,39 @@ namespace CognitiveSearch.Models
         /// <param name="storageSizeCounter"> Total size of used storage in bytes. </param>
         /// <param name="synonymMapCounter"> Total number of synonym maps. </param>
         /// <param name="skillsetCounter"> Total number of skillsets. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="documentCounter"/>, <paramref name="indexCounter"/>, <paramref name="indexerCounter"/>, <paramref name="dataSourceCounter"/>, <paramref name="storageSizeCounter"/>, <paramref name="synonymMapCounter"/> or <paramref name="skillsetCounter"/> is null. </exception>
         /// <returns> A new <see cref="Models.ServiceCounters"/> instance for mocking. </returns>
         public static ServiceCounters ServiceCounters(ResourceCounter documentCounter = null, ResourceCounter indexCounter = null, ResourceCounter indexerCounter = null, ResourceCounter dataSourceCounter = null, ResourceCounter storageSizeCounter = null, ResourceCounter synonymMapCounter = null, ResourceCounter skillsetCounter = null)
         {
+            if (documentCounter == null)
+            {
+                throw new ArgumentNullException(nameof(documentCounter));
+            }
+            if (indexCounter == null)
+            {
+                throw new ArgumentNullException(nameof(indexCounter));
+            }
+            if (indexerCounter == null)
+            {
+                throw new ArgumentNullException(nameof(indexerCounter));
+            }
+            if (dataSourceCounter == null)
+            {
+                throw new ArgumentNullException(nameof(dataSourceCounter));
+            }
+            if (storageSizeCounter == null)
+            {
+                throw new ArgumentNullException(nameof(storageSizeCounter));
+            }
+            if (synonymMapCounter == null)
+            {
+                throw new ArgumentNullException(nameof(synonymMapCounter));
+            }
+            if (skillsetCounter == null)
+            {
+                throw new ArgumentNullException(nameof(skillsetCounter));
+            }
+
             return new ServiceCounters(documentCounter, indexCounter, indexerCounter, dataSourceCounter, storageSizeCounter, synonymMapCounter, skillsetCounter);
         }
 

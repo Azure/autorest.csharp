@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType             => CreateType(enumType.EnumValueType with { IsNullable = inputType.IsNullable }),
-            InputModelType model               => new CSharpType(typeof(object), inputType.IsNullable),
+            InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Types
         public static bool IsStringLike(CSharpType type) =>
             type.IsFrameworkType
                 ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
+                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtendable;
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);

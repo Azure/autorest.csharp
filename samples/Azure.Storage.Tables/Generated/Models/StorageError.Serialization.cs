@@ -13,6 +13,16 @@ namespace Azure.Storage.Tables.Models
 {
     internal partial class StorageError
     {
+        internal static StorageError DeserializeStorageError(XElement element)
+        {
+            string message = default;
+            if (element.Element("Message") is XElement messageElement)
+            {
+                message = (string)messageElement;
+            }
+            return new StorageError(message);
+        }
+
         internal static StorageError DeserializeStorageError(JsonElement element)
         {
             Optional<string> message = default;
@@ -25,16 +35,6 @@ namespace Azure.Storage.Tables.Models
                 }
             }
             return new StorageError(message.Value);
-        }
-
-        internal static StorageError DeserializeStorageError(XElement element)
-        {
-            string message = default;
-            if (element.Element("Message") is XElement messageElement)
-            {
-                message = (string)messageElement;
-            }
-            return new StorageError(message);
         }
     }
 }

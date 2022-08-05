@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CachedDictionary<InputClient, DataPlaneClient> _clients;
         private CachedDictionary<InputOperation, LongRunningOperation> _operations;
         private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
+        private CachedDictionary<InputEnumType, EnumType> _enums;
         private CachedDictionary<Schema, TypeProvider> _models;
         private BuildContext<DataPlaneOutputLibrary> _context;
         public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
@@ -47,6 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
+            _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
             _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_input, Models, _sourceInputModel));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
@@ -73,6 +75,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> Models => _models.Values;
         public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
 
+        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums[enumType].Type;
+        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
+
         public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
 
         public override CSharpType? FindTypeByName(string originalName)
@@ -85,6 +90,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return null;
+        }
+
+        private Dictionary<InputEnumType, EnumType> BuildEnums()
+        {
+            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            foreach (var (schema, typeProvider) in _models)
+            {
+                switch (schema)
+                {
+                    case SealedChoiceSchema sealedChoiceSchema:
+                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false), (EnumType)typeProvider);
+                        break;
+                    case ChoiceSchema choiceSchema:
+                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true), (EnumType)typeProvider);
+                        break;
+                }
+            }
+
+            return dictionary;
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels(CodeModel codeModel)

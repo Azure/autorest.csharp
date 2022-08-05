@@ -18,9 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : TypeProvider
     {
-        private readonly TypeFactory _typeFactory;
-        private readonly InputModelType _inputModel;
-
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
@@ -28,21 +25,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ConstructorSignature PublicConstructor { get; }
         public ConstructorSignature SerializationConstructor { get; }
 
-        private readonly IReadOnlyDictionary<InputModelProperty, FieldDeclaration> _inputsToFields;
+        private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
         private readonly IReadOnlyDictionary<Parameter, FieldDeclaration> _parametersToFields;
 
         public ModelTypeProvider(InputModelType inputModel, TypeFactory typeFactory, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
-            _inputModel = inputModel;
-            _typeFactory = typeFactory;
-
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
 
-            (_inputsToFields, _parametersToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+            (_fieldsToInputs, _parametersToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
 
-            Fields = _inputsToFields.Values.ToList();
+            Fields = _fieldsToInputs.Keys.ToList();
             PublicConstructor = BuildPublicConstructor(Declaration.Name, _parametersToFields.Keys.ToList());
 
             // Since we consider all models roundtrip for now, use the same constructor for serialization
@@ -51,13 +45,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         // Serialization uses field and property names that first need to verified for uniqueness
         // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-        public JsonObjectSerialization CreateSerialization() => new(new CSharpType(this), CreatePropertySerializations(_inputsToFields).ToArray(), null, false);
+        public JsonObjectSerialization CreateSerialization() => new(Type, SerializationConstructor, CreatePropertySerializations().ToArray(), null, null, false, true, true);
 
         public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parametersToFields[parameter];
 
-        private IEnumerable<JsonPropertySerialization> CreatePropertySerializations(IReadOnlyDictionary<InputModelProperty, FieldDeclaration> inputsToFields)
+        private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            foreach (var (property, field) in inputsToFields)
+            foreach (var (parameter, field) in _parametersToFields)
             {
                 string name;
                 try
@@ -69,17 +63,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                     throw new InvalidOperationException($"Field with {field.Declaration.RequestedName} isn't written yet to type {Declaration.Name}", e);
                 }
 
+                var property = _fieldsToInputs[field];
                 var serializedName = property.SerializedName ?? property.Name;
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
-                var valueSerialization = new JsonValueSerialization(field.Type, SerializationBuilder.GetSerializationFormat(property.Type), field.Type.IsNullable);
-
-                yield return new JsonPropertySerialization(name, serializedName, field.Type, field.Type, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+                var valueType = field.Type;
+                var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, valueType);
+                yield return new JsonPropertySerialization(parameter.Name, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
             }
         }
 
-        private static (IReadOnlyDictionary<InputModelProperty, FieldDeclaration> InputsToFields, IReadOnlyDictionary<Parameter, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
+        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyDictionary<Parameter, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
         {
-            var inputsToFields = new Dictionary<InputModelProperty, FieldDeclaration>();
+            var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
             var parametersToFields = new Dictionary<Parameter, FieldDeclaration>();
 
             foreach (var inputModelProperty in inputModel.Properties)
@@ -89,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     : Public;
 
                 var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, typeFactory.CreateType(inputModelProperty.Type), inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
-                inputsToFields[inputModelProperty] = field;
+                fieldsToInputs[field] = inputModelProperty;
                 if (inputModelProperty.IsRequired)
                 {
                     var parameter = Parameter.FromModelProperty(inputModelProperty, typeFactory);
@@ -97,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            return (inputsToFields, parametersToFields);
+            return (fieldsToInputs, parametersToFields);
         }
 
         private static ConstructorSignature BuildPublicConstructor(string name, IReadOnlyList<Parameter> parameters)
