@@ -45,8 +45,11 @@ namespace AutoRest.CSharp.Output.Models
             SetRequestsToClients(clientInfosByName.Values);
 
 
-            IReadOnlyList<ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
-                => _rootNamespace.Models.Select(m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)).ToList();
+            IReadOnlyDictionary<InputEnumType, EnumType> EnumFactory(TypeFactory typeFactory)
+                => cadlInput ? _rootNamespace.Enums.ToDictionary(e => e, e => new EnumType(e, _defaultNamespace, "public", typeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer) : new Dictionary<InputEnumType, EnumType>();
+
+            IReadOnlyDictionary<InputModelType, ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
+                => cadlInput ? _rootNamespace.Models.ToDictionary(m => m, m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)) : new Dictionary<InputModelType, ModelTypeProvider>();
 
             IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
             {
@@ -54,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
                 return EnumerateAllClients(topLevelClients);
             }
 
-            return new DpgOutputLibrary(cadlInput ? ModelsFactory : t => Array.Empty<ModelTypeProvider>(), RestClientsFactory, clientOptions);
+            return new DpgOutputLibrary(EnumFactory, ModelsFactory, RestClientsFactory, clientOptions);
         }
 
         private IEnumerable<InputClient> UpdateListMethodNames()

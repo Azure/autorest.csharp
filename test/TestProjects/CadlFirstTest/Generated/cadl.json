@@ -2,6 +2,32 @@
   "Name": "demo.helloworld",
   "Description": "",
   "ApiVersions": ["0.1.0"],
+  "Enums": [
+    {
+      "$id": "4",
+      "Name": "SimpleEnum",
+      "Description": "Simple enum",
+      "EnumValueType": "string",
+      "AllowedValues": [
+        { "Name": "One", "Value": "1" },
+        { "Name": "Two", "Value": "2" },
+        { "Name": "Four", "Value": "4" }
+      ],
+      "IsExtendable": false
+    },
+    {
+      "$id": "5",
+      "Name": "ExtensibleEnum",
+      "Description": "Extensible enum",
+      "EnumValueType": "string",
+      "AllowedValues": [
+        { "Name": "One", "Value": "1" },
+        { "Name": "Two", "Value": "2" },
+        { "Name": "Four", "Value": "4" }
+      ],
+      "IsExtendable": true
+    }
+  ],
   "Models": [
     {
       "$id": "1",
@@ -20,6 +46,20 @@
           "Name": "requiredInt",
           "Description": "Required int, illustrating a value type property.",
           "Type": "Int32",
+          "IsRequired": true,
+          "IsReadOnly": false
+        },
+        {
+          "Name": "requiredCollection",
+          "Description": "Required collection of enums",
+          "Type": { "Name": "CollectionType", "ElementType": {"$ref": "4" }},
+          "IsRequired": true,
+          "IsReadOnly": false
+        },
+        {
+          "Name": "requiredDictionary",
+          "Description": "Required dictionary of enums",
+          "Type": { "Name": "DictionaryType", "KeyType": "string", "ValueType": {"$ref": "5" }},
           "IsRequired": true,
           "IsReadOnly": false
         }
@@ -53,7 +93,7 @@
               "Location": "Path",
               "IsRequired": true,
               "Kind": "Method",
-              "SkipUrlEncoding": true,
+              "SkipUrlEncoding": true
             },
             {
               "$id": "3",
