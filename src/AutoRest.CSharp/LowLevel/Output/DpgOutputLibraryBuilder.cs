@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
         }
 
-        public DpgOutputLibrary Build(bool cadlInput)
+        public DpgOutputLibrary Build(bool isCadlInput)
         {
             var inputClients = UpdateListMethodNames();
 
@@ -46,14 +46,14 @@ namespace AutoRest.CSharp.Output.Models
 
 
             IReadOnlyDictionary<InputEnumType, EnumType> EnumFactory(TypeFactory typeFactory)
-                => cadlInput ? _rootNamespace.Enums.ToDictionary(e => e, e => new EnumType(e, _defaultNamespace, "public", typeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer) : new Dictionary<InputEnumType, EnumType>();
+                => isCadlInput ? _rootNamespace.Enums.ToDictionary(e => e, e => new EnumType(e, _defaultNamespace, "public", typeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer) : new Dictionary<InputEnumType, EnumType>();
 
             IReadOnlyDictionary<InputModelType, ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
-                => cadlInput ? _rootNamespace.Models.ToDictionary(m => m, m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)) : new Dictionary<InputModelType, ModelTypeProvider>();
+                => isCadlInput ? _rootNamespace.Models.ToDictionary(m => m, m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)) : new Dictionary<InputModelType, ModelTypeProvider>();
 
             IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
+                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, isCadlInput);
                 return EnumerateAllClients(topLevelClients);
             }
 
@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool isCadlInput)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -240,12 +240,14 @@ namespace AutoRest.CSharp.Output.Models
                     new RestClientBuilder(clientInfo.ClientParameters, typeFactory),
                     _rootNamespace.Auth,
                     _sourceInputModel,
-                    clientOptions)
+                    clientOptions,
+                    isCadlInput,
+                    typeFactory)
                 {
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, isCadlInput));
 
                  yield return client;
             }

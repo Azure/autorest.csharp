@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -56,6 +57,42 @@ namespace CadlFirstTest
             _apiVersion = options.Version;
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Thing>> SayHiValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await SayHiAsync(context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Thing> SayHiValue(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = SayHi(context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -67,7 +104,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.SayHiAsync();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -77,6 +115,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -108,7 +147,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.SayHi();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -118,6 +158,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -151,6 +192,17 @@ namespace CadlFirstTest
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (cancellationToken == CancellationToken.None)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;
