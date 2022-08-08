@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ResourceMockTestWriter : MgmtMockTestBaseWriter<Resource>
     {
-        public ResourceMockTestWriter(CodeWriter writer, MgmtMockTestProvider<Resource> resourceMockTest) : base(writer, resourceMockTest)
+        public ResourceMockTestWriter(MgmtMockTestProvider<Resource> resourceMockTest) : base(resourceMockTest)
         {
         }
 

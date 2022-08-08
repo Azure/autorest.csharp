@@ -21,14 +21,17 @@ using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
-    internal abstract class MgmtMockTestBaseWriter<TProvider> where TProvider : MgmtTypeProvider
+    internal abstract class MgmtMockTestBaseWriter<TProvider> : MgmtTestWriterBase where TProvider : MgmtTypeProvider
     {
-        protected CodeWriter _writer;
         protected MgmtMockTestProvider<TProvider> This { get; }
 
-        public MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider)
+        public MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> typeProvider) : base()
         {
-            _writer = writer;
+            This = typeProvider;
+        }
+
+        public MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider) : base(writer)
+        {
             This = typeProvider;
         }
 
@@ -81,12 +84,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             var testCaseDict = new Dictionary<MgmtClientOperation, List<MockTestCase>>();
             foreach (var testCase in This.MockTestCases)
             {
-                testCaseDict.AddInList(testCase.ClientOperation, testCase);
+                testCaseDict.AddInList(testCase.Operation, testCase);
             }
 
-            foreach (var testCase in This.MockTestCases.OrderBy(testCase => testCase.ClientOperation.Name))
+            foreach (var testCase in This.MockTestCases.OrderBy(testCase => testCase.Operation.Name))
             {
-                WriteTestMethod(testCase, testCaseDict[testCase.ClientOperation].Count > 1);
+                WriteTestMethod(testCase, testCaseDict[testCase.Operation].Count > 1);
                 _writer.Line();
             }
         }
@@ -209,7 +212,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         protected void WriteTestOperation(CodeWriterDeclaration declaration, MockTestCase testCase)
         {
             // we will always use the Async version of methods
-            if (testCase.ClientOperation.IsPagingOperation)
+            if (testCase.Operation.IsPagingOperation)
             {
                 _writer.Append($"await foreach (var _ in ");
                 WriteTestMethodInvocation(declaration, testCase);
@@ -226,7 +229,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
         protected void WriteTestMethodInvocation(CodeWriterDeclaration declaration, MockTestCase testCase)
         {
-            var clientOperation = testCase.ClientOperation;
+            var clientOperation = testCase.Operation;
             var methodName = CreateMethodName(clientOperation.Name);
             _writer.Append($"{declaration}.{methodName}(");
             foreach (var parameter in clientOperation.MethodParameters)

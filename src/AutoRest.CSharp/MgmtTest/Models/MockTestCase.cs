@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private ExampleModel _example;
         public string OperationId { get; }
         public string Name => _example.Name;
-        public MgmtClientOperation ClientOperation { get; }
+        public MgmtClientOperation Operation { get; }
         private MgmtRestOperation? _restOperation;
         public MgmtRestOperation RestOperation => _restOperation ??= GetRestOperationFromOperationId();
         public RequestPath RequestPath => RestOperation.RequestPath;
@@ -38,17 +38,17 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public MgmtTypeProvider Carrier { get ; }
 
-        public MockTestCase(string operationId, MgmtTypeProvider provider, MgmtClientOperation clientOperation, ExampleModel example)
+        public MockTestCase(string operationId, MgmtTypeProviderAndOperation providerAndOperation, ExampleModel example)
         {
             OperationId = operationId;
-            Carrier = provider;
+            Carrier = providerAndOperation.Carrier;
             _example = example;
-            ClientOperation = clientOperation;
+            Operation = providerAndOperation.Operation;
         }
 
         public MethodSignature GetMethodSignature(bool hasSuffix)
         {
-            var methodName = ClientOperation.Name;
+            var methodName = Operation.Name;
             if (hasSuffix)
                 methodName += $"_{_example.Name.ToCleanName()}";
             return new MethodSignature(
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         private MgmtRestOperation GetRestOperationFromOperationId()
         {
-            foreach (var operation in ClientOperation)
+            foreach (var operation in Operation)
             {
                 if (operation.OperationId == OperationId)
                     return operation;
@@ -180,8 +180,8 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private IEnumerable<Parameter> GetAllPossibleParameters()
         {
             // skip the first parameter if this method is an extension method, since that will be the extension resource
-            var methodParameters = ClientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
-                ClientOperation.MethodParameters.Skip(1) : ClientOperation.MethodParameters;
+            var methodParameters = Operation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
+                Operation.MethodParameters.Skip(1) : Operation.MethodParameters;
 
             return Carrier.ExtraConstructorParameters.Concat(methodParameters);
         }

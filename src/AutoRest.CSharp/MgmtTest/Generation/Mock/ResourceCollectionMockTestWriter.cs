@@ -14,17 +14,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ResourceCollectionMockTestWriter : MgmtMockTestBaseWriter<ResourceCollection>
     {
-        public ResourceCollectionMockTestWriter(CodeWriter writer, MgmtMockTestProvider<ResourceCollection> resourceCollectionTest) : base(writer, resourceCollectionTest)
+        public ResourceCollectionMockTestWriter(MgmtMockTestProvider<ResourceCollection> resourceCollectionTest) : base(resourceCollectionTest)
         {
         }
 
         protected override void WriteTestMethodBody(MockTestCase testCase)
         {
             _writer.Line($"// Example: {testCase.Name}");
-
-            var parents = This.Target.Resource.Parent();
-            // TODO -- find a way to determine which parent to use. Only for prototype, here we use the first
-            var parent = parents.First();
 
             _writer.Line();
             var collectionName = WriteGetCollection(testCase);

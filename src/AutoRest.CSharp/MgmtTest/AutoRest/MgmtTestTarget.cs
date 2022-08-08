@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
-                var collectionTestWriter = new ResourceCollectionMockTestWriter(new CodeWriter(), collectionTest);
+                var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest);
                 collectionTestWriter.Write();
 
                 project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
@@ -50,14 +50,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resourceTest in library.ResourceMockTests)
             {
-                var resourceTestWriter = new ResourceMockTestWriter(new CodeWriter(), resourceTest);
+                var resourceTestWriter = new ResourceMockTestWriter(resourceTest);
                 resourceTestWriter.Write();
 
                 project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
             }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
-            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(new CodeWriter(), extensionWrapperTest, library.ExtensionMockTests);
+            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests);
             extensionWrapperTestWriter.Write();
 
             project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());

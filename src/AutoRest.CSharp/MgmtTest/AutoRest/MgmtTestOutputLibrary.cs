@@ -46,14 +46,14 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 {
                     // we need to find which resource or resource collection this test case belongs
                     var operationId = exampleGroup.OperationId;
-                    var exampleOperations = FindCarriersFromOperationId(operationId);
-                    foreach (var exampleOperation in exampleOperations)
+                    var providerAndOperations = FindCarriersFromOperationId(operationId);
+                    foreach (var providerForExample in providerAndOperations)
                     {
                         // if the provider is a resource, the owner is the resource (this includes the ResourceCollection). Otherwise, for instance the extensions, use the ClientOperation.Resource as its owner. Use provider as fallback
                         // This controls which test class this test operation will go to
-                        var carrier = exampleOperation.Carrier;
-                        var owner = carrier is Resource ? carrier : (exampleOperation.Operation.Resource ?? carrier);
-                        result.AddInList(owner, new MockTestCase(operationId, carrier, exampleOperation.Operation, example));
+                        var carrier = providerForExample.Carrier;
+                        var owner = carrier is Resource ? carrier : (providerForExample.Operation.Resource ?? carrier);
+                        result.AddInList(owner, new MockTestCase(operationId, providerForExample, example));
                     }
                 }
             }
