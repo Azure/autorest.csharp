@@ -6,5 +6,5 @@ using AutoRest.CSharp.Mgmt.Output;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal record ExampleOperation(MgmtTypeProvider Carrier, MgmtClientOperation Operation);
+    internal record MgmtTypeProviderAndOperation(MgmtTypeProvider Carrier, MgmtClientOperation Operation);
 }

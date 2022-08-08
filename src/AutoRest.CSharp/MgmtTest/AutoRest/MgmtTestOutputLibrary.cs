@@ -61,21 +61,21 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return result;
         }
 
-        private IEnumerable<ExampleOperation> FindCarriersFromOperationId(string operationId)
+        private IEnumerable<MgmtTypeProviderAndOperation> FindCarriersFromOperationId(string operationId)
         {
             // it is possible that an operationId does not exist in the MgmtOutputLibrary, because some of the operations are removed by design. For instance, `Operations_List`.
             if (EnsureOperationIdToProviders().TryGetValue(operationId, out var result))
                 return result;
-            return Enumerable.Empty<ExampleOperation>();
+            return Enumerable.Empty<MgmtTypeProviderAndOperation>();
         }
 
-        private Dictionary<string, List<ExampleOperation>>? _operationIdToProviders;
-        private Dictionary<string, List<ExampleOperation>> EnsureOperationIdToProviders()
+        private Dictionary<string, List<MgmtTypeProviderAndOperation>>? _operationIdToProviders;
+        private Dictionary<string, List<MgmtTypeProviderAndOperation>> EnsureOperationIdToProviders()
         {
             if (_operationIdToProviders != null)
                 return _operationIdToProviders;
 
-            _operationIdToProviders = new Dictionary<string, List<ExampleOperation>>();
+            _operationIdToProviders = new Dictionary<string, List<MgmtTypeProviderAndOperation>>();
             // iterate all the resources and resource collection
             var mgmtProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                         continue;
                     foreach (var restOperation in clientOperation)
                     {
-                        _operationIdToProviders.AddInList(restOperation.OperationId, new ExampleOperation(provider, clientOperation));
+                        _operationIdToProviders.AddInList(restOperation.OperationId, new MgmtTypeProviderAndOperation(provider, clientOperation));
                     }
                 }
             }
