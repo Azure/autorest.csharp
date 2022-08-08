@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -15,6 +16,10 @@ namespace MgmtRenameRules.Models
         internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
         {
             Optional<LogAnalyticsOutput> properties = default;
+            Optional<ContentType> contentType = default;
+            Optional<BinaryData> content = default;
+            Optional<RequestMethod> method = default;
+            Optional<Uri> basePath = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"))
@@ -27,8 +32,48 @@ namespace MgmtRenameRules.Models
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
+                if (property.NameEquals("contentType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    contentType = new ContentType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("content"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    content = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("method"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    method = new RequestMethod(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("basePath"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        basePath = null;
+                        continue;
+                    }
+                    basePath = new Uri(property.Value.GetString());
+                    continue;
+                }
             }
-            return new LogAnalytics(properties.Value);
+            return new LogAnalytics(properties.Value, Optional.ToNullable(contentType), content.Value, Optional.ToNullable(method), basePath.Value);
         }
     }
 }

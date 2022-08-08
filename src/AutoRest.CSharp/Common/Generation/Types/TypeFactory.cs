@@ -33,14 +33,15 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType             => CreateType(enumType.EnumValueType with { IsNullable = inputType.IsNullable }),
-            InputModelType model               => new CSharpType(typeof(object), inputType.IsNullable),
+            InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
                 InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
                 InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
                 InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
                 InputTypeKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTimeISO8601 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
@@ -55,6 +56,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
                 InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
                 InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
+                InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
                 InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
                 InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
                 InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
@@ -170,7 +172,7 @@ namespace AutoRest.CSharp.Generation.Types
         public static bool IsStringLike(CSharpType type) =>
             type.IsFrameworkType
                 ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
+                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtendable;
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
@@ -217,6 +219,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static Type? ToFrameworkType(Schema schema, RecordOfStringAndAny? extensions) => schema.Type switch
         {
+            AllSchemaTypes.Integer => typeof(int),
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
             AllSchemaTypes.Char => typeof(char),
@@ -245,6 +248,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.Object => typeof(object),
             XMsFormat.IPAddress => typeof(IPAddress),
             XMsFormat.ContentType => typeof(ContentType),
+            XMsFormat.RequestMethod => typeof(RequestMethod),
             _ => null
         };
 

@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultAccessibility => "public";
 
         private ConstructorSignature? _subClientInternalConstructor;
+        private TypeFactory _typeFactory;
 
         public string Description { get; }
         public ConstructorSignature[] PrimaryConstructors { get; }
@@ -37,6 +38,7 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
+        public IReadOnlyList<LowLevelConvenienceMethod> ConvenienceMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
@@ -46,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, bool isCadlInput, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -54,6 +56,7 @@ namespace AutoRest.CSharp.Output.Models
             Description = description;
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
+            _typeFactory = typeFactory;
 
             ClientOptions = clientOptions;
 
@@ -68,6 +71,10 @@ namespace AutoRest.CSharp.Output.Models
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
+
+            ConvenienceMethods = isCadlInput
+                ? ClientMethods.Select(clientMethod => BuildConvenienceMethod(clientMethod, builder)).ToList()
+                : Array.Empty<LowLevelConvenienceMethod>();
 
             RequestMethods = clientMethods.Select(m => m.RequestMethod)
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
@@ -134,6 +141,76 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private LowLevelConvenienceMethod BuildConvenienceMethod(in LowLevelClientMethod clientMethod, RestClientBuilder builder)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            MethodSignature protocolSignature = clientMethod.Signature;
+            InputOperation operation = clientMethod.RequestMethod.Operation;
+            Parameter? bodyParameter = null;
+            foreach (var parameter in protocolSignature.Parameters)
+            {
+                if (parameter == KnownParameters.RequestContent || parameter == KnownParameters.RequestContentNullable)
+                {
+                    bodyParameter = GetBodyParameter(operation, DefaultNamespace);
+                    parameters.Add(bodyParameter!);
+                }
+                else if (parameter == KnownParameters.RequestContext)
+                {
+                    parameters.Add(KnownParameters.CancellationTokenParameter);
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            CSharpType? responseType = GetResponseType(operation, DefaultNamespace);
+            CSharpType? returnType = responseType == null ? typeof(Azure.Response) : new CSharpType(typeof(Azure.Response<>), responseType!);
+
+            bool isAmbiguous = !protocolSignature.Parameters.Contains(KnownParameters.RequestContent) &&
+                !protocolSignature.Parameters.Contains(KnownParameters.RequestContentNullable);
+            string name = isAmbiguous
+                ? protocolSignature.Name.IsLastWordSingular()
+                    ? $"{protocolSignature.Name}Value"
+                    : $"{protocolSignature.Name.LastWordToSingular()}Values"
+                : protocolSignature.Name;
+
+            MethodSignature convenienceSignature = protocolSignature with { Name = name, ReturnType = returnType, Parameters = parameters };
+
+            Diagnostic? diagnostic = convenienceSignature.Name != protocolSignature.Name ? new Diagnostic($"{Declaration.Name}.{convenienceSignature.Name}") : null;
+            return new LowLevelConvenienceMethod(clientMethod, convenienceSignature, responseType, bodyParameter, diagnostic);
+        }
+
+        private Parameter? GetBodyParameter(InputOperation operation, string defaultNamespace)
+        {
+            var requestParameters = operation.Parameters
+                .Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
+
+            var bodyParameters = requestParameters.Where(parameter => parameter.Location == RequestLocation.Body);
+            var requiredParameter = bodyParameters.Where(parameter => parameter.IsRequired).FirstOrDefault();
+
+            var bodyParameter = requiredParameter ?? bodyParameters.FirstOrDefault();
+            if (bodyParameter == null)
+            {
+                return null;
+            }
+
+            var bodyParameterType = bodyParameter.Type is InputModelType
+                ? new CSharpType(new ModelTypeProvider((bodyParameter.Type as InputModelType)!, _typeFactory, defaultNamespace, null))
+                : _typeFactory.CreateType(bodyParameter.Type);
+            return Parameter.FromRequestParameter(bodyParameter, bodyParameterType, _typeFactory);
+        }
+
+        private CSharpType? GetResponseType(InputOperation operation, string defaultNamespace)
+        {
+            var bodyType = operation.Responses.FirstOrDefault()?.BodyType;
+            if (bodyType != null && bodyType is InputModelType)
+            {
+                return new CSharpType(new ModelTypeProvider((bodyType as InputModelType)!, _typeFactory, defaultNamespace, null));
+            }
+
+            return null;
+        }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {

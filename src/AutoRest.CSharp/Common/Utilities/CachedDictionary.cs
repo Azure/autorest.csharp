@@ -27,14 +27,7 @@ namespace AutoRest.CSharp.Utilities
 
         public bool IsPopulated => _values != null;
 
-        private Dictionary<K, V> EnsureValues()
-        {
-            if (_values == null)
-            {
-                _values = _populateProc();
-            }
-            return _values!;
-        }
+        private Dictionary<K, V> EnsureValues() => _values ??= _populateProc();
 
         public int Count => EnsureValues().Count;
         public bool IsReadOnly => true;

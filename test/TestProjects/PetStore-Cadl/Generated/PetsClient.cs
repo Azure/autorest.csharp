@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -13,11 +14,10 @@ using Azure.Core.Pipeline;
 
 namespace CadlPetStore
 {
-    /// <summary> The Pets service client. </summary>
+    /// <summary> Manage your pets. </summary>
     public partial class PetsClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -32,40 +32,80 @@ namespace CadlPetStore
         }
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PetsClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new PetstoreClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public PetsClient(string apiVersion) : this(apiVersion, new PetsClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PetsClient(Uri endpoint, string apiVersion, PetstoreClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public PetsClient(string apiVersion, PetsClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-            options ??= new PetstoreClientOptions();
+            options ??= new PetsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// <summary> delete. </summary>
         /// <param name="petId"> The id of pet. </param>
+=======
+        /// <summary> Delete a pet. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> DeleteValueAsync(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.DeleteValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await DeleteAsync(petId, context).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a pet. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response DeleteValue(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.DeleteValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = Delete(petId, context);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a pet. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call DeleteAsync with required parameters.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient("<apiVersion>");
         /// 
         /// Response response = await client.DeleteAsync(1234);
         /// Console.WriteLine(response.Status);
@@ -88,16 +128,20 @@ namespace CadlPetStore
             }
         }
 
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// <summary> delete. </summary>
         /// <param name="petId"> The id of pet. </param>
+=======
+        /// <summary> Delete a pet. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call Delete with required parameters.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient("<apiVersion>");
         /// 
         /// Response response = client.Delete(1234);
         /// Console.WriteLine(response.Status);
@@ -121,22 +165,87 @@ namespace CadlPetStore
         }
 
         /// <summary> Returns a pet. Supports eTags. </summary>
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// <param name="petId"> The id of pet. </param>
+=======
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Pet>> ReadValueAsync(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.ReadValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await ReadAsync(petId, context).ConfigureAwait(false);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Pet> ReadValue(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.ReadValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = Read(petId, context);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call ReadAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient("<apiVersion>");
         /// 
         /// Response response = await client.ReadAsync(1234);
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
+=======
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
@@ -154,22 +263,47 @@ namespace CadlPetStore
         }
 
         /// <summary> Returns a pet. Supports eTags. </summary>
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// <param name="petId"> The id of pet. </param>
+=======
+        /// <param name="petId"> The Int32 to use. </param>
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call Read with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient("<apiVersion>");
         /// 
         /// Response response = client.Read(1234);
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
+=======
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         public virtual Response Read(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Read");
@@ -186,28 +320,90 @@ namespace CadlPetStore
             }
         }
 
+        /// <param name="pet"> The Pet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        public virtual async Task<Response<Pet>> CreateAsync(Pet pet, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(pet, nameof(pet));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await CreateAsync(pet.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
+        }
+
+        /// <param name="pet"> The Pet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        public virtual Response<Pet> Create(Pet pet, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(pet, nameof(pet));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Create(pet.ToRequestContent(), context);
+            return Response.FromValue(Pet.FromResponse(response), response);
+        }
+
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call CreateAsync and parse the result.
+        /// This sample shows how to call CreateAsync with required request content and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient("<apiVersion>");
         /// 
-        /// Response response = await client.CreateAsync();
+        /// var data = new {};
+        /// 
+        /// Response response = await client.CreateAsync(RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
         public virtual async Task<Response> CreateAsync(RequestContext context = null)
+=======
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(context);
+                using HttpMessage message = CreateCreateRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -217,28 +413,67 @@ namespace CadlPetStore
             }
         }
 
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
-        /// This sample shows how to call Create and parse the result.
+        /// This sample shows how to call Create with required request content and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient("<apiVersion>");
         /// 
-        /// Response response = client.Create();
+        /// var data = new {};
         /// 
+<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/Generated/PetsClient.cs
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
         public virtual Response Create(RequestContext context = null)
+=======
+        /// Response response = client.Create(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Required.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response Create(RequestContent content, RequestContext context = null)
+>>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/CadlPetStore/Generated/PetsClient.cs
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = ClientDiagnostics.CreateScope("PetsClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(context);
+                using HttpMessage message = CreateCreateRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -255,8 +490,6 @@ namespace CadlPetStore
             message.BufferResponse = false;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
             uri.AppendQuery("apiVersion", _apiVersion, true);
@@ -271,8 +504,6 @@ namespace CadlPetStore
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
             uri.AppendQuery("apiVersion", _apiVersion, true);
@@ -280,19 +511,29 @@ namespace CadlPetStore
             return message;
         }
 
-        internal HttpMessage CreateCreateRequest(RequestContext context)
+        internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets", false);
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
+            request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (cancellationToken == CancellationToken.None)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

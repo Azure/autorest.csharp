@@ -8,26 +8,22 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization : PropertySerialization
     {
-        public JsonPropertySerialization(string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool isReadOnly, bool optionalViaNullability)
+        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool isReadOnly, bool optionalViaNullability)
             : base(propertyName, serializedName, propertyType, valueType, isRequired, isReadOnly)
         {
+            ParameterName = parameterName;
             OptionalViaNullability = optionalViaNullability;
-            ValueSerialization = valueSerialization;
-        }
-
-        public JsonPropertySerialization(string serializedName, bool isRequired, bool isReadOnly, ObjectTypeProperty property, JsonSerialization valueSerialization)
-            : base(property.Declaration.Name, serializedName, property.Declaration.Type, property.ValueType, isRequired, isReadOnly)
-        {
-            OptionalViaNullability = property.OptionalViaNullability;
             ValueSerialization = valueSerialization;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
             : base(serializedName, serializedName, typeof(object), null, false, false)
         {
+            ParameterName = string.Empty;
             PropertySerializations = propertySerializations;
         }
 
+        public string ParameterName { get;  }
         public bool OptionalViaNullability { get; }
         public JsonSerialization? ValueSerialization { get; }
         public JsonPropertySerialization[]? PropertySerializations { get; }

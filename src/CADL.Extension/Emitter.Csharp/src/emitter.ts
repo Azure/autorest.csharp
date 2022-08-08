@@ -8,6 +8,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ModelTypeProperty,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
@@ -20,14 +21,18 @@ import {
 } from "@cadl-lang/rest/http";
 import { CodeModel } from "./type/CodeModel";
 import { InputClient } from "./type/InputClient";
-import { dump } from "js-yaml";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import { InputType } from "./type/InputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "./type/InputType.js";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
@@ -82,10 +87,6 @@ export async function $onEmit(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
-            const yamlOutPath = resolvePath(
-                options.outputFile?.replace(".json", `.yaml`)
-            );
-            await program.host.writeFile(yamlOutPath, dump(root));
         }
     }
 }
@@ -124,11 +125,12 @@ function createModel(program: Program): any {
     apiVersions.push(version);
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const modelMap = new Map<string, InputModelType>();
+    const enumMap = new Map<string, InputEnumType>();
     try {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
-
         //create endpoint parameter from servers
         let endPointParam = undefined;
         if (servers !== undefined) {
@@ -138,12 +140,15 @@ function createModel(program: Program): any {
                 endPointParam = calServers[0].parameters[0];
             }
         }
-
         const apiVersionParam: InputParameter = {
             Name: "apiVersion",
             NameInRequest: "apiVersion",
             Description: "",
-            Type: new InputType("string", InputTypeKind.String, false),
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
             Location: RequestLocation.Query,
             IsRequired: true,
             IsApiVersion: true,
@@ -160,10 +165,11 @@ function createModel(program: Program): any {
             let client = getClient(clients, groupName);
             if (!client) {
                 const container = operation.container;
-                const clientDes = getDoc(program, container);
+                const clientDesc = getDoc(program, container);
                 const clientSummary = getSummary(program, container);
                 client = {
                     Name: groupName,
+                    Description: clientDesc,
                     Operations: [],
                     Protocol: {}
                 } as InputClient;
@@ -173,7 +179,9 @@ function createModel(program: Program): any {
                 program,
                 operation,
                 endPointParam,
-                apiVersionParam
+                apiVersionParam,
+                modelMap,
+                enumMap
             );
             client.Operations.push(op);
         }
@@ -182,6 +190,8 @@ function createModel(program: Program): any {
             Name: namespace,
             Description: description,
             ApiVersions: apiVersions,
+            Enums: Array.from(enumMap.values()),
+            Models: Array.from(modelMap.values()),
             Clients: clients,
             Auth: {}
         } as CodeModel;
@@ -195,61 +205,13 @@ function createModel(program: Program): any {
     }
 }
 
-function loadOperationParameter(
-    program: Program,
-    parameter: HttpOperationParameter
-): InputParameter {
-    const { type: location, name, param } = parameter;
-    const cadlType = param.type;
-    const inputType: InputType = getInputType(program, cadlType);
-    const requestLocation = requestLocationMap[location];
-    const kind: InputOperationParameterKind =
-        InputOperationParameterKind.Method;
-    return {
-        Name: name,
-        NameInRequest: name,
-        Description: getDoc(program, param),
-        Type: inputType,
-        Location: requestLocation,
-        IsRequired: !param.optional,
-        IsApiVersion: false,
-        IsResourceParameter: false,
-        IsContentType: false,
-        IsEndpoint: false,
-        SkipUrlEncoding: true,
-        Explode: false,
-        Kind: kind
-    } as InputParameter;
-}
-
-function loadOperationResponse(
-    program: Program,
-    response: HttpOperationResponse
-): OperationResponse | undefined {
-    if (!response.statusCode || response.statusCode === "*") {
-        return undefined;
-    }
-    const status: number[] = [];
-    status.push(Number(response.statusCode));
-    const body = response.responses[0]?.body;
-    let type: InputType | undefined = undefined;
-    if (body?.type) {
-        const cadlType = body.type;
-        const inputType: InputType = getInputType(program, cadlType);
-        type = inputType;
-    }
-
-    return {
-        StatusCodes: status,
-        BodyType: type,
-        BodyMediaType: BodyMediaType.Json
-    } as OperationResponse;
-}
 function loadOperation(
     program: Program,
     operation: OperationDetails,
     endpoint: InputParameter | undefined = undefined,
-    apiVersion: InputParameter | undefined = undefined
+    apiVersion: InputParameter | undefined = undefined,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -263,17 +225,21 @@ function loadOperation(
     const externalDocs = getExternalDocs(program, op);
 
     const parameters: InputParameter[] = [];
-    if (endpoint !== undefined) parameters.push(endpoint);
-    if (apiVersion !== undefined) parameters.push(apiVersion);
-
+    if (endpoint) parameters.push(endpoint);
+    if (apiVersion) parameters.push(apiVersion);
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
+    }
+
+    const body = cadlParameters.body;
+    if (body) {
+        parameters.push(loadBodyParameter(program, body));
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
         const operationResponse = loadOperationResponse(program, res);
-        if (operationResponse !== undefined) {
+        if (operationResponse) {
             responses.push(operationResponse);
         }
     }
@@ -294,6 +260,99 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         BufferResponse: false
     } as InputOperation;
+
+    function loadOperationParameter(
+        program: Program,
+        parameter: HttpOperationParameter
+    ): InputParameter {
+        const { type: location, name, param } = parameter;
+        const cadlType = param.type;
+        const inputType: InputType = getInputType(
+            program,
+            cadlType,
+            models,
+            enums
+        );
+        const requestLocation = requestLocationMap[location];
+        const kind: InputOperationParameterKind =
+            InputOperationParameterKind.Method;
+        return {
+            Name: name,
+            NameInRequest: name,
+            Description: getDoc(program, param),
+            Type: inputType,
+            Location: requestLocation,
+            IsRequired: !param.optional,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsEndpoint: false,
+            SkipUrlEncoding: true,
+            Explode: false,
+            Kind: kind
+        } as InputParameter;
+    }
+
+    function loadBodyParameter(
+        program: Program,
+        body: ModelTypeProperty
+    ): InputParameter {
+        const { type, name, model: cadlType } = body;
+        //const cadlType = body.type;
+        const inputType: InputType = getInputType(program, type, models, enums);
+
+        //const requestLocation = requestLocationMap[location];
+        const requestLocation = RequestLocation.Body;
+        const kind: InputOperationParameterKind =
+            InputOperationParameterKind.Method;
+        return {
+            Name: name,
+            NameInRequest: name,
+            Description: getDoc(program, body),
+            Type: models.get(inputType.Name),
+            Location: requestLocation,
+            IsRequired: !body.optional,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsEndpoint: false,
+            SkipUrlEncoding: true,
+            Explode: false,
+            Kind: kind
+        } as InputParameter;
+    }
+
+    function loadOperationResponse(
+        program: Program,
+        response: HttpOperationResponse
+    ): OperationResponse | undefined {
+        if (!response.statusCode || response.statusCode === "*") {
+            return undefined;
+        }
+        const status: number[] = [];
+        status.push(Number(response.statusCode));
+        const body = response.responses[0]?.body;
+        let type: InputType | undefined = undefined;
+        if (body?.type) {
+            const cadlType = body.type;
+            const inputType: InputType = getInputType(
+                program,
+                cadlType,
+                models,
+                enums
+            );
+            if (!models.get(inputType.Name)) {
+                models.set(inputType.Name, inputType as InputModelType);
+            }
+            type = models.get(inputType.Name);
+        }
+
+        return {
+            StatusCodes: status,
+            BodyType: type,
+            BodyMediaType: BodyMediaType.Json
+        } as OperationResponse;
+    }
 }
 
 class ErrorTypeFoundError extends Error {

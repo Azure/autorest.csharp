@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include:
+    - feature/*
+  paths:
+    include:
+    - src/CADL.Extension/
+
+pr:
+  branches:
+    include:
+    - feature/*
+  paths:
+    include:
+    - src/CADL.Extension/
+
+stages:
+  - stage: 'Build_and_Test'
+    jobs:
+      - job: 'Build'
+      - job: 'Build'

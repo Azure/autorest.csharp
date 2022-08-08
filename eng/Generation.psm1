@@ -93,8 +93,8 @@ function Invoke-CadlSetup()
         npm install $package --save
     }
     npm install
-    git checkout .\package.json
-    git checkout .\package-lock.json
+    git checkout $repoRoot/package.json
+    git checkout $repoRoot/package-lock.json
     Pop-Location
 }
 function Get-AutoRestProject()

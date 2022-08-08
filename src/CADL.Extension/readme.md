@@ -88,7 +88,7 @@ cadl compile --output-path test\TestProjects\string-format test\TestProjects\str
 
 node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile main.cadl
 
-node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path samples\petStore\ samples\petStore\petstore.cadl --emit @azure-tools/cadl-csharp
+node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path samples\petStore\Generated samples\petStore\petstore.cadl --emit @azure-tools/cadl-csharp
 
 ### serialize
 
