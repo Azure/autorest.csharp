@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
@@ -29,8 +30,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Validate a vault name
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             await subscriptionResource.CheckNameAvailabilityVaultAsync(new VaultCheckNameAvailabilityContent("sample-vault"));
         }
 
@@ -39,8 +40,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List deleted managed HSMs in the specified subscription
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             await foreach (var _ in subscriptionResource.GetDeletedManagedHsmsAsync())
             {
             }
@@ -51,8 +52,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List deleted vaults in the specified subscription
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             await foreach (var _ in subscriptionResource.GetDeletedVaultsAsync())
             {
             }

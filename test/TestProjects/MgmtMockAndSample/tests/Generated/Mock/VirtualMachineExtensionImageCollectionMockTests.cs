@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
@@ -28,8 +29,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa");
             await collection.ExistsAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
         }
@@ -39,8 +40,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa");
             await collection.ExistsAsync("aa", "aaa");
         }
@@ -50,8 +51,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa");
             await collection.GetAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
         }
@@ -61,8 +62,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa");
             await collection.GetAsync("aa", "aaa");
         }
@@ -72,8 +73,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             await foreach (var _ in collection.GetAllAsync())
             {
@@ -85,8 +86,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaa", "aa");
             await foreach (var _ in collection.GetAllAsync())
             {
@@ -98,8 +99,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa");
             await foreach (var _ in collection.GetAllAsync("aaaaaaaaaaaaaaaaaa", filter: "aaaaaaaaaaaaaaaaaaaaaaaaa", top: 22, orderby: "a"))
             {
@@ -111,8 +112,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             await foreach (var _ in collection.GetAllAsync("aaaa"))
             {

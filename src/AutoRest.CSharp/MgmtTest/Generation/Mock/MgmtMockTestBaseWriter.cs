@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
         }
 
+        protected FormattableString GetArmClientExpression => $"GetArmClient()";
+
         public override void Write()
         {
             using (_writer.Namespace(This.Namespace))

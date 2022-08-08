@@ -31,9 +31,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Delete a managed HSM Pool
 
-            var managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await managedHsmResource.DeleteAsync(WaitUntil.Completed);
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            await managedHsm.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
@@ -41,9 +41,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Retrieve a managed HSM Pool
 
-            var managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await managedHsmResource.GetAsync();
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            await managedHsm.GetAsync();
         }
 
         [RecordedTest]
@@ -51,8 +51,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List managed HSM Pools in a subscription
 
-            var subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             await foreach (var _ in subscriptionResource.GetManagedHsmsAsync())
             {
             }
@@ -63,9 +63,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultListPrivateLinkResources
 
-            var managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await foreach (var _ in managedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            await foreach (var _ in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
             }
         }
@@ -75,9 +75,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Update an existing managed HSM Pool
 
-            var managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            await managedHsmResource.UpdateAsync(WaitUntil.Completed, new ManagedHsmData(new AzureLocation("placeholder"))
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            await managedHsm.UpdateAsync(WaitUntil.Completed, new ManagedHsmData(new AzureLocation("placeholder"))
             {
                 Tags =
 {

@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
+using AutoRest.CSharp.MgmtTest.Output.Sample;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,6 +34,18 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
         }
 
+        private IEnumerable<MgmtSampleProvider>? _samples;
+        public IEnumerable<MgmtSampleProvider> Samples => _samples ??= EnsureSamples();
+
+        private IEnumerable<MgmtSampleProvider> EnsureSamples()
+        {
+            foreach (var testCases in MockTestCases.Values)
+            {
+                foreach (var testCase in testCases)
+                    yield return new MgmtSampleProvider(testCase);
+            }
+        }
+
         private Dictionary<MgmtTypeProvider, List<MockTestCase>>? _mockTestCases;
         internal Dictionary<MgmtTypeProvider, List<MockTestCase>> MockTestCases => _mockTestCases ??= EnsureMockTestCases();
 
@@ -49,11 +62,8 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                     var providerAndOperations = FindCarriersFromOperationId(operationId);
                     foreach (var providerForExample in providerAndOperations)
                     {
-                        // if the provider is a resource, the owner is the resource (this includes the ResourceCollection). Otherwise, for instance the extensions, use the ClientOperation.Resource as its owner. Use provider as fallback
-                        // This controls which test class this test operation will go to
-                        var carrier = providerForExample.Carrier;
-                        var owner = carrier is Resource ? carrier : (providerForExample.Operation.Resource ?? carrier);
-                        result.AddInList(owner, new MockTestCase(operationId, providerForExample, example));
+                        var mockTestCase = new MockTestCase(operationId, providerForExample, example);
+                        result.AddInList(mockTestCase.Owner, mockTestCase);
                     }
                 }
             }

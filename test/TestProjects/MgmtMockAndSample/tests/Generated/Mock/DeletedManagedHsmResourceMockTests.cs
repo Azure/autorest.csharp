@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
@@ -29,9 +30,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Retrieve a deleted managed HSM
 
-            var deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
-            var deletedManagedHsmResource = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
-            await deletedManagedHsmResource.GetAsync();
+            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
+            await deletedManagedHsm.GetAsync();
         }
 
         [RecordedTest]
@@ -39,9 +40,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Purge a managed HSM Pool
 
-            var deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
-            var deletedManagedHsmResource = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
-            await deletedManagedHsmResource.PurgeDeletedAsync(WaitUntil.Completed);
+            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
+            await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }
 }

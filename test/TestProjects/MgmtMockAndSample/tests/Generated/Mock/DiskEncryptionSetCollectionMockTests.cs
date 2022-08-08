@@ -33,8 +33,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create a disk encryption set with key vault from a different subscription.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "myDiskEncryptionSet", new DiskEncryptionSetData()
             {
@@ -50,8 +50,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create a disk encryption set with key vault from a different tenant.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "myDiskEncryptionSet", new DiskEncryptionSetData()
             {
@@ -73,8 +73,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create a disk encryption set.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "myDiskEncryptionSet", new DiskEncryptionSetData()
             {
@@ -92,8 +92,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.ExistsAsync("myDiskEncryptionSet");
         }
@@ -103,8 +103,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get information about a disk encryption set.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.ExistsAsync("myDiskEncryptionSet");
         }
@@ -114,8 +114,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.GetAsync("myDiskEncryptionSet");
         }
@@ -125,8 +125,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get information about a disk encryption set.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await collection.GetAsync("myDiskEncryptionSet");
         }
@@ -136,8 +136,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List all disk encryption sets in a resource group.
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetDiskEncryptionSets();
             await foreach (var _ in collection.GetAllAsync())
             {

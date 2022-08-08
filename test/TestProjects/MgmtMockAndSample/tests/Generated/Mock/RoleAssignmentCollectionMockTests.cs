@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample.Models;
 
@@ -30,8 +31,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create role assignment
 
-            var resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "roleAssignmentName", new RoleAssignmentCreateOrUpdateContent()
             {
@@ -46,8 +47,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get role assignment by name
 
-            var resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await collection.ExistsAsync("roleAssignmentName");
         }
@@ -57,8 +58,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get role assignment by name
 
-            var resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await collection.GetAsync("roleAssignmentName");
         }
@@ -68,8 +69,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List role assignments for resource
 
-            var resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", "resourceType", "resourceName"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", "resourceType", "resourceName"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await foreach (var _ in collection.GetAllAsync())
             {
@@ -81,8 +82,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List role assignments for resource group
 
-            var resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", "00000000-0000-0000-0000-000000000000", "rgname"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", "00000000-0000-0000-0000-000000000000", "rgname"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await foreach (var _ in collection.GetAllAsync())
             {
@@ -94,8 +95,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List role assignments for subscription
 
-            var resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}", "00000000-0000-0000-0000-000000000000"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}", "00000000-0000-0000-0000-000000000000"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await foreach (var _ in collection.GetAllAsync())
             {
@@ -107,8 +108,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List role assignments for scope
 
-            var resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
-            var resource = GetArmClient().GetGenericResource(resourceId);
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
+            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await foreach (var _ in collection.GetAllAsync())
             {

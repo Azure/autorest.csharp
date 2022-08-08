@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
@@ -28,9 +29,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
 
-            var virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
-            var virtualMachineExtensionImageResource = GetArmClient().GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
-            await virtualMachineExtensionImageResource.GetAsync();
+            ResourceIdentifier virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
+            MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = GetArmClient().GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
+            await virtualMachineExtensionImage.GetAsync();
         }
 
         [RecordedTest]
@@ -38,9 +39,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
 
-            var virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa", "aa", "aaa");
-            var virtualMachineExtensionImageResource = GetArmClient().GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
-            await virtualMachineExtensionImageResource.GetAsync();
+            ResourceIdentifier virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa", "aa", "aaa");
+            MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = GetArmClient().GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
+            await virtualMachineExtensionImage.GetAsync();
         }
     }
 }

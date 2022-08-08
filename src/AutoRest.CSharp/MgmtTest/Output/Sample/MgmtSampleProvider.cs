@@ -11,14 +11,14 @@ namespace AutoRest.CSharp.MgmtTest.Output.Sample
 {
     internal class MgmtSampleProvider : MgmtTestProvider
     {
-        public MockTestCase DataProvider { get; }
+        public MockTestCase Sample { get; }
         public MgmtSampleProvider(MockTestCase testCase) : base()
         {
-            DataProvider = testCase;
+            Sample = testCase;
         }
 
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= $"SampleFor{DataProvider.Name.ToCleanName()}";
+        protected override string DefaultName => _defaultName ??= $"Sample_{Sample.Carrier.Type.Name}_{Sample.Name.ToCleanName()}";
 
         // a sample class does not need a description
         public override FormattableString Description => $"";

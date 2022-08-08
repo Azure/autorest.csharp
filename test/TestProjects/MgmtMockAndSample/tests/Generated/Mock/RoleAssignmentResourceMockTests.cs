@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
@@ -30,9 +31,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Delete role assignment by name
 
-            var roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
-            var roleAssignmentResource = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
-            await roleAssignmentResource.DeleteAsync(WaitUntil.Completed);
+            ResourceIdentifier roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
+            MgmtMockAndSample.RoleAssignmentResource roleAssignment = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
+            await roleAssignment.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
@@ -40,9 +41,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get role assignment by name
 
-            var roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
-            var roleAssignmentResource = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
-            await roleAssignmentResource.GetAsync();
+            ResourceIdentifier roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
+            MgmtMockAndSample.RoleAssignmentResource roleAssignment = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
+            await roleAssignment.GetAsync();
         }
 
         [RecordedTest]
@@ -50,9 +51,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create role assignment
 
-            var roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
-            var roleAssignmentResource = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
-            await roleAssignmentResource.UpdateAsync(WaitUntil.Completed, new RoleAssignmentCreateOrUpdateContent()
+            ResourceIdentifier roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
+            MgmtMockAndSample.RoleAssignmentResource roleAssignment = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
+            await roleAssignment.UpdateAsync(WaitUntil.Completed, new RoleAssignmentCreateOrUpdateContent()
             {
                 RoleDefinitionId = "/subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",

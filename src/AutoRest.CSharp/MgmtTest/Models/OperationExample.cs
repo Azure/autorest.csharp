@@ -19,6 +19,12 @@ namespace AutoRest.CSharp.MgmtTest.Models
         public string Name => _example.Name;
 
         public MgmtTypeProvider Carrier { get; }
+
+        /// <summary>
+        /// The Owner of this Operation means which test class this test operation will go into
+        /// if the provider is a resource, the owner is the resource (this includes the ResourceCollection). Otherwise, for instance the extensions, use the Operation.Resource as its owner. Use the Carrier as a fallback
+        /// </summary>
+        public MgmtTypeProvider Owner => Carrier is Resource ? Carrier : (Operation.Resource ?? Carrier);
         public MgmtClientOperation Operation { get; }
 
         private MgmtRestOperation? _restOperation;

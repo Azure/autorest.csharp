@@ -33,8 +33,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetManagedHsms();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "hsm1", new ManagedHsmData(new AzureLocation("westus"))
             {
@@ -96,8 +96,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
         {
             // Example: Retrieve a managed HSM Pool
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetManagedHsms();
             await collection.ExistsAsync("hsm1");
         }
@@ -107,8 +107,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
         {
             // Example: Retrieve a managed HSM Pool
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetManagedHsms();
             await collection.GetAsync("hsm1");
         }
@@ -118,8 +118,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
         {
             // Example: List managed HSM Pools in a resource group
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetManagedHsms();
             await foreach (var _ in collection.GetAllAsync())
             {

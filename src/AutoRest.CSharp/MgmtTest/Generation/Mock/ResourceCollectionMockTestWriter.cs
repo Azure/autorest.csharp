@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             var parent = testCase.Parent;
             Debug.Assert(parent is not null);
-            var parentVar = WriteGetResource(parent, testCase);
+            var parentVar = WriteGetResource(parent, testCase, GetArmClientExpression);
 
             // now we have the parent resource, get the collection from that resource
             // TODO -- we might should look this up inside the code project for correct method name

@@ -33,8 +33,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Create a new vault or update an existing vault
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
@@ -72,8 +72,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
         {
             // Example: Create or update a vault with network acls
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
@@ -102,8 +102,8 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
         {
             // Example: Retrieve a vault
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
             await collection.ExistsAsync("sample-vault");
         }
@@ -113,8 +113,8 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
         {
             // Example: Retrieve a vault
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
             await collection.GetAsync("sample-vault");
         }
@@ -124,8 +124,8 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
         {
             // Example: List vaults in the specified resource group
 
-            var resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group");
-            var resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
             await foreach (var _ in collection.GetAllAsync(top: 1))
             {

@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
@@ -30,9 +31,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultDeletePrivateEndpointConnection
 
-            var mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
-            var mgmtMockAndSamplePrivateEndpointConnectionResource = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
-            await mgmtMockAndSamplePrivateEndpointConnectionResource.DeleteAsync(WaitUntil.Completed);
+            ResourceIdentifier mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
+            await mgmtMockAndSamplePrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
@@ -40,9 +41,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultGetPrivateEndpointConnection
 
-            var mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
-            var mgmtMockAndSamplePrivateEndpointConnectionResource = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
-            await mgmtMockAndSamplePrivateEndpointConnectionResource.GetAsync();
+            ResourceIdentifier mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
+            await mgmtMockAndSamplePrivateEndpointConnection.GetAsync();
         }
 
         [RecordedTest]
@@ -50,9 +51,9 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultPutPrivateEndpointConnection
 
-            var mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
-            var mgmtMockAndSamplePrivateEndpointConnectionResource = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
-            await mgmtMockAndSamplePrivateEndpointConnectionResource.UpdateAsync(WaitUntil.Completed, new MgmtMockAndSamplePrivateEndpointConnectionData()
+            ResourceIdentifier mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
+            await mgmtMockAndSamplePrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
                 Etag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()

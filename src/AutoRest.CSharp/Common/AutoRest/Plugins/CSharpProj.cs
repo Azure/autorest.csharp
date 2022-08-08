@@ -107,7 +107,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include = ""NUnit"" Version = ""3.12.0"" />
+    <PackageReference Include=""NUnit"" Version=""3.12.0"" />
+    <PackageReference Include=""Azure.Identity"" Version=""1.6.0"" />
   </ItemGroup>
 
   <ItemGroup>
