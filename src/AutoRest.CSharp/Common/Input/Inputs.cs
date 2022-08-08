@@ -3,15 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using Azure.Core;
 
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputModelType> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
+    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputEnumType> Enums, IReadOnlyList<InputModelType> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
     {
-        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: new List<string>(), Models: new List<InputModelType>(), Clients: new List<InputClient>(), Auth: new InputAuth()) {}
+        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: new List<string>(), Enums: new List<InputEnumType>(), Models: new List<InputModelType>(), Clients: new List<InputClient>(), Auth: new InputAuth()) {}
     }
 
     internal record InputAuth();
@@ -128,6 +129,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Boolean { get; }            = new(InputTypeKind.Boolean);
         public static InputPrimitiveType Bytes { get; }              = new(InputTypeKind.Bytes);
         public static InputPrimitiveType BytesBase64Url { get; }     = new(InputTypeKind.BytesBase64Url);
+        public static InputPrimitiveType ContentType { get; }        = new(InputTypeKind.ContentType);
         public static InputPrimitiveType Date { get; }               = new(InputTypeKind.Date);
         public static InputPrimitiveType DateTime { get; }           = new(InputTypeKind.DateTime);
         public static InputPrimitiveType DateTimeISO8601 { get; }    = new(InputTypeKind.DateTimeISO8601);
@@ -143,6 +145,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
+        public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
         public static InputPrimitiveType ResourceType { get; }       = new(InputTypeKind.ResourceType);
         public static InputPrimitiveType Stream { get; }             = new(InputTypeKind.Stream);
@@ -180,7 +183,53 @@ namespace AutoRest.CSharp.Common.Input
         }
     }
 
-    internal record InputEnumType(string Name, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsNullable = false) : InputType(Name, IsNullable) { }
+    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtendable, bool IsNullable = false)
+        : InputType(Name, IsNullable)
+    {
+        public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
+
+        private class IgnoreNullabilityComparerImplementation : IEqualityComparer<InputEnumType>
+        {
+            public bool Equals(InputEnumType? x, InputEnumType? y)
+            {
+                if (x is null || y is null)
+                {
+                    return ReferenceEquals(x, y);
+                }
+
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+
+                return x.Name == y.Name
+                    && x.Namespace == y.Namespace
+                    && x.Accessibility == y.Accessibility
+                    && x.Description == y.Description
+                    && x.EnumValueType.Equals(y.EnumValueType)
+                    && x.AllowedValues.SequenceEqual(y.AllowedValues)
+                    && x.IsExtendable == y.IsExtendable;
+            }
+
+            public int GetHashCode(InputEnumType obj)
+            {
+
+                var hashCode = new HashCode();
+                hashCode.Add(obj.Name);
+                hashCode.Add(obj.Namespace);
+                hashCode.Add(obj.Accessibility);
+                hashCode.Add(obj.Description);
+                hashCode.Add(obj.EnumValueType);
+                hashCode.Add(obj.IsExtendable);
+                foreach (var item in obj.AllowedValues)
+                {
+                    hashCode.Add(item);
+                }
+
+                return hashCode.ToHashCode();
+            }
+        }
+    }
 
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
@@ -218,6 +267,7 @@ namespace AutoRest.CSharp.Common.Input
         Boolean,
         Bytes,
         BytesBase64Url,
+        ContentType,
         Date,
         DateTime,
         DateTimeISO8601,
@@ -233,6 +283,7 @@ namespace AutoRest.CSharp.Common.Input
         Int32,
         Int64,
         Object,
+        RequestMethod,
         ResourceIdentifier,
         ResourceType,
         Stream,

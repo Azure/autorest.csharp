@@ -17,9 +17,19 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
         public static ErrorInformation ErrorInformation(string code = null, string message = null)
         {
+            if (code == null)
+            {
+                throw new ArgumentNullException(nameof(code));
+            }
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             return new ErrorInformation(code, message);
         }
 
@@ -46,6 +56,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         /// <summary> Initializes a new instance of KeysResult. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clusters"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.KeysResult"/> instance for mocking. </returns>
         public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
         {
@@ -85,9 +96,15 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.FormFieldsReport"/> instance for mocking. </returns>
         public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = default)
         {
+            if (fieldName == null)
+            {
+                throw new ArgumentNullException(nameof(fieldName));
+            }
+
             return new FormFieldsReport(fieldName, accuracy);
         }
 

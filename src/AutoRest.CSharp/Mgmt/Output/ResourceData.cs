@@ -1,15 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -30,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.EscapeXmlDescription($"A class representing the {_clientPrefix} data model.") + BuilderHelpers.CreateExtraDescriptionWithDiscriminator(this);
+            return BuilderHelpers.EscapeXmlDescription($"A class representing the {_clientPrefix} data model.") + CreateExtraDescriptionWithDiscriminator();
         }
 
         private string _clientPrefix;

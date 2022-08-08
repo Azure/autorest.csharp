@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
-using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -49,14 +48,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool GetAllowSetting(Type sourceType)
         {
-            var attribute = sourceType.GetCustomAttributes(false).FirstOrDefault(a => a.GetType().Name.Equals(TypeReferenceTypeChooser.TypeReferenceTypeAttributeType));
+            var attribute = sourceType.GetCustomAttributes(false).FirstOrDefault(a => a.GetType().Name.Equals(ReferenceClassFinder.TypeReferenceTypeAttributeName));
             var allowExtraValue = attribute?.GetType().GetProperty("IgnoreExtraProperties", BindingFlags.Instance | BindingFlags.Public)?.GetValue(attribute);
             return allowExtraValue is null ? false : (bool)allowExtraValue;
         }
 
         private static void AddInternalIncludes(Type sourceType, List<PropertyInfo> parentProperties)
         {
-            var typeReferenceAttribute = sourceType.GetCustomAttributes(false).FirstOrDefault(a => a.GetType().Name.Equals(TypeReferenceTypeChooser.TypeReferenceTypeAttributeType));
+            var typeReferenceAttribute = sourceType.GetCustomAttributes(false).FirstOrDefault(a => a.GetType().Name.Equals(ReferenceClassFinder.TypeReferenceTypeAttributeName));
             if (typeReferenceAttribute is not null)
             {
                 var internalToInclude = typeReferenceAttribute.GetType().GetProperty("InternalPropertiesToInclude", BindingFlags.Instance | BindingFlags.Public)?.GetValue(typeReferenceAttribute);
@@ -176,7 +175,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return parentPropertyType.Equals(sourceType) &&
                 childPropertyType.Equals(targetType.Type) &&
-                sourceType.GetCustomAttributes(false).Any(a => a.GetType().Name.Equals(TypeReferenceTypeChooser.TypeReferenceTypeAttributeType));
+                sourceType.GetCustomAttributes(false).Any(a => a.GetType().Name.Equals(ReferenceClassFinder.TypeReferenceTypeAttributeName));
         }
 
         /// <summary>
@@ -269,7 +268,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var parentProperties = parentPropertyType.GetProperties().ToList();
             if (parentProperties.Count != childPropertyType.Values.Count)
-                return false;
+            {
+                // For ManagedServiceIdentityType, if the parent choice values is a superset of the child choice values, then we treat it as a match.
+                if (parentPropertyType != typeof(Azure.ResourceManager.Models.ManagedServiceIdentityType))
+                    return false;
+                else if (parentProperties.Count < childPropertyType.Values.Count)
+                    return false;
+            }
             Dictionary<string, PropertyInfo> parentDict = parentProperties.ToDictionary(p => p.Name, p => p);
             foreach (var enumValue in childPropertyType.Values)
             {

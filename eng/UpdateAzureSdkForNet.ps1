@@ -14,3 +14,5 @@ $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
     Set-Content $PackagesProps -NoNewline
 
 dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
+
+dotnet msbuild /restore /t:GenerateTests "$SdkRepoRoot\eng\service.proj"

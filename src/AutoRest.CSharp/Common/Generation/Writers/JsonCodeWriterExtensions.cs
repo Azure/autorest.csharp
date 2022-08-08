@@ -7,9 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -18,17 +16,39 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
+using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions
     {
-        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
+        public static void ToSerializeCall(this CodeWriter writer, JsonObjectSerialization serialization)
         {
-            writerName ??= w => w.AppendRaw("writer");
+            FormattableString writerName = $"writer";
+
+            writer.Line($"{writerName}.WriteStartObject();");
+
+            writer.ToSerializeCall(writerName, serialization.Properties);
+
+            if (serialization.AdditionalProperties?.ValueSerialization != null)
+            {
+                var itemVariable = new CodeWriterDeclaration("item");
+
+                using (writer.Scope($"foreach (var {itemVariable:D} in {serialization.AdditionalProperties.PropertyName})"))
+                {
+                    writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
+                    writer.ToSerializeCall(serialization.AdditionalProperties.ValueSerialization, $"{itemVariable:I}.Value", writerName);
+                }
+            }
+
+            writer.Line($"{writerName}.WriteEndObject();");
+        }
+
+        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, FormattableString name, FormattableString? writerName = null)
+        {
+            writerName ??= $"writer";
 
             switch (serialization)
             {
@@ -36,11 +56,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{writerName}.WriteStartArray();");
                     var collectionItemVariable = new CodeWriterDeclaration("item");
 
-                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name})"))
+                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name:I})"))
                     {
                         writer.ToSerializeCall(
                             array.ValueSerialization,
-                            w => w.Append(collectionItemVariable),
+                            $"{collectionItemVariable:I}",
                             writerName);
                     }
 
@@ -51,84 +71,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{writerName}.WriteStartObject();");
                     var dictionaryItemVariable = new CodeWriterDeclaration("item");
 
-                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {name})"))
+                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {name:I})"))
                     {
-                        writer.Line($"{writerName}.WritePropertyName({dictionaryItemVariable}.Key);");
+                        writer.Line($"{writerName}.WritePropertyName({dictionaryItemVariable:I}.Key);");
                         writer.ToSerializeCall(
                             dictionary.ValueSerialization,
-                            w => w.Append($"{dictionaryItemVariable}.Value"),
+                            $"{dictionaryItemVariable:I}.Value",
                             writerName);
-                    }
-
-                    writer.Line($"{writerName}.WriteEndObject();");
-                    return;
-
-                case JsonObjectSerialization obj:
-                    writer.Line($"{writerName}.WriteStartObject();");
-
-                    foreach (JsonPropertySerialization property in obj.Properties)
-                    {
-                        if (property.IsReadOnly)
-                        {
-                            continue;
-                        }
-
-                        var objectProperty = property.Property;
-                        if (objectProperty == null)
-                        {
-                            // Flattened property
-                            writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
-                            writer.ToSerializeCall(property.ValueSerialization, w => { });
-                            continue;
-                        }
-
-                        using (writer.WriteDefinedCheck(objectProperty))
-                        {
-                            var ifScope = writer.WritePropertyNullCheckIf(objectProperty);
-                            using (ifScope)
-                            {
-                                var propertyType = objectProperty.Declaration.Type;
-                                var declarationName = objectProperty.Declaration.Name;
-
-                                writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
-                                CodeWriterDelegate valueCallback;
-
-                                if (objectProperty.OptionalViaNullability)
-                                {
-                                    valueCallback = w => w.Append($"{declarationName}").AppendNullableValue(propertyType);
-                                }
-                                else
-                                {
-                                    valueCallback = w => w.Append($"{declarationName}");
-                                }
-
-                                writer.ToSerializeCall(
-                                    property.ValueSerialization,
-                                    valueCallback
-                                    );
-                            }
-                            if (ifScope != null)
-                            {
-                                using (writer.Scope($"else"))
-                                {
-                                    writer.Line($"{writerName}.WriteNull({property.Name:L});");
-                                }
-                            }
-                        }
-                    }
-
-                    if (obj.AdditionalProperties != null)
-                    {
-                        var itemVariable = new CodeWriterDeclaration("item");
-
-                        using (writer.Scope($"foreach (var {itemVariable:D} in {obj.AdditionalProperties.Property.Declaration.Name})"))
-                        {
-                            writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
-                            writer.ToSerializeCall(
-                                obj.AdditionalProperties.ValueSerialization,
-                                w => w.Append($"{itemVariable}.Value"),
-                                writerName);
-                        }
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -142,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (frameworkType == typeof(JsonElement))
                         {
-                            writer.Line($"{name}.WriteTo({writerName});");
+                            writer.Line($"{name:I}.WriteTo({writerName});");
                             return;
                         }
 
@@ -172,6 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                                  frameworkType == typeof(Azure.Core.ResourceType) ||
+                                 frameworkType == typeof(Azure.Core.RequestMethod) ||
                                  frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
@@ -203,25 +153,25 @@ namespace AutoRest.CSharp.Generation.Writers
                             frameworkType == typeof(Azure.Core.ContentType) ||
                             frameworkType == typeof(IPAddress))
                         {
-                            writer.Line($"WriteStringValue({name}.ToString());");
+                            writer.Line($"WriteStringValue({name:I}.ToString());");
                             return;
                         }
                         else if (frameworkType == typeof(Uri))
                         {
-                            writer.Line($"WriteStringValue({name}.{nameof(Uri.AbsoluteUri)});");
+                            writer.Line($"WriteStringValue({name:I}.{nameof(Uri.AbsoluteUri)});");
                             return;
                         }
                         else if (frameworkType == typeof(BinaryData))
                         {
                             writer.Line($"#if NET6_0_OR_GREATER");
-                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name});");
+                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
                             writer.Line($"#else");
-                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name}.ToString()).RootElement);");
+                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
                             writer.Line($"#endif");
                             return;
                         }
 
-                        writer.Append($"({name}")
+                        writer.Append($"({name:I}")
                             .AppendNullableValue(valueSerialization.Type);
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
@@ -247,17 +197,17 @@ namespace AutoRest.CSharp.Generation.Writers
                                         writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                                         optionalSerializeOptions = ", serializeOptions";
                                     }
-                                    writer.Append($"JsonSerializer.Serialize(writer, {name}{optionalSerializeOptions});");
+                                    writer.Append($"JsonSerializer.Serialize(writer, {name:I}{optionalSerializeOptions});");
                                 }
                                 else
                                 {
-                                    writer.Line($"{writerName}.WriteObjectValue({name});");
+                                    writer.Line($"{writerName}.WriteObjectValue({name:I});");
                                 }
                                 return;
                             }
 
                         case EnumType clientEnum:
-                            writer.Append($"{writerName}.WriteStringValue({name}")
+                            writer.Append($"{writerName}.WriteStringValue({name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
                                 .Line($");");
@@ -271,177 +221,159 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void DeserializeIntoVariableMayBeObject(this CodeWriter writer,
-            JsonSerialization serialization,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback,
-            CodeWriterDelegate element,
-            Dictionary<ObjectTypeProperty, ObjectPropertyVariable>? propertyVariables = null)
+        private static void ToSerializeCall(this CodeWriter writer, FormattableString writerName, IEnumerable<JsonPropertySerialization> propertySerializations)
         {
-            if (serialization is JsonObjectSerialization obj)
+            foreach (JsonPropertySerialization property in propertySerializations)
             {
-                var itemVariable = new CodeWriterDeclaration("property");
-
-                if (propertyVariables == null)
+                if (property.IsReadOnly)
                 {
-                    // this is the first level of object hierarchy
-                    // collect all properties and initialize the dictionary
-                    propertyVariables = new Dictionary<ObjectTypeProperty, ObjectPropertyVariable>();
-
-                    CollectProperties(propertyVariables, obj);
-
-                    foreach (var variable in propertyVariables)
-                    {
-                        writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = default;");
-                    }
+                    continue;
                 }
 
-                var dictionaryVariable = new CodeWriterDeclaration("additionalPropertiesDictionary");
-
-                var objAdditionalProperties = obj.AdditionalProperties;
-                if (objAdditionalProperties != null)
+                if (property.ValueSerialization == null)
                 {
-                    writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
+                    // Flattened property
+                    writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L});");
+                    writer.Line($"{writerName}.WriteStartObject();");
+                    writer.ToSerializeCall(writerName, property.PropertySerializations!);
+                    writer.Line($"{writerName}.WriteEndObject();");
+                    continue;
                 }
 
-                using (writer.Scope($"foreach (var {itemVariable:D} in {element}.EnumerateObject())"))
+                using (writer.WriteDefinedCheck(property))
                 {
-                    foreach (JsonPropertySerialization property in obj.Properties)
+                    var ifScope = writer.WritePropertyNullCheckIf(property);
+                    using (ifScope)
                     {
-                        writer.Append($"if({itemVariable}.NameEquals({property.Name:L}))");
-                        using (writer.Scope())
+                        var propertyType = property.PropertyType;
+                        var declarationName = property.PropertyName;
+
+                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L});");
+
+                        if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
-                            if (property.ValueSerialization.IsNullable)
-                            {
-                                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                                {
-                                    writer.Line($"{propertyVariables[property.Property!].Declaration} = null;");
-                                    writer.Append($"continue;");
-                                }
-                            }
-                            else if (!property.IsRequired &&
-                                     property.Property?.ValueType.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
-                                     property.Property?.ValueType.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
-                            {
-                                if (Configuration.AzureArm && property.Property?.ValueType.Equals(typeof(Uri)) == true)
-                                {
-                                    using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                                    {
-                                        writer.Line($"{propertyVariables[property.Property!].Declaration} = null;");
-                                        writer.Append($"continue;");
-                                    }
-                                }
-                                else
-                                {
-                                    using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                                    {
-                                        writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
-                                        writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
-                                        writer.Append($"continue;");
-                                    }
-                                }
-                            }
-
-                            if (property.Property != null)
-                            {
-                                // Reading a property value
-                                writer.DeserializeIntoVariable(
-                                    property.ValueSerialization,
-                                    (w, v) => w.Line($"{propertyVariables[property.Property].Declaration} = {v};"),
-                                    w => w.Append($"{itemVariable}.Value"));
-                            }
-                            else
-                            {
-                                // Reading a nested object
-                                writer.DeserializeIntoVariableMayBeObject(
-                                    property.ValueSerialization,
-                                    (w, v) => { },
-                                    w => w.Append($"{itemVariable}.Value"),
-                                    propertyVariables);
-                            }
-
-                            writer.Line($"continue;");
+                            writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
+                        }
+                        else
+                        {
+                            writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}");
                         }
                     }
 
-                    if (objAdditionalProperties != null)
+                    if (ifScope != null)
                     {
-                        writer.DeserializeValue(
-                            objAdditionalProperties.ValueSerialization,
-                            w => w.Append($"{itemVariable}.Value"),
-                            (w, v) => w.Line($"{dictionaryVariable}.Add({itemVariable}.Name, {v});"));
+                        using (writer.Scope($"else"))
+                        {
+                            writer.Line($"{writerName}.WriteNull({property.SerializedName:L});");
+                        }
                     }
                 }
-
-                if (objAdditionalProperties != null)
-                {
-                    writer.Line($"{propertyVariables[objAdditionalProperties.Property].Declaration} = {dictionaryVariable};");
-                }
-
-                if (obj.Type != null)
-                {
-                    var objectType = (ObjectType)obj.Type.Implementation;
-
-                    var initializers = new List<PropertyInitializer>();
-                    foreach (var variable in propertyVariables)
-                    {
-                        initializers.Add(new PropertyInitializer(variable.Key, w => ConvertOptional(w, variable.Key, variable.Value)));
-                    }
-
-                    writer.WriteInitialization(valueCallback, objectType, objectType.SerializationConstructor, initializers);
-                }
-            }
-            else
-            {
-                writer.DeserializeIntoVariableWithNullHandling(serialization, valueCallback, element);
             }
         }
 
-        private static void ConvertOptional(CodeWriter writer, ObjectTypeProperty target, ObjectPropertyVariable variable)
+        private static void DeserializeIntoObjectProperties(this CodeWriter writer, IEnumerable<JsonPropertySerialization> propertySerializations, FormattableString itemVariable, Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables)
         {
-            var targetType = target.Declaration.Type;
+            foreach (JsonPropertySerialization property in propertySerializations)
+            {
+                writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}))");
+                using (writer.Scope())
+                {
+                    if (property.ValueType?.IsNullable == true)
+                    {
+                        using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                        {
+                            writer.Line($"{propertyVariables[property].Declaration} = null;");
+                            writer.Append($"continue;");
+                        }
+                    }
+                    else if (!property.IsRequired &&
+                             property.ValueType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
+                             property.ValueType?.Equals(typeof(string)) !=
+                             true) //https://github.com/Azure/autorest.csharp/issues/922
+                    {
+                        if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
+                        {
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            {
+                                writer.Line($"{propertyVariables[property].Declaration} = null;");
+                                writer.Append($"continue;");
+                            }
+                        }
+                        else
+                        {
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            {
+                                writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+                                writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
+                                writer.Append($"continue;");
+                            }
+                        }
+                    }
+
+                    if (property.ValueSerialization is not null)
+                    {
+                        // Reading a property value
+                        writer.DeserializeIntoVariable(property.ValueSerialization, v => writer.Line($"{propertyVariables[property].Declaration} = {v};"), $"{itemVariable}.Value");
+                    }
+                    else if (property.PropertySerializations is not null)
+                    {
+                        // Reading a nested object
+                        var nestedItemVariable = new CodeWriterDeclaration("property");
+                        using (writer.Scope($"foreach (var {nestedItemVariable:D} in {itemVariable:I}.Value.EnumerateObject())"))
+                        {
+                            writer.DeserializeIntoObjectProperties(property.PropertySerializations, $"{nestedItemVariable:I}", propertyVariables);
+                        }
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Either {nameof(JsonPropertySerialization.ValueSerialization)} must not be null or {nameof(JsonPropertySerialization.PropertySerializations)} must not be null.");
+                    }
+
+                    writer.Line($"continue;");
+                }
+            }
+        }
+
+        private static FormattableString GetOptionalFormattable(JsonPropertySerialization target, ObjectPropertyVariable variable)
+        {
+            var targetType = target.PropertyType;
             var sourceType = variable.Type;
             if (sourceType.IsFrameworkType && sourceType.FrameworkType == typeof(Optional<>))
             {
                 if (TypeFactory.IsList(targetType))
                 {
-                    writer.Append($"{typeof(Optional)}.ToList({variable.Declaration})");
-                    return;
+                    return $"{typeof(Optional)}.ToList({variable.Declaration})";
                 }
 
                 if (TypeFactory.IsDictionary(targetType))
                 {
-                    writer.Append($"{typeof(Optional)}.ToDictionary({variable.Declaration})");
-                    return;
+                    return $"{typeof(Optional)}.ToDictionary({variable.Declaration})";
                 }
 
                 if (targetType.IsValueType && targetType.IsNullable)
                 {
-                    writer.Append($"{typeof(Optional)}.ToNullable({variable.Declaration})");
-                    return;
+                    return $"{typeof(Optional)}.ToNullable({variable.Declaration})";
                 }
 
                 if (targetType.IsNullable)
                 {
-                    writer.Append($"{variable.Declaration}.Value");
-                    return;
+                    return $"{variable.Declaration}.Value";
                 }
             }
 
-            writer.Append(variable.Declaration);
+            return $"{variable.Declaration}";
         }
 
         /// Collects a list of properties being read from all level of object hierarchy
-        private static void CollectProperties(Dictionary<ObjectTypeProperty, ObjectPropertyVariable> propertyVariables, JsonObjectSerialization obj)
+        private static void CollectProperties(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
-            foreach (JsonPropertySerialization jsonProperty in obj.Properties)
+            foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
-                ObjectTypeProperty? objectProperty = jsonProperty.Property;
-
-                if (objectProperty != null)
+                if (jsonProperty.ValueType != null)
                 {
-                    var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.Name.ToVariableName());
+                    var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
 
-                    var type = objectProperty.ValueType;
+                    var type = jsonProperty.ValueType;
                     if (!jsonProperty.IsRequired)
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
@@ -449,42 +381,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         type = new CSharpType(typeof(Optional<>), type);
                     }
 
-                    propertyVariables.Add(objectProperty, new ObjectPropertyVariable(propertyDeclaration, type));
+                    propertyVariables.Add(jsonProperty, new ObjectPropertyVariable(propertyDeclaration, type));
                 }
-                else if (jsonProperty.ValueSerialization is JsonObjectSerialization objectSerialization)
+                else if (jsonProperty.PropertySerializations != null)
                 {
-                    CollectProperties(propertyVariables, objectSerialization);
+                    CollectProperties(propertyVariables, jsonProperty.PropertySerializations);
                 }
-            }
-
-            var additionalPropertiesProperty = obj.AdditionalProperties?.Property;
-            if (additionalPropertiesProperty != null)
-            {
-                var propertyDeclaration = new CodeWriterDeclaration(additionalPropertiesProperty.Declaration.Name.ToVariableName());
-                propertyVariables.Add(additionalPropertiesProperty, new ObjectPropertyVariable(propertyDeclaration, additionalPropertiesProperty.Declaration.Type));
             }
         }
 
-        private static void DeserializeIntoVariableWithNullHandling(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element)
-        {
-            if (serialization.IsNullable)
-            {
-                using (writer.Scope($"if ({element}.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                {
-                    valueCallback(writer, w => w.Append($"null"));
-                }
-                using (writer.Scope($"else"))
-                {
-                    writer.DeserializeIntoVariable(serialization, valueCallback, element);
-                }
-            }
-            else
-            {
-                writer.DeserializeIntoVariable(serialization, valueCallback, element);
-            }
-        }
-
-        private static void DeserializeIntoVariable(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element)
+        private static void DeserializeIntoVariable(this CodeWriter writer, JsonSerialization serialization, Action<FormattableString> valueCallback, FormattableString element)
         {
             switch (serialization)
             {
@@ -495,13 +401,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     var collectionItemVariable = new CodeWriterDeclaration("item");
                     using (writer.Scope($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())"))
                     {
-                        writer.DeserializeValue(
-                            array.ValueSerialization,
-                            w => w.Append($"{collectionItemVariable}"),
-                            (w, returnValue) => writer.Append($"{arrayVariable}.Add({returnValue});"));
+                        writer.DeserializeValue(array.ValueSerialization, $"{collectionItemVariable}", value => writer.Append($"{arrayVariable}.Add({value});"));
                     }
 
-                    valueCallback(writer, w => w.Append(arrayVariable));
+                    valueCallback($"{arrayVariable:I}");
                     return;
                 case JsonDictionarySerialization dictionary:
                     var dictionaryVariable = new CodeWriterDeclaration("dictionary");
@@ -510,146 +413,201 @@ namespace AutoRest.CSharp.Generation.Writers
                     var dictionaryItemVariable = new CodeWriterDeclaration("property");
                     using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {element}.EnumerateObject())"))
                     {
-                        writer.DeserializeValue(
-                            dictionary.ValueSerialization,
-                            w => w.Append($"{dictionaryItemVariable}.Value"),
-                            (w, returnValue) => writer.Append($"{dictionaryVariable}.Add({dictionaryItemVariable}.Name, {returnValue});"));
+                        writer.DeserializeValue(dictionary.ValueSerialization, $"{dictionaryItemVariable}.Value", value => writer.Append($"{dictionaryVariable}.Add({dictionaryItemVariable}.Name, {value});"));
                     }
 
-                    valueCallback(writer, w => w.Append(dictionaryVariable));
+                    valueCallback($"{dictionaryVariable:I}");
                     return;
                 case JsonValueSerialization valueSerialization:
                     if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                     {
                         writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                     }
-                    valueCallback(writer, w => w.DeserializeValue(valueSerialization, element));
+
+                    writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+                    valueCallback(GetDeserializeValueFormattable(valueSerialization, element));
                     return;
             }
         }
 
-        public static void DeserializeValue(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate value, Action<CodeWriter, CodeWriterDelegate> valueCallback)
+        public static void DeserializeValue(this CodeWriter writer, JsonSerialization serialization, FormattableString value, Action<FormattableString> valueCallback)
         {
-            writer.DeserializeIntoVariableMayBeObject(
-                serialization,
-                valueCallback,
-                value);
-        }
-
-        private static void DeserializeValue(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)
-        {
-            writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
-
-            if (serialization.Type.SerializeAs != null)
+            if (serialization.IsNullable)
             {
-                DeserializeFrameworkTypeValue(writer, element, serialization.Type.SerializeAs, serialization.Format, serialization.Type);
-            }
-            else if (serialization.Type.IsFrameworkType)
-            {
-                var frameworkType = serialization.Type.FrameworkType;
-                if (frameworkType == typeof(Nullable<>))
-                    frameworkType = serialization.Type.Arguments[0].FrameworkType;
-                DeserializeFrameworkTypeValue(writer, element, frameworkType, serialization.Format);
+                using (writer.Scope($"if ({value}.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                {
+                    valueCallback($"null");
+                }
+                using (writer.Scope($"else"))
+                {
+                    writer.DeserializeIntoVariable(serialization, valueCallback, value);
+                }
             }
             else
             {
-                writer.DeserializeImplementation(serialization.Type.Implementation, serialization, element);
+                writer.DeserializeIntoVariable(serialization, valueCallback, value);
             }
         }
 
-        private static void DeserializeFrameworkTypeValue(CodeWriter writer, CodeWriterDelegate element, Type frameworkType, SerializationFormat serializationFormat, CSharpType? serializeFromType = null)
+        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
+        {
+            // this is the first level of object hierarchy
+            // collect all properties and initialize the dictionary
+            var propertyVariables = new Dictionary<JsonPropertySerialization, ObjectPropertyVariable>();
+
+            CollectProperties(propertyVariables, serialization.Properties);
+
+            var additionalProperties = serialization.AdditionalProperties;
+            if (additionalProperties != null)
+            {
+                var propertyDeclaration = new CodeWriterDeclaration(additionalProperties.PropertyName.ToVariableName());
+                propertyVariables.Add(additionalProperties, new ObjectPropertyVariable(propertyDeclaration, additionalProperties.PropertyType));
+            }
+
+            foreach (var variable in propertyVariables)
+            {
+                writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = default;");
+            }
+
+            var dictionaryVariable = new CodeWriterDeclaration("additionalPropertiesDictionary");
+
+            var objAdditionalProperties = serialization.AdditionalProperties;
+            if (objAdditionalProperties != null)
+            {
+                writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
+            }
+
+            var itemVariable = new CodeWriterDeclaration("property");
+            using (writer.Scope($"foreach (var {itemVariable:D} in element.EnumerateObject())"))
+            {
+                writer.DeserializeIntoObjectProperties(serialization.Properties, $"{itemVariable:I}", propertyVariables);
+
+                if (objAdditionalProperties?.ValueSerialization != null)
+                {
+                    writer.DeserializeValue(objAdditionalProperties.ValueSerialization, $"{itemVariable}.Value", v => writer.Line($"{dictionaryVariable}.Add({itemVariable}.Name, {v});"));
+                }
+            }
+
+            if (objAdditionalProperties != null)
+            {
+                writer.Line($"{propertyVariables[objAdditionalProperties].Declaration} = {dictionaryVariable};");
+            }
+
+            var parameterValues = propertyVariables.ToDictionary(v => v.Key.ParameterName, v => GetOptionalFormattable(v.Key, v.Value));
+            var parameters = serialization.Constructor.Parameters
+                .Select(p => parameterValues[p.Name])
+                .ToArray();
+
+            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
+        }
+
+        private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)
+        {
+            if (serialization.Type.SerializeAs != null)
+            {
+                return $"({serialization.Type}){GetFrameworkTypeValueFormattable(element, serialization.Type.SerializeAs, serialization.Format)}";
+            }
+
+            if (serialization.Type.IsFrameworkType)
+            {
+                var frameworkType = serialization.Type.FrameworkType;
+                if (frameworkType == typeof(Nullable<>))
+                {
+                    frameworkType = serialization.Type.Arguments[0].FrameworkType;
+                }
+
+                return GetFrameworkTypeValueFormattable(element, frameworkType, serialization.Format);
+            }
+
+            return GetDeserializeImplementationFormattable(serialization.Type.Implementation, element, serialization.Options);
+        }
+
+        private static FormattableString GetFrameworkTypeValueFormattable(FormattableString element, Type frameworkType, SerializationFormat serializationFormat)
         {
             bool includeFormat = false;
 
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
-                frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
-                frameworkType == typeof(Azure.Core.ResourceType) ||
-                frameworkType == typeof(Azure.Core.ContentType) ||
-                frameworkType == typeof(Azure.Core.AzureLocation))
+                frameworkType == typeof(ResourceIdentifier) ||
+                frameworkType == typeof(ResourceType) ||
+                frameworkType == typeof(ContentType) ||
+                frameworkType == typeof(RequestMethod) ||
+                frameworkType == typeof(AzureLocation))
             {
-                writer.Append($"new {frameworkType}({element}.GetString())");
-                return;
-            }
-            else if (frameworkType == typeof(IPAddress))
-            {
-                writer.Append($"{frameworkType}.Parse({element}.GetString())");
-                return;
-            }
-            else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))
-            {
-                writer.Append($"JsonSerializer.Deserialize<{typeof(Azure.ResourceManager.Models.SystemData)}>({element}.ToString())");
-                return;
-            }
-            else if (frameworkType == typeof(BinaryData))
-            {
-                writer.Append($"{typeof(BinaryData)}.FromString({element}.GetRawText())");
-                return;
-            }
-            else
-            {
-                if (serializeFromType != null)
-                    writer.Append($"({serializeFromType})");
-                writer.Append($"{element}.");
+                return $"new {frameworkType}({element}.GetString())";
             }
 
+            if (frameworkType == typeof(IPAddress))
+            {
+                return $"{frameworkType}.Parse({element}.GetString())";
+            }
+
+            if (frameworkType == typeof(SystemData))
+            {
+                return $"JsonSerializer.Deserialize<{typeof(SystemData)}>({element}.ToString())";
+            }
+
+            if (frameworkType == typeof(BinaryData))
+            {
+                return $"{typeof(BinaryData)}.FromString({element}.GetRawText())";
+            }
+
+            var methodName = string.Empty;
             if (frameworkType == typeof(JsonElement))
-                writer.AppendRaw("Clone");
+                methodName = "Clone";
             if (frameworkType == typeof(object))
-                writer.AppendRaw("GetObject");
+                methodName = "GetObject";
             if (frameworkType == typeof(bool))
-                writer.AppendRaw("GetBoolean");
+                methodName = "GetBoolean";
             if (frameworkType == typeof(char))
-                writer.AppendRaw("GetChar");
+                methodName = "GetChar";
             if (frameworkType == typeof(short))
-                writer.AppendRaw("GetInt16");
+                methodName = "GetInt16";
             if (frameworkType == typeof(int))
-                writer.AppendRaw("GetInt32");
+                methodName = "GetInt32";
             if (frameworkType == typeof(long))
-                writer.AppendRaw("GetInt64");
+                methodName = "GetInt64";
             if (frameworkType == typeof(float))
-                writer.AppendRaw("GetSingle");
+                methodName = "GetSingle";
             if (frameworkType == typeof(double))
-                writer.AppendRaw("GetDouble");
+                methodName = "GetDouble";
             if (frameworkType == typeof(decimal))
-                writer.AppendRaw("GetDecimal");
+                methodName = "GetDecimal";
             if (frameworkType == typeof(string))
-                writer.AppendRaw("GetString");
+                methodName = "GetString";
             if (frameworkType == typeof(Guid))
-                writer.AppendRaw("GetGuid");
+                methodName = "GetGuid";
 
             if (frameworkType == typeof(byte[]))
             {
-                writer.AppendRaw("GetBytesFromBase64");
+                methodName = "GetBytesFromBase64";
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(DateTimeOffset))
             {
-                writer.AppendRaw("GetDateTimeOffset");
+                methodName = "GetDateTimeOffset";
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(DateTime))
             {
-                writer.AppendRaw("GetDateTime");
+                methodName = "GetDateTime";
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(TimeSpan))
             {
-                writer.AppendRaw("GetTimeSpan");
+                methodName = "GetTimeSpan";
                 includeFormat = true;
             }
 
-            writer.AppendRaw("(");
-
-            if (includeFormat && serializationFormat.ToFormatSpecifier() is string formatString)
+            if (includeFormat && serializationFormat.ToFormatSpecifier() is { } formatString)
             {
-                writer.Literal(formatString);
+                return $"{element}.{methodName}({formatString:L})";
             }
 
-            writer.AppendRaw(")");
+            return $"{element}.{methodName}()";
         }
 
         private static bool IsCustomJsonConverterAdded(SystemObjectType systemObjectType)
@@ -657,34 +615,28 @@ namespace AutoRest.CSharp.Generation.Writers
             return systemObjectType.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
         }
 
-        public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, JsonSerialization serialization, CodeWriterDelegate element)
+        public static FormattableString GetDeserializeImplementationFormattable(TypeProvider implementation, FormattableString element, JsonSerializationOptions options)
         {
             switch (implementation)
             {
+                case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType):
+                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
+                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})";
+
+                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
+                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())";
+
                 case ObjectType objectType:
-                    {
-                        var systemObjectType = objectType as SystemObjectType;
-                        if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
-                        {
-                            var optionalSerializeOptions = (serialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3) ? ", serializeOptions" : string.Empty;
-                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})");
-                        }
-                        else if (objectType is MgmtObjectType mgmtObjectType && TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema))
-                        {
-                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())");
-                        }
-                        else
-                        {
-                            writer.Append($"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})");
-                        }
-                        break;
-                    }
+                    return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
 
                 case EnumType clientEnum:
-                    writer.AppendEnumFromString(
-                        clientEnum,
-                        w => DeserializeFrameworkTypeValue(w, element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default));
-                    break;
+                    var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
+                    return clientEnum.IsExtendable
+                        ? $"new {clientEnum.Type}({value})"
+                        : (FormattableString) $"{value}.To{clientEnum.Type:D}()";
+
+                default:
+                    throw new NotSupportedException();
             }
         }
 
@@ -702,18 +654,17 @@ namespace AutoRest.CSharp.Generation.Writers
             _ => null
         };
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, JsonSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> callback, string response, bool isBinaryData)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, JsonSerialization serialization, bool async, Action<FormattableString> callback, string response, bool isBinaryData)
         {
             if (isBinaryData)
             {
                 if (async)
                 {
-                    callback(writer, w => w.Append($"await {typeof(BinaryData)}.FromStreamAsync({response}.ContentStream).ConfigureAwait(false)"));
+                    callback($"await {typeof(BinaryData)}.FromStreamAsync({response}.ContentStream).ConfigureAwait(false)");
                 }
                 else
                 {
-                    callback(writer, w => w.Append($"{typeof(BinaryData)}.FromStream({response}.ContentStream)"));
+                    callback($"{typeof(BinaryData)}.FromStream({response}.ContentStream)");
                 }
             }
             else
@@ -729,11 +680,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
                 }
 
-                writer.DeserializeValue(
-                    serialization,
-                    w => w.Append($"{documentVariable}.RootElement"),
-                    callback
-                );
+                writer.DeserializeValue(serialization, $"{documentVariable}.RootElement", callback);
             }
         }
 

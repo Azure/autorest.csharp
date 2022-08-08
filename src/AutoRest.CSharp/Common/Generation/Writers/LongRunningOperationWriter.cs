@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.WriteDeserializationForMethods(
                                 operation.ResultSerialization,
                                 async: true,
-                                (w, v) => w.Line($"nextPageResult = {v};"),
+                                v => writer.Line($"nextPageResult = {v};"),
                                 responseVariable,
                                 pagingResponse.ResponseType);
 

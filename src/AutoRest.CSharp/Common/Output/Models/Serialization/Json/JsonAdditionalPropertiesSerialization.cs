@@ -3,19 +3,17 @@
 
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal class JsonAdditionalPropertiesSerialization
+    internal class JsonAdditionalPropertiesSerialization : JsonPropertySerialization
     {
-        public ObjectTypeProperty Property { get; }
-        public JsonSerialization ValueSerialization { get; }
         public CSharpType Type { get; }
 
         public JsonAdditionalPropertiesSerialization(ObjectTypeProperty property, JsonSerialization valueSerialization, CSharpType type)
+            : base(property.Declaration.Name.ToVariableName(), property.Declaration.Name, property.Declaration.Name, property.Declaration.Type, property.ValueType, valueSerialization, true, property.IsReadOnly, property.OptionalViaNullability)
         {
-            Property = property;
-            ValueSerialization = valueSerialization;
             Type = type;
         }
     }

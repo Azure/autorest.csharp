@@ -2,24 +2,88 @@
   "Name": "demo.helloworld",
   "Description": "",
   "ApiVersions": ["0.1.0"],
+  "Enums": [
+    {
+      "$id": "4",
+      "Name": "SimpleEnum",
+      "Description": "Simple enum",
+      "EnumValueType": "string",
+      "AllowedValues": [
+        { "Name": "One", "Value": "1" },
+        { "Name": "Two", "Value": "2" },
+        { "Name": "Four", "Value": "4" }
+      ],
+      "IsExtendable": false
+    },
+    {
+      "$id": "5",
+      "Name": "ExtensibleEnum",
+      "Description": "Extensible enum",
+      "EnumValueType": "string",
+      "AllowedValues": [
+        { "Name": "One", "Value": "1" },
+        { "Name": "Two", "Value": "2" },
+        { "Name": "Four", "Value": "4" }
+      ],
+      "IsExtendable": true
+    }
+  ],
   "Models": [
     {
       "$id": "1",
-      "Name": "InputModel",
+      "Name": "RoundTripModel",
+      "ObjectToSkip": {"a": "b", "c": "d"},
+      "ArrayToSkip": ["a", {"b": "c"}, "d"],
       "Properties": [
         {
           "Name": "requiredString",
-          "Description": "Required string property",
+          "Description": "Required string, illustrating a reference type property.",
           "Type": "String",
           "IsRequired": true,
-          "IsReadOnly": true
+          "IsReadOnly": false
         },
         {
           "Name": "requiredInt",
-          "Description": "Required int property",
+          "Description": "Required int, illustrating a value type property.",
           "Type": "Int32",
           "IsRequired": true,
-          "IsReadOnly": true
+          "IsReadOnly": false
+        },
+        {
+          "Name": "requiredCollection",
+          "Description": "Required collection of enums",
+          "Type": { "Name": "CollectionType", "ElementType": {"$ref": "4" }},
+          "IsRequired": true,
+          "IsReadOnly": false
+        },
+        {
+          "Name": "requiredDictionary",
+          "Description": "Required dictionary of enums",
+          "Type": { "Name": "DictionaryType", "KeyType": "string", "ValueType": {"$ref": "5" }},
+          "IsRequired": true,
+          "IsReadOnly": false
+        }
+      ]
+    },
+    {
+      "$id": "7",
+      "Name": "Thing",
+      "IsNullable": false,
+      "Properties": [
+        {
+          "$id": "8",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "9",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false,
+          "IsDiscriminator": false
         }
       ]
     }
@@ -51,7 +115,7 @@
               "Location": "Path",
               "IsRequired": true,
               "Kind": "Method",
-              "SkipUrlEncoding": true,
+              "SkipUrlEncoding": true
             },
             {
               "$id": "3",
@@ -70,7 +134,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": { "Name": "Thing" },
+              "BodyType": { 
+                "$ref": "7" 
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -96,7 +162,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": { "Name": "Thing" },
+              "BodyType": { 
+                "$ref": "7" 
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -127,7 +195,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -167,7 +237,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -193,7 +265,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],

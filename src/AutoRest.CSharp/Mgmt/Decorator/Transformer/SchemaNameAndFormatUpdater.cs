@@ -9,17 +9,21 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using static AutoRest.CSharp.Mgmt.Decorator.Transformer.SchemaFormatByNameTransformer;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
-    internal static class SchemaRenamer
+    internal static class SchemaNameAndFormatUpdater
     {
+        private const char NameFormatSeparator = '|';
+        private const string EmptyName = "-";
+
         public static void ApplyRenameMapping()
         {
-            var renameTargets = new List<RenameTarget>();
-            foreach ((var key, var newName) in Configuration.MgmtConfiguration.RenameMapping)
+            var renameTargets = new List<RenameAndReformatTarget>();
+            foreach ((var key, var value) in Configuration.MgmtConfiguration.RenameMapping)
             {
-                renameTargets.Add(ParseRenameKey(key, newName));
+                renameTargets.Add(new RenameAndReformatTarget(key, value));
             }
 
             // apply them one by one
@@ -29,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyRenameTargets(Schema schema, IEnumerable<RenameTarget> renameTargets)
+        private static void ApplyRenameTargets(Schema schema, IEnumerable<RenameAndReformatTarget> renameTargets)
         {
             foreach (var target in renameTargets)
             {
@@ -37,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyRenameTarget(Schema schema, RenameTarget renameTarget)
+        private static void ApplyRenameTarget(Schema schema, RenameAndReformatTarget renameTarget)
         {
             switch (schema)
             {
@@ -53,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyChoiceSchema(ChoiceSchema choiceSchema, RenameTarget renameTarget)
+        private static void ApplyChoiceSchema(ChoiceSchema choiceSchema, RenameAndReformatTarget renameTarget)
         {
             switch (renameTarget.RenameType)
             {
@@ -61,12 +65,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     ApplyToType(choiceSchema, renameTarget);
                     break;
                 case RenameType.Property:
-                    ApplyToProperty(choiceSchema, choiceSchema.Choices, renameTarget);
+                    ApplyToChoiceValue(choiceSchema, choiceSchema.Choices, renameTarget);
                     break;
             }
         }
 
-        private static void ApplySealedChoiceSchema(SealedChoiceSchema sealedChoiceSchema, RenameTarget renameTarget)
+        private static void ApplySealedChoiceSchema(SealedChoiceSchema sealedChoiceSchema, RenameAndReformatTarget renameTarget)
         {
             switch (renameTarget.RenameType)
             {
@@ -74,12 +78,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     ApplyToType(sealedChoiceSchema, renameTarget);
                     break;
                 case RenameType.Property:
-                    ApplyToProperty(sealedChoiceSchema, sealedChoiceSchema.Choices, renameTarget);
+                    ApplyToChoiceValue(sealedChoiceSchema, sealedChoiceSchema.Choices, renameTarget);
                     break;
             }
         }
 
-        private static void ApplyObjectSchema(ObjectSchema objectSchema, RenameTarget renameTarget)
+        private static void ApplyObjectSchema(ObjectSchema objectSchema, RenameAndReformatTarget renameTarget)
         {
             switch (renameTarget.RenameType)
             {
@@ -92,26 +96,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
-        private static void ApplyToType(Schema schema, RenameTarget renameTarget)
+        private static void ApplyToType(Schema schema, RenameAndReformatTarget renameTarget)
         {
             if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
-            schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
-            schema.Language.Default.Name = renameTarget.NewName;
+            ApplyNewName(schema.Language, renameTarget.NewName);
+            // we just ignore the format information on this
         }
 
-        private static void ApplyToProperty(Schema schema, IEnumerable<ChoiceValue> choices, RenameTarget renameTarget)
+        private static void ApplyToChoiceValue(Schema schema, IEnumerable<ChoiceValue> choices, RenameAndReformatTarget renameTarget)
         {
             if (schema.GetOriginalName() != renameTarget.TypeName)
                 return;
             var choiceValue = choices.FirstOrDefault(choice => choice.Value == renameTarget.PropertyName);
             if (choiceValue == null)
                 return;
-            choiceValue.Language.Default.SerializedName ??= choiceValue.Language.Default.Name;
-            choiceValue.Language.Default.Name = renameTarget.NewName;
+            ApplyNewName(choiceValue.Language, renameTarget.NewName);
+            // we just ignore the format information on this
         }
 
-        private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameTarget renameTarget)
+        private static void ApplyToProperty(Schema schema, IEnumerable<Property> properties, RenameAndReformatTarget renameTarget)
         {
             Debug.Assert(renameTarget.PropertyName != null);
             if (schema.GetOriginalName() != renameTarget.TypeName)
@@ -128,8 +132,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             var property = filteredProperties.FirstOrDefault(p => p.FlattenedNames.SequenceEqual(flattenedNames));
             if (property == null)
                 return;
-            property.Language.Default.SerializedName ??= property.Language.Default.Name;
-            property.Language.Default.Name = renameTarget.NewName;
+            ApplyNewName(property.Language, renameTarget.NewName);
+            ApplyNewFormat(property.Schema, renameTarget.NewFormat);
         }
 
         public static void UpdateAcronyms()
@@ -142,23 +146,77 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             UpdateAcronyms(MgmtContext.CodeModel.OperationGroups);
         }
 
-        private static RenameTarget ParseRenameKey(string renameKey, string newName)
+        private static void ApplyNewName(Languages language, string? value)
         {
-            // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
-            if (renameKey.Contains('.'))
-            {
-                // this should be a renaming of property
-                var segments = renameKey.Split('.', 2); // split at the first dot
-                return new RenameTarget(RenameType.Property, segments[0], segments[1], newName);
-            }
+            if (value == null)
+                return;
+            language.Default.SerializedName ??= language.Default.Name;
+            language.Default.Name = value;
+        }
+
+        private static void ApplyNewFormat(Schema schema, FormatPattern? formatPattern)
+        {
+            if (formatPattern == null)
+                return;
+            if (formatPattern.IsPrimitiveType)
+                schema.Type = formatPattern.PrimitiveType!.Value;
             else
             {
-                // this should be a renaming of type
-                return new RenameTarget(RenameType.Type, renameKey, null, newName);
+                if (schema.Extensions == null)
+                    schema.Extensions = new RecordOfStringAndAny();
+                schema.Extensions.Format = formatPattern.ExtensionType!;
             }
         }
 
-        private record RenameTarget(RenameType RenameType, string TypeName, string? PropertyName, string NewName);
+        private record RenameAndReformatTarget
+        {
+            internal string Key { get; }
+            internal string Value { get; }
+
+            internal RenameType RenameType { get; }
+            internal string TypeName { get; }
+            internal string? PropertyName { get; }
+            internal string? NewName { get; }
+            internal FormatPattern? NewFormat { get; }
+
+            internal RenameAndReformatTarget(string renameKey, string value)
+            {
+                Key = renameKey;
+                Value = value;
+                // we do not support escape the character dot right now. In case in the future some swagger might have dot inside a property name, we need to support this. Really?
+                if (renameKey.Contains('.'))
+                {
+                    // this should be a renaming of property
+                    var segments = renameKey.Split('.', 2); // split at the first dot
+                    RenameType = RenameType.Property;
+                    TypeName = segments[0];
+                    PropertyName = segments[1];
+                }
+                else
+                {
+                    // this should be a renaming of type
+                    RenameType = RenameType.Type;
+                    TypeName = renameKey;
+                    PropertyName = null;
+                }
+                if (value.Contains(NameFormatSeparator))
+                {
+                    var segments = value.Split(NameFormatSeparator);
+                    if (segments.Length > 2)
+                        throw new InvalidOperationException($"value for rename-mapping can only contains one |, but get `{value}`");
+
+                    NewName = IsEmptyName(segments[0]) ? null : segments[0];
+                    NewFormat = FormatPattern.Parse(segments[1]);
+                }
+                else
+                {
+                    NewName = value;
+                    NewFormat = null;
+                }
+            }
+
+            private static bool IsEmptyName(string name) => string.IsNullOrEmpty(name) || name == EmptyName;
+        }
 
         private enum RenameType
         {

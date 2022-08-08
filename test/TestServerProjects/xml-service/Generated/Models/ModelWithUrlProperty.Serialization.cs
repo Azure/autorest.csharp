@@ -31,8 +31,7 @@ namespace xml_service.Models
             Uri url = default;
             if (element.Element("Url") is XElement urlElement)
             {
-                url = new Uri((string)urlElement)
-                ;
+                url = new Uri((string)urlElement);
             }
             return new ModelWithUrlProperty(url);
         }

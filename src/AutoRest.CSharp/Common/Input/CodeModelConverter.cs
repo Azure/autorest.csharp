@@ -3,12 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Security.Cryptography;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
+using Humanizer;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -35,6 +34,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public InputNamespace CreateNamespace(CodeModel codeModel)
         {
+            var enums = CreateEnums(codeModel.Schemas.Choices, codeModel.Schemas.SealedChoices);
             var models = CreateModels(codeModel.Schemas.Objects);
             var clients = CreateClients(codeModel.OperationGroups);
 
@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Common.Input
                 Description: codeModel.Language.Default.Description,
                 Clients: clients,
                 Models: models,
+                Enums: enums,
                 ApiVersions: GetApiVersions(codeModel),
                 Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().ToList()));
         }
@@ -174,6 +175,12 @@ namespace AutoRest.CSharp.Common.Input
             return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName) { NextLinkOperationRef = nextLinkOperationRef };
         }
 
+        private IReadOnlyList<InputEnumType> CreateEnums(IEnumerable<ChoiceSchema> schemasChoices, IEnumerable<SealedChoiceSchema> schemasSealedChoices)
+            => schemasChoices.Select(c => CreateType(c, null, null))
+                .Concat(schemasSealedChoices.Select(c => CreateType(c, null, null)))
+                .OfType<InputEnumType>()
+                .ToList();
+
         private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas)
         {
             foreach (var schema in schemas)
@@ -230,7 +237,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: property.Language.Default.Name,
             SerializedName: property.SerializedName,
             Description: property.Language.Default.Description,
-            Type: CreateType(property.Schema, property.IsNullable),
+            Type: CreateType(property.Schema, _modelsCache, property.IsNullable),
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false
@@ -279,20 +286,20 @@ namespace AutoRest.CSharp.Common.Input
         {
             { HttpResponse.KnownMediaType: KnownMediaType.Text } => InputPrimitiveType.String,
             BinaryResponse => InputPrimitiveType.Stream,
-            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, schemaResponse.IsNullable),
+            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, _modelsCache, schemaResponse.IsNullable),
             _ => null
         };
 
         public InputType CreateType(RequestParameter requestParameter)
-            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, requestParameter.IsNullable || !requestParameter.IsRequired);
+            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
 
-        private InputType CreateType(Schema schema, bool isNullable)
-            => CreateType(schema, schema.Extensions?.Format, isNullable);
+        private static InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
-        private InputType CreateType(Schema schema, string? format, bool isNullable)
-            => CreateType(schema, format) with {IsNullable = isNullable};
+        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => CreateType(schema, format, modelsCache) with {IsNullable = isNullable};
 
-        private InputType CreateType(Schema schema, string? format) => schema switch
+        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
@@ -318,10 +325,12 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType      => InputPrimitiveType.ContentType,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag             => InputPrimitiveType.ETag,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType     => InputPrimitiveType.ResourceType,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod    => InputPrimitiveType.RequestMethod,
 
-            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format),
+            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
 
             CredentialSchema                 => InputPrimitiveType.String,
             { Type: AllSchemaTypes.String }  => InputPrimitiveType.String,
@@ -329,17 +338,24 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
 
-            ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
-            ChoiceSchema choiceSchema       when IsDPG => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, true),
-            SealedChoiceSchema choiceSchema when IsDPG => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, false),
-            ObjectSchema objectSchema       when IsDPG => _modelsCache[objectSchema],
+            ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
+            DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
+            ChoiceSchema choiceSchema       when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
+            SealedChoiceSchema choiceSchema when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
+            ObjectSchema objectSchema       when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             _ => new CodeModelType(schema)
         };
 
-        private static InputEnumType CreateEnumType(string name, InputType choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
-            => new(Name: name, EnumValueType: (InputPrimitiveType)choiceType, AllowedValues: choices.Select(CreateEnumValue).ToList(), IsExtensible: isExtensible);
+        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtendable) => new(
+            Name: schema.Name,
+            Namespace: schema.Extensions?.Namespace,
+            Accessibility: schema.Extensions?.Accessibility,
+            Description: schema.CreateDescription(),
+            EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
+            AllowedValues: choices.Select(CreateEnumValue).ToList(),
+            IsExtendable: isExtendable
+        );
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
             Name: choiceValue.Language.Default.Name,
@@ -363,12 +379,12 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (parameter.ClientDefaultValue != null)
             {
-                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, parameter.IsNullable));
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 
             if (parameter.Schema is ConstantSchema constantSchema)
             {
-                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
+                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
             }
 
             return null;
