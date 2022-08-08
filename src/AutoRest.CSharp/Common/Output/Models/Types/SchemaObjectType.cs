@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
-        public virtual bool IsAbstract => ObjectSchema != null &&
+        protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.MgmtReferenceType;
 

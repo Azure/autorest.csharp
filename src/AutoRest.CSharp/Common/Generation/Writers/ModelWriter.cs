@@ -297,7 +297,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string GetAbstract(SchemaObjectType schema)
         {
-            return schema.IsAbstract ? "abstract " : string.Empty;
+            return schema.Declaration.IsAbstract ? "abstract " : string.Empty;
         }
 
         protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
