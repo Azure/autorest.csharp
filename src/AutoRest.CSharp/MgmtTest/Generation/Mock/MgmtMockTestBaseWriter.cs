@@ -25,12 +25,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
     {
         protected MgmtMockTestProvider<TProvider> This { get; }
 
-        public MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> typeProvider) : base()
+        protected MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> typeProvider) : base()
         {
             This = typeProvider;
         }
 
-        public MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider) : base(writer)
+        protected MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider) : base(writer)
         {
             This = typeProvider;
         }
