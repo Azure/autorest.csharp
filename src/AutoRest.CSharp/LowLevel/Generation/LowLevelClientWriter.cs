@@ -70,6 +70,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
+                            var convenienceMethod = client.ConvenienceMethods.FirstOrDefault(convenienceMethod => convenienceMethod.LowLevelClientMethod == clientMethod);
+                            if (convenienceMethod != null)
+                            {
+                                new LowLevelConvenienceMethodWriter(writer, convenienceMethod).WriteClientConvenienceMethod(client.Fields.ClientDiagnosticsProperty.Name);
+                            }
+
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
                         }
@@ -83,6 +89,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(writer, method, client.Fields, responseClassifierTypes);
                     }
 
+                    if (client.ConvenienceMethods.Count > 0)
+                    {
+                        LowLevelConvenienceMethodWriter.WriteCancellationTokenToRequestContextMethod(writer);
+                    }
                     WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
@@ -881,7 +891,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (InputModelProperty property in modelOrBase.Properties)
                             {
-                                if (property.IsDiscriminator && property.Type is InputEnumType { IsExtensible: true } && modelType.DiscriminatorValue != null)
+                                if (property.IsDiscriminator && property.Type is InputEnumType { IsExtendable: true } && modelType.DiscriminatorValue != null)
                                 {
                                     propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                         property.SerializedName ?? property.Name,

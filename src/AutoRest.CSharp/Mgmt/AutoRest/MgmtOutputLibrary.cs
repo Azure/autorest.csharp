@@ -353,7 +353,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
-                    restClientMethods.Add(operation, restClientMethod);
+                    if (!restClientMethods.TryAdd(operation, restClientMethod))
+                    {
+                        throw new Exception($"An rest method '{operation.OperationId}' has already been added");
+                    }
                 }
             }
 
@@ -747,6 +750,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             return rawRequestPathToResourceData;
         }
+
+        public override CSharpType ResolveEnum(InputEnumType enumType) => throw new NotImplementedException($"{nameof(ResolveEnum)} is not implemented for MPG yet.");
+        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema)
         {

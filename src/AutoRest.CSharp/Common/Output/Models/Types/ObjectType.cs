@@ -55,13 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
-        protected ObjectTypeConstructor? GetBaseCtor()
-        {
-            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
-            {
-                return objectType.Constructors.First();
-            }
-            return null;
-        }
+        protected ObjectType? GetBaseObjectType()
+            => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;
     }
 }

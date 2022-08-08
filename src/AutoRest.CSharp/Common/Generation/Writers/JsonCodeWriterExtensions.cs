@@ -24,6 +24,28 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions
     {
+        public static void ToSerializeCall(this CodeWriter writer, JsonObjectSerialization serialization)
+        {
+            FormattableString writerName = $"writer";
+
+            writer.Line($"{writerName}.WriteStartObject();");
+
+            writer.ToSerializeCall(writerName, serialization.Properties);
+
+            if (serialization.AdditionalProperties?.ValueSerialization != null)
+            {
+                var itemVariable = new CodeWriterDeclaration("item");
+
+                using (writer.Scope($"foreach (var {itemVariable:D} in {serialization.AdditionalProperties.PropertyName})"))
+                {
+                    writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
+                    writer.ToSerializeCall(serialization.AdditionalProperties.ValueSerialization, $"{itemVariable:I}.Value", writerName);
+                }
+            }
+
+            writer.Line($"{writerName}.WriteEndObject();");
+        }
+
         public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, FormattableString name, FormattableString? writerName = null)
         {
             writerName ??= $"writer";
@@ -56,25 +78,6 @@ namespace AutoRest.CSharp.Generation.Writers
                             dictionary.ValueSerialization,
                             $"{dictionaryItemVariable:I}.Value",
                             writerName);
-                    }
-
-                    writer.Line($"{writerName}.WriteEndObject();");
-                    return;
-
-                case JsonObjectSerialization obj:
-                    writer.Line($"{writerName}.WriteStartObject();");
-
-                    writer.ToSerializeCall(writerName, obj.Properties);
-
-                    if (obj.AdditionalProperties?.ValueSerialization != null)
-                    {
-                        var itemVariable = new CodeWriterDeclaration("item");
-
-                        using (writer.Scope($"foreach (var {itemVariable:D} in {obj.AdditionalProperties.PropertyName})"))
-                        {
-                            writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
-                            writer.ToSerializeCall(obj.AdditionalProperties.ValueSerialization, $"{itemVariable:I}.Value", writerName);
-                        }
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -118,6 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                                  frameworkType == typeof(Azure.Core.ResourceType) ||
+                                 frameworkType == typeof(Azure.Core.RequestMethod) ||
                                  frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
@@ -217,7 +221,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void ToSerializeCall(this CodeWriter writer, FormattableString writerName, JsonPropertySerialization[] propertySerializations)
+        private static void ToSerializeCall(this CodeWriter writer, FormattableString writerName, IEnumerable<JsonPropertySerialization> propertySerializations)
         {
             foreach (JsonPropertySerialization property in propertySerializations)
             {
@@ -361,7 +365,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         /// Collects a list of properties being read from all level of object hierarchy
-        private static void CollectProperties(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, JsonPropertySerialization[] jsonProperties)
+        private static void CollectProperties(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
@@ -428,13 +432,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void DeserializeValue(this CodeWriter writer, JsonSerialization serialization, FormattableString value, Action<FormattableString> valueCallback)
         {
-            if (serialization is JsonObjectSerialization obj)
-            {
-                var initializers = WritePropertiesDeserialization(writer, obj, value);
-                var objectType = (ObjectType) obj.Type.Implementation;
-                writer.WriteInitialization(valueCallback, objectType, objectType.SerializationConstructor, initializers);
-            }
-            else if (serialization.IsNullable)
+            if (serialization.IsNullable)
             {
                 using (writer.Scope($"if ({value}.ValueKind == {typeof(JsonValueKind)}.Null)"))
                 {
@@ -451,7 +449,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static IEnumerable<PropertyInitializer> WritePropertiesDeserialization(this CodeWriter writer, JsonObjectSerialization serialization, FormattableString value)
+        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -480,7 +478,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var itemVariable = new CodeWriterDeclaration("property");
-            using (writer.Scope($"foreach (var {itemVariable:D} in {value}.EnumerateObject())"))
+            using (writer.Scope($"foreach (var {itemVariable:D} in element.EnumerateObject())"))
             {
                 writer.DeserializeIntoObjectProperties(serialization.Properties, $"{itemVariable:I}", propertyVariables);
 
@@ -495,7 +493,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{propertyVariables[objAdditionalProperties].Declaration} = {dictionaryVariable};");
             }
 
-            return propertyVariables.Select(v => new PropertyInitializer(v.Key.PropertyName, v.Key.PropertyType, v.Key.IsReadOnly, GetOptionalFormattable(v.Key, v.Value)));
+            var parameterValues = propertyVariables.ToDictionary(v => v.Key.ParameterName, v => GetOptionalFormattable(v.Key, v.Value));
+            var parameters = serialization.Constructor.Parameters
+                .Select(p => parameterValues[p.Name])
+                .ToArray();
+
+            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)
@@ -516,7 +519,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return GetFrameworkTypeValueFormattable(element, frameworkType, serialization.Format);
             }
 
-            return GetDeserializeImplementationFormattable(serialization.Type.Implementation, serialization, element);
+            return GetDeserializeImplementationFormattable(serialization.Type.Implementation, element, serialization.Options);
         }
 
         private static FormattableString GetFrameworkTypeValueFormattable(FormattableString element, Type frameworkType, SerializationFormat serializationFormat)
@@ -528,6 +531,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 frameworkType == typeof(ResourceIdentifier) ||
                 frameworkType == typeof(ResourceType) ||
                 frameworkType == typeof(ContentType) ||
+                frameworkType == typeof(RequestMethod) ||
                 frameworkType == typeof(AzureLocation))
             {
                 return $"new {frameworkType}({element}.GetString())";
@@ -611,12 +615,12 @@ namespace AutoRest.CSharp.Generation.Writers
             return systemObjectType.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
         }
 
-        public static FormattableString GetDeserializeImplementationFormattable(TypeProvider implementation, JsonSerialization serialization, FormattableString element)
+        public static FormattableString GetDeserializeImplementationFormattable(TypeProvider implementation, FormattableString element, JsonSerializationOptions options)
         {
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType):
-                    var optionalSerializeOptions = (serialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3) ? ", serializeOptions" : string.Empty;
+                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
                     return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
@@ -626,7 +630,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
 
                 case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueFormattable(element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default);
+                    var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
                     return clientEnum.IsExtendable
                         ? $"new {clientEnum.Type}({value})"
                         : (FormattableString) $"{value}.To{clientEnum.Type:D}()";
