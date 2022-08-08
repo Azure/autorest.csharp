@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 using CadlFirstTest.Models;
 
@@ -32,7 +33,24 @@ namespace CadlFirstTest
         /// <param name="requiredCollection"> Required collection of enums. </param>
         /// <param name="requiredDictionary"> Required dictionary of enums. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/> or <paramref name="requiredDictionary"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary)
+        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary)
+        {
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
+
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            RequiredCollection = requiredCollection.ToList();
+            RequiredDictionary = requiredDictionary;
+        }
+        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredCollection"> Required collection of enums. </param>
+        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/> or <paramref name="requiredDictionary"/> is null. </exception>
+        internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));

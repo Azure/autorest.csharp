@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -49,6 +50,46 @@ namespace CadlPetStore
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _apiVersion = options.Version;
+        }
+
+        /// <summary> Delete a pet. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> DeleteValueAsync(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.DeleteValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await DeleteAsync(petId, context).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a pet. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response DeleteValue(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.DeleteValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = Delete(petId, context);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Delete a pet. </summary>
@@ -103,6 +144,46 @@ namespace CadlPetStore
             {
                 using HttpMessage message = CreateDeleteRequest(petId, context);
                 return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Pet>> ReadValueAsync(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.ReadValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await ReadAsync(petId, context).ConfigureAwait(false);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <param name="petId"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Pet> ReadValue(int petId, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.ReadValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = Read(petId, context);
+                return Response.FromValue(Pet.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -205,6 +286,30 @@ namespace CadlPetStore
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <param name="pet"> The Pet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        public virtual async Task<Response<Pet>> CreateAsync(Pet pet, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(pet, nameof(pet));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await CreateAsync(pet.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
+        }
+
+        /// <param name="pet"> The Pet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
+        public virtual Response<Pet> Create(Pet pet, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(pet, nameof(pet));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Create(pet.ToRequestContent(), context);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -371,6 +476,17 @@ namespace CadlPetStore
             request.Uri = uri;
             request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (cancellationToken == CancellationToken.None)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

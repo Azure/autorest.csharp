@@ -70,6 +70,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
+                            var convenienceMethod = client.ConvenienceMethods.FirstOrDefault(convenienceMethod => convenienceMethod.LowLevelClientMethod == clientMethod);
+                            if (convenienceMethod != null)
+                            {
+                                new LowLevelConvenienceMethodWriter(writer, convenienceMethod).WriteClientConvenienceMethod(client.Fields.ClientDiagnosticsProperty.Name);
+                            }
+
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
                         }
@@ -83,6 +89,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(writer, method, client.Fields, responseClassifierTypes);
                     }
 
+                    if (client.ConvenienceMethods.Count > 0)
+                    {
+                        LowLevelConvenienceMethodWriter.WriteCancellationTokenToRequestContextMethod(writer);
+                    }
                     WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }

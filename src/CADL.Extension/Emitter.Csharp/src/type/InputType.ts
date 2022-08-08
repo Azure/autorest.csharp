@@ -24,7 +24,10 @@ export interface InputModelType extends InputType {
 }
 
 export interface InputEnumType extends InputType {
-    EnumValueType: InputPrimitiveType;
+    Namespace?: string;
+    Accessibility?: string;
+    Description: string;
+    EnumValueType: string;
     AllowedValues: InputEnumTypeValue[];
     IsExtensible: boolean;
 }

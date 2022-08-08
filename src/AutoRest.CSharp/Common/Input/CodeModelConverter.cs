@@ -325,8 +325,10 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType      => InputPrimitiveType.ContentType,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag             => InputPrimitiveType.ETag,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType     => InputPrimitiveType.ResourceType,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod    => InputPrimitiveType.RequestMethod,
 
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
 
