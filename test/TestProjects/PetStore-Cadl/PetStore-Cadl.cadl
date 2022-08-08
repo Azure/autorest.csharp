@@ -1,16 +1,11 @@
 import "@cadl-lang/rest";
-<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/PetStore-Cadl.cadl
 import "./decorators.mjs";
-=======
-import "./decorators.js";
->>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/PetStore-Cadl/petstore.cadl
 
 using Cadl.Http;
 
 @serviceTitle("Pet Store Service")
 @serviceVersion("2021-03-25")
 @doc("This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.")
-<<<<<<< HEAD:test/TestProjects/PetStore-Cadl/PetStore-Cadl.cadl
 @server(
     "{petStoreUrl}",
     "Endpoint Service",
@@ -18,8 +13,6 @@ using Cadl.Http;
         petStoreUrl: string,
     }
 )
-=======
->>>>>>> d969aba11793bab86d3ca39e7252e94171c5ed31:test/TestProjects/PetStore-Cadl/petstore.cadl
 namespace PetStore;
 
 // Model types

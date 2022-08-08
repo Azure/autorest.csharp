@@ -52,14 +52,20 @@ function AutoRest-Reset()
 
 function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $debug="")
 {
+    $baseOutput = Resolve-Path -Path $baseOutput
+    $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = Join-Path $baseOutput "Generated"
-    $outputPath = Resolve-Path -Path $outputPath
+    $outputPath = $outputPath -replace "\\", "/"
+    #clean up
+    if (Test-Path $outputPath) {
+        Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+    }
     # emit cadl json
     $repoRootPath = Join-Path $PSScriptRoot ".."
     $repoRootPath = Resolve-Path -Path $repoRootPath
     Push-Location $repoRootPath
     # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-    $emitCommand = "node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath $baseOutput\$projectName.cadl --emit @azure-tools/cadl-csharp"
+    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
     Invoke $emitCommand
     Pop-Location
     

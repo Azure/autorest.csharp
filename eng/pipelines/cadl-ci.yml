@@ -18,4 +18,37 @@ stages:
   - stage: 'Build_and_Test'
     jobs:
       - job: 'Build'
-      - job: 'Build'
+        timeoutInMinutes: 120
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: 16.14.2
+          displayName: Install Node.js
+        - task: Npm@1
+          displayName: 'Install Dependencies for CADL csharp'
+          inputs:
+            command: install
+            workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
+        - task: Npm@1
+          displayName: 'Build CADL csharp emitter'
+          inputs:
+            command: custom
+            customCommand: run build
+            workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
+        - task: Npm@1
+          displayName: 'Pack CADL Csharp emitter'
+          inputs:
+            command: pack
+            workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
+      - job: 'Unit_Test'
+        timeoutInMinutes: 120
+        steps:
+        - bash: |
+            npm install
+            npm run build
+            npm pack
+          displayName: 'Install package'
+          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
+        - pwsh: .\eng\CadlGenerate.ps1
+          displayName: 'Unit_Test for CADL emitter'
+          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
