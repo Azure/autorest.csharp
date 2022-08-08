@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
         private string LibraryArmOperation { get; }
+        private string LibraryArmInterimOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
@@ -53,6 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FileName = This.Type.Name;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
+            LibraryArmInterimOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmInterimOperation";
         }
 
         public virtual void Write()
@@ -835,7 +837,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var operation = new {LibraryArmOperation}");
+            if (Configuration.MgmtConfiguration.EnableLroInterimStatus.Contains(operation.OperationId))
+            {
+                _writer.Append($"var operation = new {LibraryArmInterimOperation}");
+            }
+            else
+            {
+                _writer.Append($"var operation = new {LibraryArmOperation}");
+            }
             if (operation.ReturnType.IsGenericType)
             {
                 _writer.Append($"<{operation.MgmtReturnType}>");

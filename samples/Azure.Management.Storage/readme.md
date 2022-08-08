@@ -43,6 +43,9 @@ rename-mapping:
   BlobServiceProperties: BlobService
   FileServiceProperties: FileService
 
+enable-lro-interim-status:
+  StorageAccounts_RestoreBlobRanges
+
 directive:
   - from: swagger-document
     where: $.definitions.FileShareItems.properties.value.items["$ref"]
