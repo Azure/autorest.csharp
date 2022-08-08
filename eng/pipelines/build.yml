@@ -123,7 +123,6 @@ stages:
           inputs:
             command: pack
             workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-        - script: 
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C
