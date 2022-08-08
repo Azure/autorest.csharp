@@ -1,0 +1,352 @@
+{
+ "$id": "1",
+ "Name": "demo.helloworld",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "SimpleEnum",
+   "Namespace": "HelloWorld",
+   "Accessibility": "",
+   "Description": "Simple enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "4",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "5",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "6",
+   "Name": "Thing",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "7",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "9",
+   "Name": "RoundTripModel",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "10",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "12",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "14",
+     "Name": "requiredCollection",
+     "SerializedName": "requiredCollection",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "2"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "16",
+     "Name": "requiredDictionary",
+     "SerializedName": "requiredDictionary",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Name": "Dictionary",
+      "Kind": "Dictionary",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "18",
+   "Name": "HelloWorld",
+   "Operations": [
+    {
+     "$id": "19",
+     "Name": "topAction",
+     "Description": "top level method",
+     "Parameters": [
+      {
+       "$id": "20",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Description": "",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "22",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$id": "23",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "24",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/top/{action}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "25",
+     "Name": "topAction2",
+     "Description": "top level method2",
+     "Parameters": [
+      {
+       "$ref": "20"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "26",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/top2",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "27"
+   }
+  },
+  {
+   "$id": "28",
+   "Name": "Demo",
+   "Description": "Hello world service",
+   "Operations": [
+    {
+     "$id": "29",
+     "Name": "sayHi",
+     "Description": "Return hi",
+     "Parameters": [
+      {
+       "$ref": "20"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "30",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/hello",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "31"
+   }
+  },
+  {
+   "$id": "32",
+   "Name": "Demo2",
+   "Operations": [
+    {
+     "$id": "33",
+     "Name": "helloAgain",
+     "Description": "Return hi again",
+     "Parameters": [
+      {
+       "$ref": "20"
+      },
+      {
+       "$id": "34",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$ref": "9"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "35",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/againHi",
+     "BufferResponse": false
+    },
+    {
+     "$id": "36",
+     "Name": "helloDemo2",
+     "Description": "Return hi in demo2",
+     "Parameters": [
+      {
+       "$ref": "20"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "37",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/demoHi",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "38"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "39"
+ }
+}

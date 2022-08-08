@@ -64,6 +64,28 @@
           "IsReadOnly": false
         }
       ]
+    },
+    {
+      "$id": "7",
+      "Name": "Thing",
+      "IsNullable": false,
+      "Properties": [
+        {
+          "$id": "8",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "9",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false,
+          "IsDiscriminator": false
+        }
+      ]
     }
   ],
   "Clients": [
@@ -112,7 +134,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": { "Name": "Thing" },
+              "BodyType": { 
+                "$ref": "7" 
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -138,7 +162,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": { "Name": "Thing" },
+              "BodyType": { 
+                "$ref": "7" 
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -169,7 +195,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -209,7 +237,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -235,7 +265,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],

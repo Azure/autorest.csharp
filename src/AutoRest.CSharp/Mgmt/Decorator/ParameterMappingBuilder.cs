@@ -213,6 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 type.FrameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                 type.FrameworkType == typeof(Azure.Core.ResourceType) ||
                 type.FrameworkType == typeof(Azure.Core.ContentType) ||
+                type.FrameworkType == typeof(Azure.Core.RequestMethod) ||
                 type.FrameworkType == typeof(Azure.Core.AzureLocation))
             {
                 return $"new {type.FrameworkType}({rawExpression})";

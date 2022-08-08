@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -57,6 +58,46 @@ namespace CadlFirstTest
         }
 
         /// <param name="action"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        public virtual async Task<Response<Thing>> TopActionValueAsync(string action, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await TopActionAsync(action, context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="action"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        public virtual Response<Thing> TopActionValue(string action, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = TopAction(action, context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -69,7 +110,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.TopActionAsync("<action>");
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -79,6 +121,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -114,7 +157,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.TopAction("<action>");
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -124,6 +168,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -146,6 +191,42 @@ namespace CadlFirstTest
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Thing>> TopAction2ValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await TopAction2Async(context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Thing> TopAction2Value(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = TopAction2(context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -157,7 +238,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.TopAction2Async();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -167,6 +249,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -198,7 +281,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.TopAction2();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -208,6 +292,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -257,6 +342,17 @@ namespace CadlFirstTest
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (cancellationToken == CancellationToken.None)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

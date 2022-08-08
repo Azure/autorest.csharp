@@ -1,80 +1,115 @@
 {
  "$id": "1",
- "Name": "cadl.testserver.enumpropertiesbasic",
- "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+ "Name": "cadl.enumpropertiesbasic",
+ "Description": "Illustrates input models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
  ],
- "Models": [
+ "Enums": [
   {
    "$id": "2",
+   "Name": "DayOfTheWeek",
+   "Namespace": "EnumPropertiesBasic",
+   "Accessibility": "",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "4",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "5",
+     "Name": "Wednesday",
+     "Value": "Wednesday",
+     "Description": "Wednesday is documented to test this case."
+    },
+    {
+     "$id": "6",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "7",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "8",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "9",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  },
+  {
+   "$id": "10",
+   "Name": "EnumWithStringValue",
+   "Namespace": "EnumPropertiesBasic",
+   "Accessibility": "",
+   "Description": "Represents the simple enum with enum string value.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "11",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "12",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "13",
+     "Name": "Three",
+     "Value": "3"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "14",
    "Name": "InputModel",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "3",
+     "$id": "15",
      "Name": "Day",
      "SerializedName": "Day",
      "Description": "",
      "Type": {
-      "$id": "4",
-      "Name": "DayOfTheWeek",
-      "EnumValueType": {
-       "$id": "5",
-       "Name": "String",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "AllowedValues": [
-       {
-        "$id": "6",
-        "Name": "Monday"
-       },
-       {
-        "$id": "7",
-        "Name": "Tuesday"
-       },
-       {
-        "$id": "8",
-        "Name": "Wednesday"
-       },
-       {
-        "$id": "9",
-        "Name": "Thursday"
-       },
-       {
-        "$id": "10",
-        "Name": "Friday"
-       },
-       {
-        "$id": "11",
-        "Name": "Saturday"
-       },
-       {
-        "$id": "12",
-        "Name": "Sunday"
-       }
-      ],
-      "IsExtensible": false,
-      "IsNullable": false
+      "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": true,
+     "IsReadOnly": false,
      "IsDiscriminator": false
     },
     {
-     "$id": "13",
-     "Name": "Language",
-     "SerializedName": "Language",
+     "$id": "16",
+     "Name": "Title",
+     "SerializedName": "Title",
      "Description": "",
      "Type": {
-      "$id": "14",
-      "Name": "TranslationLanguage",
-      "IsNullable": false,
-      "Properties": []
+      "$ref": "10"
      },
      "IsRequired": true,
-     "IsReadOnly": true,
+     "IsReadOnly": false,
      "IsDiscriminator": false
     }
    ]
@@ -82,21 +117,21 @@
  ],
  "Clients": [
   {
-   "$id": "15",
+   "$id": "17",
    "Name": "EnumPropertiesBasic",
-   "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+   "Description": "Illustrates input models with required enum type properties.",
    "Operations": [
     {
-     "$id": "16",
+     "$id": "18",
      "Name": "sendEnumPropertyModel",
      "Parameters": [
       {
-       "$id": "17",
+       "$id": "19",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
        "Type": {
-        "$id": "18",
+        "$id": "20",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -112,11 +147,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "19",
+       "$id": "21",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "2"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -131,7 +166,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
@@ -146,11 +181,11 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "23"
    }
   }
  ],
  "Auth": {
-  "$id": "22"
+  "$id": "24"
  }
 }
