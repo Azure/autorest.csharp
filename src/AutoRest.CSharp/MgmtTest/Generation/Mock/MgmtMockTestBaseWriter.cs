@@ -21,21 +21,17 @@ using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
-    internal abstract class MgmtMockTestBaseWriter<TProvider> : MgmtTestWriterBase where TProvider : MgmtTypeProvider
+    internal abstract class MgmtMockTestBaseWriter<TProvider> : MgmtTestWriterBase<MgmtMockTestProvider<TProvider>> where TProvider : MgmtTypeProvider
     {
-        protected MgmtMockTestProvider<TProvider> This { get; }
-
-        protected MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> typeProvider) : base()
+        protected MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> provider) : base(provider)
         {
-            This = typeProvider;
         }
 
-        protected MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> typeProvider) : base(writer)
+        protected MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> provider) : base(writer, provider)
         {
-            This = typeProvider;
         }
 
-        public virtual void Write()
+        public override void Write()
         {
             using (_writer.Namespace(This.Namespace))
             {
@@ -45,18 +41,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                     WriteImplementations();
                 }
             }
-        }
-
-        protected void WriteClassDeclaration()
-        {
-            _writer.WriteXmlDocumentationSummary(This.Description);
-            _writer.Append($"{This.Accessibility} partial class {This.Type.Name}");
-            if (This.BaseType != null)
-            {
-                _writer.Append($" : ");
-                _writer.Append($"{This.BaseType:D}");
-            }
-            _writer.Line();
         }
 
         protected internal virtual void WriteImplementations()
@@ -116,97 +100,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             if (ignoreReason is not null)
             {
                 _writer.UseNamespace("NUnit.Framework");
-                _writer.Line($"[typeofIgnore(\"{ignoreReason}\")]");
+                _writer.Line($"[Ignore(\"{ignoreReason}\")]");
             }
         }
 
         protected string CreateMethodName(string methodName, bool async = true)
         {
             return async ? $"{methodName}Async" : methodName;
-        }
-
-        protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider carrierResource, MockTestCase testCase)
-            => carrierResource switch
-            {
-                ResourceCollection => throw new InvalidOperationException($"ResourceCollection is not supported here"),
-                Resource parentResource => WriteGetResource(parentResource, testCase),
-                MgmtExtensions parentExtension => WriteGetExtension(parentExtension, testCase),
-                _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
-            };
-
-        protected CodeWriterDeclaration WriteGetResource(Resource carrierResource, MockTestCase testCase)
-        {
-            var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
-            _writer.Append($"var {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath))
-            {
-                _writer.Append(value).AppendRaw(",");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.Line($");");
-            var resourceVar = new CodeWriterDeclaration(carrierResource.Type.Name.ToVariableName());
-            _writer.Line($"var {resourceVar:D} = GetArmClient().Get{carrierResource.Type.Name}({idVar});");
-
-            return resourceVar;
-        }
-
-        protected CodeWriterDeclaration WriteGetExtension(MgmtExtensions parentExtension, MockTestCase testCase) => parentExtension.ArmCoreType switch
-        {
-            _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, testCase),
-            _ when parentExtension.ArmCoreType == typeof(ArmResource) => WriteGetArmResource(parentExtension, testCase),
-            _ => WriteGetOtherExtension(parentExtension, testCase)
-        };
-
-        private CodeWriterDeclaration WriteGetTenantResource(MgmtExtensions parentExtension, MockTestCase testCase)
-        {
-            var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
-            _writer.Line($"var {resourceVar:D} = GetArmClient().GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
-            return resourceVar;
-        }
-
-        private CodeWriterDeclaration WriteGetArmResource(MgmtExtensions parentExtension, MockTestCase testCase)
-        {
-            var resourceVar = new CodeWriterDeclaration("resource");
-            // everytime we go into this branch, this resource must be a scope resource
-            var idVar = new CodeWriterDeclaration($"resourceId");
-            // this is the path of the scope of this operation
-            var scopePath = testCase.RequestPath.GetScopePath();
-            _writer.Append($"var {idVar:D} = new {typeof(ResourceIdentifier)}(");
-            // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
-            _writer.Append($"{typeof(string)}.Format(\"");
-            int refIndex = 0;
-            foreach (var segment in scopePath)
-            {
-                _writer.AppendRaw("/");
-                if (segment.IsConstant)
-                    _writer.AppendRaw(segment.ConstantValue);
-                else
-                    _writer.Append($"{{{refIndex++}}}");
-            }
-            _writer.AppendRaw("\", ");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(scopePath))
-            {
-                _writer.Append(value).AppendRaw(",");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.LineRaw("));");
-            _writer.Line($"var {resourceVar:D} = GetArmClient().GetGenericResource({idVar});");
-            return resourceVar;
-        }
-
-        private CodeWriterDeclaration WriteGetOtherExtension(MgmtExtensions parentExtension, MockTestCase testCase)
-        {
-            var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
-            var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
-            _writer.Append($"var {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
-            foreach (var value in testCase.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
-            {
-                _writer.Append(value).AppendRaw(",");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
-            _writer.Line($"var {resourceVar:D} = GetArmClient().Get{parentExtension.ArmCoreType.Name}({idVar});");
-            return resourceVar;
         }
 
         protected void WriteTestOperation(CodeWriterDeclaration declaration, MockTestCase testCase)
