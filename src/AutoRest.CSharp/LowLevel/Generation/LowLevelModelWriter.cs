@@ -24,12 +24,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D}"))
                 {
                     // TODO: add inherits or implements
-                    WriteFields(writer, model);
                     WriteConstructor(writer, model.PublicConstructor, model);
                     if (model.PublicConstructor != model.SerializationConstructor)
                     {
                         WriteConstructor(writer, model.SerializationConstructor, model);
                     }
+                    writer.Line();
+                    WriteFields(writer, model);
                 }
             }
         }
@@ -54,7 +55,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var field = model.GetFieldByParameterName(parameter.Name);
                     writer
-                        .Append($"{field.Name:I} = {parameter.Name:I}")
+                        .Append($"{field.Declaration.RequestedName:I} = {parameter.Name:I}")
                         .WriteConversion(parameter.Type, field.Type)
                         .LineRaw(";");
                 }

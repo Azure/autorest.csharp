@@ -110,12 +110,6 @@ namespace Cadl.TestServer.InputBasic
 {
 public partial class InputModel
 {
-/// <summary> Required string, illustrating a reference type property. </summary>
-public string RequiredString{ get; }
-
-/// <summary> Required int, illustrating a value type property. </summary>
-public int RequiredInt{ get; }
-
 /// <summary> Initializes a new instance of InputModel. </summary>
 /// <param name=""requiredString""> Required string, illustrating a reference type property. </param>
 /// <param name=""requiredInt""> Required int, illustrating a value type property. </param>
@@ -127,6 +121,12 @@ global::Azure.Core.Argument.AssertNotNull(requiredString, nameof(requiredString)
 RequiredString = requiredString;
 RequiredInt = requiredInt;
 }
+
+/// <summary> Required string, illustrating a reference type property. </summary>
+public string RequiredString{ get; }
+
+/// <summary> Required int, illustrating a value type property. </summary>
+public int RequiredInt{ get; }
 }
 }
 "
@@ -148,25 +148,6 @@ namespace Cadl.TestServer.PrimitiveProperties
 {
 public partial class PrimitivePropertyModel
 {
-public string RequiredString{ get; set; }
-
-public int RequiredInt{ get; set; }
-
-public long RequiredLong{ get; set; }
-
-public long RequiredSafeInt{ get; set; }
-
-public float RequiredFloat{ get; set; }
-
-public double RequiredDouble{ get; set; }
-
-/// <summary> Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339). </summary>
-public global::System.DateTimeOffset RequiredBodyDateTime{ get; set; }
-
-public global::System.TimeSpan RequiredDuration{ get; set; }
-
-public bool RequiredBoolean{ get; set; }
-
 /// <summary> Initializes a new instance of PrimitivePropertyModel. </summary>
 /// <param name=""requiredString""></param>
 /// <param name=""requiredInt""></param>
@@ -192,6 +173,25 @@ RequiredBodyDateTime = requiredBodyDateTime;
 RequiredDuration = requiredDuration;
 RequiredBoolean = requiredBoolean;
 }
+
+public string RequiredString{ get; set; }
+
+public int RequiredInt{ get; set; }
+
+public long RequiredLong{ get; set; }
+
+public long RequiredSafeInt{ get; set; }
+
+public float RequiredFloat{ get; set; }
+
+public double RequiredDouble{ get; set; }
+
+/// <summary> Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339). </summary>
+public global::System.DateTimeOffset RequiredBodyDateTime{ get; set; }
+
+public global::System.TimeSpan RequiredDuration{ get; set; }
+
+public bool RequiredBoolean{ get; set; }
 }
 }
 ",
@@ -324,12 +324,6 @@ namespace Cadl.TestServer.CollectionPropertiesBasic
 {
 public partial class RoundTripModel
 {
-/// <summary> Required collection of strings, illustrating a collection of reference types. </summary>
-public global::System.Collections.Generic.IList<string> RequiredStringList{ get; }
-
-/// <summary> Required collection of ints, illustrating a collection of value types. </summary>
-public global::System.Collections.Generic.IList<int> RequiredIntList{ get; }
-
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 /// <param name=""requiredStringList""> Required collection of strings, illustrating a collection of reference types. </param>
 /// <param name=""requiredIntList""> Required collection of ints, illustrating a collection of value types. </param>
@@ -354,6 +348,12 @@ global::Azure.Core.Argument.AssertNotNull(requiredIntList, nameof(requiredIntLis
 RequiredStringList = requiredStringList;
 RequiredIntList = requiredIntList;
 }
+
+/// <summary> Required collection of strings, illustrating a collection of reference types. </summary>
+public global::System.Collections.Generic.IList<string> RequiredStringList{ get; }
+
+/// <summary> Required collection of ints, illustrating a collection of value types. </summary>
+public global::System.Collections.Generic.IList<int> RequiredIntList{ get; }
 }
 }
 ",
