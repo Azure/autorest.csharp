@@ -241,8 +241,7 @@ namespace AutoRest.CSharp.Output.Models
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
-                    isCadlInput,
-                    typeFactory)
+                    isCadlInput)
                 {
                     SubClients = subClients
                 };

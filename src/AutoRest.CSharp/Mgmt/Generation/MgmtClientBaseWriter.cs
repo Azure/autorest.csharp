@@ -515,14 +515,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _ => throw new InvalidOperationException("Unknown method combination"),
             };
 
-        protected CodeWriter.CodeWriterScope WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
+        protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
-            var returnDescription = clientOperation.ReturnsDescription is not null ? clientOperation.ReturnsDescription(isAsync) : null;
+            var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
         }
 
-        protected CodeWriter.CodeWriterScope WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        protected IDisposable WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
         {
             var scope = WriteCommonMethodWithoutValidation(signature, returnDescription, isAsync);
             if (This.Accessibility == "public")
@@ -531,7 +531,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return scope;
         }
 
-        private CodeWriter.CodeWriterScope WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        private IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);

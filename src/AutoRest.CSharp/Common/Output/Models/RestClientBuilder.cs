@@ -46,20 +46,21 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly SerializationBuilder _serializationBuilder;
         private readonly OutputLibrary? _library;
-        private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
+
+        public TypeFactory TypeFactory { get; }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
+            TypeFactory = typeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _typeFactory = typeFactory;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
+            TypeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _typeFactory = context.TypeFactory;
             _library = context.BaseLibrary;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
@@ -112,14 +113,6 @@ namespace AutoRest.CSharp.Output.Models
                 operation,
                 buildContext.RequestConditionFlag
             );
-        }
-
-        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
-        {
-            var inputParameters = new CodeModelConverter().CreateOperationParameters(operation.Parameters.Concat(requestParameters).ToArray());
-            return inputParameters
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToDictionary(p => p.NameInRequest, p => (CreateReference(p, BuildParameter(p)), p.SkipUrlEncoding));
         }
 
         /// <summary>
@@ -455,7 +448,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var groupModel = (SchemaObjectType)TypeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
 
             return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -479,7 +472,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new StreamResponseBody();
             }
 
-            CSharpType responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(bodyType));
+            CSharpType responseType = TypeFactory.GetOutputType(TypeFactory.CreateType(bodyType));
             ObjectSerialization serialization = _serializationBuilder.Build(response.BodyMediaType, bodyType, responseType);
 
             return new ObjectResponseBody(responseType, serialization);
@@ -571,8 +564,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
-            return Parameter.FromRequestParameter(operationParameter, type, _typeFactory);
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : TypeFactory.CreateType(operationParameter.Type);
+            return Parameter.FromInputParameter(operationParameter, type, TypeFactory);
         }
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)

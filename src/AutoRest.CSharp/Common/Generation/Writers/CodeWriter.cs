@@ -264,14 +264,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private bool IsAvailable(string s)
         {
-            if (_scopes.TryPeek(out var currentScope))
-            {
-                if (currentScope.AllDefinedIdentifiers.Contains(s))
-                {
-                    return false;
-                }
-            }
-
             foreach (CodeWriterScope codeWriterScope in _scopes)
             {
                 if (codeWriterScope.Identifiers.Contains(s))
@@ -486,11 +478,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private CodeWriter Declaration(string declaration)
         {
-            foreach (var scope in _scopes)
-            {
-                scope.AllDefinedIdentifiers.Add(declaration);
-            }
-
             _scopes.Peek().Identifiers.Add(declaration);
 
             return Identifier(declaration);
@@ -560,8 +547,6 @@ namespace AutoRest.CSharp.Generation.Writers
             private readonly bool _newLine;
 
             public HashSet<string> Identifiers { get; } = new HashSet<string>();
-
-            public HashSet<string> AllDefinedIdentifiers { get; } = new HashSet<string>();
 
             public CodeWriterScope(CodeWriter writer, string? end, bool newLine)
             {

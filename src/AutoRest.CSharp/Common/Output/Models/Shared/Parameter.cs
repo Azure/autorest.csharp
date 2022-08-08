@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, property.Description, typeFactory.CreateType(property.Type), null, validation, null);
         }
 
-        public static Parameter FromRequestParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;

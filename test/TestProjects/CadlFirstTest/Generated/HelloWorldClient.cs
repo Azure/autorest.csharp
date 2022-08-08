@@ -62,6 +62,8 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         public virtual async Task<Response<Thing>> TopActionValueAsync(string action, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(action, nameof(action));
+
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
             scope.Start();
             try
@@ -82,6 +84,8 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         public virtual Response<Thing> TopActionValue(string action, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(action, nameof(action));
+
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
             scope.Start();
             try
@@ -347,7 +351,7 @@ namespace CadlFirstTest
         private static RequestContext DefaultRequestContext = new RequestContext();
         internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
         {
-            if (cancellationToken == CancellationToken.None)
+            if (!cancellationToken.CanBeCanceled)
             {
                 return DefaultRequestContext;
             }

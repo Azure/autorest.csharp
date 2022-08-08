@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
             {
@@ -136,6 +136,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Append($"{methodBase.Name}(")
                 .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
+            var outerScope = writer.AmbientScope();
+
             foreach (var parameter in methodBase.Parameters)
             {
                 writer.WriteParameter(parameter);
@@ -166,7 +168,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning restore {disabledWarning}");
             }
 
-            return writer.Scope();
+            var innerScope = writer.Scope();
+            return Disposable.Create(() =>
+            {
+                innerScope.Dispose();
+                outerScope.Dispose();
+            });
         }
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
@@ -302,6 +309,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
+
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, MethodSignature method, IEnumerable<FormattableString> parameters, bool asyncCall)
+        {
+            var parametersFs = parameters.ToArray().Join(", ");
+            if (asyncCall)
+            {
+                return writer.Append($"await {method.WithAsync(true).Name}({parametersFs}).ConfigureAwait(false)");
+            }
+
+            return writer.Append($"{method.WithAsync(false).Name}({parametersFs})");
+        }
 
         private static FormattableString GetMethodCallFormattableString(bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => asyncCall ? (FormattableString)$"await {asyncMethodName}({parameters}).ConfigureAwait(false)" : (FormattableString)$"{syncMethodName}({parameters})";
