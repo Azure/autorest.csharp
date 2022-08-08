@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string? SingletonResourceIdSuffix { get; }
 
-        public bool IsTaggable => ResourceData.IsTaggable;
+        public bool IsTaggable => ResourceData.IsTaggable && UpdateOperation is not null;
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
