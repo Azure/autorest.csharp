@@ -29,6 +29,7 @@ namespace MgmtMockAndSample
             // if you do not know how to create ArmResourceExtensions, please refer to the document of ArmResourceExtensions
             ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", "00000000-0000-0000-0000-000000000000", "rgname"));
             GenericResource resource = client.GetGenericResource(resourceId);
+
             // get the collection of this RoleAssignmentResource
             RoleAssignmentCollection collection = resource.GetRoleAssignments();
 

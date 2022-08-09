@@ -29,6 +29,7 @@ namespace MgmtMockAndSample
             // if you do not know how to create SubscriptionResourceExtensions, please refer to the document of SubscriptionResourceExtensions
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa");
 

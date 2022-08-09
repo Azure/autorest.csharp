@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using System.Xml;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -29,8 +34,42 @@ namespace MgmtMockAndSample
             // if you do not know how to create ResourceGroupResourceExtensions, please refer to the document of ResourceGroupResourceExtensions
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
             VaultCollection collection = resourceGroupResource.GetVaults();
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            {
+                Duration = XmlConvert.ToTimeSpan("P7D"),
+                CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
+                AccessPolicies =
+{
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+{
+Keys =
+{
+KeyPermission.Encrypt,KeyPermission.Decrypt,KeyPermission.WrapKey,KeyPermission.UnwrapKey,KeyPermission.Sign,KeyPermission.Verify,KeyPermission.Get,KeyPermission.List,KeyPermission.Create,KeyPermission.Update,KeyPermission.Import,KeyPermission.Delete,KeyPermission.Backup,KeyPermission.Restore,KeyPermission.Recover,KeyPermission.Purge
+},
+Secrets =
+{
+SecretPermission.Get,SecretPermission.List,SecretPermission.Set,SecretPermission.Delete,SecretPermission.Backup,SecretPermission.Restore,SecretPermission.Recover,SecretPermission.Purge
+},
+Certificates =
+{
+CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delete,CertificatePermission.Create,CertificatePermission.Import,CertificatePermission.Update,CertificatePermission.Managecontacts,CertificatePermission.Getissuers,CertificatePermission.Listissuers,CertificatePermission.Setissuers,CertificatePermission.Deleteissuers,CertificatePermission.Manageissuers,CertificatePermission.Recover,CertificatePermission.Purge
+},
+})
+},
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+                PublicNetworkAccess = "Enabled",
+            })
+            {
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
+            });
+            MgmtMockAndSample.VaultResource result = lro.Value;
+            MgmtMockAndSample.VaultData data = result.Data;
 
             await Task.Run(() => _ = string.Empty);
         }

@@ -29,6 +29,7 @@ namespace MgmtMockAndSample
             // if you do not know how to create ResourceGroupResourceExtensions, please refer to the document of ResourceGroupResourceExtensions
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
             DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 

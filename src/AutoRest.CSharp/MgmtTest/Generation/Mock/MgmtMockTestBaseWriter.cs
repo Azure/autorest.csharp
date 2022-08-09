@@ -106,11 +106,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             }
         }
 
-        protected string CreateMethodName(string methodName, bool async = true)
-        {
-            return async ? $"{methodName}Async" : methodName;
-        }
-
         protected void WriteTestOperation(CodeWriterDeclaration declaration, MockTestCase testCase)
         {
             // we will always use the Async version of methods
@@ -131,10 +126,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
         protected void WriteTestMethodInvocation(CodeWriterDeclaration declaration, MockTestCase testCase)
         {
-            var clientOperation = testCase.Operation;
-            var methodName = CreateMethodName(clientOperation.Name);
+            var operation = testCase.Operation;
+            var methodName = CreateMethodName(operation.Name);
             _writer.Append($"{declaration}.{methodName}(");
-            foreach (var parameter in clientOperation.MethodParameters)
+            foreach (var parameter in operation.MethodParameters)
             {
                 if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
@@ -144,11 +139,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             }
             _writer.RemoveTrailingComma();
             _writer.AppendRaw(")");
-        }
-
-        public override string ToString()
-        {
-            return _writer.ToString();
         }
     }
 }

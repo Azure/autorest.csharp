@@ -28,6 +28,7 @@ namespace MgmtMockAndSample
             // if you do not know how to create VaultResource, please refer to the document of VaultResource
             ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 

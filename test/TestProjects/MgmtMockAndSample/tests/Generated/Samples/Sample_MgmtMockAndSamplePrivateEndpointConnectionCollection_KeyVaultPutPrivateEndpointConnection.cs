@@ -6,9 +6,11 @@
 #nullable disable
 
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -28,8 +30,22 @@ namespace MgmtMockAndSample
             // if you do not know how to create VaultResource, please refer to the document of VaultResource
             ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MgmtMockAndSamplePrivateEndpointConnectionData()
+            {
+                Etag = "",
+                ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
+                {
+                    Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,
+                    Description = "My name is Joe and I'm approving this.",
+                },
+            });
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
 
             await Task.Run(() => _ = string.Empty);
         }

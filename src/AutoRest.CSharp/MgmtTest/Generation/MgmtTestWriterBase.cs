@@ -132,5 +132,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             return _writer.ToString();
         }
+
+        protected string CreateMethodName(string methodName, bool async = true)
+        {
+            return async ? $"{methodName}Async" : methodName;
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace MgmtMockAndSample
             // if you do not know how to create ManagedHsmResource, please refer to the document of ManagedHsmResource
             ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
             // get the collection of this MhsmPrivateEndpointConnectionResource
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 

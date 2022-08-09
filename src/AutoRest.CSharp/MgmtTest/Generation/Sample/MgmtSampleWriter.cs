@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -82,9 +83,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         private CodeWriterDeclaration WriteSampleOperationForResourceCollection(CodeWriterDeclaration clientVar, ResourceCollection collection)
         {
             var collectionVar = WriteGetCollection(clientVar, collection);
-            var resourceVar = WriteSampleOperation(clientVar, collectionVar);
+            var resultVar = WriteSampleOperation(clientVar, collectionVar);
 
-            return resourceVar;
+            _writer.Line();
+
+            return resultVar;
         }
 
         private CodeWriterDeclaration WriteSampleOperationForResource(CodeWriterDeclaration clientVar)
@@ -112,6 +115,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             // TODO -- we might should look this up inside the code project for correct method name
             var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
             var collectionVar = new CodeWriterDeclaration("collection");
+
+            _writer.Line();
             _writer.Line($"// get the collection of this {collection.Resource.Type.Name}");
             _writer.Append($"{collection.Type.Name} {collectionVar:D} = {parentVar}.{getResourceCollectionMethodName}(");
             var parameterValues = testCase.ParameterValueMapping;
@@ -132,10 +137,80 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return collectionVar;
         }
 
-        private CodeWriterDeclaration WriteSampleOperation(CodeWriterDeclaration clientVar, CodeWriterDeclaration? collectionVar)
+        private CodeWriterDeclaration WriteSampleOperation(CodeWriterDeclaration clientVar, CodeWriterDeclaration collectionVar)
         {
-            // TODO
+            if (testCase.IsLro)
+            {
+                return WriteSampleLroOperation(collectionVar);
+            }
+            else if (testCase.IsPageable)
+            {
+                return WriteSamplePageableOperation(collectionVar);
+            }
+
+            return WriteSampleNormalOperation(collectionVar);
+        }
+
+        // TODO -- change the return types here from a CodeWriterDeclaration to a struct that has this and its CSharpType
+        private CodeWriterDeclaration WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
+        {
+            var returnType = testCase.Operation.ReturnType;
+            var lroVar = new CodeWriterDeclaration("lro");
+            _writer.Line();
+            _writer.Line($"// invoke the operation");
+            _writer.Append($"{returnType} {lroVar:D} = ");
+            // we always write the async version
+            _writer.Append($"await ");
+            // write the method invocation
+            WriteOperationInvocation(instanceVar);
+            _writer.LineRaw(";");
+
+            // if the Lro is an ArmOperation<T>
+            if (returnType.IsGenericType)
+            {
+                var resultType = returnType.Arguments.First();
+                var resultVar = new CodeWriterDeclaration("result");
+                _writer.Line($"{resultType} {resultVar:D} = {lroVar}.Value;");
+
+                // if the result type is a resource
+                if (resultType.IsResourceType(out var resource))
+                {
+                    var dataType = resource.ResourceData.Type;
+                    var dataVar = new CodeWriterDeclaration("data");
+                    _writer.Line($"{dataType} {dataVar:D} = {resultVar}.Data;");
+                    return dataVar;
+                }
+                else
+                    return resultVar;
+            }
+            else
+                return lroVar;
+        }
+
+        private CodeWriterDeclaration WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
+        {
             return new CodeWriterDeclaration("");
+        }
+
+        private CodeWriterDeclaration WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
+        {
+            return new CodeWriterDeclaration("");
+        }
+
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar)
+        {
+            var methodName = CreateMethodName(testCase.Operation.Name);
+            _writer.Append($"{instanceVar}.{methodName}(");
+            foreach (var parameter in testCase.Operation.MethodParameters)
+            {
+                if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                {
+                    _writer.AppendExampleParameterValue(parameter, parameterValue);
+                    _writer.AppendRaw(",");
+                }
+            }
+            _writer.RemoveTrailingComma();
+            _writer.AppendRaw(")");
         }
     }
 }

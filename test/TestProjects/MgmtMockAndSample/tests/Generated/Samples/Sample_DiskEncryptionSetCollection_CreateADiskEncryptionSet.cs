@@ -5,11 +5,15 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -29,8 +33,22 @@ namespace MgmtMockAndSample
             // if you do not know how to create ResourceGroupResourceExtensions, please refer to the document of ResourceGroupResourceExtensions
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
             DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "myDiskEncryptionSet", new DiskEncryptionSetData()
+            {
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/{key}"))
+                {
+                    SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
+                },
+            });
+            MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
+            MgmtMockAndSample.DiskEncryptionSetData data = result.Data;
 
             await Task.Run(() => _ = string.Empty);
         }

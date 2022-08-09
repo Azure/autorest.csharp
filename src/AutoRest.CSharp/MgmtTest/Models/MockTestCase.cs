@@ -113,5 +113,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
             return false;
         }
+
+        public bool IsConvenientOperation => Operation.IsConvenientOperation;
+
+        public bool IsLro => Operation.IsLongRunningOperation;
+
+        public bool IsPageable => Operation.IsPagingOperation;
     }
 }
