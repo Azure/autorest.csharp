@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_RoleAssignmentResource_CreateRoleAssignment
     {
         // Create role assignment
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update()
         {
             // this example is just showing the usage of "RoleAssignments_Create" operation, for the dependent resources, they will have to be created separately.

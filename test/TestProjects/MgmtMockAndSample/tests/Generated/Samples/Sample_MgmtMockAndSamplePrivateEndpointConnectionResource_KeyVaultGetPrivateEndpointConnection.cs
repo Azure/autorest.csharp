@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_MgmtMockAndSamplePrivateEndpointConnectionResource_KeyVaultGetPrivateEndpointConnection
     {
         // KeyVaultGetPrivateEndpointConnection
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get()
         {
             // this example is just showing the usage of "PrivateEndpointConnections_Get" operation, for the dependent resources, they will have to be created separately.

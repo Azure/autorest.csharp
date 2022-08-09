@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_MhsmPrivateEndpointConnectionResource_ManagedHsmDeletePrivateEndpointConnection
     {
         // ManagedHsmDeletePrivateEndpointConnection
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete()
         {
             // this example is just showing the usage of "MHSMPrivateEndpointConnections_Delete" operation, for the dependent resources, they will have to be created separately.

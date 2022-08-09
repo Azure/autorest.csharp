@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_ManagedHsmResource_UpdateAnExistingManagedHSMPool
     {
         // Update an existing managed HSM Pool
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update()
         {
             // this example is just showing the usage of "ManagedHsms_Update" operation, for the dependent resources, they will have to be created separately.

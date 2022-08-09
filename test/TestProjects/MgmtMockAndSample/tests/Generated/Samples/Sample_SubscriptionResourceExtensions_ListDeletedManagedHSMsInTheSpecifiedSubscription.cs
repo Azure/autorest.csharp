@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_SubscriptionResourceExtensions_ListDeletedManagedHSMsInTheSpecifiedSubscription
     {
         // List deleted managed HSMs in the specified subscription
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetDeletedManagedHsms()
         {
             // this example is just showing the usage of "ManagedHsms_ListDeleted" operation, for the dependent resources, they will have to be created separately.

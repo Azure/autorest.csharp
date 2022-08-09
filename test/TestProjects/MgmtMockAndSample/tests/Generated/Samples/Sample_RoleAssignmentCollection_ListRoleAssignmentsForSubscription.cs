@@ -16,7 +16,8 @@ namespace MgmtMockAndSample
     public partial class Sample_RoleAssignmentCollection_ListRoleAssignmentsForSubscription
     {
         // List role assignments for subscription
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll()
         {
             // this example is just showing the usage of "RoleAssignments_List" operation, for the dependent resources, they will have to be created separately.

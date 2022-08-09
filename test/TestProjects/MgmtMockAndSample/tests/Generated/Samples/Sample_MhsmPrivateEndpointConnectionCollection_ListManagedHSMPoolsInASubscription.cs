@@ -15,7 +15,8 @@ namespace MgmtMockAndSample
     public partial class Sample_MhsmPrivateEndpointConnectionCollection_ListManagedHSMPoolsInASubscription
     {
         // List managed HSM Pools in a subscription
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll()
         {
             // this example is just showing the usage of "MHSMPrivateEndpointConnections_ListByResource" operation, for the dependent resources, they will have to be created separately.

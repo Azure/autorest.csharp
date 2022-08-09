@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_SubscriptionResourceExtensions_ListVaultsInTheSpecifiedSubscription
     {
         // List vaults in the specified subscription
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetVaults()
         {
             // this example is just showing the usage of "Vaults_ListBySubscription" operation, for the dependent resources, they will have to be created separately.

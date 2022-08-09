@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_TenantResourceExtensions_GetTenantActivityLogsWithoutFilterOrSelect
     {
         // Get Tenant Activity Logs without filter or select
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetTenantActivityLogs()
         {
             // this example is just showing the usage of "TenantActivityLogs_List" operation, for the dependent resources, they will have to be created separately.

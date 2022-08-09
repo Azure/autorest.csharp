@@ -37,7 +37,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         private void WriteImplementation()
         {
             _writer.Line($"// {This.Sample.Name}");
-            _writer.Line($"[NUnit.Framework.TestCase]");
+            _writer.Line($"[NUnit.Framework.Test]");
+            _writer.Line($"[NUnit.Framework.Ignore(\"Only verifying that the sample builds\")]");
             using (_writer.WriteMethodDeclaration(testCase.GetMethodSignature(false)))
             {
                 WriteSampleSteps();
@@ -50,11 +51,20 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             _writer.Line($"// this example is just showing the usage of \"{testCase.OperationId}\" operation, for the dependent resources, they will have to be created separately.");
             _writer.Line();
 
+            // Write the ArmClient and authentication
             var clientVar = WriteGetArmClient();
-            // TODO -- maybe add a switch here?
-            var collectionVar = WriteGetCollection(clientVar);
-            var resourceVar = WriteSampleOperation(clientVar, collectionVar);
 
+            // Write the operation invocation
+            var resultVar = testCase.Carrier switch
+            {
+                ResourceCollection collection => WriteSampleOperationForResourceCollection(clientVar, collection),
+                Resource resource => WriteSampleOperationForResource(clientVar),
+                MgmtExtensions => WriteSampleOperationForExtension(clientVar),
+                _ => throw new InvalidOperationException("Should never happen"),
+            };
+
+            // Write the result handling
+            // TODO
             _writer.Line($"await {typeof(System.Threading.Tasks.Task)}.Run(() => _ = string.Empty);");
         }
 
@@ -69,11 +79,28 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return clientVar;
         }
 
-        private CodeWriterDeclaration? WriteGetCollection(CodeWriterDeclaration clientVar)
+        private CodeWriterDeclaration WriteSampleOperationForResourceCollection(CodeWriterDeclaration clientVar, ResourceCollection collection)
         {
-            if (testCase.Carrier is not ResourceCollection collection)
-                return null;
+            var collectionVar = WriteGetCollection(clientVar, collection);
+            var resourceVar = WriteSampleOperation(clientVar, collectionVar);
 
+            return resourceVar;
+        }
+
+        private CodeWriterDeclaration WriteSampleOperationForResource(CodeWriterDeclaration clientVar)
+        {
+            // TODO
+            return new CodeWriterDeclaration("");
+        }
+
+        private CodeWriterDeclaration WriteSampleOperationForExtension(CodeWriterDeclaration clientVar)
+        {
+            // TODO
+            return new CodeWriterDeclaration("");
+        }
+
+        private CodeWriterDeclaration WriteGetCollection(CodeWriterDeclaration clientVar, ResourceCollection collection)
+        {
             var parent = testCase.Parent;
             Debug.Assert(parent != null);
             _writer.Line($"// we assume you already have this {parent.Type.Name} created");

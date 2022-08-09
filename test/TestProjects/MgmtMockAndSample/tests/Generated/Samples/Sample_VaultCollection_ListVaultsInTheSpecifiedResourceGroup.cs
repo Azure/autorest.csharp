@@ -16,7 +16,8 @@ namespace MgmtMockAndSample
     public partial class Sample_VaultCollection_ListVaultsInTheSpecifiedResourceGroup
     {
         // List vaults in the specified resource group
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll()
         {
             // this example is just showing the usage of "Vaults_ListByResourceGroup" operation, for the dependent resources, they will have to be created separately.

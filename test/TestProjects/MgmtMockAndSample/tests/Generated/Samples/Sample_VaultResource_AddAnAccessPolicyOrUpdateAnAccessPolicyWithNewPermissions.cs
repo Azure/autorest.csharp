@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_VaultResource_AddAnAccessPolicyOrUpdateAnAccessPolicyWithNewPermissions
     {
         // Add an access policy, or update an access policy with new permissions
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task UpdateAccessPolicy()
         {
             // this example is just showing the usage of "Vaults_UpdateAccessPolicy" operation, for the dependent resources, they will have to be created separately.

@@ -16,7 +16,8 @@ namespace MgmtMockAndSample
     public partial class Sample_VaultCollection_CreateANewVaultOrUpdateAnExistingVault
     {
         // Create a new vault or update an existing vault
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CreateOrUpdate()
         {
             // this example is just showing the usage of "Vaults_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.

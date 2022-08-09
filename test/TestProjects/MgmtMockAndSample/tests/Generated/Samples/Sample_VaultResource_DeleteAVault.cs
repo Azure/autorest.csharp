@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_VaultResource_DeleteAVault
     {
         // Delete a vault
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete()
         {
             // this example is just showing the usage of "Vaults_Delete" operation, for the dependent resources, they will have to be created separately.

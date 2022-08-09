@@ -16,7 +16,8 @@ namespace MgmtMockAndSample
     public partial class Sample_VirtualMachineExtensionImageCollection_VirtualMachineExtensionImagesListTypesMinimumSetGen
     {
         // VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetAll()
         {
             // this example is just showing the usage of "VirtualMachineExtensionImages_ListTypes" operation, for the dependent resources, they will have to be created separately.

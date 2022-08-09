@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_DeletedManagedHsmResource_PurgeAManagedHSMPool
     {
         // Purge a managed HSM Pool
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task PurgeDeleted()
         {
             // this example is just showing the usage of "ManagedHsms_PurgeDeleted" operation, for the dependent resources, they will have to be created separately.

@@ -14,7 +14,8 @@ namespace MgmtMockAndSample
     public partial class Sample_DeletedManagedHsmResource_RetrieveADeletedManagedHSM
     {
         // Retrieve a deleted managed HSM
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get()
         {
             // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.

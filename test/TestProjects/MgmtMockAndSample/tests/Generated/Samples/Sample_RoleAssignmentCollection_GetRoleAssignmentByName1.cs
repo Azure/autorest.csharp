@@ -16,7 +16,8 @@ namespace MgmtMockAndSample
     public partial class Sample_RoleAssignmentCollection_GetRoleAssignmentByName
     {
         // Get role assignment by name
-        [NUnit.Framework.TestCase]
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Exists()
         {
             // this example is just showing the usage of "RoleAssignments_Get" operation, for the dependent resources, they will have to be created separately.
