@@ -4,6 +4,7 @@
  "ApiVersions": [
   "2015-06-18"
  ],
+ "Models": [],
  "Clients": [
   {
    "$id": "2",
@@ -21,10 +22,9 @@
        "Description": "",
        "Type": {
         "$id": "5",
-        "Name": "string",
+        "Name": "String",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Query",
        "IsRequired": true,
@@ -44,8 +44,7 @@
         "$id": "7",
         "Name": "string",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Path",
        "IsRequired": true,

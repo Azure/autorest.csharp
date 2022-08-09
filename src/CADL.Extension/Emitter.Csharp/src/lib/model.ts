@@ -2,9 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    ArrayType,
+    EnumMemberType,
+    EnumType,
+    getDoc,
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
+    getVisibility,
     isIntrinsic,
     ModelType,
     ModelTypeProperty,
@@ -17,7 +22,15 @@ import {
     getQueryParamName,
     isStatusCode
 } from "@cadl-lang/rest/http";
-import { InputType } from "../type/InputType.js";
+import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
+import { InputModelProperty } from "../type/InputModelProperty.js";
+import {
+    InputEnumType,
+    InputListType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 /**
  * Map calType to csharp InputTypeKind
@@ -192,37 +205,156 @@ function getDefaultValue(type: Type): any {
     }
 }
 
-export function getInputType(program: Program, type: Type): InputType {
-    const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
-        program,
-        type
-    );
+export function getInputType(
+    program: Program,
+    type: Type,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
+): InputType {
     if (type.kind === "Model") {
-        if (type.name === getIntrinsicModelName(program, type)) {
-            // if the model is one of the Cadl Intrinsic type.
-            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-            // In such cases, we don't want to emit a ref and instead just
-            // emit the base type directly.
-            return new InputType(
-                mapCadlIntrinsicModelToCsharpModel(program, type) ?? type.name,
-                builtInKind,
-                false
-            );
-        } else {
-            type = getEffectiveSchemaType(program, type) as ModelType;
-            const name = getFriendlyName(program, type) ?? type.name;
-            return new InputType(name, builtInKind, false);
-        }
-    }
-
-    if (
+        return getInputModelType(program, type);
+    } else if (
         type.kind === "String" ||
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
         // For literal types, we just want to emit them directly as well.
-        return new InputType(type.kind, builtInKind, false);
+        const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
+            program,
+            type
+        );
+        return {
+            Name: type.kind,
+            Kind: builtInKind,
+            IsNullable: false
+        } as InputPrimitiveType;
+    } else if (type.kind === "Enum") {
+        return getInputTypeForEnum(type);
+    } else if (type.kind === "Array") {
+        return getInputTypeForArray(program, type);
+    } else {
+        return {
+            Name: InputTypeKind.UnKnownKind,
+            IsNullable: false
+        } as InputType;
     }
 
-    return new InputType(type.kind, InputTypeKind.UnKnownKind, false);
+    function getInputModelType(program: Program, m: ModelType): InputType {
+        if (m.name === getIntrinsicModelName(program, m)) {
+            // if the model is one of the Cadl Intrinsic type.
+            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+            // In such cases, we don't want to emit a ref and instead just
+            // emit the base type directly.
+            return {
+                Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
+                Kind: mapCalTypeToCsharpInputTypeKind(program, m),
+                IsNullable: false
+            } as InputPrimitiveType;
+        } else {
+            m = getEffectiveSchemaType(program, m) as ModelType;
+            const name = getFriendlyName(program, m) ?? m.name;
+            let model = models.get(name);
+            if (!model) {
+                // Get properties of the model.
+                const properties: InputModelProperty[] = [];
+                m.properties.forEach(
+                    (value: ModelTypeProperty, key: string) => {
+                        // console.log(key, value);
+                        const vis = getVisibility(program, value);
+                        let isReadOnly: boolean = false;
+                        if (vis && vis.includes("read") && vis.length == 1) {
+                            isReadOnly = true;
+                        }
+                        const inputProp = {
+                            Name: value.name,
+                            SerializedName: value.name,
+                            Description: "",
+                            Type: getInputType(
+                                program,
+                                value.type,
+                                models,
+                                enums
+                            ),
+                            IsRequired: !value.optional,
+                            IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
+                            IsDiscriminator: false
+                        };
+                        properties.push(inputProp);
+                    }
+                );
+
+                model = {
+                    Name: name,
+                    IsNullable: false,
+                    Properties: properties
+                } as InputModelType;
+
+                models.set(name, model);
+            }
+
+            return model;
+        }
+    }
+
+    function getInputTypeForEnum(e: EnumType): InputType {
+        let enumType = enums.get(e.name);
+        if (!enumType) {
+            if (e.members.length == 0) {
+                return {
+                    Name: InputTypeKind.UnKnownKind,
+                    IsNullable: false
+                } as InputType;
+            }
+            const allowValues: InputEnumTypeValue[] = [];
+            const enumValueType = enumMemberType(e.members[0]);
+
+            for (const option of e.members) {
+                if (enumValueType !== enumMemberType(option)) {
+                    // TODO: add error handler
+                    continue;
+                }
+
+                const member = {
+                    Name: option.name,
+                    Value: option.value ?? option.name,
+                    Description: getDoc(program, option)
+                } as InputEnumTypeValue;
+
+                allowValues.push(member);
+            }
+            //TODO: need to figure out if it is extensible or not.
+            const isExtensible: boolean = false;
+            enumType = {
+                Name: e.name,
+                Namespace: e.namespace?.name,
+                Accessibility: "", //TODO: need to add accessibility
+                Description: getDoc(program, e),
+                EnumValueType: enumValueType,
+                AllowedValues: allowValues,
+                IsExtensible: isExtensible,
+                IsNullable: false
+            } as InputEnumType;
+            enums.set(e.name, enumType);
+        }
+        return enumType;
+
+        function enumMemberType(member: EnumMemberType): string {
+            if (typeof member.value === "number") {
+                return "Int32";
+            }
+            return "String";
+        }
+    }
+
+    function getInputTypeForArray(
+        program: Program,
+        arr: ArrayType
+    ): InputListType {
+        const elementType = arr.elementType;
+        return {
+            Name: "Array",
+            ElementType: getInputType(program, elementType, models, enums),
+            IsNullable: false
+        } as InputListType;
+    }
 }

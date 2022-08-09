@@ -5,9 +5,11 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {
@@ -20,6 +22,21 @@ namespace CadlFirstTest
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt");
             writer.WriteNumberValue(RequiredInt);
+            writer.WritePropertyName("requiredCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollection)
+            {
+                writer.WriteStringValue(item.ToSerialString());
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredDictionary");
+            writer.WriteStartObject();
+            foreach (var item in RequiredDictionary)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value.ToString());
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -27,6 +44,8 @@ namespace CadlFirstTest
         {
             string requiredString = default;
             int requiredInt = default;
+            IList<SimpleEnum> requiredCollection = default;
+            IDictionary<string, ExtensibleEnum> requiredDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -39,8 +58,28 @@ namespace CadlFirstTest
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("requiredCollection"))
+                {
+                    List<SimpleEnum> array = new List<SimpleEnum>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString().ToSimpleEnum());
+                    }
+                    requiredCollection = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredDictionary"))
+                {
+                    Dictionary<string, ExtensibleEnum> dictionary = new Dictionary<string, ExtensibleEnum>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, new ExtensibleEnum(property0.Value.GetString()));
+                    }
+                    requiredDictionary = dictionary;
+                    continue;
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary);
         }
 
         internal RequestContent ToRequestContent()
