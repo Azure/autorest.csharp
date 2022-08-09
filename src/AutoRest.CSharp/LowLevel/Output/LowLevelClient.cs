@@ -84,14 +84,18 @@ namespace AutoRest.CSharp.Output.Models
             var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
             foreach (var operation in operations)
             {
-                requestMethods.Add(operation, builder.BuildRequestMethod(operation));
+                var requestMethod = isCadlInput
+                    ? builder.BuildRequestMethod(ChangeTypesForProtocolMethod(operation))
+                    : builder.BuildRequestMethod(operation);
+
+                requestMethods.Add(operation, requestMethod);
             }
 
             foreach (var (operation, requestMethod) in requestMethods)
             {
                 var paging = operation.Paging;
-                var requestBodyParameter = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body);
-                var requestBodyType = requestBodyParameter?.Type;
+
+                var requestBodyType = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
                 var responseBodyType = requestMethod.Operation.Responses.FirstOrDefault()?.BodyType;
                 var diagnostic = new Diagnostic($"{clientName}.{requestMethod.Name}");
 
@@ -129,50 +133,75 @@ namespace AutoRest.CSharp.Output.Models
                 var parameters = operation.LongRunning != null
                     ? requestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
                     : requestMethod.Parameters;
-                var protocolMethodSignature = new MethodSignature(requestMethod.Name, requestMethod.Summary, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
-                var convenienceMethod = isCadlInput ? BuildConvenienceMethod(protocolMethodSignature, requestBodyParameter, responseBodyType, clientName, builder.TypeFactory) : null;
 
+
+                var protocolMethodSignature = new MethodSignature(requestMethod.Name, requestMethod.Summary, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
+                var convenienceMethod = isCadlInput ? BuildConvenienceMethod(operation, protocolMethodSignature, clientName, requestMethod.ReturnType, builder.TypeFactory) : null;
                 yield return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, requestMethod, requestBodyType, responseBodyType, diagnostic, pagingInfo, operation.LongRunning);
             }
         }
 
-        private static LowLevelConvenienceMethod BuildConvenienceMethod(MethodSignature protocolSignature, InputParameter? inputBodyParameter, InputType? inputResponseType, string clientName, TypeFactory typeFactory)
+        private static ConvenienceMethod BuildConvenienceMethod(InputOperation operation, MethodSignature protocolMethod, string clientName, CSharpType? responseType, TypeFactory typeFactory)
         {
             var parameters = new List<Parameter>();
             Parameter? bodyParameter = null;
             bool isAmbiguous = true;
-            foreach (var parameter in protocolSignature.Parameters)
+
+            if (operation.LongRunning != null)
             {
-                if (parameter == KnownParameters.RequestContent || parameter == KnownParameters.RequestContentNullable)
+                parameters.Add(KnownParameters.WaitForCompletion);
+            }
+
+            var parametersByName = operation.Parameters
+                .Select(ip => Parameter.FromInputParameter(ip, typeFactory.CreateType(ip.Type), typeFactory))
+                .ToDictionary(ip => ip.Name);
+
+            foreach (var protocolParameter in protocolMethod.Parameters)
+            {
+                if (protocolParameter == KnownParameters.RequestContent || protocolParameter == KnownParameters.RequestContentNullable)
                 {
                     isAmbiguous = false;
-                    var bodyParameterType = typeFactory.CreateType(inputBodyParameter!.Type);
-                    bodyParameter = Parameter.FromInputParameter(inputBodyParameter, bodyParameterType, typeFactory);
-                    parameters.Add(bodyParameter);
+                    parameters.Add(parametersByName.Values.First(p => p.RequestLocation == RequestLocation.Body));
                 }
-                else if (parameter == KnownParameters.RequestContext)
+                else if (protocolParameter == KnownParameters.RequestContext)
                 {
                     parameters.Add(KnownParameters.CancellationTokenParameter);
                 }
-                else
+                else if (parametersByName.TryGetValue(protocolParameter.Name, out var parameter))
                 {
                     parameters.Add(parameter);
                 }
+                else
+                {
+                    parameters.Add(protocolParameter);
+                }
             }
 
-            var responseType = inputResponseType != null ? typeFactory.CreateType(inputResponseType) : null;
             var returnType = responseType == null ? typeof(Azure.Response) : new CSharpType(typeof(Azure.Response<>), responseType);
 
             string name = isAmbiguous
-                ? protocolSignature.Name.IsLastWordSingular()
-                    ? $"{protocolSignature.Name}Value"
-                    : $"{protocolSignature.Name.LastWordToSingular()}Values"
-                : protocolSignature.Name;
+                ? protocolMethod.Name.IsLastWordSingular()
+                    ? $"{protocolMethod.Name}Value"
+                    : $"{protocolMethod.Name.LastWordToSingular()}Values"
+                : protocolMethod.Name;
 
-            var convenienceSignature = protocolSignature with { Name = name, ReturnType = returnType, Parameters = parameters };
-            var diagnostic = convenienceSignature.Name != protocolSignature.Name ? new Diagnostic($"{clientName}.{convenienceSignature.Name}") : null;
-            return new LowLevelConvenienceMethod(convenienceSignature, responseType, bodyParameter, diagnostic);
+            var convenienceSignature = new MethodSignature(name, protocolMethod.Summary, protocolMethod.Description, protocolMethod.Modifiers, returnType, null, parameters);
+            var diagnostic = name != protocolMethod.Name ? new Diagnostic($"{clientName}.{convenienceSignature.Name}") : null;
+            return new ConvenienceMethod(convenienceSignature, responseType, bodyParameter, diagnostic);
         }
+
+        private static InputOperation ChangeTypesForProtocolMethod(InputOperation operation)
+            => operation with
+            {
+                Parameters = operation.Parameters.Select(p => p with { Type = ChangeTypeForProtocolMethod(p.Type) }).ToArray()
+            };
+
+        private static InputType ChangeTypeForProtocolMethod(InputType type) => type switch
+        {
+            InputEnumType enumType => enumType.EnumValueType with { IsNullable = enumType.IsNullable },
+            InputModelType modelType => InputPrimitiveType.Object with { IsNullable = modelType.IsNullable },
+            _ => type
+        };
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {

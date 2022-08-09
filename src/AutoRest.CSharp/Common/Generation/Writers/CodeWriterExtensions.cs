@@ -284,9 +284,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.Type.Equals(typeof(RequestConditions)))
                 {
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
-#pragma warning restore CS8605 // Unboxing a possibly null value.
+                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)).Cast<RequestConditionHeaders>())
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {

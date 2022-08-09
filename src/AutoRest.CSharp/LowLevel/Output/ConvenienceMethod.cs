@@ -7,5 +7,5 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelConvenienceMethod(MethodSignature Signature, CSharpType? ResponseType, Parameter? BodyParameter, Diagnostic? Diagnostic);
+    internal record ConvenienceMethod(MethodSignature Signature, CSharpType? ResponseType, Parameter? BodyParameter, Diagnostic? Diagnostic);
 }

@@ -46,6 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             if (!operationParameter.IsRequired && defaultValue == null)
             {
+                type = type.WithNullable(true);
                 defaultValue = Constant.Default(type);
             }
 

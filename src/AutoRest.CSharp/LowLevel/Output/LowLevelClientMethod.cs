@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record LowLevelClientMethod(
         MethodSignature ProtocolMethodSignature,
-        LowLevelConvenienceMethod? ConvenienceMethod,
+        ConvenienceMethod? ConvenienceMethod,
         RestClientMethod RequestMethod,
         InputType? RequestBodyType,
         InputType? ResponseBodyType,

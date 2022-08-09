@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -222,7 +223,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteConvenienceMethod(CodeWriter writer, MethodSignature protocolMethodSignature, LowLevelConvenienceMethod convenienceMethod, ClientFields fields, bool async)
+        private static void WriteConvenienceMethod(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
             using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
             {
@@ -269,7 +270,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, LowLevelConvenienceMethod convenienceMethod, bool async)
+        private static void WriteConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, bool async)
         {
             var bodyParameter = convenienceMethod.BodyParameter;
             var responseType = convenienceMethod.ResponseType;
@@ -278,10 +279,12 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
 
             var responseVariable = new CodeWriterDeclaration("response");
-            var parameters = protocolMethodSignature.Parameters.Select<Parameter, FormattableString>(p => p switch
+            var parameters = convenienceMethod.Signature.Parameters.Select<Parameter, FormattableString>(p => p switch
             {
-                _ when p == KnownParameters.RequestContext => $"{contextVariable:I}",
-                _ when p == KnownParameters.RequestContent => bodyParameter != null ? $"{bodyParameter.Name:I}.ToRequestContent()" : (FormattableString)$"null",
+                { Type.IsFrameworkType: false, Type.Implementation: EnumType {IsExtendable: true} } => $"{p.Name:I}.ToString()",
+                { Type.IsFrameworkType: false, Type.Implementation: EnumType {IsExtendable: false} } => $"{p.Name:I}.ToSerialString()",
+                { RequestLocation: RequestLocation.Body } => bodyParameter != null ? $"{bodyParameter.Name:I}.ToRequestContent()" : (FormattableString)$"null",
+                _ when p == KnownParameters.CancellationTokenParameter => $"{contextVariable:I}",
                 _ => $"{p.Name:I}"
             });
 

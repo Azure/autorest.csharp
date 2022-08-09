@@ -11,7 +11,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal class RestClientMethod
+    internal record RestClientMethod
     {
         public RestClientMethod(string name, string? summary, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, InputOperation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None)
         {
@@ -45,13 +45,13 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public string? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
         public string? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary ? string.Empty : Description;
         public Request Request { get; }
-        public Parameter[] Parameters { get; }
+        public Parameter[] Parameters { get; init; }
         public Response[] Responses { get; }
         public DataPlaneResponseHeaderGroupType? HeaderModel { get; }
         public bool BufferResponse { get; }
-        public CSharpType? ReturnType { get; }
-        public MethodSignatureModifiers Accessibility { get; }
+        public CSharpType? ReturnType { get; init; }
+        public MethodSignatureModifiers Accessibility { get; init; }
         public InputOperation Operation { get; }
-        public RequestConditionHeaders ConditionHeaderFlag { get; set; }
+        public RequestConditionHeaders ConditionHeaderFlag { get; init; }
     }
 }
