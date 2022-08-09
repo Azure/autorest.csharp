@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             Match match = pattern.Match(Configuration.OutputFolder);
             if (match.Success)
             {
-                _writer.additionalComments.Add($"// Need to install {match.Groups[1].Value} v1.0.0 to execute below sample code");
+                _writer.additionalComments.Add($"// Need to install {match.Groups[1].Value} v1.0.0 and Azure.Identity v1.6.0 to execute below sample code");
             }
             _writer.addUsingRegion = true;
             _writer.UseNamespace("Azure.ResourceManager");
