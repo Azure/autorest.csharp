@@ -47,6 +47,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public OperationSource? OperationSource { get; }
 
+        public LongRunningInterimOperation? InterimOperation { get; }
+
         private Func<bool, FormattableString>? _returnsDescription;
         public Func<bool, FormattableString>? ReturnsDescription => IsPagingOperation ? _returnsDescription ??= EnsureReturnsDescription() : null;
 
@@ -116,6 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             FinalStateVia = operation.IsLongRunning ? operation.LongRunningFinalStateVia : null;
             OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();
+            InterimOperation = GetInterimOperation();
         }
 
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
@@ -137,6 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
             OperationSource = other.OperationSource;
+            InterimOperation = other.InterimOperation;
 
             //modify some of the values
             Name = nameOverride;
@@ -165,6 +169,25 @@ namespace AutoRest.CSharp.Mgmt.Models
             return operationSource;
         }
 
+        private LongRunningInterimOperation? GetInterimOperation()
+        {
+            if (!IsLongRunningOperation)
+                return null;
+
+            if (MgmtReturnType is null)
+                return null;
+
+            if (IsFakeLongRunningOperation)
+                return null;
+
+            if (Configuration.MgmtConfiguration.EnableLroInterimStatus.Contains(OperationId))
+            {
+                var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Name);
+                MgmtContext.Library.InterimOperations.Add(interimOperation);
+                return interimOperation;
+            }
+            return null;
+        }
         private CSharpType? GetFinalResponse()
         {
             var finalSchema = Operation.LongRunningFinalResponse.ResponseSchema;

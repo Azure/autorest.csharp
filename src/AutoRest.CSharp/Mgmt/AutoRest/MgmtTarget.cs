@@ -146,11 +146,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             lroWriter.Write();
             AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
 
-            if (Configuration.MgmtConfiguration.EnableLroInterimStatus.Any())
+            foreach (var interimOperation in MgmtContext.Library.InterimOperations)
             {
-                var lroInterimWriter = new MgmtLongRunningInterimOperationWriter();
-                lroInterimWriter.Write();
-                AddGeneratedFile(project, lroInterimWriter.Filename, lroInterimWriter.ToString());
+                var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
+                writer.Write();
+                AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
             }
 
             foreach (var operationSource in MgmtContext.Library.OperationSources)
