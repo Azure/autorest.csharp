@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 
@@ -23,7 +26,16 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            await Task.Run(() => _ = string.Empty);
+            ResourceIdentifier roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
+            MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed);
+            MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
+            MgmtMockAndSample.RoleAssignmentData data = result.Data;
+
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

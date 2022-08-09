@@ -5,9 +5,13 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -23,7 +27,28 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            await Task.Run(() => _ = string.Empty);
+            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, new DiskEncryptionSetPatch()
+            {
+                Tags =
+{
+["department"] = "Development",
+["project"] = "Encryption",
+},
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion"))
+                {
+                    SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
+                },
+            });
+            MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
+            MgmtMockAndSample.DiskEncryptionSetData data = result.Data;
+
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

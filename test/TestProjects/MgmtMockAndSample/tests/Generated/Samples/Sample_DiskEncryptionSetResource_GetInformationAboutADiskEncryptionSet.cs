@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 
@@ -23,6 +24,10 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

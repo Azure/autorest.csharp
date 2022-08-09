@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this VirtualMachineExtensionImageResource
-            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaa", "aa");
+            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaa", "aa");
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

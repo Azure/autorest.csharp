@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedVaultResource
-            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
+            MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

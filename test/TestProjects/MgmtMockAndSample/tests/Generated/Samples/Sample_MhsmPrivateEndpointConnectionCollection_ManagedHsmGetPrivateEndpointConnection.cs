@@ -30,8 +30,9 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // get the collection of this MhsmPrivateEndpointConnectionResource
-            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+            MgmtMockAndSample.MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
+            MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "myDiskEncryptionSet", new DiskEncryptionSetData()
@@ -50,7 +50,8 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
             MgmtMockAndSample.DiskEncryptionSetData data = result.Data;
 
-            await Task.Run(() => _ = string.Empty);
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

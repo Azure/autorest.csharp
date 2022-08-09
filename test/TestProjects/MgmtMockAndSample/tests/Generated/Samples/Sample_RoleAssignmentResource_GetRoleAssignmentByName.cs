@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 
@@ -23,6 +24,10 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            ResourceIdentifier roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
+            MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
+
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

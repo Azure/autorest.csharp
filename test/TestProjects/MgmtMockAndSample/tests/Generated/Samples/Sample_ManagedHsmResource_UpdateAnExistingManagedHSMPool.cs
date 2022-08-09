@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 
@@ -23,7 +26,24 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            await Task.Run(() => _ = string.Empty);
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, new ManagedHsmData(new AzureLocation("placeholder"))
+            {
+                Tags =
+{
+["Dept"] = "hsm",
+["Environment"] = "dogfood",
+["Slice"] = "A",
+},
+            });
+            MgmtMockAndSample.ManagedHsmResource result = lro.Value;
+            MgmtMockAndSample.ManagedHsmData data = result.Data;
+
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

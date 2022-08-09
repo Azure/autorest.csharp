@@ -23,6 +23,7 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

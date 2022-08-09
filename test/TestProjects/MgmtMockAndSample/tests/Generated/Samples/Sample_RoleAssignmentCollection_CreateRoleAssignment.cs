@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -33,7 +34,7 @@ namespace MgmtMockAndSample
             GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
             // invoke the operation
             ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "roleAssignmentName", new RoleAssignmentCreateOrUpdateContent()
@@ -45,7 +46,8 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
             MgmtMockAndSample.RoleAssignmentData data = result.Data;
 
-            await Task.Run(() => _ = string.Empty);
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

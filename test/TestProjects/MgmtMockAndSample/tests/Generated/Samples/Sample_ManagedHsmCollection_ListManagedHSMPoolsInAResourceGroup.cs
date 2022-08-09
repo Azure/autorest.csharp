@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

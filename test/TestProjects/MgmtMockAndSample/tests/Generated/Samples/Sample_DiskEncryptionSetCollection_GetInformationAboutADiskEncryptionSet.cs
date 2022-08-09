@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
+            MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

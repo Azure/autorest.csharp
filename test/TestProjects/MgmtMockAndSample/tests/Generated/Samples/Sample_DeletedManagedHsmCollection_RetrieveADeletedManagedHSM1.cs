@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

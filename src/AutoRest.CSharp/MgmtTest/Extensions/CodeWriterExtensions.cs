@@ -428,5 +428,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
             return writer.Append($"new {enumType.Type.Name}({value:L})");
         }
+
+        public static CodeWriter AppendDeclaration(this CodeWriter writer, StepResult result)
+        {
+            return writer.Append($"{result.Type} {result.Declaration:D}");
+        }
     }
 }

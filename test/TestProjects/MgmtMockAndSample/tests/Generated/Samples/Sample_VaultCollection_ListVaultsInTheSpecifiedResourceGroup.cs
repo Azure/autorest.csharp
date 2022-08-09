@@ -31,8 +31,9 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            VaultCollection collection = resourceGroupResource.GetVaults();
+            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

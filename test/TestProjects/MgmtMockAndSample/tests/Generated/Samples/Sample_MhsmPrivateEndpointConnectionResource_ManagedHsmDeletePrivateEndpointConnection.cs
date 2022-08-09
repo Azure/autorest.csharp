@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 
@@ -23,7 +26,16 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            await Task.Run(() => _ = string.Empty);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+
+            // invoke the operation
+            ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
+            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
+            MgmtMockAndSample.MhsmPrivateEndpointConnectionData data = result.Data;
+
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

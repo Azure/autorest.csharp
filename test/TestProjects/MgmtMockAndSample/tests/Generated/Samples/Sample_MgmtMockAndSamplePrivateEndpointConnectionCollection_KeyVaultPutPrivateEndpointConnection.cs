@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -32,7 +33,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
-            MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
             ArmOperation<MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MgmtMockAndSamplePrivateEndpointConnectionData()
@@ -47,7 +48,8 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
 
-            await Task.Run(() => _ = string.Empty);
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

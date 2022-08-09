@@ -30,8 +30,9 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
-            MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }

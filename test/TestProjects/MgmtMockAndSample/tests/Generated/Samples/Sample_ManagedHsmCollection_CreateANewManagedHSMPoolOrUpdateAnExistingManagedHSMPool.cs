@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             ArmOperation<MgmtMockAndSample.ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "hsm1", new ManagedHsmData(new AzureLocation("westus"))
@@ -94,7 +94,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             MgmtMockAndSample.ManagedHsmResource result = lro.Value;
             MgmtMockAndSample.ManagedHsmData data = result.Data;
 
-            await Task.Run(() => _ = string.Empty);
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

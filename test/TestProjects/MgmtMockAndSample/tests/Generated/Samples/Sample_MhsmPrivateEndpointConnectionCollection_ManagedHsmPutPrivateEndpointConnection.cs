@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -32,7 +33,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // get the collection of this MhsmPrivateEndpointConnectionResource
-            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+            MgmtMockAndSample.MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
             // invoke the operation
             ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
@@ -46,7 +47,8 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
             MgmtMockAndSample.MhsmPrivateEndpointConnectionData data = result.Data;
 
-            await Task.Run(() => _ = string.Empty);
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data}.Id");
         }
     }
 }

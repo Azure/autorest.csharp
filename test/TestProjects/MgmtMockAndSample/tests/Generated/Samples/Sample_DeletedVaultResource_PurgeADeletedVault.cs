@@ -6,6 +6,8 @@
 #nullable disable
 
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 
@@ -23,6 +25,13 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
+
+            // invoke the operation
+            ArmOperation lro = await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
+
+            // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
     }
