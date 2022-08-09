@@ -212,6 +212,9 @@ namespace AutoRest.CSharp.Generation.Writers
                                 .AppendEnumToString(clientEnum)
                                 .Line($");");
                             return;
+                        case ModelTypeProvider modelType:
+                            writer.Line($"{writerName}.WriteObjectValue({name:I})");
+                            return;
                     }
 
                     throw new NotSupportedException();
@@ -634,6 +637,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     return clientEnum.IsExtendable
                         ? $"new {clientEnum.Type}({value})"
                         : (FormattableString) $"{value}.To{clientEnum.Type:D}()";
+
+                case ModelTypeProvider modelType:
+                    return $"{modelType.Type}.Deserialize{modelType.Declaration.Name}({element})";
 
                 default:
                     throw new NotSupportedException();
