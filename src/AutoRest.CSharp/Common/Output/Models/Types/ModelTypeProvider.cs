@@ -92,8 +92,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         // lazy envaluation
         private readonly Action _fieldsInitializer;
         private IReadOnlyList<FieldDeclaration>? _fields;
-        public ConstructorSignature? _publicConstructor;
-        public ConstructorSignature? _serializationConstructor;
+        private ConstructorSignature? _publicConstructor;
+        private ConstructorSignature? _serializationConstructor;
         private IReadOnlyDictionary<FieldDeclaration, InputModelProperty>? _fieldsToInputs;
         // parameter name should be unique since it's bound to field property
         private IReadOnlyDictionary<string, FieldDeclaration>? _parameterNamesToFields;
