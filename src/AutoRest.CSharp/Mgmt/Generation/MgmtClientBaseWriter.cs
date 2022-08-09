@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
         private string LibraryArmOperation { get; }
-        private string LibraryArmInterimOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
@@ -54,7 +53,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FileName = This.Type.Name;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
-            LibraryArmInterimOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmInterimOperation";
         }
 
         public virtual void Write()
@@ -837,17 +835,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            if (Configuration.MgmtConfiguration.EnableLroInterimStatus.Contains(operation.OperationId))
+            if (operation.InterimOperation is not null)
             {
-                _writer.Append($"var operation = new {LibraryArmInterimOperation}");
+                _writer.Append($"var operation = new {operation.InterimOperation.TypeName}");
             }
             else
             {
                 _writer.Append($"var operation = new {LibraryArmOperation}");
-            }
-            if (operation.ReturnType.IsGenericType)
-            {
-                _writer.Append($"<{operation.MgmtReturnType}>");
+                if (operation.ReturnType.IsGenericType)
+                {
+                    _writer.Append($"<{operation.MgmtReturnType}>");
+                }
             }
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)

@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             lroWriter.Write();
             AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
 
-            foreach (var interimOperation in MgmtContext.Library.InterimOperations)
+            foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
             {
                 var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
                 writer.Write();
@@ -169,7 +169,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> PostProcess(Project project)
         {
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            var interimOperationModels = MgmtContext.Library.InterimOperations.Select(o => o.TypeName).Distinct().ToList();
+            var modelsToKeep = interimOperationModels.Concat(Configuration.MgmtConfiguration.KeepOrphanedModels).ToImmutableHashSet();
             project = await Internalizer.InternalizeAsync(project, modelsToKeep);
 
             project = await Remover.RemoveUnusedAsync(project, modelsToKeep);

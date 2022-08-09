@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.Namespace(MgmtContext.Context.DefaultNamespace))
             {
-                _writer.Line($"internal class {_interimOperation.TypeName} : {_interimOperation.BaseClassType}");
+                _writer.Line($"public class {_interimOperation.TypeName} : {_interimOperation.BaseClassType}");
                 using (_writer.Scope())
                 {
                     _writer.Line($"private readonly {_interimOperation.OperationType} _operation;");
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.RawResponse;");
+                    _writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
@@ -111,12 +111,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Gets interim status of the long-running operation.");
-                    _writer.WriteParameter(KnownParameters.CancellationTokenParameter);
+                    _writer.WriteXmlDocumentationParameter(KnownParameters.CancellationTokenParameter);
                     _writer.WriteXmlDocumentationReturns($"The interim status of the long-running operation.");
                     _writer.Line($"public virtual async {_interimOperation.ValueTaskType} GetCurrentStatusAsync({typeof(CancellationToken)} cancellationToken = default) => await GetCurrentState(true, cancellationToken).ConfigureAwait(false);");
+                    _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Gets interim status of the long-running operation.");
-                    _writer.WriteParameter(KnownParameters.CancellationTokenParameter);
+                    _writer.WriteXmlDocumentationParameter(KnownParameters.CancellationTokenParameter);
                     _writer.WriteXmlDocumentationReturns($"The interim status of the long-running operation.");
                     _writer.Line($"public virtual {_interimOperation.ReturnType} GetCurrentStatus({typeof(CancellationToken)} cancellationToken = default) => GetCurrentState(false, cancellationToken).EnsureCompleted();");
                     _writer.Line();

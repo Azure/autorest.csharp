@@ -362,6 +362,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (IsPagingOperation)
                 return originalType;
 
+            if (InterimOperation is not null)
+                return InterimOperation.InterimType;
+
+
             return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(false);
         }
 
