@@ -247,9 +247,9 @@ namespace AutoRest.CSharp.Generation.Writers
             var restMethod = clientMethod.RequestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
 
-            if (restMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.RequestMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
+            if (clientMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
             {
-                writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.RequestMethod.ConditionHeaderFlag);
+                writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.ConditionHeaderFlag);
                 writer.Line();
             }
 
@@ -434,7 +434,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, LowLevelExampleComposer? exampleComposer, bool async)
+        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, LowLevelExampleComposer? exampleComposer, bool async)
         {
             using (WriteClientMethodDeclaration(writer, clientMethod, exampleComposer, async))
             {
@@ -442,7 +442,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WritePageableLongRunningOperationMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
+        private static void WritePageableLongRunningOperationMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
         {
             var startMethod = clientMethod.RequestMethod;
             var finalStateVia = longRunning.FinalStateVia;

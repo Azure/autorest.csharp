@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public FieldDeclaration ClientDiagnosticsProperty { get; }
         public FieldDeclaration PipelineField { get; }
+        public FieldDeclaration? EndpointField { get; }
 
         private readonly FieldDeclaration? _keyAuthField;
         private readonly FieldDeclaration? _tokenAuthField;
@@ -98,6 +99,10 @@ namespace AutoRest.CSharp.Output.Models
                     fields.Add(field);
                 }
                 parameterNamesToFields.Add(parameter.Name, field);
+                if (parameter.Name == "endpoint" && parameter.Type.Equals(typeof(Uri)))
+                {
+                    EndpointField = field;
+                }
             }
 
             fields.AddRange(properties);

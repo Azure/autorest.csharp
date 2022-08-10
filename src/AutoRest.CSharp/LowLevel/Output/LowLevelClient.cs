@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(builder, operations, Declaration.Name, isCadlInput).ToArray();
+            var clientMethods = BuildMethods(builder.TypeFactory, operations, Fields, Declaration.Name, isCadlInput).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
@@ -79,129 +79,19 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName, bool isCadlInput)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName, bool isCadlInput)
         {
-            var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
-            foreach (var operation in operations)
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory, isCadlInput));
+            foreach (var (_, builder) in builders)
             {
-                var requestMethod = isCadlInput
-                    ? builder.BuildRequestMethod(ChangeTypesForProtocolMethod(operation))
-                    : builder.BuildRequestMethod(operation);
-
-                requestMethods.Add(operation, requestMethod);
+                builder.BuildNextPageMethod(builders);
             }
 
-            foreach (var (operation, requestMethod) in requestMethods)
+            foreach (var (_, builder) in builders)
             {
-                var paging = operation.Paging;
-
-                var requestBodyType = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-                var responseBodyType = requestMethod.Operation.Responses.FirstOrDefault()?.BodyType;
-                var diagnostic = new Diagnostic($"{clientName}.{requestMethod.Name}");
-
-                LowLevelPagingInfo? pagingInfo = null;
-                CSharpType returnType;
-                if (paging != null)
-                {
-                    if (operation.LongRunning == null && requestMethod.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
-                    {
-                        throw new InvalidOperationException($"Method {requestMethod.Name} has to have a return value");
-                    }
-
-                    var nextLinkOperation = paging.NextLinkOperation;
-                    var nextLinkName = paging.NextLinkName;
-
-                    RestClientMethod? nextPageMethod = nextLinkOperation != null
-                        ? requestMethods[nextLinkOperation]
-                        : nextLinkName != null ? RestClientBuilder.BuildNextPageMethod(requestMethod) : null;
-
-                    pagingInfo = new LowLevelPagingInfo(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
-                    returnType = operation.LongRunning != null
-                        ? typeof(Azure.Operation<Azure.Pageable<BinaryData>>)
-                        : typeof(Azure.Pageable<BinaryData>);
-                }
-                else
-                {
-                    var headAsBoolean = requestMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
-                    returnType = operation.LongRunning != null
-                        ? responseBodyType != null ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation)
-                        : headAsBoolean
-                            ? typeof(Azure.Response<bool>)
-                            : typeof(Azure.Response);
-                }
-
-                var parameters = operation.LongRunning != null
-                    ? requestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
-                    : requestMethod.Parameters;
-
-
-                var protocolMethodSignature = new MethodSignature(requestMethod.Name, requestMethod.Summary, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
-                var convenienceMethod = isCadlInput ? BuildConvenienceMethod(operation, protocolMethodSignature, clientName, requestMethod.ReturnType, builder.TypeFactory) : null;
-                yield return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, requestMethod, requestBodyType, responseBodyType, diagnostic, pagingInfo, operation.LongRunning);
+                yield return builder.BuildOperationMethodChain();
             }
         }
-
-        private static ConvenienceMethod BuildConvenienceMethod(InputOperation operation, MethodSignature protocolMethod, string clientName, CSharpType? responseType, TypeFactory typeFactory)
-        {
-            var parameters = new List<Parameter>();
-            Parameter? bodyParameter = null;
-            bool isAmbiguous = true;
-
-            if (operation.LongRunning != null)
-            {
-                parameters.Add(KnownParameters.WaitForCompletion);
-            }
-
-            var parametersByName = operation.Parameters
-                .Select(ip => Parameter.FromInputParameter(ip, typeFactory.CreateType(ip.Type), typeFactory))
-                .ToDictionary(ip => ip.Name);
-
-            foreach (var protocolParameter in protocolMethod.Parameters)
-            {
-                if (protocolParameter == KnownParameters.RequestContent || protocolParameter == KnownParameters.RequestContentNullable)
-                {
-                    isAmbiguous = false;
-                    parameters.Add(parametersByName.Values.First(p => p.RequestLocation == RequestLocation.Body));
-                }
-                else if (protocolParameter == KnownParameters.RequestContext)
-                {
-                    parameters.Add(KnownParameters.CancellationTokenParameter);
-                }
-                else if (parametersByName.TryGetValue(protocolParameter.Name, out var parameter))
-                {
-                    parameters.Add(parameter);
-                }
-                else
-                {
-                    parameters.Add(protocolParameter);
-                }
-            }
-
-            var returnType = responseType == null ? typeof(Azure.Response) : new CSharpType(typeof(Azure.Response<>), responseType);
-
-            string name = isAmbiguous
-                ? protocolMethod.Name.IsLastWordSingular()
-                    ? $"{protocolMethod.Name}Value"
-                    : $"{protocolMethod.Name.LastWordToSingular()}Values"
-                : protocolMethod.Name;
-
-            var convenienceSignature = new MethodSignature(name, protocolMethod.Summary, protocolMethod.Description, protocolMethod.Modifiers, returnType, null, parameters);
-            var diagnostic = name != protocolMethod.Name ? new Diagnostic($"{clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, responseType, bodyParameter, diagnostic);
-        }
-
-        private static InputOperation ChangeTypesForProtocolMethod(InputOperation operation)
-            => operation with
-            {
-                Parameters = operation.Parameters.Select(p => p with { Type = ChangeTypeForProtocolMethod(p.Type) }).ToArray()
-            };
-
-        private static InputType ChangeTypeForProtocolMethod(InputType type) => type switch
-        {
-            InputEnumType enumType => enumType.EnumValueType with { IsNullable = enumType.IsNullable },
-            InputModelType modelType => InputPrimitiveType.Object with { IsNullable = modelType.IsNullable },
-            _ => type
-        };
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {
@@ -341,4 +231,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
     }
+
+    internal record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
+
+    internal record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage);
 }

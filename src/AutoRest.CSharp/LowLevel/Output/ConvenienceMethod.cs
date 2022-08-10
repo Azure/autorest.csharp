@@ -7,5 +7,8 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
+    //internal record OperationMethodChain(ConvenienceMethod ConvenienceMethod, ProtocolMethod ProtocolMethod, CreateMessageMethod CreateMessageMethod);
+    //internal record CreateMessageMethod(MethodSignature Signature, CSharpType? ResponseType, Parameter? BodyParameter, Diagnostic? Diagnostic);
+    //internal record ProtocolMethod(MethodSignature Signature, CSharpType? ResponseType, Parameter? BodyParameter, Diagnostic? Diagnostic);
     internal record ConvenienceMethod(MethodSignature Signature, CSharpType? ResponseType, Parameter? BodyParameter, Diagnostic? Diagnostic);
 }

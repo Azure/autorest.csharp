@@ -34,14 +34,14 @@ namespace AutoRest.CSharp.Output.Builders
                 _ => SerializationFormat.Default
             };
 
-        public ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
+        public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
             BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
             BodyMediaType.Json => BuildJsonSerialization(inputType, type),
             _ => throw new NotImplementedException(bodyMediaType.ToString())
         };
 
-        private XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
+        private static XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
         {
             return inputType switch
             {
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Builders
         };
 
 
-        private XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
+        private static XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
         {
             string xmlName =
                 schema.XmlName ??
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private XmlValueSerialization BuildXmlValueSerialization(Schema schema, CSharpType type)
+        private static XmlValueSerialization BuildXmlValueSerialization(Schema schema, CSharpType type)
         {
             return new XmlValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema));
         }
