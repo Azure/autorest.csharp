@@ -33,6 +33,8 @@ namespace MgmtMockAndSample
             // get the collection of this RoleAssignmentResource
             MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

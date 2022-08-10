@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

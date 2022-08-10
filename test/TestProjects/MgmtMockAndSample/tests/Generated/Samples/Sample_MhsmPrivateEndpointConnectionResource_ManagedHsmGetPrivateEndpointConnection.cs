@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
             MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

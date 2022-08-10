@@ -283,6 +283,148 @@ namespace MgmtMockAndSample
         }
 
         /// <summary>
+        /// Create or update a key vault in the specified subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys
+        /// Operation Id: Vaults_ListKeys
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="VaultKey" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VaultKey> GetKeysAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<VaultKey>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.GetKeys");
+                scope.Start();
+                try
+                {
+                    var response = await _vaultRestClient.ListKeysAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary>
+        /// Create or update a key vault in the specified subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys
+        /// Operation Id: Vaults_ListKeys
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="VaultKey" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VaultKey> GetKeys(CancellationToken cancellationToken = default)
+        {
+            Page<VaultKey> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.GetKeys");
+                scope.Start();
+                try
+                {
+                    var response = _vaultRestClient.ListKeys(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary>
+        /// Create or update a key vault in the specified subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/validate
+        /// Operation Id: Vaults_Validate
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<VaultValidationResult>> ValidateAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Validate");
+            scope.Start();
+            try
+            {
+                var response = await _vaultRestClient.ValidateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Create or update a key vault in the specified subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/validate
+        /// Operation Id: Vaults_Validate
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<VaultValidationResult> Validate(CancellationToken cancellationToken = default)
+        {
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Validate");
+            scope.Start();
+            try
+            {
+                var response = _vaultRestClient.Validate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Create or update a key vault in the specified subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/disable
+        /// Operation Id: Vaults_Disable
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> DisableAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Disable");
+            scope.Start();
+            try
+            {
+                var response = await _vaultRestClient.DisableAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Create or update a key vault in the specified subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/disable
+        /// Operation Id: Vaults_Disable
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response Disable(CancellationToken cancellationToken = default)
+        {
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Disable");
+            scope.Start();
+            try
+            {
+                var response = _vaultRestClient.Disable(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Update access policies in a key vault in the specified subscription.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}
         /// Operation Id: Vaults_UpdateAccessPolicy

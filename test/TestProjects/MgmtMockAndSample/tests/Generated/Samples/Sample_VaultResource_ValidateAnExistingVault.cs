@@ -12,20 +12,20 @@ using Azure.ResourceManager;
 
 namespace MgmtMockAndSample
 {
-    public partial class Sample_ManagedHsmResource_RetrieveAManagedHSMPool
+    public partial class Sample_VaultResource_ValidateAnExistingVault
     {
-        // Retrieve a managed HSM Pool
+        // Validate an existing vault
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Get()
+        public async Task Validate()
         {
-            // this example is just showing the usage of "ManagedHsms_Get" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "Vaults_Validate" operation, for the dependent resources, they will have to be created separately.
 
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
 

@@ -180,17 +180,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
 
         private StepResult? WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
         {
-            var lroType = testCase.Operation.ReturnType;
             _writer.Line();
             _writer.Line($"// invoke the operation");
             // if the Lro is an ArmOperation<T>
+            var lroType = testCase.Operation.ReturnType;
             if (lroType.IsGenericType)
             {
                 var lroResult = new StepResult("lro", testCase.Operation.ReturnType);
                 _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
                 // write the method invocation
                 WriteOperationInvocation(instanceVar);
-                _writer.LineRaw(";");
                 var valueResult = new StepResult("result", lroResult.Type.Arguments.First());
                 _writer.AppendDeclaration(valueResult)
                     .Line($"= {lroResult.Declaration}.Value;");
@@ -206,10 +205,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
                 else
                     return valueResult;
             }
-            // if the Lro is an ArmOperation without body, we just write the method invocation without assignment
-            WriteOperationInvocation(instanceVar);
-            _writer.LineRaw(";");
-            return null;
+            else
+            {
+                // if the Lro is an ArmOperation without body, we just write the method invocation without assignment
+                WriteOperationInvocation(instanceVar);
+                return null;
+            }
         }
 
         private StepResult? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
@@ -219,19 +220,23 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
 
         private StepResult? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
         {
+            _writer.Line();
+            _writer.Line($"// invoke the operation");
             var returnType = testCase.Operation.ReturnType;
             if (returnType.IsGenericType)
             {
                 // an operation with a response
+                return new StepResult("r", typeof(string));
             }
             else
             {
                 // an operation without a response
+                WriteOperationInvocation(instanceVar);
+                return null;
             }
-            return new StepResult("r", typeof(string));
         }
 
-        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, bool isAsync = true)
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, bool isEndOfLine = true, bool isAsync = true)
         {
             var methodName = CreateMethodName(testCase.Operation.Name);
             _writer.AppendIf($"await ", isAsync)
@@ -245,7 +250,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
                 }
             }
             _writer.RemoveTrailingComma();
-            _writer.AppendRaw(")");
+            _writer.AppendRaw(")").LineRawIf(";", isEndOfLine);
         }
     }
 }

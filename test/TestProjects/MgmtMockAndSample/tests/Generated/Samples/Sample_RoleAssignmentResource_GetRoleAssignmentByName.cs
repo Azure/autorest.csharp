@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier roleAssignmentResourceId = MgmtMockAndSample.RoleAssignmentResource.CreateResourceIdentifier("scope", "roleAssignmentName");
             MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

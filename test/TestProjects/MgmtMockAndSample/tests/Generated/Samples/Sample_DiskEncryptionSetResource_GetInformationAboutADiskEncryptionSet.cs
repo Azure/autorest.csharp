@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

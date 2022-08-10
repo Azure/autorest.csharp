@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
             MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

@@ -12,14 +12,14 @@ using Azure.ResourceManager;
 
 namespace MgmtMockAndSample
 {
-    public partial class Sample_VaultResource_RetrieveAVault
+    public partial class Sample_VaultResource_DisableAVault
     {
-        // Retrieve a vault
+        // Disable a vault
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Get()
+        public async Task Disable()
         {
-            // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "Vaults_Disable" operation, for the dependent resources, they will have to be created separately.
 
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
@@ -28,9 +28,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            await vault.DisableAsync();
         }
     }
 }

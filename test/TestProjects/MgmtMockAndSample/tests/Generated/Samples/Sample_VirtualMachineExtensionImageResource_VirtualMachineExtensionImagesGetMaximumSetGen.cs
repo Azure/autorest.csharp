@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
             MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

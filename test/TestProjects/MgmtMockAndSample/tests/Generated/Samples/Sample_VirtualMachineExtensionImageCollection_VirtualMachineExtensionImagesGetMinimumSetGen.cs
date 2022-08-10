@@ -33,6 +33,8 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa");
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

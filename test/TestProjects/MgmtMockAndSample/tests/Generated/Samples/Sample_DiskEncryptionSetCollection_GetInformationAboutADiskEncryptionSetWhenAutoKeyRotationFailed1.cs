@@ -33,6 +33,8 @@ namespace MgmtMockAndSample
             // get the collection of this DiskEncryptionSetResource
             MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

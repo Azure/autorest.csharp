@@ -33,6 +33,8 @@ namespace MgmtMockAndSample
             // get the collection of this ManagedHsmResource
             MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

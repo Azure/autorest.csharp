@@ -27,6 +27,8 @@ namespace MgmtMockAndSample
             ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }

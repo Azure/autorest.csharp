@@ -12,22 +12,20 @@ using Azure.ResourceManager;
 
 namespace MgmtMockAndSample
 {
-    public partial class Sample_VaultResource_RetrieveAVault
+    public partial class Sample_VaultResource_ListKeysOnAnExistingVault
     {
-        // Retrieve a vault
+        // List keys on an existing vault
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Get()
+        public async Task GetKeys()
         {
-            // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "Vaults_ListKeys" operation, for the dependent resources, they will have to be created separately.
 
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
             ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
-
-            // invoke the operation
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

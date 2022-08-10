@@ -246,6 +246,156 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys": {
+      "post": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_ListKeys",
+        "description": "Create or update a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created or updated vault",
+            "schema": {
+              "$ref": "#/definitions/VaultListKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List keys on an existing vault": {
+            "$ref": "./examples/listKeysOnVault.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/validate": {
+      "post": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_Validate",
+        "description": "Create or update a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created or updated vault",
+            "schema": {
+              "$ref": "#/definitions/VaultValidationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate an existing vault": {
+            "$ref": "./examples/validateVault.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/disable": {
+      "post": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_Disable",
+        "description": "Create or update a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created or updated vault"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable a vault": {
+            "$ref": "./examples/disableVault.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}": {
       "put": {
         "tags": [
@@ -2048,6 +2198,68 @@
         }
       },
       "description": "Deleted vault information with extended details.",
+      "type": "object"
+    },
+    "VaultIssue": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the issue"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the issue"
+        },
+        "sev": {
+          "type": "integer",
+          "description": "The severity of the issue"
+        }
+      }
+    },
+    "VaultValidationResult": {
+      "properties": {
+        "issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultIssue"
+          },
+          "description": "The list of vaults."
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the validation."
+        }
+      },
+      "description": "List of keys",
+      "type": "object"
+    },
+    "VaultKey": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "name of the key"
+        },
+        "content": {
+          "type": "string",
+          "description": "content of the key"
+        }
+      }
+    },
+    "VaultListKeysResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultKey"
+          },
+          "description": "The list of vaults."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of vaults."
+        }
+      },
+      "description": "List of keys",
       "type": "object"
     },
     "VaultListResult": {

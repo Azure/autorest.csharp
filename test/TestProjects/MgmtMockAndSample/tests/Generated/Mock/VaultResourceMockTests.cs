@@ -38,6 +38,16 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task Disable()
+        {
+            // Example: Disable a vault
+
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            await vault.DisableAsync();
+        }
+
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a vault
@@ -45,6 +55,18 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
             MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await vault.GetAsync();
+        }
+
+        [RecordedTest]
+        public async Task GetKeys()
+        {
+            // Example: List keys on an existing vault
+
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            await foreach (var _ in vault.GetKeysAsync())
+            {
+            }
         }
 
         [RecordedTest]
@@ -135,6 +157,16 @@ CertificatePermission.Get
 },
 })
             })));
+        }
+
+        [RecordedTest]
+        public async Task Validate()
+        {
+            // Example: Validate an existing vault
+
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            await vault.ValidateAsync();
         }
     }
 }

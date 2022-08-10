@@ -33,6 +33,8 @@ namespace MgmtMockAndSample
             // get the collection of this DeletedManagedHsmResource
             MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
+            // invoke the operation
+
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
         }
