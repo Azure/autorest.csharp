@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -60,6 +62,31 @@ namespace AutoRest.CSharp.Generation.Writers
                 0 => $"",
                 1 => $"{identifiers.First():I}",
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
+            };
+
+        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
+        {
+            var conversionMethod = GetConversionMethod(parameter.Type, toType);
+            if (conversionMethod == null)
+            {
+                return $"{parameter.Name:I}";
+            }
+
+            if (parameter.IsOptionalInSignature)
+            {
+                return $"{parameter.Name:I}?.{conversionMethod}";
+            }
+
+            return $"{parameter.Name:I}.{conversionMethod}";
+        }
+
+        public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
+            => fromType switch
+            {
+                { IsFrameworkType: false, Implementation: EnumType { IsExtendable: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => "ToString()",
+                { IsFrameworkType: false, Implementation: EnumType { IsExtendable: false } } when toType.EqualsIgnoreNullable(typeof(string)) => "ToSerialString()",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => "ToRequestContent()",
+                _ => null
             };
 
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)

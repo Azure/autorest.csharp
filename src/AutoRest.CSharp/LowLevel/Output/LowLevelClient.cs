@@ -231,8 +231,4 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
     }
-
-    internal record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
-
-    internal record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage);
 }

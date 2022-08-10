@@ -118,6 +118,24 @@
               "SkipUrlEncoding": true
             },
             {
+              "Name": "enum",
+              "NameInRequest": "enum",
+              "Description": "",
+              "Type": {"$ref" :"4"},
+              "Location": "Query",
+              "IsRequired": false,
+              "Kind": "Method"
+            },
+            {
+              "Name": "exEnum",
+              "NameInRequest": "exEnum",
+              "Description": "",
+              "Type": {"$ref" :"5"},
+              "Location": "Query",
+              "IsRequired": true,
+              "Kind": "Method"
+            },
+            {
               "$id": "3",
               "Name": "apiVersion",
               "NameInRequest": "apiVersion",

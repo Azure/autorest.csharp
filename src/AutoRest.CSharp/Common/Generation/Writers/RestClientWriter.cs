@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(restClient.Type.Namespace))
             {
-                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
+                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}", scopeDeclarations: restClient.Fields.ScopeDeclarations))
                 {
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);

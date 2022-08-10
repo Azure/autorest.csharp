@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly List<RequestPartSource> _requestParts;
         private readonly RestClientMethod _restClientMethod;
 
-        private ParameterChain? _bodyParameterChain;
+        private Parameter? _protocolBodyParameter;
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
 
             Operation = operation;
             BuildParameters();
-            _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _bodyParameterChain?.Protocol, _typeFactory);
+            _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
         }
 
         public void BuildNextPageMethod(IReadOnlyDictionary<InputOperation, OperationMethodChainBuilder> builders)
@@ -145,18 +145,21 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
         {
-            bool isAmbiguous = _bodyParameterChain == null;
-
-            string name = isAmbiguous
+            string name = _protocolBodyParameter == null
                 ? _restClientMethod.Name.IsLastWordSingular()
                     ? $"{_restClientMethod.Name}Value"
                     : $"{_restClientMethod.Name.LastWordToSingular()}Values"
                 : _restClientMethod.Name;
 
             var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
+            var protocolToConvenience = _orderedParameters
+                .Where(p => p.Protocol != null)
+                .Select(p => (p.Protocol!, p.Convenience))
+                .ToArray();
+
             var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, returnTypeChain.ConvenienceResponseType, _bodyParameterChain?.Convenience, diagnostic);
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
         public void BuildParameters()
@@ -262,11 +265,10 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var protocolBodyParameter = bodyParameter.IsRequired
+            _protocolBodyParameter = bodyParameter.IsRequired
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
-            _bodyParameterChain = new ParameterChain(BuildParameter(bodyParameter), protocolBodyParameter, protocolBodyParameter);
-            _orderedParameters.Add(_bodyParameterChain);
+            _orderedParameters.Add(new ParameterChain(BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter));
 
             if (contentTypeRequestParameter != null)
             {
@@ -364,7 +366,7 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
                 }
 
-                return new Reference(field.Declaration.RequestedName, field.Type);
+                return new Reference(field.Name, field.Type);
             }
 
             if (operationParameter?.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
@@ -381,5 +383,9 @@ namespace AutoRest.CSharp.Output.Models
             InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
             _ => null
         };
+
+        private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
+
+        private record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage);
     }
 }

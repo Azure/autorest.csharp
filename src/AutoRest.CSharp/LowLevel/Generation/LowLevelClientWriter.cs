@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(clientType.Namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{client.Description}");
-                using (writer.Scope($"{client.Declaration.Accessibility} partial class {clientType:D}"))
+                using (writer.Scope($"{client.Declaration.Accessibility} partial class {clientType:D}", scopeDeclarations: client.Fields.ScopeDeclarations))
                 {
                     WriteClientFields(writer, client);
                     WriteConstructors(writer, client);
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in client.Fields)
             {
-                writer.WriteFieldDeclaration(field);
+                writer.WriteFieldDeclaration(field, true);
             }
 
             writer
@@ -272,21 +272,28 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, bool async)
         {
-            var bodyParameter = convenienceMethod.BodyParameter;
             var responseType = convenienceMethod.ResponseType;
 
             var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
 
             var responseVariable = new CodeWriterDeclaration("response");
-            var parameters = convenienceMethod.Signature.Parameters.Select<Parameter, FormattableString>(p => p switch
+            var parameters = new List<FormattableString>();
+            foreach (var (protocolParameter, convenienceParameter)  in convenienceMethod.ProtocolToConvenienceParameters)
             {
-                { Type.IsFrameworkType: false, Type.Implementation: EnumType {IsExtendable: true} } => $"{p.Name:I}.ToString()",
-                { Type.IsFrameworkType: false, Type.Implementation: EnumType {IsExtendable: false} } => $"{p.Name:I}.ToSerialString()",
-                { RequestLocation: RequestLocation.Body } => bodyParameter != null ? $"{bodyParameter.Name:I}.ToRequestContent()" : (FormattableString)$"null",
-                _ when p == KnownParameters.CancellationTokenParameter => $"{contextVariable:I}",
-                _ => $"{p.Name:I}"
-            });
+                if (convenienceParameter == KnownParameters.CancellationTokenParameter)
+                {
+                    parameters.Add($"{contextVariable:I}");
+                }
+                else if (convenienceParameter != null)
+                {
+                    parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
+                }
+                else
+                {
+                    throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
+                }
+            }
 
             writer
                 .Append($"{typeof(Response)} {responseVariable:D} = ")

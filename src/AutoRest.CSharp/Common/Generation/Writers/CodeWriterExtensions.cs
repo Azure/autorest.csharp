@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter WriteFieldDeclaration(this CodeWriter writer, FieldDeclaration field)
+        public static CodeWriter WriteFieldDeclaration(this CodeWriter writer, FieldDeclaration field, bool isFieldPreDeclaredInScope = false)
         {
             if (field.Description != null)
             {
@@ -76,7 +76,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly));
             }
 
-            writer.Append($"{field.Type} {field.Declaration:D}");
+            if (isFieldPreDeclaredInScope)
+            {
+                writer.Append($"{field.Type} {field.Declaration:I}");
+            }
+            else
+            {
+                writer.Append($"{field.Type} {field.Declaration:D}");
+            }
 
             if (field.WriteAsProperty)
             {
@@ -95,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in fields)
             {
-                writer.WriteFieldDeclaration(field);
+                writer.WriteFieldDeclaration(field, isFieldPreDeclaredInScope: true);
             }
 
             return writer.Line();
