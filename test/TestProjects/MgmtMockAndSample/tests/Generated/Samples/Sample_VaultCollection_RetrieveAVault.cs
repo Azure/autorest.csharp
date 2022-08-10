@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -34,9 +35,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
+            MgmtMockAndSample.VaultResource result = await collection.GetAsync("sample-vault");
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.VaultData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

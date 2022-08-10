@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -33,9 +34,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = await collection.GetAsync("sample-pec");
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -28,9 +29,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync();
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.DeletedManagedHsmData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

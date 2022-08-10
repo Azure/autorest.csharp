@@ -40,10 +40,10 @@ namespace MgmtMockAndSample
 },
             });
             MgmtMockAndSample.ManagedHsmResource result = lro.Value;
-            MgmtMockAndSample.ManagedHsmData data = result.Data;
 
+            MgmtMockAndSample.ManagedHsmData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

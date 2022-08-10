@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -28,9 +29,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.VirtualMachineExtensionImageData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

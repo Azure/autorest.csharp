@@ -32,10 +32,10 @@ namespace MgmtMockAndSample
             // invoke the operation
             ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
             MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData data = result.Data;
 
+            MgmtMockAndSample.MhsmPrivateEndpointConnectionData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

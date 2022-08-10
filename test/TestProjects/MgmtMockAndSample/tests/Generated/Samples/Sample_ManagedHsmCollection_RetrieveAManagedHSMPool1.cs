@@ -34,6 +34,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
+            bool result = await collection.ExistsAsync("hsm1");
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

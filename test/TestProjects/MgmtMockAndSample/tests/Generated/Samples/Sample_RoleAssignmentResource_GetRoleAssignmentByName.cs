@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -28,9 +29,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.RoleAssignmentResource result = await roleAssignment.GetAsync();
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.RoleAssignmentData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

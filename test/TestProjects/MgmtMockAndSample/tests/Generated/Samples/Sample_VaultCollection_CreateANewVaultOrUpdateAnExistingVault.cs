@@ -69,10 +69,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
             });
             MgmtMockAndSample.VaultResource result = lro.Value;
-            MgmtMockAndSample.VaultData data = result.Data;
 
+            MgmtMockAndSample.VaultData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

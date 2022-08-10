@@ -33,6 +33,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
+            bool result = await collection.ExistsAsync("sample-pec");
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

@@ -66,27 +66,53 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             };
 
             // Write the result handling
-            WriteResultResolution(result);
+            WriteResultHandling(result);
         }
 
-        private void WriteResultResolution(StepResult? result)
+        private void WriteResultHandling(StepResult? result, bool newLine = true)
         {
             // do nothing if the previous step returns nothing
             if (result == null)
                 return;
 
-            _writer.Line();
+            if (newLine)
+                _writer.Line();
 
-            if (result.Type.IsResourceDataType(out _))
+            if (result.Type.IsResourceType(out var resource))
             {
-                _writer.Line($"// for demo we just print out the id");
-                _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded on id: {{{result.Declaration}}}.Id\");");
+                WriteResourceResultHandling(result, resource);
+            }
+            else if (result.Type.IsResourceDataType(out var resourceData))
+            {
+                WriteResourceDataResultHandling(result, resourceData);
             }
             else
             {
-                _writer.Line($"// this is a placeholder");
-                _writer.Line($"await {typeof(System.Threading.Tasks.Task)}.Run(() => _ = string.Empty);");
+                WriteOtherResultHandling(result);
             }
+        }
+
+        private void WriteResourceResultHandling(StepResult result, Resource resource)
+        {
+            // create a data variable for this data
+            var dataResult = new StepResult("data", resource.ResourceData.Type);
+            _writer.AppendDeclaration(dataResult)
+                .Line($"= {result.Declaration}.Data;");
+
+            // handle the data
+            WriteResourceDataResultHandling(dataResult, resource.ResourceData);
+        }
+
+        private void WriteResourceDataResultHandling(StepResult result, ResourceData resourceData)
+        {
+            _writer.Line($"// for demo we just print out the id");
+            _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded on id: {{{result.Declaration}.Id}}\");");
+        }
+
+        private void WriteOtherResultHandling(StepResult result)
+        {
+            _writer.Line($"// this is a placeholder");
+            _writer.Line($"await {typeof(System.Threading.Tasks.Task)}.Run(() => _ = string.Empty);");
         }
 
         private StepResult WriteGetArmClient()
@@ -190,20 +216,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
                 _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
                 // write the method invocation
                 WriteOperationInvocation(instanceVar);
-                var valueResult = new StepResult("result", lroResult.Type.Arguments.First());
+                var valueResult = new StepResult("result", lroType.Arguments.First());
                 _writer.AppendDeclaration(valueResult)
                     .Line($"= {lroResult.Declaration}.Value;");
 
-                // if the result type is a resource
-                if (valueResult.Type.IsResourceType(out var resource))
-                {
-                    var dataResult = new StepResult("data", resource.ResourceData.Type);
-                    _writer.AppendDeclaration(dataResult)
-                        .Line($"= {valueResult.Declaration}.Data;");
-                    return dataResult;
-                }
-                else
-                    return valueResult;
+                return valueResult;
             }
             else
             {
@@ -211,11 +228,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
                 WriteOperationInvocation(instanceVar);
                 return null;
             }
-        }
-
-        private StepResult? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
-        {
-            return new StepResult("r", typeof(string));
         }
 
         private StepResult? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
@@ -226,7 +238,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             if (returnType.IsGenericType)
             {
                 // an operation with a response
-                return new StepResult("r", typeof(string));
+                var valueResult = new StepResult("result", returnType.Arguments.First());
+                _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
+                // write the method invocation
+                WriteOperationInvocation(instanceVar);
+                return valueResult;
             }
             else
             {
@@ -236,10 +252,30 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
         }
 
+        private StepResult? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
+        {
+            _writer.Line();
+            _writer.Line($"// invoke the operation and iterate over the result");
+            // when the operation is pageable, the return type refers to the type of the item T, instead of Pageable<T>
+            var itemResult = new StepResult("item", testCase.Operation.ReturnType);
+            _writer.Append($"await foreach (")
+                .AppendDeclaration(itemResult)
+                .AppendRaw(" in ");
+
+            WriteOperationInvocation(instanceVar, isEndOfLine: false);
+            using (_writer.Scope($")"))
+            {
+                WriteResultHandling(itemResult, newLine: false);
+            }
+
+            // an invocation of a pageable operation does not return a result
+            return null;
+        }
+
         private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, bool isEndOfLine = true, bool isAsync = true)
         {
             var methodName = CreateMethodName(testCase.Operation.Name);
-            _writer.AppendIf($"await ", isAsync)
+            _writer.AppendIf($"await ", isAsync && !testCase.Operation.IsPagingOperation) // paging operation never needs this await
                 .Append($"{instanceVar}.{methodName}(");
             foreach (var parameter in testCase.Operation.MethodParameters)
             {

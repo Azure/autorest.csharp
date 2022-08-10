@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -28,6 +30,24 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.Models.VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
+            {
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+{
+Keys =
+{
+KeyPermission.Encrypt
+},
+Secrets =
+{
+SecretPermission.Get
+},
+Certificates =
+{
+CertificatePermission.Get
+},
+})
+            })));
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

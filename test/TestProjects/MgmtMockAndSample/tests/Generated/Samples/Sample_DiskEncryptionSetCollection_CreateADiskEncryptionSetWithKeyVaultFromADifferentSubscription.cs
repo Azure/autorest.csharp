@@ -46,10 +46,10 @@ namespace MgmtMockAndSample
                 MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
             });
             MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
-            MgmtMockAndSample.DiskEncryptionSetData data = result.Data;
 
+            MgmtMockAndSample.DiskEncryptionSetData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

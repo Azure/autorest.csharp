@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -28,9 +29,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = client.GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = await mgmtMockAndSamplePrivateEndpointConnection.GetAsync();
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

@@ -34,6 +34,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
+            bool result = await collection.ExistsAsync("myDiskEncryptionSet");
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

@@ -32,10 +32,10 @@ namespace MgmtMockAndSample
             // invoke the operation
             ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed);
             MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
-            MgmtMockAndSample.RoleAssignmentData data = result.Data;
 
+            MgmtMockAndSample.RoleAssignmentData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

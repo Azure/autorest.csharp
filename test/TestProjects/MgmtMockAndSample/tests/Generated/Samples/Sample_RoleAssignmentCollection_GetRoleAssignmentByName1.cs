@@ -34,6 +34,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
             // invoke the operation
+            bool result = await collection.ExistsAsync("roleAssignmentName");
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

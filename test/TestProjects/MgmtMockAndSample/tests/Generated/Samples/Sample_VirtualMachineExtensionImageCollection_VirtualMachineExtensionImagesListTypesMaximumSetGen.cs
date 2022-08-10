@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -33,8 +34,13 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            // invoke the operation and iterate over the result
+            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync())
+            {
+                MgmtMockAndSample.VirtualMachineExtensionImageData data = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {data.Id}");
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -27,8 +28,12 @@ namespace MgmtMockAndSample
             ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            // invoke the operation and iterate over the result
+            await foreach (MgmtMockAndSample.Models.MhsmPrivateLinkResource item in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
+            {
+                // this is a placeholder
+                await Task.Run(() => _ = string.Empty);
+            }
         }
     }
 }

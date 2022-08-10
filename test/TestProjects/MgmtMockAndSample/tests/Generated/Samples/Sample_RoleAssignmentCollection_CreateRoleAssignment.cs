@@ -44,10 +44,10 @@ namespace MgmtMockAndSample
                 CanDelegate = false,
             });
             MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
-            MgmtMockAndSample.RoleAssignmentData data = result.Data;
 
+            MgmtMockAndSample.RoleAssignmentData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -28,6 +29,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.Models.VaultValidationResult result = await vault.ValidateAsync();
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

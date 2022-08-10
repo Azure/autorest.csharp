@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -28,9 +29,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
             // invoke the operation
+            MgmtMockAndSample.DeletedVaultResource result = await deletedVault.GetAsync();
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            MgmtMockAndSample.DeletedVaultData data = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }

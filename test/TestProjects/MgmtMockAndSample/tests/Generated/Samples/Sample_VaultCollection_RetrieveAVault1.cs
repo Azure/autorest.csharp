@@ -34,6 +34,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
+            bool result = await collection.ExistsAsync("sample-vault");
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

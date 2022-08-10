@@ -34,6 +34,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa");
 
             // invoke the operation
+            bool result = await collection.ExistsAsync("aa", "aaa");
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);

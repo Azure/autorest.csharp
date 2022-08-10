@@ -41,10 +41,10 @@ namespace MgmtMockAndSample
                 },
             });
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
 
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data}.Id");
+            Console.WriteLine($"Succeeded on id: {data.Id}");
         }
     }
 }
