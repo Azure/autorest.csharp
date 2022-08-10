@@ -29,10 +29,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
-            ArmOperation lro = await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);
-
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }
 }

@@ -29,10 +29,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            ArmOperation lro = await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
-
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
         }
     }
 }

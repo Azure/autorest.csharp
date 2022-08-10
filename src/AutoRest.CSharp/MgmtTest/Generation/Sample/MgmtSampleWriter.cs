@@ -69,8 +69,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             WriteResultResolution(result);
         }
 
-        private void WriteResultResolution(StepResult result)
+        private void WriteResultResolution(StepResult? result)
         {
+            // do nothing if the previous step returns nothing
+            if (result == null)
+                return;
+
+            _writer.Line();
+
             if (result.Type.IsResourceDataType(out _))
             {
                 _writer.Line($"// for demo we just print out the id");
@@ -90,31 +96,34 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             _writer.UseNamespace("Azure.Identity");
             _writer.AppendDeclaration(clientResult)
                 .Line($" = new {typeof(ArmClient)}(new DefaultAzureCredential());");
-            _writer.Line();
 
             return clientResult;
         }
 
-        private StepResult WriteSampleOperationForResourceCollection(StepResult clientResult, ResourceCollection collection)
+        private StepResult? WriteSampleOperationForResourceCollection(StepResult clientResult, ResourceCollection collection)
         {
+            _writer.Line();
+
             var collectionResult = WriteGetCollection(clientResult, collection);
             var result = WriteSampleOperation(collectionResult);
 
-            _writer.Line();
             return result;
         }
 
-        private StepResult WriteSampleOperationForResource(StepResult clientVar, Resource resource)
+        private StepResult? WriteSampleOperationForResource(StepResult clientVar, Resource resource)
         {
+            _writer.Line();
+
             var resourceResult = WriteGetResource(resource, testCase, $"{clientVar.Declaration}");
             var result = WriteSampleOperation(new StepResult(resourceResult, resource.Type));
 
-            _writer.Line();
             return result;
         }
 
         private StepResult WriteSampleOperationForExtension(StepResult clientVar)
         {
+            _writer.Line();
+
             // TODO
             return new StepResult("rr", typeof(string));
         }
@@ -155,7 +164,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return collectionResult;
         }
 
-        private StepResult WriteSampleOperation(StepResult collectionResult)
+        private StepResult? WriteSampleOperation(StepResult collectionResult)
         {
             if (testCase.IsLro)
             {
@@ -169,21 +178,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return WriteSampleNormalOperation(collectionResult.Declaration);
         }
 
-        private StepResult WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
+        private StepResult? WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
         {
-            var lroResult = new StepResult("lro", testCase.Operation.ReturnType);
+            var lroType = testCase.Operation.ReturnType;
             _writer.Line();
             _writer.Line($"// invoke the operation");
-            _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
-            // we always write the async version
-            _writer.Append($"await ");
-            // write the method invocation
-            WriteOperationInvocation(instanceVar);
-            _writer.LineRaw(";");
-
             // if the Lro is an ArmOperation<T>
-            if (lroResult.Type.IsGenericType)
+            if (lroType.IsGenericType)
             {
+                var lroResult = new StepResult("lro", testCase.Operation.ReturnType);
+                _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
+                // write the method invocation
+                WriteOperationInvocation(instanceVar);
+                _writer.LineRaw(";");
                 var valueResult = new StepResult("result", lroResult.Type.Arguments.First());
                 _writer.AppendDeclaration(valueResult)
                     .Line($"= {lroResult.Declaration}.Value;");
@@ -199,24 +206,36 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
                 else
                     return valueResult;
             }
+            // if the Lro is an ArmOperation without body, we just write the method invocation without assignment
+            WriteOperationInvocation(instanceVar);
+            _writer.LineRaw(";");
+            return null;
+        }
+
+        private StepResult? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
+        {
+            return new StepResult("r", typeof(string));
+        }
+
+        private StepResult? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
+        {
+            var returnType = testCase.Operation.ReturnType;
+            if (returnType.IsGenericType)
+            {
+                // an operation with a response
+            }
             else
-                return lroResult;
-        }
-
-        private StepResult WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
-        {
+            {
+                // an operation without a response
+            }
             return new StepResult("r", typeof(string));
         }
 
-        private StepResult WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
-        {
-            return new StepResult("r", typeof(string));
-        }
-
-        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar)
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, bool isAsync = true)
         {
             var methodName = CreateMethodName(testCase.Operation.Name);
-            _writer.Append($"{instanceVar}.{methodName}(");
+            _writer.AppendIf($"await ", isAsync)
+                .Append($"{instanceVar}.{methodName}(");
             foreach (var parameter in testCase.Operation.MethodParameters)
             {
                 if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))

@@ -29,10 +29,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
             // invoke the operation
-            ArmOperation lro = await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
-
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }
 }
