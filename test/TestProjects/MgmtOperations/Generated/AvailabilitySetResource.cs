@@ -368,7 +368,7 @@ namespace MgmtOperations
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new AvailabilitySetUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -414,7 +414,7 @@ namespace MgmtOperations
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new AvailabilitySetUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -459,7 +459,7 @@ namespace MgmtOperations
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new AvailabilitySetUpdate();
                     patch.Tags.ReplaceWith(tags);
                     var result = await UpdateAsync(patch, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -500,7 +500,7 @@ namespace MgmtOperations
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new AvailabilitySetUpdate();
                     patch.Tags.ReplaceWith(tags);
                     var result = Update(patch, cancellationToken: cancellationToken);
@@ -540,7 +540,7 @@ namespace MgmtOperations
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new AvailabilitySetUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -584,7 +584,7 @@ namespace MgmtOperations
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new AvailabilitySetUpdate();
                     foreach (var tag in current.Tags)
                     {

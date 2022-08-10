@@ -418,7 +418,7 @@ namespace MgmtMockTest
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new VaultPatch();
                     foreach (var tag in current.Tags)
                     {
@@ -464,7 +464,7 @@ namespace MgmtMockTest
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new VaultPatch();
                     foreach (var tag in current.Tags)
                     {
@@ -509,7 +509,7 @@ namespace MgmtMockTest
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new VaultPatch();
                     patch.Tags.ReplaceWith(tags);
                     var result = await UpdateAsync(patch, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -550,7 +550,7 @@ namespace MgmtMockTest
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new VaultPatch();
                     patch.Tags.ReplaceWith(tags);
                     var result = Update(patch, cancellationToken: cancellationToken);
@@ -590,7 +590,7 @@ namespace MgmtMockTest
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new VaultPatch();
                     foreach (var tag in current.Tags)
                     {
@@ -634,7 +634,7 @@ namespace MgmtMockTest
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new VaultPatch();
                     foreach (var tag in current.Tags)
                     {

@@ -317,7 +317,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new SubParentPatch();
                     foreach (var tag in current.Tags)
                     {
@@ -363,7 +363,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new SubParentPatch();
                     foreach (var tag in current.Tags)
                     {
@@ -408,7 +408,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new SubParentPatch();
                     patch.Tags.ReplaceWith(tags);
                     var result = await UpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -449,7 +449,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new SubParentPatch();
                     patch.Tags.ReplaceWith(tags);
                     var result = Update(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
@@ -489,7 +489,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = HasData ? Data : (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new SubParentPatch();
                     foreach (var tag in current.Tags)
                     {
@@ -533,7 +533,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = HasData ? Data : Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
                     var patch = new SubParentPatch();
                     foreach (var tag in current.Tags)
                     {

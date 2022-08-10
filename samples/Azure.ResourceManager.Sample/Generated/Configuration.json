@@ -36,5 +36,8 @@
   },
   "MgmtDebug": {
     "ShowSerializedNames": true
+  },
+  "UpdateRequiredCopy": {
+    "VirtualMachineExtension": "Publisher"
   }
 }
