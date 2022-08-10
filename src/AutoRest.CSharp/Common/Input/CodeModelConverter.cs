@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
-using Humanizer;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -29,8 +29,6 @@ namespace AutoRest.CSharp.Common.Input
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
-
-        public IReadOnlyDictionary<InputOperation, Operation> InputOperationToOperationMap => _inputOperationToOperationMap;
 
         public InputNamespace CreateNamespace(CodeModel codeModel)
         {
@@ -72,7 +70,7 @@ namespace AutoRest.CSharp.Common.Input
                     }
 
                     serviceRequests.Add(serviceRequest);
-                    CacheResult(serviceRequest, _operationsCache, () => CreateOperation(serviceRequest, operation, httpRequest));
+                    _operationsCache.CreateAndCacheResult(serviceRequest, () => CreateOperation(serviceRequest, operation, httpRequest));
 
                     if (operation.RequestMediaTypes != null && !Configuration.Generation1ConvenienceClient)
                     {
@@ -111,7 +109,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             foreach (var parameter in requestParameters)
             {
-                CacheResult(parameter, _parametersCache, () => CreateOperationParameter(parameter));
+                _parametersCache.CreateAndCacheResult(parameter, () => CreateOperationParameter(parameter));
             }
 
             return requestParameters.Select(rp => _parametersCache[rp]()).ToList();
@@ -338,10 +336,11 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
 
+            ChoiceSchema choiceSchema       => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
+            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
+
             ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
             DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
-            ChoiceSchema choiceSchema       when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
-            SealedChoiceSchema choiceSchema when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
             ObjectSchema objectSchema       when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             _ => new CodeModelType(schema)
@@ -388,19 +387,6 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             return null;
-        }
-
-        private static Func<TResult> CacheResult<TSource, TResult>(TSource source, IDictionary<TSource, Func<TResult>> cache, Func<TResult> create) where TSource : notnull
-        {
-            if (cache.TryGetValue(source, out var createCache))
-            {
-                return createCache;
-            }
-
-            TResult? value = default;
-            createCache = () => value ??= create();
-            cache[source] = createCache;
-            return createCache;
         }
 
         public static IReadOnlyList<string> GetApiVersions(CodeModel codeModel)
