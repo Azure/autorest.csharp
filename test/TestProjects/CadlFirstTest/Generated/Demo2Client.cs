@@ -65,7 +65,7 @@ namespace CadlFirstTest
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await HelloAgainAsync(null, context).ConfigureAwait(false);
+            Response response = await HelloAgainAsync(input.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -77,7 +77,7 @@ namespace CadlFirstTest
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = HelloAgain(null, context);
+            Response response = HelloAgain(input.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 

@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models
             RestClientMethod? nextPageMethod = nextLinkOperation != null
                 ? builders[nextLinkOperation]._restClientMethod
                 : nextLinkName != null
-                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod, nextLinkName)
+                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod)
                     : null;
 
             _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildOperationMethodChain()
         {
-            var returnTypeChain = BuildReturnTypes(_restClientMethod.ReturnType);
+            var returnTypeChain = BuildReturnTypes();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters);
             var convenienceMethod = _isCadlInput ? BuildConvenienceMethod(returnTypeChain) : null;
@@ -93,8 +93,16 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
 
-        private ReturnTypeChain BuildReturnTypes(CSharpType? responseType)
+        private ReturnTypeChain BuildReturnTypes()
         {
+            var operationBodyTypes = Operation.Responses.Select(r => r.BodyType).WhereNotNull().Distinct().ToArray();
+            CSharpType? responseType = operationBodyTypes.Length switch
+            {
+                0 => null,
+                1 => _typeFactory.CreateType(operationBodyTypes[0]),
+                _ => new CSharpType(typeof(object))
+            };
+
             if (Operation.Paging != null)
             {
                 if (responseType == null)
@@ -129,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (responseType != null)
             {
-                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response<BinaryData>), responseType);
+                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response), responseType);
             }
 
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
@@ -314,17 +322,12 @@ namespace AutoRest.CSharp.Output.Models
             AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
         }
 
-        private void AddParameter(InputParameter operationParameter, Type? frameworkParameterType = null)
+        private void AddParameter(InputParameter operationParameter, CSharpType? frameworkParameterType = null)
             => AddParameter(operationParameter.NameInRequest, operationParameter, frameworkParameterType);
 
-        private void AddParameter(string name, InputParameter inputParameter, Type? frameworkParameterType = null)
+        private void AddParameter(string name, InputParameter inputParameter, CSharpType? frameworkParameterType = null)
         {
-            var protocolMethodInputParameter = inputParameter with
-            {
-                Type = ChangeTypeForProtocolMethod(inputParameter.Type)
-            };
-
-            var protocolMethodParameter = BuildParameter(protocolMethodInputParameter, frameworkParameterType);
+            var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
             AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
             if (inputParameter.Kind != InputOperationParameterKind.Method)
@@ -336,10 +339,10 @@ namespace AutoRest.CSharp.Output.Models
             _orderedParameters.Add(new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter));
         }
 
-        private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
+        private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)
         {
             var type = typeOverride != null
-                ? new CSharpType(typeOverride, operationParameter.Type.IsNullable)
+                ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
                 : _typeFactory.CreateType(operationParameter.Type);
 
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
@@ -372,11 +375,11 @@ namespace AutoRest.CSharp.Output.Models
             return parameter;
         }
 
-        private static InputType ChangeTypeForProtocolMethod(InputType type) => type switch
+        private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
         {
-            InputEnumType enumType => enumType.EnumValueType with { IsNullable = enumType.IsNullable },
-            InputModelType modelType => InputPrimitiveType.Object with { IsNullable = modelType.IsNullable },
-            _ => type
+            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
+            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
+            _ => null
         };
     }
 }

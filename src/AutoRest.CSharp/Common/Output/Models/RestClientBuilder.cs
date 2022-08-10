@@ -35,7 +35,6 @@ namespace AutoRest.CSharp.Output.Models
             "traceparent"
         };
 
-        private readonly SerializationBuilder _serializationBuilder;
         private readonly OutputLibrary? _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
@@ -44,14 +43,12 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             TypeFactory = typeFactory;
-            _serializationBuilder = new SerializationBuilder();
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
             TypeFactory = context.TypeFactory;
-            _serializationBuilder = new SerializationBuilder();
             _library = context.BaseLibrary;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
@@ -112,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
-            var request = BuildRequest(operation, requestParts, null);
+            var request = BuildRequest(operation, requestParts, null, _library);
             Response[] responses = BuildResponses(operation, TypeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -485,10 +482,10 @@ namespace AutoRest.CSharp.Output.Models
             return Parameter.FromInputParameter(operationParameter, type, TypeFactory);
         }
 
-        public static RestClientMethod BuildNextPageMethod(RestClientMethod method, string nextLinkName = "nextLink")
+        public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {
             var nextPageUrlParameter = new Parameter(
-                nextLinkName,
+                "nextLink",
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,

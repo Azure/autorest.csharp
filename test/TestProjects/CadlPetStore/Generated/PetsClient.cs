@@ -296,7 +296,7 @@ namespace CadlPetStore
             Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CreateAsync(null, context).ConfigureAwait(false);
+            Response response = await CreateAsync(pet.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
@@ -308,7 +308,7 @@ namespace CadlPetStore
             Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Create(null, context);
+            Response response = Create(pet.ToRequestContent(), context);
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
