@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -25,8 +26,8 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            // we assume you already have this SubscriptionResourceExtensions created
-            // if you do not know how to create SubscriptionResourceExtensions, please refer to the document of SubscriptionResourceExtensions
+            // this example assumes you already have this SubscriptionResource created on azure
+            // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
@@ -36,8 +37,7 @@ namespace MgmtMockAndSample
             // invoke the operation
             bool result = await collection.ExistsAsync("westus", "hsm1");
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            Console.WriteLine($"Succeeded: {result}");
         }
     }
 }

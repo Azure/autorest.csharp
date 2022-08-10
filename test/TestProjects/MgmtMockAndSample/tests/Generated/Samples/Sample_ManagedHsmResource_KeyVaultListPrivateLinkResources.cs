@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -25,14 +26,15 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            // this example assumes you already have this ManagedHsmResource created on azure
+            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
             ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation and iterate over the result
             await foreach (MgmtMockAndSample.Models.MhsmPrivateLinkResource item in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
-                // this is a placeholder
-                await Task.Run(() => _ = string.Empty);
+                Console.WriteLine($"Succeeded: {item}");
             }
         }
     }

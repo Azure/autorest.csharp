@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -25,8 +26,8 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            // we assume you already have this ArmResourceExtensions created
-            // if you do not know how to create ArmResourceExtensions, please refer to the document of ArmResourceExtensions
+            // this example assumes you already have this ArmResource created on azure
+            // for more information of creating ArmResource, please refer to the document of ArmResource
             ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
             GenericResource resource = client.GetGenericResource(resourceId);
 
@@ -36,8 +37,7 @@ namespace MgmtMockAndSample
             // invoke the operation
             bool result = await collection.ExistsAsync("roleAssignmentName");
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            Console.WriteLine($"Succeeded: {result}");
         }
     }
 }

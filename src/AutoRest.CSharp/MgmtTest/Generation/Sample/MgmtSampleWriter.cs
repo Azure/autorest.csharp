@@ -111,8 +111,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
 
         private void WriteOtherResultHandling(StepResult result)
         {
-            _writer.Line($"// this is a placeholder");
-            _writer.Line($"await {typeof(System.Threading.Tasks.Task)}.Run(() => _ = string.Empty);");
+            if (result.Type.IsFrameworkType)
+            {
+                _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded: {{{result.Declaration}}}\");");
+            }
+            else
+            {
+                _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded: {{{result.Declaration}}}\");");
+            }
         }
 
         private StepResult WriteGetArmClient()
@@ -125,6 +131,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
 
             return clientResult;
         }
+
+        private string GetResourceName(MgmtTypeProvider provider) => provider switch
+        {
+            Resource resource => resource.Type.Name,
+            MgmtExtensions extension => extension.ArmCoreType.Name,
+            _ => throw new InvalidOperationException("Should never happen")
+        };
 
         private StepResult? WriteSampleOperationForResourceCollection(StepResult clientResult, ResourceCollection collection)
         {
@@ -140,6 +153,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         {
             _writer.Line();
 
+            var resourceName = GetResourceName(resource);
+            _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
+            _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
             var resourceResult = WriteGetResource(resource, testCase, $"{clientVar.Declaration}");
             var result = WriteSampleOperation(new StepResult(resourceResult, resource.Type));
 
@@ -150,6 +166,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         {
             _writer.Line();
 
+            var resourceName = GetResourceName(extension);
+            _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
+            _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
             var resourceResult = WriteGetExtension(extension, testCase, $"{clientVar.Declaration}");
             var result = WriteSampleOperation(new StepResult(resourceResult, extension.ArmCoreType));
 
@@ -160,8 +179,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         {
             var parent = testCase.Parent;
             Debug.Assert(parent != null);
-            _writer.Line($"// we assume you already have this {parent.Type.Name} created");
-            _writer.Line($"// if you do not know how to create {parent.Type.Name}, please refer to the document of {parent.Type.Name}");
+
+            var parentName = GetResourceName(parent);
+            _writer.Line($"// this example assumes you already have this {parentName} created on azure");
+            _writer.Line($"// for more information of creating {parentName}, please refer to the document of {parentName}");
             var parentVar = WriteGetResource(parent, testCase, $"{clientResult.Declaration}");
 
             var resourceName = collection.Resource.ResourceName;

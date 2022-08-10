@@ -27,8 +27,8 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            // we assume you already have this VaultResource created
-            // if you do not know how to create VaultResource, please refer to the document of VaultResource
+            // this example assumes you already have this VaultResource created on azure
+            // for more information of creating VaultResource, please refer to the document of VaultResource
             ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 

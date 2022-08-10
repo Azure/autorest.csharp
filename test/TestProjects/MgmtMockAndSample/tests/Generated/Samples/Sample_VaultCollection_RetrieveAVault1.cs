@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -25,8 +26,8 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            // we assume you already have this ResourceGroupResourceExtensions created
-            // if you do not know how to create ResourceGroupResourceExtensions, please refer to the document of ResourceGroupResourceExtensions
+            // this example assumes you already have this ResourceGroupResource created on azure
+            // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
@@ -36,8 +37,7 @@ namespace MgmtMockAndSample
             // invoke the operation
             bool result = await collection.ExistsAsync("sample-vault");
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            Console.WriteLine($"Succeeded: {result}");
         }
     }
 }

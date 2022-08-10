@@ -25,6 +25,8 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            // this example assumes you already have this DeletedManagedHsmResource created on azure
+            // for more information of creating DeletedManagedHsmResource, please refer to the document of DeletedManagedHsmResource
             ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 

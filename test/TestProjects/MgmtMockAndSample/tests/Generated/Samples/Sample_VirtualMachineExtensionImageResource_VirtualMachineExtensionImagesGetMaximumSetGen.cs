@@ -25,6 +25,8 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
+            // this example assumes you already have this VirtualMachineExtensionImageResource created on azure
+            // for more information of creating VirtualMachineExtensionImageResource, please refer to the document of VirtualMachineExtensionImageResource
             ResourceIdentifier virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
             MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
