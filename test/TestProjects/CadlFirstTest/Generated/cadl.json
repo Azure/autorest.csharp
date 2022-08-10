@@ -30,6 +30,28 @@
   ],
   "Models": [
     {
+      "$id": "7",
+      "Name": "Thing",
+      "IsNullable": false,
+      "Properties": [
+        {
+          "$id": "8",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+            "$id": "9",
+            "Name": "string",
+            "Kind": "String",
+            "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false,
+          "IsDiscriminator": false
+        }
+      ]
+    },
+    {
       "$id": "1",
       "Name": "RoundTripModel",
       "ObjectToSkip": {"a": "b", "c": "d"},
@@ -62,28 +84,13 @@
           "Type": { "Name": "DictionaryType", "KeyType": "string", "ValueType": {"$ref": "5" }},
           "IsRequired": true,
           "IsReadOnly": false
-        }
-      ]
-    },
-    {
-      "$id": "7",
-      "Name": "Thing",
-      "IsNullable": false,
-      "Properties": [
+        },
         {
-          "$id": "8",
-          "Name": "name",
-          "SerializedName": "name",
-          "Description": "",
-          "Type": {
-           "$id": "9",
-           "Name": "string",
-           "Kind": "String",
-           "IsNullable": false
-          },
+          "Name": "requiredModel",
+          "Description": "Required dictionary of enums",
+          "Type": {"$ref" :"7"},
           "IsRequired": true,
-          "IsReadOnly": false,
-          "IsDiscriminator": false
+          "IsReadOnly": false
         }
       ]
     }
