@@ -167,7 +167,8 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
             TestModelerConfiguration? testmodeler = default,
-            JsonElement? operationIdMappings = default)
+            JsonElement? operationIdMappings = default,
+            JsonElement? updateRequiredCopy = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -216,6 +217,7 @@ namespace AutoRest.CSharp.Input
             DoesSingletonRequiresKeyword = IsValidJsonElement(singletonRequiresKeyword) && Convert.ToBoolean(singletonRequiresKeyword.ToString());
             TestModeler = testmodeler;
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
+            UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
         }
 
         private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
@@ -259,6 +261,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
+        public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
 
@@ -297,7 +300,8 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
-                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
+                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
+                updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -338,6 +342,7 @@ namespace AutoRest.CSharp.Input
             }
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
+            WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -408,6 +413,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
             root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
+            root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupList,
@@ -439,7 +445,8 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
-                operationIdMappings: operationIdMappings);
+                operationIdMappings: operationIdMappings,
+                updateRequiredCopy: updateRequiredCopy);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

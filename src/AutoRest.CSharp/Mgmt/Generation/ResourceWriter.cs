@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -181,7 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var awaitStr = isAsync ? "await " : String.Empty;
             //var getLatestStrRaw = $"{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}";
             //var getLatestStr = isAsync ? $"(await {getLatestStrRaw})" : getLatestStrRaw;
-            _writer.Line($"var current = HasData ? Data : ({awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
+            _writer.Line($"var current = ({awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
 
             var lroParamStr = This.UpdateOperation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
 
@@ -197,6 +198,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     using (_writer.Scope($"foreach(var tag in current.Tags)"))
                     {
                         _writer.Line($"patch.Tags.Add(tag);");
+                    }
+                }
+                Configuration.MgmtConfiguration.UpdateRequiredCopy.TryGetValue(This.ResourceName, out var properties);
+                if (properties is not null)
+                {
+                    foreach (var property in properties.Split(','))
+                    {
+                        _writer.Line($"patch.{property} = current.{property};");
                     }
                 }
             }
