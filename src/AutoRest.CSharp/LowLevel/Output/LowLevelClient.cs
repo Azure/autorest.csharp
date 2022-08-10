@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory, bool isCadlInput)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -57,13 +57,13 @@ namespace AutoRest.CSharp.Output.Models
 
             ClientOptions = clientOptions;
 
-            Parameters = builder.GetOrderedParametersByRequired();
+            Parameters = new RestClientBuilder(clientParameters, typeFactory).GetOrderedParametersByRequired();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, authorization);
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(builder.TypeFactory, operations, Fields, Declaration.Name, isCadlInput).ToArray();
+            var clientMethods = BuildMethods(typeFactory, operations, Fields, Declaration.Name, isCadlInput).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented

@@ -102,7 +102,8 @@ namespace AutoRest.CSharp.Output.Models
                     fields.Add(field);
                 }
                 parameterNamesToFields.Add(parameter.Name, field);
-                if (parameter.Name == "endpoint" && parameter.Type.Equals(typeof(Uri)))
+
+                if (parameter.Name == KnownParameters.Endpoint.Name && parameter.Type.EqualsIgnoreNullable(KnownParameters.Endpoint.Type))
                 {
                     EndpointField = field;
                 }

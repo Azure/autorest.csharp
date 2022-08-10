@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in model.Fields)
             {
-                writer.WriteFieldDeclaration(field);
+                writer.WriteField(field);
             }
             writer.Line();
         }

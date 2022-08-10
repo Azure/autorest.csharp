@@ -237,10 +237,11 @@ namespace AutoRest.CSharp.Output.Models
                     _libraryName,
                     parentClient,
                     clientInfo.Requests,
-                    new RestClientBuilder(clientInfo.ClientParameters, typeFactory),
+                    clientInfo.ClientParameters,
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
+                    typeFactory,
                     isCadlInput)
                 {
                     SubClients = subClients

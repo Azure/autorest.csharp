@@ -376,7 +376,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var field in This.Fields)
             {
-                _writer.WriteFieldDeclaration(field);
+                _writer.WriteField(field);
             }
             _writer.Line();
         }

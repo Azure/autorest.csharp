@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in client.Fields)
             {
-                writer.WriteFieldDeclaration(field, true);
+                writer.WriteField(field, declareInCurrentScope: false);
             }
 
             writer
@@ -505,7 +505,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (field != null)
                 {
-                    writer.WriteFieldDeclaration(field);
+                    writer.WriteField(field);
                 }
             }
 

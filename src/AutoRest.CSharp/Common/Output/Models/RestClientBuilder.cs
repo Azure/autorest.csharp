@@ -36,19 +36,19 @@ namespace AutoRest.CSharp.Output.Models
         };
 
         private readonly OutputLibrary? _library;
+        private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        public TypeFactory TypeFactory { get; }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
-            TypeFactory = typeFactory;
+            _typeFactory = typeFactory;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
-            TypeFactory = context.TypeFactory;
+            _typeFactory = context.TypeFactory;
             _library = context.BaseLibrary;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _library);
-            Response[] responses = BuildResponses(operation, TypeFactory, out var responseType);
+            Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
                 operation.Name.ToCleanName(),
@@ -362,7 +362,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)TypeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
 
             return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -462,15 +462,13 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var name = "endpoint";
-            var type = new CSharpType(typeof(Uri));
             var defaultValue = parameter.DefaultValue;
             var description = parameter.Description;
             var location = parameter.RequestLocation;
 
             return defaultValue != null
-                ? new Parameter(name, description, type, Constant.Default(type.WithNullable(true)), ValidationType.None, $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})", RequestLocation: location)
-                : new Parameter(name, description, type, null, parameter.Validation, null, RequestLocation: location);
+                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
+                : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
         }
 
         public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
@@ -478,8 +476,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : TypeFactory.CreateType(operationParameter.Type);
-            return Parameter.FromInputParameter(operationParameter, type, TypeFactory);
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
+            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
         }
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
