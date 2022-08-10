@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             _context = context;
             ClientBuilder = clientBuilder;
-            ProtocolMethods = GetProtocolMethods(inputClient, context).ToList();
             Fields = ClientFields.CreateForRestClient(Parameters);
+            ProtocolMethods = GetProtocolMethods(inputClient, context).ToList();
         }
 
         protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
