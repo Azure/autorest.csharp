@@ -5,9 +5,12 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtMockAndSample
 {
@@ -23,8 +26,16 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
+            // invoke the operation and iterate over the result
+            await foreach (MgmtMockAndSample.ManagedHsmResource item in subscriptionResource.GetManagedHsmsAsync())
+            {
+                MgmtMockAndSample.ManagedHsmData data = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {data.Id}");
+            }
         }
     }
 }

@@ -8,6 +8,7 @@
 using System.Threading.Tasks;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -23,8 +24,14 @@ namespace MgmtMockAndSample
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-            // this is a placeholder
-            await Task.Run(() => _ = string.Empty);
+            var tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
+
+            // invoke the operation and iterate over the result
+            await foreach (MgmtMockAndSample.Models.EventData item in tenantResource.GetTenantActivityLogsAsync())
+            {
+                // this is a placeholder
+                await Task.Run(() => _ = string.Empty);
+            }
         }
     }
 }

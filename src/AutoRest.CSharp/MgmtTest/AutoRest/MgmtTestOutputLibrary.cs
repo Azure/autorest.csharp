@@ -42,7 +42,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             foreach (var testCases in MockTestCases.Values)
             {
                 foreach (var testCase in testCases)
+                {
                     yield return new MgmtSampleProvider(testCase);
+                }
             }
         }
 
@@ -62,6 +64,10 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                     var providerAndOperations = FindCarriersFromOperationId(operationId);
                     foreach (var providerForExample in providerAndOperations)
                     {
+                        // the operations on ArmClientExtensions are the same as the tenant extension, therefore we skip it here
+                        // the source code generator will never write them if it is not in arm core
+                        if (providerForExample.Carrier is ArmClientExtensions)
+                            continue;
                         var mockTestCase = new MockTestCase(operationId, providerForExample, example);
                         result.AddInList(mockTestCase.Owner, mockTestCase);
                     }

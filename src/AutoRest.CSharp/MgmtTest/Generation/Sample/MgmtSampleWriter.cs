@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             {
                 ResourceCollection collection => WriteSampleOperationForResourceCollection(clientStepResult, collection),
                 Resource resource => WriteSampleOperationForResource(clientStepResult, resource),
-                MgmtExtensions => WriteSampleOperationForExtension(clientStepResult),
+                MgmtExtensions extension => WriteSampleOperationForExtension(clientStepResult, extension),
                 _ => throw new InvalidOperationException("Should never happen"),
             };
 
@@ -146,12 +146,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return result;
         }
 
-        private StepResult WriteSampleOperationForExtension(StepResult clientVar)
+        private StepResult? WriteSampleOperationForExtension(StepResult clientVar, MgmtExtensions extension)
         {
             _writer.Line();
 
-            // TODO
-            return new StepResult("rr", typeof(string));
+            var resourceResult = WriteGetExtension(extension, testCase, $"{clientVar.Declaration}");
+            var result = WriteSampleOperation(new StepResult(resourceResult, extension.ArmCoreType));
+
+            return result;
         }
 
         private StepResult WriteGetCollection(StepResult clientResult, ResourceCollection collection)

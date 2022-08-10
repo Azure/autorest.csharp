@@ -6,8 +6,11 @@
 #nullable disable
 
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -22,6 +25,12 @@ namespace MgmtMockAndSample
 
             // authenticate your client
             ArmClient client = new ArmClient(new DefaultAzureCredential());
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
+            // invoke the operation
+            MgmtMockAndSample.Models.CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(new VaultCheckNameAvailabilityContent("sample-vault"));
 
             // this is a placeholder
             await Task.Run(() => _ = string.Empty);
