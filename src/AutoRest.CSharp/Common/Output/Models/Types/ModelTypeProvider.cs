@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ? Public | ReadOnly
                     : Public;
 
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, typeFactory.CreateType(inputModelProperty.Type), inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, typeFactory.CreateType(inputModelProperty.Type, inputModelProperty.IsReadOnly), inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
                 if (inputModelProperty.IsRequired)
                 {
@@ -98,11 +98,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
-            if (serializationParameters.Where(IsIList).Any())
+            if (serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
             {
                 serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    serializationParameters.Select(p => IsIList(p) ? FromIListToIEnumerable(p) : p).ToList());
+                    serializationParameters.Where(p => !TypeFactory.IsReadOnlyList(p.Type)).Select(p => TypeFactory.IsReadWriteList(p.Type) ? FromIListToIEnumerable(p) : p).ToList());
             }
             else
             {
@@ -112,8 +112,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return (publicConstructor, serializationConstructor);
         }
-
-        private static bool IsIList(Parameter p) => p.Type.IsFrameworkType && p.Type.FrameworkType == typeof(IList<>);
 
         private static Parameter FromIListToIEnumerable(Parameter p) => new Parameter(p.Name, p.Description, new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments), p.DefaultValue, p.Validation, p.Initializer);
     }
