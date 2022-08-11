@@ -34,10 +34,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
 
-            (_fieldsToInputs, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+            (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
 
             Fields = _fieldsToInputs.Keys.ToList();
-            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, serializationParameters);
+            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, publicParameters, serializationParameters);
         }
 
         // Serialization uses field and property names that first need to verified for uniqueness
@@ -69,9 +69,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyList<Parameter> SerializationParameters, IReadOnlyDictionary<string, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
+        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyList<Parameter> PublicParameters, IReadOnlyList<Parameter> SerializationParameters, IReadOnlyDictionary<string, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
         {
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
+            var publicParameters = new List<Parameter>();
             var serializatoinParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
@@ -88,21 +89,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var parameter = Parameter.FromModelProperty(inputModelProperty, typeFactory);
                     parametersToFields[parameter.Name] = field;
                     serializatoinParameters.Add(parameter);
+                    if (!inputModelProperty.IsReadOnly)
+                    {
+                        publicParameters.Add(parameter);
+                    }
                 }
             }
 
-            return (fieldsToInputs, serializatoinParameters, parametersToFields);
+            return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
         }
 
-        private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, IReadOnlyList<Parameter> serializationParameters)
+        private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
-            if (serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
+            if (!publicParameters.Equals(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
             {
                 serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    serializationParameters.Where(p => !TypeFactory.IsReadOnlyList(p.Type)).Select(p => TypeFactory.IsReadWriteList(p.Type) ? FromIListToIEnumerable(p) : p).ToList());
+                    publicParameters.Select(p => TypeFactory.IsReadWriteList(p.Type) ? FromIListToIEnumerable(p) : p).ToList());
             }
             else
             {

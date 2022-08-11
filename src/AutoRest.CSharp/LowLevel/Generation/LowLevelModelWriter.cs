@@ -48,6 +48,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.WriteMethodDeclaration(signature))
             {
                 WriteFieldsInitialization(writer, signature, model);
+                // TODO: Add IReadOnlyDictionary
                 foreach (var field in model.Fields.Where(f => TypeFactory.IsReadOnlyList(f.Type)))
                 {
                     writer.Line($"{field.Name:I} = new List<{field.Type.Arguments[0]}>(0);");

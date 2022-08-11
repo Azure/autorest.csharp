@@ -103,20 +103,8 @@ public global::System.Collections.Generic.IReadOnlyList<string> OptionalReadonly
 public global::System.Collections.Generic.IReadOnlyList<int> OptionalReadonlyIntList{ get; }
 
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
-/// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>
-/// <param name=""requiredReadonlyInt""> Required int, illustrating a readonly reference type property. </param>
-/// <param name=""optionalReadonlyString""> Optional string, illustrating a readonly reference type property. </param>
-/// <param name=""optionalReadonlyInt""> Optional int, illustrating a readonly reference type property. </param>
-/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredReadonlyString""/> or <paramref name=""optionalReadonlyString""/> is null. </exception>
-public RoundTripModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int optionalReadonlyInt)
+public RoundTripModel()
 {
-global::Azure.Core.Argument.AssertNotNull(requiredReadonlyString, nameof(requiredReadonlyString));
-global::Azure.Core.Argument.AssertNotNull(optionalReadonlyString, nameof(optionalReadonlyString));
-
-RequiredReadonlyString = requiredReadonlyString;
-RequiredReadonlyInt = requiredReadonlyInt;
-OptionalReadonlyString = optionalReadonlyString;
-OptionalReadonlyInt = optionalReadonlyInt;
 RequiredReadonlyStringList = new List<string>(0);
 RequiredReadonlyIntList = new List<int>(0);
 OptionalReadonlyStringList = new List<string>(0);
