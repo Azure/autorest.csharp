@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(restClient.Type.Namespace))
             {
-                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
+                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}", scopeDeclarations: restClient.Fields.ScopeDeclarations))
                 {
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
@@ -51,18 +51,18 @@ namespace AutoRest.CSharp.Generation.Writers
             var longRunning = protocolMethod.LongRunning;
             if (longRunning != null)
             {
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, true);
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, false);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, null, true);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, null, false);
             }
             else if (protocolMethod.PagingInfo != null)
             {
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, null, true);
+                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, null, false);
             }
             else
             {
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, null, true);
+                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, null, false);
             }
         }
 

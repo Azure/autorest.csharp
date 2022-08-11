@@ -67,8 +67,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
-            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
-            scope0.Start();
+            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
+            scope.Start();
             try
             {
                 var response = await DeploymentExtendedDeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
@@ -76,7 +76,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -90,8 +90,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
-            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
-            scope0.Start();
+            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
+            scope.Start();
             try
             {
                 var response = DeploymentExtendedDeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
@@ -99,7 +99,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
