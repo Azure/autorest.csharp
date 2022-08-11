@@ -24,8 +24,9 @@ namespace MgmtScopeResource.Models
         /// <param name="duration"> The duration of the template deployment. </param>
         /// <param name="outputs"> Key/value pairs that represent deployment output. </param>
         /// <param name="parameters"> Deployment parameters. </param>
+        /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
         /// <param name="errorResponse"> The deployment error. </param>
-        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, ErrorResponse errorResponse)
+        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, DeploymentMode? mode, ErrorResponse errorResponse)
         {
             ProvisioningState = provisioningState;
             CorrelationId = correlationId;
@@ -33,6 +34,7 @@ namespace MgmtScopeResource.Models
             Duration = duration;
             Outputs = outputs;
             Parameters = parameters;
+            Mode = mode;
             ErrorResponse = errorResponse;
         }
 
@@ -48,6 +50,8 @@ namespace MgmtScopeResource.Models
         public BinaryData Outputs { get; }
         /// <summary> Deployment parameters. </summary>
         public BinaryData Parameters { get; }
+        /// <summary> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </summary>
+        public DeploymentMode? Mode { get; }
         /// <summary> The deployment error. </summary>
         internal ErrorResponse ErrorResponse { get; }
         /// <summary> The details of the error. </summary>

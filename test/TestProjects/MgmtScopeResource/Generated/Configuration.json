@@ -47,5 +47,10 @@
   },
   "OverrideOperationName": {
     "ResourceLinks_ListAtSourceScope": "GetAll"
+  },
+  "PatchInitializerCustomization": {
+    "Deployment": {
+      "Properties": "new DeploymentProperties(current.Properties.Mode.HasValue ? current.Properties.Mode.Value : DeploymentMode.Incremental)"
+    }
   }
 }
