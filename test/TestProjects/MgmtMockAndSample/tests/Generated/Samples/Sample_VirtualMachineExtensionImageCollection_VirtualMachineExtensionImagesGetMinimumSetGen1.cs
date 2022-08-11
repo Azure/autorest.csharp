@@ -32,7 +32,9 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this VirtualMachineExtensionImageResource
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages("aaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
+            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             bool result = await collection.ExistsAsync("aa", "aaa");

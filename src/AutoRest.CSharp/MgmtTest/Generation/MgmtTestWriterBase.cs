@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
-        protected CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
+        protected virtual CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
         {
             var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
             _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");

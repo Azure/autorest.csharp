@@ -6,9 +6,9 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal record StepResult(CodeWriterDeclaration Declaration, CSharpType Type)
+    internal record CodeWriterVariableDeclaration(CodeWriterDeclaration Declaration, CSharpType Type)
     {
-        public StepResult(string name, CSharpType type) : this(new CodeWriterDeclaration(name), type)
+        public CodeWriterVariableDeclaration(string name, CSharpType type) : this(new CodeWriterDeclaration(name), type)
         { }
     }
 }

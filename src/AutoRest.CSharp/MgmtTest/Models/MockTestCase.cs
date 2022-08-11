@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 }
                 else
                 {
-                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue, null));
+                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
                 }
             }
 
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new ExampleParameterValue(parameter, null, $"{typeof(WaitUntil)}.Completed"));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"{typeof(WaitUntil)}.Completed"));
                 return true;
             }
             if (parameter == KnownParameters.CancellationTokenParameter)

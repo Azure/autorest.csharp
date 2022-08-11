@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
-            MgmtMockAndSample.DeletedManagedHsmResource result = await collection.GetAsync("westus", "hsm1");
+            MgmtMockAndSample.DeletedManagedHsmResource result = await collection.GetAsync(new AzureLocation("westus"), "hsm1");
 
             MgmtMockAndSample.DeletedManagedHsmData data = result.Data;
             // for demo we just print out the id

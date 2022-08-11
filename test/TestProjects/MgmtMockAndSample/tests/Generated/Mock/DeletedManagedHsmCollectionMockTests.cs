@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetDeletedManagedHsms();
-            await collection.ExistsAsync("westus", "hsm1");
+            await collection.ExistsAsync(new AzureLocation("westus"), "hsm1");
         }
 
         [RecordedTest]
@@ -43,7 +43,7 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetDeletedManagedHsms();
-            await collection.GetAsync("westus", "hsm1");
+            await collection.GetAsync(new AzureLocation("westus"), "hsm1");
         }
     }
 }

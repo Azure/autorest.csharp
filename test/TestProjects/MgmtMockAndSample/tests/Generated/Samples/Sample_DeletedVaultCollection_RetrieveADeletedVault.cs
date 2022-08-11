@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
-            MgmtMockAndSample.DeletedVaultResource result = await collection.GetAsync("westus", "sample-vault");
+            MgmtMockAndSample.DeletedVaultResource result = await collection.GetAsync(new AzureLocation("westus"), "sample-vault");
 
             MgmtMockAndSample.DeletedVaultData data = result.Data;
             // for demo we just print out the id

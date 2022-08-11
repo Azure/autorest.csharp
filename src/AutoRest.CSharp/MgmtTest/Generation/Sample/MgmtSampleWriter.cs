@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -12,6 +13,9 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Sample;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Sample
@@ -69,7 +73,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             WriteResultHandling(result);
         }
 
-        private void WriteResultHandling(StepResult? result, bool newLine = true)
+        private void WriteResultHandling(CodeWriterVariableDeclaration? result, bool newLine = true)
         {
             // do nothing if the previous step returns nothing
             if (result == null)
@@ -92,10 +96,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
         }
 
-        private void WriteResourceResultHandling(StepResult result, Resource resource)
+        private void WriteResourceResultHandling(CodeWriterVariableDeclaration result, Resource resource)
         {
             // create a data variable for this data
-            var dataResult = new StepResult("data", resource.ResourceData.Type);
+            var dataResult = new CodeWriterVariableDeclaration("data", resource.ResourceData.Type);
             _writer.AppendDeclaration(dataResult)
                 .Line($"= {result.Declaration}.Data;");
 
@@ -103,13 +107,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             WriteResourceDataResultHandling(dataResult, resource.ResourceData);
         }
 
-        private void WriteResourceDataResultHandling(StepResult result, ResourceData resourceData)
+        private void WriteResourceDataResultHandling(CodeWriterVariableDeclaration result, ResourceData resourceData)
         {
             _writer.Line($"// for demo we just print out the id");
             _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded on id: {{{result.Declaration}.Id}}\");");
         }
 
-        private void WriteOtherResultHandling(StepResult result)
+        private void WriteOtherResultHandling(CodeWriterVariableDeclaration result)
         {
             if (result.Type.IsFrameworkType)
             {
@@ -121,10 +125,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
         }
 
-        private StepResult WriteGetArmClient()
+        private CodeWriterVariableDeclaration WriteGetArmClient()
         {
             _writer.Line($"// authenticate your client");
-            var clientResult = new StepResult("client", typeof(ArmClient));
+            var clientResult = new CodeWriterVariableDeclaration("client", typeof(ArmClient));
             _writer.UseNamespace("Azure.Identity");
             _writer.AppendDeclaration(clientResult)
                 .Line($" = new {typeof(ArmClient)}(new DefaultAzureCredential());");
@@ -139,7 +143,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             _ => throw new InvalidOperationException("Should never happen")
         };
 
-        private StepResult? WriteSampleOperationForResourceCollection(StepResult clientResult, ResourceCollection collection)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForResourceCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection)
         {
             _writer.Line();
 
@@ -149,7 +153,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return result;
         }
 
-        private StepResult? WriteSampleOperationForResource(StepResult clientVar, Resource resource)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForResource(CodeWriterVariableDeclaration clientVar, Resource resource)
         {
             _writer.Line();
 
@@ -157,12 +161,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
             _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
             var resourceResult = WriteGetResource(resource, testCase, $"{clientVar.Declaration}");
-            var result = WriteSampleOperation(new StepResult(resourceResult, resource.Type));
+            var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, resource.Type));
 
             return result;
         }
 
-        private StepResult? WriteSampleOperationForExtension(StepResult clientVar, MgmtExtensions extension)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtensions extension)
         {
             _writer.Line();
 
@@ -170,12 +174,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
             _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
             var resourceResult = WriteGetExtension(extension, testCase, $"{clientVar.Declaration}");
-            var result = WriteSampleOperation(new StepResult(resourceResult, extension.ArmCoreType));
+            var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, extension.ArmCoreType));
 
             return result;
         }
 
-        private StepResult WriteGetCollection(StepResult clientResult, ResourceCollection collection)
+        private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection)
         {
             var parent = testCase.Parent;
             Debug.Assert(parent != null);
@@ -189,21 +193,34 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             // now we have the parent resource, get the collection from that resource
             // TODO -- we might should look this up inside the code project for correct method name
             var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
-            var collectionResult = new StepResult("collection", collection.Type);
+            var collectionResult = new CodeWriterVariableDeclaration("collection", collection.Type);
 
             _writer.Line();
             _writer.Line($"// get the collection of this {collection.Resource.Type.Name}");
+            // first find the variables we need and write their assignments
+            var parameters = new Dictionary<Parameter, CodeWriterVariableDeclaration>();
+            foreach (var extraParameter in collection.ExtraConstructorParameters)
+            {
+                if (testCase.ParameterValueMapping.TryGetValue(extraParameter.Name, out var value))
+                {
+                    var declaration = new CodeWriterVariableDeclaration(extraParameter.Name, extraParameter.Type);
+                    parameters.Add(extraParameter, declaration);
+
+                    _writer.AppendDeclaration(declaration)
+                        .AppendRaw(" = ")
+                        .AppendExampleParameterValue(value, extraParameter.Type)
+                        .LineRaw(";");
+                }
+            }
             _writer.AppendDeclaration(collectionResult)
                 .Append($"= {parentVar}.{getResourceCollectionMethodName}(");
             var parameterValues = testCase.ParameterValueMapping;
-            // iterate over the ResourceCollection.ExtraConstructorParameters to get extra parameters for the GetCollection method
-            foreach (var extraParameter in collection.ExtraConstructorParameters)
+            // iterate over the parameter list and put them into the invocation
+            foreach ((var parameter, var declaration) in parameters)
             {
-                if (parameterValues.TryGetValue(extraParameter.Name, out var value))
-                {
-                    _writer.AppendExampleParameterValue(extraParameter, value);
-                    _writer.AppendRaw(",");
-                }
+                _writer.AppendIf($"{parameter.Name}: ", parameter.DefaultValue != null)
+                    .Append($"{declaration.Declaration}")
+                    .AppendRaw(",");
             }
             _writer.RemoveTrailingComma();
             _writer.LineRaw(");");
@@ -213,7 +230,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return collectionResult;
         }
 
-        private StepResult? WriteSampleOperation(StepResult collectionResult)
+        private CodeWriterVariableDeclaration? WriteSampleOperation(CodeWriterVariableDeclaration collectionResult)
         {
             if (testCase.IsLro)
             {
@@ -227,7 +244,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return WriteSampleNormalOperation(collectionResult.Declaration);
         }
 
-        private StepResult? WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
+        private CodeWriterVariableDeclaration? WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
@@ -235,11 +252,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             var lroType = testCase.Operation.ReturnType;
             if (lroType.IsGenericType)
             {
-                var lroResult = new StepResult("lro", testCase.Operation.ReturnType);
+                var lroResult = new CodeWriterVariableDeclaration("lro", testCase.Operation.ReturnType);
                 _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
                 // write the method invocation
                 WriteOperationInvocation(instanceVar);
-                var valueResult = new StepResult("result", lroType.Arguments.First());
+                var valueResult = new CodeWriterVariableDeclaration("result", lroType.Arguments.First());
                 _writer.AppendDeclaration(valueResult)
                     .Line($"= {lroResult.Declaration}.Value;");
 
@@ -253,7 +270,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
         }
 
-        private StepResult? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
+        private CodeWriterVariableDeclaration? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
@@ -261,7 +278,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             if (returnType.IsGenericType)
             {
                 // an operation with a response
-                var valueResult = new StepResult("result", returnType.Arguments.First());
+                var valueResult = new CodeWriterVariableDeclaration("result", returnType.Arguments.First());
                 _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
                 // write the method invocation
                 WriteOperationInvocation(instanceVar);
@@ -275,12 +292,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
         }
 
-        private StepResult? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
+        private CodeWriterVariableDeclaration? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation and iterate over the result");
             // when the operation is pageable, the return type refers to the type of the item T, instead of Pageable<T>
-            var itemResult = new StepResult("item", testCase.Operation.ReturnType);
+            var itemResult = new CodeWriterVariableDeclaration("item", testCase.Operation.ReturnType);
             _writer.Append($"await foreach (")
                 .AppendDeclaration(itemResult)
                 .AppendRaw(" in ");
@@ -310,6 +327,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
             _writer.RemoveTrailingComma();
             _writer.AppendRaw(")").LineRawIf(";", isEndOfLine);
+        }
+
+        protected override CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
+        {
+            var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
+            _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");
+            foreach (var value in example.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath))
+            {
+                _writer.Append(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($");");
+            var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
+            _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
+
+            return resourceVar;
         }
     }
 }

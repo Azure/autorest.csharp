@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 
@@ -13,5 +14,20 @@ namespace AutoRest.CSharp.MgmtTest.Models
     /// <param name="Parameter"></param>
     /// <param name="Value"></param>
     /// <param name="RawValue"></param>
-    internal record ExampleParameterValue(Parameter Parameter, ExampleValue? Value, FormattableString? RawValue);
+    internal record ExampleParameterValue(Parameter Parameter)
+    {
+        public ExampleValue? Value { get; }
+
+        public FormattableString? Expression { get; }
+
+        public ExampleParameterValue(Parameter parameter, ExampleValue value) : this(parameter)
+        {
+            Value = value;
+        }
+
+        public ExampleParameterValue(Parameter parameter, FormattableString rawValue) : this(parameter)
+        {
+            Expression = rawValue;
+        }
+    }
 }

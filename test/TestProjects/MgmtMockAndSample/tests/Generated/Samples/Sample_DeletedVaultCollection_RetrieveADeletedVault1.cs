@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
-            bool result = await collection.ExistsAsync("westus", "sample-vault");
+            bool result = await collection.ExistsAsync(new AzureLocation("westus"), "sample-vault");
 
             Console.WriteLine($"Succeeded: {result}");
         }

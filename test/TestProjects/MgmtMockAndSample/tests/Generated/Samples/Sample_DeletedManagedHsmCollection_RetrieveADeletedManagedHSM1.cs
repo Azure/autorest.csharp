@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
-            bool result = await collection.ExistsAsync("westus", "hsm1");
+            bool result = await collection.ExistsAsync(new AzureLocation("westus"), "hsm1");
 
             Console.WriteLine($"Succeeded: {result}");
         }
