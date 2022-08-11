@@ -194,10 +194,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 bodyParamName = "patch";
                 if (bodyParamType.Implementation is ObjectType objectType)
                 {
+                    Configuration.MgmtConfiguration.PatchInitializerCustomization.TryGetValue(bodyParamType.Name, out var customizations);
+                    customizations ??= new Dictionary<string, string>();
                     _writer.Append($"var patch = new {bodyParamType}(");
                     foreach (var parameter in objectType.InitializationConstructor.Signature.Parameters)
                     {
-                        _writer.Append($"current.{parameter.Name.FirstCharToUpperCase()}, ");
+                        var varName = parameter.Name.FirstCharToUpperCase();
+                        if (customizations.TryGetValue(varName, out var customization))
+                        {
+                            _writer.Append($"{customization}");
+                        }
+                        else
+                        {
+                            _writer.Append($"current.{varName}, ");
+                        }
                     }
                     _writer.RemoveTrailingComma();
                     _writer.Line($");");

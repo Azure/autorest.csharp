@@ -168,7 +168,8 @@ namespace AutoRest.CSharp.Input
             JsonElement? singletonRequiresKeyword = default,
             TestModelerConfiguration? testmodeler = default,
             JsonElement? operationIdMappings = default,
-            JsonElement? updateRequiredCopy = default)
+            JsonElement? updateRequiredCopy = default,
+            JsonElement? patchInitializerCustomization = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -218,6 +219,7 @@ namespace AutoRest.CSharp.Input
             TestModeler = testmodeler;
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
             UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
+            PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
         }
 
         private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
@@ -262,6 +264,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
         public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
+        public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
 
@@ -301,7 +304,8 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
-                updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult());
+                updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
+                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -343,6 +347,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
             WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
+            WriteNonEmptySettings(writer, nameof(PatchInitializerCustomization), PatchInitializerCustomization);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -414,6 +419,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
             root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
+            root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupList,
@@ -446,7 +452,8 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
                 operationIdMappings: operationIdMappings,
-                updateRequiredCopy: updateRequiredCopy);
+                updateRequiredCopy: updateRequiredCopy,
+                patchInitializerCustomization: patchInitializerCustomization);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)
