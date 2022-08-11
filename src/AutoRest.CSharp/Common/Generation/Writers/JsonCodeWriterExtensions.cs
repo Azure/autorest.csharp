@@ -449,7 +449,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
+        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization, string? abstractBackup = null)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -498,7 +498,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
+            writer.Append($"return new {(abstractBackup != null ? abstractBackup : serialization.Type)}({parameters.Join(", ")});");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)

@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Input
             get
             {
                 if (format == null)
-                    format = TryGetValue("x-ms-format", out object? value) ? value?.ToString() : string.Empty;
+                    format = TryGetValue("x-ms-format", out object? value) && value != null ? value?.ToString() : string.Empty;
                 return format;
             }
             set
@@ -140,6 +140,21 @@ namespace AutoRest.CSharp.Input
             }
         }
         private string? format;
+
+        public bool? AbstractType
+        {
+            get
+            {
+                if (abstractType == null)
+                    abstractType = TryGetValue("x-ms-abstract", out object? value) ? (bool?)Convert.ToBoolean(value) : null;
+                return abstractType;
+            }
+            set
+            {
+                abstractType = value;
+            }
+        }
+        private bool? abstractType;
     }
 
     internal partial class RecordOfStringAndRequest : System.Collections.Generic.Dictionary<string, ServiceRequest>

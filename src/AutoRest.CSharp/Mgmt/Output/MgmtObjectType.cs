@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             _defaultNamespace = nameSpace;
         }
 
-        protected override bool IsAbstract => base.IsAbstract || IsBaseClassWithDiscriminator;
         protected virtual bool IsResourceType => false;
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
@@ -279,9 +278,5 @@ namespace AutoRest.CSharp.Mgmt.Output
                 property.ValueType,
                 property.OptionalViaNullability);
         }
-
-        private bool IsBaseClassWithDiscriminator => ObjectSchema.Discriminator?.All != null &&
-            ObjectSchema.Parents?.All.Count == 0 &&
-            !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(ExistingType != null ? ExistingType.Name : DefaultName);
     }
 }

@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.MgmtReferenceType;
+            (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.AbstractType is true);
 
         public bool IsInheritableCommonType => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
