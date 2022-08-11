@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -175,24 +176,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteTaggableCommonMethodFromPutOrPatch(bool isAsync, string setCode, bool isSetTags = false)
         {
-            if (This.UpdateOperation is null)
+            if (This.UpdateOperation is null && This.CreateOperation is null)
                 throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
+            MgmtClientOperation operation = (This.UpdateOperation ?? This.CreateOperation)!;
 
             var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
             var awaitStr = isAsync ? "await " : String.Empty;
-            //var getLatestStrRaw = $"{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}";
-            //var getLatestStr = isAsync ? $"(await {getLatestStrRaw})" : getLatestStrRaw;
             _writer.Line($"var current = ({awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
 
-            var lroParamStr = This.UpdateOperation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
+            var lroParamStr = operation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
 
-            var parameters = This.UpdateOperation.IsLongRunningOperation ? This.UpdateOperation.MethodSignature.Parameters.Skip(1) : This.UpdateOperation.MethodSignature.Parameters;
+            var parameters = operation.IsLongRunningOperation ? operation.MethodSignature.Parameters.Skip(1) : operation.MethodSignature.Parameters;
             var bodyParamType = parameters.First().Type;
             string bodyParamName = "current";
             if (!bodyParamType.Equals(This.ResourceData.Type))
             {
                 bodyParamName = "patch";
-                _writer.Line($"var patch = new {bodyParamType}();");
+                if (bodyParamType.Implementation is ObjectType objectType)
+                {
+                    _writer.Append($"var patch = new {bodyParamType}(");
+                    foreach (var parameter in objectType.InitializationConstructor.Signature.Parameters)
+                    {
+                        _writer.Append($"current.{parameter.Name.FirstCharToUpperCase()}, ");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.Line($");");
+                }
+                else
+                {
+                    _writer.Line($"var patch = new {bodyParamType}();");
+                }
                 if (!isSetTags)
                 {
                     using (_writer.Scope($"foreach(var tag in current.Tags)"))
@@ -212,9 +225,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line($"{bodyParamName}.Tags{setCode};");
             _writer.Line($"var result = {awaitStr}{CreateMethodName("Update", isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
-            if (This.UpdateOperation.IsLongRunningOperation)
+            if (operation.IsLongRunningOperation)
             {
-                if (This.UpdateOperation.ReturnType.Arguments.Length == 0)
+                if (operation.ReturnType.Arguments.Length == 0)
                 {
                     _writer.Line($"return {awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr};");
                 }
