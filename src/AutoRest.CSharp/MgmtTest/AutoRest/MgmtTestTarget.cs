@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -37,6 +38,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 WriteSamples(project, library);
             }
+
+            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
         }
 
         private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
@@ -47,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest);
                 collectionTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
+                AddGeneratedFile(project, $"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
             }
 
             foreach (var resourceTest in library.ResourceMockTests)
@@ -55,14 +59,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var resourceTestWriter = new ResourceMockTestWriter(resourceTest);
                 resourceTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
+                AddGeneratedFile(project, $"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
             }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
             var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests);
             extensionWrapperTestWriter.Write();
 
-            project.AddGeneratedFile($"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+            AddGeneratedFile(project, $"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
         }
 
         private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
@@ -74,7 +78,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 sampleWriter.Write();
 
                 var filename = GetFilename(sample.Type.Name, names);
-                project.AddGeneratedFile($"Samples/{filename}.cs", sampleWriter.ToString());
+                AddGeneratedFile(project, $"Samples/{filename}.cs", sampleWriter.ToString());
             }
         }
 
@@ -96,6 +100,32 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return Configuration.MgmtConfiguration.TestGen.SourceCodePath;
 
             return Path.Combine(Configuration.OutputFolder, "../../src");
+        }
+
+        private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
+        private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
+
+        private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
+        {
+            if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
+            {
+                addedFileNames = new HashSet<string>();
+                _addedProjectFilenames.Add(project, addedFileNames);
+            }
+            if (addedFileNames.Contains(filename))
+            {
+                if (!_overriddenProjectFilenames.TryGetValue(project, out var overriddenFileNames))
+                {
+                    overriddenFileNames = new List<string>();
+                    _overriddenProjectFilenames.Add(project, overriddenFileNames);
+                }
+                overriddenFileNames.Add(filename);
+            }
+            else
+            {
+                addedFileNames.Add(filename);
+            }
+            project.AddGeneratedFile(filename, text);
         }
     }
 }

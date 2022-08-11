@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Sample
         }
 
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= $"Sample_{Sample.Carrier.Type.Name}_{Sample.Name.ToCleanName()}";
+        protected override string DefaultName => _defaultName ??= $"Sample_{Sample.Carrier.Type.Name}_{Sample.Operation.Name}_{Sample.Name.ToCleanName()}";
 
         // a sample class does not need a description
         public override FormattableString Description => $"";
