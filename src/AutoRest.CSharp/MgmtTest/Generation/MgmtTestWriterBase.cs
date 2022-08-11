@@ -58,6 +58,30 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line($");");
         }
 
+        protected virtual void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration,
+            RequestPath requestPath, CSharpType resourceType)
+        {
+            _writer.Append($"{typeof(ResourceIdentifier)} {declaration:D} = new {typeof(ResourceIdentifier)}(");
+            // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
+            _writer.Append($"{typeof(string)}.Format(\"");
+            int refIndex = 0;
+            foreach (var segment in requestPath)
+            {
+                _writer.AppendRaw("/");
+                if (segment.IsConstant)
+                    _writer.AppendRaw(segment.ConstantValue);
+                else
+                    _writer.Append($"{{{refIndex++}}}");
+            }
+            _writer.AppendRaw("\", ");
+            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            {
+                _writer.AppendExampleParameterValue(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.LineRaw("));");
+        }
+
         protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider carrierResource, OperationExample example, FormattableString client)
             => carrierResource switch
             {
@@ -97,26 +121,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             // everytime we go into this branch, this resource must be a scope resource
             var idVar = new CodeWriterDeclaration("resourceId");
             // this is the path of the scope of this operation
-            var scopePath = example.RequestPath.GetScopePath();
-            _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = new {typeof(ResourceIdentifier)}(");
-            // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
-            _writer.Append($"{typeof(string)}.Format(\"");
-            int refIndex = 0;
-            foreach (var segment in scopePath)
-            {
-                _writer.AppendRaw("/");
-                if (segment.IsConstant)
-                    _writer.AppendRaw(segment.ConstantValue);
-                else
-                    _writer.Append($"{{{refIndex++}}}");
-            }
-            _writer.AppendRaw("\", ");
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(scopePath))
-            {
-                _writer.AppendExampleParameterValue(value).AppendRaw(",");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.LineRaw("));");
+            WriteCreateScopeResourceIdentifier(example, idVar, example.RequestPath.GetScopePath(), parentExtension.ArmCoreType);
             _writer.Line($"{typeof(GenericResource)} {resourceVar:D} = {client}.GetGenericResource({idVar});");
             return resourceVar;
         }

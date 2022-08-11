@@ -12,7 +12,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
-using AutoRest.CSharp.MgmtTest.Output.Sample;
+using AutoRest.CSharp.MgmtTest.Output.Samples;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             {
                 foreach (var testCase in testCases)
                 {
-                    yield return new MgmtSampleProvider(testCase);
+                    yield return new MgmtSampleProvider(new Sample(testCase));
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                         // the source code generator will never write them if it is not in arm core
                         if (providerForExample.Carrier is ArmClientExtensions)
                             continue;
-                        var mockTestCase = new MockTestCase(operationId, providerForExample, example);
+                        var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
                         result.AddInList(mockTestCase.Owner, mockTestCase);
                     }
                 }

@@ -13,13 +13,13 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
-using AutoRest.CSharp.MgmtTest.Output.Sample;
+using AutoRest.CSharp.MgmtTest.Output.Samples;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace AutoRest.CSharp.MgmtTest.Generation.Sample
+namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 {
     internal class MgmtSampleWriter : MgmtTestWriterBase<MgmtSampleProvider>
     {
@@ -386,6 +386,38 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             }
             _writer.RemoveTrailingComma();
             _writer.Line($");");
+        }
+
+        protected override void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath requestPath, CSharpType resourceType)
+        {
+            var parameters = new List<CodeWriterVariableDeclaration>();
+            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            {
+                var declaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
+                _writer.AppendDeclaration(declaration)
+                    .AppendRaw(" = ").AppendExampleParameterValue(value).LineRaw(";");
+
+                parameters.Add(declaration);
+            }
+            _writer.Append($"{typeof(ResourceIdentifier)} {idDeclaration:D} = new {typeof(ResourceIdentifier)}(");
+            // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
+            _writer.Append($"{typeof(string)}.Format(\"");
+            int refIndex = 0;
+            foreach (var segment in requestPath)
+            {
+                _writer.AppendRaw("/");
+                if (segment.IsConstant)
+                    _writer.AppendRaw(segment.ConstantValue);
+                else
+                    _writer.Append($"{{{refIndex++}}}");
+            }
+            _writer.AppendRaw("\", ");
+            foreach (var parameter in parameters)
+            {
+                _writer.Append($"{parameter.Declaration}").AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.LineRaw("));");
         }
     }
 }

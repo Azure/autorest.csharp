@@ -4,17 +4,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class OperationExample
     {
-        private ExampleModel _example;
+        internal protected ExampleModel _example;
         public string OperationId { get; }
         public string Name => _example.Name;
 
@@ -39,12 +40,12 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private IEnumerable<ExampleParameter>? _pathParameters;
         public IEnumerable<ExampleParameter> PathParameters => _pathParameters ??= AllParameters.Where(p => p.Parameter.In == HttpParameterIn.Path);
 
-        public OperationExample(string operationId, MgmtTypeProviderAndOperation providerAndOperation, ExampleModel example)
+        protected OperationExample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, ExampleModel example)
         {
             OperationId = operationId;
             _example = example;
-            Carrier = providerAndOperation.Carrier;
-            Operation = providerAndOperation.Operation;
+            Carrier = carrier;
+            Operation = operation;
         }
 
         private MgmtRestOperation GetRestOperationFromOperationId()
@@ -77,25 +78,14 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 var serializedName = GetParameterSerializedName(referenceSegment.ReferenceName);
                 var parameter = FindPathExampleParameterBySerializedName(serializedName);
                 var exampleValue = parameter.ExampleValue;
-                if (serializedName == "subscriptionId")
-                {
-                    exampleValue.RawValue = ReplaceValueForSubscriptionId((string)exampleValue.RawValue!);
-                }
+                exampleValue = ReplacePathParameterValue(serializedName, referenceSegment.Reference.Type, exampleValue);
 
                 yield return new ExampleParameterValue(referenceSegment.Reference, exampleValue);
             }
         }
 
-        private readonly static Regex _regexForGuid = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
-        private const string _fallbackSubscriptionId = "00000000-0000-0000-0000-000000000000";
-
-        private string ReplaceValueForSubscriptionId(string rawValue)
-        {
-            if (_regexForGuid.IsMatch(rawValue))
-                return rawValue;
-
-            return _fallbackSubscriptionId;
-        }
+        protected virtual ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)
+            => value;
 
         private Dictionary<string, string> EnsureParameterSerializedNames()
         {

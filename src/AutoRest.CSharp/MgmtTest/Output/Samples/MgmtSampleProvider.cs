@@ -7,12 +7,12 @@ using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.MgmtTest.Output.Sample
+namespace AutoRest.CSharp.MgmtTest.Output.Samples
 {
     internal class MgmtSampleProvider : MgmtTestProvider
     {
         public MockTestCase Sample { get; }
-        public MgmtSampleProvider(MockTestCase testCase) : base()
+        public MgmtSampleProvider(Sample testCase) : base()
         {
             Sample = testCase;
         }

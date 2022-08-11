@@ -28,7 +28,9 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", "00000000-0000-0000-0000-000000000000", "rgname"));
+            string subscriptionId = "subId";
+            string resourceGroupName = "rgname";
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", subscriptionId, resourceGroupName));
             GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource

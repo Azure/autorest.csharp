@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class MockTestCase : OperationExample
     {
-        public MockTestCase(string operationId, MgmtTypeProviderAndOperation providerAndOperation, ExampleModel example) : base(operationId, providerAndOperation, example)
+        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, ExampleModel example) : base(operationId, carrier, operation, example)
         {
         }
 
@@ -119,5 +119,31 @@ namespace AutoRest.CSharp.MgmtTest.Models
         public bool IsLro => Operation.IsLongRunningOperation;
 
         public bool IsPageable => Operation.IsPagingOperation;
+
+        protected override ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)
+        {
+            if (serializedName == "subscriptionId")
+            {
+                return new ExampleValue()
+                {
+                    Language = value.Language,
+                    Schema = value.Schema,
+                    RawValue = ReplaceValueForSubscriptionId((string)value.RawValue!)
+                };
+            }
+
+            return value;
+        }
+
+        private readonly static Regex _regexForGuid = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
+        private const string _fallbackSubscriptionId = "00000000-0000-0000-0000-000000000000";
+
+        private string ReplaceValueForSubscriptionId(string rawValue)
+        {
+            if (_regexForGuid.IsMatch(rawValue))
+                return rawValue;
+
+            return _fallbackSubscriptionId;
+        }
     }
 }

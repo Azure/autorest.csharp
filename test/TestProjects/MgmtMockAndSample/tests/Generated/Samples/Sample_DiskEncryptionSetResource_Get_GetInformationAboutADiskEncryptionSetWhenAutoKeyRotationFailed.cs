@@ -27,7 +27,7 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this DiskEncryptionSetResource created on azure
             // for more information of creating DiskEncryptionSetResource, please refer to the document of DiskEncryptionSetResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);

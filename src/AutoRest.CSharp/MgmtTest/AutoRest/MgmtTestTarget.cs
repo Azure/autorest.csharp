@@ -11,7 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.MgmtTest.AutoRest;
 using AutoRest.CSharp.MgmtTest.Generation.Mock;
-using AutoRest.CSharp.MgmtTest.Generation.Sample;
+using AutoRest.CSharp.MgmtTest.Generation.Samples;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
