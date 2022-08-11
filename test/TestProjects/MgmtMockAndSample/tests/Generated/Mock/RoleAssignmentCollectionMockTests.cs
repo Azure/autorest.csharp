@@ -69,7 +69,7 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List role assignments for resource
 
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", "resourceType", "resourceName"));
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", new ResourceType("resourceType"), "resourceName"));
             GenericResource resource = GetArmClient().GetGenericResource(resourceId);
             var collection = resource.GetRoleAssignments();
             await foreach (var _ in collection.GetAllAsync())

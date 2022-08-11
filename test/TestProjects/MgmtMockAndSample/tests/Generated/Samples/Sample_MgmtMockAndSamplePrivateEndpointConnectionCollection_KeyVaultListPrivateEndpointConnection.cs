@@ -27,7 +27,10 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string vaultName = "sample-vault";
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
@@ -36,10 +39,12 @@ namespace MgmtMockAndSample
             // invoke the operation and iterate over the result
             await foreach (MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource item in collection.GetAllAsync())
             {
-                MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = item.Data;
+                MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData resourceData = item.Data;
                 // for demo we just print out the id
-                Console.WriteLine($"Succeeded on id: {data.Id}");
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

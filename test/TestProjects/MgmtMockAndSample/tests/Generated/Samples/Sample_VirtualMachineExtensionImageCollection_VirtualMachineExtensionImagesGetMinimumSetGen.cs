@@ -28,7 +28,8 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this VirtualMachineExtensionImageResource
@@ -37,11 +38,13 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
-            MgmtMockAndSample.VirtualMachineExtensionImageResource result = await collection.GetAsync("aa", "aaa");
+            string type = "aa";
+            string version = "aaa";
+            MgmtMockAndSample.VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
 
-            MgmtMockAndSample.VirtualMachineExtensionImageData data = result.Data;
+            MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

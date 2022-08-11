@@ -3,7 +3,9 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.MgmtTest.Models
@@ -14,18 +16,38 @@ namespace AutoRest.CSharp.MgmtTest.Models
     /// <param name="Parameter"></param>
     /// <param name="Value"></param>
     /// <param name="RawValue"></param>
-    internal record ExampleParameterValue(Parameter Parameter)
+    internal record ExampleParameterValue
     {
+        public string Name { get; }
+
+        public CSharpType Type { get; }
+
         public ExampleValue? Value { get; }
 
         public FormattableString? Expression { get; }
 
-        public ExampleParameterValue(Parameter parameter, ExampleValue value) : this(parameter)
+        private ExampleParameterValue(string name, CSharpType type)
+        {
+            Name = name;
+            Type = type;
+        }
+
+        public ExampleParameterValue(Reference reference, ExampleValue value) : this(reference.Name, reference.Type)
         {
             Value = value;
         }
 
-        public ExampleParameterValue(Parameter parameter, FormattableString rawValue) : this(parameter)
+        public ExampleParameterValue(Reference reference, FormattableString rawValue) : this(reference.Name, reference.Type)
+        {
+            Expression = rawValue;
+        }
+
+        public ExampleParameterValue(Parameter parameter, ExampleValue value) : this(parameter.Name, parameter.Type)
+        {
+            Value = value;
+        }
+
+        public ExampleParameterValue(Parameter parameter, FormattableString rawValue) : this(parameter.Name, parameter.Type)
         {
             Expression = rawValue;
         }

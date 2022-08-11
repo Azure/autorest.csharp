@@ -9,6 +9,7 @@ using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -75,14 +76,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
 
         private void WriteResultHandling(CodeWriterVariableDeclaration? result, bool newLine = true)
         {
-            // do nothing if the previous step returns nothing
-            if (result == null)
-                return;
-
             if (newLine)
                 _writer.Line();
 
-            if (result.Type.IsResourceType(out var resource))
+            if (result == null)
+            {
+                _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded\");");
+            }
+            else if (result.Type.IsResourceType(out var resource))
             {
                 WriteResourceResultHandling(result, resource);
             }
@@ -99,9 +100,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         private void WriteResourceResultHandling(CodeWriterVariableDeclaration result, Resource resource)
         {
             // create a data variable for this data
-            var dataResult = new CodeWriterVariableDeclaration("data", resource.ResourceData.Type);
+            var dataResult = new CodeWriterVariableDeclaration("resourceData", resource.ResourceData.Type);
             _writer.AppendDeclaration(dataResult)
-                .Line($"= {result.Declaration}.Data;");
+                .Line($" = {result.Declaration}.Data;");
 
             // handle the data
             WriteResourceDataResultHandling(dataResult, resource.ResourceData);
@@ -208,7 +209,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
 
                     _writer.AppendDeclaration(declaration)
                         .AppendRaw(" = ")
-                        .AppendExampleParameterValue(value, extraParameter.Type)
+                        .AppendExampleParameterValue(value)
                         .LineRaw(";");
                 }
             }
@@ -249,13 +250,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             _writer.Line();
             _writer.Line($"// invoke the operation");
             // if the Lro is an ArmOperation<T>
+            var parameters = WriteOperationInvocationParameters();
             var lroType = testCase.Operation.ReturnType;
             if (lroType.IsGenericType)
             {
                 var lroResult = new CodeWriterVariableDeclaration("lro", testCase.Operation.ReturnType);
                 _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
                 // write the method invocation
-                WriteOperationInvocation(instanceVar);
+                WriteOperationInvocation(instanceVar, parameters);
                 var valueResult = new CodeWriterVariableDeclaration("result", lroType.Arguments.First());
                 _writer.AppendDeclaration(valueResult)
                     .Line($"= {lroResult.Declaration}.Value;");
@@ -265,7 +267,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             else
             {
                 // if the Lro is an ArmOperation without body, we just write the method invocation without assignment
-                WriteOperationInvocation(instanceVar);
+                WriteOperationInvocation(instanceVar, parameters);
                 return null;
             }
         }
@@ -274,6 +276,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
+            var parameters = WriteOperationInvocationParameters();
             var returnType = testCase.Operation.ReturnType;
             if (returnType.IsGenericType)
             {
@@ -281,13 +284,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
                 var valueResult = new CodeWriterVariableDeclaration("result", returnType.Arguments.First());
                 _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
                 // write the method invocation
-                WriteOperationInvocation(instanceVar);
+                WriteOperationInvocation(instanceVar, parameters);
                 return valueResult;
             }
             else
             {
                 // an operation without a response
-                WriteOperationInvocation(instanceVar);
+                WriteOperationInvocation(instanceVar, parameters);
                 return null;
             }
         }
@@ -296,13 +299,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
         {
             _writer.Line();
             _writer.Line($"// invoke the operation and iterate over the result");
+            var parameters = WriteOperationInvocationParameters();
             // when the operation is pageable, the return type refers to the type of the item T, instead of Pageable<T>
             var itemResult = new CodeWriterVariableDeclaration("item", testCase.Operation.ReturnType);
             _writer.Append($"await foreach (")
                 .AppendDeclaration(itemResult)
                 .AppendRaw(" in ");
 
-            WriteOperationInvocation(instanceVar, isEndOfLine: false);
+            WriteOperationInvocation(instanceVar, parameters, isEndOfLine: false);
             using (_writer.Scope($")"))
             {
                 WriteResultHandling(itemResult, newLine: false);
@@ -312,37 +316,76 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Sample
             return null;
         }
 
-        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, bool isEndOfLine = true, bool isAsync = true)
+        private Dictionary<string, CodeWriterVariableDeclaration> WriteOperationInvocationParameters()
+        {
+            var result = new Dictionary<string, CodeWriterVariableDeclaration>();
+            foreach (var parameter in testCase.Operation.MethodParameters)
+            {
+                // some parameters are always inline
+                if (IsInlineParameter(parameter))
+                    continue;
+
+                if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                {
+                    var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
+                    _writer.AppendDeclaration(declaration).AppendRaw(" = ")
+                        .AppendExampleParameterValue(parameterValue).LineRaw(";");
+                    result.Add(parameter.Name, declaration);
+                }
+            }
+
+            return result;
+        }
+
+        private static readonly HashSet<Parameter> InlineParameters = new() { KnownParameters.WaitForCompletion, KnownParameters.CancellationTokenParameter };
+
+        private static bool IsInlineParameter(Parameter parameter)
+            => InlineParameters.Contains(parameter);
+
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterVariableDeclaration> parameters, bool isEndOfLine = true, bool isAsync = true)
         {
             var methodName = CreateMethodName(testCase.Operation.Name);
             _writer.AppendIf($"await ", isAsync && !testCase.Operation.IsPagingOperation) // paging operation never needs this await
                 .Append($"{instanceVar}.{methodName}(");
             foreach (var parameter in testCase.Operation.MethodParameters)
             {
-                if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                if (IsInlineParameter(parameter))
                 {
-                    _writer.AppendExampleParameterValue(parameter, parameterValue);
-                    _writer.AppendRaw(",");
+                    if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var value))
+                    {
+                        _writer.AppendExampleParameterValue(parameter, value).AppendRaw(",");
+                    }
+                    continue;
+                }
+                if (parameters.TryGetValue(parameter.Name, out var declaration))
+                {
+                    _writer.AppendIf($"{parameter.Name}: ", parameter.DefaultValue != null)
+                        .Append($"{declaration.Declaration}")
+                        .AppendRaw(",");
                 }
             }
             _writer.RemoveTrailingComma();
             _writer.AppendRaw(")").LineRawIf(";", isEndOfLine);
         }
 
-        protected override CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
+        protected override void WriteCreateResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath requestPath, CSharpType resourceType)
         {
-            var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
-            _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath))
+            var parameters = new List<CodeWriterVariableDeclaration>();
+            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
             {
-                _writer.Append(value).AppendRaw(",");
+                var declaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
+                _writer.AppendDeclaration(declaration)
+                    .AppendRaw(" = ").AppendExampleParameterValue(value).LineRaw(";");
+
+                parameters.Add(declaration);
+            }
+            _writer.Append($"{typeof(ResourceIdentifier)} {idDeclaration:D} = {resourceType}.CreateResourceIdentifier(");
+            foreach (var parameter in parameters)
+            {
+                _writer.Append($"{parameter.Declaration}").AppendRaw(",");
             }
             _writer.RemoveTrailingComma();
             _writer.Line($");");
-            var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
-            _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
-
-            return resourceVar;
         }
     }
 }

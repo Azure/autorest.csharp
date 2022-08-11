@@ -37,17 +37,19 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
             // invoke the operation
-            ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "roleAssignmentName", new RoleAssignmentCreateOrUpdateContent()
+            string roleAssignmentName = "roleAssignmentName";
+            MgmtMockAndSample.Models.RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent()
             {
                 RoleDefinitionId = "/subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
-            });
+            };
+            ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, roleAssignmentName, content);
             MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
 
-            MgmtMockAndSample.RoleAssignmentData data = result.Data;
+            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

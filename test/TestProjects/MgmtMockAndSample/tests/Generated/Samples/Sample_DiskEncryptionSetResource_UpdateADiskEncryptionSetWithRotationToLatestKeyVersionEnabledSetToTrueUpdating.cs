@@ -30,22 +30,26 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this DiskEncryptionSetResource created on azure
             // for more information of creating DiskEncryptionSetResource, please refer to the document of DiskEncryptionSetResource
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myResourceGroup";
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, new DiskEncryptionSetPatch()
+            MgmtMockAndSample.Models.DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
                 RotationToLatestKeyVersionEnabled = true,
-            });
+            };
+            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
             MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
 
-            MgmtMockAndSample.DiskEncryptionSetData data = result.Data;
+            MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

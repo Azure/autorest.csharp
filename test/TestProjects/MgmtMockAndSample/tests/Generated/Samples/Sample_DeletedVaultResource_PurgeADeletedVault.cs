@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,11 +28,16 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this DeletedVaultResource created on azure
             // for more information of creating DeletedVaultResource, please refer to the document of DeletedVaultResource
-            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            AzureLocation location = new AzureLocation("westus");
+            string vaultName = "sample-vault";
+            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier(subscriptionId, location, vaultName);
             MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
             // invoke the operation
             await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

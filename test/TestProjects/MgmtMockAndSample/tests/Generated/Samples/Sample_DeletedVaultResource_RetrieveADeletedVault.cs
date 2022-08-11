@@ -27,15 +27,18 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this DeletedVaultResource created on azure
             // for more information of creating DeletedVaultResource, please refer to the document of DeletedVaultResource
-            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            AzureLocation location = new AzureLocation("westus");
+            string vaultName = "sample-vault";
+            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier(subscriptionId, location, vaultName);
             MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
             // invoke the operation
             MgmtMockAndSample.DeletedVaultResource result = await deletedVault.GetAsync();
 
-            MgmtMockAndSample.DeletedVaultData data = result.Data;
+            MgmtMockAndSample.DeletedVaultData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

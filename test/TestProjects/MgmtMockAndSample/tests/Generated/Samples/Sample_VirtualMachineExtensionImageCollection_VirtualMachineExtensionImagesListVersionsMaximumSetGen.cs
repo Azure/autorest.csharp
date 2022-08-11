@@ -28,7 +28,8 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this VirtualMachineExtensionImageResource
@@ -37,12 +38,18 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync("aaaaaaaaaaaaaaaaaa", filter: "aaaaaaaaaaaaaaaaaaaaaaaaa", top: 22, orderby: "a"))
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string filter = "aaaaaaaaaaaaaaaaaaaaaaaaa";
+            int? top = 22;
+            string orderby = "a";
+            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
             {
-                MgmtMockAndSample.VirtualMachineExtensionImageData data = item.Data;
+                MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = item.Data;
                 // for demo we just print out the id
-                Console.WriteLine($"Succeeded on id: {data.Id}");
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

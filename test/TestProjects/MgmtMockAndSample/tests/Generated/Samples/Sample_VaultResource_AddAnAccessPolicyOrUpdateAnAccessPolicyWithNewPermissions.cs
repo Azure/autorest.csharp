@@ -28,11 +28,15 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string vaultName = "sample-vault";
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
+            MgmtMockAndSample.Models.AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
+            MgmtMockAndSample.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
             {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
@@ -49,7 +53,8 @@ Certificates =
 CertificatePermission.Get
 },
 })
-            })));
+            }));
+            MgmtMockAndSample.Models.VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
 
             Console.WriteLine($"Succeeded: {result}");
         }

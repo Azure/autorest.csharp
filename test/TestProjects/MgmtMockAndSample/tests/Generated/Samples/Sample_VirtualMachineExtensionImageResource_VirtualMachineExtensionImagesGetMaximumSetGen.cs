@@ -27,15 +27,20 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this VirtualMachineExtensionImageResource created on azure
             // for more information of creating VirtualMachineExtensionImageResource, please refer to the document of VirtualMachineExtensionImageResource
-            ResourceIdentifier virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "aaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaa";
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string version = "aaaaaaaaaaaaaa";
+            ResourceIdentifier virtualMachineExtensionImageResourceId = MgmtMockAndSample.VirtualMachineExtensionImageResource.CreateResourceIdentifier(subscriptionId, location, publisherName, type, version);
             MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
             MgmtMockAndSample.VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
 
-            MgmtMockAndSample.VirtualMachineExtensionImageData data = result.Data;
+            MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

@@ -37,10 +37,12 @@ namespace MgmtMockAndSample
             // invoke the operation and iterate over the result
             await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())
             {
-                MgmtMockAndSample.RoleAssignmentData data = item.Data;
+                MgmtMockAndSample.RoleAssignmentData resourceData = item.Data;
                 // for demo we just print out the id
-                Console.WriteLine($"Succeeded on id: {data.Id}");
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

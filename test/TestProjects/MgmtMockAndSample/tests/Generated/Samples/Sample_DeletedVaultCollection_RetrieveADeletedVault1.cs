@@ -28,14 +28,17 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedVaultResource
             MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
-            bool result = await collection.ExistsAsync(new AzureLocation("westus"), "sample-vault");
+            AzureLocation location = new AzureLocation("westus");
+            string vaultName = "sample-vault";
+            bool result = await collection.ExistsAsync(location, vaultName);
 
             Console.WriteLine($"Succeeded: {result}");
         }

@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Retrieve a deleted managed HSM
 
-            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "hsm1");
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
             await deletedManagedHsm.GetAsync();
         }
@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Purge a managed HSM Pool
 
-            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "hsm1");
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = GetArmClient().GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
             await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);
         }

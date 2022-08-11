@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         /// <param name="requestPath"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public IEnumerable<FormattableString> ComposeResourceIdentifierParameterValues(RequestPath requestPath)
+        public IEnumerable<ExampleParameterValue> ComposeResourceIdentifierParameterValues(RequestPath requestPath)
         {
             // we first take the same amount of segments from my own request path, in case there is a case that the parameter names between different paths are different
             var piecesFromMyOwn = RequestPath.Take(requestPath.Count);
@@ -76,15 +76,13 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // find a path parameter in our path parameters for one with same name
                 var serializedName = GetParameterSerializedName(referenceSegment.ReferenceName);
                 var parameter = FindPathExampleParameterBySerializedName(serializedName);
-                // considering here is the path parameter, therefore it should always be a simple type, string, int or enum
-                var rawValue = parameter.ExampleValue.RawValue;
-                if (rawValue == null)
-                    throw new InvalidOperationException($"The value of required path parameter {serializedName} in example {_example.Name} is not specified");
-                // replace the value of subscription id to avoid the sdk complain about the values not being a guid
+                var exampleValue = parameter.ExampleValue;
                 if (serializedName == "subscriptionId")
-                    rawValue = ReplaceValueForSubscriptionId((string)rawValue);
+                {
+                    exampleValue.RawValue = ReplaceValueForSubscriptionId((string)exampleValue.RawValue!);
+                }
 
-                yield return $"\"{rawValue}\"";
+                yield return new ExampleParameterValue(referenceSegment.Reference, exampleValue);
             }
         }
 

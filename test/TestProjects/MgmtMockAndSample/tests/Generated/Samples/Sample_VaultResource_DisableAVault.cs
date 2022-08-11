@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -26,11 +27,16 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-resource-group";
+            string vaultName = "sample-vault";
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
             await vault.DisableAsync();
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

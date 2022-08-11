@@ -48,13 +48,13 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (parameter.DefaultValue != null)
                 writer.Append($"{parameter.Name}: ");
 
-            return writer.AppendExampleParameterValue(exampleParameterValue, parameter.Type);
+            return writer.AppendExampleParameterValue(exampleParameterValue);
         }
 
-        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, ExampleParameterValue exampleParameterValue, CSharpType type)
+        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, ExampleParameterValue exampleParameterValue)
         {
             if (exampleParameterValue.Value != null)
-                return writer.AppendExampleValue(exampleParameterValue.Value, type);
+                return writer.AppendExampleValue(exampleParameterValue.Value, exampleParameterValue.Type);
             else
                 return writer.Append(exampleParameterValue.Expression!);
         }

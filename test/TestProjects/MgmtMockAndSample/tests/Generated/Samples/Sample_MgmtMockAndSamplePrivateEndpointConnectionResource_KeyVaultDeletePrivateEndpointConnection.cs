@@ -28,16 +28,20 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this MgmtMockAndSamplePrivateEndpointConnectionResource created on azure
             // for more information of creating MgmtMockAndSamplePrivateEndpointConnectionResource, please refer to the document of MgmtMockAndSamplePrivateEndpointConnectionResource
-            ResourceIdentifier mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string vaultName = "sample-vault";
+            string privateEndpointConnectionName = "sample-pec";
+            ResourceIdentifier mgmtMockAndSamplePrivateEndpointConnectionResourceId = MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName, privateEndpointConnectionName);
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = client.GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
 
             // invoke the operation
             ArmOperation<MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

@@ -2,9 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output;
 using AutoRest.CSharp.Utilities;
@@ -44,6 +47,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
         }
 
+        protected virtual void WriteCreateResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration, RequestPath requestPath, CSharpType resourceType)
+        {
+            _writer.Append($"{typeof(ResourceIdentifier)} {declaration:D} = {resourceType}.CreateResourceIdentifier(");
+            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            {
+                _writer.AppendExampleParameterValue(value).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($");");
+        }
+
         protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider carrierResource, OperationExample example, FormattableString client)
             => carrierResource switch
             {
@@ -53,16 +67,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
-        protected virtual CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
+        protected CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
         {
             var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
-            _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = {carrierResource.Type}.CreateResourceIdentifier(");
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(carrierResource.RequestPath))
-            {
-                _writer.Append(value).AppendRaw(",");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.Line($");");
+            WriteCreateResourceIdentifier(example, idVar, carrierResource.RequestPath, carrierResource.Type);
             var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
             _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
 
@@ -87,7 +95,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var resourceVar = new CodeWriterDeclaration("resource");
             // everytime we go into this branch, this resource must be a scope resource
-            var idVar = new CodeWriterDeclaration($"resourceId");
+            var idVar = new CodeWriterDeclaration("resourceId");
             // this is the path of the scope of this operation
             var scopePath = example.RequestPath.GetScopePath();
             _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = new {typeof(ResourceIdentifier)}(");
@@ -105,7 +113,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.AppendRaw("\", ");
             foreach (var value in example.ComposeResourceIdentifierParameterValues(scopePath))
             {
-                _writer.Append(value).AppendRaw(",");
+                _writer.AppendExampleParameterValue(value).AppendRaw(",");
             }
             _writer.RemoveTrailingComma();
             _writer.LineRaw("));");
@@ -117,13 +125,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             var idVar = new CodeWriterDeclaration($"{parentExtension.ArmCoreType.Name}Id".ToVariableName());
-            _writer.Append($"{typeof(ResourceIdentifier)} {idVar:D} = {parentExtension.ArmCoreType}.CreateResourceIdentifier(");
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(parentExtension.ContextualPath))
-            {
-                _writer.Append(value).AppendRaw(",");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
+            WriteCreateResourceIdentifier(example, idVar, parentExtension.ContextualPath, parentExtension.ArmCoreType);
+
             _writer.Line($"{parentExtension.ArmCoreType} {resourceVar:D} = {client}.Get{parentExtension.ArmCoreType.Name}({idVar});");
             return resourceVar;
         }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,11 +28,16 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ManagedHsmResource created on azure
             // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "hsm-group";
+            string name = "hsm1";
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
             await managedHsm.DeleteAsync(WaitUntil.Completed);
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

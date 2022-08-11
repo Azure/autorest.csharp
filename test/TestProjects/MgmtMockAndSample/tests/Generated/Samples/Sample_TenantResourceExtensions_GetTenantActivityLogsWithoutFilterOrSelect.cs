@@ -34,6 +34,8 @@ namespace MgmtMockAndSample
             {
                 Console.WriteLine($"Succeeded: {item}");
             }
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

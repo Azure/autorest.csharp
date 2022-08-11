@@ -28,7 +28,7 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", "resourceType", "resourceName"));
+            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", "00000000-0000-0000-0000-000000000000", "rgname", "resourceProviderNamespace", "parentResourcePath", new ResourceType("resourceType"), "resourceName"));
             GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
@@ -37,10 +37,12 @@ namespace MgmtMockAndSample
             // invoke the operation and iterate over the result
             await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())
             {
-                MgmtMockAndSample.RoleAssignmentData data = item.Data;
+                MgmtMockAndSample.RoleAssignmentData resourceData = item.Data;
                 // for demo we just print out the id
-                Console.WriteLine($"Succeeded on id: {data.Id}");
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

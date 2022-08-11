@@ -28,18 +28,21 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
-            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "hsm-group";
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
             MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
-            MgmtMockAndSample.ManagedHsmResource result = await collection.GetAsync("hsm1");
+            string name = "hsm1";
+            MgmtMockAndSample.ManagedHsmResource result = await collection.GetAsync(name);
 
-            MgmtMockAndSample.ManagedHsmData data = result.Data;
+            MgmtMockAndSample.ManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

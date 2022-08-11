@@ -29,14 +29,18 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string vaultName = "sample-vault";
+            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
-            ArmOperation<MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MgmtMockAndSamplePrivateEndpointConnectionData()
+            string privateEndpointConnectionName = "sample-pec";
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
                 Etag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
@@ -44,12 +48,13 @@ namespace MgmtMockAndSample
                     Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,
                     Description = "My name is Joe and I'm approving this.",
                 },
-            });
+            };
+            ArmOperation<MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
             MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = result.Data;
+            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

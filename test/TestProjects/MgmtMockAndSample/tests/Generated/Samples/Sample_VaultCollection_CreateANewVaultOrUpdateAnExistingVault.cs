@@ -32,14 +32,17 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
-            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-resource-group";
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
             MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
-            ArmOperation<MgmtMockAndSample.VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            string vaultName = "sample-vault";
+            MgmtMockAndSample.Models.VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 Duration = XmlConvert.ToTimeSpan("P7D"),
                 CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
@@ -67,12 +70,13 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             })
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
-            });
+            };
+            ArmOperation<MgmtMockAndSample.VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             MgmtMockAndSample.VaultResource result = lro.Value;
 
-            MgmtMockAndSample.VaultData data = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

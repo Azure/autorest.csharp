@@ -28,18 +28,21 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
-            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-resource-group";
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
             MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
-            MgmtMockAndSample.VaultResource result = await collection.GetAsync("sample-vault");
+            string vaultName = "sample-vault";
+            MgmtMockAndSample.VaultResource result = await collection.GetAsync(vaultName);
 
-            MgmtMockAndSample.VaultData data = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

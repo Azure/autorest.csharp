@@ -27,15 +27,18 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this DeletedManagedHsmResource created on azure
             // for more information of creating DeletedManagedHsmResource, please refer to the document of DeletedManagedHsmResource
-            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            AzureLocation location = new AzureLocation("westus");
+            string name = "hsm1";
+            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
             MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
             MgmtMockAndSample.DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync();
 
-            MgmtMockAndSample.DeletedManagedHsmData data = result.Data;
+            MgmtMockAndSample.DeletedManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

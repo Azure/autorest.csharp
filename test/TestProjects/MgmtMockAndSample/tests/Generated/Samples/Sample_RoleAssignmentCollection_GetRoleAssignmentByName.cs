@@ -35,11 +35,12 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
             // invoke the operation
-            MgmtMockAndSample.RoleAssignmentResource result = await collection.GetAsync("roleAssignmentName");
+            string roleAssignmentName = "roleAssignmentName";
+            MgmtMockAndSample.RoleAssignmentResource result = await collection.GetAsync(roleAssignmentName);
 
-            MgmtMockAndSample.RoleAssignmentData data = result.Data;
+            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {data.Id}");
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

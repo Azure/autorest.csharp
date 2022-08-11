@@ -28,7 +28,10 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ManagedHsmResource created on azure
             // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string name = "sample-mhsm";
+            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation and iterate over the result
@@ -36,6 +39,8 @@ namespace MgmtMockAndSample
             {
                 Console.WriteLine($"Succeeded: {item}");
             }
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,11 +28,16 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this DiskEncryptionSetResource created on azure
             // for more information of creating DiskEncryptionSetResource, please refer to the document of DiskEncryptionSetResource
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myResourceGroup";
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
             await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
+
+            Console.WriteLine($"Succeeded");
         }
     }
 }
