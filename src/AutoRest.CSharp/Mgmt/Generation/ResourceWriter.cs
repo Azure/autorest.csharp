@@ -214,7 +214,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var result = {awaitStr}{CreateMethodName("Update", isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
             if (This.UpdateOperation.IsLongRunningOperation)
             {
-                _writer.Line($"return Response.FromValue(result.Value, result.GetRawResponse());");
+                if (This.UpdateOperation.ReturnType.Arguments.Length == 0)
+                {
+                    _writer.Line($"return {awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr};");
+                }
+                else
+                {
+                    _writer.Line($"return Response.FromValue(result.Value, result.GetRawResponse());");
+                }
             }
             else
             {
