@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (returnType == null)
                 return false;
 
-            string pageingItemName = method.Operation.Paging?.ItemName ?? "Value";
+            string pageingItemName = method.Operation.Paging?.ItemName ?? "value";
             if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
             {
                 if (TypeFactory.IsList(returnType))
