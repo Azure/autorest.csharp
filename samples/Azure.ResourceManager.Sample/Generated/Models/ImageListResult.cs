@@ -19,23 +19,23 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class ImageListResult
     {
         /// <summary> Initializes a new instance of ImageListResult. </summary>
-        /// <param name="value">
+        /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal ImageListResult(IEnumerable<ImageData> value)
+        /// <exception cref="ArgumentNullException"> <paramref name="images"/> is null. </exception>
+        internal ImageListResult(IEnumerable<ImageData> images)
         {
-            if (value == null)
+            if (images == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentNullException(nameof(images));
             }
 
-            Value = value.ToList();
+            Images = images.ToList();
         }
 
         /// <summary> Initializes a new instance of ImageListResult. </summary>
-        /// <param name="value">
+        /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
         /// </param>
@@ -43,9 +43,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images.
         /// Serialized Name: ImageListResult.nextLink
         /// </param>
-        internal ImageListResult(IReadOnlyList<ImageData> value, string nextLink)
+        internal ImageListResult(IReadOnlyList<ImageData> images, string nextLink)
         {
-            Value = value;
+            Images = images;
             NextLink = nextLink;
         }
 
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
         /// </summary>
-        public IReadOnlyList<ImageData> Value { get; }
+        public IReadOnlyList<ImageData> Images { get; }
         /// <summary>
         /// The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images.
         /// Serialized Name: ImageListResult.nextLink

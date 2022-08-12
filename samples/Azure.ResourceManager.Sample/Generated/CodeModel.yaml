@@ -16482,14 +16482,14 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: VirtualMachineScaleSetListSkusResultValue
+                name: VirtualMachineScaleSetListSkusResultVmssSkus
                 description: The list of skus available for the virtual machine scale set.
             protocol: !Protocols {}
           required: true
-          serializedName: value
+          serializedName: VmssSkus
           language: !Languages 
             default:
-              name: value
+              name: vmssSkus
               description: The list of skus available for the virtual machine scale set.
           protocol: !Protocols {}
         - !Property 
@@ -24327,12 +24327,14 @@ operationGroups:
                   - '200'
         extensions:
           x-ms-pageable:
+            itemName: Images
             nextLinkName: nextLink
         language: !Languages 
           default:
             name: ListByResourceGroup
             description: Gets the list of images under a resource group.
             paging:
+              itemName: Images
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
@@ -24387,12 +24389,14 @@ operationGroups:
                   - '200'
         extensions:
           x-ms-pageable:
+            itemName: Images
             nextLinkName: nextLink
         language: !Languages 
           default:
             name: List
             description: Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
             paging:
+              itemName: Images
               nextLinkName: nextLink
         protocol: !Protocols {}
     language: !Languages 
@@ -25313,12 +25317,14 @@ operationGroups:
                   - '200'
         extensions:
           x-ms-pageable:
+            itemName: VmssSkus
             nextLinkName: nextLink
         language: !Languages 
           default:
             name: ListSkus
             description: Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
             paging:
+              itemName: VmssSkus
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 

@@ -10788,7 +10788,7 @@
         },
         "VirtualMachineScaleSetListSkusResult": {
             "properties": {
-                "value": {
+                "VmssSkus": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/VirtualMachineScaleSetSku"
@@ -10801,7 +10801,7 @@
                 }
             },
             "required": [
-                "value"
+                "VmssSkus"
             ],
             "description": "The Virtual Machine Scale Set List Skus operation response."
         },
