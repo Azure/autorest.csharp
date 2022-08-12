@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -170,7 +171,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string? SingletonResourceIdSuffix { get; }
 
-        public bool IsTaggable => ResourceData.IsTaggable && (UpdateOperation is not null || CreateOperation is not null);
+        public bool IsTaggable => ResourceData.IsTaggable && (UpdateOperation is not null || CreateOperation is not null) && HasBodyParamInUpdate();
+
+        private bool HasBodyParamInUpdate()
+        {
+            //found a case in logic where there is a patch with only a cancellation token
+            //I think this is a bug in there swagger but this works around that since generation
+            //will fail if the update doesn't have a body param
+            var op = UpdateOperation ?? CreateOperation;
+            if (op is null)
+                return false;
+
+            if (op.Parameters.Count() == 1 && op.Parameters.First().Type.Equals(typeof(CancellationToken)))
+                return false;
+
+            return true;
+        }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
