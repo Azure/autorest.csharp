@@ -571,8 +571,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     return objectProperty;
                 }
-                throw new InvalidOperationException($"Unable to find object property with serialized name '{name}' in schema {DefaultName}");
             }
+            throw new InvalidOperationException($"Unable to find object property with serialized name '{name}' in schema {DefaultName}");
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
