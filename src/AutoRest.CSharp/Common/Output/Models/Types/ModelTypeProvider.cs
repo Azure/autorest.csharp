@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -81,12 +82,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType
                     ? Public | ReadOnly
                     : Public;
+                var fieldType = GetDefaultPropertyType(inputModelProperty, typeFactory);
 
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, typeFactory.CreateType(inputModelProperty.Type, inputModelProperty.IsReadOnly), inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
                 if (inputModelProperty.IsRequired)
                 {
-                    var parameter = Parameter.FromModelProperty(inputModelProperty, typeFactory);
+                    var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
                     parametersToFields[parameter.Name] = field;
                     serializatoinParameters.Add(parameter);
                     if (!inputModelProperty.IsReadOnly)
@@ -99,11 +101,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
         }
 
+        private static CSharpType GetDefaultPropertyType(in InputModelProperty property, TypeFactory typeFactory)
+        {
+            var valueType = typeFactory.CreateType(property.Type);
+
+            if (//!_usage.HasFlag(SchemaTypeUsage.Input) ||
+                property.IsReadOnly)
+            {
+                valueType = TypeFactory.GetOutputType(valueType);
+            }
+
+            return valueType;
+        }
+
         private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
-            if (!publicParameters.Equals(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
+            if (!publicParameters.SequenceEqual(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
             {
                 serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,

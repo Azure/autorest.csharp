@@ -29,12 +29,9 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
-        public CSharpType CreateType(InputType inputType, bool readOnly = false) => inputType switch
+        public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputListType listType when readOnly is true                => new CSharpType(typeof(IReadOnlyList<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputListType listType when readOnly is false               => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputDictionaryType dictionaryType when readOnly is true    => new CSharpType(typeof(IReadOnlyDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputDictionaryType dictionaryType when readOnly is false   => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
+            InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),

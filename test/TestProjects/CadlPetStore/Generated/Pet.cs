@@ -13,11 +13,15 @@ namespace CadlPetStore
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
+        public Pet()
+        {
+        }
+        /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
         /// <param name="tag"></param>
         /// <param name="age"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="tag"/> is null. </exception>
-        public Pet(string name, string tag, int age)
+        internal Pet(string name, string tag, int age)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(tag, nameof(tag));

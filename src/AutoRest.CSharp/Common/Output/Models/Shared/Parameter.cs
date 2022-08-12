@@ -18,12 +18,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public static Parameter FromModelProperty(in InputModelProperty property, TypeFactory typeFactory)
+        public static Parameter FromModelProperty(in InputModelProperty property, CSharpType propertyType)
         {
             var name = property.Name.ToVariableName();
-            var type = typeFactory.CreateType(property.Type, property.IsReadOnly);
-            var validation = type.IsValueType ? ValidationType.None : ValidationType.AssertNotNull;
-            return new Parameter(name, property.Description, type, null, validation, null);
+            var validation = propertyType.IsValueType ? ValidationType.None : ValidationType.AssertNotNull;
+            return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)

@@ -15,8 +15,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new ModelTypeProvider(
                 new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
-                        new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, true, false),
-                        new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, true, false)
+                        new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, false, false),
+                        new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, false, false)
                     },
                     null, null, null),
                 new TypeFactory(null),
@@ -104,10 +104,10 @@ RequiredInt = requiredInt;
 }
 
 /// <summary> Required string, illustrating a reference type property. </summary>
-public string RequiredString{ get; }
+public string RequiredString{ get; set; }
 
 /// <summary> Required int, illustrating a value type property. </summary>
-public int RequiredInt{ get; }
+public int RequiredInt{ get; set; }
 }
 }
 "

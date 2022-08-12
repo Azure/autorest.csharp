@@ -78,30 +78,6 @@ namespace Cadl.TestServer.ReadonlyProperties.Models
 {
 public partial class RoundTripModel
 {
-/// <summary> Required string, illustrating a readonly reference type property. </summary>
-public string RequiredReadonlyString{ get; }
-
-/// <summary> Required int, illustrating a readonly reference type property. </summary>
-public int RequiredReadonlyInt{ get; }
-
-/// <summary> Optional string, illustrating a readonly reference type property. </summary>
-public string OptionalReadonlyString{ get; }
-
-/// <summary> Optional int, illustrating a readonly reference type property. </summary>
-public int OptionalReadonlyInt{ get; }
-
-/// <summary> Required readonly string collection. </summary>
-public global::System.Collections.Generic.IReadOnlyList<string> RequiredReadonlyStringList{ get; }
-
-/// <summary> Required readonly int collection. </summary>
-public global::System.Collections.Generic.IReadOnlyList<int> RequiredReadonlyIntList{ get; }
-
-/// <summary> Optional readonly string collection. </summary>
-public global::System.Collections.Generic.IReadOnlyList<string> OptionalReadonlyStringList{ get; }
-
-/// <summary> Optional readonly int collection. </summary>
-public global::System.Collections.Generic.IReadOnlyList<int> OptionalReadonlyIntList{ get; }
-
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 public RoundTripModel()
 {
@@ -138,6 +114,30 @@ RequiredReadonlyIntList = requiredReadonlyIntList;
 OptionalReadonlyStringList = optionalReadonlyStringList;
 OptionalReadonlyIntList = optionalReadonlyIntList;
 }
+
+/// <summary> Required string, illustrating a readonly reference type property. </summary>
+public string RequiredReadonlyString{ get; }
+
+/// <summary> Required int, illustrating a readonly reference type property. </summary>
+public int RequiredReadonlyInt{ get; }
+
+/// <summary> Optional string, illustrating a readonly reference type property. </summary>
+public string OptionalReadonlyString{ get; }
+
+/// <summary> Optional int, illustrating a readonly reference type property. </summary>
+public int OptionalReadonlyInt{ get; }
+
+/// <summary> Required readonly string collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<string> RequiredReadonlyStringList{ get; }
+
+/// <summary> Required readonly int collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<int> RequiredReadonlyIntList{ get; }
+
+/// <summary> Optional readonly string collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<string> OptionalReadonlyStringList{ get; }
+
+/// <summary> Optional readonly int collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<int> OptionalReadonlyIntList{ get; }
 }
 }
 ",
