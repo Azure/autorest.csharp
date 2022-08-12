@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return _isTaggable.Value;
 
             var bodyParameter = GetBodyParameter();
-            if (bodyParameter is not null)
+            if (ResourceData.IsTaggable && bodyParameter is not null)
             {
                 var bodyParamType = bodyParameter.Type;
                 _isTaggable = bodyParamType.Equals(ResourceData.Type) ? ResourceData.IsTaggable : DoesUpdateSchemaHaveTags(bodyParamType);
