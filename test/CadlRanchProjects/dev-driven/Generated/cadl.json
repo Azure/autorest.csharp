@@ -1,0 +1,387 @@
+{
+ "$id": "1",
+ "Name": "cadl.testserver",
+ "Description": "DPG Swagger that tests our ability to grow up.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "Mode",
+   "Namespace": "Testserver",
+   "Accessibility": "",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "raw",
+     "Value": "raw"
+    },
+    {
+     "$id": "4",
+     "Name": "model",
+     "Value": "model"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "5",
+   "Name": "Product",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "received",
+     "SerializedName": "received",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "7",
+   "Name": "Input",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "8",
+     "Name": "hello",
+     "SerializedName": "hello",
+     "Description": "",
+     "Type": {
+      "$id": "9",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "10",
+   "Name": "ProductCollection",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "11",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "",
+     "Type": {
+      "$id": "12",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "5"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "13",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "",
+     "Type": {
+      "$id": "14",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "15",
+   "Name": "LROProduct",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "16",
+     "Name": "provisioningState",
+     "SerializedName": "provisioningState",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "18",
+   "Name": "Testserver",
+   "Description": "DPG Swagger that tests our ability to grow up.",
+   "Operations": [
+    {
+     "$id": "19",
+     "Name": "getModel",
+     "Description": "Get models that you will either return to end users as a raw body, or with a model added during grow up.",
+     "Parameters": [
+      {
+       "$id": "20",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Description": "",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "22",
+       "Name": "mode",
+       "NameInRequest": "mode",
+       "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "23",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "5"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/customization/model/{mode}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "24",
+     "Name": "postModel",
+     "Description": "Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode. ",
+     "Parameters": [
+      {
+       "$ref": "20"
+      },
+      {
+       "$id": "25",
+       "Name": "mode",
+       "NameInRequest": "mode",
+       "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "26",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Description": "Please put {'hello': 'world!'}",
+       "Type": {
+        "$ref": "7"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "27",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "5"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/customization/model/{mode}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "28",
+     "Name": "getPages",
+     "Description": "Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.",
+     "Parameters": [
+      {
+       "$ref": "20"
+      },
+      {
+       "$id": "29",
+       "Name": "mode",
+       "NameInRequest": "mode",
+       "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "30",
+       "Name": "api-version",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "31",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "32",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/{mode}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "33",
+     "Name": "lro",
+     "Description": "Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.",
+     "Parameters": [
+      {
+       "$ref": "20"
+      },
+      {
+       "$id": "34",
+       "Name": "mode",
+       "NameInRequest": "mode",
+       "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "35",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "15"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/customization/lro/{mode}",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "36"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "37"
+ }
+}
