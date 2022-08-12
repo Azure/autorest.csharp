@@ -558,11 +558,28 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
+        // Return the property by given name, both orignial/serialized name and declaration name
+        public ObjectTypeProperty GetPropertyByName(string name, bool includeParents = false)
+        {
+            try
+            {
+                return GetPropertyBySerializedName(name, includeParents);
+            }
+            catch (InvalidOperationException)
+            {
+                if (TryGetPropertyForSchemaProperty(p => p.Declaration.Name == name, out ObjectTypeProperty? objectProperty, includeParents))
+                {
+                    return objectProperty;
+                }
+                throw new InvalidOperationException($"Unable to find object property with serialized name '{name}' in schema {DefaultName}");
+            }
+        }
+
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {DefaultName}");
+                throw new InvalidOperationException($"Unable to find object property with serialized name '{serializedName}' in schema {DefaultName}");
             }
 
             return objectProperty;

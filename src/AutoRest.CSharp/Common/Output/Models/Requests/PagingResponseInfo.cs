@@ -23,17 +23,17 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             itemName ??= "value";
 
-            ObjectTypeProperty itemProperty = objectType.GetPropertyBySerializedName(itemName);
+            ObjectTypeProperty itemProperty = objectType.GetPropertyByName(itemName);
 
             ObjectTypeProperty? nextLinkProperty = null;
             if (!string.IsNullOrWhiteSpace(nextLinkName))
             {
-                nextLinkProperty = objectType.GetPropertyBySerializedName(nextLinkName);
+                nextLinkProperty = objectType.GetPropertyByName(nextLinkName);
             }
 
             if (!TypeFactory.IsList(itemProperty.Declaration.Type))
             {
-                throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty?.Schema}");
+                throw new InvalidOperationException($"'{itemName}' property must be be an array schema instead of '{itemProperty.SchemaProperty?.Schema}'");
             }
 
             CSharpType itemType = TypeFactory.GetElementType(itemProperty.Declaration.Type);
