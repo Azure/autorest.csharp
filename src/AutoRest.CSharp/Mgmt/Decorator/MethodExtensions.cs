@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (returnType == null)
                 return false;
 
-            string pageingItemName = method.Operation.Paging?.ItemName ?? "Value";
+            string pageingItemName = method.Operation.Paging?.ItemName ?? "value";
             if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
             {
                 if (TypeFactory.IsList(returnType))
@@ -51,8 +52,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pageingItemName)
         {
-            return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == pageingItemName &&
-                p.Declaration.Type.IsFrameworkType && TypeFactory.IsList(p.Declaration.Type));
+            try
+            {
+                ObjectTypeProperty itemProperty = schemaObject.GetPropertyBySerializedName(pageingItemName);
+                if (itemProperty.Declaration.Type.IsFrameworkType && TypeFactory.IsList(itemProperty.Declaration.Type))
+                {
+                    return itemProperty;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                // Can't find the property by given paging Item name
+            }
+            return null;
         }
     }
 }

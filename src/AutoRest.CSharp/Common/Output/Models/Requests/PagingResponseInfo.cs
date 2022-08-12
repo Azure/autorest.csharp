@@ -23,12 +23,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             itemName ??= "value";
 
-            ObjectTypeProperty itemProperty = objectType.GetPropertyByName(itemName);
+            ObjectTypeProperty itemProperty = objectType.GetPropertyBySerializedName(itemName);
 
             ObjectTypeProperty? nextLinkProperty = null;
             if (!string.IsNullOrWhiteSpace(nextLinkName))
             {
-                nextLinkProperty = objectType.GetPropertyByName(nextLinkName);
+                nextLinkProperty = objectType.GetPropertyBySerializedName(nextLinkName);
             }
 
             if (!TypeFactory.IsList(itemProperty.Declaration.Type))

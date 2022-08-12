@@ -46,8 +46,6 @@ directive:
   - from: sample.json
     where: $.paths
     transform: >
-      $['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images'].get['x-ms-pageable']['itemName'] = 'Images';
-      $['/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images'].get['x-ms-pageable']['itemName'] = 'Images';
       $['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus'].get['x-ms-pageable']['itemName'] = 'VmssSkus';
 
 ```
