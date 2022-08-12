@@ -32,8 +32,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var returnType = method.ReturnType;
             if (returnType == null)
                 return false;
-
-            string pageingItemName = method.Operation.Paging?.ItemName ?? "value";
             if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
             {
                 if (TypeFactory.IsList(returnType))
@@ -43,28 +41,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else
             {
+                string pageingItemName = method.Operation.Paging?.ItemName ?? "value";
                 var schemaObject = (SchemaObjectType)returnType.Implementation;
                 itemType = GetValueProperty(schemaObject, pageingItemName)?.ValueType.Arguments.FirstOrDefault();
             }
             return itemType != null;
         }
 
-
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pageingItemName)
         {
-            try
-            {
-                ObjectTypeProperty itemProperty = schemaObject.GetPropertyBySerializedName(pageingItemName);
-                if (itemProperty.Declaration.Type.IsFrameworkType && TypeFactory.IsList(itemProperty.Declaration.Type))
-                {
-                    return itemProperty;
-                }
-            }
-            catch (InvalidOperationException)
-            {
-                // Can't find the property by given paging Item name
-            }
-            return null;
+            return schemaObject.Properties.FirstOrDefault(p => p.SchemaProperty?.SerializedName == pageingItemName &&
+                p.SchemaProperty?.FlattenedNames.Count == 0 && p.Declaration.Type.IsFrameworkType &&
+                TypeFactory.IsList(p.Declaration.Type));
         }
     }
 }
