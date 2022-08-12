@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 switch (operationParameter)
                 {
-                    case { Location: RequestLocation.Body } when bodyParameter == null:
+                    case { Location: RequestLocation.Body }:
                         bodyParameter = operationParameter;
                         break;
                     case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
