@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (op is null)
                 return false;
 
-            if (op.Parameters.Count() == 1 && op.Parameters.First().Type.Equals(typeof(CancellationToken)))
+            if (op.MethodParameters.Count == 1 && op.MethodParameters[0].Type.Equals(typeof(CancellationToken)))
                 return false;
 
             return true;
