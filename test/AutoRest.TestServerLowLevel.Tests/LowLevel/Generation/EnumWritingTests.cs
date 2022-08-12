@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace AutoRest.CSharp.Generation.Writers.Tests
 {
-    public class LowLevelEnumWritingTests
+    public class EnumWritingTests
     {
         [TestCaseSource(nameof(ExtensibleEnumCases))]
         public void ExtensibleEnums(EnumWrapper enumType, string expectedModelCodes)
