@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter WriteFieldDeclaration(this CodeWriter writer, FieldDeclaration field)
+        public static CodeWriter WriteField(this CodeWriter writer, FieldDeclaration field, bool declareInCurrentScope = true)
         {
             if (field.Description != null)
             {
@@ -76,7 +76,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly));
             }
 
-            writer.Append($"{field.Type} {field.Declaration:D}");
+            if (declareInCurrentScope)
+            {
+                writer.Append($"{field.Type} {field.Declaration:D}");
+            }
+            else
+            {
+                writer.Append($"{field.Type} {field.Declaration:I}");
+            }
 
             if (field.WriteAsProperty)
             {
@@ -95,13 +102,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in fields)
             {
-                writer.WriteFieldDeclaration(field);
+                writer.WriteField(field, declareInCurrentScope: false);
             }
 
             return writer.Line();
         }
 
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
             {
@@ -136,6 +143,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Append($"{methodBase.Name}(")
                 .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
+            var outerScope = writer.AmbientScope();
+
             foreach (var parameter in methodBase.Parameters)
             {
                 writer.WriteParameter(parameter);
@@ -166,7 +175,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning restore {disabledWarning}");
             }
 
-            return writer.Scope();
+            var innerScope = writer.Scope();
+            return Disposable.Create(() =>
+            {
+                innerScope.Dispose();
+                outerScope.Dispose();
+            });
         }
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
@@ -277,9 +291,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.Type.Equals(typeof(RequestConditions)))
                 {
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
-#pragma warning restore CS8605 // Unboxing a possibly null value.
+                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)).Cast<RequestConditionHeaders>())
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
@@ -302,6 +314,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
+
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, MethodSignature method, IEnumerable<FormattableString> parameters, bool asyncCall)
+        {
+            var parametersFs = parameters.ToArray().Join(", ");
+            if (asyncCall)
+            {
+                return writer.Append($"await {method.WithAsync(true).Name}({parametersFs}).ConfigureAwait(false)");
+            }
+
+            return writer.Append($"{method.WithAsync(false).Name}({parametersFs})");
+        }
 
         private static FormattableString GetMethodCallFormattableString(bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => asyncCall ? (FormattableString)$"await {asyncMethodName}({parameters}).ConfigureAwait(false)" : (FormattableString)$"{syncMethodName}({parameters})";

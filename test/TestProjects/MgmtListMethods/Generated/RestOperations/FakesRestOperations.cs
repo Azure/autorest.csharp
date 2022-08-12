@@ -385,10 +385,10 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeListResult value0 = default;
+                        FakeListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value0 = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value0, message.Response);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
                     }
                 default:
                     throw new RequestFailedException(message.Response);
@@ -413,10 +413,10 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeListResult value0 = default;
+                        FakeListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value0 = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value0, message.Response);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
                     }
                 default:
                     throw new RequestFailedException(message.Response);

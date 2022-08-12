@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -40,24 +41,40 @@ namespace AutoRest.CSharp.Output.Models
                 .ToDictionary(ci => ci.Name);
 
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
-
             var clientOptions = CreateClientOptions(topLevelClientInfos);
+
             SetRequestsToClients(clientInfosByName.Values);
 
+            var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            var modelFactories = new Dictionary<InputModelType, Func<ModelTypeProvider>>();
+            var clients = new List<LowLevelClient>();
 
-            IReadOnlyDictionary<InputEnumType, EnumType> EnumFactory(TypeFactory typeFactory)
-                => isCadlInput ? _rootNamespace.Enums.ToDictionary(e => e, e => new EnumType(e, _defaultNamespace, "public", typeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer) : new Dictionary<InputEnumType, EnumType>();
+            var library = new DpgOutputLibrary(enums, modelFactories, clients, clientOptions);
 
-            IReadOnlyDictionary<InputModelType, ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
-                => isCadlInput ? _rootNamespace.Models.ToDictionary(m => m, m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)) : new Dictionary<InputModelType, ModelTypeProvider>();
-
-            IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
+            CreateEnums(enums, library.TypeFactory);
+            if (isCadlInput)
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, isCadlInput);
-                return EnumerateAllClients(topLevelClients);
+                CreateModels(modelFactories, library.TypeFactory);
             }
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, isCadlInput);
 
-            return new DpgOutputLibrary(EnumFactory, ModelsFactory, RestClientsFactory, clientOptions);
+            return library;
+        }
+
+        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, TypeFactory typeFactory)
+        {
+            foreach (var inputEnum in _rootNamespace.Enums)
+            {
+                dictionary.Add(inputEnum, new EnumType(inputEnum, _defaultNamespace, "public", typeFactory, _sourceInputModel));
+            }
+        }
+
+        private void CreateModels(IDictionary<InputModelType, Func<ModelTypeProvider>> dictionary, TypeFactory typeFactory)
+        {
+            foreach (var model in _rootNamespace.Models)
+            {
+                dictionary.CreateAndCacheResult(model, () => new ModelTypeProvider(model, typeFactory, _defaultNamespace, _sourceInputModel));
+            }
         }
 
         private IEnumerable<InputClient> UpdateListMethodNames()
@@ -85,21 +102,6 @@ namespace AutoRest.CSharp.Output.Models
                 : $"Client options for {_libraryName} library clients.";
 
             return new ClientOptionsTypeProvider(_rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
-        }
-
-        /// <summary>
-        /// Simple implementation of breadth first traversal
-        /// </summary>
-        /// <param name="topLevelClients"></param>
-        /// <returns>All clients</returns>
-        private static IReadOnlyList<LowLevelClient> EnumerateAllClients(IEnumerable<LowLevelClient> topLevelClients)
-        {
-            var allClients = new List<LowLevelClient>(topLevelClients);
-            for (int i = 0; i < allClients.Count; i++)
-            {
-                allClients.AddRange(allClients[i].SubClients);
-            }
-            return allClients;
         }
 
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
@@ -220,6 +222,18 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        {
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, isCadlInput);
+
+            // Simple implementation of breadth first traversal
+            allClients.AddRange(topLevelClients);
+            for (int i = 0; i < allClients.Count; i++)
+            {
+                allClients.AddRange(allClients[i].SubClients);
+            }
+        }
+
         private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool isCadlInput)
         {
             foreach (var clientInfo in clientInfos)
@@ -237,12 +251,12 @@ namespace AutoRest.CSharp.Output.Models
                     _libraryName,
                     parentClient,
                     clientInfo.Requests,
-                    new RestClientBuilder(clientInfo.ClientParameters, typeFactory),
+                    clientInfo.ClientParameters,
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
-                    isCadlInput,
-                    typeFactory)
+                    typeFactory,
+                    isCadlInput)
                 {
                     SubClients = subClients
                 };

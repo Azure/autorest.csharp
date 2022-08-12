@@ -30,6 +30,28 @@
   ],
   "Models": [
     {
+      "$id": "7",
+      "Name": "Thing",
+      "IsNullable": false,
+      "Properties": [
+        {
+          "$id": "8",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+            "$id": "9",
+            "Name": "string",
+            "Kind": "String",
+            "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false,
+          "IsDiscriminator": false
+        }
+      ]
+    },
+    {
       "$id": "1",
       "Name": "RoundTripModel",
       "ObjectToSkip": {"a": "b", "c": "d"},
@@ -62,28 +84,13 @@
           "Type": { "Name": "DictionaryType", "KeyType": "string", "ValueType": {"$ref": "5" }},
           "IsRequired": true,
           "IsReadOnly": false
-        }
-      ]
-    },
-    {
-      "$id": "7",
-      "Name": "Thing",
-      "IsNullable": false,
-      "Properties": [
+        },
         {
-          "$id": "8",
-          "Name": "name",
-          "SerializedName": "name",
-          "Description": "",
-          "Type": {
-           "$id": "9",
-           "Name": "string",
-           "Kind": "String",
-           "IsNullable": false
-          },
+          "Name": "requiredModel",
+          "Description": "Required dictionary of enums",
+          "Type": {"$ref" :"7"},
           "IsRequired": true,
-          "IsReadOnly": false,
-          "IsDiscriminator": false
+          "IsReadOnly": false
         }
       ]
     }
@@ -101,7 +108,7 @@
               "Name": "Endpoint",
               "NameInRequest": "Endpoint",
               "Description": "",
-              "Type": {"Kind" :"Uri"},
+              "Type": "Uri",
               "Location": "Uri",
               "IsRequired": true,
               "IsEndpoint": true,
@@ -111,11 +118,29 @@
               "Name": "action",
               "NameInRequest": "action",
               "Description": "",
-              "Type": {"Kind" :"String"},
+              "Type": "String",
               "Location": "Path",
               "IsRequired": true,
               "Kind": "Method",
               "SkipUrlEncoding": true
+            },
+            {
+              "Name": "enum",
+              "NameInRequest": "enum",
+              "Description": "",
+              "Type": {"$ref" :"4"},
+              "Location": "Query",
+              "IsRequired": false,
+              "Kind": "Method"
+            },
+            {
+              "Name": "exEnum",
+              "NameInRequest": "exEnum",
+              "Description": "",
+              "Type": {"$ref" :"5"},
+              "Location": "Query",
+              "IsRequired": true,
+              "Kind": "Method"
             },
             {
               "$id": "3",
