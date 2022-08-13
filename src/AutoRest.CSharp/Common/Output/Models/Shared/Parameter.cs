@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             if (defaultValue != null && operationParameter.Kind != InputOperationParameterKind.Constant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
             {
-                initializer = GetParameterInitializer(type, defaultValue.Value);
+                initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);
                 defaultValue = Constant.Default(type);
             }
@@ -66,16 +66,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);
-        }
-
-        public static FormattableString? GetParameterInitializer(CSharpType parameterType, Constant? defaultValue)
-        {
-            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
-            {
-                defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
-            }
-
-            return defaultValue?.GetConstantFormattable();
         }
 
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
@@ -119,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
             {
-                initializer = GetParameterInitializer(type, defaultValue.Value);
+                initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);
                 defaultValue = Constant.Default(type);
             }
