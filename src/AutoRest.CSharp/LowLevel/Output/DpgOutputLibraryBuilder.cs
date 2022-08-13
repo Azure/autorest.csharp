@@ -49,11 +49,11 @@ namespace AutoRest.CSharp.Output.Models
             var modelFactories = new Dictionary<InputModelType, Func<ModelTypeProvider>>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(enums, modelFactories, clients, clientOptions);
+            var library = new DpgOutputLibrary(enums, modelFactories, clients, clientOptions, isCadlInput);
 
-            CreateEnums(enums, library.TypeFactory);
             if (isCadlInput)
             {
+                CreateEnums(enums, library.TypeFactory);
                 CreateModels(modelFactories, library.TypeFactory);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, isCadlInput);

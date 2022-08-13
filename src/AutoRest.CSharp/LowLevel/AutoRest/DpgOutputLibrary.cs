@@ -14,6 +14,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, Func<ModelTypeProvider>> _modelFactories;
+        private readonly bool _isCadlInput;
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
@@ -21,19 +22,30 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, Func<ModelTypeProvider>> modelFactories, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions)
+        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, Func<ModelTypeProvider>> modelFactories, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {
             TypeFactory = new TypeFactory(this);
             _enums = enums;
             _modelFactories = modelFactories;
+            _isCadlInput = isCadlInput;
             RestClients = restClients;
             ClientOptions = clientOptions;
         }
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
-            => _enums.TryGetValue(enumType, out var typeProvider)
-                ? typeProvider.Type
-                : throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
+        {
+            if (!_isCadlInput)
+            {
+                return TypeFactory.CreateType(enumType.EnumValueType);
+            }
+
+            if (_enums.TryGetValue(enumType, out var typeProvider))
+            {
+                return typeProvider.Type;
+            }
+
+            throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
+        }
 
         public override CSharpType ResolveModel(InputModelType model)
             => _modelFactories.TryGetValue(model, out var modelFactory) ? modelFactory().Type : new CSharpType(typeof(object), model.IsNullable);

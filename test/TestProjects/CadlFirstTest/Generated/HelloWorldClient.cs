@@ -61,18 +61,20 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="exEnum"> The ExtensibleEnum to use. </param>
         /// <param name="enum"> The SimpleEnum to use. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        public virtual async Task<Response<Thing>> TopActionValueAsync(string action, ExtensibleEnum exEnum, SimpleEnum? @enum = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> TopActionValueAsync(string action, ExtensibleEnum exEnum, SimpleEnum? @enum = null, ExtensibleEnum? exEnumWithDefault = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(action, nameof(action));
+            exEnumWithDefault ??= ExtensibleEnum.Two;
 
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TopActionAsync(action, exEnum.ToString(), @enum?.ToSerialString(), context).ConfigureAwait(false);
+                Response response = await TopActionAsync(action, exEnum.ToString(), @enum?.ToSerialString(), exEnumWithDefault?.ToString(), context).ConfigureAwait(false);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -85,18 +87,20 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="exEnum"> The ExtensibleEnum to use. </param>
         /// <param name="enum"> The SimpleEnum to use. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
-        public virtual Response<Thing> TopActionValue(string action, ExtensibleEnum exEnum, SimpleEnum? @enum = null, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> TopActionValue(string action, ExtensibleEnum exEnum, SimpleEnum? @enum = null, ExtensibleEnum? exEnumWithDefault = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(action, nameof(action));
+            exEnumWithDefault ??= ExtensibleEnum.Two;
 
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TopAction(action, exEnum.ToString(), @enum?.ToSerialString(), context);
+                Response response = TopAction(action, exEnum.ToString(), @enum?.ToSerialString(), exEnumWithDefault?.ToString(), context);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -109,6 +113,7 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="exEnum"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
         /// <param name="enum"> The SimpleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="exEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -129,7 +134,7 @@ namespace CadlFirstTest
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
-        /// Response response = await client.TopActionAsync("<action>", "<exEnum>", "<enum>");
+        /// Response response = await client.TopActionAsync("<action>", "<exEnum>", "<enum>", "<exEnumWithDefault>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -147,16 +152,17 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> TopActionAsync(string action, string exEnum, string @enum = null, RequestContext context = null)
+        public virtual async Task<Response> TopActionAsync(string action, string exEnum, string @enum = null, string exEnumWithDefault = null, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
             Argument.AssertNotNull(exEnum, nameof(exEnum));
+            exEnumWithDefault ??= ExtensibleEnum.Two.ToString();
 
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, exEnum, @enum, context);
+                using HttpMessage message = CreateTopActionRequest(action, exEnum, @enum, exEnumWithDefault, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -169,6 +175,7 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="exEnum"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
         /// <param name="enum"> The SimpleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="exEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -189,7 +196,7 @@ namespace CadlFirstTest
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
-        /// Response response = client.TopAction("<action>", "<exEnum>", "<enum>");
+        /// Response response = client.TopAction("<action>", "<exEnum>", "<enum>", "<exEnumWithDefault>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -207,16 +214,17 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response TopAction(string action, string exEnum, string @enum = null, RequestContext context = null)
+        public virtual Response TopAction(string action, string exEnum, string @enum = null, string exEnumWithDefault = null, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
             Argument.AssertNotNull(exEnum, nameof(exEnum));
+            exEnumWithDefault ??= ExtensibleEnum.Two.ToString();
 
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, exEnum, @enum, context);
+                using HttpMessage message = CreateTopActionRequest(action, exEnum, @enum, exEnumWithDefault, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -348,7 +356,7 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateTopActionRequest(string action, string exEnum, string @enum, RequestContext context)
+        internal HttpMessage CreateTopActionRequest(string action, string exEnum, string @enum, string exEnumWithDefault, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -364,6 +372,10 @@ namespace CadlFirstTest
             if (@enum != null)
             {
                 uri.AppendQuery("enum", @enum, true);
+            }
+            if (exEnumWithDefault != null)
+            {
+                uri.AppendQuery("exEnum", exEnumWithDefault, true);
             }
             request.Uri = uri;
             return message;
