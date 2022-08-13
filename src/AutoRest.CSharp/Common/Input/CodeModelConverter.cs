@@ -30,10 +30,10 @@ namespace AutoRest.CSharp.Common.Input
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
 
-        public InputNamespace CreateNamespace(CodeModel codeModel)
+        public InputNamespace CreateNamespace(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
             var enums = CreateEnums(codeModel.Schemas.Choices, codeModel.Schemas.SealedChoices);
-            var models = CreateModels(codeModel.Schemas.Objects);
+            var models = CreateModels(codeModel.Schemas.Objects, schemaUsages);
             var clients = CreateClients(codeModel.OperationGroups);
 
             return new(Name: codeModel.Language.Default.Name,
@@ -179,11 +179,11 @@ namespace AutoRest.CSharp.Common.Input
                 .OfType<InputEnumType>()
                 .ToList();
 
-        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas)
+        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas, SchemaUsageProvider schemaUsages)
         {
             foreach (var schema in schemas)
             {
-                GetOrCreateModel(schema);
+                GetOrCreateModel(schema, schemaUsages);
             }
 
             foreach (var (schema, properties) in _modelPropertiesCache)
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Common.Input
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
-        private InputModelType GetOrCreateModel(ObjectSchema schema)
+        private InputModelType GetOrCreateModel(ObjectSchema schema, SchemaUsageProvider schemaUsages)
         {
             if (_modelsCache.TryGetValue(schema, out var model))
             {
@@ -216,9 +216,16 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+                {
+                    SchemaTypeUsage.Input => InputModelTypeUsage.Input,
+                    SchemaTypeUsage.Output => InputModelTypeUsage.Output,
+                    SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                    _ => InputModelTypeUsage.None
+                },
                 Properties: properties,
                 BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
-                    ? GetOrCreateModel(parent)
+                    ? GetOrCreateModel(parent, schemaUsages)
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue

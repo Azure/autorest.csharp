@@ -18,12 +18,12 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
             var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public",
+                new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredStringList", "requiredStringList", "Required collection of strings, illustrating a collection of reference types.", new InputListType("requiredStringList", InputPrimitiveType.String), true, false, false),
                         new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32), true, false, false),
                     },
-                    null, null, null),
+                    null, new List<InputModelType>(), null),
                 new TypeFactory(null),
                 "test",
                 null);
@@ -35,22 +35,23 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void ModelTypeCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
-            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "Required string.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredInt", "requiredInt", "Required int.", InputPrimitiveType.Int32, true, true, false)
                     },
-                null, null, null);
-            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+                null, new List<InputModelType>(), null);
+            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
                         new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", elementModelType), true, false, false),
                         new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", elementModelType), false, false, false),
                 },
-                null, null, null);
+                null, new List<InputModelType>(), null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<String>(),
-                new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), default ), default).Build(true);
-            Assert.True(library.Models.Where(m => m.Declaration.Name == "ModelCollectionModel").Any());
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<string>(),
+                new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+
+            Assert.True(library.Models.Any(m => m.Declaration.Name == "ModelCollectionModel"));
             foreach (var model in library.Models)
             {
                 if (model.Declaration.Name == "ModelCollectionModel")
@@ -64,22 +65,23 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void ModelType2DCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
-            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "Required string.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredInt", "requiredInt", "Required int.", InputPrimitiveType.Int32, true, true, false)
                     },
-                null, null, null);
-            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+                null, new List<InputModelType>(), null);
+            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
                         new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection", new InputListType("requiredModelCollection", elementModelType)), true, false, false),
                         new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", new InputListType("optionalModelCollection", elementModelType)), false, false, false),
                 },
-                null, null, null);
+                null, new List<InputModelType>(), null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<String>(),
-                new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), default ), default).Build(true);
-            Assert.True(library.Models.Where(m => m.Declaration.Name == "ModelCollectionModel").Any());
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<string>(),
+                new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+
+            Assert.True(library.Models.Any(m => m.Declaration.Name == "ModelCollectionModel"));
             foreach (var model in library.Models)
             {
                 if (model.Declaration.Name == "ModelCollectionModel")
@@ -112,7 +114,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
 
         private static readonly object[] PrimitiveCollectionPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
