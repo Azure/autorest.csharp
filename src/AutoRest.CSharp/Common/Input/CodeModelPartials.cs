@@ -730,5 +730,91 @@ namespace AutoRest.CSharp.Input
         public string CSharpName() =>
             (this.Language.Default.Name == null || this.Language.Default.Name == "null") ? "NullProperty" : this.Language.Default.Name.ToCleanName();
     }
+
+
+    internal partial class SecurityScheme
+    {
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is SecurityScheme scheme))
+            {
+                return false;
+            }
+            return (Type == scheme.Type);
+        }
+
+        public override int GetHashCode()
+        {
+            return Type.GetHashCode();
+        }
+    }
+
+    internal partial class OAuth2SecurityScheme : SecurityScheme
+    {
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is OAuth2SecurityScheme scheme))
+            {
+                return false;
+            }
+            return base.Equals(obj) && Scopes.SequenceEqual(scheme.Scopes);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Scopes.GetHashCode();
+        }
+    }
+
+    internal partial class KeySecurityScheme : SecurityScheme
+    {
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is KeySecurityScheme scheme))
+            {
+                return false;
+            }
+            return base.Equals(obj) & (In == scheme.In) && (Name == scheme.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ In.GetHashCode() ^ Name.GetHashCode();
+        }
+    }
+
+    internal partial class AADTokenSecurityScheme : SecurityScheme
+    {
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is AADTokenSecurityScheme scheme))
+            {
+                return false;
+            }
+            return base.Equals(obj) && Scopes.SequenceEqual(scheme.Scopes);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Scopes.GetHashCode();
+        }
+    }
+
+    internal partial class AzureKeySecurityScheme : SecurityScheme
+    {
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is AzureKeySecurityScheme scheme))
+            {
+                return false;
+            }
+            return base.Equals(obj) & (HeaderName == scheme.HeaderName);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ HeaderName.GetHashCode();
+        }
+    }
 }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.

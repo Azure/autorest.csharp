@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input
                 Models: models,
                 Enums: enums,
                 ApiVersions: GetApiVersions(codeModel),
-                Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().ToList()));
+                Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().Distinct().ToList()));
         }
 
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
