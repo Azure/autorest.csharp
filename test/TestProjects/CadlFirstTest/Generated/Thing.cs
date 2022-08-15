@@ -12,8 +12,6 @@ namespace CadlFirstTest
 {
     public partial class Thing
     {
-        public string Name { get; set; }
-
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -23,5 +21,7 @@ namespace CadlFirstTest
 
             Name = name;
         }
+
+        public string Name { get; set; }
     }
 }

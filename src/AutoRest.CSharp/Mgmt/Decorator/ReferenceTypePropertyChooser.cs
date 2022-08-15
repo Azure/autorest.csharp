@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ReferenceTypePropertyChooser
     {
+        internal const string OptionalPropertiesName = "OptionalProperties";
 
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
@@ -47,9 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
                     var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceClassFinder.PropertyReferenceTypeAttributeName).First();
-                    // TODO: remove this line and uncomment below line after bumping ResourceManager version.
-                    var optionalPropertiesForMatch = replacementType.Name == nameof(ManagedServiceIdentity) ? new HashSet<string>{"UserAssignedIdentities"} : new HashSet<string>();
-                    //var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
+                    var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty(OptionalPropertiesName)?.GetValue(attributeObj) as string[])!);
                     List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.Name) || typeToReplacePropertyNames.Contains(p.Name)).ToList();
                     List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.ToList();
 

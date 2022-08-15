@@ -360,11 +360,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
                 return Resource.Type;
 
-            var foundResource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.ResourceData.Type.Equals(originalType));
-            if (foundResource is not null)
-                return foundResource.Type;
-
-            throw new InvalidOperationException($"Found a resource data return type but resource was null for method {RestClient.Type.Name}.{Method.Name}: {originalType?.Name}");
+            var foundResources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceData.Type.Equals(originalType)).ToList();
+            return foundResources.Count switch
+            {
+                0 => throw new InvalidOperationException($"No resource corresponding to {originalType?.Name} is found"),
+                1 => foundResources.Single().Type,
+                _ => originalType // we have multiple resource matched, we can only return the original type without wrapping it
+            };
         }
 
         private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)
