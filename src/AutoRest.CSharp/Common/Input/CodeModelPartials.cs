@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Input
             get
             {
                 if (format == null)
-                    format = TryGetValue("x-ms-format", out object? value) && value != null ? value?.ToString() : string.Empty;
+                    format = TryGetValue("x-ms-format", out object? value) ? value?.ToString() : string.Empty;
                 return format;
             }
             set
