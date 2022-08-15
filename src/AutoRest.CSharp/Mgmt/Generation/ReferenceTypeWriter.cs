@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -10,10 +11,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ReferenceTypeWriter : ModelWriter
     {
-        public static ModelWriter GetWriter(TypeProvider typeProvider) => typeProvider switch
+        public static ModelWriter GetWriter(TypeProvider typeProvider, TypeProvider? backingModel = null) => typeProvider switch
         {
             MgmtReferenceType => new ReferenceTypeWriter(),
             ResourceData data => new ResourceDataWriter(data),
+            _ when backingModel != null => new AbstractTypeWriter(backingModel),
             _ => new ModelWriter()
         };
 

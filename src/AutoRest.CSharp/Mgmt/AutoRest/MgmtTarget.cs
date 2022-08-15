@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
         private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
-        private static ICollection<string> _addedAbstractClassExtensions = new List<string>();
 
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
@@ -135,18 +134,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
-            foreach (var pair in AbstractTypeDetection.AbstractTypeToInternalDerivedClass)
-            {
-                var model = new MgmtObjectType(pair.Value);
-                var name = model.Type.Name;
-                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-
-                var writer = new AbstractClassExtensionsWriter(pair.Key, model);
-                writer.Write();
-                AddGeneratedFile(project, $"Models/{writer.BaseClassName}Extensions.cs", writer.ToString());
-                _addedAbstractClassExtensions.Add(writer.BaseClassName);
-            }
-
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
@@ -156,7 +143,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> PostProcess(Project project)
         {
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.Concat(_addedAbstractClassExtensions).ToImmutableHashSet();
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
             project = await Internalizer.InternalizeAsync(project, modelsToKeep);
 
             project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
@@ -193,7 +180,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static void WriteArmModel(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string modelFileName, string serializationFileName)
         {
             var codeWriter = new CodeWriter();
-            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+
+            if (AbstractTypeDetection.AbstractTypeToInternalDerivedClass.TryGetValue(model.Type.Name, out ObjectSchema? schema))
+            {
+                var backingModel = new MgmtObjectType(schema);
+                var name = backingModel.Type.Name;
+                WriteArmModel(project, backingModel, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
+                ReferenceTypeWriter.GetWriter(model, backingModel).WriteModel(codeWriter, model);
+            }
+            else
+            {
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+            }
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 
