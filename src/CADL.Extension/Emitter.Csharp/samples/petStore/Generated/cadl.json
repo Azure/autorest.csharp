@@ -5,6 +5,7 @@
  "ApiVersions": [
   "2021-03-25"
  ],
+ "Enums": [],
  "Models": [
   {
    "$id": "2",
@@ -37,7 +38,7 @@
       "Kind": "String",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false,
      "IsDiscriminator": false
     },
@@ -143,7 +144,7 @@
       "Kind": "String",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false,
      "IsDiscriminator": false
     }

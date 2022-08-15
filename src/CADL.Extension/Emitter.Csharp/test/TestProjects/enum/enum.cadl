@@ -11,7 +11,7 @@ namespace Cadl.EnumPropertiesBasic;
 
 @doc("The language to translate the input text into.")
 @knownValues(TranslationLanguageValues)
-model TranslationLanguage is string;
+model TranslationLanguage is string {};
 
 @doc("The supported languages to translate input text into.")
 enum TranslationLanguageValues
@@ -48,7 +48,7 @@ model InputModel {
   Day : DayOfTheWeek;
 
   // @doc("Required string enum value.")
-  // Language: TranslationLanguage;
+  Language: TranslationLanguage;
   Title: EnumWithStringValue;
   // Grade: EnumWithNumberValue;
 }
