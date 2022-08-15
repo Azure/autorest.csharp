@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    /// <summary> Data plane generated client for HttpRetry. </summary>
+    // Data plane generated client. The HttpRetry service client.
+    /// <summary> The HttpRetry service client. </summary>
     public partial class HttpRetryClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

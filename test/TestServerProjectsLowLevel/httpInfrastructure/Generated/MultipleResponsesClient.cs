@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    /// <summary> Data plane generated client for MultipleResponses. </summary>
+    // Data plane generated client. The MultipleResponses service client.
+    /// <summary> The MultipleResponses service client. </summary>
     public partial class MultipleResponsesClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

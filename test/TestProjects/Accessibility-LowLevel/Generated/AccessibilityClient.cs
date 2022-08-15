@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace Accessibility_LowLevel
 {
-    /// <summary> Data plane generated client for Accessibility. </summary>
+    // Data plane generated client. The Accessibility service client.
+    /// <summary> The Accessibility service client. </summary>
     public partial class AccessibilityClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

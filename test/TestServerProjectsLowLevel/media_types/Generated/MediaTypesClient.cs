@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace media_types_LowLevel
 {
-    /// <summary> Data plane generated client for MediaTypes. </summary>
+    // Data plane generated client. The MediaTypes service client.
+    /// <summary> The MediaTypes service client. </summary>
     public partial class MediaTypesClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

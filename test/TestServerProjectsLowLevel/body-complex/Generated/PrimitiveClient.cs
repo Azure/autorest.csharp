@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> Data plane generated client for Primitive. </summary>
+    // Data plane generated client. The Primitive service client.
+    /// <summary> The Primitive service client. </summary>
     public partial class PrimitiveClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

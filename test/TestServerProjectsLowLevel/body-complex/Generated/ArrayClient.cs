@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> Data plane generated client for Array. </summary>
+    // Data plane generated client. The Array service client.
+    /// <summary> The Array service client. </summary>
     public partial class ArrayClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

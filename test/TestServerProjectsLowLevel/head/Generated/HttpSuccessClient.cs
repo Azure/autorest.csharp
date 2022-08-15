@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace head_LowLevel
 {
-    /// <summary> Data plane generated client for HttpSuccess. </summary>
+    // Data plane generated client. The HttpSuccess service client.
+    /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccessClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

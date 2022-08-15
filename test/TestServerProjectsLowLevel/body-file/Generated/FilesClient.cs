@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_file_LowLevel
 {
-    /// <summary> Data plane generated client for Files. </summary>
+    // Data plane generated client. The Files service client.
+    /// <summary> The Files service client. </summary>
     public partial class FilesClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

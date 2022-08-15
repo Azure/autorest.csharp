@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> Data plane generated client for Readonlyproperty. </summary>
+    // Data plane generated client. The Readonlyproperty service client.
+    /// <summary> The Readonlyproperty service client. </summary>
     public partial class ReadonlypropertyClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

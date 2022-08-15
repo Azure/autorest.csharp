@@ -240,8 +240,8 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var clientInfo in clientInfos)
             {
                 var description = string.IsNullOrWhiteSpace(clientInfo.Description)
-                    ? $"Data plane generated client for {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)}."
-                    : $"Data plane generated client. {BuilderHelpers.EscapeXmlDescription(clientInfo.Description)}";
+                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} service client."
+                    : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
 

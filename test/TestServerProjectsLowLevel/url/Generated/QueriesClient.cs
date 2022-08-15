@@ -14,7 +14,8 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
-    /// <summary> Data plane generated client for Queries. </summary>
+    // Data plane generated client. The Queries service client.
+    /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

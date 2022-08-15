@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace lro_LowLevel
 {
-    /// <summary> Data plane generated client for LROsCustomHeader. </summary>
+    // Data plane generated client. The LROsCustomHeader service client.
+    /// <summary> The LROsCustomHeader service client. </summary>
     public partial class LROsCustomHeaderClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

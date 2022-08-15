@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> Data plane generated client for Polymorphism. </summary>
+    // Data plane generated client. The Polymorphism service client.
+    /// <summary> The Polymorphism service client. </summary>
     public partial class PolymorphismClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

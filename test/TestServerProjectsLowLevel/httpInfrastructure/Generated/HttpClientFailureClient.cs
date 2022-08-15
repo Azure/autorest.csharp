@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    /// <summary> Data plane generated client for HttpClientFailure. </summary>
+    // Data plane generated client. The HttpClientFailure service client.
+    /// <summary> The HttpClientFailure service client. </summary>
     public partial class HttpClientFailureClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

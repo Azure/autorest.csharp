@@ -16,7 +16,8 @@ using Azure.Core.Pipeline;
 
 namespace dpg_customization_LowLevel
 {
-    /// <summary> Data plane generated client for DPG. </summary>
+    // Data plane generated client. The DPG service client.
+    /// <summary> The DPG service client. </summary>
     public partial class DPGClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

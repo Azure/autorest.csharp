@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestCondition_LowLevel
 {
-    /// <summary> Data plane generated client for MatchConditionCollapse. </summary>
+    // Data plane generated client. The MatchConditionCollapse service client.
+    /// <summary> The MatchConditionCollapse service client. </summary>
     public partial class MatchConditionCollapseClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
