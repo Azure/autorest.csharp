@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static ObjectSchema BuildInternalDerivedClass(ObjectSchema abstractBaseType)
         {
-            return new ObjectSchema
+            var schema = new ObjectSchema
             {
                 Language = new Languages
                 {
@@ -52,9 +53,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     All = { abstractBaseType },
                     Immediate = { abstractBaseType }
                 },
-                SerializationFormats = { KnownMediaType.Json },
-                Usage = abstractBaseType.Usage
+                DiscriminatorValue = "Unknown",
+                SerializationFormats = { KnownMediaType.Json }
             };
+            ICollection<string> usages = abstractBaseType.Usage.Select(u => u.ToString()).ToList();
+            usages.Add("Model");
+            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) } };
+            return schema;
         }
     }
 }

@@ -10,13 +10,11 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleQueryStringCondition : IUtf8JsonSerializable
+    internal partial class UnknownDeliveryRuleCondition : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("parameters");
-            writer.WriteObjectValue(Parameters);
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name.ToString());
             if (Optional.IsDefined(Description))
@@ -27,18 +25,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static DeliveryRuleQueryStringCondition DeserializeDeliveryRuleQueryStringCondition(JsonElement element)
+        internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element)
         {
-            QueryStringMatchConditionParameters parameters = default;
             MatchVariable name = default;
             Optional<string> description = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("parameters"))
-                {
-                    parameters = QueryStringMatchConditionParameters.DeserializeQueryStringMatchConditionParameters(property.Value);
-                    continue;
-                }
                 if (property.NameEquals("name"))
                 {
                     name = new MatchVariable(property.Value.GetString());
@@ -50,7 +42,7 @@ namespace MgmtDiscriminator.Models
                     continue;
                 }
             }
-            return new DeliveryRuleQueryStringCondition(name, description.Value, parameters);
+            return new UnknownDeliveryRuleCondition(name, description.Value);
         }
     }
 }

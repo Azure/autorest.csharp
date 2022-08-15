@@ -28,8 +28,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
+        /// <param name="description"> The description of the condition for the delivery rule. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
-        internal DeliveryRuleRequestMethodCondition(MatchVariable name, RequestMethodMatchConditionParameters parameters) : base(name)
+        internal DeliveryRuleRequestMethodCondition(MatchVariable name, string description, RequestMethodMatchConditionParameters parameters) : base(name, description)
         {
             Parameters = parameters;
             Name = name;

@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -23,6 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
         private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
+        private static ICollection<string> _addedAbstractClassExtensions = new List<string>();
 
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
@@ -67,21 +69,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (ShouldSkipModelGeneration(model))
                     continue;
 
-                var codeWriter = new CodeWriter();
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
                 var name = model.Type.Name;
-                AddGeneratedFile(project, $"Models/{name}.cs", codeWriter.ToString());
-
-                if (model is MgmtReferenceType mgmtReferenceType)
-                {
-                    var extensions = mgmtReferenceType.ObjectSchema.Extensions;
-                    if (extensions != null && extensions.MgmtReferenceType)
-                        continue;
-                }
-
-                var serializerCodeWriter = new CodeWriter();
-                serializeWriter.WriteSerialization(serializerCodeWriter, model);
-                AddGeneratedFile(project, $"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
             foreach (var client in MgmtContext.Library.RestClients)
@@ -105,15 +94,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
                     continue;
 
-                var codeWriter = new CodeWriter();
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-
-                var serializerCodeWriter = new CodeWriter();
-                serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
                 var name = model.Type.Name;
-                AddGeneratedFile(project, $"{name}.cs", codeWriter.ToString());
-                AddGeneratedFile(project, $"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
             foreach (var resource in MgmtContext.Library.ArmResources)
@@ -153,6 +135,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
+            foreach (var pair in AbstractTypeDetection.AbstractTypeToInternalDerivedClass)
+            {
+                var model = new MgmtObjectType(pair.Value);
+                var name = model.Type.Name;
+                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
+
+                var writer = new AbstractClassExtensionsWriter(pair.Key, model);
+                writer.Write();
+                AddGeneratedFile(project, $"Models/{writer.BaseClassName}Extensions.cs", writer.ToString());
+                _addedAbstractClassExtensions.Add(writer.BaseClassName);
+            }
+
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
@@ -162,7 +156,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> PostProcess(Project project)
         {
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.Concat(_addedAbstractClassExtensions).ToImmutableHashSet();
             project = await Internalizer.InternalizeAsync(project, modelsToKeep);
 
             project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
@@ -194,6 +188,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             return false;
+        }
+
+        private static void WriteArmModel(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string modelFileName, string serializationFileName)
+        {
+            var codeWriter = new CodeWriter();
+            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+
+            AddGeneratedFile(project, modelFileName, codeWriter.ToString());
+
+            if (model is MgmtReferenceType mgmtReferenceType)
+            {
+                var extensions = mgmtReferenceType.ObjectSchema.Extensions;
+                if (extensions != null && extensions.MgmtReferenceType)
+                    return;
+            }
+
+            var serializerCodeWriter = new CodeWriter();
+            serializeWriter.WriteSerialization(serializerCodeWriter, model);
+            AddGeneratedFile(project, serializationFileName, serializerCodeWriter.ToString());
         }
     }
 }

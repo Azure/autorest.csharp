@@ -62,6 +62,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
+            // Update usage from the extension as the model doesn't exist at the time of constructing the BuildContext
+            if (objectSchema.Extensions?.Usage is not null)
+            {
+                _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
+            }
+
             var supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
             _hasJsonSerialization = supportedSerializationFormats.Contains(KnownMediaType.Json);
             _hasXmlSerialization = supportedSerializationFormats.Contains(KnownMediaType.Xml);

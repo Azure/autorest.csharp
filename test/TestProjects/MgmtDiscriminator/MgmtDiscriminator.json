@@ -305,6 +305,10 @@
                         "name": "MatchVariable",
                         "modelAsString": true
                     }
+                },
+                "description": {
+                    "description": "The description of the condition for the delivery rule.",
+                    "type": "string"
                 }
             }
         },

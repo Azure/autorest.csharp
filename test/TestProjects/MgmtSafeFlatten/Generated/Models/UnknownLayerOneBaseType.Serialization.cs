@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
 {
-    public partial class LayerOneBaseType : IUtf8JsonSerializable
+    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,16 +20,8 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        internal static LayerOneBaseType DeserializeLayerOneBaseType(JsonElement element)
+        internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element)
         {
-            if (element.TryGetProperty("name", out JsonElement discriminator))
-            {
-                switch (discriminator.GetString())
-                {
-                    case "LayerOneBar": return LayerOneBarType.DeserializeLayerOneBarType(element);
-                    case "LayerOneFoo": return LayerOneFooType.DeserializeLayerOneFooType(element);
-                }
-            }
             LayerOneTypeName name = default;
             foreach (var property in element.EnumerateObject())
             {
