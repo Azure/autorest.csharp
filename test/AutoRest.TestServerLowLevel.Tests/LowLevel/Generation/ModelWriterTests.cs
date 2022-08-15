@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/annelo-msft/azure-sdk-for-net/blob/cadl-models-roundtrip-basic/sdk/template/Azure.Template/src/Generated/Models/RoundTripModel.cs
             var model = new ModelTypeProvider(
-                new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public",
+                new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, true, false)
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
             var model = new ModelTypeProvider(
-                new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", "public",
+                new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, true, false, false),
                         new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, true, false, false),
@@ -91,12 +91,6 @@ namespace Cadl.TestServer.InputBasic
 {
 public partial class InputModel
 {
-/// <summary> Required string, illustrating a reference type property. </summary>
-public string RequiredString{ get; }
-
-/// <summary> Required int, illustrating a value type property. </summary>
-public int RequiredInt{ get; }
-
 /// <summary> Initializes a new instance of InputModel. </summary>
 /// <param name=""requiredString""> Required string, illustrating a reference type property. </param>
 /// <param name=""requiredInt""> Required int, illustrating a value type property. </param>
@@ -108,6 +102,12 @@ global::Azure.Core.Argument.AssertNotNull(requiredString, nameof(requiredString)
 RequiredString = requiredString;
 RequiredInt = requiredInt;
 }
+
+/// <summary> Required string, illustrating a reference type property. </summary>
+public string RequiredString{ get; }
+
+/// <summary> Required int, illustrating a value type property. </summary>
+public int RequiredInt{ get; }
 }
 }
 "
@@ -129,25 +129,6 @@ namespace Cadl.TestServer.PrimitiveProperties
 {
 public partial class PrimitivePropertyModel
 {
-public string RequiredString{ get; set; }
-
-public int RequiredInt{ get; set; }
-
-public long RequiredLong{ get; set; }
-
-public long RequiredSafeInt{ get; set; }
-
-public float RequiredFloat{ get; set; }
-
-public double RequiredDouble{ get; set; }
-
-/// <summary> Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339). </summary>
-public global::System.DateTimeOffset RequiredBodyDateTime{ get; set; }
-
-public global::System.TimeSpan RequiredDuration{ get; set; }
-
-public bool RequiredBoolean{ get; set; }
-
 /// <summary> Initializes a new instance of PrimitivePropertyModel. </summary>
 /// <param name=""requiredString""></param>
 /// <param name=""requiredInt""></param>
@@ -173,6 +154,25 @@ RequiredBodyDateTime = requiredBodyDateTime;
 RequiredDuration = requiredDuration;
 RequiredBoolean = requiredBoolean;
 }
+
+public string RequiredString{ get; set; }
+
+public int RequiredInt{ get; set; }
+
+public long RequiredLong{ get; set; }
+
+public long RequiredSafeInt{ get; set; }
+
+public float RequiredFloat{ get; set; }
+
+public double RequiredDouble{ get; set; }
+
+/// <summary> Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339). </summary>
+public global::System.DateTimeOffset RequiredBodyDateTime{ get; set; }
+
+public global::System.TimeSpan RequiredDuration{ get; set; }
+
+public bool RequiredBoolean{ get; set; }
 }
 }
 ",

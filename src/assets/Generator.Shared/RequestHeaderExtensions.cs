@@ -66,7 +66,7 @@ namespace Azure.Core
 
         public static void Add(this RequestHeaders headers, string name, ETag value)
         {
-            headers.Add(name, value.ToString());
+            headers.Add(name, value.ToString("H"));
         }
 
         public static void Add(this RequestHeaders headers, MatchConditions conditions)

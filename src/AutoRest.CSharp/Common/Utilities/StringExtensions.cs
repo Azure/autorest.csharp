@@ -355,6 +355,11 @@ namespace AutoRest.CSharp.Utilities
             return plural;
         }
 
+        public static bool IsLastWordSingular(this string str)
+        {
+            return str == str.LastWordToSingular(false);
+        }
+
         public static string FirstCharToLowerCase(this string str)
         {
             if (string.IsNullOrEmpty(str) || char.IsLower(str[0]))

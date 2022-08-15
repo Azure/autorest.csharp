@@ -3,12 +3,10 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelPagingInfo(RestClientMethod? NextPageMethod, string? NextLinkName, string ItemName);
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<(Parameter Protocol, Parameter? Convenience)> ProtocolToConvenienceParameters, CSharpType? ResponseType, Diagnostic? Diagnostic);
 }

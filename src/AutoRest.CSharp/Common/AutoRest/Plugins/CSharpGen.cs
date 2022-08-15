@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                LowLevelTarget.Execute(project, new CodeModelConverter().CreateNamespace(codeModel), sourceInputModel, false);
+                LowLevelTarget.Execute(project, new CodeModelConverter().CreateNamespace(codeModel, new SchemaUsageProvider(codeModel)), sourceInputModel, false);
             }
             return project;
         }

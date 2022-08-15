@@ -185,29 +185,26 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     switch (valueSerialization.Type.Implementation)
                     {
-                        case ObjectType objectType:
+                        case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType):
+                            var optionalSerializeOptions = string.Empty;
+                            if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                             {
-                                var systemObjectType = objectType as SystemObjectType;
-                                if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
-                                {
-                                    var optionalSerializeOptions = string.Empty;
-                                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                                    {
-                                        writer.UseNamespace("Azure.ResourceManager.Models");
-                                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
-                                        optionalSerializeOptions = ", serializeOptions";
-                                    }
-                                    writer.Append($"JsonSerializer.Serialize(writer, {name:I}{optionalSerializeOptions});");
-                                }
-                                else
-                                {
-                                    writer.Line($"{writerName}.WriteObjectValue({name:I});");
-                                }
-                                return;
+                                writer.UseNamespace("Azure.ResourceManager.Models");
+                                writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                                optionalSerializeOptions = ", serializeOptions";
                             }
 
+                            writer.Append($"JsonSerializer.Serialize(writer, {name:I}{optionalSerializeOptions});");
+                            return;
+
+                        case ObjectType:
+                        case ModelTypeProvider:
+                            writer.Line($"{writerName}.WriteObjectValue({name:I});");
+                            return;
+
                         case EnumType clientEnum:
-                            writer.Append($"{writerName}.WriteStringValue({name:I}")
+                            writer
+                                .Append($"{writerName}.WriteStringValue({name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
                                 .Line($");");
@@ -628,6 +625,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 case ObjectType objectType:
                     return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
+
+                case ModelTypeProvider model:
+                    return $"{model.Type}.Deserialize{model.Declaration.Name}({element})";
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);

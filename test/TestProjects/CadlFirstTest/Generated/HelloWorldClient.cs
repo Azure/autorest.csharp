@@ -6,10 +6,12 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {
@@ -57,8 +59,63 @@ namespace CadlFirstTest
         }
 
         /// <param name="action"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <param name="exEnum"> The ExtensibleEnum to use. </param>
+        /// <param name="enum"> The SimpleEnum to use. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        public virtual async Task<Response<Thing>> TopActionValueAsync(string action, ExtensibleEnum exEnum, SimpleEnum? @enum = null, ExtensibleEnum? exEnumWithDefault = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(action, nameof(action));
+            exEnumWithDefault ??= ExtensibleEnum.Two;
+
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await TopActionAsync(action, exEnum.ToString(), @enum?.ToSerialString(), exEnumWithDefault?.ToString(), context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="action"> The String to use. </param>
+        /// <param name="exEnum"> The ExtensibleEnum to use. </param>
+        /// <param name="enum"> The SimpleEnum to use. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        public virtual Response<Thing> TopActionValue(string action, ExtensibleEnum exEnum, SimpleEnum? @enum = null, ExtensibleEnum? exEnumWithDefault = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(action, nameof(action));
+            exEnumWithDefault ??= ExtensibleEnum.Two;
+
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopActionValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = TopAction(action, exEnum.ToString(), @enum?.ToSerialString(), exEnumWithDefault?.ToString(), context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="action"> The String to use. </param>
+        /// <param name="exEnum"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="enum"> The SimpleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="exEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
@@ -67,9 +124,20 @@ namespace CadlFirstTest
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
-        /// Response response = await client.TopActionAsync("<action>");
+        /// Response response = await client.TopActionAsync("<action>", "<exEnum>");
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// This sample shows how to call TopActionAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = await client.TopActionAsync("<action>", "<exEnum>", "<enum>", "<exEnumWithDefault>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -79,19 +147,22 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
+        public virtual async Task<Response> TopActionAsync(string action, string exEnum, string @enum = null, string exEnumWithDefault = null, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNull(exEnum, nameof(exEnum));
+            exEnumWithDefault ??= ExtensibleEnum.Two.ToString();
 
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using HttpMessage message = CreateTopActionRequest(action, exEnum, @enum, exEnumWithDefault, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,8 +173,11 @@ namespace CadlFirstTest
         }
 
         /// <param name="action"> The String to use. </param>
+        /// <param name="exEnum"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="enum"> The SimpleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
+        /// <param name="exEnumWithDefault"> The ExtensibleEnum to use. Allowed values: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="exEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
@@ -112,9 +186,20 @@ namespace CadlFirstTest
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
         /// 
-        /// Response response = client.TopAction("<action>");
+        /// Response response = client.TopAction("<action>", "<exEnum>");
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// This sample shows how to call TopAction with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new HelloWorldClient(endpoint, "<apiVersion>");
+        /// 
+        /// Response response = client.TopAction("<action>", "<exEnum>", "<enum>", "<exEnumWithDefault>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -124,20 +209,59 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response TopAction(string action, RequestContext context = null)
+        public virtual Response TopAction(string action, string exEnum, string @enum = null, string exEnumWithDefault = null, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNull(exEnum, nameof(exEnum));
+            exEnumWithDefault ??= ExtensibleEnum.Two.ToString();
 
             using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using HttpMessage message = CreateTopActionRequest(action, exEnum, @enum, exEnumWithDefault, context);
                 return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Thing>> TopAction2ValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await TopAction2Async(context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Thing> TopAction2Value(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("HelloWorldClient.TopAction2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = TopAction2(context);
+                return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -157,7 +281,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.TopAction2Async();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -167,6 +292,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -198,7 +324,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.TopAction2();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -208,6 +335,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -228,7 +356,7 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateTopActionRequest(string action, RequestContext context)
+        internal HttpMessage CreateTopActionRequest(string action, string exEnum, string @enum, string exEnumWithDefault, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -239,7 +367,16 @@ namespace CadlFirstTest
             uri.AppendRaw("/partOfUri", false);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action, false);
+            uri.AppendQuery("exEnum", exEnum, true);
             uri.AppendQuery("apiVersion", _apiVersion, true);
+            if (@enum != null)
+            {
+                uri.AppendQuery("enum", @enum, true);
+            }
+            if (exEnumWithDefault != null)
+            {
+                uri.AppendQuery("exEnum", exEnumWithDefault, true);
+            }
             request.Uri = uri;
             return message;
         }
@@ -257,6 +394,17 @@ namespace CadlFirstTest
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

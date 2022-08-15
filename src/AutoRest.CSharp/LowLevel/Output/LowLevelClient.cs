@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, RestClientBuilder builder, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory, bool isCadlInput)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -57,13 +57,13 @@ namespace AutoRest.CSharp.Output.Models
 
             ClientOptions = clientOptions;
 
-            Parameters = builder.GetOrderedParametersByRequired();
+            Parameters = new RestClientBuilder(clientParameters, typeFactory).GetOrderedParametersByRequired();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, authorization);
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(builder, operations, Declaration.Name).ToArray();
+            var clientMethods = BuildMethods(typeFactory, operations, Fields, Declaration.Name, isCadlInput).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
@@ -79,61 +79,19 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<InputOperation> operations, string clientName)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName, bool isCadlInput)
         {
-            var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
-            foreach (var operation in operations)
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory, isCadlInput));
+            foreach (var (_, builder) in builders)
             {
-                requestMethods.Add(operation, builder.BuildRequestMethod(operation));
+                builder.BuildNextPageMethod(builders);
             }
 
-            foreach (var (operation, requestMethod) in requestMethods)
+            foreach (var (_, builder) in builders)
             {
-                var paging = operation.Paging;
-                var requestBodyType = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-                var responseBodyType = requestMethod.Operation.Responses.FirstOrDefault()?.BodyType;
-                var diagnostic = new Diagnostic($"{clientName}.{requestMethod.Name}");
-
-                LowLevelPagingInfo? pagingInfo = null;
-                CSharpType returnType;
-                if (paging != null)
-                {
-                    if (operation.LongRunning == null && requestMethod.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
-                    {
-                        throw new InvalidOperationException($"Method {requestMethod.Name} has to have a return value");
-                    }
-
-                    var nextLinkOperation = paging.NextLinkOperation;
-                    var nextLinkName = paging.NextLinkName;
-
-                    RestClientMethod? nextPageMethod = nextLinkOperation != null
-                        ? requestMethods[nextLinkOperation]
-                        : nextLinkName != null ? RestClientBuilder.BuildNextPageMethod(requestMethod) : null;
-
-                    pagingInfo = new LowLevelPagingInfo(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
-                    returnType = operation.LongRunning != null
-                        ? typeof(Azure.Operation<Azure.Pageable<BinaryData>>)
-                        : typeof(Azure.Pageable<BinaryData>);
-                }
-                else
-                {
-                    var headAsBoolean = requestMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
-                    returnType = operation.LongRunning != null
-                        ? responseBodyType != null ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation)
-                        : headAsBoolean
-                            ? typeof(Azure.Response<bool>)
-                            : typeof(Azure.Response);
-                }
-
-                var parameters = operation.LongRunning != null
-                    ? requestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
-                    : requestMethod.Parameters;
-                var methodSignature = new MethodSignature(requestMethod.Name, requestMethod.Summary, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
-
-                yield return new LowLevelClientMethod(methodSignature, requestMethod, requestBodyType, responseBodyType, diagnostic, pagingInfo, operation.LongRunning);
+                yield return builder.BuildOperationMethodChain();
             }
         }
-
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {
@@ -186,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var optionalParametersArguments = optionalParameters
-                .Select(p => p.Initializer ?? Parameter.GetParameterInitializer(p.Type, p.DefaultValue!.Value)!)
+                .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
                 .ToArray();
 
             if (Fields.CredentialFields.Count == 0)

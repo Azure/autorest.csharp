@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -49,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(clientType.Namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{client.Description}");
-                using (writer.Scope($"{client.Declaration.Accessibility} partial class {clientType:D}"))
+                using (writer.Scope($"{client.Declaration.Accessibility} partial class {clientType:D}", scopeDeclarations: client.Fields.ScopeDeclarations))
                 {
                     WriteClientFields(writer, client);
                     WriteConstructors(writer, client);
@@ -70,6 +71,11 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
+                            if (clientMethod.ConvenienceMethod is not null)
+                            {
+                                WriteConvenienceMethod(writer, clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, true);
+                                WriteConvenienceMethod(writer, clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, false);
+                            }
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
                         }
@@ -83,6 +89,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(writer, method, client.Fields, responseClassifierTypes);
                     }
 
+                    if (client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
+                    {
+                        WriteCancellationTokenToRequestContextMethod(writer);
+                    }
                     WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
@@ -92,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in client.Fields)
             {
-                writer.WriteFieldDeclaration(field);
+                writer.WriteField(field, declareInCurrentScope: false);
             }
 
             writer
@@ -204,35 +214,46 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
-        {
-            using (WriteClientMethodDeclaration(writer, clientMethod, async))
-            {
-                WriteClientMethodBody(writer, clientMethod, fields, async);
-            }
-            writer.Line();
-        }
-
-        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelExampleComposer exampleComposer, bool async)
+        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelExampleComposer? exampleComposer, bool async)
         {
             using (WriteClientMethodDeclaration(writer, clientMethod, exampleComposer, async))
             {
-                WriteClientMethodBody(writer, clientMethod, fields, async);
+                WriteProtocolMethodBody(writer, clientMethod, fields, async);
             }
             writer.Line();
         }
 
-        private static void WriteClientMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        private static void WriteConvenienceMethod(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
+        {
+            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
+            {
+                if (convenienceMethod.Diagnostic != null)
+                {
+                    using (WriteDiagnosticScope(writer, convenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+                    {
+                        WriteConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, async);
+                    }
+                }
+                else
+                {
+                    WriteConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, async);
+                }
+            }
+            writer.Line();
+        }
+
+        private static void WriteProtocolMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
             var restMethod = clientMethod.RequestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
 
-            if (restMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.RequestMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
+            if (clientMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
             {
-                writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.RequestMethod.ConditionHeaderFlag);
+                writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.ConditionHeaderFlag);
                 writer.Line();
             }
-            using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+
+            using (WriteDiagnosticScope(writer, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name))
             {
                 var messageVariable = new CodeWriterDeclaration("message");
                 writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
@@ -249,29 +270,53 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        private static void WriteConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, bool async)
         {
-            MethodSignature privateMethodSignature = PreparePrivatePagingMethodSignature(clientMethod, async);
+            var responseType = convenienceMethod.ResponseType;
 
-            using (WriteClientMethodDeclaration(writer, clientMethod, async))
+            var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+
+            var responseVariable = new CodeWriterDeclaration("response");
+            var parameters = new List<FormattableString>();
+            foreach (var (protocolParameter, convenienceParameter)  in convenienceMethod.ProtocolToConvenienceParameters)
             {
-                writer.Line($"return {privateMethodSignature.Name}({clientMethod.Diagnostic.ScopeName:L}, {clientMethod.Signature.Parameters.GetIdentifiersFormattable()});");
+                if (convenienceParameter == KnownParameters.CancellationTokenParameter)
+                {
+                    parameters.Add($"{contextVariable:I}");
+                }
+                else if (convenienceParameter != null)
+                {
+                    parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
+                }
+                else
+                {
+                    throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
+                }
             }
 
-            writer.Line();
+            writer
+                .Append($"{typeof(Response)} {responseVariable:D} = ")
+                .WriteMethodCall(protocolMethodSignature, parameters, async)
+                .LineRaw(";");
 
-            WritePagingPrivateMethod(writer, clientMethod, fields, privateMethodSignature, async);
-
-            writer.Line();
+            if (responseType == null)
+            {
+                writer.Line($"return {responseVariable:I};");
+            }
+            else
+            {
+                writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
+            }
         }
 
-        public static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelExampleComposer exampleComposer, bool async)
+        public static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelExampleComposer? exampleComposer, bool async)
         {
             MethodSignature privateMethodSignature = PreparePrivatePagingMethodSignature(clientMethod, async);
 
             using (WriteClientMethodDeclaration(writer, clientMethod, exampleComposer, async))
             {
-                writer.Line($"return {privateMethodSignature.Name}({clientMethod.Diagnostic.ScopeName:L}, {clientMethod.Signature.Parameters.GetIdentifiersFormattable()});");
+                writer.Line($"return {privateMethodSignature.Name}({clientMethod.ProtocolMethodDiagnostic.ScopeName:L}, {clientMethod.ProtocolMethodSignature.Parameters.GetIdentifiersFormattable()});");
             }
 
             writer.Line();
@@ -283,13 +328,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static MethodSignature PreparePrivatePagingMethodSignature(LowLevelClientMethod clientMethod, bool async)
         {
-            return (clientMethod.Signature with
+            return (clientMethod.ProtocolMethodSignature with
             {
-                Name = $"{clientMethod.Signature.Name}Implementation",
+                Name = $"{clientMethod.ProtocolMethodSignature.Name}Implementation",
                 Summary = null,
                 Modifiers = Private,
                 Description = null,
-                Parameters = clientMethod.Signature.Parameters
+                Parameters = clientMethod.ProtocolMethodSignature.Parameters
                     .Select(p => p with { DefaultValue = null })
                     .Prepend(ScopeNameParameter).ToArray()
             }).WithAsync(async);
@@ -353,24 +398,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, bool async)
-        {
-            var pagingInfo = clientMethod.PagingInfo;
-            var nextPageMethod = pagingInfo?.NextPageMethod;
-
-            if (pagingInfo != null && nextPageMethod != null)
-            {
-                WritePageableLongRunningOperationMethod(writer, clientMethod, fields, pagingInfo, nextPageMethod, longRunning, async);
-            }
-            else
-            {
-                WriteNonPageableLongRunningOperationMethod(writer, clientMethod, fields, longRunning, async);
-            }
-
-            writer.Line();
-        }
-
-        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, LowLevelExampleComposer exampleComposer, bool async)
+        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, LowLevelExampleComposer? exampleComposer, bool async)
         {
             var pagingInfo = clientMethod.PagingInfo;
             var nextPageMethod = pagingInfo?.NextPageMethod;
@@ -387,15 +415,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteNonPageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, bool async)
-        {
-            using (WriteClientMethodDeclaration(writer, clientMethod, async))
-            {
-                WriteNonPageableLongRunningOperationMethodBody(writer, clientMethod, fields, longRunning, async);
-            }
-        }
-
-        private static void WriteNonPageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, LowLevelExampleComposer exampleComposer, bool async)
+        private static void WriteNonPageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, LowLevelExampleComposer? exampleComposer, bool async)
         {
             using (WriteClientMethodDeclaration(writer, clientMethod, exampleComposer, async))
             {
@@ -407,9 +427,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var startMethod = clientMethod.RequestMethod;
             var finalStateVia = longRunning.FinalStateVia;
-            var scopeName = clientMethod.Diagnostic.ScopeName;
+            var scopeName = clientMethod.ProtocolMethodDiagnostic.ScopeName;
 
-            using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+            using (WriteDiagnosticScope(writer, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name))
             {
                 var messageVariable = new CodeWriterDeclaration("message");
                 var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
@@ -421,15 +441,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
-        {
-            using (WriteClientMethodDeclaration(writer, clientMethod, async))
-            {
-                WritePageableLongRunningOperationMethodBody(writer, clientMethod, fields, pagingInfo, nextPageMethod, longRunning, async);
-            }
-        }
-
-        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, LowLevelExampleComposer exampleComposer, bool async)
+        public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, LowLevelExampleComposer? exampleComposer, bool async)
         {
             using (WriteClientMethodDeclaration(writer, clientMethod, exampleComposer, async))
             {
@@ -437,16 +449,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WritePageableLongRunningOperationMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
+        private static void WritePageableLongRunningOperationMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
         {
             var startMethod = clientMethod.RequestMethod;
             var finalStateVia = longRunning.FinalStateVia;
-            var scopeName = clientMethod.Diagnostic.ScopeName;
+            var scopeName = clientMethod.ProtocolMethodDiagnostic.ScopeName;
 
             var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
             var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
-            using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+            using (WriteDiagnosticScope(writer, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name))
             {
                 var messageVariable = new CodeWriterDeclaration("message");
                 var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}, {createEnumerableMethod:D}";
@@ -493,7 +505,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (field != null)
                 {
-                    writer.WriteFieldDeclaration(field);
+                    writer.WriteField(field);
                 }
             }
 
@@ -587,12 +599,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
+        private static IDisposable WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, LowLevelExampleComposer? exampleComposer, bool async)
         {
-            var methodSignature = clientMethod.Signature.WithAsync(async);
+            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
 
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
             WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks);
+            if (exampleComposer is not null)
+            {
+                writer.WriteXmlDocumentation("example", exampleComposer.Compose(clientMethod, async));
+            }
             WriteDocumentationRemarks(writer, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
 
             var scope = writer.WriteMethodDeclaration(methodSignature);
@@ -600,18 +616,34 @@ namespace AutoRest.CSharp.Generation.Writers
             return scope;
         }
 
-        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, LowLevelExampleComposer exampleComposer, bool async)
+        private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, MethodSignature convenienceMethod, bool async)
         {
-            var methodSignature = clientMethod.Signature.WithAsync(async);
-
-            var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
-            WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks);
-            writer.WriteXmlDocumentation("example", exampleComposer.Compose(clientMethod, async));
-            WriteDocumentationRemarks(writer, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+            var methodSignature = convenienceMethod.WithAsync(async);
+            writer
+                .WriteMethodDocumentation(methodSignature)
+                .WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
 
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
+        }
+
+        private static void WriteCancellationTokenToRequestContextMethod(CodeWriter writer)
+        {
+            var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
+            writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
+
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            using (writer.WriteMethodDeclaration(methodSignature))
+            {
+                using (writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
+                {
+                    writer.Line($"return {defaultRequestContext:I};");
+                }
+
+                writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
+            }
+            writer.Line();
         }
 
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool hasResponseRemarks)

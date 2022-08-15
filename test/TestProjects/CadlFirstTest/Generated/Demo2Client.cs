@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -56,6 +57,30 @@ namespace CadlFirstTest
             _apiVersion = options.Version;
         }
 
+        /// <param name="input"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<Thing>> HelloAgainAsync(RoundTripModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await HelloAgainAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <param name="input"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<Thing> HelloAgain(RoundTripModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = HelloAgain(input.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -76,11 +101,15 @@ namespace CadlFirstTest
         ///     requiredDictionary = new {
         ///         key = "1",
         ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
         /// };
         /// 
         /// Response response = await client.HelloAgainAsync(RequestContent.Create(data));
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -94,6 +123,9 @@ namespace CadlFirstTest
         ///   requiredInt: number, # Required. Required int, illustrating a value type property.
         ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
         ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+        ///   requiredModel: {
+        ///     name: string, # Required.
+        ///   }, # Required. Required dictionary of enums
         /// }
         /// </code>
         /// 
@@ -101,6 +133,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -143,11 +176,15 @@ namespace CadlFirstTest
         ///     requiredDictionary = new {
         ///         key = "1",
         ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
         /// };
         /// 
         /// Response response = client.HelloAgain(RequestContent.Create(data));
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -161,6 +198,9 @@ namespace CadlFirstTest
         ///   requiredInt: number, # Required. Required int, illustrating a value type property.
         ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
         ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+        ///   requiredModel: {
+        ///     name: string, # Required.
+        ///   }, # Required. Required dictionary of enums
         /// }
         /// </code>
         /// 
@@ -168,6 +208,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -190,6 +231,42 @@ namespace CadlFirstTest
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = HelloDemo2(context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -201,7 +278,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = await client.HelloDemo2Async();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -211,6 +289,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -242,7 +321,8 @@ namespace CadlFirstTest
         /// 
         /// Response response = client.HelloDemo2();
         /// 
-        /// Console.WriteLine(response.ToString());
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -252,6 +332,7 @@ namespace CadlFirstTest
         /// 
         /// Schema for <c>Thing</c>:
         /// <code>{
+        ///   name: string, # Required.
         /// }
         /// </code>
         /// 
@@ -301,6 +382,17 @@ namespace CadlFirstTest
             uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

@@ -5,9 +5,11 @@ import {
     ArrayType,
     EnumMemberType,
     EnumType,
+    getDoc,
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
+    getVisibility,
     isIntrinsic,
     ModelType,
     ModelTypeProperty,
@@ -206,7 +208,8 @@ function getDefaultValue(type: Type): any {
 export function getInputType(
     program: Program,
     type: Type,
-    models: Map<string, InputModelType>
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
 ): InputType {
     if (type.kind === "Model") {
         return getInputModelType(program, type);
@@ -257,13 +260,23 @@ export function getInputType(
                 m.properties.forEach(
                     (value: ModelTypeProperty, key: string) => {
                         // console.log(key, value);
+                        const vis = getVisibility(program, value);
+                        let isReadOnly: boolean = false;
+                        if (vis && vis.includes("read") && vis.length == 1) {
+                            isReadOnly = true;
+                        }
                         const inputProp = {
                             Name: value.name,
                             SerializedName: value.name,
                             Description: "",
-                            Type: getInputType(program, value.type, models),
-                            IsRequired: true,
-                            IsReadOnly: true,
+                            Type: getInputType(
+                                program,
+                                value.type,
+                                models,
+                                enums
+                            ),
+                            IsRequired: !value.optional,
+                            IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
                             IsDiscriminator: false
                         };
                         properties.push(inputProp);
@@ -284,51 +297,52 @@ export function getInputType(
     }
 
     function getInputTypeForEnum(e: EnumType): InputType {
-        if (e.members.length == 0) {
-            return {
-                Name: InputTypeKind.UnKnownKind,
-                IsNullable: false
-            } as InputType;
-        }
-        const allowValues: InputEnumTypeValue[] = [];
-        const enumValueType = enumMemberType(e.members[0]);
-
-        for (const option of e.members) {
-            if (enumValueType.Kind !== enumMemberType(option).Kind) {
-                // TODO: add error handler
-                continue;
-            }
-
-            const member = {
-                Name: option.name,
-                Value: option.value
-            } as InputEnumTypeValue;
-
-            allowValues.push(member);
-        }
-        //TODO: need to figure out if it is extensible or not.
-        const isExtensible: boolean = false;
-        return {
-            Name: e.name,
-            EnumValueType: enumValueType,
-            AllowedValues: allowValues,
-            IsExtensible: isExtensible,
-            IsNullable: false
-        } as InputEnumType;
-
-        function enumMemberType(member: EnumMemberType): InputPrimitiveType {
-            if (typeof member.value === "number") {
+        let enumType = enums.get(e.name);
+        if (!enumType) {
+            if (e.members.length == 0) {
                 return {
-                    Name: "Int32",
-                    Kind: InputTypeKind.Int32,
+                    Name: InputTypeKind.UnKnownKind,
                     IsNullable: false
-                } as InputPrimitiveType;
+                } as InputType;
             }
-            return {
-                Name: "String",
-                Kind: InputTypeKind.String,
+            const allowValues: InputEnumTypeValue[] = [];
+            const enumValueType = enumMemberType(e.members[0]);
+
+            for (const option of e.members) {
+                if (enumValueType !== enumMemberType(option)) {
+                    // TODO: add error handler
+                    continue;
+                }
+
+                const member = {
+                    Name: option.name,
+                    Value: option.value ?? option.name,
+                    Description: getDoc(program, option)
+                } as InputEnumTypeValue;
+
+                allowValues.push(member);
+            }
+            //TODO: need to figure out if it is extensible or not.
+            const isExtensible: boolean = false;
+            enumType = {
+                Name: e.name,
+                Namespace: e.namespace?.name,
+                Accessibility: "", //TODO: need to add accessibility
+                Description: getDoc(program, e),
+                EnumValueType: enumValueType,
+                AllowedValues: allowValues,
+                IsExtensible: isExtensible,
                 IsNullable: false
-            } as InputPrimitiveType;
+            } as InputEnumType;
+            enums.set(e.name, enumType);
+        }
+        return enumType;
+
+        function enumMemberType(member: EnumMemberType): string {
+            if (typeof member.value === "number") {
+                return "Int32";
+            }
+            return "String";
         }
     }
 
@@ -339,7 +353,7 @@ export function getInputType(
         const elementType = arr.elementType;
         return {
             Name: "Array",
-            ElementType: getInputType(program, elementType, models),
+            ElementType: getInputType(program, elementType, models, enums),
             IsNullable: false
         } as InputListType;
     }

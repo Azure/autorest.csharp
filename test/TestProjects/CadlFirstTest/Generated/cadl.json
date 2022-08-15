@@ -30,6 +30,28 @@
   ],
   "Models": [
     {
+      "$id": "7",
+      "Name": "Thing",
+      "IsNullable": false,
+      "Properties": [
+        {
+          "$id": "8",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+            "$id": "9",
+            "Name": "string",
+            "Kind": "String",
+            "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false,
+          "IsDiscriminator": false
+        }
+      ]
+    },
+    {
       "$id": "1",
       "Name": "RoundTripModel",
       "ObjectToSkip": {"a": "b", "c": "d"},
@@ -62,6 +84,13 @@
           "Type": { "Name": "DictionaryType", "KeyType": "string", "ValueType": {"$ref": "5" }},
           "IsRequired": true,
           "IsReadOnly": false
+        },
+        {
+          "Name": "requiredModel",
+          "Description": "Required dictionary of enums",
+          "Type": {"$ref" :"7"},
+          "IsRequired": true,
+          "IsReadOnly": false
         }
       ]
     }
@@ -79,7 +108,7 @@
               "Name": "Endpoint",
               "NameInRequest": "Endpoint",
               "Description": "",
-              "Type": {"Kind" :"Uri"},
+              "Type": "Uri",
               "Location": "Uri",
               "IsRequired": true,
               "IsEndpoint": true,
@@ -89,11 +118,39 @@
               "Name": "action",
               "NameInRequest": "action",
               "Description": "",
-              "Type": {"Kind" :"String"},
+              "Type": "String",
               "Location": "Path",
               "IsRequired": true,
               "Kind": "Method",
               "SkipUrlEncoding": true
+            },
+            {
+              "Name": "enum",
+              "NameInRequest": "enum",
+              "Description": "",
+              "Type": {"$ref" :"4"},
+              "Location": "Query",
+              "IsRequired": false,
+              "Kind": "Method"
+            },
+            {
+              "Name": "exEnum",
+              "NameInRequest": "exEnum",
+              "Description": "",
+              "Type": {"$ref" :"5"},
+              "Location": "Query",
+              "IsRequired": true,
+              "Kind": "Method"
+            },
+            {
+              "Name": "exEnumWithDefault",
+              "NameInRequest": "exEnum",
+              "Description": "",
+              "Type": {"$ref" :"5"},
+              "Location": "Query",
+              "IsRequired": false,
+              "DefaultValue": {"Value":"2", "Type": {"$ref" :"5"}},
+              "Kind": "Method"
             },
             {
               "$id": "3",
@@ -112,7 +169,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": { "Name": "Thing" },
+              "BodyType": { 
+                "$ref": "7" 
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -138,7 +197,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": { "Name": "Thing" },
+              "BodyType": { 
+                "$ref": "7" 
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -169,7 +230,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -209,7 +272,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
@@ -235,7 +300,9 @@
               "StatusCodes": [
                 200
               ],
-              "BodyType": {"Name": "Thing"},
+              "BodyType": {
+                "$ref": "7"
+              },
               "BodyMediaType": "Json"
             }
           ],
