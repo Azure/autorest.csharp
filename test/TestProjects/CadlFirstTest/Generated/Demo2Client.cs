@@ -101,6 +101,9 @@ namespace CadlFirstTest
         ///     requiredDictionary = new {
         ///         key = "1",
         ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
         /// };
         /// 
         /// Response response = await client.HelloAgainAsync(RequestContent.Create(data));
@@ -120,6 +123,9 @@ namespace CadlFirstTest
         ///   requiredInt: number, # Required. Required int, illustrating a value type property.
         ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
         ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+        ///   requiredModel: {
+        ///     name: string, # Required.
+        ///   }, # Required. Required dictionary of enums
         /// }
         /// </code>
         /// 
@@ -170,6 +176,9 @@ namespace CadlFirstTest
         ///     requiredDictionary = new {
         ///         key = "1",
         ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
         /// };
         /// 
         /// Response response = client.HelloAgain(RequestContent.Create(data));
@@ -189,6 +198,9 @@ namespace CadlFirstTest
         ///   requiredInt: number, # Required. Required int, illustrating a value type property.
         ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
         ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+        ///   requiredModel: {
+        ///     name: string, # Required.
+        ///   }, # Required. Required dictionary of enums
         /// }
         /// </code>
         /// 
@@ -375,7 +387,7 @@ namespace CadlFirstTest
         private static RequestContext DefaultRequestContext = new RequestContext();
         internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
         {
-            if (cancellationToken == CancellationToken.None)
+            if (!cancellationToken.CanBeCanceled)
             {
                 return DefaultRequestContext;
             }

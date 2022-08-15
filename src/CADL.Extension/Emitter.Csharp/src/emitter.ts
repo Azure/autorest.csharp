@@ -298,10 +298,7 @@ function loadOperation(
         body: ModelTypeProperty
     ): InputParameter {
         const { type, name, model: cadlType } = body;
-        //const cadlType = body.type;
         const inputType: InputType = getInputType(program, type, models, enums);
-
-        //const requestLocation = requestLocationMap[location];
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
@@ -309,7 +306,7 @@ function loadOperation(
             Name: name,
             NameInRequest: name,
             Description: getDoc(program, body),
-            Type: models.get(inputType.Name),
+            Type: inputType,
             Location: requestLocation,
             IsRequired: !body.optional,
             IsApiVersion: false,
@@ -341,10 +338,7 @@ function loadOperation(
                 models,
                 enums
             );
-            if (!models.get(inputType.Name)) {
-                models.set(inputType.Name, inputType as InputModelType);
-            }
-            type = models.get(inputType.Name);
+            type = inputType;
         }
 
         return {
