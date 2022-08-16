@@ -16,13 +16,16 @@ namespace CadlPetStore
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
         internal static Pet DeserializePet(JsonElement element)
         {
             string name = default;
-            string tag = default;
             int age = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -31,18 +34,13 @@ namespace CadlPetStore
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("tag"))
-                {
-                    tag = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("age"))
                 {
                     age = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new Pet(name, tag, age);
+            return new Pet(name, age);
         }
 
         internal RequestContent ToRequestContent()
