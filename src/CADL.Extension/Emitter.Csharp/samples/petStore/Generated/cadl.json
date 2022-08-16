@@ -10,6 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
+   "Namespace": "PetStore",
    "IsNullable": false,
    "Properties": [
     {
@@ -62,6 +63,7 @@
   {
    "$id": "9",
    "Name": "Toy",
+   "Namespace": "PetStore",
    "IsNullable": false,
    "Properties": [
     {
@@ -114,6 +116,7 @@
   {
    "$id": "16",
    "Name": "ToyListResults",
+   "Namespace": "PetStore",
    "IsNullable": false,
    "Properties": [
     {

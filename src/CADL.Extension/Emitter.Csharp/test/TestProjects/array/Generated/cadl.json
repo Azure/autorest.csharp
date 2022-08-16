@@ -10,6 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
+   "Namespace": "ArrayBasic",
    "IsNullable": false,
    "Properties": [
     {

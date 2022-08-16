@@ -118,6 +118,7 @@
   {
    "$id": "19",
    "Name": "InputModel",
+   "Namespace": "EnumPropertiesBasic",
    "IsNullable": false,
    "Properties": [
     {

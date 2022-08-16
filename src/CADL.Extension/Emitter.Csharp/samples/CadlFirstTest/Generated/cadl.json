@@ -62,6 +62,7 @@
   {
    "$id": "10",
    "Name": "Thing",
+   "Namespace": "HelloWorld",
    "IsNullable": false,
    "Properties": [
     {
@@ -84,6 +85,7 @@
   {
    "$id": "13",
    "Name": "RoundTripModel",
+   "Namespace": "HelloWorld",
    "IsNullable": false,
    "Properties": [
     {

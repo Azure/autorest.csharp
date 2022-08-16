@@ -314,6 +314,7 @@ export function getInputType(
 
                 model = {
                     Name: name,
+                    Namespace: m.namespace?.name,
                     IsNullable: false,
                     Properties: properties
                 } as InputModelType;
