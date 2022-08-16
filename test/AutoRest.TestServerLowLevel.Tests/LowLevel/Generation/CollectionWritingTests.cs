@@ -9,9 +9,9 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
-namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
+namespace AutoRest.CSharp.Generation.Writers.Tests
 {
-    public class CollectionWritingTests
+    public class CollectionWritingTests : ModelGenerationTestBase
     {
         [TestCaseSource(nameof(PrimitiveCollectionPropertiesCase))]
         public void PrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
@@ -89,27 +89,6 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                     ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
                 }
             }
-        }
-        private void ValidateGeneratedCodes(ModelTypeProvider model, string modelCodes, string serializationCodes)
-        {
-            ValidateGeneratedModelCodes(model, modelCodes);
-            ValidateGeneratedSerializationCodes(model, serializationCodes);
-        }
-
-        private void ValidateGeneratedModelCodes(ModelTypeProvider model, string modelCodes)
-        {
-            var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteType(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(modelCodes, codes);
-        }
-
-        private void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string serializationCodes)
-        {
-            var codeWriter = new CodeWriter();
-            SerializationWriter.WriteModelSerialization(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(serializationCodes, codes);
         }
 
         private static readonly object[] PrimitiveCollectionPropertiesCase =

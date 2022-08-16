@@ -38,6 +38,6 @@ namespace AutoRest.CSharp.Common.Input
         None = 0,
         Input = 1,
         Output = 2,
-        RoundTrip = Input & Output
+        RoundTrip = Input | Output
     }
 }
