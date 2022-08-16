@@ -5,61 +5,65 @@
  "ApiVersions": [
   "1.0.0"
  ],
+ "Enums": [],
  "Models": [
   {
    "$id": "2",
+   "Name": "Pet",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "9",
    "Name": "Array",
    "ElementType": {
-    "$id": "3",
-    "Name": "Pet",
-    "IsNullable": false,
-    "Properties": [
-     {
-      "$id": "4",
-      "Name": "name",
-      "SerializedName": "name",
-      "Description": "",
-      "Type": {
-       "$id": "5",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "IsRequired": true,
-      "IsReadOnly": true,
-      "IsDiscriminator": false
-     },
-     {
-      "$id": "6",
-      "Name": "tag",
-      "SerializedName": "tag",
-      "Description": "",
-      "Type": {
-       "$id": "7",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "IsRequired": true,
-      "IsReadOnly": true,
-      "IsDiscriminator": false
-     },
-     {
-      "$id": "8",
-      "Name": "age",
-      "SerializedName": "age",
-      "Description": "",
-      "Type": {
-       "$id": "9",
-       "Name": "Int32",
-       "Kind": "Int32",
-       "IsNullable": false
-      },
-      "IsRequired": true,
-      "IsReadOnly": true,
-      "IsDiscriminator": false
-     }
-    ]
+    "$ref": "2"
    },
    "IsNullable": false
   }
@@ -125,7 +129,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "9"
        },
        "BodyMediaType": "Json"
       }
