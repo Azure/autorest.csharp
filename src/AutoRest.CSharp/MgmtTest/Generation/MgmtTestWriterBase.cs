@@ -41,8 +41,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Append($"{This.Accessibility} partial class {This.Type.Name}");
             if (This.BaseType != null)
             {
-                _writer.Append($" : ");
-                _writer.Append($"{This.BaseType:D}");
+                _writer.Append($" : {This.BaseType:D}");
             }
             _writer.Line();
         }
@@ -58,8 +57,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line($");");
         }
 
-        protected virtual void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration,
-            RequestPath requestPath, CSharpType resourceType)
+        protected virtual void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration, RequestPath requestPath, CSharpType resourceType)
         {
             _writer.Append($"{typeof(ResourceIdentifier)} {declaration:D} = new {typeof(ResourceIdentifier)}(");
             // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
