@@ -22,6 +22,7 @@ namespace MgmtMockAndSample
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CheckNameAvailabilityVault()
         {
+            // Generated from example definition: 
             // this example is just showing the usage of "Vaults_CheckNameAvailability" operation, for the dependent resources, they will have to be created separately.
 
             // authenticate your client

@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Samples
 {
     internal class MgmtSampleProvider : MgmtTestProvider
     {
-        public MockTestCase Sample { get; }
+        public Sample Sample { get; }
         public MgmtSampleProvider(Sample testCase) : base()
         {
             Sample = testCase;

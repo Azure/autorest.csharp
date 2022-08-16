@@ -17,5 +17,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             // the samples do not override anything
             return value;
         }
+
+        public string OriginalFilepath => _example.OriginalFile!;
     }
 }
