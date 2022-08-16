@@ -7,7 +7,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
-namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
+namespace AutoRest.CSharp.Generation.Writers.Tests
 {
     public class ReadonlyPropertyWritingTests
     {
@@ -17,7 +17,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl
             // TODO: add model types after resolving how to deal with properties of model types
             var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public",
+                new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),

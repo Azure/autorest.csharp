@@ -9,7 +9,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
-namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
+namespace AutoRest.CSharp.Generation.Writers.Tests
 {
     public class CollectionWritingTests
     {
