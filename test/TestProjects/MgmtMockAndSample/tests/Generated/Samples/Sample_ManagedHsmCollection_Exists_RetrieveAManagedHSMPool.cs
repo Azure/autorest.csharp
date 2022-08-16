@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";

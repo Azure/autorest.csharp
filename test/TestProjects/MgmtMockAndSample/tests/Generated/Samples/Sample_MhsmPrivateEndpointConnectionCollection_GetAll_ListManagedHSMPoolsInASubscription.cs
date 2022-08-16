@@ -35,14 +35,14 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // get the collection of this MhsmPrivateEndpointConnectionResource
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.MhsmPrivateEndpointConnectionResource item in collection.GetAllAsync())
+            await foreach (MhsmPrivateEndpointConnectionResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.MhsmPrivateEndpointConnectionData resourceData = item.Data;
+                MhsmPrivateEndpointConnectionData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

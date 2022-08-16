@@ -35,14 +35,14 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.ManagedHsmResource item in collection.GetAllAsync())
+            await foreach (ManagedHsmResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.ManagedHsmData resourceData = item.Data;
+                ManagedHsmData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

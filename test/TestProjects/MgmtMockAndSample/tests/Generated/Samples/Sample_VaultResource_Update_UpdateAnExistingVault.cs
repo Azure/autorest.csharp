@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.VaultPatch patch = new VaultPatch()
+            VaultPatch patch = new VaultPatch()
             {
                 Properties = new VaultPatchProperties()
                 {
@@ -66,11 +66,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
                     PublicNetworkAccess = "Enabled",
                 },
             };
-            MgmtMockAndSample.VaultResource result = await vault.UpdateAsync(patch);
+            VaultResource result = await vault.UpdateAsync(patch);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VaultData resourceData = result.Data;
+            VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

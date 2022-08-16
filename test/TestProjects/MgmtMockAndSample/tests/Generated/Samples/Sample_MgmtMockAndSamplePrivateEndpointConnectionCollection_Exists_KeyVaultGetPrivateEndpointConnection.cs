@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
+            MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";

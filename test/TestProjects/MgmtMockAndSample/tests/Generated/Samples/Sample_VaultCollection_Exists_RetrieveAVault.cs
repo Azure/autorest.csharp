@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";

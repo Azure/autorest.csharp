@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.ManagedHsmData data = new ManagedHsmData(new AzureLocation("placeholder"))
+            ManagedHsmData data = new ManagedHsmData(new AzureLocation("placeholder"))
             {
                 Tags =
 {
@@ -45,12 +45,12 @@ namespace MgmtMockAndSample
 ["Slice"] = "A",
 },
             };
-            ArmOperation<MgmtMockAndSample.ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data);
-            MgmtMockAndSample.ManagedHsmResource result = lro.Value;
+            ArmOperation<ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data);
+            ManagedHsmResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.ManagedHsmData resourceData = result.Data;
+            ManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

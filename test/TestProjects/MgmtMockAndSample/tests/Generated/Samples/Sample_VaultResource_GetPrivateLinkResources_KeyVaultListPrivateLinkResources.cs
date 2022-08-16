@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
+            await foreach (MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

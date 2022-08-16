@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.Models.VaultKey item in vault.GetKeysAsync())
+            await foreach (VaultKey item in vault.GetKeysAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

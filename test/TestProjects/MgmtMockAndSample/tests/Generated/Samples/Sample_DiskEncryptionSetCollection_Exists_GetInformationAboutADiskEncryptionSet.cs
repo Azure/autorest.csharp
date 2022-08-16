@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this DiskEncryptionSetResource
-            MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";

@@ -37,11 +37,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
+            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = result.Data;
+            VirtualMachineExtensionImageData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

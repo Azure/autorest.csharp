@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aa";

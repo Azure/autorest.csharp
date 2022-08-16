@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.Models.MhsmPrivateLinkResource item in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
+            await foreach (MhsmPrivateLinkResource item in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

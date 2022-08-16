@@ -34,7 +34,7 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedManagedHsmResource
-            MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");

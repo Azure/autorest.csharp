@@ -36,8 +36,8 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
-            MgmtMockAndSample.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
+            AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
+            VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
             {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
@@ -55,7 +55,7 @@ CertificatePermission.Get
 },
 })
             }));
-            MgmtMockAndSample.Models.VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
+            VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
 
             Console.WriteLine($"Succeeded: {result}");
         }

@@ -37,11 +37,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // get the collection of this MhsmPrivateEndpointConnectionResource
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
+            MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
             {
                 PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()
                 {
@@ -49,12 +49,12 @@ namespace MgmtMockAndSample
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
+            MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData resourceData = result.Data;
+            MhsmPrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

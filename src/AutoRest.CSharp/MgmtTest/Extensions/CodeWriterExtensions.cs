@@ -434,7 +434,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         public static CodeWriter AppendDeclaration(this CodeWriter writer, CodeWriterVariableDeclaration declaration)
         {
-            return writer.Append($"{declaration.Type} {declaration.Declaration:D}");
+            return writer.Append($"{declaration.Type:I} {declaration.Declaration:D}");
         }
     }
 }

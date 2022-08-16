@@ -37,11 +37,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
+            MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData()
+            MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
                 Etag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
@@ -50,12 +50,12 @@ namespace MgmtMockAndSample
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
+            MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData resourceData = result.Data;
+            MgmtMockAndSamplePrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

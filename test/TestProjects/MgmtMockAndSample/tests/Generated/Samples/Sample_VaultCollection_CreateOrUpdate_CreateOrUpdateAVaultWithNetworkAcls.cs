@@ -37,11 +37,11 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
-            MgmtMockAndSample.Models.VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,
@@ -61,12 +61,12 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
                 ReadWriteSingleStringPropertySomething = "test",
                 DeepSomething = "deep-value",
             });
-            ArmOperation<MgmtMockAndSample.VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
-            MgmtMockAndSample.VaultResource result = lro.Value;
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
+            VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VaultData resourceData = result.Data;
+            VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

@@ -34,7 +34,7 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedVaultResource
-            MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
+            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");

@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // get the collection of this MhsmPrivateEndpointConnectionResource
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";

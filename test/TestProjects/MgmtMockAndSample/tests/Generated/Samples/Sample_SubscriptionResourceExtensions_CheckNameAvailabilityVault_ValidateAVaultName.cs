@@ -35,8 +35,8 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.VaultCheckNameAvailabilityContent content = new VaultCheckNameAvailabilityContent("sample-vault");
-            MgmtMockAndSample.Models.CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(content);
+            VaultCheckNameAvailabilityContent content = new VaultCheckNameAvailabilityContent("sample-vault");
+            CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(content);
 
             Console.WriteLine($"Succeeded: {result}");
         }

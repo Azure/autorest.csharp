@@ -35,11 +35,11 @@ namespace MgmtMockAndSample
 
             // invoke the operation and iterate over the result
             int? top = 1;
-            await foreach (MgmtMockAndSample.VaultResource item in subscriptionResource.GetVaultsAsync(top: top))
+            await foreach (VaultResource item in subscriptionResource.GetVaultsAsync(top: top))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.VaultData resourceData = item.Data;
+                VaultData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

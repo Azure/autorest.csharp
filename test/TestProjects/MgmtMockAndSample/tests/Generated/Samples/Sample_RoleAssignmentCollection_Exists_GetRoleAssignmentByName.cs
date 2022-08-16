@@ -34,7 +34,7 @@ namespace MgmtMockAndSample
             GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            RoleAssignmentCollection collection = resource.GetRoleAssignments();
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";

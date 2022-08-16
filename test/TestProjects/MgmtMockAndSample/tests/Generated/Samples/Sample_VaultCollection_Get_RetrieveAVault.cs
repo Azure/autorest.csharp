@@ -35,15 +35,15 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
-            MgmtMockAndSample.VaultResource result = await collection.GetAsync(vaultName);
+            VaultResource result = await collection.GetAsync(vaultName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VaultData resourceData = result.Data;
+            VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

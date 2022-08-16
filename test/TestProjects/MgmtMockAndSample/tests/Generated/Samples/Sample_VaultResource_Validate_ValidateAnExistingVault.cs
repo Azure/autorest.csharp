@@ -36,7 +36,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.VaultValidationResult result = await vault.ValidateAsync();
+            VaultValidationResult result = await vault.ValidateAsync();
 
             Console.WriteLine($"Succeeded: {result}");
         }
