@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -122,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    publicParameters.Select(p => TypeFactory.IsReadWriteList(p.Type) ? FromIListToIEnumerable(p) : p).ToList());
+                    publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
             }
             else
             {
@@ -133,6 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (publicConstructor, serializationConstructor);
         }
 
-        private static Parameter FromIListToIEnumerable(Parameter p) => new Parameter(p.Name, p.Description, new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments), p.DefaultValue, p.Validation, p.Initializer);
+        private static Parameter CreatePublicConstructorParameter(Parameter p)
+            => TypeFactory.IsReadWriteList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
     }
 }
