@@ -16,7 +16,6 @@ pipeline:
 output-scope:
   output-artifact: source-file-csharp
 shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
-include-x-ms-examples-original-file: true
 ```
 
 ```yaml $(generation1-convenience-client) || $(azure-arm)

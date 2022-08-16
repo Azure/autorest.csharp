@@ -9,7 +9,6 @@ azure-arm: true
 title: MgmtMockAndSample
 library-name: MgmtMockAndSample
 require: $(this-folder)/../../../../readme.md
-include-x-ms-examples-original-file: false # override this option in test project so that the local absolute path is not generated and pushed to the repo and causes CI failures
 input-file:
 - $(this-folder)/../specification/mockSwagger/keyvault.json
 - $(this-folder)/../specification/mockSwagger/managedHsm.json
