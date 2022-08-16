@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "demo.helloworld",
+ "Name": "cadlfirsttest",
  "ApiVersions": [
   "0.1.0"
  ],
@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "SimpleEnum",
-   "Namespace": "HelloWorld",
+   "Namespace": "CadlFirstTest",
    "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -34,7 +34,7 @@
   {
    "$id": "6",
    "Name": "ExtensibleEnum",
-   "Namespace": "HelloWorld",
+   "Namespace": "CadlFirstTest",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -162,7 +162,7 @@
  "Clients": [
   {
    "$id": "23",
-   "Name": "HelloWorld",
+   "Name": "CadlFirstTest",
    "Operations": [
     {
      "$id": "24",
