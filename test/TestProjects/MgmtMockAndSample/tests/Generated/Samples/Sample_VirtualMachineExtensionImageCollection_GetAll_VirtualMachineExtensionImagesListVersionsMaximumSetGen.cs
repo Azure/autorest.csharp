@@ -45,6 +45,8 @@ namespace MgmtMockAndSample
             string orderby = "a";
             await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
             {
+                // the variable item is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
                 MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");

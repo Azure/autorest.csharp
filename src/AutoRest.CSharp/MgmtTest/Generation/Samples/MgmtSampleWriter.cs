@@ -102,6 +102,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private void WriteResourceResultHandling(CodeWriterVariableDeclaration result, Resource resource)
         {
             // create a data variable for this data
+            _writer.Line($"// the variable {result.Declaration} is a resource, you could call other operations on this instance as well");
+            _writer.Line($"// but just for demo, we get its data from this resource instance");
             var dataResult = new CodeWriterVariableDeclaration("resourceData", resource.ResourceData.Type);
             _writer.AppendDeclaration(dataResult)
                 .Line($" = {result.Declaration}.Data;");

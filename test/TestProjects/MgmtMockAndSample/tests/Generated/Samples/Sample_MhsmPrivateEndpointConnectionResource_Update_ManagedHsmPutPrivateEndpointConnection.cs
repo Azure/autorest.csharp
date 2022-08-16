@@ -49,6 +49,8 @@ namespace MgmtMockAndSample
             ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data);
             MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
 
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
             MgmtMockAndSample.MhsmPrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
