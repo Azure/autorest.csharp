@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType
                     ? Public | ReadOnly
                     : Public;
-                var fieldType = GetDefaultPropertyType(inputModelProperty, typeFactory);
+                var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
@@ -100,11 +100,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
         }
 
-        private static CSharpType GetDefaultPropertyType(in InputModelProperty property, TypeFactory typeFactory)
+        private static CSharpType GetDefaultPropertyType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
         {
             var valueType = typeFactory.CreateType(property.Type);
 
-            if (//!_usage.HasFlag(SchemaTypeUsage.Input) ||
+            if (!modelUsage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {
                 valueType = TypeFactory.GetOutputType(valueType);
