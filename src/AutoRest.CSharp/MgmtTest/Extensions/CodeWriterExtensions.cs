@@ -47,13 +47,16 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // for optional parameter, we write the parameter name here
             if (parameter.DefaultValue != null)
                 writer.Append($"{parameter.Name}: ");
+
+            return writer.AppendExampleParameterValue(exampleParameterValue);
+        }
+
+        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, ExampleParameterValue exampleParameterValue)
+        {
             if (exampleParameterValue.Value != null)
-                writer.AppendExampleValue(exampleParameterValue.Value);
-            else if (exampleParameterValue.RawValue != null)
-                writer.Append(exampleParameterValue.RawValue);
+                return writer.AppendExampleValue(exampleParameterValue.Value, exampleParameterValue.Type);
             else
-                throw new InvalidOperationException($"No value for parameter {exampleParameterValue.Parameter.Name} assigned");
-            return writer;
+                return writer.Append(exampleParameterValue.Expression!);
         }
 
         private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeCollectionInitialization = true)
@@ -70,7 +73,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (exampleValue.Schema is ObjectSchema objectSchema)
                 return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
 
-            return writer.AppendRawValue(type.FrameworkType, exampleValue.RawValue, exampleValue.Schema.Type);
+            return writer.AppendRawValue(exampleValue.RawValue, type.FrameworkType, exampleValue.Schema.Type);
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
@@ -177,7 +180,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // check if this is simple type
             if (exampleValue.RawValue != null)
             {
-                return writer.AppendRawValue(exampleValue.RawValue.GetType(), exampleValue.RawValue);
+                return writer.AppendRawValue(exampleValue.RawValue, exampleValue.RawValue.GetType());
             }
             // check if this is an array
             if (exampleValue.Elements.Any())
@@ -202,7 +205,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.AppendRaw("new[] { ");
             foreach (var item in list)
             {
-                writer.AppendRawValue(item?.GetType() ?? typeof(object), item);
+                writer.AppendRawValue(item, item?.GetType() ?? typeof(object));
                 writer.AppendRaw(", ");
             }
             writer.RemoveTrailingComma();
@@ -217,7 +220,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 foreach ((var key, var value) in dict)
                 {
                     writer.Append($"{key.ToString()} = ");
-                    writer.AppendRawValue(value?.GetType() ?? typeof(object), value);
+                    writer.AppendRawValue(value, value?.GetType() ?? typeof(object));
                     writer.LineRaw(",");
                 }
                 writer.RemoveTrailingComma();
@@ -226,7 +229,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, Type type, object? rawValue, AllSchemaTypes? schemaType = null) => rawValue switch
+        private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, AllSchemaTypes? schemaType = null) => rawValue switch
         {
             // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
             // https://github.com/Azure/autorest.csharp/issues/2377
@@ -427,6 +430,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (!enumType.IsExtendable)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
             return writer.Append($"new {enumType.Type.Name}({value:L})");
+        }
+
+        public static CodeWriter AppendDeclaration(this CodeWriter writer, CodeWriterVariableDeclaration declaration)
+        {
+            return writer.Append($"{declaration.Type} {declaration.Declaration:D}");
         }
     }
 }

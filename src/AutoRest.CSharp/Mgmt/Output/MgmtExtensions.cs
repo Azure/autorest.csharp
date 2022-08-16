@@ -19,11 +19,6 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<Operation> AllRawOperations { get; }
 
-        protected MgmtExtensions(MgmtExtensions mgmtExtension)
-            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, mgmtExtension.ContextualPath)
-        {
-        }
-
         public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
             : base(armCoreType.Name)
         {

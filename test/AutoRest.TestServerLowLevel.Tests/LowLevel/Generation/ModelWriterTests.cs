@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace AutoRest.CSharp.Generation.Writers.Tests
 {
-    public class LowLevelModelWriterTests
+    public class LowLevelModelWriterTests : ModelGenerationTestBase
     {
         [TestCaseSource(nameof(InputBasicCase))]
         public void InputBasic(string expectedModelCodes)
@@ -15,8 +15,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new ModelTypeProvider(
                 new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
-                        new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, true, false),
-                        new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, true, false)
+                        new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, false, false),
+                        new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, false, false)
                     },
                     null, null, null),
                 new TypeFactory(null),
@@ -51,29 +51,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
-
-        private void ValidateGeneratedCodes(ModelTypeProvider model, string modelCodes, string serializationCodes)
-        {
-            ValidateGeneratedModelCodes(model, modelCodes);
-            ValidateGeneratedSerializationCodes(model, serializationCodes);
-        }
-
-        private void ValidateGeneratedModelCodes(ModelTypeProvider model, string modelCodes)
-        {
-            var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteType(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(modelCodes, codes);
-        }
-
-        private void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string serializationCodes)
-        {
-            var codeWriter = new CodeWriter();
-            SerializationWriter.WriteModelSerialization(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(serializationCodes, codes);
-        }
-
         // Below are test cases
         private static readonly string[] InputBasicCase =
         {
@@ -104,10 +81,10 @@ RequiredInt = requiredInt;
 }
 
 /// <summary> Required string, illustrating a reference type property. </summary>
-public string RequiredString{ get; }
+public string RequiredString{ get; set; }
 
 /// <summary> Required int, illustrating a value type property. </summary>
-public int RequiredInt{ get; }
+public int RequiredInt{ get; set; }
 }
 }
 "

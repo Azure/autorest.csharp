@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, null);
 
-            var isTestProject = Configuration.MgmtConfiguration.TestModeler is not null;
+            var isTestProject = Configuration.MgmtConfiguration.TestGen is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -107,7 +107,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include = ""NUnit"" Version = ""3.12.0"" />
+    <PackageReference Include=""NUnit"" Version=""3.12.0"" />
+    <PackageReference Include=""Azure.Identity"" Version=""1.6.0"" />
   </ItemGroup>
 
   <ItemGroup>
