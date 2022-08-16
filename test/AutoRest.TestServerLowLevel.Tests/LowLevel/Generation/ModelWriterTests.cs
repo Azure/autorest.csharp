@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace AutoRest.CSharp.Generation.Writers.Tests
 {
-    public class LowLevelModelWriterTests
+    public class LowLevelModelWriterTests : ModelGenerationTestBase
     {
         [TestCaseSource(nameof(InputBasicCase))]
         public void InputBasic(string expectedModelCodes)
@@ -49,29 +49,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null);
 
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-        }
-
-
-        private void ValidateGeneratedCodes(ModelTypeProvider model, string modelCodes, string serializationCodes)
-        {
-            ValidateGeneratedModelCodes(model, modelCodes);
-            ValidateGeneratedSerializationCodes(model, serializationCodes);
-        }
-
-        private void ValidateGeneratedModelCodes(ModelTypeProvider model, string modelCodes)
-        {
-            var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteType(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(modelCodes, codes);
-        }
-
-        private void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string serializationCodes)
-        {
-            var codeWriter = new CodeWriter();
-            SerializationWriter.WriteModelSerialization(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(serializationCodes, codes);
         }
 
         // Below are test cases
