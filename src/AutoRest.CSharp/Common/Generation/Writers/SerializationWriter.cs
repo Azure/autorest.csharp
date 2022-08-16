@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers
             => WriteObjectSerialization(writer, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, model.IncludeSerializer, model.IncludeDeserializer);
 
         public static void WriteModelSerialization(CodeWriter writer, ModelTypeProvider model)
-            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, true, true);
+            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, model.IncludeSerializer, model.IncludeDeserializer);
 
         private static void WriteObjectSerialization(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization? jsonSerialization, XmlObjectSerialization? xmlSerialization, bool isStruct, bool includeSerializer, bool includeDeserializer)
         {
