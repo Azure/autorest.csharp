@@ -481,7 +481,7 @@ namespace CadlPetStore
         private static RequestContext DefaultRequestContext = new RequestContext();
         internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
         {
-            if (cancellationToken == CancellationToken.None)
+            if (!cancellationToken.CanBeCanceled)
             {
                 return DefaultRequestContext;
             }

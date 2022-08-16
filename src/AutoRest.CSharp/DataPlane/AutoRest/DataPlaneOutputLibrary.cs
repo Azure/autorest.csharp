@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _context = context;
             _sourceInputModel = context.SourceInputModel;
-            _input = new CodeModelConverter().CreateNamespace(codeModel);
+            _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;
             _libraryName = Configuration.LibraryName ?? _input.Name;
