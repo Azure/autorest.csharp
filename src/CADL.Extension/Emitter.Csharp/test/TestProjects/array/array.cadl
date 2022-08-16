@@ -27,4 +27,4 @@ model Error {
 @summary("Manage your pets.")
 @route("/pets")
 @doc("List pets.")
-op list(@query nextLink?: string): OkResponse<Pet[]> | Error;
+op list(@query nextLink?: string): Pet[] | Error;

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    ArrayType,
     EnumMemberType,
     EnumType,
     getDoc,
@@ -14,6 +13,7 @@ import {
     isIntrinsic,
     ModelType,
     ModelTypeProperty,
+    NeverType,
     Program,
     Type
 } from "@cadl-lang/compiler";
@@ -92,8 +92,6 @@ export function mapCalTypeToCsharpInputTypeKind(
             return InputTypeKind.Object;
         case "Enum":
             return InputTypeKind.Enum;
-        case "Array":
-            return InputTypeKind.List;
         case "String":
             if (format === "date") return InputTypeKind.DateTime;
             if (format === "uri") return InputTypeKind.Uri;
@@ -206,6 +204,9 @@ function getDefaultValue(type: Type): any {
             return undefined;
     }
 }
+export function isNeverType(type: Type): type is NeverType {
+    return type.kind === "Intrinsic" && type.name === "never";
+}
 
 export function getInputType(
     program: Program,
@@ -232,8 +233,6 @@ export function getInputType(
         } as InputPrimitiveType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
-    } else if (type.kind === "Array") {
-        return getInputTypeForArray(program, type);
     } else {
         return {
             Name: InputTypeKind.UnKnownKind,
@@ -250,8 +249,25 @@ export function getInputType(
             }
         }
 
-        if (intrinsicName && intrinsicName === "Map") {
-            return getInputTypeForMap(program, m);
+        // if (intrinsicName && intrinsicName === "Map") {
+        //     return getInputTypeForMap(program, m);
+        // }
+        if (m.indexer) {
+            if (isNeverType(m.indexer.key)) {
+            } else {
+                const name = getIntrinsicModelName(program, m.indexer.key);
+                if (m.indexer.value) {
+                    if (name === "integer") {
+                        return getInputTypeForArray(program, m.indexer.value);
+                    } else {
+                        return getInputTypeForMap(
+                            program,
+                            m.indexer.key,
+                            m.indexer.value
+                        );
+                    }
+                }
+            }
         }
         if (m.name === intrinsicName) {
             // if the model is one of the Cadl Intrinsic type.
@@ -394,9 +410,8 @@ export function getInputType(
 
     function getInputTypeForArray(
         program: Program,
-        arr: ArrayType
+        elementType: Type
     ): InputListType {
-        const elementType = arr.elementType;
         return {
             Name: "Array",
             ElementType: getInputType(program, elementType, models, enums),
@@ -404,21 +419,16 @@ export function getInputType(
         } as InputListType;
     }
 
-    function getInputTypeForMap(program: Program, m: ModelType): InputType {
-        /*TODO: current only support <string, string> Map, will support more types after upgrade cadl compile version. */
+    function getInputTypeForMap(
+        program: Program,
+        key: Type,
+        value: Type
+    ): InputType {
         return {
             Name: "Dictionary",
             IsNullable: false,
-            KeyType: {
-                Name: "string",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            ValueType: {
-                Name: "string",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType
+            KeyType: getInputType(program, key, models, enums),
+            ValueType: getInputType(program, value, models, enums)
         } as InputDictionaryType;
     }
 }

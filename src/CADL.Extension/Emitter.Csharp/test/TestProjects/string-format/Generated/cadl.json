@@ -13,7 +13,7 @@
    "Operations": [
     {
      "$id": "3",
-     "Name": "stringFormat",
+     "Name": "zonedDateTime",
      "Description": "Path parameter is string with format",
      "Parameters": [
       {
@@ -39,8 +39,8 @@
       },
       {
        "$id": "6",
-       "Name": "action",
-       "NameInRequest": "action",
+       "Name": "zonedDateTime",
+       "NameInRequest": "zonedDateTime",
        "Type": {
         "$id": "7",
         "Name": "string",
@@ -70,7 +70,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/stringFormat/{action}",
+     "Path": "/uri/{zonedDateTime}",
      "BufferResponse": false
     }
    ],

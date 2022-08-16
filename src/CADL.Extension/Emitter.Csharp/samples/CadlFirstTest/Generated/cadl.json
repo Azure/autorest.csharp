@@ -31,21 +31,48 @@
    ],
    "IsExtensible": false,
    "IsNullable": false
+  },
+  {
+   "$id": "6",
+   "Name": "ExtensibleEnum",
+   "Namespace": "HelloWorld",
+   "Accessibility": "",
+   "Description": "Extensible enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "8",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "9",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
   }
  ],
  "Models": [
   {
-   "$id": "6",
+   "$id": "10",
    "Name": "Thing",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "7",
+     "$id": "11",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "8",
+      "$id": "12",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -57,17 +84,17 @@
    ]
   },
   {
-   "$id": "9",
+   "$id": "13",
    "Name": "RoundTripModel",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "10",
+     "$id": "14",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "15",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -77,12 +104,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "12",
+     "$id": "16",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "17",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -92,12 +119,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "14",
+     "$id": "18",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "",
      "Type": {
-      "$id": "15",
+      "$id": "19",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -109,25 +136,22 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "16",
+     "$id": "20",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "21",
       "Name": "Dictionary",
       "IsNullable": false,
       "KeyType": {
-       "$id": "18",
+       "$id": "22",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "19",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
+       "$ref": "6"
       }
      },
      "IsRequired": true,
@@ -139,21 +163,21 @@
  ],
  "Clients": [
   {
-   "$id": "20",
+   "$id": "23",
    "Name": "HelloWorld",
    "Operations": [
     {
-     "$id": "21",
+     "$id": "24",
      "Name": "topAction",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "22",
+       "$id": "25",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
        "Type": {
-        "$id": "23",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -169,11 +193,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "24",
+       "$id": "27",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "25",
+        "$id": "28",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -191,12 +215,12 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -208,22 +232,22 @@
      "BufferResponse": false
     },
     {
-     "$id": "27",
+     "$id": "30",
      "Name": "topAction2",
      "Description": "top level method2",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -236,31 +260,31 @@
     }
    ],
    "Protocol": {
-    "$id": "29"
+    "$id": "32"
    }
   },
   {
-   "$id": "30",
+   "$id": "33",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "31",
+     "$id": "34",
      "Name": "sayHi",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -273,27 +297,27 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "36"
    }
   },
   {
-   "$id": "34",
+   "$id": "37",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "35",
+     "$id": "38",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       },
       {
-       "$id": "36",
+       "$id": "39",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "9"
+        "$ref": "13"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -308,12 +332,12 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -325,22 +349,22 @@
      "BufferResponse": false
     },
     {
-     "$id": "38",
+     "$id": "41",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -353,11 +377,11 @@
     }
    ],
    "Protocol": {
-    "$id": "40"
+    "$id": "43"
    }
   }
  ],
  "Auth": {
-  "$id": "41"
+  "$id": "44"
  }
 }

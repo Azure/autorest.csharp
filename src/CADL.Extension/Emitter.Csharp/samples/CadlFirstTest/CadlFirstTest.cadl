@@ -40,7 +40,7 @@ model RoundTripModel {
   requiredCollection: SimpleEnum[];
 
   @doc("Required dictionary of enums")
-  requiredDictionary: Map<string, ExtensibleEnum>;
+  requiredDictionary: Record<ExtensibleEnum>;
 }
 
 @doc("Hello world service")
@@ -48,28 +48,28 @@ model RoundTripModel {
 namespace Hello.Demo {
     @doc("Return hi")
     @get
-    op sayHi(): OkResponse<Thing>;
+    op sayHi(): Thing;
 }
 
 namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    op helloAgain(@body action: RoundTripModel): OkResponse<Thing>;
+    op helloAgain(@body action: RoundTripModel): Thing;
 
     @route("/demoHi")
     @doc("Return hi in demo2")
     @get
-    op helloDemo2(): OkResponse<Thing>;
+    op helloDemo2(): Thing;
 }
 
 @route("/top")
 @doc("top level method")
 @get
-op topAction(@path @format("date") action: string): OkResponse<Thing>;
+op topAction(@path @format("date") action: string): Thing;
 
 @route("/top2")
 @doc("top level method2")
 @get
-op topAction2(): OkResponse<Thing>;
+op topAction2(): Thing;
 
