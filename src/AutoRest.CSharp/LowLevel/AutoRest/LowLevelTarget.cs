@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
         {
             var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(cadlInput);
+
             foreach (var enumType in library.Enums)
             {
                 if (enumType.IsExtendable)

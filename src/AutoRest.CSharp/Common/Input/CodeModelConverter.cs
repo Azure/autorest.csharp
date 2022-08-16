@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
-using Humanizer;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -30,12 +30,10 @@ namespace AutoRest.CSharp.Common.Input
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
 
-        public IReadOnlyDictionary<InputOperation, Operation> InputOperationToOperationMap => _inputOperationToOperationMap;
-
-        public InputNamespace CreateNamespace(CodeModel codeModel)
+        public InputNamespace CreateNamespace(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
             var enums = CreateEnums(codeModel.Schemas.Choices, codeModel.Schemas.SealedChoices);
-            var models = CreateModels(codeModel.Schemas.Objects);
+            var models = CreateModels(codeModel.Schemas.Objects, schemaUsages);
             var clients = CreateClients(codeModel.OperationGroups);
 
             return new(Name: codeModel.Language.Default.Name,
@@ -72,7 +70,7 @@ namespace AutoRest.CSharp.Common.Input
                     }
 
                     serviceRequests.Add(serviceRequest);
-                    CacheResult(serviceRequest, _operationsCache, () => CreateOperation(serviceRequest, operation, httpRequest));
+                    _operationsCache.CreateAndCacheResult(serviceRequest, () => CreateOperation(serviceRequest, operation, httpRequest));
 
                     if (operation.RequestMediaTypes != null && !Configuration.Generation1ConvenienceClient)
                     {
@@ -111,7 +109,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             foreach (var parameter in requestParameters)
             {
-                CacheResult(parameter, _parametersCache, () => CreateOperationParameter(parameter));
+                _parametersCache.CreateAndCacheResult(parameter, () => CreateOperationParameter(parameter));
             }
 
             return requestParameters.Select(rp => _parametersCache[rp]()).ToList();
@@ -181,11 +179,11 @@ namespace AutoRest.CSharp.Common.Input
                 .OfType<InputEnumType>()
                 .ToList();
 
-        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas)
+        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas, SchemaUsageProvider schemaUsages)
         {
             foreach (var schema in schemas)
             {
-                GetOrCreateModel(schema);
+                GetOrCreateModel(schema, schemaUsages);
             }
 
             foreach (var (schema, properties) in _modelPropertiesCache)
@@ -205,7 +203,7 @@ namespace AutoRest.CSharp.Common.Input
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
-        private InputModelType GetOrCreateModel(ObjectSchema schema)
+        private InputModelType GetOrCreateModel(ObjectSchema schema, SchemaUsageProvider schemaUsages)
         {
             if (_modelsCache.TryGetValue(schema, out var model))
             {
@@ -218,9 +216,16 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+                {
+                    SchemaTypeUsage.Input => InputModelTypeUsage.Input,
+                    SchemaTypeUsage.Output => InputModelTypeUsage.Output,
+                    SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                    _ => InputModelTypeUsage.None
+                },
                 Properties: properties,
                 BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
-                    ? GetOrCreateModel(parent)
+                    ? GetOrCreateModel(parent, schemaUsages)
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue
@@ -338,10 +343,11 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
 
+            ChoiceSchema choiceSchema       => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
+            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
+
             ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
             DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
-            ChoiceSchema choiceSchema       when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
-            SealedChoiceSchema choiceSchema when !Configuration.AzureArm => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
             ObjectSchema objectSchema       when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             _ => new CodeModelType(schema)
@@ -388,19 +394,6 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             return null;
-        }
-
-        private static Func<TResult> CacheResult<TSource, TResult>(TSource source, IDictionary<TSource, Func<TResult>> cache, Func<TResult> create) where TSource : notnull
-        {
-            if (cache.TryGetValue(source, out var createCache))
-            {
-                return createCache;
-            }
-
-            TResult? value = default;
-            createCache = () => value ??= create();
-            cache[source] = createCache;
-            return createCache;
         }
 
         public static IReadOnlyList<string> GetApiVersions(CodeModel codeModel)

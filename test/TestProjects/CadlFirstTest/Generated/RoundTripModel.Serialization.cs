@@ -37,6 +37,8 @@ namespace CadlFirstTest
                 writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("requiredModel");
+            writer.WriteObjectValue(RequiredModel);
             writer.WriteEndObject();
         }
 
@@ -46,6 +48,7 @@ namespace CadlFirstTest
             int requiredInt = default;
             IList<SimpleEnum> requiredCollection = default;
             IDictionary<string, ExtensibleEnum> requiredDictionary = default;
+            Thing requiredModel = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -78,8 +81,13 @@ namespace CadlFirstTest
                     requiredDictionary = dictionary;
                     continue;
                 }
+                if (property.NameEquals("requiredModel"))
+                {
+                    requiredModel = Thing.DeserializeThing(property.Value);
+                    continue;
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel);
         }
 
         internal RequestContent ToRequestContent()

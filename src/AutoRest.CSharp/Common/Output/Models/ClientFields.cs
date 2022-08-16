@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -24,6 +25,9 @@ namespace AutoRest.CSharp.Output.Models
 
         public FieldDeclaration ClientDiagnosticsProperty { get; }
         public FieldDeclaration PipelineField { get; }
+        public FieldDeclaration? EndpointField { get; }
+
+        public CodeWriterScopeDeclarations ScopeDeclarations { get; }
 
         private readonly FieldDeclaration? _keyAuthField;
         private readonly FieldDeclaration? _tokenAuthField;
@@ -98,6 +102,11 @@ namespace AutoRest.CSharp.Output.Models
                     fields.Add(field);
                 }
                 parameterNamesToFields.Add(parameter.Name, field);
+
+                if (parameter.Name == KnownParameters.Endpoint.Name && parameter.Type.EqualsIgnoreNullable(KnownParameters.Endpoint.Type))
+                {
+                    EndpointField = field;
+                }
             }
 
             fields.AddRange(properties);
@@ -109,6 +118,7 @@ namespace AutoRest.CSharp.Output.Models
             _fields = fields;
             _parameterNamesToFields = parameterNamesToFields;
             CredentialFields = credentialFields;
+            ScopeDeclarations = new CodeWriterScopeDeclarations(fields.Select(f => f.Declaration));
         }
 
         public FieldDeclaration? GetFieldByParameter(string parameterName, CSharpType parameterType)

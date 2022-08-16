@@ -125,6 +125,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             Debug.Assert(defaultValue.HasValue);
 
+            if (!type.Equals(defaultValue.Value.Type) && !CanBeInitializedInline(defaultValue.Value.Type, defaultValue))
+            {
+                return false;
+            }
+
             if (type.Equals(typeof(string)))
             {
                 return true;

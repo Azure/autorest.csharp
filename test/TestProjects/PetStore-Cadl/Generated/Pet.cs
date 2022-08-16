@@ -12,12 +12,6 @@ namespace CadlPetStore
 {
     public partial class Pet
     {
-        public string Name { get; set; }
-
-        public string Tag { get; set; }
-
-        public int Age { get; set; }
-
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
@@ -29,5 +23,11 @@ namespace CadlPetStore
             Name = name;
             Age = age;
         }
+
+        public string Name { get; set; }
+
+        public string Tag { get; set; }
+
+        public int Age { get; set; }
     }
 }
