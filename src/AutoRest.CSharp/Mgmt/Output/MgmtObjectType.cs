@@ -39,6 +39,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
+        protected override bool IsAbstract => base.IsAbstract || BackingSchema != null;
+
+        private ObjectSchema? _backingSchema;
+        public ObjectSchema? BackingSchema => _backingSchema ??= BuildBackingSchema();
+
         private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
@@ -277,6 +282,43 @@ namespace AutoRest.CSharp.Mgmt.Output
                 property.SchemaProperty,
                 property.ValueType,
                 property.OptionalViaNullability);
+        }
+
+        private ObjectSchema? BuildBackingSchema()
+        {
+            if (ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0 && !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(DefaultName))
+            {
+                return BuildInternalBackingSchema();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private ObjectSchema BuildInternalBackingSchema()
+        {
+            var schema = new ObjectSchema
+            {
+                Language = new Languages
+                {
+                    Default = new Language
+                    {
+                        Name = "Unknown" + ObjectSchema.Language.Default.Name
+                    }
+                },
+                Parents = new Relations
+                {
+                    All = { ObjectSchema },
+                    Immediate = { ObjectSchema }
+                },
+                DiscriminatorValue = "Unknown",
+                SerializationFormats = { KnownMediaType.Json }
+            };
+            ICollection<string> usages = ObjectSchema.Usage.Select(u => u.ToString()).ToList();
+            usages.Add("Model");
+            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) }, { "x-ms-skip-init-ctor", true } };
+            return schema;
         }
     }
 }

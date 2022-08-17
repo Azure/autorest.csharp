@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            if (model is SchemaObjectType objectType && objectType.BackingSchema != null)
+            if (model is MgmtObjectType objectType && objectType.BackingSchema != null)
             {
                 var backingModel = new MgmtObjectType(objectType.BackingSchema);
                 var name = backingModel.Type.Name;
