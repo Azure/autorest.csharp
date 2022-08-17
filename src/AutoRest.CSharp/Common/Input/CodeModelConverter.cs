@@ -216,6 +216,7 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Description: schema.CreateDescription(),
                 Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
                 {
                     SchemaTypeUsage.Input => InputModelTypeUsage.Input,

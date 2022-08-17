@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl
             // TODO: add model types after resolving how to deal with properties of model types
             var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", InputModelTypeUsage.RoundTrip,
+                new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", "Readonly model", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
@@ -48,21 +48,20 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Cadl.TestServer.ReadonlyProperties.Models
 {
+/// <summary> Readonly model. </summary>
 public partial class RoundTripModel
 {
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 public RoundTripModel()
 {
-RequiredReadonlyStringList = new List<string>(0);
-RequiredReadonlyIntList = new List<int>(0);
-OptionalReadonlyStringList = new List<string>(0);
-OptionalReadonlyIntList = new List<int>(0);
+RequiredReadonlyStringList = new List<string>(0).AsReadOnly();
+RequiredReadonlyIntList = new List<int>(0).AsReadOnly();
+OptionalReadonlyStringList = new List<string>(0).AsReadOnly();
+OptionalReadonlyIntList = new List<int>(0).AsReadOnly();
 }
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 /// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>
@@ -73,16 +72,8 @@ OptionalReadonlyIntList = new List<int>(0);
 /// <param name=""requiredReadonlyIntList""> Required readonly int collection. </param>
 /// <param name=""optionalReadonlyStringList""> Optional readonly string collection. </param>
 /// <param name=""optionalReadonlyIntList""> Optional readonly int collection. </param>
-/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredReadonlyString""/>, <paramref name=""optionalReadonlyString""/>, <paramref name=""requiredReadonlyStringList""/>, <paramref name=""requiredReadonlyIntList""/>, <paramref name=""optionalReadonlyStringList""/> or <paramref name=""optionalReadonlyIntList""/> is null. </exception>
 internal RoundTripModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int optionalReadonlyInt,global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList,global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList)
 {
-global::Azure.Core.Argument.AssertNotNull(requiredReadonlyString, nameof(requiredReadonlyString));
-global::Azure.Core.Argument.AssertNotNull(optionalReadonlyString, nameof(optionalReadonlyString));
-global::Azure.Core.Argument.AssertNotNull(requiredReadonlyStringList, nameof(requiredReadonlyStringList));
-global::Azure.Core.Argument.AssertNotNull(requiredReadonlyIntList, nameof(requiredReadonlyIntList));
-global::Azure.Core.Argument.AssertNotNull(optionalReadonlyStringList, nameof(optionalReadonlyStringList));
-global::Azure.Core.Argument.AssertNotNull(optionalReadonlyIntList, nameof(optionalReadonlyIntList));
-
 RequiredReadonlyString = requiredReadonlyString;
 RequiredReadonlyInt = requiredReadonlyInt;
 OptionalReadonlyString = optionalReadonlyString;

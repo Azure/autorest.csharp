@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             if (!TypeFactory.IsList(itemProperty.Declaration.Type))
             {
-                throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty?.Schema}");
+                throw new InvalidOperationException($"'{itemName}' property must be be an array schema instead of '{itemProperty.SchemaProperty?.Schema}'");
             }
 
             CSharpType itemType = TypeFactory.GetElementType(itemProperty.Declaration.Type);

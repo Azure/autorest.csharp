@@ -10,6 +10,7 @@ using Azure.Core;
 
 namespace PetStore
 {
+    /// <summary> The Pet. </summary>
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>

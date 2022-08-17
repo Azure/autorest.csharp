@@ -12,6 +12,7 @@ using Azure.Core;
 
 namespace CadlFirstTest
 {
+    /// <summary> The RoundTripModel. </summary>
     public partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>

@@ -10,6 +10,7 @@ using Azure.Core;
 
 namespace CadlFirstTest
 {
+    /// <summary> The Thing. </summary>
     public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
