@@ -177,12 +177,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (Operation.IsInterimLongRunningStateEnabled)
             {
-                if (MgmtReturnType is null)
-                    throw new InvalidOperationException($"The interim state is not supported when {Name} is a long running operation but has no return type.");
-
-                ImmutableHashSet<Schema?> schemas = Operation.Responses.Select(r => r.ResponseSchema).ToImmutableHashSet();
-                if (schemas.Count() != 1)
-                    throw new NotImplementedException($"The interim state feature is not implemented when {Name} is a long running operation but has multiple return schemas.");
+                IEnumerable<Schema?> allSchemas = Operation.Responses.Select(r => r.ResponseSchema);
+                ImmutableHashSet<Schema?> schemas = allSchemas.ToImmutableHashSet();
+                if (MgmtReturnType is null || allSchemas.Count() <= 1 || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
+                    throw new NotSupportedException($"The interim state feature is only supported when the long running operation {Name} has multiple responses and all responses have the same shcema.");
 
                 var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Resource, Name);
                 MgmtContext.Library.InterimOperations.Add(interimOperation);
