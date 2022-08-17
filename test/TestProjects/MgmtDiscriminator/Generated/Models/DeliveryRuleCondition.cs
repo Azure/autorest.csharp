@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace MgmtDiscriminator.Models
 {
     /// <summary>
@@ -34,13 +32,5 @@ namespace MgmtDiscriminator.Models
         internal MatchVariable Name { get; set; }
         /// <summary> The description of the condition for the delivery rule. </summary>
         public string Description { get; set; }
-
-        /// <summary> Create an wrapped subclass instance of DeliveryRuleCondition by serializing the provided BinaryData. </summary>
-        /// <param name="data"> The BinaryData that will be used in serializing, it should be a valid json object. </param>
-        /// <returns> The wrapped subclass instance of DeliveryRuleCondition. </returns>
-        public static DeliveryRuleCondition FromBinaryData(BinaryData data)
-        {
-            return data.ToObjectFromJson<UnknownDeliveryRuleCondition>();
-        }
     }
 }

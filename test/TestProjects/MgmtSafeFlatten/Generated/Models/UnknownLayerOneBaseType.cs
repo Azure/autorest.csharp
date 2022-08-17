@@ -11,12 +11,6 @@ namespace MgmtSafeFlatten.Models
     internal partial class UnknownLayerOneBaseType : LayerOneBaseType
     {
         /// <summary> Initializes a new instance of UnknownLayerOneBaseType. </summary>
-        public UnknownLayerOneBaseType()
-        {
-            Name = new LayerOneTypeName("Unknown");
-        }
-
-        /// <summary> Initializes a new instance of UnknownLayerOneBaseType. </summary>
         /// <param name="name"></param>
         internal UnknownLayerOneBaseType(LayerOneTypeName name) : base(name)
         {

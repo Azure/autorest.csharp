@@ -73,8 +73,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteConstructor(writer, schema);
 
                     WriteProperties(writer, schema);
-
-                    WriteAbstractTypeExtensionMethod(writer, schema);
                 }
             }
         }
@@ -155,9 +153,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        protected virtual void WriteAbstractTypeExtensionMethod(CodeWriter writer, ObjectType schema)
-        {
-        }
         private static void WriteSetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName, bool isOverridenValueType)
         {
             using (writer.Scope($"set"))

@@ -141,20 +141,20 @@ namespace AutoRest.CSharp.Input
         }
         private string? format;
 
-        public bool? AbstractType
+        public bool SkipInitCtor
         {
             get
             {
-                if (abstractType == null)
-                    abstractType = TryGetValue("x-ms-abstract", out object? value) ? (bool?)Convert.ToBoolean(value) : null;
-                return abstractType;
+                if (!skipInitCtor.HasValue)
+                    skipInitCtor = TryGetValue("x-ms-skip-init-ctor", out var value) && Convert.ToBoolean(value);
+                return skipInitCtor.Value;
             }
             set
             {
-                abstractType = value;
+                skipInitCtor = value;
             }
         }
-        private bool? abstractType;
+        private bool? skipInitCtor;
     }
 
     internal partial class RecordOfStringAndRequest : System.Collections.Generic.Dictionary<string, ServiceRequest>

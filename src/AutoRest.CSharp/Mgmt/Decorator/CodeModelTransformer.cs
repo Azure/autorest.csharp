@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             RenameTimeToOn.Update();
             RearrangeParameterOrder.Update();
             RenamePluralEnums.Update();
-            AbstractTypeDetection.Update();
             DuplicateSchemaResolver.ResolveDuplicates();
 
             if (Configuration.MgmtConfiguration.MgmtDebug.ShowSerializedNames)

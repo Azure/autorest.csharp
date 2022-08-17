@@ -37,6 +37,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private JsonObjectSerialization? _jsonSerialization;
         private XmlObjectSerialization? _xmlSerialization;
 
+        private ObjectSchema? _backingSchema;
+
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
         {
@@ -71,6 +73,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
             _hasJsonSerialization = supportedSerializationFormats.Contains(KnownMediaType.Json);
             _hasXmlSerialization = supportedSerializationFormats.Contains(KnownMediaType.Xml);
+
+            _backingSchema = BuildBackingSchema();
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -85,9 +89,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
+        public ObjectSchema? BackingSchema => _backingSchema;
+
+
         protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
-            (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.AbstractType is true);
+            ObjectSchema.Extensions.MgmtReferenceType ||
+            BackingSchema != null;
 
         public bool IsInheritableCommonType => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
@@ -292,11 +300,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
         public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
         public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        protected bool SkipInitializerConstructor => ObjectSchema != null &&
+            ObjectSchema.Extensions != null &&
+            ObjectSchema.Extensions.SkipInitCtor;
         protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return InitializationConstructor;
+            // Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
+            if (!SkipInitializerConstructor)
+            {
+                yield return InitializationConstructor;
+            }
 
             // Skip serialization ctor if they are the same
             if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)
@@ -605,6 +620,43 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string CreateDescription()
         {
             return ObjectSchema.CreateDescription();
+        }
+
+        private ObjectSchema? BuildBackingSchema()
+        {
+            if (ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0 && !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(DefaultName))
+            {
+                return BuildInternalBackingSchema();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private ObjectSchema BuildInternalBackingSchema()
+        {
+            var schema = new ObjectSchema
+            {
+                Language = new Languages
+                {
+                    Default = new Language
+                    {
+                        Name = "Unknown" + ObjectSchema.Language.Default.Name
+                    }
+                },
+                Parents = new Relations
+                {
+                    All = { ObjectSchema },
+                    Immediate = { ObjectSchema }
+                },
+                DiscriminatorValue = "Unknown",
+                SerializationFormats = { KnownMediaType.Json }
+            };
+            ICollection<string> usages = ObjectSchema.Usage.Select(u => u.ToString()).ToList();
+            usages.Add("Model");
+            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) }, { "x-ms-skip-init-ctor", true } };
+            return schema;
         }
     }
 }

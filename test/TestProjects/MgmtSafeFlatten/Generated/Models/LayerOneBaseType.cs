@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace MgmtSafeFlatten.Models
 {
     /// <summary>
@@ -30,13 +28,5 @@ namespace MgmtSafeFlatten.Models
 
         /// <summary> Gets or sets the name. </summary>
         internal LayerOneTypeName Name { get; set; }
-
-        /// <summary> Create an wrapped subclass instance of LayerOneBaseType by serializing the provided BinaryData. </summary>
-        /// <param name="data"> The BinaryData that will be used in serializing, it should be a valid json object. </param>
-        /// <returns> The wrapped subclass instance of LayerOneBaseType. </returns>
-        public static LayerOneBaseType FromBinaryData(BinaryData data)
-        {
-            return data.ToObjectFromJson<UnknownLayerOneBaseType>();
-        }
     }
 }

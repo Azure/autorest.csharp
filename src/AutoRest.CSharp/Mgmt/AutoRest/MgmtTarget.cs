@@ -181,12 +181,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            if (AbstractTypeDetection.AbstractTypeToInternalDerivedClass.TryGetValue(model.Type.Name, out ObjectSchema? schema))
+            if (model is SchemaObjectType objectType && objectType.BackingSchema != null)
             {
-                var backingModel = new MgmtObjectType(schema);
+                var backingModel = new MgmtObjectType(objectType.BackingSchema);
                 var name = backingModel.Type.Name;
                 WriteArmModel(project, backingModel, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-                ReferenceTypeWriter.GetWriter(model, backingModel).WriteModel(codeWriter, model);
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
             }
             else
             {

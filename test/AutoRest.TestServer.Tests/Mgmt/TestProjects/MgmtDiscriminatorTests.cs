@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using NUnit.Framework;
-using MgmtDiscriminator.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -33,18 +32,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name.Equals(className));
             Assert.NotNull(type);
             Assert.AreEqual(isPublic, type.IsPublic);
-        }
-
-        [TestCase("This is the first test case.")]
-        [TestCase("This is the sceond test case.")]
-        [TestCase("This is the third test case.")]
-        public void ValidateAbstractClassExtensionMethod(string description)
-        {
-            BinaryData data = BinaryData.FromString($"{{\"Description\": \"{description}\"}}");
-            var result = DeliveryRuleCondition.FromBinaryData(data);
-            Assert.AreEqual(typeof(UnknownDeliveryRuleCondition), result.GetType());
-            Assert.AreEqual(result.Name, new MatchVariable("Unknown"));
-            Assert.AreEqual(result.Description, description);
         }
     }
 }

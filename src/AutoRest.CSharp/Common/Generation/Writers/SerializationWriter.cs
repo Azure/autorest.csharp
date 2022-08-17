@@ -187,20 +187,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (!Configuration.AzureArm && declaration.IsAbstract)
+                if (declaration.IsAbstract)
                 {
-                    writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
-                }
-                else
-                {
-                    if (Configuration.AzureArm && AbstractTypeDetection.AbstractTypeToInternalDerivedClass.TryGetValue(declaration.Name, out ObjectSchema? schema))
+                    if (Configuration.AzureArm)
                     {
-                        writer.WriteObjectInitialization(serialization, schema.Language.Default.Name);
+                        writer.WriteObjectInitialization(serialization, $"Unknown{declaration.Name}");
                     }
                     else
                     {
-                        writer.WriteObjectInitialization(serialization);
+                        writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
                     }
+                }
+                else
+                {
+                    writer.WriteObjectInitialization(serialization);
                 }
             }
             writer.Line();
