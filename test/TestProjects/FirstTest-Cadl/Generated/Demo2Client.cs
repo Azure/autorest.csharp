@@ -18,7 +18,7 @@ namespace CadlFirstTest
     public partial class Demo2Client
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _apiVersion;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -32,24 +32,24 @@ namespace CadlFirstTest
         }
 
         /// <summary> Initializes a new instance of Demo2Client. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public Demo2Client(string apiVersion) : this(apiVersion, new CadlfirsttestClientOptions())
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public Demo2Client(Uri endpoint) : this(endpoint, new CadlfirsttestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of Demo2Client. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public Demo2Client(string apiVersion, CadlfirsttestClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public Demo2Client(Uri endpoint, CadlfirsttestClientOptions options)
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CadlfirsttestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _apiVersion = options.Version;
+            _endpoint = endpoint;
         }
 
         /// <summary> Return hi again. </summary>
@@ -87,7 +87,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloAgainAsync with required request content and parse the result.
         /// <code><![CDATA[
-        /// var client = new Demo2Client("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new Demo2Client(endpoint);
         /// 
         /// var data = new {
         ///     requiredString = "<requiredString>",
@@ -95,7 +96,12 @@ namespace CadlFirstTest
         ///     requiredCollection = new[] {
         ///         "1"
         ///     },
-        ///     requiredDictionary = new {},
+        ///     requiredDictionary = new {
+        ///         key = "1",
+        ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
         /// };
         /// 
         /// Response response = await client.HelloAgainAsync(RequestContent.Create(data));
@@ -114,7 +120,9 @@ namespace CadlFirstTest
         ///   requiredString: string, # Required.
         ///   requiredInt: number, # Required.
         ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-        ///   requiredDictionary: {
+        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+        ///   requiredModel: {
+        ///     name: string, # Required.
         ///   }, # Required.
         /// }
         /// </code>
@@ -155,7 +163,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloAgain with required request content and parse the result.
         /// <code><![CDATA[
-        /// var client = new Demo2Client("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new Demo2Client(endpoint);
         /// 
         /// var data = new {
         ///     requiredString = "<requiredString>",
@@ -163,7 +172,12 @@ namespace CadlFirstTest
         ///     requiredCollection = new[] {
         ///         "1"
         ///     },
-        ///     requiredDictionary = new {},
+        ///     requiredDictionary = new {
+        ///         key = "1",
+        ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
         /// };
         /// 
         /// Response response = client.HelloAgain(RequestContent.Create(data));
@@ -182,7 +196,9 @@ namespace CadlFirstTest
         ///   requiredString: string, # Required.
         ///   requiredInt: number, # Required.
         ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-        ///   requiredDictionary: {
+        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+        ///   requiredModel: {
+        ///     name: string, # Required.
         ///   }, # Required.
         /// }
         /// </code>
@@ -259,7 +275,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloDemo2Async and parse the result.
         /// <code><![CDATA[
-        /// var client = new Demo2Client("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new Demo2Client(endpoint);
         /// 
         /// Response response = await client.HelloDemo2Async();
         /// 
@@ -302,7 +319,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call HelloDemo2 and parse the result.
         /// <code><![CDATA[
-        /// var client = new Demo2Client("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new Demo2Client(endpoint);
         /// 
         /// Response response = client.HelloDemo2();
         /// 
@@ -345,8 +363,9 @@ namespace CadlFirstTest
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/againHi", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;
@@ -359,8 +378,9 @@ namespace CadlFirstTest
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/demoHi", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

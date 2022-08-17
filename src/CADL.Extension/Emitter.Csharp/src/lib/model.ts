@@ -249,12 +249,9 @@ export function getInputType(
             }
         }
 
-        // if (intrinsicName && intrinsicName === "Map") {
-        //     return getInputTypeForMap(program, m);
-        // }
+        /* Array and Map Type. */
         if (m.indexer) {
-            if (isNeverType(m.indexer.key)) {
-            } else {
+            if (!isNeverType(m.indexer.key)) {
                 const name = getIntrinsicModelName(program, m.indexer.key);
                 if (m.indexer.value) {
                     if (name === "integer") {
@@ -427,9 +424,9 @@ export function getInputType(
     ): InputType {
         return {
             Name: "Dictionary",
-            IsNullable: false,
             KeyType: getInputType(program, key, models, enums),
-            ValueType: getInputType(program, value, models, enums)
+            ValueType: getInputType(program, value, models, enums),
+            IsNullable: false
         } as InputDictionaryType;
     }
 }

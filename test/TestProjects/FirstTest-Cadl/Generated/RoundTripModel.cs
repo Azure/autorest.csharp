@@ -19,34 +19,40 @@ namespace CadlFirstTest
         /// <param name="requiredInt"></param>
         /// <param name="requiredCollection"></param>
         /// <param name="requiredDictionary"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/> or <paramref name="requiredDictionary"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<SimpleEnum> requiredCollection, object requiredDictionary)
+        /// <param name="requiredModel"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
             Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
+            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredCollection = requiredCollection.ToList();
             RequiredDictionary = requiredDictionary;
+            RequiredModel = requiredModel;
         }
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredCollection"></param>
         /// <param name="requiredDictionary"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/> or <paramref name="requiredDictionary"/> is null. </exception>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, object requiredDictionary)
+        /// <param name="requiredModel"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
+        internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
             Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
+            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredCollection = requiredCollection;
             RequiredDictionary = requiredDictionary;
+            RequiredModel = requiredModel;
         }
 
         public string RequiredString { get; set; }
@@ -55,6 +61,8 @@ namespace CadlFirstTest
 
         public IList<SimpleEnum> RequiredCollection { get; }
 
-        public object RequiredDictionary { get; set; }
+        public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
+
+        public Thing RequiredModel { get; set; }
     }
 }

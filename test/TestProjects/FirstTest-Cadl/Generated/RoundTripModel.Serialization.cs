@@ -29,7 +29,15 @@ namespace CadlFirstTest
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredDictionary");
-            writer.WriteObjectValue(RequiredDictionary);
+            writer.WriteStartObject();
+            foreach (var item in RequiredDictionary)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value.ToSerialString());
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("requiredModel");
+            writer.WriteObjectValue(RequiredModel);
             writer.WriteEndObject();
         }
 
@@ -38,7 +46,8 @@ namespace CadlFirstTest
             string requiredString = default;
             int requiredInt = default;
             IList<SimpleEnum> requiredCollection = default;
-            object requiredDictionary = default;
+            IDictionary<string, ExtensibleEnum> requiredDictionary = default;
+            Thing requiredModel = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -63,11 +72,21 @@ namespace CadlFirstTest
                 }
                 if (property.NameEquals("requiredDictionary"))
                 {
-                    requiredDictionary = property.Value.GetObject();
+                    Dictionary<string, ExtensibleEnum> dictionary = new Dictionary<string, ExtensibleEnum>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString().ToExtensibleEnum());
+                    }
+                    requiredDictionary = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredModel"))
+                {
+                    requiredModel = Thing.DeserializeThing(property.Value);
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel);
         }
 
         internal RequestContent ToRequestContent()

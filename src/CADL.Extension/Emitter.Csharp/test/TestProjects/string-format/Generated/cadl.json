@@ -18,31 +18,10 @@
      "Parameters": [
       {
        "$id": "4",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
-       "Type": {
-        "$id": "5",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "6",
        "Name": "zonedDateTime",
        "NameInRequest": "zonedDateTime",
        "Type": {
-        "$id": "7",
+        "$id": "5",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -60,7 +39,7 @@
      ],
      "Responses": [
       {
-       "$id": "8",
+       "$id": "6",
        "StatusCodes": [
         204
        ],
@@ -75,11 +54,11 @@
     }
    ],
    "Protocol": {
-    "$id": "9"
+    "$id": "7"
    }
   }
  ],
  "Auth": {
-  "$id": "10"
+  "$id": "8"
  }
 }

@@ -14,11 +14,11 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
-    /// <summary> The CadlFirstTest service client. </summary>
+    /// <summary> This is a sample cadl project. </summary>
     public partial class CadlFirstTestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _apiVersion;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -32,24 +32,24 @@ namespace CadlFirstTest
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public CadlFirstTestClient(string apiVersion) : this(apiVersion, new CadlfirsttestClientOptions())
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint) : this(endpoint, new CadlfirsttestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public CadlFirstTestClient(string apiVersion, CadlfirsttestClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint, CadlfirsttestClientOptions options)
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CadlfirsttestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _apiVersion = options.Version;
+            _endpoint = endpoint;
         }
 
         /// <summary> top level method. </summary>
@@ -107,7 +107,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopActionAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new CadlFirstTestClient("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new CadlFirstTestClient(endpoint);
         /// 
         /// Response response = await client.TopActionAsync("<action>");
         /// 
@@ -154,7 +155,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new CadlFirstTestClient("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new CadlFirstTestClient(endpoint);
         /// 
         /// Response response = client.TopAction("<action>");
         /// 
@@ -237,7 +239,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2Async and parse the result.
         /// <code><![CDATA[
-        /// var client = new CadlFirstTestClient("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new CadlFirstTestClient(endpoint);
         /// 
         /// Response response = await client.TopAction2Async();
         /// 
@@ -280,7 +283,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2 and parse the result.
         /// <code><![CDATA[
-        /// var client = new CadlFirstTestClient("<apiVersion>");
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new CadlFirstTestClient(endpoint);
         /// 
         /// Response response = client.TopAction2();
         /// 
@@ -323,9 +327,10 @@ namespace CadlFirstTest
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action, false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -337,8 +342,9 @@ namespace CadlFirstTest
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/top2", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

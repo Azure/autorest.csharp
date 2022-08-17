@@ -73,27 +73,6 @@
      "Parameters": [
       {
        "$id": "11",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
-       "Type": {
-        "$id": "12",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "13",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -112,7 +91,7 @@
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "12",
        "StatusCodes": [
         200
        ],
@@ -127,11 +106,11 @@
     }
    ],
    "Protocol": {
-    "$id": "15"
+    "$id": "13"
    }
   }
  ],
  "Auth": {
-  "$id": "16"
+  "$id": "14"
  }
 }

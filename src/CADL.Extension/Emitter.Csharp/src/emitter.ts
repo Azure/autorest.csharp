@@ -141,25 +141,6 @@ function createModel(program: Program): any {
                 endPointParam = calServers[0].parameters[0];
             }
         }
-        const apiVersionParam: InputParameter = {
-            Name: "apiVersion",
-            NameInRequest: "apiVersion",
-            Description: "",
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Location: RequestLocation.Query,
-            IsRequired: true,
-            IsApiVersion: true,
-            IsContentType: false,
-            IsEndpoint: false,
-            IsResourceParameter: false,
-            SkipUrlEncoding: false,
-            Explode: false,
-            Kind: InputOperationParameterKind.Client
-        };
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
             const groupName: string = getOperationGroupName(
@@ -183,7 +164,6 @@ function createModel(program: Program): any {
                 program,
                 operation,
                 endPointParam,
-                apiVersionParam,
                 modelMap,
                 enumMap
             );
@@ -231,14 +211,14 @@ function getOperationGroupName(
             getServiceNamespace(program);
     }
 
-    return namespace.name;
+    if (namespace) return namespace.name;
+    else return "";
 }
 
 function loadOperation(
     program: Program,
     operation: OperationDetails,
     endpoint: InputParameter | undefined = undefined,
-    apiVersion: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
@@ -255,7 +235,6 @@ function loadOperation(
 
     const parameters: InputParameter[] = [];
     if (endpoint) parameters.push(endpoint);
-    if (apiVersion) parameters.push(apiVersion);
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }

@@ -143,7 +143,6 @@
      "Type": {
       "$id": "21",
       "Name": "Dictionary",
-      "IsNullable": false,
       "KeyType": {
        "$id": "22",
        "Name": "string",
@@ -152,7 +151,8 @@
       },
       "ValueType": {
        "$ref": "6"
-      }
+      },
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -173,31 +173,10 @@
      "Parameters": [
       {
        "$id": "25",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
-       "Type": {
-        "$id": "26",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "27",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "28",
+        "$id": "26",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -215,7 +194,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "27",
        "StatusCodes": [
         200
        ],
@@ -232,17 +211,13 @@
      "BufferResponse": false
     },
     {
-     "$id": "30",
+     "$id": "28",
      "Name": "topAction2",
      "Description": "top level method2",
-     "Parameters": [
-      {
-       "$ref": "25"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -260,26 +235,22 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "30"
    }
   },
   {
-   "$id": "33",
+   "$id": "31",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "32",
      "Name": "sayHi",
      "Description": "Return hi",
-     "Parameters": [
-      {
-       "$ref": "25"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
@@ -297,23 +268,20 @@
     }
    ],
    "Protocol": {
-    "$id": "36"
+    "$id": "34"
    }
   },
   {
-   "$id": "37",
+   "$id": "35",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "38",
+     "$id": "36",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "25"
-      },
-      {
-       "$id": "39",
+       "$id": "37",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -332,7 +300,7 @@
      ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "38",
        "StatusCodes": [
         200
        ],
@@ -349,17 +317,13 @@
      "BufferResponse": false
     },
     {
-     "$id": "41",
+     "$id": "39",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
-     "Parameters": [
-      {
-       "$ref": "25"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
@@ -377,11 +341,11 @@
     }
    ],
    "Protocol": {
-    "$id": "43"
+    "$id": "41"
    }
   }
  ],
  "Auth": {
-  "$id": "44"
+  "$id": "42"
  }
 }

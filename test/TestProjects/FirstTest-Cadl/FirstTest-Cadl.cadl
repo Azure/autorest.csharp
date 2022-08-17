@@ -2,6 +2,14 @@ import "@cadl-lang/rest";
 
 @serviceTitle("Hello world")
 @serviceVersion("0.1.0")
+@doc("This is a sample cadl project.")
+@server(
+    "{firstTestUrl}",
+    "Endpoint Service",
+    {
+        firstTestUrl: string,
+    }
+)
 namespace CadlFirstTest;
 
 using Cadl.Http;
@@ -41,6 +49,9 @@ model RoundTripModel {
 
   @doc("Required dictionary of enums")
   requiredDictionary: Record<ExtensibleEnum>;
+
+  @doc("Required model")
+  requiredModel: Thing;
 }
 
 @doc("Hello world service")
