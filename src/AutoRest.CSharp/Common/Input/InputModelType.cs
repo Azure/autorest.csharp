@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue)
         : InputType(Name)
     {
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
@@ -38,6 +38,6 @@ namespace AutoRest.CSharp.Common.Input
         None = 0,
         Input = 1,
         Output = 2,
-        RoundTrip = Input & Output
+        RoundTrip = Input | Output
     }
 }

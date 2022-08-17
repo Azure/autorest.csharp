@@ -583,7 +583,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {DefaultName}");
+                throw new InvalidOperationException($"Unable to find object property with serialized name '{serializedName}' in schema {DefaultName}");
             }
 
             return objectProperty;

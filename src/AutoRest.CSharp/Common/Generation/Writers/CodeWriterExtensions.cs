@@ -43,6 +43,26 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
+        public static CodeWriter LineIf(this CodeWriter writer, FormattableString formattableString, bool condition)
+        {
+            if (condition)
+            {
+                writer.Line(formattableString);
+            }
+
+            return writer;
+        }
+
+        public static CodeWriter LineRawIf(this CodeWriter writer, string str, bool condition)
+        {
+            if (condition)
+            {
+                writer.LineRaw(str);
+            }
+
+            return writer;
+        }
+
         public static CodeWriter AppendNullableValue(this CodeWriter writer, CSharpType type)
         {
             if (type.IsNullable && type.IsValueType)

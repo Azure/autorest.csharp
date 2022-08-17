@@ -9,16 +9,16 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
-namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
+namespace AutoRest.CSharp.Generation.Writers.Tests
 {
-    public class CollectionWritingTests
+    public class CollectionWritingTests : ModelGenerationTestBase
     {
         [TestCaseSource(nameof(PrimitiveCollectionPropertiesCase))]
         public void PrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
             var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", InputModelTypeUsage.RoundTrip,
+                new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Round-trip model with collection properties", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredStringList", "requiredStringList", "Required collection of strings, illustrating a collection of reference types.", new InputListType("requiredStringList", InputPrimitiveType.String), true, false, false),
                         new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32), true, false, false),
@@ -35,13 +35,15 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void ModelTypeCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
-            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
+            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+                    "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "Required string.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredInt", "requiredInt", "Required int.", InputPrimitiveType.Int32, true, true, false)
                     },
                 null, new List<InputModelType>(), null);
-            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
+            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+                    "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
                         new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", elementModelType), true, false, false),
                         new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", elementModelType), false, false, false),
@@ -65,13 +67,15 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void ModelType2DCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
-            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
+            var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+                    "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "Required string.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredInt", "requiredInt", "Required int.", InputPrimitiveType.Int32, true, true, false)
                     },
                 null, new List<InputModelType>(), null);
-            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", InputModelTypeUsage.RoundTrip,
+            var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
+                    "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
                         new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection", new InputListType("requiredModelCollection", elementModelType)), true, false, false),
                         new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", new InputListType("optionalModelCollection", elementModelType)), false, false, false),
@@ -89,27 +93,6 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                     ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
                 }
             }
-        }
-        private void ValidateGeneratedCodes(ModelTypeProvider model, string modelCodes, string serializationCodes)
-        {
-            ValidateGeneratedModelCodes(model, modelCodes);
-            ValidateGeneratedSerializationCodes(model, serializationCodes);
-        }
-
-        private void ValidateGeneratedModelCodes(ModelTypeProvider model, string modelCodes)
-        {
-            var codeWriter = new CodeWriter();
-            LowLevelModelWriter.WriteType(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(modelCodes, codes);
-        }
-
-        private void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string serializationCodes)
-        {
-            var codeWriter = new CodeWriter();
-            SerializationWriter.WriteModelSerialization(codeWriter, model);
-            var codes = codeWriter.ToString();
-            Assert.AreEqual(serializationCodes, codes);
         }
 
         private static readonly object[] PrimitiveCollectionPropertiesCase =
@@ -130,6 +113,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.CollectionPropertiesBasic.Models
 {
+/// <summary> Round-trip model with collection properties. </summary>
 public partial class RoundTripModel
 {
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
@@ -261,6 +245,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.ModelCollectionProperties.Models
 {
+/// <summary> Simple model with model collection properties. </summary>
 public partial class ModelCollectionModel
 {
 /// <summary> Initializes a new instance of ModelCollectionModel. </summary>
@@ -371,6 +356,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.ModelCollectionProperties.Models
 {
+/// <summary> Simple model with model collection properties. </summary>
 public partial class ModelCollectionModel
 {
 /// <summary> Initializes a new instance of ModelCollectionModel. </summary>

@@ -16482,14 +16482,14 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: VirtualMachineScaleSetListSkusResultValue
+                name: VirtualMachineScaleSetListSkusResultVmssSkus
                 description: The list of skus available for the virtual machine scale set.
             protocol: !Protocols {}
           required: true
-          serializedName: value
+          serializedName: VmssSkus
           language: !Languages 
             default:
-              name: value
+              name: vmssSkus
               description: The list of skus available for the virtual machine scale set.
           protocol: !Protocols {}
         - !Property 
@@ -25313,12 +25313,14 @@ operationGroups:
                   - '200'
         extensions:
           x-ms-pageable:
+            itemName: VmssSkus
             nextLinkName: nextLink
         language: !Languages 
           default:
             name: ListSkus
             description: Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
             paging:
+              itemName: VmssSkus
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
