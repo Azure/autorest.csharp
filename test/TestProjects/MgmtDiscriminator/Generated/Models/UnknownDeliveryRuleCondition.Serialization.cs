@@ -17,18 +17,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name.ToString());
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("description");
-                writer.WriteStringValue(Description);
-            }
             writer.WriteEndObject();
         }
 
         internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element)
         {
             MatchVariable name = default;
-            Optional<string> description = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -36,13 +30,8 @@ namespace MgmtDiscriminator.Models
                     name = new MatchVariable(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("description"))
-                {
-                    description = property.Value.GetString();
-                    continue;
-                }
             }
-            return new UnknownDeliveryRuleCondition(name, description.Value);
+            return new UnknownDeliveryRuleCondition(name);
         }
     }
 }

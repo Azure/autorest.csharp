@@ -28,9 +28,8 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of DeliveryRuleQueryStringCondition. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
-        /// <param name="description"> The description of the condition for the delivery rule. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
-        internal DeliveryRuleQueryStringCondition(MatchVariable name, string description, QueryStringMatchConditionParameters parameters) : base(name, description)
+        internal DeliveryRuleQueryStringCondition(MatchVariable name, QueryStringMatchConditionParameters parameters) : base(name)
         {
             Parameters = parameters;
             Name = name;
