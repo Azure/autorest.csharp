@@ -50,7 +50,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $debug="")
+function Invoke-Cadl($baseOutput, $projectName, $arguments, $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -69,10 +69,10 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
     $repoRootPath = Resolve-Path -Path $repoRootPath
     Push-Location $repoRootPath
     # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $arguments --emit @azure-tools/cadl-csharp"
     Invoke $emitCommand
     Pop-Location
-    
+
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
     $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
     Invoke $command
