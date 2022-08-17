@@ -179,8 +179,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 IEnumerable<Schema?> allSchemas = Operation.Responses.Select(r => r.ResponseSchema);
                 ImmutableHashSet<Schema?> schemas = allSchemas.ToImmutableHashSet();
-                if (MgmtReturnType is null || allSchemas.Count() <= 1 || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
-                    throw new NotSupportedException($"The interim state feature is only supported when the long running operation {Name} has multiple responses and all responses have the same shcema.");
+                if (MgmtReturnType is null || allSchemas.Count() != Operation.Responses.Count() || schemas.Count() != 1)
+                    throw new NotSupportedException($"The interim state feature is only supported when all responses of the long running operation {Name} have the same shcema.");
 
                 var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Resource, Name);
                 MgmtContext.Library.InterimOperations.Add(interimOperation);
