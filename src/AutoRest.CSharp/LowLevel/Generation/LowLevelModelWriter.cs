@@ -15,8 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Namespace(model.Type.Namespace))
             {
-                // TODO: need add @doc/@summary support
-                //writer.WriteXmlDocumentationSummary($"{model.Summary});
+                writer.WriteXmlDocumentationSummary($"{model.Description}");
                 // TODO: do we have a case to generate struct?
                 var scopeDeclarations = new CodeWriterScopeDeclarations(model.Fields.Select(f => f.Declaration));
                 using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D}", scopeDeclarations: scopeDeclarations))

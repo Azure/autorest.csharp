@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
+        public string Description { get; }
         public IReadOnlyList<FieldDeclaration> Fields { get; }
         public ConstructorSignature PublicConstructor { get; }
         public ConstructorSignature SerializationConstructor { get; }
@@ -33,6 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
+            Description = inputModel.Description ?? $"The {inputModel.Name}.";
 
             (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
 

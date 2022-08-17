@@ -298,6 +298,7 @@ export function getInputType(
 
                 model = {
                     Name: name,
+                    Description: getDoc(program, m),
                     IsNullable: false,
                     Properties: properties
                 } as InputModelType;
