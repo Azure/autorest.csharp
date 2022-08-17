@@ -17,6 +17,7 @@ export interface InputPrimitiveType extends InputType {
 export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
+    Description: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
     DerivedModels?: InputModelType[];

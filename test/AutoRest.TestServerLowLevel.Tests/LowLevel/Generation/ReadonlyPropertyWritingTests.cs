@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl
             // TODO: add model types after resolving how to deal with properties of model types
             var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", InputModelTypeUsage.RoundTrip,
+                new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", "Readonly model", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
                         new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
@@ -52,6 +52,7 @@ using System.Collections.Generic;
 
 namespace Cadl.TestServer.ReadonlyProperties.Models
 {
+/// <summary> Readonly model. </summary>
 public partial class RoundTripModel
 {
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
