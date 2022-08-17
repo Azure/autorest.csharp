@@ -16,6 +16,7 @@ using Azure.ResourceManager;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> A class representing the specific long-running operation StorageAccountRestoreBlobRangesOperation. </summary>
     public class StorageAccountRestoreBlobRangesOperation : ArmOperation<BlobRestoreStatus>
     {
         private readonly StorageArmOperation<BlobRestoreStatus> _operation;

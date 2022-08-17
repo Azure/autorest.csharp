@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.Namespace(MgmtContext.Context.DefaultNamespace))
             {
+                _writer.WriteXmlDocumentationSummary($"A class representing the specific long-running operation {_interimOperation.TypeName}.");
                 _writer.Line($"public class {_interimOperation.TypeName} : {_interimOperation.BaseClassType}");
                 using (_writer.Scope())
                 {
