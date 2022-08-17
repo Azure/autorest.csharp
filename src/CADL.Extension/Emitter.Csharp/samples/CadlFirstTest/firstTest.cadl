@@ -13,12 +13,16 @@ enum SimpleEnum {
     Four: "4"
 }
 
-@doc("Extensible enum")
-enum ExtensibleEnum {
+@doc("Extensible enum Values")
+enum ExtensibleEnumValues {
     One: "1",
     Two: "2",
     Four: "4"
 }
+
+@doc("Extensible enum")
+@knownValues(ExtensibleEnumValues)
+model ExtensibleEnum is string {}
 
 model Thing {
   @doc("name of the Thing")

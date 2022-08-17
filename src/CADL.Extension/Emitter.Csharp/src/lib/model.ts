@@ -9,6 +9,7 @@ import {
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
+    getKnownValues,
     getVisibility,
     isIntrinsic,
     ModelType,
@@ -25,6 +26,7 @@ import {
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
+    InputDictionaryType,
     InputEnumType,
     InputListType,
     InputModelType,
@@ -240,7 +242,18 @@ export function getInputType(
     }
 
     function getInputModelType(program: Program, m: ModelType): InputType {
-        if (m.name === getIntrinsicModelName(program, m)) {
+        const intrinsicName = getIntrinsicModelName(program, m);
+        if (intrinsicName && intrinsicName === "string") {
+            const values = getKnownValues(program, m);
+            if (values) {
+                return getInputModelForExtensibleEnum(m, values);
+            }
+        }
+
+        if (intrinsicName && intrinsicName === "Map") {
+            return getInputTypeForMap(program, m);
+        }
+        if (m.name === intrinsicName) {
             // if the model is one of the Cadl Intrinsic type.
             // it's a base Cadl "primitive" that corresponds directly to an c# data type.
             // In such cases, we don't want to emit a ref and instead just
@@ -296,7 +309,41 @@ export function getInputType(
         }
     }
 
-    function getInputTypeForEnum(e: EnumType): InputType {
+    function getInputModelForExtensibleEnum(
+        m: ModelType,
+        e: EnumType
+    ): InputType {
+        let extensibleEnum = enums.get(e.name);
+        if (!extensibleEnum) {
+            const innerEnum: InputEnumType = getInputTypeForEnum(
+                e,
+                false
+            ) as InputEnumType;
+            if (!innerEnum) {
+                return {
+                    Name: InputTypeKind.UnKnownKind,
+                    IsNullable: false
+                } as InputType;
+            }
+            extensibleEnum = {
+                Name: m.name,
+                Namespace: e.namespace?.name,
+                Accessibility: "", //TODO: need to add accessibility
+                Description: getDoc(program, m),
+                EnumValueType: innerEnum.EnumValueType,
+                AllowedValues: innerEnum.AllowedValues,
+                IsExtensible: true,
+                IsNullable: false
+            } as InputEnumType;
+            enums.set(m.name, extensibleEnum);
+        }
+        return extensibleEnum;
+    }
+
+    function getInputTypeForEnum(
+        e: EnumType,
+        addToCollection: boolean = true
+    ): InputType {
         let enumType = enums.get(e.name);
         if (!enumType) {
             if (e.members.length == 0) {
@@ -322,19 +369,18 @@ export function getInputType(
 
                 allowValues.push(member);
             }
-            //TODO: need to figure out if it is extensible or not.
-            const isExtensible: boolean = false;
+
             enumType = {
                 Name: e.name,
                 Namespace: e.namespace?.name,
                 Accessibility: "", //TODO: need to add accessibility
-                Description: getDoc(program, e),
+                Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
-                IsExtensible: isExtensible,
+                IsExtensible: false,
                 IsNullable: false
             } as InputEnumType;
-            enums.set(e.name, enumType);
+            if (addToCollection) enums.set(e.name, enumType);
         }
         return enumType;
 
@@ -356,5 +402,23 @@ export function getInputType(
             ElementType: getInputType(program, elementType, models, enums),
             IsNullable: false
         } as InputListType;
+    }
+
+    function getInputTypeForMap(program: Program, m: ModelType): InputType {
+        /*TODO: current only support <string, string> Map, will support more types after upgrade cadl compile version. */
+        return {
+            Name: "Dictionary",
+            IsNullable: false,
+            KeyType: {
+                Name: "string",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
+            ValueType: {
+                Name: "string",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType
+        } as InputDictionaryType;
     }
 }

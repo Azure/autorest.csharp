@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using Configuration = AutoRest.CSharp.Input.Configuration;
@@ -65,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Type = inputType,
                     DefaultValue = Constant.Default(inputType),
-                    Initializer = Parameter.GetParameterInitializer(inputType, ctorParameter.DefaultValue)
+                    Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
             }
 

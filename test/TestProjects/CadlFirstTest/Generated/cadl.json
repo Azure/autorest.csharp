@@ -143,6 +143,16 @@
               "Kind": "Method"
             },
             {
+              "Name": "exEnumWithDefault",
+              "NameInRequest": "exEnum",
+              "Description": "",
+              "Type": {"$ref" :"5"},
+              "Location": "Query",
+              "IsRequired": false,
+              "DefaultValue": {"Value":"2", "Type": {"$ref" :"5"}},
+              "Kind": "Method"
+            },
+            {
               "$id": "3",
               "Name": "apiVersion",
               "NameInRequest": "apiVersion",

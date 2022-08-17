@@ -56,6 +56,41 @@
   },
   {
    "$id": "10",
+   "Name": "TranslationLanguage",
+   "Namespace": "EnumPropertiesBasic",
+   "Accessibility": "",
+   "Description": "The language to translate the input text into.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "11",
+     "Name": "English",
+     "Value": "English",
+     "Description": "Translate to English"
+    },
+    {
+     "$id": "12",
+     "Name": "Spanish",
+     "Value": "Spanish",
+     "Description": "Translate to Spanish"
+    },
+    {
+     "$id": "13",
+     "Name": "Mandarin",
+     "Value": "Mandarin",
+     "Description": "Translate to Mandarin"
+    },
+    {
+     "$id": "14",
+     "Name": "Undocumented",
+     "Value": "Undocumented"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
+  },
+  {
+   "$id": "15",
    "Name": "EnumWithStringValue",
    "Namespace": "EnumPropertiesBasic",
    "Accessibility": "",
@@ -63,17 +98,17 @@
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "11",
+     "$id": "16",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "12",
+     "$id": "17",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "13",
+     "$id": "18",
      "Name": "Three",
      "Value": "3"
     }
@@ -84,12 +119,12 @@
  ],
  "Models": [
   {
-   "$id": "14",
+   "$id": "19",
    "Name": "InputModel",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "15",
+     "$id": "20",
      "Name": "Day",
      "SerializedName": "Day",
      "Description": "",
@@ -101,12 +136,24 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "16",
+     "$id": "21",
+     "Name": "Language",
+     "SerializedName": "Language",
+     "Description": "",
+     "Type": {
+      "$ref": "10"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "22",
      "Name": "Title",
      "SerializedName": "Title",
      "Description": "",
      "Type": {
-      "$ref": "10"
+      "$ref": "15"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -117,21 +164,21 @@
  ],
  "Clients": [
   {
-   "$id": "17",
+   "$id": "23",
    "Name": "EnumPropertiesBasic",
    "Description": "Illustrates input models with required enum type properties.",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "24",
      "Name": "sendEnumPropertyModel",
      "Parameters": [
       {
-       "$id": "19",
+       "$id": "25",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "",
        "Type": {
-        "$id": "20",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -147,11 +194,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "21",
+       "$id": "27",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "14"
+        "$ref": "19"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -166,7 +213,7 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
@@ -181,11 +228,11 @@
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "29"
    }
   }
  ],
  "Auth": {
-  "$id": "24"
+  "$id": "30"
  }
 }

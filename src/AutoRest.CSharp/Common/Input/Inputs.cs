@@ -155,33 +155,6 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
     }
 
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue) : InputType(Name)
-    {
-        public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
-
-        public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
-
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
-
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
-        {
-            while (model != null)
-            {
-                yield return model;
-                model = model.BaseModel;
-            }
-        }
-    }
-
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }

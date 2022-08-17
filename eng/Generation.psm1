@@ -50,7 +50,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $arguments, $sharedSource="", $fast="", $debug="")
+function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -69,7 +69,7 @@ function Invoke-Cadl($baseOutput, $projectName, $arguments, $sharedSource="", $f
     $repoRootPath = Resolve-Path -Path $repoRootPath
     Push-Location $repoRootPath
     # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $arguments --emit @azure-tools/cadl-csharp"
+    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
     Invoke $emitCommand
     Pop-Location
     
@@ -85,7 +85,7 @@ function Invoke-CadlSetup()
     $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
     $emitterPath = Resolve-Path -Path $emitterPath
     Push-Location $emitterPath
-    npm install
+    npm ci
     npm run build
     npm pack
     Pop-Location
@@ -94,15 +94,15 @@ function Invoke-CadlSetup()
     $repoRoot = Join-Path $PSScriptRoot ".."
     $repoRoot = Resolve-Path $repoRoot
     Push-Location $repoRoot
+    npm ci
     $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
     if ($packages) {
         $package = $packages;
         if ($packages.count -gt 1) {
             $package = $packages[0]
         }
-        npm install $package --save
+        npm install $package
     }
-    npm install
     git checkout $repoRoot/package.json
     git checkout $repoRoot/package-lock.json
     Pop-Location

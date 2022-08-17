@@ -14,27 +14,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(cadlInput);
 
-            // Generate types only for CADL input
-            if (cadlInput)
+            foreach (var enumType in library.Enums)
             {
-                foreach (var enumType in library.Enums)
+                if (enumType.IsExtendable)
                 {
-                    if (enumType.IsExtendable)
-                    {
-                        var codeWriter = new CodeWriter();
-                        ModelWriter.WriteExtendableEnum(codeWriter, enumType);
-                        project.AddGeneratedFile($"{enumType.Type.Name}.cs", codeWriter.ToString());
-                    }
-                    else
-                    {
-                        var codeWriter = new CodeWriter();
-                        ModelWriter.WriteEnum(codeWriter, enumType);
-                        project.AddGeneratedFile($"{enumType.Type.Name}.cs", codeWriter.ToString());
+                    var codeWriter = new CodeWriter();
+                    ModelWriter.WriteExtendableEnum(codeWriter, enumType);
+                    project.AddGeneratedFile($"{enumType.Type.Name}.cs", codeWriter.ToString());
+                }
+                else
+                {
+                    var codeWriter = new CodeWriter();
+                    ModelWriter.WriteEnum(codeWriter, enumType);
+                    project.AddGeneratedFile($"{enumType.Type.Name}.cs", codeWriter.ToString());
 
-                        var serializationWriter = new CodeWriter();
-                        SerializationWriter.WriteEnumSerialization(serializationWriter, enumType);
-                        project.AddGeneratedFile($"{enumType.Type.Name}.Serialization.cs", serializationWriter.ToString());
-                    }
+                    var serializationWriter = new CodeWriter();
+                    SerializationWriter.WriteEnumSerialization(serializationWriter, enumType);
+                    project.AddGeneratedFile($"{enumType.Type.Name}.Serialization.cs", serializationWriter.ToString());
                 }
             }
 

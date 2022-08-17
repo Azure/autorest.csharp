@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var optionalParametersArguments = optionalParameters
-                .Select(p => p.Initializer ?? Parameter.GetParameterInitializer(p.Type, p.DefaultValue!.Value)!)
+                .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
                 .ToArray();
 
             if (Fields.CredentialFields.Count == 0)

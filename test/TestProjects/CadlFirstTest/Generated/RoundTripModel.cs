@@ -15,21 +15,6 @@ namespace CadlFirstTest
 {
     public partial class RoundTripModel
     {
-        /// <summary> Required string, illustrating a reference type property. </summary>
-        public string RequiredString { get; set; }
-
-        /// <summary> Required int, illustrating a value type property. </summary>
-        public int RequiredInt { get; set; }
-
-        /// <summary> Required collection of enums. </summary>
-        public IList<SimpleEnum> RequiredCollection { get; }
-
-        /// <summary> Required dictionary of enums. </summary>
-        public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
-
-        /// <summary> Required dictionary of enums. </summary>
-        public Thing RequiredModel { get; set; }
-
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
@@ -70,5 +55,20 @@ namespace CadlFirstTest
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
         }
+
+        /// <summary> Required string, illustrating a reference type property. </summary>
+        public string RequiredString { get; set; }
+
+        /// <summary> Required int, illustrating a value type property. </summary>
+        public int RequiredInt { get; set; }
+
+        /// <summary> Required collection of enums. </summary>
+        public IList<SimpleEnum> RequiredCollection { get; }
+
+        /// <summary> Required dictionary of enums. </summary>
+        public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
+
+        /// <summary> Required dictionary of enums. </summary>
+        public Thing RequiredModel { get; set; }
     }
 }
