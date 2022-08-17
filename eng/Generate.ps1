@@ -239,7 +239,10 @@ if (!($Exclude -contains "Samples"))
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
-    'dev-driven'
+    'dev-driven',
+    'srv-driven-1',
+    'srv-driven-2',
+    'roundtrip-basic'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
