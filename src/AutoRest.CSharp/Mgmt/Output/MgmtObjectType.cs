@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     return GetPropertyBySerializedName(property.SerializedName, includeParents);
                 }
-                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {DefaultName}");
+                throw new InvalidOperationException($"Unable to find object property for schema property '{property.SerializedName}' in schema {DefaultName}");
             }
 
             return objectProperty;

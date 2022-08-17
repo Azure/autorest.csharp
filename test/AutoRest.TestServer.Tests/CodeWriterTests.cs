@@ -57,7 +57,7 @@ a
         }
 
         [Test]
-        public void VariableNameNotReusedWhenUsedInChiledScope()
+        public void VariableNameNotReusedWhenUsedInChildScope()
         {
             var codeWriter = new CodeWriter();
             var cwd1 = new CodeWriterDeclaration("a");

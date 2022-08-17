@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             _context = context;
             ClientBuilder = clientBuilder;
-            ProtocolMethods = GetProtocolMethods(inputClient, clientBuilder, context).ToList();
             Fields = ClientFields.CreateForRestClient(Parameters);
+            ProtocolMethods = GetProtocolMethods(inputClient, context).ToList();
         }
 
         protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
@@ -35,8 +35,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var operation in InputClient.Operations)
             {
                 var headerModel = _context.Library.FindHeaderModel(operation);
-                var accessibility = operation.Accessibility ?? "public";
-                requestMethods.Add(operation, ClientBuilder.BuildMethod(operation, headerModel, accessibility));
+                requestMethods.Add(operation, ClientBuilder.BuildMethod(operation, headerModel));
             }
 
             return requestMethods;
@@ -51,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
             return parameters;
         }
 
-        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(InputClient inputClient, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
         {
             // At least one protocol method is found in the config for this operationGroup
             if (!inputClient.Operations.Any(operation => IsProtocolMethodExists(operation, inputClient, context)))
@@ -64,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(m => m.Operation)
                 .Where(operation => IsProtocolMethodExists(operation, inputClient, context));
 
-            return LowLevelClient.BuildMethods(restClientBuilder, operations, GetClientName(inputClient, context));
+            return LowLevelClient.BuildMethods(_context.TypeFactory, operations, Fields, GetClientName(inputClient, context), false);
         }
 
         private static string GetClientName(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)

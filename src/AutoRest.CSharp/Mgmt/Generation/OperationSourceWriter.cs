@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     if (_isReturningResource)
                     {
-                        _writer.WriteFieldDeclaration(_opSource.ArmClientField);
+                        _writer.WriteField(_opSource.ArmClientField);
 
                         if (_operationIdMappings is not null)
                         {

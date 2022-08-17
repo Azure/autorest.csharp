@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ResourceMockTestWriter : MgmtMockTestBaseWriter<Resource>
     {
-        public ResourceMockTestWriter(CodeWriter writer, MgmtMockTestProvider<Resource> resourceMockTest) : base(writer, resourceMockTest)
+        public ResourceMockTestWriter(MgmtMockTestProvider<Resource> resourceMockTest) : base(resourceMockTest)
         {
         }
 
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             _writer.Line($"// Example: {testCase.Name}");
 
             _writer.Line();
-            var resourceName = WriteGetResource(testCase.Carrier, testCase);
+            var resourceName = WriteGetResource(testCase.Carrier, testCase, GetArmClientExpression);
 
             WriteTestOperation(resourceName, testCase);
         }

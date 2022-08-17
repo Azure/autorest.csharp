@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -13,7 +14,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ResourceCollectionMockTestWriter : MgmtMockTestBaseWriter<ResourceCollection>
     {
-        public ResourceCollectionMockTestWriter(CodeWriter writer, MgmtMockTestProvider<ResourceCollection> resourceCollectionTest) : base(writer, resourceCollectionTest)
+        public ResourceCollectionMockTestWriter(MgmtMockTestProvider<ResourceCollection> resourceCollectionTest) : base(resourceCollectionTest)
         {
         }
 
@@ -21,19 +22,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             _writer.Line($"// Example: {testCase.Name}");
 
-            var parents = This.Target.Resource.Parent();
-            // TODO -- find a way to determine which parent to use. Only for prototype, here we use the first
-            var parent = parents.First();
-
             _writer.Line();
-            var collectionName = WriteGetCollection(parent, testCase);
+            var collectionName = WriteGetCollection(testCase);
 
             WriteTestOperation(collectionName, testCase);
         }
 
-        protected CodeWriterDeclaration WriteGetCollection(MgmtTypeProvider parent, MockTestCase testCase)
+        protected CodeWriterDeclaration WriteGetCollection(MockTestCase testCase)
         {
-            var parentVar = WriteGetResource(parent, testCase);
+            var parent = testCase.Parent;
+            Debug.Assert(parent is not null);
+            var parentVar = WriteGetResource(parent, testCase, GetArmClientExpression);
 
             // now we have the parent resource, get the collection from that resource
             // TODO -- we might should look this up inside the code project for correct method name

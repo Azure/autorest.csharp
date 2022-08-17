@@ -5,6 +5,7 @@
  "ApiVersions": [
   "1.0.0"
  ],
+ "Enums": [],
  "Models": [
   {
    "$id": "2",
