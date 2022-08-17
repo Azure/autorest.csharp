@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class LongRunningInterimOperation
     {
-        public LongRunningInterimOperation(CSharpType returnType, string methodName)
+        public LongRunningInterimOperation(CSharpType returnType, Resource? resource, string methodName)
         {
             ReturnType = returnType;
             BaseClassType = new CSharpType(typeof(ArmOperation<>), returnType);
@@ -24,17 +24,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             StateLockType = new CSharpType(typeof(AsyncLockWithValue<>), returnType);
             ValueTaskType = new CSharpType(typeof(ValueTask<>), returnType);
             ResponseType = new CSharpType(typeof(Response<>), returnType);
-            OperationType = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation<{returnType.Name}>";
-            var returnTypeName = returnType.Name;
-            if (returnTypeName.EndsWith("Resource"))
-            {
-                returnTypeName = returnTypeName.Substring(0, returnTypeName.Length - "Resource".Length);
-            }
-            else if (returnTypeName.EndsWith("Data"))
-            {
-                returnTypeName = returnTypeName.Substring(0, returnTypeName.Length - "Data".Length);
-            }
-            TypeName = $"{returnTypeName}{methodName}Operation";
+            var trimmedNamespace = MgmtContext.Context.DefaultNamespace.Split('.').Last();
+            OperationType = $"{trimmedNamespace}ArmOperation<{returnType.Name}>";
+            var resourceName = resource != null ? resource.ResourceName : $"{trimmedNamespace}Extensions";
+            TypeName = $"{resourceName}{methodName}Operation";
             var targetSchema = new ObjectSchema()
             {
                 Language = new Languages()

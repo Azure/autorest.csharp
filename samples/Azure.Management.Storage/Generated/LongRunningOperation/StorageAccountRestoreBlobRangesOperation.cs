@@ -16,7 +16,7 @@ using Azure.ResourceManager;
 
 namespace Azure.Management.Storage
 {
-    public class BlobRestoreStatusRestoreBlobRangesOperation : ArmOperation<BlobRestoreStatus>
+    public class StorageAccountRestoreBlobRangesOperation : ArmOperation<BlobRestoreStatus>
     {
         private readonly StorageArmOperation<BlobRestoreStatus> _operation;
 
@@ -26,12 +26,12 @@ namespace Azure.Management.Storage
 
         private readonly Response _interimResponse;
 
-        /// <summary> Initializes a new instance of BlobRestoreStatusRestoreBlobRangesOperation for mocking. </summary>
-        protected BlobRestoreStatusRestoreBlobRangesOperation()
+        /// <summary> Initializes a new instance of StorageAccountRestoreBlobRangesOperation for mocking. </summary>
+        protected StorageAccountRestoreBlobRangesOperation()
         {
         }
 
-        internal BlobRestoreStatusRestoreBlobRangesOperation(IOperationSource<BlobRestoreStatus> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal StorageAccountRestoreBlobRangesOperation(IOperationSource<BlobRestoreStatus> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new StorageArmOperation<BlobRestoreStatus>(source, clientDiagnostics, pipeline, request, response, finalStateVia);
             _operationSource = source;

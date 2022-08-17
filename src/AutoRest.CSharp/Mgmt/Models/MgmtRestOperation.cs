@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
@@ -171,23 +172,25 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private LongRunningInterimOperation? GetInterimOperation()
         {
-            if (!IsLongRunningOperation)
+            if (!IsLongRunningOperation || IsFakeLongRunningOperation)
                 return null;
 
-            if (MgmtReturnType is null)
-                return null;
-
-            if (IsFakeLongRunningOperation)
-                return null;
-
-            if (Configuration.MgmtConfiguration.EnableLroInterimStatus.Contains(OperationId))
+            if (Operation.IsInterimLongRunningStateEnabled)
             {
-                var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Name);
+                if (MgmtReturnType is null)
+                    throw new InvalidOperationException($"The interim state is not supported when {Name} is a long running operation but has no return type.");
+
+                ImmutableHashSet<Schema?> schemas = Operation.Responses.Select(r => r.ResponseSchema).ToImmutableHashSet();
+                if (schemas.Count() != 1)
+                    throw new NotImplementedException($"The interim state feature is not implemented when {Name} is a long running operation but has multiple return schemas.");
+
+                var interimOperation = new LongRunningInterimOperation(MgmtReturnType, Resource, Name);
                 MgmtContext.Library.InterimOperations.Add(interimOperation);
                 return interimOperation;
             }
             return null;
         }
+
         private CSharpType? GetFinalResponse()
         {
             var finalSchema = Operation.LongRunningFinalResponse.ResponseSchema;
