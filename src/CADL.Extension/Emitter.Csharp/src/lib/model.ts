@@ -329,7 +329,7 @@ export function getInputType(
             extensibleEnum = {
                 Name: m.name,
                 Namespace: e.namespace?.name,
-                Accessibility: "", //TODO: need to add accessibility
+                Accessibility: "public",
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
@@ -374,7 +374,7 @@ export function getInputType(
             enumType = {
                 Name: e.name,
                 Namespace: e.namespace?.name,
-                Accessibility: "", //TODO: need to add accessibility
+                Accessibility: "public",
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
