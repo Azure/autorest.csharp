@@ -34,9 +34,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [TestCaseSource(nameof(InputPrimitiveCollectionPropertiesCase))]
         public void InputPrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
-            // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
+            // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-basic/main.cadl#L16-L24
             var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", InputModelTypeUsage.Input,
+                new InputModelType("InputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Input model with collection properties", InputModelTypeUsage.Input,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredStringList", "requiredStringList", "Required collection of strings, illustrating a collection of reference types.", new InputListType("requiredStringList", InputPrimitiveType.String), true, false, false),
                         new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32), true, false, false),
@@ -264,13 +264,14 @@ using Azure.Core;
 
 namespace Cadl.TestServer.CollectionPropertiesBasic.Models
 {
-public partial class RoundTripModel
+/// <summary> Input model with collection properties. </summary>
+public partial class InputModel
 {
-/// <summary> Initializes a new instance of RoundTripModel. </summary>
+/// <summary> Initializes a new instance of InputModel. </summary>
 /// <param name=""requiredStringList""> Required collection of strings, illustrating a collection of reference types. </param>
 /// <param name=""requiredIntList""> Required collection of ints, illustrating a collection of value types. </param>
 /// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredStringList""/> or <paramref name=""requiredIntList""/> is null. </exception>
-public RoundTripModel(global::System.Collections.Generic.IEnumerable<string> requiredStringList,global::System.Collections.Generic.IEnumerable<int> requiredIntList)
+public InputModel(global::System.Collections.Generic.IEnumerable<string> requiredStringList,global::System.Collections.Generic.IEnumerable<int> requiredIntList)
 {
 global::Azure.Core.Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 global::Azure.Core.Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
@@ -299,7 +300,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.CollectionPropertiesBasic.Models
 {
-public partial class RoundTripModel: global::Azure.Core.IUtf8JsonSerializable
+public partial class InputModel: global::Azure.Core.IUtf8JsonSerializable
 {
 void global::Azure.Core.IUtf8JsonSerializable.Write(global::System.Text.Json.Utf8JsonWriter writer)
 {

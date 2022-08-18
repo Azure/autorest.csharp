@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/input-basic/main.cadl
             var model = new ModelTypeProvider(
-                new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", InputModelTypeUsage.Input,
+                new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Input Model", InputModelTypeUsage.Input,
                     new List<InputModelProperty>{
                         new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, false, false),
                         new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, false, false)
@@ -126,6 +126,7 @@ using Azure.Core;
 
 namespace Cadl.TestServer.InputBasic
 {
+/// <summary> Input Model. </summary>
 public partial class InputModel
 {
 /// <summary> Initializes a new instance of InputModel. </summary>
