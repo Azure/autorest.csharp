@@ -14,6 +14,15 @@ pr:
     include:
     - src/CADL.Extension/
 
+variables:
+  - template: ../../eng/pipelines/templates/variables/globals.yml
+  - name: NodeVersion
+    value: '16.x'
+  - name: VAR_ARTIFACT_NAME
+    value: 'CadlCsharpEmitter'
+  - name: VAR_BUILD_ARTIFACT_STAGING_DIRECTORY
+    value: $(Build.ArtifactStagingDirectory)
+
 stages:
   - stage: 'Build_and_Test'
     jobs:
@@ -22,7 +31,7 @@ stages:
         steps:
         - task: NodeTool@0
           inputs:
-            versionSpec: 16.14.2
+            versionSpec: '$(NodeVersion)'
           displayName: Install Node.js
         - task: Npm@1
           displayName: 'Install Dependencies for CADL csharp'
@@ -40,15 +49,53 @@ stages:
           inputs:
             command: pack
             workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-      - job: 'Unit_Test'
-        timeoutInMinutes: 120
-        steps:
-        - bash: |
-            npm install
-            npm run build
-            npm pack
-          displayName: 'Install package'
-          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-        - pwsh: .\eng\CadlGenerate.ps1
+        - pwsh: ./eng/CaldEmitterUT.ps1
           displayName: 'Unit_Test for CADL emitter'
+          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)'
+            ArtifactName: '$(VAR_ARTIFACT_NAME)'
+            publishLocation: 'Container'
+  - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+    - stage: 'Release'
+      dependsOn: Build_and_Test
+      condition: succeeded()
+      jobs:
+      - job: 'approve'
+        pool: server
+        steps:
+        - task: ManualValidation@0
+          inputs:
+            notifyUsers: 'Click to approve if it''s an expected public release.'
+      - job: 'release'
+        dependsOn: approve
+        condition: and(succeeded(), ne(variables['USER_SKIP_PUBLIC_RELEASE'], 'true'))
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '$(NodeVersion)'
+          displayName: 'Install Node.js'
+
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: '$(VAR_ARTIFACT_NAME)'
+            downloadPath: '$(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)'
+
+        - script: |
+            echo -e "\e[32m[$(date -u)] LOG: Ensure npm is installed"
+            sudo npm install -g npm@6.14.16 || { echo 'npm install failed' ; exit 1; }
+            sudo npm install -g pnpm || { echo 'pnpm install failed' ; exit 1; }
+
+            echo -e "\e[32m[$(date -u)] LOG: publish the package"
+            echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" >> ~/.npmrc
+            for file in $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/$(VAR_ARTIFACT_NAME)/$(VAR_ARTIFACT_NAME)/*.tgz
+            do
+              echo -e "\e[32m[$(date -u)] LOG: File: $file"
+              npm publish $file --access public || { echo 'publish $file failed' ; }
+            done
+            rm ~/.npmrc || { echo 'rm ~/.npmrc failed' ; exit 1; }
+          displayName: Publish
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
