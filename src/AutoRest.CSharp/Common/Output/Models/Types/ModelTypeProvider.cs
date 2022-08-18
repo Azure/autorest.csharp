@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType ||
-                    (!inputModel.Usage.HasFlag(InputModelTypeUsage.Output) && inputModelProperty.IsRequired)
+                    (inputModel.Usage == InputModelTypeUsage.Input && inputModelProperty.IsRequired)
                     ? Public | ReadOnly
                     : Public;
                 var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var valueType = typeFactory.CreateType(property.Type);
 
-            if (!modelUsage.HasFlag(InputModelTypeUsage.Input) ||
+            if (modelUsage == InputModelTypeUsage.Output ||
                 property.IsReadOnly)
             {
                 valueType = TypeFactory.GetOutputType(valueType);
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
-            if (!usage.HasFlag(InputModelTypeUsage.Output))
+            if (usage == InputModelTypeUsage.Input)
             {
                 serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
                     publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
