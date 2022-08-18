@@ -7,42 +7,66 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class BaseResource : MgmtTypeProvider
     {
-        public BaseResource(string resourceName) : base(resourceName)
-        {
-        }
+        /// <summary>
+        /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
+        /// </summary>
+        public ResourceData ResourceData { get; }
 
-        internal void SetDerivedResources(IEnumerable<Resource> derivedResources)
+        public BaseResource(string resourceName, IEnumerable<Resource> derivedResources) : base(resourceName)
         {
             DerivedResources = derivedResources;
+            ResourceData = derivedResources.First().ResourceData;
         }
 
-        public IEnumerable<Resource> DerivedResources { get; private set; } = Enumerable.Empty<Resource>();
+        public IEnumerable<Resource> DerivedResources { get; private set; }
 
         public override CSharpType? BaseType => typeof(ArmResource);
 
         public override FormattableString Description => $"TODO";
 
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= EnsureDefaultName();
+        protected override string DefaultName => _defaultName ??= ResourceName.AddResourceSuffixToResourceName();
 
-        private string EnsureDefaultName()
+        protected override ConstructorSignature? EnsureArmClientCtor()
         {
-            // TODO -- read the name from configuration
-            var defaultName = ResourceName.AddResourceSuffixToResourceName();
-            var isNameCollidedWithDerived = DerivedResources.Any(resource => resource.Type.Name.Equals(defaultName, StringComparison.OrdinalIgnoreCase));
+            return new ConstructorSignature(
+              Name: Type.Name,
+              null,
+              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Modifiers: Internal,
+              Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
+              Initializer: new(
+                  isBase: true,
+                  arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
+        }
 
-            return isNameCollidedWithDerived ? $"Base{defaultName}" : defaultName;
+        protected override ConstructorSignature? EnsureResourceDataCtor()
+        {
+            return new ConstructorSignature(
+                Name: Type.Name,
+                null,
+                Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                Modifiers: Internal,
+                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                Initializer: new(
+                    IsBase: false,
+                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", Resource.ResourceDataIdExpression($"{ResourceDataParameter.Name:I}", ResourceData) }));
         }
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
             return Enumerable.Empty<MgmtClientOperation>();
         }
+
+        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
     }
 }

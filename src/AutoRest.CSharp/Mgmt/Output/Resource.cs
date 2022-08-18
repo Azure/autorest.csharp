@@ -107,15 +107,25 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
-            return new ConstructorSignature(
-                Name: Type.Name,
-                null,
-                Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
-                Modifiers: Internal,
-                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
-                Initializer: new(
-                    IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+            return BaseResource == null ?
+                new ConstructorSignature(
+                    Name: Type.Name,
+                    null,
+                    Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                    Modifiers: Internal,
+                    Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                    Initializer: new(
+                        IsBase: false,
+                        Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}", ResourceData) })) :
+                new ConstructorSignature(
+                    Name: Type.Name,
+                    null,
+                    Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                    Modifiers: Internal,
+                    Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                    Initializer: new(
+                        IsBase: true,
+                        Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", $"{ResourceDataParameter.Name:I}" }));
         }
 
         public override CSharpType? BaseType => BaseResource != null ? BaseResource.Type : typeof(ArmResource);
@@ -126,7 +136,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
         {
-            yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+            if (BaseResource == null)
+                yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
@@ -419,9 +430,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                     Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
         }
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        public static FormattableString ResourceDataIdExpression(FormattableString dataExpression, ResourceData data)
         {
-            var typeOfId = ResourceData.TypeOfId;
+            var typeOfId = data.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
                 return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";

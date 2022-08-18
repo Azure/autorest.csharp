@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
@@ -29,6 +30,56 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);
             _customMethods.Add(nameof(WriteSetTagsBody), WriteSetTagsBody);
             _customMethods.Add(nameof(WriteRemoveTagBody), WriteRemoveTagBody);
+        }
+
+        protected override void WriteCtors()
+        {
+            if (This.IsStatic)
+                return;
+
+            if (This.MockingCtor is not null)
+            {
+                _writer.WriteMethodDocumentation(This.MockingCtor);
+                using (_writer.WriteMethodDeclaration(This.MockingCtor))
+                {
+                }
+            }
+
+            _writer.Line();
+            if (This.ResourceDataCtor is not null)
+            {
+                _writer.WriteMethodDocumentation(This.ResourceDataCtor);
+                using (_writer.WriteMethodDeclaration(This.ResourceDataCtor))
+                {
+                    if (This.BaseResource == null)
+                    {
+                        _writer.Line($"HasData = true;");
+                        _writer.Line($"_data = {This.DefaultResource!.ResourceDataParameter.Name};");
+                    }
+                }
+            }
+
+            _writer.Line();
+            if (This.ArmClientCtor is not null)
+            {
+                _writer.Line();
+                _writer.WriteMethodDocumentation(This.ArmClientCtor);
+                using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
+                {
+                    foreach (var param in This.ExtraConstructorParameters)
+                    {
+                        _writer.Line($"_{param.Name} = {param.Name};");
+                    }
+
+                    foreach (var set in This.UniqueSets)
+                    {
+                        WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                    }
+                    if (This.CanValidateResourceType)
+                        WriteDebugValidate();
+                }
+            }
+            _writer.Line();
         }
 
         protected override void WriteStaticMethods()
@@ -79,22 +130,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
-            _writer.Line($"public virtual bool HasData {{ get; }}");
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
-            _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
-            using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
+
+            // only writes these when there is not a base resource. When there is a base resource, these are moved to the base resource
+            if (This.BaseResource == null)
             {
-                using (_writer.Scope($"get"))
+                _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
+                _writer.Line($"public virtual bool HasData {{ get; }}");
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
+                _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
+                using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
                 {
-                    _writer.Line($"if (!HasData)");
-                    _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
-                    _writer.Line($"return _data;");
+                    using (_writer.Scope($"get"))
+                    {
+                        _writer.Line($"if (!HasData)");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
+                        _writer.Line($"return _data;");
+                    }
                 }
+
+                _writer.Line();
             }
 
-            _writer.Line();
             WriteStaticValidate($"ResourceType");
         }
 

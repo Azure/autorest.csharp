@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Sample
     /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineExtensionResource method.
     /// Otherwise you can get one from its parent resource <see cref="VirtualMachineResource" /> using the GetVirtualMachineExtension method.
     /// </summary>
-    public partial class VirtualMachineExtensionResource : ArmResource
+    public partial class VirtualMachineExtensionResource : BaseVirtualMachineExtensionResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineExtensionResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmName, string vmExtensionName)
@@ -35,7 +35,6 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _virtualMachineExtensionClientDiagnostics;
         private readonly VirtualMachineExtensionsRestOperations _virtualMachineExtensionRestClient;
-        private readonly VirtualMachineExtensionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionResource"/> class for mocking. </summary>
         protected VirtualMachineExtensionResource()
@@ -45,7 +44,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : this(client, data.Id)
+        internal VirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : base(client, data)
         {
             HasData = true;
             _data = data;
@@ -66,21 +65,6 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines/extensions";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineExtensionData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

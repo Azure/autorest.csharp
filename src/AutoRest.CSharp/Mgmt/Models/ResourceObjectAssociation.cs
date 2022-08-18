@@ -18,17 +18,19 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public ResourceCollection? ResourceCollection { get; }
 
-        public BaseResource? BaseResource { get; }
-
-        public ResourceObjectAssociation(ResourceTypeSegment resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection, BaseResource? baseResource)
+        private ResourceObjectAssociation(ResourceTypeSegment resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
         {
             ResourceType = resourceType;
             ResourceData = resourceData;
             Resource = resource;
             ResourceCollection = resourceCollection;
-            BaseResource = baseResource;
-            Resource.ResourceCollection = resourceCollection;
-            Resource.BaseResource = baseResource;
+        }
+
+        public static ResourceObjectAssociation CreateAssociation(ResourceTypeSegment resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
+        {
+            resource.ResourceCollection = resourceCollection;
+
+            return new ResourceObjectAssociation(resourceType, resourceData, resource, resourceCollection);
         }
     }
 }
