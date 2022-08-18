@@ -7,7 +7,7 @@
 
 using System;
 
-namespace CadlFirstTest.Models
+namespace CadlFirstTest
 {
     internal static partial class SimpleEnumExtensions
     {

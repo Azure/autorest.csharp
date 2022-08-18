@@ -14,12 +14,11 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
-    /// <summary> The Demo2 service client. </summary>
-    public partial class Demo2Client
+    /// <summary> This is a sample cadl project. </summary>
+    public partial class CadlFirstTestClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,219 +26,46 @@ namespace CadlFirstTest
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Demo2Client for mocking. </summary>
-        protected Demo2Client()
+        /// <summary> Initializes a new instance of CadlFirstTestClient for mocking. </summary>
+        protected CadlFirstTestClient()
         {
         }
 
-        /// <summary> Initializes a new instance of Demo2Client. </summary>
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public Demo2Client(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new DemoHelloworldClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint) : this(endpoint, new CadlfirsttestClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of Demo2Client. </summary>
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public Demo2Client(Uri endpoint, string apiVersion, DemoHelloworldClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint, CadlfirsttestClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-            options ??= new DemoHelloworldClientOptions();
+            options ??= new CadlfirsttestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
-        /// <param name="input"> The RoundTripModel to use. </param>
+        /// <summary> top level method. </summary>
+        /// <param name="action"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<Response<Thing>> HelloAgainAsync(RoundTripModel input, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        public virtual async Task<Response<Thing>> TopActionValueAsync(string action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            Argument.AssertNotNull(action, nameof(action));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await HelloAgainAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <param name="input"> The RoundTripModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual Response<Thing> HelloAgain(RoundTripModel input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = HelloAgain(input.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call HelloAgainAsync with required request content and parse the result.
-        /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new Demo2Client(endpoint, "<apiVersion>");
-        /// 
-        /// var data = new {
-        ///     requiredString = "<requiredString>",
-        ///     requiredInt = 1234,
-        ///     requiredCollection = new[] {
-        ///         "1"
-        ///     },
-        ///     requiredDictionary = new {
-        ///         key = "1",
-        ///     },
-        ///     requiredModel = new {
-        ///         name = "<name>",
-        ///     },
-        /// };
-        /// 
-        /// Response response = await client.HelloAgainAsync(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RoundTripModel</c>:
-        /// <code>{
-        ///   requiredString: string, # Required. Required string, illustrating a reference type property.
-        ///   requiredInt: number, # Required. Required int, illustrating a value type property.
-        ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-        ///   requiredModel: {
-        ///     name: string, # Required.
-        ///   }, # Required. Required dictionary of enums
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual async Task<Response> HelloAgainAsync(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloAgainRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call HelloAgain with required request content and parse the result.
-        /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new Demo2Client(endpoint, "<apiVersion>");
-        /// 
-        /// var data = new {
-        ///     requiredString = "<requiredString>",
-        ///     requiredInt = 1234,
-        ///     requiredCollection = new[] {
-        ///         "1"
-        ///     },
-        ///     requiredDictionary = new {
-        ///         key = "1",
-        ///     },
-        ///     requiredModel = new {
-        ///         name = "<name>",
-        ///     },
-        /// };
-        /// 
-        /// Response response = client.HelloAgain(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RoundTripModel</c>:
-        /// <code>{
-        ///   requiredString: string, # Required. Required string, illustrating a reference type property.
-        ///   requiredInt: number, # Required. Required int, illustrating a value type property.
-        ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-        ///   requiredModel: {
-        ///     name: string, # Required.
-        ///   }, # Required. Required dictionary of enums
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Response HelloAgain(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloAgainRequest(content, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
+                Response response = await TopActionAsync(action, context).ConfigureAwait(false);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -249,15 +75,20 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> top level method. </summary>
+        /// <param name="action"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        public virtual Response<Thing> TopActionValue(string action, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
+            Argument.AssertNotNull(action, nameof(action));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloDemo2(context);
+                Response response = TopAction(action, context);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -267,16 +98,19 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> top level method. </summary>
+        /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call HelloDemo2Async and parse the result.
+        /// This sample shows how to call TopActionAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new Demo2Client(endpoint, "<apiVersion>");
+        /// var client = new CadlFirstTestClient(endpoint);
         /// 
-        /// Response response = await client.HelloDemo2Async();
+        /// Response response = await client.TopActionAsync("<action>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -294,13 +128,15 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
+        public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
+            Argument.AssertNotNull(action, nameof(action));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloDemo2Request(context);
+                using HttpMessage message = CreateTopActionRequest(action, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -310,16 +146,19 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> top level method. </summary>
+        /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call HelloDemo2 and parse the result.
+        /// This sample shows how to call TopAction with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new Demo2Client(endpoint, "<apiVersion>");
+        /// var client = new CadlFirstTestClient(endpoint);
         /// 
-        /// Response response = client.HelloDemo2();
+        /// Response response = client.TopAction("<action>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -337,13 +176,15 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response HelloDemo2(RequestContext context = null)
+        public virtual Response TopAction(string action, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
+            Argument.AssertNotNull(action, nameof(action));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloDemo2Request(context);
+                using HttpMessage message = CreateTopActionRequest(action, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -353,7 +194,133 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateHelloAgainRequest(RequestContent content, RequestContext context)
+        /// <summary> top level method2. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Thing>> TopAction2ValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await TopAction2Async(context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> top level method2. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Thing> TopAction2Value(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = TopAction2(context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> top level method2. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call TopAction2Async and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new CadlFirstTestClient(endpoint);
+        /// 
+        /// Response response = await client.TopAction2Async();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> TopAction2Async(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateTopAction2Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> top level method2. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call TopAction2 and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new CadlFirstTestClient(endpoint);
+        /// 
+        /// Response response = client.TopAction2();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response TopAction2(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateTopAction2Request(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateTopActionRequest(string action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -361,15 +328,14 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/partOfUri", false);
-            uri.AppendPath("/againHi", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
+            uri.AppendRaw("/", false);
+            uri.AppendPath("/top/", false);
+            uri.AppendPath(action, false);
             request.Uri = uri;
-            request.Content = content;
             return message;
         }
 
-        internal HttpMessage CreateHelloDemo2Request(RequestContext context)
+        internal HttpMessage CreateTopAction2Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -377,9 +343,8 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/partOfUri", false);
-            uri.AppendPath("/demoHi", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
+            uri.AppendRaw("/", false);
+            uri.AppendPath("/top2", false);
             request.Uri = uri;
             return message;
         }

@@ -24,10 +24,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case SchemaObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsExtendable:
+                case EnumType e when e.IsExtensible:
                     WriteExtendableEnum(writer, e);
                     break;
-                case EnumType e when !e.IsExtendable:
+                case EnumType e when !e.IsExtensible:
                     WriteEnum(writer, e);
                     break;
                 default:
@@ -288,13 +288,47 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
+            FormattableString binaryDataExtraDescription = property.Declaration.Type.IsFrameworkType &&
+                property.Declaration.Type.FrameworkType == typeof(BinaryData) ?
+                CreateBinaryDataExtraDescription() : $"";
             if (!string.IsNullOrWhiteSpace(property.Description))
             {
-                return $"{property.Description}";
+                return $"{property.Description}{binaryDataExtraDescription}";
             }
-            return property.CreateDefaultPropertyDescription(overrideName);
+            return $"{property.CreateDefaultPropertyDescription(overrideName)}{binaryDataExtraDescription}";
         }
 
+        private FormattableString CreateBinaryDataExtraDescription()
+        {
+            return $@".
+<para>
+To assign an object to this property use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
+</para>
+<para>
+To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromObjectAsJson(""foo"")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromString(""\""foo\"""")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromObjectAsJson(new {{ key = ""value"" }})</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+<item>
+<term>BinaryData.FromString(""{{\""key\"": \""value\""}}"")</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+</list>
+</para>";
+        }
         private string GetAbstract(SchemaObjectType schema)
         {
             // Limit this change to management plane to avoid data plane affected

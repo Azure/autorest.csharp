@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
-using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {
@@ -17,11 +16,11 @@ namespace CadlFirstTest
     public partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
-        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
-        /// <param name="requiredCollection"> Required collection of enums. </param>
-        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
-        /// <param name="requiredModel"> Required dictionary of enums. </param>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredCollection"></param>
+        /// <param name="requiredDictionary"></param>
+        /// <param name="requiredModel"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
         public RoundTripModel(string requiredString, int requiredInt, IEnumerable<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
@@ -37,11 +36,11 @@ namespace CadlFirstTest
             RequiredModel = requiredModel;
         }
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
-        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
-        /// <param name="requiredCollection"> Required collection of enums. </param>
-        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
-        /// <param name="requiredModel"> Required dictionary of enums. </param>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredCollection"></param>
+        /// <param name="requiredDictionary"></param>
+        /// <param name="requiredModel"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
         internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
@@ -57,19 +56,14 @@ namespace CadlFirstTest
             RequiredModel = requiredModel;
         }
 
-        /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
 
-        /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; set; }
 
-        /// <summary> Required collection of enums. </summary>
         public IList<SimpleEnum> RequiredCollection { get; }
 
-        /// <summary> Required dictionary of enums. </summary>
         public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
 
-        /// <summary> Required dictionary of enums. </summary>
         public Thing RequiredModel { get; set; }
     }
 }

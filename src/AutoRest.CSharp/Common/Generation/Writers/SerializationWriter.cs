@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case SchemaObjectType objectSchema:
                     WriteObjectSerialization(writer, objectSchema);
                     break;
-                case EnumType {IsExtendable: false} sealedChoiceSchema:
+                case EnumType {IsExtensible: false} sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
                     break;
             }
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
             => WriteObjectSerialization(writer, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, model.IncludeSerializer, model.IncludeDeserializer);
 
         public static void WriteModelSerialization(CodeWriter writer, ModelTypeProvider model)
-            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, true, true);
+            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, model.IncludeSerializer, model.IncludeDeserializer);
 
         private static void WriteObjectSerialization(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization? jsonSerialization, XmlObjectSerialization? xmlSerialization, bool isStruct, bool includeSerializer, bool includeDeserializer)
         {
