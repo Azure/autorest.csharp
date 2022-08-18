@@ -57,9 +57,11 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
     $outputPath = Join-Path $baseOutput "Generated"
     $outputPath = $outputPath -replace "\\", "/"
 
-    if (!$fast) {
+    if (!$fast) 
+    {
         #clean up
-        if (Test-Path $outputPath) {
+        if (Test-Path $outputPath) 
+        {
             Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
         }
         
