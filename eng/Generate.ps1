@@ -292,7 +292,9 @@ if ($reset -or $env:TF_BUILD)
 if (!$noBuild)
 {
     Invoke "dotnet build $autoRestPluginProject"
-    Invoke-CadlSetup
+    if (!$fast) {
+        Invoke-CadlSetup
+    }
 }
 
 $keys = $testProjectEntries.Keys | Sort-Object;
@@ -328,6 +330,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-Cadl $_.output $_.projectName $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel

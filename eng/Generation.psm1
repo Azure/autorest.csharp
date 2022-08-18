@@ -30,7 +30,7 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
     }
 
-    if ($fast -or ($projectName -eq "CadlFirstTest") -or ($projectName -eq "CadlPetStore"))
+    if ($fast)
     {
         $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
         $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
@@ -56,18 +56,22 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = Join-Path $baseOutput "Generated"
     $outputPath = $outputPath -replace "\\", "/"
-    #clean up
-    if (Test-Path $outputPath) {
-        Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+
+    if (!$fast) {
+        #clean up
+        if (Test-Path $outputPath) {
+            Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+        }
+        
+        # emit cadl json
+        $repoRootPath = Join-Path $PSScriptRoot ".."
+        $repoRootPath = Resolve-Path -Path $repoRootPath
+        Push-Location $repoRootPath
+        # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
+        $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+        Invoke $emitCommand
+        Pop-Location
     }
-    # emit cadl json
-    $repoRootPath = Join-Path $PSScriptRoot ".."
-    $repoRootPath = Resolve-Path -Path $repoRootPath
-    Push-Location $repoRootPath
-    # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
-    Invoke $emitCommand
-    Pop-Location
     
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
     $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
