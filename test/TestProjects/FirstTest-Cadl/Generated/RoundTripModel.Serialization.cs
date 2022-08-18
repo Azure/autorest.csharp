@@ -33,7 +33,7 @@ namespace CadlFirstTest
             foreach (var item in RequiredDictionary)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value.ToSerialString());
+                writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel");
@@ -75,7 +75,7 @@ namespace CadlFirstTest
                     Dictionary<string, ExtensibleEnum> dictionary = new Dictionary<string, ExtensibleEnum>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString().ToExtensibleEnum());
+                        dictionary.Add(property0.Name, new ExtensibleEnum(property0.Value.GetString()));
                     }
                     requiredDictionary = dictionary;
                     continue;

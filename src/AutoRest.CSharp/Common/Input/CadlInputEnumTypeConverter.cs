@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
-                    || reader.TryReadBoolean(nameof(InputEnumType.IsExtendable), ref isExtendable)
+                    || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
 

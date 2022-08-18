@@ -40,10 +40,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
 
-            var isExtendable = input.IsExtendable;
+            var isExtensible = input.IsExtensible;
             if (ExistingType != null)
             {
-                isExtendable = ExistingType.TypeKind switch
+                isExtensible = ExistingType.TypeKind switch
                 {
                     TypeKind.Enum => false,
                     TypeKind.Struct => true,
@@ -57,18 +57,18 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             ValueType = typeFactory.CreateType(input.EnumValueType);
             Description = input.Description;
-            IsExtendable = isExtendable;
+            IsExtensible = isExtensible;
         }
 
         private static string GetDefaultNamespace(string? ns, string defaultNamespace)
             => ns ?? (Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace);
 
         public CSharpType ValueType { get; }
-        public bool IsExtendable { get; }
+        public bool IsExtensible { get; }
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
-        protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
+        protected override TypeKind TypeKind => IsExtensible ? TypeKind.Struct : TypeKind.Enum;
 
         public IList<EnumTypeValue> Values => _values ??= BuildValues();
 
