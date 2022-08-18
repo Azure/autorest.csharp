@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
         }
 
-        public override CSharpType? BaseType => typeof(ArmResource);
+        public override CSharpType? BaseType => BaseResource != null ? BaseResource.Type : typeof(ArmResource);
 
         public override Resource? DefaultResource => this;
 
@@ -171,6 +171,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string? SingletonResourceIdSuffix { get; }
 
         public bool IsTaggable => ResourceData.IsTaggable;
+
+        /// <summary>
+        /// Finds the corresponding <see cref="BaseResource"/> of this <see cref="Resource"/>
+        /// </summary>
+        public BaseResource? BaseResource { get; internal set; }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>

@@ -432,6 +432,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<Resource>? _armResources;
         public IEnumerable<Resource> ArmResources => _armResources ??= RequestPathToResources.Values.Select(bag => bag.Resource).Distinct();
 
+        private IEnumerable<BaseResource>? _baseResources;
+        public IEnumerable<BaseResource> BaseResources => _baseResources ??= RequestPathToResources.Values.Select(bag => bag.BaseResource).WhereNotNull().Distinct();
+
         private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
         public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
@@ -544,6 +547,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
+                var isResourceWithSharedData = operationSets.Count > 1;
+                BaseResource? baseResource = null;
+                if (isResourceWithSharedData)
+                {
+                    baseResource = new BaseResource(resourceDataSchemaName);
+                }
+                var resourcesWithSameData = new List<Resource>();
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach ((var operationSet, var operations) in resourceOperationsList)
                 {
@@ -558,10 +568,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var resourceType = resourcePath.GetResourceType();
                         var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
                         var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
-                        resource.ResourceCollection = collection;
 
-                        requestPathToResources.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
+                        resourcesWithSameData.Add(resource);
+                        requestPathToResources.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection, baseResource));
                     }
+                }
+
+                if (baseResource != null)
+                {
+                    baseResource.SetDerivedResources(resourcesWithSameData);
                 }
             }
 

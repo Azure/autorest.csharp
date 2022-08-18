@@ -124,6 +124,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
+            foreach (var baseResource in MgmtContext.Library.BaseResources)
+            {
+                var codeWriter = new CodeWriter();
+                
+            }
+
             // write extension class
             if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
                 WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
