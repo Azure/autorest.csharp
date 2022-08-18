@@ -9,6 +9,7 @@ import {
     getServiceVersion,
     getSummary,
     ModelTypeProperty,
+    OperationType,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
@@ -39,7 +40,7 @@ import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
-import { getExternalDocs } from "./lib/decorators.js";
+import { getExternalDocs, getOperationId } from "./lib/decorators.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -140,28 +141,12 @@ function createModel(program: Program): any {
                 endPointParam = calServers[0].parameters[0];
             }
         }
-        const apiVersionParam: InputParameter = {
-            Name: "apiVersion",
-            NameInRequest: "apiVersion",
-            Description: "",
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Location: RequestLocation.Query,
-            IsRequired: true,
-            IsApiVersion: true,
-            IsContentType: false,
-            IsEndpoint: false,
-            IsResourceParameter: false,
-            SkipUrlEncoding: false,
-            Explode: false,
-            Kind: InputOperationParameterKind.Client
-        };
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            const groupName: string = operation.groupName;
+            const groupName: string = getOperationGroupName(
+                program,
+                operation.operation
+            );
             let client = getClient(clients, groupName);
             if (!client) {
                 const container = operation.container;
@@ -179,7 +164,6 @@ function createModel(program: Program): any {
                 program,
                 operation,
                 endPointParam,
-                apiVersionParam,
                 modelMap,
                 enumMap
             );
@@ -205,11 +189,36 @@ function createModel(program: Program): any {
     }
 }
 
+function getOperationGroupName(
+    program: Program,
+    operation: OperationType
+): string {
+    const explicitOperationId = getOperationId(program, operation);
+    if (explicitOperationId) {
+        const ids: string[] = explicitOperationId.split("_");
+        if (ids.length > 1) {
+            return ids.slice(0, -2).join("_");
+        }
+    }
+
+    if (operation.interface) {
+        return operation.interface.name;
+    }
+    let namespace = operation.namespace;
+    if (!namespace) {
+        namespace =
+            program.checker.getGlobalNamespaceType() ??
+            getServiceNamespace(program);
+    }
+
+    if (namespace) return namespace.name;
+    else return "";
+}
+
 function loadOperation(
     program: Program,
     operation: OperationDetails,
     endpoint: InputParameter | undefined = undefined,
-    apiVersion: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
@@ -226,14 +235,15 @@ function loadOperation(
 
     const parameters: InputParameter[] = [];
     if (endpoint) parameters.push(endpoint);
-    if (apiVersion) parameters.push(apiVersion);
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
+    
+    const bodyType = cadlParameters.bodyType;
+    const bodyParam = cadlParameters.bodyParameter;
 
-    const body = cadlParameters.body;
-    if (body) {
-        parameters.push(loadBodyParameter(program, body));
+    if (bodyType && bodyParam) {
+        parameters.push(loadBodyParameter(program, bodyParam));
     }
 
     const responses: OperationResponse[] = [];

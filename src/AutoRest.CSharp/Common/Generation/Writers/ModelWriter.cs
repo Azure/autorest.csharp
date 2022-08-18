@@ -24,10 +24,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case SchemaObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsExtendable:
+                case EnumType e when e.IsExtensible:
                     WriteExtendableEnum(writer, e);
                     break;
-                case EnumType e when !e.IsExtendable:
+                case EnumType e when !e.IsExtensible:
                     WriteEnum(writer, e);
                     break;
                 default:

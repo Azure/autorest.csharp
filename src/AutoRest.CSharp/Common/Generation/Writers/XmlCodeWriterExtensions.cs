@@ -373,7 +373,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"{nonNullable}.Deserialize{nonNullable.Name}({element})";
 
                 case EnumType clientEnum:
-                    return clientEnum.IsExtendable
+                    return clientEnum.IsExtensible
                         ? $"new {clientEnum.Type}({element}.Value)"
                         : (FormattableString)$"{element}.Value.To{clientEnum.Type:D}()";
 

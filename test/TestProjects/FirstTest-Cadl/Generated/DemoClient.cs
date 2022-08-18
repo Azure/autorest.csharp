@@ -14,12 +14,11 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
-    /// <summary> The Demo service client. </summary>
+    /// <summary> Hello world service. </summary>
     public partial class DemoClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -34,29 +33,26 @@ namespace CadlFirstTest
 
         /// <summary> Initializes a new instance of DemoClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public DemoClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new DemoHelloworldClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public DemoClient(Uri endpoint) : this(endpoint, new CadlfirsttestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of DemoClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public DemoClient(Uri endpoint, string apiVersion, DemoHelloworldClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public DemoClient(Uri endpoint, CadlfirsttestClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-            options ??= new DemoHelloworldClientOptions();
+            options ??= new CadlfirsttestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
+        /// <summary> Return hi. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Thing>> SayHiValueAsync(CancellationToken cancellationToken = default)
         {
@@ -75,6 +71,7 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> Return hi. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Thing> SayHiValue(CancellationToken cancellationToken = default)
         {
@@ -93,6 +90,7 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> Return hi. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -100,7 +98,7 @@ namespace CadlFirstTest
         /// This sample shows how to call SayHiAsync and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new DemoClient(endpoint, "<apiVersion>");
+        /// var client = new DemoClient(endpoint);
         /// 
         /// Response response = await client.SayHiAsync();
         /// 
@@ -136,6 +134,7 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> Return hi. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -143,7 +142,7 @@ namespace CadlFirstTest
         /// This sample shows how to call SayHi and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new DemoClient(endpoint, "<apiVersion>");
+        /// var client = new DemoClient(endpoint);
         /// 
         /// Response response = client.SayHi();
         /// 
@@ -187,9 +186,8 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/partOfUri", false);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/hello", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

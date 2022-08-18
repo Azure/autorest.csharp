@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using PetStore;
 
 namespace CadlPetStore
 {
@@ -19,7 +20,6 @@ namespace CadlPetStore
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -34,27 +34,23 @@ namespace CadlPetStore
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PetsClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new PetsClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public PetsClient(Uri endpoint) : this(endpoint, new PetsClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PetsClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="apiVersion"> The String to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PetsClient(Uri endpoint, string apiVersion, PetsClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public PetsClient(Uri endpoint, PetsClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
             options ??= new PetsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> delete. </summary>
@@ -108,7 +104,7 @@ namespace CadlPetStore
         /// This sample shows how to call DeleteAsync with required parameters.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// Response response = await client.DeleteAsync(1234);
         /// Console.WriteLine(response.Status);
@@ -140,7 +136,7 @@ namespace CadlPetStore
         /// This sample shows how to call Delete with required parameters.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// Response response = client.Delete(1234);
         /// Console.WriteLine(response.Status);
@@ -212,7 +208,7 @@ namespace CadlPetStore
         /// This sample shows how to call ReadAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// Response response = await client.ReadAsync(1234);
         /// 
@@ -261,7 +257,7 @@ namespace CadlPetStore
         /// This sample shows how to call Read with required parameters and parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// Response response = client.Read(1234);
         /// 
@@ -334,7 +330,7 @@ namespace CadlPetStore
         /// This sample shows how to call CreateAsync with required request content, and how to parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// var data = new {
         ///     name = "<name>",
@@ -350,7 +346,7 @@ namespace CadlPetStore
         /// This sample shows how to call CreateAsync with all request content, and how to parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// var data = new {
         ///     name = "<name>",
@@ -417,7 +413,7 @@ namespace CadlPetStore
         /// This sample shows how to call Create with required request content, and how to parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// var data = new {
         ///     name = "<name>",
@@ -433,7 +429,7 @@ namespace CadlPetStore
         /// This sample shows how to call Create with all request content, and how to parse the result.
         /// <code><![CDATA[
         /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PetsClient(endpoint, "<apiVersion>");
+        /// var client = new PetsClient(endpoint);
         /// 
         /// var data = new {
         ///     name = "<name>",
@@ -502,7 +498,6 @@ namespace CadlPetStore
             uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -518,7 +513,6 @@ namespace CadlPetStore
             uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -533,7 +527,6 @@ namespace CadlPetStore
             uri.Reset(_endpoint);
             uri.AppendRaw("/", false);
             uri.AppendPath("/pets", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;

@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case SchemaObjectType objectSchema:
                     WriteObjectSerialization(writer, objectSchema);
                     break;
-                case EnumType {IsExtendable: false} sealedChoiceSchema:
+                case EnumType {IsExtensible: false} sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
                     break;
             }

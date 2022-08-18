@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace CadlPetStore
+namespace PetStore
 {
     /// <summary> The Pet. </summary>
     public partial class Pet
