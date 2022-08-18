@@ -288,8 +288,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
-            FormattableString binaryDataExtraDescription = Configuration.AzureArm &&
-                property.Declaration.Type.IsFrameworkType &&
+            FormattableString binaryDataExtraDescription = property.Declaration.Type.IsFrameworkType &&
                 property.Declaration.Type.FrameworkType == typeof(BinaryData) ?
                 CreateBinaryDataExtraDescription() : $"";
             if (!string.IsNullOrWhiteSpace(property.Description))
