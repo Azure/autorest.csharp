@@ -46,9 +46,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                WriteFieldsInitialization(writer, signature, model);
+                var initializedFields = WriteFieldsInitialization(writer, signature, model);
                 // TODO: Add IReadOnlyDictionary
-                foreach (var field in model.Fields.Where(f => TypeFactory.IsReadOnlyList(f.Type)))
+                foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f) && TypeFactory.IsReadOnlyList(f.Type)))
                 {
                     writer.Line($"{field.Name:I} = new List<{field.Type.Arguments[0]}>(0).AsReadOnly();");
                 }
@@ -64,10 +64,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteFieldsInitialization(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
+        private static ISet<FieldDeclaration> WriteFieldsInitialization(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
         {
             writer.WriteParametersValidation(signature.Parameters);
             writer.Line();
+
+            var initializedFields = new HashSet<FieldDeclaration>();
             foreach (var parameter in signature.Parameters)
             {
                 var field = model.GetFieldByParameterName(parameter.Name);
@@ -75,7 +77,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     .Append($"{field.Name:I} = {parameter.Name:I}")
                     .WriteConversion(parameter.Type, field.Type)
                     .LineRaw(";");
+                initializedFields.Add(field);
             }
+            return initializedFields;
         }
     }
 }
