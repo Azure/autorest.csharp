@@ -69,10 +69,16 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
-        # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-        $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
-        Invoke $emitCommand
-        Pop-Location
+        Try
+        {
+            # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
+            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+            Invoke $emitCommand    
+        }
+        Finally 
+        {
+            Pop-Location
+        }        
     }
     
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
@@ -87,27 +93,41 @@ function Invoke-CadlSetup()
     $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
     $emitterPath = Resolve-Path -Path $emitterPath
     Push-Location $emitterPath
-    npm ci
-    npm run build
-    npm pack
-    Pop-Location
+    Try 
+    {
+        npm ci
+        npm run build
+        npm pack
+    }
+    Finally 
+    {
+        Pop-Location
+    }
 
     # install cadl and emitter
     $repoRoot = Join-Path $PSScriptRoot ".."
     $repoRoot = Resolve-Path $repoRoot
     Push-Location $repoRoot
-    npm ci
-    $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
-    if ($packages) {
-        $package = $packages;
-        if ($packages.count -gt 1) {
-            $package = $packages[0]
+    Try 
+    {
+        npm ci
+        $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
+        if ($packages) 
+        {
+            $package = $packages;
+            if ($packages.count -gt 1)
+            {
+                $package = $packages[0]
+            }
+            npm install $package
         }
-        npm install $package
+        git checkout $repoRoot/package.json
+        git checkout $repoRoot/package-lock.json
     }
-    git checkout $repoRoot/package.json
-    git checkout $repoRoot/package-lock.json
-    Pop-Location
+    Finally 
+    {
+        Pop-Location
+    }
 }
 function Get-AutoRestProject()
 {
