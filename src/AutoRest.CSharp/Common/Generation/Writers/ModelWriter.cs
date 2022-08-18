@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreateBinaryDataExtraDescription()
         {
-            return $@".
+            return $@"
 <para>
 To assign an object to this property use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>

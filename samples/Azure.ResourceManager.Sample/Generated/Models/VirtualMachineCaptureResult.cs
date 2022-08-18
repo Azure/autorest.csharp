@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Sample.Models
         public string ContentVersion { get; }
         /// <summary>
         /// parameters of the captured virtual machine
-        /// Serialized Name: VirtualMachineCaptureResult.parameters.
+        /// Serialized Name: VirtualMachineCaptureResult.parameters
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

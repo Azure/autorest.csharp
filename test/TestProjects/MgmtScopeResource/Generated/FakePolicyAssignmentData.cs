@@ -72,7 +72,7 @@ namespace MgmtScopeResource
         /// <summary> This message will be part of response in case of policy violation. </summary>
         public string Description { get; set; }
         /// <summary>
-        /// The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs..
+        /// The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
