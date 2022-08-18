@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {

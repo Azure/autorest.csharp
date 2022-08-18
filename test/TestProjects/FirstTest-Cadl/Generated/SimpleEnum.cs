@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace CadlFirstTest.Models
+namespace CadlFirstTest
 {
     /// <summary> Simple enum. </summary>
     public enum SimpleEnum

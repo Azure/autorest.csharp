@@ -1,6 +1,7 @@
 {
  "$id": "1",
- "Name": "demo.helloworld",
+ "Name": "cadlfirsttest",
+ "Description": "This is a sample cadl project.",
  "ApiVersions": [
   "0.1.0"
  ],
@@ -8,7 +9,7 @@
   {
    "$id": "2",
    "Name": "SimpleEnum",
-   "Namespace": "HelloWorld",
+   "Namespace": "CadlFirstTest",
    "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -34,7 +35,7 @@
   {
    "$id": "6",
    "Name": "ExtensibleEnum",
-   "Namespace": "HelloWorld",
+   "Namespace": "CadlFirstTest",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -62,7 +63,7 @@
   {
    "$id": "10",
    "Name": "Thing",
-   "Namespace": "HelloWorld",
+   "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Properties": [
     {
@@ -85,7 +86,7 @@
   {
    "$id": "13",
    "Name": "RoundTripModel",
-   "Namespace": "HelloWorld",
+   "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Properties": [
     {
@@ -157,26 +158,59 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
+    },
+    {
+     "$id": "23",
+     "Name": "requiredModel",
+     "SerializedName": "requiredModel",
+     "Description": "",
+     "Type": {
+      "$ref": "10"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "23",
-   "Name": "HelloWorld",
+   "$id": "24",
+   "Name": "CadlFirstTest",
+   "Description": "This is a sample cadl project.",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "25",
      "Name": "topAction",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "26",
+       "Name": "firstTestUrl",
+       "NameInRequest": "firstTestUrl",
+       "Type": {
+        "$id": "27",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "28",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "26",
+        "$id": "29",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -194,7 +228,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "30",
        "StatusCodes": [
         200
        ],
@@ -206,18 +240,22 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{firstTestUrl}/",
      "Path": "/top/{action}",
      "BufferResponse": false
     },
     {
-     "$id": "28",
+     "$id": "31",
      "Name": "topAction2",
      "Description": "top level method2",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "26"
+      }
+     ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -229,28 +267,32 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{firstTestUrl}/",
      "Path": "/top2",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "33"
    }
   },
   {
-   "$id": "31",
+   "$id": "34",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "32",
+     "$id": "35",
      "Name": "sayHi",
      "Description": "Return hi",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "26"
+      }
+     ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "36",
        "StatusCodes": [
         200
        ],
@@ -262,26 +304,29 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{firstTestUrl}/",
      "Path": "/hello",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "37"
    }
   },
   {
-   "$id": "35",
+   "$id": "38",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "36",
+     "$id": "39",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$id": "37",
+       "$ref": "26"
+      },
+      {
+       "$id": "40",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -300,7 +345,7 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
@@ -312,18 +357,22 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{firstTestUrl}/",
      "Path": "/againHi",
      "BufferResponse": false
     },
     {
-     "$id": "39",
+     "$id": "42",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "26"
+      }
+     ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "43",
        "StatusCodes": [
         200
        ],
@@ -335,17 +384,17 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{firstTestUrl}/",
      "Path": "/demoHi",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "41"
+    "$id": "44"
    }
   }
  ],
  "Auth": {
-  "$id": "42"
+  "$id": "45"
  }
 }

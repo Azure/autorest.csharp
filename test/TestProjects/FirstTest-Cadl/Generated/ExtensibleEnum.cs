@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace CadlFirstTest.Models
+namespace CadlFirstTest
 {
     /// <summary> Extensible enum. </summary>
     public readonly partial struct ExtensibleEnum : IEquatable<ExtensibleEnum>
