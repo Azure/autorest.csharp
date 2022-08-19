@@ -62,10 +62,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
-            string asyncText = isAsync ? "Async" : string.Empty;
-            string configureAwait = isAsync & !isPaging ? ".ConfigureAwait(false)" : string.Empty;
-            string awaitText = isAsync & !isPaging ? " await" : string.Empty;
-            _writer.Append($"return{awaitText} GetExtensionClient({This.ExtensionParameter.Name}).{signature.Name}{asyncText}(");
+            _writer.AppendRaw("return ")
+                .AppendRawIf("await ", isAsync && !isPaging)
+                .Append($"GetExtensionClient({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(1))
             {
@@ -73,7 +72,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.RemoveTrailingComma();
-            _writer.Line($"){configureAwait};");
+            _writer.AppendRaw(")")
+                .AppendRawIf(".ConfigureAwait(false)", isAsync && !isPaging)
+                .LineRaw(";");
         }
 
         protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
