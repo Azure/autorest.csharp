@@ -318,6 +318,15 @@ namespace MgmtScopeResource
             return managementGroupResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
+        private static ArmResourceExtensionClient GetExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ArmResourceExtensionClient(client, scope);
+            }
+            );
+        }
+
         private static ArmResourceExtensionClient GetExtensionClient(ArmResource armResource)
         {
             return armResource.GetCachedClient((client) =>
@@ -328,11 +337,12 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the method will apply against. </param>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
-        public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
+        public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetExtensionClient(armResource).GetFakePolicyAssignments();
+            return GetExtensionClient(client, scope).GetFakePolicyAssignments();
         }
 
         /// <summary>
@@ -340,15 +350,16 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the method will apply against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await client.GetFakePolicyAssignments(scope).GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -356,15 +367,16 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the method will apply against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return armResource.GetFakePolicyAssignments().Get(policyAssignmentName, cancellationToken);
+            return client.GetFakePolicyAssignments(scope).Get(policyAssignmentName, cancellationToken);
         }
 
         #region FakePolicyAssignmentResource

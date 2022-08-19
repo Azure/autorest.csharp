@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        private void WriteSingletonResourceGetMethod(Resource resource)
+        protected virtual void WriteSingletonResourceGetMethod(Resource resource)
         {
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteResourceCollectionGetMethod(Resource resource)
+        protected virtual void WriteResourceCollectionGetMethod(Resource resource)
         {
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(

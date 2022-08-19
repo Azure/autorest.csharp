@@ -42,13 +42,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return;
 
             _writer.Line();
-            string staticText = IsArmCore ? string.Empty : "static ";
-            FormattableString signatureParamText = IsArmCore ? (FormattableString)$"" : (FormattableString)$"{This.ExtensionParameter.Type} {This.ExtensionParameter.Name}";
-            using (_writer.Scope($"private {staticText}{This.ExtensionParameter.Type.Name}ExtensionClient GetExtensionClient({signatureParamText})"))
+            var extensionClientSignature = new MethodSignature(
+                "GetExtensionClient",
+                null,
+                null,
+                Private | Static,
+                This.ExtensionClient.Type,
+                null,
+                new[] { This.ExtensionParameter });
+            using (_writer.WriteMethodDeclaration(extensionClientSignature))
             {
                 using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
                 {
-                    _writer.Line($"return new {This.ExtensionParameter.Type.Name}ExtensionClient({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
+                    _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
                 }
                 _writer.Line($");");
             }
