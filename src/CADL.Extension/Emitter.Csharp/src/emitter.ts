@@ -268,7 +268,7 @@ function loadOperation(
                 : "",
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
-        BufferResponse: false
+        BufferResponse: true
     } as InputOperation;
 
     function loadOperationParameter(

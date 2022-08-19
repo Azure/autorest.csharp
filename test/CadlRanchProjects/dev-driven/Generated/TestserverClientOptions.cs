@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace dpg_customization_LowLevel
+namespace dev_driven_cadl
 {
     /// <summary> Client options for TestserverClient. </summary>
     public partial class TestserverClientOptions : ClientOptions

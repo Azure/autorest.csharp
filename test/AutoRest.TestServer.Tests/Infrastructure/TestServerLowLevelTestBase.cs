@@ -54,10 +54,26 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 {
                     await test(server.Host);
                 }
-                finally
+                catch (Exception ex)
                 {
-                    await server.DisposeAsync();
+                    try
+                    {
+                        await server.DisposeAsync();
+                    }
+                    catch (Exception disposeException)
+                    {
+                        throw new AggregateException(ex, disposeException);
+                    }
+
+                    throw;
                 }
+
+                await server.DisposeAsync();
+            }
+
+            if (types.Contains(TestServerType.TestServer))
+            {
+                await Test(test);
             }
         }
 

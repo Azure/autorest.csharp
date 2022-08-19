@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "dpg_customization_LowLevel",
+  "Namespace": "dev_driven_cadl",
   "LibraryName": null,
   "SharedSourceFolders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",

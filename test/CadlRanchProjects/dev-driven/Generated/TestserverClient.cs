@@ -13,12 +13,13 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Testserver;
 
-namespace dpg_customization_LowLevel
+namespace dev_driven_cadl
 {
     /// <summary> DPG Swagger that tests our ability to grow up. </summary>
     public partial class TestserverClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -26,19 +27,30 @@ namespace dpg_customization_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of TestserverClient. </summary>
-        public TestserverClient() : this(new TestserverClientOptions())
+        /// <summary> Initializes a new instance of TestserverClient for mocking. </summary>
+        protected TestserverClient()
         {
         }
 
         /// <summary> Initializes a new instance of TestserverClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public TestserverClient(TestserverClientOptions options)
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public TestserverClient(Uri endpoint) : this(endpoint, new TestserverClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of TestserverClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public TestserverClient(Uri endpoint, TestserverClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new TestserverClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get models that you will either return to end users as a raw body, or with a model added during grow up. </summary>
@@ -90,7 +102,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call GetModelAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new TestserverClient();
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new TestserverClient(endpoint);
         /// 
         /// Response response = await client.GetModelAsync("<mode>");
         /// 
@@ -137,7 +150,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call GetModel with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new TestserverClient();
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new TestserverClient(endpoint);
         /// 
         /// Response response = client.GetModel("<mode>");
         /// 
@@ -213,7 +227,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call PostModelAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var client = new TestserverClient();
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new TestserverClient(endpoint);
         /// 
         /// var data = new {
         ///     hello = "<hello>",
@@ -274,7 +289,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call PostModel with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var client = new TestserverClient();
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new TestserverClient(endpoint);
         /// 
         /// var data = new {
         ///     hello = "<hello>",
@@ -374,7 +390,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call LroAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new TestserverClient();
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new TestserverClient(endpoint);
         /// 
         /// Response response = await client.LroAsync("<mode>");
         /// 
@@ -421,7 +438,8 @@ namespace dpg_customization_LowLevel
         /// <example>
         /// This sample shows how to call Lro with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new TestserverClient();
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new TestserverClient(endpoint);
         /// 
         /// Response response = client.Lro("<mode>");
         /// 
@@ -463,9 +481,10 @@ namespace dpg_customization_LowLevel
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/customization/model/", false);
             uri.AppendPath(mode, false);
             request.Uri = uri;
@@ -476,9 +495,10 @@ namespace dpg_customization_LowLevel
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/customization/model/", false);
             uri.AppendPath(mode, false);
             request.Uri = uri;
@@ -490,9 +510,10 @@ namespace dpg_customization_LowLevel
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/", false);
             uri.AppendPath("/customization/lro/", false);
             uri.AppendPath(mode, false);
             request.Uri = uri;
