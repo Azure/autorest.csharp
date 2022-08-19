@@ -59,7 +59,7 @@ namespace MgmtMockAndSample.Models
         }
 
         /// <summary>
-        /// The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object.
+        /// The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -90,7 +90,7 @@ namespace MgmtMockAndSample.Models
         /// </summary>
         public BinaryData Settings { get; set; }
         /// <summary>
-        /// The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object.
+        /// The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

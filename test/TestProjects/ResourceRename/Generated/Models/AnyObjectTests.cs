@@ -23,7 +23,7 @@ namespace ResourceRename.Models
         }
 
         /// <summary>
-        /// This is an Any type.
+        /// This is an Any type
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -54,7 +54,7 @@ namespace ResourceRename.Models
         /// </summary>
         public BinaryData AnyProperty { get; }
         /// <summary>
-        /// This is an AnyObject type.
+        /// This is an AnyObject type
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -91,7 +91,7 @@ namespace ResourceRename.Models
         /// <summary> This is a dictionary of Any type. </summary>
         public IReadOnlyDictionary<string, BinaryData> AnyDictionary { get; }
         /// <summary>
-        /// This is a dictionary of AnyObject type.
+        /// This is a dictionary of AnyObject type
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
