@@ -25,6 +25,28 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task Exists_VirtualMachineExtensionImagesGetMaximumSetGen()
+        {
+            // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetVirtualMachineExtensionImages(new AzureLocation("aaaaaaaaaaaaa"), "aaaaaaaaaaaaaaaaaaaa");
+            await collection.ExistsAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
+        }
+
+        [RecordedTest]
+        public async Task Exists_VirtualMachineExtensionImagesGetMinimumSetGen()
+        {
+            // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetVirtualMachineExtensionImages(new AzureLocation("aaaaaaaaaaaaaa"), "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+            await collection.ExistsAsync("aa", "aaa");
+        }
+
+        [RecordedTest]
         public async Task Get_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen

@@ -92,6 +92,17 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
         }
 
         [RecordedTest]
+        public async Task Exists()
+        {
+            // Example: Retrieve a managed HSM Pool
+
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetManagedHsms();
+            await collection.ExistsAsync("hsm1");
+        }
+
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a managed HSM Pool

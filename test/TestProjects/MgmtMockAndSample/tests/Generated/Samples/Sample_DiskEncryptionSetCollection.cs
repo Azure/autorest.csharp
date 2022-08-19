@@ -179,6 +179,34 @@ namespace MgmtMockAndSample
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
+        // Get information about a disk encryption set when auto-key rotation failed.
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        public async Task Exists_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
+        {
+            // Generated from example definition: 
+            // this example is just showing the usage of "DiskEncryptionSets_Get" operation, for the dependent resources, they will have to be created separately.
+
+            // authenticate your client
+            ArmClient client = new ArmClient(new DefaultAzureCredential());
+
+            // this example assumes you already have this ResourceGroupResource created on azure
+            // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
+            // get the collection of this DiskEncryptionSetResource
+            MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
+
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            bool result = await collection.ExistsAsync(diskEncryptionSetName);
+
+            Console.WriteLine($"Succeeded: {result}");
+        }
+
         // Get information about a disk encryption set.
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
@@ -209,6 +237,34 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+        }
+
+        // Get information about a disk encryption set.
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        public async Task Exists_GetInformationAboutADiskEncryptionSet()
+        {
+            // Generated from example definition: 
+            // this example is just showing the usage of "DiskEncryptionSets_Get" operation, for the dependent resources, they will have to be created separately.
+
+            // authenticate your client
+            ArmClient client = new ArmClient(new DefaultAzureCredential());
+
+            // this example assumes you already have this ResourceGroupResource created on azure
+            // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
+            // get the collection of this DiskEncryptionSetResource
+            MgmtMockAndSample.DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
+
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            bool result = await collection.ExistsAsync(diskEncryptionSetName);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         // List all disk encryption sets in a resource group.

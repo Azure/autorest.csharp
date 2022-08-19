@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             {
                 foreach (var clientOperation in provider.AllOperations)
                 {
-                    // we skip the convenient methods, AddTag, SetTags, DeleteTags, Exists, GetIfExist, etc
+                    // we skip the convenient methods, AddTag, SetTags, DeleteTags, etc, because they do not have a corresponding source of test data
                     if (clientOperation.IsConvenientOperation)
                         continue;
                     foreach (var restOperation in clientOperation)

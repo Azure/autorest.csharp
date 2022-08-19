@@ -88,6 +88,28 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task Exists_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
+        {
+            // Example: Get information about a disk encryption set when auto-key rotation failed.
+
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetDiskEncryptionSets();
+            await collection.ExistsAsync("myDiskEncryptionSet");
+        }
+
+        [RecordedTest]
+        public async Task Exists_GetInformationAboutADiskEncryptionSet()
+        {
+            // Example: Get information about a disk encryption set.
+
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetDiskEncryptionSets();
+            await collection.ExistsAsync("myDiskEncryptionSet");
+        }
+
+        [RecordedTest]
         public async Task Get_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.

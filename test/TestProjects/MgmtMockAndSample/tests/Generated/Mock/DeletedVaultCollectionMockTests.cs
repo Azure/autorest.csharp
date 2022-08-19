@@ -25,6 +25,17 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task Exists()
+        {
+            // Example: Retrieve a deleted vault
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetDeletedVaults();
+            await collection.ExistsAsync(new AzureLocation("westus"), "sample-vault");
+        }
+
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a deleted vault
