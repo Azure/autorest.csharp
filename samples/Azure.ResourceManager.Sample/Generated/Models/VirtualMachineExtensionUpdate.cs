@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Sample.Models
         public bool? EnableAutomaticUpgrade { get; set; }
         /// <summary>
         /// Json formatted public settings for the extension.
-        /// Serialized Name: VirtualMachineExtensionUpdate.properties.settings.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.settings
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Sample.Models
         public BinaryData Settings { get; set; }
         /// <summary>
         /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
-        /// Serialized Name: VirtualMachineExtensionUpdate.properties.protectedSettings.
+        /// Serialized Name: VirtualMachineExtensionUpdate.properties.protectedSettings
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
