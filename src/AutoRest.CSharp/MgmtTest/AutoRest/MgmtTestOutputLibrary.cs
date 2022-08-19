@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class MgmtTestOutputLibrary
     {
-        private MockTestDefinitionModel _mockTestModel;
+        private readonly MockTestDefinitionModel _mockTestModel;
         public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
@@ -39,12 +39,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 
         private IEnumerable<MgmtSampleProvider> EnsureSamples()
         {
-            foreach (var testCases in MockTestCases.Values)
+            foreach ((var owner, var cases) in MockTestCases)
             {
-                foreach (var testCase in testCases)
-                {
-                    yield return new MgmtSampleProvider(new Sample(testCase));
-                }
+                yield return new MgmtSampleProvider(owner, cases.Select(testCase => new Sample(testCase)));
             }
         }
 
@@ -100,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             {
                 foreach (var clientOperation in provider.AllOperations)
                 {
-                    // we skip the convenient methods, AddTag, SetTags, DeleteTags, etc
+                    // we skip the convenient methods, AddTag, SetTags, DeleteTags, Exists, GetIfExist, etc
                     if (clientOperation.IsConvenientOperation)
                         continue;
                     foreach (var restOperation in clientOperation)
