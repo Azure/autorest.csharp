@@ -161,7 +161,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator) { }
 
-    internal record InputConstant(object? Value, InputType Type);
+    internal record InputConstant(object? Value, InputType Type) {
+        public InputConstant() : this(null, InputPrimitiveType.String) { }
+    }
 
     internal record InputEnumTypeValue(string Name, string Value, string? Description);
 

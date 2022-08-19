@@ -77,6 +77,38 @@ export function resolveServers(
 
             parameters.push(variable);
         }
+        /* add default server. */
+        if (server.url && server.url.startsWith('http') && parameters.length == 0) {
+            const variable: InputParameter = {
+                Name: "localhost",
+                NameInRequest: "localhost",
+                Description: server.description,
+                Type: {
+                    Name: "Uri",
+                    Kind: InputTypeKind.Uri,
+                    IsNullable: false
+                } as InputPrimitiveType,
+                Location: RequestLocation.Uri,
+                IsApiVersion: false,
+                IsResourceParameter: false,
+                IsContentType: false,
+                IsRequired: true,
+                IsEndpoint: true,
+                SkipUrlEncoding: false,
+                Explode: false,
+                Kind: InputOperationParameterKind.Client,
+                DefaultValue: {
+                    Value: server.url,
+                    Type: {
+                        Name: "Uri",
+                        Kind: InputTypeKind.Uri,
+                        IsNullable: false
+                    } as InputPrimitiveType
+                } as InputConstant
+            };
+
+            parameters.push(variable);
+        }
         return {
             url: server.url,
             description: server.description,
