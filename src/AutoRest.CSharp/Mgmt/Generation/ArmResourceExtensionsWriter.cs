@@ -101,12 +101,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetParametersForCollectionEntry(resourceCollection));
             using (WriteCommonMethod(signature, null, false))
             {
-                WriteResourceCollectionEntry(resourceCollection, signature);
+                WriteCollectionBody(signature, false, false);
             }
         }
-
-        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
-            => WriteCollectionBody(signature, false, false);
 
         private void WriteCollectionBody(MethodSignature signature, bool isAsync, bool isPaging)
         {

@@ -507,13 +507,22 @@ namespace MgmtMockAndSample
             );
         }
 
+        private static ArmResourceExtensionClient GetExtensionClient(ArmResource armResource)
+        {
+            return armResource.GetCachedClient((client) =>
+            {
+                return new ArmResourceExtensionClient(client, armResource.Id);
+            }
+            );
+        }
+
         /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the method will apply against. </param>
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public static RoleAssignmentCollection GetRoleAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetExtensionClient(client, scope).GetRoleAssignments(scope);
+            return GetExtensionClient(client, scope).GetRoleAssignments();
         }
 
         /// <summary>

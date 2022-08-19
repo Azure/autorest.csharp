@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 
 namespace MgmtMockAndSample
 {
@@ -29,17 +28,16 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
+
+            // get the collection of this RoleAssignmentResource
             string subscriptionId = "subId";
             string resourceGroupName = "rgname";
             string resourceProviderNamespace = "resourceProviderNamespace";
             string parentResourcePath = "parentResourcePath";
             ResourceType resourceType = new ResourceType("resourceType");
             string resourceName = "resourceName";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", subscriptionId, resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName));
-            GenericResource resource = client.GetGenericResource(resourceId);
-
-            // get the collection of this RoleAssignmentResource
-            MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", subscriptionId, resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName));
+            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
             await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())

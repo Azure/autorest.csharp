@@ -11,7 +11,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
@@ -31,12 +30,11 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string scope = "scope";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", scope));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string scope = "scope";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
+            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
