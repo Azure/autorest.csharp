@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, Func<ModelTypeProvider>> modelFactories, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {
-            TypeFactory = new TypeFactory(this);
+            TypeFactory = new TypeFactory(this, isCadlInput);
             _enums = enums;
             _modelFactories = modelFactories;
             _isCadlInput = isCadlInput;

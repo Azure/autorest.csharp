@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new ModelTypeProvider(
                 new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", "Readonly model", InputModelTypeUsage.RoundTrip,
                     ReadOnlyProperties, null, null, null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new ModelTypeProvider(
                 new InputModelType("OutputModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", "Readonly model", InputModelTypeUsage.Output,
                     ReadOnlyProperties, null, null, null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
