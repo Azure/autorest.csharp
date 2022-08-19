@@ -167,34 +167,6 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Retrieve a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Exists_RetrieveAVault()
-        {
-            // Generated from example definition: 
-            // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
-
-            // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
-
-            // this example assumes you already have this ResourceGroupResource created on azure
-            // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
-
-            // get the collection of this VaultResource
-            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
-
-            // invoke the operation
-            string vaultName = "sample-vault";
-            bool result = await collection.ExistsAsync(vaultName);
-
-            Console.WriteLine($"Succeeded: {result}");
-        }
-
         // List vaults in the specified resource group
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]

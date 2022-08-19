@@ -43,17 +43,6 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Exists()
-        {
-            // Example: Get role assignment by name
-
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", "scope"));
-            GenericResource resource = GetArmClient().GetGenericResource(resourceId);
-            var collection = resource.GetRoleAssignments();
-            await collection.ExistsAsync("roleAssignmentName");
-        }
-
-        [RecordedTest]
         public async Task Get()
         {
             // Example: Get role assignment by name

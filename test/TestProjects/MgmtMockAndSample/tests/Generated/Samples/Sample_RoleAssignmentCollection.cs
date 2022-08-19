@@ -159,33 +159,6 @@ namespace MgmtMockAndSample
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Get role assignment by name
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Exists_GetRoleAssignmentByName()
-        {
-            // Generated from example definition: 
-            // this example is just showing the usage of "RoleAssignments_Get" operation, for the dependent resources, they will have to be created separately.
-
-            // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
-
-            // this example assumes you already have this ArmResource created on azure
-            // for more information of creating ArmResource, please refer to the document of ArmResource
-            string scope = "scope";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", scope));
-            GenericResource resource = client.GetGenericResource(resourceId);
-
-            // get the collection of this RoleAssignmentResource
-            MgmtMockAndSample.RoleAssignmentCollection collection = resource.GetRoleAssignments();
-
-            // invoke the operation
-            string roleAssignmentName = "roleAssignmentName";
-            bool result = await collection.ExistsAsync(roleAssignmentName);
-
-            Console.WriteLine($"Succeeded: {result}");
-        }
-
         // List role assignments for subscription
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
