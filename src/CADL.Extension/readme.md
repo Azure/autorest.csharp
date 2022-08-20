@@ -120,8 +120,8 @@ You can generate sdk step by step as following:
 - install libraries : install the libraries under the directory of the cadl file or its parent directory
   - install cadl dependencies: cadl compile and cadl rest
   ```cmd
-  npm install @cadl-lang/compiler@0.33.0
-  npm install @cadl-lang/rest@0.15.1
+  npm install @cadl-lang/compiler@0.34.0
+  npm install @cadl-lang/rest@0.16.0
   npm install <path-to-csharp-emitter> # e.g. npm install autorest.csharp/src/CADL.Extension/Emitter.Csharp/azure-tools-cadl-csharp-0.1.0.tgz
   ```
 - emit cadl model json
