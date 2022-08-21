@@ -9,7 +9,6 @@
    "$id": "2",
    "Name": "SimpleEnum",
    "Namespace": "HelloWorld",
-   "Accessibility": "",
    "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -31,21 +30,48 @@
    ],
    "IsExtensible": false,
    "IsNullable": false
+  },
+  {
+   "$id": "6",
+   "Name": "ExtensibleEnum",
+   "Namespace": "HelloWorld",
+   "Description": "Extensible enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "8",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "9",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
   }
  ],
  "Models": [
   {
-   "$id": "6",
+   "$id": "10",
    "Name": "Thing",
+   "Namespace": "HelloWorld",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "7",
+     "$id": "11",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "8",
+      "$id": "12",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -57,17 +83,18 @@
    ]
   },
   {
-   "$id": "9",
+   "$id": "13",
    "Name": "RoundTripModel",
+   "Namespace": "HelloWorld",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "10",
+     "$id": "14",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "15",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -77,12 +104,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "12",
+     "$id": "16",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "17",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -92,12 +119,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "14",
+     "$id": "18",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "",
      "Type": {
-      "$id": "15",
+      "$id": "19",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -109,26 +136,23 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "16",
+     "$id": "20",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "21",
       "Name": "Dictionary",
-      "IsNullable": false,
       "KeyType": {
-       "$id": "18",
+       "$id": "22",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "19",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      }
+       "$ref": "6"
+      },
+      "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -139,41 +163,20 @@
  ],
  "Clients": [
   {
-   "$id": "20",
+   "$id": "23",
    "Name": "HelloWorld",
    "Operations": [
     {
-     "$id": "21",
+     "$id": "24",
      "Name": "topAction",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "22",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
-       "Type": {
-        "$id": "23",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "24",
+       "$id": "25",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "25",
+        "$id": "26",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -191,12 +194,12 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "27",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -208,22 +211,18 @@
      "BufferResponse": false
     },
     {
-     "$id": "27",
+     "$id": "28",
      "Name": "topAction2",
      "Description": "top level method2",
-     "Parameters": [
-      {
-       "$ref": "22"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -236,31 +235,27 @@
     }
    ],
    "Protocol": {
-    "$id": "29"
+    "$id": "30"
    }
   },
   {
-   "$id": "30",
+   "$id": "31",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "31",
+     "$id": "32",
      "Name": "sayHi",
      "Description": "Return hi",
-     "Parameters": [
-      {
-       "$ref": "22"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -273,27 +268,24 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "34"
    }
   },
   {
-   "$id": "34",
+   "$id": "35",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "35",
+     "$id": "36",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "22"
-      },
-      {
-       "$id": "36",
+       "$id": "37",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "9"
+        "$ref": "13"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -308,12 +300,12 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "38",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -325,22 +317,18 @@
      "BufferResponse": false
     },
     {
-     "$id": "38",
+     "$id": "39",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
-     "Parameters": [
-      {
-       "$ref": "22"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "6"
+        "$ref": "10"
        },
        "BodyMediaType": "Json"
       }
@@ -353,11 +341,11 @@
     }
    ],
    "Protocol": {
-    "$id": "40"
+    "$id": "41"
    }
   }
  ],
  "Auth": {
-  "$id": "41"
+  "$id": "42"
  }
 }

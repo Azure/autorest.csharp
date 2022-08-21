@@ -99,8 +99,8 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtendable: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
-                { IsFrameworkType: false, Implementation: EnumType { IsExtendable: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
                 { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
                 _ => null
             };

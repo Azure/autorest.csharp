@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace CadlPetStore
+namespace PetStore
 {
     public partial class Pet : IUtf8JsonSerializable
     {

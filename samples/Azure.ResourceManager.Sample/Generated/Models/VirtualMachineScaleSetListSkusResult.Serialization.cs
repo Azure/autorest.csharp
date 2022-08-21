@@ -15,18 +15,18 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetListSkusResult DeserializeVirtualMachineScaleSetListSkusResult(JsonElement element)
         {
-            IReadOnlyList<VirtualMachineScaleSetSku> value = default;
+            IReadOnlyList<VirtualMachineScaleSetSku> vmssSkus = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("value"))
+                if (property.NameEquals("VmssSkus"))
                 {
                     List<VirtualMachineScaleSetSku> array = new List<VirtualMachineScaleSetSku>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item));
                     }
-                    value = array;
+                    vmssSkus = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetListSkusResult(value, nextLink.Value);
+            return new VirtualMachineScaleSetListSkusResult(vmssSkus, nextLink.Value);
         }
     }
 }

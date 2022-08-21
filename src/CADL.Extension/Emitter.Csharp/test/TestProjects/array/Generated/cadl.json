@@ -10,6 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
+   "Namespace": "ArrayBasic",
    "IsNullable": false,
    "Properties": [
     {
@@ -74,31 +75,10 @@
      "Parameters": [
       {
        "$id": "11",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
-       "Type": {
-        "$id": "12",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "13",
        "Name": "nextLink",
        "NameInRequest": "nextLink",
        "Type": {
-        "$id": "14",
+        "$id": "12",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -116,12 +96,12 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "13",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "16",
+        "$id": "14",
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
@@ -139,11 +119,11 @@
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "15"
    }
   }
  ],
  "Auth": {
-  "$id": "18"
+  "$id": "16"
  }
 }

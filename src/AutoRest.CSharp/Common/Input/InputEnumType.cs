@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtendable, bool IsNullable = false)
+    internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string Description, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsNullable = false)
         : InputType(Name, IsNullable)
     {
         public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Input
                        && x.Description == y.Description
                        && x.EnumValueType.Equals(y.EnumValueType)
                        && x.AllowedValues.SequenceEqual(y.AllowedValues)
-                       && x.IsExtendable == y.IsExtendable;
+                       && x.IsExtensible == y.IsExtensible;
             }
 
             public int GetHashCode(InputEnumType obj)
@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
                 hashCode.Add(obj.Accessibility);
                 hashCode.Add(obj.Description);
                 hashCode.Add(obj.EnumValueType);
-                hashCode.Add(obj.IsExtendable);
+                hashCode.Add(obj.IsExtensible);
                 foreach (var item in obj.AllowedValues)
                 {
                     hashCode.Add(item);

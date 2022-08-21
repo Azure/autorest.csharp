@@ -513,7 +513,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _virtualMachineScaleSetRestClient.ListSkusAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.VmssSkus, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -528,7 +528,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _virtualMachineScaleSetRestClient.ListSkusNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.VmssSkus, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -555,7 +555,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _virtualMachineScaleSetRestClient.ListSkus(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.VmssSkus, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -570,7 +570,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _virtualMachineScaleSetRestClient.ListSkusNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.VmssSkus, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

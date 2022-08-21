@@ -427,7 +427,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (choice != null)
                 return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
-            if (!enumType.IsExtendable)
+            if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
             return writer.Append($"new {enumType.Type.Name}({value:L})");
         }

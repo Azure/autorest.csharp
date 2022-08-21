@@ -6,11 +6,10 @@ namespace stringFormat;
 
 using Cadl.Http;
 
-@route("/stringFormat")
+@route("/uri")
 @doc("Path parameter is string with format")
 @get
-op stringFormat(
+op zonedDateTime(
     @path
-    @format("date")
-    @intrinsic("string")
-    action: string): void;
+    @intrinsic("zonedDateTime")
+    zonedDateTime: string): void;

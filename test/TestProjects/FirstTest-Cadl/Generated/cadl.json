@@ -1,0 +1,400 @@
+{
+ "$id": "1",
+ "Name": "cadlfirsttest",
+ "Description": "This is a sample cadl project.",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "SimpleEnum",
+   "Namespace": "CadlFirstTest",
+   "Description": "Simple enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "4",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "5",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  },
+  {
+   "$id": "6",
+   "Name": "ExtensibleEnum",
+   "Namespace": "CadlFirstTest",
+   "Description": "Extensible enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "8",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "9",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "10",
+   "Name": "Thing",
+   "Namespace": "CadlFirstTest",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "11",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "12",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "13",
+   "Name": "RoundTripModel",
+   "Namespace": "CadlFirstTest",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "14",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "16",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "18",
+     "Name": "requiredCollection",
+     "SerializedName": "requiredCollection",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "2"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "20",
+     "Name": "requiredDictionary",
+     "SerializedName": "requiredDictionary",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "22",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$ref": "6"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "23",
+     "Name": "requiredModel",
+     "SerializedName": "requiredModel",
+     "Description": "",
+     "Type": {
+      "$ref": "10"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "24",
+   "Name": "CadlFirstTest",
+   "Description": "This is a sample cadl project.",
+   "Operations": [
+    {
+     "$id": "25",
+     "Name": "topAction",
+     "Description": "top level method",
+     "Parameters": [
+      {
+       "$id": "26",
+       "Name": "firstTestUrl",
+       "NameInRequest": "firstTestUrl",
+       "Type": {
+        "$id": "27",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "28",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$id": "29",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "30",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestUrl}/",
+     "Path": "/top/{action}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "31",
+     "Name": "topAction2",
+     "Description": "top level method2",
+     "Parameters": [
+      {
+       "$ref": "26"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "32",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestUrl}/",
+     "Path": "/top2",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "33"
+   }
+  },
+  {
+   "$id": "34",
+   "Name": "Demo",
+   "Description": "Hello world service",
+   "Operations": [
+    {
+     "$id": "35",
+     "Name": "sayHi",
+     "Description": "Return hi",
+     "Parameters": [
+      {
+       "$ref": "26"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "36",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestUrl}/",
+     "Path": "/hello",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "37"
+   }
+  },
+  {
+   "$id": "38",
+   "Name": "Demo2",
+   "Operations": [
+    {
+     "$id": "39",
+     "Name": "helloAgain",
+     "Description": "Return hi again",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "40",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$ref": "13"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "41",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestUrl}/",
+     "Path": "/againHi",
+     "BufferResponse": false
+    },
+    {
+     "$id": "42",
+     "Name": "helloDemo2",
+     "Description": "Return hi in demo2",
+     "Parameters": [
+      {
+       "$ref": "26"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "43",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestUrl}/",
+     "Path": "/demoHi",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "44"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "45"
+ }
+}
