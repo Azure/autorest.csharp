@@ -8,6 +8,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ModelType,
     ModelTypeProperty,
     OperationType,
     Program,

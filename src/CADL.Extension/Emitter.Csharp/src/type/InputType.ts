@@ -20,8 +20,7 @@ export interface InputModelType extends InputType {
     Description: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
-    DerivedModels?: InputModelType[];
-    DiscriminatorValue?: string[];
+    DiscriminatorPropertyName?: string;
 }
 
 export interface InputEnumType extends InputType {
