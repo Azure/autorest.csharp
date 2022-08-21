@@ -38,11 +38,11 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";
-            ManagedHsmData data = new ManagedHsmData(new AzureLocation("westus"))
+            MgmtMockAndSample.ManagedHsmData data = new ManagedHsmData(new AzureLocation("westus"))
             {
                 Properties = new ManagedHsmProperties()
                 {
@@ -95,12 +95,12 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 ["Environment"] = "dogfood",
 },
             };
-            ArmOperation<ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data);
-            ManagedHsmResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data);
+            MgmtMockAndSample.ManagedHsmResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            ManagedHsmData resourceData = result.Data;
+            MgmtMockAndSample.ManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -124,15 +124,15 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";
-            ManagedHsmResource result = await collection.GetAsync(name);
+            MgmtMockAndSample.ManagedHsmResource result = await collection.GetAsync(name);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            ManagedHsmData resourceData = result.Data;
+            MgmtMockAndSample.ManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -156,7 +156,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";
@@ -184,14 +184,14 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
+            MgmtMockAndSample.ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation and iterate over the result
-            await foreach (ManagedHsmResource item in collection.GetAllAsync())
+            await foreach (MgmtMockAndSample.ManagedHsmResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                ManagedHsmData resourceData = item.Data;
+                MgmtMockAndSample.ManagedHsmData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         AppendType(new CSharpType(t));
                         break;
                     case CSharpType t:
-                        AppendType(t, isDeclaration, isIdentifier);
+                        AppendType(t, isDeclaration);
                         break;
                     case CodeWriterDeclaration declaration when isDeclaration:
                         Declaration(declaration);
@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private void AppendType(CSharpType type, bool isDeclaration = false, bool isIdentifier = false)
+        private void AppendType(CSharpType type, bool isDeclaration = false)
         {
             string? mappedName = type.IsFrameworkType
                 ? GetTypeNameMapping(type.FrameworkType)
@@ -334,12 +334,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 UseNamespace(type.Namespace);
 
-                if (!isIdentifier)
-                {
-                    AppendRaw("global::");
-                    AppendRaw(type.Namespace);
-                    AppendRaw(".");
-                }
+                AppendRaw("global::");
+                AppendRaw(type.Namespace);
+                AppendRaw(".");
                 AppendRaw(type.Name);
             }
 
@@ -348,7 +345,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw("<");
                 foreach (var typeArgument in type.Arguments)
                 {
-                    AppendType(typeArgument, isIdentifier: isIdentifier);
+                    AppendType(typeArgument);
                     AppendRaw(", ");
                 }
                 RemoveTrailingComma();

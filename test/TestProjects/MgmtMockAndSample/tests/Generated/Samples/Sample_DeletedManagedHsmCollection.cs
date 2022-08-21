@@ -34,16 +34,16 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
-            DeletedManagedHsmResource result = await collection.GetAsync(location, name);
+            MgmtMockAndSample.DeletedManagedHsmResource result = await collection.GetAsync(location, name);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DeletedManagedHsmData resourceData = result.Data;
+            MgmtMockAndSample.DeletedManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            MgmtMockAndSample.DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");

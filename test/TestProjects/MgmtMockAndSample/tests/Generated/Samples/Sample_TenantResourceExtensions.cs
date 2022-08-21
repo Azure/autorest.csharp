@@ -31,7 +31,7 @@ namespace MgmtMockAndSample
             var tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
 
             // invoke the operation and iterate over the result
-            await foreach (EventData item in tenantResource.GetTenantActivityLogsAsync())
+            await foreach (MgmtMockAndSample.Models.EventData item in tenantResource.GetTenantActivityLogsAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

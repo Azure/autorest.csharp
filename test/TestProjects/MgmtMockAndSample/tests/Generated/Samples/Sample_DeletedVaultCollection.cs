@@ -34,16 +34,16 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedVaultResource
-            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
+            MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
             string vaultName = "sample-vault";
-            DeletedVaultResource result = await collection.GetAsync(location, vaultName);
+            MgmtMockAndSample.DeletedVaultResource result = await collection.GetAsync(location, vaultName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DeletedVaultData resourceData = result.Data;
+            MgmtMockAndSample.DeletedVaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // get the collection of this DeletedVaultResource
-            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
+            MgmtMockAndSample.DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");

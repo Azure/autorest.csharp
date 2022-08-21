@@ -39,19 +39,19 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
+            MgmtMockAndSample.Models.DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
                 RotationToLatestKeyVersionEnabled = true,
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
-            DiskEncryptionSetResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
+            MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DiskEncryptionSetData resourceData = result.Data;
+            MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -76,19 +76,19 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
+            MgmtMockAndSample.Models.DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
                 RotationToLatestKeyVersionEnabled = true,
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
-            DiskEncryptionSetResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
+            MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DiskEncryptionSetData resourceData = result.Data;
+            MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -113,7 +113,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
+            MgmtMockAndSample.Models.DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch()
             {
                 Tags =
 {
@@ -126,12 +126,12 @@ namespace MgmtMockAndSample
                     SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
                 },
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
-            DiskEncryptionSetResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
+            MgmtMockAndSample.DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DiskEncryptionSetData resourceData = result.Data;
+            MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -156,11 +156,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            DiskEncryptionSetResource result = await diskEncryptionSet.GetAsync();
+            MgmtMockAndSample.DiskEncryptionSetResource result = await diskEncryptionSet.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DiskEncryptionSetData resourceData = result.Data;
+            MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -185,11 +185,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            DiskEncryptionSetResource result = await diskEncryptionSet.GetAsync();
+            MgmtMockAndSample.DiskEncryptionSetResource result = await diskEncryptionSet.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DiskEncryptionSetData resourceData = result.Data;
+            MgmtMockAndSample.DiskEncryptionSetData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -237,11 +237,11 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (DiskEncryptionSetResource item in subscriptionResource.GetDiskEncryptionSetsAsync())
+            await foreach (MgmtMockAndSample.DiskEncryptionSetResource item in subscriptionResource.GetDiskEncryptionSetsAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                DiskEncryptionSetData resourceData = item.Data;
+                MgmtMockAndSample.DiskEncryptionSetData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

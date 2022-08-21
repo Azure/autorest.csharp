@@ -36,11 +36,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
             // invoke the operation
-            DeletedVaultResource result = await deletedVault.GetAsync();
+            MgmtMockAndSample.DeletedVaultResource result = await deletedVault.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DeletedVaultData resourceData = result.Data;
+            MgmtMockAndSample.DeletedVaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

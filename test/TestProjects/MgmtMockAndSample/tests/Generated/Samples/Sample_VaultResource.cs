@@ -38,7 +38,7 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            VaultPatch patch = new VaultPatch()
+            MgmtMockAndSample.Models.VaultPatch patch = new VaultPatch()
             {
                 Properties = new VaultPatchProperties()
                 {
@@ -68,11 +68,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
                     PublicNetworkAccess = "Enabled",
                 },
             };
-            VaultResource result = await vault.UpdateAsync(patch);
+            MgmtMockAndSample.VaultResource result = await vault.UpdateAsync(patch);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            VaultData resourceData = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -122,11 +122,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            VaultResource result = await vault.GetAsync();
+            MgmtMockAndSample.VaultResource result = await vault.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            VaultData resourceData = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -151,7 +151,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (VaultKey item in vault.GetKeysAsync())
+            await foreach (MgmtMockAndSample.Models.VaultKey item in vault.GetKeysAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }
@@ -179,7 +179,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            VaultValidationResult result = await vault.ValidateAsync();
+            MgmtMockAndSample.Models.VaultValidationResult result = await vault.ValidateAsync();
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -229,8 +229,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
-            VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
+            MgmtMockAndSample.Models.AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
+            MgmtMockAndSample.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
             {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
@@ -248,7 +248,7 @@ CertificatePermission.Get
 },
 })
             }));
-            VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
+            MgmtMockAndSample.Models.VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -272,11 +272,11 @@ CertificatePermission.Get
 
             // invoke the operation and iterate over the result
             int? top = 1;
-            await foreach (VaultResource item in subscriptionResource.GetVaultsAsync(top: top))
+            await foreach (MgmtMockAndSample.VaultResource item in subscriptionResource.GetVaultsAsync(top: top))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                VaultData resourceData = item.Data;
+                MgmtMockAndSample.VaultData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -304,7 +304,7 @@ CertificatePermission.Get
             MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
+            await foreach (MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

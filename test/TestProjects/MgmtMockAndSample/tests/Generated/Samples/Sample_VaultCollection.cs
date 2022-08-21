@@ -39,11 +39,11 @@ namespace MgmtMockAndSample
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            VaultCollection collection = resourceGroupResource.GetVaults();
+            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
-            VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            MgmtMockAndSample.Models.VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 Duration = XmlConvert.ToTimeSpan("P7D"),
                 CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
@@ -72,12 +72,12 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
             };
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
-            VaultResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
+            MgmtMockAndSample.VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            VaultData resourceData = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -101,11 +101,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            VaultCollection collection = resourceGroupResource.GetVaults();
+            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
-            VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            MgmtMockAndSample.Models.VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,
@@ -125,12 +125,12 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
                 ReadWriteSingleStringPropertySomething = "test",
                 DeepSomething = "deep-value",
             });
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
-            VaultResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
+            MgmtMockAndSample.VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            VaultData resourceData = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -154,15 +154,15 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            VaultCollection collection = resourceGroupResource.GetVaults();
+            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
-            VaultResource result = await collection.GetAsync(vaultName);
+            MgmtMockAndSample.VaultResource result = await collection.GetAsync(vaultName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            VaultData resourceData = result.Data;
+            MgmtMockAndSample.VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -186,7 +186,7 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            VaultCollection collection = resourceGroupResource.GetVaults();
+            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
@@ -214,15 +214,15 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
             // get the collection of this VaultResource
-            VaultCollection collection = resourceGroupResource.GetVaults();
+            MgmtMockAndSample.VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation and iterate over the result
             int? top = 1;
-            await foreach (VaultResource item in collection.GetAllAsync(top: top))
+            await foreach (MgmtMockAndSample.VaultResource item in collection.GetAllAsync(top: top))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                VaultData resourceData = item.Data;
+                MgmtMockAndSample.VaultData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

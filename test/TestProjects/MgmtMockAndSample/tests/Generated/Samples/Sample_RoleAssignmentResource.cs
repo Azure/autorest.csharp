@@ -36,12 +36,12 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed);
-            RoleAssignmentResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed);
+            MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            RoleAssignmentData resourceData = result.Data;
+            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -65,18 +65,18 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent()
+            MgmtMockAndSample.Models.RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent()
             {
                 RoleDefinitionId = "/subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
             };
-            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.UpdateAsync(WaitUntil.Completed, content);
-            RoleAssignmentResource result = lro.Value;
+            ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await roleAssignment.UpdateAsync(WaitUntil.Completed, content);
+            MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            RoleAssignmentData resourceData = result.Data;
+            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -100,11 +100,11 @@ namespace MgmtMockAndSample
             MgmtMockAndSample.RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            RoleAssignmentResource result = await roleAssignment.GetAsync();
+            MgmtMockAndSample.RoleAssignmentResource result = await roleAssignment.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            RoleAssignmentData resourceData = result.Data;
+            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
