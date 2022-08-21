@@ -36,16 +36,16 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
             string version = "aaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
+            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = result.Data;
+            VirtualMachineExtensionImageData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -70,7 +70,7 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
@@ -100,16 +100,16 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aa";
             string version = "aaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
+            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = result.Data;
+            VirtualMachineExtensionImageData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -134,7 +134,7 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aa";
@@ -164,14 +164,14 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync())
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = item.Data;
+                VirtualMachineExtensionImageData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -199,14 +199,14 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaa");
             string publisherName = "aa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync())
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = item.Data;
+                VirtualMachineExtensionImageData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -234,18 +234,18 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
             string type = "aaaaaaaaaaaaaaaaaa";
             string filter = "aaaaaaaaaaaaaaaaaaaaaaaaa";
             int? top = 22;
             string orderby = "a";
-            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = item.Data;
+                VirtualMachineExtensionImageData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -273,15 +273,15 @@ namespace MgmtMockAndSample
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            MgmtMockAndSample.VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
             string type = "aaaa";
-            await foreach (MgmtMockAndSample.VirtualMachineExtensionImageResource item in collection.GetAllAsync(type))
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.VirtualMachineExtensionImageData resourceData = item.Data;
+                VirtualMachineExtensionImageData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

@@ -30,8 +30,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Retrieve a deleted vault
 
-            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "sample-vault");
-            MgmtMockAndSample.DeletedVaultResource deletedVault = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
+            ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "sample-vault");
+            DeletedVaultResource deletedVault = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
             await deletedVault.GetAsync();
         }
 
@@ -40,8 +40,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Purge a deleted vault
 
-            ResourceIdentifier deletedVaultResourceId = MgmtMockAndSample.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "sample-vault");
-            MgmtMockAndSample.DeletedVaultResource deletedVault = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
+            ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "sample-vault");
+            DeletedVaultResource deletedVault = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
             await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }
