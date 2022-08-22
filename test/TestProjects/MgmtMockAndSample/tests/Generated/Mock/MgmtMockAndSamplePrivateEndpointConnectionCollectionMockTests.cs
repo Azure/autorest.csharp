@@ -31,8 +31,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultPutPrivateEndpointConnection
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
@@ -50,8 +50,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultGetPrivateEndpointConnection
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
             await collection.ExistsAsync("sample-pec");
         }
@@ -61,8 +61,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultGetPrivateEndpointConnection
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
             await collection.GetAsync("sample-pec");
         }
@@ -72,8 +72,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultListPrivateEndpointConnection
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             var collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
             await foreach (var _ in collection.GetAllAsync())
             {

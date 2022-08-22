@@ -29,6 +29,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // construct the MgmtTestOutputLibrary
             var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
 
+            // add the files in the source code project into the GeneratedCodeWorkspace so that our Roslyn could know how to simplify them
+            project.AddDirectory(sourceCodePath);
+
             if (Configuration.MgmtConfiguration.TestGen.Mock)
             {
                 WriteMockTests(project, library);

@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
@@ -11,6 +12,9 @@ namespace AutoRest.CSharp.MgmtTest.Models
         public Sample(MockTestCase testCase) : base(testCase.OperationId, testCase.Carrier, testCase.Operation, testCase._example)
         {
         }
+
+        protected override string GetMethodName(bool hasSuffix)
+            => $"{Operation.Name}_{Name.ToCleanName()}"; // sample will always use a full name
 
         protected override ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)
         {
