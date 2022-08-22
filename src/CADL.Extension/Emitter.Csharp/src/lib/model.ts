@@ -425,7 +425,7 @@ export function getInputType(
                 if (value.name !== discriminatorPropertyName) {
                     const vis = getVisibility(program, value);
                     let isReadOnly: boolean = false;
-                    if (vis && vis.includes("read") && vis.length == 1) {
+                    if (vis && vis.includes("read") && vis.length === 1) {
                         isReadOnly = true;
                     }
                     const inputProp = {
@@ -439,7 +439,7 @@ export function getInputType(
                             enums
                         ),
                         IsRequired: !value.optional,
-                        IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
+                        IsReadOnly: isReadOnly,
                         IsDiscriminator: false
                     };
                     outputProperties.push(inputProp);
