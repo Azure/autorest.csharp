@@ -419,7 +419,10 @@ namespace AutoRest.CSharp.Common.Input
                     case AADTokenSecurityScheme:
                         throw new NotSupportedException($"{typeof(AADTokenSecurityScheme)} is not supported. Use {typeof(OAuth2SecurityScheme)} instead");
                     case KeySecurityScheme when apiKey is not null:
-                        throw new NotSupportedException($"Only one {typeof(KeySecurityScheme)} is supported. Remove excess");
+                        // Tolerate second KeySecurityScheme to support TranslatorText: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/stable/v3.0/TranslatorText.json#L14
+                        // See https://github.com/Azure/autorest.csharp/issues/2637
+                        //throw new NotSupportedException($"Only one {typeof(KeySecurityScheme)} is supported. Remove excess");
+                        break;
                     case OAuth2SecurityScheme when oAuth2 is not null:
                         throw new NotSupportedException($"Only one {typeof(OAuth2SecurityScheme)} is not supported. Remove excess");
                     case KeySecurityScheme apiKeyScheme:
