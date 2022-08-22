@@ -34,11 +34,11 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.ManagedHsmData data = new ManagedHsmData(new AzureLocation("placeholder"))
+            ManagedHsmData data = new ManagedHsmData(new AzureLocation("placeholder"))
             {
                 Tags =
 {
@@ -47,12 +47,12 @@ namespace MgmtMockAndSample
 ["Slice"] = "A",
 },
             };
-            ArmOperation<MgmtMockAndSample.ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data);
-            MgmtMockAndSample.ManagedHsmResource result = lro.Value;
+            ArmOperation<ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data);
+            ManagedHsmResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.ManagedHsmData resourceData = result.Data;
+            ManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -73,8 +73,8 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
             await managedHsm.DeleteAsync(WaitUntil.Completed);
@@ -98,15 +98,15 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.ManagedHsmResource result = await managedHsm.GetAsync();
+            ManagedHsmResource result = await managedHsm.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.ManagedHsmData resourceData = result.Data;
+            ManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -129,11 +129,11 @@ namespace MgmtMockAndSample
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.ManagedHsmResource item in subscriptionResource.GetManagedHsmsAsync())
+            await foreach (ManagedHsmResource item in subscriptionResource.GetManagedHsmsAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.ManagedHsmData resourceData = item.Data;
+                ManagedHsmData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -157,11 +157,11 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-group";
             string name = "sample-mhsm";
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            MgmtMockAndSample.ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.Models.MhsmPrivateLinkResource item in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
+            await foreach (MhsmPrivateLinkResource item in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

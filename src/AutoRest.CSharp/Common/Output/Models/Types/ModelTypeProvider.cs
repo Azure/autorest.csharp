@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -84,10 +86,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType ||
-                    (inputModel.Usage == InputModelTypeUsage.Input && inputModelProperty.IsRequired)
-                    ? Public | ReadOnly
-                    : Public;
+                var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
+                var propertyIsRequiredInNonRoundTripModel = (inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output) && inputModelProperty.IsRequired;
+                var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel;
+
+                var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
                 var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
@@ -124,28 +127,34 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
+
             if (usage == InputModelTypeUsage.Input)
             {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
-                publicConstructor = serializationConstructor;
-            }
-            else if (!publicParameters.SequenceEqual(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
-            {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
                     publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                serializationConstructor = publicConstructor;
             }
             else
             {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, serializationParameters);
-                publicConstructor = serializationConstructor;
-
+                var publicConstructorAccessbility = (usage == InputModelTypeUsage.Output ? MethodSignatureModifiers.Internal : MethodSignatureModifiers.Public);
+                if (serializationParameters.Any(p => TypeFactory.IsList(p.Type)) || !publicParameters.SequenceEqual(serializationParameters))
+                {
+                    publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility,
+                        publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                    serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal,
+                        serializationParameters.Select(p => p with { Validation = ValidationType.None }).ToList()); // we don't validate parameters for serialization constructor
+                }
+                else
+                {
+                    publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility, publicParameters);
+                    serializationConstructor = publicConstructor;
+                }
             }
+
             return (publicConstructor, serializationConstructor);
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsReadWriteList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
     }
 }

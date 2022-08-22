@@ -41,14 +41,8 @@ namespace CadlFirstTest
         /// <param name="requiredCollection"></param>
         /// <param name="requiredDictionary"></param>
         /// <param name="requiredModel"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
         internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-            Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
-            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredCollection = requiredCollection;
