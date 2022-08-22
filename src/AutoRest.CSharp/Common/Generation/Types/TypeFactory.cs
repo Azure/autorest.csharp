@@ -23,15 +23,10 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
-        private readonly bool _isCadl;
 
-        public TypeFactory(OutputLibrary library) : this(library, false)
-        {}
-
-        public TypeFactory(OutputLibrary library, bool isCadl)
+        public TypeFactory(OutputLibrary library)
         {
             _library = library;
-            _isCadl = isCadl;
         }
 
         public CSharpType CreateType(InputType inputType) => inputType switch
@@ -43,11 +38,10 @@ namespace AutoRest.CSharp.Generation.Types
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
+                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
                 InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url when _isCadl is true => new CSharpType(typeof(BinaryData), inputType.IsNullable),
-                InputTypeKind.Bytes when _isCadl is true => new CSharpType(typeof(BinaryData), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url when _isCadl is false => new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.Bytes  when _isCadl is false=> new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
                 InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
                 InputTypeKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),

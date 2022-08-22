@@ -14,7 +14,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         internal static readonly InputModelProperty RequiredInitProperty = new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, false, false);
 
-        internal static TypeFactory CadlTypeFactory => new TypeFactory(null, true);
+        internal static TypeFactory CadlTypeFactory => new TypeFactory(null);
+
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredInitProperty },

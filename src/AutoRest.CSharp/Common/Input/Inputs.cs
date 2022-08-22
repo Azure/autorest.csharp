@@ -132,6 +132,7 @@ namespace AutoRest.CSharp.Common.Input
     internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable = false) : InputType(Kind.ToString(), IsNullable)
     {
         public static InputPrimitiveType AzureLocation { get; }      = new(InputTypeKind.AzureLocation);
+        public static InputPrimitiveType BinaryData { get; }            = new(InputTypeKind.BinaryData);
         public static InputPrimitiveType Boolean { get; }            = new(InputTypeKind.Boolean);
         public static InputPrimitiveType Bytes { get; }              = new(InputTypeKind.Bytes);
         public static InputPrimitiveType BytesBase64Url { get; }     = new(InputTypeKind.BytesBase64Url);
@@ -196,6 +197,7 @@ namespace AutoRest.CSharp.Common.Input
     {
         AzureLocation,
         Boolean,
+        BinaryData,
         Bytes,
         BytesBase64Url,
         ContentType,
