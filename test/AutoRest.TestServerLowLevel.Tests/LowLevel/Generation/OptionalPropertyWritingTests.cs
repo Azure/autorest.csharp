@@ -94,7 +94,7 @@ OptionalIntList = new global::Azure.Core.ChangeTrackingList<int>();
 /// <param name=""optionalInt""> Optional int, illustrating an optional reference type property. </param>
 /// <param name=""optionalStringList""> Optional string collection. </param>
 /// <param name=""optionalIntList""> Optional int collection. </param>
-internal RoundTripModel(string optionalString,int optionalInt,global::System.Collections.Generic.IList<string> optionalStringList,global::System.Collections.Generic.IList<int> optionalIntList)
+internal RoundTripModel(string optionalString,int? optionalInt,global::System.Collections.Generic.IList<string> optionalStringList,global::System.Collections.Generic.IList<int> optionalIntList)
 {
 OptionalString = optionalString;
 OptionalInt = optionalInt;
@@ -106,7 +106,7 @@ OptionalIntList = optionalIntList;
 public string OptionalString{ get; set; }
 
 /// <summary> Optional int, illustrating an optional reference type property. </summary>
-public int OptionalInt{ get; set; }
+public int? OptionalInt{ get; set; }
 
 /// <summary> Optional string collection. </summary>
 public global::System.Collections.Generic.IList<string> OptionalStringList{ get; }
@@ -142,8 +142,15 @@ writer.WriteStringValue(OptionalString);
 }
 if (global::Azure.Core.Optional.IsDefined(OptionalInt))
 {
+if (OptionalInt != null)
+{
 writer.WritePropertyName(""optionalInt"");
-writer.WriteNumberValue(OptionalInt);
+writer.WriteNumberValue(OptionalInt.Value);
+}
+else
+{
+writer.WriteNull(""optionalInt"");
+}
 }
 if (global::Azure.Core.Optional.IsCollectionDefined(OptionalStringList))
 {
@@ -171,7 +178,7 @@ writer.WriteEndObject();
 internal static global::Cadl.TestServer.OptionalProperties.Models.RoundTripModel DeserializeRoundTripModel(global::System.Text.Json.JsonElement element)
 {
 global::Azure.Core.Optional<string> optionalString = default;
-global::Azure.Core.Optional<int> optionalInt = default;
+global::Azure.Core.Optional<int?> optionalInt = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IList<string>> optionalStringList = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IList<int>> optionalIntList = default;
 foreach (var property in element.EnumerateObject())
@@ -183,7 +190,7 @@ continue;
 if(property.NameEquals(""optionalInt"")){
 if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
 {
-property.ThrowNonNullablePropertyIsNull();
+optionalInt = null;
 continue;}
 optionalInt = property.Value.GetInt32();
 continue;
@@ -213,7 +220,7 @@ optionalIntList = array;
 continue;
 }
 }
-return new global::Cadl.TestServer.OptionalProperties.Models.RoundTripModel(optionalString, optionalInt, global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList));}
+return new global::Cadl.TestServer.OptionalProperties.Models.RoundTripModel(optionalString, global::Azure.Core.Optional.ToNullable(optionalInt), global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList));}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {
@@ -263,7 +270,7 @@ OptionalIntList = new global::Azure.Core.ChangeTrackingList<int>();
 public string OptionalString{ get; set; }
 
 /// <summary> Optional int, illustrating an optional reference type property. </summary>
-public int OptionalInt{ get; set; }
+public int? OptionalInt{ get; set; }
 
 /// <summary> Optional string collection. </summary>
 public global::System.Collections.Generic.IList<string> OptionalStringList{ get; }
@@ -297,8 +304,15 @@ writer.WriteStringValue(OptionalString);
 }
 if (global::Azure.Core.Optional.IsDefined(OptionalInt))
 {
+if (OptionalInt != null)
+{
 writer.WritePropertyName(""optionalInt"");
-writer.WriteNumberValue(OptionalInt);
+writer.WriteNumberValue(OptionalInt.Value);
+}
+else
+{
+writer.WriteNull(""optionalInt"");
+}
 }
 if (global::Azure.Core.Optional.IsCollectionDefined(OptionalStringList))
 {
@@ -364,7 +378,7 @@ OptionalIntList = new List<int>(0).AsReadOnly();
 /// <param name=""optionalInt""> Optional int, illustrating an optional reference type property. </param>
 /// <param name=""optionalStringList""> Optional string collection. </param>
 /// <param name=""optionalIntList""> Optional int collection. </param>
-internal OutputModel(string optionalString,int optionalInt,global::System.Collections.Generic.IReadOnlyList<string> optionalStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalIntList)
+internal OutputModel(string optionalString,int? optionalInt,global::System.Collections.Generic.IReadOnlyList<string> optionalStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalIntList)
 {
 OptionalString = optionalString;
 OptionalInt = optionalInt;
@@ -376,7 +390,7 @@ OptionalIntList = optionalIntList;
 public string OptionalString{ get; }
 
 /// <summary> Optional int, illustrating an optional reference type property. </summary>
-public int OptionalInt{ get; }
+public int? OptionalInt{ get; }
 
 /// <summary> Optional string collection. </summary>
 public global::System.Collections.Generic.IReadOnlyList<string> OptionalStringList{ get; }
@@ -405,7 +419,7 @@ public partial class OutputModel
 internal static global::Cadl.TestServer.OptionalProperties.Models.OutputModel DeserializeOutputModel(global::System.Text.Json.JsonElement element)
 {
 global::Azure.Core.Optional<string> optionalString = default;
-global::Azure.Core.Optional<int> optionalInt = default;
+global::Azure.Core.Optional<int?> optionalInt = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<string>> optionalStringList = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<int>> optionalIntList = default;
 foreach (var property in element.EnumerateObject())
@@ -417,7 +431,7 @@ continue;
 if(property.NameEquals(""optionalInt"")){
 if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
 {
-property.ThrowNonNullablePropertyIsNull();
+optionalInt = null;
 continue;}
 optionalInt = property.Value.GetInt32();
 continue;
@@ -447,7 +461,7 @@ optionalIntList = array;
 continue;
 }
 }
-return new global::Cadl.TestServer.OptionalProperties.Models.OutputModel(optionalString, optionalInt, global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList));}
+return new global::Cadl.TestServer.OptionalProperties.Models.OutputModel(optionalString, global::Azure.Core.Optional.ToNullable(optionalInt), global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList));}
 
 internal static global::Cadl.TestServer.OptionalProperties.Models.OutputModel FromResponse(global::Azure.Response response)
 {

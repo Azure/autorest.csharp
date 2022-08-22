@@ -121,6 +121,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = TypeFactory.GetOutputType(valueType);
             }
 
+            if (valueType.IsValueType && !property.IsRequired)
+            {
+                valueType = valueType.WithNullable(true);
+            }
+
             return valueType;
         }
 

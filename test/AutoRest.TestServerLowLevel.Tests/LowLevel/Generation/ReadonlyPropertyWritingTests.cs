@@ -42,12 +42,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         private static readonly IReadOnlyList<InputModelProperty> ReadOnlyProperties = new List<InputModelProperty>{
             new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
             new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
-            new InputModelProperty("optionalReadonlyString", "optionalReadonlyString", "Optional string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
-            new InputModelProperty("optionalReadonlyInt", "optionalReadonlyInt", "Optional int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
+            new InputModelProperty("optionalReadonlyString", "optionalReadonlyString", "Optional string, illustrating a readonly reference type property.", InputPrimitiveType.String, false, true, false),
+            new InputModelProperty("optionalReadonlyInt", "optionalReadonlyInt", "Optional int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, false, true, false),
             new InputModelProperty("requiredReadonlyStringList", "requiredReadonlyStringList", "Required readonly string collection.", new InputListType("requiredReadonlyStringList", InputPrimitiveType.String), true, true, false),
             new InputModelProperty("requiredReadonlyIntList", "requiredReadonlyIntList", "Required readonly int collection.", new InputListType("requiredReadonlyIntList", InputPrimitiveType.Int32), true, true, false),
-            new InputModelProperty("optionalReadonlyStringList", "optionalReadonlyStringList", "Optional readonly string collection.", new InputListType("optionalReadonlyStringList", InputPrimitiveType.String), true, true, false),
-            new InputModelProperty("optionalReadonlyIntList", "optionalReadonlyIntList", "Optional readonly int collection.", new InputListType("optionalReadonlyIntList", InputPrimitiveType.Int32), true, true, false),
+            new InputModelProperty("optionalReadonlyStringList", "optionalReadonlyStringList", "Optional readonly string collection.", new InputListType("optionalReadonlyStringList", InputPrimitiveType.String), false, true, false),
+            new InputModelProperty("optionalReadonlyIntList", "optionalReadonlyIntList", "Optional readonly int collection.", new InputListType("optionalReadonlyIntList", InputPrimitiveType.Int32), false, true, false),
         };
 
         private static readonly object[] RoundTripModelCase =
@@ -85,7 +85,7 @@ OptionalReadonlyIntList = new List<int>(0).AsReadOnly();
 /// <param name=""requiredReadonlyIntList""> Required readonly int collection. </param>
 /// <param name=""optionalReadonlyStringList""> Optional readonly string collection. </param>
 /// <param name=""optionalReadonlyIntList""> Optional readonly int collection. </param>
-internal RoundTripModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int optionalReadonlyInt,global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList,global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList)
+internal RoundTripModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int? optionalReadonlyInt,global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList,global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList)
 {
 RequiredReadonlyString = requiredReadonlyString;
 RequiredReadonlyInt = requiredReadonlyInt;
@@ -107,7 +107,7 @@ public int RequiredReadonlyInt{ get; }
 public string OptionalReadonlyString{ get; }
 
 /// <summary> Optional int, illustrating a readonly reference type property. </summary>
-public int OptionalReadonlyInt{ get; }
+public int? OptionalReadonlyInt{ get; }
 
 /// <summary> Required readonly string collection. </summary>
 public global::System.Collections.Generic.IReadOnlyList<string> RequiredReadonlyStringList{ get; }
@@ -150,7 +150,7 @@ internal static global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel
 string requiredReadonlyString = default;
 int requiredReadonlyInt = default;
 global::Azure.Core.Optional<string> optionalReadonlyString = default;
-global::Azure.Core.Optional<int> optionalReadonlyInt = default;
+global::Azure.Core.Optional<int?> optionalReadonlyInt = default;
 global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList = default;
 global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<string>> optionalReadonlyStringList = default;
@@ -172,7 +172,7 @@ continue;
 if(property.NameEquals(""optionalReadonlyInt"")){
 if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
 {
-property.ThrowNonNullablePropertyIsNull();
+optionalReadonlyInt = null;
 continue;}
 optionalReadonlyInt = property.Value.GetInt32();
 continue;
@@ -218,7 +218,7 @@ optionalReadonlyIntList = array;
 continue;
 }
 }
-return new global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyStringList, requiredReadonlyIntList, global::Azure.Core.Optional.ToList(optionalReadonlyStringList), global::Azure.Core.Optional.ToList(optionalReadonlyIntList));}
+return new global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, global::Azure.Core.Optional.ToNullable(optionalReadonlyInt), requiredReadonlyStringList, requiredReadonlyIntList, global::Azure.Core.Optional.ToList(optionalReadonlyStringList), global::Azure.Core.Optional.ToList(optionalReadonlyIntList));}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {
@@ -273,7 +273,7 @@ OptionalReadonlyIntList = new List<int>(0).AsReadOnly();
 /// <param name=""requiredReadonlyIntList""> Required readonly int collection. </param>
 /// <param name=""optionalReadonlyStringList""> Optional readonly string collection. </param>
 /// <param name=""optionalReadonlyIntList""> Optional readonly int collection. </param>
-internal OutputModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int optionalReadonlyInt,global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList,global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList)
+internal OutputModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int? optionalReadonlyInt,global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList,global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList)
 {
 RequiredReadonlyString = requiredReadonlyString;
 RequiredReadonlyInt = requiredReadonlyInt;
@@ -295,7 +295,7 @@ public int RequiredReadonlyInt{ get; }
 public string OptionalReadonlyString{ get; }
 
 /// <summary> Optional int, illustrating a readonly reference type property. </summary>
-public int OptionalReadonlyInt{ get; }
+public int? OptionalReadonlyInt{ get; }
 
 /// <summary> Required readonly string collection. </summary>
 public global::System.Collections.Generic.IReadOnlyList<string> RequiredReadonlyStringList{ get; }
@@ -331,12 +331,12 @@ internal static global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel De
 {
 string requiredReadonlyString = default;
 int requiredReadonlyInt = default;
-string optionalReadonlyString = default;
-int optionalReadonlyInt = default;
+global::Azure.Core.Optional<string> optionalReadonlyString = default;
+global::Azure.Core.Optional<int?> optionalReadonlyInt = default;
 global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList = default;
 global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList = default;
-global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList = default;
-global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<string>> optionalReadonlyStringList = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<int>> optionalReadonlyIntList = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""requiredReadonlyString"")){
@@ -352,6 +352,10 @@ optionalReadonlyString = property.Value.GetString();
 continue;
 }
 if(property.NameEquals(""optionalReadonlyInt"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+optionalReadonlyInt = null;
+continue;}
 optionalReadonlyInt = property.Value.GetInt32();
 continue;
 }
@@ -372,6 +376,10 @@ requiredReadonlyIntList = array;
 continue;
 }
 if(property.NameEquals(""optionalReadonlyStringList"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
 global::System.Collections.Generic.List<string> array = new global::System.Collections.Generic.List<string>();
 foreach (var item in property.Value.EnumerateArray())
 {
@@ -380,6 +388,10 @@ optionalReadonlyStringList = array;
 continue;
 }
 if(property.NameEquals(""optionalReadonlyIntList"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
 global::System.Collections.Generic.List<int> array = new global::System.Collections.Generic.List<int>();
 foreach (var item in property.Value.EnumerateArray())
 {
@@ -388,7 +400,7 @@ optionalReadonlyIntList = array;
 continue;
 }
 }
-return new global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyStringList, requiredReadonlyIntList, optionalReadonlyStringList, optionalReadonlyIntList);}
+return new global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, global::Azure.Core.Optional.ToNullable(optionalReadonlyInt), requiredReadonlyStringList, requiredReadonlyIntList, global::Azure.Core.Optional.ToList(optionalReadonlyStringList), global::Azure.Core.Optional.ToList(optionalReadonlyIntList));}
 
 internal static global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel FromResponse(global::Azure.Response response)
 {
