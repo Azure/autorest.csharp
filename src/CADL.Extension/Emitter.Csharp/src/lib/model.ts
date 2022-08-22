@@ -380,7 +380,7 @@ export function getInputType(
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)?.propertyName,
-                DiscriminatorValue: getDiscriminatorValue(baseModel),
+                DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
@@ -388,7 +388,7 @@ export function getInputType(
             models.set(name, model);
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
-            resolveProperties(m.properties, properties, baseModel?.DiscriminatorPropertyName);
+            addModelProperties(m.properties, properties, baseModel?.DiscriminatorPropertyName);
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed 
@@ -400,70 +400,70 @@ export function getInputType(
         }
 
         return model;
+    }   
 
-        function getInputModelBaseType(m?: ModelType) : InputModelType | undefined {
-            if (!m) {
-                return undefined;
+    function getDiscriminatorValue(m: ModelType, baseModel?: InputModelType) : string | undefined {
+        const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
+
+        if (discriminatorPropertyName) {
+            const discriminatorProperty = m.properties.get(discriminatorPropertyName);
+            if (discriminatorProperty?.type.kind === "String") {
+                return discriminatorProperty.type.value;
             }
-
-            // Arrays and dictionaries can't be a base type
-            if (m.indexer) {
-                return undefined;
-            }
-
-            // Cadl "primitive" types can't be base types for models
-            const intrinsicName = getIntrinsicModelName(program, m);
-            if (intrinsicName) {
-                return undefined;
-            }
-
-            return getInputModelForModel(m);
         }
 
-        function getDiscriminatorValue(baseModel?: InputModelType) : string | undefined {
-            const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
+        return undefined;
+    }
 
-            if (discriminatorPropertyName) {
-                const discriminatorProperty = m.properties.get(discriminatorPropertyName);
-                if (discriminatorProperty?.type.kind === "String") {
-                    return discriminatorProperty.type.value;
+    function addModelProperties(
+        inputProperties: Map<string, ModelTypeProperty>,
+        outputProperties: InputModelProperty[],
+        discriminatorPropertyName?: string
+    ) : void {
+        inputProperties.forEach(
+            (value: ModelTypeProperty, key: string) => {
+                if (value.name !== discriminatorPropertyName) {
+                    const vis = getVisibility(program, value);
+                    let isReadOnly: boolean = false;
+                    if (vis && vis.includes("read") && vis.length == 1) {
+                        isReadOnly = true;
+                    }
+                    const inputProp = {
+                        Name: value.name,
+                        SerializedName: value.name,
+                        Description: "",
+                        Type: getInputType(
+                            program,
+                            value.type,
+                            models,
+                            enums
+                        ),
+                        IsRequired: !value.optional,
+                        IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
+                        IsDiscriminator: false
+                    };
+                    outputProperties.push(inputProp);
                 }
             }
+        );
+    }
 
+    function getInputModelBaseType(m?: ModelType) : InputModelType | undefined {
+        if (!m) {
             return undefined;
         }
 
-        function resolveProperties(
-            inputProperties: Map<string, ModelTypeProperty>,
-            outputProperties: InputModelProperty[],
-            discriminatorPropertyName?: string
-        ) : void {
-            inputProperties.forEach(
-                (value: ModelTypeProperty, key: string) => {
-                    if (value.name !== discriminatorPropertyName) {
-                        const vis = getVisibility(program, value);
-                        let isReadOnly: boolean = false;
-                        if (vis && vis.includes("read") && vis.length == 1) {
-                            isReadOnly = true;
-                        }
-                        const inputProp = {
-                            Name: value.name,
-                            SerializedName: value.name,
-                            Description: "",
-                            Type: getInputType(
-                                program,
-                                value.type,
-                                models,
-                                enums
-                            ),
-                            IsRequired: !value.optional,
-                            IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
-                            IsDiscriminator: false
-                        };
-                        outputProperties.push(inputProp);
-                    }
-                }
-            );
+        // Arrays and dictionaries can't be a base type
+        if (m.indexer) {
+            return undefined;
         }
+
+        // Cadl "primitive" types can't be base types for models
+        const intrinsicName = getIntrinsicModelName(program, m);
+        if (intrinsicName) {
+            return undefined;
+        }
+
+        return getInputModelForModel(m);
     }
 }
