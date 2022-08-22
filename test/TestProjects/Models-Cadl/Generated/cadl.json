@@ -230,32 +230,18 @@
    "Namespace": "ModelsInCadl",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
+   "DiscriminatorValue": "A",
    "BaseModel": {
     "$ref": "25"
    },
    "Properties": [
     {
      "$id": "27",
-     "Name": "discriminatorProperty",
-     "SerializedName": "discriminatorProperty",
-     "Description": "",
-     "Type": {
-      "$id": "28",
-      "Name": "String",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "29",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "30",
+      "$id": "28",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -267,37 +253,23 @@
    ]
   },
   {
-   "$id": "31",
+   "$id": "29",
    "Name": "DerivedModelWithDiscriminatorB",
    "Namespace": "ModelsInCadl",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
+   "DiscriminatorValue": "B",
    "BaseModel": {
     "$ref": "25"
    },
    "Properties": [
     {
-     "$id": "32",
-     "Name": "discriminatorProperty",
-     "SerializedName": "discriminatorProperty",
-     "Description": "",
-     "Type": {
-      "$id": "33",
-      "Name": "String",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "34",
+     "$id": "30",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "35",
+      "$id": "31",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -309,7 +281,7 @@
    ]
   },
   {
-   "$id": "36",
+   "$id": "32",
    "Name": "OutputModel",
    "Namespace": "ModelsInCadl",
    "Description": "Model used only as output",
@@ -319,12 +291,12 @@
    },
    "Properties": [
     {
-     "$id": "37",
+     "$id": "33",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "38",
+      "$id": "34",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -334,12 +306,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "39",
+     "$id": "35",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "40",
+      "$id": "36",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -349,7 +321,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "41",
+     "$id": "37",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "",
@@ -365,17 +337,17 @@
  ],
  "Clients": [
   {
-   "$id": "42",
+   "$id": "38",
    "Name": "ModelsInCadl",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "43",
+     "$id": "39",
      "Name": "inputToRoundTrip",
      "Description": "Input to RoundTrip",
      "Parameters": [
       {
-       "$id": "44",
+       "$id": "40",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -394,7 +366,7 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
@@ -411,12 +383,12 @@
      "BufferResponse": false
     },
     {
-     "$id": "46",
+     "$id": "42",
      "Name": "roundTripToOutput",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$id": "47",
+       "$id": "43",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -435,12 +407,12 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "44",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "36"
+        "$ref": "32"
        },
        "BodyMediaType": "Json"
       }
@@ -453,11 +425,11 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "45"
    }
   }
  ],
  "Auth": {
-  "$id": "50"
+  "$id": "46"
  }
 }

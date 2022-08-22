@@ -21,6 +21,7 @@ export interface InputModelType extends InputType {
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
+    DiscriminatorValue?: string;
 }
 
 export interface InputEnumType extends InputType {

@@ -16,8 +16,6 @@ namespace ModelsInCadl
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("discriminatorProperty");
-            writer.WriteStringValue(DiscriminatorProperty);
             writer.WritePropertyName("requiredString");
             writer.WriteStringValue(RequiredString);
             writer.WriteEndObject();
@@ -25,22 +23,16 @@ namespace ModelsInCadl
 
         internal static DerivedModelWithDiscriminatorA DeserializeDerivedModelWithDiscriminatorA(JsonElement element)
         {
-            string discriminatorProperty = default;
             string requiredString = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("discriminatorProperty"))
-                {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("requiredString"))
                 {
                     requiredString = property.Value.GetString();
                     continue;
                 }
             }
-            return new DerivedModelWithDiscriminatorA(discriminatorProperty, requiredString);
+            return new DerivedModelWithDiscriminatorA(requiredString);
         }
 
         internal RequestContent ToRequestContent()
