@@ -229,6 +229,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var resourceType = operation.GetRequestPath().GetResourceType();
             var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
 
+            // We should not find more than one candidate if all the segments in ResourceType is constant.
+            // If this happen, We determine the right candidate by doing a further check on the request path.
+            if (candidates.Count() > 1 && !resourceType.Any(segment => segment.IsReference))
+            {
+                return candidates.Where(resource => resource.RequestPath.Equals(operation.GetRequestPath()));
+            }
+
             return candidates;
         }
     }
