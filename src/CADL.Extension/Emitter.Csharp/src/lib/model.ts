@@ -302,7 +302,7 @@ export function getInputType(
                                 enums
                             ),
                             IsRequired: !value.optional,
-                            IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
+                            IsReadOnly: isReadOnly,
                             IsDiscriminator: false
                         };
                         properties.push(inputProp);

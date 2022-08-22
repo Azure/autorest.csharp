@@ -238,7 +238,7 @@ function loadOperation(
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
-    
+
     const bodyType = cadlParameters.bodyType;
     const bodyParam = cadlParameters.bodyParameter;
 

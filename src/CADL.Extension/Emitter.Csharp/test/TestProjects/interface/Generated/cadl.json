@@ -73,8 +73,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "11",
-        "Name": "Uri",
-        "Kind": "Uri",
+        "Name": "String",
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -88,13 +88,13 @@
        "Kind": "Client",
        "DefaultValue": {
         "$id": "12",
-        "Value": "http://localhost:3000",
         "Type": {
          "$id": "13",
-         "Name": "Uri",
-         "Kind": "Uri",
+         "Name": "String",
+         "Kind": "String",
          "IsNullable": false
-        }
+        },
+        "Value": "http://localhost:3000"
        }
       }
      ],

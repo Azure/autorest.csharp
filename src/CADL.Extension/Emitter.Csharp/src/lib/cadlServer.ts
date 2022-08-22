@@ -78,14 +78,18 @@ export function resolveServers(
             parameters.push(variable);
         }
         /* add default server. */
-        if (server.url && server.url.startsWith('http') && parameters.length == 0) {
+        if (
+            server.url &&
+            server.url.startsWith("http") &&
+            parameters.length == 0
+        ) {
             const variable: InputParameter = {
                 Name: "localhost",
                 NameInRequest: "localhost",
                 Description: server.description,
                 Type: {
-                    Name: "Uri",
-                    Kind: InputTypeKind.Uri,
+                    Name: "String",
+                    Kind: InputTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
@@ -98,12 +102,12 @@ export function resolveServers(
                 Explode: false,
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: {
-                    Value: server.url,
                     Type: {
-                        Name: "Uri",
-                        Kind: InputTypeKind.Uri,
+                        Name: "String",
+                        Kind: InputTypeKind.String,
                         IsNullable: false
-                    } as InputPrimitiveType
+                    } as InputPrimitiveType,
+                    Value: server.url
                 } as InputConstant
             };
 
