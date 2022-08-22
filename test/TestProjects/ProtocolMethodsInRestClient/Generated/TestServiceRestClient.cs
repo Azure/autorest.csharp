@@ -155,7 +155,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceId)
+        internal HttpMessage CreateDeleteRequest(string resourceId, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -165,21 +165,26 @@ namespace ProtocolMethodsInRestClient
             uri.AppendPath("/template/resources/", false);
             uri.AppendPath(resourceId, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
             return message;
         }
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceId, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (resourceId == null)
             {
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateDeleteRequest(resourceId);
+            using var message = CreateDeleteRequest(resourceId, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -192,16 +197,17 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public Response Delete(string resourceId, CancellationToken cancellationToken = default)
+        public Response Delete(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (resourceId == null)
             {
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateDeleteRequest(resourceId);
+            using var message = CreateDeleteRequest(resourceId, ifMatch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -212,7 +218,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceId, RequestContext context)
+        internal HttpMessage CreateDeleteRequest(string resourceId, ETag? ifMatch, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -222,17 +228,22 @@ namespace ProtocolMethodsInRestClient
             uri.AppendPath("/template/resources/", false);
             uri.AppendPath(resourceId, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch.Value);
+            }
             return message;
         }
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> DeleteAsync(string resourceId, RequestContext context = null)
+        public virtual async Task<Response> DeleteAsync(string resourceId, ETag? ifMatch = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -240,7 +251,7 @@ namespace ProtocolMethodsInRestClient
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteRequest(resourceId, context);
+                using HttpMessage message = CreateDeleteRequest(resourceId, ifMatch, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -252,12 +263,13 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Delete(string resourceId, RequestContext context = null)
+        public virtual Response Delete(string resourceId, ETag? ifMatch = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -265,7 +277,7 @@ namespace ProtocolMethodsInRestClient
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteRequest(resourceId, context);
+                using HttpMessage message = CreateDeleteRequest(resourceId, ifMatch, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)

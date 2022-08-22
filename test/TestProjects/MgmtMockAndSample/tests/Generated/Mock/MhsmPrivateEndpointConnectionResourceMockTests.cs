@@ -31,8 +31,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: ManagedHsmDeletePrivateEndpointConnection
 
-            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
             await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
         }
 
@@ -41,8 +41,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
 
-            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
             await mhsmPrivateEndpointConnection.GetAsync();
         }
 
@@ -51,8 +51,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
 
-            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
             await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
             {
                 PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()

@@ -33,8 +33,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Delete a disk encryption set.
 
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
-            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+            ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
             await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
         }
 
@@ -43,8 +43,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
 
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
-            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+            ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
             await diskEncryptionSet.GetAsync();
         }
 
@@ -53,8 +53,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Get information about a disk encryption set.
 
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
-            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+            ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
             await diskEncryptionSet.GetAsync();
         }
 
@@ -75,8 +75,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Succeeded
 
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
-            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+            ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
             await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, new DiskEncryptionSetPatch()
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
@@ -91,8 +91,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Updating
 
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
-            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+            ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
             await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, new DiskEncryptionSetPatch()
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
@@ -107,8 +107,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Update a disk encryption set.
 
-            ResourceIdentifier diskEncryptionSetResourceId = MgmtMockAndSample.DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
-            MgmtMockAndSample.DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+            ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "myDiskEncryptionSet");
+            DiskEncryptionSetResource diskEncryptionSet = GetArmClient().GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
             await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, new DiskEncryptionSetPatch()
             {
                 Tags =
