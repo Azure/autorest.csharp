@@ -26,11 +26,8 @@ namespace ModelsInCadl
         }
         /// <summary> Initializes a new instance of DerivedModel. </summary>
         /// <param name="requiredCollection"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
         internal DerivedModel(IList<CollectionItem> requiredCollection)
         {
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-
             RequiredCollection = requiredCollection;
         }
 

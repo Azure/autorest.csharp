@@ -37,13 +37,8 @@ namespace ModelsInCadl
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
         /// <param name="requiredCollection"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/> or <paramref name="requiredCollection"/> is null. </exception>
         internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<CollectionItem> requiredCollection)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
-            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
