@@ -464,10 +464,10 @@ namespace AutoRest.CSharp.Common.Input
 
                 return (x, y) switch
                 {
-                    (AzureKeySecurityScheme azureX, AzureKeySecurityScheme azureY)
-                        => azureX.Type == azureY.Type && azureX.HeaderName == azureY.HeaderName,
-                    (AADTokenSecurityScheme aadX, AADTokenSecurityScheme aadY)
-                        => aadX.Type == aadY.Type && aadX.Scopes.SequenceEqual(aadY.Scopes, StringComparer.Ordinal),
+                    (KeySecurityScheme apyKeyX, KeySecurityScheme apyKeyY)
+                        => apyKeyX.Type == apyKeyY.Type && apyKeyX.Name == apyKeyY.Name,
+                    (OAuth2SecurityScheme oAuth2X, OAuth2SecurityScheme oAuth2Y)
+                        => oAuth2X.Type == oAuth2Y.Type && oAuth2X.Scopes.SequenceEqual(oAuth2Y.Scopes, StringComparer.Ordinal),
                     _ => x.Type == y.Type
                 };
             }
