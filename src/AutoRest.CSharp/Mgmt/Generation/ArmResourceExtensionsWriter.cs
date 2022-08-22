@@ -16,6 +16,8 @@ using System.Linq;
 using Azure.ResourceManager;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.Input;
+using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -73,6 +75,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteSingletonResourceGetMethod(Resource resource)
         {
+            if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resource.RequestPath))
+            {
+                base.WriteSingletonResourceGetMethod(resource);
+            }
+
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
                 null,
@@ -90,6 +97,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteResourceCollectionGetMethod(Resource resource)
         {
+            if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resource.RequestPath))
+            {
+                base.WriteResourceCollectionGetMethod(resource);
+                _writer.Line();
+            }
+
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
                 $"{GetResourceCollectionMethodName(resourceCollection)}",
@@ -102,6 +115,55 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (WriteCommonMethod(signature, null, false))
             {
                 WriteCollectionBody(signature, false, false);
+            }
+        }
+
+        protected override void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        {
+            if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resourceCollection.Resource.RequestPath))
+            {
+                base.WriteChildResourceGetMethod(resourceCollection, isAsync);
+                _writer.Line();
+            }
+
+            var getOperation = resourceCollection.GetOperation;
+            // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
+            var methodSignature = getOperation.MethodSignature with
+            {
+                // name after `Get{ResourceName}`
+                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
+                Modifiers = GetMethodModifiers(),
+                // There could be parameters to get resource collection
+                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+            };
+
+            _writer.Line();
+            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, true, new List<Attribute> { new ForwardsClientCallsAttribute() }))
+            {
+                WriteResourceEntry(resourceCollection, isAsync);
+            }
+        }
+
+        private new void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        {
+            if (IsArmCore)
+            {
+                base.WriteResourceEntry(resourceCollection, isAsync);
+            }
+            else
+            {
+                var operation = resourceCollection.GetOperation;
+                string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
+                string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
+                _writer.Append($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}(");
+
+                foreach (var parameter in operation.MethodSignature.Parameters)
+                {
+                    _writer.Append($"{parameter.Name},");
+                }
+
+                _writer.RemoveTrailingComma();
+                _writer.Line($"){configureAwait};");
             }
         }
 
@@ -139,9 +201,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"return new {type}({armClientVariable}, {This.ExtensionParameter.Name}.Id);");
         }
 
-        protected override Parameter[] GetParametersForSingletonEntry() => IsArmCore ? base.GetParametersForSingletonEntry() : new[] { _armClientParameter, _scopeParameter };
+        private new string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
+        {
+            return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
+        }
 
-        protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
+        private new Parameter[] GetParametersForSingletonEntry() => IsArmCore ? base.GetParametersForSingletonEntry() : new[] { _armClientParameter, _scopeParameter };
+
+        private new Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
             => IsArmCore ? base.GetParametersForCollectionEntry(resourceCollection) : resourceCollection.ExtraConstructorParameters.Prepend(_scopeParameter).Prepend(_armClientParameter).ToArray();
     }
 }

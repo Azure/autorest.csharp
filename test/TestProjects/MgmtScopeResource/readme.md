@@ -43,6 +43,9 @@ override-operation-name:
   ResourceLinks_ListAtSourceScope: GetAll
 operation-positions:
   ResourceLinks_ListAtSourceScope: collection
+generate-arm-resource-extensions:
+- /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: FakePolicyAssignments_DeleteById
