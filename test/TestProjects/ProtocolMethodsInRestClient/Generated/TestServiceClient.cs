@@ -95,14 +95,15 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string resourceId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Delete");
             scope.Start();
             try
             {
-                return await RestClient.DeleteAsync(resourceId, cancellationToken).ConfigureAwait(false);
+                return await RestClient.DeleteAsync(resourceId, ifMatch, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -113,14 +114,15 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string resourceId, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Delete");
             scope.Start();
             try
             {
-                return RestClient.Delete(resourceId, cancellationToken);
+                return RestClient.Delete(resourceId, ifMatch, cancellationToken);
             }
             catch (Exception e)
             {

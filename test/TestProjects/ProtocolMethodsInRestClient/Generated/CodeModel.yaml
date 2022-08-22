@@ -220,6 +220,17 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - !Parameter &ref_11
+            schema: *ref_9
+            implementation: Method
+            language: !Languages 
+              default:
+                name: ifMatch
+                description: The ETag of the transformation.
+                serializedName: If-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
         requests:
           - !Request 
             language: !Languages 
@@ -233,6 +244,7 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters:
           - *ref_10
+          - *ref_11
         responses:
           - !Response 
             language: !Languages 
@@ -255,7 +267,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_11
+          - !Parameter &ref_12
             schema: *ref_9
             implementation: Method
             required: true
@@ -294,7 +306,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_11
+          - *ref_12
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -330,7 +342,7 @@ operationGroups:
         parameters:
           - *ref_3
         requestMediaTypes:
-          application/json: !Request &ref_13
+          application/json: !Request &ref_14
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -345,7 +357,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_12
+              - !Parameter &ref_13
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -371,7 +383,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_12
+              - *ref_13
             language: !Languages 
               default:
                 name: ''
@@ -385,7 +397,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_13
+          - *ref_14
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -413,7 +425,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_14
+          - !Parameter &ref_15
             schema: *ref_9
             implementation: Method
             required: true
@@ -437,7 +449,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_14
+          - *ref_15
         responses:
           - !Response 
             language: !Languages 
@@ -460,7 +472,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_15
+          - !Parameter &ref_16
             schema: *ref_9
             implementation: Method
             required: true
@@ -499,7 +511,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_15
+          - *ref_16
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -535,7 +547,7 @@ operationGroups:
         parameters:
           - *ref_3
         requestMediaTypes:
-          application/json: !Request &ref_17
+          application/json: !Request &ref_18
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -550,7 +562,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_16
+              - !Parameter &ref_17
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -576,7 +588,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_16
+              - *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -590,7 +602,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_17
+          - *ref_18
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -618,7 +630,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_18
+          - !Parameter &ref_19
             schema: *ref_9
             implementation: Method
             required: true
@@ -642,7 +654,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
+          - *ref_19
         responses:
           - !Response 
             language: !Languages 
@@ -665,7 +677,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_19
+          - !Parameter &ref_20
             schema: *ref_9
             implementation: Method
             required: true
@@ -704,7 +716,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_19
+          - *ref_20
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -739,7 +751,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_20
+          - !Parameter &ref_21
             schema: *ref_9
             implementation: Method
             required: true
@@ -763,7 +775,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_20
+          - *ref_21
         responses:
           - !Response 
             language: !Languages 
@@ -786,7 +798,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_21
+          - !Parameter &ref_22
             schema: *ref_9
             implementation: Method
             required: true
@@ -825,7 +837,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_21
+          - *ref_22
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -853,7 +865,7 @@ operationGroups:
         parameters:
           - *ref_3
         requestMediaTypes:
-          application/json: !Request &ref_23
+          application/json: !Request &ref_24
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -868,7 +880,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_22
+              - !Parameter &ref_23
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -894,7 +906,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_22
+              - *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -908,7 +920,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_23
+          - *ref_24
         signatureParameters: []
         responses:
           - !SchemaResponse 
