@@ -346,7 +346,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the method will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmClient client, ResourceIdentifier scope)
         {
@@ -375,7 +375,7 @@ namespace MgmtScopeResource
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the method will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -408,7 +408,7 @@ namespace MgmtScopeResource
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the method will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -421,7 +421,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the method will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {

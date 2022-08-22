@@ -73,6 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resource.RequestPath))
             {
                 base.WriteSingletonResourceGetMethod(resource);
+                _writer.Line();
             }
 
             var signature = new MethodSignature(
