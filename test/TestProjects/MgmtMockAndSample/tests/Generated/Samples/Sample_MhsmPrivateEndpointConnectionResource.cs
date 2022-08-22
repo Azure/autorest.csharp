@@ -34,15 +34,15 @@ namespace MgmtMockAndSample
             string resourceGroupName = "sample-group";
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
-            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = await mhsmPrivateEndpointConnection.GetAsync();
+            MhsmPrivateEndpointConnectionResource result = await mhsmPrivateEndpointConnection.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData resourceData = result.Data;
+            MhsmPrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -64,11 +64,11 @@ namespace MgmtMockAndSample
             string resourceGroupName = "sample-group";
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
-            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
+            MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
             {
                 PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()
                 {
@@ -76,12 +76,12 @@ namespace MgmtMockAndSample
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data);
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data);
+            MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData resourceData = result.Data;
+            MhsmPrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -103,16 +103,16 @@ namespace MgmtMockAndSample
             string resourceGroupName = "sample-group";
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
-            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MgmtMockAndSample.MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
+            ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            ArmOperation<MgmtMockAndSample.MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionResource result = lro.Value;
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
+            MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.MhsmPrivateEndpointConnectionData resourceData = result.Data;
+            MhsmPrivateEndpointConnectionData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }

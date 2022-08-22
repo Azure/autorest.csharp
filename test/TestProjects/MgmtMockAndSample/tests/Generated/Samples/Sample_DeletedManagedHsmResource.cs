@@ -32,15 +32,15 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
-            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
-            MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
+            ResourceIdentifier deletedManagedHsmResourceId = DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
+            DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync();
+            DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.DeletedManagedHsmData resourceData = result.Data;
+            DeletedManagedHsmData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -61,8 +61,8 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
-            ResourceIdentifier deletedManagedHsmResourceId = MgmtMockAndSample.DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
-            MgmtMockAndSample.DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
+            ResourceIdentifier deletedManagedHsmResourceId = DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
+            DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
             await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);

@@ -32,8 +32,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Delete a vault
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await vault.DeleteAsync(WaitUntil.Completed);
         }
 
@@ -42,8 +42,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Disable a vault
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await vault.DisableAsync();
         }
 
@@ -52,8 +52,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Retrieve a vault
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await vault.GetAsync();
         }
 
@@ -62,8 +62,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List keys on an existing vault
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await foreach (var _ in vault.GetKeysAsync())
             {
             }
@@ -74,8 +74,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultListPrivateLinkResources
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await foreach (var _ in vault.GetPrivateLinkResourcesAsync())
             {
             }
@@ -98,8 +98,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Update an existing vault
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await vault.UpdateAsync(new VaultPatch()
             {
                 Properties = new VaultPatchProperties()
@@ -137,9 +137,9 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
         {
             // Example: Add an access policy, or update an access policy with new permissions
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
-            await vault.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            await vault.UpdateAccessPolicyAsync(AccessPolicyUpdateKind.Add, new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new AccessPolicyEntry[]
             {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
@@ -164,8 +164,8 @@ CertificatePermission.Get
         {
             // Example: Validate an existing vault
 
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            MgmtMockAndSample.VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
             await vault.ValidateAsync();
         }
     }

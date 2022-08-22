@@ -39,14 +39,14 @@ namespace MgmtMockAndSample
             ResourceType resourceType = new ResourceType("resourceType");
             string resourceName = "resourceName";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", subscriptionId, resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())
+            await foreach (RoleAssignmentResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.RoleAssignmentData resourceData = item.Data;
+                RoleAssignmentData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -72,14 +72,14 @@ namespace MgmtMockAndSample
             string subscriptionId = "subId";
             string resourceGroupName = "rgname";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", subscriptionId, resourceGroupName));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())
+            await foreach (RoleAssignmentResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.RoleAssignmentData resourceData = item.Data;
+                RoleAssignmentData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -104,22 +104,22 @@ namespace MgmtMockAndSample
             // get the collection of this RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
-            MgmtMockAndSample.Models.RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent()
+            RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent()
             {
                 RoleDefinitionId = "/subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
             };
-            ArmOperation<MgmtMockAndSample.RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, roleAssignmentName, content);
-            MgmtMockAndSample.RoleAssignmentResource result = lro.Value;
+            ArmOperation<RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, roleAssignmentName, content);
+            RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
+            RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -141,15 +141,15 @@ namespace MgmtMockAndSample
             // get the collection of this RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
-            MgmtMockAndSample.RoleAssignmentResource result = await collection.GetAsync(roleAssignmentName);
+            RoleAssignmentResource result = await collection.GetAsync(roleAssignmentName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.RoleAssignmentData resourceData = result.Data;
+            RoleAssignmentData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -171,7 +171,7 @@ namespace MgmtMockAndSample
             // get the collection of this RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -197,14 +197,14 @@ namespace MgmtMockAndSample
             // get the collection of this RoleAssignmentResource
             string subscriptionId = "subId";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}", subscriptionId));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())
+            await foreach (RoleAssignmentResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.RoleAssignmentData resourceData = item.Data;
+                RoleAssignmentData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -229,14 +229,14 @@ namespace MgmtMockAndSample
             // get the collection of this RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
-            MgmtMockAndSample.RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.RoleAssignmentResource item in collection.GetAllAsync())
+            await foreach (RoleAssignmentResource item in collection.GetAllAsync())
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.RoleAssignmentData resourceData = item.Data;
+                RoleAssignmentData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
