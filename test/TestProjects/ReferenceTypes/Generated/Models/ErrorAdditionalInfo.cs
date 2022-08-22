@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> The additional info type. </summary>
         public string ErrorAdditionalInfoType { get; }
         /// <summary>
-        /// The additional info..
+        /// The additional info.
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
