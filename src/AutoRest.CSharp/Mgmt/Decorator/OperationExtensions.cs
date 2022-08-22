@@ -226,14 +226,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;
 
-            var resourceType = operation.GetRequestPath().GetResourceType();
+            var requestPath = operation.GetRequestPath();
+            var resourceType = requestPath.GetResourceType();
             var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
 
-            // We should not find more than one candidate if all the segments in ResourceType is constant.
-            // If this happen, We determine the right candidate by doing a further check on the request path.
-            if (candidates.Count() > 1 && !resourceType.Any(segment => segment.IsReference))
+            // When more than one candidate is found and all the segments in ResourceType is constant, it's possible that some unexpected resources are included.
+            // If this happen, We determine the right candidate by doing a further check on the scope request path.
+            if (candidates.Count() > 1 && resourceType.IsConstant)
             {
-                return candidates.Where(resource => resource.RequestPath.Equals(operation.GetRequestPath()));
+                return candidates.Where(resource => resource.RequestPath.GetScopePath().Equals(requestPath.GetScopePath()));
             }
 
             return candidates;

@@ -385,14 +385,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!IsResourceDataType(originalType, out var data))
                 return originalType;
 
-            if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
+            bool shouldReturnData = Configuration.MgmtConfiguration.DisableResourceReturn.Contains(OperationId);
+            if (Resource is not null && Resource.ResourceData.Type.Equals(originalType) && !shouldReturnData)
                 return Resource.Type;
 
             var foundResources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceData.Type.Equals(originalType)).ToList();
             return foundResources.Count switch
             {
                 0 => throw new InvalidOperationException($"No resource corresponding to {originalType?.Name} is found"),
-                1 => foundResources.Single().Type,
+                1 => shouldReturnData ?
+                    throw new InvalidOperationException($"When resource data is only used by one resource, we don't support directly returning the data.") :
+                    foundResources.Single().Type,
                 _ => originalType // we have multiple resource matched, we can only return the original type without wrapping it
             };
         }
