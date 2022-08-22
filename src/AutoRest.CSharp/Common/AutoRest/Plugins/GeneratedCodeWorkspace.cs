@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// <param name="directory"></param>
         /// <param name="skipPredicate"></param>
         /// <param name="folders"></param>
-        public void AddDirectory(string directory, Predicate<string>? skipPredicate = null, IEnumerable<string>? folders = null)
+        public void AddDirectory(string directory, Func<string, bool>? skipPredicate = null, IEnumerable<string>? folders = null)
         {
             _project = AddDirectory(_project, directory, skipPredicate, folders);
         }
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// <param name="skipPredicate"></param>
         /// <param name="folders"></param>
         /// <returns></returns>
-        internal static Project AddDirectory(Project project, string directory, Predicate<string>? skipPredicate = null, IEnumerable<string>? folders = null)
+        internal static Project AddDirectory(Project project, string directory, Func<string, bool>? skipPredicate = null, IEnumerable<string>? folders = null)
         {
             foreach (string sourceFile in Directory.GetFiles(directory, "*.cs", SearchOption.AllDirectories))
             {
