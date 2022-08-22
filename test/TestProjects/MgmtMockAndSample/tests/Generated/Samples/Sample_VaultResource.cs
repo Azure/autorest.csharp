@@ -34,11 +34,11 @@ namespace MgmtMockAndSample
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.VaultPatch patch = new VaultPatch()
+            VaultPatch patch = new VaultPatch()
             {
                 Properties = new VaultPatchProperties()
                 {
@@ -68,11 +68,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
                     PublicNetworkAccess = "Enabled",
                 },
             };
-            MgmtMockAndSample.VaultResource result = await vault.UpdateAsync(patch);
+            VaultResource result = await vault.UpdateAsync(patch);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VaultData resourceData = result.Data;
+            VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -93,8 +93,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
             await vault.DeleteAsync(WaitUntil.Completed);
@@ -118,15 +118,15 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.VaultResource result = await vault.GetAsync();
+            VaultResource result = await vault.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            MgmtMockAndSample.VaultData resourceData = result.Data;
+            VaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
@@ -147,11 +147,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.Models.VaultKey item in vault.GetKeysAsync())
+            await foreach (VaultKey item in vault.GetKeysAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }
@@ -175,11 +175,11 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.VaultValidationResult result = await vault.ValidateAsync();
+            VaultValidationResult result = await vault.ValidateAsync();
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -200,8 +200,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
             await vault.DisableAsync();
@@ -225,12 +225,12 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            MgmtMockAndSample.Models.AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
-            MgmtMockAndSample.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new MgmtMockAndSample.Models.AccessPolicyEntry[]
+            AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
+            VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new AccessPolicyEntry[]
             {
 new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
 {
@@ -248,7 +248,7 @@ CertificatePermission.Get
 },
 })
             }));
-            MgmtMockAndSample.Models.VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
+            VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -272,11 +272,11 @@ CertificatePermission.Get
 
             // invoke the operation and iterate over the result
             int? top = 1;
-            await foreach (MgmtMockAndSample.VaultResource item in subscriptionResource.GetVaultsAsync(top: top))
+            await foreach (VaultResource item in subscriptionResource.GetVaultsAsync(top: top))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                MgmtMockAndSample.VaultData resourceData = item.Data;
+                VaultData resourceData = item.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
@@ -300,11 +300,11 @@ CertificatePermission.Get
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-group";
             string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = MgmtMockAndSample.VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            MgmtMockAndSample.VaultResource vault = client.GetVaultResource(vaultResourceId);
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
+            await foreach (MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
             {
                 Console.WriteLine($"Succeeded: {item}");
             }

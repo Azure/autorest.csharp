@@ -38,26 +38,16 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return compilation;
         }
 
-        // TODO -- this code is similar to the one in GeneratedCodeWorkspace, we might need to refactor this
         private static Project CreateSourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
         {
             var sourceCodeProject = CreateGeneratedCodeProject();
             var sourceCodeGeneratedDirectory = Path.Join(sourceCodePath, GeneratedCodeWorkspace.GeneratedFolder);
-            foreach (var sourceFile in Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories))
-            {
-                if (sourceFile.StartsWith(sourceCodeGeneratedDirectory))
-                {
-                    continue;
-                }
-                sourceCodeProject = sourceCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
-            }
+
+            sourceCodeProject = GeneratedCodeWorkspace.AddDirectory(sourceCodeProject, sourceCodePath, skipPredicate: sourceFile => sourceFile.StartsWith(sourceCodeGeneratedDirectory));
 
             foreach (var sharedSourceFolder in sharedSourceFolders)
             {
-                foreach (var sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
-                {
-                    sourceCodeProject = sourceCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
-                }
+                sourceCodeProject = GeneratedCodeWorkspace.AddDirectory(sourceCodeProject, sharedSourceFolder, folders: SharedFolders);
             }
 
             sourceCodeProject = sourceCodeProject.WithParseOptions(new CSharpParseOptions(preprocessorSymbols: new[] { "EXPERIMENTAL" }));
