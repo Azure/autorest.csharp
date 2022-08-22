@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
             _scopeParameter = new Parameter(
                 Name: "scope",
-                Description: $"The scope that the method will apply against.",
+                Description: $"The scope that the resource will apply against.",
                 Type: typeof(ResourceIdentifier),
                 DefaultValue: null,
                 Validation: ValidationType.None,
