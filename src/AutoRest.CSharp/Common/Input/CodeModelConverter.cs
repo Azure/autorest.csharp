@@ -467,8 +467,8 @@ namespace AutoRest.CSharp.Common.Input
 
                 return (x, y) switch
                 {
-                    (KeySecurityScheme apyKeyX, KeySecurityScheme apyKeyY)
-                        => apyKeyX.Type == apyKeyY.Type && apyKeyX.Name == apyKeyY.Name,
+                    (KeySecurityScheme apiKeyX, KeySecurityScheme apiKeyY)
+                        => apiKeyX.Type == apiKeyY.Type && apiKeyX.Name == apiKeyY.Name,
                     (OAuth2SecurityScheme oAuth2X, OAuth2SecurityScheme oAuth2Y)
                         => oAuth2X.Type == oAuth2Y.Type && oAuth2X.Scopes.SequenceEqual(oAuth2Y.Scopes, StringComparer.Ordinal),
                     _ => x.Type == y.Type
