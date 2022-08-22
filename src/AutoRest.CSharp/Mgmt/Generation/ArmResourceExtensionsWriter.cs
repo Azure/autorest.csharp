@@ -1,23 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Generation.Types;
 using System;
-using AutoRest.CSharp.Utilities;
+using System.Collections.Generic;
 using System.Linq;
-using Azure.ResourceManager;
-using Azure.Core;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using Humanizer.Localisation;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
+using Azure.ResourceManager;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -90,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetParametersForSingletonEntry());
             using (WriteCommonMethod(signature, null, false))
             {
-                WriteSingletonBody(signature, false, false);
+                WriteMethodBodyWrapper(signature, false, false);
             }
         }
 
@@ -113,7 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetParametersForCollectionEntry(resourceCollection));
             using (WriteCommonMethod(signature, null, false))
             {
-                WriteCollectionBody(signature, false, false);
+                WriteMethodBodyWrapper(signature, false, false);
             }
         }
 
@@ -166,31 +161,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteSingletonBody(MethodSignature signature, bool isAsync, bool isPaging)
-        {
-            if (IsArmCore)
-            {
-                // TODO -- currently we do nothing
-            }
-            else
-            {
-                WriteMethodBodyWrapper(signature, isAsync, isPaging);
-            }
-        }
-
-        private void WriteCollectionBody(MethodSignature signature, bool isAsync, bool isPaging)
-        {
-            if (IsArmCore)
-            {
-                // TODO -- this might have issues
-                WriteGetter(signature.ReturnType, ArmClientReference);
-            }
-            else
-            {
-                WriteMethodBodyWrapper(signature, isAsync, isPaging);
-            }
-        }
-
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
             _writer.AppendRaw("return ")
@@ -206,11 +176,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.AppendRaw(")")
                 .AppendRawIf(".ConfigureAwait(false)", isAsync && !isPaging)
                 .LineRaw(";");
-        }
-
-        private void WriteGetter(CSharpType? type, string armClientVariable)
-        {
-            _writer.Line($"return new {type}({armClientVariable}, {This.ExtensionParameter.Name}.Id);");
         }
 
         private new string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
