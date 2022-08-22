@@ -382,7 +382,7 @@ export function getInputType(
                 DiscriminatorPropertyName: getDiscriminator(program, m)?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(baseModel),
                 BaseModel: baseModel,
-                Properties: properties // Properties should be the last property assigned to model
+                Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
 
             models.set(name, model);
