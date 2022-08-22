@@ -12,6 +12,7 @@ input-file:
   - $(this-folder)/PolicyAssignments.json
   - $(this-folder)/Deployments.json
   - $(this-folder)/Links.json
+  - $(this-folder)/vmInsightsOnboarding_API.json
 namespace: MgmtScopeResource
 
 list-exception:

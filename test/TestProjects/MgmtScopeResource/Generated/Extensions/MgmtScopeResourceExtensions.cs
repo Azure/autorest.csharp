@@ -419,6 +419,15 @@ namespace MgmtScopeResource
             return client.GetFakePolicyAssignments(scope).Get(policyAssignmentName, cancellationToken);
         }
 
+        /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the method will apply against. </param>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
+        {
+            return GetExtensionClient(client, scope).GetVMInsightsOnboardingStatus();
+        }
+
         #region FakePolicyAssignmentResource
         /// <summary>
         /// Gets an object representing a <see cref="FakePolicyAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
@@ -471,6 +480,25 @@ namespace MgmtScopeResource
             {
                 ResourceLinkResource.ValidateResourceId(id);
                 return new ResourceLinkResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VMInsightsOnboardingStatusResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VMInsightsOnboardingStatusResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VMInsightsOnboardingStatusResource.CreateResourceIdentifier" /> to create a <see cref="VMInsightsOnboardingStatusResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VMInsightsOnboardingStatusResource.ValidateResourceId(id);
+                return new VMInsightsOnboardingStatusResource(client, id);
             }
             );
         }

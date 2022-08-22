@@ -90,8 +90,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetParametersForSingletonEntry());
             using (WriteCommonMethod(signature, null, false))
             {
-                // TODO
-                WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
+                WriteSingletonBody(signature, false, false);
             }
         }
 
@@ -167,10 +166,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        private void WriteSingletonBody(MethodSignature signature, bool isAsync, bool isPaging)
+        {
+            if (IsArmCore)
+            {
+                // TODO -- currently we do nothing
+            }
+            else
+            {
+                WriteMethodBodyWrapper(signature, isAsync, isPaging);
+            }
+        }
+
         private void WriteCollectionBody(MethodSignature signature, bool isAsync, bool isPaging)
         {
             if (IsArmCore)
             {
+                // TODO -- this might have issues
                 WriteGetter(signature.ReturnType, ArmClientReference);
             }
             else
