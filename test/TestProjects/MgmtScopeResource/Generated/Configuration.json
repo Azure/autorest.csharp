@@ -14,7 +14,8 @@
     "/{linkId}"
   ],
   "GenerateArmResourceExtensions": [
-    "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}"
+    "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
+    "/{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default"
   ],
   "RequestPathToParent": {
     "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",

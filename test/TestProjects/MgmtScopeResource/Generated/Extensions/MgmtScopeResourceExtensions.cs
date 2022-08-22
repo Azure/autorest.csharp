@@ -420,6 +420,14 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
+        {
+            return GetExtensionClient(armResource).GetVMInsightsOnboardingStatus();
+        }
+
+        /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>

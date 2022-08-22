@@ -46,6 +46,7 @@ operation-positions:
   ResourceLinks_ListAtSourceScope: collection
 generate-arm-resource-extensions:
 - /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+- /{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default
 
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
