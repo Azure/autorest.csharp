@@ -31,6 +31,24 @@ namespace MultipleInputFiles
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
+        {
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            source ??= new Source("value1");
+
+            options ??= new MultipleInputFilesClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "subscription-key"));
+            RestClient = new MultipleInputFilesRestClient(_clientDiagnostics, _pipeline, source);
+        }
+
+        /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="source"> source - server parameter. </param>
+        /// <param name="options"> The options for configuring the client. </param>
         public MultipleInputFilesClient(TokenCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
@@ -43,24 +61,6 @@ namespace MultipleInputFiles
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "https://fakeendpoint.azure.com/.default" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new MultipleInputFilesRestClient(_clientDiagnostics, _pipeline, source);
-        }
-
-        /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="source"> source - server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
-        {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
-            source ??= new Source("value1");
-
-            options ??= new MultipleInputFilesClientOptions();
-            _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "subscription-key"));
             RestClient = new MultipleInputFilesRestClient(_clientDiagnostics, _pipeline, source);
         }
 

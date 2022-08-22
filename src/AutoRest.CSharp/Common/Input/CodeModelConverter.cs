@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input
                 Models: models,
                 Enums: enums,
                 ApiVersions: GetApiVersions(codeModel),
-                Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().ToList()));
+                Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
@@ -404,5 +404,93 @@ namespace AutoRest.CSharp.Common.Input
                 .Distinct()
                 .OrderBy(v => v)
                 .ToList();
+
+        private static InputAuth GetAuth(IEnumerable<SecurityScheme> securitySchemes)
+        {
+            InputApiKeyAuth? apiKey = null;
+            InputOAuth2Auth? oAuth2 = null;
+
+            foreach (var scheme in securitySchemes.Distinct(SecuritySchemesComparer.Instance))
+            {
+                switch (scheme)
+                {
+                    case AzureKeySecurityScheme:
+                        throw new NotSupportedException($"{typeof(AzureKeySecurityScheme)} is not supported. Use {typeof(KeySecurityScheme)} instead");
+                    case AADTokenSecurityScheme:
+                        throw new NotSupportedException($"{typeof(AADTokenSecurityScheme)} is not supported. Use {typeof(OAuth2SecurityScheme)} instead");
+                    case KeySecurityScheme when apiKey is not null:
+                        throw new NotSupportedException($"Only one {typeof(KeySecurityScheme)} is supported. Remove excess");
+                    case OAuth2SecurityScheme when oAuth2 is not null:
+                        throw new NotSupportedException($"Only one {typeof(OAuth2SecurityScheme)} is not supported. Remove excess");
+                    case KeySecurityScheme apiKeyScheme:
+                        apiKey = new InputApiKeyAuth(apiKeyScheme.Name);
+                        break;
+                    case OAuth2SecurityScheme oAuth2Scheme:
+                        oAuth2 = new InputOAuth2Auth(oAuth2Scheme.Scopes.ToList());
+                        break;
+                }
+            }
+
+            return new InputAuth(apiKey, oAuth2);
+        }
+
+        private class SecuritySchemesComparer : IEqualityComparer<SecurityScheme>
+        {
+            public static IEqualityComparer<SecurityScheme> Instance { get; } = new SecuritySchemesComparer();
+
+            private SecuritySchemesComparer() { }
+
+            public bool Equals(SecurityScheme? x, SecurityScheme? y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (ReferenceEquals(x, null))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(y, null))
+                {
+                    return false;
+                }
+
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+
+                return (x, y) switch
+                {
+                    (AzureKeySecurityScheme azureX, AzureKeySecurityScheme azureY)
+                        => azureX.Type == azureY.Type && azureX.HeaderName == azureY.HeaderName,
+                    (AADTokenSecurityScheme aadX, AADTokenSecurityScheme aadY)
+                        => aadX.Type == aadY.Type && aadX.Scopes.SequenceEqual(aadY.Scopes, StringComparer.Ordinal),
+                    _ => x.Type == y.Type
+                };
+            }
+
+            public int GetHashCode(SecurityScheme obj) =>
+                obj switch
+                {
+                    AzureKeySecurityScheme azure => HashCode.Combine(azure.Type, azure.HeaderName),
+                    AADTokenSecurityScheme aad => GetAADTokenSecurityHashCode(aad),
+                    _ => HashCode.Combine(obj.Type)
+                };
+
+            private static int GetAADTokenSecurityHashCode(AADTokenSecurityScheme aad)
+            {
+                var hashCode = new HashCode();
+                hashCode.Add(aad.Type);
+                foreach (var value in aad.Scopes)
+                {
+                    hashCode.Add(value);
+                }
+                return hashCode.ToHashCode();
+            }
+        }
+
     }
 }
