@@ -149,12 +149,12 @@ internal static global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel
 {
 string requiredReadonlyString = default;
 int requiredReadonlyInt = default;
-string optionalReadonlyString = default;
-int optionalReadonlyInt = default;
+global::Azure.Core.Optional<string> optionalReadonlyString = default;
+global::Azure.Core.Optional<int> optionalReadonlyInt = default;
 global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList = default;
 global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList = default;
-global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList = default;
-global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<string>> optionalReadonlyStringList = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<int>> optionalReadonlyIntList = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""requiredReadonlyString"")){
@@ -170,6 +170,10 @@ optionalReadonlyString = property.Value.GetString();
 continue;
 }
 if(property.NameEquals(""optionalReadonlyInt"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
 optionalReadonlyInt = property.Value.GetInt32();
 continue;
 }
@@ -190,6 +194,10 @@ requiredReadonlyIntList = array;
 continue;
 }
 if(property.NameEquals(""optionalReadonlyStringList"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
 global::System.Collections.Generic.List<string> array = new global::System.Collections.Generic.List<string>();
 foreach (var item in property.Value.EnumerateArray())
 {
@@ -198,6 +206,10 @@ optionalReadonlyStringList = array;
 continue;
 }
 if(property.NameEquals(""optionalReadonlyIntList"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
 global::System.Collections.Generic.List<int> array = new global::System.Collections.Generic.List<int>();
 foreach (var item in property.Value.EnumerateArray())
 {
@@ -206,7 +218,7 @@ optionalReadonlyIntList = array;
 continue;
 }
 }
-return new global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyStringList, requiredReadonlyIntList, optionalReadonlyStringList, optionalReadonlyIntList);}
+return new global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyStringList, requiredReadonlyIntList, global::Azure.Core.Optional.ToList(optionalReadonlyStringList), global::Azure.Core.Optional.ToList(optionalReadonlyIntList));}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {

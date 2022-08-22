@@ -469,12 +469,15 @@ public ModelCollectionModel(global::System.Collections.Generic.IEnumerable<globa
 global::Azure.Core.Argument.AssertNotNull(requiredModelCollection, nameof(requiredModelCollection));
 
 RequiredModelCollection = requiredModelCollection.ToList();
+OptionalModelCollection = new global::Azure.Core.ChangeTrackingList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
 }
 /// <summary> Initializes a new instance of ModelCollectionModel. </summary>
 /// <param name=""requiredModelCollection""> Required collection of models. </param>
-internal ModelCollectionModel(global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> requiredModelCollection)
+/// <param name=""optionalModelCollection""> Optional collection of models. </param>
+internal ModelCollectionModel(global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> requiredModelCollection,global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> optionalModelCollection)
 {
 RequiredModelCollection = requiredModelCollection;
+OptionalModelCollection = optionalModelCollection;
 }
 
 /// <summary> Required collection of models. </summary>
@@ -511,12 +514,23 @@ foreach (var item in RequiredModelCollection)
 writer.WriteObjectValue(item);
 }
 writer.WriteEndArray();
+if (global::Azure.Core.Optional.IsCollectionDefined(OptionalModelCollection))
+{
+writer.WritePropertyName(""optionalModelCollection"");
+writer.WriteStartArray();
+foreach (var item in OptionalModelCollection)
+{
+writer.WriteObjectValue(item);
+}
+writer.WriteEndArray();
+}
 writer.WriteEndObject();
 }
 
 internal static global::Cadl.TestServer.ModelCollectionProperties.Models.ModelCollectionModel DeserializeModelCollectionModel(global::System.Text.Json.JsonElement element)
 {
 global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> requiredModelCollection = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> optionalModelCollection = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""requiredModelCollection"")){
@@ -527,8 +541,20 @@ array.Add(global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel.D
 requiredModelCollection = array;
 continue;
 }
+if(property.NameEquals(""optionalModelCollection"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
+global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> array = new global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel.DeserializeSimpleModel(item));}
+optionalModelCollection = array;
+continue;
 }
-return new global::Cadl.TestServer.ModelCollectionProperties.Models.ModelCollectionModel(requiredModelCollection);}
+}
+return new global::Cadl.TestServer.ModelCollectionProperties.Models.ModelCollectionModel(requiredModelCollection, global::Azure.Core.Optional.ToList(optionalModelCollection));}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {
@@ -577,12 +603,15 @@ public ModelCollectionModel(global::System.Collections.Generic.IEnumerable<globa
 global::Azure.Core.Argument.AssertNotNull(required2DCollection, nameof(required2DCollection));
 
 Required2DCollection = required2DCollection.ToList();
+Optional2DCollection = new global::Azure.Core.ChangeTrackingList<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>>();
 }
 /// <summary> Initializes a new instance of ModelCollectionModel. </summary>
 /// <param name=""required2DCollection""> Required collection of models. </param>
-internal ModelCollectionModel(global::System.Collections.Generic.IList<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> required2DCollection)
+/// <param name=""optional2DCollection""> Optional collection of models. </param>
+internal ModelCollectionModel(global::System.Collections.Generic.IList<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> required2DCollection,global::System.Collections.Generic.IList<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> optional2DCollection)
 {
 Required2DCollection = required2DCollection;
+Optional2DCollection = optional2DCollection;
 }
 
 /// <summary> Required collection of models. </summary>
@@ -624,12 +653,28 @@ writer.WriteObjectValue(item0);
 writer.WriteEndArray();
 }
 writer.WriteEndArray();
+if (global::Azure.Core.Optional.IsCollectionDefined(Optional2DCollection))
+{
+writer.WritePropertyName(""optional2DCollection"");
+writer.WriteStartArray();
+foreach (var item in Optional2DCollection)
+{
+writer.WriteStartArray();
+foreach (var item0 in item)
+{
+writer.WriteObjectValue(item0);
+}
+writer.WriteEndArray();
+}
+writer.WriteEndArray();
+}
 writer.WriteEndObject();
 }
 
 internal static global::Cadl.TestServer.ModelCollectionProperties.Models.ModelCollectionModel DeserializeModelCollectionModel(global::System.Text.Json.JsonElement element)
 {
 global::System.Collections.Generic.IList<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> required2DCollection = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IList<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>>> optional2DCollection = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""required2DCollection"")){
@@ -644,8 +689,24 @@ array.Add(array0);}
 required2DCollection = array;
 continue;
 }
+if(property.NameEquals(""optional2DCollection"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
+global::System.Collections.Generic.List<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> array = new global::System.Collections.Generic.List<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>>();
+foreach (var item in property.Value.EnumerateArray())
+{
+global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> array0 = new global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
+foreach (var item0 in item.EnumerateArray())
+{
+array0.Add(global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel.DeserializeSimpleModel(item0));}
+array.Add(array0);}
+optional2DCollection = array;
+continue;
 }
-return new global::Cadl.TestServer.ModelCollectionProperties.Models.ModelCollectionModel(required2DCollection);}
+}
+return new global::Cadl.TestServer.ModelCollectionProperties.Models.ModelCollectionModel(required2DCollection, global::Azure.Core.Optional.ToList(optional2DCollection));}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {

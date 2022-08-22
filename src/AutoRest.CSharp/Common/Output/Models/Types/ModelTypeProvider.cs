@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -81,33 +82,33 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
             var publicParameters = new List<Parameter>();
-            var serializatoinParameters = new List<Parameter>();
+            var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
                 var propertyIsRequiredInNonRoundTripModel = (inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output) && inputModelProperty.IsRequired;
-                var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel;
+                var propertyIsOptionalInOutputModel = (inputModel.Usage is InputModelTypeUsage.Output) && !inputModelProperty.IsRequired;
+                var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
 
                 var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
                 var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(),
+                    isRequired: inputModelProperty.IsRequired, writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
-                if (inputModelProperty.IsRequired)
+
+                var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
+                parametersToFields[parameter.Name] = field;
+                serializationParameters.Add(parameter);
+                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
                 {
-                    var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
-                    parametersToFields[parameter.Name] = field;
-                    serializatoinParameters.Add(parameter);
-                    if (!inputModelProperty.IsReadOnly)
-                    {
-                        publicParameters.Add(parameter);
-                    }
+                    publicParameters.Add(parameter);
                 }
             }
 
-            return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
+            return (fieldsToInputs, publicParameters, serializationParameters, parametersToFields);
         }
 
         private static CSharpType GetDefaultPropertyType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
