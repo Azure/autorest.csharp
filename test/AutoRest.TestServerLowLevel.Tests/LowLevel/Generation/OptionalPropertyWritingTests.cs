@@ -370,8 +370,8 @@ public partial class OutputModel
 /// <summary> Initializes a new instance of OutputModel. </summary>
 internal OutputModel()
 {
-OptionalStringList = new List<string>(0).AsReadOnly();
-OptionalIntList = new List<int>(0).AsReadOnly();
+OptionalStringList = Array.Empty<string>();
+OptionalIntList = Array.Empty<int>();
 }
 /// <summary> Initializes a new instance of OutputModel. </summary>
 /// <param name=""optionalString""> Optional string, illustrating an optional reference type property. </param>

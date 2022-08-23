@@ -71,10 +71,10 @@ public partial class RoundTripModel
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 public RoundTripModel()
 {
-RequiredReadonlyStringList = new List<string>(0).AsReadOnly();
-RequiredReadonlyIntList = new List<int>(0).AsReadOnly();
-OptionalReadonlyStringList = new List<string>(0).AsReadOnly();
-OptionalReadonlyIntList = new List<int>(0).AsReadOnly();
+RequiredReadonlyStringList = Array.Empty<string>();
+RequiredReadonlyIntList = Array.Empty<int>();
+OptionalReadonlyStringList = Array.Empty<string>();
+OptionalReadonlyIntList = Array.Empty<int>();
 }
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 /// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>
@@ -259,10 +259,10 @@ public partial class OutputModel
 /// <summary> Initializes a new instance of OutputModel. </summary>
 internal OutputModel()
 {
-RequiredReadonlyStringList = new List<string>(0).AsReadOnly();
-RequiredReadonlyIntList = new List<int>(0).AsReadOnly();
-OptionalReadonlyStringList = new List<string>(0).AsReadOnly();
-OptionalReadonlyIntList = new List<int>(0).AsReadOnly();
+RequiredReadonlyStringList = Array.Empty<string>();
+RequiredReadonlyIntList = Array.Empty<int>();
+OptionalReadonlyStringList = Array.Empty<string>();
+OptionalReadonlyIntList = Array.Empty<int>();
 }
 /// <summary> Initializes a new instance of OutputModel. </summary>
 /// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>

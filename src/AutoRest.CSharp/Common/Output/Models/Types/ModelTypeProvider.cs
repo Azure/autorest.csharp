@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (TypeFactory.IsReadOnlyList(propertyType))
                 {
-                    return $"new List<{propertyType.Arguments[0]}>(0).AsReadOnly();";
+                    return $"Array.Empty<{propertyType.Arguments[0]}>();";
                 }
                 if (!isRequired)
                 {
