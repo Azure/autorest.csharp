@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
     internal class ExtensionWrapMockTestWriter : MgmtMockTestBaseWriter<MgmtExtensionsWrapper>
     {
         private IEnumerable<MgmtMockTestProvider<MgmtExtensions>> _extensionTests;
-        public ExtensionWrapMockTestWriter(CodeWriter writer, MgmtMockTestProvider<MgmtExtensionsWrapper> testWrapper, IEnumerable<MgmtMockTestProvider<MgmtExtensions>> extensionTests) : base(writer, testWrapper)
+        public ExtensionWrapMockTestWriter(MgmtMockTestProvider<MgmtExtensionsWrapper> testWrapper, IEnumerable<MgmtMockTestProvider<MgmtExtensions>> extensionTests) : base(testWrapper)
         {
             _extensionTests = extensionTests;
         }

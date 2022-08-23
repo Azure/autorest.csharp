@@ -4,9 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
+using Configuration = AutoRest.CSharp.Input.Configuration;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -14,30 +18,34 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal sealed class ModelFactoryTypeProvider : TypeProvider
     {
         protected override string DefaultName { get; }
-        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; }
         public IEnumerable<MethodSignature> Methods { get; }
         public string DefaultClientName { get; }
 
-        public ModelFactoryTypeProvider(BuildContext context, IEnumerable<MethodSignature> methods) : this(context, methods, ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)) { }
-
-        private ModelFactoryTypeProvider(BuildContext context, IEnumerable<MethodSignature> methods, string defaultClientName) : base(context)
+        private ModelFactoryTypeProvider(IEnumerable<MethodSignature> methods, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Methods = methods;
 
             DefaultName = $"{defaultClientName}ModelFactory";
-            DefaultNamespace = GetDefaultNamespace(default, context);
             DefaultClientName = defaultClientName;
             DefaultAccessibility = "public";
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(BuildContext context, IEnumerable<TypeProvider> models)
+        public static ModelFactoryTypeProvider? TryCreate(InputNamespace rootNamespace, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             var schemaObjectTypes = models.OfType<SchemaObjectType>()
                 .Where(RequiresModelFactory)
                 .ToArray();
 
-            return schemaObjectTypes.Any() ? new ModelFactoryTypeProvider(context, schemaObjectTypes.Select(CreateMethod)) : null;
+            if (!schemaObjectTypes.Any())
+            {
+                return null;
+            }
+
+            var defaultClientName = ClientBuilder.GetClientPrefix(Configuration.LibraryName, rootNamespace.Name);
+            var defaultNamespace = GetDefaultModelNamespace(null, rootNamespace.Name);
+
+            return new ModelFactoryTypeProvider(schemaObjectTypes.Select(CreateMethod), defaultClientName, defaultNamespace, sourceInputModel);
         }
 
         private static MethodSignature CreateMethod(SchemaObjectType modelType)
@@ -58,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Type = inputType,
                     DefaultValue = Constant.Default(inputType),
-                    Initializer = Parameter.GetParameterInitializer(inputType, ctorParameter.DefaultValue)
+                    Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
             }
 

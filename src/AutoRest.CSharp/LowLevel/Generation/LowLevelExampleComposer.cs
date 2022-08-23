@@ -4,19 +4,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
-using System.Xml.Schema;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -26,36 +22,33 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
         private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
 
-        private string ClientTypeName { get; init; }
-        private BuildContext<LowLevelOutputLibrary> Context { get; init; }
-        private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; init; }
+        private string ClientTypeName { get; }
+        private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
 
 
-        public LowLevelExampleComposer(LowLevelClient client, BuildContext<LowLevelOutputLibrary> context)
+        public LowLevelExampleComposer(LowLevelClient client)
         {
             ClientTypeName = client.Type.Name;
-            Context = context;
             ClientInvocationChain = GetClientInvocationChain(client);
         }
 
         public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
         {
-            var methodSignature = clientMethod.Signature.WithAsync(async);
-            var operationSchema = clientMethod.OperationSchemas;
-
+            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
+            var requestBodyType = clientMethod.RequestBodyType;
             var builder = new StringBuilder();
 
             if (HasNoCustomInput(methodSignature.Parameters)) // client.GetAllItems(RequestContext context = null)
             {
                 ComposeExampleWithoutParameter(clientMethod, methodSignature.Name, async, true, builder);
             }
-            else if (HasOptionalInputValue(methodSignature.Parameters, operationSchema.RequestBodySchema))
+            else if (HasOptionalInputValue(methodSignature.Parameters, requestBodyType, out var requestModel))
             {
-                if (AreAllParametersOptional(methodSignature.Parameters))
+                if (methodSignature.Parameters.All(p => p.IsOptionalInSignature))
                 {
                     ComposeExampleWithoutParameter(clientMethod, methodSignature.Name, async, false, builder);
                 }
-                else if (operationSchema.RequestBodySchema != null && HasRequiredAndWritablePropertyFromTop(operationSchema.RequestBodySchema))
+                else if (requestBodyType != null && (requestModel == null || HasRequiredAndWritablePropertyFromTop(requestModel)))
                 {
                     ComposeExampleWithParametersAndRequestContent(clientMethod, methodSignature.Name, async, false, builder);
                 }
@@ -75,149 +68,83 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{builder.ToString()}";
         }
 
-        private bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)
-        {
-            return !parameters.Any(p => p.Type.Name != nameof(RequestContext)); // `RequestContext = null` is excluded
-        }
+        // `RequestContext = null` is excluded
+        private static bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)
+            => parameters.Count == 0 || parameters.Count == 1 && parameters[0].Equals(KnownParameters.RequestContext);
 
-        private bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
-        {
-            return parameters.Any(p => p.RequestLocation != RequestLocation.Body && p.Type.Name != nameof(RequestContext));// RequestContext is excluded
-        }
+        // RequestContext is excluded
+        private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
+            => parameters.Any(p => p.RequestLocation != RequestLocation.Body && !p.Equals(KnownParameters.RequestContext));
 
         private void ComposeExampleWithoutRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
         {
-            var hasNonBodyParameter = HasNonBodyCustomParameter(clientMethod.Signature.Parameters);
-            builder.AppendLine($"This sample shows how to call {methodName}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? " and parse the result" : "")}.");
+            var hasNonBodyParameter = HasNonBodyCustomParameter(clientMethod.ProtocolMethodSignature.Parameters);
+            builder.AppendLine($"This sample shows how to call {methodName}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
             ComposeCodeSnippet(clientMethod, methodName, async, false, builder);
         }
 
         private void ComposeExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.Signature.Parameters)}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? " and parse the result" : "")}.");
+            builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
             ComposeCodeSnippet(clientMethod, methodName, async, true, builder);
         }
 
-        private bool AreAllParametersOptional(IReadOnlyList<Parameter> parameters)
-        {
-            return !parameters.Any(p => p.DefaultValue == null);
-        }
-
         /// <summary>
-        /// Check top level properties of the given schema, return true if a required and writable property is found.
+        /// Check top level properties of the given model, return true if a required and writable property is found.
         /// </summary>
-        /// <param name="schema"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        private bool HasRequiredAndWritablePropertyFromTop(Schema schema)
+        private bool HasRequiredAndWritablePropertyFromTop(InputModelType model)
+            => GetConcreteChildModel(model).GetSelfAndBaseModels().Any(m => m.Properties.Any(p => p.IsRequired && !p.IsReadOnly));
+
+        private bool HasOptionalInputValue(IReadOnlyList<Parameter> parameters, InputType? requestBodyType, out InputModelType? requestModel)
         {
-            switch (schema)
-            {
-                case OrSchema o:
-                    foreach (Schema s in o.AnyOf)
-                    {
-                        if (HasRequiredAndWritablePropertyFromTop(s))
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                case XorSchema o:
-                    foreach (Schema s in o.OneOf)
-                    {
-                        if (HasRequiredAndWritablePropertyFromTop(s))
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                case ObjectSchema o:
-                    // We must also include any properties introduced by our parent chain.
-                    // Try to get the concrete child type for polymorphism
-                    foreach (ObjectSchema s in GetAllSchemaInherited(GetConcreteChildType(o)))
-                    {
-                        foreach (Property prop in s.Properties)
-                        {
-                            if (prop.IsRequired && !prop.IsReadOnly)
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-            }
-
-            return true;
-        }
-
-        private bool HasOptionalInputValue(IReadOnlyList<Parameter> parameters, Schema? requestSchema)
-        {
-            foreach (var parameter in parameters.Where(p => p.Type.Name != nameof(RequestContext))) // exlucde RequestContext
-            {
-                if (parameter.DefaultValue != null)
-                {
-                    return true;
-                }
-            }
-
-            if (requestSchema != null && HasOptionalAndWritableProperty(requestSchema!))
+            requestModel = requestBodyType as InputModelType;
+            if (parameters.Any(p => p.IsOptionalInSignature && !p.Equals(KnownParameters.RequestContext)))
             {
                 return true;
             }
 
-            return false;
+            return requestModel != null && HasOptionalAndWritableProperty(requestModel);
         }
 
         /// <summary>
-        /// Check if there is any optional and wriable property in the given schema hierarchy.
+        /// Check if there is any optional and writable property in the given model hierarchy.
         /// </summary>
-        /// <param name="schema"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        private bool HasOptionalAndWritableProperty(Schema schema)
+        private bool HasOptionalAndWritableProperty(InputModelType model)
         {
             // Visit each schema in the graph and for object schemas, check if any property is optional
-            var visitedSchema = new HashSet<Schema>();
-            var schemasToExplore = new Queue<Schema>(new[] { schema });
+            var visitedModels = new HashSet<InputModelType>();
+            var modelsToExplore = new Queue<InputModelType>(new[] { model });
 
-            while (schemasToExplore.Any())
+            while (modelsToExplore.Any())
             {
-                Schema toExplore = schemasToExplore.Dequeue();
+                var toExplore = modelsToExplore.Dequeue();
 
-                if (visitedSchema.Contains(toExplore))
+                if (visitedModels.Contains(toExplore))
                 {
                     continue;
                 }
 
-                switch (toExplore)
+                foreach (var modelOrBase in GetConcreteChildModel(toExplore).GetSelfAndBaseModels())
                 {
-                    case OrSchema o:
-                        foreach (Schema s in o.AnyOf)
+                    foreach (var prop in modelOrBase.Properties)
+                    {
+                        if (!prop.IsRequired && !prop.IsReadOnly)
                         {
-                            schemasToExplore.Enqueue(s);
+                            return true;
                         }
-                        break;
-                    case XorSchema o:
-                        foreach (Schema s in o.OneOf)
+
+                        if (prop.Type is InputModelType modelType)
                         {
-                            schemasToExplore.Enqueue(s);
+                            modelsToExplore.Enqueue(modelType);
                         }
-                        break;
-                    case ObjectSchema o:
-                        // We must also include any properties introduced by our parent chain.
-                        // Try to get the concrete child type for polymorphism
-                        foreach (ObjectSchema s in GetAllSchemaInherited(GetConcreteChildType(o)))
-                        {
-                            foreach (Property prop in s.Properties)
-                            {
-                                if (!prop.IsRequired && !prop.IsReadOnly)
-                                {
-                                    return true;
-                                }
-                                schemasToExplore.Enqueue(prop.Schema);
-                            }
-                        }
-                        break;
+                    }
                 }
-                visitedSchema.Add(toExplore);
+
+                visitedModels.Add(toExplore);
             }
 
             return false;
@@ -225,7 +152,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.Signature.Parameters)}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? ", and how to parse the result" : "")}.");
+            builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? ", and how to parse the result" : "")}.");
             ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
@@ -247,7 +174,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.OperationSchemas.ResponseBodySchema != null ? " and parse the result" : "")}.");
+            builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
             ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
@@ -256,13 +183,13 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine("<code><![CDATA[");
             ComposeGetClientCodes(builder);
             builder.AppendLine();
-            if (clientMethod.OperationSchemas.RequestBodySchema != null)
+            if (clientMethod.RequestBodyType != null)
             {
-                ComposeRequestContent(allParameters, clientMethod.OperationSchemas.RequestBodySchema!, builder);
+                ComposeRequestContent(allParameters, clientMethod.RequestBodyType, builder);
                 builder.AppendLine();
             }
 
-            if (clientMethod.IsLongRunning)
+            if (clientMethod.LongRunning != null)
             {
                 if (clientMethod.PagingInfo != null && clientMethod.PagingInfo?.NextPageMethod != null)
                 {
@@ -287,6 +214,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
+            if (clientMethod is not { ResponseBodyType: InputModelType {} responseModel})
+            {
+                return;
+            }
+
             /* CODE PATTEN
              * var operation = await client.{methodName}(...);
              *
@@ -300,12 +232,12 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
             builder.AppendLine();
             builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
             using (Scope($"{(async ? "await " : "")}foreach (var data in response.Value)", 0, builder, true))
             {
-                ComposeParsingPageableResponseCodes((ObjectSchema)clientMethod.OperationSchemas.ResponseBodySchema!, clientMethod.PagingInfo!.ItemName, allParameters, builder);
+                ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
         }
 
@@ -322,10 +254,10 @@ namespace AutoRest.CSharp.Generation.Writers
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
             builder.AppendLine();
 
-            if (clientMethod.OperationSchemas.ResponseBodySchema == null)
+            if (clientMethod.ResponseBodyType == null)
             {
                 builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletionResponse{(async ? "Async" : "")}();");
                 builder.AppendLine("Console.WriteLine(response.Status)");
@@ -333,13 +265,13 @@ namespace AutoRest.CSharp.Generation.Writers
             else
             {
                 builder.AppendLine($"BinaryData data = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
-                ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema, builder);
+                ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
             }
         }
 
-        private void ComposeParsingLongRunningResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
+        private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
-            if (responseSchema is BinarySchema binarySchema)
+            if (inputType is InputPrimitiveType {Kind: InputTypeKind.Stream})
             {
                 using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 0, builder, true))
                 {
@@ -349,8 +281,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { responseSchema });
-            var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
+            ComposeResponseParsingCode(allProperties, inputType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
 
             if (apiInvocationChainList.Count == 0)
             {
@@ -368,6 +299,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandlePageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
+            if (clientMethod.ResponseBodyType is not InputModelType modelType)
+            {
+                return;
+            }
+
             /* GENERATED CODE PATTERN
              * await foreach (var data in client.{methodName}(...))
              * {
@@ -378,20 +314,20 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
             {
-                ComposeParsingPageableResponseCodes((ObjectSchema)clientMethod.OperationSchemas.ResponseBodySchema!, clientMethod.PagingInfo!.ItemName, allParameters, builder);
+                ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
         }
 
-        private void ComposeParsingPageableResponseCodes(ObjectSchema responseSchema, string pagingItemName, bool allProperties, StringBuilder builder)
+        private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
         {
-            foreach (var property in responseSchema.Properties)
+            foreach (var property in responseModelType.Properties)
             {
-                if (property.SerializedName == pagingItemName && property.Schema is ArraySchema itemArraySchema)
+                if (property.SerializedName == pagingItemName && property.Type is InputListType listType)
                 {
                     var apiInvocationChainList = new List<IReadOnlyList<string>>();
-                    ComposeResponseParsingCode(allProperties, itemArraySchema.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { responseSchema });
+                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType> { responseModelType });
                     var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
 
                     if (apiInvocationChainList.Count == 0)
@@ -416,10 +352,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.Signature.Parameters.SkipLast(1).ToList(), allParameters)});");
-            if (clientMethod.OperationSchemas.ResponseBodySchema != null)
+            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            if (clientMethod.ResponseBodyType != null)
             {
-                ComposeParsingNormalResponseCodes(allParameters, clientMethod.OperationSchemas.ResponseBodySchema, builder);
+                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
             }
             else
             {
@@ -427,9 +363,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeParsingNormalResponseCodes(bool allProperties, Schema responseSchema, StringBuilder builder)
+        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
         {
-            if (responseSchema is BinarySchema binarySchema)
+            if (responseBodyType is InputPrimitiveType {Kind: InputTypeKind.Stream})
             {
                 using (Scope("if (response.ContentStream != null)", 0, builder, true))
                 {
@@ -442,8 +378,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseSchema, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<Schema>() { responseSchema });
-            var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
+            ComposeResponseParsingCode(allProperties, responseBodyType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
 
             builder.AppendLine();
 
@@ -461,95 +396,79 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void ComposeResponseParsingCode(bool allProperties, Schema schema, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentAPIInvocationChain, HashSet<Schema> visitedSchema)
+        private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
         {
-            switch (schema)
+            switch (type)
             {
-                case ArraySchema a:
+                case InputListType listType:
+                    if (visitedTypes.Contains(listType.ElementType))
+                    {
+                        return;
+                    }
                     // {parentOp}[0]
-                    if (visitedSchema.Contains(a.ElementType))
+                    var parentOp = currentApiInvocationChain.Pop();
+                    currentApiInvocationChain.Push($"{parentOp}[0]");
+                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    return;
+                case InputDictionaryType dictionaryType :
+                    if (visitedTypes.Contains(dictionaryType.ValueType))
                     {
                         return;
                     }
-                    var parentOp = currentAPIInvocationChain.Pop();
-                    currentAPIInvocationChain.Push($"{parentOp}[0]");
-                    ComposeResponseParsingCode(allProperties, a.ElementType, apiInvocationChainList, currentAPIInvocationChain, visitedSchema);
-                    return;
-                case DictionarySchema d:
                     // .GetProperty("<test>")
-                    if (visitedSchema.Contains(d.ElementType))
-                    {
-                        return;
-                    }
-                    currentAPIInvocationChain.Push("GetProperty(\"<test>\")");
-                    ComposeResponseParsingCode(allProperties, d.ElementType, apiInvocationChainList, currentAPIInvocationChain, visitedSchema);
-                    currentAPIInvocationChain.Pop();
+                    currentApiInvocationChain.Push("GetProperty(\"<test>\")");
+                    ComposeResponseParsingCode(allProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    currentApiInvocationChain.Pop();
                     return;
-                case OrSchema o:
-                    foreach (Schema s in o.AnyOf)
-                    {
-                        if (visitedSchema.Contains(s))
-                        {
-                            return;
-                        }
-                        ComposeResponseParsingCode(allProperties, s, apiInvocationChainList, currentAPIInvocationChain, visitedSchema);
-                    }
-                    return;
-                case XorSchema o:
-                    foreach (Schema s in o.OneOf)
-                    {
-                        if (visitedSchema.Contains(s))
-                        {
-                            return;
-                        }
-                        ComposeResponseParsingCode(allProperties, s, apiInvocationChainList, currentAPIInvocationChain, visitedSchema);
-                    }
-                    return;
-                case ObjectSchema o:
-                    // We must also include any properties introduced by our parent chain.
-                    foreach (ObjectSchema s in GetAllSchemaInherited(o))
-                    {
-                        if (!s.Properties.Any())
-                        {
-                            continue;
-                        }
-
-                        var propertiesToExplore = s.Properties;
-                        if (!allProperties)
-                        {
-                            propertiesToExplore = s.Properties.Where(p => p.IsRequired).ToArray();
-                        }
-
-                        if (propertiesToExplore.Count() == 0) // if you have a required property, but its child properties are all optional
-                        {
-                            // return the object
-                            AddAPIInvocationChainResult(apiInvocationChainList, currentAPIInvocationChain);
-                            return;
-                        }
-
-                        foreach (Property prop in propertiesToExplore)
-                        {
-                            if (visitedSchema.Contains(prop.Schema))
-                            {
-                                continue;
-                            }
-                            // .GetProperty("{property_name}")
-                            visitedSchema.Add(prop.Schema);
-                            currentAPIInvocationChain.Push($"GetProperty(\"{prop.SerializedName}\")");
-                            ComposeResponseParsingCode(allProperties, prop.Schema, apiInvocationChainList, currentAPIInvocationChain, visitedSchema);
-                            currentAPIInvocationChain.Pop();
-                            visitedSchema.Remove(prop.Schema);
-                        }
-                    }
+                case InputModelType modelType:
+                    ComposeResponseParsingCode(allProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
                     return;
             }
+
             // primitive types, return
-            AddAPIInvocationChainResult(apiInvocationChainList, currentAPIInvocationChain);
+            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
         }
 
-        private void AddAPIInvocationChainResult(List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentAPIInvocationChain)
+        private void ComposeResponseParsingCode(bool allProperties, InputModelType model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
         {
-            var finalChain = currentAPIInvocationChain.ToList();
+            foreach (var modelOrBase in model.GetSelfAndBaseModels())
+            {
+                if (!modelOrBase.Properties.Any())
+                {
+                    continue;
+                }
+
+                var propertiesToExplore = modelOrBase.Properties;
+                if (!allProperties)
+                {
+                    propertiesToExplore = modelOrBase.Properties.Where(p => p.IsRequired).ToArray();
+                }
+
+                if (propertiesToExplore.Count == 0) // if you have a required property, but its child properties are all optional
+                {
+                    // return the object
+                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
+                    return;
+                }
+
+                foreach (var property in propertiesToExplore)
+                {
+                    if (!visitedTypes.Contains(property.Type))
+                    {
+                        // .GetProperty("{property_name}")
+                        visitedTypes.Add(property.Type);
+                        currentApiInvocationChain.Push($"GetProperty(\"{property.SerializedName}\")");
+                        ComposeResponseParsingCode(allProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                        currentApiInvocationChain.Pop();
+                        visitedTypes.Remove(property.Type);
+                    }
+                }
+            }
+        }
+
+        private void AddApiInvocationChainResult(List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain)
+        {
+            var finalChain = currentApiInvocationChain.ToList();
             finalChain.Reverse();
             apiInvocationChainList.Add(finalChain);
         }
@@ -673,83 +592,99 @@ namespace AutoRest.CSharp.Generation.Writers
             return "null"; // some unknown found
         }
 
-        private void ComposeRequestContent(bool composeAll, Schema requestBodySchema, StringBuilder builder)
+        private void ComposeRequestContent(bool composeAll, InputType requestBodyType, StringBuilder builder)
         {
             // var data = {value_expression};
             builder.Append("var data = ");
-            builder.Append(ComposeRequestContent(composeAll, requestBodySchema, 0, new HashSet<Schema>()));
+            builder.Append(ComposeRequestContent(composeAll, requestBodyType, null, 0, new HashSet<InputModelType>()));
             builder.AppendLine(";");
         }
 
-        private string ComposeRequestContent(bool allProperties, Schema schema, int indent, HashSet<Schema> visitedSchema)
+        private string ComposeRequestContent(bool allProperties, InputType inputType, string? propertyDescription, int indent, HashSet<InputModelType> visitedModels) => inputType switch
         {
-            if (visitedSchema.Contains(schema))
+            InputListType listType             => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
+            InputDictionaryType dictionaryType => ComposeDictionaryRequestContent(allProperties, dictionaryType.ValueType, indent, visitedModels),
+            InputEnumType enumType             => $"\"{enumType.AllowedValues.First().Value}\"",
+            InputPrimitiveType primitiveType   => primitiveType.Kind switch
+            {
+                InputTypeKind.Stream           => "File.OpenRead(\"<filePath>\")",
+                InputTypeKind.Boolean          => "true",
+                InputTypeKind.Date             => "\"2022-05-10\"",
+                InputTypeKind.DateTime         => "\"2022-05-10T14:57:31.2311892-04:00\"",
+                InputTypeKind.DateTimeISO8601  => "\"2022-05-10T18:57:31.2311892Z\"",
+                InputTypeKind.DateTimeRFC1123  => "\"Tue, 10 May 2022 18:57:31 GMT\"",
+                InputTypeKind.DateTimeUnix     => "\"1652209051\"",
+                InputTypeKind.Float32          => "123.45f",
+                InputTypeKind.Float64          => "123.45d",
+                InputTypeKind.Float128         => "123.45m",
+                InputTypeKind.Guid             => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
+                InputTypeKind.Int32            => "1234",
+                InputTypeKind.Int64            => "1234L",
+                InputTypeKind.String           => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
+                InputTypeKind.DurationISO8601  => "PT1H23M45S",
+                InputTypeKind.DurationConstant => "01:23:45",
+                InputTypeKind.Time             => "01:23:45",
+                _ => "new {}"
+            },
+            InputModelType modelType          => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
+            _ => "new {}"
+        };
+
+        private string ComposeArrayRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new[] {
+             *     {element_expression}
+             * }
+             * or
+             * new[] {}
+             */
+
+            var elementExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
+            if (elementExpr == "")
+            {
+                return "new[] {}";
+            }
+
+            var builder = new StringBuilder();
+            using (Scope("new[] ", indent, builder))
+            {
+                builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
+            }
+            return builder.ToString();
+        }
+
+        private string ComposeDictionaryRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new {
+             *     key = {value_expression},
+             * }
+             * or
+             * new {}
+             */
+            var valueExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
+            if (valueExpr == "")
+            {
+                return "new {}";
+            }
+
+            var builder = new StringBuilder();
+            using (Scope("new ", indent, builder))
+            {
+                builder.Append(' ', indent + 4).AppendLine($"key = {valueExpr},");
+            }
+            return builder.ToString();
+        }
+
+        private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
+        {
+            if (visitedModels.Contains(model))
             {
                 return "";
             }
 
-            switch (schema)
-            {
-                case ArraySchema a:
-                    /* GENERATED CODE PATTERN
-                     * new[] {
-                     *     {element_expression}
-                     * }
-                     * or
-                     * new[] {}
-                     */
-                    var elementExpr = ComposeRequestContent(allProperties, a.ElementType, indent + 4, visitedSchema);
-                    if (elementExpr == "")
-                    {
-                        return "new[] {}";
-                    }
-
-                    var builder = new StringBuilder();
-                    using (Scope("new[] ", indent, builder))
-                    {
-                        builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
-                    }
-                    return builder.ToString();
-                case DictionarySchema d:
-                    /* GENERATED CODE PATTERN
-                     * new {
-                     *     key = {value_expression},
-                     * }
-                     * or
-                     * new {}
-                     */
-                    var valueExpr = ComposeRequestContent(allProperties, d.ElementType, indent + 4, visitedSchema);
-                    if (valueExpr == "")
-                    {
-                        return "new {}";
-                    }
-
-                    builder = new StringBuilder();
-                    using (Scope("new ", indent, builder))
-                    {
-                        builder.Append(' ', indent + 4).AppendLine($"key = {valueExpr},");
-                    }
-                    return builder.ToString();
-                case OrSchema or:
-                    foreach (var o in or.AnyOf)
-                    {
-                        if (!visitedSchema.Contains(o))
-                        {
-                            return ComposeRequestContent(allProperties, o, indent, visitedSchema);
-                        }
-                    }
-                    return "";
-                case XorSchema xor:
-                    foreach (var o in xor.OneOf)
-                    {
-                        if (!visitedSchema.Contains(o))
-                        {
-                            return ComposeRequestContent(allProperties, o, indent, visitedSchema);
-                        }
-                    }
-                    return "";
-                case ObjectSchema obj:
-                    /* GENERATED CODE PATTERN
+            /* GENERATED CODE PATTERN
                      * new {
                      *     prop1 = {value_expression},
                      *     prop2 = {value_expression},
@@ -758,119 +693,65 @@ namespace AutoRest.CSharp.Generation.Writers
                      * or
                      * new {}
                      */
-                    var properties = new List<Property>();
-                    // We must also include any properties introduced by our parent chain.
-                    // Try to get the concrete child type for polymorphism
-                    var concreteObj = GetConcreteChildType(obj);
-                    foreach (ObjectSchema s in GetAllSchemaInherited(concreteObj))
-                    {
-                        if (allProperties)
-                        {
-                            properties.AddRange(s.Properties.Where(p => !p.IsReadOnly));
-                        }
-                        else
-                        {
-                            properties.AddRange(s.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
-                        }
-                    }
-
-                    if (!properties.Any())
-                    {
-                        return "new {}";
-                    }
-
-                    visitedSchema.Add(obj);
-                    var propertyExpressions = new List<string>();
-                    foreach (Property p in properties)
-                    {
-                        string propertyValueExpr = "";
-                        if (p.IsDiscriminator == true)
-                        {
-                            propertyValueExpr = MockDiscriminatorValue(concreteObj.DiscriminatorValue!, p.Schema);
-                        }
-                        else
-                        {
-                            propertyValueExpr = ComposeRequestContent(allProperties, p.Schema, indent + 4, visitedSchema);
-
-                        }
-
-                        if (propertyValueExpr != "")
-                        {
-                            var propertyExprBuilder = new StringBuilder();
-                            propertyExprBuilder.Append(' ', indent + 4).Append($"{p.SerializedName} = {propertyValueExpr},");
-                            propertyExpressions.Add(propertyExprBuilder.ToString());
-                        }
-                    }
-                    visitedSchema.Remove(obj);
-
-                    if (propertyExpressions.Count == 0)
-                    {
-                        return "new {}";
-                    }
-
-                    builder = new StringBuilder();
-                    using (Scope("new ", indent, builder))
-                    {
-                        foreach (var expr in propertyExpressions)
-                        {
-                            builder.AppendLine(expr);
-                        }
-                    }
-                    return builder.ToString();
-                case AnySchema a:
-                    return $"\"<{a.DefaultValue ?? a.Name}>\"";
-                case BooleanSchema b:
-                    return $"{(b.DefaultValue ?? "true")}";
-                case NumberSchema n:
-                    return $"{(n.DefaultValue ?? "1234")}";
-                case StringSchema s:
-                    return $"\"<{(s.DefaultValue ?? s.Name)}>\"";
-                case CharSchema c:
-                    return $"\"<{(c.DefaultValue ?? "t")}>\"";
-                case DateSchema d:
-                    return $"\"<{(d.DefaultValue ?? "2022-05-10")}>\"";
-                case TimeSchema t:
-                    return $"\"<{(t.DefaultValue ?? "14:57:31.2311892")}>\"";
-                case DateTimeSchema dt:
-                    return $"\"<{(dt.DefaultValue ?? "2022-05-10T14:57:31.2311892-04:00")}>\"";
-                case DurationSchema d:
-                    // duration format is P1H2M3S
-                    return $"\"<{(d.DefaultValue ?? "(1.)3:45:67")}>\"";
-                case ChoiceSchema c:
-                    return $"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"";
-                case ConstantSchema c:
-                    if (c.Value == null)
-                    {
-                        return ComposeRequestContent(allProperties, c.ValueType, indent, visitedSchema);
-                    }
-                    return (c.ValueType is StringSchema ? $"\"<{c.Value.Value}>\"" : $"{c.Value.Value}");
-                case SealedChoiceSchema c:
-                    return $"\"<{(c.DefaultValue ?? c.Choices.First().Value)}>\"";
-                case UuidSchema u:
-                    return $"\"<{(u.DefaultValue ?? "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")}>\"";
-                case UriSchema u:
-                    return $"\"<{(u.DefaultValue ?? "http://my-account-name.azure.com")}>\"";
-                case BinarySchema b:
-                    return "File.OpenRead(\"<filePath>\")";
-                default:
-                    // unknown type
-                    return $"{(schema.DefaultValue ?? "new {}")}";
-            }
-        }
-
-        private string MockDiscriminatorValue(string value, Schema discriminatorPropertySchema)
-        {
-            switch (discriminatorPropertySchema)
+            var properties = new List<InputModelProperty>();
+            // We must also include any properties introduced by our parent chain.
+            // Try to get the concrete child type for polymorphism
+            var concreteModel = GetConcreteChildModel(model);
+            foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
             {
-
-                case BooleanSchema b:
-                case NumberSchema n:
-                    return value;
-                case ConstantSchema c:
-                    return MockDiscriminatorValue(value, c.ValueType);
-                default:
-                    return $"\"{value}\"";
+                if (allProperties)
+                {
+                    properties.AddRange(modelOrBase.Properties.Where(p => !p.IsReadOnly));
+                }
+                else
+                {
+                    properties.AddRange(modelOrBase.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
+                }
             }
+
+            if (!properties.Any())
+            {
+                return "new {}";
+            }
+
+            visitedModels.Add(model);
+            var propertyExpressions = new List<string>();
+            foreach (var property in properties)
+            {
+                string propertyValueExpr;
+                if (property.IsDiscriminator)
+                {
+                    propertyValueExpr = property.Type is InputPrimitiveType { Kind: InputTypeKind.Boolean } or InputPrimitiveType { IsNumber: true } ? $"{concreteModel.DiscriminatorValue}" : $"\"{concreteModel.DiscriminatorValue}\"";
+                }
+                else
+                {
+                    propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.SerializedName, indent + 4, visitedModels);
+
+                }
+
+                if (propertyValueExpr != "")
+                {
+                    var propertyExprBuilder = new StringBuilder();
+                    propertyExprBuilder.Append(' ', indent + 4).Append($"{property.SerializedName} = {propertyValueExpr},");
+                    propertyExpressions.Add(propertyExprBuilder.ToString());
+                }
+            }
+            visitedModels.Remove(model);
+
+            if (propertyExpressions.Count == 0)
+            {
+                return "new {}";
+            }
+
+            var builder = new StringBuilder();
+            using (Scope("new ", indent, builder))
+            {
+                foreach (var expr in propertyExpressions)
+                {
+                    builder.AppendLine(expr);
+                }
+            }
+            return builder.ToString();
         }
 
         private void ComposeGetClientCodes(StringBuilder builder)
@@ -964,15 +845,8 @@ namespace AutoRest.CSharp.Generation.Writers
             return "https://my-service.azure.com";
         }
 
-        private static ObjectSchema GetConcreteChildType(ObjectSchema o)
-        {
-            return (ObjectSchema)(o.Children != null && o.Children.All.Count > 0 ? o.Children!.All.First() : o);
-        }
-
-        private static IEnumerable<ObjectSchema> GetAllSchemaInherited(ObjectSchema o)
-        {
-            return (o.Parents?.All ?? Array.Empty<ComplexSchema>()).Concat(new ComplexSchema[] { o }).OfType<ObjectSchema>();
-        }
+        private static InputModelType GetConcreteChildModel(InputModelType model)
+            => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
 
         private CodeScope Scope(string content, int indent, StringBuilder builder, bool encloseWithNewLine = false)
         {

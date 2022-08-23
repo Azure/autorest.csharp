@@ -41,7 +41,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -59,7 +59,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -77,7 +77,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutRequiredBinaryBodyAsync(Stream bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -95,7 +95,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutRequiredBinaryBody(Stream bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -113,7 +113,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The Integer to use. </param>
+        /// <param name="bodyParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -131,7 +131,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The Integer to use. </param>
+        /// <param name="bodyParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredIntegerParameter(int bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -149,7 +149,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put null. </summary>
-        /// <param name="bodyParameter"> The Integer to use. </param>
+        /// <param name="bodyParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalIntegerParameterAsync(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -167,7 +167,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put null. </summary>
-        /// <param name="bodyParameter"> The Integer to use. </param>
+        /// <param name="bodyParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalIntegerParameter(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -257,7 +257,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The Integer to use. </param>
+        /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
         {
@@ -275,7 +275,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The Integer to use. </param>
+        /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredIntegerHeader(int headerParameter, CancellationToken cancellationToken = default)
         {
@@ -293,7 +293,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
-        /// <param name="headerParameter"> The Integer to use. </param>
+        /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -311,7 +311,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
-        /// <param name="headerParameter"> The Integer to use. </param>
+        /// <param name="headerParameter"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalIntegerHeader(int? headerParameter = null, CancellationToken cancellationToken = default)
         {

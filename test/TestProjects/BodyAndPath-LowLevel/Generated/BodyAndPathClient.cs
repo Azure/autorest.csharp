@@ -71,7 +71,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -111,7 +111,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = client.Create("<itemName>", RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -256,7 +256,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -298,7 +298,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -474,7 +474,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -484,7 +484,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", <value>);
         /// Console.WriteLine(response.Status);
@@ -528,7 +528,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
         /// Console.WriteLine(response.Status);
@@ -538,7 +538,7 @@ namespace BodyAndPath_LowLevel
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new BodyAndPathClient(credential);
         /// 
-        /// var data = "<any>";
+        /// var data = new {};
         /// 
         /// Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", <value>);
         /// Console.WriteLine(response.Status);

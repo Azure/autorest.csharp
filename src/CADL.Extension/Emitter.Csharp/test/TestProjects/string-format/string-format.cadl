@@ -1,0 +1,20 @@
+import "@cadl-lang/rest";
+
+@serviceTitle("stringFormat")
+@serviceVersion("2015-06-18")
+namespace stringFormat;
+
+using Cadl.Http;
+
+@route("/zonedDateTime")
+@doc("Path parameter is string with zonedDateTime format")
+@get
+op zonedDateTime(
+    @path
+    @intrinsic("zonedDateTime")
+    zonedDateTime: string): void;
+
+@route("/uri")
+@doc("path paramter is string with uri format")
+@get
+op uri(@path @intrinsic("uri") uri: string): void

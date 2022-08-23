@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Input
                 JsonElement? showSerializedNames = default
             )
             {
-                SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
-                ShowSerializedNames = showSerializedNames == null || !IsValidJsonElement(showSerializedNames) ? false : Convert.ToBoolean(showSerializedNames.ToString());
+                SuppressListException = DeserializeBoolean(suppressListException, false);
+                ShowSerializedNames = DeserializeBoolean(showSerializedNames, false);
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Input
 
             public void Write(Utf8JsonWriter writer, string settingName)
             {
-                if (!SuppressListException)
+                if (!SuppressListException && !ShowSerializedNames)
                     return;
 
                 writer.WriteStartObject(settingName);
@@ -67,44 +67,56 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public class TestModelerConfiguration
+        public class TestGenConfiguration
         {
-            private const string TestModelerOptionsFormat = "testmodeler.{0}";
+            private const string TestGenOptionsFormat = "testgen.{0}";
 
             public string? IgnoreReason { get; }
             public string? SourceCodePath { get; }
+            public bool Mock { get; }
+            public bool Sample { get; }
 
-            public TestModelerConfiguration(
+            public TestGenConfiguration(
                 JsonElement? ignoreReason = default,
-                JsonElement? sourceCodePath = default)
+                JsonElement? sourceCodePath = default,
+                JsonElement? mock = default,
+                JsonElement? sample = default)
             {
                 IgnoreReason = !IsValidJsonElement(ignoreReason) ? null : ignoreReason.ToString();
                 SourceCodePath = !IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
+                Mock = DeserializeBoolean(mock, false);
+                Sample = DeserializeBoolean(sample, false);
             }
 
-            internal static TestModelerConfiguration? LoadConfiguration(JsonElement root)
+            internal static TestGenConfiguration? LoadConfiguration(JsonElement root)
             {
                 if (root.ValueKind != JsonValueKind.Object)
                     return null;
 
                 root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
                 root.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
+                root.TryGetProperty(nameof(Mock), out var mock);
+                root.TryGetProperty(nameof(Sample), out var sample);
 
-                return new TestModelerConfiguration(
+                return new TestGenConfiguration(
                     ignoreReason: ignoreReason,
-                    sourceCodePath: sourceCodePath);
+                    sourceCodePath: sourceCodePath,
+                    mock: mock,
+                    sample: sample);
             }
 
-            internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
+            internal static TestGenConfiguration? GetConfiguration(IPluginCommunication autoRest)
             {
-                var testModeler = autoRest.GetValue<JsonElement?>("testmodeler").GetAwaiter().GetResult();
-                if (!IsValidJsonElement(testModeler))
+                var testGen = autoRest.GetValue<JsonElement?>("testgen").GetAwaiter().GetResult();
+                if (!IsValidJsonElement(testGen))
                 {
                     return null;
                 }
-                return new TestModelerConfiguration(
-                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
-                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "source-path")).GetAwaiter().GetResult());
+                return new TestGenConfiguration(
+                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
+                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "source-path")).GetAwaiter().GetResult(),
+                    mock: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "mock")).GetAwaiter().GetResult(),
+                    sample: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "sample")).GetAwaiter().GetResult());
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -116,6 +128,12 @@ namespace AutoRest.CSharp.Input
 
                 if (SourceCodePath is not null)
                     writer.WriteString(nameof(SourceCodePath), SourceCodePath);
+
+                if (Mock)
+                    writer.WriteBoolean(nameof(Mock), Mock);
+
+                if (Sample)
+                    writer.WriteBoolean(nameof(Sample), Sample);
 
                 writer.WriteEndObject();
             }
@@ -166,39 +184,38 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
-            TestModelerConfiguration? testmodeler = default,
+            TestGenConfiguration? testGen = default,
             JsonElement? operationIdMappings = default)
         {
-            RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
-            RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
-            RequestPathToResourceData = !IsValidJsonElement(requestPathToResourceData) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceData.ToString());
-            RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
-            RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
-            RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
-            OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
-            RawRenameRules = !IsValidJsonElement(renameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(renameRules.ToString());
-            FormatByNameRules = !IsValidJsonElement(formatByNameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(formatByNameRules.ToString());
-            RenameMapping = !IsValidJsonElement(renameMapping) ? new Dictionary<string, string>() :
-                JsonSerializer.Deserialize<Dictionary<string, string>>(renameMapping.ToString());
-            IrregularPluralWords = !IsValidJsonElement(irregularPluralWords) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(irregularPluralWords.ToString());
+            RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
+            RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
+            RequestPathToResourceData = DeserializeDictionary<string, string>(requestPathToResourceData);
+            RequestPathToResourceType = DeserializeDictionary<string, string>(requestPathToResourceType);
+            RequestPathToScopeResourceTypes = DeserializeDictionary<string, string[]>(requestPathToScopeResourceTypes);
+            RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
+            OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName);
+            RawRenameRules = DeserializeDictionary<string, string>(renameRules);
+            FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
+            RenameMapping = DeserializeDictionary<string, string>(renameMapping);
+            IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
             try
             {
-                OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
+                OperationPositions = DeserializeDictionary<string, string[]>(operationPositions);
             }
             catch (JsonException)
             {
-                var operationPositionsStrDict = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationPositions.ToString());
+                var operationPositionsStrDict = DeserializeDictionary<string, string>(operationPositions);
                 OperationPositions = operationPositionsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
             MgmtDebug = mgmtDebug;
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
-                MergeOperations = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(mergeOperations.ToString());
+                MergeOperations = DeserializeDictionary<string, string[]>(mergeOperations);
             }
             catch (JsonException)
             {
-                var mergeOperationsStrDict = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(mergeOperations.ToString());
+                var mergeOperationsStrDict = DeserializeDictionary<string, string>(mergeOperations);
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
             OperationGroupsToOmit = operationGroupsToOmit;
@@ -211,15 +228,19 @@ namespace AutoRest.CSharp.Input
             KeepPluralResourceData = keepPluralResourceData;
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
-            IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
-            DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
-            DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
-            DoesSingletonRequiresKeyword = !IsValidJsonElement(singletonRequiresKeyword) ? false : Convert.ToBoolean(singletonRequiresKeyword.ToString());
-            TestModeler = testmodeler;
-            OperationIdMappings = !IsValidJsonElement(operationIdMappings)
-                ? new Dictionary<string, IReadOnlyDictionary<string, string>>()
-                : JsonSerializer.Deserialize<Dictionary<string, IReadOnlyDictionary<string, string>>>(operationIdMappings.ToString());
+            IsArmCore = DeserializeBoolean(armCore, false);
+            DoesResourceModelRequireType = DeserializeBoolean(resourceModelRequiresType, true);
+            DoesResourceModelRequireName = DeserializeBoolean(resourceModelRequiresName, true);
+            DoesSingletonRequiresKeyword = DeserializeBoolean(singletonRequiresKeyword, false);
+            TestGen = testGen;
+            OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
         }
+
+        private static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
+            => jsonElement == null || !IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
+
+        private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
+            => !IsValidJsonElement(jsonElement) ? new Dictionary<TKey, TValue>() : JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(jsonElement.ToString()!)!;
 
         public MgmtDebugConfiguration MgmtDebug { get; }
         /// <summary>
@@ -263,7 +284,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> NoResourceSuffix { get; }
 
         public bool IsArmCore { get; }
-        public TestModelerConfiguration? TestModeler { get; }
+        public TestGenConfiguration? TestGen { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -296,7 +317,7 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
-                testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
+                testGen: TestGenConfiguration.GetConfiguration(autoRest),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
         }
 
@@ -332,9 +353,9 @@ namespace AutoRest.CSharp.Input
                 writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
             if (DoesSingletonRequiresKeyword)
                 writer.WriteBoolean(nameof(DoesSingletonRequiresKeyword), DoesSingletonRequiresKeyword);
-            if (TestModeler is not null)
+            if (TestGen is not null)
             {
-                TestModeler.Write(writer, nameof(TestModeler));
+                TestGen.Write(writer, nameof(TestGen));
             }
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
@@ -406,7 +427,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
-            root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
+            root.TryGetProperty(nameof(TestGen), out var testModelerRoot);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
 
             return new MgmtConfiguration(
@@ -438,7 +459,7 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
-                testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
+                testGen: TestGenConfiguration.LoadConfiguration(testModelerRoot),
                 operationIdMappings: operationIdMappings);
         }
 

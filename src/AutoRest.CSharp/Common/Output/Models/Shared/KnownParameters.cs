@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using Azure;
 using Azure.Core;
@@ -22,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter Pipeline = new("pipeline", "The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(typeof(HttpPipeline)), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter KeyAuth = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, ValidationType.None, null);
         public static readonly Parameter TokenAuth = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
+        public static readonly Parameter Endpoint = new("endpoint", "Service endpoint", new CSharpType(typeof(Uri)), null, ValidationType.None, null, RequestLocation: RequestLocation.Uri);
 
         public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request. Details of the request body schema are in the Remarks section below.", RequestContentType, null, ValidationType.AssertNotNull, null, RequestLocation: RequestLocation.Body);
         public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request. Details of the request body schema are in the Remarks section below.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, ValidationType.None, null, RequestLocation: RequestLocation.Body);

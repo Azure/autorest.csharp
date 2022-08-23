@@ -20,12 +20,12 @@ namespace AutoRest.TestServer.Tests
             var firstConstructor = constructors[0];
             var tokenCred = TypeAsserts.HasParameter(firstConstructor, "credential");
             Assert.NotNull(tokenCred);
-            Assert.AreEqual(typeof(TokenCredential), tokenCred.ParameterType);
+            Assert.AreEqual(typeof(AzureKeyCredential), tokenCred.ParameterType);
 
             var secondConstructor = constructors[1];
             var keyCred = TypeAsserts.HasParameter(secondConstructor, "credential");
             Assert.NotNull(keyCred);
-            Assert.AreEqual(typeof(AzureKeyCredential), keyCred.ParameterType);
+            Assert.AreEqual(typeof(TokenCredential), keyCred.ParameterType);
         }
     }
 }

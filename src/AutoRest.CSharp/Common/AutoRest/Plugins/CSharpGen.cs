@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
@@ -33,7 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (Configuration.AzureArm)
             {
-                if (Configuration.MgmtConfiguration.TestModeler is not null)
+                if (Configuration.MgmtConfiguration.TestGen is not null)
                 {
                     // we currently do not need this sourceInputModel when generating the test code because it only has information about the "non-generated" test code.
                     await MgmtTestTarget.ExecuteAsync(project, codeModel);
@@ -45,8 +46,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                LowLevelTarget.Execute(project, codeModel, sourceInputModel);
+                LowLevelTarget.Execute(project, new CodeModelConverter().CreateNamespace(codeModel, new SchemaUsageProvider(codeModel)), sourceInputModel, false);
             }
+            return project;
+        }
+
+        public async Task<GeneratedCodeWorkspace> ExecuteAsync(InputNamespace rootNamespace)
+        {
+            ValidateConfiguration();
+
+            Directory.CreateDirectory(Configuration.OutputFolder);
+            var projectDirectory = Path.Combine(Configuration.OutputFolder, Configuration.ProjectFolder);
+            var project = await GeneratedCodeWorkspace.Create(projectDirectory, Configuration.OutputFolder, Configuration.SharedSourceFolders);
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+            LowLevelTarget.Execute(project, rootNamespace, sourceInputModel, true);
             return project;
         }
 

@@ -1,0 +1,129 @@
+{
+ "$id": "1",
+ "Name": "cadl.testserver.arraybasic",
+ "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "Pet",
+   "Namespace": "ArrayBasic",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "9",
+   "Name": "ArrayBasic",
+   "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+   "Operations": [
+    {
+     "$id": "10",
+     "Name": "list",
+     "Summary": "Manage your pets.",
+     "Description": "Manage your pets. You can delete or get the Pet from pet store.",
+     "Parameters": [
+      {
+       "$id": "11",
+       "Name": "nextLink",
+       "NameInRequest": "nextLink",
+       "Type": {
+        "$id": "12",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "13",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "14",
+        "Name": "Array",
+        "ElementType": {
+         "$ref": "2"
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/pets",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "15"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "16"
+ }
+}

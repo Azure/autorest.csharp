@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 writer.WriteDeserializationForMethods(
                                     objectResponseBody.Serialization,
                                     async,
-                                    (w, v) => w.Line($"{valueVariable} = {v};"),
+                                    v => writer.Line($"{valueVariable} = {v};"),
                                     responseVariable,
                                     objectResponseBody.Type);
                                 value = new Reference(valueVariable.ActualName, responseBody.Type);

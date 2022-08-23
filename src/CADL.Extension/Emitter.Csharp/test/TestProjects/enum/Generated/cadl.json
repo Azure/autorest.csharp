@@ -1,0 +1,216 @@
+{
+ "$id": "1",
+ "Name": "cadl.enumpropertiesbasic",
+ "Description": "Illustrates input models with required enum type properties.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "DayOfTheWeek",
+   "Namespace": "EnumPropertiesBasic",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "4",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "5",
+     "Name": "Wednesday",
+     "Value": "Wednesday",
+     "Description": "Wednesday is documented to test this case."
+    },
+    {
+     "$id": "6",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "7",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "8",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "9",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  },
+  {
+   "$id": "10",
+   "Name": "TranslationLanguage",
+   "Namespace": "EnumPropertiesBasic",
+   "Description": "The language to translate the input text into.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "11",
+     "Name": "English",
+     "Value": "English",
+     "Description": "Translate to English"
+    },
+    {
+     "$id": "12",
+     "Name": "Spanish",
+     "Value": "Spanish",
+     "Description": "Translate to Spanish"
+    },
+    {
+     "$id": "13",
+     "Name": "Mandarin",
+     "Value": "Mandarin",
+     "Description": "Translate to Mandarin"
+    },
+    {
+     "$id": "14",
+     "Name": "Undocumented",
+     "Value": "Undocumented"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
+  },
+  {
+   "$id": "15",
+   "Name": "EnumWithStringValue",
+   "Namespace": "EnumPropertiesBasic",
+   "Description": "Represents the simple enum with enum string value.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "16",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "17",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "18",
+     "Name": "Three",
+     "Value": "3"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "19",
+   "Name": "InputModel",
+   "Namespace": "EnumPropertiesBasic",
+   "Description": "Input model with enum properties.",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "20",
+     "Name": "Day",
+     "SerializedName": "Day",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "21",
+     "Name": "Language",
+     "SerializedName": "Language",
+     "Description": "",
+     "Type": {
+      "$ref": "10"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "22",
+     "Name": "Title",
+     "SerializedName": "Title",
+     "Description": "",
+     "Type": {
+      "$ref": "15"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "23",
+   "Name": "EnumPropertiesBasic",
+   "Description": "Illustrates input models with required enum type properties.",
+   "Operations": [
+    {
+     "$id": "24",
+     "Name": "sendEnumPropertyModel",
+     "Parameters": [
+      {
+       "$id": "25",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "19"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "26",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/models",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "27"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "28"
+ }
+}

@@ -34,12 +34,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private Type _type;
+        private readonly Type _type;
+        private readonly BuildContext _context;
 
         public SystemObjectType(Type type, BuildContext context)
             : base(context)
         {
             _type = type;
+            _context = context;
             DefaultName = GetNameWithoutGeneric(type);
         }
 
@@ -118,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return index == -1 ? name : name.Substring(0, index);
         }
 
-        private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor)
+        private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor, ObjectTypeConstructor? baseConstructor)
         {
             var parameters = ctor.GetParameters()
                 .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null))
@@ -133,10 +135,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var modifiers = ctor.IsFamily ? Protected : Public;
 
-            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
+            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), baseConstructor);
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildInitializationConstructor()
+            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -213,11 +216,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildSerializationConstructor()
+            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName), GetBaseObjectType()?.SerializationConstructor);
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(Context, _type.BaseType);
+            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_context, _type.BaseType);
         }
 
         protected override string CreateDescription()

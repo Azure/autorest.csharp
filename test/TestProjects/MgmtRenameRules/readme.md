@@ -16,7 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 keep-orphaned-models:
-- VmDiskType
+  VmDiskType
 
 rename-rules:
   Os: OS
@@ -34,9 +34,9 @@ rename-rules:
 
 format-by-name-rules:
   'tenantId': 'uuid'
-  'resourceType': 'resource-type'
   'etag': 'etag'
   'location': 'azure-location'
+  'contentType': 'content-type'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
   
@@ -45,6 +45,10 @@ rename-mapping:
   SshPublicKeyResource: SshPublicKey
   LogAnalyticsOperationResult: LogAnalytics
   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
-  UpgradeOperationHistoricalStatusInfo.type: ResourceType
+  UpgradeOperationHistoricalStatusInfo.type: -|resource-type # this configuration does not change its property name, only changes its format to resource-type
   DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
+  AdditionalUnattendContent.backupFrequency: -|integer
+  LogAnalyticsOperationResult.method: requestMethod|request-method
+  LogAnalyticsOperationResult.content: -|any
+  LogAnalyticsOperationResult.basePath: basePathUri|uri
 ```

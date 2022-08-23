@@ -1,0 +1,64 @@
+{
+ "$id": "1",
+ "Name": "stringformat",
+ "ApiVersions": [
+  "2015-06-18"
+ ],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "stringFormat",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "zonedDateTime",
+     "Description": "Path parameter is string with format",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "zonedDateTime",
+       "NameInRequest": "zonedDateTime",
+       "Type": {
+        "$id": "5",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "6",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/uri/{zonedDateTime}",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "7"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "8"
+ }
+}

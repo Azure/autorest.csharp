@@ -22,19 +22,23 @@ function Invoke($command)
     }
 }
 
-function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast)
+function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
 {
     $outputPath = Join-Path $baseOutput "Generated"
     if ($projectName -eq "TypeSchemaMapping")
     {
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
     }
-    $namespace = $projectName.Replace('-', '_')
-    $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
     if ($fast)
     {
-        $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
+        $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
+        $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
+    }
+    else
+    {
+        $namespace = $projectName.Replace('-', '_')
+        $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
     }
 
     Invoke $command
@@ -46,6 +50,85 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
+function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $debug="")
+{
+    $baseOutput = Resolve-Path -Path $baseOutput
+    $baseOutput = $baseOutput -replace "\\", "/"
+    $outputPath = Join-Path $baseOutput "Generated"
+    $outputPath = $outputPath -replace "\\", "/"
+
+    if (!$fast) 
+    {
+        #clean up
+        if (Test-Path $outputPath) 
+        {
+            Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+        }
+        
+        # emit cadl json
+        $repoRootPath = Join-Path $PSScriptRoot ".."
+        $repoRootPath = Resolve-Path -Path $repoRootPath
+        Push-Location $repoRootPath
+        Try
+        {
+            # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
+            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+            Invoke $emitCommand    
+        }
+        Finally 
+        {
+            Pop-Location
+        }        
+    }
+    
+    $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
+    $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
+    Invoke $command
+    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
+}
+
+function Invoke-CadlSetup()
+{
+    # build emitter
+    $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
+    $emitterPath = Resolve-Path -Path $emitterPath
+    Push-Location $emitterPath
+    Try 
+    {
+        npm ci
+        npm run build
+        npm pack
+    }
+    Finally 
+    {
+        Pop-Location
+    }
+
+    # install cadl and emitter
+    $repoRoot = Join-Path $PSScriptRoot ".."
+    $repoRoot = Resolve-Path $repoRoot
+    Push-Location $repoRoot
+    Try 
+    {
+        npm ci
+        $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
+        if ($packages) 
+        {
+            $package = $packages;
+            if ($packages.count -gt 1)
+            {
+                $package = $packages[0]
+            }
+            npm install $package
+        }
+        git checkout $repoRoot/package.json
+        git checkout $repoRoot/package-lock.json
+    }
+    Finally 
+    {
+        Pop-Location
+    }
+}
 function Get-AutoRestProject()
 {
     $AutoRestPluginProject;
@@ -55,3 +138,5 @@ Export-ModuleMember -Function "Invoke"
 Export-ModuleMember -Function "Invoke-AutoRest"
 Export-ModuleMember -Function "AutoRest-Reset"
 Export-ModuleMember -Function "Get-AutoRestProject"
+Export-ModuleMember -Function "Invoke-Cadl"
+Export-ModuleMember -Function "Invoke-CadlSetup"
