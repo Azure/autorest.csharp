@@ -15,32 +15,30 @@ import {
 } from "@cadl-lang/compiler";
 import {
     getAllRoutes,
+    getAuthentication,
     getServers,
     HttpOperationParameter,
     HttpOperationResponse,
-    OperationDetails
+    OperationDetails,
+    ServiceAuthentication
 } from "@cadl-lang/rest/http";
-import { CodeModel } from "./type/CodeModel";
-import { InputClient } from "./type/InputClient";
+import { CodeModel } from "./type/CodeModel.js";
+import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import {
-    InputEnumType,
-    InputModelType,
-    InputPrimitiveType,
-    InputType
-} from "./type/InputType.js";
-import { InputTypeKind } from "./type/InputTypeKind.js";
+import { InputEnumType, InputModelType, InputType } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
 import { getExternalDocs, getOperationId } from "./lib/decorators.js";
+import { InputAuth } from "./type/InputAuth.js";
+import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -126,6 +124,11 @@ function createModel(program: Program): any {
     apiVersions.push(version);
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const authentication = getAuthentication(program, serviceNamespaceType);
+    let auth = undefined;
+    if (authentication) {
+        auth = processServiceAuthentication(authentication);
+    }
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
@@ -143,6 +146,7 @@ function createModel(program: Program): any {
         }
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
+            if (!isSupportedOperation(operation)) continue;
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -177,7 +181,7 @@ function createModel(program: Program): any {
             Enums: Array.from(enumMap.values()),
             Models: Array.from(modelMap.values()),
             Clients: clients,
-            Auth: {}
+            Auth: auth
         } as CodeModel;
         return clientModel;
     } catch (err) {
@@ -187,6 +191,41 @@ function createModel(program: Program): any {
             throw err;
         }
     }
+}
+
+function processServiceAuthentication(
+    authentication: ServiceAuthentication
+): InputAuth {
+    const auth = {} as InputAuth;
+    for (const option of authentication.options) {
+        for (const schema of option.schemes) {
+            switch (schema.type) {
+                case "apiKey":
+                    auth.ApiKey = schema.name;
+                    break;
+                case "oauth2":
+                    let scopes: string[] = [];
+                    for (const flow of schema.flows) {
+                        switch (flow.type) {
+                            case "clientCredentials":
+                                scopes = scopes.concat(flow.scopes);
+                                break;
+                            default:
+                                throw new Error(
+                                    "Not Supported Authentication."
+                                );
+                        }
+                    }
+                    auth.OAuth2 = {
+                        Scopes: scopes
+                    } as InputOAuth2Auth;
+                    break;
+                default:
+                    throw new Error("Not supported authentication.");
+            }
+        }
+    }
+    return auth;
 }
 
 function getOperationGroupName(
@@ -359,6 +398,16 @@ function loadOperation(
     }
 }
 
+function isLROOperation(op: OperationDetails) {
+    return false;
+}
+function isPagingOperation(op: OperationDetails) {
+    return false;
+}
+function isSupportedOperation(op: OperationDetails) {
+    if (isLROOperation(op) || isPagingOperation(op)) return false;
+    return true;
+}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");

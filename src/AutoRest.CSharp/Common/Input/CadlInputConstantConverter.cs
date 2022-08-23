@@ -6,9 +6,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
-using static AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Common.Input
 {
