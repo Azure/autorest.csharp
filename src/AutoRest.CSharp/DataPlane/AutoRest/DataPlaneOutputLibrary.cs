@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Security;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -54,6 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
 
             ClientOptions = CreateClientOptions();
+            Authentication = _input.Auth;
         }
 
         private ClientOptionsTypeProvider? CreateClientOptions()
@@ -69,6 +71,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
         public ClientOptionsTypeProvider? ClientOptions { get; }
+        public InputAuth Authentication { get; }
         public IEnumerable<DataPlaneClient> Clients => _clients.Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
