@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Input
                 ? prependRPPrefix.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
             var disableResourceReturnList = disableResourceReturn.ValueKind == JsonValueKind.Array
-                ? prependRPPrefix.EnumerateArray().Select(t => t.ToString()).ToArray()
+                ? disableResourceReturn.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
 
             root.TryGetProperty("ArmCore", out var isArmCore);
