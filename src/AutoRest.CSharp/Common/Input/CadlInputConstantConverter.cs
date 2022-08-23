@@ -32,17 +32,13 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null;
             Object? value = null;
             InputType? type = null;
-            while (reader.TokenType != JsonTokenType.EndObject)
-            {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter(nameof(InputConstant.Type), options, ref type)
-                    || TryReadConstantValue(ref reader, nameof(InputConstant.Value), options, type, ref value);
 
-                if (!isKnownProperty)
-                {
-                    reader.SkipProperty();
-                }
+            reader.TryReadReferenceId(ref isFirstProperty, ref id);
+            if (!reader.TryReadWithConverter(nameof(InputConstant.Type), options, ref type))
+            {
+                throw new JsonException("Must provide type ahead of value.");
             }
+            value = ReadConstantValue(ref reader, nameof(InputConstant.Value), options, type);
 
             type = type ?? throw new JsonException("InputConstant must have type");
 
@@ -56,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input
             return constant;
         }
 
-        public static bool TryReadConstantValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, InputType? type, ref Object? value)
+        public static object? ReadConstantValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, InputType? type)
         {
             if (type == null)
             {
@@ -69,10 +65,11 @@ namespace AutoRest.CSharp.Common.Input
 
             if (reader.GetString() != propertyName)
             {
-                return false;
+                throw new JsonException("This is not for json field " + propertyName);
             }
 
             reader.Read();
+            Object? value = null;
             switch (type) {
                 case InputPrimitiveType primitype:
                     switch (primitype.Kind)
@@ -100,19 +97,12 @@ namespace AutoRest.CSharp.Common.Input
                     }
                     break;
                 case InputModelType model:
-                    /*TODO: serialize it as Byte array, and will convert to the actually type in autorest.csharp code generator. */
-                    var converter = (JsonConverter<ObjectType>)options.GetConverter(typeof(Byte[]));
-                    if (converter != null)
-                    {
-                        Type typeToConvert = typeof(Byte[]);
-                        value = converter.Read(ref reader, typeToConvert: typeToConvert, options) ?? throw new JsonException();
-                    }
-                    break;
+                    throw new JsonException("Not supported type.");
                 default:
                     break;
             }
             reader.Read();
-            return true;
+            return value;
         }
     }
 }
