@@ -51,16 +51,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 // TODO: Add IReadOnlyDictionary
                 foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f)))
                 {
-                    if (TypeFactory.IsList(field.Type))
+                    if (field.DefaultValue is not null)
                     {
-                        if (TypeFactory.IsReadOnlyList(field.Type))
-                        {
-                            writer.Line($"{field.Name:I} = new List<{field.Type.Arguments[0]}>(0).AsReadOnly();");
-                        }
-                        else if (!field.IsRequired)
-                        {
-                            writer.Line($"{field.Name:I} = {Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(field.Type)).GetConstantFormattable()};");
-                        }
+                        writer.Line($"{field.Name:I} = {field.DefaultValue}");
                     }
                 }
             }

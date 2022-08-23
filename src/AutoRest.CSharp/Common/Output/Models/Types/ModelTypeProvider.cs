@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(),
-                    isRequired: inputModelProperty.IsRequired, writeAsProperty: true);
+                    GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
 
                 var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
@@ -127,6 +127,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return valueType;
+        }
+
+        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, bool isRequired)
+        {
+            if (TypeFactory.IsList(propertyType))
+            {
+                if (TypeFactory.IsReadOnlyList(propertyType))
+                {
+                    return $"new List<{propertyType.Arguments[0]}>(0).AsReadOnly();";
+                }
+                if (!isRequired)
+                {
+                    return $"{Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable()};";
+                }
+            }
+            return null;
         }
 
         private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, in InputModelTypeUsage usage, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
