@@ -48,12 +48,11 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.WriteMethodDeclaration(signature))
             {
                 var initializedFields = WriteFieldsInitialization(writer, signature, model);
-                // TODO: Add IReadOnlyDictionary
                 foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f)))
                 {
                     if (field.DefaultValue is not null)
                     {
-                        writer.Line($"{field.Name:I} = {field.DefaultValue}");
+                        writer.Line($"{field.Name:I} = {field.DefaultValue};");
                     }
                 }
             }

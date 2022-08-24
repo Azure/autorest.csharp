@@ -131,15 +131,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, bool isRequired)
         {
+            // TODO: Add Dictionary support
             if (TypeFactory.IsList(propertyType))
             {
                 if (TypeFactory.IsReadOnlyList(propertyType))
                 {
-                    return $"Array.Empty<{propertyType.Arguments[0]}>();";
+                    return $"Array.Empty<{propertyType.Arguments[0]}>()";
                 }
                 if (!isRequired)
                 {
-                    return $"{Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable()};";
+                    return Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable();
                 }
             }
             return null;
