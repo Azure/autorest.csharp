@@ -204,11 +204,11 @@ function processServiceAuthentication(
                     auth.ApiKey = schema.name;
                     break;
                 case "oauth2":
-                    let scopes: string[] = [];
+                    let scopes = new Set<string>();
                     for (const flow of schema.flows) {
                         switch (flow.type) {
                             case "clientCredentials":
-                                scopes = scopes.concat(flow.scopes);
+                                flow.scopes.forEach(item => scopes.add(item));
                                 break;
                             default:
                                 throw new Error(
@@ -217,7 +217,7 @@ function processServiceAuthentication(
                         }
                     }
                     auth.OAuth2 = {
-                        Scopes: scopes
+                        Scopes: Array.from(scopes.values())
                     } as InputOAuth2Auth;
                     break;
                 default:
@@ -398,14 +398,14 @@ function loadOperation(
     }
 }
 
-function isLROOperation(op: OperationDetails) {
+function isLroOperation(op: OperationDetails) {
     return false;
 }
 function isPagingOperation(op: OperationDetails) {
     return false;
 }
 function isSupportedOperation(op: OperationDetails) {
-    if (isLROOperation(op) || isPagingOperation(op)) return false;
+    if (isLroOperation(op) || isPagingOperation(op)) return false;
     return true;
 }
 class ErrorTypeFoundError extends Error {

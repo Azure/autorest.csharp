@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input
             return constant;
         }
 
-        public static object? ReadConstantValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, InputType? type)
+        public static object ReadConstantValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, InputType? type)
         {
             if (type == null)
             {
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Common.Input
                 case InputModelType model:
                     throw new JsonException("Not supported type.");
                 default:
-                    break;
+                    throw new JsonException("Not supported type.");
             }
             reader.Read();
             return value;
