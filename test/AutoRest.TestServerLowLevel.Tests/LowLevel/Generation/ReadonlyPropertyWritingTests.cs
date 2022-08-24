@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
@@ -18,17 +15,22 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // TODO: add model types after resolving how to deal with properties of model types
             var model = new ModelTypeProvider(
                 new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", "Readonly model", InputModelTypeUsage.RoundTrip,
-                    new List<InputModelProperty>{
-                        new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
-                        new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
-                        new InputModelProperty("optionalReadonlyString", "optionalReadonlyString", "Optional string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
-                        new InputModelProperty("optionalReadonlyInt", "optionalReadonlyInt", "Optional int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
-                        new InputModelProperty("requiredReadonlyStringList", "requiredReadonlyStringList", "Required readonly string collection.", new InputListType("requiredReadonlyStringList", InputPrimitiveType.String), true, true, false),
-                        new InputModelProperty("requiredReadonlyIntList", "requiredReadonlyIntList", "Required readonly int collection.", new InputListType("requiredReadonlyIntList", InputPrimitiveType.Int32), true, true, false),
-                        new InputModelProperty("optionalReadonlyStringList", "optionalReadonlyStringList", "Optional readonly string collection.", new InputListType("optionalReadonlyStringList", InputPrimitiveType.String), true, true, false),
-                        new InputModelProperty("optionalReadonlyIntList", "optionalReadonlyIntList", "Optional readonly int collection.", new InputListType("optionalReadonlyIntList", InputPrimitiveType.Int32), true, true, false),
-                    },
-                    null, null, null),
+                    ReadOnlyProperties, null, null, null),
+                new TypeFactory(null),
+                "test",
+                null);
+
+            ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
+        }
+
+        [TestCaseSource(nameof(OutputModelCase))]
+        public void OutputModel(string expectedModelCodes, string expectedSerializationCodes)
+        {
+            // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/dc6d00c98983f34b2f723c90fe840678a863438c/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl#L24-L65
+            // TODO: add model types after resolving how to deal with properties of model types
+            var model = new ModelTypeProvider(
+                new InputModelType("OutputModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", "Readonly model", InputModelTypeUsage.Output,
+                    ReadOnlyProperties, null, null, null),
                 new TypeFactory(null),
                 "test",
                 null);
@@ -37,6 +39,17 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         }
 
         // below are test cases
+        private static readonly IReadOnlyList<InputModelProperty> ReadOnlyProperties = new List<InputModelProperty>{
+            new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
+            new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
+            new InputModelProperty("optionalReadonlyString", "optionalReadonlyString", "Optional string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
+            new InputModelProperty("optionalReadonlyInt", "optionalReadonlyInt", "Optional int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
+            new InputModelProperty("requiredReadonlyStringList", "requiredReadonlyStringList", "Required readonly string collection.", new InputListType("requiredReadonlyStringList", InputPrimitiveType.String), true, true, false),
+            new InputModelProperty("requiredReadonlyIntList", "requiredReadonlyIntList", "Required readonly int collection.", new InputListType("requiredReadonlyIntList", InputPrimitiveType.Int32), true, true, false),
+            new InputModelProperty("optionalReadonlyStringList", "optionalReadonlyStringList", "Optional readonly string collection.", new InputListType("optionalReadonlyStringList", InputPrimitiveType.String), true, true, false),
+            new InputModelProperty("optionalReadonlyIntList", "optionalReadonlyIntList", "Optional readonly int collection.", new InputListType("optionalReadonlyIntList", InputPrimitiveType.Int32), true, true, false),
+        };
+
         private static readonly object[] RoundTripModelCase =
         {
             new string[]
@@ -206,6 +219,169 @@ internal static global::Cadl.TestServer.ReadonlyProperties.Models.RoundTripModel
 {
 using var document = global::System.Text.Json.JsonDocument.Parse(response.Content);
 return DeserializeRoundTripModel(document.RootElement);
+}
+}
+}
+"
+            }
+        };
+
+        private static readonly object[] OutputModelCase =
+        {
+            new string[]
+            {
+                @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+// <auto-generated/>
+
+#nullable disable
+
+using System.Collections.Generic;
+
+namespace Cadl.TestServer.ReadonlyProperties.Models
+{
+/// <summary> Readonly model. </summary>
+public partial class OutputModel
+{
+/// <summary> Initializes a new instance of OutputModel. </summary>
+internal OutputModel()
+{
+RequiredReadonlyStringList = new List<string>(0).AsReadOnly();
+RequiredReadonlyIntList = new List<int>(0).AsReadOnly();
+OptionalReadonlyStringList = new List<string>(0).AsReadOnly();
+OptionalReadonlyIntList = new List<int>(0).AsReadOnly();
+}
+/// <summary> Initializes a new instance of OutputModel. </summary>
+/// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>
+/// <param name=""requiredReadonlyInt""> Required int, illustrating a readonly reference type property. </param>
+/// <param name=""optionalReadonlyString""> Optional string, illustrating a readonly reference type property. </param>
+/// <param name=""optionalReadonlyInt""> Optional int, illustrating a readonly reference type property. </param>
+/// <param name=""requiredReadonlyStringList""> Required readonly string collection. </param>
+/// <param name=""requiredReadonlyIntList""> Required readonly int collection. </param>
+/// <param name=""optionalReadonlyStringList""> Optional readonly string collection. </param>
+/// <param name=""optionalReadonlyIntList""> Optional readonly int collection. </param>
+internal OutputModel(string requiredReadonlyString,int requiredReadonlyInt,string optionalReadonlyString,int optionalReadonlyInt,global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList,global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList)
+{
+RequiredReadonlyString = requiredReadonlyString;
+RequiredReadonlyInt = requiredReadonlyInt;
+OptionalReadonlyString = optionalReadonlyString;
+OptionalReadonlyInt = optionalReadonlyInt;
+RequiredReadonlyStringList = requiredReadonlyStringList;
+RequiredReadonlyIntList = requiredReadonlyIntList;
+OptionalReadonlyStringList = optionalReadonlyStringList;
+OptionalReadonlyIntList = optionalReadonlyIntList;
+}
+
+/// <summary> Required string, illustrating a readonly reference type property. </summary>
+public string RequiredReadonlyString{ get; }
+
+/// <summary> Required int, illustrating a readonly reference type property. </summary>
+public int RequiredReadonlyInt{ get; }
+
+/// <summary> Optional string, illustrating a readonly reference type property. </summary>
+public string OptionalReadonlyString{ get; }
+
+/// <summary> Optional int, illustrating a readonly reference type property. </summary>
+public int OptionalReadonlyInt{ get; }
+
+/// <summary> Required readonly string collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<string> RequiredReadonlyStringList{ get; }
+
+/// <summary> Required readonly int collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<int> RequiredReadonlyIntList{ get; }
+
+/// <summary> Optional readonly string collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<string> OptionalReadonlyStringList{ get; }
+
+/// <summary> Optional readonly int collection. </summary>
+public global::System.Collections.Generic.IReadOnlyList<int> OptionalReadonlyIntList{ get; }
+}
+}
+",
+                @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+// <auto-generated/>
+
+#nullable disable
+
+using System.Collections.Generic;
+using System.Text.Json;
+using Azure;
+using Azure.Core;
+
+namespace Cadl.TestServer.ReadonlyProperties.Models
+{
+public partial class OutputModel
+{
+internal static global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel DeserializeOutputModel(global::System.Text.Json.JsonElement element)
+{
+string requiredReadonlyString = default;
+int requiredReadonlyInt = default;
+string optionalReadonlyString = default;
+int optionalReadonlyInt = default;
+global::System.Collections.Generic.IReadOnlyList<string> requiredReadonlyStringList = default;
+global::System.Collections.Generic.IReadOnlyList<int> requiredReadonlyIntList = default;
+global::System.Collections.Generic.IReadOnlyList<string> optionalReadonlyStringList = default;
+global::System.Collections.Generic.IReadOnlyList<int> optionalReadonlyIntList = default;
+foreach (var property in element.EnumerateObject())
+{
+if(property.NameEquals(""requiredReadonlyString"")){
+requiredReadonlyString = property.Value.GetString();
+continue;
+}
+if(property.NameEquals(""requiredReadonlyInt"")){
+requiredReadonlyInt = property.Value.GetInt32();
+continue;
+}
+if(property.NameEquals(""optionalReadonlyString"")){
+optionalReadonlyString = property.Value.GetString();
+continue;
+}
+if(property.NameEquals(""optionalReadonlyInt"")){
+optionalReadonlyInt = property.Value.GetInt32();
+continue;
+}
+if(property.NameEquals(""requiredReadonlyStringList"")){
+global::System.Collections.Generic.List<string> array = new global::System.Collections.Generic.List<string>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(item.GetString());}
+requiredReadonlyStringList = array;
+continue;
+}
+if(property.NameEquals(""requiredReadonlyIntList"")){
+global::System.Collections.Generic.List<int> array = new global::System.Collections.Generic.List<int>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(item.GetInt32());}
+requiredReadonlyIntList = array;
+continue;
+}
+if(property.NameEquals(""optionalReadonlyStringList"")){
+global::System.Collections.Generic.List<string> array = new global::System.Collections.Generic.List<string>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(item.GetString());}
+optionalReadonlyStringList = array;
+continue;
+}
+if(property.NameEquals(""optionalReadonlyIntList"")){
+global::System.Collections.Generic.List<int> array = new global::System.Collections.Generic.List<int>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(item.GetInt32());}
+optionalReadonlyIntList = array;
+continue;
+}
+}
+return new global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyStringList, requiredReadonlyIntList, optionalReadonlyStringList, optionalReadonlyIntList);}
+
+internal static global::Cadl.TestServer.ReadonlyProperties.Models.OutputModel FromResponse(global::Azure.Response response)
+{
+using var document = global::System.Text.Json.JsonDocument.Parse(response.Content);
+return DeserializeOutputModel(document.RootElement);
 }
 }
 }
