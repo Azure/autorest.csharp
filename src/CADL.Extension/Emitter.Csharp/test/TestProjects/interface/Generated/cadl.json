@@ -65,10 +65,42 @@
      "$id": "9",
      "Name": "getDogs",
      "Description": "Illustrate grouping operations on subclient.",
-     "Parameters": [],
-     "Responses": [
+     "Parameters": [
       {
        "$id": "10",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "11",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "12",
+        "Type": {
+         "$id": "13",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
        "StatusCodes": [
         200
        ],
@@ -80,17 +112,20 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{host}",
      "Path": "/dogs",
      "BufferResponse": false
     },
     {
-     "$id": "11",
+     "$id": "15",
      "Name": "setDogs",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
-       "$id": "12",
+       "$ref": "10"
+      },
+      {
+       "$id": "16",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -107,38 +142,6 @@
        "Kind": "Method"
       }
      ],
-     "Responses": [
-      {
-       "$id": "13",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json"
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
-     "Uri": "",
-     "Path": "/dogs/models",
-     "BufferResponse": false
-    }
-   ],
-   "Protocol": {
-    "$id": "14"
-   }
-  },
-  {
-   "$id": "15",
-   "Name": "cats",
-   "Operations": [
-    {
-     "$id": "16",
-     "Name": "getCats",
-     "Description": "Illustrate grouping operations on subclient.",
-     "Parameters": [],
      "Responses": [
       {
        "$id": "17",
@@ -146,6 +149,42 @@
         200
        ],
        "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/dogs/models",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "18"
+   }
+  },
+  {
+   "$id": "19",
+   "Name": "cats",
+   "Operations": [
+    {
+     "$id": "20",
+     "Name": "getCats",
+     "Description": "Illustrate grouping operations on subclient.",
+     "Parameters": [
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "21",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
         "$ref": "5"
        },
        "BodyMediaType": "Json"
@@ -153,17 +192,20 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{host}",
      "Path": "/cats",
      "BufferResponse": false
     },
     {
-     "$id": "18",
+     "$id": "22",
      "Name": "setCats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
-       "$id": "19",
+       "$ref": "10"
+      },
+      {
+       "$id": "23",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -182,7 +224,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "24",
        "StatusCodes": [
         200
        ],
@@ -194,17 +236,14 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{host}",
      "Path": "/cats",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "25"
    }
   }
- ],
- "Auth": {
-  "$id": "22"
- }
+ ]
 }
