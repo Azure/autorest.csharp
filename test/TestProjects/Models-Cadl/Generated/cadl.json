@@ -1,0 +1,435 @@
+{
+ "$id": "1",
+ "Name": "modelsincadl",
+ "Description": "CADL project to test various types of models.",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "BaseModel",
+   "Namespace": "ModelsInCadl",
+   "Description": "Base model",
+   "IsNullable": false,
+   "Properties": []
+  },
+  {
+   "$id": "3",
+   "Name": "InputModel",
+   "Namespace": "ModelsInCadl",
+   "Description": "Model used only as input",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "2"
+   },
+   "Properties": [
+    {
+     "$id": "4",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "5",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "6",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "8",
+     "Name": "requiredModel",
+     "SerializedName": "requiredModel",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "9",
+     "Name": "requiredCollection",
+     "SerializedName": "requiredCollection",
+     "Description": "",
+     "Type": {
+      "$id": "10",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "11",
+       "Name": "CollectionItem",
+       "Namespace": "ModelsInCadl",
+       "Description": "Collection item model",
+       "IsNullable": false,
+       "Properties": [
+        {
+         "$id": "12",
+         "Name": "requiredRecord",
+         "SerializedName": "requiredRecord",
+         "Description": "",
+         "Type": {
+          "$id": "13",
+          "Name": "Dictionary",
+          "KeyType": {
+           "$id": "14",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "ValueType": {
+           "$id": "15",
+           "Name": "RecordItem",
+           "Namespace": "ModelsInCadl",
+           "Description": "Record item model",
+           "IsNullable": false,
+           "BaseModel": {
+            "$id": "16",
+            "Name": "DerivedModel",
+            "Namespace": "ModelsInCadl",
+            "Description": "Derived model",
+            "IsNullable": false,
+            "BaseModel": {
+             "$ref": "2"
+            },
+            "Properties": [
+             {
+              "$id": "17",
+              "Name": "requiredCollection",
+              "SerializedName": "requiredCollection",
+              "Description": "",
+              "Type": {
+               "$id": "18",
+               "Name": "Array",
+               "ElementType": {
+                "$ref": "11"
+               },
+               "IsNullable": false
+              },
+              "IsRequired": true,
+              "IsReadOnly": false,
+              "IsDiscriminator": false
+             }
+            ]
+           },
+           "Properties": []
+          },
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        }
+       ]
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "11"
+  },
+  {
+   "$ref": "16"
+  },
+  {
+   "$ref": "15"
+  },
+  {
+   "$id": "19",
+   "Name": "RoundTripModel",
+   "Namespace": "ModelsInCadl",
+   "Description": "Model used both as input and output",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "2"
+   },
+   "Properties": [
+    {
+     "$id": "20",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "22",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "23",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "24",
+     "Name": "requiredModel",
+     "SerializedName": "requiredModel",
+     "Description": "",
+     "Type": {
+      "$id": "25",
+      "Name": "BaseModelWithDiscriminator",
+      "Namespace": "ModelsInCadl",
+      "Description": "Base model with discriminator property.",
+      "IsNullable": false,
+      "DiscriminatorPropertyName": "discriminatorProperty",
+      "BaseModel": {
+       "$ref": "2"
+      },
+      "Properties": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "25"
+  },
+  {
+   "$id": "26",
+   "Name": "DerivedModelWithDiscriminatorA",
+   "Namespace": "ModelsInCadl",
+   "Description": "Deriver model with discriminator property.",
+   "IsNullable": false,
+   "DiscriminatorValue": "A",
+   "BaseModel": {
+    "$ref": "25"
+   },
+   "Properties": [
+    {
+     "$id": "27",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "28",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "29",
+   "Name": "DerivedModelWithDiscriminatorB",
+   "Namespace": "ModelsInCadl",
+   "Description": "Deriver model with discriminator property.",
+   "IsNullable": false,
+   "DiscriminatorValue": "B",
+   "BaseModel": {
+    "$ref": "25"
+   },
+   "Properties": [
+    {
+     "$id": "30",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "31",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "32",
+   "Name": "OutputModel",
+   "Namespace": "ModelsInCadl",
+   "Description": "Model used only as output",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "2"
+   },
+   "Properties": [
+    {
+     "$id": "33",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "34",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "35",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "36",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "37",
+     "Name": "requiredModel",
+     "SerializedName": "requiredModel",
+     "Description": "",
+     "Type": {
+      "$ref": "16"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "38",
+   "Name": "ModelsInCadl",
+   "Description": "CADL project to test various types of models.",
+   "Operations": [
+    {
+     "$id": "39",
+     "Name": "inputToRoundTrip",
+     "Description": "Input to RoundTrip",
+     "Parameters": [
+      {
+       "$id": "40",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "3"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "41",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "19"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/inputToRoundTrip",
+     "BufferResponse": false
+    },
+    {
+     "$id": "42",
+     "Name": "roundTripToOutput",
+     "Description": "RoundTrip to Output",
+     "Parameters": [
+      {
+       "$id": "43",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "19"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "44",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "32"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/roundTripToOutput",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "45"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "46"
+ }
+}
