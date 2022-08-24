@@ -76,7 +76,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
         Try
         {
             # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $mainFile --emit @azure-tools/cadl-csharp"
             Invoke $emitCommand    
         }
         Finally 
@@ -84,14 +84,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
             Pop-Location
         }        
     }
-    # emit cadl json
-    $repoRootPath = Join-Path $PSScriptRoot ".."
-    $repoRootPath = Resolve-Path -Path $repoRootPath
-    Push-Location $repoRootPath
-    # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-    $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $mainFile --emit @azure-tools/cadl-csharp"
-    Invoke $emitCommand
-    Pop-Location
+
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
     $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
     Invoke $command
