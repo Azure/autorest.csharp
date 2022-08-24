@@ -77,14 +77,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "ModelCollectionModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "ModelCollectionModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("ModelCollectionModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(ModelType2DCollectionPropertiesCase))]
@@ -106,14 +99,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "ModelCollectionModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "ModelCollectionModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("ModelCollectionModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         // below are test cases

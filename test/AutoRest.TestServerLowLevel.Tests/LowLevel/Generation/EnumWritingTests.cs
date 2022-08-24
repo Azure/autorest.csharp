@@ -35,14 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "RoundTripModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "RoundTripModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(InputEnumPropertiesCase))]
@@ -58,14 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "InputModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "InputModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(OutputEnumPropertiesCase))]
@@ -81,14 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "OutputModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "OutputModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         private void ValidateGeneratedCodes(EnumType enumType, string modelCodes, string serializationCodes)

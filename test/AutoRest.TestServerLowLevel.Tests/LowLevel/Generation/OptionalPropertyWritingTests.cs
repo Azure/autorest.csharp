@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers.Tests;
-using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models;
 using NUnit.Framework;
 
 namespace AutoRest.CSharp.Generation.Writers.Tests
@@ -15,45 +11,39 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L35-L38
-            var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.OptionalProperties.Models", "public", "Round-trip model with optional properties.", InputModelTypeUsage.RoundTrip,
-                    OptionalProperties,
-                    null, null, null),
-                new TypeFactory(null),
-                "test",
-                null);
+            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.OptionalProperties.Models", "public", "Round-trip model with optional properties.", InputModelTypeUsage.RoundTrip,
+                    OptionalProperties, null, null, null);
 
-            ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", null, new List<string>(),
+                new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+
+            ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(InputModelCase))]
         public void InputModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L15-L28
-            var model = new ModelTypeProvider(
-                new InputModelType("InputModel", "Cadl.TestServer.OptionalProperties.Models", "public", "Input model with optional properties.", InputModelTypeUsage.Input,
-                    OptionalProperties,
-                    null, null, null),
-                new TypeFactory(null),
-                "test",
-                null);
+            var model = new InputModelType("InputModel", "Cadl.TestServer.OptionalProperties.Models", "public", "Input model with optional properties.", InputModelTypeUsage.Input,
+                    OptionalProperties, null, null, null);
 
-            ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", null, new List<string>(),
+                new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+
+            ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(OutputModelCase))]
         public void OutputModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L30-L33
-            var model = new ModelTypeProvider(
-                new InputModelType("OutputModel", "Cadl.TestServer.OptionalProperties.Models", "public", "Output model with optional properties.", InputModelTypeUsage.Output,
-                    OptionalProperties,
-                    null, null, null),
-                new TypeFactory(null),
-                "test",
-                null);
+            var model = new InputModelType("OutputModel", "Cadl.TestServer.OptionalProperties.Models", "public", "Output model with optional properties.", InputModelTypeUsage.Output,
+                    OptionalProperties, null, null, null);
 
-            ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", null, new List<string>(),
+                new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+
+            ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         private static readonly IReadOnlyList<InputModelProperty> OptionalProperties = new List<InputModelProperty>{
@@ -61,6 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             new InputModelProperty("optionalInt", "optionalInt", "Optional int, illustrating an optional reference type property.", InputPrimitiveType.Int32, false, false, false),
             new InputModelProperty("optionalStringList", "optionalStringList", "Optional string collection.", new InputListType("optionalStringList", InputPrimitiveType.String), false, false, false),
             new InputModelProperty("optionalIntList", "optionalIntList", "Optional int collection.", new InputListType("optionalIntList", InputPrimitiveType.Int32), false, false, false),
+            new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", ElementModelType), false, false, false)
         };
 
         // below are test cases
@@ -77,6 +68,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
 using System.Collections.Generic;
 using Azure.Core;
+using Cadl.TestServer.ModelCollectionProperties.Models;
 
 namespace Cadl.TestServer.OptionalProperties.Models
 {
@@ -88,18 +80,21 @@ public RoundTripModel()
 {
 OptionalStringList = new global::Azure.Core.ChangeTrackingList<string>();
 OptionalIntList = new global::Azure.Core.ChangeTrackingList<int>();
+OptionalModelCollection = new global::Azure.Core.ChangeTrackingList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
 }
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 /// <param name=""optionalString""> Optional string, illustrating an optional reference type property. </param>
 /// <param name=""optionalInt""> Optional int, illustrating an optional reference type property. </param>
 /// <param name=""optionalStringList""> Optional string collection. </param>
 /// <param name=""optionalIntList""> Optional int collection. </param>
-internal RoundTripModel(string optionalString,int? optionalInt,global::System.Collections.Generic.IList<string> optionalStringList,global::System.Collections.Generic.IList<int> optionalIntList)
+/// <param name=""optionalModelCollection""> Optional collection of models. </param>
+internal RoundTripModel(string optionalString,int? optionalInt,global::System.Collections.Generic.IList<string> optionalStringList,global::System.Collections.Generic.IList<int> optionalIntList,global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> optionalModelCollection)
 {
 OptionalString = optionalString;
 OptionalInt = optionalInt;
 OptionalStringList = optionalStringList;
 OptionalIntList = optionalIntList;
+OptionalModelCollection = optionalModelCollection;
 }
 
 /// <summary> Optional string, illustrating an optional reference type property. </summary>
@@ -113,6 +108,9 @@ public global::System.Collections.Generic.IList<string> OptionalStringList{ get;
 
 /// <summary> Optional int collection. </summary>
 public global::System.Collections.Generic.IList<int> OptionalIntList{ get; }
+
+/// <summary> Optional collection of models. </summary>
+public global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> OptionalModelCollection{ get; }
 }
 }
 ",
@@ -127,6 +125,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Cadl.TestServer.ModelCollectionProperties.Models;
 
 namespace Cadl.TestServer.OptionalProperties.Models
 {
@@ -172,6 +171,16 @@ writer.WriteNumberValue(item);
 }
 writer.WriteEndArray();
 }
+if (global::Azure.Core.Optional.IsCollectionDefined(OptionalModelCollection))
+{
+writer.WritePropertyName(""optionalModelCollection"");
+writer.WriteStartArray();
+foreach (var item in OptionalModelCollection)
+{
+writer.WriteObjectValue(item);
+}
+writer.WriteEndArray();
+}
 writer.WriteEndObject();
 }
 
@@ -181,6 +190,7 @@ global::Azure.Core.Optional<string> optionalString = default;
 global::Azure.Core.Optional<int?> optionalInt = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IList<string>> optionalStringList = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IList<int>> optionalIntList = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> optionalModelCollection = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""optionalString"")){
@@ -219,8 +229,20 @@ array.Add(item.GetInt32());}
 optionalIntList = array;
 continue;
 }
+if(property.NameEquals(""optionalModelCollection"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
+global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> array = new global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel.DeserializeSimpleModel(item));}
+optionalModelCollection = array;
+continue;
 }
-return new global::Cadl.TestServer.OptionalProperties.Models.RoundTripModel(optionalString, global::Azure.Core.Optional.ToNullable(optionalInt), global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList));}
+}
+return new global::Cadl.TestServer.OptionalProperties.Models.RoundTripModel(optionalString, global::Azure.Core.Optional.ToNullable(optionalInt), global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList), global::Azure.Core.Optional.ToList(optionalModelCollection));}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {
@@ -253,6 +275,7 @@ return DeserializeRoundTripModel(document.RootElement);
 
 using System.Collections.Generic;
 using Azure.Core;
+using Cadl.TestServer.ModelCollectionProperties.Models;
 
 namespace Cadl.TestServer.OptionalProperties.Models
 {
@@ -264,6 +287,7 @@ public InputModel()
 {
 OptionalStringList = new global::Azure.Core.ChangeTrackingList<string>();
 OptionalIntList = new global::Azure.Core.ChangeTrackingList<int>();
+OptionalModelCollection = new global::Azure.Core.ChangeTrackingList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
 }
 
 /// <summary> Optional string, illustrating an optional reference type property. </summary>
@@ -277,6 +301,9 @@ public global::System.Collections.Generic.IList<string> OptionalStringList{ get;
 
 /// <summary> Optional int collection. </summary>
 public global::System.Collections.Generic.IList<int> OptionalIntList{ get; }
+
+/// <summary> Optional collection of models. </summary>
+public global::System.Collections.Generic.IList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> OptionalModelCollection{ get; }
 }
 }
 ",
@@ -334,6 +361,16 @@ writer.WriteNumberValue(item);
 }
 writer.WriteEndArray();
 }
+if (global::Azure.Core.Optional.IsCollectionDefined(OptionalModelCollection))
+{
+writer.WritePropertyName(""optionalModelCollection"");
+writer.WriteStartArray();
+foreach (var item in OptionalModelCollection)
+{
+writer.WriteObjectValue(item);
+}
+writer.WriteEndArray();
+}
 writer.WriteEndObject();
 }
 
@@ -361,6 +398,7 @@ return content;
 #nullable disable
 
 using System.Collections.Generic;
+using Cadl.TestServer.ModelCollectionProperties.Models;
 
 namespace Cadl.TestServer.OptionalProperties.Models
 {
@@ -372,18 +410,21 @@ internal OutputModel()
 {
 OptionalStringList = Array.Empty<string>();
 OptionalIntList = Array.Empty<int>();
+OptionalModelCollection = Array.Empty<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
 }
 /// <summary> Initializes a new instance of OutputModel. </summary>
 /// <param name=""optionalString""> Optional string, illustrating an optional reference type property. </param>
 /// <param name=""optionalInt""> Optional int, illustrating an optional reference type property. </param>
 /// <param name=""optionalStringList""> Optional string collection. </param>
 /// <param name=""optionalIntList""> Optional int collection. </param>
-internal OutputModel(string optionalString,int? optionalInt,global::System.Collections.Generic.IReadOnlyList<string> optionalStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalIntList)
+/// <param name=""optionalModelCollection""> Optional collection of models. </param>
+internal OutputModel(string optionalString,int? optionalInt,global::System.Collections.Generic.IReadOnlyList<string> optionalStringList,global::System.Collections.Generic.IReadOnlyList<int> optionalIntList,global::System.Collections.Generic.IReadOnlyList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> optionalModelCollection)
 {
 OptionalString = optionalString;
 OptionalInt = optionalInt;
 OptionalStringList = optionalStringList;
 OptionalIntList = optionalIntList;
+OptionalModelCollection = optionalModelCollection;
 }
 
 /// <summary> Optional string, illustrating an optional reference type property. </summary>
@@ -397,6 +438,9 @@ public global::System.Collections.Generic.IReadOnlyList<string> OptionalStringLi
 
 /// <summary> Optional int collection. </summary>
 public global::System.Collections.Generic.IReadOnlyList<int> OptionalIntList{ get; }
+
+/// <summary> Optional collection of models. </summary>
+public global::System.Collections.Generic.IReadOnlyList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> OptionalModelCollection{ get; }
 }
 }
 ",
@@ -411,6 +455,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Cadl.TestServer.ModelCollectionProperties.Models;
 
 namespace Cadl.TestServer.OptionalProperties.Models
 {
@@ -422,6 +467,7 @@ global::Azure.Core.Optional<string> optionalString = default;
 global::Azure.Core.Optional<int?> optionalInt = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<string>> optionalStringList = default;
 global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<int>> optionalIntList = default;
+global::Azure.Core.Optional<global::System.Collections.Generic.IReadOnlyList<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>> optionalModelCollection = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""optionalString"")){
@@ -460,8 +506,20 @@ array.Add(item.GetInt32());}
 optionalIntList = array;
 continue;
 }
+if(property.NameEquals(""optionalModelCollection"")){
+if (property.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+{
+property.ThrowNonNullablePropertyIsNull();
+continue;}
+global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel> array = new global::System.Collections.Generic.List<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
+foreach (var item in property.Value.EnumerateArray())
+{
+array.Add(global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel.DeserializeSimpleModel(item));}
+optionalModelCollection = array;
+continue;
 }
-return new global::Cadl.TestServer.OptionalProperties.Models.OutputModel(optionalString, global::Azure.Core.Optional.ToNullable(optionalInt), global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList));}
+}
+return new global::Cadl.TestServer.OptionalProperties.Models.OutputModel(optionalString, global::Azure.Core.Optional.ToNullable(optionalInt), global::Azure.Core.Optional.ToList(optionalStringList), global::Azure.Core.Optional.ToList(optionalIntList), global::Azure.Core.Optional.ToList(optionalModelCollection));}
 
 internal static global::Cadl.TestServer.OptionalProperties.Models.OutputModel FromResponse(global::Azure.Response response)
 {
