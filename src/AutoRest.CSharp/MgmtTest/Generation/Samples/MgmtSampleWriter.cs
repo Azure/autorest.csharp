@@ -23,8 +23,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 {
     internal class MgmtSampleWriter : MgmtTestWriterBase<MgmtSampleProvider>
     {
-        private MockTestCase testCase => This.Sample;
-
         public MgmtSampleWriter(MgmtSampleProvider sample) : base(sample)
         {
         }
@@ -43,32 +41,41 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private void WriteImplementation()
         {
-            _writer.Line($"// {This.Sample.Name}");
-            _writer.Line($"[NUnit.Framework.Test]");
-            _writer.Line($"[NUnit.Framework.Ignore(\"Only verifying that the sample builds\")]");
-            using (_writer.WriteMethodDeclaration(testCase.GetMethodSignature(false)))
+            foreach (var sample in This.Samples)
             {
-                WriteSampleSteps();
+                WriteSample(sample);
+                _writer.Line();
             }
         }
 
-        private void WriteSampleSteps()
+        private void WriteSample(Sample sample)
+        {
+            _writer.Line($"// {sample.Name}");
+            _writer.Line($"[NUnit.Framework.Test]");
+            _writer.Line($"[NUnit.Framework.Ignore(\"Only verifying that the sample builds\")]");
+            using (_writer.WriteMethodDeclaration(sample.GetMethodSignature(false)))
+            {
+                WriteSampleSteps(sample);
+            }
+        }
+
+        private void WriteSampleSteps(Sample sample)
         {
             // Write sample source file
-            _writer.Line($"// Generated from example definition: {This.Sample.OriginalFilepath}");
+            _writer.Line($"// Generated from example definition: {sample.OriginalFilepath}");
             // Write claimers
-            _writer.Line($"// this example is just showing the usage of \"{testCase.OperationId}\" operation, for the dependent resources, they will have to be created separately.");
+            _writer.Line($"// this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resources, they will have to be created separately.");
             _writer.Line();
 
             // Write the ArmClient and authentication
             var clientStepResult = WriteGetArmClient();
 
             // Write the operation invocation
-            var result = testCase.Carrier switch
+            var result = sample.Carrier switch
             {
-                ResourceCollection collection => WriteSampleOperationForResourceCollection(clientStepResult, collection),
-                Resource resource => WriteSampleOperationForResource(clientStepResult, resource),
-                MgmtExtensions extension => WriteSampleOperationForExtension(clientStepResult, extension),
+                ResourceCollection collection => WriteSampleOperationForResourceCollection(clientStepResult, collection, sample),
+                Resource resource => WriteSampleOperationForResource(clientStepResult, resource, sample),
+                MgmtExtensions extension => WriteSampleOperationForExtension(clientStepResult, extension, sample),
                 _ => throw new InvalidOperationException("Should never happen"),
             };
 
@@ -148,51 +155,51 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _ => throw new InvalidOperationException("Should never happen")
         };
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForResourceCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForResourceCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
         {
             _writer.Line();
 
-            var collectionResult = WriteGetCollection(clientResult, collection);
-            var result = WriteSampleOperation(collectionResult);
+            var collectionResult = WriteGetCollection(clientResult, collection, sample);
+            var result = WriteSampleOperation(collectionResult, sample);
 
             return result;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForResource(CodeWriterVariableDeclaration clientVar, Resource resource)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForResource(CodeWriterVariableDeclaration clientVar, Resource resource, Sample sample)
         {
             _writer.Line();
 
             var resourceName = GetResourceName(resource);
             _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
             _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
-            var resourceResult = WriteGetResource(resource, testCase, $"{clientVar.Declaration}");
-            var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, resource.Type));
+            var resourceResult = WriteGetResource(resource, sample, $"{clientVar.Declaration}");
+            var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, resource.Type), sample);
 
             return result;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtensions extension)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtensions extension, Sample sample)
         {
             _writer.Line();
 
             var resourceName = GetResourceName(extension);
             _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
             _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
-            var resourceResult = WriteGetExtension(extension, testCase, $"{clientVar.Declaration}");
-            var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, extension.ArmCoreType));
+            var resourceResult = WriteGetExtension(extension, sample, $"{clientVar.Declaration}");
+            var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, extension.ArmCoreType), sample);
 
             return result;
         }
 
-        private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection)
+        private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
         {
-            var parent = testCase.Parent;
+            var parent = sample.Parent;
             Debug.Assert(parent != null);
 
             var parentName = GetResourceName(parent);
             _writer.Line($"// this example assumes you already have this {parentName} created on azure");
             _writer.Line($"// for more information of creating {parentName}, please refer to the document of {parentName}");
-            var parentVar = WriteGetResource(parent, testCase, $"{clientResult.Declaration}");
+            var parentVar = WriteGetResource(parent, sample, $"{clientResult.Declaration}");
 
             var resourceName = collection.Resource.ResourceName;
             // now we have the parent resource, get the collection from that resource
@@ -206,7 +213,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             var parameters = new Dictionary<Parameter, CodeWriterVariableDeclaration>();
             foreach (var extraParameter in collection.ExtraConstructorParameters)
             {
-                if (testCase.ParameterValueMapping.TryGetValue(extraParameter.Name, out var value))
+                if (sample.ParameterValueMapping.TryGetValue(extraParameter.Name, out var value))
                 {
                     var declaration = new CodeWriterVariableDeclaration(extraParameter.Name, extraParameter.Type);
                     parameters.Add(extraParameter, declaration);
@@ -219,7 +226,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             }
             _writer.AppendDeclaration(collectionResult)
                 .Append($"= {parentVar}.{getResourceCollectionMethodName}(");
-            var parameterValues = testCase.ParameterValueMapping;
+            var parameterValues = sample.ParameterValueMapping;
             // iterate over the parameter list and put them into the invocation
             foreach ((var parameter, var declaration) in parameters)
             {
@@ -235,33 +242,33 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return collectionResult;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperation(CodeWriterVariableDeclaration collectionResult)
+        private CodeWriterVariableDeclaration? WriteSampleOperation(CodeWriterVariableDeclaration collectionResult, Sample sample)
         {
-            if (testCase.IsLro)
+            if (sample.IsLro)
             {
-                return WriteSampleLroOperation(collectionResult.Declaration);
+                return WriteSampleLroOperation(collectionResult.Declaration, sample);
             }
-            else if (testCase.IsPageable)
+            else if (sample.IsPageable)
             {
-                return WriteSamplePageableOperation(collectionResult.Declaration);
+                return WriteSamplePageableOperation(collectionResult.Declaration, sample);
             }
 
-            return WriteSampleNormalOperation(collectionResult.Declaration);
+            return WriteSampleNormalOperation(collectionResult.Declaration, sample);
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleLroOperation(CodeWriterDeclaration instanceVar)
+        private CodeWriterVariableDeclaration? WriteSampleLroOperation(CodeWriterDeclaration instanceVar, Sample sample)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
             // if the Lro is an ArmOperation<T>
-            var parameters = WriteOperationInvocationParameters();
-            var lroType = testCase.Operation.ReturnType;
+            var parameters = WriteOperationInvocationParameters(sample);
+            var lroType = sample.Operation.ReturnType;
             if (lroType.IsGenericType)
             {
-                var lroResult = new CodeWriterVariableDeclaration("lro", testCase.Operation.ReturnType);
+                var lroResult = new CodeWriterVariableDeclaration("lro", sample.Operation.ReturnType);
                 _writer.AppendDeclaration(lroResult).AppendRaw(" = ");
                 // write the method invocation
-                WriteOperationInvocation(instanceVar, parameters);
+                WriteOperationInvocation(instanceVar, parameters, sample);
                 var valueResult = new CodeWriterVariableDeclaration("result", lroType.Arguments.First());
                 _writer.AppendDeclaration(valueResult)
                     .Line($"= {lroResult.Declaration}.Value;");
@@ -271,46 +278,46 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             else
             {
                 // if the Lro is an ArmOperation without body, we just write the method invocation without assignment
-                WriteOperationInvocation(instanceVar, parameters);
+                WriteOperationInvocation(instanceVar, parameters, sample);
                 return null;
             }
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar)
+        private CodeWriterVariableDeclaration? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar, Sample sample)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
-            var parameters = WriteOperationInvocationParameters();
-            var returnType = testCase.Operation.ReturnType;
+            var parameters = WriteOperationInvocationParameters(sample);
+            var returnType = sample.Operation.ReturnType;
             if (returnType.IsGenericType)
             {
                 // an operation with a response
                 var valueResult = new CodeWriterVariableDeclaration("result", returnType.Arguments.First());
                 _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
                 // write the method invocation
-                WriteOperationInvocation(instanceVar, parameters);
+                WriteOperationInvocation(instanceVar, parameters, sample);
                 return valueResult;
             }
             else
             {
                 // an operation without a response
-                WriteOperationInvocation(instanceVar, parameters);
+                WriteOperationInvocation(instanceVar, parameters, sample);
                 return null;
             }
         }
 
-        private CodeWriterVariableDeclaration? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar)
+        private CodeWriterVariableDeclaration? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar, Sample sample)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation and iterate over the result");
-            var parameters = WriteOperationInvocationParameters();
+            var parameters = WriteOperationInvocationParameters(sample);
             // when the operation is pageable, the return type refers to the type of the item T, instead of Pageable<T>
-            var itemResult = new CodeWriterVariableDeclaration("item", testCase.Operation.ReturnType);
+            var itemResult = new CodeWriterVariableDeclaration("item", sample.Operation.ReturnType);
             _writer.Append($"await foreach (")
                 .AppendDeclaration(itemResult)
                 .AppendRaw(" in ");
 
-            WriteOperationInvocation(instanceVar, parameters, isEndOfLine: false);
+            WriteOperationInvocation(instanceVar, parameters, sample, isEndOfLine: false);
             using (_writer.Scope($")"))
             {
                 WriteResultHandling(itemResult, newLine: false);
@@ -320,16 +327,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return null;
         }
 
-        private Dictionary<string, CodeWriterVariableDeclaration> WriteOperationInvocationParameters()
+        private Dictionary<string, CodeWriterVariableDeclaration> WriteOperationInvocationParameters(Sample sample)
         {
             var result = new Dictionary<string, CodeWriterVariableDeclaration>();
-            foreach (var parameter in testCase.Operation.MethodParameters)
+            foreach (var parameter in sample.Operation.MethodParameters)
             {
                 // some parameters are always inline
                 if (IsInlineParameter(parameter))
                     continue;
 
-                if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
@@ -346,16 +353,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private static bool IsInlineParameter(Parameter parameter)
             => InlineParameters.Contains(parameter);
 
-        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterVariableDeclaration> parameters, bool isEndOfLine = true, bool isAsync = true)
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterVariableDeclaration> parameters, Sample sample, bool isEndOfLine = true, bool isAsync = true)
         {
-            var methodName = CreateMethodName(testCase.Operation.Name);
-            _writer.AppendIf($"await ", isAsync && !testCase.Operation.IsPagingOperation) // paging operation never needs this await
+            var methodName = CreateMethodName(sample.Operation.Name);
+            _writer.AppendIf($"await ", isAsync && !sample.Operation.IsPagingOperation) // paging operation never needs this await
                 .Append($"{instanceVar}.{methodName}(");
-            foreach (var parameter in testCase.Operation.MethodParameters)
+            foreach (var parameter in sample.Operation.MethodParameters)
             {
                 if (IsInlineParameter(parameter))
                 {
-                    if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var value))
+                    if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var value))
                     {
                         _writer.AppendExampleParameterValue(parameter, value).AppendRaw(",");
                     }

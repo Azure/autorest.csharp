@@ -30,7 +30,7 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
         $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
     }
 
-    if ($fast -or ($projectName -eq "CadlFirstTest") -or ($projectName -eq "CadlPetStore"))
+    if ($fast)
     {
         $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
         $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
@@ -60,9 +60,29 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = Join-Path $baseOutput "Generated"
     $outputPath = $outputPath -replace "\\", "/"
-    #clean up
-    if (Test-Path $outputPath) {
-        Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+
+    if (!$fast) 
+    {
+        #clean up
+        if (Test-Path $outputPath) 
+        {
+            Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+        }
+        
+        # emit cadl json
+        $repoRootPath = Join-Path $PSScriptRoot ".."
+        $repoRootPath = Resolve-Path -Path $repoRootPath
+        Push-Location $repoRootPath
+        Try
+        {
+            # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
+            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+            Invoke $emitCommand    
+        }
+        Finally 
+        {
+            Pop-Location
+        }        
     }
     # emit cadl json
     $repoRootPath = Join-Path $PSScriptRoot ".."
@@ -72,7 +92,6 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
     $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $mainFile --emit @azure-tools/cadl-csharp"
     Invoke $emitCommand
     Pop-Location
-
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
     $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
     Invoke $command
@@ -85,27 +104,41 @@ function Invoke-CadlSetup()
     $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
     $emitterPath = Resolve-Path -Path $emitterPath
     Push-Location $emitterPath
-    npm ci
-    npm run build
-    npm pack
-    Pop-Location
+    Try 
+    {
+        npm ci
+        npm run build
+        npm pack
+    }
+    Finally 
+    {
+        Pop-Location
+    }
 
     # install cadl and emitter
     $repoRoot = Join-Path $PSScriptRoot ".."
     $repoRoot = Resolve-Path $repoRoot
     Push-Location $repoRoot
-    npm ci
-    $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
-    if ($packages) {
-        $package = $packages;
-        if ($packages.count -gt 1) {
-            $package = $packages[0]
+    Try 
+    {
+        npm ci
+        $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
+        if ($packages) 
+        {
+            $package = $packages;
+            if ($packages.count -gt 1)
+            {
+                $package = $packages[0]
+            }
+            npm install $package
         }
-        npm install $package
+        git checkout $repoRoot/package.json
+        git checkout $repoRoot/package-lock.json
     }
-    git checkout $repoRoot/package.json
-    git checkout $repoRoot/package-lock.json
-    Pop-Location
+    Finally 
+    {
+        Pop-Location
+    }
 }
 function Get-AutoRestProject()
 {

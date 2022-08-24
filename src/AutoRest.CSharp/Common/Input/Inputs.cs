@@ -14,7 +14,14 @@ namespace AutoRest.CSharp.Common.Input
         public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: new List<string>(), Enums: new List<InputEnumType>(), Models: new List<InputModelType>(), Clients: new List<InputClient>(), Auth: new InputAuth()) {}
     }
 
-    internal record InputAuth();
+    internal record InputAuth(InputApiKeyAuth? ApiKey, InputOAuth2Auth? OAuth2)
+    {
+        public InputAuth() : this(null, null) {}
+    }
+
+    internal record InputApiKeyAuth(string Name);
+
+    internal record InputOAuth2Auth(IReadOnlyCollection<string> Scopes);
 
     internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations)
     {
