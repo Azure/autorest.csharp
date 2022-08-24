@@ -217,7 +217,6 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/hello", false);
             request.Uri = uri;
             return message;

@@ -187,8 +187,8 @@
      "Parameters": [
       {
        "$id": "26",
-       "Name": "localhost",
-       "NameInRequest": "localhost",
+       "Name": "host",
+       "NameInRequest": "host",
        "Description": "Endpoint Service",
        "Type": {
         "$id": "27",
@@ -251,7 +251,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/top/{action}",
      "BufferResponse": false
     },
@@ -278,7 +278,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/top2",
      "BufferResponse": false
     }
@@ -315,7 +315,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/hello",
      "BufferResponse": false
     }
@@ -368,7 +368,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/againHi",
      "BufferResponse": false
     },
@@ -395,7 +395,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/demoHi",
      "BufferResponse": false
     }

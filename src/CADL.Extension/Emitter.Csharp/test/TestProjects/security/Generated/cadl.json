@@ -20,8 +20,8 @@
      "Parameters": [
       {
        "$id": "4",
-       "Name": "localhost",
-       "NameInRequest": "localhost",
+       "Name": "host",
+       "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "5",
@@ -61,7 +61,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/security",
      "BufferResponse": false
     }

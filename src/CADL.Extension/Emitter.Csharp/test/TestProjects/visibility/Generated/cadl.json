@@ -73,8 +73,8 @@
      "Parameters": [
       {
        "$id": "11",
-       "Name": "localhost",
-       "NameInRequest": "localhost",
+       "Name": "host",
+       "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "12",
@@ -131,7 +131,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/visibility",
      "BufferResponse": false
     }

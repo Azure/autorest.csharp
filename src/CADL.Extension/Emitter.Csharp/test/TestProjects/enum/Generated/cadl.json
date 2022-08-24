@@ -173,8 +173,8 @@
      "Parameters": [
       {
        "$id": "25",
-       "Name": "localhost",
-       "NameInRequest": "localhost",
+       "Name": "host",
+       "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "26",
@@ -231,7 +231,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{localhost}/",
+     "Uri": "{host}",
      "Path": "/models",
      "BufferResponse": false
     }

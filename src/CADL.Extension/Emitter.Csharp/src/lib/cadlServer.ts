@@ -37,6 +37,7 @@ export function resolveServers(
 ): CadlServer[] {
     return servers.map((server) => {
         const parameters: InputParameter[] = [];
+        let url: string = server.url;
         for (const [name, prop] of server.parameters) {
             // if (!validateValidServerVariable(program, prop)) {
             //   continue;
@@ -78,14 +79,10 @@ export function resolveServers(
             parameters.push(variable);
         }
         /* add default server. */
-        if (
-            server.url &&
-            server.url.startsWith("http") &&
-            parameters.length == 0
-        ) {
+        if (server.url && parameters.length == 0) {
             const variable: InputParameter = {
-                Name: "localhost",
-                NameInRequest: "localhost",
+                Name: "host",
+                NameInRequest: "host",
                 Description: server.description,
                 Type: {
                     Name: "String",
@@ -110,11 +107,11 @@ export function resolveServers(
                     Value: server.url
                 } as InputConstant
             };
-
+            url = `{host}`;
             parameters.push(variable);
         }
         return {
-            url: server.url,
+            url: url,
             description: server.description,
             parameters
         };

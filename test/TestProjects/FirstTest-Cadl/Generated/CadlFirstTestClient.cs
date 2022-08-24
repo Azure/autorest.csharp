@@ -359,7 +359,6 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action, false);
             request.Uri = uri;
@@ -374,7 +373,6 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/top2", false);
             request.Uri = uri;
             return message;

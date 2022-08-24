@@ -126,7 +126,7 @@
      ],
      "HttpMethod": "DELETE",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": false
     },
@@ -184,7 +184,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": false
     },
@@ -227,7 +227,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets",
      "BufferResponse": false
     }

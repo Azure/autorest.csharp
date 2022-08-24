@@ -137,11 +137,13 @@ function createModel(program: Program): any {
         const clients: InputClient[] = [];
         //create endpoint parameter from servers
         let endPointParam = undefined;
+        let url: string = "";
         if (servers !== undefined) {
-            const calServers = resolveServers(program, servers);
-            if (calServers.length > 0) {
+            const cadlServers = resolveServers(program, servers);
+            if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
-                endPointParam = calServers[0].parameters[0];
+                url = cadlServers[0].url;
+                endPointParam = cadlServers[0].parameters[0];
             }
         }
         for (const operation of routes) {
@@ -167,6 +169,7 @@ function createModel(program: Program): any {
             const op: InputOperation = loadOperation(
                 program,
                 operation,
+                url,
                 endPointParam,
                 modelMap,
                 enumMap
@@ -208,7 +211,7 @@ function processServiceAuthentication(
                     for (const flow of schema.flows) {
                         switch (flow.type) {
                             case "clientCredentials":
-                                flow.scopes.forEach(item => scopes.add(item));
+                                flow.scopes.forEach((item) => scopes.add(item));
                                 break;
                             default:
                                 throw new Error(
@@ -257,6 +260,7 @@ function getOperationGroupName(
 function loadOperation(
     program: Program,
     operation: OperationDetails,
+    uri: string,
     endpoint: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
@@ -301,10 +305,7 @@ function loadOperation(
         Responses: responses,
         HttpMethod: parseHttpRequestMethod(verb),
         RequestBodyMediaType: BodyMediaType.Json,
-        Uri:
-            endpoint !== undefined && endpoint.Name !== ""
-                ? `{${endpoint.Name}}/`
-                : "",
+        Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
         BufferResponse: false
