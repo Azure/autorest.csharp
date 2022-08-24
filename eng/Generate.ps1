@@ -18,7 +18,7 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$cadlRanchPath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http' 
+$cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http' 
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -36,11 +36,11 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$arguments="") {
+function Add-Cadl([string]$name, [string]$output, [string]$mainFile="") {
     $cadlDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
-        'arguments'=$arguments
+        'mainFile'=$mainFile
     }
 }
 
@@ -51,13 +51,13 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
-function Add-CadlRanch-Cadl([string]$testName, [string]$cadlRanchDirectory) {
-    $projectDirectory = Join-Path $cadlRanchDirectory $testName
-    $cadlFolders = Get-ChildItem -Path $cadlRanchPath -Depth 2 -Directory $testName
+function Add-CadlRanch-Cadl([string]$testName, [string]$projectPreffix, [string]$cadlRanchProjectsDirectory) {
+    $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    $cadlFolders = Get-ChildItem -Path $cadlRanchFilePath -Depth 2 -Directory $testName
     if ($cadlFolders) {
         $cadlFolder = $cadlFolders[0]
         $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl $testName $projectDirectory $cadlMain
+        Add-Cadl "$projectPreffix$testName" $projectDirectory $cadlMain
     }
 }
 
@@ -196,7 +196,7 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            Add-CadlRanch-Cadl $testName $directory
+            Add-Cadl $testName $directory
         } else {
             if (Test-Path $readmeConfigurationPath)
             {
@@ -241,14 +241,13 @@ $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
     'dev-driven',
     'srv-driven-1',
-    'srv-driven-2',
-    'roundtrip-basic'
+    'srv-driven-2'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
     foreach ($testName in $cadlRanchProjectNames)
     {
-        Add-CadlRanch-Cadl $testName $cadlRanchProjectDirectory
+        Add-CadlRanch-Cadl $testName "cadl-" $cadlRanchProjectDirectory
     }
 }
 
@@ -358,6 +357,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-Cadl $_.output $_.projectName $_.mainFile $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
