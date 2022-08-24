@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? (FormattableString)$"Client options for {clientName}."
                 : $"Client options for {_libraryName} library clients.";
 
-            return new ClientOptionsTypeProvider(_rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
         }
 
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
