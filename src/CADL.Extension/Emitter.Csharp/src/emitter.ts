@@ -31,10 +31,8 @@ import { InputParameter } from "./type/InputParameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType,
     InputType
 } from "./type/InputType.js";
-import { InputTypeKind } from "./type/InputTypeKind.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
