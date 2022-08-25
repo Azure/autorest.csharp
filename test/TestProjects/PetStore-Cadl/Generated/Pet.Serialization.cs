@@ -18,6 +18,11 @@ namespace PetStore
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Tag))
+            {
+                writer.WritePropertyName("tag");
+                writer.WriteStringValue(Tag);
+            }
             writer.WritePropertyName("age");
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
@@ -26,6 +31,7 @@ namespace PetStore
         internal static Pet DeserializePet(JsonElement element)
         {
             string name = default;
+            Optional<string> tag = default;
             int age = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,13 +40,18 @@ namespace PetStore
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("tag"))
+                {
+                    tag = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("age"))
                 {
                     age = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new Pet(name, age);
+            return new Pet(name, tag, age);
         }
 
         internal RequestContent ToRequestContent()

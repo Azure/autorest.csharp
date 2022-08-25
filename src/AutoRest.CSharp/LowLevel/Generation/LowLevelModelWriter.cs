@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -47,10 +48,12 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.WriteMethodDeclaration(signature))
             {
                 var initializedFields = WriteFieldsInitialization(writer, signature, model);
-                // TODO: Add IReadOnlyDictionary
-                foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f) && TypeFactory.IsReadOnlyList(f.Type)))
+                foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f)))
                 {
-                    writer.Line($"{field.Name:I} = new List<{field.Type.Arguments[0]}>(0).AsReadOnly();");
+                    if (field.DefaultValue is not null)
+                    {
+                        writer.Line($"{field.Name:I} = {field.DefaultValue};");
+                    }
                 }
             }
         }
