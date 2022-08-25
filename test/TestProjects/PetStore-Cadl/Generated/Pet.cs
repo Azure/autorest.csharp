@@ -24,6 +24,16 @@ namespace PetStore
             Name = name;
             Age = age;
         }
+        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <param name="name"></param>
+        /// <param name="tag"></param>
+        /// <param name="age"></param>
+        internal Pet(string name, string tag, int age)
+        {
+            Name = name;
+            Tag = tag;
+            Age = age;
+        }
 
         public string Name { get; set; }
 

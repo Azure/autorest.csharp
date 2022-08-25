@@ -495,7 +495,6 @@ namespace CadlPetStore
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
             request.Uri = uri;
@@ -510,7 +509,6 @@ namespace CadlPetStore
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
             request.Uri = uri;
@@ -525,7 +523,6 @@ namespace CadlPetStore
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets", false);
             request.Uri = uri;
             request.Content = content;
