@@ -109,11 +109,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
                 WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
-            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensionsClient);
-            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensionsClient);
-            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensionsClient);
-            WriteExtensionClient(project, MgmtContext.Library.TenantExtensionsClient);
-            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensions.ExtensionClient);
+            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensions.ExtensionClient);
+            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensions.ExtensionClient);
+            WriteExtensionClient(project, MgmtContext.Library.TenantExtensions.ExtensionClient);
+            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensions.ExtensionClient);
 
             if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
             {

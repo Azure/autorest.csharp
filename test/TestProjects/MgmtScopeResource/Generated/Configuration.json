@@ -13,6 +13,10 @@
   "ListException": [
     "/{linkId}"
   ],
+  "GenerateArmResourceExtensions": [
+    "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
+    "/{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default"
+  ],
   "RequestPathToParent": {
     "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",
     "/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",

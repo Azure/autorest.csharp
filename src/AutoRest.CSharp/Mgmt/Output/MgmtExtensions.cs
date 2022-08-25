@@ -151,5 +151,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return null;
         }
+
+        private MgmtExtensionClient? _extensionClient;
+        public virtual MgmtExtensionClient ExtensionClient => _extensionClient ??= new MgmtExtensionClient(this);
     }
 }

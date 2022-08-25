@@ -498,6 +498,15 @@ namespace MgmtMockAndSample
             return resourceGroupResource.GetManagedHsms().Get(name, cancellationToken);
         }
 
+        private static ArmResourceExtensionClient GetExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ArmResourceExtensionClient(client, scope);
+            }
+            );
+        }
+
         private static ArmResourceExtensionClient GetExtensionClient(ArmResource armResource)
         {
             return armResource.GetCachedClient((client) =>
@@ -513,6 +522,15 @@ namespace MgmtMockAndSample
         public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
         {
             return GetExtensionClient(armResource).GetRoleAssignments();
+        }
+
+        /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
+        public static RoleAssignmentCollection GetRoleAssignments(this ArmClient client, ResourceIdentifier scope)
+        {
+            return GetExtensionClient(client, scope).GetRoleAssignments();
         }
 
         /// <summary>
@@ -536,6 +554,23 @@ namespace MgmtMockAndSample
         /// Request Path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
         /// Operation Id: RoleAssignments_Get
         /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return await client.GetRoleAssignments(scope).GetAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the specified role assignment.
+        /// Request Path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+        /// Operation Id: RoleAssignments_Get
+        /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -545,6 +580,23 @@ namespace MgmtMockAndSample
         public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
             return armResource.GetRoleAssignments().Get(roleAssignmentName, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get the specified role assignment.
+        /// Request Path: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+        /// Operation Id: RoleAssignments_Get
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmClient client, ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return client.GetRoleAssignments(scope).Get(roleAssignmentName, cancellationToken);
         }
 
         #region VaultResource

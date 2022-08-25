@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -166,6 +166,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> keepPluralResourceData,
             IReadOnlyList<string> noResourceSuffix,
             IReadOnlyList<string> schemasToPrependRPPrefix,
+            IReadOnlyList<string> generateArmResourceExtensions,
             IReadOnlyList<string> suppressAbstractBaseClass,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
@@ -229,6 +230,7 @@ namespace AutoRest.CSharp.Input
             KeepPluralResourceData = keepPluralResourceData;
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
+            GenerateArmResourceExtensions = generateArmResourceExtensions;
             SuppressAbstractBaseClass = suppressAbstractBaseClass;
             IsArmCore = DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = DeserializeBoolean(resourceModelRequiresType, true);
@@ -240,6 +242,9 @@ namespace AutoRest.CSharp.Input
 
         private static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
             => jsonElement == null || !IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
+
+        private static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
+            => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
 
         private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
             => !IsValidJsonElement(jsonElement) ? new Dictionary<TKey, TValue>() : JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(jsonElement.ToString()!)!;
@@ -281,10 +286,10 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralEnums { get; }
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
-        public IReadOnlyList<string> SuppressAbstractBaseClass { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
-
         public IReadOnlyList<string> NoResourceSuffix { get; }
+        public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
+        public IReadOnlyList<string> SuppressAbstractBaseClass { get; }
 
         public bool IsArmCore { get; }
         public TestGenConfiguration? TestGen { get; }
@@ -302,6 +307,7 @@ namespace AutoRest.CSharp.Input
                 keepPluralResourceData: autoRest.GetValue<string[]?>("keep-plural-resource-data").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClass: autoRest.GetValue<string[]?>("suppress-abstract-base-class").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
@@ -335,6 +341,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(KeepPluralEnums), KeepPluralEnums);
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
+            WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
             WriteNonEmptySettings(writer, nameof(SuppressAbstractBaseClass), SuppressAbstractBaseClass);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
@@ -368,16 +375,17 @@ namespace AutoRest.CSharp.Input
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
         {
-            root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
-            root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResource);
-            root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacement);
-            root.TryGetProperty(nameof(ListException), out var listException);
-            root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModels);
-            root.TryGetProperty(nameof(KeepPluralEnums), out var keepPluralEnums);
-            root.TryGetProperty(nameof(KeepPluralResourceData), out var keepPluralResourceData);
-            root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffix);
-            root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefix);
-            root.TryGetProperty(nameof(SuppressAbstractBaseClass), out var suppressAbstractBaseClass);
+            root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmitElement);
+            root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResourceElement);
+            root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacementElement);
+            root.TryGetProperty(nameof(ListException), out var listExceptionElement);
+            root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModelsElement);
+            root.TryGetProperty(nameof(KeepPluralEnums), out var keepPluralEnumsElement);
+            root.TryGetProperty(nameof(KeepPluralResourceData), out var keepPluralResourceDataElement);
+            root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffixElement);
+            root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefixElement);
+            root.TryGetProperty(nameof(GenerateArmResourceExtensions), out var generateArmResourceExtensionsElement);
+            root.TryGetProperty(nameof(SuppressAbstractBaseClass), out var suppressAbstractBaseClassElement);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -391,45 +399,20 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(IrregularPluralWords), out var irregularPluralWords);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
-            root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValues);
+            root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
 
-            var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
-                ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
-                ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var noPropertyTypeReplacementList = noPropertyTypeReplacement.ValueKind == JsonValueKind.Array
-                ? noPropertyTypeReplacement.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var listExceptionList = listException.ValueKind == JsonValueKind.Array
-                ? listException.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var promptedEnumValuesList = promptedEnumValues.ValueKind == JsonValueKind.Array
-                ? promptedEnumValues.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var keepOrphanedModelsList = keepOrphanedModels.ValueKind == JsonValueKind.Array
-                ? keepOrphanedModels.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var keepPluralEnumsList = keepPluralEnums.ValueKind == JsonValueKind.Array
-                ? keepPluralEnums.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var keepPluralResourceDataList = keepPluralResourceData.ValueKind == JsonValueKind.Array
-                ? keepPluralResourceData.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var noResourceSuffixList = noResourceSuffix.ValueKind == JsonValueKind.Array
-                ? noResourceSuffix.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var prependRPPrefixList = prependRPPrefix.ValueKind == JsonValueKind.Array
-                ? prependRPPrefix.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var suppressAbstractBaseClassList = suppressAbstractBaseClass.ValueKind == JsonValueKind.Array
-                ? suppressAbstractBaseClass.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
+            var operationGroupToOmit = DeserializeArray(operationGroupsToOmitElement);
+            var requestPathIsNonResource = DeserializeArray(requestPathIsNonResourceElement);
+            var noPropertyTypeReplacement = DeserializeArray(noPropertyTypeReplacementElement);
+            var listException = DeserializeArray(listExceptionElement);
+            var promptedEnumValues = DeserializeArray(promptedEnumValuesElement);
+            var keepOrphanedModels = DeserializeArray(keepOrphanedModelsElement);
+            var keepPluralEnums = DeserializeArray(keepPluralEnumsElement);
+            var keepPluralResourceData = DeserializeArray(keepPluralResourceDataElement);
+            var noResourceSuffix = DeserializeArray(noResourceSuffixElement);
+            var prependRPPrefix = DeserializeArray(prependRPPrefixElement);
+            var generateArmResourceExtensions = DeserializeArray(generateArmResourceExtensionsElement);
+            var suppressAbstractBaseClass = DeserializeArray(suppressAbstractBaseClassElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -440,17 +423,18 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
 
             return new MgmtConfiguration(
-                operationGroupsToOmit: operationGroupList,
-                requestPathIsNonResource: requestPathIsNonResourceList,
-                noPropertyTypeReplacement: noPropertyTypeReplacementList,
-                listException: listExceptionList,
-                promptedEnumValues: promptedEnumValuesList,
-                keepOrphanedModels: keepOrphanedModelsList,
-                keepPluralEnums: keepPluralEnumsList,
-                keepPluralResourceData: keepPluralResourceDataList,
-                noResourceSuffix: noResourceSuffixList,
-                schemasToPrependRPPrefix: prependRPPrefixList,
-                suppressAbstractBaseClass: suppressAbstractBaseClassList,
+                operationGroupsToOmit: operationGroupToOmit,
+                requestPathIsNonResource: requestPathIsNonResource,
+                noPropertyTypeReplacement: noPropertyTypeReplacement,
+                listException: listException,
+                promptedEnumValues: promptedEnumValues,
+                keepOrphanedModels: keepOrphanedModels,
+                keepPluralEnums: keepPluralEnums,
+                keepPluralResourceData: keepPluralResourceData,
+                noResourceSuffix: noResourceSuffix,
+                schemasToPrependRPPrefix: prependRPPrefix,
+                generateArmResourceExtensions: generateArmResourceExtensions,
+                suppressAbstractBaseClass: suppressAbstractBaseClass,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
