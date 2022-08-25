@@ -1,0 +1,101 @@
+import "@cadl-lang/rest";
+
+@serviceTitle("Models in CADL")
+@serviceVersion("0.1.0")
+@doc("CADL project to test various types of models.")
+namespace ModelsInCadl;
+
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("Base model")
+model BaseModel {
+
+}
+
+@doc("Derived model")
+model DerivedModel extends BaseModel {
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
+@discriminator("discriminatorProperty")
+@doc("Base model with discriminator property.")
+model BaseModelWithDiscriminator extends BaseModel {}
+
+@doc("Deriver model with discriminator property.")
+model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {
+  discriminatorProperty: "A";
+
+  @doc("Required string.")
+  requiredString: string;
+}
+
+@doc("Deriver model with discriminator property.")
+model DerivedModelWithDiscriminatorB extends BaseModelWithDiscriminator {
+  discriminatorProperty: "B";
+
+  @doc("Required int.")
+  requiredInt: int32;
+}
+
+
+@doc("Collection item model")
+model CollectionItem {
+    @doc("Required Record")
+    requiredRecord: Record<RecordItem>;
+}
+
+@doc("Record item model")
+model RecordItem extends DerivedModel {
+    
+}
+
+@doc("Model used both as input and output")
+model RoundTripModel extends BaseModel {
+  @doc("Required string, illustrating a reference type property.")
+  requiredString: string;
+
+  @doc("Required int, illustrating a value type property.")
+  requiredInt: int32;
+
+  @doc("Required model with discriminator")
+  requiredModel: BaseModelWithDiscriminator;
+}
+
+@doc("Model used only as input")
+model InputModel extends BaseModel {
+  @doc("Required string")
+  requiredString: string;
+
+  @doc("Required int")
+  requiredInt: int32;
+
+  @doc("Required model")
+  requiredModel: BaseModel;
+
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
+@doc("Model used only as output")
+model OutputModel extends BaseModel {
+  @doc("Required string")
+  requiredString: string;
+
+  @doc("Required int")
+  requiredInt: int32;
+
+  @doc("Required model")
+  requiredModel: DerivedModel;
+}
+
+@route("/inputToRoundTrip")
+@doc("Input to RoundTrip")
+@get
+op inputToRoundTrip(@body input: InputModel): RoundTripModel;
+
+@route("/roundTripToOutput")
+@doc("RoundTrip to Output")
+@get
+op roundTripToOutput(@body input: RoundTripModel): OutputModel;
