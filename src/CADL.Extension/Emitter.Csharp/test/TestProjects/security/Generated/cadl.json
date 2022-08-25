@@ -1,0 +1,84 @@
+{
+ "$id": "1",
+ "Name": "securityclient",
+ "Description": "Illustrates clients generated from a Cadl with security.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "SecurityClient",
+   "Description": "Illustrates clients generated from a Cadl with security.",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "genSecurity",
+     "Description": "Get security info",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "5",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "6",
+        "Type": {
+         "$id": "7",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "8",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/security",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "9"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "10",
+  "OAuth2": {
+   "$id": "11",
+   "Scopes": [
+    "https://api.example.com/.default"
+   ]
+  },
+  "ApiKey": "x-ms-api-key"
+ }
+}

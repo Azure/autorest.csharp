@@ -35,14 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "RoundTripModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "RoundTripModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(InputEnumPropertiesCase))]
@@ -58,15 +51,25 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "InputModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "InputModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
+
+        [TestCaseSource(nameof(OutputEnumPropertiesCase))]
+        public void OutputEnumProperties(string expectedModelCodes, string expectedSerializationCodes)
+        {
+            // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L57-L65
+            var modelType = new InputModelType("OutputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", "Output model with enum properties", InputModelTypeUsage.Output,
+                    new List<InputModelProperty>{
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
+                    },
+                    null, new List<InputModelType>(), null);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
+                new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+
+            ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
+        }
+
         private void ValidateGeneratedCodes(EnumType enumType, string modelCodes, string serializationCodes)
         {
             ValidateGeneratedModelCodes(enumType, modelCodes);
@@ -123,7 +126,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             {
                 new EnumWrapper(new EnumType(ExtensibleEnumType,
                     "Cadl.TestServer.EnumPropertiesBasic", "public",
-                    new TypeFactory(null), null
+                    CadlTypeFactory, null
                 )),
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -193,7 +196,7 @@ public override string ToString() => _value;
                 // see cadl definition: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L35-L45
                 new EnumWrapper(new EnumType(FixedEnumType,
                     "Cadl.TestServer.EnumPropertiesBasic", "public",
-                    new TypeFactory(null), null
+                    CadlTypeFactory, null
                 )),
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -420,6 +423,82 @@ internal global::Azure.Core.RequestContent ToRequestContent()
 var content = new global::Azure.Core.Utf8JsonRequestContent();
 content.JsonWriter.WriteObjectValue(this);
 return content;
+}
+}
+}
+"
+            }
+        };
+
+        private static readonly object[] OutputEnumPropertiesCase =
+        {
+            new object[]
+            {
+                @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+// <auto-generated/>
+
+#nullable disable
+
+namespace Cadl.TestServer.EnumPropertiesBasic
+{
+/// <summary> Output model with enum properties. </summary>
+public partial class OutputModel
+{
+/// <summary> Initializes a new instance of OutputModel. </summary>
+/// <param name=""day""> Required standard enum value. </param>
+/// <param name=""language""> Required string enum value. </param>
+internal OutputModel(global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek day,global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues language)
+{
+Day = day;
+Language = language;
+}
+
+/// <summary> Required standard enum value. </summary>
+public global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek Day{ get; }
+
+/// <summary> Required string enum value. </summary>
+public global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues Language{ get; }
+}
+}
+",
+                @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+// <auto-generated/>
+
+#nullable disable
+
+using System.Text.Json;
+using Azure;
+using Azure.Core;
+
+namespace Cadl.TestServer.EnumPropertiesBasic
+{
+public partial class OutputModel
+{
+internal static global::Cadl.TestServer.EnumPropertiesBasic.OutputModel DeserializeOutputModel(global::System.Text.Json.JsonElement element)
+{
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek day = default;
+global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues language = default;
+foreach (var property in element.EnumerateObject())
+{
+if(property.NameEquals(""Day"")){
+day = property.Value.GetString().ToDayOfTheWeek();
+continue;
+}
+if(property.NameEquals(""Language"")){
+language = new global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues(property.Value.GetString());
+continue;
+}
+}
+return new global::Cadl.TestServer.EnumPropertiesBasic.OutputModel(day, language);}
+
+internal static global::Cadl.TestServer.EnumPropertiesBasic.OutputModel FromResponse(global::Azure.Response response)
+{
+using var document = global::System.Text.Json.JsonDocument.Parse(response.Content);
+return DeserializeOutputModel(document.RootElement);
 }
 }
 }

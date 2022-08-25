@@ -14,7 +14,7 @@
     {
      "$id": "3",
      "Name": "zonedDateTime",
-     "Description": "Path parameter is string with format",
+     "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
        "$id": "4",
@@ -49,16 +49,54 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/uri/{zonedDateTime}",
+     "Path": "/zonedDateTime/{zonedDateTime}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "7",
+     "Name": "uri",
+     "Description": "path paramter is string with uri format",
+     "Parameters": [
+      {
+       "$id": "8",
+       "Name": "uri",
+       "NameInRequest": "uri",
+       "Type": {
+        "$id": "9",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "10",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/uri/{uri}",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "7"
+    "$id": "11"
    }
   }
- ],
- "Auth": {
-  "$id": "8"
- }
+ ]
 }

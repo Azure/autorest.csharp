@@ -116,7 +116,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var candidate = resourceTypeSegments[index];
                     var value = ResourceType[candidate.index];
-                    result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                    try
+                    {
+                        result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        throw new InvalidOperationException($"Expected enum type for the parameter '{segment.ReferenceName}' in method '{method.Operation.Path}'");
+                    }
                 }
             }
             return result;

@@ -284,17 +284,6 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
 
 $settings | ConvertTo-Json | Out-File $launchSettings
 
-if ($reset -or $env:TF_BUILD)
-{
-    AutoRest-Reset;
-}
-
-if (!$noBuild)
-{
-    Invoke "dotnet build $autoRestPluginProject"
-    Invoke-CadlSetup
-}
-
 $keys = $testProjectEntries.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter))
 { 
@@ -308,6 +297,26 @@ if (![string]::IsNullOrWhiteSpace($filter))
     {
         $keys = $keys.Where({$_ -match $filter}) 
     }
+}
+
+if ($reset -or $env:TF_BUILD)
+{
+    $cadlCount = ([string]::IsNullOrWhiteSpace($filter) ? $cadlDefinitions : $cadlDefinitions.Keys.Where({$_ -match $filter})).Count
+    $swaggerCount = $keys.Count - $cadlCount
+    if ($swaggerCount -gt 0) 
+    {
+        AutoRest-Reset;
+    }
+    
+    if ($cadlCount -gt 0) 
+    {
+        Invoke-CadlSetup
+    }
+}
+
+if (!$noBuild)
+{
+    Invoke "dotnet build $autoRestPluginProject"
 }
 
 
@@ -328,6 +337,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-Cadl $_.output $_.projectName $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel

@@ -3,9 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -79,32 +82,33 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
             var publicParameters = new List<Parameter>();
-            var serializatoinParameters = new List<Parameter>();
+            var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType ||
-                    (inputModel.Usage == InputModelTypeUsage.Input && inputModelProperty.IsRequired)
-                    ? Public | ReadOnly
-                    : Public;
+                var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
+                var propertyIsRequiredInNonRoundTripModel = (inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output) && inputModelProperty.IsRequired;
+                var propertyIsOptionalInOutputModel = (inputModel.Usage is InputModelTypeUsage.Output) && !inputModelProperty.IsRequired;
+                var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+
+                var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
                 var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(),
+                    GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
-                if (inputModelProperty.IsRequired)
+
+                var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
+                parametersToFields[parameter.Name] = field;
+                serializationParameters.Add(parameter);
+                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
                 {
-                    var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
-                    parametersToFields[parameter.Name] = field;
-                    serializatoinParameters.Add(parameter);
-                    if (!inputModelProperty.IsReadOnly)
-                    {
-                        publicParameters.Add(parameter);
-                    }
+                    publicParameters.Add(parameter);
                 }
             }
 
-            return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
+            return (fieldsToInputs, publicParameters, serializationParameters, parametersToFields);
         }
 
         private static CSharpType GetDefaultPropertyType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
@@ -117,35 +121,63 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = TypeFactory.GetOutputType(valueType);
             }
 
+            if (valueType.IsValueType && !property.IsRequired)
+            {
+                valueType = valueType.WithNullable(true);
+            }
+
             return valueType;
+        }
+
+        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, bool isRequired)
+        {
+            // TODO: Add Dictionary support
+            if (TypeFactory.IsList(propertyType))
+            {
+                if (TypeFactory.IsReadOnlyList(propertyType))
+                {
+                    return $"Array.Empty<{propertyType.Arguments[0]}>()";
+                }
+                if (!isRequired)
+                {
+                    return Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable();
+                }
+            }
+            return null;
         }
 
         private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, in InputModelTypeUsage usage, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
+
             if (usage == InputModelTypeUsage.Input)
             {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
-                publicConstructor = serializationConstructor;
-            }
-            else if (!publicParameters.SequenceEqual(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
-            {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
                     publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                serializationConstructor = publicConstructor;
             }
             else
             {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, serializationParameters);
-                publicConstructor = serializationConstructor;
-
+                var publicConstructorAccessbility = (usage == InputModelTypeUsage.Output ? MethodSignatureModifiers.Internal : MethodSignatureModifiers.Public);
+                if (serializationParameters.Any(p => TypeFactory.IsList(p.Type)) || !publicParameters.SequenceEqual(serializationParameters))
+                {
+                    publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility,
+                        publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                    serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal,
+                        serializationParameters.Select(p => p with { Validation = ValidationType.None }).ToList()); // we don't validate parameters for serialization constructor
+                }
+                else
+                {
+                    publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility, publicParameters);
+                    serializationConstructor = publicConstructor;
+                }
             }
+
             return (publicConstructor, serializationConstructor);
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsReadWriteList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
     }
 }
