@@ -3,9 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -20,9 +23,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
+        public string Description { get; }
         public IReadOnlyList<FieldDeclaration> Fields { get; }
         public ConstructorSignature PublicConstructor { get; }
         public ConstructorSignature SerializationConstructor { get; }
+        public bool IncludeSerializer { get; }
+        public bool IncludeDeserializer { get; }
 
         private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
         // parameter name should be unique since it's bound to field property
@@ -33,11 +39,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
+            Description = inputModel.Description ?? $"The {inputModel.Name}.";
+            IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
+            IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
 
             (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
 
             Fields = _fieldsToInputs.Keys.ToList();
-            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, publicParameters, serializationParameters);
+            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, inputModel.Usage, publicParameters, serializationParameters);
         }
 
         // Serialization uses field and property names that first need to verified for uniqueness
@@ -73,66 +82,102 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
             var publicParameters = new List<Parameter>();
-            var serializatoinParameters = new List<Parameter>();
+            var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType
-                    ? Public | ReadOnly
-                    : Public;
+                var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
+                var propertyIsRequiredInNonRoundTripModel = (inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output) && inputModelProperty.IsRequired;
+                var propertyIsOptionalInOutputModel = (inputModel.Usage is InputModelTypeUsage.Output) && !inputModelProperty.IsRequired;
+                var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+
+                var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
                 var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(),
+                    GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), writeAsProperty: true);
                 fieldsToInputs[field] = inputModelProperty;
-                if (inputModelProperty.IsRequired)
+
+                var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
+                parametersToFields[parameter.Name] = field;
+                serializationParameters.Add(parameter);
+                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
                 {
-                    var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
-                    parametersToFields[parameter.Name] = field;
-                    serializatoinParameters.Add(parameter);
-                    if (!inputModelProperty.IsReadOnly)
-                    {
-                        publicParameters.Add(parameter);
-                    }
+                    publicParameters.Add(parameter);
                 }
             }
 
-            return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
+            return (fieldsToInputs, publicParameters, serializationParameters, parametersToFields);
         }
 
         private static CSharpType GetDefaultPropertyType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
         {
             var valueType = typeFactory.CreateType(property.Type);
 
-            if (!modelUsage.HasFlag(InputModelTypeUsage.Input) ||
+            if (modelUsage == InputModelTypeUsage.Output ||
                 property.IsReadOnly)
             {
                 valueType = TypeFactory.GetOutputType(valueType);
             }
 
+            if (valueType.IsValueType && !property.IsRequired)
+            {
+                valueType = valueType.WithNullable(true);
+            }
+
             return valueType;
         }
 
-        private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
+        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, bool isRequired)
+        {
+            // TODO: Add Dictionary support
+            if (TypeFactory.IsList(propertyType))
+            {
+                if (TypeFactory.IsReadOnlyList(propertyType))
+                {
+                    return $"Array.Empty<{propertyType.Arguments[0]}>()";
+                }
+                if (!isRequired)
+                {
+                    return Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable();
+                }
+            }
+            return null;
+        }
+
+        private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, in InputModelTypeUsage usage, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
             ConstructorSignature publicConstructor;
             ConstructorSignature serializationConstructor;
-            if (!publicParameters.SequenceEqual(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
+
+            if (usage == InputModelTypeUsage.Input)
             {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
                     publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                serializationConstructor = publicConstructor;
             }
             else
             {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, serializationParameters);
-                publicConstructor = serializationConstructor;
-
+                var publicConstructorAccessbility = (usage == InputModelTypeUsage.Output ? MethodSignatureModifiers.Internal : MethodSignatureModifiers.Public);
+                if (serializationParameters.Any(p => TypeFactory.IsList(p.Type)) || !publicParameters.SequenceEqual(serializationParameters))
+                {
+                    publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility,
+                        publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                    serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal,
+                        serializationParameters.Select(p => p with { Validation = ValidationType.None }).ToList()); // we don't validate parameters for serialization constructor
+                }
+                else
+                {
+                    publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility, publicParameters);
+                    serializationConstructor = publicConstructor;
+                }
             }
+
             return (publicConstructor, serializationConstructor);
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsReadWriteList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
     }
 }

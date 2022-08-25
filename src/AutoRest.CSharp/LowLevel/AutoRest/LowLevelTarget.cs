@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var enumType in library.Enums)
             {
-                if (enumType.IsExtendable)
+                if (enumType.IsExtensible)
                 {
                     var codeWriter = new CodeWriter();
                     ModelWriter.WriteExtendableEnum(codeWriter, enumType);

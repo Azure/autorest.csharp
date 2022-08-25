@@ -16,10 +16,10 @@ namespace SecurityDefinition_LowLevel
     /// <summary> The SecurityDefinition service client. </summary>
     public partial class SecurityDefinitionClient
     {
-        private static readonly string[] AuthorizationScopes = new string[] { "user_impersonation" };
-        private readonly TokenCredential _tokenCredential;
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private static readonly string[] AuthorizationScopes = new string[] { "user_impersonation" };
+        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,14 +39,6 @@ namespace SecurityDefinition_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public SecurityDefinitionClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new SecurityDefinitionClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of SecurityDefinitionClient. </summary>
-        /// <param name="endpoint"> server parameter. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public SecurityDefinitionClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new SecurityDefinitionClientOptions())
         {
         }
@@ -54,19 +46,9 @@ namespace SecurityDefinition_LowLevel
         /// <summary> Initializes a new instance of SecurityDefinitionClient. </summary>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public SecurityDefinitionClient(Uri endpoint, TokenCredential credential, SecurityDefinitionClientOptions options)
+        public SecurityDefinitionClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new SecurityDefinitionClientOptions())
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new SecurityDefinitionClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> Initializes a new instance of SecurityDefinitionClient. </summary>
@@ -87,6 +69,24 @@ namespace SecurityDefinition_LowLevel
             _apiVersion = options.Version;
         }
 
+        /// <summary> Initializes a new instance of SecurityDefinitionClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public SecurityDefinitionClient(Uri endpoint, TokenCredential credential, SecurityDefinitionClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
+            options ??= new SecurityDefinitionClientOptions();
+
+            ClientDiagnostics = new ClientDiagnostics(options, true);
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _endpoint = endpoint;
+            _apiVersion = options.Version;
+        }
+
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -95,7 +95,7 @@ namespace SecurityDefinition_LowLevel
         /// <example>
         /// This sample shows how to call OperationAsync.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
+        /// var credential = new AzureKeyCredential("<key>");
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
@@ -106,7 +106,7 @@ namespace SecurityDefinition_LowLevel
         /// ]]></code>
         /// This sample shows how to call OperationAsync with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
+        /// var credential = new AzureKeyCredential("<key>");
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
@@ -158,7 +158,7 @@ namespace SecurityDefinition_LowLevel
         /// <example>
         /// This sample shows how to call Operation.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
+        /// var credential = new AzureKeyCredential("<key>");
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 
@@ -169,7 +169,7 @@ namespace SecurityDefinition_LowLevel
         /// ]]></code>
         /// This sample shows how to call Operation with all request content.
         /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
+        /// var credential = new AzureKeyCredential("<key>");
         /// var endpoint = new Uri("<https://my-service.azure.com>");
         /// var client = new SecurityDefinitionClient(endpoint, credential);
         /// 

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input
                 Models: models,
                 Enums: enums,
                 ApiVersions: GetApiVersions(codeModel),
-                Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().ToList()));
+                Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
@@ -216,6 +216,7 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Description: schema.CreateDescription(),
                 Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
                 {
                     SchemaTypeUsage.Input => InputModelTypeUsage.Input,
@@ -353,14 +354,14 @@ namespace AutoRest.CSharp.Common.Input
             _ => new CodeModelType(schema)
         };
 
-        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtendable) => new(
+        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
             Name: schema.Name,
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
-            IsExtendable: isExtendable
+            IsExtensible: isExtensible
         );
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
@@ -403,5 +404,96 @@ namespace AutoRest.CSharp.Common.Input
                 .Distinct()
                 .OrderBy(v => v)
                 .ToList();
+
+        private static InputAuth GetAuth(IEnumerable<SecurityScheme> securitySchemes)
+        {
+            InputApiKeyAuth? apiKey = null;
+            InputOAuth2Auth? oAuth2 = null;
+
+            foreach (var scheme in securitySchemes.Distinct(SecuritySchemesComparer.Instance))
+            {
+                switch (scheme)
+                {
+                    case AzureKeySecurityScheme:
+                        throw new NotSupportedException($"{typeof(AzureKeySecurityScheme)} is not supported. Use {typeof(KeySecurityScheme)} instead");
+                    case AADTokenSecurityScheme:
+                        throw new NotSupportedException($"{typeof(AADTokenSecurityScheme)} is not supported. Use {typeof(OAuth2SecurityScheme)} instead");
+                    case KeySecurityScheme when apiKey is not null:
+                        // Tolerate second KeySecurityScheme to support TranslatorText: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/stable/v3.0/TranslatorText.json#L14
+                        // See https://github.com/Azure/autorest.csharp/issues/2637
+                        //throw new NotSupportedException($"Only one {typeof(KeySecurityScheme)} is supported. Remove excess");
+                        break;
+                    case OAuth2SecurityScheme when oAuth2 is not null:
+                        throw new NotSupportedException($"Only one {typeof(OAuth2SecurityScheme)} is not supported. Remove excess");
+                    case KeySecurityScheme apiKeyScheme:
+                        apiKey = new InputApiKeyAuth(apiKeyScheme.Name);
+                        break;
+                    case OAuth2SecurityScheme oAuth2Scheme:
+                        oAuth2 = new InputOAuth2Auth(oAuth2Scheme.Scopes.ToList());
+                        break;
+                }
+            }
+
+            return new InputAuth(apiKey, oAuth2);
+        }
+
+        private class SecuritySchemesComparer : IEqualityComparer<SecurityScheme>
+        {
+            public static IEqualityComparer<SecurityScheme> Instance { get; } = new SecuritySchemesComparer();
+
+            private SecuritySchemesComparer() { }
+
+            public bool Equals(SecurityScheme? x, SecurityScheme? y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (ReferenceEquals(x, null))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(y, null))
+                {
+                    return false;
+                }
+
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+
+                return (x, y) switch
+                {
+                    (KeySecurityScheme apiKeyX, KeySecurityScheme apiKeyY)
+                        => apiKeyX.Type == apiKeyY.Type && apiKeyX.Name == apiKeyY.Name,
+                    (OAuth2SecurityScheme oAuth2X, OAuth2SecurityScheme oAuth2Y)
+                        => oAuth2X.Type == oAuth2Y.Type && oAuth2X.Scopes.SequenceEqual(oAuth2Y.Scopes, StringComparer.Ordinal),
+                    _ => x.Type == y.Type
+                };
+            }
+
+            public int GetHashCode(SecurityScheme obj) =>
+                obj switch
+                {
+                    AzureKeySecurityScheme azure => HashCode.Combine(azure.Type, azure.HeaderName),
+                    AADTokenSecurityScheme aad => GetAADTokenSecurityHashCode(aad),
+                    _ => HashCode.Combine(obj.Type)
+                };
+
+            private static int GetAADTokenSecurityHashCode(AADTokenSecurityScheme aad)
+            {
+                var hashCode = new HashCode();
+                hashCode.Add(aad.Type);
+                foreach (var value in aad.Scopes)
+                {
+                    hashCode.Add(value);
+                }
+                return hashCode.ToHashCode();
+            }
+        }
+
     }
 }

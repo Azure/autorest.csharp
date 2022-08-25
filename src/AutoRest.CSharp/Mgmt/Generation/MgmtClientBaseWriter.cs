@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
-                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).Distinct().ToArray(),
             };
 
             _writer.Line();
@@ -835,10 +835,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var operation = new {LibraryArmOperation}");
-            if (operation.ReturnType.IsGenericType)
+            if (operation.InterimOperation is not null)
             {
-                _writer.Append($"<{operation.MgmtReturnType}>");
+                _writer.Append($"var operation = new {operation.InterimOperation.TypeName}");
+            }
+            else
+            {
+                _writer.Append($"var operation = new {LibraryArmOperation}");
+                if (operation.ReturnType.IsGenericType)
+                {
+                    _writer.Append($"<{operation.MgmtReturnType}>");
+                }
             }
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)

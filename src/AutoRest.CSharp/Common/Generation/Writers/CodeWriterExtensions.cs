@@ -110,7 +110,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
-            if (field.DefaultValue != null)
+            if (field.DefaultValue != null &&
+                (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
                 return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
             }
@@ -404,16 +405,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
         {
-            if (!enumType.IsExtendable)
+            if (!enumType.IsExtensible)
             {
                 writer.UseNamespace(enumType.Type.Namespace);
             }
-            return writer.AppendRaw(enumType.IsExtendable ? ".ToString()" : ".ToSerialString()");
+            return writer.AppendRaw(enumType.IsExtensible ? ".ToString()" : ".ToSerialString()");
         }
 
         public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, FormattableString value)
         {
-            if (enumType.IsExtendable)
+            if (enumType.IsExtensible)
             {
                 writer.Append($"new {enumType.Type}({value})");
             }

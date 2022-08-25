@@ -51,6 +51,13 @@
             "required": true,
             "type": "string",
             "description": "The id of the resource."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The ETag of the transformation."
           }
         ],
         "responses": {

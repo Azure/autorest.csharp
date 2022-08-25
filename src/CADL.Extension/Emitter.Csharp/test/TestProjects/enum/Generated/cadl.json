@@ -10,7 +10,6 @@
    "$id": "2",
    "Name": "DayOfTheWeek",
    "Namespace": "EnumPropertiesBasic",
-   "Accessibility": "",
    "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -58,7 +57,6 @@
    "$id": "10",
    "Name": "TranslationLanguage",
    "Namespace": "EnumPropertiesBasic",
-   "Accessibility": "",
    "Description": "The language to translate the input text into.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -93,7 +91,6 @@
    "$id": "15",
    "Name": "EnumWithStringValue",
    "Namespace": "EnumPropertiesBasic",
-   "Accessibility": "",
    "Description": "Represents the simple enum with enum string value.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -121,6 +118,8 @@
   {
    "$id": "19",
    "Name": "InputModel",
+   "Namespace": "EnumPropertiesBasic",
+   "Description": "Input model with enum properties.",
    "IsNullable": false,
    "Properties": [
     {
@@ -174,27 +173,37 @@
      "Parameters": [
       {
        "$id": "25",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
        "Type": {
         "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "27",
+        "Type": {
+         "$id": "28",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
       },
       {
-       "$id": "27",
+       "$id": "29",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -213,7 +222,7 @@
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "30",
        "StatusCodes": [
         200
        ],
@@ -222,17 +231,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{host}",
      "Path": "/models",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "29"
+    "$id": "31"
    }
   }
- ],
- "Auth": {
-  "$id": "30"
- }
+ ]
 }

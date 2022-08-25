@@ -446,7 +446,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
+        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization, string? backingTypeName = null)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -495,7 +495,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
+            writer.Append($"return new {(backingTypeName != null ? backingTypeName : serialization.Type)}({parameters.Join(", ")});");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)
@@ -631,7 +631,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
-                    return clientEnum.IsExtendable
+                    return clientEnum.IsExtensible
                         ? $"new {clientEnum.Type}({value})"
                         : (FormattableString) $"{value}.To{clientEnum.Type:D}()";
 

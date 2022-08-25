@@ -3,8 +3,9 @@
   "private": true,
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
   "devDependencies": {
-    "@cadl-lang/compiler": "0.33.0",
-    "@cadl-lang/rest": "0.15.1",
+    "@cadl-lang/compiler": "0.34.0",
+    "@cadl-lang/rest": "0.16.0",
+    "@azure-tools/cadl-csharp": "0.1.0",
     "@microsoft.azure/autorest.testserver": "3.3.24",
     "autorest": "3.6.1"
   }

@@ -9,37 +9,36 @@ import {
     getServiceVersion,
     getSummary,
     ModelTypeProperty,
+    OperationType,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
 import {
     getAllRoutes,
+    getAuthentication,
     getServers,
     HttpOperationParameter,
     HttpOperationResponse,
-    OperationDetails
+    OperationDetails,
+    ServiceAuthentication
 } from "@cadl-lang/rest/http";
-import { CodeModel } from "./type/CodeModel";
-import { InputClient } from "./type/InputClient";
+import { CodeModel } from "./type/CodeModel.js";
+import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import {
-    InputEnumType,
-    InputModelType,
-    InputPrimitiveType,
-    InputType
-} from "./type/InputType.js";
-import { InputTypeKind } from "./type/InputTypeKind.js";
+import { InputEnumType, InputModelType, InputType } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
-import { getExternalDocs } from "./lib/decorators.js";
+import { getExternalDocs, getOperationId } from "./lib/decorators.js";
+import { InputAuth } from "./type/InputAuth.js";
+import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -125,6 +124,11 @@ function createModel(program: Program): any {
     apiVersions.push(version);
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const authentication = getAuthentication(program, serviceNamespaceType);
+    let auth = undefined;
+    if (authentication) {
+        auth = processServiceAuthentication(authentication);
+    }
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
@@ -133,35 +137,22 @@ function createModel(program: Program): any {
         const clients: InputClient[] = [];
         //create endpoint parameter from servers
         let endPointParam = undefined;
+        let url: string = "";
         if (servers !== undefined) {
-            const calServers = resolveServers(program, servers);
-            if (calServers.length > 0) {
+            const cadlServers = resolveServers(program, servers);
+            if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
-                endPointParam = calServers[0].parameters[0];
+                url = cadlServers[0].url;
+                endPointParam = cadlServers[0].parameters[0];
             }
         }
-        const apiVersionParam: InputParameter = {
-            Name: "apiVersion",
-            NameInRequest: "apiVersion",
-            Description: "",
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Location: RequestLocation.Query,
-            IsRequired: true,
-            IsApiVersion: true,
-            IsContentType: false,
-            IsEndpoint: false,
-            IsResourceParameter: false,
-            SkipUrlEncoding: false,
-            Explode: false,
-            Kind: InputOperationParameterKind.Client
-        };
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            const groupName: string = operation.groupName;
+            if (!isSupportedOperation(operation)) continue;
+            const groupName: string = getOperationGroupName(
+                program,
+                operation.operation
+            );
             let client = getClient(clients, groupName);
             if (!client) {
                 const container = operation.container;
@@ -178,8 +169,8 @@ function createModel(program: Program): any {
             const op: InputOperation = loadOperation(
                 program,
                 operation,
+                url,
                 endPointParam,
-                apiVersionParam,
                 modelMap,
                 enumMap
             );
@@ -193,7 +184,7 @@ function createModel(program: Program): any {
             Enums: Array.from(enumMap.values()),
             Models: Array.from(modelMap.values()),
             Clients: clients,
-            Auth: {}
+            Auth: auth
         } as CodeModel;
         return clientModel;
     } catch (err) {
@@ -205,11 +196,72 @@ function createModel(program: Program): any {
     }
 }
 
+function processServiceAuthentication(
+    authentication: ServiceAuthentication
+): InputAuth {
+    const auth = {} as InputAuth;
+    for (const option of authentication.options) {
+        for (const schema of option.schemes) {
+            switch (schema.type) {
+                case "apiKey":
+                    auth.ApiKey = schema.name;
+                    break;
+                case "oauth2":
+                    let scopes = new Set<string>();
+                    for (const flow of schema.flows) {
+                        switch (flow.type) {
+                            case "clientCredentials":
+                                flow.scopes.forEach((item) => scopes.add(item));
+                                break;
+                            default:
+                                throw new Error(
+                                    "Not Supported Authentication."
+                                );
+                        }
+                    }
+                    auth.OAuth2 = {
+                        Scopes: Array.from(scopes.values())
+                    } as InputOAuth2Auth;
+                    break;
+                default:
+                    throw new Error("Not supported authentication.");
+            }
+        }
+    }
+    return auth;
+}
+
+function getOperationGroupName(
+    program: Program,
+    operation: OperationType
+): string {
+    const explicitOperationId = getOperationId(program, operation);
+    if (explicitOperationId) {
+        const ids: string[] = explicitOperationId.split("_");
+        if (ids.length > 1) {
+            return ids.slice(0, -2).join("_");
+        }
+    }
+
+    if (operation.interface) {
+        return operation.interface.name;
+    }
+    let namespace = operation.namespace;
+    if (!namespace) {
+        namespace =
+            program.checker.getGlobalNamespaceType() ??
+            getServiceNamespace(program);
+    }
+
+    if (namespace) return namespace.name;
+    else return "";
+}
+
 function loadOperation(
     program: Program,
     operation: OperationDetails,
+    uri: string,
     endpoint: InputParameter | undefined = undefined,
-    apiVersion: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
@@ -226,14 +278,15 @@ function loadOperation(
 
     const parameters: InputParameter[] = [];
     if (endpoint) parameters.push(endpoint);
-    if (apiVersion) parameters.push(apiVersion);
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
 
-    const body = cadlParameters.body;
-    if (body) {
-        parameters.push(loadBodyParameter(program, body));
+    const bodyType = cadlParameters.bodyType;
+    const bodyParam = cadlParameters.bodyParameter;
+
+    if (bodyType && bodyParam) {
+        parameters.push(loadBodyParameter(program, bodyParam));
     }
 
     const responses: OperationResponse[] = [];
@@ -252,10 +305,7 @@ function loadOperation(
         Responses: responses,
         HttpMethod: parseHttpRequestMethod(verb),
         RequestBodyMediaType: BodyMediaType.Json,
-        Uri:
-            endpoint !== undefined && endpoint.Name !== ""
-                ? `{${endpoint.Name}}/`
-                : "",
+        Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
         BufferResponse: false
@@ -349,6 +399,16 @@ function loadOperation(
     }
 }
 
+function isLroOperation(op: OperationDetails) {
+    return false;
+}
+function isPagingOperation(op: OperationDetails) {
+    return false;
+}
+function isSupportedOperation(op: OperationDetails) {
+    if (isLroOperation(op) || isPagingOperation(op)) return false;
+    return true;
+}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");

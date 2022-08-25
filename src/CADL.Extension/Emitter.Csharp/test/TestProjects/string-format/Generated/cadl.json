@@ -13,36 +13,15 @@
    "Operations": [
     {
      "$id": "3",
-     "Name": "stringFormat",
-     "Description": "Path parameter is string with format",
+     "Name": "zonedDateTime",
+     "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
        "$id": "4",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
+       "Name": "zonedDateTime",
+       "NameInRequest": "zonedDateTime",
        "Type": {
         "$id": "5",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "6",
-       "Name": "action",
-       "NameInRequest": "action",
-       "Type": {
-        "$id": "7",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -60,7 +39,7 @@
      ],
      "Responses": [
       {
-       "$id": "8",
+       "$id": "6",
        "StatusCodes": [
         204
        ],
@@ -70,16 +49,54 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/stringFormat/{action}",
+     "Path": "/zonedDateTime/{zonedDateTime}",
+     "BufferResponse": false
+    },
+    {
+     "$id": "7",
+     "Name": "uri",
+     "Description": "path paramter is string with uri format",
+     "Parameters": [
+      {
+       "$id": "8",
+       "Name": "uri",
+       "NameInRequest": "uri",
+       "Type": {
+        "$id": "9",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "10",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/uri/{uri}",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "9"
+    "$id": "11"
    }
   }
- ],
- "Auth": {
-  "$id": "10"
- }
+ ]
 }

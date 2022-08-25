@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
+                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
                 InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
                 InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
                 InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),
@@ -147,7 +148,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             return !type.IsFrameworkType && type.IsValueType &&
                 type.Implementation is EnumType enumType &&
-                enumType.IsExtendable;
+                enumType.IsExtensible;
         }
 
         public static CSharpType GetElementType(CSharpType type)
@@ -177,7 +178,7 @@ namespace AutoRest.CSharp.Generation.Types
         public static bool IsStringLike(CSharpType type) =>
             type.IsFrameworkType
                 ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtendable;
+                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtensible;
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);

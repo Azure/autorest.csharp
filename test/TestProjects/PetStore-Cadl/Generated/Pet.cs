@@ -8,8 +8,9 @@
 using System;
 using Azure.Core;
 
-namespace CadlPetStore
+namespace PetStore
 {
+    /// <summary> The Pet. </summary>
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
@@ -21,6 +22,16 @@ namespace CadlPetStore
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            Age = age;
+        }
+        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <param name="name"></param>
+        /// <param name="tag"></param>
+        /// <param name="age"></param>
+        internal Pet(string name, string tag, int age)
+        {
+            Name = name;
+            Tag = tag;
             Age = age;
         }
 

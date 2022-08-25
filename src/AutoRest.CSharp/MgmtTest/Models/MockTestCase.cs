@@ -25,20 +25,17 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
         }
 
-        public MethodSignature GetMethodSignature(bool hasSuffix)
-        {
-            var methodName = Operation.Name;
-            if (hasSuffix)
-                methodName += $"_{Name.ToCleanName()}";
-            return new MethodSignature(
-                Name: methodName,
+        protected virtual string GetMethodName(bool hasSuffix)
+            => hasSuffix ? $"{Operation.Name}_{Name.ToCleanName()}" : Operation.Name;
+
+        public MethodSignature GetMethodSignature(bool hasSuffix) => new MethodSignature(
+                Name: GetMethodName(hasSuffix),
                 Description: null,
                 Summary: null,
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Async,
                 ReturnType: typeof(Task),
                 ReturnDescription: null,
                 Parameters: Array.Empty<Parameter>());
-        }
 
         private MgmtTypeProvider? _parent;
         public MgmtTypeProvider? Parent => _parent ??= GetParent();

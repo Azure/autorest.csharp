@@ -31,8 +31,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Delete a managed HSM Pool
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             await managedHsm.DeleteAsync(WaitUntil.Completed);
         }
 
@@ -41,8 +41,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Retrieve a managed HSM Pool
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             await managedHsm.GetAsync();
         }
 
@@ -63,8 +63,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: KeyVaultListPrivateLinkResources
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             await foreach (var _ in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {
             }
@@ -75,8 +75,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: Update an existing managed HSM Pool
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             await managedHsm.UpdateAsync(WaitUntil.Completed, new ManagedHsmData(new AzureLocation("placeholder"))
             {
                 Tags =

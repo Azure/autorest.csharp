@@ -10,6 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
+   "Namespace": "ArrayBasic",
    "IsNullable": false,
    "Properties": [
     {
@@ -74,31 +75,41 @@
      "Parameters": [
       {
        "$id": "11",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
        "Type": {
         "$id": "12",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "13",
+        "Type": {
+         "$id": "14",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
       },
       {
-       "$id": "13",
+       "$id": "15",
        "Name": "nextLink",
        "NameInRequest": "nextLink",
        "Type": {
-        "$id": "14",
+        "$id": "16",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -116,12 +127,12 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "17",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "16",
+        "$id": "18",
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
@@ -133,17 +144,14 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{host}",
      "Path": "/pets",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "19"
    }
   }
- ],
- "Auth": {
-  "$id": "18"
- }
+ ]
 }

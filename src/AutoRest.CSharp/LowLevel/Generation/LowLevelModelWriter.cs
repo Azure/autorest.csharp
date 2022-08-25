@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -15,8 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Namespace(model.Type.Namespace))
             {
-                // TODO: need add @doc/@summary support
-                //writer.WriteXmlDocumentationSummary($"{model.Summary});
+                writer.WriteXmlDocumentationSummary($"{model.Description}");
                 // TODO: do we have a case to generate struct?
                 var scopeDeclarations = new CodeWriterScopeDeclarations(model.Fields.Select(f => f.Declaration));
                 using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D}", scopeDeclarations: scopeDeclarations))
@@ -47,11 +47,13 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                WriteFieldsInitialization(writer, signature, model);
-                // TODO: Add IReadOnlyDictionary
-                foreach (var field in model.Fields.Where(f => TypeFactory.IsReadOnlyList(f.Type)))
+                var initializedFields = WriteFieldsInitialization(writer, signature, model);
+                foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f)))
                 {
-                    writer.Line($"{field.Name:I} = new List<{field.Type.Arguments[0]}>(0);");
+                    if (field.DefaultValue is not null)
+                    {
+                        writer.Line($"{field.Name:I} = {field.DefaultValue};");
+                    }
                 }
             }
         }
@@ -65,10 +67,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteFieldsInitialization(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
+        private static ISet<FieldDeclaration> WriteFieldsInitialization(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
         {
             writer.WriteParametersValidation(signature.Parameters);
             writer.Line();
+
+            var initializedFields = new HashSet<FieldDeclaration>();
             foreach (var parameter in signature.Parameters)
             {
                 var field = model.GetFieldByParameterName(parameter.Name);
@@ -76,7 +80,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     .Append($"{field.Name:I} = {parameter.Name:I}")
                     .WriteConversion(parameter.Type, field.Type)
                     .LineRaw(";");
+                initializedFields.Add(field);
             }
+            return initializedFields;
         }
     }
 }

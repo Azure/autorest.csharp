@@ -111,18 +111,15 @@ CodeModelConverter will convert modelfoure to the cadl code model (m4 codemodel 
 
 ### Generate SDK step by step
 You can generate sdk step by step as following:
-- build emitter under autorest.csharp\src\CADL.Extension\Emitter.Csharp directory
-  ```cmd
-  npm run build
-  npm pack
-  ```
-
 - install libraries : install the libraries under the directory of the cadl file or its parent directory
   - install cadl dependencies: cadl compile and cadl rest
   ```cmd
-  npm install @cadl-lang/compiler@0.33.0
-  npm install @cadl-lang/rest@0.15.1
-  npm install <path-to-csharp-emitter> # e.g. npm install autorest.csharp/src/CADL.Extension/Emitter.Csharp/azure-tools-cadl-csharp-0.1.0.tgz
+  npm install @cadl-lang/compiler@0.34.0
+  npm install @cadl-lang/rest@0.16.0
+  ```
+- install csharp cadl emitter
+  ```cmd
+  npm install @azure-tools/cadl-csharp
   ```
 - emit cadl model json
   
