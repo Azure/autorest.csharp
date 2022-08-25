@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var extensionWriter = extension switch
                 {
                     ArmClientExtensions armClientExtensions => new ArmClientExtensionsWriter(_writer, armClientExtensions),
+                    _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionsWriter(_writer, extension),
                     _ => new MgmtExtensionWriter(_writer, extension)
                 };
                 extensionWriter.WriteImplementations();

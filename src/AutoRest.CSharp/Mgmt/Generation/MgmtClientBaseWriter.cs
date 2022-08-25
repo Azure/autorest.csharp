@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        private void WriteSingletonResourceGetMethod(Resource resource)
+        protected virtual void WriteSingletonResourceGetMethod(Resource resource)
         {
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteResourceCollectionGetMethod(Resource resource)
+        protected virtual void WriteResourceCollectionGetMethod(Resource resource)
         {
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        protected virtual void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
         {
             var getOperation = resourceCollection.GetOperation;
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
@@ -531,7 +531,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return scope;
         }
 
-        private IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        protected IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);

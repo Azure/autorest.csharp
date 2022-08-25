@@ -418,19 +418,27 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = clientPrefix.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : this.Parent().First();
+            var parents = this.Parent();
+            var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
             lines.Add($"If you have a <see cref=\"{typeof(ResourceIdentifier)}\" /> you can construct {an} <see cref=\"{Type}\" />");
             lines.Add($"from an instance of <see cref=\"{typeof(ArmClient)}\" /> using the Get{DefaultName} method.");
-            if (parent is not null)
+            // only append the following information when the parent of me is not myself, aka TenantResource
+            if (parentDescription != null && !parents.Contains(this))
             {
-                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
-                lines.Add($"Otherwise you can get one from its parent resource <see cref=\"{parentType}\" /> using the Get{ResourceName} method.");
+                lines.Add($"Otherwise you can get one from its parent resource {parentDescription} using the Get{ResourceName} method.");
             }
 
             return FormattableStringHelpers.Join(lines, "\r\n");
         }
+
+        protected static FormattableString? CreateParentDescription(IReadOnlyList<CSharpType> parentTypes) => parentTypes.Count switch
+        {
+            0 => null,
+            _ => FormattableStringHelpers.Join(parentTypes.Select(type => (FormattableString)$"<see cref=\"{type}\" />").ToList(), ", ", " or "),
+        };
 
         private static Type? ToFormatTypeByName(string? name) => name switch
         {

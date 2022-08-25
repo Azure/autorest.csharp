@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -191,6 +192,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return result;
         }
 
+        private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, MockTestCase testCase, FormattableString clientExpression)
+        {
+            if (parent is MgmtExtensions extension && extension.ArmCoreType == typeof(ArmResource))
+                return null;
+
+            return WriteGetResource(parent, testCase, clientExpression);
+        }
+
         private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
         {
             var parent = sample.Parent;
@@ -199,7 +208,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             var parentName = GetResourceName(parent);
             _writer.Line($"// this example assumes you already have this {parentName} created on azure");
             _writer.Line($"// for more information of creating {parentName}, please refer to the document of {parentName}");
-            var parentVar = WriteGetResource(parent, sample, $"{clientResult.Declaration}");
+            var parentVar = WriteGetParentResource(parent, sample, $"{clientResult.Declaration}");
 
             var resourceName = collection.Resource.ResourceName;
             // now we have the parent resource, get the collection from that resource
@@ -209,6 +218,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
             _writer.Line();
             _writer.Line($"// get the collection of this {collection.Resource.Type.Name}");
+
+            var idVar = new CodeWriterDeclaration("scopeId");
+            if (parentVar == null)
+            {
+                // this case will happen only when the resource is a scope resource
+                WriteCreateScopeResourceIdentifier(sample, idVar, sample.RequestPath.GetScopePath());
+            }
             // first find the variables we need and write their assignments
             var parameters = new Dictionary<Parameter, CodeWriterVariableDeclaration>();
             foreach (var extraParameter in collection.ExtraConstructorParameters)
@@ -224,8 +240,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                         .LineRaw(";");
                 }
             }
-            _writer.AppendDeclaration(collectionResult)
-                .Append($"= {parentVar}.{getResourceCollectionMethodName}(");
+            _writer.AppendDeclaration(collectionResult).AppendRaw(" = ");
+            if (parentVar == null)
+            {
+                _writer.Append($"{clientResult.Declaration}.{getResourceCollectionMethodName}({idVar}, ");
+            }
+            else
+            {
+                _writer.Append($"{parentVar}.{getResourceCollectionMethodName}(");
+            }
+
             var parameterValues = sample.ParameterValueMapping;
             // iterate over the parameter list and put them into the invocation
             foreach ((var parameter, var declaration) in parameters)
@@ -399,7 +423,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _writer.Line($");");
         }
 
-        protected override void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath requestPath, CSharpType resourceType)
+        protected override void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath requestPath)
         {
             var parameters = new List<CodeWriterVariableDeclaration>();
             foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))

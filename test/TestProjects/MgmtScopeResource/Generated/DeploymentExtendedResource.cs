@@ -24,7 +24,7 @@ namespace MgmtScopeResource
     /// A Class representing a DeploymentExtended along with the instance operations that can be performed on it.
     /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DeploymentExtendedResource" />
     /// from an instance of <see cref="ArmClient" /> using the GetDeploymentExtendedResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ManagementGroupResource" /> using the GetDeploymentExtended method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" />, <see cref="ResourceGroupResource" />, <see cref="ManagementGroupResource" /> or <see cref="TenantResource" /> using the GetDeploymentExtended method.
     /// </summary>
     public partial class DeploymentExtendedResource : ArmResource
     {

@@ -11,7 +11,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
@@ -31,17 +30,16 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
+
+            // get the collection of this RoleAssignmentResource
             string subscriptionId = "subId";
             string resourceGroupName = "rgname";
             string resourceProviderNamespace = "resourceProviderNamespace";
             string parentResourcePath = "parentResourcePath";
             ResourceType resourceType = new ResourceType("resourceType");
             string resourceName = "resourceName";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", subscriptionId, resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName));
-            GenericResource resource = client.GetGenericResource(resourceId);
-
-            // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourcegroups/{1}/providers/{2}/{3}/{4}/{5}", subscriptionId, resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
             await foreach (RoleAssignmentResource item in collection.GetAllAsync())
@@ -69,13 +67,12 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string subscriptionId = "subId";
-            string resourceGroupName = "rgname";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", subscriptionId, resourceGroupName));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string subscriptionId = "subId";
+            string resourceGroupName = "rgname";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}", subscriptionId, resourceGroupName));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
             await foreach (RoleAssignmentResource item in collection.GetAllAsync())
@@ -103,12 +100,11 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string scope = "scope";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", scope));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string scope = "scope";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -141,12 +137,11 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string scope = "scope";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", scope));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string scope = "scope";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -172,12 +167,11 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string scope = "scope";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", scope));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string scope = "scope";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -199,12 +193,11 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string subscriptionId = "subId";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/subscriptions/{0}", subscriptionId));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string subscriptionId = "subId";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}", subscriptionId));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
             await foreach (RoleAssignmentResource item in collection.GetAllAsync())
@@ -232,12 +225,11 @@ namespace MgmtMockAndSample
 
             // this example assumes you already have this ArmResource created on azure
             // for more information of creating ArmResource, please refer to the document of ArmResource
-            string scope = "scope";
-            ResourceIdentifier resourceId = new ResourceIdentifier(string.Format("/{0}", scope));
-            GenericResource resource = client.GetGenericResource(resourceId);
 
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = resource.GetRoleAssignments();
+            string scope = "scope";
+            ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/{0}", scope));
+            RoleAssignmentCollection collection = client.GetRoleAssignments(scopeId);
 
             // invoke the operation and iterate over the result
             await foreach (RoleAssignmentResource item in collection.GetAllAsync())
