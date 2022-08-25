@@ -51,7 +51,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
             const name = cadlType.name;
             switch (name) {
                 case "bytes":
-                    return InputTypeKind.Bytes;
+                    return InputTypeKind.BinaryData;
                 case "int8":
                     return InputTypeKind.Int32;
                 case "int16":

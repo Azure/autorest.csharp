@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Round-trip model with collection properties", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
                     null, new List<InputModelType>(), null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new InputModelType("OutputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Output model with collection properties", InputModelTypeUsage.Output,
                     new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
                     null, new List<InputModelType>(), null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 

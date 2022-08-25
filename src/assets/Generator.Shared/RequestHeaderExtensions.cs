@@ -56,6 +56,11 @@ namespace Azure.Core
             headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
+        public static void Add(this RequestHeaders headers, string name, BinaryData value, string format)
+        {
+            headers.Add(name, TypeFormatters.ToString(value.ToArray(), format));
+        }
+
         public static void Add(this RequestHeaders headers, string prefix, IDictionary<string, string> headersToAdd)
         {
             foreach (var header in headersToAdd)
