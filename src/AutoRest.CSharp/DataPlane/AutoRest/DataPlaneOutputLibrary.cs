@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var clientPrefix = ClientBuilder.GetClientPrefix(_libraryName, _input.Name);
-            return new ClientOptionsTypeProvider(_input.ApiVersions, $"{clientPrefix}ClientOptions", _defaultNamespace, $"Client options for {clientPrefix}Client.", _sourceInputModel);
+            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _input.ApiVersions, $"{clientPrefix}ClientOptions", _defaultNamespace, $"Client options for {clientPrefix}Client.", _sourceInputModel);
         }
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
