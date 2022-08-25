@@ -62,6 +62,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
+            // Update usage from the extension as the model doesn't exist at the time of constructing the BuildContext
+            if (objectSchema.Extensions?.Usage is not null)
+            {
+                _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
+            }
+
             var supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
             _hasJsonSerialization = supportedSerializationFormats.Contains(KnownMediaType.Json);
             _hasXmlSerialization = supportedSerializationFormats.Contains(KnownMediaType.Xml);
@@ -79,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
-        public bool IsAbstract => ObjectSchema != null &&
+        protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.MgmtReferenceType;
 
@@ -286,11 +292,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
         public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
         public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        protected bool SkipInitializerConstructor => ObjectSchema != null &&
+            ObjectSchema.Extensions != null &&
+            ObjectSchema.Extensions.SkipInitCtor;
         protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return InitializationConstructor;
+            // Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
+            if (!SkipInitializerConstructor)
+            {
+                yield return InitializationConstructor;
+            }
 
             // Skip serialization ctor if they are the same
             if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)

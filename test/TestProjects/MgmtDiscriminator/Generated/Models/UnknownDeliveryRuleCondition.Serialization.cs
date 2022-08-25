@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleCondition : IUtf8JsonSerializable
+    internal partial class UnknownDeliveryRuleCondition : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,17 +20,8 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static DeliveryRuleCondition DeserializeDeliveryRuleCondition(JsonElement element)
+        internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element)
         {
-            if (element.TryGetProperty("name", out JsonElement discriminator))
-            {
-                switch (discriminator.GetString())
-                {
-                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element);
-                    case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element);
-                    case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element);
-                }
-            }
             MatchVariable name = default;
             foreach (var property in element.EnumerateObject())
             {
