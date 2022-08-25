@@ -187,41 +187,10 @@
      "Parameters": [
       {
        "$id": "26",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "Endpoint Service",
-       "Type": {
-        "$id": "27",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "28",
-        "Type": {
-         "$id": "29",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:300"
-       }
-      },
-      {
-       "$id": "30",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "31",
+        "$id": "27",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -239,7 +208,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
@@ -251,19 +220,48 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "",
      "Path": "/top/{action}",
      "BufferResponse": false
     },
     {
-     "$id": "33",
+     "$id": "29",
      "Name": "topAction2",
      "Description": "top level method2",
-     "Parameters": [
+     "Parameters": [],
+     "Responses": [
       {
-       "$ref": "26"
+       "$id": "30",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
       }
      ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/top2",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "31"
+   }
+  },
+  {
+   "$id": "32",
+   "Name": "Demo",
+   "Description": "Hello world service",
+   "Operations": [
+    {
+     "$id": "33",
+     "Name": "sayHi",
+     "Description": "Return hi",
+     "Parameters": [],
      "Responses": [
       {
        "$id": "34",
@@ -278,8 +276,8 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/top2",
+     "Uri": "",
+     "Path": "/hello",
      "BufferResponse": false
     }
    ],
@@ -289,55 +287,15 @@
   },
   {
    "$id": "36",
-   "Name": "Demo",
-   "Description": "Hello world service",
-   "Operations": [
-    {
-     "$id": "37",
-     "Name": "sayHi",
-     "Description": "Return hi",
-     "Parameters": [
-      {
-       "$ref": "26"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "38",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "10"
-       },
-       "BodyMediaType": "Json"
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/hello",
-     "BufferResponse": false
-    }
-   ],
-   "Protocol": {
-    "$id": "39"
-   }
-  },
-  {
-   "$id": "40",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "37",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "26"
-      },
-      {
-       "$id": "42",
+       "$id": "38",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -356,7 +314,7 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
@@ -368,22 +326,18 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "",
      "Path": "/againHi",
      "BufferResponse": false
     },
     {
-     "$id": "44",
+     "$id": "40",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
-     "Parameters": [
-      {
-       "$ref": "26"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
@@ -395,24 +349,17 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "",
      "Path": "/demoHi",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "42"
    }
   }
  ],
  "Auth": {
-  "$id": "47",
-  "OAuth2": {
-   "$id": "48",
-   "Scopes": [
-    "https://api.example.com/.default"
-   ]
-  },
-  "ApiKey": "x-ms-api-key"
+  "$id": "43"
  }
 }

@@ -85,9 +85,7 @@ namespace GeneratedModels
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredRecord = new {
-        ///                 key = new {
-        ///                     requiredCollection = new[] {},
-        ///                 },
+        ///                 key = new {},
         ///             },
         ///         }
         ///     },
@@ -167,9 +165,7 @@ namespace GeneratedModels
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredRecord = new {
-        ///                 key = new {
-        ///                     requiredCollection = new[] {},
-        ///                 },
+        ///                 key = new {},
         ///             },
         ///         }
         ///     },
