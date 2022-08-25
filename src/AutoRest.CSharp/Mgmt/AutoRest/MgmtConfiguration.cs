@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> noResourceSuffix,
             IReadOnlyList<string> schemasToPrependRPPrefix,
             IReadOnlyList<string> generateArmResourceExtensions,
-			IReadOnlyList<string> suppressAbstractBaseClasses,
+            IReadOnlyList<string> suppressAbstractBaseClass,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.Input
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
-            SuppressAbstractBaseClasses = suppressAbstractBaseClasses;
+            SuppressAbstractBaseClass = suppressAbstractBaseClass;
             IsArmCore = DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = DeserializeBoolean(resourceModelRequiresName, true);
@@ -289,7 +289,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
         public IReadOnlyList<string> NoResourceSuffix { get; }
         public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
-        public IReadOnlyList<string> SuppressAbstractBaseClasses { get; }
+        public IReadOnlyList<string> SuppressAbstractBaseClass { get; }
 
         public bool IsArmCore { get; }
         public TestGenConfiguration? TestGen { get; }
@@ -308,7 +308,7 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                suppressAbstractBaseClasses: autoRest.GetValue<string[]?>("suppress-abstract-base-class").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                suppressAbstractBaseClass: autoRest.GetValue<string[]?>("suppress-abstract-base-class").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
             WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
-            WriteNonEmptySettings(writer, nameof(SuppressAbstractBaseClasses), SuppressAbstractBaseClasses);
+            WriteNonEmptySettings(writer, nameof(SuppressAbstractBaseClass), SuppressAbstractBaseClass);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffixElement);
             root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefixElement);
             root.TryGetProperty(nameof(GenerateArmResourceExtensions), out var generateArmResourceExtensionsElement);
-            root.TryGetProperty(nameof(SuppressAbstractBaseClasses), out var suppressAbstractBaseClassElement);
+            root.TryGetProperty(nameof(SuppressAbstractBaseClass), out var suppressAbstractBaseClassElement);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -412,7 +412,7 @@ namespace AutoRest.CSharp.Input
             var noResourceSuffix = DeserializeArray(noResourceSuffixElement);
             var prependRPPrefix = DeserializeArray(prependRPPrefixElement);
             var generateArmResourceExtensions = DeserializeArray(generateArmResourceExtensionsElement);
-            var suppressAbstractBaseClasses = DeserializeArray(suppressAbstractBaseClassElement);
+            var suppressAbstractBaseClass = DeserializeArray(suppressAbstractBaseClassElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -434,7 +434,7 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: noResourceSuffix,
                 schemasToPrependRPPrefix: prependRPPrefix,
                 generateArmResourceExtensions: generateArmResourceExtensions,
-                suppressAbstractBaseClasses: suppressAbstractBaseClasses,
+                suppressAbstractBaseClass: suppressAbstractBaseClass,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
