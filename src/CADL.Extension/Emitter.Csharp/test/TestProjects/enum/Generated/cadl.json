@@ -173,6 +173,37 @@
      "Parameters": [
       {
        "$id": "25",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "26",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "27",
+        "Type": {
+         "$id": "28",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "29",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -191,7 +222,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "30",
        "StatusCodes": [
         200
        ],
@@ -200,17 +231,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{host}",
      "Path": "/models",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "31"
    }
   }
- ],
- "Auth": {
-  "$id": "28"
- }
+ ]
 }
