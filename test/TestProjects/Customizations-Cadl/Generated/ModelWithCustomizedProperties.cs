@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties

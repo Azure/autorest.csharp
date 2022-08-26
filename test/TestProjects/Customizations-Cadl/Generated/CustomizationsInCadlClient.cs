@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ModelsInCadl;
+using CustomizationsInCadl;
 
 namespace GeneratedModels
 {
     /// <summary> CADL project to test various types of models. </summary>
-    public partial class ModelsInCadlClient
+    public partial class CustomizationsInCadlClient
     {
         private readonly HttpPipeline _pipeline;
 
@@ -26,16 +26,16 @@ namespace GeneratedModels
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ModelsInCadlClient. </summary>
-        public ModelsInCadlClient() : this(new ModelsInCadlClientOptions())
+        /// <summary> Initializes a new instance of CustomizationsInCadlClient. </summary>
+        public CustomizationsInCadlClient() : this(new CustomizationsInCadlClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of ModelsInCadlClient. </summary>
+        /// <summary> Initializes a new instance of CustomizationsInCadlClient. </summary>
         /// <param name="options"> The options for configuring the client. </param>
-        public ModelsInCadlClient(ModelsInCadlClientOptions options)
+        public CustomizationsInCadlClient(CustomizationsInCadlClientOptions options)
         {
-            options ??= new ModelsInCadlClientOptions();
+            options ??= new CustomizationsInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
@@ -76,7 +76,7 @@ namespace GeneratedModels
         /// <example>
         /// This sample shows how to call RoundTripAsync and parse the result.
         /// <code><![CDATA[
-        /// var client = new ModelsInCadlClient();
+        /// var client = new CustomizationsInCadlClient();
         /// 
         /// var data = new {};
         /// 
@@ -87,7 +87,7 @@ namespace GeneratedModels
         /// ]]></code>
         /// This sample shows how to call RoundTripAsync with all request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var client = new ModelsInCadlClient();
+        /// var client = new CustomizationsInCadlClient();
         /// 
         /// var data = new {
         ///     propertyModelToMakeInternal = new {
@@ -195,7 +195,7 @@ namespace GeneratedModels
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.RoundTrip");
+            using var scope = ClientDiagnostics.CreateScope("CustomizationsInCadlClient.RoundTrip");
             scope.Start();
             try
             {
@@ -218,7 +218,7 @@ namespace GeneratedModels
         /// <example>
         /// This sample shows how to call RoundTrip and parse the result.
         /// <code><![CDATA[
-        /// var client = new ModelsInCadlClient();
+        /// var client = new CustomizationsInCadlClient();
         /// 
         /// var data = new {};
         /// 
@@ -229,7 +229,7 @@ namespace GeneratedModels
         /// ]]></code>
         /// This sample shows how to call RoundTrip with all request content, and how to parse the result.
         /// <code><![CDATA[
-        /// var client = new ModelsInCadlClient();
+        /// var client = new CustomizationsInCadlClient();
         /// 
         /// var data = new {
         ///     propertyModelToMakeInternal = new {
@@ -337,7 +337,7 @@ namespace GeneratedModels
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.RoundTrip");
+            using var scope = ClientDiagnostics.CreateScope("CustomizationsInCadlClient.RoundTrip");
             scope.Start();
             try
             {

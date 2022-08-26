@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     internal static partial class EnumToBeMadeExtensibleExtensions
     {

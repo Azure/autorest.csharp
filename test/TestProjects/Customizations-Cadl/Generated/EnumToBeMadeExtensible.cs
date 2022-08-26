@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     /// <summary> Extensible enum that has been fixed enum. </summary>
     public enum EnumToBeMadeExtensible

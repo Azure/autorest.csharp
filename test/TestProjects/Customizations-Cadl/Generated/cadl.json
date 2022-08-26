@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "modelsincadl",
+ "Name": "customizationsincadl",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "EnumToRename",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "CustomizationsInCadl",
    "Description": "Renamed enum (original name: EnumToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -35,7 +35,7 @@
   {
    "$id": "6",
    "Name": "EnumWithValueToRename",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "CustomizationsInCadl",
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -61,7 +61,7 @@
   {
    "$id": "10",
    "Name": "EnumToBeMadeExtensible",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "CustomizationsInCadl",
    "Description": "Extensible enum that has been fixed enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -89,7 +89,7 @@
   {
    "$id": "14",
    "Name": "RootModel",
-   "Namespace": "ModelsInCadl",
+   "Namespace": "CustomizationsInCadl",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
    "Properties": [
@@ -101,7 +101,7 @@
      "Type": {
       "$id": "16",
       "Name": "ModelToMakeInternal",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "CustomizationsInCadl",
       "Description": "Public model made internal",
       "IsNullable": false,
       "Properties": [
@@ -134,7 +134,7 @@
      "Type": {
       "$id": "20",
       "Name": "ModelToRename",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "CustomizationsInCadl",
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
       "Properties": [
@@ -167,7 +167,7 @@
      "Type": {
       "$id": "24",
       "Name": "ModelToChangeNamespace",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "CustomizationsInCadl",
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
       "Properties": [
@@ -200,7 +200,7 @@
      "Type": {
       "$id": "28",
       "Name": "ModelWithCustomizedProperties",
-      "Namespace": "ModelsInCadl",
+      "Namespace": "CustomizationsInCadl",
       "Description": "Model with customized properties",
       "IsNullable": false,
       "Properties": [
@@ -369,7 +369,7 @@
  "Clients": [
   {
    "$id": "46",
-   "Name": "ModelsInCadl",
+   "Name": "CustomizationsInCadl",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {

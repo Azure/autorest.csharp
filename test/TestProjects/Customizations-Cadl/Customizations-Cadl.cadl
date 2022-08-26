@@ -3,7 +3,7 @@ import "@cadl-lang/rest";
 @serviceTitle("Models in CADL")
 @serviceVersion("0.1.0")
 @doc("CADL project to test various types of models.")
-namespace ModelsInCadl;
+namespace CustomizationsInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;

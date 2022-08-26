@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     /// <summary> Root RoundTrip model to reference all other types to ensure generation. </summary>
     public partial class RootModel

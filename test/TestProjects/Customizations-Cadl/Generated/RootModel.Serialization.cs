@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     public partial class RootModel : IUtf8JsonSerializable
     {

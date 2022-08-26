@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     /// <summary> Renamed enum (original name: EnumToRename). </summary>
     public enum EnumToRename

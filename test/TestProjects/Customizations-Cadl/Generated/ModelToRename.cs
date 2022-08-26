@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ModelsInCadl
+namespace CustomizationsInCadl
 {
     /// <summary> Renamed model (original name: ModelToRename). </summary>
     public partial class ModelToRename
