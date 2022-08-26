@@ -99,16 +99,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteDPGIdentificationComment(CodeWriter writer, LowLevelClient client)
+        private static void WriteDPGIdentificationComment(CodeWriter writer, LowLevelClient client)
         {
-            if (string.IsNullOrEmpty(client.Description))
-            {
-                writer.Line($"// Data plane generated client for {ClientBuilder.GetClientPrefix(client.Declaration.Name, client.Declaration.Namespace)}.");
-            }
-            else
-            {
-                writer.Line($"// Data plane generated client. {client.Description}");
-            }
+            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}. {client.Description}");
         }
 
         private static void WriteClientFields(CodeWriter writer, LowLevelClient client)

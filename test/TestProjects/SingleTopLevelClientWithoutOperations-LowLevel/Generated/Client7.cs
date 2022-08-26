@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel
 {
-    // Data plane generated client. The Client7 service client.
+    // Data plane generated sub-client. The Client7 service client.
     /// <summary> The Client7 service client. </summary>
     public partial class Client7
     {
