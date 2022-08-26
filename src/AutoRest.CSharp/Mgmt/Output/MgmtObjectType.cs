@@ -136,7 +136,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
-            return descendantTypes.Contains(Type);
+            return descendantTypes.Contains(Type) ||
+                // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
+                ObjectSchema.Parents?.All.Count == 1  && ObjectSchema.Parents.All.First().Equals(schemaObjectType.ObjectSchema);
         }
 
         private static bool ShouldIncludeArmCoreType(Type type)
