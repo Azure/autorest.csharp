@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var clientInfo in clientInfos)
             {
                 var description = string.IsNullOrWhiteSpace(clientInfo.Description)
-                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} service client."
+                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
                     : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
