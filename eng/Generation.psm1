@@ -75,8 +75,8 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
         Push-Location $repoRootPath
         Try
         {
-            # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $mainFile --emit @azure-tools/cadl-csharp"
+            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
+            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp"
             Invoke $emitCommand    
         }
         Finally 

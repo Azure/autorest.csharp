@@ -77,6 +77,9 @@
    "Name": "LROProduct",
    "Namespace": "Testserver",
    "IsNullable": false,
+   "BaseModel": {
+    "$ref": "5"
+   },
    "Properties": [
     {
      "$id": "11",
@@ -109,12 +112,13 @@
      "Parameters": [
       {
        "$id": "15",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "Testserver endpoint",
        "Type": {
         "$id": "16",
-        "Name": "Uri",
-        "Kind": "Uri",
+        "Name": "String",
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -125,10 +129,20 @@
        "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "17",
+        "Type": {
+         "$id": "18",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
       },
       {
-       "$id": "17",
+       "$id": "19",
        "Name": "mode",
        "NameInRequest": "mode",
        "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
@@ -148,7 +162,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "20",
        "StatusCodes": [
         200
        ],
@@ -160,12 +174,12 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}/",
+     "Uri": "{host}",
      "Path": "/customization/model/{mode}",
      "BufferResponse": true
     },
     {
-     "$id": "19",
+     "$id": "21",
      "Name": "postModel",
      "Description": "Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode. ",
      "Parameters": [
@@ -173,7 +187,7 @@
        "$ref": "15"
       },
       {
-       "$id": "20",
+       "$id": "22",
        "Name": "mode",
        "NameInRequest": "mode",
        "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
@@ -191,7 +205,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "21",
+       "$id": "23",
        "Name": "input",
        "NameInRequest": "input",
        "Description": "Please put {'hello': 'world!'}",
@@ -211,7 +225,7 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "24",
        "StatusCodes": [
         200
        ],
@@ -223,12 +237,12 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}/",
+     "Uri": "{host}",
      "Path": "/customization/model/{mode}",
      "BufferResponse": true
     },
     {
-     "$id": "23",
+     "$id": "25",
      "Name": "lro",
      "Description": "Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.",
      "Parameters": [
@@ -236,7 +250,7 @@
        "$ref": "15"
       },
       {
-       "$id": "24",
+       "$id": "26",
        "Name": "mode",
        "NameInRequest": "mode",
        "Description": "The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.",
@@ -256,7 +270,7 @@
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "27",
        "StatusCodes": [
         200
        ],
@@ -268,17 +282,14 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}/",
+     "Uri": "{host}",
      "Path": "/customization/lro/{mode}",
      "BufferResponse": true
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "28"
    }
   }
- ],
- "Auth": {
-  "$id": "27"
- }
+ ]
 }

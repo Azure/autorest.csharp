@@ -27,20 +27,13 @@ namespace dev_driven_cadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of TestserverClient for mocking. </summary>
-        protected TestserverClient()
+        /// <summary> Initializes a new instance of TestserverClient. </summary>
+        public TestserverClient() : this(new Uri("http://localhost:3000"), new TestserverClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TestserverClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public TestserverClient(Uri endpoint) : this(endpoint, new TestserverClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of TestserverClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> Testserver endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TestserverClient(Uri endpoint, TestserverClientOptions options)
@@ -102,8 +95,7 @@ namespace dev_driven_cadl
         /// <example>
         /// This sample shows how to call GetModelAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new TestserverClient(endpoint);
+        /// var client = new TestserverClient();
         /// 
         /// Response response = await client.GetModelAsync("<mode>");
         /// 
@@ -150,8 +142,7 @@ namespace dev_driven_cadl
         /// <example>
         /// This sample shows how to call GetModel with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new TestserverClient(endpoint);
+        /// var client = new TestserverClient();
         /// 
         /// Response response = client.GetModel("<mode>");
         /// 
@@ -227,8 +218,7 @@ namespace dev_driven_cadl
         /// <example>
         /// This sample shows how to call PostModelAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new TestserverClient(endpoint);
+        /// var client = new TestserverClient();
         /// 
         /// var data = new {
         ///     hello = "<hello>",
@@ -289,8 +279,7 @@ namespace dev_driven_cadl
         /// <example>
         /// This sample shows how to call PostModel with required parameters and request content and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new TestserverClient(endpoint);
+        /// var client = new TestserverClient();
         /// 
         /// var data = new {
         ///     hello = "<hello>",
@@ -390,13 +379,13 @@ namespace dev_driven_cadl
         /// <example>
         /// This sample shows how to call LroAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new TestserverClient(endpoint);
+        /// var client = new TestserverClient();
         /// 
         /// Response response = await client.LroAsync("<mode>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -407,6 +396,7 @@ namespace dev_driven_cadl
         /// Schema for <c>LROProduct</c>:
         /// <code>{
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 
@@ -438,13 +428,13 @@ namespace dev_driven_cadl
         /// <example>
         /// This sample shows how to call Lro with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new TestserverClient(endpoint);
+        /// var client = new TestserverClient();
         /// 
         /// Response response = client.Lro("<mode>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("received").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -455,6 +445,7 @@ namespace dev_driven_cadl
         /// Schema for <c>LROProduct</c>:
         /// <code>{
         ///   provisioningState: string, # Required.
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
         /// }
         /// </code>
         /// 
@@ -484,7 +475,6 @@ namespace dev_driven_cadl
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/customization/model/", false);
             uri.AppendPath(mode, false);
             request.Uri = uri;
@@ -498,7 +488,6 @@ namespace dev_driven_cadl
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/customization/model/", false);
             uri.AppendPath(mode, false);
             request.Uri = uri;
@@ -513,7 +502,6 @@ namespace dev_driven_cadl
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/customization/lro/", false);
             uri.AppendPath(mode, false);
             request.Uri = uri;

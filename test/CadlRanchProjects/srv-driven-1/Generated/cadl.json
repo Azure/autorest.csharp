@@ -1,0 +1,350 @@
+{
+ "$id": "1",
+ "Name": "dpgservicedriven1",
+ "Description": "DPG Swagger, this is the initial swagger a service could do",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "Message",
+   "Namespace": "DPGServiceDriven1",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "messageProperty",
+     "SerializedName": "messageProperty",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "Name": "PostInput",
+   "Namespace": "DPGServiceDriven1",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "url",
+     "SerializedName": "url",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "8",
+   "Name": "params",
+   "Operations": [
+    {
+     "$id": "9",
+     "Name": "headNoParams",
+     "Description": "Head request, no params.\n Initially has no query parameters. After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$id": "10",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "Testserver endpoint",
+       "Type": {
+        "$id": "11",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "12",
+        "Type": {
+         "$id": "13",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "HEAD",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven1/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "15",
+     "Name": "getRequired",
+     "Description": "Get true Boolean value on path.\n Initially only has one required Query Parameter. After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "16",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Description": "I am a required parameter",
+       "Type": {
+        "$id": "17",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "18",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven1/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "19",
+     "Name": "putRequiredOptional",
+     "Description": "Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "20",
+       "Name": "requiredParam",
+       "NameInRequest": "requiredParam",
+       "Description": "I am a required parameter",
+       "Type": {
+        "$id": "21",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "22",
+       "Name": "optionalParam",
+       "NameInRequest": "optionalParam",
+       "Description": "I am an optional parameter",
+       "Type": {
+        "$id": "23",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "24",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven1/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "25",
+     "Name": "postParameters",
+     "Description": "POST a JSON",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "26",
+       "Name": "contentTypePath",
+       "NameInRequest": "contentTypePath",
+       "Type": {
+        "$id": "27",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "28",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Description": "I am a body parameter. My only valid JSON entry is { url: \"http://example.org/myimage.jpeg\" }",
+       "Type": {
+        "$ref": "5"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "29",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven1/parameters/{contentTypePath}",
+     "BufferResponse": true
+    },
+    {
+     "$id": "30",
+     "Name": "getOptional",
+     "Description": "Get true Boolean value on path.\n Initially has one optional query parameter. After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "31",
+       "Name": "optionalParam",
+       "NameInRequest": "optionalParam",
+       "Description": "I am an optional parameter",
+       "Type": {
+        "$id": "32",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "33",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven1/moreParameters",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "34"
+   }
+  }
+ ]
+}

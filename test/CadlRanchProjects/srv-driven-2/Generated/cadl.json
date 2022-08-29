@@ -1,0 +1,397 @@
+{
+ "$id": "1",
+ "Name": "dpgservicedriven2",
+ "Description": "DPG Swagger, this is the initial swagger a service could do",
+ "ApiVersions": [
+  "1.1.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "Message",
+   "Namespace": "DPGServiceDriven2",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "messageProperty",
+     "SerializedName": "messageProperty",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "5",
+   "Name": "params",
+   "Operations": [
+    {
+     "$id": "6",
+     "Name": "headNoParams",
+     "Description": "Head request, no params.\n Initially has no query parameters. After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$id": "7",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "Testserver endpoint",
+       "Type": {
+        "$id": "8",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "9",
+        "Type": {
+         "$id": "10",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "11",
+       "Name": "new_parameter",
+       "NameInRequest": "new_parameter",
+       "Description": "I'm a new input optional parameter",
+       "Type": {
+        "$id": "12",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "13",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "HEAD",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven2/serviceDriven/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "14",
+     "Name": "getRequired",
+     "Description": "Get true Boolean value on path.\n Initially only has one required Query Parameter. After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$ref": "7"
+      },
+      {
+       "$id": "15",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Description": "I am a required parameter",
+       "Type": {
+        "$id": "16",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "17",
+       "Name": "new_parameter",
+       "NameInRequest": "new_parameter",
+       "Description": "I'm a new input optional parameter",
+       "Type": {
+        "$id": "18",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "19",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven2/serviceDriven/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "20",
+     "Name": "putRequiredOptional",
+     "Description": "Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$ref": "7"
+      },
+      {
+       "$id": "21",
+       "Name": "requiredParam",
+       "NameInRequest": "requiredParam",
+       "Description": "I am a required parameter",
+       "Type": {
+        "$id": "22",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "23",
+       "Name": "optionalParam",
+       "NameInRequest": "optionalParam",
+       "Description": "I am an optional parameter",
+       "Type": {
+        "$id": "24",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "25",
+       "Name": "new_parameter",
+       "NameInRequest": "new_parameter",
+       "Description": "I'm a new input optional parameter",
+       "Type": {
+        "$id": "26",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "27",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven2/serviceDriven/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "28",
+     "Name": "deleteParameters",
+     "Description": "Delete something.\n Initially the path exists but there is no delete method. After evolution this is a new method in a known path",
+     "Parameters": [
+      {
+       "$ref": "7"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "29",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "DELETE",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven2/serviceDriven/parameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "30",
+     "Name": "getOptional",
+     "Description": "Get true Boolean value on path.\n Initially has one optional query parameter. After evolution, a new optional query parameter is added",
+     "Parameters": [
+      {
+       "$ref": "7"
+      },
+      {
+       "$id": "31",
+       "Name": "optionalParam",
+       "NameInRequest": "optionalParam",
+       "Description": "I am an optional parameter",
+       "Type": {
+        "$id": "32",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "33",
+       "Name": "new_parameter",
+       "NameInRequest": "new_parameter",
+       "Description": "I'm a new input optional parameter",
+       "Type": {
+        "$id": "34",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "35",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven2/serviceDriven/moreParameters",
+     "BufferResponse": true
+    },
+    {
+     "$id": "36",
+     "Name": "getNewOperation",
+     "Description": "I'm a new operation.\n Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path",
+     "Parameters": [
+      {
+       "$ref": "7"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "37",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/serviceDriven2/serviceDriven/newPath",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "38"
+   }
+  }
+ ]
+}
