@@ -211,20 +211,13 @@ function processServiceAuthentication(
                     break;
                 case "oauth2":
                     for (const flow of schema.flows) {
-                        switch (flow.type) {
-                            case "clientCredentials":
-                                scopes ??= new Set<string>();
-                                for (var scope of flow.scopes) {
-                                    scopes.add(scope)
-                                }
-                                break;
-                            default:
-                                throw new Error(
-                                    "Not Supported Authentication."
-                                );
+                        if (flow.scopes) {
+                            scopes ??= new Set<string>();
+                            for (var scope of flow.scopes) {
+                                scopes.add(scope)
+                            }
                         }
-                    }
-                    
+                    }                    
                     break;
                 default:
                     throw new Error("Not supported authentication.");
