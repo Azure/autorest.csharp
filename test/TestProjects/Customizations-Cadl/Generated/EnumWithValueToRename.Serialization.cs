@@ -15,7 +15,7 @@ namespace CustomizationsInCadl
         {
             EnumWithValueToRename.One => "1",
             EnumWithValueToRename.Two => "2",
-            EnumWithValueToRename.ValueToRename => "3",
+            EnumWithValueToRename.Three => "3",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EnumWithValueToRename value.")
         };
 
@@ -23,7 +23,7 @@ namespace CustomizationsInCadl
         {
             if (string.Equals(value, "1", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.One;
             if (string.Equals(value, "2", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.Two;
-            if (string.Equals(value, "3", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.ValueToRename;
+            if (string.Equals(value, "3", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.Three;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EnumWithValueToRename value.");
         }
     }

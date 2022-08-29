@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -19,17 +20,19 @@ namespace CustomizationsInCadl
             writer.WritePropertyName("propertyToMakeInternal");
             writer.WriteNumberValue(PropertyToMakeInternal);
             writer.WritePropertyName("propertyToRename");
-            writer.WriteNumberValue(PropertyToRename);
+            writer.WriteNumberValue(RenamedProperty);
             writer.WritePropertyName("propertyToMakeFloat");
             writer.WriteNumberValue(PropertyToMakeFloat);
             writer.WritePropertyName("propertyToMakeInt");
             writer.WriteNumberValue(PropertyToMakeInt);
             writer.WritePropertyName("propertyToMakeDuration");
-            writer.WriteStringValue(PropertyToMakeDuration);
+            writer.WriteStringValue(PropertyToMakeDuration, "P");
             writer.WritePropertyName("propertyToMakeString");
             writer.WriteStringValue(PropertyToMakeString);
             writer.WritePropertyName("propertyToMakeJsonElement");
-            writer.WriteStringValue(PropertyToMakeJsonElement);
+            PropertyToMakeJsonElement.WriteTo(writer);
+            writer.WritePropertyName("propertyToField");
+            writer.WriteStringValue(_propertyToField);
             writer.WriteEndObject();
         }
 
@@ -37,11 +40,12 @@ namespace CustomizationsInCadl
         {
             int propertyToMakeInternal = default;
             int propertyToRename = default;
-            int propertyToMakeFloat = default;
-            float propertyToMakeInt = default;
-            string propertyToMakeDuration = default;
+            float propertyToMakeFloat = default;
+            int propertyToMakeInt = default;
+            TimeSpan propertyToMakeDuration = default;
             string propertyToMakeString = default;
-            string propertyToMakeJsonElement = default;
+            JsonElement propertyToMakeJsonElement = default;
+            string propertyToField = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyToMakeInternal"))
@@ -56,17 +60,17 @@ namespace CustomizationsInCadl
                 }
                 if (property.NameEquals("propertyToMakeFloat"))
                 {
-                    propertyToMakeFloat = property.Value.GetInt32();
+                    propertyToMakeFloat = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("propertyToMakeInt"))
                 {
-                    propertyToMakeInt = property.Value.GetSingle();
+                    propertyToMakeInt = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("propertyToMakeDuration"))
                 {
-                    propertyToMakeDuration = property.Value.GetString();
+                    propertyToMakeDuration = property.Value.GetTimeSpan("P");
                     continue;
                 }
                 if (property.NameEquals("propertyToMakeString"))
@@ -76,11 +80,16 @@ namespace CustomizationsInCadl
                 }
                 if (property.NameEquals("propertyToMakeJsonElement"))
                 {
-                    propertyToMakeJsonElement = property.Value.GetString();
+                    propertyToMakeJsonElement = property.Value.Clone();
+                    continue;
+                }
+                if (property.NameEquals("propertyToField"))
+                {
+                    propertyToField = property.Value.GetString();
                     continue;
                 }
             }
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement);
+            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField);
         }
 
         internal RequestContent ToRequestContent()

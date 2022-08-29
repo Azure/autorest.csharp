@@ -3,5 +3,8 @@
 
 namespace CustomizationsInCadl
 {
-    internal partial class ModelToMakeInternal { }
+    public partial class RootModel
+    {
+        internal ModelToMakeInternal PropertyModelToMakeInternal { get; set; }
+    }
 }

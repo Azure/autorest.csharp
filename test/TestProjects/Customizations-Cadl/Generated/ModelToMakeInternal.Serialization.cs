@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace CustomizationsInCadl
 {
-    public partial class ModelToMakeInternal : IUtf8JsonSerializable
+    internal partial class ModelToMakeInternal : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

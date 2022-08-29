@@ -128,8 +128,9 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 var newType = existingMember switch
                 {
+                    IFieldSymbol { Type: INamedTypeSymbol { EnumUnderlyingType: { } } } => defaultType, // Special case for enums
+                    IFieldSymbol fieldSymbol => typeFactory.CreateType(fieldSymbol.Type),
                     IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
-                    IFieldSymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
                     _ => defaultType
                 };
 

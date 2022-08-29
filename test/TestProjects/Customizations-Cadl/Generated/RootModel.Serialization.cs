@@ -8,6 +8,7 @@
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInCadlOther;
 
 namespace CustomizationsInCadl
 {
@@ -65,7 +66,7 @@ namespace CustomizationsInCadl
                 if (PropertyEnumToBeMadeExtensible != null)
                 {
                     writer.WritePropertyName("propertyEnumToBeMadeExtensible");
-                    writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToSerialString());
+                    writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
                 }
                 else
                 {
@@ -78,10 +79,10 @@ namespace CustomizationsInCadl
         internal static RootModel DeserializeRootModel(JsonElement element)
         {
             Optional<ModelToMakeInternal> propertyModelToMakeInternal = default;
-            Optional<ModelToRename> propertyModelToRename = default;
+            Optional<RenamedModel> propertyModelToRename = default;
             Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;
             Optional<ModelWithCustomizedProperties> propertyModelWithCustomizedProperties = default;
-            Optional<EnumToRename?> propertyEnumToRename = default;
+            Optional<RenamedEnum?> propertyEnumToRename = default;
             Optional<EnumWithValueToRename?> propertyEnumWithValueToRename = default;
             Optional<EnumToBeMadeExtensible?> propertyEnumToBeMadeExtensible = default;
             foreach (var property in element.EnumerateObject())
@@ -103,7 +104,7 @@ namespace CustomizationsInCadl
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    propertyModelToRename = ModelToRename.DeserializeModelToRename(property.Value);
+                    propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToChangeNamespace"))
@@ -133,7 +134,7 @@ namespace CustomizationsInCadl
                         propertyEnumToRename = null;
                         continue;
                     }
-                    propertyEnumToRename = property.Value.GetString().ToEnumToRename();
+                    propertyEnumToRename = property.Value.GetString().ToRenamedEnum();
                     continue;
                 }
                 if (property.NameEquals("propertyEnumWithValueToRename"))
@@ -153,7 +154,7 @@ namespace CustomizationsInCadl
                         propertyEnumToBeMadeExtensible = null;
                         continue;
                     }
-                    propertyEnumToBeMadeExtensible = property.Value.GetString().ToEnumToBeMadeExtensible();
+                    propertyEnumToBeMadeExtensible = new EnumToBeMadeExtensible(property.Value.GetString());
                     continue;
                 }
             }

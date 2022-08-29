@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace CustomizationsInCadl
+namespace CustomizationsInCadlOther
 {
     /// <summary> Model moved into custom namespace. </summary>
     public partial class ModelToChangeNamespace

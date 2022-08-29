@@ -105,8 +105,9 @@ namespace GeneratedModels
         ///         propertyToMakeFloat = 1234,
         ///         propertyToMakeInt = 123.45f,
         ///         propertyToMakeDuration = "<propertyToMakeDuration>",
-        ///         propertyToMakeString = "<propertyToMakeString>",
+        ///         propertyToMakeString = PT1H23M45S,
         ///         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+        ///         propertyToField = "<propertyToField>",
         ///     },
         ///     propertyEnumToRename = "1",
         ///     propertyEnumWithValueToRename = "1",
@@ -126,6 +127,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeDuration").ToString());
         /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
         /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
+        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
         /// Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
         /// Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
         /// Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -153,8 +155,9 @@ namespace GeneratedModels
         ///     propertyToMakeFloat: number, # Required.
         ///     propertyToMakeInt: number, # Required.
         ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string, # Required.
+        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
         ///     propertyToMakeJsonElement: string, # Required.
+        ///     propertyToField: string, # Required.
         ///   }, # Optional.
         ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
         ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
@@ -181,8 +184,9 @@ namespace GeneratedModels
         ///     propertyToMakeFloat: number, # Required.
         ///     propertyToMakeInt: number, # Required.
         ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string, # Required.
+        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
         ///     propertyToMakeJsonElement: string, # Required.
+        ///     propertyToField: string, # Required.
         ///   }, # Optional.
         ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
         ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
@@ -247,8 +251,9 @@ namespace GeneratedModels
         ///         propertyToMakeFloat = 1234,
         ///         propertyToMakeInt = 123.45f,
         ///         propertyToMakeDuration = "<propertyToMakeDuration>",
-        ///         propertyToMakeString = "<propertyToMakeString>",
+        ///         propertyToMakeString = PT1H23M45S,
         ///         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+        ///         propertyToField = "<propertyToField>",
         ///     },
         ///     propertyEnumToRename = "1",
         ///     propertyEnumWithValueToRename = "1",
@@ -268,6 +273,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeDuration").ToString());
         /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
         /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
+        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
         /// Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
         /// Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
         /// Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -295,8 +301,9 @@ namespace GeneratedModels
         ///     propertyToMakeFloat: number, # Required.
         ///     propertyToMakeInt: number, # Required.
         ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string, # Required.
+        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
         ///     propertyToMakeJsonElement: string, # Required.
+        ///     propertyToField: string, # Required.
         ///   }, # Optional.
         ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
         ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
@@ -323,8 +330,9 @@ namespace GeneratedModels
         ///     propertyToMakeFloat: number, # Required.
         ///     propertyToMakeInt: number, # Required.
         ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string, # Required.
+        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
         ///     propertyToMakeJsonElement: string, # Required.
+        ///     propertyToField: string, # Required.
         ///   }, # Optional.
         ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
         ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.

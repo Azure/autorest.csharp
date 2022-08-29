@@ -287,7 +287,7 @@
         "Type": {
          "$id": "40",
          "Name": "TimeSpan",
-         "Kind": "String",
+         "Kind": "DurationISO8601",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -308,6 +308,21 @@
         "IsRequired": true,
         "IsReadOnly": false,
         "IsDiscriminator": false
+       },
+       {
+        "$id": "43",
+        "Name": "propertyToField",
+        "SerializedName": "propertyToField",
+        "Description": "",
+        "Type": {
+         "$id": "44",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
@@ -316,7 +331,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "43",
+     "$id": "45",
      "Name": "propertyEnumToRename",
      "SerializedName": "propertyEnumToRename",
      "Description": "",
@@ -328,7 +343,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "44",
+     "$id": "46",
      "Name": "propertyEnumWithValueToRename",
      "SerializedName": "propertyEnumWithValueToRename",
      "Description": "",
@@ -340,7 +355,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "45",
+     "$id": "47",
      "Name": "propertyEnumToBeMadeExtensible",
      "SerializedName": "propertyEnumToBeMadeExtensible",
      "Description": "",
@@ -368,17 +383,17 @@
  ],
  "Clients": [
   {
-   "$id": "46",
+   "$id": "48",
    "Name": "CustomizationsInCadl",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "47",
+     "$id": "49",
      "Name": "roundTrip",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "48",
+       "$id": "50",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -397,7 +412,7 @@
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
@@ -415,7 +430,7 @@
     }
    ],
    "Protocol": {
-    "$id": "50"
+    "$id": "52"
    }
   }
  ]

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using Azure.Core;
 
 namespace CustomizationsInCadl
@@ -21,34 +22,21 @@ namespace CustomizationsInCadl
         /// <param name="propertyToMakeDuration"></param>
         /// <param name="propertyToMakeString"></param>
         /// <param name="propertyToMakeJsonElement"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeDuration"/>, <paramref name="propertyToMakeString"/> or <paramref name="propertyToMakeJsonElement"/> is null. </exception>
-        public ModelWithCustomizedProperties(int propertyToMakeInternal, int propertyToRename, int propertyToMakeFloat, float propertyToMakeInt, string propertyToMakeDuration, string propertyToMakeString, string propertyToMakeJsonElement)
+        /// <param name="propertyToField"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeString"/> or <paramref name="propertyToField"/> is null. </exception>
+        public ModelWithCustomizedProperties(int propertyToMakeInternal, int propertyToRename, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField)
         {
-            Argument.AssertNotNull(propertyToMakeDuration, nameof(propertyToMakeDuration));
             Argument.AssertNotNull(propertyToMakeString, nameof(propertyToMakeString));
-            Argument.AssertNotNull(propertyToMakeJsonElement, nameof(propertyToMakeJsonElement));
+            Argument.AssertNotNull(propertyToField, nameof(propertyToField));
 
             PropertyToMakeInternal = propertyToMakeInternal;
-            PropertyToRename = propertyToRename;
+            RenamedProperty = propertyToRename;
             PropertyToMakeFloat = propertyToMakeFloat;
             PropertyToMakeInt = propertyToMakeInt;
             PropertyToMakeDuration = propertyToMakeDuration;
             PropertyToMakeString = propertyToMakeString;
             PropertyToMakeJsonElement = propertyToMakeJsonElement;
+            _propertyToField = propertyToField;
         }
-
-        public int PropertyToMakeInternal { get; set; }
-
-        public int PropertyToRename { get; set; }
-
-        public int PropertyToMakeFloat { get; set; }
-
-        public float PropertyToMakeInt { get; set; }
-
-        public string PropertyToMakeDuration { get; set; }
-
-        public string PropertyToMakeString { get; set; }
-
-        public string PropertyToMakeJsonElement { get; set; }
     }
 }

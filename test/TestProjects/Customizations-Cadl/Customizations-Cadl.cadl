@@ -47,7 +47,10 @@ model ModelWithCustomizedProperties {
   propertyToMakeString: duration; 
  
   @doc("Property with type changed to JsonElement (original type: string)")
-  propertyToMakeJsonElement: string; 
+  propertyToMakeJsonElement: string;  
+ 
+  @doc("Field that replaces property (original name: PropertyToField)")
+  propertyToField: string; 
 }
 
 @doc("Renamed enum (original name: EnumToRename)")

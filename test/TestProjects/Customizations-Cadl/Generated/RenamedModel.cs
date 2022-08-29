@@ -8,11 +8,11 @@
 namespace CustomizationsInCadl
 {
     /// <summary> Renamed model (original name: ModelToRename). </summary>
-    public partial class ModelToRename
+    public partial class RenamedModel
     {
-        /// <summary> Initializes a new instance of ModelToRename. </summary>
+        /// <summary> Initializes a new instance of RenamedModel. </summary>
         /// <param name="requiredInt"></param>
-        public ModelToRename(int requiredInt)
+        public RenamedModel(int requiredInt)
         {
             RequiredInt = requiredInt;
         }

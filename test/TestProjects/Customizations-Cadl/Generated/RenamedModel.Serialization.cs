@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace CustomizationsInCadl
 {
-    public partial class ModelToRename : IUtf8JsonSerializable
+    public partial class RenamedModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -21,7 +21,7 @@ namespace CustomizationsInCadl
             writer.WriteEndObject();
         }
 
-        internal static ModelToRename DeserializeModelToRename(JsonElement element)
+        internal static RenamedModel DeserializeRenamedModel(JsonElement element)
         {
             int requiredInt = default;
             foreach (var property in element.EnumerateObject())
@@ -32,7 +32,7 @@ namespace CustomizationsInCadl
                     continue;
                 }
             }
-            return new ModelToRename(requiredInt);
+            return new RenamedModel(requiredInt);
         }
 
         internal RequestContent ToRequestContent()
@@ -42,10 +42,10 @@ namespace CustomizationsInCadl
             return content;
         }
 
-        internal static ModelToRename FromResponse(Response response)
+        internal static RenamedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToRename(document.RootElement);
+            return DeserializeRenamedModel(document.RootElement);
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace CustomizationsInCadl
+namespace CustomizationsInCadlOther
 {
     public partial class ModelToChangeNamespace : IUtf8JsonSerializable
     {

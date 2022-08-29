@@ -8,7 +8,7 @@
 namespace CustomizationsInCadl
 {
     /// <summary> Public model made internal. </summary>
-    public partial class ModelToMakeInternal
+    internal partial class ModelToMakeInternal
     {
         /// <summary> Initializes a new instance of ModelToMakeInternal. </summary>
         /// <param name="requiredInt"></param>

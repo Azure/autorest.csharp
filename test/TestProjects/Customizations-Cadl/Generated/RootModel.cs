@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using CustomizationsInCadlOther;
+
 namespace CustomizationsInCadl
 {
     /// <summary> Root RoundTrip model to reference all other types to ensure generation. </summary>
@@ -22,7 +24,7 @@ namespace CustomizationsInCadl
         /// <param name="propertyEnumToRename"></param>
         /// <param name="propertyEnumWithValueToRename"></param>
         /// <param name="propertyEnumToBeMadeExtensible"></param>
-        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, ModelToRename propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, EnumToRename? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible)
+        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible)
         {
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
             PropertyModelToRename = propertyModelToRename;
@@ -33,15 +35,13 @@ namespace CustomizationsInCadl
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
         }
 
-        public ModelToMakeInternal PropertyModelToMakeInternal { get; set; }
-
-        public ModelToRename PropertyModelToRename { get; set; }
+        public RenamedModel PropertyModelToRename { get; set; }
 
         public ModelToChangeNamespace PropertyModelToChangeNamespace { get; set; }
 
         public ModelWithCustomizedProperties PropertyModelWithCustomizedProperties { get; set; }
 
-        public EnumToRename? PropertyEnumToRename { get; set; }
+        public RenamedEnum? PropertyEnumToRename { get; set; }
 
         public EnumWithValueToRename? PropertyEnumWithValueToRename { get; set; }
 
