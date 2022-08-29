@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
+using MgmtParamOrdering;
 using MgmtParamOrdering.Models;
 using NUnit.Framework;
 
@@ -10,6 +11,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtParamOrderingTests() : base("MgmtParamOrdering")
         {
+            TagResourceExceptions.Add(typeof(VirtualMachineExtensionImageResource));
         }
 
         [TestCase("AvailabilitySetResource", true)]
