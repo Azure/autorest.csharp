@@ -332,13 +332,23 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
             AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
-            if (inputParameter.Kind != InputOperationParameterKind.Method)
+            if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
                 return;
             }
 
+            if (inputParameter.Kind == InputOperationParameterKind.Grouped)
+            {
+                _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
+                return;
+            }
+
             var convenienceMethodParameter = BuildParameter(inputParameter);
-            _orderedParameters.Add(new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter));
+            var parameterChain = inputParameter.Location == RequestLocation.None
+                ? new ParameterChain(convenienceMethodParameter, null, null)
+                : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
+
+            _orderedParameters.Add(parameterChain);
         }
 
         private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)
