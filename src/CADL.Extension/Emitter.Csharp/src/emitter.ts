@@ -30,7 +30,12 @@ import { InputOperation } from "./type/InputOperation.js";
 import { parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import { InputEnumType, InputModelType, InputType } from "./type/InputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
@@ -39,6 +44,9 @@ import { resolveServers } from "./lib/cadlServer.js";
 import { getExternalDocs, getOperationId } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
+import { getConsumes, getProduces } from "@cadl-lang/rest";
+import { InputTypeKind } from "./type/InputTypeKind.js";
+import { InputConstant } from "./type/InputConstant.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -129,6 +137,38 @@ function createModel(program: Program): any {
     if (authentication) {
         auth = processServiceAuthentication(authentication);
     }
+    const consumes = getConsumes(program, serviceNamespaceType);
+    let contentTypeParameter = undefined;
+    const requestMediaTypes: string[] = [];
+    if (consumes && consumes.length > 0) {
+        contentTypeParameter = {
+            Name: "content_type",
+            NameInRequest: "content_type",
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
+            Location: RequestLocation.Header,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: true,
+            IsRequired: true,
+            IsEndpoint: false,
+            SkipUrlEncoding: false,
+            Explode: false,
+            Kind: InputOperationParameterKind.Method,
+            DefaultValue: {
+                Type: {
+                    Name: "String",
+                    Kind: InputTypeKind.String,
+                    IsNullable: false
+                } as InputPrimitiveType,
+                Value: consumes[0]
+            } as InputConstant
+        } as InputParameter;
+    }
+    const produces = getProduces(program, serviceNamespaceType);
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
@@ -174,6 +214,20 @@ function createModel(program: Program): any {
                 modelMap,
                 enumMap
             );
+            if (
+                contentTypeParameter &&
+                op.Parameters.some(
+                    (value) => value.Location === RequestLocation.Body
+                ) &&
+                !op.Parameters.some(
+                    (value) =>
+                        value.Location === RequestLocation.Header &&
+                        value.NameInRequest === "content-type"
+                )
+            ) {
+                op.Parameters.push(contentTypeParameter);
+                op.RequestMediaTypes = consumes;
+            }
             client.Operations.push(op);
         }
 
@@ -207,7 +261,7 @@ function processServiceAuthentication(
                     auth.ApiKey = schema.name;
                     break;
                 case "oauth2":
-                    let scopes = new Set<string>();
+                    const scopes = new Set<string>();
                     for (const flow of schema.flows) {
                         switch (flow.type) {
                             case "clientCredentials":
@@ -276,6 +330,8 @@ function loadOperation(
     const summary = getSummary(program, op);
     const externalDocs = getExternalDocs(program, op);
 
+    const consumes = getConsumes(program, op);
+    const produces = getProduces(program, op);
     const parameters: InputParameter[] = [];
     if (endpoint) parameters.push(endpoint);
     for (const p of cadlParameters.parameters) {
@@ -327,7 +383,7 @@ function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: name,
+            Name: param.name,
             NameInRequest: name,
             Description: getDoc(program, param),
             Type: inputType,
@@ -335,7 +391,9 @@ function loadOperation(
             IsRequired: !param.optional,
             IsApiVersion: false,
             IsResourceParameter: false,
-            IsContentType: false,
+            IsContentType:
+                requestLocation === RequestLocation.Header &&
+                name === "content-type",
             IsEndpoint: false,
             SkipUrlEncoding: true,
             Explode: false,

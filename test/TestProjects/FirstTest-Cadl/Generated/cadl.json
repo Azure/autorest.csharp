@@ -299,11 +299,71 @@
      "Parameters": [
       {
        "$ref": "26"
+      },
+      {
+       "$id": "38",
+       "Name": "headParameter",
+       "NameInRequest": "head-parameter",
+       "Type": {
+        "$id": "39",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "40",
+       "Name": "queryParameter",
+       "NameInRequest": "queryParameter",
+       "Type": {
+        "$id": "41",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "42",
+       "Name": "optionalQuery",
+       "NameInRequest": "optionalQuery",
+       "Type": {
+        "$id": "43",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "44",
        "StatusCodes": [
         200
        ],
@@ -321,15 +381,15 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "45"
    }
   },
   {
-   "$id": "40",
+   "$id": "46",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "47",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
@@ -337,7 +397,67 @@
        "$ref": "26"
       },
       {
-       "$id": "42",
+       "$id": "48",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "49",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "50",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "51",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "52",
+       "Name": "p2",
+       "NameInRequest": "p2",
+       "Type": {
+        "$id": "53",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "54",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -356,7 +476,7 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "55",
        "StatusCodes": [
         200
        ],
@@ -369,11 +489,11 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/againHi",
+     "Path": "/againHi/{p2}",
      "BufferResponse": false
     },
     {
-     "$id": "44",
+     "$id": "56",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
      "Parameters": [
@@ -383,7 +503,7 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "57",
        "StatusCodes": [
         200
        ],
@@ -401,14 +521,14 @@
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "58"
    }
   }
  ],
  "Auth": {
-  "$id": "47",
+  "$id": "59",
   "OAuth2": {
-   "$id": "48",
+   "$id": "60",
    "Scopes": [
     "https://api.example.com/.default"
    ]

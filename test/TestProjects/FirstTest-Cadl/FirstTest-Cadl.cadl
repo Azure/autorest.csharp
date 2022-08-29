@@ -63,14 +63,14 @@ model RoundTripModel {
 namespace Hello.Demo {
     @doc("Return hi")
     @get
-    op sayHi(): Thing;
+    op sayHi(@header headParameter: string, @query queryParameter: string, @query optionalQuery?: string): Thing;
 }
 
 namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    op helloAgain(@body action: RoundTripModel): Thing;
+    op helloAgain(@header p1: string, @body action: RoundTripModel, @Cadl.Http.header contentType: "text/plain", @path p2: string): Thing;
 
     @route("/demoHi")
     @doc("Return hi in demo2")
