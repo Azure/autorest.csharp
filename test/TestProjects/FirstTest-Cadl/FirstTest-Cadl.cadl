@@ -3,14 +3,18 @@ import "@cadl-lang/rest";
 @serviceTitle("Hello world")
 @serviceVersion("0.1.0")
 @doc("This is a sample cadl project.")
-@server(
-    "{firstTestUrl}",
-    "Endpoint Service",
-    {
-        firstTestUrl: string,
-    }
-)
+@server("http://localhost:300","Endpoint Service")
+@useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
 namespace CadlFirstTest;
+
+model AuthFlow {
+    type: OAuth2FlowType.clientCredentials;
+    tokenUrl: "https://api.example.com/oauth2/token";
+    refreshUrl: "https://api.example.com/oauth2/refresh";
+    scopes: [
+        "https://api.example.com/.default"
+    ]
+}
 
 using Cadl.Http;
 

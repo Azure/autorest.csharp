@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{ RequiredStringProperty, RequiredInitProperty },
                     null, null, null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Input Model", InputModelTypeUsage.Input,
                     new List<InputModelProperty>{ RequiredStringProperty, RequiredInitProperty },
                     null, new List<InputModelType>(), null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new InputModelType("OutputModel", "Cadl.TestServer.OutputBasic", "public", "Output Model", InputModelTypeUsage.Output,
                     new List<InputModelProperty>{ RequiredStringProperty, RequiredInitProperty },
                     null, new List<InputModelType>(), null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
@@ -69,10 +69,11 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, true, false, false),
                         new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, true, false, false),
                         new InputModelProperty("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, true, false, false),
-                        new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, true, false, false)
+                        new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, true, false, false),
+                        new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, true, false, false)
                     },
                     null, null, null),
-                new TypeFactory(null),
+                CadlTypeFactory,
                 "test",
                 null);
 
@@ -303,10 +304,12 @@ public partial class PrimitivePropertyModel
 /// <param name=""requiredBodyDateTime""> Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339). </param>
 /// <param name=""requiredDuration""></param>
 /// <param name=""requiredBoolean""></param>
-/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredString""/> is null. </exception>
-public PrimitivePropertyModel(string requiredString,int requiredInt,long requiredLong,long requiredSafeInt,float requiredFloat,double requiredDouble,global::System.DateTimeOffset requiredBodyDateTime,global::System.TimeSpan requiredDuration,bool requiredBoolean)
+/// <param name=""requiredBytes""></param>
+/// <exception cref=""global::System.ArgumentNullException""> <paramref name=""requiredString""/> or <paramref name=""requiredBytes""/> is null. </exception>
+public PrimitivePropertyModel(string requiredString,int requiredInt,long requiredLong,long requiredSafeInt,float requiredFloat,double requiredDouble,global::System.DateTimeOffset requiredBodyDateTime,global::System.TimeSpan requiredDuration,bool requiredBoolean,global::System.BinaryData requiredBytes)
 {
 global::Azure.Core.Argument.AssertNotNull(requiredString, nameof(requiredString));
+global::Azure.Core.Argument.AssertNotNull(requiredBytes, nameof(requiredBytes));
 
 RequiredString = requiredString;
 RequiredInt = requiredInt;
@@ -317,6 +320,7 @@ RequiredDouble = requiredDouble;
 RequiredBodyDateTime = requiredBodyDateTime;
 RequiredDuration = requiredDuration;
 RequiredBoolean = requiredBoolean;
+RequiredBytes = requiredBytes;
 }
 
 public string RequiredString{ get; set; }
@@ -337,6 +341,8 @@ public global::System.DateTimeOffset RequiredBodyDateTime{ get; set; }
 public global::System.TimeSpan RequiredDuration{ get; set; }
 
 public bool RequiredBoolean{ get; set; }
+
+public global::System.BinaryData RequiredBytes{ get; set; }
 }
 }
 ",
@@ -377,6 +383,12 @@ writer.WritePropertyName(""requiredDuration"");
 writer.WriteStringValue(RequiredDuration, ""P"");
 writer.WritePropertyName(""requiredBoolean"");
 writer.WriteBooleanValue(RequiredBoolean);
+writer.WritePropertyName(""requiredBytes"");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(RequiredBytes);
+#else
+global::System.Text.Json.JsonSerializer.Serialize(writer, global::System.Text.Json.JsonDocument.Parse(RequiredBytes.ToString()).RootElement);
+#endif
 writer.WriteEndObject();
 }
 
@@ -391,6 +403,7 @@ double requiredDouble = default;
 global::System.DateTimeOffset requiredBodyDateTime = default;
 global::System.TimeSpan requiredDuration = default;
 bool requiredBoolean = default;
+global::System.BinaryData requiredBytes = default;
 foreach (var property in element.EnumerateObject())
 {
 if(property.NameEquals(""requiredString"")){
@@ -429,8 +442,12 @@ if(property.NameEquals(""requiredBoolean"")){
 requiredBoolean = property.Value.GetBoolean();
 continue;
 }
+if(property.NameEquals(""requiredBytes"")){
+requiredBytes = global::System.BinaryData.FromString(property.Value.GetRawText());
+continue;
 }
-return new global::Cadl.TestServer.PrimitiveProperties.PrimitivePropertyModel(requiredString, requiredInt, requiredLong, requiredSafeInt, requiredFloat, requiredDouble, requiredBodyDateTime, requiredDuration, requiredBoolean);}
+}
+return new global::Cadl.TestServer.PrimitiveProperties.PrimitivePropertyModel(requiredString, requiredInt, requiredLong, requiredSafeInt, requiredFloat, requiredDouble, requiredBodyDateTime, requiredDuration, requiredBoolean, requiredBytes);}
 
 internal global::Azure.Core.RequestContent ToRequestContent()
 {

@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
             IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
 
-            (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+            (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory, sourceInputModel?.CreateForModel(ExistingType));
 
             Fields = _fieldsToInputs.Keys.ToList();
             (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, inputModel.Usage, publicParameters, serializationParameters);
@@ -77,37 +77,71 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyList<Parameter> PublicParameters, IReadOnlyList<Parameter> SerializationParameters, IReadOnlyDictionary<string, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
+        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyList<Parameter> PublicParameters, IReadOnlyList<Parameter> SerializationParameters, IReadOnlyDictionary<string, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
         {
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
             var publicParameters = new List<Parameter>();
-            var serializatoinParameters = new List<Parameter>();
+            var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
-                var propertyIsRequiredInNonRoundTripModel = (inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output) && inputModelProperty.IsRequired;
-                var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel;
+                var originalFieldName = inputModelProperty.Name.FirstCharToUpperCase();
+                var originalFieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
 
-                var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
-                var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
-
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
+                var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
+                var field = existingMember is not null
+                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModelProperty.IsRequired, typeFactory)
+                    : CreateField(originalFieldName, originalFieldType, inputModel, inputModelProperty);
                 fieldsToInputs[field] = inputModelProperty;
-                if (inputModelProperty.IsRequired)
+
+                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Type);
+                parametersToFields[parameter.Name] = field;
+                serializationParameters.Add(parameter);
+                if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
                 {
-                    var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
-                    parametersToFields[parameter.Name] = field;
-                    serializatoinParameters.Add(parameter);
-                    if (!inputModelProperty.IsReadOnly)
-                    {
-                        publicParameters.Add(parameter);
-                    }
+                    publicParameters.Add(parameter);
                 }
             }
 
-            return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
+            return (fieldsToInputs, publicParameters, serializationParameters, parametersToFields);
+        }
+
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, bool isRequired, TypeFactory typeFactory)
+        {
+            var existingMemberTypeSymbol = existingMember switch
+            {
+                IPropertySymbol propertySymbol => (INamedTypeSymbol)propertySymbol.Type,
+                IFieldSymbol propertySymbol => (INamedTypeSymbol)propertySymbol.Type,
+                _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+            };
+
+            // Changing of model types is not supported
+            var fieldType = originalType.IsFrameworkType ? existingMemberTypeSymbol.GetCSharpType() : originalType;
+
+            var fieldModifiers = existingMember.DeclaredAccessibility switch
+            {
+                Accessibility.Public => Public,
+                Accessibility.Internal => Internal,
+                Accessibility.Private => Private,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            var writeAsProperty = existingMember is IPropertySymbol;
+
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, existingMember.Name, GetPropertyDefaultValue(originalType, isRequired), writeAsProperty: writeAsProperty);
+        }
+
+        private static FieldDeclaration CreateField(string fieldName, CSharpType fieldType, InputModelType inputModel, InputModelProperty inputModelProperty)
+        {
+            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
+            var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
+            var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
+            var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+
+            var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
+
+            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, fieldName, GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), writeAsProperty: true);
         }
 
         private static CSharpType GetDefaultPropertyType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
@@ -120,7 +154,32 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = TypeFactory.GetOutputType(valueType);
             }
 
+            if (valueType.IsValueType && !property.IsRequired)
+            {
+                valueType = valueType.WithNullable(true);
+            }
+
             return valueType;
+        }
+
+        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, bool isRequired)
+        {
+            if (TypeFactory.IsCollectionType(propertyType))
+            {
+                if (TypeFactory.IsReadOnlyList(propertyType))
+                {
+                    return $"Array.Empty<{propertyType.Arguments[0]}>()";
+                }
+                if (TypeFactory.IsReadOnlyDictionary(propertyType))
+                {
+                    return $"new ReadOnlyDictionary<{propertyType.Arguments[0]}, {propertyType.Arguments[1]}>(new Dictionary<{propertyType.Arguments[0]}, {propertyType.Arguments[1]}>(0))";
+                }
+                if (!isRequired)
+                {
+                    return Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable();
+                }
+            }
+            return null;
         }
 
         private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, in InputModelTypeUsage usage, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
@@ -131,7 +190,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (usage == InputModelTypeUsage.Input)
             {
                 publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                    publicParameters.Select(CreatePublicConstructorParameter).ToList());
                 serializationConstructor = publicConstructor;
             }
             else
@@ -140,7 +199,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (serializationParameters.Any(p => TypeFactory.IsList(p.Type)) || !publicParameters.SequenceEqual(serializationParameters))
                 {
                     publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, publicConstructorAccessbility,
-                        publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
+                        publicParameters.Select(CreatePublicConstructorParameter).ToList());
                     serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal,
                         serializationParameters.Select(p => p with { Validation = ValidationType.None }).ToList()); // we don't validate parameters for serialization constructor
                 }

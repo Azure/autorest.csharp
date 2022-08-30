@@ -35,14 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "RoundTripModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "RoundTripModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(InputEnumPropertiesCase))]
@@ -58,14 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "InputModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "InputModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         [TestCaseSource(nameof(OutputEnumPropertiesCase))]
@@ -81,14 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
-            Assert.True(library.Models.Any(m => m.Declaration.Name == "OutputModel"));
-            foreach (var model in library.Models)
-            {
-                if (model.Declaration.Name == "OutputModel")
-                {
-                    ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
-                }
-            }
+            ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
         private void ValidateGeneratedCodes(EnumType enumType, string modelCodes, string serializationCodes)
@@ -147,7 +126,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             {
                 new EnumWrapper(new EnumType(ExtensibleEnumType,
                     "Cadl.TestServer.EnumPropertiesBasic", "public",
-                    new TypeFactory(null), null
+                    CadlTypeFactory, null
                 )),
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -217,7 +196,7 @@ public override string ToString() => _value;
                 // see cadl definition: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L35-L45
                 new EnumWrapper(new EnumType(FixedEnumType,
                     "Cadl.TestServer.EnumPropertiesBasic", "public",
-                    new TypeFactory(null), null
+                    CadlTypeFactory, null
                 )),
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.

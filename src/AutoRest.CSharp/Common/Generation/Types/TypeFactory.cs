@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
+                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
                 InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
                 InputTypeKind.BytesBase64Url => new CSharpType(typeof(byte[]), inputType.IsNullable),
                 InputTypeKind.Bytes => new CSharpType(typeof(byte[]), inputType.IsNullable),

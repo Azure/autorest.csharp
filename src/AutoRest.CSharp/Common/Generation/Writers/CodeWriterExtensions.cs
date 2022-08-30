@@ -110,7 +110,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
-            if (field.DefaultValue != null)
+            if (field.DefaultValue != null &&
+                (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
                 return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
             }

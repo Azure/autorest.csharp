@@ -9,6 +9,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
@@ -28,17 +29,36 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             WriteTestOperation(collectionName, testCase);
         }
 
+        private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, MockTestCase testCase)
+        {
+            if (parent is MgmtExtensions extension && extension.ArmCoreType == typeof(ArmResource))
+                return null;
+
+            return WriteGetResource(parent, testCase, GetArmClientExpression);
+        }
+
         protected CodeWriterDeclaration WriteGetCollection(MockTestCase testCase)
         {
             var parent = testCase.Parent;
             Debug.Assert(parent is not null);
-            var parentVar = WriteGetResource(parent, testCase, GetArmClientExpression);
+            var parentVar = WriteGetParentResource(parent, testCase);
 
-            // now we have the parent resource, get the collection from that resource
-            // TODO -- we might should look this up inside the code project for correct method name
             var getResourceCollectionMethodName = $"Get{This.Target.Resource.ResourceName.ResourceNameToPlural()}";
             var collectionName = new CodeWriterDeclaration("collection");
-            _writer.Append($"var {collectionName:D} = {parentVar}.{getResourceCollectionMethodName}(");
+            if (parentVar == null)
+            {
+                // this case will happen only when the resource is a scope resource
+                var idVar = new CodeWriterDeclaration("scope");
+                WriteCreateScopeResourceIdentifier(testCase, idVar, testCase.RequestPath.GetScopePath());
+                _writer.Line($"var {collectionName:D} = {GetArmClientExpression}.{getResourceCollectionMethodName}({idVar}, ");
+            }
+            else
+            {
+                // now we have the parent resource, get the collection from that resource
+                // TODO -- we might should look this up inside the code project for correct method name
+                _writer.Append($"var {collectionName:D} = {parentVar}.{getResourceCollectionMethodName}(");
+            }
+
             var parameterValues = testCase.ParameterValueMapping;
             // iterate over the ResourceCollection.ExtraConstructorParameters to get extra parameters for the GetCollection method
             foreach (var extraParameter in This.Target.ExtraConstructorParameters)

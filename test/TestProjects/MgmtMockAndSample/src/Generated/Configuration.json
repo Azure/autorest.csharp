@@ -14,6 +14,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}",
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}"
   ],
+  "GenerateArmResourceExtensions": [
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
+  ],
   "FormatByNameRules": {
     "tenantId": "uuid",
     "resourceType": "resource-type",

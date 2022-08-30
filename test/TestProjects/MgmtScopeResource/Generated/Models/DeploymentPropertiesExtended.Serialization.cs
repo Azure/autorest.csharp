@@ -21,6 +21,7 @@ namespace MgmtScopeResource.Models
             Optional<TimeSpan> duration = default;
             Optional<BinaryData> outputs = default;
             Optional<BinaryData> parameters = default;
+            Optional<DeploymentMode> mode = default;
             Optional<ErrorResponse> errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -79,6 +80,16 @@ namespace MgmtScopeResource.Models
                     parameters = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("mode"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    mode = property.Value.GetString().ToDeploymentMode();
+                    continue;
+                }
                 if (property.NameEquals("errorResponse"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -90,7 +101,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, errorResponse.Value);
+            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, Optional.ToNullable(mode), errorResponse.Value);
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -187,7 +189,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (declaration.IsAbstract)
                 {
-                    writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
+                    if (Configuration.AzureArm)
+                    {
+                        writer.WriteObjectInitialization(serialization, $"Unknown{declaration.Name}");
+                    }
+                    else
+                    {
+                        writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
+                    }
                 }
                 else
                 {

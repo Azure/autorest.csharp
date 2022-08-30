@@ -37,5 +37,12 @@ namespace MgmtScopeResource
         {
             return GetCachedClient(Client => new FakePolicyAssignmentCollection(Client, Id));
         }
+
+        /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        public virtual VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus()
+        {
+            return new VMInsightsOnboardingStatusResource(Client, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default"));
+        }
     }
 }

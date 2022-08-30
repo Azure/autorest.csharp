@@ -56,32 +56,26 @@ namespace AutoRest.CSharp.Output.Models
                 parameterNamesToFields[KnownParameters.Pipeline.Name] = PipelineField;
                 parameterNamesToFields[KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty;
 
-                var schemes = authorization is CodeModelSecurity security
-                    ? security.Schemes
-                    : Array.Empty<SecurityScheme>();
-                foreach (var scheme in schemes)
+                if (authorization.ApiKey is not null)
                 {
-                    switch (scheme)
-                    {
-                        case KeySecurityScheme keySecurityScheme:
-                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{keySecurityScheme.Name:L}");
-                            _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
+                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}");
+                    _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
-                            fields.Add(AuthorizationHeaderConstant);
-                            fields.Add(_keyAuthField);
-                            credentialFields.Add(_keyAuthField);
-                            parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
-                            break;
-                        case OAuth2SecurityScheme oAuth2SecurityScheme:
-                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {oAuth2SecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                            _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
+                    fields.Add(AuthorizationHeaderConstant);
+                    fields.Add(_keyAuthField);
+                    credentialFields.Add(_keyAuthField);
+                    parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
+                }
 
-                            fields.Add(ScopesConstant);
-                            fields.Add(_tokenAuthField);
-                            credentialFields.Add(_tokenAuthField);
-                            parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
-                            break;
-                    }
+                if (authorization.OAuth2 is not null)
+                {
+                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}");
+                    _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
+
+                    fields.Add(ScopesConstant);
+                    fields.Add(_tokenAuthField);
+                    credentialFields.Add(_tokenAuthField);
+                    parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
                 }
 
                 fields.Add(PipelineField);

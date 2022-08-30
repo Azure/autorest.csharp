@@ -331,7 +331,8 @@ Examples:
         }
         private string GetAbstract(SchemaObjectType schema)
         {
-            return schema.IsAbstract ? "abstract " : string.Empty;
+            // Limit this change to management plane to avoid data plane affected
+            return schema.Declaration.IsAbstract && Configuration.AzureArm ? "abstract " : string.Empty;
         }
 
         protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
