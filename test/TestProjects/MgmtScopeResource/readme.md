@@ -48,6 +48,9 @@ generate-arm-resource-extensions:
 - /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
 - /{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default
 
+patch-initializer-customization:
+  Deployment:
+    Properties: 'new DeploymentProperties(current.Properties.Mode.HasValue ? current.Properties.Mode.Value : DeploymentMode.Incremental)'
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: FakePolicyAssignments_DeleteById

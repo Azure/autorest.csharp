@@ -187,7 +187,9 @@ namespace AutoRest.CSharp.Input
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
             TestGenConfiguration? testGen = default,
-            JsonElement? operationIdMappings = default)
+            JsonElement? operationIdMappings = default,
+            JsonElement? updateRequiredCopy = default,
+            JsonElement? patchInitializerCustomization = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -238,6 +240,8 @@ namespace AutoRest.CSharp.Input
             DoesSingletonRequiresKeyword = DeserializeBoolean(singletonRequiresKeyword, false);
             TestGen = testGen;
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
+            UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
+            PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
         }
 
         private static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
@@ -287,6 +291,9 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
+        public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
+        public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
+
         public IReadOnlyList<string> NoResourceSuffix { get; }
         public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
         public IReadOnlyList<string> SuppressAbstractBaseClass { get; }
@@ -328,7 +335,9 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 testGen: TestGenConfiguration.GetConfiguration(autoRest),
-                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
+                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
+                updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
+                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -371,6 +380,8 @@ namespace AutoRest.CSharp.Input
             }
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
+            WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
+            WriteNonEmptySettings(writer, nameof(PatchInitializerCustomization), PatchInitializerCustomization);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -421,6 +432,8 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
             root.TryGetProperty(nameof(TestGen), out var testModelerRoot);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
+            root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
+            root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupToOmit,
@@ -454,7 +467,9 @@ namespace AutoRest.CSharp.Input
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 testGen: TestGenConfiguration.LoadConfiguration(testModelerRoot),
-                operationIdMappings: operationIdMappings);
+                operationIdMappings: operationIdMappings,
+                updateRequiredCopy: updateRequiredCopy,
+                patchInitializerCustomization: patchInitializerCustomization);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

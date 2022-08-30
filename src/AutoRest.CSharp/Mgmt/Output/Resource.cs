@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -13,8 +14,10 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -170,7 +173,50 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string? SingletonResourceIdSuffix { get; }
 
-        public bool IsTaggable => ResourceData.IsTaggable;
+        private bool? _isTaggable;
+        public bool IsTaggable => GetIsTaggable();
+
+        private bool GetIsTaggable()
+        {
+            if (_isTaggable is not null)
+                return _isTaggable.Value;
+
+            var bodyParameter = GetBodyParameter();
+            if (ResourceData.IsTaggable && bodyParameter is not null)
+            {
+                var bodyParamType = bodyParameter.Type;
+                _isTaggable = bodyParamType.Equals(ResourceData.Type) ? ResourceData.IsTaggable : DoesUpdateSchemaHaveTags(bodyParamType);
+            }
+            else
+            {
+                _isTaggable = false;
+            }
+
+            return _isTaggable.Value;
+        }
+
+        private bool DoesUpdateSchemaHaveTags(CSharpType bodyParamType)
+        {
+            if (bodyParamType.IsFrameworkType)
+                return false;
+            if (bodyParamType.Implementation is null)
+                return false;
+            if (bodyParamType.Implementation is not SchemaObjectType schemaObject)
+                return false;
+            return schemaObject.ObjectSchema.HasTags();
+        }
+
+        private Parameter? GetBodyParameter()
+        {
+            //found a case in logic where there is a patch with only a cancellation token
+            //I think this is a bug in there swagger but this works around that since generation
+            //will fail if the update doesn't have a body param
+            var op = UpdateOperation ?? CreateOperation;
+            if (op is null)
+                return null;
+
+            return op.MethodParameters.FirstOrDefault(p => p.RequestLocation == Common.Input.RequestLocation.Body);
+        }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>

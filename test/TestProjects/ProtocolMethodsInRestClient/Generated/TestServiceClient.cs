@@ -58,15 +58,16 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary> Create or update resource. </summary>
+        /// <param name="grouped"> Parameter group. </param>
         /// <param name="resource"> Information about the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Resource>> CreateAsync(Resource resource = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Resource>> CreateAsync(Grouped grouped, Resource resource = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                return await RestClient.CreateAsync(resource, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateAsync(grouped, resource, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -76,15 +77,16 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary> Create or update resource. </summary>
+        /// <param name="grouped"> Parameter group. </param>
         /// <param name="resource"> Information about the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
+        public virtual Response<Resource> Create(Grouped grouped, Resource resource = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                return RestClient.Create(resource, cancellationToken);
+                return RestClient.Create(grouped, resource, cancellationToken);
             }
             catch (Exception e)
             {
