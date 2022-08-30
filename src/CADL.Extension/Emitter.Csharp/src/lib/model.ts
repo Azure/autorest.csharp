@@ -85,7 +85,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
                 case "plainTime":
                     return InputTypeKind.Time;
                 case "duration":
-                    return InputTypeKind.String;
+                    return InputTypeKind.Duration;
                 case "Map":
                     return InputTypeKind.Dictionary;
                 default:

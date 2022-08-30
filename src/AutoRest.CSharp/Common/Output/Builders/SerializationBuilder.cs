@@ -11,7 +11,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
 
@@ -19,6 +18,27 @@ namespace AutoRest.CSharp.Output.Builders
 {
     internal class SerializationBuilder
     {
+
+        public static SerializationFormat GetDefaultSerializationFormat(CSharpType type)
+        {
+            if (type.EqualsIgnoreNullable(typeof(byte[])))
+            {
+                return SerializationFormat.Bytes_Base64;
+            }
+
+            if (type.EqualsIgnoreNullable(typeof(DateTimeOffset)))
+            {
+                return SerializationFormat.DateTime_ISO8601;
+            }
+
+            if (type.EqualsIgnoreNullable(typeof(TimeSpan)))
+            {
+                return SerializationFormat.Duration_ISO8601;
+            }
+
+            return SerializationFormat.Default;
+        }
+
         public static SerializationFormat GetSerializationFormat(InputType type)
             => type is not InputPrimitiveType primitiveType ? SerializationFormat.Default : primitiveType.Kind switch
             {
@@ -33,6 +53,12 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default
             };
+
+        private static SerializationFormat GetSerializationFormat(InputType inputType, CSharpType valueType)
+        {
+            var serializationFormat = GetSerializationFormat(inputType);
+            return serializationFormat != SerializationFormat.Default ? serializationFormat : GetDefaultSerializationFormat(valueType);
+        }
 
         public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
@@ -114,7 +140,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(JsonElement))
             {
-                return new JsonValueSerialization(valueType, GetSerializationFormat(inputType), valueType.IsNullable);
+                return new JsonValueSerialization(valueType, GetSerializationFormat(inputType, valueType), valueType.IsNullable);
             }
 
             return inputType switch
@@ -122,7 +148,7 @@ namespace AutoRest.CSharp.Output.Builders
                 CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType),
                 InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType)), valueType.IsNullable),
                 InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType)), valueType.IsNullable),
-                _ => new JsonValueSerialization(valueType, GetSerializationFormat(inputType), valueType.IsNullable)
+                _ => new JsonValueSerialization(valueType, GetSerializationFormat(inputType, valueType), valueType.IsNullable)
             };
         }
 
