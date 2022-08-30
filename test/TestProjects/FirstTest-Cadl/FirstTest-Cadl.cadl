@@ -63,7 +63,7 @@ model RoundTripModel {
 namespace Hello.Demo {
     @doc("Return hi")
     @get
-    op sayHi(): Thing;
+    op sayHi(@path pathParameter: "json" | "jpeg"): Thing;
 }
 
 namespace Hello.Demo2 {

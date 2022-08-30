@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {
@@ -84,15 +85,16 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi. </summary>
+        /// <param name="pathParameter"> The pathParameter to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> SayHiValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> SayHiValueAsync(PathParameter pathParameter, CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await SayHiAsync(context).ConfigureAwait(false);
+                Response response = await SayHiAsync(pathParameter.ToSerialString(), context).ConfigureAwait(false);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -103,15 +105,16 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi. </summary>
+        /// <param name="pathParameter"> The pathParameter to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> SayHiValue(CancellationToken cancellationToken = default)
+        public virtual Response<Thing> SayHiValue(PathParameter pathParameter, CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = SayHi(context);
+                Response response = SayHi(pathParameter.ToSerialString(), context);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -122,16 +125,18 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi. </summary>
+        /// <param name="pathParameter"> The pathParameter to use. Allowed values: &quot;json&quot; | &quot;jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call SayHiAsync and parse the result.
+        /// This sample shows how to call SayHiAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new DemoClient(credential);
         /// 
-        /// Response response = await client.SayHiAsync();
+        /// Response response = await client.SayHiAsync("<pathParameter>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -149,13 +154,15 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> SayHiAsync(RequestContext context = null)
+        public virtual async Task<Response> SayHiAsync(string pathParameter, RequestContext context = null)
         {
+            Argument.AssertNotNull(pathParameter, nameof(pathParameter));
+
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHi");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSayHiRequest(context);
+                using HttpMessage message = CreateSayHiRequest(pathParameter, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -166,16 +173,18 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi. </summary>
+        /// <param name="pathParameter"> The pathParameter to use. Allowed values: &quot;json&quot; | &quot;jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call SayHi and parse the result.
+        /// This sample shows how to call SayHi with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new DemoClient(credential);
         /// 
-        /// Response response = client.SayHi();
+        /// Response response = client.SayHi("<pathParameter>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -193,13 +202,15 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response SayHi(RequestContext context = null)
+        public virtual Response SayHi(string pathParameter, RequestContext context = null)
         {
+            Argument.AssertNotNull(pathParameter, nameof(pathParameter));
+
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHi");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSayHiRequest(context);
+                using HttpMessage message = CreateSayHiRequest(pathParameter, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -209,7 +220,7 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateSayHiRequest(RequestContext context)
+        internal HttpMessage CreateSayHiRequest(string pathParameter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -217,7 +228,8 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/hello", false);
+            uri.AppendPath("/hello/", false);
+            uri.AppendPath(pathParameter, false);
             request.Uri = uri;
             return message;
         }

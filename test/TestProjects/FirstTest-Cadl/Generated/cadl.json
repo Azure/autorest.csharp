@@ -8,23 +8,43 @@
  "Enums": [
   {
    "$id": "2",
+   "Name": "pathParameter",
+   "Description": "",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "json",
+     "Value": "json"
+    },
+    {
+     "$id": "4",
+     "Name": "jpeg",
+     "Value": "jpeg"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  },
+  {
+   "$id": "5",
    "Name": "SimpleEnum",
    "Namespace": "CadlFirstTest",
    "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "3",
+     "$id": "6",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "4",
+     "$id": "7",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "5",
+     "$id": "8",
      "Name": "Four",
      "Value": "4"
     }
@@ -33,24 +53,24 @@
    "IsNullable": false
   },
   {
-   "$id": "6",
+   "$id": "9",
    "Name": "ExtensibleEnum",
    "Namespace": "CadlFirstTest",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "7",
+     "$id": "10",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "8",
+     "$id": "11",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "9",
+     "$id": "12",
      "Name": "Four",
      "Value": "4"
     }
@@ -61,18 +81,18 @@
  ],
  "Models": [
   {
-   "$id": "10",
+   "$id": "13",
    "Name": "Thing",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "11",
+     "$id": "14",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "12",
+      "$id": "15",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -84,18 +104,18 @@
    ]
   },
   {
-   "$id": "13",
+   "$id": "16",
    "Name": "RoundTripModel",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "14",
+     "$id": "17",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "15",
+      "$id": "18",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -105,12 +125,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "16",
+     "$id": "19",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "20",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -120,38 +140,15 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "18",
+     "$id": "21",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "",
      "Type": {
-      "$id": "19",
+      "$id": "22",
       "Name": "Array",
       "ElementType": {
-       "$ref": "2"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "20",
-     "Name": "requiredDictionary",
-     "SerializedName": "requiredDictionary",
-     "Description": "",
-     "Type": {
-      "$id": "21",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "22",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$ref": "6"
+       "$ref": "5"
       },
       "IsNullable": false
      },
@@ -161,11 +158,34 @@
     },
     {
      "$id": "23",
+     "Name": "requiredDictionary",
+     "SerializedName": "requiredDictionary",
+     "Description": "",
+     "Type": {
+      "$id": "24",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "25",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$ref": "9"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "26",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "",
      "Type": {
-      "$ref": "10"
+      "$ref": "13"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -176,22 +196,22 @@
  ],
  "Clients": [
   {
-   "$id": "24",
+   "$id": "27",
    "Name": "CadlFirstTest",
    "Description": "This is a sample cadl project.",
    "Operations": [
     {
-     "$id": "25",
+     "$id": "28",
      "Name": "topAction",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "26",
+       "$id": "29",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "27",
+        "$id": "30",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -206,9 +226,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "31",
         "Type": {
-         "$id": "29",
+         "$id": "32",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -217,11 +237,11 @@
        }
       },
       {
-       "$id": "30",
+       "$id": "33",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "31",
+        "$id": "34",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -239,12 +259,12 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "BodyMediaType": "Json"
       }
@@ -256,22 +276,22 @@
      "BufferResponse": false
     },
     {
-     "$id": "33",
+     "$id": "36",
      "Name": "topAction2",
      "Description": "top level method2",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "BodyMediaType": "Json"
       }
@@ -284,31 +304,48 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "38"
    }
   },
   {
-   "$id": "36",
+   "$id": "39",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "37",
+     "$id": "40",
      "Name": "sayHi",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "29"
+      },
+      {
+       "$id": "41",
+       "Name": "pathParameter",
+       "NameInRequest": "pathParameter",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "BodyMediaType": "Json"
       }
@@ -316,32 +353,32 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/hello",
+     "Path": "/hello/{pathParameter}",
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "43"
    }
   },
   {
-   "$id": "40",
+   "$id": "44",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "45",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "29"
       },
       {
-       "$id": "42",
+       "$id": "46",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "13"
+        "$ref": "16"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -356,12 +393,12 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "47",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "BodyMediaType": "Json"
       }
@@ -373,22 +410,22 @@
      "BufferResponse": false
     },
     {
-     "$id": "44",
+     "$id": "48",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "BodyMediaType": "Json"
       }
@@ -401,14 +438,14 @@
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "50"
    }
   }
  ],
  "Auth": {
-  "$id": "47",
+  "$id": "51",
   "OAuth2": {
-   "$id": "48",
+   "$id": "52",
    "Scopes": [
     "https://api.example.com/.default"
    ]
