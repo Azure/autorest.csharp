@@ -15,7 +15,8 @@ import {
     ModelTypeProperty,
     NeverType,
     Program,
-    Type
+    Type,
+    UnionType
 } from "@cadl-lang/compiler";
 import {
     getDiscriminator,
@@ -215,7 +216,8 @@ export function getInputType(
     program: Program,
     type: Type,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>
+    enums: Map<string, InputEnumType>,
+    name: string = ""
 ): InputType {
     if (type.kind === "Model") {
         return getInputModelType(type);
@@ -236,6 +238,8 @@ export function getInputType(
         } as InputPrimitiveType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
+    } else if (type.kind === "Union") {
+        return getInputTypeForUnion(name, type);
     } else {
         return {
             Name: InputTypeKind.UnKnownKind,
@@ -303,6 +307,44 @@ export function getInputType(
         return extensibleEnum;
     }
 
+    function getInputTypeForUnion(name: string, u: UnionType): InputEnumType {
+        let enumType = enums.get(name);
+        if (!enumType) {
+            if (u.options.length === 0) {
+                throw new Error(`Union type '${name}' doesn't define any options.`);
+            }
+
+            const allowValues: InputEnumTypeValue[] = [];
+            for (const option of u.options) {
+                if (option.kind !== "String") {
+                    // TODO: Only handle string now
+                    continue;
+                }
+
+                allowValues.push({
+                    Name: option.value,
+                    Value: option.value,
+                    Description: getDoc(program, option)
+                } as InputEnumTypeValue);
+            }
+
+            enumType = {
+                Name: name,
+                Namespace: u.namespace?.name,
+                Accessibility: undefined, //TODO: need to add accessibility
+                Description: getDoc(program, u) ?? "",
+                EnumValueType: "String",
+                AllowedValues: allowValues,
+                IsExtensible: false,
+                IsNullable: false
+            } as InputEnumType;
+
+            enums.set(name, enumType);
+        }
+
+        return enumType;
+    }
+
     function getInputTypeForEnum(e: EnumType, addToCollection: boolean = true): InputEnumType {
         let enumType = enums.get(e.name);
         if (!enumType) {
@@ -364,7 +406,7 @@ export function getInputType(
             ValueType: getInputType(program, value, models, enums),
             IsNullable: false
         } as InputDictionaryType;
-    }   
+    }
 
     function getInputModelForModel(m: ModelType): InputModelType {
         m = getEffectiveSchemaType(program, m) as ModelType;
@@ -400,9 +442,9 @@ export function getInputType(
         }
 
         return model;
-    }   
+    }
 
-    function getDiscriminatorValue(m: ModelType, baseModel?: InputModelType) : string | undefined {
+    function getDiscriminatorValue(m: ModelType, baseModel?: InputModelType): string | undefined {
         const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
 
         if (discriminatorPropertyName) {
@@ -419,7 +461,7 @@ export function getInputType(
         inputProperties: Map<string, ModelTypeProperty>,
         outputProperties: InputModelProperty[],
         discriminatorPropertyName?: string
-    ) : void {
+    ): void {
         inputProperties.forEach(
             (value: ModelTypeProperty, key: string) => {
                 if (value.name !== discriminatorPropertyName) {
@@ -448,7 +490,7 @@ export function getInputType(
         );
     }
 
-    function getInputModelBaseType(m?: ModelType) : InputModelType | undefined {
+    function getInputModelBaseType(m?: ModelType): InputModelType | undefined {
         if (!m) {
             return undefined;
         }

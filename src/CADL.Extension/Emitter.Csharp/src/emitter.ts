@@ -321,7 +321,8 @@ function loadOperation(
             program,
             cadlType,
             models,
-            enums
+            enums,
+            name
         );
         const requestLocation = requestLocationMap[location];
         const kind: InputOperationParameterKind =
