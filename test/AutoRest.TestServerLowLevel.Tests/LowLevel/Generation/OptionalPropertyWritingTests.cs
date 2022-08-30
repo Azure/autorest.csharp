@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         // below are test cases
         private static readonly object[] RoundTripModelCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -295,7 +295,7 @@ return DeserializeRoundTripModel(document.RootElement);
 
         private static readonly object[] InputModelCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -434,7 +434,7 @@ return content;
 
         private static readonly object[] OutputModelCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
