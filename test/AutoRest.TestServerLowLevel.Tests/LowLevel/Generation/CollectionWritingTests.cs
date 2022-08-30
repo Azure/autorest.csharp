@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
@@ -64,7 +60,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
             var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
                     "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
-                    new List<InputModelProperty>{ RequiredStringProperty, RequiredInitProperty },
+                    new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
                     "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
@@ -86,7 +82,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
             var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
                     "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
-                    new List<InputModelProperty>{ RequiredStringProperty, RequiredInitProperty },
+                    new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
                     "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
@@ -103,10 +99,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         }
 
         // below are test cases
-        private static readonly InputModelProperty RequiredStringListProperty = new InputModelProperty("requiredStringList", "requiredStringList", "Required collection of strings, illustrating a collection of reference types.", new InputListType("requiredStringList", InputPrimitiveType.String), true, false, false);
-
-        private static readonly InputModelProperty RequiredIntListProperty = new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32), true, false, false);
-
         private static readonly object[] RoundTripPrimitiveCollectionPropertiesCase =
         {
             new[]
@@ -326,7 +318,7 @@ return content;
 
         private static readonly object[] OutputPrimitiveCollectionPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -428,7 +420,7 @@ return DeserializeOutputModel(document.RootElement);
 
         private static readonly object[] ModelTypeCollectionPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -562,7 +554,7 @@ return DeserializeModelCollectionModel(document.RootElement);
 
         private static readonly object[] ModelType2DCollectionPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
