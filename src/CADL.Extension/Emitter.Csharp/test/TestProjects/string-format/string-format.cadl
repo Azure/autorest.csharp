@@ -17,4 +17,4 @@ op zonedDateTime(
 @route("/uri")
 @doc("path paramter is string with uri format")
 @get
-op uri(@path @intrinsic("uri") uri: string): void;
+op uri(@path @intrinsic("uri") uri: string): Response<200>;

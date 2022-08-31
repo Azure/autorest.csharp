@@ -8,6 +8,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ModelType,
     ModelTypeProperty,
     OperationType,
     Program,
@@ -22,6 +23,10 @@ import {
     OperationDetails,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
+// import {
+//     getLongRunningStates,
+//     getPagedResult
+// } from "@azure-tools/cadl-azure-core"
 import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
@@ -148,7 +153,7 @@ function createModel(program: Program): any {
         }
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            if (!isSupportedOperation(operation)) continue;
+            if (!isSupportedOperation(program, operation)) continue;
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -399,14 +404,23 @@ function loadOperation(
     }
 }
 
-function isLroOperation(op: OperationDetails) {
+function isLroOperation(program: Program, op: OperationDetails) {
+    // for (const res of op.responses) {
+    //     if (res.responses[0]?.body) {
+    //         if (res.responses[0].body.type as ModelType) {
+    //             const lroMetadata = getLongRunningStates(program, res.responses[0]?.body.type as ModelType);
+    //         }
+    //     }
+    // }
+    
     return false;
 }
-function isPagingOperation(op: OperationDetails) {
+function isPagingOperation(program: Program, op: OperationDetails) {
+    // const pagingMetadata = getPagedResult(program, op.operation);
     return false;
 }
-function isSupportedOperation(op: OperationDetails) {
-    if (isLroOperation(op) || isPagingOperation(op)) return false;
+function isSupportedOperation(program: Program, op: OperationDetails) {
+    if (isLroOperation(program, op) || isPagingOperation(program, op)) return false;
     return true;
 }
 class ErrorTypeFoundError extends Error {

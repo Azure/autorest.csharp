@@ -1,0 +1,285 @@
+{
+ "$id": "1",
+ "Name": "lrooperation",
+ "ApiVersions": [
+  "2022-05-15-preview"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "ResourceOkResponse",
+   "Namespace": "Foundations",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "statusCode",
+     "SerializedName": "statusCode",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "Number",
+      "Kind": "UnknownKind",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "9",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "10",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "11",
+     "Name": "operationLocation",
+     "SerializedName": "operationLocation",
+     "Description": "",
+     "Type": {
+      "$id": "12",
+      "Name": "ResourceLocation",
+      "Namespace": "Rest",
+      "Description": "The location of an instance of OperationStatus",
+      "IsNullable": false,
+      "Properties": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "12"
+  },
+  {
+   "$id": "13",
+   "Name": "ResourceCreatedResponse",
+   "Namespace": "Foundations",
+   "Description": "A  resource was successfully created.",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "14",
+     "Name": "statusCode",
+     "SerializedName": "statusCode",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "Number",
+      "Kind": "UnknownKind",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "16",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "18",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "20",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "22",
+     "Name": "operationLocation",
+     "SerializedName": "operationLocation",
+     "Description": "",
+     "Type": {
+      "$ref": "12"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "23",
+   "Name": "Projects",
+   "Operations": [
+    {
+     "$id": "24",
+     "Name": "createOrUpdate",
+     "Description": "Creates a new pet or updates an existing one.",
+     "Parameters": [
+      {
+       "$id": "25",
+       "Name": "Endpoint",
+       "NameInRequest": "Endpoint",
+       "Type": {
+        "$id": "26",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "27",
+       "Name": "content-type",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "28",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "29",
+       "Name": "api-version",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "30",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "31",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      },
+      {
+       "$id": "32",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "13"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{Endpoint}/language",
+     "Path": "/authoring/analyze-text",
+     "BufferResponse": false
+    }
+   ],
+   "Protocol": {
+    "$id": "33"
+   }
+  }
+ ]
+}

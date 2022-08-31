@@ -82,7 +82,7 @@
       {
        "$id": "10",
        "StatusCodes": [
-        204
+        200
        ],
        "BodyMediaType": "Json"
       }
