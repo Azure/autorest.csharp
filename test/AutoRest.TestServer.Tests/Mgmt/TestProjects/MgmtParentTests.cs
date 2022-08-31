@@ -11,6 +11,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtParentTests()
             : base("MgmtParent")
         {
+            TagResourceExceptions.Add(typeof(VirtualMachineExtensionImageResource));
         }
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DedicatedHostGroupCollection) };

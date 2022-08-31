@@ -7,14 +7,13 @@ using System.Collections.Immutable;
 using System.Linq;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Input.Source
 {
     public class ModelTypeMapping
     {
         private readonly INamedTypeSymbol? _existingType;
-        private SourceMemberMapping[] PropertyMappings { get; }
+        private readonly Dictionary<string, ISymbol> _propertyMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -22,17 +21,16 @@ namespace AutoRest.CSharp.Input.Source
         public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol? existingType)
         {
             _existingType = existingType;
+            _propertyMappings = new Dictionary<string, ISymbol>();
 
-            List<SourceMemberMapping> memberMappings = new List<SourceMemberMapping>();
             foreach (ISymbol member in GetMembers(existingType))
             {
                 if (SourceInputModel.TryGetName(member, memberAttribute, out var schemaMemberName))
                 {
-                    memberMappings.Add(new SourceMemberMapping(schemaMemberName, member));
+                    _propertyMappings.Add(schemaMemberName, member);
                 }
             }
 
-            PropertyMappings = memberMappings.ToArray();
             if (existingType != null)
             {
                 foreach (var attributeData in existingType.GetAttributes())
@@ -71,20 +69,20 @@ namespace AutoRest.CSharp.Input.Source
 
         public SourceMemberMapping? GetForMember(string name)
         {
-            var memberMapping = PropertyMappings.SingleOrDefault(p => string.Equals(p.OriginalName, name, StringComparison.InvariantCultureIgnoreCase));
-            if (memberMapping == null)
+            if (!_propertyMappings.TryGetValue(name, out var memberSymbol))
             {
-                var memberSymbol = _existingType?.GetMembers(name).FirstOrDefault();
-                if (memberSymbol != null)
-                {
-                    memberMapping = new SourceMemberMapping(memberSymbol.Name, memberSymbol);
-                }
+                memberSymbol = _existingType?.GetMembers(name).FirstOrDefault();
             }
 
-            return memberMapping;
+            if (memberSymbol != null)
+            {
+                return new SourceMemberMapping(name, memberSymbol);
+            }
+
+            return null;
         }
 
-        private IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
+        private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
         {
             while (typeSymbol != null)
             {

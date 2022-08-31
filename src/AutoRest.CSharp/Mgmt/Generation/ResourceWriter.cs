@@ -7,11 +7,13 @@ using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -98,62 +100,163 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteStaticValidate($"ResourceType");
         }
 
-        private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
-                _writer.Append($"var originalTags = ");
-                if (async)
+                using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
-                    _writer.Append($"await ");
+                    WriteGetOriginalFromTagResource(isAsync, "[key] = value");
+                    WriteTaggableCommonMethod(isAsync);
                 }
-                _writer.Line($"GetTagResource().{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"originalTags.Value.Data.TagValues[key] = value;");
-                WriteTaggableCommonMethod(async);
+                using (_writer.Scope($"else"))
+                {
+                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, "[key] = value");
+                }
             }
             _writer.Line();
         }
 
-        private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
-                if (async)
+                using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
-                    _writer.Append($"await ");
+                    if (isAsync)
+                    {
+                        _writer.Append($"await ");
+                    }
+                    _writer.Line($"GetTagResource().{CreateMethodName("Delete", isAsync)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
+                    WriteGetOriginalFromTagResource(isAsync, ".ReplaceWith(tags)");
+                    WriteTaggableCommonMethod(isAsync);
                 }
-                _writer.Line($"GetTagResource().{CreateMethodName("Delete", async)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-                _writer.Append($"var originalTags  = ");
-                if (async)
+                using (_writer.Scope($"else"))
                 {
-                    _writer.Append($"await ");
+                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".ReplaceWith(tags)", true);
                 }
-                _writer.Line($"GetTagResource().{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"originalTags.Value.Data.TagValues.ReplaceWith(tags);");
-                WriteTaggableCommonMethod(async);
             }
             _writer.Line();
         }
 
-        private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
-                _writer.Append($"var originalTags = ");
-                if (async)
+                using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
-                    _writer.Append($"await ");
+                    WriteGetOriginalFromTagResource(isAsync, ".Remove(key)");
+                    WriteTaggableCommonMethod(isAsync);
                 }
-                _writer.Line($"GetTagResource().{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"originalTags.Value.Data.TagValues.Remove(key);");
-                WriteTaggableCommonMethod(async);
+                using (_writer.Scope($"else"))
+                {
+                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".Remove(key)");
+                }
             }
             _writer.Line();
         }
 
-        private void WriteTaggableCommonMethod(bool async)
+        private static FormattableString GetTagResourceCheckString(bool isAsync)
         {
-            _writer.Line($"{GetAwait(async)} GetTagResource().{CreateMethodName("CreateOrUpdate", async)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            var awaitStr = isAsync ? "await " : String.Empty;
+            var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
+            return $"if({awaitStr} {CreateMethodName("CanUseTagResource", isAsync)}(cancellationToken: cancellationToken){configureStr})";
+        }
+
+        private void WriteGetOriginalFromTagResource(bool isAsync, string setCode)
+        {
+            _writer.Append($"var originalTags = ");
+            if (isAsync)
+            {
+                _writer.Append($"await ");
+            }
+            _writer.Line($"GetTagResource().{CreateMethodName("Get", isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
+            _writer.Line($"originalTags.Value.Data.TagValues{setCode};");
+        }
+
+        private void WriteTaggableCommonMethodFromPutOrPatch(bool isAsync, string setCode, bool isSetTags = false)
+        {
+            if (This.UpdateOperation is null && This.CreateOperation is null)
+                throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
+            MgmtClientOperation operation = (This.UpdateOperation ?? This.CreateOperation)!;
+            var updateMethodName = This.UpdateOperation is null ? This.IsSingleton ? "CreateOrUpdate" : "Update" : This.UpdateOperation.Name;
+
+            var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
+            var awaitStr = isAsync ? "await " : String.Empty;
+            _writer.Line($"var current = ({awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
+
+            var lroParamStr = operation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
+
+            var parameters = operation.IsLongRunningOperation ? operation.MethodSignature.Parameters.Skip(1) : operation.MethodSignature.Parameters;
+            var bodyParamType = parameters.First().Type;
+            string bodyParamName = "current";
+            //if we are using PATCH always minimize what we pass in the body to what we actually want to change
+            if (!bodyParamType.Equals(This.ResourceData.Type) || operation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
+            {
+                bodyParamName = "patch";
+                if (bodyParamType.Implementation is ObjectType objectType)
+                {
+                    Configuration.MgmtConfiguration.PatchInitializerCustomization.TryGetValue(bodyParamType.Name, out var customizations);
+                    customizations ??= new Dictionary<string, string>();
+                    _writer.Append($"var patch = new {bodyParamType}(");
+                    foreach (var parameter in objectType.InitializationConstructor.Signature.Parameters)
+                    {
+                        var varName = parameter.Name.FirstCharToUpperCase();
+                        if (customizations.TryGetValue(varName, out var customization))
+                        {
+                            _writer.Append($"{customization}");
+                        }
+                        else
+                        {
+                            _writer.Append($"current.{varName}, ");
+                        }
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.Line($");");
+                }
+                else
+                {
+                    _writer.Line($"var patch = new {bodyParamType}();");
+                }
+                if (!isSetTags)
+                {
+                    using (_writer.Scope($"foreach(var tag in current.Tags)"))
+                    {
+                        _writer.Line($"patch.Tags.Add(tag);");
+                    }
+                }
+                Configuration.MgmtConfiguration.UpdateRequiredCopy.TryGetValue(This.ResourceName, out var properties);
+                if (properties is not null)
+                {
+                    foreach (var property in properties.Split(','))
+                    {
+                        _writer.Line($"patch.{property} = current.{property};");
+                    }
+                }
+            }
+
+            _writer.Line($"{bodyParamName}.Tags{setCode};");
+            _writer.Line($"var result = {awaitStr}{CreateMethodName(updateMethodName, isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
+            if (operation.IsLongRunningOperation)
+            {
+                if (operation.ReturnType.Arguments.Length == 0)
+                {
+                    _writer.Line($"return {awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr};");
+                }
+                else
+                {
+                    _writer.Line($"return Response.FromValue(result.Value, result.GetRawResponse());");
+                }
+            }
+            else
+            {
+                _writer.Line($"return result;");
+            }
+        }
+
+        private void WriteTaggableCommonMethod(bool isAsync)
+        {
+            _writer.Line($"{GetAwait(isAsync)} GetTagResource().{CreateMethodName("CreateOrUpdate", isAsync)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             MgmtClientOperation clientOperation = This.GetOperation!;
             // we need to write multiple branches for a normal method
@@ -161,7 +264,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = clientOperation.OperationMappings.Keys.First();
-                WriteTaggableCommonMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
+                WriteTaggableCommonMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
             }
             else
             {
@@ -170,15 +273,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
-                .Append($"var {originalResponse:D} = {GetAwait(async)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
+                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
-            _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {

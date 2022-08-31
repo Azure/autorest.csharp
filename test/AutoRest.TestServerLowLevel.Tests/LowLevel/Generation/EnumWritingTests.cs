@@ -270,7 +270,7 @@ throw new global::System.ArgumentOutOfRangeException(nameof(value), value, ""Unk
 
         private static readonly object[] RoundTripEnumPropertiesCase =
         {
-            new object[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -363,7 +363,7 @@ return DeserializeRoundTripModel(document.RootElement);
 
         private static readonly object[] InputEnumPropertiesCase =
         {
-            new object[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -432,7 +432,7 @@ return content;
 
         private static readonly object[] OutputEnumPropertiesCase =
         {
-            new object[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.

@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var allProperties = objSchema.GetAllProperties();
 
-            return allProperties.Any(property => IsTagsProperty(property));
+            return allProperties.Any(property => IsTagsProperty(property) && !property.IsReadOnly);
         }
 
         public static bool IsTagsOnly(this Schema schema)
