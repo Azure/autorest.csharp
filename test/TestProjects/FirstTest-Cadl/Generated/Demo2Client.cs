@@ -87,18 +87,16 @@ namespace CadlFirstTest
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
-        /// <param name="contentType"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/>, <paramref name="action"/> or <paramref name="contentType"/> is null. </exception>
-        public virtual async Task<Response<Thing>> HelloAgainAsync(string p2, string p1, RoundTripModel action, string contentType, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        public virtual async Task<Response<Thing>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
-            Argument.AssertNotNull(contentType, nameof(contentType));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), contentType, context).ConfigureAwait(false);
+            Response response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -106,18 +104,16 @@ namespace CadlFirstTest
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
-        /// <param name="contentType"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/>, <paramref name="action"/> or <paramref name="contentType"/> is null. </exception>
-        public virtual Response<Thing> HelloAgain(string p2, string p1, RoundTripModel action, string contentType, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        public virtual Response<Thing> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(action, nameof(action));
-            Argument.AssertNotNull(contentType, nameof(contentType));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = HelloAgain(p2, p1, action.ToRequestContent(), contentType, context);
+            Response response = HelloAgain(p2, p1, action.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -125,7 +121,6 @@ namespace CadlFirstTest
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="contentType"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -150,7 +145,7 @@ namespace CadlFirstTest
         ///     },
         /// };
         /// 
-        /// Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -182,7 +177,7 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, ContentType contentType, RequestContext context = null)
+        public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -192,7 +187,7 @@ namespace CadlFirstTest
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, contentType, context);
+                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -206,7 +201,6 @@ namespace CadlFirstTest
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="contentType"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -231,7 +225,7 @@ namespace CadlFirstTest
         ///     },
         /// };
         /// 
-        /// Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -263,7 +257,7 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response HelloAgain(string p2, string p1, RequestContent content, ContentType contentType, RequestContext context = null)
+        public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
@@ -273,7 +267,201 @@ namespace CadlFirstTest
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, contentType, context);
+                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        public virtual async Task<Response<Thing>> NoContentTypeAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await NoContentTypeAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        public virtual Response<Thing> NoContentType(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = NoContentType(p2, p1, action.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NoContentTypeAsync with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new Demo2Client(credential);
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredCollection = new[] {
+        ///         "1"
+        ///     },
+        ///     requiredDictionary = new {
+        ///         key = "1",
+        ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>RoundTripModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
+        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+        ///   requiredModel: {
+        ///     name: string, # Required.
+        ///   }, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Demo2Client.NoContentType");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NoContentType with required parameters and request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new Demo2Client(credential);
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredCollection = new[] {
+        ///         "1"
+        ///     },
+        ///     requiredDictionary = new {
+        ///         key = "1",
+        ///     },
+        ///     requiredModel = new {
+        ///         name = "<name>",
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>RoundTripModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
+        ///   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+        ///   requiredModel: {
+        ///     name: string, # Required.
+        ///   }, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Demo2Client.NoContentType");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -409,7 +597,7 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, ContentType contentType, RequestContext context)
+        internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -421,7 +609,26 @@ namespace CadlFirstTest
             uri.AppendPath(p2, false);
             request.Uri = uri;
             request.Headers.Add("p1", p1);
-            request.Headers.Add("content-type", contentType.ToString());
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", "text/plain");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/noContentType/", false);
+            uri.AppendPath(p2, false);
+            request.Uri = uri;
+            request.Headers.Add("p1", p1);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", "application/json");
             request.Content = content;
             return message;
         }
@@ -436,6 +643,7 @@ namespace CadlFirstTest
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

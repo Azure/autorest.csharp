@@ -191,7 +191,7 @@ function getEffectiveSchemaType(program: Program, type: Type): Type {
     }
 }
 
-function getDefaultValue(type: Type): any {
+export function getDefaultValue(type: Type): any {
     switch (type.kind) {
         case "String":
             return type.value;

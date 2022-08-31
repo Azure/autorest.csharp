@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? propertyName, string? name, string? id, JsonSerializerOptions options) => propertyName switch
         {
-            PrimitiveTypeKind   => ReadPrimitiveType(ref reader, id),
+            PrimitiveTypeKind   => ReadPrimitiveType(ref reader, id, _referenceHandler.CurrentResolver),
             ListElementType     => CadlInputListTypeConverter.CreateListType(ref reader, id, name, options),
             DictionaryKeyType   => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
             DictionaryValueType => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
@@ -74,7 +75,7 @@ namespace AutoRest.CSharp.Common.Input
             _                   => CadlInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver)
         };
 
-        public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id)
+        public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
             var isNullable = false;
@@ -91,7 +92,14 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return CreatePrimitiveType(inputTypeKindString, isNullable);
+            var primitiveType = CreatePrimitiveType(inputTypeKindString, isNullable);
+            if (id != null)
+            {
+                resolver.AddReference(id, primitiveType);
+            }
+
+            return primitiveType;
+
         }
 
         public static InputPrimitiveType CreatePrimitiveType(string? inputTypeKindString, bool isNullable)

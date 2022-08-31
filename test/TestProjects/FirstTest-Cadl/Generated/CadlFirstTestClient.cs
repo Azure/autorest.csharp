@@ -362,6 +362,7 @@ namespace CadlFirstTest
             uri.AppendPath("/top/", false);
             uri.AppendPath(action, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -375,6 +376,7 @@ namespace CadlFirstTest
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

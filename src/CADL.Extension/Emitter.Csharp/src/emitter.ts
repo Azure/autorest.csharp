@@ -38,7 +38,7 @@ import {
 } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
-import { getInputType } from "./lib/model.js";
+import { getDefaultValue, getInputType } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
 import { getExternalDocs, getOperationId } from "./lib/decorators.js";
@@ -140,11 +140,10 @@ function createModel(program: Program): any {
     }
     const consumes = getConsumes(program, serviceNamespaceType);
     let contentTypeParameter = undefined;
-    const requestMediaTypes: string[] = [];
     if (consumes && consumes.length > 0) {
         contentTypeParameter = {
-            Name: "content_type",
-            NameInRequest: "content_type",
+            Name: "contentType",
+            NameInRequest: "content-type",
             Type: {
                 Name: "String",
                 Kind: InputTypeKind.String,
@@ -158,18 +157,53 @@ function createModel(program: Program): any {
             IsEndpoint: false,
             SkipUrlEncoding: false,
             Explode: false,
-            Kind: InputOperationParameterKind.Method,
-            DefaultValue: {
-                Type: {
-                    Name: "String",
-                    Kind: InputTypeKind.String,
-                    IsNullable: false
-                } as InputPrimitiveType,
-                Value: consumes[0]
-            } as InputConstant
+            Kind: InputOperationParameterKind.Constant,
+            DefaultValue:
+                consumes.length === 1
+                    ? ({
+                          Type: {
+                              Name: "String",
+                              Kind: InputTypeKind.String,
+                              IsNullable: false
+                          } as InputPrimitiveType,
+                          Value: consumes[0]
+                      } as InputConstant)
+                    : undefined
         } as InputParameter;
     }
     const produces = getProduces(program, serviceNamespaceType);
+    let acceptParameter = undefined;
+    if (produces && produces.length > 0) {
+        acceptParameter = {
+            Name: "Accept",
+            NameInRequest: "Accept",
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
+            Location: RequestLocation.Header,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsRequired: true,
+            IsEndpoint: false,
+            SkipUrlEncoding: false,
+            Explode: false,
+            Kind: InputOperationParameterKind.Constant,
+            DefaultValue:
+                produces.length === 1
+                    ? ({
+                          Type: {
+                              Name: "String",
+                              Kind: InputTypeKind.String,
+                              IsNullable: false
+                          } as InputPrimitiveType,
+                          Value: produces[0]
+                      } as InputConstant)
+                    : undefined
+        } as InputParameter;
+    }
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
@@ -220,15 +254,20 @@ function createModel(program: Program): any {
                 op.Parameters.some(
                     (value) => value.Location === RequestLocation.Body
                 ) &&
-                !op.Parameters.some(
-                    (value) =>
-                        value.Location === RequestLocation.Header &&
-                        value.NameInRequest === "content-type"
-                )
+                !op.Parameters.some((value) => value.IsContentType === true)
             ) {
                 op.Parameters.push(contentTypeParameter);
                 op.RequestMediaTypes = consumes;
             }
+            if (
+                acceptParameter &&
+                !op.Parameters.some(
+                    (value) =>
+                        value.Location === RequestLocation.Header &&
+                        value.NameInRequest === "Accept"
+                )
+            )
+                op.Parameters.push(acceptParameter);
             client.Operations.push(op);
         }
 
@@ -256,7 +295,7 @@ function processServiceAuthentication(
 ): InputAuth {
     const auth = {} as InputAuth;
     let scopes: Set<string> | undefined;
-    
+
     for (const option of authentication.options) {
         for (const schema of option.schemes) {
             switch (schema.type) {
@@ -267,11 +306,11 @@ function processServiceAuthentication(
                     for (const flow of schema.flows) {
                         if (flow.scopes) {
                             scopes ??= new Set<string>();
-                            for (var scope of flow.scopes) {
-                                scopes.add(scope)
+                            for (const scope of flow.scopes) {
+                                scopes.add(scope);
                             }
                         }
-                    }                    
+                    }
                     break;
                 default:
                     throw new Error("Not supported authentication.");
@@ -333,8 +372,6 @@ function loadOperation(
     const summary = getSummary(program, op);
     const externalDocs = getExternalDocs(program, op);
 
-    const consumes = getConsumes(program, op);
-    const produces = getProduces(program, op);
     const parameters: InputParameter[] = [];
     if (endpoint) parameters.push(endpoint);
     for (const p of cadlParameters.parameters) {
@@ -356,6 +393,12 @@ function loadOperation(
         }
     }
 
+    const mediaTypes: string[] = [];
+    const contentTypeParameter = parameters.find((value) => value.IsContentType);
+    if (contentTypeParameter) {
+        mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+        contentTypeParameter.Kind = InputOperationParameterKind.Constant;
+    }
     return {
         Name: op.name,
         Summary: summary,
@@ -367,6 +410,7 @@ function loadOperation(
         Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
+        RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: false
     } as InputOperation;
 
@@ -382,6 +426,14 @@ function loadOperation(
             models,
             enums
         );
+        let defaultValue = undefined;
+        const value = getDefaultValue(cadlType);
+        if (value) {
+            defaultValue = {
+                Type: inputType,
+                Value: value
+            } as InputConstant;
+        }
         const requestLocation = requestLocationMap[location];
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
@@ -391,6 +443,7 @@ function loadOperation(
             Description: getDoc(program, param),
             Type: inputType,
             Location: requestLocation,
+            DefaultValue: defaultValue,
             IsRequired: !param.optional,
             IsApiVersion: false,
             IsResourceParameter: false,

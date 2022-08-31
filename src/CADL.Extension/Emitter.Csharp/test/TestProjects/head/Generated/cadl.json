@@ -111,8 +111,8 @@
       },
       {
        "$id": "14",
-       "Name": "content_type",
-       "NameInRequest": "content_type",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
        "Type": {
         "$id": "15",
         "Name": "String",
@@ -127,11 +127,31 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method",
+       "Kind": "Constant"
+      },
+      {
+       "$id": "16",
+       "Name": "Accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "17",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "18",
         "Type": {
-         "$id": "17",
+         "$id": "19",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -142,7 +162,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "20",
        "StatusCodes": [
         204
        ],
@@ -153,30 +173,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/head",
-     "BufferResponse": false,
      "RequestMediaTypes": [
       "application/json",
       "image/jpeg"
-     ]
+     ],
+     "BufferResponse": false
     },
     {
-     "$id": "19",
+     "$id": "21",
      "Name": "opWithContentTypeHead",
      "Parameters": [
       {
        "$ref": "7"
       },
       {
-       "$id": "20",
+       "$id": "22",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "21",
+        "$id": "23",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
+       "DefaultValue": {
+        "$id": "24",
+        "Type": {
+         "$ref": "23"
+        },
+        "Value": "text/plain"
+       },
        "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
@@ -184,10 +211,10 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": true,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant"
       },
       {
-       "$id": "22",
+       "$id": "25",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -202,11 +229,14 @@
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "16"
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -217,11 +247,14 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/withContentTypehead",
+     "RequestMediaTypes": [
+      "text/plain"
+     ],
      "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "24"
+    "$id": "27"
    }
   }
  ]

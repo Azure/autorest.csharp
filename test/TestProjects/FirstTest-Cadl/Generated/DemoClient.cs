@@ -273,6 +273,7 @@ namespace CadlFirstTest
             }
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
