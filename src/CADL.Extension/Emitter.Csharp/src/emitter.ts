@@ -264,7 +264,7 @@ function createModel(program: Program): any {
                 !op.Parameters.some(
                     (value) =>
                         value.Location === RequestLocation.Header &&
-                        value.NameInRequest === "Accept"
+                        value.NameInRequest.toLowerCase() === "accept"
                 )
             )
                 op.Parameters.push(acceptParameter);
@@ -394,10 +394,11 @@ function loadOperation(
     }
 
     const mediaTypes: string[] = [];
-    const contentTypeParameter = parameters.find((value) => value.IsContentType);
+    const contentTypeParameter = parameters.find(
+        (value) => value.IsContentType
+    );
     if (contentTypeParameter) {
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
-        contentTypeParameter.Kind = InputOperationParameterKind.Constant;
     }
     return {
         Name: op.name,
@@ -435,8 +436,12 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const kind: InputOperationParameterKind =
-            InputOperationParameterKind.Method;
+        const isContentType: boolean =
+            requestLocation === RequestLocation.Header &&
+            name.toLowerCase() === "content-type";
+        const kind: InputOperationParameterKind = isContentType
+            ? InputOperationParameterKind.Constant
+            : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
@@ -447,9 +452,7 @@ function loadOperation(
             IsRequired: !param.optional,
             IsApiVersion: false,
             IsResourceParameter: false,
-            IsContentType:
-                requestLocation === RequestLocation.Header &&
-                name === "content-type",
+            IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: true,
             Explode: false,
