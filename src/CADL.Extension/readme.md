@@ -117,6 +117,7 @@ You can generate sdk step by step as following:
   npm install @cadl-lang/compiler@0.34.0
   npm install @cadl-lang/rest@0.16.0
   ```
+  **Note**: if your cadl file imports other libraries, such as cadl-azure-core, you need to install them.
 - install csharp cadl emitter
   ```cmd
   npm install @azure-tools/cadl-csharp
@@ -124,8 +125,29 @@ You can generate sdk step by step as following:
 - emit cadl model json
   
     ```cmd
-    cadl compile --emit @azure-tools/cadl-csharp <path-to-cadl-file>
+    cadl compile [--output-path <path-of-output-folder>] --emit @azure-tools/cadl-csharp <path-to-cadl-file>
     ```
+    e.g
+
+    ```
+    cadl compile --output-path test\TestProjects\Petstore-Cadl\Generated --emit @azure-tools/cadl-csharp test\TestProjects\Petstore-Cadl\PetStore-Cadl.cadl
+    ```
+
+- add `Configuration.json` file under the same directory with cadl json file, e.g. test\TestProjects\Petstore-Cadl\Generated
+  
+  `Configuration.json` is to define some configuration meta-data, as following:
+
+  ```
+  {
+    "OutputFolder": ".",
+    "Namespace": "CadlFirstTest",
+    "LibraryName": null,
+    "SharedSourceFolders": [
+      "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+      "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    ]
+  }
+  ````
 
 - generate sdk from cadl json
   
@@ -138,7 +160,7 @@ You can generate sdk step by step as following:
 
   ```cmd
 
-  artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1\AutoRest.CSharp.exe --standalone test\TestProjectsCadl\petstore
+  artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1\AutoRest.CSharp.exe --standalone test\TestProjects\Petstore-Cadl\Generated
   ```
 
 ### Generate SDK by Generate.ps1
@@ -146,7 +168,7 @@ You can generate sdk step by step as following:
 You can generate SDK via Generate.ps1 script
 
 ```cmd
-eng/Generate.ps1 petstore
+eng/Generate.ps1 Petstore-Cadl
 ```
 
 ## E2E flow
