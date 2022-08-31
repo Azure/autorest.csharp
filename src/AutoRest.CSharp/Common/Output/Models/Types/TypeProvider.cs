@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected virtual string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
+        protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
 
         internal virtual Type? SerializeAs => null;
@@ -41,7 +42,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 DefaultNamespace,
                 DefaultAccessibility,
                 ExistingType,
-                existingTypeOverrides: TypeKind == TypeKind.Enum);
+                existingTypeOverrides: TypeKind == TypeKind.Enum,
+                isAbstract: IsAbstract);
         }
 
         public static string GetDefaultModelNamespace(string? namespaceExtension, string rootNamespaceName)

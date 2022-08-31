@@ -3,10 +3,11 @@
 
 export enum InputTypeKind {
     AzureLocation = "AzureLocation",
+    BinaryData = "BinaryData",
     Boolean = "Boolean",
-    Bytes = "Bytes",
     DateTime = "DateTime",
     Dictionary = "Dictionary",
+    Duration = "DurationISO8601",
     Enum = "Enum",
     ETag = "Etag",
     ExtensibleEnum = "ExtensibleEnum",

@@ -43,6 +43,7 @@ import { InputOperationParameterKind } from "./type/InputOperationParameterKind.
 import { resolveServers } from "./lib/cadlServer.js";
 import { getExternalDocs, getOperationId } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
+import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 import { getConsumes, getProduces } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
@@ -254,34 +255,36 @@ function processServiceAuthentication(
     authentication: ServiceAuthentication
 ): InputAuth {
     const auth = {} as InputAuth;
+    let scopes: Set<string> | undefined;
+    
     for (const option of authentication.options) {
         for (const schema of option.schemes) {
             switch (schema.type) {
                 case "apiKey":
-                    auth.ApiKey = schema.name;
+                    auth.ApiKey = { Name: schema.name } as InputApiKeyAuth;
                     break;
                 case "oauth2":
-                    const scopes = new Set<string>();
                     for (const flow of schema.flows) {
-                        switch (flow.type) {
-                            case "clientCredentials":
-                                flow.scopes.forEach((item) => scopes.add(item));
-                                break;
-                            default:
-                                throw new Error(
-                                    "Not Supported Authentication."
-                                );
+                        if (flow.scopes) {
+                            scopes ??= new Set<string>();
+                            for (var scope of flow.scopes) {
+                                scopes.add(scope)
+                            }
                         }
-                    }
-                    auth.OAuth2 = {
-                        Scopes: Array.from(scopes.values())
-                    } as InputOAuth2Auth;
+                    }                    
                     break;
                 default:
                     throw new Error("Not supported authentication.");
             }
         }
     }
+
+    if (scopes) {
+        auth.OAuth2 = {
+            Scopes: Array.from(scopes.values())
+        } as InputOAuth2Auth;
+    }
+
     return auth;
 }
 

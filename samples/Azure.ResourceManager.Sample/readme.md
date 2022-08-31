@@ -42,6 +42,9 @@ rename-mapping:
 mgmt-debug:
   show-serialized-names: true
 
+update-required-copy:
+  VirtualMachineExtension: Publisher
+
 directive:
   - from: sample.json
     where: $.paths

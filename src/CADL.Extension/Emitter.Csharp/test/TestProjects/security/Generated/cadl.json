@@ -73,12 +73,15 @@
  ],
  "Auth": {
   "$id": "10",
-  "OAuth2": {
+  "ApiKey": {
    "$id": "11",
+   "Name": "x-ms-api-key"
+  },
+  "OAuth2": {
+   "$id": "12",
    "Scopes": [
     "https://api.example.com/.default"
    ]
-  },
-  "ApiKey": "x-ms-api-key"
+  }
  }
 }

@@ -1,12 +1,16 @@
 # Management SDK polishing configurations
 
-- [Rename Rules](#rename-rules)
-- [Change Format by Name Rules](#change-format-by-name-rules)
-- [Rename Mapping](#rename-mapping)
-    - [Rename a Type](#rename-a-type)
-    - [Rename a Property in a Class](#rename-a-property-in-a-class)
-    - [Rename an Enumeration Value in an Enumeration Type](#rename-an-enumeration-value-in-an-enumeration-type)
-- [Irregular Plural Words](#irregular-plural-words)
+- [Management SDK polishing configurations](#management-sdk-polishing-configurations)
+  - [Rename rules](#rename-rules)
+  - [Change format by name rules](#change-format-by-name-rules)
+  - [Rename mapping](#rename-mapping)
+    - [Rename a type](#rename-a-type)
+    - [Rename a property in a class](#rename-a-property-in-a-class)
+    - [Change the format of a property](#change-the-format-of-a-property)
+    - [Rename an enumeration value in an enumeration type](#rename-an-enumeration-value-in-an-enumeration-type)
+  - [Irregular Plural Words](#irregular-plural-words)
+  - [Keep Plural Enums](#keep-plural-enums)
+  - [Suppress Abstract Base Class](#suppress-abstract-base-class)
 
 ## Rename rules
 
@@ -232,3 +236,21 @@ irregular-plural-words:
   redis: redis
 ```
 This configuration adds a new irregular word into the dictionary that the plural form of `redis` is still `redis`.
+
+## Keep Plural Enums
+
+According to the [.NET Framework Design Guidelines](https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces#naming-enumerations), we will use a singular type name for an enumeration unless its values are bit fields. This is also implemented with the help of [Humanizer](https://humanizr.net/) and sometimes the result might be strange. For example, `ContainerRegistryOS` will become `ContainerRegistryO`, which doesn't make sense and will lose its true meaning. In such cases, you can use `keep-plural-enums` configuration to suppress this conversion.
+
+```yaml
+keep-plural-enums:
+  ContainerRegistryOS
+```
+
+## Suppress Abstract Base Class
+
+The generator will add an `abstract` modifier to the base class when its has a discriminator. This could help the user understand that it is the derived classes that really work as the base class isn't allowed to be instantiated. However, we also provide the configuration to suppress this feature, you can use `suppress-abstract-base-class` with the corresponding class name to remove the `abstract` modifier. In particular, it should be noted that there is difference between the original model name in swagger and the name in the final generated SDK and this configuration requires the finalized model name in SDK.
+
+```yaml
+suppress-abstract-base-class:
+  DeliveryRuleAction
+```

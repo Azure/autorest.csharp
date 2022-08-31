@@ -49,7 +49,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
             const name = cadlType.name;
             switch (name) {
                 case "bytes":
-                    return InputTypeKind.Bytes;
+                    return InputTypeKind.BinaryData;
                 case "int8":
                     return InputTypeKind.Int32;
                 case "int16":
@@ -83,7 +83,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
                 case "plainTime":
                     return InputTypeKind.Time;
                 case "duration":
-                    return InputTypeKind.String;
+                    return InputTypeKind.Duration;
                 case "Map":
                     return InputTypeKind.Dictionary;
                 default:

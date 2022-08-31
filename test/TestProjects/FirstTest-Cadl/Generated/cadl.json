@@ -526,13 +526,16 @@
   }
  ],
  "Auth": {
-  "$id": "59",
+  "$id": "47",
+  "ApiKey": {
+   "$id": "48",
+   "Name": "x-ms-api-key"
+  },
   "OAuth2": {
-   "$id": "60",
+   "$id": "49",
    "Scopes": [
     "https://api.example.com/.default"
    ]
-  },
-  "ApiKey": "x-ms-api-key"
+  }
  }
 }

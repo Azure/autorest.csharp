@@ -16,14 +16,15 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
+using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="DeploymentExtendedResource" /> and their operations.
-    /// Each <see cref="DeploymentExtendedResource" /> in the collection will belong to the same instance of <see cref="ManagementGroupResource" />.
-    /// To get a <see cref="DeploymentExtendedCollection" /> instance call the GetDeploymentExtendeds method from an instance of <see cref="ManagementGroupResource" />.
+    /// Each <see cref="DeploymentExtendedResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />, <see cref="ResourceGroupResource" />, <see cref="ManagementGroupResource" /> or <see cref="TenantResource" />.
+    /// To get a <see cref="DeploymentExtendedCollection" /> instance call the GetDeploymentExtendeds method from an instance of <see cref="SubscriptionResource" />, <see cref="ResourceGroupResource" />, <see cref="ManagementGroupResource" /> or <see cref="TenantResource" />.
     /// </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtendedResource>, IAsyncEnumerable<DeploymentExtendedResource>
     {
