@@ -105,6 +105,12 @@ model OutputModel extends BaseModel {
   requiredRecord: Record<RecordItem>;
 }
 
+@doc("Model that has property of its own type")
+model ErrorModel {
+  @doc("Required Record")
+  innerError?: ErrorModel;
+}
+
 @route("/inputToRoundTrip")
 @doc("Input to RoundTrip")
 @get
@@ -114,3 +120,8 @@ op inputToRoundTrip(@body input: InputModel): RoundTripModel;
 @doc("RoundTrip to Output")
 @get
 op roundTripToOutput(@body input: RoundTripModel): OutputModel;
+
+@route("/selfReference")
+@doc("Returns model that has property of its own type")
+@get
+op selfReference(): ErrorModel;
