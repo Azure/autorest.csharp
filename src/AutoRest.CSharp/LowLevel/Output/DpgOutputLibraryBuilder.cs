@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
                 CreateEnums(enums, library.TypeFactory);
                 CreateModels(modelFactories, library.TypeFactory);
             }
-            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, isCadlInput);
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
 
             return library;
         }
@@ -222,9 +222,9 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
         {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, isCadlInput);
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
 
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool isCadlInput)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -255,13 +255,12 @@ namespace AutoRest.CSharp.Output.Models
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
-                    typeFactory,
-                    isCadlInput)
+                    typeFactory)
                 {
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, isCadlInput));
+                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
 
                  yield return client;
             }

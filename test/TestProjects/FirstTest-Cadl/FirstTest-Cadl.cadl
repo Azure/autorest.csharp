@@ -75,6 +75,7 @@ namespace Hello.Demo2 {
     op helloAgain(@body action: RoundTripModel): Thing;
 
     @route("/demoHi")
+    @OpenAPI.extension("x-ms-convenient-api", false)
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;
@@ -91,3 +92,9 @@ op topAction(@path @format("date") action: string): Thing;
 @get
 op topAction2(): Thing;
 
+
+@route("/patch")
+@doc("top level patch")
+@patch
+@OpenAPI.extension("x-ms-convenient-api", true)
+op patchAction(@body body: Thing): Thing;

@@ -22,12 +22,13 @@ import {
     OperationDetails,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
+import { getExtensions } from "@cadl-lang/openapi";
 import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
-import { parseHttpRequestMethod } from "./type/RequestMethod.js";
+import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import { InputEnumType, InputModelType, InputType } from "./type/InputType.js";
@@ -40,7 +41,6 @@ import { convenienceApiKey, getExternalDocs, getOperationId } from "./lib/decora
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-import { getExtensions } from "@cadl-lang/openapi";
 export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
@@ -147,6 +147,9 @@ function createModel(program: Program): any {
                 endPointParam = cadlServers[0].parameters[0];
             }
         }
+        
+        const hasNoConvenienceApiDecorators = routes.every(u => !(getExtensions(program, u.operation).has(convenienceApiKey)));
+
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
             if (!isSupportedOperation(operation)) continue;
@@ -173,7 +176,8 @@ function createModel(program: Program): any {
                 url,
                 endPointParam,
                 modelMap,
-                enumMap
+                enumMap,
+                hasNoConvenienceApiDecorators
             );
             client.Operations.push(op);
         }
@@ -266,7 +270,8 @@ function loadOperation(
     uri: string,
     endpoint: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>
+    enums: Map<string, InputEnumType>,
+    hasNoConvenienceApiDecorators: boolean
 ): InputOperation {
     const {
         path: fullPath,
@@ -300,24 +305,22 @@ function loadOperation(
         }
     }
 
-    let isConvenienceMethod = false;
-    const extensions = getExtensions(program, op);
-    if (extensions) {
-        isConvenienceMethod = extensions.get(convenienceApiKey) ?? false;
-    }
+    const requestMethod = parseHttpRequestMethod(verb);
+    const generateConvenienceMethod = requestMethod !== RequestMethod.PATCH && (hasNoConvenienceApiDecorators || getExtensions(program, op).get(convenienceApiKey))
+
     return {
         Name: op.name,
         Summary: summary,
         Description: desc,
         Parameters: parameters,
         Responses: responses,
-        HttpMethod: parseHttpRequestMethod(verb),
+        HttpMethod: requestMethod,
         RequestBodyMediaType: BodyMediaType.Json,
         Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
         BufferResponse: false,
-        IsConvenienceMethod: isConvenienceMethod
+        GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 
     function loadOperationParameter(

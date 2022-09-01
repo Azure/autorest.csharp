@@ -129,7 +129,7 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": false,
-     "IsConvenienceMethod": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "16",
@@ -188,7 +188,7 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": false,
-     "IsConvenienceMethod": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "21",
@@ -232,7 +232,7 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets",
      "BufferResponse": false,
-     "IsConvenienceMethod": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

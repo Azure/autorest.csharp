@@ -380,7 +380,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/inputToRoundTrip",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "42",
@@ -421,7 +422,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/roundTripToOutput",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
