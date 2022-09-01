@@ -16,10 +16,14 @@ namespace CadlFirstTest
 {
     // Data plane generated client. This is a sample cadl project.
     /// <summary> This is a sample cadl project. </summary>
-    public partial class cadlfirsttestClient
+    public partial class CadlFirstTestClient
     {
+        private const string AuthorizationHeader = "x-ms-api-key";
+        private readonly AzureKeyCredential _keyCredential;
+        private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
+        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly string _apiVersion;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,30 +31,57 @@ namespace CadlFirstTest
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of cadlfirsttestClient for mocking. </summary>
-        protected cadlfirsttestClient()
+        /// <summary> Initializes a new instance of CadlFirstTestClient for mocking. </summary>
+        protected CadlFirstTestClient()
         {
         }
 
-        /// <summary> Initializes a new instance of cadlfirsttestClient. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public cadlfirsttestClient(string apiVersion) : this(apiVersion, new CadlfirsttestClientOptions())
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of cadlfirsttestClient. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(TokenCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public cadlfirsttestClient(string apiVersion, CadlfirsttestClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(AzureKeyCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CadlfirsttestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _apiVersion = options.Version;
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(TokenCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
+        {
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            options ??= new CadlfirsttestClientOptions();
+
+            ClientDiagnostics = new ClientDiagnostics(options, true);
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> top level method. </summary>
@@ -61,7 +92,7 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNull(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopActionValue");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
             scope.Start();
             try
             {
@@ -84,7 +115,7 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNull(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopActionValue");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
             scope.Start();
             try
             {
@@ -108,7 +139,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopActionAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = await client.TopActionAsync("<action>");
         /// 
@@ -132,7 +164,7 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNull(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopAction");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
             try
             {
@@ -155,7 +187,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = client.TopAction("<action>");
         /// 
@@ -179,7 +212,7 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNull(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopAction");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
             try
             {
@@ -197,7 +230,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Thing>> TopAction2ValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopAction2Value");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2Value");
             scope.Start();
             try
             {
@@ -216,7 +249,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Thing> TopAction2Value(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopAction2Value");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2Value");
             scope.Start();
             try
             {
@@ -238,7 +271,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2Async and parse the result.
         /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = await client.TopAction2Async();
         /// 
@@ -260,7 +294,7 @@ namespace CadlFirstTest
         /// </remarks>
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2");
             scope.Start();
             try
             {
@@ -281,7 +315,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2 and parse the result.
         /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = client.TopAction2();
         /// 
@@ -303,383 +338,11 @@ namespace CadlFirstTest
         /// </remarks>
         public virtual Response TopAction2(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateTopAction2Request(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> SayHiValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await SayHiAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> SayHiValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = SayHi(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call SayHiAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
-        /// 
-        /// Response response = await client.SayHiAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual async Task<Response> SayHiAsync(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.SayHi");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateSayHiRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call SayHi and parse the result.
-        /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
-        /// 
-        /// Response response = client.SayHi();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Response SayHi(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.SayHi");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateSayHiRequest(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloAgainValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloAgainValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloAgainAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloAgainValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloAgainValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloAgain(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call HelloAgainAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
-        /// 
-        /// Response response = await client.HelloAgainAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual async Task<Response> HelloAgainAsync(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloAgain");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloAgainRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call HelloAgain and parse the result.
-        /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
-        /// 
-        /// Response response = client.HelloAgain();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Response HelloAgain(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloAgain");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloAgainRequest(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloDemo2(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call HelloDemo2Async and parse the result.
-        /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
-        /// 
-        /// Response response = await client.HelloDemo2Async();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloDemo2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloDemo2Request(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call HelloDemo2 and parse the result.
-        /// <code><![CDATA[
-        /// var client = new cadlfirsttestClient("<apiVersion>");
-        /// 
-        /// Response response = client.HelloDemo2();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Response HelloDemo2(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("cadlfirsttestClient.HelloDemo2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloDemo2Request(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -696,9 +359,9 @@ namespace CadlFirstTest
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action, false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -710,47 +373,8 @@ namespace CadlFirstTest
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
-            request.Uri = uri;
-            return message;
-        }
-
-        internal HttpMessage CreateSayHiRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            message.BufferResponse = false;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/hello", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
-            request.Uri = uri;
-            return message;
-        }
-
-        internal HttpMessage CreateHelloAgainRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            message.BufferResponse = false;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/againHi", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
-            request.Uri = uri;
-            return message;
-        }
-
-        internal HttpMessage CreateHelloDemo2Request(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            message.BufferResponse = false;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/demoHi", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
