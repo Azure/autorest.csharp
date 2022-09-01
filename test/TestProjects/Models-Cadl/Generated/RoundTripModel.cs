@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace ModelsInCadl
@@ -17,15 +19,35 @@ namespace ModelsInCadl
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredModel"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel)
+        /// <param name="requiredCollection"></param>
+        /// <param name="requiredRecord"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredRecord"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
+            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredRecord, nameof(requiredRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
+            RequiredCollection = requiredCollection.ToList();
+            RequiredRecord = requiredRecord;
+        }
+        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredModel"></param>
+        /// <param name="requiredCollection"></param>
+        /// <param name="requiredRecord"></param>
+        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, IList<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        {
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            RequiredModel = requiredModel;
+            RequiredCollection = requiredCollection;
+            RequiredRecord = requiredRecord;
         }
 
         public string RequiredString { get; set; }
@@ -33,5 +55,9 @@ namespace ModelsInCadl
         public int RequiredInt { get; set; }
 
         public BaseModelWithDiscriminator RequiredModel { get; set; }
+
+        public IList<CollectionItem> RequiredCollection { get; }
+
+        public IDictionary<string, RecordItem> RequiredRecord { get; }
     }
 }

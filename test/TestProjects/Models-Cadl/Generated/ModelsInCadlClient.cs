@@ -91,6 +91,15 @@ namespace GeneratedModels
         ///             },
         ///         }
         ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
@@ -116,6 +125,7 @@ namespace GeneratedModels
         ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -127,6 +137,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -173,6 +189,15 @@ namespace GeneratedModels
         ///             },
         ///         }
         ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = client.InputToRoundTrip(RequestContent.Create(data));
@@ -198,6 +223,7 @@ namespace GeneratedModels
         ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -209,6 +235,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -272,6 +304,24 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
+        ///     requiredCollection = new[] {
+        ///         new {
+        ///             requiredRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
@@ -292,6 +342,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -308,6 +364,8 @@ namespace GeneratedModels
         ///       }
         ///     ], # Required.
         ///   }, # Required.
+        ///   requiredCollection: [CollectionItem], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -345,6 +403,24 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
+        ///     requiredCollection = new[] {
+        ///         new {
+        ///             requiredRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = client.RoundTripToOutput(RequestContent.Create(data));
@@ -365,6 +441,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -381,6 +463,8 @@ namespace GeneratedModels
         ///       }
         ///     ], # Required.
         ///   }, # Required.
+        ///   requiredCollection: [CollectionItem], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
