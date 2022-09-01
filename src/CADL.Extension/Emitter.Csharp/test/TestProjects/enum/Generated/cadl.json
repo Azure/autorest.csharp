@@ -234,7 +234,7 @@
      "Uri": "{host}",
      "Path": "/models",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

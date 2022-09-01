@@ -209,7 +209,7 @@
      "Uri": "",
      "Path": "/top/{action}",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "28",
@@ -233,7 +233,7 @@
      "Uri": "",
      "Path": "/top2",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -267,7 +267,7 @@
      "Uri": "",
      "Path": "/hello",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -318,7 +318,7 @@
      "Uri": "",
      "Path": "/againHi",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "39",
@@ -342,7 +342,7 @@
      "Uri": "",
      "Path": "/demoHi",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

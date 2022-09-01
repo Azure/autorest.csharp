@@ -147,7 +147,7 @@
      "Uri": "{host}",
      "Path": "/pets",
      "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

@@ -115,7 +115,7 @@
      "Uri": "{host}",
      "Path": "/dogs",
      "BufferResponse": false,
-     "IsConvenienceMethod": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "15",
@@ -159,8 +159,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/dogs/models",
-     "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "BufferResponse": false
     }
    ],
    "Protocol": {
@@ -196,8 +195,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/cats",
-     "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "BufferResponse": false
     },
     {
      "$id": "22",
@@ -241,8 +239,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/cats",
-     "BufferResponse": false,
-     "IsConvenienceMethod": false
+     "BufferResponse": false
     }
    ],
    "Protocol": {
