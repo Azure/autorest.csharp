@@ -61,6 +61,12 @@ model RoundTripModel extends BaseModel {
 
   @doc("Required model with discriminator")
   requiredModel: BaseModelWithDiscriminator;
+
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+
+  @doc("Required Record")
+  requiredRecord: Record<RecordItem>;
 }
 
 @doc("Model used only as input")
@@ -76,6 +82,9 @@ model InputModel extends BaseModel {
 
   @doc("Required collection")
   requiredCollection: CollectionItem[];
+
+  @doc("Required Record")
+  requiredRecord: Record<RecordItem>;
 }
 
 @doc("Model used only as output")
@@ -88,6 +97,12 @@ model OutputModel extends BaseModel {
 
   @doc("Required model")
   requiredModel: DerivedModel;
+
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+
+  @doc("Required Record")
+  requiredRecord: Record<RecordItem>;
 }
 
 @route("/inputToRoundTrip")
