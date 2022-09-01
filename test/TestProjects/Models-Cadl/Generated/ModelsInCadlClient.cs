@@ -85,12 +85,20 @@ namespace GeneratedModels
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredRecord = new {
-        ///                 key = new {},
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
         ///             },
         ///         }
         ///     },
         ///     requiredRecord = new {
-        ///         key = new {},
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
         ///     },
         /// };
         /// 
@@ -175,12 +183,20 @@ namespace GeneratedModels
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredRecord = new {
-        ///                 key = new {},
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
         ///             },
         ///         }
         ///     },
         ///     requiredRecord = new {
-        ///         key = new {},
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
         ///     },
         /// };
         /// 
@@ -291,12 +307,20 @@ namespace GeneratedModels
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredRecord = new {
-        ///                 key = new {},
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
         ///             },
         ///         }
         ///     },
         ///     requiredRecord = new {
-        ///         key = new {},
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
         ///     },
         /// };
         /// 
@@ -382,12 +406,20 @@ namespace GeneratedModels
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredRecord = new {
-        ///                 key = new {},
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
         ///             },
         ///         }
         ///     },
         ///     requiredRecord = new {
-        ///         key = new {},
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
         ///     },
         /// };
         /// 
