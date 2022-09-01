@@ -14,6 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. This is a sample cadl project.
     /// <summary> This is a sample cadl project. </summary>
     public partial class CadlFirstTestClient
     {

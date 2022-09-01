@@ -14,6 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. The Demo2 service client.
     /// <summary> The Demo2 service client. </summary>
     public partial class Demo2Client
     {

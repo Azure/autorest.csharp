@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
+    // Data plane generated client. The Polymorphicrecursive service client.
     /// <summary> The Polymorphicrecursive service client. </summary>
     public partial class PolymorphicrecursiveClient
     {

@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace dpg_initial_LowLevel
 {
+    // Data plane generated client. The Params service client.
     /// <summary> The Params service client. </summary>
     public partial class ParamsClient
     {

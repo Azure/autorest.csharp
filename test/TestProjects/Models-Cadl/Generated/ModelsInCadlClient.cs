@@ -15,6 +15,7 @@ using ModelsInCadl;
 
 namespace GeneratedModels
 {
+    // Data plane generated client. CADL project to test various types of models.
     /// <summary> CADL project to test various types of models. </summary>
     public partial class ModelsInCadlClient
     {
