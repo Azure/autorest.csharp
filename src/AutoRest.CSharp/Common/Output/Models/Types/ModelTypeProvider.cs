@@ -23,15 +23,87 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
 
         public string Description { get; }
-        public IReadOnlyList<FieldDeclaration> Fields { get; }
-        public ConstructorSignature PublicConstructor { get; }
-        public ConstructorSignature SerializationConstructor { get; }
+        // adopt lazy initialization for fields related properties
+        public IReadOnlyList<FieldDeclaration> Fields
+        {
+            get
+            {
+                if (_fields != null)
+                {
+                    return _fields;
+                }
+
+                _fieldsInitializer();
+                return _fields!;
+            }
+        }
+        public ConstructorSignature PublicConstructor
+        {
+            get
+            {
+                if (_publicConstructor != null)
+                {
+                    return _publicConstructor;
+                }
+
+                _fieldsInitializer();
+                return _publicConstructor!;
+            }
+        }
+        public ConstructorSignature SerializationConstructor
+        {
+            get
+            {
+                if (_serializationConstructor != null)
+                {
+                    return _serializationConstructor;
+                }
+
+                _fieldsInitializer();
+                return _serializationConstructor!;
+            }
+        }
+
+        private IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs
+        {
+            get
+            {
+                if (_fieldsToInputs != null)
+                {
+                    return _fieldsToInputs;
+                }
+
+                _fieldsInitializer();
+                return _fieldsToInputs!;
+            }
+        }
+        // parameter name should be unique since it's bound to field property
+        private IReadOnlyDictionary<string, FieldDeclaration> ParameterNamesToFields
+        {
+            get
+            {
+                if (_parameterNamesToFields != null)
+                {
+                    return _parameterNamesToFields;
+                }
+
+                _fieldsInitializer();
+                return _parameterNamesToFields!;
+            }
+        }
+
+        // lazy envaluation
+        private readonly Action _fieldsInitializer;
+        private IReadOnlyList<FieldDeclaration>? _fields;
+        private ConstructorSignature? _publicConstructor;
+        private ConstructorSignature? _serializationConstructor;
+
         public bool IncludeSerializer { get; }
         public bool IncludeDeserializer { get; }
 
-        private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
+        private IReadOnlyDictionary<FieldDeclaration, InputModelProperty>? _fieldsToInputs;
         // parameter name should be unique since it's bound to field property
-        private readonly IReadOnlyDictionary<string, FieldDeclaration> _parameterNamesToFields;
+        private IReadOnlyDictionary<string, FieldDeclaration>? _parameterNamesToFields;
 
         public ModelTypeProvider(InputModelType inputModel, TypeFactory typeFactory, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
@@ -42,21 +114,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
             IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
 
-            (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory, sourceInputModel?.CreateForModel(ExistingType));
+            _fieldsInitializer = delegate ()
+            {
+                (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory, sourceInputModel?.CreateForModel(ExistingType));
 
-            Fields = _fieldsToInputs.Keys.ToList();
-            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, inputModel.Usage, publicParameters, serializationParameters);
+                _fields = _fieldsToInputs.Keys.ToList();
+                (_publicConstructor, _serializationConstructor) = BuildConstructors(Declaration.Name, inputModel.Usage, publicParameters, serializationParameters);
+            };
         }
 
         // Serialization uses field and property names that first need to verified for uniqueness
         // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
         public JsonObjectSerialization CreateSerialization() => new(Type, SerializationConstructor, CreatePropertySerializations().ToArray(), null, null, false, true, true);
 
-        public FieldDeclaration GetFieldByParameterName(string name) => _parameterNamesToFields[name];
+        public FieldDeclaration GetFieldByParameterName(string name) => ParameterNamesToFields[name];
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            foreach (var (parameterName, field) in _parameterNamesToFields)
+            foreach (var (parameterName, field) in ParameterNamesToFields)
             {
                 string name;
                 try
@@ -68,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     throw new InvalidOperationException($"Field with {field.Declaration.RequestedName} isn't written yet to type {Declaration.Name}", e);
                 }
 
-                var property = _fieldsToInputs[field];
+                var property = FieldsToInputs[field];
                 var serializedName = property.SerializedName ?? property.Name;
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
                 var valueType = field.Type;
