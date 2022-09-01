@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -81,44 +80,6 @@ namespace CadlFirstTest
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> SayHiValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await SayHiAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> SayHiValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = SayHi(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Return hi. </summary>
@@ -220,17 +181,6 @@ namespace CadlFirstTest
             uri.AppendPath("/hello", false);
             request.Uri = uri;
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

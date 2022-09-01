@@ -36,11 +36,11 @@ import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
-import { getExternalDocs, getOperationId } from "./lib/decorators.js";
+import { convenienceApiKey, getExternalDocs, getOperationId } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-
+import { getExtensions } from "@cadl-lang/openapi";
 export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
@@ -300,6 +300,11 @@ function loadOperation(
         }
     }
 
+    let isConvenienceMethod = false;
+    const extensions = getExtensions(program, op);
+    if (extensions) {
+        isConvenienceMethod = extensions.get(convenienceApiKey) ?? false;
+    }
     return {
         Name: op.name,
         Summary: summary,
@@ -311,7 +316,8 @@ function loadOperation(
         Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
-        BufferResponse: false
+        BufferResponse: false,
+        IsConvenienceMethod: isConvenienceMethod
     } as InputOperation;
 
     function loadOperationParameter(
@@ -417,3 +423,4 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
+

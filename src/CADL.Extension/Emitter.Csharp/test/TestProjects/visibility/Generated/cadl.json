@@ -133,7 +133,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/visibility",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {

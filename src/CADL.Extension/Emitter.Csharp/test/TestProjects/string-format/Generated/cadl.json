@@ -50,7 +50,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/zonedDateTime/{zonedDateTime}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     },
     {
      "$id": "7",
@@ -91,7 +92,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/uri/{uri}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {

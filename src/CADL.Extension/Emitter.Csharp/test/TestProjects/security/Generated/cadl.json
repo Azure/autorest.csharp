@@ -63,7 +63,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/security",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {

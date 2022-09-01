@@ -70,7 +70,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{endpointServiceUrl}",
      "Path": "/endpoint/{action}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {

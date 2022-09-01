@@ -262,44 +262,6 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloDemo2(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>

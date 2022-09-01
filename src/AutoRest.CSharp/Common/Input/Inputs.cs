@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Input
         IReadOnlyList<string>? RequestMediaTypes,
         bool BufferResponse,
         OperationLongRunning? LongRunning,
-        OperationPaging? Paging)
+        OperationPaging? Paging, bool IsConvenienceMethod = false)
     {
         public InputOperation() : this(
             Name: string.Empty,

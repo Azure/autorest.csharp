@@ -208,7 +208,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/top/{action}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     },
     {
      "$id": "28",
@@ -231,7 +232,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/top2",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {
@@ -264,7 +266,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/hello",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {
@@ -314,7 +317,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/againHi",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     },
     {
      "$id": "39",
@@ -337,7 +341,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/demoHi",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": false
     }
    ],
    "Protocol": {

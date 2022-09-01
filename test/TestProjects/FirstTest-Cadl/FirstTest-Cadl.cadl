@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
 
 @serviceTitle("Hello world")
 @serviceVersion("0.1.0")
@@ -70,6 +71,7 @@ namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
+    @OpenAPI.extension("x-ms-convenient-api", true)
     op helloAgain(@body action: RoundTripModel): Thing;
 
     @route("/demoHi")
@@ -81,6 +83,7 @@ namespace Hello.Demo2 {
 @route("/top")
 @doc("top level method")
 @get
+@OpenAPI.extension("x-ms-convenient-api", true)
 op topAction(@path @format("date") action: string): Thing;
 
 @route("/top2")

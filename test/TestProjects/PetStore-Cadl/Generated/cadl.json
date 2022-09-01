@@ -128,7 +128,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": true
     },
     {
      "$id": "16",
@@ -186,7 +187,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": true
     },
     {
      "$id": "21",
@@ -229,7 +231,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "IsConvenienceMethod": true
     }
    ],
    "Protocol": {
