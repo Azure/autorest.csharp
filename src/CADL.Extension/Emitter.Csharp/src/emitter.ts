@@ -37,7 +37,11 @@ import { OperationResponse } from "./type/OperationResponse.js";
 import { getInputType } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
-import { convenienceApiKey, getExternalDocs, getOperationId } from "./lib/decorators.js";
+import {
+    convenienceApiKey,
+    getExternalDocs,
+    getOperationId
+} from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
@@ -147,8 +151,10 @@ function createModel(program: Program): any {
                 endPointParam = cadlServers[0].parameters[0];
             }
         }
-        
-        const hasNoConvenienceApiDecorators = routes.every(u => !(getExtensions(program, u.operation).has(convenienceApiKey)));
+
+        const hasNoConvenienceApiDecorators = routes.every(
+            (u) => !getExtensions(program, u.operation).has(convenienceApiKey)
+        );
 
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
@@ -206,7 +212,7 @@ function processServiceAuthentication(
 ): InputAuth {
     const auth = {} as InputAuth;
     let scopes: Set<string> | undefined;
-    
+
     for (const option of authentication.options) {
         for (const schema of option.schemes) {
             switch (schema.type) {
@@ -218,10 +224,10 @@ function processServiceAuthentication(
                         if (flow.scopes) {
                             scopes ??= new Set<string>();
                             for (var scope of flow.scopes) {
-                                scopes.add(scope)
+                                scopes.add(scope);
                             }
                         }
-                    }                    
+                    }
                     break;
                 default:
                     throw new Error("Not supported authentication.");
@@ -306,7 +312,10 @@ function loadOperation(
     }
 
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateConvenienceMethod = requestMethod !== RequestMethod.PATCH && (hasNoConvenienceApiDecorators || getExtensions(program, op).get(convenienceApiKey))
+    const generateConvenienceMethod =
+        requestMethod !== RequestMethod.PATCH &&
+        (hasNoConvenienceApiDecorators ||
+            getExtensions(program, op).get(convenienceApiKey));
 
     return {
         Name: op.name,
@@ -426,4 +435,3 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
-
