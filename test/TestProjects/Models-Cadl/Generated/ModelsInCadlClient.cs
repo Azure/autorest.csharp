@@ -15,6 +15,7 @@ using ModelsInCadl;
 
 namespace GeneratedModels
 {
+    // Data plane generated client. CADL project to test various types of models.
     /// <summary> CADL project to test various types of models. </summary>
     public partial class ModelsInCadlClient
     {
@@ -91,6 +92,15 @@ namespace GeneratedModels
         ///             },
         ///         }
         ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
@@ -116,6 +126,7 @@ namespace GeneratedModels
         ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -127,6 +138,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -173,6 +190,15 @@ namespace GeneratedModels
         ///             },
         ///         }
         ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = client.InputToRoundTrip(RequestContent.Create(data));
@@ -198,6 +224,7 @@ namespace GeneratedModels
         ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -209,6 +236,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -272,6 +305,24 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
+        ///     requiredCollection = new[] {
+        ///         new {
+        ///             requiredRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
@@ -292,6 +343,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -308,6 +365,8 @@ namespace GeneratedModels
         ///       }
         ///     ], # Required.
         ///   }, # Required.
+        ///   requiredCollection: [CollectionItem], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -345,6 +404,24 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
+        ///     requiredCollection = new[] {
+        ///         new {
+        ///             requiredRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
         /// };
         /// 
         /// Response response = client.RoundTripToOutput(RequestContent.Create(data));
@@ -365,6 +442,12 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredCollection: [
+        ///     {
+        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///     }
+        ///   ], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -381,6 +464,8 @@ namespace GeneratedModels
         ///       }
         ///     ], # Required.
         ///   }, # Required.
+        ///   requiredCollection: [CollectionItem], # Required.
+        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -394,6 +479,128 @@ namespace GeneratedModels
             try
             {
                 using HttpMessage message = CreateRoundTripToOutputRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ErrorModel>> SelfReferenceValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReferenceValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await SelfReferenceAsync(context).ConfigureAwait(false);
+                return Response.FromValue(ErrorModel.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ErrorModel> SelfReferenceValue(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReferenceValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = SelfReference(context);
+                return Response.FromValue(ErrorModel.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call SelfReferenceAsync and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// Response response = await client.SelfReferenceAsync();
+        /// 
+        /// Console.WriteLine(response.ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ErrorModel</c>:
+        /// <code>{
+        ///   innerError: ErrorModel, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> SelfReferenceAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReference");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSelfReferenceRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call SelfReference and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// Response response = client.SelfReference();
+        /// 
+        /// Console.WriteLine(response.ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ErrorModel</c>:
+        /// <code>{
+        ///   innerError: ErrorModel, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response SelfReference(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReference");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSelfReferenceRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -426,6 +633,18 @@ namespace GeneratedModels
             uri.AppendPath("/roundTripToOutput", false);
             request.Uri = uri;
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSelfReferenceRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/selfReference", false);
+            request.Uri = uri;
             return message;
         }
 

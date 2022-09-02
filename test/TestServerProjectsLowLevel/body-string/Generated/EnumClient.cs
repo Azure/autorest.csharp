@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_string_LowLevel
 {
+    // Data plane generated client. The Enum service client.
     /// <summary> The Enum service client. </summary>
     public partial class EnumClient
     {

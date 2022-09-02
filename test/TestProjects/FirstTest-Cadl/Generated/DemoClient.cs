@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. Hello world service
     /// <summary> Hello world service. </summary>
     public partial class DemoClient
     {
