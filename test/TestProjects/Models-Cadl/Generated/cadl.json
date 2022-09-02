@@ -436,21 +436,42 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "51",
+   "Name": "ErrorModel",
+   "Namespace": "ModelsInCadl",
+   "Description": "Model that has property of its own type",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "52",
+     "Name": "innerError",
+     "SerializedName": "innerError",
+     "Description": "",
+     "Type": {
+      "$ref": "51"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "51",
+   "$id": "53",
    "Name": "ModelsInCadl",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "52",
+     "$id": "54",
      "Name": "inputToRoundTrip",
      "Description": "Input to RoundTrip",
      "Parameters": [
       {
-       "$id": "53",
+       "$id": "55",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -469,7 +490,7 @@
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "56",
        "StatusCodes": [
         200
        ],
@@ -486,12 +507,12 @@
      "BufferResponse": false
     },
     {
-     "$id": "55",
+     "$id": "57",
      "Name": "roundTripToOutput",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$id": "56",
+       "$id": "58",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -510,7 +531,7 @@
      ],
      "Responses": [
       {
-       "$id": "57",
+       "$id": "59",
        "StatusCodes": [
         200
        ],
@@ -525,10 +546,33 @@
      "Uri": "",
      "Path": "/roundTripToOutput",
      "BufferResponse": false
+    },
+    {
+     "$id": "60",
+     "Name": "selfReference",
+     "Description": "Returns model that has property of its own type",
+     "Parameters": [],
+     "Responses": [
+      {
+       "$id": "61",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "51"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/selfReference",
+     "BufferResponse": false
     }
    ],
    "Protocol": {
-    "$id": "58"
+    "$id": "62"
    }
   }
  ]

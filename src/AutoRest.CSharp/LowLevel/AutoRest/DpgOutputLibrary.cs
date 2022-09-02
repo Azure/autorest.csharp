@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -13,20 +12,20 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class DpgOutputLibrary : OutputLibrary
     {
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
-        private readonly IReadOnlyDictionary<InputModelType, Func<ModelTypeProvider>> _modelFactories;
+        private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
         private readonly bool _isCadlInput;
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
-        public IEnumerable<ModelTypeProvider> Models => _modelFactories.Values.Select(f => f());
+        public IEnumerable<ModelTypeProvider> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, Func<ModelTypeProvider>> modelFactories, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {
             TypeFactory = new TypeFactory(this);
             _enums = enums;
-            _modelFactories = modelFactories;
+            _models = models;
             _isCadlInput = isCadlInput;
             RestClients = restClients;
             ClientOptions = clientOptions;
@@ -48,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override CSharpType ResolveModel(InputModelType model)
-            => _modelFactories.TryGetValue(model, out var modelFactory) ? modelFactory().Type : new CSharpType(typeof(object), model.IsNullable);
+            => _models.TryGetValue(model, out var modelFactory) ? modelFactory.Type : new CSharpType(typeof(object), model.IsNullable);
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
