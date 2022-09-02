@@ -47,12 +47,12 @@ export function resolveServers(
             const value = prop.default ? getDefaultValue(prop.default) : "";
             if (value) {
                 defaultValue = {
-                    Value: value,
                     Type: {
                         Name: "Uri",
                         Kind: InputTypeKind.Uri,
                         IsNullable: false
-                    } as InputPrimitiveType
+                    } as InputPrimitiveType,
+                    Value: value
                 } as InputConstant;
             }
             const variable: InputParameter = {

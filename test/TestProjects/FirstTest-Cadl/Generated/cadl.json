@@ -235,11 +235,38 @@
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "32",
+       "Name": "Accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "33",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "34",
+        "Type": {
+         "$ref": "33"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -257,17 +284,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "33",
+     "$id": "36",
      "Name": "topAction2",
      "Description": "top level method2",
      "Parameters": [
       {
        "$ref": "26"
+      },
+      {
+       "$ref": "32"
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
@@ -284,7 +314,7 @@
      "BufferResponse": false
     },
     {
-     "$id": "35",
+     "$id": "38",
      "Name": "patchAction",
      "Description": "top level patch",
      "Parameters": [
@@ -292,7 +322,7 @@
        "$ref": "26"
       },
       {
-       "$id": "36",
+       "$id": "39",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -307,11 +337,41 @@
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "40",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "41",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "42",
+        "Type": {
+         "$ref": "41"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "32"
       }
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "43",
        "StatusCodes": [
         200
        ],
@@ -325,31 +385,97 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/patch",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "38"
+    "$id": "44"
    }
   },
   {
-   "$id": "39",
+   "$id": "45",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "40",
+     "$id": "46",
      "Name": "sayHi",
      "Description": "Return hi",
      "Parameters": [
       {
        "$ref": "26"
+      },
+      {
+       "$id": "47",
+       "Name": "headParameter",
+       "NameInRequest": "head-parameter",
+       "Type": {
+        "$id": "48",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "49",
+       "Name": "queryParameter",
+       "NameInRequest": "queryParameter",
+       "Type": {
+        "$id": "50",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "51",
+       "Name": "optionalQuery",
+       "NameInRequest": "optionalQuery",
+       "Type": {
+        "$id": "52",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$ref": "32"
       }
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "53",
        "StatusCodes": [
         200
        ],
@@ -367,15 +493,15 @@
     }
    ],
    "Protocol": {
-    "$id": "42"
+    "$id": "54"
    }
   },
   {
-   "$id": "43",
+   "$id": "55",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "44",
+     "$id": "56",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
@@ -383,7 +509,74 @@
        "$ref": "26"
       },
       {
-       "$id": "45",
+       "$id": "57",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "58",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "59",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "60",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "61",
+        "Type": {
+         "$ref": "60"
+        },
+        "Value": "text/plain"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "62",
+       "Name": "p2",
+       "NameInRequest": "p2",
+       "Type": {
+        "$id": "63",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "64",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -398,11 +591,14 @@
        "SkipUrlEncoding": true,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "32"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -415,22 +611,121 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/againHi",
+     "Path": "/againHi/{p2}",
+     "RequestMediaTypes": [
+      "text/plain"
+     ],
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "47",
+     "$id": "66",
+     "Name": "noContentType",
+     "Description": "Return hi again",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "67",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "68",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "69",
+       "Name": "p2",
+       "NameInRequest": "p2",
+       "Type": {
+        "$id": "70",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "71",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$ref": "13"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$ref": "40"
+      },
+      {
+       "$ref": "32"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "72",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/noContentType/{p2}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": false
+    },
+    {
+     "$id": "73",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
        "$ref": "26"
+      },
+      {
+       "$ref": "32"
       }
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "74",
        "StatusCodes": [
         200
        ],
@@ -449,18 +744,18 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "75"
    }
   }
  ],
  "Auth": {
-  "$id": "50",
+  "$id": "76",
   "ApiKey": {
-   "$id": "51",
+   "$id": "77",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "52",
+   "$id": "78",
    "Scopes": [
     "https://api.example.com/.default"
    ]
