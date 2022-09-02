@@ -177,7 +177,8 @@
       "application/json",
       "image/jpeg"
      ],
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "21",
@@ -250,7 +251,8 @@
      "RequestMediaTypes": [
       "text/plain"
      ],
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

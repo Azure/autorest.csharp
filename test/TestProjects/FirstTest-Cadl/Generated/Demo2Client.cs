@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -14,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. The Demo2 service client.
     /// <summary> The Demo2 service client. </summary>
     public partial class Demo2Client
     {
@@ -81,40 +81,6 @@ namespace CadlFirstTest
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
-        public virtual async Task<Response<Thing>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(action, nameof(action));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
-        public virtual Response<Thing> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(action, nameof(action));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = HelloAgain(p2, p1, action.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> Return hi again. </summary>
@@ -280,40 +246,6 @@ namespace CadlFirstTest
         /// <summary> Return hi again. </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
-        public virtual async Task<Response<Thing>> NoContentTypeAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(action, nameof(action));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await NoContentTypeAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
-        public virtual Response<Thing> NoContentType(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(action, nameof(action));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = NoContentType(p2, p1, action.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -472,44 +404,6 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloDemo2(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi in demo2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -645,17 +539,6 @@ namespace CadlFirstTest
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

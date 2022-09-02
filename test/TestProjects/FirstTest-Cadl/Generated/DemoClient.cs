@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -14,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. Hello world service
     /// <summary> Hello world service. </summary>
     public partial class DemoClient
     {
@@ -81,58 +81,6 @@ namespace CadlFirstTest
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        public virtual async Task<Response<Thing>> SayHiValueAsync(string headParameter, string queryParameter, string optionalQuery = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(headParameter, nameof(headParameter));
-            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
-
-            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await SayHiAsync(headParameter, queryParameter, optionalQuery, context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        public virtual Response<Thing> SayHiValue(string headParameter, string queryParameter, string optionalQuery = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(headParameter, nameof(headParameter));
-            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
-
-            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = SayHi(headParameter, queryParameter, optionalQuery, context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Return hi. </summary>
@@ -275,17 +223,6 @@ namespace CadlFirstTest
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

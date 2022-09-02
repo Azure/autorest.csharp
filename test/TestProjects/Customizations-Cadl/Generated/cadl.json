@@ -426,7 +426,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/inputToRoundTrip",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
@@ -13,14 +15,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripPrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
-            var model = new ModelTypeProvider(
-                new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Round-trip model with collection properties", InputModelTypeUsage.RoundTrip,
-                    new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
-                    null, new List<InputModelType>(), null),
-                CadlTypeFactory,
-                "test",
-                null);
+            var input = new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Round-trip model with collection properties", InputModelTypeUsage.RoundTrip,
+                new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
+                null, new List<InputModelType>(), null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -28,14 +28,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void InputPrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-basic/main.cadl#L16-L24
-            var model = new ModelTypeProvider(
-                new InputModelType("InputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Input model with collection properties", InputModelTypeUsage.Input,
-                    new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
-                    null, new List<InputModelType>(), null),
-                new TypeFactory(null),
-                "test",
-                null);
+            var input = new InputModelType("InputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Input model with collection properties", InputModelTypeUsage.Input,
+                new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
+                null, new List<InputModelType>(), null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -43,14 +41,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void OutputPrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-basic/main.cadl#L26-L34
-            var model = new ModelTypeProvider(
-                new InputModelType("OutputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Output model with collection properties", InputModelTypeUsage.Output,
-                    new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
-                    null, new List<InputModelType>(), null),
-                CadlTypeFactory,
-                "test",
-                null);
+            var input = new InputModelType("OutputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", "Output model with collection properties", InputModelTypeUsage.Output,
+                new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
+                null, new List<InputModelType>(), null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
@@ -12,14 +14,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripBasic(string expectedModelCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/roundtrip-basic/main.cadl#L15-L23
-            var model = new ModelTypeProvider(
-                new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
-                    new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
-                    null, null, null),
-                CadlTypeFactory,
-                "test",
-                null);
+            var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
+                new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
+                null, null, null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedModelCodes(model, expectedModelCodes);
         }
 
@@ -27,14 +27,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void InputBasic(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/input-basic/main.cadl
-            var model = new ModelTypeProvider(
-                new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Input Model", InputModelTypeUsage.Input,
-                    new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
-                    null, new List<InputModelType>(), null),
-                CadlTypeFactory,
-                "test",
-                null);
+            var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Input Model", InputModelTypeUsage.Input,
+                new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
+                null, new List<InputModelType>(), null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -42,14 +40,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void OutputBasic(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/output-basic/main.cadl#L15-L23
-            var model = new ModelTypeProvider(
-                new InputModelType("OutputModel", "Cadl.TestServer.OutputBasic", "public", "Output Model", InputModelTypeUsage.Output,
-                    new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
-                    null, new List<InputModelType>(), null),
-                CadlTypeFactory,
-                "test",
-                null);
+            var input = new InputModelType("OutputModel", "Cadl.TestServer.OutputBasic", "public", "Output Model", InputModelTypeUsage.Output,
+                new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
+                null, new List<InputModelType>(), null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -57,26 +53,24 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void PrimitiveProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
-            var model = new ModelTypeProvider(
-                new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", "public",
-                    "Round-trip model with primitive properties to show serialization and deserialization of each.", InputModelTypeUsage.RoundTrip,
-                    new List<InputModelProperty>{
-                        new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, true, false, false),
-                        new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, true, false, false),
-                        new InputModelProperty("requiredLong", "requiredLong", "", InputPrimitiveType.Int64, true, false, false),
-                        new InputModelProperty("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, true, false, false),
-                        new InputModelProperty("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, true, false, false),
-                        new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, true, false, false),
-                        new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, true, false, false),
-                        new InputModelProperty("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, true, false, false),
-                        new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, true, false, false),
-                        new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, true, false, false)
-                    },
-                    null, null, null),
-                CadlTypeFactory,
-                "test",
-                null);
+            var input = new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", "public",
+                "Round-trip model with primitive properties to show serialization and deserialization of each.", InputModelTypeUsage.RoundTrip,
+                new List<InputModelProperty>{
+                    new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, true, false, false),
+                    new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, true, false, false),
+                    new InputModelProperty("requiredLong", "requiredLong", "", InputPrimitiveType.Int64, true, false, false),
+                    new InputModelProperty("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, true, false, false),
+                    new InputModelProperty("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, true, false, false),
+                    new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, true, false, false),
+                    new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, true, false, false),
+                    new InputModelProperty("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, true, false, false),
+                    new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, true, false, false),
+                    new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, true, false, false)
+                },
+                null, null, null);
 
+            var model = new ModelTypeProvider(input, "test", null);
+            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
