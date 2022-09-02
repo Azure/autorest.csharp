@@ -253,7 +253,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/top/{action}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "33",
@@ -281,19 +282,64 @@
      "Uri": "{host}",
      "Path": "/top2",
      "BufferResponse": false
+    },
+    {
+     "$id": "35",
+     "Name": "patchAction",
+     "Description": "top level patch",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "36",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "10"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "37",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/patch",
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "38"
    }
   },
   {
-   "$id": "36",
+   "$id": "39",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "37",
+     "$id": "40",
      "Name": "sayHi",
      "Description": "Return hi",
      "Parameters": [
@@ -303,7 +349,7 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
@@ -321,15 +367,15 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "42"
    }
   },
   {
-   "$id": "40",
+   "$id": "43",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "44",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
@@ -337,7 +383,7 @@
        "$ref": "26"
       },
       {
-       "$id": "42",
+       "$id": "45",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -356,7 +402,7 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "46",
        "StatusCodes": [
         200
        ],
@@ -370,10 +416,11 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/againHi",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
-     "$id": "44",
+     "$id": "47",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
      "Parameters": [
@@ -383,7 +430,7 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "48",
        "StatusCodes": [
         200
        ],
@@ -397,22 +444,23 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/demoHi",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "49"
    }
   }
  ],
  "Auth": {
-  "$id": "47",
+  "$id": "50",
   "ApiKey": {
-   "$id": "48",
+   "$id": "51",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "49",
+   "$id": "52",
    "Scopes": [
     "https://api.example.com/.default"
    ]

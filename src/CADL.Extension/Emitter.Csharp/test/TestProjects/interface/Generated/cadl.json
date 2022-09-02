@@ -63,7 +63,7 @@
    "Operations": [
     {
      "$id": "9",
-     "Name": "getDogs",
+     "Name": "getDogsConvenient",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -114,7 +114,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/dogs",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "15",
