@@ -4,7 +4,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input

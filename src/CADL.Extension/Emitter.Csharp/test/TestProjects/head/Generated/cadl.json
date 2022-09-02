@@ -112,7 +112,7 @@
       {
        "$id": "14",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "15",
         "Name": "String",
@@ -151,10 +151,7 @@
        "DefaultValue": {
         "$id": "18",
         "Type": {
-         "$id": "19",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
+         "$ref": "17"
         },
         "Value": "application/json"
        }
@@ -162,7 +159,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "19",
        "StatusCodes": [
         204
        ],
@@ -181,27 +178,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "opWithContentTypeHead",
      "Parameters": [
       {
        "$ref": "7"
       },
       {
-       "$id": "22",
+       "$id": "21",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "23",
+        "$id": "22",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "24",
+        "$id": "23",
         "Type": {
-         "$ref": "23"
+         "$ref": "22"
         },
         "Value": "text/plain"
        },
@@ -215,7 +212,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "25",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -237,7 +234,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "25",
        "StatusCodes": [
         204
        ],
@@ -256,7 +253,7 @@
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "26"
    }
   }
  ]

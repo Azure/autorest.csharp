@@ -146,68 +146,20 @@ function createModel(program: Program): any {
     const consumes = getConsumes(program, serviceNamespaceType);
     let contentTypeParameter = undefined;
     if (consumes && consumes.length > 0) {
-        contentTypeParameter = {
-            Name: "contentType",
-            NameInRequest: "content-type",
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Location: RequestLocation.Header,
-            IsApiVersion: false,
-            IsResourceParameter: false,
-            IsContentType: true,
-            IsRequired: true,
-            IsEndpoint: false,
-            SkipUrlEncoding: false,
-            Explode: false,
-            Kind: InputOperationParameterKind.Constant,
-            DefaultValue:
-                consumes.length === 1
-                    ? ({
-                          Type: {
-                              Name: "String",
-                              Kind: InputTypeKind.String,
-                              IsNullable: false
-                          } as InputPrimitiveType,
-                          Value: consumes[0]
-                      } as InputConstant)
-                    : undefined
-        } as InputParameter;
+        contentTypeParameter = createContentTypeOrAcceptParameter(
+            consumes,
+            "contentType",
+            "Content-Type"
+        );
     }
     const produces = getProduces(program, serviceNamespaceType);
     let acceptParameter = undefined;
     if (produces && produces.length > 0) {
-        acceptParameter = {
-            Name: "Accept",
-            NameInRequest: "Accept",
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Location: RequestLocation.Header,
-            IsApiVersion: false,
-            IsResourceParameter: false,
-            IsContentType: false,
-            IsRequired: true,
-            IsEndpoint: false,
-            SkipUrlEncoding: false,
-            Explode: false,
-            Kind: InputOperationParameterKind.Constant,
-            DefaultValue:
-                produces.length === 1
-                    ? ({
-                          Type: {
-                              Name: "String",
-                              Kind: InputTypeKind.String,
-                              IsNullable: false
-                          } as InputPrimitiveType,
-                          Value: produces[0]
-                      } as InputConstant)
-                    : undefined
-        } as InputParameter;
+        acceptParameter = createContentTypeOrAcceptParameter(
+            produces,
+            "Accept",
+            "Accept"
+        );
     }
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
@@ -299,6 +251,41 @@ function createModel(program: Program): any {
             throw err;
         }
     }
+}
+
+function createContentTypeOrAcceptParameter(
+    mediaTypes: string[],
+    name: string,
+    nameInRequest: string
+): InputParameter {
+    const isContentType: boolean =
+        nameInRequest.toLowerCase() === "content-type";
+    const inputType: InputType = {
+        Name: "String",
+        Kind: InputTypeKind.String,
+        IsNullable: false
+    } as InputPrimitiveType;
+    return {
+        Name: name,
+        NameInRequest: nameInRequest,
+        Type: inputType,
+        Location: RequestLocation.Header,
+        IsApiVersion: false,
+        IsResourceParameter: false,
+        IsContentType: isContentType,
+        IsRequired: true,
+        IsEndpoint: false,
+        SkipUrlEncoding: false,
+        Explode: false,
+        Kind: InputOperationParameterKind.Constant,
+        DefaultValue:
+            mediaTypes.length === 1
+                ? ({
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
+                : undefined
+    } as InputParameter;
 }
 
 function processServiceAuthentication(

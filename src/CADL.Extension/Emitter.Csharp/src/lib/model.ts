@@ -411,9 +411,9 @@ export function getInputType(
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
-                m.derivedModels.forEach((dm) => {
+                for (const dm of m.derivedModels) {
                     getInputType(program, dm, models, enums);
-                });
+                }
             }
         }
 
