@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Instance view statuses summary for virtual machines of a virtual machine scale set. </summary>
+    /// <summary>
+    /// Instance view statuses summary for virtual machines of a virtual machine scale set.
+    /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary
+    /// </summary>
     internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
@@ -20,13 +23,19 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
-        /// <param name="statusesSummary"> The extensions information. </param>
+        /// <param name="statusesSummary">
+        /// The extensions information.
+        /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary.statusesSummary
+        /// </param>
         internal VirtualMachineScaleSetInstanceViewStatusesSummary(IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
         {
             StatusesSummary = statusesSummary;
         }
 
-        /// <summary> The extensions information. </summary>
+        /// <summary>
+        /// The extensions information.
+        /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary.statusesSummary
+        /// </summary>
         public IReadOnlyList<VirtualMachineStatusCodeCount> StatusesSummary { get; }
     }
 }

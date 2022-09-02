@@ -44,6 +44,10 @@
     "AdditionalUnattendContent.backupFrequency": "-|integer",
     "LogAnalyticsOperationResult.method": "requestMethod|request-method",
     "LogAnalyticsOperationResult.content": "-|any",
-    "LogAnalyticsOperationResult.basePath": "basePathUri|uri"
+    "LogAnalyticsOperationResult.basePath": "basePathUri|uri",
+    "VirtualMachineScaleSetIPConfiguration.properties.ipAddresses": "-|ip-address"
+  },
+  "MgmtDebug": {
+    "ShowSerializedNames": true
   }
 }

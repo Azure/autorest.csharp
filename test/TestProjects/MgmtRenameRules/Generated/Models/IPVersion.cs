@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </summary>
+    /// <summary>
+    /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+    /// Serialized Name: IPVersion
+    /// </summary>
     public readonly partial struct IPVersion : IEquatable<IPVersion>
     {
         private readonly string _value;
@@ -25,9 +28,15 @@ namespace MgmtRenameRules.Models
         private const string IPv4Value = "IPv4";
         private const string IPv6Value = "IPv6";
 
-        /// <summary> IPv4. </summary>
+        /// <summary>
+        /// IPv4
+        /// Serialized Name: IPVersion.IPv4
+        /// </summary>
         public static IPVersion IPv4 { get; } = new IPVersion(IPv4Value);
-        /// <summary> IPv6. </summary>
+        /// <summary>
+        /// IPv6
+        /// Serialized Name: IPVersion.IPv6
+        /// </summary>
         public static IPVersion IPv6 { get; } = new IPVersion(IPv6Value);
         /// <summary> Determines if two <see cref="IPVersion"/> values are the same. </summary>
         public static bool operator ==(IPVersion left, IPVersion right) => left.Equals(right);

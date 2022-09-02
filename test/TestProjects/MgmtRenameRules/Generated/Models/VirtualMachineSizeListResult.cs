@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The List Virtual Machine operation response. </summary>
+    /// <summary>
+    /// The List Virtual Machine operation response.
+    /// Serialized Name: VirtualMachineSizeListResult
+    /// </summary>
     internal partial class VirtualMachineSizeListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineSizeListResult. </summary>
@@ -20,13 +23,19 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineSizeListResult. </summary>
-        /// <param name="value"> The list of virtual machine sizes. </param>
+        /// <param name="value">
+        /// The list of virtual machine sizes.
+        /// Serialized Name: VirtualMachineSizeListResult.value
+        /// </param>
         internal VirtualMachineSizeListResult(IReadOnlyList<VirtualMachineSize> value)
         {
             Value = value;
         }
 
-        /// <summary> The list of virtual machine sizes. </summary>
+        /// <summary>
+        /// The list of virtual machine sizes.
+        /// Serialized Name: VirtualMachineSizeListResult.value
+        /// </summary>
         public IReadOnlyList<VirtualMachineSize> Value { get; }
     }
 }
