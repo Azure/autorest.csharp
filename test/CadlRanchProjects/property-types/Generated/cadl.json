@@ -1,0 +1,1379 @@
+{
+ "$id": "1",
+ "Name": "models.property.types",
+ "Description": "Illustrates various property types for models",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "InnerEnum",
+   "Namespace": "Types",
+   "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "ValueOne",
+     "Value": "ValueOne",
+     "Description": "First value."
+    },
+    {
+     "$id": "4",
+     "Name": "ValueTwo",
+     "Value": "ValueTwo",
+     "Description": "Second value."
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "5",
+   "Name": "BooleanProperty",
+   "Namespace": "Types",
+   "Description": "Model with a boolean property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Name": "bool",
+      "Kind": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "8",
+   "Name": "StringProperty",
+   "Namespace": "Types",
+   "Description": "Model with a string property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "9",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "10",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "11",
+   "Name": "BytesProperty",
+   "Namespace": "Types",
+   "Description": "Model with a bytes property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Name": "Bytes",
+      "Kind": "BinaryData",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "14",
+   "Name": "IntProperty",
+   "Namespace": "Types",
+   "Description": "Model with a int property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "15",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Name": "Int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "17",
+   "Name": "FloatProperty",
+   "Namespace": "Types",
+   "Description": "Model with a float property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "18",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Name": "float",
+      "Kind": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "20",
+   "Name": "DatetimeProperty",
+   "Namespace": "Types",
+   "Description": "Model with a datetime property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "21",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "22",
+      "Name": "DateTime",
+      "Kind": "DateTime",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "23",
+   "Name": "DurationProperty",
+   "Namespace": "Types",
+   "Description": "Model with a duration property",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "24",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "25",
+      "Name": "TimeSpan",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "26",
+   "Name": "EnumProperty",
+   "Namespace": "Types",
+   "Description": "Model with enum properties",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "27",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "28",
+   "Name": "ExtensibleEnumProperty",
+   "Namespace": "Types",
+   "Description": "Model with extensible enum properties",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "29",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "30",
+   "Name": "ModelProperty",
+   "Namespace": "Types",
+   "Description": "Model with model properties",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "32",
+      "Name": "InnerModel",
+      "Namespace": "Types",
+      "Description": "Inner model. Will be a property type for ModelWithModelProperties",
+      "IsNullable": false,
+      "Properties": [
+       {
+        "$id": "33",
+        "Name": "property",
+        "SerializedName": "property",
+        "Description": "",
+        "Type": {
+         "$id": "34",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "32"
+  },
+  {
+   "$id": "35",
+   "Name": "CollectionsStringProperty",
+   "Namespace": "Types",
+   "Description": "Model with collection string properties",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "36",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "37",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "38",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "39",
+   "Name": "CollectionsIntProperty",
+   "Namespace": "Types",
+   "Description": "Model with collection int properties",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "40",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "41",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "42",
+       "Name": "Int32",
+       "Kind": "Int32",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "43",
+   "Name": "CollectionsModelProperty",
+   "Namespace": "Types",
+   "Description": "Model with collection model properties",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "44",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "45",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "32"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "46",
+   "Name": "Boolean",
+   "Operations": [
+    {
+     "$id": "47",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$id": "48",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "49",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "50",
+        "Type": {
+         "$id": "51",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "52",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "5"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/boolean",
+     "BufferResponse": true
+    },
+    {
+     "$id": "53",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "54",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "5"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "55",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/boolean",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "56"
+   }
+  },
+  {
+   "$id": "57",
+   "Name": "String",
+   "Operations": [
+    {
+     "$id": "58",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "59",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/string",
+     "BufferResponse": true
+    },
+    {
+     "$id": "60",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "61",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "8"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "62",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/string",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "63"
+   }
+  },
+  {
+   "$id": "64",
+   "Name": "Bytes",
+   "Operations": [
+    {
+     "$id": "65",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "66",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "11"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/bytes",
+     "BufferResponse": true
+    },
+    {
+     "$id": "67",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "68",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "11"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "69",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/bytes",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "70"
+   }
+  },
+  {
+   "$id": "71",
+   "Name": "Int",
+   "Operations": [
+    {
+     "$id": "72",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "73",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "14"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/int",
+     "BufferResponse": true
+    },
+    {
+     "$id": "74",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "75",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "14"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "76",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/int",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "77"
+   }
+  },
+  {
+   "$id": "78",
+   "Name": "Float",
+   "Operations": [
+    {
+     "$id": "79",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "80",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "17"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/float",
+     "BufferResponse": true
+    },
+    {
+     "$id": "81",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "82",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "17"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "83",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/float",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "84"
+   }
+  },
+  {
+   "$id": "85",
+   "Name": "Datetime",
+   "Operations": [
+    {
+     "$id": "86",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "87",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "20"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/datetime",
+     "BufferResponse": true
+    },
+    {
+     "$id": "88",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "89",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "20"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "90",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/datetime",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "91"
+   }
+  },
+  {
+   "$id": "92",
+   "Name": "Duration",
+   "Operations": [
+    {
+     "$id": "93",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "94",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "23"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/duration",
+     "BufferResponse": true
+    },
+    {
+     "$id": "95",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "96",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "23"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "97",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/duration",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "98"
+   }
+  },
+  {
+   "$id": "99",
+   "Name": "Enum",
+   "Operations": [
+    {
+     "$id": "100",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "101",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "26"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/enum",
+     "BufferResponse": true
+    },
+    {
+     "$id": "102",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "103",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "26"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "104",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/enum",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "105"
+   }
+  },
+  {
+   "$id": "106",
+   "Name": "ExtensibleEnum",
+   "Operations": [
+    {
+     "$id": "107",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "108",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "28"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/extensible-enum",
+     "BufferResponse": true
+    },
+    {
+     "$id": "109",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "110",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "28"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "111",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/extensible-enum",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "112"
+   }
+  },
+  {
+   "$id": "113",
+   "Name": "Model",
+   "Operations": [
+    {
+     "$id": "114",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "115",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "30"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/model",
+     "BufferResponse": true
+    },
+    {
+     "$id": "116",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "117",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "30"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "118",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/model",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "119"
+   }
+  },
+  {
+   "$id": "120",
+   "Name": "CollectionsString",
+   "Operations": [
+    {
+     "$id": "121",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "122",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "35"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/collections/string",
+     "BufferResponse": true
+    },
+    {
+     "$id": "123",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "124",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "35"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "125",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/collections/string",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "126"
+   }
+  },
+  {
+   "$id": "127",
+   "Name": "CollectionsInt",
+   "Operations": [
+    {
+     "$id": "128",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "129",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "39"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/collections/int",
+     "BufferResponse": true
+    },
+    {
+     "$id": "130",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "131",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "39"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "132",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/collections/int",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "133"
+   }
+  },
+  {
+   "$id": "134",
+   "Name": "CollectionsModel",
+   "Operations": [
+    {
+     "$id": "135",
+     "Name": "get",
+     "Parameters": [
+      {
+       "$ref": "48"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "136",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "43"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/collections/model",
+     "BufferResponse": true
+    },
+    {
+     "$id": "137",
+     "Name": "put",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "138",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "43"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": true,
+       "Explode": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "139",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models/properties/types/collections/model",
+     "BufferResponse": true
+    }
+   ],
+   "Protocol": {
+    "$id": "140"
+   }
+  }
+ ]
+}
