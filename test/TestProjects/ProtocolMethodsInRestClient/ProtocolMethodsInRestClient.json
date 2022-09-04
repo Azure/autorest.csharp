@@ -28,6 +28,29 @@
             "schema": {
               "$ref": "#/definitions/Resource"
             }
+          },
+          {
+            "name": "first",
+            "description": "First in group",
+            "required": false,
+            "type": "string",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "Grouped"
+            }
+          },
+          {
+            "name": "second",
+            "description": "Second in group",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "Grouped"
+            }
           }
         ],
         "responses": {

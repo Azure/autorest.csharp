@@ -154,6 +154,21 @@ namespace AutoRest.CSharp.Input
             }
         }
         private string? format;
+
+        public bool SkipInitCtor
+        {
+            get
+            {
+                if (!skipInitCtor.HasValue)
+                    skipInitCtor = TryGetValue("x-ms-skip-init-ctor", out var value) && Convert.ToBoolean(value);
+                return skipInitCtor.Value;
+            }
+            set
+            {
+                skipInitCtor = value;
+            }
+        }
+        private bool? skipInitCtor;
     }
 
     internal partial class RecordOfStringAndRequest : System.Collections.Generic.Dictionary<string, ServiceRequest>

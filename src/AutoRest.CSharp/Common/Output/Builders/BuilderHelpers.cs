@@ -107,19 +107,19 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this HttpResponseHeader header) =>
             header.Language!.Default.Name.ToCleanName();
 
-        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false)
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false, bool isAbstract = false)
         {
             if (existingType != null)
             {
                 return new TypeDeclarationOptions(existingType.Name,
                     existingType.ContainingNamespace.ToDisplayString(),
                     SyntaxFacts.GetText(existingType.DeclaredAccessibility),
-                    existingType.IsAbstract,
+                    existingType.IsAbstract || isAbstract,
                     existingTypeOverrides
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, false, false);
+            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, isAbstract, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
@@ -128,8 +128,9 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 var newType = existingMember switch
                 {
+                    IFieldSymbol { Type: INamedTypeSymbol { EnumUnderlyingType: { } } } => defaultType, // Special case for enums
+                    IFieldSymbol fieldSymbol => typeFactory.CreateType(fieldSymbol.Type),
                     IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
-                    IFieldSymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
                     _ => defaultType
                 };
 

@@ -4,8 +4,10 @@
 using System;
 using System.Linq;
 using Azure;
+using Azure.Core;
 using NUnit.Framework;
 using ProtocolMethodsInRestClient;
+using ProtocolMethodsInRestClient.Models;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -71,5 +73,26 @@ namespace AutoRest.TestServer.Tests
             Assert.IsFalse(parameters.Any(p => p.GetType().Equals(typeof(RequestContext))));
         }
 
+        [Test]
+        public void CorrectSignatureForGroupedParameters()
+        {
+            TypeAsserts.HasInternalInstanceMethod(
+                typeof(TestServiceRestClient),
+                nameof(TestServiceRestClient.CreateCreateRequest),
+                new TypeAsserts.Parameter[] {
+                    new("grouped", typeof(Grouped)),
+                    new("resource", typeof(Resource))
+                });
+
+            TypeAsserts.HasInternalInstanceMethod(
+                typeof(TestServiceRestClient),
+                nameof(TestServiceRestClient.CreateCreateRequest),
+                new TypeAsserts.Parameter[] {
+                    new("second", typeof(int)),
+                    new("content", typeof(RequestContent)),
+                    new("first", typeof(string)),
+                    new("context", typeof(RequestContext))
+                });
+        }
     }
 }

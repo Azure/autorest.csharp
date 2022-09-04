@@ -22,3 +22,5 @@ export function getOperationId(
 ): string | undefined {
     return program.stateMap(operationIdsKey).get(entity);
 }
+
+export const convenienceApiKey = "x-ms-convenient-api";

@@ -12,4 +12,6 @@ namespace: MgmtDiscriminator
 model-namespace: false
 public-clients: false
 head-as-boolean: false
+suppress-abstract-base-class:
+  DeliveryRuleAction
 ```

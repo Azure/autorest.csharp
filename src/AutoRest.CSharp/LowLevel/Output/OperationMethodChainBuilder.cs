@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Output.Models
             ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
         };
 
-        private readonly bool _isCadlInput;
         private readonly string _clientName;
         private readonly ClientFields _fields;
         private readonly TypeFactory _typeFactory;
@@ -45,12 +44,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory, bool isCadlInput)
+        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory)
         {
             _clientName = clientName;
             _fields = fields;
             _typeFactory = typeFactory;
-            _isCadlInput = isCadlInput;
             _orderedParameters = new List<ParameterChain>();
             _requestParts = new List<RequestPartSource>();
 
@@ -84,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models
             var returnTypeChain = BuildReturnTypes();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters);
-            var convenienceMethod = _isCadlInput ? BuildConvenienceMethod(returnTypeChain) : null;
+            var convenienceMethod = Operation.GenerateConvenienceMethod ? BuildConvenienceMethod(returnTypeChain) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -332,13 +330,23 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
             AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
-            if (inputParameter.Kind != InputOperationParameterKind.Method)
+            if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
                 return;
             }
 
+            if (inputParameter.Kind == InputOperationParameterKind.Grouped)
+            {
+                _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
+                return;
+            }
+
             var convenienceMethodParameter = BuildParameter(inputParameter);
-            _orderedParameters.Add(new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter));
+            var parameterChain = inputParameter.Location == RequestLocation.None
+                ? new ParameterChain(convenienceMethodParameter, null, null)
+                : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
+
+            _orderedParameters.Add(parameterChain);
         }
 
         private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)

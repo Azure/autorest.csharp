@@ -12,6 +12,7 @@ input-file:
   - $(this-folder)/PolicyAssignments.json
   - $(this-folder)/Deployments.json
   - $(this-folder)/Links.json
+  - $(this-folder)/vmInsightsOnboarding_API.json
 namespace: MgmtScopeResource
 
 list-exception:
@@ -43,6 +44,13 @@ override-operation-name:
   ResourceLinks_ListAtSourceScope: GetAll
 operation-positions:
   ResourceLinks_ListAtSourceScope: collection
+generate-arm-resource-extensions:
+- /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+- /{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default
+
+patch-initializer-customization:
+  Deployment:
+    Properties: 'new DeploymentProperties(current.Properties.Mode.HasValue ? current.Properties.Mode.Value : DeploymentMode.Incremental)'
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: FakePolicyAssignments_DeleteById

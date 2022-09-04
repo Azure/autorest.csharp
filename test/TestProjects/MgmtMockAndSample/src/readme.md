@@ -20,6 +20,9 @@ namespace: MgmtMockAndSample
 modelerfour:
   lenient-model-deduplication: true
 
+generate-arm-resource-extensions:
+- /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+
 list-exception:
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}

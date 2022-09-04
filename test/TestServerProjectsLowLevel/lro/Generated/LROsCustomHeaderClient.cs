@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace lro_LowLevel
 {
+    // Data plane generated client. The LROsCustomHeader service client.
     /// <summary> The LROsCustomHeader service client. </summary>
     public partial class LROsCustomHeaderClient
     {
