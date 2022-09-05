@@ -235,6 +235,10 @@ namespace AutoRest.CSharp.Input
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
             SuppressAbstractBaseClass = suppressAbstractBaseClass;
+            if (preventWrappingReturnType.Any())
+            {
+                Console.Error.WriteLine($"WARNING: The configuration 'prevent-wrapping-return-type' is a workaround and will be removed in the future.");
+            }
             PreventWrappingReturnType = preventWrappingReturnType;
             IsArmCore = DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = DeserializeBoolean(resourceModelRequiresType, true);
