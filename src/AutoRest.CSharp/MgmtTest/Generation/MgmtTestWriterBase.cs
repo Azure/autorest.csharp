@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line($");");
         }
 
-        protected virtual void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration, RequestPath requestPath, CSharpType resourceType)
+        protected virtual void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration, RequestPath requestPath)
         {
             _writer.Append($"{typeof(ResourceIdentifier)} {declaration:D} = new {typeof(ResourceIdentifier)}(");
             // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected CodeWriterDeclaration WriteGetExtension(MgmtExtensions parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
         {
             _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, example, client),
-            _ when parentExtension.ArmCoreType == typeof(ArmResource) => WriteGetArmResource(parentExtension, example, client),
+            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException("The method that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
             _ => WriteGetOtherExtension(parentExtension, example, client)
         };
 
@@ -110,17 +110,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             _writer.Line($"var {resourceVar:D} = {client}.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
-            return resourceVar;
-        }
-
-        private CodeWriterDeclaration WriteGetArmResource(MgmtExtensions parentExtension, OperationExample example, FormattableString client)
-        {
-            var resourceVar = new CodeWriterDeclaration("resource");
-            // everytime we go into this branch, this resource must be a scope resource
-            var idVar = new CodeWriterDeclaration("resourceId");
-            // this is the path of the scope of this operation
-            WriteCreateScopeResourceIdentifier(example, idVar, example.RequestPath.GetScopePath(), parentExtension.ArmCoreType);
-            _writer.Line($"{typeof(GenericResource)} {resourceVar:D} = {client}.GetGenericResource({idVar});");
             return resourceVar;
         }
 

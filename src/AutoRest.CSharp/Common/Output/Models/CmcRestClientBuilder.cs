@@ -139,7 +139,8 @@ namespace AutoRest.CSharp.Output.Models
                     RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
                     BufferResponse: operation.Extensions?.BufferResponse ?? true,
                     LongRunning: null,
-                    Paging: CreateOperationPaging(operation));
+                    Paging: CreateOperationPaging(operation),
+                    false);
             }
             return new InputOperation();
         }

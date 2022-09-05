@@ -15,6 +15,7 @@ using PetStore;
 
 namespace CadlPetStore
 {
+    // Data plane generated client. Manage your pets. You can delete or get the Pet from pet store.
     /// <summary> Manage your pets. You can delete or get the Pet from pet store. </summary>
     public partial class PetsClient
     {
@@ -495,7 +496,6 @@ namespace CadlPetStore
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
             request.Uri = uri;
@@ -510,7 +510,6 @@ namespace CadlPetStore
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, false);
             request.Uri = uri;
@@ -525,7 +524,6 @@ namespace CadlPetStore
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/pets", false);
             request.Uri = uri;
             request.Content = content;

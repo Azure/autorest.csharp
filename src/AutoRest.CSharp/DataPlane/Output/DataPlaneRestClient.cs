@@ -14,8 +14,10 @@ namespace AutoRest.CSharp.Output.Models
     internal class DataPlaneRestClient : RestClient
     {
         private readonly BuildContext<DataPlaneOutputLibrary> _context;
+        // postpone the calculation, since it depends on the initialization of context
+        private readonly Lazy<IReadOnlyList<LowLevelClientMethod>> _protocolMethods;
 
-        public IReadOnlyList<LowLevelClientMethod> ProtocolMethods { get; }
+        public IReadOnlyList<LowLevelClientMethod> ProtocolMethods => _protocolMethods.Value;
         public RestClientBuilder ClientBuilder { get; }
         public ClientFields Fields { get; }
 
@@ -25,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models
             _context = context;
             ClientBuilder = clientBuilder;
             Fields = ClientFields.CreateForRestClient(Parameters);
-            ProtocolMethods = GetProtocolMethods(inputClient, context).ToList();
+            _protocolMethods = new Lazy<IReadOnlyList<LowLevelClientMethod>>(() => GetProtocolMethods(inputClient, context).ToList());
         }
 
         protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
@@ -63,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(m => m.Operation)
                 .Where(operation => IsProtocolMethodExists(operation, inputClient, context));
 
-            return LowLevelClient.BuildMethods(_context.TypeFactory, operations, Fields, GetClientName(inputClient, context), false);
+            return LowLevelClient.BuildMethods(_context.TypeFactory, operations, Fields, GetClientName(inputClient, context));
         }
 
         private static string GetClientName(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)

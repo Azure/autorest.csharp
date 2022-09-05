@@ -8,6 +8,8 @@ using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -35,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
             => WriteObjectSerialization(writer, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, model.IncludeSerializer, model.IncludeDeserializer);
 
         public static void WriteModelSerialization(CodeWriter writer, ModelTypeProvider model)
-            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, true, true);
+            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, model.IncludeSerializer, model.IncludeDeserializer);
 
         private static void WriteObjectSerialization(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization? jsonSerialization, XmlObjectSerialization? xmlSerialization, bool isStruct, bool includeSerializer, bool includeDeserializer)
         {
@@ -187,7 +189,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (declaration.IsAbstract)
                 {
-                    writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
+                    if (Configuration.AzureArm)
+                    {
+                        writer.WriteObjectInitialization(serialization, $"Unknown{declaration.Name}");
+                    }
+                    else
+                    {
+                        writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
+                    }
                 }
                 else
                 {

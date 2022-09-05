@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
+    // Data plane generated client. The Inheritance service client.
     /// <summary> The Inheritance service client. </summary>
     public partial class InheritanceClient
     {

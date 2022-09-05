@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -11,14 +13,17 @@ namespace AutoRest.CSharp.MgmtTest.Output.Samples
 {
     internal class MgmtSampleProvider : MgmtTestProvider
     {
-        public Sample Sample { get; }
-        public MgmtSampleProvider(Sample testCase) : base()
+        public MgmtTypeProvider Owner { get; }
+        public IEnumerable<Sample> Samples { get; }
+
+        public MgmtSampleProvider(MgmtTypeProvider owner, IEnumerable<Sample> samples) : base()
         {
-            Sample = testCase;
+            Owner = owner;
+            Samples = samples;
         }
 
         private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= $"Sample_{Sample.Carrier.Type.Name}_{Sample.Operation.Name}_{Sample.Name.ToCleanName()}";
+        protected override string DefaultName => _defaultName ??= $"Sample_{Owner.Type.Name}";
 
         // a sample class does not need a description
         public override FormattableString Description => $"";

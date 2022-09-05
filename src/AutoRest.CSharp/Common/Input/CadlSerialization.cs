@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Common.Input
             options.Converters.Add(new CadlInputEnumTypeValueConverter(referenceHandler));
             options.Converters.Add(new CadlInputModelTypeConverter(referenceHandler));
             options.Converters.Add(new CadlInputModelPropertyConverter(referenceHandler));
+            options.Converters.Add(new CadlInputConstantConverter(referenceHandler));
             return JsonSerializer.Deserialize<InputNamespace>(json, options);
         }
 

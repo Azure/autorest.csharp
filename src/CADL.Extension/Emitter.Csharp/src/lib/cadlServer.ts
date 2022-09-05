@@ -37,6 +37,7 @@ export function resolveServers(
 ): CadlServer[] {
     return servers.map((server) => {
         const parameters: InputParameter[] = [];
+        let url: string = server.url;
         for (const [name, prop] of server.parameters) {
             // if (!validateValidServerVariable(program, prop)) {
             //   continue;
@@ -46,12 +47,12 @@ export function resolveServers(
             const value = prop.default ? getDefaultValue(prop.default) : "";
             if (value) {
                 defaultValue = {
-                    Value: value,
                     Type: {
                         Name: "Uri",
                         Kind: InputTypeKind.Uri,
                         IsNullable: false
-                    } as InputPrimitiveType
+                    } as InputPrimitiveType,
+                    Value: value
                 } as InputConstant;
             }
             const variable: InputParameter = {
@@ -77,8 +78,40 @@ export function resolveServers(
 
             parameters.push(variable);
         }
+        /* add default server. */
+        if (server.url && parameters.length == 0) {
+            const variable: InputParameter = {
+                Name: "host",
+                NameInRequest: "host",
+                Description: server.description,
+                Type: {
+                    Name: "String",
+                    Kind: InputTypeKind.String,
+                    IsNullable: false
+                } as InputPrimitiveType,
+                Location: RequestLocation.Uri,
+                IsApiVersion: false,
+                IsResourceParameter: false,
+                IsContentType: false,
+                IsRequired: true,
+                IsEndpoint: true,
+                SkipUrlEncoding: false,
+                Explode: false,
+                Kind: InputOperationParameterKind.Client,
+                DefaultValue: {
+                    Type: {
+                        Name: "String",
+                        Kind: InputTypeKind.String,
+                        IsNullable: false
+                    } as InputPrimitiveType,
+                    Value: server.url
+                } as InputConstant
+            };
+            url = `{host}`;
+            parameters.push(variable);
+        }
         return {
-            url: server.url,
+            url: url,
             description: server.description,
             parameters
         };

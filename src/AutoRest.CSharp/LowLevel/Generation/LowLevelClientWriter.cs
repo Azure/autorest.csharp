@@ -8,23 +8,23 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Response = Azure.Response;
-using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
+using Response = Azure.Response;
+using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var clientType = client.Type;
             using (writer.Namespace(clientType.Namespace))
             {
+                WriteDPGIdentificationComment(writer, client);
                 writer.WriteXmlDocumentationSummary($"{client.Description}");
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {clientType:D}", scopeDeclarations: client.Fields.ScopeDeclarations))
                 {
@@ -96,6 +97,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
+        }
+
+        private static void WriteDPGIdentificationComment(CodeWriter writer, LowLevelClient client)
+        {
+            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}. {client.Description}");
         }
 
         private static void WriteClientFields(CodeWriter writer, LowLevelClient client)
@@ -279,7 +285,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var responseVariable = new CodeWriterDeclaration("response");
             var parameters = new List<FormattableString>();
-            foreach (var (protocolParameter, convenienceParameter)  in convenienceMethod.ProtocolToConvenienceParameters)
+            foreach (var (protocolParameter, convenienceParameter) in convenienceMethod.ProtocolToConvenienceParameters)
             {
                 if (convenienceParameter == KnownParameters.CancellationTokenParameter)
                 {
@@ -727,7 +733,7 @@ namespace AutoRest.CSharp.Generation.Writers
             static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
                 bodyType switch
                 {
-                    InputListType listType             => AddRequestOrResponseInputType(formattedSchemas, listType.ElementType, schemaName),
+                    InputListType listType => AddRequestOrResponseInputType(formattedSchemas, listType.ElementType, schemaName),
                     InputDictionaryType dictionaryType => AddRequestOrResponseInputType(formattedSchemas, dictionaryType.ValueType, schemaName),
                     _ => AddRequestOrResponseSchema(formattedSchemas, bodyType, schemaName),
                 };

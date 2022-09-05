@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -32,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteFields(CodeWriter writer, IReadOnlyList<FieldDeclaration> fields)
+        private static void WriteFields(CodeWriter writer, IEnumerable<FieldDeclaration> fields)
         {
             foreach (var field in fields)
             {
@@ -46,11 +45,13 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                WriteFieldsInitialization(writer, signature, model);
-                // TODO: Add IReadOnlyDictionary
-                foreach (var field in model.Fields.Where(f => TypeFactory.IsReadOnlyList(f.Type)))
+                var initializedFields = WriteFieldsInitialization(writer, signature, model);
+                foreach (var field in model.Fields.Where(f => !initializedFields.Contains(f)))
                 {
-                    writer.Line($"{field.Name:I} = new List<{field.Type.Arguments[0]}>(0).AsReadOnly();");
+                    if (field.DefaultValue is not null)
+                    {
+                        writer.Line($"{field.Name:I} = {field.DefaultValue};");
+                    }
                 }
             }
         }
@@ -64,18 +65,22 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteFieldsInitialization(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
+        private static ISet<FieldDeclaration> WriteFieldsInitialization(CodeWriter writer, ConstructorSignature signature, ModelTypeProvider model)
         {
             writer.WriteParametersValidation(signature.Parameters);
             writer.Line();
+
+            var initializedFields = new HashSet<FieldDeclaration>();
             foreach (var parameter in signature.Parameters)
             {
-                var field = model.GetFieldByParameterName(parameter.Name);
+                var field = model.Fields.GetFieldByParameter(parameter);
                 writer
                     .Append($"{field.Name:I} = {parameter.Name:I}")
                     .WriteConversion(parameter.Type, field.Type)
                     .LineRaw(";");
+                initializedFields.Add(field);
             }
+            return initializedFields;
         }
     }
 }

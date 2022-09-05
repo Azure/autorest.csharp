@@ -126,9 +126,10 @@
      ],
      "HttpMethod": "DELETE",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "16",
@@ -184,9 +185,10 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "21",
@@ -227,17 +229,15 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "24"
    }
   }
- ],
- "Auth": {
-  "$id": "25"
- }
+ ]
 }

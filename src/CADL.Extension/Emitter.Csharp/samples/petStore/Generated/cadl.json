@@ -62,73 +62,70 @@
   },
   {
    "$id": "9",
-   "Name": "Toy",
-   "Namespace": "PetStore",
-   "IsNullable": false,
-   "Properties": [
-    {
-     "$id": "10",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
-      "$id": "11",
-      "Name": "Int64",
-      "Kind": "Int64",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "12",
-     "Name": "petId",
-     "SerializedName": "petId",
-     "Description": "",
-     "Type": {
-      "$id": "13",
-      "Name": "Int64",
-      "Kind": "Int64",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "14",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "15",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "16",
    "Name": "ToyListResults",
    "Namespace": "PetStore",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "17",
+     "$id": "10",
      "Name": "items",
      "SerializedName": "items",
      "Description": "",
      "Type": {
-      "$id": "18",
+      "$id": "11",
       "Name": "Array",
       "ElementType": {
-       "$ref": "9"
+       "$id": "12",
+       "Name": "Toy",
+       "Namespace": "PetStore",
+       "IsNullable": false,
+       "Properties": [
+        {
+         "$id": "13",
+         "Name": "id",
+         "SerializedName": "id",
+         "Description": "",
+         "Type": {
+          "$id": "14",
+          "Name": "Int64",
+          "Kind": "Int64",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "15",
+         "Name": "petId",
+         "SerializedName": "petId",
+         "Description": "",
+         "Type": {
+          "$id": "16",
+          "Name": "Int64",
+          "Kind": "Int64",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "17",
+         "Name": "name",
+         "SerializedName": "name",
+         "Description": "",
+         "Type": {
+          "$id": "18",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        }
+       ]
       },
       "IsNullable": false
      },
@@ -152,6 +149,9 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$ref": "12"
   }
  ],
  "Clients": [
@@ -219,9 +219,10 @@
      ],
      "HttpMethod": "DELETE",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "28",
@@ -277,9 +278,10 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "33",
@@ -320,9 +322,10 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -388,24 +391,22 @@
         200
        ],
        "BodyType": {
-        "$ref": "16"
+        "$ref": "9"
        },
        "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{petStoreUrl}/",
+     "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}/toys",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "44"
    }
   }
- ],
- "Auth": {
-  "$id": "45"
- }
+ ]
 }

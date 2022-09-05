@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory, bool isCadlInput)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(typeFactory, operations, Fields, Declaration.Name, isCadlInput).ToArray();
+            var clientMethods = BuildMethods(typeFactory, operations, Fields, Declaration.Name).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
@@ -79,9 +79,9 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName, bool isCadlInput)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory, isCadlInput));
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);

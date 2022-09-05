@@ -31,8 +31,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             var collection = managedHsm.GetMhsmPrivateEndpointConnections();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
             {
@@ -49,8 +49,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             var collection = managedHsm.GetMhsmPrivateEndpointConnections();
             await collection.ExistsAsync("sample-pec");
         }
@@ -60,8 +60,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             var collection = managedHsm.GetMhsmPrivateEndpointConnections();
             await collection.GetAsync("sample-pec");
         }
@@ -71,8 +71,8 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             // Example: List managed HSM Pools in a subscription
 
-            ResourceIdentifier managedHsmResourceId = MgmtMockAndSample.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            MgmtMockAndSample.ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
             var collection = managedHsm.GetMhsmPrivateEndpointConnections();
             await foreach (var _ in collection.GetAllAsync())
             {

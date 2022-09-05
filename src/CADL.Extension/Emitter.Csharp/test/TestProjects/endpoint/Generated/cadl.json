@@ -68,17 +68,15 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{endpointServiceUrl}/",
+     "Uri": "{endpointServiceUrl}",
      "Path": "/endpoint/{action}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "9"
    }
   }
- ],
- "Auth": {
-  "$id": "10"
- }
+ ]
 }

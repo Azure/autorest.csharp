@@ -1,5 +1,6 @@
 import "@cadl-lang/rest";
 import "./decorators.mjs";
+import "@cadl-lang/openapi";
 
 using Cadl.Http;
 
@@ -63,13 +64,16 @@ namespace Pets {
   @doc("Delete a pet.")
   @summary("delete.")
   @delete
+  @OpenAPI.extension("x-ms-convenient-api", true)
   op delete(...PetId): Response<200> | Error;
 
   // @fancyDoc("List pets.")
   // op list(@query nextLink?: string): OkResponse<ResponsePage<Pet>> | Error;
 
   @doc("Returns a pet. Supports eTags.")
+  @OpenAPI.extension("x-ms-convenient-api", true)
   op read(...PetId): Pet | (NotModifiedResponse & Pet) | Error;
 
+  @OpenAPI.extension("x-ms-convenient-api", true)
   @post op create(@body pet: Pet): Pet | Error;
 }

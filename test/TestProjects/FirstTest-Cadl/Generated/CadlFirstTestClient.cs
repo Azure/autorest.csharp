@@ -14,9 +14,14 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. This is a sample cadl project.
     /// <summary> This is a sample cadl project. </summary>
     public partial class CadlFirstTestClient
     {
+        private const string AuthorizationHeader = "x-ms-api-key";
+        private readonly AzureKeyCredential _keyCredential;
+        private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
+        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -32,23 +37,50 @@ namespace CadlFirstTest
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public CadlFirstTestClient(Uri endpoint) : this(endpoint, new CadlfirsttestClientOptions())
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public CadlFirstTestClient(Uri endpoint, CadlfirsttestClientOptions options)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(TokenCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(AzureKeyCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
+        {
+            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new CadlfirsttestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public CadlFirstTestClient(TokenCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
+        {
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            options ??= new CadlfirsttestClientOptions();
+
+            ClientDiagnostics = new ClientDiagnostics(options, true);
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -107,8 +139,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopActionAsync with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new CadlFirstTestClient(endpoint);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = await client.TopActionAsync("<action>");
         /// 
@@ -155,8 +187,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction with required parameters and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new CadlFirstTestClient(endpoint);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = client.TopAction("<action>");
         /// 
@@ -195,52 +227,14 @@ namespace CadlFirstTest
         }
 
         /// <summary> top level method2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> TopAction2ValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TopAction2Async(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> top level method2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> TopAction2Value(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TopAction2(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> top level method2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
         /// This sample shows how to call TopAction2Async and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new CadlFirstTestClient(endpoint);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = await client.TopAction2Async();
         /// 
@@ -283,8 +277,8 @@ namespace CadlFirstTest
         /// <example>
         /// This sample shows how to call TopAction2 and parse the result.
         /// <code><![CDATA[
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new CadlFirstTestClient(endpoint);
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
         /// 
         /// Response response = client.TopAction2();
         /// 
@@ -320,6 +314,126 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> top level patch. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PatchActionAsync with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
+        /// 
+        /// var data = new {
+        ///     name = "<name>",
+        /// };
+        /// 
+        /// Response response = await client.PatchActionAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.PatchAction");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePatchActionRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> top level patch. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PatchAction with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
+        /// 
+        /// var data = new {
+        ///     name = "<name>",
+        /// };
+        /// 
+        /// Response response = client.PatchAction(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response PatchAction(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.PatchAction");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePatchActionRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateTopActionRequest(string action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -328,10 +442,10 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -343,9 +457,25 @@ namespace CadlFirstTest
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendRaw("/", false);
             uri.AppendPath("/top2", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreatePatchActionRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/patch", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 

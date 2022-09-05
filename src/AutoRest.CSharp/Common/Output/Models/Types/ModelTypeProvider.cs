@@ -11,47 +11,59 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : TypeProvider
     {
+        private ModelTypeProviderFields? _fields;
+        private ConstructorSignature? _publicConstructor;
+        private ConstructorSignature? _serializationConstructor;
+
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
         public string Description { get; }
-        public IReadOnlyList<FieldDeclaration> Fields { get; }
-        public ConstructorSignature PublicConstructor { get; }
-        public ConstructorSignature SerializationConstructor { get; }
+        public bool IncludeSerializer { get; }
+        public bool IncludeDeserializer { get; }
 
-        private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
-        // parameter name should be unique since it's bound to field property
-        private readonly IReadOnlyDictionary<string, FieldDeclaration> _parameterNamesToFields;
+        public ModelTypeProviderFields Fields => _fields ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
+        public ConstructorSignature PublicConstructor => _publicConstructor ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
+        public ConstructorSignature SerializationConstructor => _serializationConstructor ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
 
-        public ModelTypeProvider(InputModelType inputModel, TypeFactory typeFactory, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             Description = inputModel.Description ?? $"The {inputModel.Name}.";
+            IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
+            IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+        }
 
-            (_fieldsToInputs, var publicParameters, var serializationParameters, _parameterNamesToFields) = CreateParametersAndFieldsForRoundTripModel(inputModel, typeFactory);
+        public void FinishInitialization(InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        {
+            if (_fields is not null)
+            {
+                throw new InvalidOperationException("Model is initialized already");
+            }
 
-            Fields = _fieldsToInputs.Keys.ToList();
-            (PublicConstructor, SerializationConstructor) = BuildConstructors(Declaration.Name, publicParameters, serializationParameters);
+            _fields = new ModelTypeProviderFields(inputModelType, typeFactory, sourceInputModel?.CreateForModel(ExistingType));
+            _publicConstructor = CreatePublicConstructor(Declaration.Name, inputModelType.Usage, Fields.PublicConstructorParameters);
+            _serializationConstructor = IncludeDeserializer
+                ? CreateSerializationConstructor(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters) ?? _publicConstructor
+                : _publicConstructor;
         }
 
         // Serialization uses field and property names that first need to verified for uniqueness
         // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
         public JsonObjectSerialization CreateSerialization() => new(Type, SerializationConstructor, CreatePropertySerializations().ToArray(), null, null, false, true, true);
 
-        public FieldDeclaration GetFieldByParameterName(string name) => _parameterNamesToFields[name];
-
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            foreach (var (parameterName, field) in _parameterNamesToFields)
+            foreach (var parameter in Fields.SerializationParameters)
             {
+                var field = Fields.GetFieldByParameter(parameter);
                 string name;
                 try
                 {
@@ -62,79 +74,39 @@ namespace AutoRest.CSharp.Output.Models.Types
                     throw new InvalidOperationException($"Field with {field.Declaration.RequestedName} isn't written yet to type {Declaration.Name}", e);
                 }
 
-                var property = _fieldsToInputs[field];
+                var property = Fields.GetInputByField(field);
                 var serializedName = property.SerializedName ?? property.Name;
                 var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
                 var valueType = field.Type;
                 var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, valueType);
-                yield return new JsonPropertySerialization(parameterName, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+                yield return new JsonPropertySerialization(parameter.Name, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
             }
         }
 
-        private static (IReadOnlyDictionary<FieldDeclaration, InputModelProperty> FieldsToInputs, IReadOnlyList<Parameter> PublicParameters, IReadOnlyList<Parameter> SerializationParameters, IReadOnlyDictionary<string, FieldDeclaration> ParametersToFields) CreateParametersAndFieldsForRoundTripModel(InputModelType inputModel, TypeFactory typeFactory)
+        private static ConstructorSignature? CreateSerializationConstructor(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
-            var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
-            var publicParameters = new List<Parameter>();
-            var serializatoinParameters = new List<Parameter>();
-            var parametersToFields = new Dictionary<string, FieldDeclaration>();
-
-            foreach (var inputModelProperty in inputModel.Properties)
+            if (!serializationParameters.Any(p => TypeFactory.IsList(p.Type)) && publicParameters.SequenceEqual(serializationParameters))
             {
-                var fieldModifiers = inputModelProperty.IsReadOnly || inputModelProperty.Type is InputDictionaryType or InputListType
-                    ? Public | ReadOnly
-                    : Public;
-                var fieldType = GetDefaultPropertyType(inputModel.Usage, inputModelProperty, typeFactory);
-
-                var field = new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, inputModelProperty.Name.FirstCharToUpperCase(), writeAsProperty: true);
-                fieldsToInputs[field] = inputModelProperty;
-                if (inputModelProperty.IsRequired)
-                {
-                    var parameter = Parameter.FromModelProperty(inputModelProperty, fieldType);
-                    parametersToFields[parameter.Name] = field;
-                    serializatoinParameters.Add(parameter);
-                    if (!inputModelProperty.IsReadOnly)
-                    {
-                        publicParameters.Add(parameter);
-                    }
-                }
+                return null;
             }
 
-            return (fieldsToInputs, publicParameters, serializatoinParameters, parametersToFields);
+            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters.Select(CreateSerializationConstructorParameter).ToList());
         }
 
-        private static CSharpType GetDefaultPropertyType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
+        private static ConstructorSignature CreatePublicConstructor(string name, InputModelTypeUsage usage, IEnumerable<Parameter> parameters)
         {
-            var valueType = typeFactory.CreateType(property.Type);
+            var summary = $"Initializes a new instance of {name}";
+            var accessibility = usage == InputModelTypeUsage.Output
+                ? MethodSignatureModifiers.Internal
+                : MethodSignatureModifiers.Public;
 
-            if (!modelUsage.HasFlag(InputModelTypeUsage.Input) ||
-                property.IsReadOnly)
-            {
-                valueType = TypeFactory.GetOutputType(valueType);
-            }
-
-            return valueType;
-        }
-
-        private static (ConstructorSignature PublicConstructor, ConstructorSignature SerializationConstructor) BuildConstructors(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
-        {
-            ConstructorSignature publicConstructor;
-            ConstructorSignature serializationConstructor;
-            if (!publicParameters.SequenceEqual(serializationParameters) || serializationParameters.Any(p => TypeFactory.IsList(p.Type)))
-            {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters);
-                publicConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public,
-                    publicParameters.Select(p => CreatePublicConstructorParameter(p)).ToList());
-            }
-            else
-            {
-                serializationConstructor = new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Public, serializationParameters);
-                publicConstructor = serializationConstructor;
-
-            }
-            return (publicConstructor, serializationConstructor);
+            return new ConstructorSignature(name, summary, null, accessibility, parameters.Select(CreatePublicConstructorParameter).ToList());
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsReadWriteList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+
+        private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
+            => p with { Validation = ValidationType.None };
     }
 }

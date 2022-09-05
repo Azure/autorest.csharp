@@ -17,6 +17,7 @@ import {
     Program,
     Type
 } from "@cadl-lang/compiler";
+import { getDiscriminator } from "@cadl-lang/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
@@ -37,7 +38,7 @@ import { InputTypeKind } from "../type/InputTypeKind.js";
 /**
  * Map calType to csharp InputTypeKind
  */
-export function mapCalTypeToCsharpInputTypeKind(
+export function mapCadlTypeToCSharpInputTypeKind(
     program: Program,
     cadlType: Type
 ): InputTypeKind {
@@ -48,7 +49,7 @@ export function mapCalTypeToCsharpInputTypeKind(
             const name = cadlType.name;
             switch (name) {
                 case "bytes":
-                    return InputTypeKind.Bytes;
+                    return InputTypeKind.BinaryData;
                 case "int8":
                     return InputTypeKind.Int32;
                 case "int16":
@@ -82,7 +83,7 @@ export function mapCalTypeToCsharpInputTypeKind(
                 case "plainTime":
                     return InputTypeKind.Time;
                 case "duration":
-                    return InputTypeKind.String;
+                    return InputTypeKind.Duration;
                 case "Map":
                     return InputTypeKind.Dictionary;
                 default:
@@ -92,6 +93,8 @@ export function mapCalTypeToCsharpInputTypeKind(
             return InputTypeKind.Object;
         case "Enum":
             return InputTypeKind.Enum;
+        case "Number":
+            return InputTypeKind.Int32;
         case "String":
             if (format === "date") return InputTypeKind.DateTime;
             if (format === "uri") return InputTypeKind.Uri;
@@ -190,7 +193,7 @@ function getEffectiveSchemaType(program: Program, type: Type): Type {
     }
 }
 
-function getDefaultValue(type: Type): any {
+export function getDefaultValue(type: Type): any {
     switch (type.kind) {
         case "String":
             return type.value;
@@ -215,14 +218,14 @@ export function getInputType(
     enums: Map<string, InputEnumType>
 ): InputType {
     if (type.kind === "Model") {
-        return getInputModelType(program, type);
+        return getInputModelType(type);
     } else if (
         type.kind === "String" ||
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
         // For literal types, we just want to emit them directly as well.
-        const builtInKind: InputTypeKind = mapCalTypeToCsharpInputTypeKind(
+        const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
             program,
             type
         );
@@ -240,7 +243,7 @@ export function getInputType(
         } as InputType;
     }
 
-    function getInputModelType(program: Program, m: ModelType): InputType {
+    function getInputModelType(m: ModelType): InputType {
         const intrinsicName = getIntrinsicModelName(program, m);
         if (intrinsicName && intrinsicName === "string") {
             const values = getKnownValues(program, m);
@@ -255,10 +258,9 @@ export function getInputType(
                 const name = getIntrinsicModelName(program, m.indexer.key);
                 if (m.indexer.value) {
                     if (name === "integer") {
-                        return getInputTypeForArray(program, m.indexer.value);
+                        return getInputTypeForArray(m.indexer.value);
                     } else {
                         return getInputTypeForMap(
-                            program,
                             m.indexer.key,
                             m.indexer.value
                         );
@@ -266,6 +268,7 @@ export function getInputType(
                 }
             }
         }
+
         if (m.name === intrinsicName) {
             // if the model is one of the Cadl Intrinsic type.
             // it's a base Cadl "primitive" that corresponds directly to an c# data type.
@@ -273,72 +276,25 @@ export function getInputType(
             // emit the base type directly.
             return {
                 Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
-                Kind: mapCalTypeToCsharpInputTypeKind(program, m),
+                Kind: mapCadlTypeToCSharpInputTypeKind(program, m),
                 IsNullable: false
             } as InputPrimitiveType;
         } else {
-            m = getEffectiveSchemaType(program, m) as ModelType;
-            const name = getFriendlyName(program, m) ?? m.name;
-            let model = models.get(name);
-            if (!model) {
-                // Get properties of the model.
-                const properties: InputModelProperty[] = [];
-                m.properties.forEach(
-                    (value: ModelTypeProperty, key: string) => {
-                        // console.log(key, value);
-                        const vis = getVisibility(program, value);
-                        let isReadOnly: boolean = false;
-                        if (vis && vis.includes("read") && vis.length == 1) {
-                            isReadOnly = true;
-                        }
-                        const inputProp = {
-                            Name: value.name,
-                            SerializedName: value.name,
-                            Description: "",
-                            Type: getInputType(
-                                program,
-                                value.type,
-                                models,
-                                enums
-                            ),
-                            IsRequired: !value.optional,
-                            IsReadOnly: isReadOnly, //TODO: get the require and readonly value from cadl.
-                            IsDiscriminator: false
-                        };
-                        properties.push(inputProp);
-                    }
-                );
-
-                model = {
-                    Name: name,
-                    Namespace: m.namespace?.name,
-                    Description: getDoc(program, m),
-                    IsNullable: false,
-                    Properties: properties
-                } as InputModelType;
-
-                models.set(name, model);
-            }
-
-            return model;
+            return getInputModelForModel(m);
         }
     }
 
     function getInputModelForExtensibleEnum(
         m: ModelType,
         e: EnumType
-    ): InputType {
+    ): InputEnumType {
         let extensibleEnum = enums.get(e.name);
         if (!extensibleEnum) {
-            const innerEnum: InputEnumType = getInputTypeForEnum(
-                e,
-                false
-            ) as InputEnumType;
+            const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
             if (!innerEnum) {
-                return {
-                    Name: InputTypeKind.UnKnownKind,
-                    IsNullable: false
-                } as InputType;
+                throw new Error(
+                    `Extensible enum type '${e.name}' has no values defined.`
+                );
             }
             extensibleEnum = {
                 Name: m.name,
@@ -358,14 +314,13 @@ export function getInputType(
     function getInputTypeForEnum(
         e: EnumType,
         addToCollection: boolean = true
-    ): InputType {
+    ): InputEnumType {
         let enumType = enums.get(e.name);
         if (!enumType) {
             if (e.members.length == 0) {
-                return {
-                    Name: InputTypeKind.UnKnownKind,
-                    IsNullable: false
-                } as InputType;
+                throw new Error(
+                    `Enum type '${e.name}' doesn't define any values.`
+                );
             }
             const allowValues: InputEnumTypeValue[] = [];
             const enumValueType = enumMemberType(e.members[0]);
@@ -407,10 +362,7 @@ export function getInputType(
         }
     }
 
-    function getInputTypeForArray(
-        program: Program,
-        elementType: Type
-    ): InputListType {
+    function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Name: "Array",
             ElementType: getInputType(program, elementType, models, enums),
@@ -418,16 +370,116 @@ export function getInputType(
         } as InputListType;
     }
 
-    function getInputTypeForMap(
-        program: Program,
-        key: Type,
-        value: Type
-    ): InputType {
+    function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Name: "Dictionary",
             KeyType: getInputType(program, key, models, enums),
             ValueType: getInputType(program, value, models, enums),
             IsNullable: false
         } as InputDictionaryType;
+    }
+
+    function getInputModelForModel(m: ModelType): InputModelType {
+        m = getEffectiveSchemaType(program, m) as ModelType;
+        const name = getFriendlyName(program, m) ?? m.name;
+        let model = models.get(name);
+        if (!model) {
+            const baseModel = getInputModelBaseType(m.baseModel);
+            const properties: InputModelProperty[] = [];
+
+            model = {
+                Name: name,
+                Namespace: m.namespace?.name,
+                Description: getDoc(program, m),
+                IsNullable: false,
+                DiscriminatorPropertyName: getDiscriminator(program, m)
+                    ?.propertyName,
+                DiscriminatorValue: getDiscriminatorValue(m, baseModel),
+                BaseModel: baseModel,
+                Properties: properties // Properties should be the last assigned to model
+            } as InputModelType;
+
+            models.set(name, model);
+
+            // Resolve properties after model is added to the map to resolve possible circular dependencies
+            addModelProperties(
+                m.properties,
+                properties,
+                baseModel?.DiscriminatorPropertyName
+            );
+
+            // Temporary part. Derived types may not be referenced directly by any operation
+            // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
+            if (model.DiscriminatorPropertyName && m.derivedModels) {
+                for (const dm of m.derivedModels) {
+                    getInputType(program, dm, models, enums);
+                }
+            }
+        }
+
+        return model;
+    }
+
+    function getDiscriminatorValue(
+        m: ModelType,
+        baseModel?: InputModelType
+    ): string | undefined {
+        const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
+
+        if (discriminatorPropertyName) {
+            const discriminatorProperty = m.properties.get(
+                discriminatorPropertyName
+            );
+            if (discriminatorProperty?.type.kind === "String") {
+                return discriminatorProperty.type.value;
+            }
+        }
+
+        return undefined;
+    }
+
+    function addModelProperties(
+        inputProperties: Map<string, ModelTypeProperty>,
+        outputProperties: InputModelProperty[],
+        discriminatorPropertyName?: string
+    ): void {
+        inputProperties.forEach((value: ModelTypeProperty, key: string) => {
+            if (value.name !== discriminatorPropertyName) {
+                const vis = getVisibility(program, value);
+                let isReadOnly: boolean = false;
+                if (vis && vis.includes("read") && vis.length === 1) {
+                    isReadOnly = true;
+                }
+                const inputProp = {
+                    Name: value.name,
+                    SerializedName: value.name,
+                    Description: "",
+                    Type: getInputType(program, value.type, models, enums),
+                    IsRequired: !value.optional,
+                    IsReadOnly: isReadOnly,
+                    IsDiscriminator: false
+                };
+                outputProperties.push(inputProp);
+            }
+        });
+    }
+
+    function getInputModelBaseType(m?: ModelType): InputModelType | undefined {
+        if (!m) {
+            return undefined;
+        }
+
+        // Arrays and dictionaries can't be a base type
+        if (m.indexer) {
+            return undefined;
+        }
+
+        // Cadl "primitive" types can't be base types for models
+        const intrinsicName = getIntrinsicModelName(program, m);
+        if (intrinsicName) {
+            return undefined;
+        }
+
+        return getInputModelForModel(m);
     }
 }
