@@ -89,14 +89,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             foreach (var set in UniqueSets)
             {
                 var nameSet = GetRestDiagNames(set);
-                yield return new FieldDeclaration(
-                    FieldModifiers,
-                    typeof(ClientDiagnostics),
-                    nameSet.DiagnosticField);
-                yield return new FieldDeclaration(
-                    FieldModifiers,
-                    set.RestClient.Type,
-                    nameSet.RestField);
+                yield return nameSet.DiagnosticFieldDeclaration;
+                yield return nameSet.RestFieldDeclaration;
             }
 
             var additionalFields = GetAdditionalFields();
@@ -147,7 +141,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"{uniqueName}ClientDiagnostics",
                 $"_{uniqueVariable}RestClient",
                 $"{uniqueName}RestClient",
-                $"{uniqueVariable}ApiVersion");
+                $"{uniqueVariable}ApiVersion",
+                FieldModifiers,
+                client.Type);
             _nameCache.Add(set, result);
 
             return result;

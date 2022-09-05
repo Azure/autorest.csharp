@@ -210,11 +210,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticsProperty);
             string diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
-            string apiVersionText = string.Empty;
+            FormattableString apiVersionText = $"";
             if (resource is not null)
             {
-                string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
-                _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
+                var apiVersionVariable = new CodeWriterDeclaration(GetApiVersionVariableName(restClient, resource));
+                _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable:D});");
                 apiVersionText = $", {apiVersionVariable}";
             }
             _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionText)};");
@@ -401,32 +401,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
-        protected string GetRestConstructorString(MgmtRestClient restClient, string apiVersionVariable)
+        protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString apiVersionVariable)
         {
             string subIdVariable = ", Id.SubscriptionId";
             if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
                 subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
+            return (FormattableString)$"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);
         private string GetRestClientName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
-            return UseField ? names.RestField : names.RestProperty;
+            return UseField ? names.RestFieldDeclaration.Name : names.RestProperty;
         }
 
         protected string GetDiagnosticName(MgmtRestOperation operation) => GetDiagnosticName(operation.RestClient, operation.Resource);
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
-            return UseField ? names.DiagnosticField : names.DiagnosticProperty;
+            return UseField ? names.DiagnosticFieldDeclaration.Name : names.DiagnosticProperty;
         }
 
         protected string GetRestPropertyName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).RestProperty;
-        protected string GetRestFieldName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).RestField;
+        protected string GetRestFieldName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).RestFieldDeclaration.Name;
         protected string GetDiagnosticsPropertyName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).DiagnosticProperty;
-        protected string GetDiagnosticFieldName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).DiagnosticField;
+        protected string GetDiagnosticFieldName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).DiagnosticFieldDeclaration.Name;
         protected virtual string GetApiVersionVariableName(MgmtRestClient client, Resource? resource) => This.GetRestDiagNames(new NameSetKey(client, resource)).ApiVersionVariable;
 
         protected internal static string GetConfigureAwait(bool isAsync)

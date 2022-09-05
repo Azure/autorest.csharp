@@ -145,7 +145,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
             await project.PostProcess(PostProcess);
-
         }
 
         private static async Task<Project> PostProcess(Project project)
