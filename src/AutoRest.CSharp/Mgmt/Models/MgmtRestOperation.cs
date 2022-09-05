@@ -382,6 +382,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             //try for list method
             originalType = GetListMethodItemType() ?? originalType;
 
+            if (Configuration.MgmtConfiguration.PreventWrappingReturnType.Contains(OperationId))
+                return originalType;
+
             if (!IsResourceDataType(originalType, out var data))
                 return originalType;
 
