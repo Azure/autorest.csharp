@@ -11,7 +11,10 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a virtual machine scale set network profile&apos;s network configurations. </summary>
+    /// <summary>
+    /// Describes a virtual machine scale set network profile&apos;s network configurations.
+    /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration
+    /// </summary>
     public partial class VirtualMachineScaleSetUpdateNetworkConfiguration : SubResource
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkConfiguration. </summary>
@@ -21,14 +24,38 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkConfiguration. </summary>
-        /// <param name="id"> Resource Id. </param>
-        /// <param name="name"> The network configuration name. </param>
-        /// <param name="primary"> Whether this is a primary NIC on a virtual machine. </param>
-        /// <param name="enableAcceleratedNetworking"> Specifies whether the network interface is accelerated networking-enabled. </param>
-        /// <param name="networkSecurityGroup"> The network security group. </param>
-        /// <param name="dnsSettings"> The dns settings to be applied on the network interfaces. </param>
-        /// <param name="ipConfigurations"> The virtual machine scale set IP Configuration. </param>
-        /// <param name="enableIPForwarding"> Whether IP forwarding enabled on this NIC. </param>
+        /// <param name="id">
+        /// Resource Id
+        /// Serialized Name: SubResource.id
+        /// </param>
+        /// <param name="name">
+        /// The network configuration name.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.name
+        /// </param>
+        /// <param name="primary">
+        /// Whether this is a primary NIC on a virtual machine.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.primary
+        /// </param>
+        /// <param name="enableAcceleratedNetworking">
+        /// Specifies whether the network interface is accelerated networking-enabled.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableAcceleratedNetworking
+        /// </param>
+        /// <param name="networkSecurityGroup">
+        /// The network security group.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.networkSecurityGroup
+        /// </param>
+        /// <param name="dnsSettings">
+        /// The dns settings to be applied on the network interfaces.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.dnsSettings
+        /// </param>
+        /// <param name="ipConfigurations">
+        /// The virtual machine scale set IP Configuration.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.ipConfigurations
+        /// </param>
+        /// <param name="enableIPForwarding">
+        /// Whether IP forwarding enabled on this NIC.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableIPForwarding
+        /// </param>
         internal VirtualMachineScaleSetUpdateNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id)
         {
             Name = name;
@@ -40,13 +67,25 @@ namespace MgmtRenameRules.Models
             EnableIPForwarding = enableIPForwarding;
         }
 
-        /// <summary> The network configuration name. </summary>
+        /// <summary>
+        /// The network configuration name.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.name
+        /// </summary>
         public string Name { get; set; }
-        /// <summary> Whether this is a primary NIC on a virtual machine. </summary>
+        /// <summary>
+        /// Whether this is a primary NIC on a virtual machine.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.primary
+        /// </summary>
         public bool? Primary { get; set; }
-        /// <summary> Specifies whether the network interface is accelerated networking-enabled. </summary>
+        /// <summary>
+        /// Specifies whether the network interface is accelerated networking-enabled.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableAcceleratedNetworking
+        /// </summary>
         public bool? EnableAcceleratedNetworking { get; set; }
-        /// <summary> The network security group. </summary>
+        /// <summary>
+        /// The network security group.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.networkSecurityGroup
+        /// </summary>
         internal WritableSubResource NetworkSecurityGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier NetworkSecurityGroupId
@@ -60,9 +99,15 @@ namespace MgmtRenameRules.Models
             }
         }
 
-        /// <summary> The dns settings to be applied on the network interfaces. </summary>
+        /// <summary>
+        /// The dns settings to be applied on the network interfaces.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.dnsSettings
+        /// </summary>
         internal VirtualMachineScaleSetNetworkConfigurationDnsSettings DnsSettings { get; set; }
-        /// <summary> List of DNS servers IP addresses. </summary>
+        /// <summary>
+        /// List of DNS servers IP addresses
+        /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers
+        /// </summary>
         public IList<string> DnsServers
         {
             get
@@ -73,9 +118,15 @@ namespace MgmtRenameRules.Models
             }
         }
 
-        /// <summary> The virtual machine scale set IP Configuration. </summary>
+        /// <summary>
+        /// The virtual machine scale set IP Configuration.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.ipConfigurations
+        /// </summary>
         public IList<VirtualMachineScaleSetUpdateIPConfiguration> IPConfigurations { get; }
-        /// <summary> Whether IP forwarding enabled on this NIC. </summary>
+        /// <summary>
+        /// Whether IP forwarding enabled on this NIC.
+        /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableIPForwarding
+        /// </summary>
         public bool? EnableIPForwarding { get; set; }
     }
 }

@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types. </summary>
+    /// <summary>
+    /// Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types
+    /// Serialized Name: StorageAccountTypes
+    /// </summary>
     public readonly partial struct StorageAccountType : IEquatable<StorageAccountType>
     {
         private readonly string _value;
@@ -27,13 +30,25 @@ namespace MgmtRenameRules.Models
         private const string StandardSSDLRSValue = "StandardSSD_LRS";
         private const string UltraSSDLRSValue = "UltraSSD_LRS";
 
-        /// <summary> Standard_LRS. </summary>
+        /// <summary>
+        /// Standard_LRS
+        /// Serialized Name: StorageAccountTypes.Standard_LRS
+        /// </summary>
         public static StorageAccountType StandardLRS { get; } = new StorageAccountType(StandardLRSValue);
-        /// <summary> Premium_LRS. </summary>
+        /// <summary>
+        /// Premium_LRS
+        /// Serialized Name: StorageAccountTypes.Premium_LRS
+        /// </summary>
         public static StorageAccountType PremiumLRS { get; } = new StorageAccountType(PremiumLRSValue);
-        /// <summary> StandardSSD_LRS. </summary>
+        /// <summary>
+        /// StandardSSD_LRS
+        /// Serialized Name: StorageAccountTypes.StandardSSD_LRS
+        /// </summary>
         public static StorageAccountType StandardSSDLRS { get; } = new StorageAccountType(StandardSSDLRSValue);
-        /// <summary> UltraSSD_LRS. </summary>
+        /// <summary>
+        /// UltraSSD_LRS
+        /// Serialized Name: StorageAccountTypes.UltraSSD_LRS
+        /// </summary>
         public static StorageAccountType UltraSSDLRS { get; } = new StorageAccountType(UltraSSDLRSValue);
         /// <summary> Determines if two <see cref="StorageAccountType"/> values are the same. </summary>
         public static bool operator ==(StorageAccountType left, StorageAccountType right) => left.Equals(right);

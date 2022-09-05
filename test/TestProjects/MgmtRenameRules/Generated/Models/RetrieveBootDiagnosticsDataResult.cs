@@ -9,7 +9,10 @@ using System;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The SAS URIs of the console screenshot and serial log blobs. </summary>
+    /// <summary>
+    /// The SAS URIs of the console screenshot and serial log blobs.
+    /// Serialized Name: RetrieveBootDiagnosticsDataResult
+    /// </summary>
     public partial class RetrieveBootDiagnosticsDataResult
     {
         /// <summary> Initializes a new instance of RetrieveBootDiagnosticsDataResult. </summary>
@@ -18,17 +21,29 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of RetrieveBootDiagnosticsDataResult. </summary>
-        /// <param name="consoleScreenshotBlobUri"> The console screenshot blob URI. </param>
-        /// <param name="serialConsoleLogBlobUri"> The serial console log blob URI. </param>
+        /// <param name="consoleScreenshotBlobUri">
+        /// The console screenshot blob URI
+        /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri
+        /// </param>
+        /// <param name="serialConsoleLogBlobUri">
+        /// The serial console log blob URI.
+        /// Serialized Name: RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri
+        /// </param>
         internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
         }
 
-        /// <summary> The console screenshot blob URI. </summary>
+        /// <summary>
+        /// The console screenshot blob URI
+        /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri
+        /// </summary>
         public Uri ConsoleScreenshotBlobUri { get; }
-        /// <summary> The serial console log blob URI. </summary>
+        /// <summary>
+        /// The serial console log blob URI.
+        /// Serialized Name: RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri
+        /// </summary>
         public Uri SerialConsoleLogBlobUri { get; }
     }
 }
