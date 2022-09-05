@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes Windows Remote Management configuration of the VM. </summary>
+    /// <summary>
+    /// Describes Windows Remote Management configuration of the VM
+    /// Serialized Name: WinRMConfiguration
+    /// </summary>
     internal partial class WinRMConfiguration
     {
         /// <summary> Initializes a new instance of WinRMConfiguration. </summary>
@@ -20,13 +23,19 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of WinRMConfiguration. </summary>
-        /// <param name="listeners"> The list of Windows Remote Management listeners. </param>
+        /// <param name="listeners">
+        /// The list of Windows Remote Management listeners
+        /// Serialized Name: WinRMConfiguration.listeners
+        /// </param>
         internal WinRMConfiguration(IList<WinRMListener> listeners)
         {
             Listeners = listeners;
         }
 
-        /// <summary> The list of Windows Remote Management listeners. </summary>
+        /// <summary>
+        /// The list of Windows Remote Management listeners
+        /// Serialized Name: WinRMConfiguration.listeners
+        /// </summary>
         public IList<WinRMListener> Listeners { get; }
     }
 }

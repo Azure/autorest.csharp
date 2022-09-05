@@ -133,7 +133,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (property == null)
                 return;
             ApplyNewName(property.Language, renameTarget.NewName);
-            ApplyNewFormat(property.Schema, renameTarget.NewFormat);
+            if (property.Schema is ArraySchema arraySchema)
+                ApplyNewFormat(arraySchema.ElementType, renameTarget.NewFormat);
+            else
+                ApplyNewFormat(property.Schema, renameTarget.NewFormat);
         }
 
         public static void UpdateAcronyms()

@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace security_key_LowLevel
 {
+    // Data plane generated client. The AutorestSecurityKey service client.
     /// <summary> The AutorestSecurityKey service client. </summary>
     public partial class AutorestSecurityKeyClient
     {

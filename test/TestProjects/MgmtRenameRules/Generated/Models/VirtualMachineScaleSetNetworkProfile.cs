@@ -11,7 +11,10 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a virtual machine scale set network profile. </summary>
+    /// <summary>
+    /// Describes a virtual machine scale set network profile.
+    /// Serialized Name: VirtualMachineScaleSetNetworkProfile
+    /// </summary>
     public partial class VirtualMachineScaleSetNetworkProfile
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkProfile. </summary>
@@ -21,15 +24,24 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkProfile. </summary>
-        /// <param name="healthProbe"> A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;. </param>
-        /// <param name="networkInterfaceConfigurations"> The list of network configurations. </param>
+        /// <param name="healthProbe">
+        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;.
+        /// Serialized Name: VirtualMachineScaleSetNetworkProfile.healthProbe
+        /// </param>
+        /// <param name="networkInterfaceConfigurations">
+        /// The list of network configurations.
+        /// Serialized Name: VirtualMachineScaleSetNetworkProfile.networkInterfaceConfigurations
+        /// </param>
         internal VirtualMachineScaleSetNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations)
         {
             HealthProbe = healthProbe;
             NetworkInterfaceConfigurations = networkInterfaceConfigurations;
         }
 
-        /// <summary> A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;. </summary>
+        /// <summary>
+        /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}&apos;.
+        /// Serialized Name: VirtualMachineScaleSetNetworkProfile.healthProbe
+        /// </summary>
         internal WritableSubResource HealthProbe { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier HealthProbeId
@@ -43,7 +55,10 @@ namespace MgmtRenameRules.Models
             }
         }
 
-        /// <summary> The list of network configurations. </summary>
+        /// <summary>
+        /// The list of network configurations.
+        /// Serialized Name: VirtualMachineScaleSetNetworkProfile.networkInterfaceConfigurations
+        /// </summary>
         public IList<VirtualMachineScaleSetNetworkConfiguration> NetworkInterfaceConfigurations { get; }
     }
 }
