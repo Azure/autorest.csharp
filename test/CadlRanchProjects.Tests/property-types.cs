@@ -100,18 +100,103 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(204, response.Status);
         }, new[] { TestServerType.CadlRanch });
 
-        //[Test]
-        //public Task Models_Property_Types_Duration_get() => Test(async (host) =>
-        //{
-        //    Response<DurationProperty> response = await new DurationClient(host, null).GetValueAsync();
-        //    Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value.Property);
-        //}, new[] { TestServerType.CadlRanch });
+        [Test]
+        public Task Models_Property_Types_Duration_get() => Test(async (host) =>
+        {
+            Response<DurationProperty> response = await new DurationClient(host, null).GetValueAsync();
+            Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value.Property);
+        }, new[] { TestServerType.CadlRanch });
 
-        //[Test]
-        //public Task Models_Property_Types_Duration_put() => Test(async (host) =>
-        //{
-        //    Response response = await new DurationClient(host, null).PutAsync(new DurationProperty(XmlConvert.ToTimeSpan("P123DT22H14M12.011S")));
-        //    Assert.AreEqual(204, response.Status);
-        //}, new[] { TestServerType.CadlRanch });
+        [Test]
+        public Task Models_Property_Types_Duration_put() => Test(async (host) =>
+        {
+            Response response = await new DurationClient(host, null).PutAsync(new DurationProperty(XmlConvert.ToTimeSpan("P123DT22H14M12.011S")));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_Enum_get() => Test(async (host) =>
+        {
+            Response<EnumProperty> response = await new EnumClient(host, null).GetValueAsync();
+            Assert.AreEqual(InnerEnum.ValueOne, response.Value.Property);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_Enum_put() => Test(async (host) =>
+        {
+            Response response = await new EnumClient(host, null).PutAsync(new EnumProperty(InnerEnum.ValueOne));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_ExtensibleEnum_get() => Test(async (host) =>
+        {
+            Response<ExtensibleEnumProperty> response = await new ExtensibleEnumClient(host, null).GetValueAsync();
+            Assert.AreEqual(InnerEnum.ValueOne, response.Value.Property);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_ExtensibleEnum_put() => Test(async (host) =>
+        {
+            Response response = await new ExtensibleEnumClient(host, null).PutAsync(new ExtensibleEnumProperty(InnerEnum.ValueOne));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_Model_get() => Test(async (host) =>
+        {
+            Response<ModelProperty> response = await new ModelClient(host, null).GetValueAsync();
+            Assert.AreEqual("hello", response.Value.Property.Property);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_Model_put() => Test(async (host) =>
+        {
+            Response response = await new ModelClient(host, null).PutAsync(new ModelProperty(new InnerModel("hello")));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_CollectionsString_get() => Test(async (host) =>
+        {
+            Response<CollectionsStringProperty> response = await new CollectionsStringClient(host, null).GetValueAsync();
+            CollectionAssert.AreEqual(new[] { "hello", "world" }, response.Value.Property);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_CollectionsString_put() => Test(async (host) =>
+        {
+            Response response = await new CollectionsStringClient(host, null).PutAsync(new CollectionsStringProperty(new[] { "hello", "world" }));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_CollectionsInt_get() => Test(async (host) =>
+        {
+            Response<CollectionsIntProperty> response = await new CollectionsIntClient(host, null).GetValueAsync();
+            CollectionAssert.AreEqual(new[] { 1, 2 }, response.Value.Property);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_CollectionsInt_put() => Test(async (host) =>
+        {
+            Response response = await new CollectionsIntClient(host, null).PutAsync(new CollectionsIntProperty(new[] { 1, 2 }));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_CollectionsModel_get() => Test(async (host) =>
+        {
+            Response<CollectionsModelProperty> response = await new CollectionsModelClient(host, null).GetValueAsync();
+            Assert.AreEqual("hello", response.Value.Property[0].Property);
+            Assert.AreEqual("world", response.Value.Property[1].Property);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_CollectionsModel_put() => Test(async (host) =>
+        {
+            Response response = await new CollectionsModelClient(host, null).PutAsync(new CollectionsModelProperty(new[] { new InnerModel("hello"), new InnerModel("world") }));
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
     }
 }
