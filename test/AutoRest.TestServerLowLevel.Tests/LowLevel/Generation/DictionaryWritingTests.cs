@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         // below are test cases
         private static readonly object[] RoundTripDictionaryPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -272,7 +272,7 @@ return DeserializeRoundTripModel(document.RootElement);
 
         private static readonly object[] InputDictionaryPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -415,7 +415,7 @@ return content;
 
         private static readonly object[] OutputDictionaryPropertiesCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.

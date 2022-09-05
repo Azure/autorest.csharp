@@ -30,4 +30,5 @@ export interface InputOperation {
     BufferResponse: boolean;
     LongRunning?: OperationLongRunning;
     Paging?: OperationPaging;
+    GenerateConvenienceMethod: boolean;
 }

@@ -99,7 +99,8 @@ namespace AutoRest.CSharp.Common.Input
                 RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
                 BufferResponse: operation.Extensions?.BufferResponse ?? true,
                 LongRunning: CreateLongRunning(operation),
-                Paging: CreateOperationPaging(operation));
+                Paging: CreateOperationPaging(operation),
+                GenerateConvenienceMethod: false);
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;

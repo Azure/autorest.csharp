@@ -61,6 +61,12 @@ model RoundTripModel extends BaseModel {
 
   @doc("Required model with discriminator")
   requiredModel: BaseModelWithDiscriminator;
+
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+
+  @doc("Required Record")
+  requiredRecord: Record<RecordItem>;
 }
 
 @doc("Model used only as input")
@@ -76,6 +82,9 @@ model InputModel extends BaseModel {
 
   @doc("Required collection")
   requiredCollection: CollectionItem[];
+
+  @doc("Required Record")
+  requiredRecord: Record<RecordItem>;
 }
 
 @doc("Model used only as output")
@@ -88,6 +97,18 @@ model OutputModel extends BaseModel {
 
   @doc("Required model")
   requiredModel: DerivedModel;
+
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+
+  @doc("Required Record")
+  requiredRecord: Record<RecordItem>;
+}
+
+@doc("Model that has property of its own type")
+model ErrorModel {
+  @doc("Required Record")
+  innerError?: ErrorModel;
 }
 
 @route("/inputToRoundTrip")
@@ -99,3 +120,8 @@ op inputToRoundTrip(@body input: InputModel): RoundTripModel;
 @doc("RoundTrip to Output")
 @get
 op roundTripToOutput(@body input: RoundTripModel): OutputModel;
+
+@route("/selfReference")
+@doc("Returns model that has property of its own type")
+@get
+op selfReference(): ErrorModel;

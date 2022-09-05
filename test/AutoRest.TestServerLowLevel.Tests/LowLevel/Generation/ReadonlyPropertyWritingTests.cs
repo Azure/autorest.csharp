@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
 namespace AutoRest.CSharp.Generation.Writers.Tests
@@ -58,7 +56,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         private static readonly object[] RoundTripModelCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
@@ -338,7 +336,7 @@ return DeserializeRoundTripModel(document.RootElement);
 
         private static readonly object[] OutputModelCase =
         {
-            new string[]
+            new[]
             {
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.

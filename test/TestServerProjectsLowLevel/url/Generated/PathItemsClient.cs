@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
+    // Data plane generated client. The PathItems service client.
     /// <summary> The PathItems service client. </summary>
     public partial class PathItemsClient
     {

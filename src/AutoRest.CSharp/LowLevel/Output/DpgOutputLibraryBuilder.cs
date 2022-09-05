@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
@@ -46,17 +48,17 @@ namespace AutoRest.CSharp.Output.Models
             SetRequestsToClients(clientInfosByName.Values);
 
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            var modelFactories = new Dictionary<InputModelType, Func<ModelTypeProvider>>();
+            var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(enums, modelFactories, clients, clientOptions, isCadlInput);
+            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, isCadlInput);
 
             if (isCadlInput)
             {
                 CreateEnums(enums, library.TypeFactory);
-                CreateModels(modelFactories, library.TypeFactory);
+                CreateModels(models, library.TypeFactory);
             }
-            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, isCadlInput);
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
 
             return library;
         }
@@ -69,11 +71,16 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private void CreateModels(IDictionary<InputModelType, Func<ModelTypeProvider>> dictionary, TypeFactory typeFactory)
+        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
             foreach (var model in _rootNamespace.Models)
             {
-                dictionary.CreateAndCacheResult(model, () => new ModelTypeProvider(model, typeFactory, _defaultNamespace, _sourceInputModel));
+                models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel));
+            }
+
+            foreach (var (inputModel, modelTypeProvider) in models)
+            {
+                modelTypeProvider.FinishInitialization(inputModel, typeFactory, _sourceInputModel);
             }
         }
 
@@ -222,9 +229,9 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
         {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, isCadlInput);
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
 
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
@@ -234,12 +241,12 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, bool isCadlInput)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
         {
             foreach (var clientInfo in clientInfos)
             {
                 var description = string.IsNullOrWhiteSpace(clientInfo.Description)
-                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} service client."
+                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
                     : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
@@ -255,13 +262,12 @@ namespace AutoRest.CSharp.Output.Models
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
-                    typeFactory,
-                    isCadlInput)
+                    typeFactory)
                 {
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, isCadlInput));
+                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
 
                  yield return client;
             }

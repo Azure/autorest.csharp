@@ -16,6 +16,7 @@ using Azure.Core.Pipeline;
 
 namespace SingleTopLevelClientWithOperations_LowLevel
 {
+    // Data plane generated client. The TopLevelClientWithOperation service client.
     /// <summary> The TopLevelClientWithOperation service client. </summary>
     public partial class TopLevelClientWithOperationClient
     {
