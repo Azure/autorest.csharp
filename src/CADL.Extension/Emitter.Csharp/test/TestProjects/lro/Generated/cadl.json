@@ -20,7 +20,7 @@
      "Type": {
       "$id": "4",
       "Name": "Number",
-      "Kind": "UnknownKind",
+      "Kind": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -109,7 +109,7 @@
      "Type": {
       "$id": "15",
       "Name": "Number",
-      "Kind": "UnknownKind",
+      "Kind": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -224,7 +224,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": true,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant"
       },
       {
        "$id": "29",
@@ -239,7 +239,7 @@
        },
        "Location": "Query",
        "IsRequired": true,
-       "IsApiVersion": false,
+       "IsApiVersion": true,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,

@@ -13,17 +13,17 @@
    "Operations": [
     {
      "$id": "3",
-     "Name": "zonedDateTime",
+     "Name": "getZonedDateTime",
      "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
        "$id": "4",
-       "Name": "zonedDateTime",
-       "NameInRequest": "zonedDateTime",
+       "Name": "time",
+       "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "string",
-        "Kind": "String",
+        "Name": "DateTime",
+        "Kind": "DateTime",
         "IsNullable": false
        },
        "Location": "Path",
@@ -49,12 +49,12 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/zonedDateTime/{zonedDateTime}",
+     "Path": "/zonedDateTime/{time}",
      "BufferResponse": false
     },
     {
      "$id": "7",
-     "Name": "uri",
+     "Name": "getUri",
      "Description": "path paramter is string with uri format",
      "Parameters": [
       {
@@ -82,7 +82,7 @@
       {
        "$id": "10",
        "StatusCodes": [
-        200
+        204
        ],
        "BodyMediaType": "Json"
       }

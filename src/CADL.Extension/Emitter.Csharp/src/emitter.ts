@@ -332,8 +332,13 @@ function loadOperation(
             enums
         );
         const requestLocation = requestLocationMap[location];
-        const kind: InputOperationParameterKind =
-            InputOperationParameterKind.Method;
+        const isApiVersion: boolean = requestLocation === RequestLocation.Query && name.toLocaleLowerCase() === "api-version";
+        const isContentType: boolean =
+            requestLocation === RequestLocation.Header &&
+            name.toLowerCase() === "content-type";
+        const kind: InputOperationParameterKind = isContentType
+            ? InputOperationParameterKind.Constant
+            : InputOperationParameterKind.Method;
         return {
             Name: name,
             NameInRequest: name,
@@ -341,7 +346,7 @@ function loadOperation(
             Type: inputType,
             Location: requestLocation,
             IsRequired: !param.optional,
-            IsApiVersion: false,
+            IsApiVersion: isApiVersion,
             IsResourceParameter: false,
             IsContentType: false,
             IsEndpoint: false,
