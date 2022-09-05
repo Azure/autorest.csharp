@@ -17,9 +17,7 @@ import {
     Program,
     Type
 } from "@cadl-lang/compiler";
-import {
-    getDiscriminator,
-} from "@cadl-lang/rest";
+import { getDiscriminator } from "@cadl-lang/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
@@ -195,7 +193,7 @@ function getEffectiveSchemaType(program: Program, type: Type): Type {
     }
 }
 
-function getDefaultValue(type: Type): any {
+export function getDefaultValue(type: Type): any {
     switch (type.kind) {
         case "String":
             return type.value;
@@ -262,7 +260,10 @@ export function getInputType(
                     if (name === "integer") {
                         return getInputTypeForArray(m.indexer.value);
                     } else {
-                        return getInputTypeForMap(m.indexer.key, m.indexer.value);
+                        return getInputTypeForMap(
+                            m.indexer.key,
+                            m.indexer.value
+                        );
                     }
                 }
             }
@@ -283,12 +284,17 @@ export function getInputType(
         }
     }
 
-    function getInputModelForExtensibleEnum(m: ModelType, e: EnumType): InputEnumType {
+    function getInputModelForExtensibleEnum(
+        m: ModelType,
+        e: EnumType
+    ): InputEnumType {
         let extensibleEnum = enums.get(e.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
             if (!innerEnum) {
-                throw new Error(`Extensible enum type '${e.name}' has no values defined.`);
+                throw new Error(
+                    `Extensible enum type '${e.name}' has no values defined.`
+                );
             }
             extensibleEnum = {
                 Name: m.name,
@@ -305,11 +311,16 @@ export function getInputType(
         return extensibleEnum;
     }
 
-    function getInputTypeForEnum(e: EnumType, addToCollection: boolean = true): InputEnumType {
+    function getInputTypeForEnum(
+        e: EnumType,
+        addToCollection: boolean = true
+    ): InputEnumType {
         let enumType = enums.get(e.name);
         if (!enumType) {
             if (e.members.length == 0) {
-                throw new Error(`Enum type '${e.name}' doesn't define any values.`);
+                throw new Error(
+                    `Enum type '${e.name}' doesn't define any values.`
+                );
             }
             const allowValues: InputEnumTypeValue[] = [];
             const enumValueType = enumMemberType(e.members[0]);
@@ -366,7 +377,7 @@ export function getInputType(
             ValueType: getInputType(program, value, models, enums),
             IsNullable: false
         } as InputDictionaryType;
-    }   
+    }
 
     function getInputModelForModel(m: ModelType): InputModelType {
         m = getEffectiveSchemaType(program, m) as ModelType;
@@ -381,7 +392,8 @@ export function getInputType(
                 Namespace: m.namespace?.name,
                 Description: getDoc(program, m),
                 IsNullable: false,
-                DiscriminatorPropertyName: getDiscriminator(program, m)?.propertyName,
+                DiscriminatorPropertyName: getDiscriminator(program, m)
+                    ?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Properties: properties // Properties should be the last assigned to model
@@ -390,25 +402,34 @@ export function getInputType(
             models.set(name, model);
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
-            addModelProperties(m.properties, properties, baseModel?.DiscriminatorPropertyName);
+            addModelProperties(
+                m.properties,
+                properties,
+                baseModel?.DiscriminatorPropertyName
+            );
 
             // Temporary part. Derived types may not be referenced directly by any operation
-            // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed 
+            // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
-                m.derivedModels.forEach(dm => {
+                for (const dm of m.derivedModels) {
                     getInputType(program, dm, models, enums);
-                });
+                }
             }
         }
 
         return model;
-    }   
+    }
 
-    function getDiscriminatorValue(m: ModelType, baseModel?: InputModelType) : string | undefined {
+    function getDiscriminatorValue(
+        m: ModelType,
+        baseModel?: InputModelType
+    ): string | undefined {
         const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
 
         if (discriminatorPropertyName) {
-            const discriminatorProperty = m.properties.get(discriminatorPropertyName);
+            const discriminatorProperty = m.properties.get(
+                discriminatorPropertyName
+            );
             if (discriminatorProperty?.type.kind === "String") {
                 return discriminatorProperty.type.value;
             }
@@ -421,36 +442,29 @@ export function getInputType(
         inputProperties: Map<string, ModelTypeProperty>,
         outputProperties: InputModelProperty[],
         discriminatorPropertyName?: string
-    ) : void {
-        inputProperties.forEach(
-            (value: ModelTypeProperty, key: string) => {
-                if (value.name !== discriminatorPropertyName) {
-                    const vis = getVisibility(program, value);
-                    let isReadOnly: boolean = false;
-                    if (vis && vis.includes("read") && vis.length === 1) {
-                        isReadOnly = true;
-                    }
-                    const inputProp = {
-                        Name: value.name,
-                        SerializedName: value.name,
-                        Description: "",
-                        Type: getInputType(
-                            program,
-                            value.type,
-                            models,
-                            enums
-                        ),
-                        IsRequired: !value.optional,
-                        IsReadOnly: isReadOnly,
-                        IsDiscriminator: false
-                    };
-                    outputProperties.push(inputProp);
+    ): void {
+        inputProperties.forEach((value: ModelTypeProperty, key: string) => {
+            if (value.name !== discriminatorPropertyName) {
+                const vis = getVisibility(program, value);
+                let isReadOnly: boolean = false;
+                if (vis && vis.includes("read") && vis.length === 1) {
+                    isReadOnly = true;
                 }
+                const inputProp = {
+                    Name: value.name,
+                    SerializedName: value.name,
+                    Description: "",
+                    Type: getInputType(program, value.type, models, enums),
+                    IsRequired: !value.optional,
+                    IsReadOnly: isReadOnly,
+                    IsDiscriminator: false
+                };
+                outputProperties.push(inputProp);
             }
-        );
+        });
     }
 
-    function getInputModelBaseType(m?: ModelType) : InputModelType | undefined {
+    function getInputModelBaseType(m?: ModelType): InputModelType | undefined {
         if (!m) {
             return undefined;
         }

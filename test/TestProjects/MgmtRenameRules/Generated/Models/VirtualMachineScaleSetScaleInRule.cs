@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The VirtualMachineScaleSetScaleInRule. </summary>
+    /// <summary>
+    /// The VirtualMachineScaleSetScaleInRule.
+    /// Serialized Name: VirtualMachineScaleSetScaleInRules
+    /// </summary>
     public readonly partial struct VirtualMachineScaleSetScaleInRule : IEquatable<VirtualMachineScaleSetScaleInRule>
     {
         private readonly string _value;
@@ -26,11 +29,20 @@ namespace MgmtRenameRules.Models
         private const string OldestVmValue = "OldestVM";
         private const string NewestVmValue = "NewestVM";
 
-        /// <summary> Default. </summary>
+        /// <summary>
+        /// Default
+        /// Serialized Name: VirtualMachineScaleSetScaleInRules.Default
+        /// </summary>
         public static VirtualMachineScaleSetScaleInRule Default { get; } = new VirtualMachineScaleSetScaleInRule(DefaultValue);
-        /// <summary> OldestVM. </summary>
+        /// <summary>
+        /// OldestVM
+        /// Serialized Name: VirtualMachineScaleSetScaleInRules.OldestVM
+        /// </summary>
         public static VirtualMachineScaleSetScaleInRule OldestVm { get; } = new VirtualMachineScaleSetScaleInRule(OldestVmValue);
-        /// <summary> NewestVM. </summary>
+        /// <summary>
+        /// NewestVM
+        /// Serialized Name: VirtualMachineScaleSetScaleInRules.NewestVM
+        /// </summary>
         public static VirtualMachineScaleSetScaleInRule NewestVm { get; } = new VirtualMachineScaleSetScaleInRule(NewestVmValue);
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineScaleSetScaleInRule left, VirtualMachineScaleSetScaleInRule right) => left.Equals(right);

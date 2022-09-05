@@ -15,6 +15,7 @@ using PetStore;
 
 namespace CadlPetStore
 {
+    // Data plane generated client. Manage your pets. You can delete or get the Pet from pet store.
     /// <summary> Manage your pets. You can delete or get the Pet from pet store. </summary>
     public partial class PetsClient
     {

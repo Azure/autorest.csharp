@@ -30,6 +30,14 @@ namespace ModelsInCadl
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
+            writer.WritePropertyName("requiredRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -39,6 +47,7 @@ namespace ModelsInCadl
             int requiredInt = default;
             BaseModel requiredModel = default;
             IList<CollectionItem> requiredCollection = default;
+            IDictionary<string, RecordItem> requiredRecord = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -66,8 +75,18 @@ namespace ModelsInCadl
                     requiredCollection = array;
                     continue;
                 }
+                if (property.NameEquals("requiredRecord"))
+                {
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                    }
+                    requiredRecord = dictionary;
+                    continue;
+                }
             }
-            return new InputModel(requiredString, requiredInt, requiredModel, requiredCollection);
+            return new InputModel(requiredString, requiredInt, requiredModel, requiredCollection, requiredRecord);
         }
 
         internal RequestContent ToRequestContent()

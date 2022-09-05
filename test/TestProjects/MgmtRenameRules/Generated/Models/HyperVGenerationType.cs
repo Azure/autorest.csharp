@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Specifies the HyperVGeneration Type associated with a resource. </summary>
+    /// <summary>
+    /// Specifies the HyperVGeneration Type associated with a resource
+    /// Serialized Name: HyperVGenerationType
+    /// </summary>
     public readonly partial struct HyperVGenerationType : IEquatable<HyperVGenerationType>
     {
         private readonly string _value;
@@ -25,9 +28,15 @@ namespace MgmtRenameRules.Models
         private const string V1Value = "V1";
         private const string V2Value = "V2";
 
-        /// <summary> V1. </summary>
+        /// <summary>
+        /// V1
+        /// Serialized Name: HyperVGenerationType.V1
+        /// </summary>
         public static HyperVGenerationType V1 { get; } = new HyperVGenerationType(V1Value);
-        /// <summary> V2. </summary>
+        /// <summary>
+        /// V2
+        /// Serialized Name: HyperVGenerationType.V2
+        /// </summary>
         public static HyperVGenerationType V2 { get; } = new HyperVGenerationType(V2Value);
         /// <summary> Determines if two <see cref="HyperVGenerationType"/> values are the same. </summary>
         public static bool operator ==(HyperVGenerationType left, HyperVGenerationType right) => left.Equals(right);

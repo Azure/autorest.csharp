@@ -7,7 +7,10 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a network interface reference. </summary>
+    /// <summary>
+    /// Describes a network interface reference.
+    /// Serialized Name: NetworkInterfaceReference
+    /// </summary>
     public partial class NetworkInterfaceReference : SubResource
     {
         /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
@@ -16,14 +19,23 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
-        /// <param name="id"> Resource Id. </param>
-        /// <param name="primary"> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </param>
+        /// <param name="id">
+        /// Resource Id
+        /// Serialized Name: SubResource.id
+        /// </param>
+        /// <param name="primary">
+        /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
+        /// Serialized Name: NetworkInterfaceReference.properties.primary
+        /// </param>
         internal NetworkInterfaceReference(string id, bool? primary) : base(id)
         {
             Primary = primary;
         }
 
-        /// <summary> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </summary>
+        /// <summary>
+        /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
+        /// Serialized Name: NetworkInterfaceReference.properties.primary
+        /// </summary>
         public bool? Primary { get; set; }
     }
 }

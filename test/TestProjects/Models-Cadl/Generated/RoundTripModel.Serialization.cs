@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -22,6 +23,21 @@ namespace ModelsInCadl
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel");
             writer.WriteObjectValue(RequiredModel);
+            writer.WritePropertyName("requiredCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollection)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -30,6 +46,8 @@ namespace ModelsInCadl
             string requiredString = default;
             int requiredInt = default;
             BaseModelWithDiscriminator requiredModel = default;
+            IList<CollectionItem> requiredCollection = default;
+            IDictionary<string, RecordItem> requiredRecord = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -47,8 +65,28 @@ namespace ModelsInCadl
                     requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value);
                     continue;
                 }
+                if (property.NameEquals("requiredCollection"))
+                {
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                    }
+                    requiredCollection = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredRecord"))
+                {
+                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                    }
+                    requiredRecord = dictionary;
+                    continue;
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredModel);
+            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredCollection, requiredRecord);
         }
 
         internal RequestContent ToRequestContent()

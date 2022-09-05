@@ -57,7 +57,8 @@ namespace AutoRest.CSharp.Common.Input
         IReadOnlyList<string>? RequestMediaTypes,
         bool BufferResponse,
         OperationLongRunning? LongRunning,
-        OperationPaging? Paging)
+        OperationPaging? Paging,
+        bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
             Name: string.Empty,
@@ -74,7 +75,8 @@ namespace AutoRest.CSharp.Common.Input
             RequestMediaTypes: Array.Empty<string>(),
             BufferResponse: false,
             LongRunning: null,
-            Paging: null)
+            Paging: null,
+            GenerateConvenienceMethod: false)
         { }
     }
 

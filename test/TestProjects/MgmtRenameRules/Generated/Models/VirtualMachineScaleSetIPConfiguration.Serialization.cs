@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Net;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -40,6 +41,16 @@ namespace MgmtRenameRules.Models
             {
                 writer.WritePropertyName("publicIPAddressConfiguration");
                 writer.WriteObjectValue(PublicIPAddressConfiguration);
+            }
+            if (Optional.IsCollectionDefined(IPAddresses))
+            {
+                writer.WritePropertyName("ipAddresses");
+                writer.WriteStartArray();
+                foreach (var item in IPAddresses)
+                {
+                    writer.WriteStringValue(item.ToString());
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {
@@ -97,6 +108,7 @@ namespace MgmtRenameRules.Models
             Optional<WritableSubResource> subnet = default;
             Optional<bool> primary = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfiguration> publicIPAddressConfiguration = default;
+            Optional<IList<IPAddress>> ipAddresses = default;
             Optional<IPVersion> privateIPAddressVersion = default;
             Optional<IList<WritableSubResource>> applicationGatewayBackendAddressPools = default;
             Optional<IList<WritableSubResource>> applicationSecurityGroups = default;
@@ -151,6 +163,21 @@ namespace MgmtRenameRules.Models
                                 continue;
                             }
                             publicIPAddressConfiguration = VirtualMachineScaleSetPublicIPAddressConfiguration.DeserializeVirtualMachineScaleSetPublicIPAddressConfiguration(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("ipAddresses"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            List<IPAddress> array = new List<IPAddress>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(IPAddress.Parse(item.GetString()));
+                            }
+                            ipAddresses = array;
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"))
@@ -227,7 +254,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetIPConfiguration(id.Value, name, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
+            return new VirtualMachineScaleSetIPConfiguration(id.Value, name, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToList(ipAddresses), Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
         }
     }
 }

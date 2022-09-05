@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -14,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
+    // Data plane generated client. Hello world service
     /// <summary> Hello world service. </summary>
     public partial class DemoClient
     {
@@ -84,54 +84,30 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> SayHiValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await SayHiAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> SayHiValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = SayHi(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return hi. </summary>
+        /// <param name="headParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="optionalQuery"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call SayHiAsync and parse the result.
+        /// This sample shows how to call SayHiAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new DemoClient(credential);
         /// 
-        /// Response response = await client.SayHiAsync();
+        /// Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DemoClient(credential);
+        /// 
+        /// Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -149,13 +125,16 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> SayHiAsync(RequestContext context = null)
+        public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHi");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSayHiRequest(context);
+                using HttpMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -166,16 +145,30 @@ namespace CadlFirstTest
         }
 
         /// <summary> Return hi. </summary>
+        /// <param name="headParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="optionalQuery"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call SayHi and parse the result.
+        /// This sample shows how to call SayHi with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
         /// var client = new DemoClient(credential);
         /// 
-        /// Response response = client.SayHi();
+        /// Response response = client.SayHi("<headParameter>", "<queryParameter>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// This sample shows how to call SayHi with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new DemoClient(credential);
+        /// 
+        /// Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -193,13 +186,16 @@ namespace CadlFirstTest
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response SayHi(RequestContext context = null)
+        public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+
             using var scope = ClientDiagnostics.CreateScope("DemoClient.SayHi");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSayHiRequest(context);
+                using HttpMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -209,7 +205,7 @@ namespace CadlFirstTest
             }
         }
 
-        internal HttpMessage CreateSayHiRequest(RequestContext context)
+        internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -218,19 +214,15 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
-            request.Uri = uri;
-            return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
+            uri.AppendQuery("queryParameter", queryParameter, false);
+            if (optionalQuery != null)
             {
-                return DefaultRequestContext;
+                uri.AppendQuery("optionalQuery", optionalQuery, false);
             }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
+            request.Uri = uri;
+            request.Headers.Add("head-parameter", headParameter);
+            request.Headers.Add("Accept", "application/json");
+            return message;
         }
 
         private static ResponseClassifier _responseClassifier200;

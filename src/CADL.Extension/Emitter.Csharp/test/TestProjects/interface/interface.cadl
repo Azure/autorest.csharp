@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
 
 using Cadl.Http;
 
@@ -24,7 +25,8 @@ model Cat {
 interface dogs {
   @doc("Illustrate grouping operations on subclient.")
   @get
-  getDogs(): Dog;
+  @OpenAPI.extension("x-ms-convenient-api", true)
+  getDogsConvenient(): Dog;
 
   @doc("Illustrate grouping operations on subclient.")
   @route("/models")

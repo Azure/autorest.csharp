@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
+    // Data plane generated client. The Flattencomplex service client.
     /// <summary> The Flattencomplex service client. </summary>
     public partial class FlattencomplexClient
     {

@@ -233,7 +233,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

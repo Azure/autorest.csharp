@@ -7,7 +7,10 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Inner error details. </summary>
+    /// <summary>
+    /// Inner error details.
+    /// Serialized Name: InnerError
+    /// </summary>
     public partial class InnerError
     {
         /// <summary> Initializes a new instance of InnerError. </summary>
@@ -16,17 +19,29 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of InnerError. </summary>
-        /// <param name="exceptiontype"> The exception type. </param>
-        /// <param name="errordetail"> The internal error message or exception dump. </param>
+        /// <param name="exceptiontype">
+        /// The exception type.
+        /// Serialized Name: InnerError.exceptiontype
+        /// </param>
+        /// <param name="errordetail">
+        /// The internal error message or exception dump.
+        /// Serialized Name: InnerError.errordetail
+        /// </param>
         internal InnerError(string exceptiontype, string errordetail)
         {
             Exceptiontype = exceptiontype;
             Errordetail = errordetail;
         }
 
-        /// <summary> The exception type. </summary>
+        /// <summary>
+        /// The exception type.
+        /// Serialized Name: InnerError.exceptiontype
+        /// </summary>
         public string Exceptiontype { get; }
-        /// <summary> The internal error message or exception dump. </summary>
+        /// <summary>
+        /// The internal error message or exception dump.
+        /// Serialized Name: InnerError.errordetail
+        /// </summary>
         public string Errordetail { get; }
     }
 }
