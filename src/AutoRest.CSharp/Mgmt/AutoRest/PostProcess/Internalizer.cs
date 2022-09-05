@@ -26,9 +26,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             var compilation = await GetCompilationAsync(project);
 
             // first get all the declared models
-            var definitions = await GetModels(project, true);
+            var definitions = await PostProcessCommon.GetModels(project, true);
             // get the root nodes
-            var rootNodes = await GetRootNodes(project, modelsToKeep, true);
+            var rootNodes = await PostProcessCommon.GetRootNodes(project, true, modelsToKeep);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync(compilation, project, rootNodes);
             await foreach (var model in publicModels)
@@ -191,93 +191,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             var compilation = await project.GetCompilationAsync() as CSharpCompilation;
             Debug.Assert(compilation != null);
             return compilation;
-        }
-
-        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
-        {
-            var classVisitor = new DefinitionVisitor(publicOnly);
-
-            foreach (var document in project.Documents)
-            {
-                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
-                {
-                    var root = await document.GetSyntaxRootAsync();
-                    classVisitor.Visit(root);
-                }
-            }
-
-            return classVisitor.ModelDeclarations;
-        }
-
-        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetRootNodes(Project project, ImmutableHashSet<string> modelsToKeep, bool publicOnly)
-        {
-            var classVisitor = new DefinitionVisitor(publicOnly);
-            foreach (var document in project.Documents)
-            {
-                var root = await document.GetSyntaxRootAsync();
-                // we add a declaration as root node when
-                // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
-                // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
-                // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
-                if (IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document) || ShouldKeepModel(root, modelsToKeep))
-                {
-                    classVisitor.Visit(root);
-                }
-            }
-
-            return classVisitor.ModelDeclarations;
-        }
-
-        private static bool IsMgmtRootDocument(Document document) => GeneratedCodeWorkspace.IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
-
-        private static HashSet<string> _referenceAttributes = new HashSet<string> { "ReferenceType", "PropertyReferenceType", "TypeReferenceType" };
-
-        private static bool IsReferenceType(SyntaxNode? root)
-        {
-            if (root is null)
-                return false;
-
-            var childNodes = root.DescendantNodes();
-            var typeNode = childNodes.OfType<TypeDeclarationSyntax>().FirstOrDefault();
-            if (typeNode is null)
-            {
-                return false;
-            }
-
-            var attributeLists = GetAttributeLists(typeNode);
-            if (attributeLists is null || attributeLists.Value.Count == 0)
-                return false;
-
-            foreach (var attributeList in attributeLists.Value)
-            {
-                if (_referenceAttributes.Contains(attributeList.Attributes[0].Name.ToString()))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private static bool ShouldKeepModel(SyntaxNode? root, ImmutableHashSet<string> modelsToKeep)
-        {
-            if (root is null)
-                return false;
-
-            // use `BaseTypeDeclarationSyntax` to also include enums because `EnumDeclarationSyntax` extends `BaseTypeDeclarationSyntax`
-            // `ClassDeclarationSyntax` and `StructDeclarationSyntax` both inherit `TypeDeclarationSyntax`
-            var typeNodes = root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>();
-            // there is possibility that we have multiple types defined in the same document (for instance, custom code)
-            return typeNodes.Any(t => modelsToKeep.Contains(t.Identifier.Text));
-        }
-
-        private static SyntaxList<AttributeListSyntax>? GetAttributeLists(SyntaxNode node)
-        {
-            if (node is StructDeclarationSyntax structDeclaration)
-                return structDeclaration.AttributeLists;
-
-            if (node is ClassDeclarationSyntax classDeclaration)
-                return classDeclaration.AttributeLists;
-
-            return null;
         }
     }
 }

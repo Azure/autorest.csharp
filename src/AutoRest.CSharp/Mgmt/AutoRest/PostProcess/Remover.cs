@@ -6,6 +6,8 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Core;
+using Azure.ResourceManager;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
@@ -22,11 +24,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                 return project;
 
             // find all the declarations, including non-public declared
-            var definitions = await Internalizer.GetModels(project, false);
+            var definitions = await PostProcessCommon.GetModels(project, false);
             // build reference map
             var referenceMap = await BuildReferenceMap(compilation, project, definitions);
             // get root nodes
-            var rootNodes = await Internalizer.GetRootNodes(project, modelsToKeep, false);
+            var rootNodes = await PostProcessCommon.GetRootNodes(project, false, modelsToKeep);
             // traverse the map to determine the declarations that we are about to remove, starting from root nodes
             var referencedDefinitions = TraverseAllModelsAsync(rootNodes, referenceMap);
             // remove those declarations one by one
@@ -37,6 +39,92 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             }
             // remove them one by one
             project = await RemoveModels(project, unusedModels);
+
+            return project;
+        }
+
+        public static async Task<Project> RemoveUnusedFieldsAsync(Project project)
+        {
+            var compilation = await project.GetCompilationAsync();
+            if (compilation == null)
+                return project;
+
+            // find all the resources and resource collections
+            var definitions = await PostProcessCommon.GetClients(project);
+
+            // get them inside a big dictionary
+            var result = new List<IEnumerable<FieldDeclarationSyntax>>();
+            foreach (var definition in definitions)
+            {
+                var semanticModel = compilation.GetSemanticModel(definition.SyntaxTree);
+                var symbol = semanticModel.GetDeclaredSymbol(definition);
+                if (symbol == null || symbol is not INamedTypeSymbol typeSymbol)
+                    continue;
+
+                var unusedFields = await FindUnusedFields(project, typeSymbol);
+
+                if (unusedFields.Any())
+                    result.Add(unusedFields);
+            }
+
+            // remove all of them
+            project = await RemoveUnusedFieldsFromClientsAsync(project, result);
+
+            return project;
+        }
+
+        private static async Task<IEnumerable<FieldDeclarationSyntax>> FindUnusedFields(Project project, INamedTypeSymbol typeSymbol)
+        {
+            var fieldsWithoutReferences = new List<FieldDeclarationSyntax>();
+            // iterate over the field symbols
+            foreach (var field in typeSymbol.GetMembers().OfType<IFieldSymbol>())
+            {
+                var references = await SymbolFinder.FindReferencesAsync(field, project.Solution);
+                // we cannot simply assert the array references is empty because this is never empty. Only when the Locations inside is empty indicates this symbol is not used
+                var allOcurrences = references.Sum(reference => reference.Locations.Count());
+                if (allOcurrences == 0)
+                {
+                    foreach (var declaration in field.DeclaringSyntaxReferences)
+                    {
+                        // we have this layer because a field can define multiple variables hence multiple VariableDeclarators here, like
+                        // private string a, b;
+                        // but we never use it in our SDK. Therefore here we just iterate over all the field declarations and find which one is containing this
+                        var node = await declaration.GetSyntaxAsync();
+                        if (node is VariableDeclaratorSyntax variableDeclarator)
+                            fieldsWithoutReferences.Add(await FindFieldDeclaration(variableDeclarator));
+                    }
+                }
+            }
+
+            return fieldsWithoutReferences;
+        }
+
+        private static async Task<FieldDeclarationSyntax> FindFieldDeclaration(VariableDeclaratorSyntax variableDeclaration)
+        {
+            var root = await variableDeclaration.SyntaxTree.GetRootAsync();
+            var allFields = root.DescendantNodes().OfType<FieldDeclarationSyntax>();
+
+            return allFields.First(field => field.Declaration.Variables.Contains(variableDeclaration));
+        }
+
+        private static async Task<Project> RemoveUnusedFieldsFromClientsAsync(Project project, List<IEnumerable<FieldDeclarationSyntax>> unusedFields)
+        {
+            var documents = new Dictionary<Document, HashSet<FieldDeclarationSyntax>>();
+            foreach (var fields in unusedFields)
+            {
+                var document = project.GetDocument(fields.First().SyntaxTree);
+                Debug.Assert(document != null);
+                if (!documents.ContainsKey(document))
+                    documents.Add(document, new HashSet<FieldDeclarationSyntax>());
+
+                foreach (var field in fields)
+                    documents[document].Add(field);
+            }
+
+            foreach (var fields in documents.Values)
+            {
+                project = await RemoveNodesFromDocumentAsync(project, fields);
+            }
 
             return project;
         }
@@ -57,21 +145,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 
             foreach (var models in documents.Values)
             {
-                project = await RemoveModelsFromDocument(project, models);
+                project = await RemoveNodesFromDocumentAsync(project, models);
             }
 
             return project;
         }
 
-        private static async Task<Project> RemoveModelsFromDocument(Project project, IEnumerable<BaseTypeDeclarationSyntax> models)
+        private static async Task<Project> RemoveNodesFromDocumentAsync<T>(Project project, IEnumerable<T> nodes) where T : SyntaxNode
         {
-            var tree = models.First().SyntaxTree;
+            var tree = nodes.First().SyntaxTree;
             var document = project.GetDocument(tree);
             if (document == null)
                 return project;
             var root = await tree.GetRootAsync();
-            root = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
+            root = root.RemoveNodes(nodes, SyntaxRemoveOptions.KeepNoTrivia);
             document = document.WithSyntaxRoot(root!);
+
             return document.Project;
         }
 

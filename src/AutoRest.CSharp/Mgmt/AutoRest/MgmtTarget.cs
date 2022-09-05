@@ -155,6 +155,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
 
+            project = await Remover.RemoveUnusedFieldsAsync(project);
+
             return project;
         }
 
