@@ -136,9 +136,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
-            return descendantTypes.Contains(Type) ||
-                // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-                ObjectSchema.Parents?.All.Count == 1  && ObjectSchema.Parents.All.First().Equals(schemaObjectType.ObjectSchema);
+            // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
+            if (ObjectSchema.DiscriminatorValue == "Unknown" &&
+                ObjectSchema.Parents?.All.Count == 1 &&
+                ObjectSchema.Parents.All.First().Equals(schemaObjectType.ObjectSchema))
+            {
+                descendantTypes.Add(Type);
+            }
+
+            return descendantTypes.Contains(Type);
         }
 
         private static bool ShouldIncludeArmCoreType(Type type)
@@ -300,6 +306,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private ObjectSchema BuildInternalBackingSchema()
         {
+            // TODO: Avoid potential duplicated schema name and discriminator value.
+            // Note: When this Todo is done, the method IsDescendantOf also needs to be updated.
+            // Reason:
+            // Here we just hard coded the name and discriminator value for the internal backing schema.
+            // This could work now, but there are also potential duplicate conflict issue.
             var schema = new ObjectSchema
             {
                 Language = new Languages
