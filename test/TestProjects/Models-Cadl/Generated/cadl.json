@@ -483,14 +483,45 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "56",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "57",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "58",
+        "Type": {
+         "$id": "59",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "60",
        "StatusCodes": [
         200
        ],
@@ -508,12 +539,12 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "57",
+     "$id": "61",
      "Name": "roundTripToOutput",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$id": "58",
+       "$id": "62",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -525,14 +556,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "56"
       }
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "63",
        "StatusCodes": [
         200
        ],
@@ -550,13 +584,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "60",
+     "$id": "64",
      "Name": "selfReference",
      "Description": "Returns model that has property of its own type",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "56"
+      }
+     ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -575,7 +613,7 @@
     }
    ],
    "Protocol": {
-    "$id": "62"
+    "$id": "66"
    }
   }
  ]

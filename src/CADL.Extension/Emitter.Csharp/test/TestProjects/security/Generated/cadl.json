@@ -48,11 +48,42 @@
         },
         "Value": "http://localhost:3000"
        }
+      },
+      {
+       "$id": "8",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "9",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "10",
+        "Type": {
+         "$id": "11",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "8",
+       "$id": "12",
        "StatusCodes": [
         200
        ],
@@ -68,18 +99,18 @@
     }
    ],
    "Protocol": {
-    "$id": "9"
+    "$id": "13"
    }
   }
  ],
  "Auth": {
-  "$id": "10",
+  "$id": "14",
   "ApiKey": {
-   "$id": "11",
+   "$id": "15",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "12",
+   "$id": "16",
    "Scopes": [
     "https://api.example.com/.default"
    ]

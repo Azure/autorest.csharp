@@ -187,14 +187,45 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "27",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "28",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "29",
+        "Type": {
+         "$id": "30",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
@@ -212,13 +243,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "28",
+     "$id": "32",
      "Name": "topAction2",
      "Description": "top level method2",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "27"
+      }
+     ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
@@ -237,22 +272,26 @@
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "34"
    }
   },
   {
-   "$id": "31",
+   "$id": "35",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "32",
+     "$id": "36",
      "Name": "sayHi",
      "Description": "Return hi",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "27"
+      }
+     ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
@@ -271,20 +310,20 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "38"
    }
   },
   {
-   "$id": "35",
+   "$id": "39",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "36",
+     "$id": "40",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$id": "37",
+       "$id": "41",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -296,14 +335,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "27"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
@@ -321,13 +363,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "43",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "27"
+      }
+     ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "44",
        "StatusCodes": [
         200
        ],
@@ -346,7 +392,7 @@
     }
    ],
    "Protocol": {
-    "$id": "41"
+    "$id": "45"
    }
   }
  ]

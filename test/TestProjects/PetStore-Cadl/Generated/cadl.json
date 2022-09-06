@@ -110,14 +110,45 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "15",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "16",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "17",
+        "Type": {
+         "$id": "18",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2021-03-25"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "19",
        "StatusCodes": [
         200
        ],
@@ -132,7 +163,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "16",
+     "$id": "20",
      "Name": "read",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
@@ -140,12 +171,12 @@
        "$ref": "11"
       },
       {
-       "$id": "17",
+       "$id": "21",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "18",
+        "$id": "22",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -156,14 +187,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
@@ -173,7 +207,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "20",
+       "$id": "24",
        "StatusCodes": [
         304
        ],
@@ -191,14 +225,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "25",
      "Name": "create",
      "Parameters": [
       {
        "$ref": "11"
       },
       {
-       "$id": "22",
+       "$id": "26",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -210,14 +244,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "27",
        "StatusCodes": [
         200
        ],
@@ -236,7 +273,7 @@
     }
    ],
    "Protocol": {
-    "$id": "24"
+    "$id": "28"
    }
   }
  ]

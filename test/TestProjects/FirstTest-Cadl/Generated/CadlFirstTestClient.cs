@@ -24,6 +24,7 @@ namespace CadlFirstTest
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -65,6 +66,7 @@ namespace CadlFirstTest
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
@@ -82,15 +84,17 @@ namespace CadlFirstTest
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response<Thing>> TopActionValueAsync(string action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
             scope.Start();
@@ -111,9 +115,10 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response<Thing> TopActionValue(string action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
             scope.Start();
@@ -134,6 +139,7 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
@@ -162,7 +168,7 @@ namespace CadlFirstTest
         /// </remarks>
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
         {
-            Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
@@ -182,6 +188,7 @@ namespace CadlFirstTest
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <example>
@@ -210,7 +217,7 @@ namespace CadlFirstTest
         /// </remarks>
         public virtual Response TopAction(string action, RequestContext context = null)
         {
-            Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNullOrEmpty(action, nameof(action));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
@@ -443,7 +450,8 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action, false);
+            uri.AppendPath(action, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -458,6 +466,7 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -472,6 +481,7 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

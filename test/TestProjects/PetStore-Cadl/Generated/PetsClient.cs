@@ -21,6 +21,7 @@ namespace CadlPetStore
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -52,6 +53,7 @@ namespace CadlPetStore
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> delete. </summary>
@@ -497,7 +499,8 @@ namespace CadlPetStore
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets/", false);
-            uri.AppendPath(petId, false);
+            uri.AppendPath(petId, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -511,7 +514,8 @@ namespace CadlPetStore
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets/", false);
-            uri.AppendPath(petId, false);
+            uri.AppendPath(petId, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -525,6 +529,7 @@ namespace CadlPetStore
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;

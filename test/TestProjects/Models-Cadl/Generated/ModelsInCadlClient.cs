@@ -20,6 +20,7 @@ namespace GeneratedModels
     public partial class ModelsInCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -40,6 +41,7 @@ namespace GeneratedModels
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _apiVersion = options.Version;
         }
 
         /// <summary> Input to RoundTrip. </summary>
@@ -618,6 +620,7 @@ namespace GeneratedModels
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTrip", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;
@@ -631,6 +634,7 @@ namespace GeneratedModels
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/roundTripToOutput", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;
@@ -644,6 +648,7 @@ namespace GeneratedModels
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/selfReference", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

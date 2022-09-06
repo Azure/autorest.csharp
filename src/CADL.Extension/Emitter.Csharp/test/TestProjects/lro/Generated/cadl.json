@@ -217,22 +217,29 @@
         "IsNullable": false
        },
        "Location": "Header",
+       "DefaultValue": {
+        "$id": "29",
+        "Type": {
+         "$ref": "28"
+        },
+        "Value": "application/merge-patch+json"
+       },
        "IsRequired": false,
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Constant"
       },
       {
-       "$id": "29",
+       "$id": "30",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "30",
+        "$id": "31",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -243,14 +250,14 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Client"
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -260,7 +267,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "32",
+       "$id": "33",
        "StatusCodes": [
         201
        ],
@@ -274,11 +281,15 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text",
-     "BufferResponse": false
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "34"
    }
   }
  ]

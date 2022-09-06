@@ -32,14 +32,45 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "6",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "7",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "8",
+        "Type": {
+         "$id": "9",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2015-06-18"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "6",
+       "$id": "10",
        "StatusCodes": [
         204
        ],
@@ -54,16 +85,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "7",
+     "$id": "11",
      "Name": "getUri",
      "Description": "path paramter is string with uri format",
      "Parameters": [
       {
-       "$id": "8",
+       "$id": "12",
        "Name": "uri",
        "NameInRequest": "uri",
        "Type": {
-        "$id": "9",
+        "$id": "13",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -74,14 +105,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "6"
       }
      ],
      "Responses": [
       {
-       "$id": "10",
+       "$id": "14",
        "StatusCodes": [
         204
        ],
@@ -97,7 +131,7 @@
     }
    ],
    "Protocol": {
-    "$id": "11"
+    "$id": "15"
    }
   }
  ]

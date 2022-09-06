@@ -23,6 +23,7 @@ namespace CadlFirstTest
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -64,6 +65,7 @@ namespace CadlFirstTest
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Initializes a new instance of DemoClient. </summary>
@@ -81,6 +83,7 @@ namespace CadlFirstTest
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Return hi. </summary>
@@ -214,11 +217,12 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
-            uri.AppendQuery("queryParameter", queryParameter, false);
+            uri.AppendQuery("queryParameter", queryParameter, true);
             if (optionalQuery != null)
             {
-                uri.AppendQuery("optionalQuery", optionalQuery, false);
+                uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");
