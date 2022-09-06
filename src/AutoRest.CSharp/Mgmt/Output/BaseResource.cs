@@ -28,6 +28,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResourceData = derivedResources.First().ResourceData;
         }
 
+        protected override bool IsAbstract => true;
+
         public IEnumerable<Resource> DerivedResources { get; private set; }
 
         public override CSharpType? BaseType => typeof(ArmResource);

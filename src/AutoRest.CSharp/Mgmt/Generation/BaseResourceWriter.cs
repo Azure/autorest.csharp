@@ -37,7 +37,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // TODO -- this is only placeholder
                 _writer.Line($"// this is only placeholder");
-                _writer.Append($"return new {This.Type}(");
+                var resource = This.DerivedResources.First();
+                _writer.Append($"return new {resource.Type}(");
                 foreach (var parameter in signature.Parameters)
                 {
                     _writer.AppendRaw(parameter.Name).AppendRaw(",");

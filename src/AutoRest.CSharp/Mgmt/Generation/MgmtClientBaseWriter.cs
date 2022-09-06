@@ -99,9 +99,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteClassDeclaration()
         {
             _writer.WriteXmlDocumentationSummary(This.Description);
-            _writer.Append($"{This.Accessibility}");
-            if (This.IsStatic)
-                _writer.Append($" static");
+            _writer.AppendRaw(This.Accessibility);
+            _writer.AppendRawIf(" static", This.IsStatic);
+            _writer.AppendRawIf(" abstract", This.Declaration.IsAbstract);
             _writer.Append($" partial class {This.Type.Name}");
             if (This.GetImplementsList().Any())
             {

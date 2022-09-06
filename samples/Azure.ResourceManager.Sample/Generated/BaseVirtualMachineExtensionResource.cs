@@ -12,12 +12,12 @@ using Azure.ResourceManager;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> TODO. </summary>
-    public partial class BaseVirtualMachineExtensionResource : ArmResource
+    public abstract partial class BaseVirtualMachineExtensionResource : ArmResource
     {
         internal static BaseVirtualMachineExtensionResource GetResource(ArmClient client, VirtualMachineExtensionData data)
         {
             // this is only placeholder
-            return new BaseVirtualMachineExtensionResource(client, data);
+            return new VirtualMachineExtensionResource(client, data);
         }
 
         private readonly VirtualMachineExtensionData _data;
